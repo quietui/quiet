@@ -1,0 +1,6 @@
+*.mdx
+.github
+cspell.json
+dist
+package.json
+package-lock.json

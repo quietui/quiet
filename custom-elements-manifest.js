@@ -1,0 +1,79 @@
+import { parse } from 'comment-parser';
+import { readFileSync } from 'fs';
+
+const packageData = JSON.parse(readFileSync('./package.json', 'utf8'));
+const { name, description, version, author, homepage, license } = packageData;
+
+export default {
+  globs: ['src/components/**/*.ts'],
+  exclude: ['**/*.styles.ts', '**/*.test.ts'],
+  litelement: true,
+  outdir: 'dist',
+  packagejson: false,
+  plugins: [
+    // Append package data
+    {
+      name: 'append-package-data',
+      packageLinkPhase({ customElementsManifest }) {
+        customElementsManifest.package = { name, description, version, author, homepage, license };
+      }
+    },
+
+    // Parse custom jsDoc tags
+    {
+      name: 'parse-custom-tags',
+      analyzePhase({ ts, node, moduleDoc }) {
+        switch (node.kind) {
+          case ts.SyntaxKind.ClassDeclaration: {
+            const className = node.name.getText();
+            const classDoc = moduleDoc?.declarations?.find(declaration => declaration.name === className);
+            const customTags = ['dependency', 'documentation', 'since', 'status', 'title'];
+            let customComments = '/**';
+
+            node.jsDoc?.forEach(jsDoc => {
+              jsDoc?.tags?.forEach(tag => {
+                const tagName = tag.tagName.getText();
+
+                if (customTags.includes(tagName)) {
+                  customComments += `\n * @${tagName} ${tag.comment}`;
+                }
+              });
+            });
+
+            const parsed = parse(`${customComments}\n */`);
+            parsed[0].tags?.forEach(t => {
+              switch (t.tag) {
+                // Dependencies
+                case 'dependency':
+                  if (!Array.isArray(classDoc['dependencies'])) {
+                    classDoc['dependencies'] = [];
+                  }
+                  classDoc['dependencies'].push(t.name);
+                  break;
+
+                // Value-only metadata tags
+                case 'documentation':
+                case 'since':
+                case 'status':
+                  classDoc[t.tag] = t.name;
+                  break;
+
+                // All other tags
+                default:
+                  if (!Array.isArray(classDoc[t.tag])) {
+                    classDoc[t.tag] = [];
+                  }
+
+                  classDoc[t.tag].push({
+                    name: t.name,
+                    description: t.description,
+                    type: t.type || undefined
+                  });
+              }
+            });
+          }
+        }
+      }
+    }
+  ]
+};

@@ -1,0 +1,9 @@
+/* This is the production TS Config. */
+{
+  "extends": "./tsconfig",
+  "compilerOptions": {
+    "rootDir": "./src"
+  },
+  "include": ["src"],
+  "exclude": ["src/**/*.test.ts"]
+}

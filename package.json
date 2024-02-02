@@ -1,0 +1,84 @@
+{
+  "name": "@quietui/components",
+  "type": "module",
+  "version": "1.0.0-beta.1",
+  "description": "Quiet is a hand-crafted UI library built with Web Components. It uses standardized browser APIs, so its components are highly portable and interoperable.",
+  "types": "dist/quiet.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/quiet.d.ts",
+      "import": "./dist/quiet.js"
+    },
+    "./dist/custom-elements.json": "./dist/custom-elements.json",
+    "./dist/quiet.js": "./dist/quiet.js"
+  },
+  "keywords": [
+    "web components",
+    "custom elements",
+    "ui",
+    "components"
+  ],
+  "author": "Cory LaViska",
+  "license": "MIT",
+  "homepage": "https://github.com/quietui/components#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quietui/components.git"
+  },
+  "bugs": {
+    "url": "https://github.com/quietui/components/issues"
+  },
+  "funding": {
+    "type": "individual",
+    "url": "https://github.com/sponsors/claviska"
+  },
+  "scripts": {
+    "start": "node scripts/build.js --develop",
+    "build": "node scripts/build.js",
+    "test": "wtr --group default",
+    "test:component": "wtr -- --watch --group",
+    "test:watch": "wtr --watch --group default",
+    "lint": "eslint src --max-warnings 0",
+    "lint:fix": "eslint src --max-warnings 0 --fix",
+    "prettier": "prettier --check --log-level=warn .",
+    "prettier:fix": "prettier --write --log-level=warn .",
+    "spellcheck": "cspell \"**/*.{js,ts,json,html,css,md}\" --no-progress"
+  },
+  "devDependencies": {
+    "@custom-elements-manifest/analyzer": "^0.9.0",
+    "@esm-bundle/chai": "^4.3.4-fix.0",
+    "@open-wc/testing": "^4.0.0",
+    "@types/mocha": "^10.0.6",
+    "@typescript-eslint/eslint-plugin": "^6.20.0",
+    "@typescript-eslint/parser": "^6.20.0",
+    "@web/dev-server-esbuild": "^1.0.1",
+    "@web/test-runner": "^0.18.0",
+    "@web/test-runner-playwright": "^0.11.0",
+    "browser-sync": "^3.0.2",
+    "chalk": "^5.3.0",
+    "comment-parser": "^1.4.1",
+    "cspell": "^8.3.2",
+    "del": "^7.1.0",
+    "esbuild": "^0.20.0",
+    "esbuild-plugin-replace": "^1.4.0",
+    "eslint": "^8.56.0",
+    "eslint-plugin-chai-expect": "^3.0.0",
+    "eslint-plugin-chai-friendly": "^0.7.4",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-lit": "^1.11.0",
+    "eslint-plugin-lit-a11y": "^4.1.2",
+    "eslint-plugin-markdown": "^3.0.1",
+    "eslint-plugin-sort-imports-es6-autofix": "^0.6.0",
+    "eslint-plugin-wc": "^2.0.4",
+    "get-port": "^7.0.0",
+    "globby": "^14.0.0",
+    "heroicons": "^2.1.1",
+    "ora": "^8.0.1",
+    "prettier": "^3.2.4",
+    "recursive-copy": "^2.0.14",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "lit": "^3.1.2"
+  }
+}

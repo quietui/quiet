@@ -1,0 +1,236 @@
+import { deleteAsync } from 'del';
+import { dirname, join } from 'path';
+import { execSync } from 'child_process';
+import { fileURLToPath } from 'url';
+import { mkdir, readFile, unlink } from 'fs/promises';
+import { replace } from 'esbuild-plugin-replace';
+import browserSync from 'browser-sync';
+import chalk from 'chalk';
+import copy from 'recursive-copy';
+import esbuild from 'esbuild';
+import getPort, { portNumbers } from 'get-port';
+import ora from 'ora';
+import process from 'process';
+
+const isDeveloping = process.argv.includes('--develop');
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const rootDir = dirname(__dirname);
+const distDir = join(rootDir, 'dist');
+const docsDir = join(rootDir, 'docs');
+const iconDir = join(distDir, 'assets/icons');
+const spinner = ora({ text: 'Quiet UI', color: 'magenta' }).start();
+const packageData = JSON.parse(await readFile(join(rootDir, 'package.json'), 'utf-8'));
+const version = JSON.stringify(packageData.version.toString());
+let buildContext;
+
+/**
+ * Runs the full build.
+ */
+async function buildAll() {
+  try {
+    await cleanup();
+    await generateManifest();
+    await generateIcons();
+    await generateTypes();
+    await generateBundle();
+    spinner.stop();
+  } catch (error) {
+    spinner.fail();
+    console.log(chalk.red(`\n${error}`));
+  }
+}
+
+/** Empties the dist directory. */
+async function cleanup() {
+  spinner.start('Cleaning up dist');
+
+  await deleteAsync(distDir);
+  await mkdir(distDir, { recursive: true });
+
+  spinner.succeed();
+}
+
+/**
+ * Analyzes components and generates the custom elements manifest file.
+ */
+function generateManifest() {
+  spinner.start('Generating CEM');
+
+  try {
+    execSync('cem analyze --config "custom-elements-manifest.js"');
+  } catch (error) {
+    console.error(`\n\n${error.message}`);
+  }
+
+  spinner.succeed();
+
+  return Promise.resolve();
+}
+
+/**
+ * Downloads and copies icons to the assets directory.
+ */
+async function generateIcons() {
+  const dirToCopy = join(rootDir, 'node_modules/heroicons');
+  const filesToRemove = ['package.json', 'README.md'];
+
+  spinner.start('Packaging icons');
+
+  await deleteAsync(iconDir);
+  await mkdir(iconDir, { recursive: true });
+  await copy(dirToCopy, iconDir);
+  await Promise.all(filesToRemove.map(file => unlink(join(iconDir, file))));
+
+  spinner.succeed();
+
+  return Promise.resolve();
+}
+
+/**
+ * Runs TypeScript to generate types.
+ */
+function generateTypes() {
+  spinner.start('Running the TypeScript compiler');
+
+  try {
+    execSync(`tsc --project ./tsconfig.prod.json --outdir "${distDir}"`);
+  } catch (error) {
+    return Promise.reject(error.stdout);
+  }
+
+  spinner.succeed();
+
+  return Promise.resolve();
+}
+
+/**
+ * Runs esbuild to generate the final dist.
+ */
+async function generateBundle() {
+  spinner.start('Bundling with esbuild');
+
+  const config = {
+    format: 'esm',
+    target: 'es2020',
+    entryPoints: [
+      //
+      // IMPORTANT: Entry points MUST be mapped in package.json => exports
+      //
+      './src/quiet.ts'
+    ],
+    outdir: distDir,
+    chunkNames: 'chunks/[name].[hash]',
+    define: {
+      'process.env.NODE_ENV': '"production"' // required by Floating UI
+    },
+    bundle: true,
+    legalComments: 'linked',
+    splitting: true,
+    plugins: [replace({ __QUIET_VERSION__: version })]
+  };
+
+  if (isDeveloping) {
+    // Incremental builds for dev
+    buildContext = await esbuild.context(config);
+  } else {
+    // One-time build for production
+    esbuild.build(config);
+  }
+
+  spinner.succeed();
+}
+
+/**
+ * Incrementally rebuilds the source files. Must be called only after `generateBundle()` has been called.
+ */
+async function regenerateBundle() {
+  try {
+    spinner.start('Re-bundling with esbuild');
+    await buildContext.rebuild();
+  } catch (error) {
+    spinner.fail();
+    console.log(chalk.red(`\n${error}`));
+  }
+
+  spinner.succeed();
+}
+
+// Initial build
+await buildAll();
+
+// Launch the dev server
+if (isDeveloping) {
+  spinner.start('Launching the dev server');
+
+  const bs = browserSync.create();
+  const port = await getPort({ port: portNumbers(4000, 4999) });
+  const browserSyncConfig = {
+    startPath: '/',
+    port,
+    logLevel: 'silent',
+    logPrefix: '[quietui]',
+    logFileChanges: true,
+    notify: false,
+    single: false,
+    ghostMode: false,
+    server: {
+      baseDir: docsDir,
+      routes: {
+        '/dist': './dist'
+      }
+    }
+  };
+  const reload = () => {
+    spinner.start('Reloading browser');
+    bs.reload();
+    spinner.succeed();
+  };
+
+  // Launch browser sync
+  bs.init(browserSyncConfig, () => {
+    const url = `http://localhost:${port}`;
+    spinner.succeed();
+    console.log(`\n🐭 The dev server is running at ${chalk.magenta(url)}\n`);
+  });
+
+  // Rebuild and reload when source files change
+  bs.watch('src/**/!(*.test).*').on('change', async filename => {
+    spinner.warn(`File modified: ${filename}`);
+
+    try {
+      const isTestFile = filename.includes('.test.ts');
+      const isComponent = filename.includes('components/') && filename.includes('.ts') && !isTestFile;
+
+      // Rebuild metadata when component files change
+      if (isComponent) {
+        await regenerateBundle();
+        await generateManifest();
+      }
+
+      reload();
+    } catch (err) {
+      console.error(chalk.red(err));
+    }
+  });
+
+  // Reload when the docs change
+  bs.watch([`${docsDir}/**/*.*`]).on('change', () => reload());
+}
+
+//
+// Cleanup everything when the process terminates
+//
+function terminate() {
+  if (buildContext) {
+    buildContext.dispose();
+  }
+
+  if (spinner) {
+    spinner.stop();
+  }
+
+  process.exit();
+}
+
+process.on('SIGINT', terminate);
+process.on('SIGTERM', terminate);

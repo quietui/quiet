@@ -1,0 +1,7 @@
+contact_links:
+  - name: Feature Requests
+    url: https://github.com/quietui/components/discussions/categories/feature-requests
+    about: All requests for new features and ideas should go here.
+  - name: Help & Support
+    url: https://github.com/quietui/components/discussions/categories/help-support
+    about: Please don't create issues for personal help requests. Instead, ask your question in the discussion forum.

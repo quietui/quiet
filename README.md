@@ -8,10 +8,10 @@ Since Quiet is built with Web Standards, it's not tied to the lifespan of any fr
 
 ## What's in the box?
 
-🧰 A collection of quality components you can use to build beautiful, accessible, and consistent user interfaces with.
-🎨 A curated CSS reset you can use to kick off projects without having to think about styling thing up front.
-🪙 Customizable design tokens make it easy to change the look and feel any time.
-🐭 A built-in autoloader that detects Quiet components in your HTML — even ones you add dynamically — and loads the bare minimum code for them to work.
+- 🧰 A collection of quality components you can use to build beautiful, accessible, and consistent user interfaces with.
+- 🎨 A curated CSS reset you can use to kick off projects without having to think about styling thing up front.
+- 🪙 Customizable design tokens make it easy to change the look and feel any time.
+- 🐭 A built-in autoloader that detects Quiet components in your HTML — even ones you add dynamically — and loads the bare minimum code for them to work.
 
 ## Where do I…?
 

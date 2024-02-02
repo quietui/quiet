@@ -8,6 +8,8 @@
   "words": [
     "atrule",
     "autofix",
+    "autoload",
+    "autoloader",
     "callout",
     "Callouts",
     "claviska",
@@ -18,7 +20,8 @@
     "outdir",
     "packagejson",
     "quietui",
-    "rebeccapurple"
+    "rebeccapurple",
+    "stylesheet"
   ],
   // flagWords - list of words to be always considered incorrect
   // This is useful for offensive words and common spelling errors.

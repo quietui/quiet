@@ -2,6 +2,7 @@ import { deleteAsync } from 'del';
 import { dirname, join } from 'path';
 import { execSync } from 'child_process';
 import { fileURLToPath } from 'url';
+import { globby } from 'globby';
 import { mkdir, readFile, unlink } from 'fs/promises';
 import { replace } from 'esbuild-plugin-replace';
 import browserSync from 'browser-sync';
@@ -116,7 +117,11 @@ async function generateBundle() {
       //
       // IMPORTANT: Entry points MUST be mapped in package.json => exports
       //
-      './src/quiet.ts'
+      // Autoloader and utilities
+      './src/quiet.ts',
+      //
+      // Individual components
+      ...(await globby('./src/components/**/!(*.(style|test)).ts'))
     ],
     outdir: distDir,
     chunkNames: 'chunks/[name].[hash]',
@@ -124,7 +129,7 @@ async function generateBundle() {
       'process.env.NODE_ENV': '"production"' // required by Floating UI
     },
     bundle: true,
-    legalComments: 'linked',
+    legalComments: 'none',
     splitting: true,
     plugins: [replace({ __QUIET_VERSION__: version })]
   };
@@ -132,6 +137,7 @@ async function generateBundle() {
   if (isDeveloping) {
     // Incremental builds for dev
     buildContext = await esbuild.context(config);
+    await buildContext.rebuild();
   } else {
     // One-time build for production
     esbuild.build(config);
@@ -199,11 +205,16 @@ if (isDeveloping) {
 
     try {
       const isTestFile = filename.includes('.test.ts');
-      const isComponent = filename.includes('components/') && filename.includes('.ts') && !isTestFile;
+      const isStylesheet = filename.includes('.styles.ts');
+      const isComponent = filename.includes('components/') && filename.includes('.ts') && !isStylesheet && !isTestFile;
 
-      // Rebuild metadata when component files change
-      if (isComponent) {
+      // Re-bundle when relevant files change
+      if (!isTestFile && !isStylesheet) {
         await regenerateBundle();
+      }
+
+      // Regenerate metadata when components change
+      if (isComponent) {
         await generateManifest();
       }
 

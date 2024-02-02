@@ -34,7 +34,7 @@ async function buildAll() {
     await generateIcons();
     await generateTypes();
     await generateBundle();
-    spinner.stop();
+    spinner.succeed('The build is complete');
   } catch (error) {
     spinner.fail();
     console.log(chalk.red(`\n${error}`));

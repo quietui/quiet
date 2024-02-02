@@ -1,3 +1,2 @@
-export { QuietButton } from './components/button/button.js';
-
-console.log('byah');
+export { startLoader, stopLoader, discoverElements } from './utilities/loader.js';
+export { getAssetPath, setAssetPath } from './utilities/assets.js';

@@ -30,13 +30,19 @@ npm i
 npm run start
 ```
 
-This will launch a browser showing the docs. It will reload the page as you make changes to the project. When you're ready to create a production build of the project, use the following commands.
+This will launch a browser showing the docs. The browser will reload as you make changes to the project. When you're ready to create a production build, use the following command.
 
 ```sh
 npm run build
 ```
 
-The `dist` folder will contain the final build.
+The `dist` folder will contain the files you want.
+
+There are a number of commands you can use to lint and test the library. For a full list of them, run the following command.
+
+```sh
+npm run
+```
 
 ## About this project
 

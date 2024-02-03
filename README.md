@@ -33,7 +33,6 @@ npm run start
 This will launch a browser showing the docs. It will reload the page as you make changes to the project. When you're ready to create a production build of the project, use the following commands.
 
 ```sh
-npm i
 npm run build
 ```
 

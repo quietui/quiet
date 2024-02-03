@@ -56,7 +56,7 @@ As a result, you'll find that Quiet is rather opinionated. If it's not exactly w
 
 But be warned…
 
-Expect a long beta period…maybe forever. Expect breaking changes. Expect that PRs will be closed when they don't align with my vision for the project. Expect that features will land when I get around to them. Expect me to be very picky about what makes it into the library, its quality of code, and every other aspect of how the project is maintained. Expect that I won't always want a PR because I prefer to experiment with things myself.
+Expect a long beta period…maybe forever. Expect breaking changes. Expect that issues and PRs will be closed when they don't align with my vision for the project. Expect that features will land when I get around to them. Expect me to be very picky about what makes it into the library, its quality of code, and every other aspect of how the project is maintained. Expect that I won't always want a PR because I prefer to experiment with things myself.
 
 With all due respect, I'm not building this for you. I'm building it for me.
 

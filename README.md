@@ -15,14 +15,31 @@ Since Quiet is built with Web Standards, it's not tied to the lifespan of any fr
 
 ## Where do I…?
 
+- [Get started using Quiet UI](https://quietui.com/)
 - [Meet the community and talk about the project](https://github.com/quietui/components/discussions)
 - [Get help with something](https://github.com/quietui/components/discussions/categories/help-support)
 - [Request a feature](https://github.com/quietui/components/discussions/categories/feature-requests)
 - [Submit a bug report](https://github.com/quietui/components/issues/new/choose)
 
-## Getting started
+## Developer instructions
 
-TODO
+To launch the development server, use the following commands.
+
+```sh
+npm i
+npm run start
+```
+
+This will launch a browser showing the docs. It will reload the page as you make changes to the project.
+
+When you're ready to create a production build of the project, use the following commands.
+
+```sh
+npm i
+npm run build
+```
+
+The `dist` folder will contain the final build.
 
 ## About this project
 

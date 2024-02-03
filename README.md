@@ -62,7 +62,7 @@ With all due respect, I'm not building this for you. I'm building it for me.
 
 But don't be afraid to learn from and have fun with it!
 
-— [Cory LaViska](https://twitter.com/claviska)
+— [Cory](https://twitter.com/claviska)
 
 ### Accessibility commitment
 

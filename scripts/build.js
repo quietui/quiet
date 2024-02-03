@@ -18,6 +18,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const rootDir = dirname(__dirname);
 const distDir = join(rootDir, 'dist');
 const docsDir = join(rootDir, 'docs');
+const siteDir = join(rootDir, '_site');
 const iconDir = join(distDir, 'assets/icons');
 const spinner = ora({ text: 'Quiet UI', color: 'magenta' }).start();
 const packageData = JSON.parse(await readFile(join(rootDir, 'package.json'), 'utf-8'));
@@ -166,9 +167,13 @@ async function regenerateBundle() {
  * Generates the documentation site.
  */
 async function generateDocs() {
+  spinner.start('Writing the docs');
+
   //
   // TODO - build the docs here
   //
+
+  spinner.succeed();
 }
 
 // Initial build
@@ -190,7 +195,7 @@ if (isDeveloping) {
     single: false,
     ghostMode: false,
     server: {
-      baseDir: docsDir,
+      baseDir: siteDir,
       routes: {
         '/dist': './dist'
       }

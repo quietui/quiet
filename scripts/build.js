@@ -34,6 +34,7 @@ async function buildAll() {
     await generateIcons();
     await generateTypes();
     await generateBundle();
+    await generateDocs();
     spinner.succeed('The build is complete');
   } catch (error) {
     spinner.fail();
@@ -161,6 +162,15 @@ async function regenerateBundle() {
   spinner.succeed();
 }
 
+/**
+ * Generates the documentation site.
+ */
+async function generateDocs() {
+  //
+  // TODO - build the docs here
+  //
+}
+
 // Initial build
 await buildAll();
 
@@ -225,7 +235,10 @@ if (isDeveloping) {
   });
 
   // Reload when the docs change
-  bs.watch([`${docsDir}/**/*.*`]).on('change', () => reload());
+  bs.watch([`${docsDir}/**/*.*`]).on('change', async () => {
+    await generateDocs();
+    reload();
+  });
 }
 
 //

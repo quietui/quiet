@@ -1,5 +1,6 @@
 import { deleteAsync } from 'del';
 import { dirname, join } from 'path';
+import { distDir, docsDir, rootDir, runScript, siteDir } from './utils.js';
 import { execSync } from 'child_process';
 import { fileURLToPath } from 'url';
 import { globby } from 'globby';
@@ -13,12 +14,8 @@ import getPort, { portNumbers } from 'get-port';
 import ora from 'ora';
 import process from 'process';
 
-const isDeveloping = process.argv.includes('--develop');
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const rootDir = dirname(__dirname);
-const distDir = join(rootDir, 'dist');
-const docsDir = join(rootDir, 'docs');
-const siteDir = join(rootDir, '_site');
+const isDeveloping = process.argv.includes('--develop');
 const iconDir = join(distDir, 'assets/icons');
 const spinner = ora({ text: 'Quiet UI', color: 'magenta' }).start();
 const packageData = JSON.parse(await readFile(join(rootDir, 'package.json'), 'utf-8'));
@@ -169,11 +166,15 @@ async function regenerateBundle() {
 async function generateDocs() {
   spinner.start('Writing the docs');
 
-  //
-  // TODO - build the docs here
-  //
+  const output = (await runScript(join(__dirname, 'docs.js')))
+    // Cleanup the output
+    .replace('[11ty]', '')
+    .replace(' seconds', 's')
+    .replace(/\(.*?\)/, '')
+    .toLowerCase()
+    .trim();
 
-  spinner.succeed();
+  spinner.succeed(`Writing the docs (${output})`);
 }
 
 // Initial build
@@ -239,7 +240,7 @@ if (isDeveloping) {
     }
   });
 
-  // Reload when the docs change
+  // Rebuild the docs and reload when the docs change
   bs.watch([`${docsDir}/**/*.*`]).on('change', async () => {
     await generateDocs();
     reload();

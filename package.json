@@ -9,6 +9,7 @@
       "types": "./dist/quiet.d.ts",
       "import": "./dist/quiet.js"
     },
+    "./loader.js": "./dist/loader.js",
     "./quiet.js": "./dist/quiet.js",
     "./components/*": "./dist/components/*",
     "./custom-elements.json": "./dist/custom-elements.json"
@@ -61,6 +62,7 @@
     "chalk": "^5.3.0",
     "comment-parser": "^1.4.1",
     "cspell": "^8.3.2",
+    "custom-element-vs-code-integration": "^1.2.2",
     "del": "^7.1.0",
     "esbuild": "^0.20.0",
     "esbuild-plugin-replace": "^1.4.0",
@@ -76,8 +78,15 @@
     "get-port": "^7.0.0",
     "globby": "^14.0.0",
     "heroicons": "^2.1.1",
+    "markdown-it": "^14.0.0",
+    "markdown-it-container": "^4.0.0",
+    "markdown-it-ins": "^4.0.0",
+    "markdown-it-kbd": "^2.2.2",
+    "markdown-it-mark": "^4.0.0",
+    "node-html-parser": "^6.1.12",
     "ora": "^8.0.1",
     "prettier": "^3.2.4",
+    "prismjs": "^1.29.0",
     "recursive-copy": "^2.0.14",
     "typescript": "^5.3.3"
   },

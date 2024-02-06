@@ -1,12 +1,11 @@
 import { deleteAsync } from 'del';
 import { docsDir, siteDir } from './utils.js';
+import { join } from 'path';
 import Eleventy from '@11ty/eleventy';
 
 const elev = new Eleventy(docsDir, siteDir, {
   quietMode: true,
-  config: function (eleventyConfig) {
-    // Config options here
-  }
+  configPath: join(docsDir, '.eleventy.js')
 });
 
 // Cleanup

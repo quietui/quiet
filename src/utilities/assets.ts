@@ -28,9 +28,11 @@ export function getAssetPath(subpath = '') {
       // Use data-quiet
       setAssetPath(String(quietEl.getAttribute('data-quiet')));
     } else {
-      // Use quiet.js location
+      // Use the path to quiet.js or quiet.loader.js
       const scripts = [...document.getElementsByTagName('script')] as HTMLScriptElement[];
-      const quietScript = scripts.find(script => script.src.endsWith('quiet.js'));
+      const quietScript = scripts.find(
+        script => script.src.endsWith('quiet.js') || script.src.endsWith('quiet.loader.js')
+      );
 
       if (quietScript) {
         const path = String(quietScript.getAttribute('src'));

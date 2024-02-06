@@ -10,18 +10,25 @@
     "autofix",
     "autoload",
     "autoloader",
+    "Autoloading",
     "callout",
     "Callouts",
     "claviska",
     "csspart",
     "heroicons",
     "laviska",
+    "linkify",
     "litelement",
+    "noopener",
+    "noreferrer",
     "outdir",
     "packagejson",
+    "prismjs",
     "quietui",
     "rebeccapurple",
-    "stylesheet"
+    "smartquotes",
+    "stylesheet",
+    "Triaging"
   ],
   // flagWords - list of words to be always considered incorrect
   // This is useful for offensive words and common spelling errors.

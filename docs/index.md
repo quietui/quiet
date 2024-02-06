@@ -1,29 +1,36 @@
 ---
 title: Quiet UI
 description: Quiet is a high quality UI library hand-crafted for the Web with a focus on accessibility, performance, longevity, and aesthetics.
+layout: default
 ---
-
-<!-- You need to have the <body> tag for browser sync to inject its script to reload -->
-<body>
-
-# {{ title }}
 
 {{ description }}
 
-## Basic Usage
-
-Try this:
+### Quick start
 
 ```html
-<script type="module" src="/dist/quiet.js"></script>
-<script type="module">
-  import { startLoader } from '/dist/quiet.js';
-  startLoader();
-</script>
+<script type="module" src="/dist/quiet.loader.js"></script>
 ```
+
+Here's a code block for testing:
+
+```css
+:root {
+  --custom-prop: blue;
+  --another-prop: tomato;
+}
+```
+
+Look at these nice callouts.
 
 :::tip
 Don't forget to include `type="module"` in your scripts!
 :::
 
-</body>
+:::warning
+Don't forget to include `type="module"` in your scripts!
+:::
+
+:::danger
+Don't forget to include `type="module"` in your scripts!
+:::

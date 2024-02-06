@@ -1,3 +1,3 @@
 # Contributing Guidelines
 
-TODO
+Please refer to the contribution guidelines found at: https://quietui/developers/contributing

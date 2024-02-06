@@ -16,7 +16,7 @@ export const siteDir = join(rootDir, '_site');
  */
 export function runScript(scriptPath, args = []) {
   return new Promise((resolve, reject) => {
-    const child = childProcess.fork(scriptPath, ...args, { silent: true });
+    const child = childProcess.fork(scriptPath, args, { silent: true });
     let wasInvoked = false;
     let stderr = '';
     let stdout = '';

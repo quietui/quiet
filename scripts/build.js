@@ -1,5 +1,5 @@
 import { deleteAsync } from 'del';
-import { dirname, join } from 'path';
+import { dirname, join, relative } from 'path';
 import { distDir, docsDir, rootDir, runScript, siteDir } from './utils.js';
 import { execSync } from 'child_process';
 import { fileURLToPath } from 'url';
@@ -116,9 +116,10 @@ async function generateBundle() {
       //
       // IMPORTANT: Entry points MUST be mapped in package.json => exports
       //
-      // Autoloader and utilities
+      // Utilities
       './src/quiet.ts',
-      //
+      // Autoloader + utilities
+      './src/quiet.loader.ts',
       // Individual components
       ...(await globby('./src/components/**/!(*.(style|test)).ts'))
     ],
@@ -166,7 +167,8 @@ async function regenerateBundle() {
 async function generateDocs() {
   spinner.start('Writing the docs');
 
-  const output = (await runScript(join(__dirname, 'docs.js')))
+  // 11ty
+  const output = (await runScript(join(__dirname, 'docs.js'), isDeveloping ? ['--develop'] : undefined))
     // Cleanup the output
     .replace('[11ty]', '')
     .replace(' seconds', 's')
@@ -174,7 +176,10 @@ async function generateDocs() {
     .toLowerCase()
     .trim();
 
-  spinner.succeed(`Writing the docs (${output})`);
+  // Copy assets
+  await copy(join(docsDir, 'assets'), join(siteDir, 'assets'), { overwrite: true });
+
+  spinner.succeed(`Writing the docs ${chalk.gray(`(${output}`)})`);
 }
 
 // Initial build
@@ -217,7 +222,7 @@ if (isDeveloping) {
 
   // Rebuild and reload when source files change
   bs.watch('src/**/!(*.test).*').on('change', async filename => {
-    spinner.warn(`File modified: ${filename}`);
+    spinner.info(`File modified ${chalk.gray(`(${relative(rootDir, filename)})`)}`);
 
     try {
       const isTestFile = filename.includes('.test.ts');
@@ -241,9 +246,15 @@ if (isDeveloping) {
   });
 
   // Rebuild the docs and reload when the docs change
-  bs.watch([`${docsDir}/**/*.*`]).on('change', async () => {
+  bs.watch(`${docsDir}/**/*.*`).on('change', async filename => {
+    spinner.info(`File modified ${chalk.gray(`(${relative(rootDir, filename)})`)}`);
     await generateDocs();
     reload();
+  });
+
+  // Warn when the 11ty config file changes
+  bs.watch(join(docsDir, '.eleventy.js')).on('change', () => {
+    spinner.warn('The 11ty config file has changed. Restart required!');
   });
 }
 

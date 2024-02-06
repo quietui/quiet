@@ -1,14 +1,16 @@
+import { customElementVsCodePlugin } from 'custom-element-vs-code-integration';
 import { parse } from 'comment-parser';
 import { readFileSync } from 'fs';
 
 const packageData = JSON.parse(readFileSync('./package.json', 'utf8'));
 const { name, description, version, author, homepage, license } = packageData;
+const outdir = 'dist';
 
 export default {
   globs: ['src/components/**/*.ts'],
   exclude: ['**/*.styles.ts', '**/*.test.ts'],
   litelement: true,
-  outdir: 'dist',
+  outdir,
   packagejson: false,
   plugins: [
     // Append package data
@@ -74,6 +76,18 @@ export default {
           }
         }
       }
-    }
+    },
+
+    // Custom data for VS Code
+    customElementVsCodePlugin({
+      outdir,
+      cssFileName: null,
+      referencesTemplate: (_, tag) => [
+        {
+          name: 'Documentation',
+          url: `https://quietui.com/components/${tag.replace('quiet-', '')}`
+        }
+      ]
+    })
   ]
 };

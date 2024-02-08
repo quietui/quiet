@@ -34,7 +34,7 @@ A bug is a demonstrable problem caused by code in the library. Bug reports are a
 - Please **do not** paste in large blocks of irrelevant code
 - Please **do not** paste in screenshots of code
 
-:::tip
+:::info
 A minimal test case is critical to a successful bug report. It demonstrates that the bug exists in the library and not in surrounding code. Contributors should be able to understand the bug without studying your code, otherwise they'll probably move on to another bug.
 :::
 

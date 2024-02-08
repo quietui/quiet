@@ -2,6 +2,7 @@
 title: About this project
 description:
 layout: default
+section: about
 ---
 
 Quiet was built in New Hampshire by me, [Cory LaViska](https://twitter.com/claviska), the creator of [Shoelace](https://shoelace.style/). With the success of Shoelace, many of you are probably wondering why I'd choose to build another UI library, and that's a reasonable question.

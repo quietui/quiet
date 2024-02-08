@@ -1,4 +1,4 @@
-*.mdx
+*.md
 .github
 cspell.json
 dist

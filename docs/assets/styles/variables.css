@@ -115,7 +115,7 @@
 
   /* Code */
   --docs-code-font: Menlo, Monaco, Consolas, 'Courier New', monospace;
-  --docs-code-font-size: 0.95em;
+  --docs-code-font-size: 0.9375em;
   --docs-code-font-weight: 400;
 
   /* Borders */
@@ -123,8 +123,8 @@
   --docs-border-color: var(--docs-gray-200);
   --docs-border-radius: 6px;
 
-  /* Call-outs */
-  --docs-tip-background: var(--docs-primary-200);
+  /* Callouts */
+  --docs-info-background: var(--docs-primary-200);
   --docs-warning-background: var(--docs-warning-200);
   --docs-danger-background: var(--docs-danger-200);
 }

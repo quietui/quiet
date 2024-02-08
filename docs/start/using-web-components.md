@@ -4,7 +4,7 @@ description:
 layout: default
 ---
 
-- don't use self-closing tag (tip)
+- don't use self-closing tag (info)
 - properties
 - methods
 - events

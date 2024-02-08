@@ -12,6 +12,15 @@ layout: default
 <script type="module" src="/dist/quiet.loader.js"></script>
 ```
 
+Here's a button.
+
+```html {.example}
+<!-- Put things here! -->
+<quiet-button>
+  Click me
+</quiet-button>
+```
+
 Here's a code block for testing:
 
 ```css
@@ -23,7 +32,7 @@ Here's a code block for testing:
 
 Look at these nice callouts.
 
-:::tip
+:::info
 Don't forget to include `type="module"` in your scripts!
 :::
 

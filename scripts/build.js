@@ -230,7 +230,7 @@ if (isDeveloping) {
       const isComponent = filename.includes('components/') && filename.includes('.ts') && !isStylesheet && !isTestFile;
 
       // Re-bundle when relevant files change
-      if (!isTestFile && !isStylesheet) {
+      if (!isTestFile) {
         await regenerateBundle();
       }
 

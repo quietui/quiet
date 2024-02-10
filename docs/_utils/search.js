@@ -45,7 +45,7 @@ export function searchPlugin(options = {}) {
         description: collapseWhitespace(options.getDescription(doc)),
         headings: options.getHeadings(doc).map(collapseWhitespace),
         content: collapseWhitespace(options.getContent(doc)),
-        url: this.page.url.replace(/\/$/, '')
+        url: this.page.url === '/' ? '/' : this.page.url.replace(/\/$/, '')
       });
 
       return content;
@@ -58,8 +58,8 @@ export function searchPlugin(options = {}) {
         let index = 0;
 
         this.ref('id');
-        this.field('t', { boost: 10 });
-        this.field('h', { boost: 5 });
+        this.field('t', { boost: 20 });
+        this.field('h', { boost: 10 });
         this.field('c');
 
         for (const page of pagesToIndex) {

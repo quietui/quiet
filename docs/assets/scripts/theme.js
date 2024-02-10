@@ -17,6 +17,10 @@ function getTheme() {
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
 
+function toggleTheme() {
+  setTheme(getTheme() === 'dark' ? 'light' : 'dark');
+}
+
 const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
 
 // Initial set/restore
@@ -30,6 +34,16 @@ prefersDark.addEventListener('change', event => {
 // Update when a dark mode toggle is activated
 document.addEventListener('click', event => {
   if (event.target.closest('[data-toggle="dark-mode"]')) {
-    setTheme(getTheme() === 'dark' ? 'light' : 'dark');
+    toggleTheme();
+  }
+});
+
+// Toggle when backslash is pressed
+document.addEventListener('keydown', event => {
+  if (
+    event.key === '\\' &&
+    !event.composedPath().some(el => ['input', 'textarea'].includes(el?.tagName?.toLowerCase()))
+  ) {
+    toggleTheme();
   }
 });

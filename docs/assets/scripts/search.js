@@ -112,7 +112,7 @@ function handleKeyDown(event) {
     event.preventDefault();
 
     const currentEl = results.querySelector('[data-selected="true"]');
-    const items = results.querySelectorAll('li');
+    const items = [...results.querySelectorAll('li')];
     const index = items.indexOf(currentEl);
     let nextEl;
 

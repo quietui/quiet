@@ -78,6 +78,7 @@
     "get-port": "^7.0.0",
     "globby": "^14.0.0",
     "heroicons": "^2.1.1",
+    "lunr": "^2.3.9",
     "markdown-it": "^14.0.0",
     "markdown-it-attrs": "^4.1.6",
     "markdown-it-container": "^4.0.0",
@@ -89,6 +90,7 @@
     "prettier": "^3.2.4",
     "prismjs": "^1.29.0",
     "recursive-copy": "^2.0.14",
+    "slugify": "^1.6.6",
     "typescript": "^5.3.3",
     "uuid": "^9.0.1"
   },

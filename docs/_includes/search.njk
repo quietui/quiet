@@ -1,0 +1,73 @@
+<div id="site-search" class="site-search" hidden>
+  <div class="site-search__overlay"></div>
+
+  <dialog class="site-search__dialog" class="site-search__dialog">
+    <div class="site-search__content">
+      <div class="site-search__header">
+        <div id="site-search-combobox" class="site-search__input-wrapper">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+          </svg>
+          <input
+            id="site-search-input"
+            class="site-search__input"
+            type="search"
+            placeholder="Search"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            enterkeyhint="go"
+            spellcheck="false"
+            maxlength="100"
+            role="combobox"
+            aria-autocomplete="list"
+            aria-expanded="true"
+            aria-controls="site-search-listbox"
+            aria-haspopup="listbox"
+            aria-activedescendant
+          >
+          <button type="button" class="site-search__clear-button" aria-label="Clear entry" tabindex="-1" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="site-search__body">
+        <ul
+          id="site-search-listbox"
+          class="site-search__results"
+          role="listbox"
+          aria-label="Search results"
+        ></ul>
+        <div class="site-search__empty">No matching pages</div>
+      </div>
+      <footer class="site-search__footer">
+        <small>
+          <kbd aria-label="Up">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+              <path fill-rule="evenodd" d="M8 14a.75.75 0 0 1-.75-.75V4.56L4.03 7.78a.75.75 0 0 1-1.06-1.06l4.5-4.5a.75.75 0 0 1 1.06 0l4.5 4.5a.75.75 0 0 1-1.06 1.06L8.75 4.56v8.69A.75.75 0 0 1 8 14Z" clip-rule="evenodd" />
+            </svg>
+          </kbd>
+          <kbd aria-label="Down">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+              <path fill-rule="evenodd" d="M8 2a.75.75 0 0 1 .75.75v8.69l3.22-3.22a.75.75 0 1 1 1.06 1.06l-4.5 4.5a.75.75 0 0 1-1.06 0l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.22 3.22V2.75A.75.75 0 0 1 8 2Z" clip-rule="evenodd" />
+            </svg>
+          </kbd>
+          Navigate
+        </small>
+
+        <small>
+          <kbd aria-label="Enter">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" style="rotate: 180deg;">
+              <path fill-rule="evenodd" d="M3.5 9.75A2.75 2.75 0 0 1 6.25 7h5.19L9.22 9.22a.75.75 0 1 0 1.06 1.06l3.5-3.5a.75.75 0 0 0 0-1.06l-3.5-3.5a.75.75 0 1 0-1.06 1.06l2.22 2.22H6.25a4.25 4.25 0 0 0 0 8.5h1a.75.75 0 0 0 0-1.5h-1A2.75 2.75 0 0 1 3.5 9.75Z" clip-rule="evenodd" />
+            </svg>
+          </kbd>
+          Select
+        </small>
+
+        <small><kbd>Esc</kbd> Close</small>
+      </footer>
+    </div>
+  </dialog>
+</div>

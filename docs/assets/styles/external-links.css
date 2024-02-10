@@ -1,0 +1,6 @@
+a.external > svg {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.1em;
+  margin-inline-start: 0.15rem;
+}

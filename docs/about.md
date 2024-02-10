@@ -23,7 +23,7 @@ But don't be afraid to learn from and have fun with it!
 
 — [Cory LaViska](https://twitter.com/claviska)
 
-### My Commitment to Accessibility
+## My commitment to accessibility
 
 I recognize the need for all users, regardless of ability and device, to have undeterred access to the websites and applications that are created with it. This is an important goal of my projects.
 

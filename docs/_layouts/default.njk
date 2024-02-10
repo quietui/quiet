@@ -6,21 +6,24 @@
     <meta name="description" content="{{ description }}">
 
     <link rel="icon" href="/assets/images/logo-light.svg" />
-    <link rel="stylesheet" href="/assets/styles/variables.css" />
-    <link rel="stylesheet" href="/assets/styles/reset.css" />
     <link rel="stylesheet" href="/assets/styles/docs.css" />
 
     {# Scripts #}
     <script type="module" src="/assets/scripts/theme.js"></script>
     <script type="module" src="/assets/scripts/sidebar.js"></script>
     <script type="module" src="/assets/scripts/code-examples.js"></script>
+    <script type="module" src="/assets/scripts/copy-code.js"></script>
+    <script type="module" src="/assets/scripts/outline.js"></script>
+    <script type="module" src="/assets/scripts/search.js"></script>
+    <script type="module" src="/assets/scripts/smooth-links.js"></script>
+    <script type="module" src="/assets/scripts/turbo.js"></script>
 
     {# Quiet #}
     <script type="module" src="/dist/quiet.loader.js"></script>
     <title>{{ title }}</title>
   </head>
   <body>
-    <a id="skip-to-main" class="visually-hidden" href="#content">Skip to content</a>
+    <a id="skip-to-main" href="#content">Skip to content</a>
 
     <header id="header">
       <div id="navbar">
@@ -46,7 +49,7 @@
           </a>
         </div>
 
-        <div id="header-group-links" class="header-group header-group-scrollable">
+        <div id="header-group-links" class="header-group header-group-scrollable" data-remember-scroll>
           <div class="header-group-scrollable-interior">
             <a href="/start/installation"{% if section == 'docs' %} class="current"{% endif %}>Documentation</a>
             <a href="/about"{% if section == 'about' %} class="current"{% endif %}>About</a>
@@ -56,7 +59,7 @@
 
         <div id="header-group-buttons" class="header-group">
           {# Search #}
-          <button type="button" title="Search this website">
+          <button type="button" title="Search this website" data-search>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
             </svg>
@@ -104,7 +107,7 @@
     </header>
 
     <div id="body">
-      <aside id="sidebar" class="docs-aside">
+      <aside id="sidebar" class="docs-aside" data-remember-scroll>
         <button id="close-sidebar" class="docs-icon-button" type="button" aria-label="Close menu">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -124,25 +127,19 @@
 
       <div id="page">
         <aside id="outline" class="docs-aside">
-          <nav id="outline-standard">
-            <h2>On this page</h2>
-            <ul>
-              <li><a href="#">Section 1</a></li>
-              <li><a href="#">Section 2</a></li>
-              <li><a href="#">Section 3</a></li>
-              <li><a href="#">Section 4</a></li>
-              <li><a href="#">Section 5</a></li>
-              <li><a href="#">Section 6</a></li>
-              <li><a href="#">Section 7</a></li>
-              <li><a href="#">Section 8</a></li>
-              <li><a href="#">Section 9</a></li>
-              <li><a href="#">Section 10</a></li>
-            </ul>
+          <nav id="outline-standard" class="outline-links">
+            <h2><a href="#content">{{ title }}</a></h2>
+          </nav>
+
+          <nav id="outline-expandable">
+            <details class="outline-links">
+              <summary>On this page</summary>
+            </details>
           </nav>
         </aside>
 
         <main id="content">
-          <h2>{{ title }}</h2>
+          <h1>{{ title }}</h1>
 
           {{ content | safe }}
         </main>
@@ -150,5 +147,7 @@
     </div>
 
     <div id="overlay" hidden></div>
+
+    {% include 'search.njk' %}
   </body>
 </html>

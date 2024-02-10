@@ -1,0 +1,75 @@
+.code-example {
+  border: solid var(--docs-border-width) var(--docs-border-color);
+  border-radius: var(--docs-border-radius);
+  color: var(--docs-gray-700);
+  margin-block-end: var(--docs-flow-spacing);
+}
+
+.code-example-preview {
+  padding: 2rem;
+  border-bottom: solid var(--docs-border-width) var(--docs-border-color);
+}
+
+.code-example-preview > :first-child {
+  margin-block-start: 0;
+}
+
+.code-example-preview > :last-child {
+  margin-block-end: 0;
+}
+
+.code-example-source {
+  background: var(--docs-background-lowered);
+  border-bottom: solid var(--docs-border-width) var(--docs-border-color);
+}
+
+.code-example:not(.open) .code-example-source {
+  display: none;
+}
+
+.code-example.open .code-example-toggle svg {
+  rotate: 180deg;
+}
+
+.code-example-source pre {
+  margin: 0;
+}
+
+.code-example-buttons {
+  display: flex;
+  align-items: stretch;
+}
+
+.code-example-buttons button {
+  all: unset;
+  flex: 1 0 auto;
+  font-size: 0.875rem;
+  border-left: solid var(--docs-border-width) var(--docs-border-color);
+  text-align: center;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.code-example-buttons button:first-of-type {
+  border-left: none;
+  border-bottom-left-radius: var(--docs-border-radius);
+}
+
+.code-example-buttons button:last-of-type {
+  border-bottom-right-radius: var(--docs-border-radius);
+}
+
+.code-example-buttons button:focus-visible {
+  outline: solid var(--docs-focus-ring-width) var(--docs-focus-ring-color);
+}
+
+.code-example-buttons .code-example-pen {
+  flex: 0 0 100px;
+  white-space: nowrap;
+}
+
+.code-example-buttons svg {
+  width: 1em;
+  height: 1em;
+  vertical-align: -2px;
+}

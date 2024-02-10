@@ -20,7 +20,7 @@ document.addEventListener('click', event => {
       `<script type="module" src="https://cdn.jsdelivr.net/npm/@quietui/quiet@${version}/dist/quiet.loader.js"></script>` +
       `\n\n` +
       `${code.textContent}`;
-    const css = 'body {\\n  font: 16px sans-serif;\\n  padding: 1rem;\\n}\\n';
+    const css = 'body {\n  font: 16px sans-serif;\n  padding: 1rem;\n}\n';
     const js = '';
 
     const form = document.createElement('form');

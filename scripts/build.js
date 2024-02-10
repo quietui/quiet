@@ -26,6 +26,8 @@ let buildContext;
  * Runs the full build.
  */
 async function buildAll() {
+  const start = Date.now();
+
   try {
     await cleanup();
     await generateManifest();
@@ -33,7 +35,9 @@ async function buildAll() {
     await generateTypes();
     await generateBundle();
     await generateDocs();
-    spinner.succeed('The build is complete');
+
+    const time = (Date.now() - start) / 1000 + 's';
+    spinner.succeed(`The build is complete ${chalk.gray(`(finished in ${time})`)}`);
   } catch (error) {
     spinner.fail();
     console.log(chalk.red(`\n${error}`));
@@ -185,6 +189,10 @@ async function generateDocs() {
 // Initial build
 await buildAll();
 
+if (!isDeveloping) {
+  console.log(); // just a newline for readability
+}
+
 // Launch the dev server
 if (isDeveloping) {
   spinner.start('Launching the dev server');
@@ -250,11 +258,6 @@ if (isDeveloping) {
     spinner.info(`File modified ${chalk.gray(`(${relative(rootDir, filename)})`)}`);
     await generateDocs();
     reload();
-  });
-
-  // Warn when the 11ty config file changes
-  bs.watch(join(docsDir, '.eleventy.js')).on('change', () => {
-    spinner.warn('The 11ty config file has changed. Restart required!');
   });
 }
 

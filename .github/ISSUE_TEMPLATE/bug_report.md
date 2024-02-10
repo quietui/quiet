@@ -6,13 +6,13 @@ labels: bug
 assignees: claviska
 ---
 
-### Describe the bug
+## Describe the bug
 
 <!-- Please provide a brief description of the bug below this line. -->
 
 
 
-### How can I reproduce the bug?
+## How can I reproduce the bug?
 
 1. Go to ___
 2. Click on ___
@@ -21,7 +21,7 @@ assignees: claviska
 
 
 
-### Reproduction
+## Reproduction
 
 <!--
 IMPORTANT!
@@ -37,14 +37,14 @@ Link to repro:
 
 
 
-### Affected Browsers / Operating Systems
+## Affected Browsers / Operating Systems
 
  - Browsers (include versions):
  - OS: 
 
 
 
-### Additional information
+## Additional information
 
 <!-- Provide any additional information about the bug below this line. -->
 

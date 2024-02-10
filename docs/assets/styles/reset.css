@@ -53,8 +53,7 @@ p,
 pre,
 table,
 ul,
-video,
-.callout {
+video {
   margin-block-end: var(--docs-flow-spacing);
 }
 
@@ -199,8 +198,6 @@ pre {
 
 pre {
   position: relative;
-  padding: 1.25rem;
-  overflow-x: auto;
 }
 
 pre > code {
@@ -208,7 +205,8 @@ pre > code {
   hyphens: none;
   white-space: pre;
   tab-size: 2;
-  padding: 0;
+  padding: 1.25rem;
+  overflow-x: auto;
 }
 
 /* Lists */
@@ -322,7 +320,7 @@ summary::before {
 }
 
 details[open] {
-  padding-bottom: 1rem;
+  padding-block-end: 1rem;
 }
 
 details[open] > summary::before {
@@ -334,6 +332,16 @@ details :last-child {
 }
 
 /* Utilities */
+.sr-only {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
 .text-muted {
   color: var(--docs-body-color-muted);
 }

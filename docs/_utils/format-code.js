@@ -16,10 +16,17 @@ export async function formatCode(string, options) {
 }
 
 /**
- * Eleventy plugin to format pages using Prettier.
+ * Eleventy plugin to format page HTML using Prettier.
  */
-export function formatCodePlugin(eleventyConfig) {
-  eleventyConfig.addTransform('format-code', function (content) {
-    return formatCode(content, { parser: 'html' });
-  });
+export function formatCodePlugin(options = {}) {
+  options = {
+    parser: 'html',
+    ...options
+  };
+
+  return function (eleventyConfig) {
+    eleventyConfig.addTransform('format-code', function (content) {
+      return formatCode(content, options);
+    });
+  };
 }

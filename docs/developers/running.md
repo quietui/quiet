@@ -20,7 +20,7 @@ npm run start
 
 This will launch a browser showing the docs. The browser will reload as you make changes to the project.
 
-### Production Builds
+## Production Builds
 
 When you're ready to create a production build, use the following command.
 
@@ -36,6 +36,6 @@ There are a number of commands you can use to lint and test the library. For a f
 npm run
 ```
 
-### Testing
+## Testing
 
 TODO

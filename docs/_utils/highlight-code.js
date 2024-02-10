@@ -33,29 +33,39 @@ export function highlightCode(code, language = 'plain') {
 }
 
 /**
- * Eleventy plugin to highlight code blocks with the `language-*` attribute using Prism.js. This works on the entire
- * document, not just the markdown content.
+ * Eleventy plugin to highlight code blocks with the `language-*` attribute using Prism.js. Unlike most plugins, this
+ * works on the entire document — not just markdown content.
  */
-export function highlightCodePlugin(eleventyConfig) {
-  eleventyConfig.addTransform('code-highlighter', async function (content) {
-    const doc = parse(content, {
-      blockTextElements: { code: true }
-    });
+export function highlightCodePlugin(options = {}) {
+  options = {
+    container: 'body',
+    ...options
+  };
 
-    // Look for <code class="language-*"> and highlight each one
-    [...doc.querySelectorAll('code[class*="language-"]')].forEach(code => {
-      const langClass = [...code.classList.values()].find(val => val.startsWith('language-'));
-      const lang = langClass ? langClass.replace(/^language-/, '') : 'plain';
+  return function (eleventyConfig) {
+    eleventyConfig.addTransform('highlight-code', async function (content) {
+      const doc = parse(content, { blockTextElements: { code: true } });
+      const container = doc.querySelector(options.container);
 
-      try {
-        code.innerHTML = highlightCode(code.textContent ?? '', lang);
-      } catch (err) {
-        if (!opts.ignoreMissingLangs) {
-          throw new Error(err.message);
-        }
+      if (!container) {
+        return content;
       }
-    });
 
-    return doc.toString();
-  });
+      // Look for <code class="language-*"> and highlight each one
+      container.querySelectorAll('code[class*="language-"]').forEach(code => {
+        const langClass = [...code.classList.values()].find(val => val.startsWith('language-'));
+        const lang = langClass ? langClass.replace(/^language-/, '') : 'plain';
+
+        try {
+          code.innerHTML = highlightCode(code.textContent ?? '', lang);
+        } catch (err) {
+          if (!opts.ignoreMissingLangs) {
+            throw new Error(err.message);
+          }
+        }
+      });
+
+      return doc.toString();
+    });
+  };
 }

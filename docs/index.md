@@ -6,7 +6,9 @@ layout: default
 
 {{ description }}
 
-### Quick start
+"Here's a code block for testing"
+
+## Quick start's
 
 ```html
 <script type="module" src="/dist/quiet.loader.js"></script>
@@ -15,15 +17,17 @@ layout: default
 Here's a button.
 
 ```html {.example}
-<!-- Put things here! -->
-<quiet-button>
+<!-- Put thing's here! -->
+<quiet-button this="that">
   Click me
 </quiet-button>
 ```
 
-Here's a code block for testing:
+"Here's a code block for testing"
 
 ```css
+/* The first line should be really long. The first line should be really long. The first line should be really long. The first line should be really long. */
+
 :root {
   --custom-prop: blue;
   --another-prop: tomato;

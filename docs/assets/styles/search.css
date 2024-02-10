@@ -13,7 +13,7 @@
   --docs-search-border-radius: calc(var(--docs-border-radius) * 2);
   --docs-search-accent-color: var(--docs-primary-600);
   --docs-search-icon-color: var(--docs-gray-700);
-  --docs-search-shadow: 0 4px 16px hsl(240 3.8% 46.1% / 24%);
+  --docs-search-shadow: 0 4px 32px color-mix(in oklab, transparent, var(--docs-gray-600) 50%);
   --docs-search-result-background-hover: var(--docs-gray-100);
   --docs-search-result-background-active: var(--docs-search-accent-color);
   --docs-search-result-color-active: white;

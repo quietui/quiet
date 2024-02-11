@@ -2,11 +2,18 @@ import { parse } from 'node-html-parser';
 import { v4 as uuid } from 'uuid';
 import slugify from 'slugify';
 
-function createSlug(text) {
-  return slugify(String(text), {
+function createId(text) {
+  let slug = slugify(String(text), {
     remove: /[^\w|\s]/g,
     lower: true
   });
+
+  // ids must start with a letter
+  if (!/^[a-z]/i.test(slug)) {
+    slug = `quiet_${slug}`;
+  }
+
+  return slug;
 }
 
 /**
@@ -32,7 +39,7 @@ export function anchorHeadingsPlugin(options = {}) {
       // Look for headings
       container.querySelectorAll(options.headingSelector).forEach(heading => {
         const hasAnchor = heading.querySelector('a');
-        const slug = createSlug(heading.textContent ?? '') ?? uuid().slice(-12);
+        let slug = createId(heading.textContent ?? '') ?? uuid().slice(-12);
         let id = slug;
         let suffix = 0;
 

@@ -2,7 +2,7 @@
   "name": "@quietui/components",
   "type": "module",
   "version": "1.0.0-beta.1",
-  "description": "Quiet is a high quality UI library hand-crafted for the Web with a focus on accessibility, performance, longevity, and aesthetics.",
+  "description": "A high quality UI library hand-crafted for the Web with a focus on accessibility, performance, longevity, and aesthetics.",
   "types": "dist/quiet.d.ts",
   "exports": {
     ".": {

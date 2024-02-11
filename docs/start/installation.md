@@ -1,7 +1,7 @@
 ---
 title: Installation
 description:
-layout: default
+layout: docs.njk
 ---
 
 There are two ways to install Quiet.

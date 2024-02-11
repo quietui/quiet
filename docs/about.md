@@ -1,7 +1,7 @@
 ---
 title: About this project
 description:
-layout: default
+layout: page.njk
 section: about
 ---
 

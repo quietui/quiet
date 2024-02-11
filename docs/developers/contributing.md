@@ -1,7 +1,7 @@
 ---
 title: Contributing
 description: Learn how contributions work in this project.
-layout: default
+layout: docs.njk
 ---
 
 Quiet UI is an open source project, meaning everyone can use it and contribute to its development. A common misconception about contributing to an open source project is that you need to know how to code.

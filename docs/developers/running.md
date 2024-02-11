@@ -1,7 +1,7 @@
 ---
 title: Running the Project
 description:
-layout: default
+layout: docs.njk
 ---
 
 To set up a local development environment, [fork the repo on GitHub](https://github.com/quietui/quiet/fork), clone it locally, and install its dependencies.

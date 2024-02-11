@@ -1,0 +1,41 @@
+{% set hasSidebar = true %}
+{% set hasOutline = true %}
+
+{% extends "../_includes/base.njk" %}
+
+{# Component header #}
+{% block beforeContent %}
+  <h1>{{ title }}</h1>
+  <p>Component header here</p>
+{% endblock %}
+
+{# Content #}
+{% block content %}
+  {{ content | safe }}
+{% endblock %}
+
+{# Component API #}
+{% block afterContent %}
+  <hr>
+
+  <h2>Importing</h2>
+  <p>TODO</p>
+
+  <h2>Slots</h2>
+  <p>TODO</p>
+
+  <h2>Properties</h2>
+  <p>TODO</p>
+
+  <h2>Methods</h2>
+  <p>TODO</p>
+
+  <h2>Events</h2>
+  <p>TODO</p>
+
+  <h2>Customizing</h2>
+  <p>TODO</p>
+
+  <h2>Dependencies</h2>
+  <p>TODO</p>
+{% endblock %}

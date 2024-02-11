@@ -1,7 +1,7 @@
 ---
 title: Buy a license
 description:
-layout: default
+layout: page.njk
 section: buy
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Changelog
 description: Every release ships with a changelog entry showing what's new.
-layout: default
+layout: docs.njk
 ---
 
 ## 1.0.0-beta.1

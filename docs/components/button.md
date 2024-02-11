@@ -1,7 +1,7 @@
 ---
 title: Button
 description: test
-layout: default
+layout: component.njk
 ---
 
 TODO

@@ -1,7 +1,7 @@
 ---
 title: Themes
 description:
-layout: default
+layout: docs.njk
 ---
 
 ## Available themes

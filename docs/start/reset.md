@@ -1,7 +1,7 @@
 ---
 title: CSS Reset
 description:
-layout: default
+layout: docs.njk
 ---
 
 TODO

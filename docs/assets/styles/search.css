@@ -17,7 +17,6 @@
   --docs-search-result-background-hover: var(--docs-gray-100);
   --docs-search-result-background-active: var(--docs-search-accent-color);
   --docs-search-result-color-active: white;
-  --docs-search-overlay-background: rgba(0 0 0 / 0.33);
 }
 
 body.site-search-visible {
@@ -45,7 +44,7 @@ body.site-search-visible {
   left: 0;
   right: 0;
   bottom: 0;
-  background: var(--docs-search-overlay-background);
+  background: var(--docs-overlay-background);
   backdrop-filter: blur(6px);
   z-index: -1;
 }

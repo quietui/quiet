@@ -12,6 +12,18 @@ html:not(.docs-dark) .only-dark {
   display: none !important;
 }
 
+@media screen and (min-width: 960px) {
+  .only-mobile {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 959px) {
+  .not-mobile {
+    display: none !important;
+  }
+}
+
 #skip-to-main {
   position: fixed;
   z-index: calc(var(--docs-header-z-index) + 1);
@@ -194,11 +206,16 @@ html:not(.docs-dark) .only-dark {
 #body {
   position: relative;
   display: grid;
-  grid-template-columns: var(--docs-sidebar-width) auto;
+  grid-template-columns: auto;
+  max-width: calc(var(--docs-max-width) - var(--docs-sidebar-width));
   min-height: 100vh;
-  max-width: var(--docs-max-width);
   margin-block-start: var(--docs-header-height);
   margin: 0 auto;
+}
+
+#body.has-sidebar {
+  grid-template-columns: var(--docs-sidebar-width) auto;
+  max-width: var(--docs-max-width);
 }
 
 #sidebar {
@@ -222,11 +239,15 @@ html:not(.docs-dark) .only-dark {
   position: relative;
   display: grid;
   gap: var(--docs-content-spacing);
-  grid-template-columns: auto var(--docs-outline-width);
+  grid-template-columns: auto;
   padding-inline-start: var(--docs-content-spacing);
   padding-block: var(--docs-header-height) 2rem;
   /* Adjust for the sidebar's focus ring offset so the page is equally balanced */
   margin-inline-end: calc(var(--docs-focus-ring-width) + var(--docs-focus-ring-offset));
+}
+
+#page.has-outline {
+  grid-template-columns: auto var(--docs-outline-width);
 }
 
 #content {
@@ -308,10 +329,6 @@ html:not(.docs-dark) .only-dark {
 }
 
 @media screen and (max-width: 959px) {
-  #header-logo {
-    display: none;
-  }
-
   .header-group:not(:first-of-type) + .header-group {
     border-left: solid var(--docs-border-width) var(--docs-border-color);
     padding-inline-start: 0.5rem;
@@ -367,6 +384,7 @@ html:not(.docs-dark) .only-dark {
     left: 0;
     z-index: calc(var(--docs-sidebar-z-index) - 1);
     background: var(--docs-overlay-background);
+    backdrop-filter: blur(6px);
   }
 
   #page {

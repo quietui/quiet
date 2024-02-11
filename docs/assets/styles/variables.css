@@ -94,8 +94,8 @@
   --docs-sidebar-width: 17rem;
   --docs-sidebar-width-mobile: 20rem;
   --docs-sidebar-speed: 250ms;
-  --docs-sidebar-shadow: 0 2px 2rem rgb(0 0 0 / 0.125);
-  --docs-overlay-background: rgb(0 0 0 / 0.4);
+  --docs-sidebar-shadow: color-mix(in oklab, transparent, var(--docs-gray-600) 50%);
+  --docs-overlay-background: rgba(0 0 0 / 0.33);
 
   /* Body text */
   --docs-body-font: system-ui, sans-serif;

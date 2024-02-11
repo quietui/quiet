@@ -1,7 +1,7 @@
 ---
 title: Using Web Components
 description:
-layout: default
+layout: docs.njk
 ---
 
 - don't use self-closing tag (info)

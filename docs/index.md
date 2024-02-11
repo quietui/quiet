@@ -1,7 +1,7 @@
 ---
 title: Quiet UI
 description: Quiet is a high quality UI library hand-crafted for the Web with a focus on accessibility, performance, longevity, and aesthetics.
-layout: default
+layout: splash
 ---
 
 {{ description }}

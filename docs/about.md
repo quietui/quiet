@@ -11,7 +11,7 @@ The truth is, Shoelace has matured a lot over the years. While that's a great th
 
 **Enter Quiet, my creative outlet.** A passion project. Something I'm building to explore new ideas and have fun with. It leans towards the bleeding edge of what's become possible with browsers in recent years. It thinks more about progressive enhancement than it probably should. Quiet is in no way meant to compete with Shoelace. It allows me to try new things that may or may not work and improve my skills as a designer and developer.
 
-As a result, you'll find that Quiet is rather opinionated. If it's not exactly what you want, it's probably not a good choice for your next project. Maybe consider using Shoelace instead. For the rest of you — the ones who like living on the edge and playing with newer browser APIs — go ahead and use it to your heart's content.
+As a result, you'll find that Quiet is rather opinionated. If it's not exactly what you want, it's probably not a good choice for your next project. For the rest of you — the ones who like living on the edge and playing with newer browser APIs — go ahead and use it to your heart's content.
 
 **But be warned…**
 
@@ -19,9 +19,7 @@ Expect a long beta period…maybe forever. Expect breaking changes. Expect that 
 
 With all due respect, I'm not building this for you. I'm building it for me.
 
-But don't be afraid to learn from and have fun with it!
-
-— [Cory LaViska](https://twitter.com/claviska)
+But don't be afraid to use it, learn from it, and have fun with it!
 
 ## My commitment to accessibility
 
@@ -31,10 +29,12 @@ Oftentimes, people will ask "is it accessible?" I'm reluctant to answer because 
 
 Accessibility is something you have to continuously strive for. No individual contributor — or perhaps even an entire team — can claim their software is 100% accessible because of the sheer diversity of abilities, devices, assistive technologies, and individual use cases.
 
-Furthermore, accessibility doesn't stop at the component level. Using accessible building blocks doesn't magically make the rest of your webpage or application compliant. There is no library or overlay that will make your software "fully accessible" without putting in the effort. It's also worth noting that web components are still somewhat bleeding edge, so browsers, assistive devices, and even specifications are still evolving to help improve accessibility on the web platform.
+Furthermore, accessibility doesn't stop at the component level. Using accessible building blocks doesn't magically make the rest of your webpage or application compliant. There is no library or overlay that will make your software "fully accessible" without putting in the effort.
 
-My commitment to my users is this: Everything I develop will be built with accessibility in mind. I will test and improve every component to the best of my ability and knowledge. I will work around upstream issues, such as browser bugs and limitations, to the best of my ability and within reason.
+My commitment to my users is this: Everything I develop will be built with accessibility in mind. I will test and improve my software to the best of my ability and knowledge. I will work around upstream issues, such as browser bugs and limitations, to the best of my ability and within reason.
 
 I'm fully aware that I won't get it right every time for every user, so I invite the community to participate in this ongoing effort by submitting issues, pull requests, and discussions. Many accessibility improvements have already been made thanks to contributors submitting code, feedback, and suggestions.
 
 This is the path forward. Together, we will continue to make accessible software for as many users as possible.
+
+— [Cory LaViska](https://twitter.com/claviska)

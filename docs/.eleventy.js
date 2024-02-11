@@ -36,7 +36,7 @@ export default function (eleventyConfig) {
       target: '.outline-links',
       selector: 'h2',
       ifEmpty: doc => {
-        doc.querySelector('#outline').remove();
+        doc.querySelector('#outline')?.remove();
       }
     })
   );

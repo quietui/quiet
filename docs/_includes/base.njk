@@ -164,7 +164,9 @@
       </div>
     </div>
 
-    <div id="overlay" hidden></div>
+    {% if hasSidebar %}
+      <div id="overlay" hidden></div>
+    {% endif %}
 
     {% include 'search.njk' %}
   </body>

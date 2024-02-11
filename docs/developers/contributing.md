@@ -21,7 +21,20 @@ In fact, there are many ways to contribute, and some of the most important contr
 - Sharing ideas
 - And, of course, contributing code!
 
+:::info
 Please take a moment to review these guidelines to make the contribution process as easy as possible for both yourself and the project's maintainer.
+:::
+
+## Feature requests
+
+It's important to remember that this project is [very opinionated](/about). Many feature requests will be considered out of scope and will not be fulfilled. This doesn't mean your idea is bad — it means it's not a good fit for the project right now. The maintainer strongly believes that certain tradeoffs are worth eliminating complexity and bloat, which ultimately leads to improved longevity.
+
+- Please **do** search for an existing request before suggesting a new feature.
+- Please **do** use the voting buttons to vote for a feature.
+- Please **do** share substantial use cases and perspective that support new features if they haven't already been mentioned.
+- Please **do not** bump, spam, or ping contributors to prioritize your own feature.
+
+You can [request a feature here](https://github.com/quietui/quiet/discussions/categories/feature-requests).
 
 ## Bug Reports
 
@@ -35,7 +48,7 @@ A bug is a demonstrable problem caused by code in the library. Bug reports are a
 - Please **do not** paste in screenshots of code
 
 :::info
-A minimal test case is critical to a successful bug report. It demonstrates that the bug exists in the library and not in surrounding code. Contributors should be able to understand the bug without studying your code, otherwise they'll probably move on to another bug.
+A minimal test case is critical to getting your bug fixed! It demonstrates that the bug exists in the library and not in surrounding code. Contributors should be able to understand the bug without studying your code.
 :::
 
 ## Pull requests
@@ -43,23 +56,10 @@ A minimal test case is critical to a successful bug report. It demonstrates that
 To keep the project on track, please consider the following guidelines before submitting a PR.
 
 - Please **do** open an issue before submitting a PR unless the changes are trivial (e.g. fixing typos or outdated docs). This will prevent you from doing work that won't be accepted for various reasons (e.g. someone is already working on it, it's not a good fit for the project's roadmap, it needs additional exploration, etc.)
-- Please **do** make sure your PR clearly defines what you're changing. Even if you feel your changes are obvious, please explain them so other contributors can more easily review your works.
+- Please **do** make sure your PR clearly defines what you're changing. Even if you feel your changes are obvious, please explain them so other contributors can more easily review your work.
 - Please **do not** edit anything in `dist/`, as those files are generated at build time.
 
-The maintainer reserves the right to reject any PR that's outside the scope of the project or doesn't meet code quality standards. Remember, [this project is very opinionated](/start/about).
-
-## Feature requests
-
-It's important to know that this project's roadmap is [heavily opinionated](/start/about). Many feature requests will be considered out of scope and remain unfulfilled. This doesn't mean your idea is bad — it means it's not a good fit for _this_ project.
-
-- Please **do** search for an existing request before suggesting a new feature.
-- Please **do** use the voting buttons to vote for a feature.
-- Please **do** share substantial use cases and perspective that support new features if they haven't already been mentioned.
-- Please **do not** bump, spam, or ping contributors to prioritize your own feature.
-
-You can [request a feature here](https://github.com/quietui/quiet/discussions/categories/feature-requests).
-
-## Content
+The maintainer reserves the right to reject any PR that's outside the scope of the project or doesn't meet code quality standards.
 
 ## Documentation
 

@@ -26,7 +26,7 @@ assignees: claviska
 <!--
 IMPORTANT!
 
-If the bug isn't obvious, please post a minimal reproduction using CodePen or JSFiddle. Avoid using cloud-based IDEs such as CodeSandbox and StackBlitz, as make things a lot harder for me to verify.
+If the bug isn't obvious, please post a minimal reproduction using CodePen or JSFiddle. Avoid using cloud-based IDEs such as CodeSandbox and StackBlitz, as it makes things a lot harder for the maintainer to verify.
 
 A MINIMAL REPRO WILL GET YOUR BUG RESOLVED FASTER!
 

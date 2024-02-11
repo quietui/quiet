@@ -2,9 +2,12 @@
 // Sidebar
 //
 function showSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('overlay');
   const duration = parseInt(getComputedStyle(sidebar).getPropertyValue('--docs-sidebar-speed'), 10);
+  const closeButton = document.getElementById('close-sidebar');
 
-  root.classList.add('docs-sidebar-open');
+  document.documentElement.classList.add('docs-sidebar-open');
   isSidebarOpen = true;
   sidebar.inert = false;
   overlay.hidden = false;
@@ -16,39 +19,62 @@ function showSidebar() {
 }
 
 function hideSidebar() {
-  root.classList.remove('docs-sidebar-open');
-  isSidebarOpen = false;
-  sidebar.inert = isMobile.matches;
-  overlay
-    .animate([{ opacity: 1 }, { opacity: 0 }], {
-      duration: 250,
-      easing: 'ease'
-    })
-    .finished.then(() => {
-      overlay.hidden = true;
-    });
-}
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('overlay');
 
-function syncSidebarInert() {
-  if (isMobile.matches) {
-    sidebar.inert = !isSidebarOpen;
-  } else {
-    sidebar.inert = false;
+  document.documentElement.classList.remove('docs-sidebar-open');
+
+  if (sidebar) {
+    isSidebarOpen = false;
+    sidebar.inert = isMobile.matches;
+  }
+
+  if (overlay) {
+    overlay
+      .animate([{ opacity: 1 }, { opacity: 0 }], {
+        duration: 250,
+        easing: 'ease'
+      })
+      .finished.then(() => {
+        overlay.hidden = true;
+      });
   }
 }
 
-const root = document.documentElement;
-const sidebar = document.getElementById('sidebar');
-const overlay = document.getElementById('overlay');
-const openButton = document.getElementById('open-sidebar');
-const closeButton = document.getElementById('close-sidebar');
+function syncSidebarInert() {
+  const sidebar = document.getElementById('sidebar');
+
+  if (sidebar) {
+    if (isMobile.matches) {
+      sidebar.inert = !isSidebarOpen;
+    } else {
+      sidebar.inert = false;
+    }
+  }
+}
+
 const isMobile = window.matchMedia('(max-width: 959px)');
 let isSidebarOpen = false;
 let resizeTimeout;
 
 // Toggle the sidebar
-openButton.addEventListener('click', showSidebar);
-closeButton.addEventListener('click', hideSidebar);
+document.addEventListener('click', event => {
+  const openButton = event.target.closest('#open-sidebar');
+  const closeButton = event.target.closest('#close-sidebar');
+
+  if (openButton) {
+    showSidebar();
+    return;
+  }
+
+  if (closeButton) {
+    hideSidebar();
+  }
+});
+
+window.addEventListener('turbo:render', () => {
+  hideSidebar();
+});
 
 // Close when clicking outside the sidebar
 document.addEventListener('mousedown', event => {

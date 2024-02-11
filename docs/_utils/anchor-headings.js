@@ -33,7 +33,7 @@ export function anchorHeadingsPlugin(options = {}) {
       const container = doc.querySelector(options.container);
 
       if (!container) {
-        return container;
+        return content;
       }
 
       // Look for headings

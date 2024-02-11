@@ -26,7 +26,7 @@ export function outlinePlugin(options = {}) {
       let numLinks = 0;
 
       if (!container) {
-        return container;
+        return content;
       }
 
       container.querySelectorAll(options.selector).forEach(heading => {

@@ -1,7 +1,7 @@
 ---
 title: Installation
 description:
-layout: docs.njk
+layout: docs
 ---
 
 There are two ways to install Quiet.
@@ -15,8 +15,8 @@ The autoloader is the recommended way to use Quiet. It will automatically regist
 ```
 
 - how asset paths work and how to set them
-- event: quiet:discovery-complete', { detail: { registered, unknown }
-- how to force discovery with { discoverElements }
+- event: quiet:discovery-complete `{ detail: { registered: [], unknown: [] }`
+- how to force discovery with `discoverElements()`
 
 ## Importing
 

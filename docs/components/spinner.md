@@ -1,7 +1,7 @@
 ---
 title: Spinner
 description: test
-layout: component.njk
+layout: component
 ---
 
 TODO

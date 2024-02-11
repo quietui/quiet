@@ -1,7 +1,7 @@
 ---
 title: Quiet Restyle
 description:
-layout: docs.njk
+layout: docs
 ---
 
 Quiet Restyle is an opinionated CSS reset you can use with or without its components. Kick off a new website or app that looks great without worrying about styling anything right away.

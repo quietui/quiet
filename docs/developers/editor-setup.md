@@ -1,7 +1,7 @@
 ---
 title: Editor Setup
 description:
-layout: docs.njk
+layout: docs
 ---
 
 TODO

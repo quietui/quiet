@@ -1,4 +1,5 @@
 *.md
+*.min.js
 .github
 cspell.json
 dist

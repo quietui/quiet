@@ -1,49 +1,29 @@
 ---
 title: Quiet UI
-description: Quiet is a high quality UI library hand-crafted for the Web with a focus on accessibility, performance, longevity, and aesthetics.
+description: A high quality UI library hand-crafted for the Web with a focus on accessibility, performance, longevity, and aesthetics.
 layout: splash
 ---
 
-{{ description }}
+<div class="splash">
+  <h1 class="visually-hidden">Quiet UI</h1>
+  <img class="only-light" src="/assets/images/wordmark-light.svg" alt="">
+  <img class="only-dark" src="/assets/images/wordmark-dark.svg" alt="">
 
-"Here's a code block for testing"
+  <p class="subtitle">{{ description }}</p>
 
-## Quick start's
+  <p>
+    Open source with commercial licensing available.
+  </p>
 
-```html
-<script type="module" src="/dist/quiet.loader.js"></script>
-```
+  <div class="splash-actions">
 
-Here's a button.
+  <quiet-button href="/docs/" variant="primary">
+    Get Started
+  </quiet-button>
 
-```html {.example}
-<!-- Put thing's here! -->
-<quiet-button this="that">
-  Click me
-</quiet-button>
-```
-
-"Here's a code block for testing"
-
-```css
-/* The first line should be really long. The first line should be really long. The first line should be really long. The first line should be really long. */
-
-:root {
-  --custom-prop: blue;
-  --another-prop: tomato;
-}
-```
-
-Look at these nice callouts.
-
-:::info
-Don't forget to include `type="module"` in your scripts!
-:::
-
-:::warning
-Don't forget to include `type="module"` in your scripts!
-:::
-
-:::danger
-Don't forget to include `type="module"` in your scripts!
-:::
+  <quiet-button href="https://github.com/quietui/quiet">
+    View on GitHub
+  </quiet-button>
+  
+  </div>
+</div>

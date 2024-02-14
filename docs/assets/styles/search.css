@@ -1,11 +1,11 @@
 :root {
-  --docs-search-box-background: var(--docs-background);
+  --docs-search-box-background: var(--docs-background-raised);
   --docs-search-box-border-width: var(--docs-border-color);
   --docs-search-box-border-color: var(--docs-border-color);
   --docs-search-box-color: var(--docs-body-color);
-  --docs-search-dialog-background: white;
-  --docs-search-border-width: 1px;
-  --docs-search-border-color: #ddd;
+  --docs-search-dialog-background: var(--docs-background);
+  --docs-search-border-width: var(--docs-border-width);
+  --docs-search-border-color: var(--docs-border-color);
   --docs-search-text-color: var(--docs-body-color);
   --docs-search-text-color-muted: var(--docs-gray-600);
   --docs-search-font-weight-normal: normal;
@@ -17,6 +17,11 @@
   --docs-search-result-background-hover: var(--docs-gray-100);
   --docs-search-result-background-active: var(--docs-search-accent-color);
   --docs-search-result-color-active: white;
+}
+
+.docs-dark {
+  --docs-search-accent-color: var(--docs-primary-300);
+  --docs-search-shadow: 0 4px 32px color-mix(in oklab, transparent, black 50%);
 }
 
 body.site-search-visible {
@@ -46,6 +51,7 @@ body.site-search-visible {
   bottom: 0;
   background: var(--docs-overlay-background);
   backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   z-index: -1;
 }
 
@@ -252,7 +258,7 @@ body.site-search-visible {
 .site-search__result-title {
   font-size: 1.2rem;
   font-weight: var(--docs-search-font-weight-semibold);
-  color: var(--docs-search-accent-color);
+  color: var(--docs-link-color);
 }
 
 .site-search__result-description {
@@ -297,7 +303,7 @@ body.site-search-visible {
 
 .site-search__footer kbd {
   display: inline-flex;
-  height: 1.5em;
+  height: 1.35rem;
   justify-content: center;
   align-items: center;
 }

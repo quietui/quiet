@@ -2,3 +2,7 @@
 {% set hasOutline = false %}
 
 {% extends "../_includes/base.njk" %}
+
+{% block content %}
+  {{ content | safe }}
+{% endblock %}

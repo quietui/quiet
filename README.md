@@ -93,3 +93,7 @@ Some components will have an "experimental" label. These components are consider
 In contrast, components with the "stable" label can be safely used in production. These components have been tested more thoroughly and are unlikely to change.
 
 During the beta period, breaking changes may occur even to stable components. When this happens, it's for a good reason and the changes will be documented clearly in the project's changelog.
+
+---
+
+"Silence is a source of great strength." ― Lao Tzu

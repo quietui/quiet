@@ -1,3 +1,4 @@
+// Smooth links
 document.addEventListener('click', event => {
   const link = event.target.closest('a');
   const id = (link?.hash ?? '').substr(1);
@@ -20,3 +21,12 @@ document.addEventListener('click', event => {
     }
   }
 });
+
+// Scroll classes
+function updateScrollClass() {
+  document.body.classList.toggle('scrolled-down', window.scrollY >= 10);
+}
+
+window.addEventListener('scroll', updateScrollClass);
+window.addEventListener('turbo:render', updateScrollClass);
+updateScrollClass();

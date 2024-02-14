@@ -57,7 +57,10 @@ html:not(.docs-dark) .only-dark {
   right: 0;
   left: 0;
   height: var(--docs-header-height);
-  background: var(--docs-background);
+  background-color: color-mix(in oklab, transparent, var(--docs-background) 85%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: 0.25s background-color ease;
 }
 
 /* Draw the underline as a separate element so we can use z-index */
@@ -69,6 +72,7 @@ html:not(.docs-dark) .only-dark {
   left: 0;
   right: 0;
   border-bottom: solid var(--docs-border-width) var(--docs-border-color);
+  transition: 0.25s border-color ease;
 }
 
 /* Header groups */
@@ -127,6 +131,10 @@ html:not(.docs-dark) .only-dark {
   width: auto;
   height: calc(var(--docs-header-height) / 1.75);
   margin-inline-end: 0.25rem;
+}
+
+#header-logo svg.only-mobile {
+  padding-block: 0.125rem;
 }
 
 /* Header group links */
@@ -463,7 +471,7 @@ html:not(.docs-dark) .only-dark {
   color: var(--docs-link-color);
 }
 
-/* callouts */
+/* Callouts */
 .callout {
   display: flex;
   gap: 1rem;
@@ -481,7 +489,6 @@ html:not(.docs-dark) .only-dark {
 }
 
 .callout-info {
-  border: solid var(--docs-border-width) var(--docs-primary-200);
   background-color: var(--docs-primary-100);
 }
 
@@ -490,7 +497,6 @@ html:not(.docs-dark) .only-dark {
 }
 
 .callout-warning {
-  border: solid 1px var(--docs-warning-200);
   background-color: var(--docs-warning-100);
 }
 
@@ -499,7 +505,6 @@ html:not(.docs-dark) .only-dark {
 }
 
 .callout-danger {
-  border: solid 1px var(--docs-danger-200);
   background-color: var(--docs-danger-100);
 }
 
@@ -525,4 +530,55 @@ html:not(.docs-dark) .only-dark {
 
 .callout-danger code {
   background-color: color-mix(in oklab, transparent, var(--docs-danger-200) 75%);
+}
+
+/* Splash */
+.layout-splash {
+  background-image: linear-gradient(135deg, var(--docs-background) 25%, var(--docs-primary-200) 125%);
+}
+
+.docs-dark .layout-splash {
+  background-image: linear-gradient(135deg, var(--docs-background) 25%, var(--docs-primary-100) 125%);
+}
+
+.layout-splash:not(.scrolled-down) #header {
+  background-color: transparent;
+}
+
+.layout-splash:not(.scrolled-down) #header::after {
+  border-color: transparent;
+}
+
+.splash {
+  font-size: 1.375rem;
+  font-weight: var(--docs-body-font-weight-heavy);
+  line-height: 1.4;
+  text-align: center;
+}
+
+.splash img {
+  display: block;
+  width: 100%;
+  max-width: 600px;
+  margin-inline: auto;
+  margin-block: 12vh;
+}
+
+.splash .subtitle {
+  font-size: 3.5rem;
+}
+
+.splash-actions {
+  margin-block-start: 4rem;
+}
+
+@media screen and (max-width: 959px) {
+  .splash {
+    font-size: 1rem;
+    line-height: 1.3;
+  }
+
+  .splash .subtitle {
+    font-size: 2rem;
+  }
 }

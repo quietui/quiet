@@ -37,7 +37,7 @@
   "scripts": {
     "start": "node scripts/build.js --develop",
     "build": "node scripts/build.js",
-    "postinstall": "npx playwright install",
+    "prepare": "npx playwright install",
     "test": "wtr --group default",
     "test:component": "wtr -- --watch --group",
     "test:watch": "wtr --watch --group default",

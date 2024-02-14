@@ -199,22 +199,6 @@ if (isDeveloping) {
 
   const bs = browserSync.create();
   const port = await getPort({ port: portNumbers(4000, 4999) });
-  const browserSyncConfig = {
-    startPath: '/',
-    port,
-    logLevel: 'silent',
-    logPrefix: '[quietui]',
-    logFileChanges: true,
-    notify: false,
-    single: false,
-    ghostMode: false,
-    server: {
-      baseDir: siteDir,
-      routes: {
-        '/dist': './dist'
-      }
-    }
-  };
   const reload = () => {
     spinner.start('Reloading browser');
     bs.reload();
@@ -222,11 +206,38 @@ if (isDeveloping) {
   };
 
   // Launch browser sync
-  bs.init(browserSyncConfig, () => {
-    const url = `http://localhost:${port}`;
-    spinner.succeed();
-    console.log(`\n🐭 The dev server is running at ${chalk.magenta(url)}\n`);
-  });
+  bs.init(
+    {
+      startPath: '/',
+      port,
+      logLevel: 'silent',
+      logPrefix: '[quietui]',
+      logFileChanges: true,
+      notify: false,
+      single: false,
+      ghostMode: false,
+      server: {
+        baseDir: siteDir,
+        routes: {
+          '/dist': './dist'
+        }
+      },
+      callbacks: {
+        ready: (_err, instance) => {
+          // 404 errors
+          instance.addMiddleware('*', (_req, res) => {
+            res.writeHead(302, { location: '/404.html' });
+            res.end();
+          });
+        }
+      }
+    },
+    () => {
+      const url = `http://localhost:${port}`;
+      spinner.succeed();
+      console.log(`\n🐭 The dev server is running at ${chalk.magenta(url)}\n`);
+    }
+  );
 
   // Rebuild and reload when source files change
   bs.watch('src/**/!(*.test).*').on('change', async filename => {

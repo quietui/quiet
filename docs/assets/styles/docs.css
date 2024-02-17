@@ -154,6 +154,23 @@ html:not(.docs-dark) .only-dark {
   margin-inline-end: 0.5rem;
 }
 
+#header-group-links a svg {
+  width: 1.1em;
+  height: 1.1em;
+  vertical-align: -3px;
+  color: deeppink;
+  animation: 1.25s infinite alternate pulse;
+}
+
+@keyframes pulse {
+  from {
+    scale: 0.95;
+  }
+  to {
+    scale: 1.05;
+  }
+}
+
 #header-group-links a:hover {
   color: var(--docs-link-color);
 }

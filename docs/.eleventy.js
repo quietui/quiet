@@ -2,6 +2,7 @@ import { parse } from 'path';
 import { markdown } from './_utils/markdown.js';
 import { anchorHeadingsPlugin } from './_utils/anchor-headings.js';
 import { codeExamplesPlugin } from './_utils/code-examples.js';
+import { analyticsPlugin } from './_utils/analytics.js';
 import { copyCodePlugin } from './_utils/copy-code.js';
 import { currentLink } from './_utils/current-link.js';
 import { highlightCodePlugin } from './_utils/highlight-code.js';
@@ -11,6 +12,7 @@ import { replaceTextPlugin } from './_utils/replace-text.js';
 import { searchPlugin } from './_utils/search.js';
 import { readFile } from 'fs/promises';
 import { outlinePlugin } from './_utils/outline.js';
+import { getComponents } from './_utils/manifest.js';
 import process from 'process';
 
 const packageData = JSON.parse(await readFile('./package.json', 'utf-8'));
@@ -21,7 +23,26 @@ export default function (eleventyConfig) {
   eleventyConfig.addGlobalData('package', packageData);
 
   // Template filters
+  eleventyConfig.addFilter('inlineMarkdown', content => markdown.renderInline(content));
+  eleventyConfig.addFilter('markdown', content => markdown.render(content));
   eleventyConfig.addFilter('stripExtension', string => parse(string).name);
+  eleventyConfig.addFilter('trimPipes', content => {
+    // Trims whitespace and pipes from the start and end of a string. Useful for CEM types, which can be pipe-delimited.
+    // With Prettier 3, this means a leading pipe will exist be present when the line wraps.
+    return typeof content === 'string' ? content.replace(/^(\s|\|)/g, '').replace(/(\s|\|)$/g, '') : content;
+  });
+
+  // Helpers
+  eleventyConfig.addNunjucksGlobal('getComponent', tagName => {
+    const component = getComponents().find(c => c.tagName === tagName);
+
+    if (!component) {
+      throw new Error(
+        `Unable to find "<${tagName}>". Make sure the file name is the same as the tag name (without prefix)`
+      );
+    }
+    return component;
+  });
 
   // Use our own markdown instance
   eleventyConfig.setLibrary('md', markdown);
@@ -59,6 +80,12 @@ export default function (eleventyConfig) {
   // Various text replacements
   eleventyConfig.addPlugin(
     replaceTextPlugin([
+      // Replace __CDN_URL__
+      {
+        replace: /__CDN_URL__/g,
+        replaceWith: `https://cdn.jsdelivr.net/npm/@quietui/quiet@${packageData.version}/dist`
+      },
+
       // Replace [issue:1234] with a link to the issue on GitHub
       {
         replace: /\[pr:([0-9]+)\]/gs,
@@ -86,9 +113,13 @@ export default function (eleventyConfig) {
     })
   );
 
-  // Run Prettier on each file (prod only because it can be slow)
+  // Production-only plugins
   if (!isDeveloping) {
+    // Run Prettier on each file (prod only because it can be slow)
     eleventyConfig.addPlugin(formatCodePlugin());
+
+    // Add privacy-friendly analytics
+    eleventyConfig.addPlugin(analyticsPlugin({ domain: 'quietui.com' }));
   }
 
   return {

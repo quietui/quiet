@@ -12,7 +12,7 @@ layout: splash
   <p class="subtitle">{{ description }}</p>
 
   <p>
-    Open source with commercial licensing available.
+    Beautiful design. Platform-based. Open source.
   </p>
 
   <div class="splash-actions">

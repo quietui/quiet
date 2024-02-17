@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="{{ description }}">
     <meta name="theme-color" content="#787acf">
+    <title>{{ title }}</title>
 
     <link rel="icon" href="/assets/images/logo-light.svg" />
     <link rel="stylesheet" href="/assets/styles/docs.css" />
@@ -21,7 +22,7 @@
 
     {# Quiet #}
     <script type="module" src="/dist/quiet.loader.js"></script>
-    <title>{{ title }}</title>
+    <link rel="stylesheet" href="/dist/themes/light.css" />
   </head>
   <body class="layout-{{ layout | stripExtension }}">
     <a id="skip-to-main" href="#content">Skip to content</a>
@@ -58,8 +59,8 @@
 
         <div id="header-group-links" class="header-group header-group-scrollable" data-remember-scroll>
           <div class="header-group-scrollable-interior">
-            <a href="/start/installation"{% if section == 'docs' %} class="current"{% endif %}>Documentation</a>
-            <a href="/buy"{% if section == 'buy' %} class="current"{% endif %}>Buy a license</a>
+            <a href="/docs"{% if section == 'docs' %} class="current"{% endif %}>Documentation</a>
+            <a href="/sponsor"{% if section == 'sponsor' %} class="current"{% endif %}>Sponsor</a>
             <a href="/about"{% if section == 'about' %} class="current"{% endif %}>About</a>
           </div>
         </div>

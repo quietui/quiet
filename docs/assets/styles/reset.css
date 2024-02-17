@@ -141,9 +141,9 @@ a:hover {
 
 abbr[title] {
   text-decoration: underline;
-  text-decoration-style: dotted;
+  text-decoration-style: dashed;
   text-decoration-thickness: 1.5px;
-  text-underline-offset: 2px;
+  text-underline-offset: 2.5px;
   cursor: help;
 }
 
@@ -269,10 +269,11 @@ table {
   margin-block-end: 1.5rem;
 }
 
-tr:hover {
-  background-color: color-mix(in oklab, var(--docs-background), var(--docs-gray-1000) 3%);
+tbody tr:hover {
+  background-color: color-mix(in oklab, var(--docs-background), var(--docs-gray-1000) 2%);
 }
 
+thead th,
 tr:not(:last-of-type) {
   border-bottom: solid var(--docs-border-width) var(--docs-border-color);
 }
@@ -325,6 +326,10 @@ details[open] {
 
 details[open] > summary::before {
   rotate: 90deg;
+}
+
+details summary ~ * {
+  margin-block-start: 0;
 }
 
 details :last-child {

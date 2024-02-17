@@ -1,3 +1,3 @@
 # Contributing Guidelines
 
-Please refer to the contribution guidelines found at: https://quietui/developers/contributing
+Please refer to the contribution guidelines found at: https://quietui/docs/developers/contributing

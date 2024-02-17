@@ -276,6 +276,33 @@ html:not(.docs-dark) .only-dark {
   }
 }
 
+#content aside {
+  float: inline-end;
+  max-width: 340px;
+  background-color: var(--docs-background-lowered);
+  border-radius: calc(var(--docs-border-radius) * 1.5);
+  padding: 1.5rem;
+  margin-inline-start: 1.5rem;
+  margin-block: 1.5rem;
+}
+
+#content aside :first-child {
+  margin-block-start: 0;
+}
+
+#content aside :last-child {
+  margin-block-end: 0;
+}
+
+@media screen and (max-width: 959px) {
+  #content aside {
+    float: none;
+    max-width: none;
+    margin-inline: 0;
+    margin-block: 2rem;
+  }
+}
+
 #outline {
   order: 2;
 }
@@ -581,4 +608,10 @@ html:not(.docs-dark) .only-dark {
   .splash .subtitle {
     font-size: 2rem;
   }
+}
+
+/* Tables */
+.table-checkmark svg {
+  width: 1em;
+  height: 1em;
 }

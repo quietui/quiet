@@ -1,12 +1,13 @@
 {% set hasSidebar = true %}
 {% set hasOutline = true %}
+{% set component = getComponent('quiet-' + page.fileSlug) %}
 
-{% extends "../_includes/base.njk" %}
+{% extends '../_includes/base.njk' %}
 
 {# Component header #}
 {% block beforeContent %}
   <h1>{{ title }}</h1>
-  <p>Component header here</p>
+  <p><code>&lt;{{ component.tagName }}&gt;</code> – {{ component.status }}, since {{ component.since }}</p>
 {% endblock %}
 
 {# Content #}
@@ -16,26 +17,222 @@
 
 {# Component API #}
 {% block afterContent %}
-  <hr>
+  {# Slots #}
+  {% if component.slots.length %}
+    <h2>Slots</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for slot in component.slots %}
+          <tr>
+            <td>
+              {% if slot.name %}
+                <code>{{ slot.name }}</code>
+              {% else %}
+                (default)
+              {% endif %}
+            </td>
+            <td>{{ slot.description | inlineMarkdown | safe }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+
+  {# Properties #}
+  {% if component.properties.length %}
+    <h2>Properties</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Reflects</th>
+          <th>Type</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for prop in component.properties %}
+          <tr>
+            <td>
+              <code>{{ prop.name }}</code>
+              {% if prop.attribute | length > 0 %}
+                {% if prop.attribute != prop.name %}
+                  <br>
+                  <small>
+                    <code>
+                      {{ prop.attribute }}
+                    </code>
+                  </small>
+                {% endif %}
+              {% endif %}
+            </td>
+            <td>
+              {{ prop.description | inlineMarkdown | safe }}
+            </td>
+            <td class="table-checkmark">
+              {% if prop.reflects %}
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                </svg>
+              {% endif %}
+            </td>
+            <td>
+              {% if prop.type.text %}
+                <code>{{ prop.type.text | trimPipes | inlineMarkdown | safe }}</code>
+              {% else %}
+                -
+              {% endif %}
+            </td>
+            <td>
+              {% if prop.default %}
+                <code>{{ prop.default | inlineMarkdown | safe }}</code>
+              {% else %}
+                -
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+
+  {# Methods #}
+  {% if component.methods.length %}
+    <h2>Methods</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Arguments</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for method in component.methods %}
+          <tr>
+            <td><code>{{ method.name }}()</code></td>
+            <td>{{ method.description | inlineMarkdown | safe }}</td>
+            <td>
+              {% if method.parameters.length %}
+                <code>
+                  {% for param in method.parameters %}
+                    {{ param.name }}: {{ param.type.text | trimPipes }}{% if not loop.last %},{% endif %}
+                  {% endfor %}
+                </code>
+              {% else %}
+                -
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+
+  {# Events #}
+  {% if component.events.length %}
+    <h2>Events</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Event Detail</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for event in component.events %}
+          <tr>
+            <td><code>{{ event.name }}</code></td>
+            <td>{{ event.description | inlineMarkdown | safe }}</td>
+            <td>
+              {% if event.type.text %}
+                <code>{{ event.type.text | trimPipes  }}</code>
+              {% else %}
+                -
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+
+  {% if component.cssProperties.length or component.cssParts.length %}
+    <h2>Customizing styles</h2>
+  {% endif %}
+
+  {# Custom Properties #}
+  {% if component.cssProperties.length %}
+    <h3>CSS custom properties</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for cssProperty in component.cssProperties %}
+          <tr>
+            <td><code>{{ cssProperty.name }}</code></td>
+            <td>{{ cssProperty.description | inlineMarkdown | safe }}</td>
+            <td>{{ cssProperty.default }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+
+  {# CSS Parts #}
+  {% if component.cssParts.length %}
+    <h3>CSS parts</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for cssPart in component.cssParts %}
+          <tr>
+            <td><code>{{ cssPart.name }}</code></td>
+            <td>{{ cssPart.description | inlineMarkdown | safe }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+
+  {# Dependencies #}
+  {% if component.dependencies.length %}
+    <h2>Dependencies</h2>
+
+    <ul>
+      {% for dependency in component.dependencies %}
+        <li><code>&lt;{{ dependency }}&gt;</code></li>
+      {% endfor %}
+    </ul>
+  {% endif %}
 
   <h2>Importing</h2>
-  <p>TODO</p>
-
-  <h2>Slots</h2>
-  <p>TODO</p>
-
-  <h2>Properties</h2>
-  <p>TODO</p>
-
-  <h2>Methods</h2>
-  <p>TODO</p>
-
-  <h2>Events</h2>
-  <p>TODO</p>
-
-  <h2>Customizing</h2>
-  <p>TODO</p>
-
-  <h2>Dependencies</h2>
-  <p>TODO</p>
+  <p>
+    To import this component without using the autoloader, use the following code.
+  </p>
+  <pre><code class="language-js">import '__CDN_URL__/components/tagname/tagname.js';</code></pre>
 {% endblock %}

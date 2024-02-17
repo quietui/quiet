@@ -33,6 +33,7 @@ async function buildAll() {
     await generateManifest();
     await generateIcons();
     await generateTypes();
+    await generateStyles();
     await generateBundle();
     await generateDocs();
 
@@ -84,6 +85,19 @@ async function generateIcons() {
   await mkdir(iconDir, { recursive: true });
   await copy(dirToCopy, iconDir);
   await Promise.all(filesToRemove.map(file => unlink(join(iconDir, file))));
+
+  spinner.succeed();
+
+  return Promise.resolve();
+}
+
+/**
+ * Copies stylesheets to the dist.
+ */
+async function generateStyles() {
+  spinner.start('Copying stylesheets');
+
+  await copy(join(rootDir, 'src/themes'), join(distDir, 'themes'), { overwrite: true });
 
   spinner.succeed();
 
@@ -199,6 +213,7 @@ if (isDeveloping) {
 
   const bs = browserSync.create();
   const port = await getPort({ port: portNumbers(4000, 4999) });
+  const url = `http://localhost:${port}/`;
   const reload = () => {
     spinner.start('Reloading browser');
     bs.reload();
@@ -233,7 +248,6 @@ if (isDeveloping) {
       }
     },
     () => {
-      const url = `http://localhost:${port}`;
       spinner.succeed();
       console.log(`\n🐭 The dev server is running at ${chalk.magenta(url)}\n`);
     }
@@ -245,12 +259,23 @@ if (isDeveloping) {
 
     try {
       const isTestFile = filename.includes('.test.ts');
-      const isStylesheet = filename.includes('.styles.ts');
-      const isComponent = filename.includes('components/') && filename.includes('.ts') && !isStylesheet && !isTestFile;
+      const isJsStylesheet = filename.includes('.styles.ts');
+      const isCssStylesheet = filename.includes('.css');
+      const isComponent =
+        filename.includes('components/') &&
+        filename.includes('.ts') &&
+        !isJsStylesheet &&
+        !isCssStylesheet &&
+        !isTestFile;
 
       // Re-bundle when relevant files change
-      if (!isTestFile) {
+      if (!isTestFile && !isCssStylesheet) {
         await regenerateBundle();
+      }
+
+      // Copy stylesheets when CSS files change
+      if (isCssStylesheet) {
+        await generateStyles();
       }
 
       // Regenerate metadata when components change

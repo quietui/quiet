@@ -1,5 +1,5 @@
 ---
-title: Editor Setup
+title: Editor setup
 description:
 layout: docs
 ---

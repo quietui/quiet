@@ -9,5 +9,5 @@ Quiet Restyle is an opinionated CSS reset you can use with or without its compon
 Add the following markup to the `<head>` of your document.
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@quietui/quiet@{{package.version}}/dist/quiet.loader.js">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@quietui/quiet@{{package.version}}/dist/themes/restyle.css">
 ```

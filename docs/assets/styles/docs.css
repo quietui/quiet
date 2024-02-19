@@ -605,7 +605,7 @@ html:not(.docs-dark) .only-dark {
   width: 100%;
   max-width: 600px;
   margin-inline: auto;
-  margin-block: 12vh;
+  margin-block: 10vh;
 }
 
 .splash .subtitle {

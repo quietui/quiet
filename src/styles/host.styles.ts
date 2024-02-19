@@ -8,7 +8,7 @@ export default css`
   :host *,
   :host *::before,
   :host *::after {
-    box-sizing: inherit;
+    box-sizing: border-box;
   }
 
   [hidden] {

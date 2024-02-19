@@ -1,45 +1,220 @@
+import '../spinner/spinner.js';
+import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property } from 'lit/decorators.js';
-import { html, LitElement } from 'lit';
-import sharedStyles from '../../styles/shared.styles.js';
+import { html, literal } from 'lit/static-html.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { QuietElement } from '../../utilities/quiet-element.js';
+import hostStyles from '../../styles/host.styles.js';
 import styles from './button.styles.js';
 import type { CSSResultGroup } from 'lit';
 
 /**
- * @summary Buttons allow users to perform an action.
+ * <quiet-button>
+ *
+ * @summary Buttons allow users to navigate, submit forms, and perform other actions.
  * @documentation https://quietui.com/docs/components/button
  * @status stable
  * @since 1.0
  *
- * @event quiet:blur - Emitted when the button loses focus.
- * @event quiet:focus - Emitted when the button gains focus.
- *
  * @slot - The button's label.
- * @slot prefix - A presentational prefix icon or similar element.
- * @slot suffix - A presentational suffix icon or similar element.
+ * @slot start - An icon or similar element to place before the label. Works great with SVGs.
+ * @slot end - An icon or similar element to place after the label. Works great with SVGs.
  *
- * @cssproperty sample - A sample custom property. TODO remove me.
+ * @event quiet:click - Emitted when the button is clicked. Will not be emitted when the button is disabled or loading.
+ * @event quiet:focus - Emitted when the button receives focus.
+ * @event quiet:blur - Emitted when the button loses focus.
  *
- * @csspart label - The label's container element.
- * @csspart prefix - The prefix's container element.
- * @csspart suffix - The suffix container element.
+ * @csspart button - The internal `<button>` element.
  */
 @customElement('quiet-button')
-export class QuietButton extends LitElement {
-  static styles: CSSResultGroup = [sharedStyles, styles];
+export class Button extends QuietElement {
+  static styles: CSSResultGroup = [hostStyles, styles];
+
+  static get formAssociated() {
+    return true;
+  }
+
+  private internals: ElementInternals;
+
+  /** The type of button to render. */
+  @property() variant: 'primary' | 'secondary' | 'destructive' = 'secondary';
+
+  /** The button's design. */
+  @property() design: 'normal' | 'outline' | 'plain' = 'normal';
 
   /** Disables the button. */
-  @property({ type: Boolean, reflect: true }) disabled = false;
+  @property({ type: Boolean }) disabled = false;
 
-  /** A public method that does something. */
-  doSomething() {
-    // TODO - remove me
+  /** Draws the button in a pill shape. */
+  @property({ type: Boolean }) pill = false;
+
+  /** Draws the button in a loading state. */
+  @property({ type: Boolean }) loading = false;
+
+  /** Determines the button's type. */
+  @property() type: 'button' | 'submit' | 'reset' = 'button';
+
+  /** The name to submit when the button is used to submit the form. */
+  @property() name = '';
+
+  /** The value to submit when the button is used to submit the form. */
+  @property() value = '';
+
+  /**
+   * Set this to render the button as an `<a>` tag instead of a `<button>`. The button will act as a link. When this is
+   * set, form attributes and features will not work.
+   */
+  @property() href = '';
+
+  /** Opens the link in the specified target. Only valid when `href` is used. */
+  @property() target: '_blank' | '_parent' | '_self' | '_top' | undefined;
+
+  /**
+   *  Sets the link's `rel` attribute. Only valid when `href` is used. Note that the default value is
+   * `noreferrer noopener`, meaning you might need to set it to an empty string if you're also using `target`.
+   */
+  @property() rel = 'noreferrer noopener';
+
+  /** Sets the link's `download` attribute, causing the linked file to be downloaded. Only valid when `href` is used. */
+  @property() download?: string;
+
+  /**
+   * The form to associate the button with. If omitted, the closest containing form element will be used. The value of
+   * this attribute must be an id of a form in the same document or shadow root as the button.
+   */
+  @property() form: string | undefined;
+
+  /** Overrides the containing form's `action` attribute. */
+  @property({ attribute: 'formaction' }) formAction: string | undefined;
+
+  /** Overrides the containing form's `enctype` attribute. */
+  @property({ attribute: 'formenctype' }) formEnctype:
+    | 'application/x-www-form-urlencoded'
+    | 'multipart/form-data'
+    | 'text/plain'
+    | undefined;
+
+  /** Overrides the containing form's `method` attribute. */
+  @property({ attribute: 'formmethod' }) formMethod: 'post' | 'get' | undefined;
+
+  /** Overrides the containing form's `novalidate` attribute. */
+  @property({ attribute: 'formnovalidate', type: Boolean }) formNoValidate: boolean | undefined;
+
+  /** Overrides the containing form's `target` attribute. */
+  @property({ attribute: 'formtarget' }) formTarget: '_self' | '_blank' | '_parent' | '_top' | string | undefined;
+
+  constructor() {
+    super();
+    this.internals = this.attachInternals();
+    this.internals.role = 'button';
+  }
+
+  private handleBlur() {
+    this.emit('quiet:blur');
+  }
+
+  private handleFocus() {
+    this.emit('quiet:focus');
+  }
+
+  private handleClick() {
+    // Don't do anything when the button is busy
+    if (this.disabled || this.loading) {
+      return;
+    }
+
+    // Emit quiet:click and stop if it gets canceled
+    const clickEvent = this.emit('quiet:click');
+    if (clickEvent.defaultPrevented) {
+      return;
+    }
+
+    // Reset the form
+    if (this.type === 'reset' && this.internals.form) {
+      this.internals.form.reset();
+      return;
+    }
+
+    // Submit the form
+    if (this.type === 'submit' && this.internals.form) {
+      //
+      // Create a temporary submitter so the button's value gets passed to the form. This is a platform limitation.
+      //
+      // More info: https://github.com/WICG/webcomponents/issues/814
+      //
+      const submitter = document.createElement('button');
+      submitter.type = 'submit';
+      submitter.name = this.name;
+      submitter.value = this.value;
+      submitter.style.position = 'absolute';
+      submitter.style.width = '0';
+      submitter.style.height = '0';
+      submitter.style.clipPath = 'inset(50%)';
+      submitter.style.overflow = 'hidden';
+      submitter.style.whiteSpace = 'nowrap';
+
+      // Pass form attributes through
+      ['formaction', 'formenctype', 'formmethod', 'formnovalidate', 'formtarget'].forEach(attr => {
+        if (this.hasAttribute(attr)) {
+          submitter.setAttribute(attr, this.getAttribute(attr) ?? '');
+        }
+      });
+
+      this.internals.form.append(submitter);
+      submitter.click();
+      submitter.remove();
+    }
   }
 
   render() {
+    const isLink = this.href !== '';
+    const tag = isLink ? literal`a` : literal`button`;
+
+    /* eslint-disable lit/binding-positions, lit/no-invalid-html */
     return html`
-      <button type="button" ?disabled=${this.disabled}>
+      <${tag}
+        part="button"
+        class=${classMap({
+          button: true,
+          // Variants
+          primary: this.variant === 'primary',
+          secondary: this.variant === 'secondary',
+          destructive: this.variant === 'destructive',
+          // Designs
+          normal: this.design === 'normal',
+          outline: this.design === 'outline',
+          plain: this.design === 'plain',
+          // Modifiers
+          pill: this.pill,
+          // States
+          disabled: this.disabled,
+          loading: this.loading
+        })}
+        id="button"
+        type=${ifDefined(isLink ? undefined : this.type)}
+        ?disabled=${ifDefined(isLink ? undefined : this.disabled)}
+        name=${ifDefined(isLink ? undefined : this.name)}
+        value=${ifDefined(isLink ? undefined : this.value)}
+        href=${ifDefined(isLink ? this.href : undefined)}
+        target=${ifDefined(isLink ? this.target : undefined)}
+        download=${ifDefined(isLink ? this.download : undefined)}
+        rel=${ifDefined(isLink ? this.rel : undefined)}
+        @blur=${this.handleBlur}
+        @focus=${this.handleFocus}
+        @click=${this.handleClick}
+      >
+        <slot name="start"></slot>
         <slot></slot>
-      </button>
+        <slot name="end"></slot>
+        ${this.loading ? html`<span class="spinner"></span>` : ''}
+      </${tag}>
     `;
+    /* eslint-enable lit/binding-positions, lit/no-invalid-html */
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'quiet-button': Button;
   }
 }

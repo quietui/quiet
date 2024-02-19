@@ -7,7 +7,14 @@
 {# Component header #}
 {% block beforeContent %}
   <h1>{{ title }}</h1>
-  <p><code>&lt;{{ component.tagName }}&gt;</code> – {{ component.status }}, since {{ component.since }}</p>
+  <p>
+    <code>&lt;{{ component.tagName }}&gt;</code>
+    <quiet-badge>Since {{ component.since }}</quiet-badge>
+    <quiet-badge>{{ component.status }}</quiet-badge>
+  </p>
+  <p class="component-summary">
+    {{ component.summary }}
+  </p>
 {% endblock %}
 
 {# Content #}
@@ -234,5 +241,5 @@
   <p>
     To import this component without using the autoloader, use the following code.
   </p>
-  <pre><code class="language-js">import '__CDN_URL__/components/tagname/tagname.js';</code></pre>
+  <pre><code class="language-js">import '__CDN_URL__/components/TODO/TODO.js';</code></pre>
 {% endblock %}

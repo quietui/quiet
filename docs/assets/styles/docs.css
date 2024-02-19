@@ -12,6 +12,10 @@ html:not(.docs-dark) .only-dark {
   display: none !important;
 }
 
+:not(:defined) {
+  visibility: hidden;
+}
+
 @media screen and (min-width: 960px) {
   .only-mobile {
     display: none !important;
@@ -631,4 +635,9 @@ html:not(.docs-dark) .only-dark {
 .table-checkmark svg {
   width: 1em;
   height: 1em;
+}
+
+/* Component pages */
+.component-summary {
+  font-size: 1.25rem;
 }

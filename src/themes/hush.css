@@ -1,0 +1,60 @@
+:root {
+  /*
+    Typography
+  */
+
+  --quiet-font-size-base: 16px;
+  --quiet-font-family: sans-serif;
+
+  --quiet-font-weight: 400;
+  --quiet-font-weight-semibold: 500;
+  --quiet-font-weight-bold: 700;
+
+  /* Headings */
+  --quiet-heading-font-family: var(--quiet-font-family);
+  --quiet-heading-font-weight: var(--quiet-font-weight-semibold);
+
+  /* Code */
+  --quiet-code-font-size: calc(var(--quiet-font-size-base) * 0.9375);
+  --quiet-border-radius-base: 6px;
+
+  /*
+    Colors
+  */
+
+  /* Base colors should always be true midtones, e.g. 500 on a 0 to 1000 color scale. */
+  --quiet-primary-base: #79a4fe; /* harmony indigo 500 */
+  --quiet-success-base: #7db664; /* harmony emerald 500 */
+  --quiet-destructive-base: #ef4444; /* tw rose 500 */
+  --quiet-neutral-base: #a4a6b0; /* harmony gray 500 */
+
+  --quiet-text-subtle: black;
+  --quiet-text-soft: black;
+  --quiet-text-midtone: white;
+  --quiet-text-deep: white;
+
+  /* The following tokens are derived from base color tokens and seldom require modification. */
+  --quiet-primary-subtle: color-mix(in oklab, var(--quiet-primary-base), white 87.5%);
+  --quiet-primary-soft: color-mix(in oklab, var(--quiet-primary-base), white 71.5%);
+  --quiet-primary-emergent: color-mix(in oklab, var(--quiet-primary-base), white 48.25%);
+  --quiet-primary-midtone: color-mix(in oklab, var(--quiet-primary-base), black 16%);
+  --quiet-primary-deep: color-mix(in oklab, var(--quiet-primary-base), black 43.75%);
+
+  --quiet-success-subtle: color-mix(in oklab, var(--quiet-success-base), white 87.5%);
+  --quiet-success-soft: color-mix(in oklab, var(--quiet-success-base), white 71.5%);
+  --quiet-success-emergent: color-mix(in oklab, var(--quiet-success-base), white 48.25%);
+  --quiet-success-midtone: color-mix(in oklab, var(--quiet-success-base), black 16%);
+  --quiet-success-deep: color-mix(in oklab, var(--quiet-success-base), black 43.75%);
+
+  --quiet-destructive-subtle: color-mix(in oklab, var(--quiet-destructive-base), white 87.5%);
+  --quiet-destructive-soft: color-mix(in oklab, var(--quiet-destructive-base), white 71.5%);
+  --quiet-destructive-emergent: color-mix(in oklab, var(--quiet-destructive-base), white 48.25%);
+  --quiet-destructive-midtone: color-mix(in oklab, var(--quiet-destructive-base), black 16%);
+  --quiet-destructive-deep: color-mix(in oklab, var(--quiet-destructive-base), black 43.75%);
+
+  --quiet-neutral-subtle: color-mix(in oklab, var(--quiet-neutral-base), white 87.5%);
+  --quiet-neutral-soft: color-mix(in oklab, var(--quiet-neutral-base), white 71.5%);
+  --quiet-neutral-emergent: color-mix(in oklab, var(--quiet-neutral-base), white 48.25%);
+  --quiet-neutral-midtone: color-mix(in oklab, var(--quiet-neutral-base), black 16%);
+  --quiet-neutral-deep: color-mix(in oklab, var(--quiet-neutral-base), black 43.75%);
+}

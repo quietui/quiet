@@ -1,3 +1,13 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
 html,
 body {
   min-height: 100%;
@@ -6,7 +16,6 @@ body {
   font-weight: var(--docs-body-font-weight);
   color: var(--docs-body-color);
   background: var(--docs-background);
-  box-sizing: border-box;
   line-height: var(--docs-body-line-height);
   overflow-wrap: break-word;
   text-rendering: optimizeLegibility;
@@ -14,12 +23,6 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
 }
 
 ::selection {

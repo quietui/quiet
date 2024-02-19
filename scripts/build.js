@@ -92,7 +92,7 @@ async function generateIcons() {
 }
 
 /**
- * Copies stylesheets to the dist.
+ * Copies theme stylesheets to the dist.
  */
 async function generateStyles() {
   spinner.start('Copying stylesheets');

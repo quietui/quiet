@@ -7,7 +7,7 @@ import type { CSSResultGroup } from 'lit';
 /**
  * <quiet-spinner>
  *
- * @summary Spinners show an animated, indeterminate loading state.
+ * @summary Spinners tell the user that content is loading or an indeterminate request is processing in the background.
  * @documentation https://quietui.com/docs/components/spinner
  * @status stable
  * @since 1.0
@@ -20,9 +20,6 @@ export class Spinner extends LitElement {
     super.connectedCallback();
 
     this.setAttribute('role', 'progressbar');
-    //
-    // TODO - localize
-    //
-    this.setAttribute('aria-label', 'Loading');
+    this.setAttribute('aria-label', 'Loading'); // TODO - localize
   }
 }

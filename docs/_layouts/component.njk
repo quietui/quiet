@@ -10,7 +10,9 @@
   <p>
     <code>&lt;{{ component.tagName }}&gt;</code>
     <quiet-badge>Since {{ component.since }}</quiet-badge>
-    <quiet-badge>{{ component.status }}</quiet-badge>
+    <quiet-badge {% if component.status == 'stable' %}variant="primary"{% endif %}>
+      {{ component.status }}
+    </quiet-badge>
   </p>
   <p class="component-summary">
     {{ component.summary }}
@@ -28,152 +30,153 @@
   {% if component.slots.length %}
     <h2>Slots</h2>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for slot in component.slots %}
+    <div class="table-scroll">
+      <table>
+        <thead>
           <tr>
-            <td>
-              {% if slot.name %}
-                <code>{{ slot.name }}</code>
-              {% else %}
-                (default)
-              {% endif %}
-            </td>
-            <td>{{ slot.description | inlineMarkdown | safe }}</td>
+            <th class="table-name">Name</th>
+            <th class="table-description">Description</th>
           </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {% for slot in component.slots %}
+            <tr>
+              <td class="table-name">
+                {% if slot.name %}
+                  <code>{{ slot.name }}</code>
+                {% else %}
+                  (default)
+                {% endif %}
+              </td>
+              <td class="table-description">{{ slot.description | inlineMarkdown | safe }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
   {% endif %}
 
   {# Properties #}
   {% if component.properties.length %}
     <h2>Properties</h2>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Reflects</th>
-          <th>Type</th>
-          <th>Default</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for prop in component.properties %}
+    <div class="table-scroll">
+      <table>
+        <thead>
           <tr>
-            <td>
-              <code>{{ prop.name }}</code>
-              {% if prop.attribute | length > 0 %}
-                {% if prop.attribute != prop.name %}
-                  <br>
-                  <small>
-                    <code>
-                      {{ prop.attribute }}
-                    </code>
-                  </small>
-                {% endif %}
-              {% endif %}
-            </td>
-            <td>
-              {{ prop.description | inlineMarkdown | safe }}
-            </td>
-            <td class="table-checkmark">
-              {% if prop.reflects %}
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                </svg>
-              {% endif %}
-            </td>
-            <td>
-              {% if prop.type.text %}
-                <code>{{ prop.type.text | trimPipes | inlineMarkdown | safe }}</code>
-              {% else %}
-                -
-              {% endif %}
-            </td>
-            <td>
-              {% if prop.default %}
-                <code>{{ prop.default | inlineMarkdown | safe }}</code>
-              {% else %}
-                -
-              {% endif %}
-            </td>
+            <th class="table-name">Name</th>
+            <th>Attribute</th>
+            <th class="table-description">Description</th>
+            <th>Reflects</th>
+            <th>Type</th>
+            <th>Default</th>
           </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {% for prop in component.properties %}
+            <tr>
+              <td class="table-name">
+                <code>{{ prop.name }}</code>
+              </td>
+              <td class="table-name">
+                <code>{{ prop.attribute }}</code>
+              </td>
+              <td class="table-description">
+                {{ prop.description | inlineMarkdown | safe }}
+              </td>
+              <td class="table-checkmark">
+                {% if prop.reflects %}
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                  </svg>
+                {% endif %}
+              </td>
+              <td>
+                {% if prop.type.text %}
+                  <code>{{ prop.type.text | trimPipes | inlineMarkdown | safe }}</code>
+                {% else %}
+                  -
+                {% endif %}
+              </td>
+              <td>
+                {% if prop.default %}
+                  <code>{{ prop.default | inlineMarkdown | safe }}</code>
+                {% else %}
+                  -
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
   {% endif %}
 
   {# Methods #}
   {% if component.methods.length %}
     <h2>Methods</h2>
-
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Arguments</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for method in component.methods %}
+    <div class="table-scroll">
+      <table>
+        <thead>
           <tr>
-            <td><code>{{ method.name }}()</code></td>
-            <td>{{ method.description | inlineMarkdown | safe }}</td>
-            <td>
-              {% if method.parameters.length %}
-                <code>
-                  {% for param in method.parameters %}
-                    {{ param.name }}: {{ param.type.text | trimPipes }}{% if not loop.last %},{% endif %}
-                  {% endfor %}
-                </code>
-              {% else %}
-                -
-              {% endif %}
-            </td>
+            <th class="table-name">Name</th>
+            <th class="table-description">Description</th>
+            <th>Arguments</th>
           </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {% for method in component.methods %}
+            <tr>
+              <td class="table-name"><code>{{ method.name }}()</code></td>
+              <td class="table-description">{{ method.description | inlineMarkdown | safe }}</td>
+              <td>
+                {% if method.parameters.length %}
+                  <code>
+                    {% for param in method.parameters %}
+                      {{ param.name }}: {{ param.type.text | trimPipes }}{% if not loop.last %},{% endif %}
+                    {% endfor %}
+                  </code>
+                {% else %}
+                  -
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
   {% endif %}
 
   {# Events #}
   {% if component.events.length %}
     <h2>Events</h2>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Event Detail</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for event in component.events %}
+    <div class="table-scroll">
+      <table>
+        <thead>
           <tr>
-            <td><code>{{ event.name }}</code></td>
-            <td>{{ event.description | inlineMarkdown | safe }}</td>
-            <td>
-              {% if event.type.text %}
-                <code>{{ event.type.text | trimPipes  }}</code>
-              {% else %}
-                -
-              {% endif %}
-            </td>
+            <th class="table-name">Name</th>
+            <th class="table-description">Description</th>
+            <th>Event Detail</th>
           </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {% for event in component.events %}
+            <tr>
+              <td class="table-name"><code>{{ event.name }}</code></td>
+              <td class="table-description">{{ event.description | inlineMarkdown | safe }}</td>
+              <td>
+                {% if event.type.text %}
+                  <code>{{ event.type.text | trimPipes  }}</code>
+                {% else %}
+                  -
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
   {% endif %}
 
   {% if component.cssProperties.length or component.cssParts.length %}
@@ -184,46 +187,54 @@
   {% if component.cssProperties.length %}
     <h3>CSS custom properties</h3>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Default</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for cssProperty in component.cssProperties %}
+    <div class="table-scroll">
+      <table>
+        <thead>
           <tr>
-            <td><code>{{ cssProperty.name }}</code></td>
-            <td>{{ cssProperty.description | inlineMarkdown | safe }}</td>
-            <td>{{ cssProperty.default }}</td>
+            <th class="table-name">Name</th>
+            <th class="table-description">Description</th>
+            <th>Default</th>
           </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {% for cssProperty in component.cssProperties %}
+            <tr>
+              <td class="table-name"><code>{{ cssProperty.name }}</code></td>
+              <td class="table-description">{{ cssProperty.description | inlineMarkdown | safe }}</td>
+              <td>
+                {% if cssProperty.default %}
+                  <code>{{ cssProperty.default }}</code>
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
   {% endif %}
 
   {# CSS Parts #}
   {% if component.cssParts.length %}
     <h3>CSS parts</h3>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for cssPart in component.cssParts %}
+    <div class="table-scroll">
+      <table>
+        <thead>
           <tr>
-            <td><code>{{ cssPart.name }}</code></td>
-            <td>{{ cssPart.description | inlineMarkdown | safe }}</td>
+            <th class="table-name">Name</th>
+            <th class="table-description">Description</th>
           </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {% for cssPart in component.cssParts %}
+            <tr>
+              <td><code>{{ cssPart.name }}</code></td>
+              <td class="table-description">{{ cssPart.description | inlineMarkdown | safe }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
   {% endif %}
 
   {# Dependencies #}

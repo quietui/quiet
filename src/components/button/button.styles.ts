@@ -11,21 +11,25 @@ export default css`
     appearance: none;
     display: inline-flex;
     gap: 0.4em;
-    align-items: stretch;
+    align-items: center;
     justify-content: center;
     width: 100%;
+    height: 3em;
     font: inherit;
-    font-weight: var(--quiet-font-weight-semibold);
+    font-size: 0.95em;
+    font-weight: calc(var(--quiet-base-font-weight) + 100);
     text-decoration: none;
     vertical-align: middle;
     border: none;
-    border-radius: var(--quiet-border-radius-base);
-    padding: 0.6em 1rem;
+    border-radius: var(--quiet-base-border-radius);
+    padding-inline: 1em;
     cursor: pointer;
     user-select: none;
     -webkit-user-select: none;
     white-space: nowrap;
     transition:
+      100ms color ease,
+      100ms border-color ease,
       100ms background-color ease,
       100ms translate ease;
 
@@ -33,33 +37,54 @@ export default css`
       translate: 0 0.0625em;
     }
 
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-visible {
+      outline: var(--quiet-base-focus-ring);
+      outline-offset: var(--quiet-base-focus-offset);
+    }
+
     /* Primary */
     &.primary {
-      background-color: var(--quiet-primary-midtone);
-      color: var(--quiet-text-midtone);
+      background-color: var(--quiet-primary-moderate);
+      color: var(--quiet-primary-moderate-text);
 
       &:hover:not(.disabled) {
-        background-color: color-mix(in oklab, var(--quiet-primary-midtone), black 5%);
+        background-color: color-mix(in oklab, var(--quiet-primary-moderate), black 5%);
       }
     }
 
     /* Secondary */
     &.secondary {
-      background-color: var(--quiet-neutral-subtle);
-      color: var(--quiet-text-subtle);
+      background: var(--quiet-base-background-color);
+      border: var(--quiet-base-border-style) var(--quiet-base-border-width) var(--quiet-neutral-border-subtle);
+      color: var(--quiet-neutral-subtle-text);
 
       &:hover:not(.disabled) {
-        background-color: color-mix(in oklab, var(--quiet-neutral-subtle), black 5%);
+        background-color: var(--quiet-neutral-silent);
       }
     }
 
     /* Destructive */
     &.destructive {
-      background-color: var(--quiet-destructive-midtone);
-      color: var(--quiet-text-midtone);
+      background-color: var(--quiet-destructive-moderate);
+      color: var(--quiet-destructive-moderate-text);
 
       &:hover:not(.disabled) {
-        background-color: color-mix(in oklab, var(--quiet-destructive-midtone), black 5%);
+        background-color: color-mix(in oklab, var(--quiet-destructive-moderate), black 5%);
+      }
+    }
+
+    /* Text */
+    &.text {
+      background: none;
+      color: var(--quiet-neutral-silent-text);
+
+      &:hover {
+        background-color: var(--quiet-neutral-silent);
+        color: var(--quiet-neutral-silent-text);
       }
     }
 
@@ -68,22 +93,20 @@ export default css`
       border-radius: 9999px;
     }
 
+    /* Icon buttons */
+    &.icon-only {
+      padding-inline: 0.95em;
+    }
+
     /* Disable */
-    &.disabled {
+    &.disabled:not(.loading) {
       opacity: 0.5;
       cursor: not-allowed;
     }
 
-    /* Icons */
-    ::slotted(svg) {
-      align-self: center;
-      width: 1em !important;
-      height: 1em !important;
-    }
-
     /* Loading */
     &.loading {
-      cursor: wait;
+      cursor: not-allowed;
     }
 
     &.loading slot {
@@ -96,12 +119,24 @@ export default css`
       left: calc(50% - 0.5em);
       width: 1em;
       height: 1em;
-      border: solid 0.15em currentColor;
+      border: solid 0.125em currentColor;
       border-bottom-color: color-mix(in oklab, currentColor, transparent 90%);
       border-left-color: color-mix(in oklab, currentColor, transparent 90%);
       border-radius: 50%;
       display: block;
-      animation: 1s infinite spin cubic-bezier(0.75, 0.4, 0.25, 0.6);
+      animation: 0.875s infinite spin cubic-bezier(0.37, 0.2, 0.63, 0.8);
+    }
+
+    /* Visually hidden label */
+    slot[name='label'] {
+      display: inline;
+    }
+
+    /* Icons */
+    ::slotted(svg) {
+      align-self: center;
+      width: 1em !important;
+      height: 1em !important;
     }
   }
 

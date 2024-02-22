@@ -37,16 +37,19 @@ export class Button extends QuietElement {
   private internals: ElementInternals;
 
   /** The type of button to render. */
-  @property() variant: 'primary' | 'secondary' | 'destructive' = 'secondary';
-
-  /** The button's design. */
-  @property() design: 'normal' | 'outline' | 'plain' = 'normal';
+  @property() variant: 'primary' | 'secondary' | 'destructive' | 'text' = 'secondary';
 
   /** Disables the button. */
   @property({ type: Boolean }) disabled = false;
 
   /** Draws the button in a pill shape. */
   @property({ type: Boolean }) pill = false;
+
+  /**
+   * To create an icon button, slot an icon into the button's default slot and set this attribute to an appropriate
+   * label. The label won't be visible, but it will be available to assistive devices.
+   */
+  @property({ attribute: 'icon-label' }) iconLabel = '';
 
   /** Draws the button in a loading state. */
   @property({ type: Boolean }) loading = false;
@@ -143,15 +146,10 @@ export class Button extends QuietElement {
       // More info: https://github.com/WICG/webcomponents/issues/814
       //
       const submitter = document.createElement('button');
+      submitter.classList.add('visually-hidden');
       submitter.type = 'submit';
       submitter.name = this.name;
       submitter.value = this.value;
-      submitter.style.position = 'absolute';
-      submitter.style.width = '0';
-      submitter.style.height = '0';
-      submitter.style.clipPath = 'inset(50%)';
-      submitter.style.overflow = 'hidden';
-      submitter.style.whiteSpace = 'nowrap';
 
       // Pass form attributes through
       ['formaction', 'formenctype', 'formmethod', 'formnovalidate', 'formtarget'].forEach(attr => {
@@ -168,6 +166,8 @@ export class Button extends QuietElement {
 
   render() {
     const isLink = this.href !== '';
+    const isDisabled = !isLink && (this.disabled || this.loading);
+    const isLoading = !isLink && this.loading;
     const tag = isLink ? literal`a` : literal`button`;
 
     /* eslint-disable lit/binding-positions, lit/no-invalid-html */
@@ -179,16 +179,15 @@ export class Button extends QuietElement {
           // Variants
           primary: this.variant === 'primary',
           secondary: this.variant === 'secondary',
+          confirmative: this.variant === 'destructive',
           destructive: this.variant === 'destructive',
-          // Designs
-          normal: this.design === 'normal',
-          outline: this.design === 'outline',
-          plain: this.design === 'plain',
+          text: this.variant === 'text',
           // Modifiers
           pill: this.pill,
+          'icon-only': this.iconLabel !== '',
           // States
-          disabled: this.disabled,
-          loading: this.loading
+          disabled: isDisabled,
+          loading: isLoading
         })}
         id="button"
         type=${ifDefined(isLink ? undefined : this.type)}
@@ -199,6 +198,7 @@ export class Button extends QuietElement {
         target=${ifDefined(isLink ? this.target : undefined)}
         download=${ifDefined(isLink ? this.download : undefined)}
         rel=${ifDefined(isLink ? this.rel : undefined)}
+        aria-label=${ifDefined(this.iconLabel ? this.iconLabel : undefined)}
         @blur=${this.handleBlur}
         @focus=${this.handleFocus}
         @click=${this.handleClick}
@@ -206,7 +206,7 @@ export class Button extends QuietElement {
         <slot name="start"></slot>
         <slot></slot>
         <slot name="end"></slot>
-        ${this.loading ? html`<span class="spinner"></span>` : ''}
+        ${isLoading ? html`<span class="spinner"></span>` : ''}
       </${tag}>
     `;
     /* eslint-enable lit/binding-positions, lit/no-invalid-html */

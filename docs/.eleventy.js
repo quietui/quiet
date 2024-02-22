@@ -55,7 +55,7 @@ export default function (eleventyConfig) {
     outlinePlugin({
       container: '#content',
       target: '.outline-links',
-      selector: 'h2',
+      selector: 'h2, h3',
       ifEmpty: doc => {
         doc.querySelector('#outline')?.remove();
       }

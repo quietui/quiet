@@ -26,9 +26,9 @@ Spinners derive their color from the current text color. This allows you to plac
 
 ```html {.example}
 <div style="font-size: 2rem;">
-  <quiet-spinner style="color: purple;"></quiet-spinner>
-  <quiet-spinner style="color: green;"></quiet-spinner>
-  <quiet-spinner style="color: orange;"></quiet-spinner>
+  <quiet-spinner style="color: royalblue;"></quiet-spinner>
+  <quiet-spinner style="color: deeppink;"></quiet-spinner>
+  <quiet-spinner style="color: forestgreen;"></quiet-spinner>
 </div>
 ```
 

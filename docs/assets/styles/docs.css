@@ -163,15 +163,20 @@ html:not(.docs-dark) .only-dark {
   height: 1.1em;
   vertical-align: -3px;
   color: deeppink;
-  animation: 1.25s infinite alternate pulse;
+  animation: 1.25s infinite alternate heartbeat;
+  transition: 0.5s rotate ease;
 }
 
-@keyframes pulse {
+#header-group-links a:has(svg):hover > svg {
+  rotate: -360deg;
+}
+
+@keyframes heartbeat {
   from {
     scale: 0.95;
   }
   to {
-    scale: 1.05;
+    scale: 1.1;
   }
 }
 
@@ -186,7 +191,7 @@ html:not(.docs-dark) .only-dark {
 #header-group-links .current {
   z-index: calc(var(--docs-header-z-index) + 2);
   font-weight: var(--docs-body-font-weight-heavy);
-  border-bottom: solid var(--docs-border-width) var(--docs-link-color);
+  border-bottom: solid calc(var(--docs-border-width) * 1.5) var(--docs-link-color);
 }
 
 /* Header group buttons */
@@ -350,6 +355,10 @@ html:not(.docs-dark) .only-dark {
 
 #outline-expandable li {
   padding: 0.25rem 0;
+}
+
+#outline [data-level='3'] {
+  margin-inline-start: 1rem;
 }
 
 @media screen and (max-width: 1419px) {
@@ -568,6 +577,10 @@ html:not(.docs-dark) .only-dark {
   margin-block-end: 0;
 }
 
+.callout code {
+  white-space: nowrap;
+}
+
 .callout-info code {
   background-color: color-mix(in oklab, transparent, var(--docs-primary-200) 75%);
 }
@@ -609,11 +622,11 @@ html:not(.docs-dark) .only-dark {
   width: 100%;
   max-width: 600px;
   margin-inline: auto;
-  margin-block: 10vh;
+  margin-block: 8vh;
 }
 
 .splash .subtitle {
-  font-size: 3.5rem;
+  font-size: 3rem;
 }
 
 .splash-actions {
@@ -635,6 +648,15 @@ html:not(.docs-dark) .only-dark {
 .table-checkmark svg {
   width: 1em;
   height: 1em;
+}
+
+.table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.table-description {
+  min-width: 30ch;
 }
 
 /* Component pages */

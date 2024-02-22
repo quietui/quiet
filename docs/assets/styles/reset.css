@@ -272,10 +272,6 @@ table {
   margin-block-end: 1.5rem;
 }
 
-tbody tr:hover {
-  background-color: color-mix(in oklab, var(--docs-background), var(--docs-gray-1000) 2%);
-}
-
 thead th,
 tr:not(:last-of-type) {
   border-bottom: solid var(--docs-border-width) var(--docs-border-color);

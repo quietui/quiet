@@ -21,7 +21,7 @@ layout: splash
     Get Started
   </quiet-button>
 
-  <quiet-button href="https://github.com/quietui/quiet">
+  <quiet-button href="https://github.com/quietui/quiet" variant="secondary">
     View on GitHub
   </quiet-button>
   

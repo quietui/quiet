@@ -1,5 +1,5 @@
 ---
-title: Style Tokens
+title: Customizing styles
 description:
 layout: docs
 ---

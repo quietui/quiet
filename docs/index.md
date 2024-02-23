@@ -17,11 +17,11 @@ layout: splash
 
   <div class="splash-actions">
 
-  <quiet-button href="/docs/" variant="primary">
+  <quiet-button href="/docs/" variant="primary" pill>
     Get Started
   </quiet-button>
 
-  <quiet-button href="https://github.com/quietui/quiet" variant="secondary">
+  <quiet-button href="https://github.com/quietui/quiet" pill>
     View on GitHub
   </quiet-button>
   

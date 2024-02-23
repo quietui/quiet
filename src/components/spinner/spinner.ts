@@ -11,6 +11,8 @@ import type { CSSResultGroup } from 'lit';
  * @documentation https://quietui.com/docs/components/spinner
  * @status stable
  * @since 1.0
+ *
+ * @cssproperty [--color=var(--quiet-primary-moderate)] - The spinner's color.
  */
 @customElement('quiet-spinner')
 export class Spinner extends LitElement {

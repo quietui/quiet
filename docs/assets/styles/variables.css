@@ -72,8 +72,8 @@
 
   /* Focus rings */
   --docs-focus-ring-color: var(--docs-primary-600);
-  --docs-focus-ring-width: 2px;
-  --docs-focus-ring-offset: 2px;
+  --docs-focus-ring-width: 3px;
+  --docs-focus-ring-offset: 1px;
 
   /* Private / sizing */
   --docs-max-width: 1376px;

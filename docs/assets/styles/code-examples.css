@@ -6,6 +6,7 @@
 }
 
 .code-example-preview {
+  color: var(--docs-body-color);
   padding: 2rem;
   border-bottom: solid var(--docs-border-width) var(--docs-border-color);
 }

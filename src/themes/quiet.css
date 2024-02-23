@@ -5,9 +5,10 @@
 	Use color-mix here to make shadows that have nicer colors than just black.
 	See also: https://www.joshwcomeau.com/css/designing-shadows/
 	*/
-  --quiet-shadow-silent: 1;
-  --quiet-shadow-moderate: 1;
-  --quiet-shadow-loud: 1;
+  --quiet-shadow-color: black;
+  --quiet-shadow-silent: 0 1px 2px color-mix(in oklab, transparent, var(--quiet-shadow-color) 4%);
+  --quiet-shadow-moderate: 0 4px 8px color-mix(in oklab, transparent, var(--quiet-shadow-color) 6%);
+  --quiet-shadow-loud: 0 8px 16px color-mix(in oklab, transparent, var(--quiet-shadow-color) 8%);
 
   /* Base color tokens */
   --quiet-base-primary-color: #989cff;

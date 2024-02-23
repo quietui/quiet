@@ -1,5 +1,6 @@
 import { customElement, property } from 'lit/decorators.js';
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
+import { QuietElement } from '../../utilities/quiet-element.js';
 import hostStyles from '../../styles/host.styles.js';
 import styles from './badge.styles.js';
 import type { CSSResultGroup } from 'lit';
@@ -16,7 +17,7 @@ import type { CSSResultGroup } from 'lit';
  * @cssproperty [--attention-easing=ease] - The easing to use for the attention animation.
  */
 @customElement('quiet-badge')
-export class Badge extends LitElement {
+export class Badge extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
   /** The type of badge to draw. */

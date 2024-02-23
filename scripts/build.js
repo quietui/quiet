@@ -281,6 +281,7 @@ if (isDeveloping) {
       // Regenerate metadata when components change
       if (isComponent) {
         await generateManifest();
+        await generateDocs();
       }
 
       reload();

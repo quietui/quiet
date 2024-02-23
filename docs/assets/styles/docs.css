@@ -622,15 +622,18 @@ html:not(.docs-dark) .only-dark {
   width: 100%;
   max-width: 600px;
   margin-inline: auto;
-  margin-block: 8vh;
+  margin-block: 10vh;
 }
 
 .splash .subtitle {
-  font-size: 3rem;
+  font-size: 2.25rem;
 }
 
 .splash-actions {
-  margin-block-start: 4rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-block-start: 2.5rem;
 }
 
 @media screen and (max-width: 959px) {
@@ -640,7 +643,7 @@ html:not(.docs-dark) .only-dark {
   }
 
   .splash .subtitle {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
 }
 
@@ -653,6 +656,10 @@ html:not(.docs-dark) .only-dark {
 .table-scroll {
   max-width: 100%;
   overflow-x: auto;
+}
+
+.table-scroll code {
+  white-space: nowrap;
 }
 
 .table-description {

@@ -22,13 +22,13 @@ Spinners are sized relative to the current font size. This allows you to place t
 
 ### Changing the color
 
-Spinners derive their color from the current text color. This allows you to place them in various locations without having to explicitly set a color. To change the color, set the `color` property on the spinner or an ancestor element.
+To change the color, set the `--color` custom property on the spinner.
 
 ```html {.example}
 <div style="font-size: 2rem;">
-  <quiet-spinner style="color: royalblue;"></quiet-spinner>
-  <quiet-spinner style="color: deeppink;"></quiet-spinner>
-  <quiet-spinner style="color: forestgreen;"></quiet-spinner>
+  <quiet-spinner style="--color: royalblue;"></quiet-spinner>
+  <quiet-spinner style="--color: deeppink;"></quiet-spinner>
+  <quiet-spinner style="--color: forestgreen;"></quiet-spinner>
 </div>
 ```
 

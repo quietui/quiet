@@ -58,12 +58,12 @@ export default css`
 
     /* Secondary */
     &.secondary {
-      background: var(--quiet-base-background-color);
+      background: transparent;
       border: var(--quiet-base-border-style) var(--quiet-base-border-width) var(--quiet-neutral-border-subtle);
       color: var(--quiet-neutral-subtle-text);
 
       &:hover:not(.disabled) {
-        background-color: var(--quiet-neutral-silent);
+        background-color: color-mix(in oklab, transparent, var(--quiet-base-color) 3%);
       }
     }
 
@@ -83,7 +83,7 @@ export default css`
       color: var(--quiet-neutral-silent-text);
 
       &:hover {
-        background-color: var(--quiet-neutral-silent);
+        background-color: color-mix(in oklab, transparent, var(--quiet-base-color) 3%);
         color: var(--quiet-neutral-silent-text);
       }
     }

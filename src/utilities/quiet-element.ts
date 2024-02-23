@@ -1,6 +1,8 @@
 import { LitElement } from 'lit';
 
 export class QuietElement extends LitElement {
+  shadowRoot: ShadowRoot;
+
   /**
    * Emits a custom event from the host element.
    */

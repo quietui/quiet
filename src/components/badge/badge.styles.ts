@@ -12,17 +12,20 @@ export default css`
     padding: 0.1em 0.7em;
   }
 
+  /* Primary */
   :host([variant='primary']) {
     background-color: var(--quiet-primary-moderate);
     color: var(--quiet-primary-moderate-text);
   }
 
+  /* Secondary */
   :host([variant='secondary']) {
     background: var(--quiet-base-background-color);
     border: var(--quiet-base-border-style) var(--quiet-base-border-width) var(--quiet-neutral-border-subtle);
     color: var(--quiet-neutral-subtle-text);
   }
 
+  /* Destructive */
   :host([variant='destructive']) {
     background-color: var(--quiet-destructive-moderate);
     color: var(--quiet-destructive-moderate-text);

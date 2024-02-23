@@ -24,7 +24,9 @@ import type { CSSResultGroup } from 'lit';
  * @event quiet:focus - Emitted when the button receives focus.
  * @event quiet:blur - Emitted when the button loses focus.
  *
- * @csspart button - The internal `<button>` element.
+ * @csspart button - The internal `<button>` element. Other than `width`, this is where most custom styles should be
+ *  applied.
+ * @csspart spinner - The loading indicator. Only present when the `loading` attribute is set.
  */
 @customElement('quiet-button')
 export class Button extends QuietElement {
@@ -206,7 +208,7 @@ export class Button extends QuietElement {
         <slot name="start"></slot>
         <slot></slot>
         <slot name="end"></slot>
-        ${isLoading ? html`<span class="spinner"></span>` : ''}
+        ${isLoading ? html`<span part="spinner" class="spinner"></span>` : ''}
       </${tag}>
     `;
     /* eslint-enable lit/binding-positions, lit/no-invalid-html */

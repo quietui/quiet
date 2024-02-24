@@ -34,6 +34,10 @@ export function outlinePlugin(options = {}) {
         const level = heading.tagName.slice(1);
         const clone = parse(heading.outerHTML);
 
+        if (heading.closest('[data-no-outline]')) {
+          return;
+        }
+
         // Create a clone of the heading so we can remove links from the text content
         clone.querySelectorAll('a').forEach(a => a.remove());
 

@@ -1,5 +1,4 @@
 @import 'variables.css';
-@import 'reset.css';
 @import 'code-examples.css';
 @import 'copy-code.css';
 @import 'external-links.css';
@@ -163,7 +162,7 @@ html:not(.docs-dark) .only-dark {
   height: 1.1em;
   vertical-align: -3px;
   color: deeppink;
-  animation: 1.25s infinite alternate heartbeat;
+  animation: 1.5s infinite alternate heartbeat;
   transition: 0.5s rotate ease;
 }
 
@@ -287,6 +286,41 @@ html:not(.docs-dark) .only-dark {
 #content {
   order: 1;
   min-width: 0; /* prevent overflowing content from stretching the column */
+
+  .title {
+    margin-block-start: 3rem;
+    margin-block-end: 2rem;
+  }
+
+  .component-info {
+    margin-block-start: -1rem;
+    margin-block-end: 1rem;
+  }
+
+  .component-tag {
+    font-size: 1.2rem;
+    color: var(--quiet-neutral-moderate);
+    background: transparent;
+    padding: 0;
+    margin-inline-end: 0.25rem;
+  }
+
+  .component-summary {
+    margin-block-end: 2rem;
+  }
+}
+
+#content pre:has(code) {
+  padding: 0;
+
+  > code {
+    display: block;
+    hyphens: none;
+    white-space: pre;
+    tab-size: 2;
+    padding: calc(var(--quiet-base-content-spacing) / 2);
+    overflow-x: auto;
+  }
 }
 
 /* Anchor headings */
@@ -345,6 +379,7 @@ html:not(.docs-dark) .only-dark {
 
 #outline-expandable {
   display: none;
+  margin-block-start: 1.5rem;
 }
 
 #outline-expandable ul {
@@ -551,14 +586,6 @@ html:not(.docs-dark) .only-dark {
 
 .callout-info svg {
   color: var(--docs-primary-600);
-}
-
-.callout-warning {
-  background-color: var(--docs-warning-100);
-}
-
-.callout-warning svg {
-  color: var(--docs-warning-600);
 }
 
 .callout-danger {

@@ -1,35 +1,45 @@
 :root {
   color-scheme: light;
 
-  /*
-	Use color-mix here to make shadows that have nicer colors than just black.
-	See also: https://www.joshwcomeau.com/css/designing-shadows/
-	*/
-  --quiet-shadow-color: black;
-  --quiet-shadow-silent: 0 1px 2px color-mix(in oklab, transparent, var(--quiet-shadow-color) 4%);
-  --quiet-shadow-moderate: 0 4px 8px color-mix(in oklab, transparent, var(--quiet-shadow-color) 6%);
-  --quiet-shadow-loud: 0 8px 16px color-mix(in oklab, transparent, var(--quiet-shadow-color) 8%);
-
   /* Base color tokens */
   --quiet-base-primary-color: #989cff;
   --quiet-base-neutral-color: #a4a6b0;
   --quiet-base-destructive-color: #ff4c4a;
   --quiet-base-confirmative-color: #7db664;
   --quiet-base-background-color: white;
-  --quiet-base-color: black;
+  --quiet-base-color: var(--quiet-neutral-strident);
+
+  /*
+
+  TODO - remove base from some (all?) tokens
+
+  */
 
   /* Other base tokens */
   --quiet-base-border-style: solid;
   --quiet-base-border-width: 1px;
   --quiet-base-border-radius: 6px;
+  --quiet-base-content-spacing: 2rem;
+  --quiet-base-font-family: system-ui, sans-serif;
+  --quiet-base-font-family-code: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
   --quiet-base-font-size: 16px;
-  --quiet-base-font-weight: 400;
+  --quiet-base-font-weight-normal: 400;
+  --quiet-base-font-weight-semibold: 500;
+  --quiet-base-font-weight-bold: 600;
   --quiet-base-line-height: 1.6;
   --quiet-base-focus-width: 3px;
   --quiet-base-focus-offset: 1px;
   --quiet-base-focus-color: var(--quiet-primary-moderate);
   --quiet-base-focus-ring: var(--quiet-base-border-style) var(--quiet-base-focus-width) var(--quiet-base-focus-color);
   --quiet-base-transition-duration: 200ms;
+
+  --quiet-selection-background-color: var(--quiet-primary-300);
+
+  /* Shadows */
+  --quiet-shadow-color: black;
+  --quiet-shadow-silent: 0 1px 2px color-mix(in oklab, transparent, var(--quiet-shadow-color) 4%);
+  --quiet-shadow-moderate: 0 4px 8px color-mix(in oklab, transparent, var(--quiet-shadow-color) 6%);
+  --quiet-shadow-loud: 0 8px 16px color-mix(in oklab, transparent, var(--quiet-shadow-color) 8%);
 
   /*
     Primary colors (calculated)
@@ -58,8 +68,8 @@
   --quiet-primary-loud-text: white;
   --quiet-primary-strident-text: white;
 
-  --quiet-primary-border-subtle: var(--quiet-primary-200);
-  --quiet-primary-border-soft: var(--quiet-primary-300);
+  --quiet-primary-border-subtle: var(--quiet-neutral-200);
+  --quiet-primary-border-soft: var(--quiet-neutral-300);
 
   /*
     Neutral colors (calculated)

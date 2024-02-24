@@ -23,6 +23,7 @@
     {# Quiet #}
     <script type="module" src="/dist/quiet.loader.js"></script>
     <link rel="stylesheet" href="/dist/themes/quiet.css" />
+    <link rel="stylesheet" href="/dist/themes/restyle.css" />
   </head>
   <body class="layout-{{ layout | stripExtension }}">
     <a id="skip-to-main" href="#content">Skip to content</a>
@@ -159,7 +160,7 @@
           {% block beforeContent %}{% endblock %}
 
           {% block content %}
-            <h1>{{ title }}</h1>
+            <h1 class="title">{{ title }}</h1>
 
             {{ content | safe }}
 

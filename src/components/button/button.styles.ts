@@ -17,7 +17,7 @@ export default css`
     height: 3em;
     font: inherit;
     font-size: 0.95em;
-    font-weight: calc(var(--quiet-base-font-weight) + 100);
+    font-weight: var(--quiet-base-font-weight-semibold);
     text-decoration: none;
     vertical-align: middle;
     border: none;
@@ -124,7 +124,7 @@ export default css`
       border-left-color: color-mix(in oklab, currentColor, transparent 90%);
       border-radius: 50%;
       display: block;
-      animation: 0.875s infinite spin cubic-bezier(0.37, 0.2, 0.63, 0.8);
+      animation: 750ms infinite spin linear;
     }
 
     /* Visually hidden label */
@@ -135,8 +135,8 @@ export default css`
     /* Icons */
     ::slotted(svg) {
       align-self: center;
-      width: 1em !important;
-      height: 1em !important;
+      width: 1.25em !important;
+      height: 1.25em !important;
     }
   }
 

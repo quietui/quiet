@@ -7,7 +7,7 @@ export default css`
 
     display: inline-flex;
     font-size: 0.75em;
-    font-weight: calc(var(--quiet-base-font-weight) + 100);
+    font-weight: var(--quiet-base-font-weight-semibold);
     border-radius: 9999px;
     padding: 0.1em 0.7em;
   }
@@ -23,6 +23,12 @@ export default css`
     background: var(--quiet-base-background-color);
     border: var(--quiet-base-border-style) var(--quiet-base-border-width) var(--quiet-neutral-border-subtle);
     color: var(--quiet-neutral-subtle-text);
+  }
+
+  /* Confirmative */
+  :host([variant='confirmative']) {
+    background-color: var(--quiet-confirmative-moderate);
+    color: var(--quiet-confirmative-moderate-text);
   }
 
   /* Destructive */

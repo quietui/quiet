@@ -22,7 +22,7 @@ export default css`
     vertical-align: middle;
     border: none;
     border-radius: var(--quiet-base-border-radius);
-    padding-inline: 1em;
+    padding-inline: 1.25em;
     cursor: pointer;
     user-select: none;
     -webkit-user-select: none;
@@ -95,7 +95,8 @@ export default css`
 
     /* Icon buttons */
     &.icon-only {
-      padding-inline: 0.95em;
+      aspect-ratio: 1 / 1;
+      padding-inline: 0.75em;
     }
 
     /* Disable */

@@ -6,7 +6,7 @@ layout: component
 
 ```html {.example}
 <quiet-card with-media with-footer style="max-width: 340px;">
-  <img slot="media" src="https://images.unsplash.com/photo-1596105891581-49db1ef8550a?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="A small rodent climbs a small plant and peeks at the camera.">
+  <img slot="media" src="https://images.unsplash.com/photo-1515073883629-5e2924e3e106?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="A tabby kitten sleeps next to a toy mouse.">
 
   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 
@@ -30,7 +30,7 @@ Card are really just styled containers. You can put almost anything in them.
 ```
 
 :::info
-Cards will remove margins from the top of the first element and the bottom of the last element in their body. This prevents extra vertical space, which is seldom desirable.
+Cards are styled to remove margins from the top of the first element and the bottom of the last element in their body. This prevents extra vertical space, which is seldom desirable.
 :::
 
 ### With header
@@ -40,9 +40,9 @@ Apply the `with-header` attribute and place elements into the `header` slot to a
 ```html {.example}
 <quiet-card with-header style="max-width: 340px;">
   <h3 slot="header" style="font-size: 1.125rem; margin-inline-end: auto; margin-block: 0;">Lorem ipsum</h3>
-  <quiet-button slot="header" variant="text" icon-label="Settings">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-      <path fill-rule="evenodd" d="M11.078 2.25c-.917 0-1.699.663-1.85 1.567L9.05 4.889c-.02.12-.115.26-.297.348a7.493 7.493 0 0 0-.986.57c-.166.115-.334.126-.45.083L6.3 5.508a1.875 1.875 0 0 0-2.282.819l-.922 1.597a1.875 1.875 0 0 0 .432 2.385l.84.692c.095.078.17.229.154.43a7.598 7.598 0 0 0 0 1.139c.015.2-.059.352-.153.43l-.841.692a1.875 1.875 0 0 0-.432 2.385l.922 1.597a1.875 1.875 0 0 0 2.282.818l1.019-.382c.115-.043.283-.031.45.082.312.214.641.405.985.57.182.088.277.228.297.35l.178 1.071c.151.904.933 1.567 1.85 1.567h1.844c.916 0 1.699-.663 1.85-1.567l.178-1.072c.02-.12.114-.26.297-.349.344-.165.673-.356.985-.57.167-.114.335-.125.45-.082l1.02.382a1.875 1.875 0 0 0 2.28-.819l.923-1.597a1.875 1.875 0 0 0-.432-2.385l-.84-.692c-.095-.078-.17-.229-.154-.43a7.614 7.614 0 0 0 0-1.139c-.016-.2.059-.352.153-.43l.84-.692c.708-.582.891-1.59.433-2.385l-.922-1.597a1.875 1.875 0 0 0-2.282-.818l-1.02.382c-.114.043-.282.031-.449-.083a7.49 7.49 0 0 0-.985-.57c-.183-.087-.277-.227-.297-.348l-.179-1.072a1.875 1.875 0 0 0-1.85-1.567h-1.843ZM12 15.75a3.75 3.75 0 1 0 0-7.5 3.75 3.75 0 0 0 0 7.5Z" clip-rule="evenodd" />
+  <quiet-button slot="header" variant="text" icon-label="Settings" style="margin-inline-end: -.75rem;">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
     </svg>
   </quiet-button>
   
@@ -70,13 +70,13 @@ Apply the `with-media` attribute and place an image or video into the `media` sl
 ```html {.example}
 <quiet-card with-media style="max-width: 340px;">
   <h3 slot="header" style="font-size: 1.125rem; margin-inline-end: auto; margin-block: 0;">Lorem ipsum</h3>
-  <img slot="media" style="height: 200px;" src="https://images.unsplash.com/photo-1624065935763-97571a9b1478?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="A mouse climbs up through some old wooden boards and looks around.">
+  <img slot="media" style="height: 200px;" src="https://images.unsplash.com/photo-1498336179775-9836baef8fdf?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="A fluffy kitten sprawls out on a red pillow with its eyes closed and paws in the air.">
 
   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 </quiet-card>
 
 <quiet-card with-media style="max-width: 340px; margin-block-start: 2rem;">
-  <iframe slot="media" style="height: 200px;" src="https://www.youtube.com/embed/HeoBHjDET6g?si=_Ef-eIv92lIgYF4k&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  <iframe slot="media" height="200" src="https://www.youtube.com/embed/fOd16PT1S7A?si=EOT0GM82FbYsNSzj&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 </quiet-card>
@@ -99,6 +99,6 @@ You can wrap links around cards to make the entire card clickable. You might nee
 </a>
 ```
 
-:::warning
+:::info
 If you wrap a card with a link, avoid nesting buttons, form controls, links, videos, and other interactive content inside of the card.
 :::

@@ -20,9 +20,9 @@ import type { CSSResultGroup } from 'lit';
  * @slot start - An icon or similar element to place before the label. Works great with SVGs.
  * @slot end - An icon or similar element to place after the label. Works great with SVGs.
  *
- * @event quiet:click - Emitted when the button is clicked. Will not be emitted when the button is disabled or loading.
- * @event quiet:focus - Emitted when the button receives focus.
- * @event quiet:blur - Emitted when the button loses focus.
+ * @event quiet-click - Emitted when the button is clicked. Will not be emitted when the button is disabled or loading.
+ * @event quiet-focus - Emitted when the button receives focus.
+ * @event quiet-blur - Emitted when the button loses focus.
  *
  * @csspart button - The internal `<button>` element. Other than `width`, this is where most custom styles should be
  *  applied.
@@ -115,11 +115,11 @@ export class Button extends QuietElement {
   }
 
   private handleBlur() {
-    this.emit('quiet:blur');
+    this.emit('quiet-blur');
   }
 
   private handleFocus() {
-    this.emit('quiet:focus');
+    this.emit('quiet-focus');
   }
 
   private handleClick() {
@@ -128,8 +128,8 @@ export class Button extends QuietElement {
       return;
     }
 
-    // Emit quiet:click and stop if it gets canceled
-    const clickEvent = this.emit('quiet:click');
+    // Emit quiet-click and stop if it gets canceled
+    const clickEvent = this.emit('quiet-click');
     if (clickEvent.defaultPrevented) {
       return;
     }

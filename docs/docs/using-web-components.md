@@ -11,7 +11,7 @@ layout: docs
 - slots
 - waiting for components to load
   - `:not(:defined)` CSS selector and link to FOUCE article
-  - mention the autoloader's `quiet:discovery-complete` event
+  - mention the autoloader's `quiet-discovery-complete` event
   - waiting for `el.updateComplete` after rendering
 
 TODO

@@ -15,7 +15,7 @@ The autoloader is the recommended way to use Quiet. It will automatically regist
 ```
 
 - how asset paths work and how to set them
-- event: quiet:discovery-complete `{ detail: { registered: [], unknown: [] }`
+- event: quiet-discovery-complete `{ detail: { registered: [], unknown: [] }`
 - how to force discovery with `discoverElements()`
 
 ## Importing

@@ -44,6 +44,15 @@ export class Button extends QuietElement {
   /** Disables the button. */
   @property({ type: Boolean }) disabled = false;
 
+  /** Draws the button in a loading state. */
+  @property({ type: Boolean }) loading = false;
+
+  /**
+   * Turns the button into a two-state toggle button. Clicking once will turn it on. Clicking again will turn it off.
+   * Cannot be used with links buttons or submit buttons.
+   */
+  @property({ reflect: true }) toggle?: 'on' | 'off';
+
   /** Draws the button in a pill shape. */
   @property({ type: Boolean }) pill = false;
 
@@ -52,9 +61,6 @@ export class Button extends QuietElement {
    * label. The label won't be visible, but it will be available to assistive devices.
    */
   @property({ attribute: 'icon-label' }) iconLabel = '';
-
-  /** Draws the button in a loading state. */
-  @property({ type: Boolean }) loading = false;
 
   /** Determines the button's type. */
   @property() type: 'button' | 'submit' | 'reset' = 'button';
@@ -134,6 +140,11 @@ export class Button extends QuietElement {
       return;
     }
 
+    // Update toggle buttons
+    if (this.toggle !== undefined) {
+      this.toggle = this.toggle === 'on' ? 'off' : 'on';
+    }
+
     // Reset the form
     if (this.type === 'reset' && this.internals.form) {
       this.internals.form.reset();
@@ -170,6 +181,8 @@ export class Button extends QuietElement {
     const isLink = this.href !== '';
     const isDisabled = !isLink && (this.disabled || this.loading);
     const isLoading = !isLink && this.loading;
+    const isSubmit = this.type === 'submit';
+    const isToggle = this.toggle !== undefined && !isLink && !isSubmit;
     const tag = isLink ? literal`a` : literal`button`;
 
     /* eslint-disable lit/binding-positions, lit/no-invalid-html */
@@ -201,6 +214,7 @@ export class Button extends QuietElement {
         download=${ifDefined(isLink ? this.download : undefined)}
         rel=${ifDefined(isLink ? this.rel : undefined)}
         aria-label=${ifDefined(this.iconLabel ? this.iconLabel : undefined)}
+        aria-pressed=${ifDefined(isToggle ? (this.toggle === 'on' ? 'true' : 'false') : undefined)}
         @blur=${this.handleBlur}
         @focus=${this.handleFocus}
         @click=${this.handleClick}

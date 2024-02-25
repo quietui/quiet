@@ -12,7 +12,7 @@ layout: component
 
 ### Variants
 
-Buttons have four built-in variants. Primary buttons are intended for suggested behaviors and calls to action. Destructive buttons draw attention to dangerous operations, such as deletion. Secondary buttons are the default variant and are useful for secondary operations. Text buttons can be used as an alternative to secondary buttons when you want a simpler appearance with the same proportions.
+Buttons have four standard variants. Primary buttons are intended for suggested behaviors and calls to action. Destructive buttons draw attention to dangerous operations, such as deletion. Secondary buttons are the default variant and are useful for secondary operations. Text buttons can be used as an alternative to secondary buttons when you want a simpler appearance with the same proportions.
 
 ```html {.example}
 <quiet-button variant="primary">
@@ -109,6 +109,16 @@ Buttons are sized relative to the current font size. To change their size, apply
 Be careful to not make the button's text too small. Typically, 12px is the absolute smallest you should use to ensure your buttons are accessible.
 :::
 
+### Pill-shaped buttons
+
+Any button can be rendered with pill-shaped edges by applying the `pill` attribute.
+
+```html {.example}
+<quiet-button pill>
+  I'm a pill button
+</quiet-button>
+```
+
 ### Icon-only buttons
 
 To create an icon button, place an icon into the button's default slot and set this attribute to an appropriate label. The label won't be visible, but it will be available to assistive devices.
@@ -139,19 +149,9 @@ To create an icon button, place an icon into the button's default slot and set t
 </quiet-button>
 ```
 
-### Pill-shaped buttons
-
-Any button can be rendered with pill-shaped edges by applying the `pill` attribute.
-
-```html {.example}
-<quiet-button pill>
-  I'm a pill button
-</quiet-button>
-```
-
 ### Toggle buttons
 
-Create a toggle button by applying the `toggle="off"` attribute. If you want the default state to be pressed, use `toggle="on"` instead.
+Create a toggle button by applying the `toggle="off"` attribute. If you want the default state to be pressed, use `toggle="on"` instead. Note that toggle buttons cannot be used with link buttons or submit buttons.
 
 ```html {.example}
 <quiet-button toggle="off" icon-label="Bold">
@@ -173,8 +173,18 @@ Create a toggle button by applying the `toggle="off"` attribute. If you want the
 </quiet-button>
 ```
 
+### Image buttons
+
+Image buttons are a special variant that let you create application icons and other picture-based buttons using images. Unlike other variants, image buttons conform to the size of the image you slot in.
+
+```html {.example}
+<quiet-button variant="image">
+  <img width="64" height="64" src="/assets/images/app-icon.png" alt="Launch Quiet">
+</quiet-button>
+```
+
 :::info
-Toggle buttons cannot be used with link buttons or submit buttons.
+Use the `width` and `height` attributes to prevent shifting as the image loads and make sure to provide `alt` text for assistive devices.
 :::
 
 ### Loading

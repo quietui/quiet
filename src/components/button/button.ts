@@ -39,7 +39,7 @@ export class Button extends QuietElement {
   private internals: ElementInternals;
 
   /** The type of button to render. */
-  @property() variant: 'primary' | 'secondary' | 'destructive' | 'text' = 'secondary';
+  @property() variant: 'primary' | 'secondary' | 'destructive' | 'text' | 'image' = 'secondary';
 
   /** Disables the button. */
   @property({ type: Boolean }) disabled = false;
@@ -197,6 +197,7 @@ export class Button extends QuietElement {
           confirmative: this.variant === 'destructive',
           destructive: this.variant === 'destructive',
           text: this.variant === 'text',
+          image: this.variant === 'image',
           // Modifiers
           pill: this.pill,
           'icon-only': this.iconLabel !== '',

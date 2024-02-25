@@ -20,6 +20,7 @@ export default css`
     font-weight: var(--quiet-base-font-weight-semibold);
     text-decoration: none;
     vertical-align: middle;
+    background: none;
     border: none;
     border-radius: var(--quiet-base-border-radius);
     padding-inline: 1.25em;
@@ -119,6 +120,17 @@ export default css`
       padding-inline: 0.75em;
     }
 
+    /* image buttons */
+    &.image {
+      height: auto;
+      border-radius: calc(var(--quiet-base-border-radius) * 2);
+      padding: 0;
+
+      ::slotted(*) {
+        border-radius: calc(var(--quiet-base-border-radius) * 2) !important;
+      }
+    }
+
     /* Disable */
     &.disabled:not(.loading) {
       opacity: 0.5;
@@ -128,10 +140,14 @@ export default css`
     /* Loading */
     &.loading {
       cursor: not-allowed;
-    }
 
-    &.loading slot {
-      visibility: hidden;
+      &:not(.image) slot {
+        visibility: hidden;
+      }
+
+      &.image ::slotted(*) {
+        opacity: 0.5 !important;
+      }
     }
 
     .spinner {

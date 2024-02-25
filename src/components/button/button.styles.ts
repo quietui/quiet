@@ -73,6 +73,7 @@ export default css`
       }
 
       &[aria-pressed='true'] {
+        border-color: var(--quiet-neutral-border-soft);
         background-color: var(--quiet-neutral-silent);
         color: var(--quiet-neutral-silent-text);
       }

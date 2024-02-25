@@ -68,8 +68,8 @@
   --quiet-primary-loud-text: white;
   --quiet-primary-strident-text: white;
 
-  --quiet-primary-border-subtle: var(--quiet-neutral-200);
-  --quiet-primary-border-soft: var(--quiet-neutral-300);
+  --quiet-primary-border-subtle: var(--quiet-primary-200);
+  --quiet-primary-border-soft: var(--quiet-primary-300);
 
   /*
     Neutral colors (calculated)

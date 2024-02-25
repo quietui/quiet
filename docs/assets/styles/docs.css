@@ -318,6 +318,8 @@ html:not(.docs-dark) .only-dark {
     hyphens: none;
     white-space: pre;
     tab-size: 2;
+    color: white;
+    background-color: #2c2e36;
     padding: calc(var(--quiet-base-content-spacing) / 2);
     overflow-x: auto;
   }
@@ -549,6 +551,7 @@ html:not(.docs-dark) .only-dark {
 }
 
 .docs-aside a {
+  font-weight: var(--quiet-base-font-weight-normal);
   color: var(--docs-body-color-muted);
   text-decoration: none;
   transition: 150ms color ease;

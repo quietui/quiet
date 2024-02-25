@@ -83,7 +83,7 @@ Apply the `with-media` attribute and place an image or video into the `media` sl
 </div>
 ```
 
-### Wrapped with a link
+### Wrapping with a link
 
 You can wrap links around cards to make the entire card clickable. You might need to add custom styles to prevent unwanted colors, underlines, and transitions from leaking into the card. Consider using styles that make it obvious to users that the card is clickable.
 

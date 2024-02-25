@@ -1,14 +1,14 @@
 .code-example {
-  border: solid var(--docs-border-width) var(--docs-border-color);
-  border-radius: var(--docs-border-radius);
+  border: var(--quiet-base-border-style) var(--quiet-base-border-width) var(--quiet-neutral-border-subtle);
+  border-radius: var(--quiet-base-border-radius);
   color: var(--docs-gray-700);
-  margin-block-end: var(--docs-flow-spacing);
+  margin-block-end: var(--quiet-base-content-spacing);
 }
 
 .code-example-preview {
   color: var(--docs-body-color);
   padding: 2rem;
-  border-bottom: solid var(--docs-border-width) var(--docs-border-color);
+  border-bottom: var(--quiet-base-border-style) var(--quiet-base-border-width) var(--quiet-neutral-border-subtle);
 }
 
 .code-example-preview > :first-child {
@@ -20,8 +20,7 @@
 }
 
 .code-example-source {
-  background: var(--docs-background-lowered);
-  border-bottom: solid var(--docs-border-width) var(--docs-border-color);
+  border-bottom: var(--quiet-base-border-style) var(--quiet-base-border-width) var(--quiet-neutral-border-subtle);
 }
 
 .code-example:not(.open) .code-example-source {
@@ -33,7 +32,12 @@
 }
 
 .code-example-source pre {
+  border-radius: 0;
   margin: 0;
+
+  code {
+    background: transparent;
+  }
 }
 
 .code-example-buttons {
@@ -45,7 +49,7 @@
   all: unset;
   flex: 1 0 auto;
   font-size: 0.875rem;
-  border-left: solid var(--docs-border-width) var(--docs-border-color);
+  border-left: var(--quiet-base-border-style) var(--quiet-base-border-width) var(--quiet-neutral-border-subtle);
   text-align: center;
   padding: 0.5rem;
   cursor: pointer;
@@ -53,15 +57,15 @@
 
 .code-example-buttons button:first-of-type {
   border-left: none;
-  border-bottom-left-radius: var(--docs-border-radius);
+  border-bottom-left-radius: var(--quiet-base-border-radius);
 }
 
 .code-example-buttons button:last-of-type {
-  border-bottom-right-radius: var(--docs-border-radius);
+  border-bottom-right-radius: var(--quiet-base-border-radius);
 }
 
 .code-example-buttons button:focus-visible {
-  outline: solid var(--docs-focus-ring-width) var(--docs-focus-ring-color);
+  outline: var(--quiet-base-focus-ring);
 }
 
 .code-example-buttons .code-example-pen {

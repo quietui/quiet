@@ -163,8 +163,10 @@ a {
   text-underline-offset: 2px;
   transition: 150ms color ease;
 
-  &:hover {
-    color: color-mix(in oklab, var(--quiet-primary-moderate), black 10%);
+  @media (hover: hover) {
+    &:hover {
+      color: color-mix(in oklab, var(--quiet-primary-moderate), black 10%);
+    }
   }
 }
 
@@ -221,7 +223,7 @@ samp,
 tt,
 pre {
   background: var(--quiet-neutral-silent);
-  border-radius: calc(var(--quiet-base-border-radius) / 2);
+  border-radius: var(--quiet-base-border-radius);
   font-family: var(--quiet-base-font-family-code);
   font-size: calc(var(--quiet-base-font-size) * 0.875);
   padding: 0.125em 0.25em;
@@ -229,6 +231,7 @@ pre {
 
 pre {
   position: relative;
+  background: var(--quiet-neutral-strident);
   padding: calc(var(--quiet-base-content-spacing) / 2);
 }
 

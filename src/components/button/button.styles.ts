@@ -52,8 +52,10 @@ export default css`
       background-color: var(--quiet-primary-moderate);
       color: var(--quiet-primary-moderate-text);
 
-      &:hover:not(.disabled, [aria-pressed='true']) {
-        background-color: color-mix(in oklab, var(--quiet-primary-moderate), black 5%);
+      @media (hover: hover) {
+        &:hover:not(.disabled, [aria-pressed='true']) {
+          background-color: color-mix(in oklab, var(--quiet-primary-moderate), black 5%);
+        }
       }
 
       &[aria-pressed='true'] {
@@ -68,8 +70,10 @@ export default css`
       border: var(--quiet-base-border-style) var(--quiet-base-border-width) var(--quiet-neutral-border-subtle);
       color: var(--quiet-neutral-subtle-text);
 
-      &:hover:not(.disabled, [aria-pressed='true']) {
-        background-color: color-mix(in oklab, transparent, var(--quiet-base-color) 3%);
+      @media (hover: hover) {
+        &:hover:not(.disabled, [aria-pressed='true']) {
+          background-color: color-mix(in oklab, transparent, var(--quiet-base-color) 3%);
+        }
       }
 
       &[aria-pressed='true'] {
@@ -84,8 +88,10 @@ export default css`
       background-color: var(--quiet-destructive-moderate);
       color: var(--quiet-destructive-moderate-text);
 
-      &:hover:not(.disabled, [aria-pressed='true']) {
-        background-color: color-mix(in oklab, var(--quiet-destructive-moderate), black 5%);
+      @media (hover: hover) {
+        &:hover:not(.disabled, [aria-pressed='true']) {
+          background-color: color-mix(in oklab, var(--quiet-destructive-moderate), black 5%);
+        }
       }
 
       &[aria-pressed='true'] {
@@ -99,9 +105,11 @@ export default css`
       background: none;
       color: var(--quiet-neutral-silent-text);
 
-      &:hover {
-        background-color: color-mix(in oklab, transparent, var(--quiet-base-color) 3%);
-        color: var(--quiet-neutral-silent-text);
+      @media (hover: hover) {
+        &:hover {
+          background-color: color-mix(in oklab, transparent, var(--quiet-base-color) 3%);
+          color: var(--quiet-neutral-silent-text);
+        }
       }
 
       &[aria-pressed='true'] {

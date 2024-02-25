@@ -115,7 +115,7 @@ export default css`
     }
 
     /* Icon buttons */
-    &.icon-only {
+    &.icon {
       aspect-ratio: 1 / 1;
       padding-inline: 0.75em;
     }

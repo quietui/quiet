@@ -200,7 +200,7 @@ export class Button extends QuietElement {
           image: this.variant === 'image',
           // Modifiers
           pill: this.pill,
-          'icon-only': this.iconLabel !== '',
+          icon: this.iconLabel !== '',
           // States
           disabled: isDisabled,
           loading: isLoading

@@ -119,7 +119,7 @@ Any button can be rendered with pill-shaped edges by applying the `pill` attribu
 </quiet-button>
 ```
 
-### Icon-only buttons
+### Icon buttons
 
 To create an icon button, place an icon into the button's default slot and set this attribute to an appropriate label. The label won't be visible, but it will be available to assistive devices.
 

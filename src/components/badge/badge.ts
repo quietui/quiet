@@ -8,7 +8,7 @@ import type { CSSResultGroup } from 'lit';
 /**
  * <quiet-badge>
  *
- * @summary Badges display useful information or notifications such as an unread message count or a new feature.
+ * @summary Badges display useful information or notifications such as a new feature or an unread message count.
  * @documentation https://quietui.com/docs/components/badge
  * @status stable
  * @since 1.0

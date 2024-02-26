@@ -1,13 +1,10 @@
-.code-comment {
-  color: #b7bac4; /* gray 400 */
-}
-
+.code-comment,
 .code-prolog,
 .code-doctype,
 .code-cdata,
 .code-operator,
 .code-punctuation {
-  color: #b7bac4; /* gray 400 */
+  color: #a4a6b0; /* gray 500 */
 }
 
 .code-namespace {
@@ -18,7 +15,7 @@
 .code-keyword,
 .code-tag,
 .code-url {
-  color: #98bafe; /* blue 400 */
+  color: #98bafe; /* indigo 400 */
 }
 
 .code-symbol,
@@ -41,10 +38,7 @@
 .code-atrule,
 .code-attr-value,
 .code-number,
-.code-variable {
-  color: #afb4fe; /* violet 400 */
-}
-
+.code-variable,
 .code-function,
 .code-class-name,
 .code-regex {

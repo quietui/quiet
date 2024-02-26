@@ -24,7 +24,7 @@ Avatars are best used with images to create a more personalized experience. Set 
 
 ### Characters
 
-When an image isn't available or fails to load, you can provide up to five characters to show instead. It's usually best to show no more than three, as more will cause the text to shrink to fit.
+When an image isn't available or fails to load, you can provide up to five characters to show instead. It's usually best to show no more than three, as the text shrinks to fit.
 
 ```html {.example}
 <quiet-avatar label="Quiet UI" characters="Q"></quiet-avatar>

@@ -7,7 +7,7 @@ import type { CSSResultGroup } from 'lit';
 /**
  * <quiet-spinner>
  *
- * @summary Spinners tell the user that content is loading or an indeterminate request is processing in the background.
+ * @summary Spinners tell the user that content is loading or a request is processing in the background.
  * @documentation https://quietui.com/docs/components/spinner
  * @status stable
  * @since 1.0

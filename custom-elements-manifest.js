@@ -29,7 +29,7 @@ export default {
           case ts.SyntaxKind.ClassDeclaration: {
             const className = node.name.getText();
             const classDoc = moduleDoc?.declarations?.find(declaration => declaration.name === className);
-            const customTags = ['dependency', 'documentation', 'since', 'status', 'title'];
+            const customTags = ['dependency', 'documentation', 'since', 'state', 'status', 'title'];
             let customComments = '/**';
 
             node.jsDoc?.forEach(jsDoc => {
@@ -51,6 +51,16 @@ export default {
                     classDoc['dependencies'] = [];
                   }
                   classDoc['dependencies'].push(t.name);
+                  break;
+
+                case 'state':
+                  if (!Array.isArray(classDoc['states'])) {
+                    classDoc['states'] = [];
+                  }
+                  classDoc['states'].push({
+                    name: t.name,
+                    description: t.description.replace(/^-/, '')
+                  });
                   break;
 
                 // Value-only metadata tags

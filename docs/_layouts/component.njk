@@ -94,15 +94,11 @@
               <td>
                 {% if prop.type.text %}
                   <code>{{ prop.type.text | trimPipes | inlineMarkdown | safe }}</code>
-                {% else %}
-                  -
                 {% endif %}
               </td>
               <td>
                 {% if prop.default %}
                   <code>{{ prop.default | inlineMarkdown | safe }}</code>
-                {% else %}
-                  -
                 {% endif %}
               </td>
             </tr>
@@ -136,10 +132,33 @@
                       {{ param.name }}: {{ param.type.text | trimPipes }}{% if not loop.last %},{% endif %}
                     {% endfor %}
                   </code>
-                {% else %}
-                  -
                 {% endif %}
               </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% endif %}
+
+  {# States #}
+  {% if component.states.length %}
+    <h2>States</h2>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th class="table-name">Name</th>
+            <th class="table-description">Description</th>
+            <th>CSS selector</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for state in component.states %}
+            <tr>
+              <td class="table-name"><code>{{ state.name }}</code></td>
+              <td class="table-description">{{ state.description | inlineMarkdown | safe }}</td>
+              <td><code>[data-state-{{ state.name }}]</code></td>
             </tr>
           {% endfor %}
         </tbody>
@@ -168,8 +187,6 @@
               <td>
                 {% if event.type.text %}
                   <code>{{ event.type.text | trimPipes  }}</code>
-                {% else %}
-                  -
                 {% endif %}
               </td>
             </tr>
@@ -179,13 +196,9 @@
     </div>
   {% endif %}
 
-  {% if component.cssProperties.length or component.cssParts.length %}
-    <h2>Customizing styles</h2>
-  {% endif %}
-
   {# Custom Properties #}
   {% if component.cssProperties.length %}
-    <h3>CSS custom properties</h3>
+    <h2>CSS custom properties</h2>
 
     <div class="table-scroll">
       <table>
@@ -215,7 +228,7 @@
 
   {# CSS Parts #}
   {% if component.cssParts.length %}
-    <h3>CSS parts</h3>
+    <h2>CSS parts</h2>
 
     <div class="table-scroll">
       <table>

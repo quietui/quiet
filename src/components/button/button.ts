@@ -20,6 +20,9 @@ import type { CSSResultGroup } from 'lit';
  * @slot start - An icon or similar element to place before the label. Works great with SVGs.
  * @slot end - An icon or similar element to place after the label. Works great with SVGs.
  *
+ * @state focused - Applied when the button has focus.
+ * @state toggled - Applied when a toggle button is activated.
+ *
  * @event quiet-click - Emitted when the button is clicked. Will not be emitted when the button is disabled or loading.
  * @event quiet-focus - Emitted when the button receives focus.
  * @event quiet-blur - Emitted when the button loses focus.
@@ -36,7 +39,7 @@ export class Button extends QuietElement {
     return true;
   }
 
-  private internals: ElementInternals;
+  protected internals: ElementInternals;
 
   /** The type of button to render. */
   @property() variant: 'primary' | 'secondary' | 'destructive' | 'text' | 'image' = 'secondary';
@@ -121,10 +124,12 @@ export class Button extends QuietElement {
   }
 
   private handleBlur() {
+    this.states.delete('focused');
     this.emit('quiet-blur');
   }
 
   private handleFocus() {
+    this.states.add('focused');
     this.emit('quiet-focus');
   }
 
@@ -143,6 +148,7 @@ export class Button extends QuietElement {
     // Update toggle buttons
     if (this.toggle !== undefined) {
       this.toggle = this.toggle === 'on' ? 'off' : 'on';
+      this.states.toggle('toggled', this.toggle === 'on');
     }
 
     // Reset the form

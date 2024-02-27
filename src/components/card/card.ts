@@ -25,13 +25,13 @@ export class Card extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
   /** Renders the card with the `header` slot. */
-  @property({ attribute: 'with-header', type: Boolean }) withHeader = false;
+  @property({ attribute: 'with-header', type: Boolean, reflect: true }) withHeader = false;
 
   /** Renders the card with the `footer` slot. */
-  @property({ attribute: 'with-footer', type: Boolean }) withFooter = false;
+  @property({ attribute: 'with-footer', type: Boolean, reflect: true }) withFooter = false;
 
   /** Renders the card with the `media` slot. */
-  @property({ attribute: 'with-media', type: Boolean }) withMedia = false;
+  @property({ attribute: 'with-media', type: Boolean, reflect: true }) withMedia = false;
 
   private handleBodySlotChange(event: Event) {
     const slot = event.target as HTMLSlotElement;

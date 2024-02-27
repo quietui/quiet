@@ -1,3 +1,4 @@
+*.hbs
 *.md
 *.min.js
 .github

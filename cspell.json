@@ -21,6 +21,7 @@
     "csspart",
     "cssproperty",
     "evenodd",
+    "focusable",
     "formaction",
     "formenctype",
     "formmethod",
@@ -46,6 +47,7 @@
     "smartquotes",
     "stylesheet",
     "Triaging",
+    "unsupportive",
     "wordmark"
   ],
   // flagWords - list of words to be always considered incorrect

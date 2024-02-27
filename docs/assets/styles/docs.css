@@ -327,13 +327,13 @@ html:not(.docs-dark) .only-dark {
 
 /* Anchor headings */
 .anchor-heading a {
-  display: none;
+  visibility: hidden;
   text-decoration: none;
 }
 
 @media (hover: hover) {
   .anchor-heading:hover a {
-    display: inline-block;
+    visibility: visible;
     padding: 0 0.125em;
   }
 }
@@ -693,7 +693,7 @@ html:not(.docs-dark) .only-dark {
 }
 
 .table-description {
-  min-width: 30ch;
+  min-width: 40ch;
 }
 
 /* Component pages */

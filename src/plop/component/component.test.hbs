@@ -1,0 +1,10 @@
+import '../../../dist/quiet.js';
+import { expect, fixture, html } from '@open-wc/testing';
+import type { {{ tagToClassName tag }} } from './{{ removePrefix tag }}.js';
+
+describe('<{{ tag }}>', () => {
+  it('does something', async () => {
+    const el = await fixture<{{ tagToClassName tag }}>(html` <{{ tag }}>Click me</{{ tag }}> `);
+    await expect(el).to.be.accessible();
+  });
+});

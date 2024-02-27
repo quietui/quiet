@@ -37,6 +37,7 @@
   "scripts": {
     "start": "node scripts/build.js --develop",
     "build": "node scripts/build.js",
+    "create": "plop --plopfile src/plop/plopfile.js",
     "prepare": "npx playwright install",
     "test": "wtr --group default",
     "test:component": "wtr -- --watch --group",
@@ -87,6 +88,7 @@
     "markdown-it-mark": "^4.0.0",
     "node-html-parser": "^6.1.12",
     "ora": "^8.0.1",
+    "plop": "^4.0.1",
     "prettier": "^3.2.4",
     "prismjs": "^1.29.0",
     "recursive-copy": "^2.0.14",

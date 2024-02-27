@@ -26,6 +26,8 @@ The following content shows how Restyle affects native HTML elements using the c
 
 ---
 
+<div data-no-outline>
+
 # Heading level one
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tortor posuere ac ut consequat semper viverra nam libero justo.
@@ -129,6 +131,10 @@ export function thing(arg) {
   }
 }</pre>
 
+:::info
+Syntax highlighting, like you see elsewhere in the docs, is not included in Restyle.
+:::
+
 ### Tables
 
 <table>
@@ -179,6 +185,12 @@ export function thing(arg) {
   <p>Cras tincidunt lobortis feugiat vivamus at augue eget arcu. Risus pretium quam vulputate dignissim suspendisse.</p>
 </details>
 
+<details>
+  <summary>A diam sollicitudin</summary>
+  <p>Enim diam vulputate ut pharetra sit amet aliquam id diam. Suscipit tellus mauris a diam maecenas sed enim ut sem. Sit amet mattis vulputate enim nulla.</p>
+  <p>Tristique et egestas quis ipsum. Volutpat lacus laoreet non curabitur gravida arcu. Fermentum posuere urna nec tincidunt. Mattis enim ut tellus elementum. Quam lacus suspendisse faucibus interdum posuere lorem ipsum.</p>
+</details>
+
 ### Definition Lists
 
 <dl>
@@ -189,6 +201,15 @@ export function thing(arg) {
   <dt>Third definition</dt>
   <dd>Donec pretium vulputate sapien nec sagittis aliquam malesuada bibendum arcu.</dd>
 </dl>
+
+### Figures
+
+<figure>
+  <img src="https://images.unsplash.com/photo-1570018144715-43110363d70a?q=80&w=512&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Three gray kittens on a wood floor">
+  <figcaption>
+    Non curabitur gravida arcu ac tortor dignissim convallis. Aliquet lectus proin nibh nisl condimentum id. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed.
+  </figcaption>
+</figure>
 
 ### Media
 
@@ -202,3 +223,14 @@ export function thing(arg) {
     column-gap: 2rem;
   }
 </style>
+
+</div>
+
+---
+
+## Utility classes
+
+Restyle ships with a handful of helpful utility classes. Use `class="..."` to apply them to any HTML element.
+
+- `visually-hidden` - Used when an element must be accessible to assistive technologies like screen readers but should remain hidden in other circumstances.
+- `visually-hidden-focusable` - The same as `visually-hidden`, but will show when the element or any of its children receive focus. Useful for things like "skip to content" links.

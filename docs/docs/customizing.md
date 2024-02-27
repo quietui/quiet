@@ -8,9 +8,10 @@ The following tokens are available as [CSS custom properties](https://developer.
 
 TODO:
 
-- explain how to customize tokens
-- find a nice way to show off base tokens
+- explain how color palettes are generated and when to NOT use primitives
+- explain how light and dark mode tokens map to palettes
 - let users change base colors right in the docs
+- find a nice way to show off base tokens
 - list out all other tokens and what they do
 
 <div class="colors">
@@ -82,3 +83,7 @@ TODO:
     }
   }
 </style>
+
+## How to create a theme
+
+TODO

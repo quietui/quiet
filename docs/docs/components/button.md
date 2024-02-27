@@ -179,7 +179,7 @@ Image buttons are a special variant that let you create application icons and ot
 
 ```html {.example}
 <quiet-button variant="image">
-  <img width="64" height="64" src="/assets/images/app-icon.png" alt="Launch Quiet">
+  <img width="60" height="60" src="/assets/images/app-icon.png" alt="Launch Quiet">
 </quiet-button>
 ```
 

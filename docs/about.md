@@ -39,4 +39,8 @@ I'm fully aware that I won't get it right every time for every user, so I invite
 
 This is the path forward. Together, we will continue to make accessible software for as many users as possible.
 
+## What's with all the cats?
+
+I'm not really sure. They keep sneaking into the docs. I think they like the logo.
+
 — [Cory LaViska](https://twitter.com/claviska)

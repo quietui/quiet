@@ -8,6 +8,7 @@
   --quiet-base-confirmative-color: #7db664;
   --quiet-base-background-color: white;
   --quiet-base-color: var(--quiet-neutral-strident);
+  --quiet-base-color-muted: var(--quiet-neutral-700);
 
   /*
 

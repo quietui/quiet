@@ -5,52 +5,49 @@
   top: 0.25rem;
   right: 0.25rem;
   font-size: 1.25rem;
-  color: var(--docs-gray-800);
-  background: var(--docs-background-lowered);
-  border-radius: calc(var(--docs-border-radius) * 0.75);
+  color: var(--quiet-neutral-strident-text);
+  background: var(--quiet-neutral-strident);
+  border: none;
+  border-radius: calc(var(--quiet-base-border-radius) / 2);
   padding: 0.5rem;
   margin: 0;
   cursor: pointer;
   transition: 150ms translate ease;
-}
 
-.copy-code:focus-visible {
-  outline: solid var(--docs-focus-ring-width) var(--docs-focus-ring-color);
-}
+  &:focus-visible {
+    outline: var(--quiet-base-focus-ring);
+  }
 
-.copy-code:active {
-  translate: 0 1px;
-}
+  &:active {
+    translate: 0 1px;
+  }
 
-.copy-code svg {
-  width: 1em;
-  height: 1em;
-}
+  svg {
+    width: 1em;
+    height: 1em;
+  }
 
-.copy-code-check-icon {
-  display: none;
-  color: var(--docs-success-600);
-}
+  .copy-code-check-icon {
+    display: none;
+    color: var(--quiet-confirmative-moderate);
+  }
 
-.copy-code.copied {
-  opacity: 1;
-}
+  &.copied {
+    opacity: 1;
+  }
 
-.copy-code.copied .copy-code-copy-icon {
-  display: none;
-}
+  &.copied .copy-code-copy-icon {
+    display: none;
+  }
 
-.copy-code.copied .copy-code-check-icon {
-  display: block;
+  &.copied .copy-code-check-icon {
+    display: block;
+  }
 }
 
 @media (hover: hover) {
   .copy-code {
     opacity: 0;
-  }
-
-  .copy-code:hover {
-    background: color-mix(in oklab, var(--docs-background-lowered), black 5%);
   }
 
   pre:hover > .copy-code {

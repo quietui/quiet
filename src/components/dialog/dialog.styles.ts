@@ -14,6 +14,9 @@ export default css`
   }
 
   .dialog {
+    position: fixed;
+    inset-block-start: 0;
+    inset-block-end: 0;
     display: flex;
     flex-direction: column;
     width: auto;

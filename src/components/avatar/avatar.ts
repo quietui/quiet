@@ -13,6 +13,8 @@ import type { CSSResultGroup } from 'lit';
  * @status stable
  * @since 1.0
  *
+ * @slot icon - A custom icon to use instead of the default. Will not be shown when an image or initials are present.
+ *
  * @cssproperty [--size=3rem] - The size of the avatar to draw.
  */
 @customElement('quiet-avatar')

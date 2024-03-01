@@ -13,6 +13,10 @@ import type { CSSResultGroup } from 'lit';
  * @status stable
  * @since 1.0
  *
+ * @slot - Content to place in the dialog's body.
+ * @slot header - Content to place in the dialog's header.
+ * @slot footer - Content to place in the dialog's footer.
+ *
  * @csspart body - The container that wraps the card's body.
  * @csspart header - The container that wraps the card's header. A flex container, by default.
  * @csspart footer - The container that wraps the card's footer. A flex container, by default.
@@ -33,26 +37,13 @@ export class Card extends QuietElement {
   /** Renders the card with the `media` slot. */
   @property({ attribute: 'with-media', type: Boolean, reflect: true }) withMedia = false;
 
-  private handleBodySlotChange(event: Event) {
-    const slot = event.target as HTMLSlotElement;
-    const els = slot.assignedElements({ flatten: true });
-
-    // Apply a class to the first and last slotted element in the body so we can zero out the top and bottom margins
-    // with CSS. Alas, we can't do it with only CSS yet because :first-child and :last-child consider the position of
-    // all elements in the light DOM, so if a header or footer is present, those will be targeted instead.
-    els.forEach((el, index) => {
-      el.classList.toggle('quiet__first', index === 0);
-      el.classList.toggle('quiet__last', index === els.length - 1);
-    });
-  }
-
   render() {
     return html`
       ${this.withMedia ? html` <div part="media" class="media"><slot name="media"></slot></div> ` : ''}
       ${this.withHeader ? html` <header part="header" class="header"><slot name="header"></slot></header> ` : ''}
 
       <div part="body" class="body">
-        <slot @slotchange=${this.handleBodySlotChange}></slot>
+        <slot></slot>
       </div>
 
       ${this.withFooter ? html` <footer part="footer" class="footer"><slot name="footer"></slot></footer> ` : ''}

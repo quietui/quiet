@@ -34,7 +34,8 @@ export default css`
     align-items: center;
     gap: calc(var(--spacing) / 4);
     border-bottom: var(--quiet-base-border-style) var(--quiet-base-border-width) var(--quiet-neutral-border-subtle);
-    padding-inline: var(--spacing);
+    padding-inline-start: var(--spacing);
+    padding-inline-end: calc(var(--spacing) / 2); /* less spacing to better align buttons as actions */
     padding-block: calc(var(--spacing) * 0.875);
 
     /*
@@ -50,14 +51,6 @@ export default css`
   /* Body */
   .body {
     padding: var(--spacing);
-  }
-
-  .body ::slotted(.quiet__first) {
-    margin-block-start: 0 !important;
-  }
-
-  .body ::slotted(.quiet__last) {
-    margin-block-end: 0 !important;
   }
 
   /* Footer */

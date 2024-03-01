@@ -13,6 +13,8 @@ import type { CSSResultGroup } from 'lit';
  * @status stable
  * @since 1.0
  *
+ * @slot - The badge's content.
+ *
  * @cssproperty [--attention-duration=1.5s] - The speed at which the attention animation will run.
  * @cssproperty [--attention-easing=ease] - The easing to use for the attention animation.
  */

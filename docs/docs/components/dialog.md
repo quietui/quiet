@@ -183,7 +183,7 @@ The `--width` custom property controls the default width of the dialog. On small
 
 ### Scrolling dialogs
 
-Dialogs with overflowing content will scroll. By design, the header and footer will remain visible so users don't get confused and have an easy way to exit the dialog.
+Dialogs with overflowing content will expand as the viewport allows before scrolling. By design, the header and footer will remain visible so users don't get confused and have an easy way to exit the dialog.
 
 ```html {.example}
 <quiet-dialog id="scrolling__dialog" with-header with-footer>
@@ -266,7 +266,7 @@ You can check `event.detail.source` to see which element triggered the dialog to
     I won't close it
   </quiet-button>
   
-  <quiet-button slot="footer" data-dialog="dismiss" variant="primary">
+  <quiet-button slot="footer" data-dialog="dismiss" variant="destructive">
     I will close it
   </quiet-button>
 </quiet-dialog>

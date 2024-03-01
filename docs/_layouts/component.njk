@@ -176,7 +176,6 @@
           <tr>
             <th class="table-name">Name</th>
             <th class="table-description">Description</th>
-            <th>Event Detail</th>
           </tr>
         </thead>
         <tbody>
@@ -184,11 +183,6 @@
             <tr>
               <td class="table-name"><code>{{ event.name }}</code></td>
               <td class="table-description">{{ event.description | inlineMarkdown | safe }}</td>
-              <td>
-                {% if event.type.text %}
-                  <code>{{ event.type.text | trimPipes  }}</code>
-                {% endif %}
-              </td>
             </tr>
           {% endfor %}
         </tbody>

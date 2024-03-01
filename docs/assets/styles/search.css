@@ -49,9 +49,9 @@ body.site-search-visible {
   left: 0;
   right: 0;
   bottom: 0;
-  background: var(--docs-overlay-background);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  background: var(--quiet-overlay-color);
+  backdrop-filter: blur(--quiet-overlay-backdrop-filter);
+  -webkit-backdrop-filter: blur(--quiet-overlay-backdrop-filter);
   z-index: -1;
 }
 

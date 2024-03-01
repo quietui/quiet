@@ -34,6 +34,9 @@
   --quiet-base-focus-ring: var(--quiet-base-border-style) var(--quiet-base-focus-width) var(--quiet-base-focus-color);
   --quiet-base-transition-duration: 200ms;
 
+  --quiet-overlay-color: rgb(0 0 0 / 33%); /* can't be a custom property, Safari doesn't inherit on dialog ::backdrop */
+  --quiet-overlay-backdrop-filter: blur(6px);
+
   --quiet-selection-background-color: var(--quiet-primary-300);
 
   /* Shadows */

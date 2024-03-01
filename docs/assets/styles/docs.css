@@ -310,6 +310,10 @@ html:not(.docs-dark) .only-dark {
   }
 }
 
+#content code {
+  white-space: nowrap;
+}
+
 #content pre:has(code) {
   padding: 0;
 

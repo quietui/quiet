@@ -102,7 +102,7 @@ Be careful to not make the button's text too small. Typically, 12px is the absol
 
 ### Pill-shaped buttons
 
-Any button can be rendered with pill-shaped edges by applying the `pill` attribute.
+Any button can be rendered with pill-shaped edges by adding the `pill` attribute.
 
 ```html {.example}
 <quiet-button pill>
@@ -134,7 +134,7 @@ To create an icon button, place an icon into the button's default slot and set t
 
 ### Toggle buttons
 
-Create a toggle button by applying the `toggle="off"` attribute. If you want the default state to be pressed, use `toggle="on"` instead. Note that toggle buttons cannot be used with link buttons or submit buttons.
+Create a toggle button by adding the `toggle="off"` attribute. If you want the default state to be pressed, use `toggle="on"` instead. Toggle buttons cannot be used with link buttons or submit buttons.
 
 ```html {.example}
 <quiet-button toggle="off" icon-label="Bold">

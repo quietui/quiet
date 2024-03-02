@@ -53,7 +53,7 @@ export async function updateConnectedIcons() {
 }
 
 // Register the default icon library
-registerIconLibrary('hero', {
+registerIconLibrary('default', {
   resolve: (name, family) => {
     let folder = '24/outline';
     if (family === 'solid') folder = '24/solid';

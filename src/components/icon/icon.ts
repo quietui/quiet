@@ -5,6 +5,10 @@ import hostStyles from '../../styles/host.styles.js';
 import styles from './icon.styles.js';
 import type { CSSResultGroup } from 'lit';
 
+/**
+ * Store a cache of icon requests by URL to prevent HTTP requests to the same resources from stacking up and to make
+ * subsequent requests load faster.
+ */
 const requests = new Map<string, Promise<string>>();
 
 /**

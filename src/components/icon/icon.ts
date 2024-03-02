@@ -29,7 +29,7 @@ export class Icon extends QuietElement {
   @state() private svg?: SVGSVGElement;
 
   /** The name of the icon library to use. */
-  @property() library = 'hero';
+  @property() library = 'default';
 
   /** The name of the icon to render. */
   @property() family = 'outline';

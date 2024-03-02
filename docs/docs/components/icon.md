@@ -116,6 +116,8 @@ registerIconLibrary('my-icons', {
 });
 ```
 
+It's fine to add icons to the page before registering an icon library. They just won't be fetched or rendered until registration.
+
 You can also unregister icon libraries using the `unregisterIconLibrary()` function. However, this will cause existing icons that reference the library to disappear. Unregistering can be useful when you no longer need to display icons from a specific library.
 
 ```js
@@ -124,13 +126,9 @@ import { unregisterIconLibrary } from '/dist/quiet.js';
 unregisterIconLibrary('my-icons');
 ```
 
-:::info
-It's fine to add icons to the page before registering an icon library. They just won't be fetched or rendered until registration.
-:::
-
 ### The default icon library
 
-To change the default icon library, register a new one called `default`. This will let you skip setting `<quiet-icon library="...">` on every icon. This is only recommended if you want to completely replace the default Heroicons library.
+To change the default icon library, register a new one called `default`. This will let you skip setting `<quiet-icon library="...">` on every single icon. This is only recommended if you want to completely replace the default Heroicons library.
 
 ```js
 import { registerIconLibrary } from '/dist/quiet.js';
@@ -144,7 +142,7 @@ registerIconLibrary('default', {
 
 Quiet also has a system icon library that ships a subset of the default library for internal component use. These icons are served as base64-encoded data URIs, which allows them to load instantly and not require the [library path](http://localhost:4000/docs/#setting-the-library-path) to be set.
 
-Changing the system library isn't recommended, but it is possible. To change the system icon library, register a new one called `system`. 
+Changing the system library isn't recommended, but it is possible. To change the system icon library, register a new one called `system`.
 
 ```js
 import { registerIconLibrary } from '/dist/quiet.js';

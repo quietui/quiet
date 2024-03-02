@@ -163,19 +163,19 @@ html:not(.docs-dark) .only-dark {
   vertical-align: -3px;
   color: deeppink;
   animation: 1.5s infinite alternate heartbeat;
-  transition: 0.5s rotate ease;
+  transition: 0.5s transform ease;
 }
 
 #header-group-links a:has(svg):hover > svg {
-  rotate: -360deg;
+  transform: scaleX(-1);
 }
 
 @keyframes heartbeat {
   from {
-    scale: 0.95;
+    scale: 0.85;
   }
   to {
-    scale: 1.1;
+    scale: 1.15;
   }
 }
 

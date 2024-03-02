@@ -140,7 +140,7 @@ registerIconLibrary('default', {
 
 ### The system icon library
 
-Quiet also has a system icon library that ships a subset of the default library for internal component use. These icons are served as base64-encoded data URIs, which allows them to load instantly and not require the [library path](http://localhost:4000/docs/#setting-the-library-path) to be set.
+Quiet also has a system icon library that provides a subset of the default library for internal component use. These icons are served as base64-encoded data URIs, which allows them to load instantly and not require the [library path](http://localhost:4000/docs/#setting-the-library-path) to be set.
 
 Changing the system library isn't recommended, but it is possible. To change the system icon library, register a new one called `system`.
 

@@ -240,8 +240,14 @@ if (isDeveloping) {
       callbacks: {
         ready: (_err, instance) => {
           // 404 errors
-          instance.addMiddleware('*', (_req, res) => {
-            res.writeHead(302, { location: '/404.html' });
+          instance.addMiddleware('*', (req, res) => {
+            if (req.url.toLowerCase().endsWith('.svg')) {
+              // Make sure SVGs error out in dev instead of serve the 404 page
+              res.writeHead(404);
+            } else {
+              res.writeHead(302, { location: '/404.html' });
+            }
+
             res.end();
           });
         }

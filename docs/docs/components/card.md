@@ -41,9 +41,7 @@ Apply the `with-header` attribute and place elements into the `header` slot to a
 <quiet-card with-header style="max-width: 340px;">
   <h3 slot="header" style="font-size: 1.125rem; margin-inline-end: auto; margin-block: 0;">Lorem ipsum</h3>
   <quiet-button slot="header" variant="text" icon-label="Settings">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-    </svg>
+    <quiet-icon name="cog-6-tooth"></quiet-icon>
   </quiet-button>
   
   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.

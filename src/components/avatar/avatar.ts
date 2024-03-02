@@ -1,3 +1,4 @@
+import '../icon/icon.js';
 import { customElement, property } from 'lit/decorators.js';
 import { html } from 'lit';
 import { QuietElement } from '../../utilities/quiet-element.js';
@@ -16,6 +17,8 @@ import type { CSSResultGroup } from 'lit';
  * @slot icon - A custom icon to use instead of the default. Will not be shown when an image or initials are present.
  *
  * @cssproperty [--size=3rem] - The size of the avatar to draw.
+ *
+ * @dependency quiet-icon
  */
 @customElement('quiet-avatar')
 export class Avatar extends QuietElement {
@@ -54,13 +57,7 @@ export class Avatar extends QuietElement {
         ? html` <span class="characters" data-length=${this.characters.length}>${this.characters.slice(0, 5)}</span> `
         : html`
             <slot name="icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  fill-rule="evenodd"
-                  d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
-                  clip-rule="evenodd"
-                />
-              </svg>
+              <quiet-icon library="system" name="user" family="solid"></quiet-icon>
             </slot>
           `}
       ${this.image ? html` <img class="image" role="presentation" src=${this.image} alt="" /> ` : ''}

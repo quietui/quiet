@@ -25,3 +25,7 @@ If you don't want to use the autoloader, you can import components individually.
 ```html
 TODO
 ```
+
+## Setting the library path
+
+TODO

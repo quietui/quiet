@@ -31,7 +31,7 @@ export default css`
   }
 
   slot[name='icon'] {
-    svg,
+    quiet-icon,
     &::slotted(*) {
       position: absolute !important;
       top: calc(50% - 0.75em) !important;

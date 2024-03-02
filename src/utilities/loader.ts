@@ -1,4 +1,4 @@
-import { getAssetPath } from './assets.js';
+import { getLibraryPath } from './assets.js';
 
 const observer = new MutationObserver(mutations => {
   for (const { addedNodes } of mutations) {
@@ -20,7 +20,7 @@ function register(tagName: string): Promise<void> {
   }
 
   const tagWithoutPrefix = tagName.replace(/^quiet-/i, '');
-  const path = getAssetPath(`components/${tagWithoutPrefix}/${tagWithoutPrefix}.js`);
+  const path = getLibraryPath(`components/${tagWithoutPrefix}/${tagWithoutPrefix}.js`);
 
   // Register it
   return new Promise((resolve, reject) => {

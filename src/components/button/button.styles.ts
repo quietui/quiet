@@ -160,15 +160,12 @@ export default css`
     }
 
     .spinner {
+      --color: currentColor;
       position: absolute;
       top: calc(50% - 0.5em);
       left: calc(50% - 0.5em);
       width: 1em;
       height: 1em;
-      border: solid 0.125em currentColor;
-      border-bottom-color: color-mix(in oklab, currentColor, transparent 90%);
-      border-left-color: color-mix(in oklab, currentColor, transparent 90%);
-      border-radius: 50%;
       display: block;
       animation: 750ms infinite spin linear;
     }
@@ -179,20 +176,13 @@ export default css`
     }
 
     /* Icons */
+    ::slotted(quiet-icon) {
+      font-size: 1.25em !important;
+    }
+
     ::slotted(svg) {
-      align-self: center;
-      width: 1.25em !important;
-      height: 1.25em !important;
-    }
-  }
-
-  @keyframes spin {
-    from {
-      rotate: 0;
-    }
-
-    to {
-      rotate: 360deg;
+      width: 1.25em;
+      height: 1.25em;
     }
   }
 `;

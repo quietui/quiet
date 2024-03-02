@@ -30,6 +30,8 @@ import type { CSSResultGroup } from 'lit';
  * @csspart button - The internal `<button>` element. Other than `width`, this is where most custom styles should be
  *  applied.
  * @csspart spinner - The loading indicator. Only present when the `loading` attribute is set.
+ *
+ * @dependency quiet-spinner
  */
 @customElement('quiet-button')
 export class Button extends QuietElement {
@@ -229,7 +231,7 @@ export class Button extends QuietElement {
         <slot name="start"></slot>
         <slot></slot>
         <slot name="end"></slot>
-        ${isLoading ? html`<span part="spinner" class="spinner"></span>` : ''}
+        ${isLoading ? html`<quiet-spinner class="spinner"></quiet-spinner>` : ''}
       </${tag}>
     `;
     /* eslint-enable lit/binding-positions, lit/no-invalid-html */

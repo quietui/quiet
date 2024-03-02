@@ -1,8 +1,8 @@
-let assetPath = '';
+let libraryPath = '';
 
 /** Sets the library's asset path to the specified directory or URL. */
-export function setAssetPath(path: string) {
-  assetPath = path;
+export function setLibraryPath(path: string) {
+  libraryPath = path;
 }
 
 /**
@@ -20,13 +20,13 @@ export function setAssetPath(path: string) {
  *
  * @param subpath - An optional path to append to the base path.
  */
-export function getAssetPath(subpath = '') {
-  if (!assetPath) {
+export function getLibraryPath(subpath = '') {
+  if (!libraryPath) {
     const quietEl = document.querySelector('[data-quiet]');
 
     if (quietEl?.hasAttribute('data-quiet')) {
       // Use data-quiet
-      setAssetPath(String(quietEl.getAttribute('data-quiet')));
+      setLibraryPath(String(quietEl.getAttribute('data-quiet')));
     } else {
       // Use the path to quiet.js or quiet.loader.js
       const scripts = [...document.getElementsByTagName('script')] as HTMLScriptElement[];
@@ -36,11 +36,11 @@ export function getAssetPath(subpath = '') {
 
       if (quietScript) {
         const path = String(quietScript.getAttribute('src'));
-        setAssetPath(path.split('/').slice(0, -1).join('/'));
+        setLibraryPath(path.split('/').slice(0, -1).join('/'));
       }
     }
   }
 
   // Return the asset path without a trailing slash and append the subpath
-  return assetPath.replace(/\/$/, '') + (subpath ? `/${subpath.replace(/^\//, '')}` : ``);
+  return libraryPath.replace(/\/$/, '') + (subpath ? `/${subpath.replace(/^\//, '')}` : ``);
 }

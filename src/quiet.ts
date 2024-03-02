@@ -1,2 +1,2 @@
 export { startLoader, stopLoader, discoverElements } from './utilities/loader.js';
-export { getAssetPath, setAssetPath } from './utilities/assets.js';
+export { getLibraryPath, setLibraryPath } from './utilities/assets.js';

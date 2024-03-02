@@ -3,6 +3,7 @@ import { css } from 'lit';
 export default css`
   :host {
     --width: 30rem;
+    --height: fit-content;
     --show-duration: 200ms;
     --spacing: 1.5em;
 
@@ -19,9 +20,8 @@ export default css`
     inset-block-end: 0;
     display: flex;
     flex-direction: column;
-    width: auto;
-    max-width: min(var(--width), calc(100vw - var(--quiet-base-content-spacing)));
-    max-height: calc(100vh - var(--quiet-base-content-spacing));
+    width: var(--width);
+    height: var(--height);
     border: none;
     border-radius: var(--quiet-base-border-radius);
     background: var(--quiet-base-background-color);
@@ -41,6 +41,167 @@ export default css`
     &:focus-visible {
       outline: var(--quiet-base-focus-ring);
     }
+
+    /* Shake animation */
+    &.shake {
+      animation: shake 1000ms ease;
+    }
+
+    &.pulse {
+      --pulse-size: 1.01;
+      animation: pulse 250ms ease;
+    }
+
+    /* Center placement */
+    &[data-placement='center'] {
+      --pulse-size: 1.02;
+      max-width: calc(100vw - var(--quiet-base-content-spacing));
+      max-height: calc(100vh - var(--quiet-base-content-spacing));
+
+      &.show {
+        animation: show-from-center var(--show-duration) ease;
+
+        &::backdrop {
+          animation: show-backdrop var(--show-duration, 200ms) ease;
+        }
+      }
+
+      &.hide {
+        animation: show-from-center var(--show-duration) ease reverse;
+
+        &::backdrop {
+          animation: show-backdrop var(--show-duration, 200ms) ease reverse;
+        }
+      }
+    }
+
+    /* Top placement */
+    &[data-placement='top'] {
+      inset-inline-start: 0;
+      inset-inline-end: 0;
+      inset-block-start: 0;
+      inset-block-end: auto;
+      width: 100vw;
+      max-width: 100vw;
+      max-height: 100vh;
+      border-radius: 0;
+
+      &.show {
+        animation: show-from-top var(--show-duration) ease;
+
+        &::backdrop {
+          animation: show-backdrop var(--show-duration, 200ms) ease;
+        }
+      }
+
+      &.hide {
+        animation: show-from-top var(--show-duration) ease reverse;
+
+        &::backdrop {
+          animation: show-backdrop var(--show-duration, 200ms) ease reverse;
+        }
+      }
+    }
+
+    /* Bottom placement */
+    &[data-placement='bottom'] {
+      inset-inline-start: 0;
+      inset-inline-end: 0;
+      inset-block-start: auto;
+      inset-block-end: 0;
+      width: 100vw;
+      max-width: 100vw;
+      max-height: 100vh;
+      border-radius: 0;
+
+      &.show {
+        animation: show-from-bottom var(--show-duration) ease;
+
+        &::backdrop {
+          animation: show-backdrop var(--show-duration, 200ms) ease;
+        }
+      }
+
+      &.hide {
+        animation: show-from-bottom var(--show-duration) ease reverse;
+
+        &::backdrop {
+          animation: show-backdrop var(--show-duration, 200ms) ease reverse;
+        }
+      }
+    }
+
+    /* Start placement */
+    &[data-placement='start'] {
+      inset-inline-start: 0;
+      inset-inline-end: auto;
+      inset-block-start: 0;
+      inset-block-end: 0;
+      max-width: 100vw;
+      max-height: none;
+      height: 100vh;
+      border-radius: 0;
+
+      &.show {
+        animation: show-from-left var(--show-duration) ease;
+
+        &:dir(rtl) {
+          animation-name: show-from-right;
+        }
+
+        &::backdrop {
+          animation: show-backdrop var(--show-duration, 200ms) ease;
+        }
+      }
+
+      &.hide {
+        animation: show-from-left var(--show-duration) ease reverse;
+
+        &:dir(rtl) {
+          animation-name: show-from-right;
+        }
+
+        &::backdrop {
+          animation: show-backdrop var(--show-duration, 200ms) ease reverse;
+        }
+      }
+    }
+
+    /* End placement */
+    &[data-placement='end'] {
+      inset-inline-start: auto;
+      inset-inline-end: 0;
+      inset-block-start: 0;
+      inset-block-end: 0;
+      max-width: 100vw;
+      max-height: none;
+      height: 100vh;
+      border-radius: 0;
+
+      &.show {
+        animation: show-from-right var(--show-duration) ease;
+
+        &:dir(rtl) {
+          animation-name: show-from-left;
+        }
+
+        &::backdrop {
+          animation: show-backdrop var(--show-duration, 200ms) ease;
+        }
+      }
+
+      &.hide {
+        animation: show-from-right var(--show-duration) ease reverse;
+
+        &:dir(rtl) {
+          animation-name: show-from-left;
+        }
+
+        &::backdrop {
+          animation: show-backdrop var(--show-duration, 200ms) ease reverse;
+        }
+      }
+    }
   }
 
   /*
@@ -48,25 +209,6 @@ export default css`
     <dialog> due to the way the spec was originally written. Also note that, at the time of this writing, Firefox
     doesn't support animating backdrops.
   */
-  dialog.show {
-    animation: show-dialog var(--show-duration) ease;
-  }
-
-  dialog.show::backdrop {
-    animation: show-backdrop var(--show-duration, 200ms) ease;
-  }
-
-  dialog.hide {
-    animation: show-dialog var(--show-duration) ease reverse;
-  }
-
-  dialog.hide::backdrop {
-    animation: show-backdrop var(--show-duration, 200ms) ease reverse;
-  }
-
-  dialog.shake {
-    animation: shake 1000ms ease;
-  }
 
   /* Header */
   .header {
@@ -108,7 +250,7 @@ export default css`
     padding-block-end: var(--spacing);
   }
 
-  @keyframes show-dialog {
+  @keyframes show-from-center {
     from {
       opacity: 0;
       scale: 0.9;
@@ -119,12 +261,68 @@ export default css`
     }
   }
 
+  @keyframes show-from-top {
+    from {
+      opacity: 0;
+      translate: 0 -75%;
+    }
+    to {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+
+  @keyframes show-from-bottom {
+    from {
+      opacity: 0;
+      translate: 0 75%;
+    }
+    to {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+
+  @keyframes show-from-left {
+    from {
+      opacity: 0;
+      translate: -75%;
+    }
+    to {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+
+  @keyframes show-from-right {
+    from {
+      opacity: 0;
+      translate: 75%;
+    }
+    to {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+
   @keyframes show-backdrop {
     from {
       opacity: 0;
     }
     to {
       opacity: 1;
+    }
+  }
+
+  @keyframes pulse {
+    0% {
+      scale: 1;
+    }
+    50% {
+      scale: var(--pulse-size);
+    }
+    100% {
+      scale: 1;
     }
   }
 

@@ -83,7 +83,7 @@ Apply the `with-footer` attribute and place elements into the `footer` slot to a
 
 ### Dismissing the dialog
 
-You can dismiss the dialog programmatically by setting the `open` property to `false`. However, it's often convenient to do this without additional scripting. In those cases, you can add the `data-dialog="dismiss"` attribute to any button within the dialog.
+You can dismiss the dialog programmatically by setting the `open` property to `false`. However, it's often convenient to have a button close the dialog without additional scripting. In that case, you can add the `data-dialog="dismiss"` attribute to any button within the dialog.
 
 ```html {.example}
 <quiet-dialog with-header with-footer id="dismissing__dialog">
@@ -110,6 +110,35 @@ You can dismiss the dialog programmatically by setting the `open` property to `f
 </script>
 ``` 
 
+### Light dismissal
+
+When clicking outside of a dialog, it will normally pulse briefly to draw the user's attention. If you want these clicks to dismiss the dialog instead, use the `light-dismiss` attribute.
+
+```html {.example}
+<quiet-dialog light-dismiss with-header with-footer id="light__dialog">
+  <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">
+    Lorem ipsum
+  </h3>
+
+  Clicking outside the dialog will cause it to close.
+
+  <quiet-button slot="footer" data-dialog="dismiss" variant="primary">
+    Close
+  </quiet-button>
+</quiet-dialog>
+
+<quiet-button variant="primary">Show dialog</quiet-button>
+
+<script>
+  const dialog = document.getElementById('light__dialog');
+  const openButton = dialog.nextElementSibling;
+
+  openButton.addEventListener('quiet-click', () => {
+    dialog.open = true;
+  });
+</script>
+``` 
+
 ### Customizing actions
 
 By default, a close button is provided as a single action in the dialog's header. You can add your own header actions by slotting text buttons into the `actions` slot. Note that adding your own actions will remove the default close button.
@@ -120,16 +149,12 @@ By default, a close button is provided as a single action in the dialog's header
     Lorem ipsum
   </h3>
 
-  <quiet-button slot="actions" variant="text" icon-label="Bookmark">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" />
-    </svg>
+  <quiet-button slot="actions" variant="text" icon-label="Settings">
+    <quiet-icon name="cog-6-tooth"></quiet-icon>
   </quiet-button>
 
   <quiet-button slot="actions" variant="text" icon-label="Open in a new window">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-    </svg>
+    <quiet-icon name="arrow-top-right-on-square"></quiet-icon>
   </quiet-button>
 
   Lorem dolor sed viverra ipsum. Nisl rhoncus mattis rhoncus urna neque viverra justo nec.
@@ -155,9 +180,48 @@ By default, a close button is provided as a single action in the dialog's header
 The `actions` slot is only available when the header is present by enabling the `with-header` attribute.
 :::
 
-### Customizing the width
+### Changing the placement
 
-The `--width` custom property controls the default width of the dialog. On smaller screens, the dialog will shrink to fit.
+By default, dialogs appear in the center of the screen. To make the dialog slide in from the side of the screen like a drawer, set the `placement` attribute to `start`, `end`, `top`, or `bottom`.
+
+```html {.example}
+<quiet-dialog with-header with-footer id="placement__dialog">
+  <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">
+    Lorem ipsum
+  </h3>
+
+  Nec nam aliquam sem et tortor consequat id porta nibh. Amet risus nullam eget felis eget nunc.
+
+  <quiet-button slot="footer" data-dialog="dismiss" variant="primary">
+    Close
+  </quiet-button>
+</quiet-dialog>
+
+<div>
+  <quiet-button data-placement="start">Start</quiet-button>
+  <quiet-button data-placement="end">End</quiet-button>
+  <quiet-button data-placement="top">Top</quiet-button>
+  <quiet-button data-placement="bottom">Bottom</quiet-button>
+</div>
+
+<script>
+  const dialog = document.getElementById('placement__dialog');
+  const container = dialog.nextElementSibling;
+
+  container.addEventListener('quiet-click', event => {
+    dialog.placement = event.target.getAttribute('data-placement');
+    dialog.open = true;
+  });
+</script>
+```
+
+:::info
+The `--width` custom property has no effect on dialogs with `top` and `bottom` placements. Similarly, the `--height` custom property has no effect on dialogs with `start` and `end` placements.
+:::
+
+### Changing the size
+
+The `--width` and `--height` custom properties control the default width and height of the dialog, respectively. On smaller screens, the dialog will shrink to fit the viewport.
 
 ```html {.example}
 <quiet-dialog id="width__dialog" with-header style="--width: 800px;">
@@ -266,7 +330,7 @@ You can check `event.detail.source` to see which element triggered the dialog to
     I won't close it
   </quiet-button>
   
-  <quiet-button slot="footer" data-dialog="dismiss" variant="destructive">
+  <quiet-button slot="footer" data-dialog="dismiss" variant="primary">
     I will close it
   </quiet-button>
 </quiet-dialog>

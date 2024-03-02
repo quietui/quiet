@@ -230,6 +230,7 @@
           <tr>
             <th class="table-name">Name</th>
             <th class="table-description">Description</th>
+            <th>CSS selector</th>
           </tr>
         </thead>
         <tbody>
@@ -237,6 +238,7 @@
             <tr>
               <td><code>{{ cssPart.name }}</code></td>
               <td class="table-description">{{ cssPart.description | inlineMarkdown | safe }}</td>
+              <td><code>::part({{ cssPart.name }})</code></td>
             </tr>
           {% endfor %}
         </tbody>
@@ -247,6 +249,9 @@
   {# Dependencies #}
   {% if component.dependencies.length %}
     <h2>Dependencies</h2>
+    <p>
+      This component imports the following dependencies:
+    </p>
 
     <ul>
       {% for dependency in component.dependencies %}

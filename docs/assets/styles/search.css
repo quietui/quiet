@@ -50,8 +50,8 @@ body.site-search-visible {
   right: 0;
   bottom: 0;
   background: var(--quiet-overlay-color);
-  backdrop-filter: blur(--quiet-overlay-backdrop-filter);
-  -webkit-backdrop-filter: blur(--quiet-overlay-backdrop-filter);
+  backdrop-filter: var(--quiet-overlay-backdrop-filter);
+  -webkit-backdrop-filter: var(--quiet-overlay-backdrop-filter);
   z-index: -1;
 }
 

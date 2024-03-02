@@ -30,8 +30,8 @@ export default css`
 
     &::backdrop {
       background-color: rgb(0 0 0 / 33%); /* can't be a custom property due to Safari not inheriting yet */
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: var(--quiet-overlay-backdrop-filter);
+      -webkit-backdrop-filter: var(--quiet-overlay-backdrop-filter);
     }
 
     &:focus {

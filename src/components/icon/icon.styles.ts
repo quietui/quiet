@@ -2,12 +2,14 @@ import { css } from 'lit';
 
 export default css`
   :host {
-    display: inline-flex;
-    height: 1em;
     width: auto;
+    height: 1em;
+    display: inline-block;
   }
 
   svg {
-    height: 1em;
+    display: block;
+    width: auto;
+    height: 100%;
   }
 `;

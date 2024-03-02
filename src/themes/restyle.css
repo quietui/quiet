@@ -262,6 +262,10 @@ ol ol {
   margin-block-end: 0;
 }
 
+li p:last-child {
+  margin-block-end: 0;
+}
+
 /* Figures */
 figure {
   box-shadow: var(--quiet-shadow-silent);

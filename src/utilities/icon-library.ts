@@ -1,5 +1,5 @@
-import { getLibraryPath } from '../../utilities/assets.js';
-import type { Icon } from './icon.js';
+import { getLibraryPath } from './assets.js';
+import type { Icon } from '../components/icon/icon.js';
 
 export type ResolveFunction = (name: string, family: string) => string;
 export type MutateFunction = (svg: SVGElement) => void;
@@ -13,13 +13,13 @@ const libraries = new Map<string, Library>();
 const connectedIcons = new Set<Icon>();
 
 /** Registers a new icon library. */
-export function registerLibrary(name: string, library: Library) {
+export function registerIconLibrary(name: string, library: Library) {
   libraries.set(name, library);
   updateConnectedIcons();
 }
 
 /** Removes a previously registered icon library. */
-export function unregisterLibrary(name: string) {
+export function unregisterIconLibrary(name: string) {
   libraries.delete(name);
   updateConnectedIcons();
 }
@@ -53,7 +53,7 @@ export async function updateConnectedIcons() {
 }
 
 // Register the default icon library
-registerLibrary('hero', {
+registerIconLibrary('hero', {
   resolve: (name, family) => {
     let folder = '24/outline';
     if (family === 'solid') folder = '24/solid';
@@ -65,7 +65,7 @@ registerLibrary('hero', {
 });
 
 // Register the system icon library. We hard code these ones so they load instantly.
-registerLibrary('system', {
+registerIconLibrary('system', {
   resolve: (name, family) => {
     const encode = (svg: string) => `data:image/svg+xml,${encodeURIComponent(svg)}`;
 

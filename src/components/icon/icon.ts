@@ -1,4 +1,4 @@
-import { connectIcon, disconnectIcon, getLibrary } from './library.js';
+import { connectIcon, disconnectIcon, getLibrary } from '../../utilities/icon-library.js';
 import { customElement, property, state } from 'lit/decorators.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import hostStyles from '../../styles/host.styles.js';

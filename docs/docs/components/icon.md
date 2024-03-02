@@ -5,10 +5,10 @@ layout: component
 ---
 
 ```html {.example}
-<div style="font-size: 1.5rem;" id="container">
-  <quiet-icon label="Undo" name="bell"></quiet-icon>
-  <quiet-icon label="Globe" name="globe-americas"></quiet-icon>
-  <quiet-icon label="Shopping cart" name="shopping-cart"></quiet-icon>
+<div style="font-size: 1.5rem;">
+  <quiet-icon name="pencil-square"></quiet-icon>
+  <quiet-icon name="cog-6-tooth"></quiet-icon>
+  <quiet-icon name="trash"></quiet-icon>  
 </div>
 ```
 
@@ -20,13 +20,15 @@ A common pitfall of this component is not [setting the library's path](/docs/#se
 
 ### Built-in icons
 
-Quiet provides with the popular [Heroicons](https://heroicons.com/) icon library out of the box, but you can [register additional libraries](#registering-icon-libraries) as well. Use the `name` attribute to specify which icon should be drawn.
+Quiet provides with the popular [Heroicons](https://heroicons.com/) icon library out of the box. This is the default icon library, but you can [register additional libraries](#registering-icon-libraries) as well. Use the `name` attribute to specify which icon should be drawn.
 
 ```html {.example}
 <div style="font-size: 1.5rem;">
   <quiet-icon name="home"></quiet-icon>
-  <quiet-icon name="light-bulb"></quiet-icon>
-  <quiet-icon name="printer"></quiet-icon>
+  <quiet-icon name="bug-ant"></quiet-icon>
+  <quiet-icon name="bell"></quiet-icon>
+  <quiet-icon name="microphone"></quiet-icon>
+  <quiet-icon name="chat-bubble-oval-left"></quiet-icon>
 </div>
 ```
 
@@ -34,21 +36,32 @@ Quiet provides with the popular [Heroicons](https://heroicons.com/) icon library
 For a list of all available icons, please refer to the [Heroicons website](https://heroicons.com/). Be careful to copy the name of the icon and _not the SVG code!_
 :::
 
+### Changing the icon family
+
+Some libraries have more than one family of icons. To specify the icon family, use the `family` attribute. The Heroicons library comes with four families: `outline` (default), `solid`, `mini`, and `micro`.
+
+```html {.example}
+<quiet-icon family="outline" name="rocket-launch" style="font-size: 24px;"></quiet-icon>
+<quiet-icon family="solid" name="rocket-launch" style="font-size: 24px;"></quiet-icon>
+<quiet-icon family="mini" name="rocket-launch" style="font-size: 20px;"></quiet-icon>
+<quiet-icon family="micro" name="rocket-launch" style="font-size: 16px;"></quiet-icon>
+```
+
 ### Labeling icons
 
 By default, icons are considered presentational elements. However, you can add the `label` attribute to any icon to make it available to assistive devices such as screen readers.
 
 ```html {.example}
 <div style="font-size: 1.5rem;">
-  <quiet-icon label="Messages" name="envelope"></quiet-icon>
-  <quiet-icon label="Favorites" name="heart"></quiet-icon>
-  <quiet-icon label="Settings" name="cog-6-tooth" ></quiet-icon>
+  <quiet-icon label="Edit" name="pencil-square"></quiet-icon>
+  <quiet-icon label="Settings" name="cog-6-tooth"></quiet-icon>
+  <quiet-icon label="Delete" name="trash"></quiet-icon>  
 </div>
 ```
 
 ### Changing the size
 
-Icons are sized <quiet-icon name="cube"></quiet-icon> based on the current font size. This allows you to place them into many contexts without having to explicitly size them. To change the size, set the `font-size` property on the badge or an ancestor element.
+Icons are sized based on the current font size. This allows you to place them into many contexts without having to explicitly size them. To change the size, set the `font-size` property on the badge or an ancestor element.
 
 ```html {.example}
 <quiet-icon name="hand-thumb-up" style="font-size: 1.5em;"></quiet-icon>
@@ -68,30 +81,198 @@ Icons inherit the current text color. To change it, set the `color` property on 
 </div>
 ```
 
-### Changing the icon family
+## Registering icon libraries
 
-Some libraries have more than one family of icons. To specify the icon family, use the `family` attribute. The default library comes with four families: `outline`, `solid`, `mini`, and `micro`. If unspecified, `outline` will be the default.
+You can register additional icon libraries using the `registerIconLibrary()` function. The example below has detailed comments explaining each step of the registration process, and additional examples can be found later in this section.
 
-```html {.example}
-<quiet-icon family="outline" name="radio" style="font-size: 24px;"></quiet-icon>
-<quiet-icon family="solid" name="radio" style="font-size: 24px;"></quiet-icon>
-<quiet-icon family="mini" name="radio" style="font-size: 20px;"></quiet-icon>
-<quiet-icon family="micro" name="radio" style="font-size: 16px;"></quiet-icon>
+```js
+import { registerIconLibrary } from '/dist/quiet.js';
+
+// This registers a new icon library called "my-icons"
+registerIconLibrary('my-icons', {
+  //
+  // The resolve function is required. It must be a callback that accepts 
+  // two string arguments: the name of the icon and an optional icon family 
+  // (e.g. solid, outline). These values are passed through from: 
+  // <quiet-icon name="..." family="...">
+  //
+  // The resolver must return a URL of an SVG located at a CORS-enabled 
+  // endpoint. You can also return SVG data URIs.
+  //
+  resolve: (name, family) => {
+    return `https://example.com/path/to/icons/${family}/${name}.svg`
+  },
+  //
+  // The mutate function is optional. It must be a callback that accepts 
+  // one argument: an `SVGElement` you can use to modify the icon before it 
+  // gets written.
+  //
+  // The mutator is handy when you're pulling in SVGs from, for example, a 
+  // CDN and you need to adjust the fill, stroke, and other properties.
+  //
+  mutate: svg =>  {
+    svg.setAttribute('fill', 'currentColor');
+  }
+});
 ```
 
-### Registering icon libraries
+You can also unregister icon libraries using the `unregisterIconLibrary()` function. However, this will cause existing icons that reference the library to disappear. Unregistering can be useful when you no longer need to display icons from a specific library.
 
-TODO
+```js
+import { unregisterIconLibrary } from '/dist/quiet.js';
 
-- adding new
-- customizing default
-- customizing system
+unregisterIconLibrary('my-icons');
+```
 
-- icon packs:
-   - https://boxicons.com/
-   - https://jam-icons.com/
-   - https://lucide.dev/
-   - https://remixicon.com/
-   - https://tabler.io/icons
+:::info
+It's fine to add icons to the page before registering an icon library. They just won't be fetched or rendered until registration.
+:::
 
-*should we provide these out of the box using a public CDN?
+### The default icon library
+
+To change the default icon library, register a new one called `default`. This will let you skip setting `<quiet-icon library="...">` on every icon. This is only recommended if you want to completely replace the default Heroicons library.
+
+```js
+import { registerIconLibrary } from '/dist/quiet.js';
+
+registerIconLibrary('default', {
+  // ...
+});
+```
+
+### The system icon library
+
+Quiet also has a system icon library that ships a subset of the default library for internal component use. These icons are served as base64-encoded data URIs, which allows them to load instantly and not require the [library path](http://localhost:4000/docs/#setting-the-library-path) to be set.
+
+Changing the system library isn't recommended, but it is possible. To change the system icon library, register a new one called `system`. 
+
+```js
+import { registerIconLibrary } from '/dist/quiet.js';
+
+registerIconLibrary('system', {
+  // ...
+});
+```
+
+:::danger
+If you choose to change the system library, you must re-implement all of the system icons found in `src/utilities/icon-library.ts`. Otherwise, the icons will be absent from the components that use them.
+:::
+
+### Bootstrap icons
+
+This examples demonstrates how to load the [Bootstrap Icons](https://icons.getbootstrap.com/) library using the jsDelivr CDN.
+
+```html {.example}
+<script type="module">
+  import { registerIconLibrary } from '/dist/quiet.js';
+
+  registerIconLibrary('bootstrap', {
+    resolve: (name, family) => {
+      const suffix = family === 'filled' ? '-fill' : '';
+      return `https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/icons/${name}${suffix}.svg`
+    }
+  });
+</script>
+
+<div style="font-size: 1.5em;">
+  <quiet-icon library="bootstrap" name="house"></quiet-icon>
+  <quiet-icon library="bootstrap" name="bug"></quiet-icon>
+  <quiet-icon library="bootstrap" name="bell"></quiet-icon>
+  <quiet-icon library="bootstrap" name="mic"></quiet-icon>
+  <quiet-icon library="bootstrap" name="chat"></quiet-icon>
+
+  <br>
+
+  <quiet-icon library="bootstrap" family="filled" name="house"></quiet-icon>
+  <quiet-icon library="bootstrap" family="filled" name="bug"></quiet-icon>
+  <quiet-icon library="bootstrap" family="filled" name="bell"></quiet-icon>
+  <quiet-icon library="bootstrap" family="filled" name="mic"></quiet-icon>
+  <quiet-icon library="bootstrap" family="filled" name="chat"></quiet-icon>
+</div>
+```
+
+### Boxicons
+
+This example demonstrates how to load the [Boxicons](https://boxicons.com/) library using the jsDelivr CDN. Available families include `regular` (default), `solid`, and `logos`.
+
+```html {.example}
+<script type="module">
+  import { registerIconLibrary } from '/dist/quiet.js';
+
+  registerIconLibrary('boxicons', {
+    resolve: (name, family = 'regular') => {
+      const baseUrl = 'https://cdn.jsdelivr.net/npm/boxicons@2.1.4/svg/';
+
+      switch (family) {
+        case 'solid':
+          return `${baseUrl}solid/bxs-${name}.svg`;
+        case 'logos':
+          return `${baseUrl}logos/bxl-${name}.svg`;
+        default:
+          return `${baseUrl}regular/bx-${name}.svg`;
+      }
+    },
+    mutate: svg => svg.setAttribute('fill', 'currentColor')
+  });
+</script>
+
+<div style="font-size: 1.5em;">
+  <quiet-icon library="boxicons" name="home"></quiet-icon>
+  <quiet-icon library="boxicons" name="bug"></quiet-icon>
+  <quiet-icon library="boxicons" name="bell"></quiet-icon>
+  <quiet-icon library="boxicons" name="microphone"></quiet-icon>
+  <quiet-icon library="boxicons" name="chat"></quiet-icon>
+
+  <br>
+
+  <quiet-icon library="boxicons" family="solid" name="home"></quiet-icon>
+  <quiet-icon library="boxicons" family="solid" name="bug"></quiet-icon>
+  <quiet-icon library="boxicons" family="solid" name="bell"></quiet-icon>
+  <quiet-icon library="boxicons" family="solid" name="microphone"></quiet-icon>
+  <quiet-icon library="boxicons" family="solid" name="chat"></quiet-icon>
+</div>
+```
+
+### Lucide icons
+
+This example demonstrates how to load the [Lucide](https://lucide.dev/icons/) library using the jsDelivr CDN. Only one family is available from this set.
+
+```html {.example}
+<script type="module">
+  import { registerIconLibrary } from '/dist/quiet.js';
+
+  registerIconLibrary('lucide', {
+    resolve: name => `https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/${name}.svg`
+  });
+</script>
+
+<div style="font-size: 1.5em;">
+  <quiet-icon library="lucide" name="home"></quiet-icon>
+  <quiet-icon library="lucide" name="bug"></quiet-icon>
+  <quiet-icon library="lucide" name="bell"></quiet-icon>
+  <quiet-icon library="lucide" name="mic"></quiet-icon>
+  <quiet-icon library="lucide" name="message-circle"></quiet-icon>
+</div>
+```
+
+### Tabler icons
+
+This example demonstrates how to load the [Tabler icons](https://tabler.io/icons) library using the jsDelivr CDN. Only one family is available from this set.
+
+```html {.example}
+<script type="module">
+  import { registerIconLibrary } from '/dist/quiet.js';
+
+  registerIconLibrary('tabler', {
+    resolve: name => `https://cdn.jsdelivr.net/npm/@tabler/icons@2.47.0/icons/${name}.svg`
+  });
+</script>
+
+<div style="font-size: 1.5em;">
+  <quiet-icon library="tabler" name="home"></quiet-icon>
+  <quiet-icon library="tabler" name="bug"></quiet-icon>
+  <quiet-icon library="tabler" name="bell"></quiet-icon>
+  <quiet-icon library="tabler" name="microphone"></quiet-icon>
+  <quiet-icon library="tabler" name="message-circle"></quiet-icon>
+</div>
+```

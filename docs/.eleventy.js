@@ -26,6 +26,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter('inlineMarkdown', content => markdown.renderInline(content));
   eleventyConfig.addFilter('markdown', content => markdown.render(content));
   eleventyConfig.addFilter('stripExtension', string => parse(string).name);
+  eleventyConfig.addFilter('stripQuietPrefix', content => content.replace(/^quiet-/, ''));
   eleventyConfig.addFilter('trimPipes', content => {
     // Trims whitespace and pipes from the start and end of a string. Useful for CEM types, which can be pipe-delimited.
     // With Prettier 3, this means a leading pipe will exist be present when the line wraps.

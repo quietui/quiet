@@ -5,10 +5,9 @@ export default css`
     display: inline-flex;
     height: 1em;
     width: auto;
-    aspect-ratio: 1 / 1;
   }
 
   svg {
-    flex: 1 1 auto;
+    height: 1em;
   }
 `;

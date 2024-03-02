@@ -1,5 +1,5 @@
 import { customElement } from 'lit/decorators.js';
-import { LitElement } from 'lit';
+import { html, LitElement } from 'lit';
 import hostStyles from '../../styles/host.styles.js';
 import styles from './spinner.styles.js';
 import type { CSSResultGroup } from 'lit';
@@ -23,5 +23,13 @@ export class Spinner extends LitElement {
 
     this.setAttribute('role', 'progressbar');
     this.setAttribute('aria-label', 'Loading'); // TODO - localize
+  }
+
+  render() {
+    return html`
+      <svg fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <g><circle cx="12" cy="12" r="10" fill="none" stroke-width="3" /></g>
+      </svg>
+    `;
   }
 }

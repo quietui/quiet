@@ -255,7 +255,7 @@
 
     <ul>
       {% for dependency in component.dependencies %}
-        <li><code>&lt;{{ dependency }}&gt;</code></li>
+        <li><a href="/docs/components/{{ dependency | stripQuietPrefix }}"><code>&lt;{{ dependency }}&gt;</code></a></li>
       {% endfor %}
     </ul>
   {% endif %}

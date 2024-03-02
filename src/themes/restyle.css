@@ -55,8 +55,12 @@ p,
 pre,
 table,
 ul,
-video:not(:last-child) {
+video {
   margin-block-end: calc(var(--quiet-base-content-spacing));
+
+  & > :last-child {
+    margin-block-end: 0;
+  }
 }
 
 /* Headings and paragraphs */

@@ -224,13 +224,17 @@ The `--width` custom property has no effect on dialogs with `top` and `bottom` p
 The `--width` and `--height` custom properties control the default width and height of the dialog, respectively. On smaller screens, the dialog will shrink to fit the viewport.
 
 ```html {.example}
-<quiet-dialog id="width__dialog" with-header style="--width: 800px;">
+<quiet-dialog id="width__dialog" with-header with-footer style="--width: 800px;">
   <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">
     Lorem ipsum
   </h3>
 
   <p>Lobortis feugiat vivamus at augue eget arcu dictum. Nulla at volutpat diam ut venenatis tellus in metus vulputate. Venenatis tellus in metus vulputate eu scelerisque felis.</p>
   <p>Et malesuada fames ac turpis egestas maecenas pharetra. Eu lobortis elementum nibh tellus molestie nunc. Nisl purus in mollis nunc sed id semper risus in. Ultricies mi quis hendrerit dolor magna eget. Venenatis cras sed felis eget velit aliquet sagittis.</p>
+
+  <quiet-button slot="footer" data-dialog="dismiss" variant="primary">
+    Close
+  </quiet-button>
 </quiet-dialog>
 
 <quiet-button variant="primary">Show dialog</quiet-button>

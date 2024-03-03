@@ -4,6 +4,8 @@ description: TODO
 layout: component
 ---
 
+Quiet includes hundreds of beautifully designed SVG icons from the popular [Heroicons](https://heroicons.com/) library. In addition, it's flexible enough that you can [replace](#the-default-icon-library) or [supplement](#registering-icon-libraries) the default icon set.
+
 ```html {.example}
 <div style="font-size: 1.5rem;">
   <quiet-icon name="pencil-square"></quiet-icon>
@@ -20,7 +22,7 @@ A common pitfall of this component is not [setting the library's path](/docs/#se
 
 ### Built-in icons
 
-Quiet provides with the popular [Heroicons](https://heroicons.com/) icon library out of the box. This is the default icon library, but you can [register additional libraries](#registering-icon-libraries) as well. Use the `name` attribute to specify which icon should be drawn.
+Quiet includes the popular [Heroicons](https://heroicons.com/) icon library out of the box. Use the `name` attribute to specify which icon should be drawn.
 
 ```html {.example}
 <div style="font-size: 1.5rem;">
@@ -33,12 +35,12 @@ Quiet provides with the popular [Heroicons](https://heroicons.com/) icon library
 ```
 
 :::info
-For a list of all available icons, please refer to the [Heroicons website](https://heroicons.com/). Be careful to copy the name of the icon and _not the SVG code!_
+For a list of all available icons, please refer to the [Heroicons website](https://heroicons.com/). Be careful to copy the _name_ of the icon and not the SVG code!
 :::
 
-### Changing the icon family
+### Setting the icon family
 
-Some libraries have more than one family of icons. To specify the icon family, use the `family` attribute. The Heroicons library comes with four families: `outline` (default), `solid`, `mini`, and `micro`.
+Some libraries have more than one family of icons. To specify the family, use the `family` attribute. Heroicons has four to choose from: `outline` (default), `solid`, `mini`, and `micro`.
 
 ```html {.example}
 <quiet-icon family="outline" name="rocket-launch" style="font-size: 24px;"></quiet-icon>
@@ -61,7 +63,7 @@ By default, icons are considered presentational elements. However, you can add t
 
 ### Changing the size
 
-Icons are sized based on the current font size. This allows you to place them into many contexts without having to explicitly size them. To change the size, set the `font-size` property on the badge or an ancestor element.
+Icons are sized relative to the current font size. This allows you to place them into many contexts without having to explicitly size them. To change the size, set the `font-size` property on the badge or an ancestor element.
 
 ```html {.example}
 <quiet-icon name="hand-thumb-up" style="font-size: 1.5em;"></quiet-icon>
@@ -85,40 +87,42 @@ Icons inherit the current text color. To change it, set the `color` property on 
 
 You can register additional icon libraries using the `registerIconLibrary()` function. The example below has detailed comments explaining each step of the registration process, and additional examples can be found later in this section.
 
-```js
-import { registerIconLibrary } from '/dist/quiet.js';
+```html
+<script type="module">
+  import { registerIconLibrary } from '/dist/quiet.js';
 
-// This registers a new icon library called "my-icons"
-registerIconLibrary('my-icons', {
-  //
-  // The resolve function is required. It must be a callback that accepts 
-  // two string arguments: the name of the icon and an optional icon family 
-  // (e.g. solid, outline). These values are passed through from: 
-  // <quiet-icon name="..." family="...">
-  //
-  // The resolver must return a URL of an SVG located at a CORS-enabled 
-  // endpoint. You can also return SVG data URIs.
-  //
-  resolve: (name, family) => {
-    return `https://example.com/path/to/icons/${family}/${name}.svg`
-  },
-  //
-  // The mutate function is optional. It must be a callback that accepts 
-  // one argument: an `SVGElement` you can use to modify the icon before it 
-  // gets written.
-  //
-  // The mutator is handy when you're pulling in SVGs from, for example, a 
-  // CDN and you need to adjust the fill, stroke, and other properties.
-  //
-  mutate: svg =>  {
-    svg.setAttribute('fill', 'currentColor');
-  }
-});
+  // This registers a new icon library called "my-icons"
+  registerIconLibrary('my-icons', {
+    //
+    // The resolve function is required. It must be a callback that accepts 
+    // two string arguments: the name of the icon and an optional icon family 
+    // (e.g. solid, outline). These values are passed through from: 
+    // <quiet-icon name="..." family="...">
+    //
+    // The resolver must return a URL of an SVG located at a CORS-enabled 
+    // endpoint. You can also return SVG data URIs.
+    //
+    resolve: (name, family) => {
+      return `https://example.com/path/to/icons/${family}/${name}.svg`
+    },
+    //
+    // The mutate function is optional. It must be a callback that accepts 
+    // one argument: an `SVGElement` you can use to modify the icon before it 
+    // gets written.
+    //
+    // The mutator is handy when you're pulling in SVGs from, for example, a 
+    // CDN and you need to adjust the fill, stroke, and other properties.
+    //
+    mutate: svg =>  {
+      svg.setAttribute('fill', 'currentColor');
+    }
+  });
+</script>
 ```
 
 It's fine to add icons to the page before registering an icon library. They just won't be fetched or rendered until registration.
 
-You can also unregister icon libraries using the `unregisterIconLibrary()` function. However, this will cause existing icons that reference the library to disappear. Unregistering can be useful when you no longer need to display icons from a specific library.
+You can unregister icon libraries using the `unregisterIconLibrary()` function. However, this will cause existing icons that reference the library to disappear. Unregistering can be useful when you no longer need to display icons from a specific library.
 
 ```js
 import { unregisterIconLibrary } from '/dist/quiet.js';
@@ -126,9 +130,9 @@ import { unregisterIconLibrary } from '/dist/quiet.js';
 unregisterIconLibrary('my-icons');
 ```
 
-### The default icon library
+### Changing the default icon library
 
-To change the default icon library, register a new one called `default`. This will let you skip setting `<quiet-icon library="...">` on every single icon. This is only recommended if you want to completely replace the default Heroicons library.
+To change the default icon library, override it by registering a new one called `default`. This will let you skip setting `<quiet-icon library="...">` on every single icon. This is only recommended if you want to completely replace the default Heroicons library.
 
 ```js
 import { registerIconLibrary } from '/dist/quiet.js';
@@ -138,11 +142,11 @@ registerIconLibrary('default', {
 });
 ```
 
-### The system icon library
+### Changing the system icon library
 
-Quiet also has a system icon library that provides a subset of the default library for internal component use. These icons are served as base64-encoded data URIs, which allows them to load instantly and not require the [library path](http://localhost:4000/docs/#setting-the-library-path) to be set.
+Quiet also has a system icon library that provides a small number of icons for internal use. These icons are served as base64-encoded data URIs, which allows them to load instantly and not require the [library path](/docs/#setting-the-library-path) to be set.
 
-Changing the system library isn't recommended, but it is possible. To change the system icon library, register a new one called `system`.
+Changing the system library isn't recommended, but it is possible. To change the system icon library, override it by registering a new one called `system`.
 
 ```js
 import { registerIconLibrary } from '/dist/quiet.js';
@@ -153,7 +157,7 @@ registerIconLibrary('system', {
 ```
 
 :::danger
-If you choose to change the system library, you must re-implement all of the system icons found in `src/utilities/icon-library.ts`. Otherwise, the icons will be absent from the components that use them.
+If you choose to change the system library, you must reimplement _all_ of the system icons found in `src/utilities/icon-library.ts`. Otherwise, icons will be absent from the components that use them.
 :::
 
 ### Bootstrap icons
@@ -228,6 +232,40 @@ This example demonstrates how to load the [Boxicons](https://boxicons.com/) libr
   <quiet-icon library="boxicons" family="solid" name="bell"></quiet-icon>
   <quiet-icon library="boxicons" family="solid" name="microphone"></quiet-icon>
   <quiet-icon library="boxicons" family="solid" name="chat"></quiet-icon>
+</div>
+```
+
+### Jam icons
+
+This example demonstrates how to load the [Jam icons](https://jam-icons.com/) library using the jsDelivr CDN. Available families include `outline` (default) and `filled`.
+
+```html {.example}
+<script type="module">
+  import { registerIconLibrary } from '/dist/quiet.js';
+
+  registerIconLibrary('jam', {
+    resolve: (name, family) => {
+      const suffix = family === 'filled' ? '-f' : '';
+      return `https://cdn.jsdelivr.net/npm/jam-icons@2.0.0/svg/${name}${suffix}.svg`;
+    },
+    mutate: svg => svg.setAttribute('fill', 'currentColor')
+  });
+</script>
+
+<div style="font-size: 1.5em;>
+  <quiet-icon library="jam" name="home"></quiet-icon>
+  <quiet-icon library="jam" name="bug"></quiet-icon>
+  <quiet-icon library="jam" name="bell"></quiet-icon>
+  <quiet-icon library="jam" name="mic"></quiet-icon>
+  <quiet-icon library="jam" name="message-alt"></quiet-icon>
+
+  <br>
+
+  <quiet-icon library="jam" family="filled" name="home"></quiet-icon>
+  <quiet-icon library="jam" family="filled" name="bug"></quiet-icon>
+  <quiet-icon library="jam" family="filled" name="bell"></quiet-icon>
+  <quiet-icon library="jam" family="filled" name="mic"></quiet-icon>
+  <quiet-icon library="jam" family="filled" name="message-alt"></quiet-icon>
 </div>
 ```
 

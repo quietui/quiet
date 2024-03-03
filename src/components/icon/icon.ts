@@ -43,6 +43,7 @@ export class Icon extends QuietElement {
   connectedCallback() {
     super.connectedCallback();
     this.setAttribute('role', 'img');
+    this.setAttribute('aria-hidden', 'true');
     connectIcon(this);
   }
 

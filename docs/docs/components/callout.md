@@ -6,7 +6,7 @@ layout: component
 
 ```html {.example}
 <quiet-callout variant="primary" with-icon>
-  <quiet-icon slot="icon" name="globe-americas"></quiet-icon>
+  <quiet-icon slot="icon" name="book-open"></quiet-icon>
   Volutpat commodo sed egestas egestas fringilla phasellus. Massa vitae tortor condimentum lacinia quis vel.
 </quiet-callout>
 ```
@@ -41,7 +41,7 @@ Add an icon to a callout using the `icon` slot. Works best with `<quiet-icon>` a
 
 ```html {.example}
 <quiet-callout variant="primary" with-icon>
-  <quiet-icon slot="icon" name="chat-bubble-bottom-center"></quiet-icon>
+  <quiet-icon slot="icon" name="information-circle"></quiet-icon>
   Dui vivamus arcu felis bibendum ut tristique et egestas. Tortor condimentum lacinia quis vel eros.
 </quiet-callout>
 

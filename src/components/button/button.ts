@@ -44,7 +44,7 @@ export class Button extends QuietElement {
   protected internals: ElementInternals;
 
   /** The type of button to render. */
-  @property() variant: 'primary' | 'secondary' | 'destructive' | 'text' | 'image' = 'secondary';
+  @property({ reflect: true }) variant: 'primary' | 'secondary' | 'destructive' | 'text' | 'image' = 'secondary';
 
   /** Disables the button. */
   @property({ type: Boolean }) disabled = false;

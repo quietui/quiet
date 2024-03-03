@@ -571,6 +571,10 @@ html:not(.docs-dark) .only-dark {
 }
 
 /* Callouts */
+quiet-callout {
+  margin-block-end: var(--docs-flow-spacing);
+}
+
 .callout {
   display: flex;
   gap: 1rem;

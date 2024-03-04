@@ -126,12 +126,12 @@ export class Button extends QuietElement {
   }
 
   private handleBlur() {
-    this.states.delete('focused');
+    this.customStates.set('focused', false);
     this.emit('quiet-blur');
   }
 
   private handleFocus() {
-    this.states.add('focused');
+    this.customStates.set('focused', true);
     this.emit('quiet-focus');
   }
 
@@ -150,7 +150,7 @@ export class Button extends QuietElement {
     // Update toggle buttons
     if (this.toggle !== undefined) {
       this.toggle = this.toggle === 'on' ? 'off' : 'on';
-      this.states.toggle('toggled', this.toggle === 'on');
+      this.customStates.set('toggled', this.toggle === 'on');
     }
 
     // Reset the form

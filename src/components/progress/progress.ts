@@ -1,5 +1,5 @@
 import { classMap } from 'lit/directives/class-map.js';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, query } from 'lit/decorators.js';
 import { html } from 'lit';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import hostStyles from '../../styles/host.styles.js';
@@ -16,7 +16,7 @@ import type { CSSResultGroup } from 'lit';
  *
  * @slot - Text to render inside the progress bar.
  *
- * @csspart indicator - The progress bar's value indicator.
+ * @csspart indicator - The progress bar's current value indicator.
  *
  * @cssproperty [--indicator-color=var(--quiet-primary-moderate)] - The color of the progress bar's value indicator.
  * @cssproperty [--track-color=var(--quiet-neutral-silent)] - The color of the progress bar's track.
@@ -24,6 +24,8 @@ import type { CSSResultGroup } from 'lit';
 @customElement('quiet-progress')
 export class Progress extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
+
+  @query('.indicator') private indicator: HTMLDivElement;
 
   /** A custom label for assistive devices. */
   @property() label = '';
@@ -37,7 +39,7 @@ export class Progress extends QuietElement {
   /** The progress bar's current value. */
   @property({ type: Number, reflect: true }) value = 0;
 
-  /** The progress bar's currently value as a percentage. This is a readonly property. */
+  /** The progress bar's current value as a percentage. This is a readonly property. */
   public get percentage() {
     return ((this.value - this.min) / (this.max - this.min)) * 100;
   }
@@ -66,7 +68,7 @@ export class Progress extends QuietElement {
       changedProps.has('value') ||
       changedProps.has('indeterminate')
     ) {
-      this.style.setProperty('--progress', `${this.percentage}%`);
+      this.indicator.style.width = `${this.percentage}%`;
       this.setAttribute('aria-valuemin', String(this.min));
       this.setAttribute('aria-valuemax', String(this.max));
       if (this.indeterminate) {

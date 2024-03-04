@@ -5,9 +5,6 @@ export default css`
     --indicator-color: var(--quiet-primary-moderate);
     --track-color: var(--quiet-neutral-silent);
 
-    /* Private */
-    --progress: 0%;
-
     display: flex;
     align-items: center;
     width: 100%;
@@ -21,7 +18,6 @@ export default css`
   .indicator {
     display: grid;
     place-content: center;
-    width: var(--progress);
     height: 100%;
     border-radius: inherit;
     border-start-end-radius: 0;

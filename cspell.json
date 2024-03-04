@@ -53,6 +53,7 @@
     "Triaging",
     "unregistering",
     "unsupportive",
+    "valuenow",
     "wordmark"
   ],
   // flagWords - list of words to be always considered incorrect

@@ -79,7 +79,9 @@
                 <code>{{ prop.name }}</code>
               </td>
               <td class="table-name">
-                <code>{{ prop.attribute }}</code>
+                {% if prop.attribute %}
+                  <code>{{ prop.attribute }}</code>
+                {% endif %}
               </td>
               <td class="table-description">
                 {{ prop.description | inlineMarkdown | safe }}

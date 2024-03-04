@@ -572,63 +572,35 @@ html:not(.docs-dark) .only-dark {
 
 /* Callouts */
 quiet-callout {
-  margin-block-end: var(--docs-flow-spacing);
-}
+  margin-block-end: var(--quiet-base-content-spacing);
 
-.callout {
-  display: flex;
-  gap: 1rem;
-  border-radius: var(--docs-border-radius);
-  align-items: start;
-  padding: 1rem;
-  margin-block-end: var(--docs-flow-spacing);
-}
+  > :last-child {
+    margin-block-end: 0;
+  }
 
-.callout svg {
-  flex: 0 0 auto;
-  width: 1.6rem;
-  height: 1.6rem;
-  margin: 0;
-}
+  &[variant='primary'] {
+    code {
+      background-color: var(--quiet-primary-subtle);
+    }
+  }
 
-.callout-info {
-  background-color: var(--docs-primary-100);
-}
+  &[variant='secondary'] {
+    code {
+      background-color: var(--quiet-neutral-subtle);
+    }
+  }
 
-.callout-info svg {
-  color: var(--docs-primary-600);
-}
+  &[variant='confirmative'] {
+    code {
+      background-color: var(--quiet-confirmative-subtle);
+    }
+  }
 
-.callout-danger {
-  background-color: var(--docs-danger-100);
-}
-
-.callout-danger svg {
-  color: var(--docs-danger-600);
-}
-
-.callout-content > :first-child {
-  margin-block-start: 0;
-}
-
-.callout-content > :last-child {
-  margin-block-end: 0;
-}
-
-.callout code {
-  white-space: nowrap;
-}
-
-.callout-info code {
-  background-color: color-mix(in oklab, transparent, var(--docs-primary-200) 75%);
-}
-
-.callout-warning code {
-  background-color: color-mix(in oklab, transparent, var(--docs-warning-200) 75%);
-}
-
-.callout-danger code {
-  background-color: color-mix(in oklab, transparent, var(--docs-danger-200) 75%);
+  &[variant='destructive'] {
+    code {
+      background-color: var(--quiet-destructive-subtle);
+    }
+  }
 }
 
 /* Splash */

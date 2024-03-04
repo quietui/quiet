@@ -217,8 +217,7 @@ u {
 /* Code */
 code,
 samp,
-tt,
-pre {
+tt {
   background: var(--quiet-neutral-silent);
   border-radius: var(--quiet-base-border-radius);
   font-family: var(--quiet-base-font-family-code);
@@ -233,11 +232,13 @@ a:has(code, samp, tt, pre) {
 pre {
   position: relative;
   background: var(--quiet-neutral-strident);
+  border-radius: var(--quiet-base-border-radius);
+  font-family: var(--quiet-base-font-family-code);
   color: var(--quiet-neutral-strident-text);
   padding: calc(var(--quiet-base-content-spacing) / 2);
 
   code {
-    font-size: inherit;
+    font-size: 0.875em;
   }
 }
 

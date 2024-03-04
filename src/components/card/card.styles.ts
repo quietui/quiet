@@ -14,7 +14,7 @@ export default css`
   /* Media */
   .media {
     position: relative;
-    margin: calc(-1 * var(--quiet-base-border-width)) !important;
+    margin: calc(-1 * var(--quiet-base-border-width));
 
     ::slotted(*) {
       display: block !important;

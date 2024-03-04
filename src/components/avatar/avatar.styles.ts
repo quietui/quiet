@@ -30,15 +30,13 @@ export default css`
     overflow: hidden;
   }
 
-  slot[name='icon'] {
-    quiet-icon,
-    &::slotted(*) {
-      position: absolute !important;
-      top: calc(50% - 0.75em) !important;
-      left: calc(50% - 0.75em) !important;
-      width: 1.5em !important;
-      height: 1.5em !important;
-    }
+  slot[name='icon'] quiet-icon,
+  slot[name='icon']::slotted(*) {
+    position: absolute !important;
+    top: calc(50% - 0.75em) !important;
+    left: calc(50% - 0.75em) !important;
+    width: 1.5em !important;
+    height: 1.5em !important;
   }
 
   .characters {

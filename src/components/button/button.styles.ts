@@ -173,15 +173,15 @@ export default css`
     slot[name='label'] {
       display: inline;
     }
+  }
 
-    /* Icons */
-    ::slotted(quiet-icon) {
-      font-size: 1.25em !important;
-    }
+  /* Icons */
+  ::slotted(quiet-icon) {
+    font-size: 1.25rem !important;
+  }
 
-    ::slotted(svg) {
-      width: 1.25em;
-      height: 1.25em;
-    }
+  ::slotted(svg) {
+    width: 1.25em;
+    height: 1.25em;
   }
 `;

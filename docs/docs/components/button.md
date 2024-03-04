@@ -1,6 +1,5 @@
 ---
 title: Button
-description: TODO
 layout: component
 ---
 

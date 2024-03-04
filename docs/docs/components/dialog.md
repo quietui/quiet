@@ -1,6 +1,5 @@
 ---
 title: Dialog
-description: TODO
 layout: component
 ---
 

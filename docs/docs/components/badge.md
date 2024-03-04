@@ -1,6 +1,5 @@
 ---
 title: Badge
-description: TODO
 layout: component
 ---
 

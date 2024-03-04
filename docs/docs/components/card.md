@@ -1,6 +1,5 @@
 ---
 title: Card
-description: TODO
 layout: component
 ---
 

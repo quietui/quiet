@@ -1,6 +1,5 @@
 ---
 title: Progress
-description: TODO
 layout: component
 ---
 

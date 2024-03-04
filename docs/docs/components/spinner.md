@@ -1,6 +1,5 @@
 ---
 title: Spinner
-description: TODO
 layout: component
 ---
 

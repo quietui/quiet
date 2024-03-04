@@ -1,6 +1,5 @@
 ---
 title: Icon
-description: TODO
 layout: component
 ---
 

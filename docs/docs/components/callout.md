@@ -1,6 +1,5 @@
 ---
 title: Callout
-description: TODO
 layout: component
 ---
 

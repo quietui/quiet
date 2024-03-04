@@ -1,6 +1,5 @@
 ---
 title: Avatar
-description: TODO
 layout: component
 ---
 

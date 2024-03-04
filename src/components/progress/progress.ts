@@ -1,3 +1,4 @@
+import { clamp } from '../../utilities/math.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property, query } from 'lit/decorators.js';
 import { html } from 'lit';
@@ -68,7 +69,7 @@ export class Progress extends QuietElement {
       changedProps.has('value') ||
       changedProps.has('indeterminate')
     ) {
-      this.indicator.style.width = `${this.percentage}%`;
+      this.indicator.style.width = `${clamp(this.percentage, 0, 100)}%`;
       this.setAttribute('aria-valuemin', String(this.min));
       this.setAttribute('aria-valuemax', String(this.max));
       if (this.indeterminate) {

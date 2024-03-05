@@ -6,8 +6,8 @@
 @import 'search.css';
 
 /* Utility classes */
-html.docs-dark .only-light,
-html:not(.docs-dark) .only-dark {
+html.quiet-dark .only-light,
+html:not(.quiet-dark) .only-dark {
   display: none !important;
 }
 
@@ -572,25 +572,45 @@ quiet-callout {
 
   &[variant='primary'] {
     code {
-      background-color: var(--quiet-primary-subtle);
+      background-color: color-mix(in oklab, var(--quiet-primary-subtle), transparent 25%);
+    }
+
+    kbd {
+      border-color: var(--quiet-primary-subtle);
+      box-shadow: 0 max(1px, 0.0715em) 0 0 var(--quiet-primary-subtle);
     }
   }
 
   &[variant='secondary'] {
     code {
-      background-color: var(--quiet-neutral-subtle);
+      background-color: color-mix(in oklab, var(--quiet-neutral-subtle), transparent 25%);
+    }
+
+    kbd {
+      border-color: var(--quiet-neutral-subtle);
+      box-shadow: 0 max(1px, 0.0715em) 0 0 var(--quiet-neutral-subtle);
     }
   }
 
   &[variant='confirmative'] {
     code {
-      background-color: var(--quiet-confirmative-subtle);
+      background-color: color-mix(in oklab, var(--quiet-confirmative-subtle), transparent 25%);
+    }
+
+    kbd {
+      border-color: var(--quiet-confirmative-subtle);
+      box-shadow: 0 max(1px, 0.0715em) 0 0 var(--quiet-confirmative-subtle);
     }
   }
 
   &[variant='destructive'] {
     code {
-      background-color: var(--quiet-destructive-subtle);
+      background-color: color-mix(in oklab, var(--quiet-destructive-subtle), transparent 25%);
+    }
+
+    kbd {
+      border-color: var(--quiet-destructive-subtle);
+      box-shadow: 0 max(1px, 0.0715em) 0 0 var(--quiet-destructive-subtle);
     }
   }
 }
@@ -600,7 +620,7 @@ quiet-callout {
   background-image: linear-gradient(135deg, var(--docs-background) 25%, var(--docs-primary-200) 125%);
 }
 
-.docs-dark .layout-splash {
+.quiet-dark .layout-splash {
   background-image: linear-gradient(135deg, var(--docs-background) 25%, var(--docs-primary-100) 125%);
 }
 

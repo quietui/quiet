@@ -4,7 +4,7 @@
 function setTheme(name) {
   const isDark = name === 'dark';
   sessionStorage.setItem('theme', isDark ? 'dark' : 'light');
-  document.documentElement.classList.toggle('docs-dark', isDark);
+  document.documentElement.classList.toggle('quiet-dark', isDark);
 }
 
 function getTheme() {

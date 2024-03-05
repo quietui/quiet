@@ -1,4 +1,9 @@
-:root {
+/*
+ * Light styles
+ */
+:root,
+:host,
+.quiet-light {
   color-scheme: light;
 
   /* Base color tokens */
@@ -158,4 +163,12 @@
 
   --quiet-confirmative-border-subtle: var(--quiet-confirmative-200);
   --quiet-confirmative-border-soft: var(--quiet-confirmative-300);
+}
+
+/*
+ * Dark styles
+ */
+:host,
+.quiet-dark {
+  color-scheme: dark;
 }

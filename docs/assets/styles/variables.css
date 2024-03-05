@@ -130,7 +130,7 @@
 }
 
 /* Dark theme adjustments */
-.docs-dark {
+.quiet-dark {
   color-scheme: dark;
 
   --docs-primary-50: #111225;

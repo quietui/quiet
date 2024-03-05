@@ -14,7 +14,7 @@ import type { CSSResultGroup } from 'lit';
  * @since 1.0
  *
  * @slot - Content to show in the callout.
- * @slot icon - An optional icon to show in the callout. For best results, use `<quiet-icon>` or an `<svg>` element.
+ * @slot icon - An optional icon to show in the callout. For best results, use a `<quiet-icon>` or an `<svg>` element.
  *
  * @csspart icon - The container the wraps the icon.
  * @csspart body - The container that wraps the callout's content.

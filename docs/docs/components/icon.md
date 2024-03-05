@@ -251,7 +251,7 @@ This example demonstrates how to load the [Jam icons](https://jam-icons.com/) li
   });
 </script>
 
-<div style="font-size: 1.5em;>
+<div style="font-size: 1.5em;">
   <quiet-icon library="jam" name="home"></quiet-icon>
   <quiet-icon library="jam" name="bug"></quiet-icon>
   <quiet-icon library="jam" name="bell"></quiet-icon>

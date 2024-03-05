@@ -185,9 +185,9 @@ ins {
 }
 
 kbd {
-  background: var(--quiet-neutral-silent);
   font-size: 0.875em;
-  box-shadow: 0 0.0625em 0 0.0625em color-mix(in oklab, var(--quiet-neutral-silent), var(--quiet-neutral-loud) 5%);
+  border: solid 0.0715em var(--quiet-neutral-silent);
+  box-shadow: 0 0.0715em 0 0 var(--quiet-neutral-silent);
   border-radius: calc(var(--quiet-base-border-radius) / 2);
   padding: 0.125em 0.25em;
 }
@@ -219,7 +219,7 @@ code,
 samp,
 tt {
   background: var(--quiet-neutral-silent);
-  border-radius: var(--quiet-base-border-radius);
+  border-radius: calc(var(--quiet-base-border-radius) / 2);
   font-family: var(--quiet-base-font-family-code);
   font-size: 0.875em;
   padding: 0.125em 0.25em;

@@ -16,8 +16,11 @@ export default css`
   }
 
   .indicator {
+    --percentage: 0%;
+
     display: grid;
     place-content: center;
+    width: var(--percentage);
     height: 100%;
     border-radius: inherit;
     border-start-end-radius: 0;
@@ -38,7 +41,7 @@ export default css`
     &.indeterminate {
       width: 50%;
       border-radius: inherit;
-      animation: 2.5s indeterminate infinite ease-in-out;
+      animation: 2.5s indeterminate infinite cubic-bezier(0.45, 0, 0.55, 1);
 
       &:dir(rtl) {
         animation-name: indeterminate-rtl;

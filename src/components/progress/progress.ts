@@ -69,7 +69,7 @@ export class Progress extends QuietElement {
       changedProps.has('value') ||
       changedProps.has('indeterminate')
     ) {
-      this.indicator.style.width = `${clamp(this.percentage, 0, 100)}%`;
+      this.indicator.style.setProperty('--percentage', `${clamp(this.percentage, 0, 100)}%`);
       this.setAttribute('aria-valuemin', String(this.min));
       this.setAttribute('aria-valuemax', String(this.max));
       if (this.indeterminate) {

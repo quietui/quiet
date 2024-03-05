@@ -18,7 +18,8 @@ import type { CSSResultGroup } from 'lit';
  *
  * @slot - Content to place in the dialog's body.
  * @slot header - Content to place in the dialog's header.
- * @slot actions - Slot in one or more text buttons to customize the actions that appear in the dialog's header.
+ * @slot actions - Slot in one or more text buttons to customize the actions that appear in the dialog's header. Only
+ *  available when the header is enabled.
  * @slot footer - Content to place in the dialog's footer.
  *
  * @event quiet-open - Emitted when the dialog is instructed to open but before it is shown. Calling

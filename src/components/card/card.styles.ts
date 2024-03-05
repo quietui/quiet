@@ -48,6 +48,12 @@ export default css`
     }
   }
 
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    margin-inline-start: auto;
+  }
+
   /* Body */
   .body {
     padding: var(--spacing);

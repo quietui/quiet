@@ -9,14 +9,14 @@
   color: var(--docs-body-color);
   padding: 2rem;
   border-bottom: var(--quiet-base-border-style) var(--quiet-base-border-width) var(--quiet-neutral-border-subtle);
-}
 
-.code-example-preview > :first-child {
-  margin-block-start: 0;
-}
+  > :first-child {
+    margin-block-start: 0;
+  }
 
-.code-example-preview > :last-child {
-  margin-block-end: 0;
+  > :last-child {
+    margin-block-end: 0;
+  }
 }
 
 .code-example-source {
@@ -27,7 +27,7 @@
   display: none;
 }
 
-.code-example.open .code-example-toggle svg {
+.code-example.open .code-example-toggle quiet-icon {
   rotate: 180deg;
 }
 
@@ -43,38 +43,38 @@
 .code-example-buttons {
   display: flex;
   align-items: stretch;
-}
 
-.code-example-buttons button {
-  all: unset;
-  flex: 1 0 auto;
-  font-size: 0.875rem;
-  border-left: var(--quiet-base-border-style) var(--quiet-base-border-width) var(--quiet-neutral-border-subtle);
-  text-align: center;
-  padding: 0.5rem;
-  cursor: pointer;
-}
+  button {
+    all: unset;
+    flex: 1 0 auto;
+    font-size: 0.875rem;
+    border-left: var(--quiet-base-border-style) var(--quiet-base-border-width) var(--quiet-neutral-border-subtle);
+    text-align: center;
+    padding: 0.5rem;
+    cursor: pointer;
 
-.code-example-buttons button:first-of-type {
-  border-left: none;
-  border-bottom-left-radius: var(--quiet-base-border-radius);
-}
+    &:first-of-type {
+      border-left: none;
+      border-bottom-left-radius: var(--quiet-base-border-radius);
+    }
 
-.code-example-buttons button:last-of-type {
-  border-bottom-right-radius: var(--quiet-base-border-radius);
-}
+    &:last-of-type {
+      border-bottom-right-radius: var(--quiet-base-border-radius);
+    }
 
-.code-example-buttons button:focus-visible {
-  outline: var(--quiet-base-focus-ring);
-}
+    &:focus-visible {
+      outline: var(--quiet-base-focus-ring);
+    }
+  }
 
-.code-example-buttons .code-example-pen {
-  flex: 0 0 100px;
-  white-space: nowrap;
-}
+  .code-example-pen {
+    flex: 0 0 100px;
+    white-space: nowrap;
+  }
 
-.code-example-buttons svg {
-  width: 1em;
-  height: 1em;
-  vertical-align: -2px;
+  quiet-icon {
+    width: 1em;
+    height: 1em;
+    vertical-align: -2px;
+  }
 }

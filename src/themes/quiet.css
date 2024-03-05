@@ -10,12 +10,6 @@
   --quiet-color: var(--quiet-neutral-strident);
   --quiet-color-muted: var(--quiet-neutral-700);
 
-  /*
-
-  TODO - remove base from some (all?) tokens
-
-  */
-
   /* Other base tokens */
   --quiet-border-style: solid;
   --quiet-border-width: 1px;

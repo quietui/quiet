@@ -385,17 +385,12 @@ html:not(.docs-dark) .only-dark {
 
 #outline-expandable {
   display: none;
-  margin-block-start: 1.5rem;
 }
 
 #outline-expandable ul {
   columns: 2;
   column-gap: 2rem;
   padding-inline: 1rem;
-}
-
-#outline-expandable li {
-  padding: 0.25rem 0;
 }
 
 #outline [data-level='3'] {
@@ -547,6 +542,7 @@ html:not(.docs-dark) .only-dark {
 }
 
 .docs-aside li {
+  color: var(--docs-body-color-muted);
   list-style: none;
 }
 
@@ -556,7 +552,7 @@ html:not(.docs-dark) .only-dark {
 
 .docs-aside a {
   font-weight: var(--quiet-base-font-weight-normal);
-  color: var(--docs-body-color-muted);
+  color: inherit;
   text-decoration: none;
   transition: 150ms color ease;
 }

@@ -294,7 +294,7 @@ To move focus to a specific form control when the dialog opens, use the `autofoc
   </h3>
 
   <!-- TODO - replace with <quiet-input> and make sure autofocus works correctly -->
-  <input autofocus placeholder="Replace me soon" style="display: block; width: 100%; background: white; border: solid 1px lightgray; height: 50px; border-radius: var(--quiet-base-border-radius); padding-inline: 1rem;">
+  <input autofocus placeholder="Replace me soon" style="display: block; width: 100%; background: white; border: solid 1px lightgray; height: 50px; border-radius: var(--quiet-border-radius); padding-inline: 1rem;">
 
   <quiet-button slot="footer" data-dialog="dismiss" variant="primary">Close</quiet-button>
 </quiet-dialog>

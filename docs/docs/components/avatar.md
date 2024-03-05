@@ -90,7 +90,7 @@ You can group avatars with some custom CSS.
 
 <style>
   .avatar-group quiet-avatar {
-    border: solid 2px var(--quiet-base-background-color);
+    border: solid 2px var(--quiet-background-color);
 
     &:not(:first-of-type) {
       margin-inline-start: -1.5rem;

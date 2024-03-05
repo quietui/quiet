@@ -2,13 +2,13 @@
   color-scheme: light;
 
   /* Base color tokens */
-  --quiet-base-primary-color: #989cff;
-  --quiet-base-neutral-color: #a4a6b0;
-  --quiet-base-destructive-color: #ff4c4a;
-  --quiet-base-confirmative-color: #7db664;
-  --quiet-base-background-color: white;
-  --quiet-base-color: var(--quiet-neutral-strident);
-  --quiet-base-color-muted: var(--quiet-neutral-700);
+  --quiet-primary-color: #989cff;
+  --quiet-neutral-color: #a4a6b0;
+  --quiet-destructive-color: #ff4c4a;
+  --quiet-confirmative-color: #7db664;
+  --quiet-background-color: white;
+  --quiet-color: var(--quiet-neutral-strident);
+  --quiet-color-muted: var(--quiet-neutral-700);
 
   /*
 
@@ -17,22 +17,22 @@
   */
 
   /* Other base tokens */
-  --quiet-base-border-style: solid;
-  --quiet-base-border-width: 1px;
-  --quiet-base-border-radius: 6px;
-  --quiet-base-content-spacing: 2rem;
-  --quiet-base-font-family: system-ui, sans-serif;
-  --quiet-base-font-family-code: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
-  --quiet-base-font-size: 16px;
-  --quiet-base-font-weight-normal: 400;
-  --quiet-base-font-weight-semibold: 500;
-  --quiet-base-font-weight-bold: 600;
-  --quiet-base-line-height: 1.6;
-  --quiet-base-focus-width: 3px;
-  --quiet-base-focus-offset: 1px;
-  --quiet-base-focus-color: var(--quiet-primary-moderate);
-  --quiet-base-focus-ring: var(--quiet-base-border-style) var(--quiet-base-focus-width) var(--quiet-base-focus-color);
-  --quiet-base-transition-duration: 200ms;
+  --quiet-border-style: solid;
+  --quiet-border-width: 1px;
+  --quiet-border-radius: 6px;
+  --quiet-content-spacing: 2rem;
+  --quiet-font-family: system-ui, sans-serif;
+  --quiet-font-family-code: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+  --quiet-font-size: 16px;
+  --quiet-font-weight-normal: 400;
+  --quiet-font-weight-semibold: 500;
+  --quiet-font-weight-bold: 600;
+  --quiet-line-height: 1.6;
+  --quiet-focus-width: 3px;
+  --quiet-focus-offset: 1px;
+  --quiet-focus-color: var(--quiet-primary-moderate);
+  --quiet-focus-ring: var(--quiet-border-style) var(--quiet-focus-width) var(--quiet-focus-color);
+  --quiet-transition-duration: 200ms;
 
   --quiet-overlay-color: rgb(0 0 0 / 33%); /* can't be a custom property, Safari doesn't inherit on dialog ::backdrop */
   --quiet-overlay-backdrop-filter: blur(6px);
@@ -48,17 +48,17 @@
   /*
     Primary colors (calculated)
   */
-  --quiet-primary-50: color-mix(in oklab, var(--quiet-base-primary-color), white 95%);
-  --quiet-primary-100: color-mix(in oklab, var(--quiet-base-primary-color), white 87%);
-  --quiet-primary-200: color-mix(in oklab, var(--quiet-base-primary-color), white 70%);
-  --quiet-primary-300: color-mix(in oklab, var(--quiet-base-primary-color), white 47%);
-  --quiet-primary-400: color-mix(in oklab, var(--quiet-base-primary-color), white 23%);
-  --quiet-primary-500: var(--quiet-base-primary-color);
-  --quiet-primary-600: color-mix(in oklab, var(--quiet-base-primary-color), black 15.5%);
-  --quiet-primary-700: color-mix(in oklab, var(--quiet-base-primary-color), black 28.25%);
-  --quiet-primary-800: color-mix(in oklab, var(--quiet-base-primary-color), black 43.5%);
-  --quiet-primary-900: color-mix(in oklab, var(--quiet-base-primary-color), black 58.5%);
-  --quiet-primary-950: color-mix(in oklab, var(--quiet-base-primary-color), black 73.75%);
+  --quiet-primary-50: color-mix(in oklab, var(--quiet-primary-color), white 95%);
+  --quiet-primary-100: color-mix(in oklab, var(--quiet-primary-color), white 87%);
+  --quiet-primary-200: color-mix(in oklab, var(--quiet-primary-color), white 70%);
+  --quiet-primary-300: color-mix(in oklab, var(--quiet-primary-color), white 47%);
+  --quiet-primary-400: color-mix(in oklab, var(--quiet-primary-color), white 23%);
+  --quiet-primary-500: var(--quiet-primary-color);
+  --quiet-primary-600: color-mix(in oklab, var(--quiet-primary-color), black 15.5%);
+  --quiet-primary-700: color-mix(in oklab, var(--quiet-primary-color), black 28.25%);
+  --quiet-primary-800: color-mix(in oklab, var(--quiet-primary-color), black 43.5%);
+  --quiet-primary-900: color-mix(in oklab, var(--quiet-primary-color), black 58.5%);
+  --quiet-primary-950: color-mix(in oklab, var(--quiet-primary-color), black 73.75%);
 
   --quiet-primary-silent: var(--quiet-primary-100);
   --quiet-primary-subtle: var(--quiet-primary-200);
@@ -78,17 +78,17 @@
   /*
     Neutral colors (calculated)
   */
-  --quiet-neutral-50: color-mix(in oklab, var(--quiet-base-neutral-color), white 95%);
-  --quiet-neutral-100: color-mix(in oklab, var(--quiet-base-neutral-color), white 87%);
-  --quiet-neutral-200: color-mix(in oklab, var(--quiet-base-neutral-color), white 70%);
-  --quiet-neutral-300: color-mix(in oklab, var(--quiet-base-neutral-color), white 47%);
-  --quiet-neutral-400: color-mix(in oklab, var(--quiet-base-neutral-color), white 23%);
-  --quiet-neutral-500: var(--quiet-base-neutral-color);
-  --quiet-neutral-600: color-mix(in oklab, var(--quiet-base-neutral-color), black 15.5%);
-  --quiet-neutral-700: color-mix(in oklab, var(--quiet-base-neutral-color), black 28.25%);
-  --quiet-neutral-800: color-mix(in oklab, var(--quiet-base-neutral-color), black 43.5%);
-  --quiet-neutral-900: color-mix(in oklab, var(--quiet-base-neutral-color), black 58.5%);
-  --quiet-neutral-950: color-mix(in oklab, var(--quiet-base-neutral-color), black 73.75%);
+  --quiet-neutral-50: color-mix(in oklab, var(--quiet-neutral-color), white 95%);
+  --quiet-neutral-100: color-mix(in oklab, var(--quiet-neutral-color), white 87%);
+  --quiet-neutral-200: color-mix(in oklab, var(--quiet-neutral-color), white 70%);
+  --quiet-neutral-300: color-mix(in oklab, var(--quiet-neutral-color), white 47%);
+  --quiet-neutral-400: color-mix(in oklab, var(--quiet-neutral-color), white 23%);
+  --quiet-neutral-500: var(--quiet-neutral-color);
+  --quiet-neutral-600: color-mix(in oklab, var(--quiet-neutral-color), black 15.5%);
+  --quiet-neutral-700: color-mix(in oklab, var(--quiet-neutral-color), black 28.25%);
+  --quiet-neutral-800: color-mix(in oklab, var(--quiet-neutral-color), black 43.5%);
+  --quiet-neutral-900: color-mix(in oklab, var(--quiet-neutral-color), black 58.5%);
+  --quiet-neutral-950: color-mix(in oklab, var(--quiet-neutral-color), black 73.75%);
 
   --quiet-neutral-silent: var(--quiet-neutral-100);
   --quiet-neutral-subtle: var(--quiet-neutral-200);
@@ -108,17 +108,17 @@
   /*
     Destructive colors (calculated)
   */
-  --quiet-destructive-50: color-mix(in oklab, var(--quiet-base-destructive-color), white 95%);
-  --quiet-destructive-100: color-mix(in oklab, var(--quiet-base-destructive-color), white 87%);
-  --quiet-destructive-200: color-mix(in oklab, var(--quiet-base-destructive-color), white 70%);
-  --quiet-destructive-300: color-mix(in oklab, var(--quiet-base-destructive-color), white 47%);
-  --quiet-destructive-400: color-mix(in oklab, var(--quiet-base-destructive-color), white 23%);
-  --quiet-destructive-500: var(--quiet-base-destructive-color);
-  --quiet-destructive-600: color-mix(in oklab, var(--quiet-base-destructive-color), black 15.5%);
-  --quiet-destructive-700: color-mix(in oklab, var(--quiet-base-destructive-color), black 28.25%);
-  --quiet-destructive-800: color-mix(in oklab, var(--quiet-base-destructive-color), black 43.5%);
-  --quiet-destructive-900: color-mix(in oklab, var(--quiet-base-destructive-color), black 58.5%);
-  --quiet-destructive-950: color-mix(in oklab, var(--quiet-base-destructive-color), black 73.75%);
+  --quiet-destructive-50: color-mix(in oklab, var(--quiet-destructive-color), white 95%);
+  --quiet-destructive-100: color-mix(in oklab, var(--quiet-destructive-color), white 87%);
+  --quiet-destructive-200: color-mix(in oklab, var(--quiet-destructive-color), white 70%);
+  --quiet-destructive-300: color-mix(in oklab, var(--quiet-destructive-color), white 47%);
+  --quiet-destructive-400: color-mix(in oklab, var(--quiet-destructive-color), white 23%);
+  --quiet-destructive-500: var(--quiet-destructive-color);
+  --quiet-destructive-600: color-mix(in oklab, var(--quiet-destructive-color), black 15.5%);
+  --quiet-destructive-700: color-mix(in oklab, var(--quiet-destructive-color), black 28.25%);
+  --quiet-destructive-800: color-mix(in oklab, var(--quiet-destructive-color), black 43.5%);
+  --quiet-destructive-900: color-mix(in oklab, var(--quiet-destructive-color), black 58.5%);
+  --quiet-destructive-950: color-mix(in oklab, var(--quiet-destructive-color), black 73.75%);
 
   --quiet-destructive-silent: var(--quiet-destructive-100);
   --quiet-destructive-subtle: var(--quiet-destructive-200);
@@ -138,17 +138,17 @@
   /*
     Confirmative colors (calculated)
   */
-  --quiet-confirmative-50: color-mix(in oklab, var(--quiet-base-confirmative-color), white 95%);
-  --quiet-confirmative-100: color-mix(in oklab, var(--quiet-base-confirmative-color), white 87%);
-  --quiet-confirmative-200: color-mix(in oklab, var(--quiet-base-confirmative-color), white 70%);
-  --quiet-confirmative-300: color-mix(in oklab, var(--quiet-base-confirmative-color), white 47%);
-  --quiet-confirmative-400: color-mix(in oklab, var(--quiet-base-confirmative-color), white 23%);
-  --quiet-confirmative-500: var(--quiet-base-confirmative-color);
-  --quiet-confirmative-600: color-mix(in oklab, var(--quiet-base-confirmative-color), black 15.5%);
-  --quiet-confirmative-700: color-mix(in oklab, var(--quiet-base-confirmative-color), black 28.25%);
-  --quiet-confirmative-800: color-mix(in oklab, var(--quiet-base-confirmative-color), black 43.5%);
-  --quiet-confirmative-900: color-mix(in oklab, var(--quiet-base-confirmative-color), black 58.5%);
-  --quiet-confirmative-950: color-mix(in oklab, var(--quiet-base-confirmative-color), black 73.75%);
+  --quiet-confirmative-50: color-mix(in oklab, var(--quiet-confirmative-color), white 95%);
+  --quiet-confirmative-100: color-mix(in oklab, var(--quiet-confirmative-color), white 87%);
+  --quiet-confirmative-200: color-mix(in oklab, var(--quiet-confirmative-color), white 70%);
+  --quiet-confirmative-300: color-mix(in oklab, var(--quiet-confirmative-color), white 47%);
+  --quiet-confirmative-400: color-mix(in oklab, var(--quiet-confirmative-color), white 23%);
+  --quiet-confirmative-500: var(--quiet-confirmative-color);
+  --quiet-confirmative-600: color-mix(in oklab, var(--quiet-confirmative-color), black 15.5%);
+  --quiet-confirmative-700: color-mix(in oklab, var(--quiet-confirmative-color), black 28.25%);
+  --quiet-confirmative-800: color-mix(in oklab, var(--quiet-confirmative-color), black 43.5%);
+  --quiet-confirmative-900: color-mix(in oklab, var(--quiet-confirmative-color), black 58.5%);
+  --quiet-confirmative-950: color-mix(in oklab, var(--quiet-confirmative-color), black 73.75%);
 
   --quiet-confirmative-silent: var(--quiet-confirmative-100);
   --quiet-confirmative-subtle: var(--quiet-confirmative-200);

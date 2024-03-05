@@ -23,8 +23,8 @@ export default css`
     width: var(--width);
     height: var(--height);
     border: none;
-    border-radius: var(--quiet-base-border-radius);
-    background: var(--quiet-base-background-color);
+    border-radius: var(--quiet-border-radius);
+    background: var(--quiet-background-color);
     box-shadow: var(--quiet-shadow-loud);
     padding: 0;
 
@@ -39,7 +39,7 @@ export default css`
     }
 
     &:focus-visible {
-      outline: var(--quiet-base-focus-ring);
+      outline: var(--quiet-focus-ring);
     }
 
     /* Shake animation */
@@ -55,8 +55,8 @@ export default css`
     /* Center placement */
     &[data-placement='center'] {
       --pulse-size: 1.02;
-      max-width: calc(100vw - var(--quiet-base-content-spacing));
-      max-height: calc(100vh - var(--quiet-base-content-spacing));
+      max-width: calc(100vw - var(--quiet-content-spacing));
+      max-height: calc(100vh - var(--quiet-content-spacing));
 
       &.show {
         animation: show-from-center var(--show-duration) ease;
@@ -216,7 +216,7 @@ export default css`
     top: 0;
     display: flex;
     align-items: center;
-    background: var(--quiet-base-background-color);
+    background: var(--quiet-background-color);
     gap: calc(var(--spacing) / 4);
     padding-inline-start: var(--spacing);
     padding-inline-end: calc(var(--spacing) / 2); /* less spacing to better align buttons as actions */
@@ -244,7 +244,7 @@ export default css`
     align-items: center;
     gap: calc(var(--spacing) / 4);
     justify-content: end;
-    background: var(--quiet-base-background-color);
+    background: var(--quiet-background-color);
     padding-inline: var(--spacing);
     padding-block-start: calc(var(--spacing) / 2);
     padding-block-end: var(--spacing);

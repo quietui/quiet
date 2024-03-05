@@ -14,14 +14,19 @@ html {
   margin: 0;
 }
 
+/* Hide custom elements until they're upgraded to prevent FOUCE */
+:not(:defined) {
+  visibility: hidden;
+}
+
 html,
 body {
-  font-family: var(--quiet-base-font-family);
-  font-size: var(--quiet-base-font-size);
-  font-weight: var(--quiet-base-font-weight-normal);
-  color: var(--quiet-base-color);
-  background-color: var(--quiet-base-background-color);
-  line-height: var(--quiet-base-line-height);
+  font-family: var(--quiet-font-family);
+  font-size: var(--quiet-font-size);
+  font-weight: var(--quiet-font-weight-normal);
+  color: var(--quiet-color);
+  background-color: var(--quiet-background-color);
+  line-height: var(--quiet-line-height);
   text-rendering: optimizeLegibility;
   padding: 0;
   margin: 0;
@@ -31,13 +36,13 @@ body {
 
 ::selection {
   background-color: var(--quiet-selection-background-color);
-  color: var(--quiet-base-color);
+  color: var(--quiet-color);
   text-shadow: none !important;
 }
 
 :focus-visible {
-  outline: var(--quiet-base-focus-ring);
-  outline-offset: var(--quiet-base-focus-ring-offset);
+  outline: var(--quiet-focus-ring);
+  outline-offset: var(--quiet-focus-ring-offset);
 }
 
 /* Content spacing */
@@ -56,7 +61,7 @@ pre,
 table,
 ul,
 video {
-  margin-block-end: calc(var(--quiet-base-content-spacing));
+  margin-block-end: calc(var(--quiet-content-spacing));
 
   & > :last-child {
     margin-block-end: 0;
@@ -70,14 +75,14 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: var(--quiet-base-font-weight-bold);
+  font-weight: var(--quiet-font-weight-bold);
   line-height: 1.3;
   overflow-wrap: break-word;
   text-wrap: balance;
-  margin-block-end: calc(var(--quiet-base-content-spacing) / 4);
+  margin-block-end: calc(var(--quiet-content-spacing) / 4);
 
   &:not(:first-child) {
-    margin-block-start: var(--quiet-base-content-spacing);
+    margin-block-start: var(--quiet-content-spacing);
   }
 }
 
@@ -109,7 +114,7 @@ p {
   overflow-wrap: break-word;
 
   &:has(+ p) {
-    margin-block-end: calc(var(--quiet-base-content-spacing) / 2);
+    margin-block-end: calc(var(--quiet-content-spacing) / 2);
   }
 }
 
@@ -118,16 +123,15 @@ blockquote {
   position: relative;
   color: var(--docs-body-color-muted);
   font-size: 1.25em;
-  border-left: var(--quiet-base-border-style) calc(var(--quiet-base-border-width) * 4)
-    var(--quiet-neutral-border-subtle);
-  padding: calc(var(--quiet-base-content-spacing) / 1.5) var(--quiet-base-content-spacing);
+  border-left: var(--quiet-border-style) calc(var(--quiet-border-width) * 4) var(--quiet-neutral-border-subtle);
+  padding: calc(var(--quiet-content-spacing) / 1.5) var(--quiet-content-spacing);
 }
 
 /* Dividers */
 hr {
   border: none;
-  border-top: var(--quiet-base-border-style) var(--quiet-base-border-width) var(--quiet-neutral-border-subtle);
-  margin: calc(var(--quiet-base-content-spacing) * 2) 0;
+  border-top: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-border-subtle);
+  margin: calc(var(--quiet-content-spacing) * 2) 0;
 }
 
 /* Media */
@@ -137,7 +141,7 @@ picture,
 video,
 canvas {
   display: block;
-  border-radius: var(--quiet-base-border-radius);
+  border-radius: var(--quiet-border-radius);
   width: 100%;
   max-width: 100%;
 }
@@ -149,7 +153,7 @@ iframe {
 
 /* Inline text elements */
 a {
-  font-weight: var(--quiet-base-font-weight-semibold);
+  font-weight: var(--quiet-font-weight-semibold);
   color: var(--quiet-primary-moderate);
   text-decoration-thickness: 0.09375em;
   text-underline-offset: 0.125em;
@@ -188,7 +192,7 @@ kbd {
   font-size: 0.875em;
   border: solid 0.0715em var(--quiet-neutral-silent);
   box-shadow: 0 0.0715em 0 0 var(--quiet-neutral-silent);
-  border-radius: calc(var(--quiet-base-border-radius) / 2);
+  border-radius: calc(var(--quiet-border-radius) / 2);
   padding: 0.125em 0.25em;
 }
 
@@ -196,17 +200,17 @@ mark {
   background-color: var(--quiet-primary-silent);
   border-radius: 0;
   color: inherit;
-  border-radius: calc(var(--quiet-base-border-radius) / 2);
+  border-radius: calc(var(--quiet-border-radius) / 2);
   padding: 0.125em 0.25em;
 }
 
 small {
   font-size: 0.875em;
-  color: var(--quiet-base-color-muted);
+  color: var(--quiet-color-muted);
 }
 
 strong {
-  font-weight: var(--quiet-base-font-weight-bold);
+  font-weight: var(--quiet-font-weight-bold);
 }
 
 u {
@@ -219,8 +223,8 @@ code,
 samp,
 tt {
   background: var(--quiet-neutral-silent);
-  border-radius: calc(var(--quiet-base-border-radius) / 2);
-  font-family: var(--quiet-base-font-family-code);
+  border-radius: calc(var(--quiet-border-radius) / 2);
+  font-family: var(--quiet-font-family-code);
   font-size: 0.875em;
   padding: 0.125em 0.25em;
 }
@@ -232,10 +236,10 @@ a:has(code, samp, tt, pre) {
 pre {
   position: relative;
   background: var(--quiet-neutral-strident);
-  border-radius: var(--quiet-base-border-radius);
-  font-family: var(--quiet-base-font-family-code);
+  border-radius: var(--quiet-border-radius);
+  font-family: var(--quiet-font-family-code);
   color: var(--quiet-neutral-strident-text);
-  padding: calc(var(--quiet-base-content-spacing) / 2);
+  padding: calc(var(--quiet-content-spacing) / 2);
 
   code {
     font-size: 0.875em;
@@ -270,36 +274,36 @@ li p:last-child {
 /* Figures */
 figure {
   box-shadow: var(--quiet-shadow-silent);
-  border: var(--quiet-base-border-style) var(--quiet-base-border-width) var(--quiet-neutral-border-subtle);
-  border-radius: var(--quiet-base-border-radius);
-  padding: calc(var(--quiet-base-content-spacing) / 2);
+  border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-border-subtle);
+  border-radius: var(--quiet-border-radius);
+  padding: calc(var(--quiet-content-spacing) / 2);
 }
 
 figcaption {
-  padding-block-start: calc(var(--quiet-base-content-spacing) / 2);
+  padding-block-start: calc(var(--quiet-content-spacing) / 2);
 }
 
 /* Definition lists */
 dt {
-  font-weight: var(--quiet-base-font-weight-semibold);
+  font-weight: var(--quiet-font-weight-semibold);
 }
 
 dd {
-  margin-inline-start: calc(var(--quiet-base-content-spacing) / 2);
+  margin-inline-start: calc(var(--quiet-content-spacing) / 2);
 
   &:not(:last-of-type) {
-    margin-block-end: calc(var(--quiet-base-content-spacing) / 2);
+    margin-block-end: calc(var(--quiet-content-spacing) / 2);
   }
 }
 
 /* Details */
 details {
   background-color: var(--quiet-neutral-silent);
-  border-radius: var(--quiet-base-border-radius);
-  padding-inline: calc(var(--quiet-base-content-spacing) / 2);
+  border-radius: var(--quiet-border-radius);
+  padding-inline: calc(var(--quiet-content-spacing) / 2);
 
   &[open] {
-    padding-block-end: calc(var(--quiet-base-content-spacing) / 2);
+    padding-block-end: calc(var(--quiet-content-spacing) / 2);
   }
 
   &[open] > summary::before {
@@ -307,7 +311,7 @@ details {
   }
 
   summary {
-    font-weight: var(--quiet-base-font-weight-semibold);
+    font-weight: var(--quiet-font-weight-semibold);
   }
 
   > :first-child {
@@ -319,7 +323,7 @@ details {
   }
 
   + details {
-    margin-block-start: calc(var(--quiet-base-content-spacing) / -1.25);
+    margin-block-start: calc(var(--quiet-content-spacing) / -1.25);
   }
 }
 
@@ -328,7 +332,7 @@ summary {
   display: block;
   cursor: pointer;
   text-indent: 1.4em;
-  padding-block: calc(var(--quiet-base-content-spacing) / 2);
+  padding-block: calc(var(--quiet-content-spacing) / 2);
   margin: 0;
   user-select: none;
 
@@ -367,18 +371,18 @@ thead th,
 thead td,
 tr:not(:last-of-type) th,
 tr:not(:last-of-type) td {
-  border-bottom: var(--quiet-base-border-style) var(--quiet-base-border-width) var(--quiet-neutral-border-subtle);
+  border-bottom: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-border-subtle);
 }
 
 tfoot th,
 tfoot td {
-  border-top: var(--quiet-base-border-style) var(--quiet-base-border-width) var(--quiet-neutral-border-subtle);
+  border-top: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-border-subtle);
 }
 
 th,
 td[scope],
 tfoot td {
-  font-weight: var(--quiet-base-font-weight-semibold);
+  font-weight: var(--quiet-font-weight-semibold);
 }
 
 th,

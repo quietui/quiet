@@ -79,7 +79,7 @@ TODO:
 
     .color {
       height: 40px;
-      border-radius: calc(var(--quiet-base-border-radius) / 2);
+      border-radius: calc(var(--quiet-border-radius) / 2);
     }
   }
 </style>

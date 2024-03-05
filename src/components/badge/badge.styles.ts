@@ -7,7 +7,7 @@ export default css`
 
     display: inline-flex;
     font-size: 0.75em;
-    font-weight: var(--quiet-base-font-weight-semibold);
+    font-weight: var(--quiet-font-weight-semibold);
     border-radius: 9999px;
     padding: 0.1em 0.7em;
   }
@@ -20,8 +20,8 @@ export default css`
 
   /* Secondary */
   :host([variant='secondary']) {
-    background: var(--quiet-base-background-color);
-    border: var(--quiet-base-border-style) var(--quiet-base-border-width) var(--quiet-neutral-border-subtle);
+    background: var(--quiet-background-color);
+    border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-border-subtle);
     color: var(--quiet-neutral-subtle-text);
   }
 

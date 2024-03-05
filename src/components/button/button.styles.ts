@@ -17,12 +17,12 @@ export default css`
     height: 3em;
     font: inherit;
     font-size: 0.95em;
-    font-weight: var(--quiet-base-font-weight-semibold);
+    font-weight: var(--quiet-font-weight-semibold);
     text-decoration: none;
     vertical-align: middle;
     background: none;
     border: none;
-    border-radius: var(--quiet-base-border-radius);
+    border-radius: var(--quiet-border-radius);
     padding-inline: 1.25em;
     cursor: pointer;
     user-select: none;
@@ -43,8 +43,8 @@ export default css`
     }
 
     &:focus-visible {
-      outline: var(--quiet-base-focus-ring);
-      outline-offset: var(--quiet-base-focus-offset);
+      outline: var(--quiet-focus-ring);
+      outline-offset: var(--quiet-focus-offset);
     }
 
     /* Primary */
@@ -67,12 +67,12 @@ export default css`
     /* Secondary */
     &.secondary {
       background: transparent;
-      border: var(--quiet-base-border-style) var(--quiet-base-border-width) var(--quiet-neutral-border-subtle);
+      border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-border-subtle);
       color: var(--quiet-neutral-subtle-text);
 
       @media (hover: hover) {
         &:hover:not(.disabled, [aria-pressed='true']) {
-          background-color: color-mix(in oklab, transparent, var(--quiet-base-color) 3%);
+          background-color: color-mix(in oklab, transparent, var(--quiet-color) 3%);
         }
       }
 
@@ -107,7 +107,7 @@ export default css`
 
       @media (hover: hover) {
         &:hover {
-          background-color: color-mix(in oklab, transparent, var(--quiet-base-color) 3%);
+          background-color: color-mix(in oklab, transparent, var(--quiet-color) 3%);
           color: var(--quiet-neutral-silent-text);
         }
       }
@@ -132,12 +132,12 @@ export default css`
     /* image buttons */
     &.image {
       height: auto;
-      border-radius: calc(var(--quiet-base-border-radius) * 2);
+      border-radius: calc(var(--quiet-border-radius) * 2);
       padding: 0;
 
       ::slotted(*) {
         width: auto !important;
-        border-radius: calc(var(--quiet-base-border-radius) * 2) !important;
+        border-radius: calc(var(--quiet-border-radius) * 2) !important;
       }
     }
 

@@ -27,7 +27,7 @@ export default css`
     border-end-end-radius: 0;
     background-color: var(--indicator-color);
     color: var(--quiet-primary-moderate-text);
-    font-weight: var(--quiet-base-font-weight-semibold);
+    font-weight: var(--quiet-font-weight-semibold);
     transition: 0.3s width ease;
 
     slot {

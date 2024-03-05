@@ -6,22 +6,22 @@ export default css`
 
     display: flex;
     flex-direction: column;
-    border: var(--quiet-base-border-style) var(--quiet-base-border-width) var(--quiet-neutral-border-subtle);
-    border-radius: var(--quiet-base-border-radius);
+    border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-border-subtle);
+    border-radius: var(--quiet-border-radius);
     box-shadow: var(--quiet-shadow-silent);
   }
 
   /* Media */
   .media {
     position: relative;
-    margin: calc(-1 * var(--quiet-base-border-width));
+    margin: calc(-1 * var(--quiet-border-width));
 
     ::slotted(*) {
       display: block !important;
       width: 100% !important;
       object-fit: cover !important;
-      border-top-left-radius: var(--quiet-base-border-radius) !important;
-      border-top-right-radius: var(--quiet-base-border-radius) !important;
+      border-top-left-radius: var(--quiet-border-radius) !important;
+      border-top-right-radius: var(--quiet-border-radius) !important;
       border-bottom-left-radius: 0 !important;
       border-bottom-right-radius: 0 !important;
       margin: 0 !important;
@@ -33,7 +33,7 @@ export default css`
     display: flex;
     align-items: center;
     gap: calc(var(--spacing) / 4);
-    border-bottom: var(--quiet-base-border-style) var(--quiet-base-border-width) var(--quiet-neutral-border-subtle);
+    border-bottom: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-border-subtle);
     padding-inline-start: var(--spacing);
     padding-inline-end: calc(var(--spacing) / 2); /* less spacing to better align buttons as actions */
     padding-block: calc(var(--spacing) * 0.875);
@@ -64,7 +64,7 @@ export default css`
     display: flex;
     align-items: center;
     gap: calc(var(--spacing) / 4);
-    border-top: var(--quiet-base-border-style) var(--quiet-base-border-width) var(--quiet-neutral-border-subtle);
+    border-top: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-border-subtle);
     padding: var(--spacing);
   }
 `;

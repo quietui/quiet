@@ -12,7 +12,7 @@ export default css`
     height: var(--size);
     aspect-ratio: 1 / 1;
     font-size: calc(var(--size) / 3);
-    font-weight: var(--quiet-base-font-weight-semibold);
+    font-weight: var(--quiet-font-weight-semibold);
     vertical-align: middle;
     border-radius: 50%;
     background-color: var(--quiet-neutral-silent);

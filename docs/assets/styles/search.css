@@ -2,7 +2,7 @@
   --width: 35rem;
 
   &::part(dialog) {
-    border-radius: calc(var(--quiet-base-border-radius) * 2);
+    border-radius: calc(var(--quiet-border-radius) * 2);
     padding: 0;
     margin: 10rem auto;
     overflow: hidden;
@@ -40,12 +40,12 @@ header {
   flex: 0 0 auto;
   align-items: middle;
   /* Fixes an iOS Safari 16.4 bug that draws the parent element's border radius incorrectly when showing/hiding results */
-  border-radius: calc(var(--quiet-base-border-radius) * 2);
+  border-radius: calc(var(--quiet-border-radius) * 2);
 }
 
 #site-search.has-results header {
-  border-start-start-radius: calc(var(--quiet-base-border-radius) * 2);
-  border-start-end-radius: calc(var(--quiet-base-border-radius) * 2);
+  border-start-start-radius: calc(var(--quiet-border-radius) * 2);
+  border-start-end-radius: calc(var(--quiet-border-radius) * 2);
   border-end-start-radius: 0;
   border-end-end-radius: 0;
 }
@@ -85,7 +85,7 @@ header {
   margin: 0;
 
   &::placeholder {
-    color: var(--quiet-base-color-muted);
+    color: var(--quiet-color-muted);
   }
 }
 
@@ -140,13 +140,13 @@ header {
   }
 
   h3 {
-    font-weight: var(--quiet-base-font-weight-semibold);
+    font-weight: var(--quiet-font-weight-semibold);
     margin: 0;
   }
 
   small {
     display: block;
-    color: var(--quiet-base-color-muted);
+    color: var(--quiet-color-muted);
   }
 }
 
@@ -184,18 +184,18 @@ header {
 
   .site-search-result-title {
     font-size: 1.25rem;
-    font-weight: var(--quiet-base-font-weight-semibold);
+    font-weight: var(--quiet-font-weight-semibold);
     color: var(--docs-link-color);
   }
 
   .site-search-result-description {
     font-size: 0.875rem;
-    color: var(--quiet-base-color);
+    color: var(--quiet-color);
   }
 
   .site-search-result-url {
     font-size: 0.875rem;
-    color: var(--quiet-base-color-muted);
+    color: var(--quiet-color-muted);
   }
 }
 
@@ -204,7 +204,7 @@ header {
   display: none;
   text-align: center;
   font-size: 0.875rem;
-  color: var(--quiet-base-color-muted);
+  color: var(--quiet-color-muted);
   padding: 3rem 2rem;
 
   svg {
@@ -226,7 +226,7 @@ header {
   display: flex;
   justify-content: center;
   gap: 2rem;
-  color: var(--quiet-base-color-muted);
+  color: var(--quiet-color-muted);
   border-bottom-left-radius: inherit;
   border-bottom-right-radius: inherit;
   padding: 1rem;

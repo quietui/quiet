@@ -6,7 +6,7 @@ export default css`
     gap: 1em;
     align-items: center;
     width: 100%;
-    border-radius: var(--quiet-base-border-radius);
+    border-radius: var(--quiet-border-radius);
     padding-inline: 1em;
     padding-block: 1em;
   }

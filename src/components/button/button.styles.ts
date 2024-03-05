@@ -178,7 +178,7 @@ export default css`
 
   /* Icons */
   ::slotted(quiet-icon) {
-    font-size: 1.25rem !important;
+    font-size: 1.25em !important;
   }
 
   ::slotted(svg) {

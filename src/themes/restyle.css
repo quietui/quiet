@@ -190,10 +190,10 @@ ins {
 
 kbd {
   font-size: 0.875em;
-  border: solid 0.0715em var(--quiet-neutral-silent);
-  box-shadow: 0 0.0715em 0 0 var(--quiet-neutral-silent);
+  border: solid max(1px, 0.0715em) var(--quiet-neutral-subtle);
+  box-shadow: 0 max(1px, 0.0715em) 0 0 var(--quiet-neutral-subtle);
   border-radius: calc(var(--quiet-border-radius) / 2);
-  padding: 0.125em 0.25em;
+  padding: 0.125em 0.33em;
 }
 
 mark {

@@ -29,6 +29,6 @@ export function unlockScrolling(el: Element) {
 
   if (locks.size === 0) {
     document.documentElement.classList.remove('quiet-scroll-lock');
-    document.body.removeChild(lockStyles);
+    lockStyles.remove();
   }
 }

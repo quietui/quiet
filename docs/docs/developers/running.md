@@ -1,6 +1,6 @@
 ---
 title: Running the Project
-description:
+description: TODO
 layout: docs
 ---
 

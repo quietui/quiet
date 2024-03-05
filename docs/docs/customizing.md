@@ -1,6 +1,6 @@
 ---
 title: Customizing styles
-description:
+description: Learn how to customize the library.
 layout: docs
 ---
 

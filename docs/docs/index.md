@@ -1,6 +1,6 @@
 ---
 title: Installation
-description:
+description: Learn how to install the library.
 layout: docs
 ---
 

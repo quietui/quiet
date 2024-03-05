@@ -28,28 +28,24 @@ Card are really just styled containers. You can put almost anything in them.
 </quiet-card>
 ```
 
-:::info
-Cards are styled to remove margins from the top of the first element and the bottom of the last element in their body. This prevents extra vertical space, which is seldom desirable.
-:::
-
 ### With header
 
-Apply the `with-header` attribute and place elements into the `header` slot to add a title and some actions at the start of the card.
+Add the `with-header` attribute and place elements into the `header` slot to add content at the start of the card. Enabling the header also enables the `actions` slot, which is a good place to put relevant icon buttons.
 
 ```html {.example}
 <quiet-card with-header style="max-width: 340px;">
-  <h3 slot="header" style="font-size: 1.125rem; margin-inline-end: auto; margin-block: 0;">Lorem ipsum</h3>
-  <quiet-button slot="header" variant="text" icon-label="Settings">
+  <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">Lorem ipsum</h3>
+  <quiet-button slot="actions" variant="text" icon-label="Settings">
     <quiet-icon name="cog-6-tooth"></quiet-icon>
   </quiet-button>
-  
+
   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 </quiet-card>
 ```
 
 ### With footer
 
-Apply the `with-footer` attribute and place elements into the `footer` slot to add actions or other supplemental information at the end of the card.
+Add the `with-footer` attribute and place elements into the `footer` slot to add actions or other supplemental information at the end of the card.
 
 ```html {.example}
 <quiet-card with-footer style="max-width: 340px;">
@@ -62,7 +58,7 @@ Apply the `with-footer` attribute and place elements into the `footer` slot to a
 
 ### With media
 
-Apply the `with-media` attribute and place an image or video into the `media` slot to add media at the beginning of the card. For consistency, you can set a custom height on the media and it will be cropped and resized as needed.
+Add the `with-media` attribute and place an image or video into the `media` slot to add media at the beginning of the card. For consistency, you can set a custom height on the media and it will be cropped and resized as needed.
 
 ```html {.example}
 <quiet-card with-media style="max-width: 340px;">

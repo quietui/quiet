@@ -2,12 +2,15 @@
 <html lang="en" data-version="{{ package.version }}">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="{{ description }}">
     <meta name="theme-color" content="#787acf">
+    {% if noindex %}<meta name="robots" content="noindex">{% endif %}
+
     <title>{{ title }}</title>
 
-    <link rel="icon" href="/assets/images/logo-light.svg" />
+    <link rel="icon" href="/assets/images/logo-light.svg" media="(prefers-color-scheme: light)" />
+    <link rel="icon" href="/assets/images/logo-dark.svg" media="(prefers-color-scheme: dark)" />
     <link rel="apple-touch-icon" href="/assets/images/app-icon.png">
     <link rel="stylesheet" href="/assets/styles/docs.css" />
 
@@ -27,7 +30,7 @@
     <link rel="stylesheet" href="/dist/themes/restyle.css" />
   </head>
   <body class="layout-{{ layout | stripExtension }}">
-    <a id="skip-to-main" href="#content">Skip to content</a>
+    <a id="skip-to-main" href="#content" data-smooth-link="off">Skip to content</a>
 
     <header id="header">
       <div id="navbar">

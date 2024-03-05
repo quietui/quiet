@@ -32,7 +32,7 @@ layout: component
 
 ### With header
 
-Apply the `with-header` attribute and place elements into the `header` slot to add a title and some actions at the start of the dialog.
+Add the `with-header` attribute and place elements into the `header` slot to add content at the start of the dialog.
 
 ```html {.example}
 <quiet-dialog with-header id="header__dialog">
@@ -57,7 +57,7 @@ Apply the `with-header` attribute and place elements into the `header` slot to a
 
 ### With footer
 
-Apply the `with-footer` attribute and place elements into the `footer` slot to add actions or other supplemental information at the end of the dialog.
+Add the `with-footer` attribute and place elements into the `footer` slot to add actions or other supplemental information at the end of the dialog.
 
 ```html {.example}
 <quiet-dialog with-footer id="footer__dialog">

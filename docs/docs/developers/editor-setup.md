@@ -1,6 +1,6 @@
 ---
 title: Editor setup
-description:
+description: TODO
 layout: docs
 ---
 

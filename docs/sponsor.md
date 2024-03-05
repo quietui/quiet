@@ -1,6 +1,6 @@
 ---
 title: Sponsoring Quiet
-description:
+description: Your sponsorship lets me continue building this software for the greater good.
 layout: page
 section: sponsor
 ---

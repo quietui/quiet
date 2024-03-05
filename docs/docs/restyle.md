@@ -1,6 +1,6 @@
 ---
 title: Quiet Restyle
-description:
+description: Quiet Restyle is an opinionated CSS reset you can use with or without Quiet's components.
 layout: docs
 ---
 

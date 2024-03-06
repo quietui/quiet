@@ -210,8 +210,6 @@ export default css`
 
   /* Header */
   .header {
-    position: sticky;
-    top: 0;
     display: flex;
     align-items: center;
     background: var(--quiet-raised-background-color);
@@ -231,21 +229,35 @@ export default css`
   .body {
     flex: 1 1 auto;
     padding-inline: var(--spacing);
-    padding-block: var(--spacing);
+    padding-block: calc(var(--spacing) / 2);
+    overflow: auto;
+
+    @supports (animation-timeline: scroll(self block)) {
+      & {
+        animation: scroll-shadow linear;
+        animation-timeline: scroll(self block);
+      }
+    }
   }
 
   /* Footer */
   .footer {
-    position: sticky;
-    bottom: 0;
     display: flex;
     align-items: center;
     gap: calc(var(--spacing) / 4);
     justify-content: end;
     background: var(--quiet-raised-background-color);
     padding-inline: var(--spacing);
-    padding-block-start: calc(var(--spacing) / 2);
-    padding-block-end: var(--spacing);
+    padding-block: var(--spacing);
+  }
+
+  @keyframes scroll-shadow {
+    from {
+      box-shadow: inset 0 -4px 4px 0 rgb(0 0 0 / 7.5%);
+    }
+    to {
+      box-shadow: inset 0 4px 4px 0 rgb(0 0 0 / 7.5%);
+    }
   }
 
   @keyframes show-from-center {

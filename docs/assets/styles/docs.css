@@ -111,6 +111,22 @@ html:not(.quiet-dark) .only-dark {
   overflow-x: auto;
   overflow-y: hidden;
   scrollbar-width: thin;
+
+  @supports (animation-timeline: scroll(self inline)) {
+    & {
+      animation: header-scroll-shadow linear;
+      animation-timeline: scroll(self inline);
+    }
+  }
+}
+
+@keyframes header-scroll-shadow {
+  from {
+    box-shadow: inset -4px 0 4px 0 rgb(0 0 0 / 7.5%);
+  }
+  to {
+    box-shadow: inset 4px 0 4px 0 rgb(0 0 0 / 7.5%);
+  }
 }
 
 .header-group-scrollable-interior {
@@ -158,7 +174,10 @@ html:not(.quiet-dark) .only-dark {
   color: inherit;
   white-space: nowrap;
   padding-inline: 0.5rem;
-  margin-inline-end: 0.5rem;
+
+  &:not(:last-child) {
+    margin-inline-end: 0.5rem;
+  }
 }
 
 #header-group-links a svg {
@@ -445,7 +464,6 @@ html:not(.quiet-dark) .only-dark {
 
 @media screen and (max-width: 959px) {
   .header-group:not(:first-of-type) + .header-group {
-    border-left: solid var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
     padding-inline-start: 0.5rem;
   }
 

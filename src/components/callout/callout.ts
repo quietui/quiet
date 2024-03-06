@@ -8,7 +8,7 @@ import type { CSSResultGroup } from 'lit';
 /**
  * <quiet-callout>
  *
- * @summary Callouts are draw attention to important information, provide context, or prompt users to take action.
+ * @summary Callouts draw attention to important information, provide context, or prompt users to take action.
  * @documentation https://quietui.com/docs/components/callout
  * @status stable
  * @since 1.0

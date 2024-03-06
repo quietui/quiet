@@ -1,10 +1,18 @@
 //
 // Dark mode
 //
-function setTheme(name) {
+function setTheme(name, skipTransition = false) {
   const isDark = name === 'dark';
   sessionStorage.setItem('theme', isDark ? 'dark' : 'light');
-  document.documentElement.classList.toggle('quiet-dark', isDark);
+
+  if (skipTransition || !document.startViewTransition) {
+    document.documentElement.classList.toggle('quiet-dark', isDark);
+    return;
+  }
+
+  document.startViewTransition(() => {
+    document.documentElement.classList.toggle('quiet-dark', isDark);
+  });
 }
 
 function getTheme() {
@@ -24,7 +32,7 @@ function toggleTheme() {
 const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
 
 // Initial set/restore
-setTheme(getTheme());
+setTheme(getTheme(), true);
 
 // Update when the OS preference changes
 prefersDark.addEventListener('change', event => {

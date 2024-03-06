@@ -8,22 +8,20 @@ import type { CSSResultGroup } from 'lit';
 /**
  * <{{ tag }}>
  *
- * @summary What does this component do?
+ * @summary TODO
  * @documentation https://quietui.com/docs/components/{{ removePrefix tag }}
- * @status stable
- * @since ___
+ * @status experimental
+ * @since TODO
  *
  * @slot - The default slot.
  * @slot named - A named slot.
- *
- * @cssproperty [--foo=bar] - Description of foo.
  */
 @customElement('{{ tag }}')
 export class {{ tagToClassName tag }} extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
-  /** The property description. */
-  @property() example = 'TODO';
+  /** Description of the property.
+  @property() example = '';
 
   render() {
     return html` <slot></slot> `;

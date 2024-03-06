@@ -24,14 +24,18 @@ export default css`
     height: var(--height);
     border: none;
     border-radius: var(--quiet-border-radius);
-    background: var(--quiet-background-color);
+    background: var(--quiet-raised-background-color);
     box-shadow: var(--quiet-shadow-loud);
     padding: 0;
 
     &::backdrop {
-      background-color: rgb(0 0 0 / 33%); /* can't be a custom property due to Safari not inheriting yet */
-      backdrop-filter: var(--quiet-overlay-backdrop-filter);
-      -webkit-backdrop-filter: var(--quiet-overlay-backdrop-filter);
+      /*
+        NOTE: the ::backdrop element doesn't inherit properly in Safari yet, but it will soon! At that time, we can
+        remove the fallbacks.
+      */
+      background-color: var(--quiet-backdrop-color, rgba(0 0 0 / 0.25));
+      backdrop-filter: var(--quiet-backdrop-filter);
+      -webkit-backdrop-filter: var(--quiet-backdrop-filter, blur(6px));
     }
 
     &:focus {
@@ -204,19 +208,13 @@ export default css`
     }
   }
 
-  /*
-    NOTE: We use a fallback for backdrops because because Safari < 17.4 doesn't let them inherit custom properties from
-    <dialog> due to the way the spec was originally written. Also note that, at the time of this writing, Firefox
-    doesn't support animating backdrops.
-  */
-
   /* Header */
   .header {
     position: sticky;
     top: 0;
     display: flex;
     align-items: center;
-    background: var(--quiet-background-color);
+    background: var(--quiet-raised-background-color);
     gap: calc(var(--spacing) / 4);
     padding-inline-start: var(--spacing);
     padding-inline-end: calc(var(--spacing) / 2); /* less spacing to better align buttons as actions */
@@ -244,7 +242,7 @@ export default css`
     align-items: center;
     gap: calc(var(--spacing) / 4);
     justify-content: end;
-    background: var(--quiet-background-color);
+    background: var(--quiet-raised-background-color);
     padding-inline: var(--spacing);
     padding-block-start: calc(var(--spacing) / 2);
     padding-block-end: var(--spacing);

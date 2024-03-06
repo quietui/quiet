@@ -5,8 +5,8 @@
   top: 0.25rem;
   right: 0.25rem;
   font-size: 1.25rem;
-  color: var(--quiet-neutral-strident-text);
-  background: var(--quiet-neutral-strident);
+  color: var(--quiet-neutral-50);
+  background: var(--quiet-neutral-900);
   border: none;
   border-radius: calc(var(--quiet-border-radius) / 2);
   padding: 0.5rem;
@@ -29,7 +29,7 @@
 
   .copy-code-check-icon {
     display: none;
-    color: var(--quiet-confirmative-moderate);
+    color: var(--quiet-confirmative-fill-moderate);
   }
 
   &.copied {

@@ -15,8 +15,8 @@ export default css`
     font-weight: var(--quiet-font-weight-semibold);
     vertical-align: middle;
     border-radius: 50%;
-    background-color: var(--quiet-neutral-silent);
-    color: var(--quiet-neutral-silent-text);
+    background-color: var(--quiet-neutral-fill-softer);
+    color: var(--quiet-neutral-fill-text-softer);
     overflow: hidden;
   }
 

@@ -3,16 +3,16 @@
 //
 function showSidebar() {
   const sidebar = document.getElementById('sidebar');
-  const overlay = document.getElementById('overlay');
+  const backdrop = document.getElementById('backdrop');
   const duration = parseInt(getComputedStyle(sidebar).getPropertyValue('--docs-sidebar-speed'), 10);
   const closeButton = document.getElementById('close-sidebar');
 
   document.documentElement.classList.add('docs-sidebar-open');
   isSidebarOpen = true;
   sidebar.inert = false;
-  overlay.hidden = false;
+  backdrop.hidden = false;
   closeButton.focus();
-  overlay.animate([{ opacity: 0 }, { opacity: 1 }], {
+  backdrop.animate([{ opacity: 0 }, { opacity: 1 }], {
     duration,
     easing: 'ease'
   });
@@ -20,7 +20,7 @@ function showSidebar() {
 
 function hideSidebar() {
   const sidebar = document.getElementById('sidebar');
-  const overlay = document.getElementById('overlay');
+  const backdrop = document.getElementById('backdrop');
 
   document.documentElement.classList.remove('docs-sidebar-open');
 
@@ -29,14 +29,14 @@ function hideSidebar() {
     sidebar.inert = isMobile.matches;
   }
 
-  if (overlay) {
-    overlay
+  if (backdrop) {
+    backdrop
       .animate([{ opacity: 1 }, { opacity: 0 }], {
         duration: 250,
         easing: 'ease'
       })
       .finished.then(() => {
-        overlay.hidden = true;
+        backdrop.hidden = true;
       });
   }
 }

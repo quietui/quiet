@@ -11,11 +11,6 @@ layout: component
 In the same way that images require `alt` text, you [[should]] always add a label to every avatar. The label won't be displayed, but it will be announced by assistive devices.
 :::
 
-:::danger
-In the same way that images require `alt` text, you should always add a label to every avatar. The label won't be displayed, but it will be announced by assistive devices.
-:::
-
-
 ## Examples
 
 ### Images

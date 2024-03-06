@@ -118,11 +118,11 @@ To create an icon button, place an icon into the button's default slot and set t
   <quiet-icon name="check"></quiet-icon>
 </quiet-button>
 
-<quiet-button icon-label="Reload"https://heroicons.com/>
+<quiet-button icon-label="Reload">
   <quiet-icon name="arrow-path"></quiet-icon>
 </quiet-button>
 
-<quiet-button icon-label="Delete" variant="destructive"https://heroicons.com/>
+<quiet-button icon-label="Delete" variant="destructive">
   <quiet-icon name="trash"></quiet-icon>
 </quiet-button>
 

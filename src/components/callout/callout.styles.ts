@@ -13,38 +13,38 @@ export default css`
 
   /* Primary */
   :host([variant='primary']) {
-    background-color: var(--quiet-primary-silent);
+    background-color: var(--quiet-primary-fill-softer);
   }
 
   :host([variant='primary']) .icon {
-    color: var(--quiet-primary-moderate);
+    color: var(--quiet-primary-colored-text);
   }
 
   /* Secondary */
   :host([variant='secondary']) {
-    background-color: var(--quiet-neutral-silent);
+    background-color: var(--quiet-neutral-fill-softer);
   }
 
   :host([variant='secondary']) .icon {
-    color: var(--quiet-neutral-moderate);
+    color: var(--quiet-neutral-colored-text);
   }
 
   /* Confirmative */
   :host([variant='confirmative']) {
-    background-color: var(--quiet-confirmative-silent);
+    background-color: var(--quiet-confirmative-fill-softer);
   }
 
   :host([variant='confirmative']) .icon {
-    color: var(--quiet-confirmative-moderate);
+    color: var(--quiet-confirmative-colored-text);
   }
 
   /* Destructive */
   :host([variant='destructive']) {
-    background-color: var(--quiet-destructive-silent);
+    background-color: var(--quiet-destructive-fill-softer);
   }
 
   :host([variant='destructive']) .icon {
-    color: var(--quiet-destructive-moderate);
+    color: var(--quiet-destructive-colored-text);
   }
 
   .icon {

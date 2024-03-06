@@ -56,7 +56,7 @@ header {
   margin-inline-end: 0.5rem;
 
   quiet-icon {
-    color: var(--quiet-neutral-moderate);
+    color: var(--quiet-neutral-fill-moderate);
   }
 }
 
@@ -67,7 +67,7 @@ header {
 
   quiet-icon[name='magnifying-glass'] {
     flex: 0 0 auto;
-    color: var(--quiet-neutral-moderate);
+    color: var(--quiet-neutral-fill-moderate);
     font-size: 1.5rem;
     margin-inline-start: 1.5rem;
     margin-block-start: 0.5rem;
@@ -85,7 +85,7 @@ header {
   margin: 0;
 
   &::placeholder {
-    color: var(--quiet-color-muted);
+    color: var(--quiet-neutral-colored-text);
   }
 }
 
@@ -123,20 +123,20 @@ header {
   }
 
   a:focus-visible {
-    outline: solid 2px var(--docs-primary-600);
+    outline: var(--quiet-focus-ring);
     outline-offset: -2px;
   }
 
   li a:hover,
   li a:hover small {
-    background-color: var(--quiet-neutral-silent);
+    background-color: var(--quiet-neutral-fill-softer);
   }
 
   li[data-selected='true'] a,
   li[data-selected='true'] a * {
     outline: none;
-    background-color: var(--quiet-primary-moderate);
-    color: var(--quiet-primary-moderate-text);
+    background-color: var(--quiet-primary-fill-moderate);
+    color: var(--quiet-primary-fill-text-moderate);
   }
 
   h3 {
@@ -146,7 +146,7 @@ header {
 
   small {
     display: block;
-    color: var(--quiet-color-muted);
+    color: var(--quiet-neutral-colored-text);
   }
 }
 
@@ -165,7 +165,7 @@ header {
 
     quiet-icon {
       font-size: 2rem;
-      color: var(--quiet-neutral-moderate);
+      color: var(--quiet-neutral-fill-moderate);
     }
   }
 
@@ -185,17 +185,17 @@ header {
   .site-search-result-title {
     font-size: 1.25rem;
     font-weight: var(--quiet-font-weight-semibold);
-    color: var(--docs-link-color);
+    color: var(--quiet-primary-colored-text);
   }
 
   .site-search-result-description {
     font-size: 0.875rem;
-    color: var(--quiet-color);
+    color: var(--quiet-body-color);
   }
 
   .site-search-result-url {
     font-size: 0.875rem;
-    color: var(--quiet-color-muted);
+    color: var(--quiet-neutral-colored-text);
   }
 }
 
@@ -204,7 +204,7 @@ header {
   display: none;
   text-align: center;
   font-size: 0.875rem;
-  color: var(--quiet-color-muted);
+  color: var(--quiet-neutral-colored-text);
   padding: 3rem 2rem;
 
   svg {
@@ -226,7 +226,7 @@ header {
   display: flex;
   justify-content: center;
   gap: 2rem;
-  color: var(--quiet-color-muted);
+  color: var(--quiet-neutral-colored-text);
   border-bottom-left-radius: inherit;
   border-bottom-right-radius: inherit;
   padding: 1rem;

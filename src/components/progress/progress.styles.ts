@@ -2,8 +2,8 @@ import { css } from 'lit';
 
 export default css`
   :host {
-    --indicator-color: var(--quiet-primary-moderate);
-    --track-color: var(--quiet-neutral-silent);
+    --indicator-color: var(--quiet-primary-fill-moderate);
+    --track-color: var(--quiet-neutral-fill-softer);
 
     display: flex;
     align-items: center;
@@ -26,7 +26,7 @@ export default css`
     border-start-end-radius: 0;
     border-end-end-radius: 0;
     background-color: var(--indicator-color);
-    color: var(--quiet-primary-moderate-text);
+    color: var(--quiet-primary-fill-text-moderate);
     font-weight: var(--quiet-font-weight-semibold);
     transition: 0.3s width ease;
 

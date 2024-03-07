@@ -285,7 +285,7 @@ Dialogs with overflowing content will expand as the viewport allows before scrol
 
 ### Setting focus on open
 
-To move focus to a specific form control when the dialog opens, use the `autofocus` attribute.
+To move focus to a specific form control when the dialog opens, use the [`autofocus`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/autofocus) global attribute.
 
 ```html {.example}
 <quiet-dialog id="focus__dialog" with-header with-footer>

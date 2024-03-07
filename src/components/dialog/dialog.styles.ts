@@ -30,8 +30,8 @@ export default css`
 
     &::backdrop {
       /*
-        NOTE: the ::backdrop element doesn't inherit properly in Safari yet, but it will soon! At that time, we can
-        remove the fallbacks.
+        NOTE: the ::backdrop element doesn't inherit properly in Safari yet, but it will in 17.4! At that time, we can
+        remove the fallback values here.
       */
       background-color: var(--quiet-backdrop-color, rgba(0 0 0 / 0.25));
       backdrop-filter: var(--quiet-backdrop-filter);

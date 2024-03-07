@@ -240,12 +240,21 @@ export default css`
     }
   }
 
+  /* Normalize spacing when the header and footer are absent */
+  :host(:not([with-header])) .body {
+    padding-block-start: var(--spacing);
+  }
+
+  :host(:not([with-footer])) .body {
+    padding-block-end: var(--spacing);
+  }
+
   /* Footer */
   .footer {
     display: flex;
     align-items: center;
-    gap: calc(var(--spacing) / 4);
     justify-content: end;
+    gap: calc(var(--spacing) / 4);
     background: var(--quiet-raised-background-color);
     padding-inline: var(--spacing);
     padding-block: var(--spacing);

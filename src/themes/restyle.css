@@ -176,7 +176,7 @@ abbr[title] {
 }
 
 del {
-  text-decoration-color: currentColor;
+  text-decoration-color: var(--quiet-destructive-fill-moderate);
   text-decoration-style: solid;
   text-decoration-thickness: 0.09375em;
 }

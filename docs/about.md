@@ -13,7 +13,7 @@ The truth is, Shoelace has matured a lot over the years. While that's a great th
 
 **Enter Quiet, my creative outlet.**
 
-A passion project. Something I'm building to explore new ideas and have fun with. It leans towards the bleeding edge of what's become possible with browsers in recent years. It uses modern features more than it probably should. Quiet is in no way meant to compete with Shoelace. It allows me to try new things that may or may not work and improve my skills as a designer and developer.
+A passion project. Something I'm building to explore new ideas and have fun with. It leans towards the bleeding edge of what's become possible with browsers in recent years. It uses modern features more than it probably should. It goes further than just components. Quiet isn't meant to compete with Shoelace, it allows me to try new things that may or may not work and improve my skills as a designer and developer.
 
 As a result, you'll find that Quiet is rather opinionated. I carefully curate everything from the project's scope down to every individual line of code. Oftentimes, saying "no" is key to maintaining the quality of the library and my ability to steward it effectively.
 

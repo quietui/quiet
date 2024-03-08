@@ -93,24 +93,25 @@ You can register additional icon libraries using the `registerIconLibrary()` fun
   // This registers a new icon library called "my-icons"
   registerIconLibrary('my-icons', {
     //
-    // The resolve function is required. It must be a callback that accepts 
-    // two string arguments: the name of the icon and an optional icon family 
-    // (e.g. solid, outline). These values are passed through from: 
-    // <quiet-icon name="..." family="...">
+    // The resolve function is required. It must be a callback that 
+    // accepts two string arguments: the name of the icon and an 
+    // optional icon family (e.g. solid, outline). These values are 
+    // passed through from: <quiet-icon name="..." family="...">
     //
-    // The resolver must return a URL of an SVG located at a CORS-enabled 
-    // endpoint. You can also return SVG data URIs.
+    // The resolver must return a URL of an SVG located at a 
+    // CORS-enabled endpoint. You can also return SVG data URIs.
     //
     resolve: (name, family) => {
       return `https://example.com/path/to/icons/${family}/${name}.svg`
     },
     //
-    // The mutate function is optional. It must be a callback that accepts 
-    // one argument: an `SVGElement` you can use to modify the icon before it 
-    // gets written.
+    // The mutate function is optional. It must be a callback that 
+    // accepts one argument, an `SVGElement`, you can use to modify 
+    // the icon before it gets rendered.
     //
-    // The mutator is handy when you're pulling in SVGs from, for example, a 
-    // CDN and you need to adjust the fill, stroke, and other properties.
+    // The mutator is handy when you're pulling in SVGs from, for 
+    // example, a  CDN and you need to adjust the fill, stroke, and 
+    // other properties.
     //
     mutate: svg =>  {
       svg.setAttribute('fill', 'currentColor');
@@ -161,7 +162,7 @@ If you choose to change the system library, you must reimplement _all_ of the sy
 
 ### Bootstrap icons
 
-This examples demonstrates how to load the [Bootstrap Icons](https://icons.getbootstrap.com/) library using the jsDelivr CDN.
+This examples demonstrates how to load the [Bootstrap Icons](https://icons.getbootstrap.com/) library using the jsDelivr CDN. Available families include `regular` (default) and `filled`.
 
 ```html {.example}
 <script type="module">

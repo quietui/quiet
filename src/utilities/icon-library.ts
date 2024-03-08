@@ -1,4 +1,4 @@
-import { getLibraryPath } from './assets.js';
+import { getLibraryPath } from './library.js';
 import type { Icon } from '../components/icon/icon.js';
 
 export type ResolveFunction = (name: string, family: string) => string;

@@ -13,7 +13,7 @@ You can think of Restyle as a smarter, prettier user agent stylesheet.
 To add Restyle to your app, first [include a theme stylesheet](/docs/themes) and then add the following markup to the `<head>` of your document.
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@quietui/quiet@{{package.version}}/dist/themes/restyle.css">
+<link rel="stylesheet" href="{% cdnUrl '/dist/themes/restyle.css' %}">
 ```
 
 Restyle uses your theme's variables as a baseline, so things will look familiar right away. Feel free to customize any of its styles in your own CSS by overriding the properties you want to change.

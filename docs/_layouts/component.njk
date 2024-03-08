@@ -263,7 +263,11 @@
 
   <h2>Importing</h2>
   <p>
-    To import this component without using the autoloader, use the following code.
+    To manually import this component from the CDN, use the following code.
   </p>
-  <pre><code class="language-js">import '__CDN_URL__/components/TODO/TODO.js';</code></pre>
+  <pre><code class="language-js">import '{% cdnUrl component.path %}';</code></pre>
+  <p>
+    To manually import this component from npm, use the following code.
+  </p>
+  <pre><code class="language-js">import '@quietui/quiet/{{ component.path }}';</code></pre>
 {% endblock %}

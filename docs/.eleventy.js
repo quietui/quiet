@@ -22,7 +22,7 @@ export default function (eleventyConfig) {
   // Add template data
   eleventyConfig.addGlobalData('package', packageData);
 
-  // Template filters
+  // Template filters - {{ content | filter }}
   eleventyConfig.addFilter('inlineMarkdown', content => markdown.renderInline(content));
   eleventyConfig.addFilter('markdown', content => markdown.render(content));
   eleventyConfig.addFilter('stripExtension', string => parse(string).name);
@@ -31,6 +31,11 @@ export default function (eleventyConfig) {
     // Trims whitespace and pipes from the start and end of a string. Useful for CEM types, which can be pipe-delimited.
     // With Prettier 3, this means a leading pipe will exist be present when the line wraps.
     return typeof content === 'string' ? content.replace(/^(\s|\|)/g, '').replace(/(\s|\|)$/g, '') : content;
+  });
+
+  // Shortcodes - {% shortCode arg1, arg2 %}
+  eleventyConfig.addShortcode('cdnUrl', location => {
+    return `https://cdn.jsdelivr.net/npm/@quietui/quiet@${packageData.version}/` + location.replace(/^\//, '');
   });
 
   // Helpers
@@ -81,10 +86,10 @@ export default function (eleventyConfig) {
   // Various text replacements
   eleventyConfig.addPlugin(
     replaceTextPlugin([
-      // Replace __CDN_URL__
+      // Replace __CDN_BASE__
       {
-        replace: /__CDN_URL__/g,
-        replaceWith: `https://cdn.jsdelivr.net/npm/@quietui/quiet@${packageData.version}/dist`
+        replace: /__CDN_BASE__/g,
+        replaceWith: `https://cdn.jsdelivr.net/npm/@quietui/quiet@${packageData.version}/`
       },
 
       // Replace [issue:1234] with a link to the issue on GitHub

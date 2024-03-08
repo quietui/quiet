@@ -4,7 +4,7 @@ description: Quiet Restyle is an opinionated CSS reset you can use with or witho
 layout: docs
 ---
 
-Quiet Restyle is an opinionated CSS reset you can use with or without Quiet's components. It allows you to kick off a new website or app that looks great without worrying about styling native HTML elements right away. Just include it and start writing HTML!
+Quiet Restyle is an [`opinionated CSS reset`](#) you can use with or without Quiet's components. It allows you to kick off a new website or app that looks great without worrying about styling native HTML elements right away. Just include it and start writing HTML!
 
 You can think of Restyle as a smarter, prettier user agent stylesheet.
 

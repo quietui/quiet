@@ -164,6 +164,10 @@ a {
       color: color-mix(in oklab, var(--quiet-primary-colored-text), black 10%);
     }
   }
+
+  &:has(code, samp, tt) {
+    color: color-mix(in oklab, var(--quiet-primary-colored-text), var(--quiet-strident) 5%);
+  }
 }
 
 abbr[title] {
@@ -325,6 +329,12 @@ details {
 
   + details {
     margin-block-start: calc(var(--quiet-content-spacing) / -1.25);
+  }
+
+  code,
+  samp,
+  tt {
+    background-color: color-mix(in oklab, var(--quiet-neutral-fill-softer), var(--quiet-strident) 5%);
   }
 }
 

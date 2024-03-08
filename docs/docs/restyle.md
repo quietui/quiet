@@ -131,10 +131,6 @@ export function thing(arg) {
   }
 }</pre>
 
-:::info
-Syntax highlighting, like you see elsewhere in the docs, is not included in Restyle.
-:::
-
 ### Tables
 
 <table>

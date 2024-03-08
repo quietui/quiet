@@ -164,15 +164,11 @@ a {
       color: color-mix(in oklab, var(--quiet-primary-colored-text), black 10%);
     }
   }
-
-  &:has(code, samp, tt) {
-    color: color-mix(in oklab, var(--quiet-primary-colored-text), var(--quiet-strident) 5%);
-  }
 }
 
 abbr[title] {
   text-decoration: underline;
-  text-decoration-style: dashed;
+  text-decoration-style: dotted;
   text-decoration-thickness: 0.09375em;
   text-decoration-color: var(--quiet-neutral-fill-moderate);
   text-underline-offset: 0.125em;

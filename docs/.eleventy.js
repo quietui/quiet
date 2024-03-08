@@ -86,12 +86,6 @@ export default function (eleventyConfig) {
   // Various text replacements
   eleventyConfig.addPlugin(
     replaceTextPlugin([
-      // Replace __CDN_BASE__
-      {
-        replace: /__CDN_BASE__/g,
-        replaceWith: `https://cdn.jsdelivr.net/npm/@quietui/quiet@${packageData.version}/`
-      },
-
       // Replace [issue:1234] with a link to the issue on GitHub
       {
         replace: /\[pr:([0-9]+)\]/gs,

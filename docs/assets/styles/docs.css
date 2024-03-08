@@ -209,8 +209,10 @@ html:not(.quiet-dark) .only-dark {
   }
 }
 
-#header-group-links a:hover {
-  color: var(--quiet-primary-colored-text);
+@media (hover: hover) {
+  #header-group-links a:hover {
+    color: var(--quiet-primary-colored-text);
+  }
 }
 
 #header-group-links a:focus-visible {
@@ -249,9 +251,11 @@ html:not(.quiet-dark) .only-dark {
   width: 1.25rem;
 }
 
-#header-group-buttons a:hover svg,
-#header-group-buttons button:hover svg {
-  color: var(--quiet-primary-colored-text);
+@media (hover: hover) {
+  #header-group-buttons a:hover svg,
+  #header-group-buttons button:hover svg {
+    color: var(--quiet-primary-colored-text);
+  }
 }
 
 #open-sidebar,

@@ -127,9 +127,11 @@ header {
     outline-offset: -2px;
   }
 
-  li a:hover,
-  li a:hover small {
-    background-color: var(--quiet-neutral-fill-softer);
+  @media (hover: hover) {
+    li a:hover,
+    li a:hover small {
+      background-color: var(--quiet-neutral-fill-softer);
+    }
   }
 
   li[data-selected='true'] a,

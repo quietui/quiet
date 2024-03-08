@@ -1,6 +1,6 @@
 ---
 title: Quiet UI
-description: A high quality UI library hand-crafted for the Web with a focus on accessibility, performance, longevity, and aesthetics.
+description: A hand-crafted UI library for the Web with a focus on accessibility, performance, longevity, and aesthetics.
 layout: splash
 ---
 
@@ -12,7 +12,7 @@ layout: splash
   <p class="subtitle">{{ description }}</p>
 
   <p>
-    Beautifully designed. Platform-based. Open source.
+    Professionally designed. Platform-built. Open source.
   </p>
 
   <div class="splash-actions">

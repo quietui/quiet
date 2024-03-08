@@ -138,7 +138,7 @@
   --quiet-primary-fill-text-moderate: white;
   --quiet-primary-fill-text-loud: white;
   --quiet-primary-fill-text-louder: white;
-  --quiet-primary-colored-text: color-mix(in oklab, var(--quiet-primary-600), black 7.5%);
+  --quiet-primary-colored-text: color-mix(in oklab, var(--quiet-primary-600), black 12.5%);
   --quiet-primary-stroke-softer: var(--quiet-primary-200);
   --quiet-primary-stroke-soft: var(--quiet-primary-300);
 
@@ -153,7 +153,7 @@
   --quiet-neutral-fill-text-moderate: white;
   --quiet-neutral-fill-text-loud: white;
   --quiet-neutral-fill-text-louder: white;
-  --quiet-neutral-colored-text: color-mix(in oklab, var(--quiet-neutral-600), black 7.5%);
+  --quiet-neutral-colored-text: color-mix(in oklab, var(--quiet-neutral-600), black 12.5%);
   --quiet-neutral-stroke-softer: var(--quiet-neutral-200);
   --quiet-neutral-stroke-soft: var(--quiet-neutral-300);
 
@@ -168,7 +168,7 @@
   --quiet-confirmative-fill-text-moderate: white;
   --quiet-confirmative-fill-text-loud: white;
   --quiet-confirmative-fill-text-louder: white;
-  --quiet-confirmative-colored-text: color-mix(in oklab, var(--quiet-confirmative-600), black 7.5%);
+  --quiet-confirmative-colored-text: color-mix(in oklab, var(--quiet-confirmative-600), black 12.5%);
   --quiet-confirmative-stroke-softer: var(--quiet-confirmative-200);
   --quiet-confirmative-stroke-soft: var(--quiet-confirmative-300);
 
@@ -183,7 +183,7 @@
   --quiet-destructive-fill-text-moderate: white;
   --quiet-destructive-fill-text-loud: white;
   --quiet-destructive-fill-text-louder: white;
-  --quiet-destructive-colored-text: color-mix(in oklab, var(--quiet-destructive-600), black 7.5%);
+  --quiet-destructive-colored-text: color-mix(in oklab, var(--quiet-destructive-600), black 12.5%);
   --quiet-destructive-stroke-softer: var(--quiet-destructive-200);
   --quiet-destructive-stroke-soft: var(--quiet-destructive-300);
 }

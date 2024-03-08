@@ -38,8 +38,9 @@ export function outlinePlugin(options = {}) {
           return;
         }
 
-        // Create a clone of the heading so we can remove links from the text content
+        // Create a clone of the heading so we can remove links and [data-no-outline] elements from the text content
         clone.querySelectorAll('a').forEach(a => a.remove());
+        clone.querySelectorAll('[data-no-outline]').forEach(el => el.remove());
 
         // Generate the link
         const li = parse(`<li data-level="${level}"><a></a></li>`);

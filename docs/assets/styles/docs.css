@@ -314,6 +314,16 @@ html:not(.quiet-dark) .only-dark {
   grid-template-columns: auto var(--docs-outline-width);
 }
 
+.layout-splash {
+  display: block;
+}
+
+.layout-splash #page {
+  max-width: 58rem;
+  padding-inline: 0;
+  margin-inline: auto;
+}
+
 #content {
   order: 1;
   min-width: 0; /* prevent overflowing content from stretching the column */
@@ -355,10 +365,26 @@ html:not(.quiet-dark) .only-dark {
     white-space: pre;
     tab-size: 2;
     color: white;
-    background-color: var(--quiet-neutral-900);
+    background-color: transparent;
     border-radius: inherit;
     padding: calc(var(--quiet-content-spacing) / 2);
     overflow-x: auto;
+  }
+}
+
+.quiet-dark #content pre:has(code) {
+  background-color: color-mix(in oklab, var(--quiet-neutral-900), white 5%);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  quiet-badge {
+    font-size: 0.875rem;
+    vertical-align: 0.3em;
   }
 }
 
@@ -677,6 +703,7 @@ quiet-callout {
   font-weight: var(--quiet-font-weight-bold);
   line-height: 1.4;
   text-align: center;
+  padding-inline: 2rem;
 }
 
 .splash img {
@@ -684,7 +711,8 @@ quiet-callout {
   width: 100%;
   max-width: 600px;
   margin-inline: auto;
-  margin-block: 10vh;
+  margin-block-start: 12vh;
+  margin-block-end: 4vh;
 }
 
 .splash .subtitle {
@@ -695,7 +723,7 @@ quiet-callout {
   display: flex;
   gap: 1rem;
   justify-content: center;
-  margin-block-start: 2.5rem;
+  margin-block-start: 4rem;
 }
 
 @media screen and (max-width: 959px) {

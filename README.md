@@ -50,7 +50,7 @@ Quiet is built in New Hampshire by me, [Cory LaViska](https://twitter.com/clavis
 
 The truth is, Shoelace has matured a lot over the years. While that's a great thing for its users, as an artist, I've lost my canvas for creativity. I'm still committed to Shoelace and I think it has a very promising future, but I'm no longer in charge of its design or its day to day operations. It has a full team now and we're building a product out of it. It's not my personal playground, anymore.
 
-Enter Quiet, my creative outlet. A passion project. Something I'm building to explore new ideas and have fun with. It leans towards the bleeding edge of what's become possible with browsers in recent years. It thinks more about progressive enhancement than it probably should. Quiet is in no way meant to compete with Shoelace. It allows me to try new things that may or may not work and improve my skills as a designer and developer.
+Enter Quiet, my creative outlet. A passion project. Something I'm building to explore new ideas and have fun with. It leans towards the bleeding edge of what's become possible with browsers in recent years. It uses modern features more than it probably should. Quiet is in no way meant to compete with Shoelace. It allows me to try new things that may or may not work and improve my skills as a designer and developer.
 
 As a result, you'll find that Quiet is rather opinionated. If it's not exactly what you want, it's probably not a good choice for your next project. Maybe consider using Shoelace instead. For the rest of you — the ones who like living on the edge and playing with newer browser APIs — go ahead and use it to your heart's content.
 

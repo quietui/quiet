@@ -1,4 +1,4 @@
-import { getLibraryPath } from './assets.js';
+import { getLibraryPath } from './library.js';
 
 const observer = new MutationObserver(mutations => {
   for (const { addedNodes } of mutations) {
@@ -69,6 +69,10 @@ export async function discoverElements(root: Element | ShadowRoot) {
   const tagsToRegister = [...new Set(tags)];
   const registered: string[] = [];
   const unknown: string[] = [];
+
+  if (tagsToRegister.length === 0) {
+    return;
+  }
 
   for await (const tagName of tagsToRegister) {
     try {

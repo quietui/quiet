@@ -43,7 +43,7 @@ Use the `color` and `background-color` properties to change badge colors. You ca
 
 ### Getting attention with animation
 
-Use the `attention` attribute to draw attention to a badge with an animation.
+Use the `attention` attribute to draw attention to a badge with an animation. Valid options include `pulse`, `shake`, and `wobble`.
 
 ```html {.example}
 <quiet-badge attention="pulse" variant="primary">Pulse</quiet-badge>

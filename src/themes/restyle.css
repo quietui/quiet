@@ -122,7 +122,6 @@ p {
 blockquote {
   position: relative;
   color: var(--quiet-neutral--color-muted);
-  font-size: 1.25em;
   border-left: var(--quiet-border-style) calc(var(--quiet-border-width) * 4) var(--quiet-neutral-stroke-softer);
   padding: calc(var(--quiet-content-spacing) / 1.5) var(--quiet-content-spacing);
 }

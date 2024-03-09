@@ -4,15 +4,15 @@ description: Learn how to install the library.
 layout: docs
 ---
 
-There are two ways to install Quiet. Autoloading is the easiest and recommended way to get started using components. However, you can also import them manually from the CDN or using a bundler.
+There are two ways to install Quiet. Autoloading is the easiest way to get started using components. However, you can also import them manually from the CDN or using a bundler.
 
 ## Autoloading <quiet-badge variant="confirmative" data-no-outline>Recommended</quiet-badge>
 
 The autoloader will automatically register components as you add them to the DOM. Just place the following code into the `<head>` section of an HTML document and you can use all of Quiet's components without any further effort.
 
 ```html
-<link rel="stylesheet" href="/dist/quiet.css">
-<script src="/dist/quiet.loader.js" type="module"></script>
+<link rel="stylesheet" href="{% cdnUrl '/dist/quiet.css' %}">
+<script src="{% cdnUrl '/dist/quiet.loader.js' %}" type="module"></script>
 ```
 
 :::info
@@ -82,7 +82,7 @@ Quiet uses something called the _library path_ to load components and assets at 
 
 **If you're using a bundler,** you will need to create a task that copies Quiet's `dist` folder into your project and set the library path to point to there.
 
-You can set the library path by adding `data-quiet` attribute to any element on the page.
+You can set the library path by adding the `data-quiet` attribute to any element on the page.
 
 ```html
 <html data-quiet="/path/to/quiet/dist">

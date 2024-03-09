@@ -22,7 +22,8 @@ export function codeExamplesPlugin(options = {}) {
       // Look for external links
       container.querySelectorAll('code.example').forEach(code => {
         const pre = code.closest('pre');
-        const isOpen = code.classList.contains('open');
+        const hasButtons = !code.classList.contains('no-buttons');
+        const isOpen = code.classList.contains('open') || !hasButtons;
         const noEdit = code.classList.contains('no-edit');
         const id = `code-example-${uuid().slice(-12)}`;
         let preview = pre.textContent;
@@ -40,27 +41,34 @@ export function codeExamplesPlugin(options = {}) {
             <div class="code-example-source" id="${id}">
               ${pre.outerHTML}
             </div>
-            <div class="code-example-buttons">
-              <button
-                class="code-example-toggle"
-                type="button"
-                aria-expanded="${isOpen ? 'true' : 'false'}"
-                aria-controls="${id}"
-              >
-                Code
-                <quiet-icon name="chevron-down" family="micro"></quiet-icon>
-              </button>
+            ${
+              hasButtons
+                ? `
+                <div class="code-example-buttons">
+                  <button
+                    class="code-example-toggle"
+                    type="button"
+                    aria-expanded="${isOpen ? 'true' : 'false'}"
+                    aria-controls="${id}"
+                  >
+                    Code
+                    <quiet-icon name="chevron-down" family="micro"></quiet-icon>
+                  </button>
 
-              ${
-                noEdit
-                  ? ''
-                  : `
-                    <button class="code-example-pen" type="button">
-                      Edit
-                      <quiet-icon name="arrow-top-right-on-square" family="micro"></quiet-icon>
-                    </button>
-                  `
-              }
+                  ${
+                    noEdit
+                      ? ''
+                      : `
+                        <button class="code-example-pen" type="button">
+                          Edit
+                          <quiet-icon name="arrow-top-right-on-square" family="micro"></quiet-icon>
+                        </button>
+                      `
+                  }
+
+                `
+                : ''
+            }
             </div>
           </div>
         `);

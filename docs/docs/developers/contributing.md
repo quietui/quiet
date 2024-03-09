@@ -21,7 +21,7 @@ In fact, there are many ways to contribute, and some of the most important contr
 - Sharing ideas
 - And, of course, contributing code!
 
-:::info
+:::danger
 Please take a moment to review these guidelines to make the contribution process as easy as possible for both yourself and the project's maintainer.
 :::
 

@@ -432,6 +432,23 @@ h6 {
   }
 }
 
+figure.float-end {
+  float: right;
+  max-width: 50%;
+  margin-inline-start: var(--quiet-content-spacing);
+  margin-block: 0;
+}
+
+@media screen and (max-width: 959px) {
+  figure.float-end {
+    float: none;
+    max-width: none;
+    margin-inline: auto;
+    margin-block-end: var(--quiet-content-spacing);
+  }
+}
+
+/* Outline */
 #outline {
   order: 2;
 }
@@ -715,7 +732,7 @@ quiet-callout {
   width: 100%;
   max-width: 600px;
   margin-inline: auto;
-  margin-block-start: 12vh;
+  margin-block-start: 10vh;
   margin-block-end: 4vh;
 }
 
@@ -728,6 +745,26 @@ quiet-callout {
   gap: 1rem;
   justify-content: center;
   margin-block-start: 4rem;
+}
+
+.quick-start {
+  max-width: 500px;
+  font-weight: var(--quiet-font-weight-normal);
+  margin-inline: auto;
+  margin-block-start: 3.5rem;
+
+  small {
+    font-size: 0.875rem;
+  }
+
+  pre {
+    margin-block-start: 0.25rem;
+    margin-block-end: 0;
+  }
+
+  code {
+    background: transparent;
+  }
 }
 
 @media screen and (max-width: 959px) {

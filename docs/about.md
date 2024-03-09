@@ -5,19 +5,21 @@ layout: page
 section: about
 ---
 
-Quiet is built in New Hampshire by me, [Cory LaViska](https://twitter.com/claviska), the creator of [Shoelace](https://shoelace.style/). With the success of Shoelace, many of you are probably wondering why I'd choose to build another UI library, and that's a reasonable question.
+<a href="https://twitter.com/claviska" data-no-external-icon>
+  <quiet-avatar label="Cory LaViska's avatar" image="http://0.gravatar.com/avatar/bf1b3b95fd5b096a3592247c29667b33?s=512" style="--size: 7rem; float: right; margin-inline-start: 2rem; margin-block-end: 1rem;"></quiet-avatar>
+</a>
 
-## The inception
+Quiet is built in New Hampshire by [Cory LaViska](https://twitter.com/claviska), the creator of [Shoelace](https://shoelace.style/). With the success of Shoelace, many of you are probably wondering why I'd choose to build another UI library, and that's a reasonable question.
 
 The truth is, Shoelace has matured a lot over the years. While that's a great thing for its users, as an artist, I've lost my canvas for creativity. I'm still committed to Shoelace and I think it has a very promising future, but I'm no longer in charge of its design or its day to day operations. It has a full team now and we're building a product out of it. It's not my personal playground, anymore.
 
 **Enter Quiet, my creative outlet.**
 
-A passion project. Something I'm building to explore new ideas and have fun with. It leans towards the bleeding edge of what's become possible with browsers in recent years. It uses modern features more than it probably should. It goes further than just components. Quiet isn't meant to compete with Shoelace, it allows me to try new things that may or may not work and improve my skills as a designer and developer.
+A passion project. Something I'm building to explore new ideas and have fun with. It leans towards the bleeding edge of what's become possible with browsers in recent years. It uses modern features more than it probably should. It goes further than just components. Quiet isn't meant to compete with Shoelace — it allows me to try new things that may or may not work and improve my skills as a designer and developer.
 
 As a result, you'll find that Quiet is rather opinionated. I carefully curate everything from the project's scope down to every individual line of code. Oftentimes, saying "no" is key to maintaining the quality of the library and my ability to steward it effectively.
 
-If that's not exactly what you want, it's probably not a good choice for your next project. For the rest of you — those who see the vision and like living on the edge — go ahead and use it to your heart's content.
+If Quiet isn't exactly what you want, it's probably not a good choice for your project. For the rest of you — those who see the vision and like living on the edge — go ahead and use it to your heart's content.
 
 **But be warned…**
 

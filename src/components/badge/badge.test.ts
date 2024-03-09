@@ -1,4 +1,4 @@
-import '../../../dist/quiet.js';
+import '../../../dist/quiet.loader.js';
 import { expect, fixture, html } from '@open-wc/testing';
 import type { Badge } from './badge.js';
 

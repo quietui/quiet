@@ -4,6 +4,10 @@ description: TODO
 layout: docs
 ---
 
+
+
+## Cloning the repo
+
 To set up a local development environment, [fork the repo on GitHub](https://github.com/quietui/quiet/fork), clone it locally, and install its dependencies.
 
 ```sh
@@ -12,15 +16,21 @@ cd quiet
 npm install
 ```
 
+:::danger
+Please read the [contribution guidelines](/docs/developers/contributing) before submitting a pull request.
+:::
+
+## Starting the dev server
+
 Once you've cloned the repo, run the following command to launch the development server.
 
 ```sh
-npm run start
+npm start
 ```
 
-This will launch a browser showing the docs. The browser will reload as you make changes to the project.
+This will open a browser showing the docs. As you work, the browser will automatically reload.
 
-## Production Builds
+## Building for production
 
 When you're ready to create a production build, use the following command.
 
@@ -30,12 +40,18 @@ npm run build
 
 The `dist` folder will contain the files you want.
 
-There are a number of commands you can use to lint and test the library. For a full list of them, run the following command.
+There are a number of commands you can use to lint and test the library. For a full list of them, use `npm run`.
+
+## Running tests
+
+Quiet uses [Web Test Runner](https://modern-web.dev/docs/test-runner/overview/) to test in actual browsers. Once installed and built, the following command will launch the test runner.
 
 ```sh
-npm run
+npm run test
 ```
 
-## Testing
+If you want to test a single component, pass the tag name without the `quiet-` prefix like this.
 
-TODO
+```sh
+npm run test:component button
+```

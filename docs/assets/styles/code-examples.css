@@ -39,6 +39,15 @@
   }
 }
 
+.code-example-source:not(:has(+ .code-example-buttons)) {
+  border-bottom: none;
+
+  pre {
+    border-bottom-right-radius: calc(var(--quiet-border-radius));
+    border-bottom-left-radius: calc(var(--quiet-border-radius));
+  }
+}
+
 .code-example-buttons {
   display: flex;
   align-items: stretch;

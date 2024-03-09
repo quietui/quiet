@@ -29,7 +29,6 @@
 
   .copy-code-check-icon {
     display: none;
-    color: var(--quiet-confirmative-colored-text);
   }
 
   &.copied {

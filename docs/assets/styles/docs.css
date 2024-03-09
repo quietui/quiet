@@ -764,6 +764,7 @@ quiet-callout {
 
   code {
     background: transparent;
+    padding-inline: 0;
   }
 }
 

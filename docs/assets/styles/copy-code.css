@@ -18,6 +18,12 @@
     outline: var(--quiet-focus-ring);
   }
 
+  @media (hover: hover) {
+    &:hover {
+      background: var(--quiet-neutral-800);
+    }
+  }
+
   &:active {
     translate: 0 1px;
   }

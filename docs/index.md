@@ -18,11 +18,11 @@ Professionally designed. Platform-built. Open source.
 <div class="splash-actions">
 
 <quiet-button href="/docs/" variant="primary" pill>
-Get Started
+Get started
 </quiet-button>
 
-<quiet-button href="https://github.com/quietui/quiet" pill>
-View on GitHub
+<quiet-button href="/about" pill>
+About this project
 </quiet-button>
 
 </div>

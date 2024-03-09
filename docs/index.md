@@ -26,14 +26,4 @@ About this project
 </quiet-button>
 
 </div>
-
-<div class="quick-start">
-<small>Ready to jump in? Paste this into your <code>&lt;head&gt;</code> and go…</small>
-
-```html
-<link rel="stylesheet" href="{% cdnUrl '/dist/quiet.css' %}">
-<script src="{% cdnUrl '/dist/quiet.loader.js' %}" type="module"></script>
-```
-
-</div>
 </div>

@@ -161,12 +161,12 @@ Image buttons are a special variant that let you create application icons and ot
 
 ```html {.example}
 <quiet-button variant="image">
-  <img width="60" height="60" src="/assets/images/app-icon.png" alt="Launch Quiet">
+  <img src="/assets/images/app-icon.png" alt="Launch Quiet" style="width: 60px; height: 60px;">
 </quiet-button>
 ```
 
 :::info
-Use the `width` and `height` attributes to prevent shifting as the image loads and make sure to provide `alt` text for assistive devices.
+Don't forget to include `alt` text on images for assistive devices.
 :::
 
 ### Loading

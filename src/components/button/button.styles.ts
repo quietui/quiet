@@ -136,7 +136,6 @@ export default css`
       padding: 0;
 
       ::slotted(*) {
-        width: auto !important;
         border-radius: calc(var(--quiet-border-radius) * 2) !important;
       }
     }

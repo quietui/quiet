@@ -60,7 +60,7 @@ Some attributes will _reflect_, or be added/removed automatically, when setting 
 
 Many components accepts content through slots. Slots are a platform feature that work very similar to the slots you may have used in Vue. A custom element can have any number of slots.
 
-The default slot is almost any content inside the component. In this example, we're slotting a text node into the button to serve as its label.
+The default slot is almost any content inside the component. In this example, we're slotting a text node into the button to serve as its label, but it could be an HTML element as well.
 
 ```html {.example .no-buttons}
 <quiet-button>
@@ -93,8 +93,6 @@ You can insert more than one item into a named slot. This card has a `footer` sl
 </quiet-card>
 ```
 
-Refer to the documentation to see which slots are available for each component.
-
 ## Events
 
 Many components emit [custom events](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent) when certain things happen. For example, a [`<quiet-button>`](/docs/components/button) emits an event called `quiet-click` when the button is activated. You can listen for custom events the same way you listen for native events.
@@ -107,13 +105,12 @@ Many components emit [custom events](https://developer.mozilla.org/en-US/docs/We
 
   button.addEventListener('quiet-click', event => {
     // The button has been clicked
+    console.log(event);
   });
 </script>
 ```
 
-You can also listen to native events on custom elements. However, it's important to understand that native events occur inside the shadow DOM and are [retargeted from the host](https://javascript.info/shadow-dom-events), so they might not work the exact way you expect.
-
-When available, it's always better to use a custom event instead of a native one. Refer to the documentation to see which events a component emits.
+You can also listen to native events on custom elements. However, it's important to understand that native events occur inside the shadow DOM and are [retargeted to the host](https://javascript.info/shadow-dom-events), so they might not work the exact way you expect. When available, it's always better to use a custom event instead of a native one.
 
 :::danger
 Event bubbling is a common pitfall. In the same way native HTML elements all dispatch a `click` event, Quiet components often dispatch custom events that aren't unique to the component. [Learn more about custom event bubbling.](https://www.abeautifulsite.net/posts/custom-event-names-and-the-bubbling-problem/)
@@ -132,7 +129,7 @@ The information contained in an event's `detail` property is described in the re
 
 ## Methods
 
-Some components have methods you can all. For example, you can programmatically set focus to a button by calling its `focus()` method.
+Some components have methods you can call. To call a method, you'll first need to obtain a reference to the element. For example, you can programmatically set focus to a button by calling its `focus()` method. 
 
 ```js
 const button = document.querySelector('quiet-button');
@@ -207,6 +204,8 @@ You can, however, select non-structural pseudo elements such as `::before` and `
   }
 </style>
 ```
+
+Another caveat of parts involves animation. When you target an element with `::part()`, you're changing styles inside the shadow DOM. However, animations require keyframes to exist in the same document, and it's not currently possible to do define keyframes from outside the shadow DOM. You can, however, apply animations to the component itself.
 
 Not all components expose parts. Refer to the documentation to see which parts a component has.
 

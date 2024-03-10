@@ -21,7 +21,7 @@ Professionally designed. Platform-built. Open source.
 Get started
 </quiet-button>
 
-<quiet-button href="/about" pill>
+<quiet-button href="/about" variant="text" pill>
 About this project
 </quiet-button>
 

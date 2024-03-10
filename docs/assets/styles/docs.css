@@ -630,6 +630,7 @@ figure.float-end {
 
 .docs-aside a {
   color: inherit;
+  font-weight: var(--quiet-font-weight-normal);
   text-decoration: none;
   transition: 150ms color ease;
 
@@ -643,18 +644,7 @@ figure.float-end {
 .docs-aside .current {
   position: relative;
   color: var(--quiet-primary-colored-text);
-
-  /* Dot as a visual indicator */
-  &::after {
-    content: '';
-    position: absolute;
-    top: calc(50% - 0.125em);
-    left: -0.5rem;
-    width: 0.25em;
-    height: 0.25em;
-    background: var(--quiet-primary-fill-moderate);
-    border-radius: 50%;
-  }
+  font-weight: var(--quiet-font-weight-bold);
 }
 
 /* Callouts */

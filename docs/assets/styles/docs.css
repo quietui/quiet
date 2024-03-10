@@ -298,9 +298,9 @@ html:not(.quiet-dark) .only-dark {
   overflow-x: hidden;
   overflow-y: auto;
 
-  /* Bump the padding so focus rings don't get clipped, then transform is back so it's visually aligned */
-  padding-inline-start: calc(var(--quiet-focus-width) + var(--quiet-focus-offset));
-  translate: calc(-1 * (var(--quiet-focus-width) + var(--quiet-focus-offset)));
+  /* Bump the padding so focus rings and dots don't get clipped, then transform is back so it's visually aligned */
+  padding-inline-start: calc(var(--quiet-focus-width) + var(--quiet-focus-offset) + 0.25rem);
+  translate: calc(-1 * (var(--quiet-focus-width) + var(--quiet-focus-offset)) - 0.25rem);
 }
 
 #page {
@@ -641,8 +641,20 @@ figure.float-end {
 }
 
 .docs-aside .current {
-  font-weight: var(--quiet-font-weight-semibold);
+  position: relative;
   color: var(--quiet-primary-colored-text);
+
+  /* Dot as a visual indicator */
+  &::after {
+    content: '';
+    position: absolute;
+    top: calc(50% - 0.125em);
+    left: -0.5rem;
+    width: 0.25em;
+    height: 0.25em;
+    background: var(--quiet-primary-fill-moderate);
+    border-radius: 50%;
+  }
 }
 
 /* Callouts */

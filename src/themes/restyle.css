@@ -196,7 +196,7 @@ kbd {
 }
 
 mark {
-  background-color: var(--quiet-primary-fill-softer);
+  background-color: var(--quiet-primary-fill-soft);
   border-radius: 0;
   color: inherit;
   border-radius: calc(var(--quiet-border-radius) / 2);

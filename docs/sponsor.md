@@ -26,11 +26,9 @@ I want Quiet to remain free for everyone to learn from. I don't get paid to buil
   “Your sponsorship lets me build this software for the greater good. All proceeds go directly to maintaining the library — new features, bug fixes, and support. Thank you!”
 </div>
 
-<div style="font-size: 1.25rem; margin-block: 3rem;">
-  <quiet-button variant="primary" href="https://github.com/sponsors/claviska" target="_blank">
-    Make a contribution
-  </quiet-button>
-</div>
+<quiet-button variant="primary" href="https://github.com/sponsors/claviska" target="_blank" style="font-size: 1.25rem; margin-block-start: 2.5rem; margin-block-end: 2rem;">
+  Make a contribution
+</quiet-button>
 
 Alternatively, I can accept [contributions through PayPal](https://paypal.me/claviska).
 

@@ -13,7 +13,7 @@ If you've made it to this page, there's a good chance I've already saved you a l
 
 I want Quiet to remain free for everyone to learn from. I don't get paid to build it so, if you're using this software to make a profit, ==I respectfully ask that you sponsor the project== with a [one-time](https://github.com/sponsors/claviska?frequency=one-time) or [recurring donation](https://github.com/sponsors/claviska?frequency=recurring) via GitHub.
 
-<div style="display: flex; align-items: center; gap: 1.5rem;">
+<div style="display: flex; align-items: center; gap: 2rem; font-size: 1.25rem;">
   <img 
     src="http://0.gravatar.com/avatar/bf1b3b95fd5b096a3592247c29667b33?s=512" 
     alt="Cory's avatar"
@@ -23,10 +23,10 @@ I want Quiet to remain free for everyone to learn from. I don't get paid to buil
       border-radius: 50%;
     "
   >
-  Your sponsorship lets me continue building this software for the greater good. All proceeds go directly to maintaining the library via new features, bug fixes, and support.
+  “Your sponsorship lets me build this software for the greater good. All proceeds go directly to maintaining the library via new features, bug fixes, and support.”
 </div>
 
-<div style="font-size: 1.5rem; margin-block: 3rem;">
+<div style="font-size: 1.25rem; margin-block: 3rem;">
   <quiet-button variant="primary" href="https://github.com/sponsors/claviska" target="_blank">
     Make a contribution
   </quiet-button>

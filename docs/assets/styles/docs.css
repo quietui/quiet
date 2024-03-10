@@ -644,7 +644,7 @@ figure.float-end {
 .docs-aside .current {
   position: relative;
   color: var(--quiet-primary-colored-text);
-  font-weight: var(--quiet-font-weight-bold);
+  font-weight: var(--quiet-font-weight-semibold);
 }
 
 /* Callouts */

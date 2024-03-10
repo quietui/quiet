@@ -23,7 +23,7 @@ I want Quiet to remain free for everyone to learn from. I don't get paid to buil
       border-radius: 50%;
     "
   >
-  “Your sponsorship lets me build this software for the greater good. All proceeds go directly to maintaining the library via new features, bug fixes, and support.”
+  “Your sponsorship lets me build this software for the greater good. All proceeds go directly to maintaining the library — new features, bug fixes, and support. Thank you!”
 </div>
 
 <div style="font-size: 1.25rem; margin-block: 3rem;">

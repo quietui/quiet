@@ -6,7 +6,19 @@ section: about
 ---
 
 <a href="https://twitter.com/claviska" data-no-external-icon>
-  <quiet-avatar label="Cory LaViska's avatar" image="http://0.gravatar.com/avatar/bf1b3b95fd5b096a3592247c29667b33?s=512" style="--size: 7rem; float: right; margin-inline-start: 2rem; margin-block-end: 1rem;"></quiet-avatar>
+  <img 
+    src="http://0.gravatar.com/avatar/bf1b3b95fd5b096a3592247c29667b33?s=512" 
+    alt="Cory's avatar"
+    width="96"
+    height="96"
+    style="
+      float: right;
+      max-width: 10em;
+      height: auto;
+      border-radius: var(--quiet-border-radius);
+      margin-inline-start: 2rem; 
+      margin-block-end: 1rem;"
+  >
 </a>
 
 Quiet is built in New Hampshire by [Cory LaViska](https://twitter.com/claviska), the creator of [Shoelace](https://shoelace.style/). With the success of Shoelace, many of you are probably wondering why I'd choose to build another UI library, and that's a reasonable question.

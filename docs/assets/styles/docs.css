@@ -619,6 +619,11 @@ figure.float-end {
   margin-inline: 0;
 }
 
+.docs-aside ul ul {
+  margin-block: 0.5rem;
+  margin-inline: 1rem;
+}
+
 .docs-aside li {
   color: var(--quiet-neutral-colored-text);
   list-style: none;

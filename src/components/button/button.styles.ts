@@ -16,7 +16,7 @@ export default css`
     width: 100%;
     height: 3em;
     font: inherit;
-    font-size: 0.95em;
+    font-size: 0.9375em;
     font-weight: var(--quiet-font-weight-semibold);
     text-decoration: none;
     vertical-align: middle;

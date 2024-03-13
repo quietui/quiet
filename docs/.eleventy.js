@@ -44,7 +44,7 @@ export default function (eleventyConfig) {
 
     if (!component) {
       throw new Error(
-        `Unable to find "<${tagName}>". Make sure the file name is the same as the tag name (without prefix)`
+        `Unable to find "<${tagName}>". Make sure the file name is the same as the tag name (without prefix).`
       );
     }
     return component;

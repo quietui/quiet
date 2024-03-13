@@ -28,7 +28,7 @@ export class Spinner extends LitElement {
   render() {
     return html`
       <svg fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <g><circle cx="12" cy="12" r="10" fill="none" stroke-width="3" /></g>
+        <g><circle cx="12" cy="12" r="10" fill="none" stroke-width="2" /></g>
       </svg>
     `;
   }

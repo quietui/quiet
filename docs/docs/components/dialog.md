@@ -334,7 +334,7 @@ You can check `event.detail.source` to see which element triggered the dialog to
   </quiet-button>
   
   <quiet-button slot="footer" data-dialog="dismiss" variant="primary">
-    I will close it
+    Only I will close it
   </quiet-button>
 </quiet-dialog>
 

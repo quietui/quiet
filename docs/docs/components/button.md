@@ -169,7 +169,7 @@ Image buttons are a special variant that let you create application icons and ot
 Don't forget to include `alt` text on images for assistive devices.
 :::
 
-### Loading
+### Loading buttons
 
 To show the button in a loading state, add the `loading` attribute. When a button is loading, it is effectively disabled and the `quiet-click` event will not be emitted.
 
@@ -179,7 +179,7 @@ To show the button in a loading state, add the `loading` attribute. When a butto
 </quiet-button>
 ```
 
-### Disabling
+### Disabling buttons
 
 To disable a button, add the `disabled` attribute. When a button is disabled, the `quiet-click` event will not be emitted.
 

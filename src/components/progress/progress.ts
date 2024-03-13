@@ -32,13 +32,13 @@ export class Progress extends QuietElement {
   @property() label = '';
 
   /** The progress bar's minimum value. */
-  @property({ type: Number, reflect: true }) min = 0;
+  @property({ type: Number }) min = 0;
 
   /** The progress bar's maximum value. */
-  @property({ type: Number, reflect: true }) max = 100;
+  @property({ type: Number }) max = 100;
 
   /** The progress bar's current value. */
-  @property({ type: Number, reflect: true }) value = 0;
+  @property({ type: Number }) value = 0;
 
   /** The progress bar's current value as a percentage. This is a readonly property. */
   public get percentage() {
@@ -49,7 +49,7 @@ export class Progress extends QuietElement {
    * When the completion status can't be determined, the progress bar is considered indeterminate and the value is
    * ignored. Useful for tasks whose progress can't be reported.
    */
-  @property({ type: Boolean, reflect: true }) indeterminate = false;
+  @property({ type: Boolean }) indeterminate = false;
 
   connectedCallback() {
     super.connectedCallback();

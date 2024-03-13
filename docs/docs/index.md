@@ -6,9 +6,9 @@ layout: docs
 
 There are two ways to install Quiet. Autoloading is the easiest way to get started using components. However, you can also import them manually from the CDN or using a bundler.
 
-## Autoloading <quiet-badge variant="confirmative" data-no-outline>Recommended</quiet-badge>
+## Autoloading <quiet-badge variant="confirmative" data-no-outline data-no-anchor>Recommended</quiet-badge>
 
-The autoloader will automatically register components as you add them to the DOM. Just place the following code into the `<head>` section of an HTML document and you can use all of Quiet's components without any further effort.
+The autoloader will automatically register components as you add them to the DOM. Just place the following code into the `<head>` section of an HTML document and you can use all of Quiet's components via CDN without any further effort.
 
 ```html
 <link rel="stylesheet" href="{% cdnUrl '/dist/quiet.css' %}">
@@ -19,7 +19,7 @@ The autoloader will automatically register components as you add them to the DOM
 Quiet components are [custom HTML elements](https://developer.mozilla.org/en-US/docs/Web/API/Web_components). They're built with platform APIs, so you can use them anywhere — even in your favorite framework!
 :::
 
-### Avoiding FOUCE
+### Discovery complete
 
 Custom elements are registered with JavaScript, so you might experience <abbr title="Flash of undefined custom elements">FOUCE</abbr> when the page first loads. You can [learn more about FOUCE](https://www.abeautifulsite.net/posts/flash-of-undefined-custom-elements/) and various ways to deal with it on my blog.
 
@@ -28,14 +28,14 @@ As a convenience, Quiet's autoloader emits an event called `quiet-discovery-comp
 ```js
 window.addEventListener('quiet-discovery-complete', event => {
   // All custom elements have been registered!
-});
+}, { once: true });
 ```
 
 You can inspect `event.detail.registered` to see an array of tag names that were found and registered. Similarly, `event.detail.unknown` will be an array of `<quiet-*>` tags that were found in the document but couldn't be registered. This can happen if you use the wrong tag name, if the files are missing, or if you're trying to use new components with an older version of the library.
 
-### Forcing discovery
+### Awaiting discovery
 
-The autoloader will automatically discover and register elements you add to the document after the page first loads. If necessary, you can force discovery and await registration with the `discoverElements()` function.
+The autoloader will automatically discover and register elements you add to the document after the page loads. If necessary, you can force discovery and await registration with the `discoverElements()` function.
 
 ```js
 import { discoverElements } from '/dist/quiet.js';
@@ -47,7 +47,7 @@ await discoverElements();
 // All custom elements have been registered!
 ```
 
-## Manually importing <quiet-badge variant="destructive" data-no-outline>Advanced</quiet-badge>
+## Manually importing <quiet-badge variant="destructive" data-no-outline data-no-anchor>Advanced</quiet-badge>
 
 If you don't want to use the autoloader, you can import components manually from the CDN or from a local npm installation. For npm, use the following command to install Quiet.
 
@@ -99,4 +99,3 @@ setLibraryPath('/path/to/quiet');
 :::danger
 If you're not seeing components or icons load, make sure you've copied the necessary files into your project and set the library path correctly!
 :::
-

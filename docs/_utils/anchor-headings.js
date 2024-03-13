@@ -39,7 +39,12 @@ export function anchorHeadingsPlugin(options = {}) {
       // Look for headings
       container.querySelectorAll(options.headingSelector).forEach(heading => {
         const hasAnchor = heading.querySelector('a');
-        let slug = createId(heading.textContent ?? '') ?? uuid().slice(-12);
+        const clone = parse(heading.outerHTML);
+
+        // Create a clone of the heading so we can remove [data-no-anchor] elements from the text content
+        clone.querySelectorAll('[data-no-anchor]').forEach(el => el.remove());
+
+        let slug = createId(clone.textContent ?? '') ?? uuid().slice(-12);
         let id = slug;
         let suffix = 0;
 

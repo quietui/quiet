@@ -7,6 +7,9 @@
   // words - list of words to be always considered correct
   "words": [
     "activedescendant",
+    "afterend",
+    "aria-describedby",
+    "aria-labelledby",
     "atrule",
     "autofix",
     "autoload",
@@ -57,6 +60,8 @@
     "smartquotes",
     "stylesheet",
     "Tabler",
+    "tablist",
+    "tabpanel",
     "Triaging",
     "unregistering",
     "unsupportive",

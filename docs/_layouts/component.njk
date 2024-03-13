@@ -261,13 +261,26 @@
     </ul>
   {% endif %}
 
+  {# Importing #}
   <h2>Importing</h2>
   <p>
-    To manually import this component from the CDN, use the following code.
+    The <a href="/docs/#autoloading">autoloader</a> is the recommended way to import components. If you prefer to do it manually, use one of the following code snippets.
   </p>
-  <pre><code class="language-js">import '{% cdnUrl component.path %}';</code></pre>
-  <p>
-    To manually import this component from npm, use the following code.
-  </p>
-  <pre><code class="language-js">import '@quietui/quiet/{{ component.path }}';</code></pre>
+
+  <quiet-tablist label="How would you like to import this component?">
+    <quiet-tab slot="tab" panel="cdn">CDN</quiet-tab>
+    <quiet-tab slot="tab" panel="npm">npm</quiet-tab>
+    <quiet-tabpanel name="cdn">
+      <p>
+        To manually import this component from the CDN, use the following code.
+      </p>
+      <pre><code class="language-js">import '{% cdnUrl component.path %}';</code></pre>
+    </quiet-tabpanel>
+    <quiet-tabpanel name="npm">
+      <p>
+        To manually import this component from npm, use the following code.
+      </p>
+      <pre><code class="language-js">import '@quietui/quiet/{{ component.path }}';</code></pre>
+    </quiet-tabpanel>
+  </quiet-tablist>
 {% endblock %}

@@ -59,8 +59,8 @@ export default css`
     /* Center placement */
     &[data-placement='center'] {
       --pulse-size: 1.02;
-      max-width: calc(100vw - var(--quiet-content-spacing));
-      max-height: calc(100vh - var(--quiet-content-spacing));
+      max-width: calc(100vw - 2rem);
+      max-height: calc(100vh - 2rem);
 
       &.show {
         animation: show-from-center var(--show-duration) ease;

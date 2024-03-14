@@ -92,15 +92,15 @@ export class Icon extends QuietElement {
       return undefined;
     }
 
-    try {
-      // If this is a new request, add it to the cache so subsequent requests can share it instead of hitting the server
-      if (!requests.has(url)) {
-        requests.set(
-          url,
-          fetch(url, { mode: 'cors' }).then(res => res.text())
-        );
-      }
+    // Cache new requests so subsequent ones can share it
+    if (!requests.has(url)) {
+      requests.set(
+        url,
+        fetch(url, { mode: 'cors' }).then(res => res.text())
+      );
+    }
 
+    try {
       const responseText = await requests.get(url)!;
       const parser = new DOMParser();
       const doc = parser.parseFromString(responseText, 'text/html');

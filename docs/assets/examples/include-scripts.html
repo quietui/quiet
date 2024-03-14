@@ -1,0 +1,11 @@
+<p>
+  This content was included <a href="/assets/examples/include-scripts.html" target="_blank">from another file</a> and it
+  has a script.
+</p>
+
+<p id="include-script-content" style="margin-block-end: 0"></p>
+
+<script>
+  const div = document.getElementById('include-script-content');
+  div.innerHTML = 'If you see this line, the script has executed!';
+</script>

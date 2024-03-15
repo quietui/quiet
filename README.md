@@ -2,7 +2,7 @@
 
 ![Quiet UI logo](https://pbs.twimg.com/profile_banners/1705198841094356992/1697645956/1500x500)
 
-Quiet is a high quality UI library hand-crafted for the Web with a focus on accessibility, performance, longevity, and aesthetics. It uses [standardized browser APIs](https://developer.mozilla.org/en-US/docs/Web/API/Web_components), so its components are highly portable and interoperable. That means you can use them with just about any JavaScript framework — or even without one!
+Quiet is a high quality UI library hand-crafted for the Web with a focus on accessibility, longevity, performance, and simplicity. It uses [standardized browser APIs](https://developer.mozilla.org/en-US/docs/Web/API/Web_components), so its components are highly portable and interoperable. That means you can use them with just about any JavaScript framework — or even without one!
 
 Since Quiet is built with Web Standards, it's not tied to the lifespan of any framework. Learn it once, use it forever. Quiet has an accessibility-first philosophy and is laser-focused on providing the building blocks for amazing user interfaces for everyone on the Web.
 

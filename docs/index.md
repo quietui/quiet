@@ -1,6 +1,6 @@
 ---
 title: Quiet UI
-description: A hand-crafted library for the Web with a focus on accessibility, performance, longevity, and aesthetics.
+description: A hand-crafted library for the Web with a focus on accessibility, longevity, performance, and simplicity.
 layout: splash
 ---
 

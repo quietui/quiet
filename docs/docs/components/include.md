@@ -55,7 +55,6 @@ If the HTTP request completes but the response is outside of the acceptable 200 
     // the 200 range. You can inspect event.detail.status to
     // see which HTTP code was provided.
     //
-    console.log(event);
   });
 
   include.addEventListener('quiet-network-error', event => {

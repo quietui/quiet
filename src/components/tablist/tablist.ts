@@ -64,6 +64,12 @@ export class TabList extends QuietElement {
     if (changedProps.has('active')) {
       this.setActive(this.active);
     }
+
+    // Set orientation
+    if (changedProps.has('placement')) {
+      const orientation = ['top', 'bottom'].includes(this.placement) ? 'horizontal' : 'vertical';
+      this.setAttribute('aria-orientation', orientation);
+    }
   }
 
   private handleTabsClick(event: PointerEvent) {

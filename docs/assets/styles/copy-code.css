@@ -51,7 +51,7 @@
 }
 
 @media (hover: hover) {
-  .copy-code {
+  .copy-code:not(:focus-within) {
     opacity: 0;
   }
 

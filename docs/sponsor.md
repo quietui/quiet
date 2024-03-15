@@ -13,24 +13,26 @@ If you've made it to this page, there's a good chance I've already saved you a l
 
 I want Quiet to remain free for everyone to learn from. I don't get paid to build it so, if you're using this software to make a profit, ==I respectfully ask that you sponsor the project== with a [one-time](https://github.com/sponsors/claviska?frequency=one-time) or [recurring donation](https://github.com/sponsors/claviska?frequency=recurring) via GitHub.
 
-<div style="display: flex; align-items: center; gap: 2rem; font-size: 1.25rem;">
+<div class="sponsorship-quote">
+<div class="quote">
   <img 
     src="http://0.gravatar.com/avatar/bf1b3b95fd5b096a3592247c29667b33?s=512" 
     alt="Cory's avatar"
-    style="
-      max-width: 5em;
-      height: auto;
-      border-radius: 50%;
-    "
   >
-  “Your sponsorship lets me build this software for the greater good. All proceeds go directly to maintaining the library, including new features, bug fixes, and support. Thank you!”
+  <div>
+  “Your sponsorship lets me build this software for the greater good. All proceeds go directly to maintaining the library, including new features, bug fixes, and support.”
+  <quiet-button variant="primary" href="https://github.com/sponsors/claviska" target="_blank">
+    Make a contribution
+  </quiet-button>
+  </div>
+  <img 
+    src="/assets/images/public-sponsor.png" 
+    alt="Cory's avatar"
+  >
+</div>
 </div>
 
-<quiet-button variant="primary" href="https://github.com/sponsors/claviska" target="_blank" style="font-size: 1.25rem; margin-block-start: 2.5rem; margin-block-end: 2rem;">
-  Make a contribution
-</quiet-button>
-
-Contributions sent through GitHub get you an optional contributor's badge on your profile or, if you prefer, you can contribute privately. Alternatively, I can accept [contributions through PayPal](https://paypal.me/claviska).
+Contributions sent through GitHub earn you (an optional) contributor's badge on your profile. Alternatively, I can accept [contributions through PayPal](https://paypal.me/claviska).
 
 ## Contact the maintainer
 

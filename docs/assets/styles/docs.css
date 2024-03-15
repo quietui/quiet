@@ -581,18 +581,17 @@ figure.float-end {
     max-width: calc(100% - 2rem);
     height: 100%;
     border-right: none;
-    translate: -100%;
     padding-inline: 1.5rem;
     padding-block: 3.25rem 2rem;
+    translate: -100%;
     transition:
-      var(--docs-sidebar-speed) translate ease,
-      var(--docs-sidebar-speed) box-shadow ease;
+      var(--docs-sidebar-speed) translate cubic-bezier(0.33, 1, 0.68, 1),
+      var(--docs-sidebar-speed) box-shadow cubic-bezier(0.33, 1, 0.68, 1);
   }
 
   .docs-sidebar-open #sidebar {
     box-shadow: 0 1px 1rem rgba(0 0 0 / 0.33);
     translate: 0;
-    scale: 1;
   }
 
   #backdrop {

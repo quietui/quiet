@@ -78,10 +78,10 @@ You can register your own translation by creating a new JavaScript or TypeScript
 
 Refer to the [default translation](https://github.com/quietui/quiet/tree/main/src/translations/en.ts) to see all terms that need to be translated.
 
-<quiet-tablist label="Select your flavor">
+<quiet-tab-list label="Select your flavor">
 <quiet-tab slot="tab" panel="ts">TypeScript</quiet-tab>
 <quiet-tab slot="tab" panel="js">JavaScript</quiet-tab>
-<quiet-tabpanel name="ts">
+<quiet-tab-panel name="ts">
 
 ```ts
 import { registerTranslation } from './dist/utilities/localize.js';
@@ -100,8 +100,8 @@ registerTranslation(translation);
 export default translation;
 ```
 
-</quiet-tabpanel>
-<quiet-tabpanel name="js">
+</quiet-tab-panel>
+<quiet-tab-panel name="js">
 
 ```js
 import { registerTranslation } from './dist/utilities/localize.js';
@@ -119,6 +119,6 @@ registerTranslation(translation);
 export default translation;
 ```
 
-</quiet-tabpanel>
-</quiet-tablist>
+</quiet-tab-panel>
+</quiet-tab-list>
 

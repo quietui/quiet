@@ -2,14 +2,14 @@ import { customElement, property } from 'lit/decorators.js';
 import { html } from 'lit';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import hostStyles from '../../styles/host.styles.js';
-import styles from './tabpanel.styles.js';
+import styles from './tab-panel.styles.js';
 import type { CSSResultGroup } from 'lit';
 
 /**
- * <quiet-tabpanel>
+ * <quiet-tab-panel>
  *
  * @summary Tab panels hold the content that gets displayed when a tab is selected.
- * @documentation https://quietui.com/docs/components/tabpanel
+ * @documentation https://quietui.com/docs/components/tab-panel
  * @status stable
  * @since 1.0
  *
@@ -17,7 +17,7 @@ import type { CSSResultGroup } from 'lit';
  *
  * @state visible - Applied when the tab panel is visible.
  */
-@customElement('quiet-tabpanel')
+@customElement('quiet-tab-panel')
 export class TabPanel extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 

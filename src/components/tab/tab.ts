@@ -26,7 +26,7 @@ export class Tab extends QuietElement {
   @property({ type: Boolean }) active = false;
 
   /**
-   * The name of the tab panel this tab will link to. The tab panel must be an HTML element inside the `<quiet-tablist>`
+   * The name of the tab panel this tab will link to. The tab panel must be an HTML element inside the `<quiet-tab-list>`
    * element with a `name` attribute.
    */
   @property() panel?: string;

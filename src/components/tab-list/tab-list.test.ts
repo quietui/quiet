@@ -1,10 +1,10 @@
 import '../../../dist/quiet.loader.js';
 import { expect, fixture, html } from '@open-wc/testing';
-import type { TabList } from './tablist.js';
+import type { TabList } from './tab-list.js';
 
-describe('<quiet-tablist>', () => {
+describe('<quiet-tab-list>', () => {
   it('does something', async () => {
-    const el = await fixture<TabList>(html` <quiet-tablist>Click me</quiet-tablist> `);
+    const el = await fixture<TabList>(html` <quiet-tab-list>Click me</quiet-tab-list> `);
     await expect(el).to.be.accessible();
   });
 });

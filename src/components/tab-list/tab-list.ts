@@ -1,27 +1,27 @@
+import '../tab-panel/tab-panel.js';
 import '../tab/tab.js';
-import '../tabpanel/tabpanel.js';
 import { customElement, property, query } from 'lit/decorators.js';
 import { html } from 'lit';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import hostStyles from '../../styles/host.styles.js';
-import styles from './tablist.styles.js';
+import styles from './tab-list.styles.js';
 import type { CSSResultGroup } from 'lit';
 import type { Tab } from '../tab/tab.js';
-import type { TabPanel } from '../tabpanel/tabpanel.js';
+import type { TabPanel } from '../tab-panel/tab-panel.js';
 
 let tabId = 1;
 let tabPanelId = 1;
 
 /**
- * <quiet-tablist>
+ * <quiet-tab-list>
  *
  * @summary Tab lists let users switch between different sections of content without leaving the page, providing a clean
  *  and organized interface.
- * @documentation https://quietui.com/docs/components/tablist
+ * @documentation https://quietui.com/docs/components/tab-list
  * @status stable
  * @since 1.0
  *
- * @slot - One or more `<quiet-tabpanel>` elements, each with a `name` attribute unique to the tab list.
+ * @slot - One or more `<quiet-tab-panel>` elements, each with a `name` attribute unique to the tab list.
  * @slot tab - One or more `<quiet-tab>` elements, each with a `panel` attribute linked to the `name` of a tab panel.
  *
  * @event quiet-tab-shown - Emitted after a tab is shown. The event will include a `detail` object with `tab` and
@@ -33,9 +33,9 @@ let tabPanelId = 1;
  * @csspart panels - The container that holds all of the tab panels.
  *
  * @dependency quiet-tab
- * @dependency quiet-tabpanel
+ * @dependency quiet-tab-panel
  */
-@customElement('quiet-tablist')
+@customElement('quiet-tab-list')
 export class TabList extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
@@ -88,7 +88,7 @@ export class TabList extends QuietElement {
 
   private getPanels() {
     const panels = this.panelSlot.assignedElements({ flatten: true }) as TabPanel[];
-    return panels.filter(panel => panel.localName === 'quiet-tabpanel');
+    return panels.filter(panel => panel.localName === 'quiet-tab-panel');
   }
 
   private handleSlotChange() {
@@ -97,7 +97,7 @@ export class TabList extends QuietElement {
 
     // Ensure tabs and panels have ids
     tabs.forEach(tab => (tab.id = tab.id || `quiet-tab-${tabId++}`));
-    panels.forEach(panel => (panel.id = panel.id || `quiet-tabpanel-${tabPanelId++}`));
+    panels.forEach(panel => (panel.id = panel.id || `quiet-tab-panel-${tabPanelId++}`));
     // Link tabs and panels
     tabs.forEach(tab => {
       const name = tab.panel;

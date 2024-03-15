@@ -1,5 +1,7 @@
 import { customElement } from 'lit/decorators.js';
-import { html, LitElement } from 'lit';
+import { html } from 'lit';
+import { Localize } from '../../utilities/localize.js';
+import { QuietElement } from '../../utilities/quiet-element.js';
 import hostStyles from '../../styles/host.styles.js';
 import styles from './spinner.styles.js';
 import type { CSSResultGroup } from 'lit';
@@ -15,14 +17,15 @@ import type { CSSResultGroup } from 'lit';
  * @cssproperty [--color=var(--quiet-primary-fill-moderate)] - The spinner's color.
  */
 @customElement('quiet-spinner')
-export class Spinner extends LitElement {
+export class Spinner extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
+
+  private localize = new Localize(this);
 
   connectedCallback() {
     super.connectedCallback();
-
     this.setAttribute('role', 'progressbar');
-    this.setAttribute('aria-label', 'Loading'); // TODO - localize
+    this.setAttribute('aria-label', this.localize.term('loading'));
   }
 
   render() {

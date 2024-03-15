@@ -1,8 +1,13 @@
 import { LitElement } from 'lit';
+import { property } from 'lit/decorators.js';
 
 export class QuietElement extends LitElement {
   protected internals?: ElementInternals;
   shadowRoot: ShadowRoot;
+
+  // Make localization attributes reactive
+  @property() dir: string;
+  @property() lang: string;
 
   /**
    * Browser support for `ElementInternals.states` isn't great at the time of this writing. By using these utilities,

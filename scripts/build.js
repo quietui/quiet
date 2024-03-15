@@ -139,7 +139,9 @@ async function generateBundle() {
       // Autoloader + utilities
       './src/quiet.loader.ts',
       // Individual components
-      ...(await globby('./src/components/**/!(*.(style|test)).ts'))
+      ...(await globby('./src/components/**/!(*.(style|test)).ts')),
+      // Translations
+      ...(await globby('./src/translations/**/*.ts'))
     ],
     outdir: distDir,
     chunkNames: 'chunks/[name].[hash]',

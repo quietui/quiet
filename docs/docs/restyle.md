@@ -213,13 +213,6 @@ export function thing(arg) {
 
 <iframe src="https://www.youtube.com/embed/ALGG6ptfLdc?si=03a9K9QigWi2A9Wt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-<style>
-  .two-columns {
-    columns: 2;
-    column-gap: 2rem;
-  }
-</style>
-
 </div>
 
 ---

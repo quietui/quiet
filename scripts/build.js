@@ -39,9 +39,9 @@ async function buildAll() {
 
     const time = (Date.now() - start) / 1000 + 's';
     spinner.succeed(`The build is complete ${chalk.gray(`(finished in ${time})`)}`);
-  } catch (error) {
+  } catch (err) {
     spinner.fail();
-    console.log(chalk.red(`\n${error}`));
+    console.log(chalk.red(`\n${err}`));
   }
 }
 

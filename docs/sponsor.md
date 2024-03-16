@@ -21,7 +21,7 @@ I want Quiet to remain free for everyone to learn from. I don't get paid to buil
   >
   <div>
   “Your sponsorship lets me build this software for the greater good. All proceeds go directly to maintaining the library, including new features, bug fixes, and support.”
-  <quiet-button variant="primary" href="https://github.com/sponsors/claviska" target="_blank">
+  <quiet-button variant="primary" pill href="https://github.com/sponsors/claviska" target="_blank">
     Make a contribution
   </quiet-button>
   </div>

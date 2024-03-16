@@ -34,7 +34,7 @@ import type { CSSResultGroup } from 'lit';
  * @dependency quiet-spinner
  */
 @customElement('quiet-button')
-export class Button extends QuietElement {
+export class QuietButton extends QuietElement {
   static shadowRootOptions = { ...QuietElement.shadowRootOptions, delegatesFocus: true };
   static styles: CSSResultGroup = [hostStyles, styles];
 
@@ -241,6 +241,6 @@ export class Button extends QuietElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'quiet-button': Button;
+    'quiet-button': QuietButton;
   }
 }

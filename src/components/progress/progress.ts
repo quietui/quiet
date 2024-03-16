@@ -23,7 +23,7 @@ import type { CSSResultGroup } from 'lit';
  * @cssproperty [--track-color=var(--quiet-neutral-fill-softer)] - The color of the progress bar's track.
  */
 @customElement('quiet-progress')
-export class Progress extends QuietElement {
+export class QuietProgress extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
   @query('.indicator') private indicator: HTMLDivElement;
@@ -92,5 +92,11 @@ export class Progress extends QuietElement {
         <slot></slot>
       </div>
     `;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'quiet-progress': QuietProgress;
   }
 }

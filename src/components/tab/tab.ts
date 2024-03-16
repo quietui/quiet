@@ -19,7 +19,7 @@ import type { CSSResultGroup } from 'lit';
  * @state disabled - Applied when the tab is selected.
  */
 @customElement('quiet-tab')
-export class Tab extends QuietElement {
+export class QuietTab extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
   /** @internal The controller will set this property to true when the tab is active. */
@@ -66,5 +66,11 @@ export class Tab extends QuietElement {
 
   render() {
     return html` <slot></slot> `;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'quiet-tab': QuietTab;
   }
 }

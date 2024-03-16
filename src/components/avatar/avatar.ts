@@ -22,7 +22,7 @@ import type { CSSResultGroup } from 'lit';
  * @dependency quiet-icon
  */
 @customElement('quiet-avatar')
-export class Avatar extends QuietElement {
+export class QuietAvatar extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
   /**
@@ -63,5 +63,11 @@ export class Avatar extends QuietElement {
           `}
       ${this.image ? html` <img class="image" role="presentation" src=${this.image} alt="" /> ` : ''}
     `;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'quiet-avatar': QuietAvatar;
   }
 }

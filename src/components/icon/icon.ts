@@ -23,7 +23,7 @@ const requests = new Map<string, Promise<string>>();
  * @event quiet-icon-error - The icon failed to reload.
  */
 @customElement('quiet-icon')
-export class Icon extends QuietElement {
+export class QuietIcon extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
   @state() private svg?: SVGSVGElement;
@@ -124,5 +124,11 @@ export class Icon extends QuietElement {
 
   render() {
     return this.svg;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'quiet-icon': QuietIcon;
   }
 }

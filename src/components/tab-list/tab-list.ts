@@ -6,8 +6,8 @@ import { QuietElement } from '../../utilities/quiet-element.js';
 import hostStyles from '../../styles/host.styles.js';
 import styles from './tab-list.styles.js';
 import type { CSSResultGroup } from 'lit';
-import type { Tab } from '../tab/tab.js';
-import type { TabPanel } from '../tab-panel/tab-panel.js';
+import type { QuietTab } from '../tab/tab.js';
+import type { QuietTabPanel } from '../tab-panel/tab-panel.js';
 
 let tabId = 1;
 let tabPanelId = 1;
@@ -36,7 +36,7 @@ let tabPanelId = 1;
  * @dependency quiet-tab-panel
  */
 @customElement('quiet-tab-list')
-export class TabList extends QuietElement {
+export class QuietTabList extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
   @query('.tabs > slot') private tabSlot: HTMLSlotElement;
@@ -74,7 +74,7 @@ export class TabList extends QuietElement {
 
   private handleTabsClick(event: PointerEvent) {
     const target = event.target as HTMLElement;
-    const tab = target.closest<Tab>('quiet-tab');
+    const tab = target.closest<QuietTab>('quiet-tab');
 
     if (tab?.panel && !tab.disabled) {
       this.active = tab.panel || '';
@@ -82,12 +82,12 @@ export class TabList extends QuietElement {
   }
 
   private getTabs() {
-    const tabs = this.tabSlot.assignedElements({ flatten: true }) as Tab[];
+    const tabs = this.tabSlot.assignedElements({ flatten: true }) as QuietTab[];
     return tabs.filter(tab => tab.localName === 'quiet-tab' && !tab.disabled);
   }
 
   private getPanels() {
-    const panels = this.panelSlot.assignedElements({ flatten: true }) as TabPanel[];
+    const panels = this.panelSlot.assignedElements({ flatten: true }) as QuietTabPanel[];
     return panels.filter(panel => panel.localName === 'quiet-tab-panel');
   }
 
@@ -152,7 +152,7 @@ export class TabList extends QuietElement {
     const activeTab = tabs.find(tab => tab.panel === this.active);
     const activeTabIndex = activeTab ? tabs.indexOf(activeTab) : 0;
     const isVertical = ['start', 'end'].includes(this.placement);
-    let targetTab: Tab | undefined;
+    let targetTab: QuietTab | undefined;
 
     // Previous tab
     if ((isVertical && event.key === 'ArrowUp') || (!isVertical && event.key === 'ArrowLeft')) {
@@ -189,5 +189,11 @@ export class TabList extends QuietElement {
         <slot @slotchange=${this.handleSlotChange}></slot>
       </div>
     `;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'quiet-tab-list': QuietTabList;
   }
 }

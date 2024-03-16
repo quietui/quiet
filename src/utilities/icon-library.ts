@@ -1,5 +1,5 @@
 import { getLibraryPath } from './library.js';
-import type { Icon } from '../components/icon/icon.js';
+import type { QuietIcon } from '../components/icon/icon.js';
 
 export type ResolveFunction = (name: string, family: string) => string;
 export type MutateFunction = (svg: SVGElement) => void;
@@ -10,7 +10,7 @@ export interface Library {
 }
 
 const libraries = new Map<string, Library>();
-const connectedIcons = new Set<Icon>();
+const connectedIcons = new Set<QuietIcon>();
 
 /** Registers a new icon library. */
 export function registerIconLibrary(name: string, library: Library) {
@@ -30,12 +30,12 @@ export function getLibrary(name: string) {
 }
 
 /** Call this when an icon is connected to make it reactive to changes to icon libraries. */
-export function connectIcon(el: Icon) {
+export function connectIcon(el: QuietIcon) {
   connectedIcons.add(el);
 }
 
 /** Call this when an icon is disconnected and no longer needs to be reactive. */
-export function disconnectIcon(el: Icon) {
+export function disconnectIcon(el: QuietIcon) {
   connectedIcons.delete(el);
 }
 

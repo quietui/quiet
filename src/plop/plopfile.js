@@ -2,9 +2,8 @@ export default function (plop) {
   plop.setHelper('removePrefix', tag => tag.replace(/^quiet-/, ''));
 
   plop.setHelper('tagToClassName', tag => {
-    const removePrefix = plop.getHelper('removePrefix');
     const properCase = plop.getHelper('properCase');
-    return properCase(removePrefix(tag).replace(/-/g, ' '));
+    return properCase(tag.replace(/-/g, ' '));
   });
 
   plop.setHelper('tagToTitleCase', tag => {

@@ -19,7 +19,7 @@ import type { CSSResultGroup } from 'lit';
  * @cssproperty [--attention-easing=ease] - The easing to use for the attention animation.
  */
 @customElement('quiet-badge')
-export class Badge extends QuietElement {
+export class QuietBadge extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
   /** The type of badge to draw. */
@@ -30,5 +30,11 @@ export class Badge extends QuietElement {
 
   render() {
     return html` <slot></slot> `;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'quiet-badge': QuietBadge;
   }
 }

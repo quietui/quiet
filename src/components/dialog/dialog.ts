@@ -42,7 +42,7 @@ import type { CSSResultGroup } from 'lit';
  * @cssproperty [--width=30rem] - The default width of the dialog. Note that dialogs shrink to fit as necessary.
  */
 @customElement('quiet-dialog')
-export class Dialog extends QuietElement {
+export class QuietDialog extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
   @query('dialog') dialog: HTMLDialogElement;
@@ -179,5 +179,11 @@ export class Dialog extends QuietElement {
         ${this.withFooter ? html` <footer part="footer" class="footer"><slot name="footer"></slot></footer> ` : ''}
       </dialog>
     `;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'quiet-dialog': QuietDialog;
   }
 }

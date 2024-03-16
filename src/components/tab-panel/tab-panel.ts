@@ -18,7 +18,7 @@ import type { CSSResultGroup } from 'lit';
  * @state visible - Applied when the tab panel is visible.
  */
 @customElement('quiet-tab-panel')
-export class TabPanel extends QuietElement {
+export class QuietTabPanel extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
   /** @internal The controller will set this when the panel should be visible. */
@@ -45,5 +45,11 @@ export class TabPanel extends QuietElement {
 
   render() {
     return html` <slot></slot> `;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'quiet-tab-panel': QuietTabPanel;
   }
 }

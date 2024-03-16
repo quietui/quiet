@@ -20,7 +20,7 @@ import type { CSSResultGroup } from 'lit';
  * @csspart body - The container that wraps the callout's content.
  */
 @customElement('quiet-callout')
-export class Callout extends QuietElement {
+export class QuietCallout extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
   connectedCallback() {
@@ -48,5 +48,11 @@ export class Callout extends QuietElement {
         <slot></slot>
       </div>
     `;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'quiet-callout': QuietCallout;
   }
 }

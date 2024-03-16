@@ -17,7 +17,7 @@ import type { CSSResultGroup } from 'lit';
  * @cssproperty [--color=var(--quiet-primary-fill-moderate)] - The spinner's color.
  */
 @customElement('quiet-spinner')
-export class Spinner extends QuietElement {
+export class QuietSpinner extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
   private localize = new Localize(this);
@@ -34,5 +34,11 @@ export class Spinner extends QuietElement {
         <g><circle cx="12" cy="12" r="10" fill="none" stroke-width="2" /></g>
       </svg>
     `;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'quiet-spinner': QuietSpinner;
   }
 }

@@ -27,7 +27,7 @@ import type { CSSResultGroup } from 'lit';
  * @cssproperty [--spacing=1.5rem] - The spacing to use throughout the card.
  */
 @customElement('quiet-card')
-export class Card extends QuietElement {
+export class QuietCard extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
   /** Renders the card with the `header` slot. */
@@ -57,5 +57,11 @@ export class Card extends QuietElement {
 
       ${this.withFooter ? html` <footer part="footer" class="footer"><slot name="footer"></slot></footer> ` : ''}
     `;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'quiet-card': QuietCard;
   }
 }

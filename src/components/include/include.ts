@@ -27,7 +27,7 @@ const requests = new Map<string, Promise<Response>>();
  *  The error will be available in `event.detail.error`.
  */
 @customElement('quiet-include')
-export class Include extends QuietElement {
+export class QuietInclude extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
   /** The URL of the file to include. Must be a CORS-enabled endpoint. */
@@ -113,5 +113,11 @@ export class Include extends QuietElement {
 
   render() {
     return html` <slot></slot> `;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'quiet-include': QuietInclude;
   }
 }

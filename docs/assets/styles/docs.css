@@ -814,11 +814,11 @@ quiet-callout {
 
 .sponsorship-quote {
   border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
-  border-radius: calc(var(--quiet-border-radius) * 4);
+  border-radius: calc(var(--quiet-border-radius) * 6);
   box-shadow: var(--quiet-shadow-softer);
   text-align: center;
   padding: 2rem;
-  margin-block: var(--quiet-content-spacing);
+  margin-block: calc(var(--quiet-content-spacing) * 1.5);
   scale: 1.025;
 
   .quote {

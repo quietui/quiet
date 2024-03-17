@@ -176,7 +176,7 @@ By default, a close button is provided as a single action in the dialog's header
 ```
 
 :::info
-The `actions` slot is only available when the header is present by enabling the `with-header` attribute.
+The `actions` slot is only available when the header is enabled using the `with-header` attribute.
 :::
 
 ### Changing the placement
@@ -229,7 +229,7 @@ The `--width` and `--height` custom properties control the default width and hei
   </h3>
 
   <p>Lobortis feugiat vivamus at augue eget arcu dictum. Nulla at volutpat diam ut venenatis tellus in metus vulputate. Venenatis tellus in metus vulputate eu scelerisque felis.</p>
-  <p>Et malesuada fames ac turpis egestas maecenas pharetra. Eu lobortis elementum nibh tellus molestie nunc. Nisl purus in mollis nunc sed id semper risus in. Ultricies mi quis hendrerit dolor magna eget. Venenatis cras sed felis eget velit aliquet sagittis.</p>
+  <p style="margin-block-end: 0;">Et malesuada fames ac turpis egestas maecenas pharetra. Eu lobortis elementum nibh tellus molestie nunc. Nisl purus in mollis nunc sed id semper risus in. Ultricies mi quis hendrerit dolor magna eget. Venenatis cras sed felis eget velit aliquet sagittis.</p>
 
   <quiet-button slot="footer" data-dialog="dismiss" variant="primary">
     Close

@@ -15,7 +15,7 @@ If you pass a string to the `date` attribute, always use the [ISO 8601 format](h
 
 ### Simple formatting
 
-This component supports most options from [`Intl.DateTimeFormat()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat) in a declarative syntax. It's very flexible, but it can be a bit verbose to output a simple date or time with individual properties. Fortunately, there are two shortcuts you can use to easily style dates and times in desirable formats.
+This component supports most options from [`Intl.DateTimeFormat()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat) in a declarative syntax. It's very flexible, but it can be a bit verbose to output a simple date or time with individual properties. Fortunately, there are two shortcuts you can use to easily output dates and times in desirable formats.
 
 The `date-style` and `time-style` attributes both accept `full`, `long`, `medium`, and `short` as options. These attributes can be used together, but they cannot be combined with other date-time formatting options.
 

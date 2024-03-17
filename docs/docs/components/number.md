@@ -44,7 +44,6 @@ You can format a variety of different units. [Possible values can be found here.
 ```html {.example}
 <quiet-number type="unit" unit="kilobyte" number="5.1"></quiet-number><br>
 <quiet-number type="unit" unit="megabyte" number="3.45"></quiet-number><br>
-<quiet-number type="unit" unit="gigabyte" number="6"></quiet-number><br>
 <quiet-number type="unit" unit="centimeter" number="2.54"></quiet-number><br>
 <quiet-number type="unit" unit="inch" number="1"></quiet-number><br>
 <quiet-number type="unit" unit="fahrenheit" number="75"></quiet-number><br>

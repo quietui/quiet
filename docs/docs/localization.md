@@ -11,7 +11,7 @@ Quiet components are fully localized using a tiny in-house library called [Squea
 The default language is English (US), which doesn't need to be registered. Additional languages can be registered by importing the appropriate translation files.
 
 ```js
-import './dist/translations/es.js';
+import '/dist/translations/es.js';
 ```
 
 Translations are self-registering, so simply importing them as shown above makes them available to use in your app. Available translations currently include:
@@ -30,7 +30,7 @@ Translations are self-registering, so simply importing them as shown above makes
 To register translations as needed instead of all at once, use the [dynamic import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import) syntax. This is useful when you're supporting multiple languages and don't want to load the extra bytes upfront.
 
 ```js
-await import('./dist/translations/es.js');
+await import('/dist/translations/es.js');
 ```
 
 Once registered, components will automatically update and display the appropriate terms.
@@ -84,8 +84,8 @@ Refer to the [default translation](https://github.com/quietui/quiet/tree/main/sr
 <quiet-tab-panel name="ts">
 
 ```ts
-import { registerTranslation } from './dist/utilities/localize.js';
-import type { Translation } from './dist/utilities/localize.js';
+import { registerTranslation } from '/dist/utilities/localize.js';
+import type { Translation } from '/dist/utilities/localize.js';
 
 const translation: Translation = {
   $code: 'ru',
@@ -104,7 +104,7 @@ export default translation;
 <quiet-tab-panel name="js">
 
 ```js
-import { registerTranslation } from './dist/utilities/localize.js';
+import { registerTranslation } from '/dist/utilities/localize.js';
 
 const translation = {
   $code: 'ru',

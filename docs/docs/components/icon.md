@@ -88,7 +88,7 @@ You can register additional icon libraries using the `registerIconLibrary()` fun
 
 ```html
 <script type="module">
-  import { registerIconLibrary } from './dist/quiet.js';
+  import { registerIconLibrary } from '/dist/quiet.js';
 
   // This registers a new icon library called "my-icons"
   registerIconLibrary('my-icons', {
@@ -125,7 +125,7 @@ It's fine to add icons to the page before registering an icon library. They just
 You can unregister icon libraries using the `unregisterIconLibrary()` function. However, this will cause existing icons that reference the library to disappear. Unregistering can be useful when you no longer need to display icons from a specific library.
 
 ```js
-import { unregisterIconLibrary } from './dist/quiet.js';
+import { unregisterIconLibrary } from '/dist/quiet.js';
 
 unregisterIconLibrary('my-icons');
 ```
@@ -135,7 +135,7 @@ unregisterIconLibrary('my-icons');
 To change the default icon library, override it by registering a new one called `default`. This will let you skip setting `<quiet-icon library="...">` on every single icon. This is only recommended if you want to completely replace the default Heroicons library.
 
 ```js
-import { registerIconLibrary } from './dist/quiet.js';
+import { registerIconLibrary } from '/dist/quiet.js';
 
 registerIconLibrary('default', {
   // ...
@@ -149,7 +149,7 @@ Quiet also has a system icon library that provides a small number of icons for i
 Changing the system library isn't recommended, but it is possible. To change the system icon library, override it by registering a new one called `system`.
 
 ```js
-import { registerIconLibrary } from './dist/quiet.js';
+import { registerIconLibrary } from '/dist/quiet.js';
 
 registerIconLibrary('system', {
   // ...
@@ -166,7 +166,7 @@ This examples demonstrates how to load the [Bootstrap Icons](https://icons.getbo
 
 ```html {.example}
 <script type="module">
-  import { registerIconLibrary } from './dist/quiet.js';
+  import { registerIconLibrary } from '/dist/quiet.js';
 
   registerIconLibrary('bootstrap', {
     resolve: (name, family) => {
@@ -199,7 +199,7 @@ This example demonstrates how to load the [Boxicons](https://boxicons.com/) libr
 
 ```html {.example}
 <script type="module">
-  import { registerIconLibrary } from './dist/quiet.js';
+  import { registerIconLibrary } from '/dist/quiet.js';
 
   registerIconLibrary('boxicons', {
     resolve: (name, family = 'regular') => {
@@ -241,7 +241,7 @@ This example demonstrates how to load the [Jam icons](https://jam-icons.com/) li
 
 ```html {.example}
 <script type="module">
-  import { registerIconLibrary } from './dist/quiet.js';
+  import { registerIconLibrary } from '/dist/quiet.js';
 
   registerIconLibrary('jam', {
     resolve: (name, family) => {
@@ -275,7 +275,7 @@ This example demonstrates how to load the [Lucide](https://lucide.dev/icons/) li
 
 ```html {.example}
 <script type="module">
-  import { registerIconLibrary } from './dist/quiet.js';
+  import { registerIconLibrary } from '/dist/quiet.js';
 
   registerIconLibrary('lucide', {
     resolve: name => `https://cdn.jsdelivr.net/npm/lucide-static@0.344.0/icons/${name}.svg`
@@ -297,7 +297,7 @@ This example demonstrates how to load the [Tabler icons](https://tabler.io/icons
 
 ```html {.example}
 <script type="module">
-  import { registerIconLibrary } from './dist/quiet.js';
+  import { registerIconLibrary } from '/dist/quiet.js';
 
   registerIconLibrary('tabler', {
     resolve: name => `https://cdn.jsdelivr.net/npm/@tabler/icons@2.47.0/icons/${name}.svg`

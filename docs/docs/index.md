@@ -60,15 +60,15 @@ Quiet ships standard ES modules, so you can use [`import`](https://developer.moz
 
 ```js
 // Static imports are the most common
-import './dist/components/badge/badge.js';
-import './dist/components/button/button.js';
-import './dist/components/card/card.js';
+import '/dist/components/badge/badge.js';
+import '/dist/components/button/button.js';
+import '/dist/components/card/card.js';
 
 // ...but you can also import components dynamically
 await Promise.all([
-  import './dist/components/badge/badge.js',
-  import './dist/components/button/button.js',
-  import './dist/components/card/card.js'
+  import '/dist/components/badge/badge.js',
+  import '/dist/components/button/button.js',
+  import '/dist/components/card/card.js'
 ]);
 ```
 

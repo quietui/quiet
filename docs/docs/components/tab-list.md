@@ -172,7 +172,7 @@ Quiet considers lazy loading tab content to be an anti-pattern but, when necessa
 
 ### Making tabs closable
 
-Avoid nesting buttons and other interactive elements inside of a tab, as it will cause assistive devices to work incorrectly. Instead, you can add buttons adjacent to tabs using `slot="tab"`.
+Avoid nesting buttons and other interactive elements inside of a tab, as it will cause assistive devices to work incorrectly. Instead, you can add buttons adjacent to tabs using `slot="tab"`. When tabs are removable, you should also listen for the [[Delete]] key.
 
 Note that we use `tabindex="-1"` on the close button to prevent it from interfering with normal tabbing. The button, however, is still accessible to virtual cursors.
 
@@ -194,32 +194,42 @@ Note that we use `tabindex="-1"` on the close button to prevent it from interfer
 
 <script>
   const tabList = document.getElementById('tab-list__closable');
-  const closeButton = tabList.querySelector('quiet-button');
+  const firstTab = tabList.querySelector('quiet-tab[panel="first"]');
   const secondTab = tabList.querySelector('quiet-tab[panel="second"]');
   const secondPanel = tabList.querySelector('quiet-tab-panel[name="second"]');
+  const closeButton = tabList.querySelector('quiet-button');
   const restoreButton = tabList.nextElementSibling;
   
-  // Remove the tab
-  closeButton.addEventListener('quiet-click', () => {
+  function closeTab() {
     closeButton.remove();
     secondTab.remove();
     secondPanel.remove();
     restoreButton.disabled = false;
 
     if (tabList.active === 'second') {
-      tabList.active = 'first';
+      tabList.active = 'third';
     }
-  });
+  }
 
-  // Restore the tab
-  restoreButton.addEventListener('quiet-click', () => {
-    const firstTab = tabList.querySelector('quiet-tab[panel="first"]');
-
+  function restoreTab() {
     firstTab.insertAdjacentElement('afterend', closeButton);
     firstTab.insertAdjacentElement('afterend', secondTab);
     tabList.append(secondPanel);
     restoreButton.disabled = true;
+  }
+
+  // Remove the tab when the close button is clicked
+  closeButton.addEventListener('quiet-click', closeTab);
+
+  // Remove the tab when delete is pressed
+  secondTab.addEventListener('keydown', event => {
+    if (event.key === 'Delete') {
+      closeTab();
+    }
   });
+  
+  // Restore the tab
+  restoreButton.addEventListener('quiet-click', restoreTab);
 </script>
 
 <style>

@@ -3,7 +3,12 @@ import { property } from 'lit/decorators.js';
 
 export class QuietElement extends LitElement {
   protected internals?: ElementInternals;
-  shadowRoot: ShadowRoot;
+  public shadowRoot: ShadowRoot;
+
+  constructor() {
+    super();
+    this.internals = this.attachInternals();
+  }
 
   // Make localization attributes reactive
   @property() dir: string;

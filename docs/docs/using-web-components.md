@@ -56,6 +56,33 @@ Some properties are Boolean, meaning they only accept true or false values. Bool
 Some attributes will _reflect_, or be added/removed automatically, when setting the property via JavaScript. You can determine if an attribute reflects by looking at the properties table in the component's documentation.
 :::
 
+### The `updateComplete` property
+
+Components batch DOM updates for performance, so you might run into scenarios where you update a property but don't see the changes in the DOM right away. In this case, you can await the `updateComplete` property, which is available on every component.
+
+Here's an example where we update a progress bar's value and inspect the corresponding attribute. Note how the attribute isn't updated until awaiting `updateComplete`.
+
+```html
+<quiet-progress value="0"></quiet-progress>
+
+<script>
+  const progress = document.querySelector('quiet-progress');
+  progress.value = 100;
+
+  // outputs "0"
+  console.log(progress.getAttribute('value'));
+
+  await progress.updateComplete;
+
+  // outputs "100"
+  console.log(progress.getAttribute('value'));
+</script>
+```
+
+:::info
+If you're updating multiple elements, you can safely use [`requestAnimationFrame()`](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame) instead of awaiting every individual component.
+:::
+
 ## Slots
 
 Many components accepts content through slots. Slots are a platform feature that work very similar to the slots you may have used in Vue. A custom element can have any number of slots.

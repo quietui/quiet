@@ -20,7 +20,7 @@ export default css`
 
   /* Secondary */
   :host([variant='secondary']) {
-    background: var(--quiet-background-color);
+    background: var(--quiet-silent);
     border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
     color: var(--quiet-neutral-fill-text-soft);
   }

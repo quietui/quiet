@@ -25,6 +25,7 @@ export default css`
     border-radius: var(--quiet-border-radius);
     padding-inline: 1.25em;
     cursor: pointer;
+    touch-action: manipulation;
     user-select: none;
     -webkit-user-select: none;
     white-space: nowrap;

@@ -11,7 +11,7 @@ Quiet is open source and available under the terms of the [MIT license](https://
 
 If you've made it to this page, there's a good chance I've already saved you a lot of time.
 
-I want Quiet to remain free for everyone to learn from. I don't get paid to build it so, if you're using this software to make a profit, ==I respectfully ask that you sponsor the project== with a [one-time](https://github.com/sponsors/claviska?frequency=one-time) or [recurring donation](https://github.com/sponsors/claviska?frequency=recurring) via GitHub.
+I want Quiet to remain free for everyone to explore and learn from. I don't get paid to build it so, if you're using this software to make a profit, ==I respectfully ask that you sponsor the project== with a [one-time](https://github.com/sponsors/claviska?frequency=one-time) or [recurring donation](https://github.com/sponsors/claviska?frequency=recurring) via GitHub.
 
 <div class="sponsorship-quote">
 <div class="quote">

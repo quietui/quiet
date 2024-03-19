@@ -120,12 +120,6 @@ export class QuietButton extends QuietElement {
   /** Overrides the containing form's `target` attribute. */
   @property({ attribute: 'formtarget' }) formTarget: '_self' | '_blank' | '_parent' | '_top' | string | undefined;
 
-  constructor() {
-    super();
-    this.internals = this.attachInternals();
-    this.internals.role = 'button';
-  }
-
   private handleBlur() {
     this.customStates.set('focused', false);
     this.emit('quiet-blur');

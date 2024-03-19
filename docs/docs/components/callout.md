@@ -65,12 +65,12 @@ Add an icon to a callout using the `icon` slot. Works best with `<quiet-icon>` a
 Callouts are sized relative to the current font size. To change their size, apply `font-size` to the button or an ancestor element.
 
 ```html {.example}
-<quiet-callout variant="primary" with-icon style="font-size: 1.125rem;">
+<quiet-callout variant="primary" with-icon style="font-size: 1.25rem;">
   <quiet-icon slot="icon" name="rocket-launch"></quiet-icon>
   It's a magical world, ol' buddy…let's go exploring!
 </quiet-callout>
 
-<quiet-callout variant="confirmative" with-icon style="font-size: 1.125rem;">
+<quiet-callout variant="confirmative" with-icon style="font-size: 1.25rem;">
   <quiet-icon slot="icon" name="paper-airplane"></quiet-icon>
   Your message has been sent successfully!
 </quiet-callout>

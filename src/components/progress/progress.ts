@@ -38,7 +38,7 @@ export class QuietProgress extends QuietElement {
   @property({ type: Number }) max = 100;
 
   /** The progress bar's current value. */
-  @property({ type: Number }) value = 0;
+  @property({ type: Number, reflect: true }) value = 0;
 
   /** The progress bar's current value as a percentage. This is a readonly property. */
   public get percentage() {

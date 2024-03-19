@@ -1,5 +1,6 @@
 import '../tab-panel/tab-panel.js';
 import '../tab/tab.js';
+import { createId } from '../../utilities/math.js';
 import { customElement, property, query } from 'lit/decorators.js';
 import { html } from 'lit';
 import { QuietElement } from '../../utilities/quiet-element.js';
@@ -8,9 +9,6 @@ import styles from './tab-list.styles.js';
 import type { CSSResultGroup } from 'lit';
 import type { QuietTab } from '../tab/tab.js';
 import type { QuietTabPanel } from '../tab-panel/tab-panel.js';
-
-let tabId = 1;
-let tabPanelId = 1;
 
 /**
  * <quiet-tab-list>
@@ -96,8 +94,9 @@ export class QuietTabList extends QuietElement {
     const panels = this.getPanels();
 
     // Ensure tabs and panels have ids
-    tabs.forEach(tab => (tab.id = tab.id || `quiet-tab-${tabId++}`));
-    panels.forEach(panel => (panel.id = panel.id || `quiet-tab-panel-${tabPanelId++}`));
+    tabs.forEach(tab => (tab.id = tab.id || createId('quiet-tab-')));
+    panels.forEach(panel => (panel.id = panel.id || createId('quiet-tab-panel-')));
+
     // Link tabs and panels
     tabs.forEach(tab => {
       const name = tab.panel;

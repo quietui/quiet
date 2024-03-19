@@ -55,7 +55,7 @@ You can format a variety of different units. [Possible values can be found here.
 Set the `lang` attribute on the element to change the language.
 
 ```html {.example}
-<quiet-number lang="es" number="100000000"></quiet-number><br>
+<quiet-number lang="en" number="100000000"></quiet-number><br>
 <quiet-number lang="de" number="100000000"></quiet-number><br>
 <quiet-number lang="ru" number="100000000"></quiet-number>
 ```

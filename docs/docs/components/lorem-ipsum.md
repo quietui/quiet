@@ -22,7 +22,7 @@ Set the `type` attribute to `title` to generate text suitable for a title or hea
 ```
 
 :::info
-Some attributes herein allow you to specify a minimum and maximum range using the `{min-max}` syntax, e.g. `length="2-6"`.
+Some attributes herein allow you to specify a minimum and maximum range using the `{min}-{max}` syntax, e.g. `length="2-6"`.
 :::
 
 ### Sentences

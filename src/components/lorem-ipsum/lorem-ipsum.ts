@@ -67,19 +67,6 @@ export class QuietLoremIpsum extends QuietElement {
     return randomInteger(min, max);
   }
 
-  /** Generates a random title based on the properties that are currently set */
-  private generateTitle() {
-    const numWords = this.getNumberWithinRange(this.length);
-    const words = this.generateWords(numWords);
-    const title = [];
-
-    for (const word of words) {
-      title.push(word.charAt(0).toUpperCase() + word.slice(1));
-    }
-
-    return title.join(' ');
-  }
-
   /** Generates a list of random items based on the properties that are currently set */
   private generateList() {
     const numItems = this.getNumberWithinRange(this.length);
@@ -145,6 +132,19 @@ export class QuietLoremIpsum extends QuietElement {
     }
 
     return sentences.trim();
+  }
+
+  /** Generates a random title based on the properties that are currently set */
+  private generateTitle() {
+    const numWords = this.getNumberWithinRange(this.length);
+    const words = this.generateWords(numWords);
+    const title = [];
+
+    for (const word of words) {
+      title.push(word.charAt(0).toUpperCase() + word.slice(1));
+    }
+
+    return title.join(' ');
   }
 
   render() {

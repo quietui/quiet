@@ -9,3 +9,8 @@ export function clamp(value: number, min: number, max: number) {
 export function createId(prefix = '') {
   return prefix + crypto.randomUUID().slice(-8);
 }
+
+/** Generates a random integer from min to max. */
+export function randomInteger(min: number, max: number) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}

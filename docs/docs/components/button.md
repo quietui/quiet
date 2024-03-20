@@ -31,7 +31,7 @@ Buttons have four standard variants. Primary buttons are intended for suggested 
 </quiet-button>
 ```
 
-### Start and end icons
+### Start & end icons
 
 Use the `start` and `end` slots to add icons. For best results, use a [`<quiet-icon>`](/docs/components/icon) or an `<svg>` element.
 

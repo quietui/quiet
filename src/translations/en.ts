@@ -6,6 +6,9 @@ const translation: Translation = {
   $name: 'English',
   $dir: 'ltr',
 
+  copied: 'Copied',
+  copyToClipboard: 'Copy to clipboard',
+  error: 'Error',
   loading: 'Loading'
 };
 

@@ -7,6 +7,9 @@ const translation: Translation = {
   $name: 'Deutsch',
   $dir: 'ltr',
 
+  copied: 'Kopiert',
+  copyToClipboard: 'In die Zwischenablage kopieren',
+  error: 'Fehler',
   loading: 'Wird geladen'
   /* cSpell:enable */
 };

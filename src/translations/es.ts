@@ -7,6 +7,9 @@ const translation: Translation = {
   $name: 'Español',
   $dir: 'ltr',
 
+  copied: 'Copiado',
+  copyToClipboard: 'Copiar al portapapeles',
+  error: 'Error',
   loading: 'Cargando'
   /* cSpell:enable */
 };

@@ -7,6 +7,9 @@ const translation: Translation = {
   $name: 'Русский',
   $dir: 'ltr',
 
+  copied: 'Скопировано',
+  copyToClipboard: 'Скопировать в буфер обмена',
+  error: 'Ошибка',
   loading: 'Загрузка'
   /* cSpell:enable */
 };

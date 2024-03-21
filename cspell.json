@@ -26,6 +26,7 @@
     "cssproperty",
     "datetime",
     "evenodd",
+    "exportparts",
     "focusable",
     "formaction",
     "formenctype",

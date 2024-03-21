@@ -1,29 +1,15 @@
-const timeouts = new WeakMap();
-
-document.addEventListener('click', event => {
-  const copyButton = event.target?.closest('.copy-code');
-
-  // Copy code
-  if (copyButton) {
+function setCopyData() {
+  document.querySelectorAll('.copy-button').forEach(copyButton => {
     const pre = copyButton.closest('pre');
-    const valueToCopy = pre.querySelector('code').textContent;
+    const code = pre?.querySelector('code');
 
-    clearTimeout(timeouts.get(copyButton));
+    if (code) {
+      copyButton.data = code.textContent;
+    }
+  });
+}
 
-    navigator.clipboard
-      .writeText(valueToCopy)
-      .then(() => {
-        copyButton.classList.add('copied');
+// Set data for all copy buttons when the page loads
+setCopyData();
 
-        const timeout = setTimeout(() => {
-          copyButton.classList.remove('copied');
-        }, 1000);
-
-        timeouts.set(copyButton, timeout);
-      })
-      .catch(() => {
-        // Failed
-        alert(`Your browser has blocked the ability to copy this way. Please use keyboard shortcuts instead.`);
-      });
-  }
-});
+document.addEventListener('turbo:load', setCopyData);

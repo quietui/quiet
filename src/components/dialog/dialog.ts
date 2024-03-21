@@ -165,7 +165,7 @@ export class QuietDialog extends QuietElement {
                 <slot name="header"></slot>
                 <slot name="actions" class="actions">
                   <quiet-button slot="header" variant="text" icon-label="Close" data-dialog="dismiss">
-                    <quiet-icon name="x-mark"></quiet-icon>
+                    <quiet-icon library="system" name="x-mark"></quiet-icon>
                   </quiet-button>
                 </slot>
               </header>

@@ -20,9 +20,8 @@ export default css`
 
   /* Secondary */
   :host([variant='secondary']) {
-    background: var(--quiet-background);
-    border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
-    color: var(--quiet-neutral-fill-text-soft);
+    background-color: var(--quiet-neutral-fill-softer);
+    color: var(--quiet-primary-fill-text-softer);
   }
 
   /* Confirmative */

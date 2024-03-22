@@ -35,12 +35,9 @@ import type { CSSResultGroup } from 'lit';
  */
 @customElement('quiet-button')
 export class QuietButton extends QuietElement {
+  static formAssociated = true;
   static shadowRootOptions = { ...QuietElement.shadowRootOptions, delegatesFocus: true };
   static styles: CSSResultGroup = [hostStyles, styles];
-
-  static get formAssociated() {
-    return true;
-  }
 
   protected internals: ElementInternals;
 

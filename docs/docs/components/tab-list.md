@@ -267,8 +267,8 @@ Tab lists come with a simple, minimal appearance. Feel free to customize them wi
 
 <br><br>
 
-<!-- Pills -->
-<quiet-tab-list label="Select a tab" class="tab-list-pills">
+<!-- Segmented -->
+<quiet-tab-list label="Select a tab" class="tab-list-segments">
 	<quiet-tab slot="tab" panel="first">First</quiet-tab>
 	<quiet-tab slot="tab" panel="second">Second</quiet-tab>
 	<quiet-tab slot="tab" panel="third">Third</quiet-tab>
@@ -305,8 +305,8 @@ Tab lists come with a simple, minimal appearance. Feel free to customize them wi
     }
   }
 
-  /* Pills */
-  .tab-list-pills {
+  /* Segments */
+  .tab-list-segments {
     &::part(tabs) {
       justify-content: space-between;
       background-color: var(--quiet-neutral-fill-softer);

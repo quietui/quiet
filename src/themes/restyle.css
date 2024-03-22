@@ -410,10 +410,6 @@ fieldset {
   margin-block-end: var(--quiet-content-spacing);
 }
 
-legend {
-  font-size: 0.9375em;
-}
-
 /* Utilities */
 .visually-hidden,
 .visually-hidden-focusable:not(:focus-within) {

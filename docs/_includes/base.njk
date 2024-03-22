@@ -28,6 +28,14 @@
     <script type="module" src="/dist/quiet.loader.js"></script>
     <link rel="stylesheet" href="/dist/themes/quiet.css" />
     <link rel="stylesheet" href="/dist/themes/restyle.css" />
+
+    {# Set the theme to prevent flashing #}
+    <script>
+      document.documentElement.classList.toggle(
+        'quiet-dark',
+        sessionStorage.getItem('theme') === 'dark' || window.matchMedia('(prefers-color-scheme: dark)').matches
+      );
+    </script>
   </head>
   <body class="layout-{{ layout | stripExtension }}">
     <a id="skip-to-main" href="#content" data-smooth-link="off">Skip to content</a>

@@ -9,7 +9,7 @@ import type { CSSResultGroup } from 'lit';
 /**
  * <quiet-copy>
  *
- * @summary Copy buttons let you copy arbitrary text to the clipboard.
+ * @summary Copy buttons let you copy text and other types of data to the clipboard.
  * @documentation https://quietui.com/docs/components/copy
  * @status stable
  * @since 1.0
@@ -117,7 +117,7 @@ export class QuietCopy extends QuietElement {
           variant="text"
           icon-label=${this.localize.term('copyToClipboard')}
         >
-          <quiet-icon part="copy-icon" library="system" name="square-2-stack"></quiet-icon>
+          <quiet-icon part="copy-icon" library="system" name="clipboard"></quiet-icon>
         </quiet-button>
       </slot>
 

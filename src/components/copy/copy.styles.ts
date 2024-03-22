@@ -25,6 +25,7 @@ export default css`
     padding-block: 0.25rem;
     opacity: 0;
     pointer-events: none;
+    user-select: none;
     translate: 0 -100%;
 
     &.show {

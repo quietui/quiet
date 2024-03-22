@@ -401,6 +401,19 @@ select {
   font: inherit;
 }
 
+fieldset {
+  border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
+  border-radius: var(--quiet-border-radius);
+  padding: 1.5rem;
+  padding-block-start: 1rem;
+  margin: 0;
+  margin-block-end: var(--quiet-content-spacing);
+}
+
+legend {
+  font-size: 0.9375em;
+}
+
 /* Utilities */
 .visually-hidden,
 .visually-hidden-focusable:not(:focus-within) {

@@ -177,8 +177,8 @@ export function thing(arg) {
 
 <details>
   <summary>Scelerisque varius</summary>
-  <p>Scelerisque varius morbi enim nunc faucibus a pellentesque sit. Volutpat blandit aliquam etiam erat velit scelerisque. Non sodales neque sodales ut etiam sit amet.</p>
-  <p>Cras tincidunt lobortis feugiat vivamus at augue eget arcu. Risus pretium quam vulputate dignissim suspendisse.</p>
+  <p>Pretium vulputate sapien nec sagittis. Pretium fusce id velit ut. Justo eget magna fermentum iaculis eu non diam phasellus. Purus in mollis nunc sed.</p>
+  <p>Turpis egestas pretium aenean pharetra magna ac placerat vestibulum. Lacus vestibulum sed arcu non odio euismod lacinia.</p>
 </details>
 
 <details>
@@ -191,12 +191,19 @@ export function thing(arg) {
 
 <dl>
   <dt>First definition</dt>
-  <dd>Consectetur lorem donec massa sapien. Pellentesque id nibh tortor id aliquet lectus proin nibh nisl.</dd>
+  <dd>Morbi tempus iaculis urna id volutpat lacus. Tincidunt eget nullam non nisi. Viverra mauris in aliquam sem fringilla ut.</dd>
   <dt>Second definition</dt>
-  <dd>Viverra nam libero justo laoreet. Pellentesque habitant morbi tristique senectus et.</dd>
+  <dd>Vel quam elementum pulvinar etiam non quam lacus suspendisse. Nisl nisi scelerisque eu ultrices vitae auctor eu.</dd>
   <dt>Third definition</dt>
-  <dd>Donec pretium vulputate sapien nec sagittis aliquam malesuada bibendum arcu.</dd>
+  <dd>Odio facilisis mauris sit amet massa vitae. Venenatis lectus magna fringilla urna porttitor rhoncus dolor. Eu ultrices vitae auctor eu augue ut.</dd>
 </dl>
+
+### Fieldsets
+
+<fieldset>
+  <legend>Legend</legend>
+  Nunc mi ipsum faucibus vitae aliquet nec ullamcorper. Tincidunt id aliquet risus feugiat in ante. Ac turpis egestas integer eget aliquet nibh praesent tristique magna.
+</fieldset>
 
 ### Figures
 

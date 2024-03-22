@@ -26,6 +26,7 @@
     "datetime",
     "evenodd",
     "exportparts",
+    "Fieldsets",
     "focusable",
     "formaction",
     "formenctype",

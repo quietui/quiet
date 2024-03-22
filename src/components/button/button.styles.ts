@@ -67,20 +67,18 @@ export default css`
 
     /* Secondary */
     &.secondary {
-      background: transparent;
-      border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
-      color: var(--quiet-neutral-fill-text-soft);
+      background-color: var(--quiet-neutral-fill-softer);
+      color: var(--quiet-neutral-fill-text-softer);
 
       @media (hover: hover) {
         &:hover:not(.disabled, [aria-pressed='true']) {
-          background-color: color-mix(in oklab, transparent, var(--quiet-body-color) 3%);
+          background-color: color-mix(in oklab, var(--quiet-neutral-fill-softer), black 5%);
         }
       }
 
       &[aria-pressed='true'] {
-        border-color: var(--quiet-neutral-stroke-soft);
-        background-color: var(--quiet-neutral-fill-softer);
-        color: var(--quiet-neutral-fill-text-softer);
+        background-color: var(--quiet-neutral-fill-soft);
+        color: var(--quiet-neutral-fill-text-soft);
       }
     }
 

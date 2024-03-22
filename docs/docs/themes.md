@@ -47,17 +47,17 @@ TODO:
 </div>
 
 <div class="colors">
-  <div class="color" style="background-color: var(--quiet-confirmative-50);"></div>
-  <div class="color" style="background-color: var(--quiet-confirmative-100);"></div>
-  <div class="color" style="background-color: var(--quiet-confirmative-200);"></div>
-  <div class="color" style="background-color: var(--quiet-confirmative-300);"></div>
-  <div class="color" style="background-color: var(--quiet-confirmative-400);"></div>
-  <div class="color" style="background-color: var(--quiet-confirmative-500);"></div>
-  <div class="color" style="background-color: var(--quiet-confirmative-600);"></div>
-  <div class="color" style="background-color: var(--quiet-confirmative-700);"></div>
-  <div class="color" style="background-color: var(--quiet-confirmative-800);"></div>
-  <div class="color" style="background-color: var(--quiet-confirmative-900);"></div>
-  <div class="color" style="background-color: var(--quiet-confirmative-950);"></div>
+  <div class="color" style="background-color: var(--quiet-constructive-50);"></div>
+  <div class="color" style="background-color: var(--quiet-constructive-100);"></div>
+  <div class="color" style="background-color: var(--quiet-constructive-200);"></div>
+  <div class="color" style="background-color: var(--quiet-constructive-300);"></div>
+  <div class="color" style="background-color: var(--quiet-constructive-400);"></div>
+  <div class="color" style="background-color: var(--quiet-constructive-500);"></div>
+  <div class="color" style="background-color: var(--quiet-constructive-600);"></div>
+  <div class="color" style="background-color: var(--quiet-constructive-700);"></div>
+  <div class="color" style="background-color: var(--quiet-constructive-800);"></div>
+  <div class="color" style="background-color: var(--quiet-constructive-900);"></div>
+  <div class="color" style="background-color: var(--quiet-constructive-950);"></div>
 </div>
 
 <div class="colors">
@@ -95,11 +95,11 @@ TODO:
 </div>
 
 <div class="colors">
-  <div class="color" style="background-color: var(--quiet-confirmative-fill-softer);"></div>
-  <div class="color" style="background-color: var(--quiet-confirmative-fill-soft);"></div>
-  <div class="color" style="background-color: var(--quiet-confirmative-fill-moderate);"></div>
-  <div class="color" style="background-color: var(--quiet-confirmative-fill-loud);"></div>
-  <div class="color" style="background-color: var(--quiet-confirmative-fill-louder);"></div>
+  <div class="color" style="background-color: var(--quiet-constructive-fill-softer);"></div>
+  <div class="color" style="background-color: var(--quiet-constructive-fill-soft);"></div>
+  <div class="color" style="background-color: var(--quiet-constructive-fill-moderate);"></div>
+  <div class="color" style="background-color: var(--quiet-constructive-fill-loud);"></div>
+  <div class="color" style="background-color: var(--quiet-constructive-fill-louder);"></div>
 </div>
 
 <div class="colors">
@@ -132,7 +132,7 @@ TODO:
 
 <quiet-badge variant="primary">Primary</quiet-badge>
 <quiet-badge variant="secondary">Secondary</quiet-badge>
-<quiet-badge variant="confirmative">Confirmative</quiet-badge>
+<quiet-badge variant="constructive">Constructive</quiet-badge>
 <quiet-badge variant="destructive">Destructive</quiet-badge>
 
 <p style="color: var(--quiet-primary-colored-text);">
@@ -143,8 +143,8 @@ TODO:
   This is neutral colored text on a background, like for muted text.
 </p>
 
-<p style="color: var(--quiet-confirmative-colored-text);">
-  This is confirmative colored text on a background, like for success messages.
+<p style="color: var(--quiet-constructive-colored-text);">
+  This is constructive colored text on a background, like for success messages.
 </p>
 
 <p style="color: var(--quiet-destructive-colored-text);">
@@ -161,7 +161,7 @@ TODO:
   Maecenas sed enim ut sem viverra aliquet eget sit amet. Id diam maecenas ultricies mi eget.
 </quiet-callout>
 
-<quiet-callout variant="confirmative" with-icon>
+<quiet-callout variant="constructive" with-icon>
   <quiet-icon slot="icon" name="check-circle"></quiet-icon>
   Nunc sed augue lacus viverra vitae congue. Mattis nunc sed blandit libero volutpat sed cras.
 </quiet-callout>

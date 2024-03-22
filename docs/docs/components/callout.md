@@ -14,7 +14,7 @@ layout: component
 
 ### Variants
 
-Callouts have four variants: `primary`, `secondary`, `confirmative`, and `destructive`. Primary callouts are good for showing tips and information more prominently...
+Callouts have four built-in variants. Set the `variant` attribute to `primary`, `secondary`, `constructive`, or `destructive` to change the callout's appearance.
 
 ```html {.example}
 <quiet-callout variant="primary">
@@ -25,8 +25,8 @@ Callouts have four variants: `primary`, `secondary`, `confirmative`, and `destru
   This is a secondary callout. Use me for informative content.
 </quiet-callout>
 
-<quiet-callout variant="confirmative">
-  This is a confirmative callout. Use me to show confirmations.
+<quiet-callout variant="constructive">
+  This is a constructive callout. Use me to show confirmations.
 </quiet-callout>
 
 <quiet-callout variant="destructive">
@@ -49,7 +49,7 @@ Add an icon to a callout using the `icon` slot. Works best with `<quiet-icon>` a
   Maecenas sed enim ut sem viverra aliquet eget sit amet. Id diam maecenas ultricies mi eget.
 </quiet-callout>
 
-<quiet-callout variant="confirmative" with-icon>
+<quiet-callout variant="constructive" with-icon>
   <quiet-icon slot="icon" name="check-circle"></quiet-icon>
   Nunc sed augue lacus viverra vitae congue. Mattis nunc sed blandit libero volutpat sed cras.
 </quiet-callout>
@@ -70,7 +70,7 @@ Callouts are sized relative to the current font size. To change their size, appl
   It's a magical world, ol' buddy…let's go exploring!
 </quiet-callout>
 
-<quiet-callout variant="confirmative" with-icon style="font-size: 1.25rem;">
+<quiet-callout variant="constructive" with-icon style="font-size: 1.25rem;">
   <quiet-icon slot="icon" name="paper-airplane"></quiet-icon>
   Your message has been sent successfully!
 </quiet-callout>

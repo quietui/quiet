@@ -721,14 +721,14 @@ quiet-callout {
     }
   }
 
-  &[variant='confirmative'] {
+  &[variant='constructive'] {
     code {
-      background-color: color-mix(in oklab, var(--quiet-confirmative-fill-soft), transparent 25%);
+      background-color: color-mix(in oklab, var(--quiet-constructive-fill-soft), transparent 25%);
     }
 
     kbd {
-      border-color: var(--quiet-confirmative-fill-soft);
-      box-shadow: 0 max(1px, 0.0715em) 0 0 var(--quiet-confirmative-fill-soft);
+      border-color: var(--quiet-constructive-fill-soft);
+      box-shadow: 0 max(1px, 0.0715em) 0 0 var(--quiet-constructive-fill-soft);
     }
   }
 

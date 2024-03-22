@@ -29,7 +29,7 @@ export class QuietCallout extends QuietElement {
   }
 
   /** The type of callout to render. */
-  @property({ reflect: true }) variant: 'primary' | 'secondary' | 'confirmative' | 'destructive' = 'secondary';
+  @property({ reflect: true }) variant: 'primary' | 'secondary' | 'constructive' | 'destructive' = 'secondary';
 
   /** Renders the callout with the `icon` slot. */
   @property({ attribute: 'with-icon', type: Boolean, reflect: true }) withIcon = false;

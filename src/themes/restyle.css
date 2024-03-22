@@ -181,7 +181,7 @@ del {
 }
 
 ins {
-  text-decoration-color: var(--quiet-confirmative-fill-moderate);
+  text-decoration-color: var(--quiet-constructive-fill-moderate);
   text-decoration-style: solid;
   text-decoration-thickness: 0.09375em;
   text-underline-offset: 0.125em;

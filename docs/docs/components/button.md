@@ -11,7 +11,7 @@ layout: component
 
 ### Variants
 
-Buttons have four standard variants. Primary buttons are intended for suggested behaviors and calls to action. Destructive buttons draw attention to dangerous operations, such as deletion. Secondary buttons are the default variant and are useful for secondary operations. Text buttons can be used as an alternative to secondary buttons when you want a simpler appearance with the same proportions.
+Buttons have four built-in variants. Set the `variant` attribute to `primary`, `secondary`, `constructive`, or `destructive` to change the button's appearance.
 
 ```html {.example}
 <quiet-button variant="primary">

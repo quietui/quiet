@@ -194,7 +194,7 @@ export class QuietButton extends QuietElement {
           // Variants
           primary: this.variant === 'primary',
           secondary: this.variant === 'secondary',
-          confirmative: this.variant === 'destructive',
+          constructive: this.variant === 'destructive',
           destructive: this.variant === 'destructive',
           text: this.variant === 'text',
           image: this.variant === 'image',

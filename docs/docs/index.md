@@ -6,7 +6,7 @@ layout: docs
 
 There are two ways to install Quiet. Autoloading is the easiest way to get started using components. However, you can also import them manually from the CDN or using a bundler.
 
-## Autoloading <quiet-badge variant="confirmative" data-no-outline data-no-anchor>Recommended</quiet-badge>
+## Autoloading <quiet-badge variant="constructive" data-no-outline data-no-anchor>Recommended</quiet-badge>
 
 The autoloader will automatically register components as you add them to the DOM. Just place the following code into the `<head>` section of an HTML document and you can use all of Quiet's components via CDN without any further effort.
 

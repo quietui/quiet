@@ -29,13 +29,13 @@ export default css`
     color: var(--quiet-neutral-colored-text);
   }
 
-  /* Confirmative */
-  :host([variant='confirmative']) {
-    background-color: var(--quiet-confirmative-fill-softer);
+  /* Constructive */
+  :host([variant='constructive']) {
+    background-color: var(--quiet-constructive-fill-softer);
   }
 
-  :host([variant='confirmative']) .icon {
-    color: var(--quiet-confirmative-colored-text);
+  :host([variant='constructive']) .icon {
+    color: var(--quiet-constructive-colored-text);
   }
 
   /* Destructive */

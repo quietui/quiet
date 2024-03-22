@@ -24,10 +24,10 @@ export default css`
     color: var(--quiet-primary-fill-text-softer);
   }
 
-  /* Confirmative */
-  :host([variant='confirmative']) {
-    background-color: var(--quiet-confirmative-fill-moderate);
-    color: var(--quiet-confirmative-fill-text-moderate);
+  /* Constructive */
+  :host([variant='constructive']) {
+    background-color: var(--quiet-constructive-fill-moderate);
+    color: var(--quiet-constructive-fill-text-moderate);
   }
 
   /* Destructive */

@@ -28,7 +28,7 @@
   --quiet-border-radius: 6px;
   --quiet-content-spacing: 2rem;
   --quiet-font-family: system-ui, sans-serif;
-  --quiet-font-family-code: Consolas, 'Liberation Mono', Menlo, monospace;
+  --quiet-font-family-code: SFMono-Regular, Consolas, Menlo, Monaco, 'liberation mono', 'courier new', monospace;
   --quiet-font-size: 16px;
   --quiet-font-weight-normal: 400;
   --quiet-font-weight-semibold: 500;

@@ -4,19 +4,59 @@ description: Customize Quiet with themes.
 layout: docs
 ---
 
-The following tokens are available as [CSS custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties).
+The default theme provides simple, elegant styles with support for light and dark modes. A number of [CSS custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) are exposed, giving you an easy way to make high-level changes to the library.
 
-TODO:
+## Using the default theme
 
-- explain how color palettes are generated and when to NOT use primitives
-- explain how light and dark mode tokens map to palettes
-- let users change base colors right in the docs
-- find a nice way to show off base tokens
-- list out all other tokens and what they do
+To import the default theme from the CDN, add the following code to the `<head>` of your page.
 
-<div style="display: none;">
+```html
+<link rel="stylesheet" href="{% cdnUrl '/dist/quiet.css' %}">
+```
 
-## Palettes
+### Activating dark mode
+
+Light mode "just works" once you import the default theme. To switch to dark mode, add the `quiet-dark` class to the `<html>` element as shown below. Removing the class will switch back to light mode.
+
+```html
+<html class="quiet-dark">
+  ...
+</html>
+```
+
+If you're using [Quiet Restyle](/docs/restyle), the entire page will enter dark mode. If you're not using Restyle, only the components will change and it's up to you to style the rest of your app accordingly.
+
+## Theme concepts
+
+Quiet's default theme is designed to be highly customizable with minimal effort. The following seed colors are used to generate color palettes with pure CSS — one for each variant.
+
+
+```css
+:root {
+  --quiet-primary-seed: #989cff;
+  --quiet-neutral-seed: #a4a6b0;
+  --quiet-constructive-seed: #7db664;
+  --quiet-destructive-seed: #f86565;
+}
+```
+
+This means you can customize an entire palette by setting a single custom property in your stylesheet. For example, this will change the primary color palette from violet to orange.
+
+```css
+:root {
+  --quiet-primary-seed: #e98d61;
+}
+```
+
+:::info
+For best results, use midtone colors to seed palettes. Any of the 500-level colors from [color.surf](https://color.surf) or similar palettes will work well.
+:::
+
+### Color primitives
+
+Four primitive color palettes are generated based on the aforementioned seed colors. These palettes correspond with the four variants used throughout the library and remain static in light and dark mode.
+
+Think of the primary variant as your brand color; neutral is usually gray, representing surfaces and secondary objects; constructive is often green, indicating creation or success; and destructive is often red, indicating deletion or danger.
 
 <div class="colors">
   <div class="color" style="background-color: var(--quiet-primary-50);"></div>
@@ -31,7 +71,6 @@ TODO:
   <div class="color" style="background-color: var(--quiet-primary-900);"></div>
   <div class="color" style="background-color: var(--quiet-primary-950);"></div>
 </div>
-
 <div class="colors">
   <div class="color" style="background-color: var(--quiet-neutral-50);"></div>
   <div class="color" style="background-color: var(--quiet-neutral-100);"></div>
@@ -45,7 +84,6 @@ TODO:
   <div class="color" style="background-color: var(--quiet-neutral-900);"></div>
   <div class="color" style="background-color: var(--quiet-neutral-950);"></div>
 </div>
-
 <div class="colors">
   <div class="color" style="background-color: var(--quiet-constructive-50);"></div>
   <div class="color" style="background-color: var(--quiet-constructive-100);"></div>
@@ -59,7 +97,6 @@ TODO:
   <div class="color" style="background-color: var(--quiet-constructive-900);"></div>
   <div class="color" style="background-color: var(--quiet-constructive-950);"></div>
 </div>
-
 <div class="colors">
   <div class="color" style="background-color: var(--quiet-destructive-50);"></div>
   <div class="color" style="background-color: var(--quiet-destructive-100);"></div>
@@ -74,137 +111,93 @@ TODO:
   <div class="color" style="background-color: var(--quiet-destructive-950);"></div>
 </div>
 
-</div>
+==TODO - figure out a good way to visualize these colors and vars and add click-to-copy==
 
-## Theme colors
+You should only use color primitives when you want a color that doesn't change in dark mode. For most styles, you probably want to use [adaptive colors](#adaptive-colors) instead.
 
-<div class="colors">
-  <div class="color" style="background-color: var(--quiet-primary-fill-softer);"></div>
-  <div class="color" style="background-color: var(--quiet-primary-fill-soft);"></div>
-  <div class="color" style="background-color: var(--quiet-primary-fill-moderate);"></div>
-  <div class="color" style="background-color: var(--quiet-primary-fill-loud);"></div>
-  <div class="color" style="background-color: var(--quiet-primary-fill-louder);"></div>
-</div>
+:::info
+While not recommended, it is technically possible to override the primitives for even more control over your application's color palettes.
+:::
 
-<div class="colors">
-  <div class="color" style="background-color: var(--quiet-neutral-fill-softer);"></div>
-  <div class="color" style="background-color: var(--quiet-neutral-fill-soft);"></div>
-  <div class="color" style="background-color: var(--quiet-neutral-fill-moderate);"></div>
-  <div class="color" style="background-color: var(--quiet-neutral-fill-loud);"></div>
-  <div class="color" style="background-color: var(--quiet-neutral-fill-louder);"></div>
-</div>
+### Adaptive colors
 
-<div class="colors">
-  <div class="color" style="background-color: var(--quiet-constructive-fill-softer);"></div>
-  <div class="color" style="background-color: var(--quiet-constructive-fill-soft);"></div>
-  <div class="color" style="background-color: var(--quiet-constructive-fill-moderate);"></div>
-  <div class="color" style="background-color: var(--quiet-constructive-fill-loud);"></div>
-  <div class="color" style="background-color: var(--quiet-constructive-fill-louder);"></div>
-</div>
+Design tokens automatically change between light and dark modes. Instead of numeric values, they use a scale that indicates their "volume" relative to the the app's background. Thus, "softer" colors have less contrast than "louder" ones. This approach lets you style most elements one time, but they'll look great in both color schemes.
 
-<div class="colors">
-  <div class="color" style="background-color: var(--quiet-destructive-fill-softer);"></div>
-  <div class="color" style="background-color: var(--quiet-destructive-fill-soft);"></div>
-  <div class="color" style="background-color: var(--quiet-destructive-fill-moderate);"></div>
-  <div class="color" style="background-color: var(--quiet-destructive-fill-loud);"></div>
-  <div class="color" style="background-color: var(--quiet-destructive-fill-louder);"></div>
-</div>
+Fill tokens are primarily used for backgrounds and surfaces; text-on colors provide adequate contrast when used on top of the respective fill color; and stroke colors are used to draw borders and outlines.
 
-<br>
+Replace `{variant}` with one of `primary`, `neutral`, `constructive`, or `destructive` in any of the tokens below.
 
-<quiet-button variant="primary">
-  Primary
-</quiet-button>
+<quiet-tab-list label="Color tokens">
+<quiet-tab slot="tab" panel="fill">Fill colors</quiet-tab>
+<quiet-tab slot="tab" panel="text">Text color</quiet-tab>
+<quiet-tab slot="tab" panel="stroke">Stroke colors</quiet-tab>
 
-<quiet-button variant="secondary">
-  Secondary
-</quiet-button>
+<quiet-tab-panel name="fill">
 
-<quiet-button variant="destructive">
-  Destructive
-</quiet-button>
+| Custom property                 | Used for                                       |
+| ------------------------------- | ---------------------------------------------- |
+| `--quiet-{variant}-fill-softer` | Very subtle backgrounds with minimal contrast  |
+| `--quiet-{variant}-fill-soft`   | Subtle backgrounds with little contrast        |
+| `--quiet-{variant}-fill-mid`    | A midtone fill with moderate contrast          |
+| `--quiet-{variant}-fill-loud`   | Strong backgrounds with a lot of contrast      |
+| `--quiet-{variant}-fill-louder` | Very strong backgrounds with extra contrast    |
 
-<quiet-button variant="text">
-  Text Button
-</quiet-button>
+</quiet-tab-panel>
 
-<div style="margin-block: 1.5rem;"></div>
+<quiet-tab-panel name="text">
 
-<quiet-badge variant="primary">Primary</quiet-badge>
-<quiet-badge variant="secondary">Secondary</quiet-badge>
-<quiet-badge variant="constructive">Constructive</quiet-badge>
-<quiet-badge variant="destructive">Destructive</quiet-badge>
+| Custom property                  | Used for                       |
+| -------------------------------- | ------------------------------ |
+| `--quiet-{variant}-text-on-soft` | Text on top of soft fills      |
+| `--quiet-{variant}-text-on-mid`  | Text on top of midtone fills   |
+| `--quiet-{variant}-text-on-loud` | Text on top of loud fills      |
+| `--quiet-neutral-text-colorful`  | Colored text, such as links    |
 
-<p style="color: var(--quiet-primary-colored-text);">
-  This is primary colored text on a background, like for links.
-</p>
+</quiet-tab-panel>
 
-<p style="color: var(--quiet-neutral-colored-text);">
-  This is neutral colored text on a background, like for muted text.
-</p>
+<quiet-tab-panel name="stroke">
 
-<p style="color: var(--quiet-constructive-colored-text);">
-  This is constructive colored text on a background, like for success messages.
-</p>
+| Custom property                   | Used for                              |
+| --------------------------------- | ------------------------------------- |
+| `--quiet-{variant}-stroke-softer` | Very subtle borders and outlines      |
+| `--quiet-{variant}-stroke-soft`   | Subtle borders and outlines           |
 
-<p style="color: var(--quiet-destructive-colored-text);">
-  This is destructive colored text on a background, like for dangerous messages.
-</p>
+</quiet-tab-panel>
+</quiet-tab-list>
 
-<quiet-callout variant="primary" with-icon>
-  <quiet-icon slot="icon" name="information-circle"></quiet-icon>
-  Dui vivamus arcu felis bibendum ut tristique et egestas. Tortor condimentum lacinia quis vel eros.
-</quiet-callout>
+==TODO - figure out a good way to visualize these colors and vars and add click-to-copy==
 
-<quiet-callout variant="secondary" with-icon>
-  <quiet-icon slot="icon" name="cog-6-tooth"></quiet-icon>
-  Maecenas sed enim ut sem viverra aliquet eget sit amet. Id diam maecenas ultricies mi eget.
-</quiet-callout>
+### Design tokens
 
-<quiet-callout variant="constructive" with-icon>
-  <quiet-icon slot="icon" name="check-circle"></quiet-icon>
-  Nunc sed augue lacus viverra vitae congue. Mattis nunc sed blandit libero volutpat sed cras.
-</quiet-callout>
+Aside from color palettes, the following tokens can be used to customize the overall appearance of the default theme. More granular customizations can be made to components with [CSS parts](/docs/using-web-components/#css-parts).
 
-<quiet-callout variant="destructive" with-icon>
-  <quiet-icon slot="icon" name="exclamation-triangle"></quiet-icon>
-  Sagittis purus sit amet volutpat consequat mauris nunc congue nisi. Sociis natoque penatibus et magnis dis.
-</quiet-callout>
+#### Application tokens
 
-<div style="background: var(--quiet-raised-background-color); border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer); padding: 2rem; border-radius: var(--quiet-border-radius);">
-  This content is raised up and has <a href="#">links too</a>.
-  <br><br>
-  <quiet-button variant="primary">
-    Primary
-  </quiet-button>
+==TODO==
 
-  <quiet-button variant="secondary">
-    Secondary
-  </quiet-button>
+#### Typography tokens
 
-  <quiet-button variant="destructive">
-    Destructive
-  </quiet-button>
+==TODO==
 
-  <quiet-button variant="text">
-    Text Button
-  </quiet-button>
-</div>
+#### Form tokens
+
+==TODO==
 
 <style>
   .colors {
     display: grid;
-    grid-template-columns: repeat(11, 40px);
-    gap: .125rem;
-    margin-block-end: .125rem;
+    grid-template-columns: repeat(11, 1fr);
+    justify-content: center;
+    gap: .25rem;
+    margin-block-end: var(--quiet-content-spacing);
 
     .color {
-      height: 40px;
-      border-radius: calc(var(--quiet-border-radius) / 2);
+      aspect-ratio: 2 / 1.25;
+      border-radius: 2px;
     }
   }
+
+  .colors:has(+ .colors) {
+    margin-block-end: .25rem;
+  }
 </style>
-
-## How to create a theme
-
-TODO

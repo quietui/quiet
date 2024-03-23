@@ -24,7 +24,7 @@ export default css`
     height: var(--height);
     border: none;
     border-radius: var(--quiet-border-radius);
-    background: var(--quiet-raised-background-color);
+    background: var(--quiet-paper-color);
     box-shadow: var(--quiet-shadow-loud);
     padding: 0;
 
@@ -212,7 +212,7 @@ export default css`
   .header {
     display: flex;
     align-items: center;
-    background: var(--quiet-raised-background-color);
+    background: var(--quiet-paper-color);
     gap: calc(var(--spacing) / 4);
     padding-inline-start: var(--spacing);
     padding-inline-end: calc(var(--spacing) / 2); /* less spacing to better align buttons as actions */
@@ -255,7 +255,7 @@ export default css`
     align-items: center;
     justify-content: end;
     gap: calc(var(--spacing) / 4);
-    background: var(--quiet-raised-background-color);
+    background: var(--quiet-paper-color);
     padding-inline: var(--spacing);
     padding-block: var(--spacing);
   }

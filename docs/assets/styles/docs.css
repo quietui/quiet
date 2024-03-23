@@ -47,7 +47,7 @@ html:not(.quiet-dark) .only-dark {
   z-index: calc(var(--docs-header-z-index) + 1);
   top: 0.5rem;
   left: 0.5rem;
-  background: var(--quiet-raised-background-color);
+  background: var(--quiet-paper-color);
   border-radius: var(--quiet-border-radius);
   box-shadow: 0 5px 20px rgb(0 0 0 / 0.125);
   text-decoration: none;
@@ -239,7 +239,7 @@ html:not(.quiet-dark) .only-dark {
 
 @media (hover: hover) {
   #header-group-links a:hover {
-    color: var(--quiet-primary-colored-text);
+    color: var(--quiet-primary-text-colorful);
   }
 }
 
@@ -249,9 +249,9 @@ html:not(.quiet-dark) .only-dark {
 
 #header-group-links .current {
   z-index: calc(var(--docs-header-z-index) + 2);
-  color: var(--quiet-primary-colored-text);
+  color: var(--quiet-primary-text-colorful);
   font-weight: var(--quiet-font-weight-semibold);
-  border-bottom: solid calc(var(--quiet-border-width) * 2) var(--quiet-primary-colored-text);
+  border-bottom: solid calc(var(--quiet-border-width) * 2) var(--quiet-primary-text-colorful);
 }
 
 /* Header group buttons */
@@ -282,7 +282,7 @@ html:not(.quiet-dark) .only-dark {
 @media (hover: hover) {
   #header-group-buttons a:hover svg,
   #header-group-buttons button:hover svg {
-    color: var(--quiet-primary-colored-text);
+    color: var(--quiet-primary-text-colorful);
   }
 }
 
@@ -385,7 +385,7 @@ html:not(.quiet-dark) .only-dark {
 
   .component-tag {
     font-size: 1.2rem;
-    color: var(--quiet-neutral-colored-text);
+    color: var(--quiet-text-muted);
     background: transparent;
     padding: 0;
     margin-inline-end: 0.25rem;
@@ -665,7 +665,7 @@ figure.float-end {
 }
 
 .docs-aside li {
-  color: var(--quiet-neutral-colored-text);
+  color: var(--quiet-text-muted);
   list-style: none;
 }
 
@@ -681,14 +681,14 @@ figure.float-end {
 
   @media (hover: hover) {
     &:not(.current):hover {
-      color: var(--quiet-body-color);
+      color: var(--quiet-text-body);
     }
   }
 }
 
 .docs-aside .current {
   font-weight: var(--quiet-font-weight-semibold);
-  color: var(--quiet-primary-colored-text);
+  color: var(--quiet-primary-text-colorful);
 }
 
 /* Callouts */
@@ -793,6 +793,17 @@ quiet-callout {
   gap: 1rem;
   justify-content: center;
   margin-block-start: 4rem;
+}
+
+@media screen and (max-width: 600px) {
+  .splash-actions {
+    flex-direction: column;
+    align-items: center;
+
+    quiet-button {
+      width: fit-content;
+    }
+  }
 }
 
 @media screen and (max-width: 959px) {

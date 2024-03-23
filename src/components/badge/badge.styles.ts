@@ -14,26 +14,26 @@ export default css`
 
   /* Primary */
   :host([variant='primary']) {
-    background-color: var(--quiet-primary-fill-moderate);
-    color: var(--quiet-primary-fill-text-moderate);
+    background-color: var(--quiet-primary-fill-mid);
+    color: var(--quiet-primary-text-on-mid);
   }
 
   /* Secondary */
   :host([variant='secondary']) {
     background-color: var(--quiet-neutral-fill-softer);
-    color: var(--quiet-primary-fill-text-softer);
+    color: var(--quiet-primary-text-on-soft);
   }
 
   /* Constructive */
   :host([variant='constructive']) {
-    background-color: var(--quiet-constructive-fill-moderate);
-    color: var(--quiet-constructive-fill-text-moderate);
+    background-color: var(--quiet-constructive-fill-mid);
+    color: var(--quiet-constructive-text-on-mid);
   }
 
   /* Destructive */
   :host([variant='destructive']) {
-    background-color: var(--quiet-destructive-fill-moderate);
-    color: var(--quiet-destructive-fill-text-moderate);
+    background-color: var(--quiet-destructive-fill-mid);
+    color: var(--quiet-destructive-text-on-mid);
   }
 
   /* Pulse */

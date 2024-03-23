@@ -33,7 +33,7 @@ export default css`
   }
 
   :host([placement='top']) ::slotted(quiet-tab[aria-selected='true']) {
-    border-bottom-color: var(--quiet-primary-fill-moderate);
+    border-bottom-color: var(--quiet-primary-fill-mid);
   }
 
   /* Bottom placement */
@@ -60,7 +60,7 @@ export default css`
   }
 
   :host([placement='bottom']) ::slotted(quiet-tab[aria-selected='true']) {
-    border-top-color: var(--quiet-primary-fill-moderate);
+    border-top-color: var(--quiet-primary-fill-mid);
   }
 
   /* Start placement */
@@ -95,7 +95,7 @@ export default css`
   }
 
   :host([placement='start']) ::slotted(quiet-tab[aria-selected='true']) {
-    border-color: var(--quiet-primary-fill-moderate);
+    border-color: var(--quiet-primary-fill-mid);
   }
 
   /* End placement */
@@ -132,6 +132,6 @@ export default css`
   }
 
   :host([placement='end']) ::slotted(quiet-tab[aria-selected='true']) {
-    border-color: var(--quiet-primary-fill-moderate);
+    border-color: var(--quiet-primary-fill-mid);
   }
 `;

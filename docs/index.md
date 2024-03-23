@@ -17,11 +17,11 @@ Professionally designed. Platform-built. Open source.
 
 <div class="splash-actions">
 
-<quiet-button href="/docs/" variant="primary" pill>
-Get started
+<quiet-button href="/docs/" variant="primary" size="xl" pill>
+View the docs
 </quiet-button>
 
-<quiet-button href="/about" variant="text" pill>
+<quiet-button href="/about" variant="text" size="xl" pill>
 About this project
 </quiet-button>
 

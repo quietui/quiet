@@ -17,7 +17,7 @@ export default css`
   }
 
   :host([variant='primary']) .icon {
-    color: var(--quiet-primary-colored-text);
+    color: var(--quiet-primary-text-colorful);
   }
 
   /* Secondary */
@@ -26,7 +26,7 @@ export default css`
   }
 
   :host([variant='secondary']) .icon {
-    color: var(--quiet-neutral-colored-text);
+    color: var(--quiet-neutral-text-colorful);
   }
 
   /* Constructive */
@@ -35,7 +35,7 @@ export default css`
   }
 
   :host([variant='constructive']) .icon {
-    color: var(--quiet-constructive-colored-text);
+    color: var(--quiet-constructive-text-colorful);
   }
 
   /* Destructive */
@@ -44,7 +44,7 @@ export default css`
   }
 
   :host([variant='destructive']) .icon {
-    color: var(--quiet-destructive-colored-text);
+    color: var(--quiet-destructive-text-colorful);
   }
 
   .icon {

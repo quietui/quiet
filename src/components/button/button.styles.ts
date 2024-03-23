@@ -14,7 +14,6 @@ export default css`
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 3em;
     font: inherit;
     font-size: 0.9375em;
     font-weight: var(--quiet-font-weight-semibold);
@@ -23,7 +22,6 @@ export default css`
     background: none;
     border: none;
     border-radius: var(--quiet-border-radius);
-    padding-inline: 1.25em;
     cursor: pointer;
     touch-action: manipulation;
     user-select: none;
@@ -50,25 +48,25 @@ export default css`
 
     /* Primary */
     &.primary {
-      background-color: var(--quiet-primary-fill-moderate);
-      color: var(--quiet-primary-fill-text-moderate);
+      background-color: var(--quiet-primary-fill-mid);
+      color: var(--quiet-primary-text-on-mid);
 
       @media (hover: hover) {
         &:hover:not(.disabled, [aria-pressed='true']) {
-          background-color: color-mix(in oklab, var(--quiet-primary-fill-moderate), black 5%);
+          background-color: color-mix(in oklab, var(--quiet-primary-fill-mid), black 5%);
         }
       }
 
       &[aria-pressed='true'] {
         background-color: var(--quiet-primary-fill-loud);
-        color: var(--quiet-primary-fill-text-loud);
+        color: var(--quiet-primary-text-on-loud);
       }
     }
 
     /* Secondary */
     &.secondary {
       background-color: var(--quiet-neutral-fill-softer);
-      color: var(--quiet-neutral-fill-text-softer);
+      color: var(--quiet-neutral-text-on-soft);
 
       @media (hover: hover) {
         &:hover:not(.disabled, [aria-pressed='true']) {
@@ -78,43 +76,74 @@ export default css`
 
       &[aria-pressed='true'] {
         background-color: var(--quiet-neutral-fill-soft);
-        color: var(--quiet-neutral-fill-text-soft);
+        color: var(--quiet-neutral-text-on-soft);
       }
     }
 
     /* Destructive */
     &.destructive {
-      background-color: var(--quiet-destructive-fill-moderate);
-      color: var(--quiet-destructive-fill-text-moderate);
+      background-color: var(--quiet-destructive-fill-mid);
+      color: var(--quiet-destructive-text-on-mid);
 
       @media (hover: hover) {
         &:hover:not(.disabled, [aria-pressed='true']) {
-          background-color: color-mix(in oklab, var(--quiet-destructive-fill-moderate), black 5%);
+          background-color: color-mix(in oklab, var(--quiet-destructive-fill-mid), black 5%);
         }
       }
 
       &[aria-pressed='true'] {
         background-color: var(--quiet-destructive-fill-loud);
-        color: var(--quiet-destructive-fill-text-loud);
+        color: var(--quiet-destructive-text-on-loud);
       }
     }
 
     /* Text */
     &.text {
       background: none;
-      color: var(--quiet-neutral-fill-text-softer);
+      color: var(--quiet-neutral-text-on-soft);
 
       @media (hover: hover) {
         &:hover {
-          background-color: color-mix(in oklab, transparent, var(--quiet-body-color) 3%);
-          color: var(--quiet-neutral-fill-text-softer);
+          background-color: color-mix(in oklab, transparent, var(--quiet-text-body) 3%);
+          color: var(--quiet-neutral-text-on-soft);
         }
       }
 
       &[aria-pressed='true'] {
         background-color: var(--quiet-neutral-fill-softer);
-        color: var(--quiet-neutral-fill-text-softer);
+        color: var(--quiet-neutral-text-on-soft);
       }
+    }
+
+    /* Sizes */
+    &.xs {
+      min-height: var(--quiet-form-control-height-xs);
+      font-size: var(--quiet-form-control-font-size-xs);
+      padding-inline: 0.75em;
+    }
+
+    &.sm {
+      min-height: var(--quiet-form-control-height-sm);
+      font-size: var(--quiet-form-control-font-size-sm);
+      padding-inline: 1em;
+    }
+
+    &.md {
+      min-height: var(--quiet-form-control-height-md);
+      font-size: var(--quiet-form-control-font-size-md);
+      padding-inline: 1.25em;
+    }
+
+    &.lg {
+      min-height: var(--quiet-form-control-height-lg);
+      font-size: var(--quiet-form-control-font-size-lg);
+      padding-inline: 1.33em;
+    }
+
+    &.xl {
+      min-height: var(--quiet-form-control-height-xl);
+      font-size: var(--quiet-form-control-font-size-xl);
+      padding-inline: 1.5em;
     }
 
     /* Pills */
@@ -131,6 +160,7 @@ export default css`
     /* image buttons */
     &.image {
       height: auto;
+      min-height: 0;
       border-radius: calc(var(--quiet-border-radius) * 2);
       padding: 0;
 

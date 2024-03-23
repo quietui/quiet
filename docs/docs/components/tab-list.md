@@ -285,7 +285,7 @@ Tab lists come with a simple, minimal appearance. Feel free to customize them wi
       border: solid 1px var(--quiet-neutral-stroke-softer);
       border-start-start-radius: var(--quiet-border-radius);
       border-start-end-radius: var(--quiet-border-radius);
-      color: var(--quiet-neutral-colored-text);
+      color: var(--quiet-text-muted);
       padding-block: .75rem;
       margin-inline: 2px;
     }
@@ -296,7 +296,7 @@ Tab lists come with a simple, minimal appearance. Feel free to customize them wi
 
     quiet-tab[data-state-active] {
       border-bottom-color: var(--quiet-background-color);
-      color: var(--quiet-body-color);
+      color: var(--quiet-text-body);
     }
 
     &::part(panels) {
@@ -319,7 +319,7 @@ Tab lists come with a simple, minimal appearance. Feel free to customize them wi
       justify-content: center;
       border: none;
       border-radius: calc(var(--quiet-border-radius) * .75);
-      color: var(--quiet-neutral-colored-text);
+      color: var(--quiet-text-muted);
       padding-inline: 2rem;
       padding-block: .25rem;
       transition: 100ms background-color ease, 100ms color ease;
@@ -332,7 +332,7 @@ Tab lists come with a simple, minimal appearance. Feel free to customize them wi
     quiet-tab[data-state-active] {
       border: none;
       background-color: var(--quiet-background-color);
-      color: var(--quiet-body-color);
+      color: var(--quiet-text-body);
     }
 
     &::part(panels) {

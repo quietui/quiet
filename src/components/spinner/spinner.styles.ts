@@ -2,7 +2,7 @@ import { css } from 'lit';
 
 export default css`
   :host {
-    --color: var(--quiet-primary-fill-moderate);
+    --color: var(--quiet-primary-fill-mid);
 
     display: inline-flex;
     width: 1em;

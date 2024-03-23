@@ -16,7 +16,7 @@ export default css`
     vertical-align: middle;
     border-radius: 50%;
     background-color: var(--quiet-neutral-fill-softer);
-    color: var(--quiet-neutral-fill-text-softer);
+    color: var(--quiet-neutral-text-on-soft);
     overflow: hidden;
   }
 

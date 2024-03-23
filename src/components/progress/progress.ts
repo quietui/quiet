@@ -19,7 +19,7 @@ import type { CSSResultGroup } from 'lit';
  *
  * @csspart indicator - The progress bar's current value indicator.
  *
- * @cssproperty [--indicator-color=var(--quiet-primary-fill-moderate)] - The color of the progress bar's value indicator.
+ * @cssproperty [--indicator-color=var(--quiet-primary-fill-mid)] - The color of the progress bar's value indicator.
  * @cssproperty [--track-color=var(--quiet-neutral-fill-softer)] - The color of the progress bar's track.
  */
 @customElement('quiet-progress')

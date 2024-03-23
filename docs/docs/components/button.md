@@ -83,16 +83,14 @@ To change a button's width, use the CSS `width` property.
 
 ### Changing the size
 
-Buttons are sized relative to the current font size. To change their size, apply `font-size` to the button or an ancestor element.
+Use the `size` attribute to change the button's size. Available sizes include `xs`, `sm`, `md`, `lg`, and `xl`, with the default being `md`.
 
 ```html {.example}
-<quiet-button style="font-size: .875rem;">
-  I'm a bit smaller
-</quiet-button>
-
-<quiet-button style="font-size: 1.125rem;">
-  I'm a bit bigger
-</quiet-button>
+<quiet-button size="xs">Extra small</quiet-button>
+<quiet-button size="sm">Small</quiet-button>
+<quiet-button size="md">Medium</quiet-button>
+<quiet-button size="lg">Large</quiet-button>
+<quiet-button size="xl">Extra large</quiet-button>
 ```
 
 :::info

@@ -16,7 +16,7 @@ export default css`
     left: 0;
     background-color: var(--quiet-neutral-fill-louder);
     border-radius: var(--quiet-border-radius);
-    color: var(--quiet-neutral-fill-text-louder);
+    color: var(--quiet-neutral-text-on-loud);
     font-size: 0.75rem;
     font-weight: var(--quiet-font-weight-semibold);
     text-align: center;

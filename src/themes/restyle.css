@@ -24,7 +24,7 @@ body {
   font-family: var(--quiet-font-family);
   font-size: var(--quiet-font-size);
   font-weight: var(--quiet-font-weight-normal);
-  color: var(--quiet-body-color);
+  color: var(--quiet-text-body);
   background-color: var(--quiet-background-color);
   line-height: var(--quiet-line-height);
   text-rendering: optimizeLegibility;
@@ -36,7 +36,7 @@ body {
 
 ::selection {
   background-color: var(--quiet-selection-background-color);
-  color: var(--quiet-body-color);
+  color: var(--quiet-text-body);
   text-shadow: none !important;
 }
 
@@ -121,7 +121,8 @@ p {
 /* Block quotes */
 blockquote {
   position: relative;
-  color: var(--quiet-neutral--color-muted);
+  font-size: 1.125em;
+  color: var(--quiet-text-muted);
   border-left: var(--quiet-border-style) calc(var(--quiet-border-width) * 4) var(--quiet-neutral-stroke-softer);
   padding: calc(var(--quiet-content-spacing) / 1.5) var(--quiet-content-spacing);
 }
@@ -153,14 +154,14 @@ iframe {
 /* Inline text elements */
 a {
   font-weight: var(--quiet-font-weight-semibold);
-  color: var(--quiet-primary-colored-text);
+  color: var(--quiet-primary-text-colorful);
   text-decoration-thickness: 0.09375em;
   text-underline-offset: 0.125em;
   transition: 150ms color ease;
 
   @media (hover: hover) {
     &:hover {
-      color: color-mix(in oklab, var(--quiet-primary-colored-text), black 10%);
+      color: color-mix(in oklab, var(--quiet-primary-text-colorful), black 10%);
     }
   }
 }
@@ -169,19 +170,19 @@ abbr[title] {
   text-decoration: underline;
   text-decoration-style: dotted;
   text-decoration-thickness: 0.09375em;
-  text-decoration-color: var(--quiet-neutral-fill-moderate);
+  text-decoration-color: var(--quiet-neutral-fill-mid);
   text-underline-offset: 0.125em;
   cursor: help;
 }
 
 del {
-  text-decoration-color: var(--quiet-destructive-fill-moderate);
+  text-decoration-color: var(--quiet-destructive-fill-mid);
   text-decoration-style: solid;
   text-decoration-thickness: 0.09375em;
 }
 
 ins {
-  text-decoration-color: var(--quiet-constructive-fill-moderate);
+  text-decoration-color: var(--quiet-constructive-fill-mid);
   text-decoration-style: solid;
   text-decoration-thickness: 0.09375em;
   text-underline-offset: 0.125em;
@@ -196,7 +197,7 @@ kbd {
 }
 
 mark {
-  background-color: var(--quiet-primary-fill-soft);
+  background-color: var(--quiet-constructive-fill-soft);
   border-radius: 0;
   color: inherit;
   border-radius: calc(var(--quiet-border-radius) / 2);
@@ -205,7 +206,7 @@ mark {
 
 small {
   font-size: 0.875em;
-  color: var(--quiet-neutral-colored-text);
+  color: var(---quiet-text-muted);
 }
 
 strong {
@@ -238,7 +239,7 @@ pre {
   border-radius: var(--quiet-border-radius);
   font-family: var(--quiet-font-family-code);
   font-size: 0.9375rem;
-  color: var(--quiet-neutral-fill-text-softer);
+  color: var(--quiet-neutral-text-on-soft);
   padding: calc(var(--quiet-content-spacing) / 2);
 
   code {

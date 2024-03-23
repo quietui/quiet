@@ -51,12 +51,11 @@ header {
 }
 
 #site-search-clear {
-  font-size: 1.25rem;
   margin-block-start: 0.5rem;
   margin-inline-end: 0.5rem;
 
   quiet-icon {
-    color: var(--quiet-neutral-fill-moderate);
+    color: var(--quiet-neutral-fill-mid);
   }
 }
 
@@ -67,7 +66,7 @@ header {
 
   quiet-icon[name='magnifying-glass'] {
     flex: 0 0 auto;
-    color: var(--quiet-neutral-fill-moderate);
+    color: var(--quiet-neutral-fill-mid);
     font-size: 1.5rem;
     margin-inline-start: 1.5rem;
     margin-block-start: 0.5rem;
@@ -85,7 +84,7 @@ header {
   margin: 0;
 
   &::placeholder {
-    color: var(--quiet-neutral-colored-text);
+    color: var(--quiet-text-muted);
   }
 }
 
@@ -137,8 +136,8 @@ header {
   li[data-selected='true'] a,
   li[data-selected='true'] a * {
     outline: none;
-    background-color: var(--quiet-primary-fill-moderate);
-    color: var(--quiet-primary-fill-text-moderate);
+    background-color: var(--quiet-primary-fill-mid);
+    color: var(--quiet-primary-text-on-mid);
   }
 
   h3 {
@@ -148,7 +147,7 @@ header {
 
   small {
     display: block;
-    color: var(--quiet-neutral-colored-text);
+    color: var(--quiet-text-muted);
   }
 }
 
@@ -167,7 +166,7 @@ header {
 
     quiet-icon {
       font-size: 2rem;
-      color: var(--quiet-neutral-fill-moderate);
+      color: var(--quiet-neutral-fill-mid);
     }
   }
 
@@ -187,17 +186,17 @@ header {
   .site-search-result-title {
     font-size: 1.25rem;
     font-weight: var(--quiet-font-weight-semibold);
-    color: var(--quiet-primary-colored-text);
+    color: var(--quiet-primary-text-colorful);
   }
 
   .site-search-result-description {
     font-size: 0.875rem;
-    color: var(--quiet-body-color);
+    color: var(--quiet-text-body);
   }
 
   .site-search-result-url {
     font-size: 0.875rem;
-    color: var(--quiet-neutral-colored-text);
+    color: var(--quiet-text-muted);
   }
 }
 
@@ -206,7 +205,7 @@ header {
   display: none;
   text-align: center;
   font-size: 0.875rem;
-  color: var(--quiet-neutral-colored-text);
+  color: var(--quiet-text-muted);
   padding: 3rem 2rem;
 
   svg {
@@ -228,7 +227,7 @@ header {
   display: flex;
   justify-content: center;
   gap: 2rem;
-  color: var(--quiet-neutral-colored-text);
+  color: var(--quiet-text-muted);
   border-bottom-left-radius: inherit;
   border-bottom-right-radius: inherit;
   padding: 1rem;

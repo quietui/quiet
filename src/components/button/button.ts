@@ -56,14 +56,17 @@ export class QuietButton extends QuietElement {
    */
   @property({ reflect: true }) toggle?: 'on' | 'off';
 
-  /** Draws the button in a pill shape. */
-  @property({ type: Boolean }) pill = false;
+  /** The button's size. */
+  @property() size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' = 'md';
 
   /**
    * To create an icon button, slot an icon into the button's default slot and set this attribute to an appropriate
    * label. The label won't be visible, but it will be available to assistive devices.
    */
   @property({ attribute: 'icon-label' }) iconLabel = '';
+
+  /** Draws the button in a pill shape. */
+  @property({ type: Boolean }) pill = false;
 
   /** Determines the button's type. */
   @property() type: 'button' | 'submit' | 'reset' = 'button';
@@ -198,6 +201,12 @@ export class QuietButton extends QuietElement {
           destructive: this.variant === 'destructive',
           text: this.variant === 'text',
           image: this.variant === 'image',
+          // Sizes
+          xs: this.size === 'xs',
+          sm: this.size === 'sm',
+          md: this.size === 'md',
+          lg: this.size === 'lg',
+          xl: this.size === 'xl',
           // Modifiers
           pill: this.pill,
           icon: this.iconLabel !== '',

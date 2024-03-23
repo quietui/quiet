@@ -180,7 +180,7 @@ Please read this section thoroughly if you've never styled custom elements befor
 
 ### CSS custom properties
 
-CSS custom properties, often referred to as CSS variables, are unique in that their values _will inherit_ through the shadow root. Custom properties are typically used when a value needs to be reused more than once within the custom element, or when they map to a property that isn't necessarily intuitive.
+[CSS custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties), often referred to as CSS variables, are unique in that their values _will inherit_ through the shadow root. Custom properties are typically used when a value needs to be reused more than once within the custom element, or when they map to a property that isn't necessarily intuitive.
 
 For example, [`<quiet-spinner>`](/docs/components/spinner) renders an animated SVG in its shadow root. The color of the indicator is applied to a `<circle>` element within the SVG, but the implementation detail shouldn't matter to a user who just wants to make the spinner pink.
 

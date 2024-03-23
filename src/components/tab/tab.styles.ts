@@ -19,7 +19,7 @@ export default css`
   }
 
   :host([aria-selected='true']) {
-    color: var(--quiet-primary-colored-text);
+    color: var(--quiet-primary-text-colorful);
   }
 
   :host([disabled]) {

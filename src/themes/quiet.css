@@ -2,8 +2,8 @@
 :host {
   /*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //
-  //  These base tokens are used to seed the color palettes. For best results, always use a mid-tone color such as any
-  //  of the 500-level colors from:
+  //  These base tokens are used to seed the color palettes. For best results, always use a midtone color such as any of
+  //  the 500-level colors from:
   //
   //  https://color.surf/
   //
@@ -28,7 +28,7 @@
   --quiet-border-radius: 6px;
   --quiet-content-spacing: 2rem;
   --quiet-font-family: system-ui, sans-serif;
-  --quiet-font-family-code: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+  --quiet-font-family-code: Consolas, 'Liberation Mono', Menlo, monospace;
   --quiet-font-size: 16px;
   --quiet-font-weight-normal: 400;
   --quiet-font-weight-semibold: 500;
@@ -205,7 +205,7 @@
 
   --quiet-silent: black;
   --quiet-strident: white;
-  --quiet-background-color: color-mix(in oklab, var(--quiet-neutral-950), white 7.5%);
+  --quiet-background-color: color-mix(in oklab, var(--quiet-neutral-950), white 5%);
   --quiet-paper-color: color-mix(in oklab, var(--quiet-background-color), white 3.5%);
   --quiet-text-body: var(--quiet-neutral-100);
   --quiet-text-muted: var(--quiet-neutral-text-colorful);

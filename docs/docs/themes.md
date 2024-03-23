@@ -56,62 +56,161 @@ For best results, use midtone colors to seed palettes. Any of the 500-level colo
 
 Four primitive color palettes are generated based on the aforementioned seed colors. These palettes correspond with the four variants used throughout the library and remain static in light and dark mode.
 
-Think of the primary variant as your brand color; neutral is usually gray, representing surfaces and secondary objects; constructive is often green, indicating creation or success; and destructive is often red, indicating deletion or danger.
+Click on a color to copy the respective CSS custom property.
 
-<div class="colors">
-  <div class="color" style="background-color: var(--quiet-primary-50);"></div>
-  <div class="color" style="background-color: var(--quiet-primary-100);"></div>
-  <div class="color" style="background-color: var(--quiet-primary-200);"></div>
-  <div class="color" style="background-color: var(--quiet-primary-300);"></div>
-  <div class="color" style="background-color: var(--quiet-primary-400);"></div>
-  <div class="color" style="background-color: var(--quiet-primary-500);"></div>
-  <div class="color" style="background-color: var(--quiet-primary-600);"></div>
-  <div class="color" style="background-color: var(--quiet-primary-700);"></div>
-  <div class="color" style="background-color: var(--quiet-primary-800);"></div>
-  <div class="color" style="background-color: var(--quiet-primary-900);"></div>
-  <div class="color" style="background-color: var(--quiet-primary-950);"></div>
-</div>
-<div class="colors">
-  <div class="color" style="background-color: var(--quiet-neutral-50);"></div>
-  <div class="color" style="background-color: var(--quiet-neutral-100);"></div>
-  <div class="color" style="background-color: var(--quiet-neutral-200);"></div>
-  <div class="color" style="background-color: var(--quiet-neutral-300);"></div>
-  <div class="color" style="background-color: var(--quiet-neutral-400);"></div>
-  <div class="color" style="background-color: var(--quiet-neutral-500);"></div>
-  <div class="color" style="background-color: var(--quiet-neutral-600);"></div>
-  <div class="color" style="background-color: var(--quiet-neutral-700);"></div>
-  <div class="color" style="background-color: var(--quiet-neutral-800);"></div>
-  <div class="color" style="background-color: var(--quiet-neutral-900);"></div>
-  <div class="color" style="background-color: var(--quiet-neutral-950);"></div>
-</div>
-<div class="colors">
-  <div class="color" style="background-color: var(--quiet-constructive-50);"></div>
-  <div class="color" style="background-color: var(--quiet-constructive-100);"></div>
-  <div class="color" style="background-color: var(--quiet-constructive-200);"></div>
-  <div class="color" style="background-color: var(--quiet-constructive-300);"></div>
-  <div class="color" style="background-color: var(--quiet-constructive-400);"></div>
-  <div class="color" style="background-color: var(--quiet-constructive-500);"></div>
-  <div class="color" style="background-color: var(--quiet-constructive-600);"></div>
-  <div class="color" style="background-color: var(--quiet-constructive-700);"></div>
-  <div class="color" style="background-color: var(--quiet-constructive-800);"></div>
-  <div class="color" style="background-color: var(--quiet-constructive-900);"></div>
-  <div class="color" style="background-color: var(--quiet-constructive-950);"></div>
-</div>
-<div class="colors">
-  <div class="color" style="background-color: var(--quiet-destructive-50);"></div>
-  <div class="color" style="background-color: var(--quiet-destructive-100);"></div>
-  <div class="color" style="background-color: var(--quiet-destructive-200);"></div>
-  <div class="color" style="background-color: var(--quiet-destructive-300);"></div>
-  <div class="color" style="background-color: var(--quiet-destructive-400);"></div>
-  <div class="color" style="background-color: var(--quiet-destructive-500);"></div>
-  <div class="color" style="background-color: var(--quiet-destructive-600);"></div>
-  <div class="color" style="background-color: var(--quiet-destructive-700);"></div>
-  <div class="color" style="background-color: var(--quiet-destructive-800);"></div>
-  <div class="color" style="background-color: var(--quiet-destructive-900);"></div>
-  <div class="color" style="background-color: var(--quiet-destructive-950);"></div>
-</div>
+<div class="color-palettes">
+  <h4>Primary</h4>
+  <p class="description">Primary is your brand color. Use it for brand recognition and guiding attention through calls to action.</p>
+  <div class="swatches swatches-11">
+    <quiet-copy data="--quiet-primary-50">
+      <button aria-label="Primary 50" style="background-color: var(--quiet-primary-50);"><span class="value">50</span></button>
+    </quiet-copy>
+    <quiet-copy data="--quiet-primary-100">
+      <button aria-label="Primary 100" style="background-color: var(--quiet-primary-100);"><span class="value">100</span></button>
+    </quiet-copy>
+    <quiet-copy data="--quiet-primary-200">
+      <button aria-label="Primary 200" style="background-color: var(--quiet-primary-200);"><span class="value">200</span></button>
+    </quiet-copy>
+    <quiet-copy data="--quiet-primary-300">
+      <button aria-label="Primary 300" style="background-color: var(--quiet-primary-300);"><span class="value">300</span></button>
+    </quiet-copy>
+    <quiet-copy data="--quiet-primary-400">
+      <button aria-label="Primary 400" style="background-color: var(--quiet-primary-400);"><span class="value">400</span></button>
+    </quiet-copy>
+    <quiet-copy data="--quiet-primary-500">
+      <button aria-label="Primary 500" style="background-color: var(--quiet-primary-500);"><span class="value">500</span></button>
+    </quiet-copy>
+    <quiet-copy data="--quiet-primary-600">
+      <button aria-label="Primary 600" style="background-color: var(--quiet-primary-600);"><span class="value">600</span></button>
+    </quiet-copy>
+    <quiet-copy data="--quiet-primary-700">
+      <button aria-label="Primary 700" style="background-color: var(--quiet-primary-700);"><span class="value">700</span></button>
+    </quiet-copy>
+    <quiet-copy data="--quiet-primary-800">
+      <button aria-label="Primary 800" style="background-color: var(--quiet-primary-800);"><span class="value">800</span></button>
+    </quiet-copy>
+    <quiet-copy data="--quiet-primary-900">
+      <button aria-label="Primary 900" style="background-color: var(--quiet-primary-900);"><span class="value">900</span></button>
+    </quiet-copy>
+    <quiet-copy data="--quiet-primary-950">
+      <button aria-label="Primary 950" style="background-color: var(--quiet-primary-950);"><span class="value">950</span></button>
+    </quiet-copy>
+  </div>
 
-==TODO - figure out a good way to visualize these colors and vars and add click-to-copy==
+  <h4>Neutral</h4>
+  <p class="description">Neutral is usually gray, representing surfaces and secondary objects.</p>
+  <div class="swatches swatches-11">
+    <quiet-copy data="--quiet-neutral-50">
+      <button aria-label="Neutral 50" style="background-color: var(--quiet-neutral-50);"><span class="value">50</span></button>
+    </quiet-copy>
+    <quiet-copy data="--quiet-neutral-100">
+      <button aria-label="Neutral 100" style="background-color: var(--quiet-neutral-100);"><span class="value">100</span></button>
+    </quiet-copy>
+    <quiet-copy data="--quiet-neutral-200">
+      <button aria-label="Neutral 200" style="background-color: var(--quiet-neutral-200);"><span class="value">200</span></button>
+    </quiet-copy>
+    <quiet-copy data="--quiet-neutral-300">
+      <button aria-label="Neutral 300" style="background-color: var(--quiet-neutral-300);"><span class="value">300</span></button>
+    </quiet-copy>
+    <quiet-copy data="--quiet-neutral-400">
+      <button aria-label="Neutral 400" style="background-color: var(--quiet-neutral-400);"><span class="value">400</span></button>
+    </quiet-copy>
+    <quiet-copy data="--quiet-neutral-500">
+      <button aria-label="Neutral 500" style="background-color: var(--quiet-neutral-500);"><span class="value">500</span></button>
+    </quiet-copy>
+    <quiet-copy data="--quiet-neutral-600">
+      <button aria-label="Neutral 600" style="background-color: var(--quiet-neutral-600);"><span class="value">600</span></button>
+    </quiet-copy>
+    <quiet-copy data="--quiet-neutral-700">
+      <button aria-label="Neutral 700" style="background-color: var(--quiet-neutral-700);"><span class="value">700</span></button>
+    </quiet-copy>
+    <quiet-copy data="--quiet-neutral-800">
+      <button aria-label="Neutral 800" style="background-color: var(--quiet-neutral-800);"><span class="value">800</span></button>
+    </quiet-copy>
+    <quiet-copy data="--quiet-neutral-900">
+      <button aria-label="Neutral 900" style="background-color: var(--quiet-neutral-900);"><span class="value">900</span></button>
+    </quiet-copy>
+    <quiet-copy data="--quiet-neutral-950">
+      <button aria-label="Neutral 950" style="background-color: var(--quiet-neutral-950);"><span class="value">950</span></button>
+    </quiet-copy>
+  </div>
+
+  <h4>Constructive</h4>
+  <p class="description">Constructive is often green, indicating creation or success.</p>
+  <div class="swatches swatches-11">
+    <quiet-copy data="--quiet-constructive-50">
+      <button aria-label="Constructive 50" style="background-color: var(--quiet-constructive-50);"><span class="value">50</span></button>
+    </quiet-copy>
+    <quiet-copy data="--quiet-constructive-100">
+      <button aria-label="Constructive 100" style="background-color: var(--quiet-constructive-100);"><span class="value">100</span></button>
+    </quiet-copy>
+    <quiet-copy data="--quiet-constructive-200">
+      <button aria-label="Constructive 200" style="background-color: var(--quiet-constructive-200);"><span class="value">200</span></button>
+    </quiet-copy>
+    <quiet-copy data="--quiet-constructive-300">
+      <button aria-label="Constructive 300" style="background-color: var(--quiet-constructive-300);"><span class="value">300</span></button>
+    </quiet-copy>
+    <quiet-copy data="--quiet-constructive-400">
+      <button aria-label="Constructive 400" style="background-color: var(--quiet-constructive-400);"><span class="value">400</span></button>
+    </quiet-copy>
+    <quiet-copy data="--quiet-constructive-500">
+      <button aria-label="Constructive 500" style="background-color: var(--quiet-constructive-500);"><span class="value">500</span></button>
+    </quiet-copy>
+    <quiet-copy data="--quiet-constructive-600">
+      <button aria-label="Constructive 600" style="background-color: var(--quiet-constructive-600);"><span class="value">600</span></button>
+    </quiet-copy>
+    <quiet-copy data="--quiet-constructive-700">
+      <button aria-label="Constructive 700" style="background-color: var(--quiet-constructive-700);"><span class="value">700</span></button>
+    </quiet-copy>
+    <quiet-copy data="--quiet-constructive-800">
+      <button aria-label="Constructive 800" style="background-color: var(--quiet-constructive-800);"><span class="value">800</span></button>
+    </quiet-copy>
+    <quiet-copy data="--quiet-constructive-900">
+      <button aria-label="Constructive 900" style="background-color: var(--quiet-constructive-900);"><span class="value">900</span></button>
+    </quiet-copy>
+    <quiet-copy data="--quiet-constructive-950">
+      <button aria-label="Constructive 950" style="background-color: var(--quiet-constructive-950);"><span class="value">950</span></button>
+    </quiet-copy>
+  </div>
+
+  <h4>Destructive</h4>
+  <p class="description">Destructive is often red, indicating deletion or danger.</p>
+  <div class="swatches swatches-11">
+    <quiet-copy data="--quiet-destructive-50">
+      <button aria-label="Destructive 50" style="background-color: var(--quiet-destructive-50);"><span class="value">50</span></button>
+    </quiet-copy>
+    <quiet-copy data="--quiet-destructive-100">
+      <button aria-label="Destructive 100" style="background-color: var(--quiet-destructive-100);"><span class="value">100</span></button>
+    </quiet-copy>
+    <quiet-copy data="--quiet-destructive-200">
+      <button aria-label="Destructive 200" style="background-color: var(--quiet-destructive-200);"><span class="value">200</span></button>
+    </quiet-copy>
+    <quiet-copy data="--quiet-destructive-300">
+      <button aria-label="Destructive 300" style="background-color: var(--quiet-destructive-300);"><span class="value">300</span></button>
+    </quiet-copy>
+    <quiet-copy data="--quiet-destructive-400">
+      <button aria-label="Destructive 400" style="background-color: var(--quiet-destructive-400);"><span class="value">400</span></button>
+    </quiet-copy>
+    <quiet-copy data="--quiet-destructive-500">
+      <button aria-label="Destructive 500" style="background-color: var(--quiet-destructive-500);"><span class="value">500</span></button>
+    </quiet-copy>
+    <quiet-copy data="--quiet-destructive-600">
+      <button aria-label="Destructive 600" style="background-color: var(--quiet-destructive-600);"><span class="value">600</span></button>
+    </quiet-copy>
+    <quiet-copy data="--quiet-destructive-700">
+      <button aria-label="Destructive 700" style="background-color: var(--quiet-destructive-700);"><span class="value">700</span></button>
+    </quiet-copy>
+    <quiet-copy data="--quiet-destructive-800">
+      <button aria-label="Destructive 800" style="background-color: var(--quiet-destructive-800);"><span class="value">800</span></button>
+    </quiet-copy>
+    <quiet-copy data="--quiet-destructive-900">
+      <button aria-label="Destructive 900" style="background-color: var(--quiet-destructive-900);"><span class="value">900</span></button>
+    </quiet-copy>
+    <quiet-copy data="--quiet-destructive-950">
+      <button aria-label="Destructive 950" style="background-color: var(--quiet-destructive-950);"><span class="value">950</span></button>
+    </quiet-copy>
+  </div>      
+</div>
 
 You should only use color primitives when you want a color that doesn't change in dark mode. For most styles, you probably want to use [adaptive colors](#adaptive-colors) instead.
 
@@ -165,6 +264,7 @@ Replace `{variant}` with one of `primary`, `neutral`, `constructive`, or `destru
 </quiet-tab-panel>
 </quiet-tab-list>
 
+==TODO - 0 and 1000 color names and documentation==
 ==TODO - figure out a good way to visualize these colors and vars and add click-to-copy==
 
 ### Design tokens
@@ -184,6 +284,87 @@ Aside from color palettes, the following tokens can be used to customize the ove
 ==TODO==
 
 <style>
+
+  .color-palettes {
+    h4 {
+      font-size: 1rem;
+      margin-block-end: 0;
+    }
+    
+    .description {
+      font-size: .875rem;
+      color: var(--quiet-text-muted);
+      margin-block-end: .25rem;
+    }
+  }
+
+  .swatches {
+    display: grid;
+    justify-content: center;
+    gap: 1.5rem .25rem;
+    margin-block-end: calc(var(--quiet-content-spacing) + 1.25rem);
+
+    &.swatches-11 {
+      grid-template-columns: repeat(11, 1fr);
+
+      @media screen and (max-width: 700px) {
+        grid-template-columns: repeat(6, 1fr);
+      }
+    }
+
+    & > quiet-copy {
+      display: flex;
+      position: relative;
+    }
+
+    & > quiet-copy > button {
+      position: relative;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      align-items: end;
+      justify-content: center;
+      aspect-ratio: 2 / 1.75;
+      font-size: .75rem;
+      font-weight: var(--quiet-font-weight-semibold);
+      color: var(--quiet-text-muted);
+      background: none;
+      border: none;
+      border-radius: calc(var(--quiet-border-radius) / 2);
+      padding-inline: .25rem;
+      cursor: pointer;
+      transition: 100ms translate ease;
+
+      &:active {
+        translate: 0 1px;
+
+        .value {
+          translate: 0 calc(1.25rem - 1px);
+        }
+      }
+    }
+
+    .value {
+      display: flex;
+      position: absolute;
+      align-items: end;
+      justify-content: center;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: 100ms translate ease;
+      translate: 0 1.25rem;
+      pointer-events: none;
+    }
+  }
+
+  /* Old styles below */
+
   .colors {
     display: grid;
     grid-template-columns: repeat(11, 1fr);
@@ -201,3 +382,13 @@ Aside from color palettes, the following tokens can be used to customize the ove
     margin-block-end: .25rem;
   }
 </style>
+
+<script>
+  document.addEventListener('click', event => {
+    const button = event.target.closest('button.color');
+
+    if (button) {
+      navigator.clipboard.writeText(button.dataset.copy);
+    }
+  });
+</script>

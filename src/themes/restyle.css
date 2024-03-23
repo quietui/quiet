@@ -290,7 +290,7 @@ dt {
 }
 
 dd {
-  margin-inline-start: calc(var(--quiet-content-spacing) / 2);
+  color: var(--quiet-text-muted);
 
   &:not(:last-of-type) {
     margin-block-end: calc(var(--quiet-content-spacing) / 2);
@@ -391,7 +391,7 @@ tfoot td {
 th,
 td {
   text-align: start;
-  padding: 1.25em;
+  padding: 0.75em;
 }
 
 /* Form controls */

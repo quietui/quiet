@@ -9,6 +9,7 @@ export default css`
 
   .button {
     appearance: none;
+    position: relative;
     display: inline-flex;
     gap: 0.4em;
     align-items: center;
@@ -58,8 +59,7 @@ export default css`
       }
 
       &[aria-pressed='true'] {
-        background-color: var(--quiet-primary-fill-loud);
-        color: var(--quiet-primary-text-on-loud);
+        background-color: color-mix(in oklab, var(--quiet-primary-fill-mid), var(--quiet-strident) 7.5%);
       }
     }
 
@@ -75,8 +75,7 @@ export default css`
       }
 
       &[aria-pressed='true'] {
-        background-color: var(--quiet-neutral-fill-soft);
-        color: var(--quiet-neutral-text-on-soft);
+        background-color: color-mix(in oklab, var(--quiet-neutral-fill-softer), var(--quiet-strident) 7.5%);
       }
     }
 
@@ -92,8 +91,7 @@ export default css`
       }
 
       &[aria-pressed='true'] {
-        background-color: var(--quiet-destructive-fill-loud);
-        color: var(--quiet-destructive-text-on-loud);
+        background-color: color-mix(in oklab, var(--quiet-destructive-fill-mid), var(--quiet-strident) 7.5%);
       }
     }
 
@@ -104,15 +102,31 @@ export default css`
 
       @media (hover: hover) {
         &:hover {
-          background-color: color-mix(in oklab, transparent, var(--quiet-text-body) 3%);
+          background-color: color-mix(in oklab, transparent, var(--quiet-text-body) 2.5%);
           color: var(--quiet-neutral-text-on-soft);
         }
       }
 
       &[aria-pressed='true'] {
-        background-color: var(--quiet-neutral-fill-softer);
-        color: var(--quiet-neutral-text-on-soft);
+        background-color: color-mix(in oklab, transparent, var(--quiet-text-body) 5%);
       }
+    }
+
+    /* Toggle button indicators */
+    &[aria-pressed]::after {
+      content: '';
+      position: absolute;
+      bottom: 0.25em;
+      left: calc(50% - 0.375em);
+      width: 0.75em;
+      height: 0.2em;
+      background-color: currentColor;
+      border-radius: 9999px;
+      opacity: 0.15;
+    }
+
+    &[aria-pressed='true']::after {
+      opacity: 1;
     }
 
     /* Sizes */

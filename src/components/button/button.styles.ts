@@ -16,7 +16,6 @@ export default css`
     justify-content: center;
     width: 100%;
     font: inherit;
-    font-size: 0.9375em;
     font-weight: var(--quiet-font-weight-semibold);
     text-decoration: none;
     vertical-align: middle;

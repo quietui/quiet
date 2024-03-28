@@ -29,7 +29,8 @@ import type { CSSResultGroup } from 'lit';
  *
  * @csspart button - The internal `<button>` element. Other than `width`, this is where most custom styles should be
  *  applied.
- * @csspart spinner - The loading indicator. Only present when the `loading` attribute is set.
+ * @csspart caret - The caret icon, a `<quiet-icon>` element. Only present with the `with-caret` attribute.
+ * @csspart spinner - The loading indicator, a `<quiet-spinner>` element. Only present with the `loading` attribute.
  *
  * @dependency quiet-spinner
  */
@@ -76,6 +77,9 @@ export class QuietButton extends QuietElement {
 
   /** The value to submit when the button is used to submit the form. */
   @property() value = '';
+
+  /** When true, the button will be rendered with a caret to indicate a dropdown menu. */
+  @property({ attribute: 'with-caret', type: Boolean }) withCaret = false;
 
   /**
    * Set this to render the button as an `<a>` tag instead of a `<button>`. The button will act as a link. When this is
@@ -231,7 +235,8 @@ export class QuietButton extends QuietElement {
         <slot name="start"></slot>
         <slot></slot>
         <slot name="end"></slot>
-        ${isLoading ? html`<quiet-spinner class="spinner"></quiet-spinner>` : ''}
+        ${this.withCaret ? html`<quiet-icon part="caret" class="caret" slot="end" name="chevron-down" library="system"></quiet-icon>` : ''}
+        ${isLoading ? html`<quiet-spinner part="spinner" class="spinner"></quiet-spinner>` : ''}
       </${tag}>
     `;
     /* eslint-enable lit/binding-positions, lit/no-invalid-html */

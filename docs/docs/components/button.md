@@ -186,3 +186,11 @@ To disable a button, add the `disabled` attribute. When a button is disabled, th
 ```html {.example}
 <quiet-button disabled>Click me</quiet-button>
 ```
+
+### Adding a dropdown caret
+
+A caret can be shown to indicate the button opens a dropdown menu by adding the `with-caret` attribute.
+
+```html {.example}
+<quiet-button with-caret>Dropdown</quiet-button>
+```

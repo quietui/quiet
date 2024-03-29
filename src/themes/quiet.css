@@ -133,7 +133,7 @@
   --quiet-text-muted: var(--quiet-neutral-text-colorful);
   --quiet-focus-color: var(--quiet-primary-fill-mid);
   --quiet-focus-ring: var(--quiet-border-style) var(--quiet-focus-width) var(--quiet-focus-color);
-  --quiet-backdrop-color: rgba(0 0 0 / 0.25);
+  --quiet-backdrop-color: rgb(0 0 0 / 0.25);
   --quiet-selection-background-color: var(--quiet-primary-300);
   --quiet-shadow-color: black;
   --quiet-shadow-softer: 0 1px 2px color-mix(in oklab, transparent, var(--quiet-shadow-color) 4%);
@@ -215,7 +215,7 @@
   --quiet-text-muted: var(--quiet-neutral-text-colorful);
   --quiet-focus-color: var(--quiet-primary-fill-mid);
   --quiet-focus-ring: var(--quiet-border-style) var(--quiet-focus-width) var(--quiet-focus-color);
-  --quiet-backdrop-color: rgba(0 0 0 / 0.25);
+  --quiet-backdrop-color: rgb(0 0 0 / 0.25);
   --quiet-selection-background-color: var(--quiet-primary-700);
   --quiet-shadow-color: transparent;
   --quiet-shadow-softer: none;

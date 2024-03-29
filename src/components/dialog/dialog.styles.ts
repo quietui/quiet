@@ -33,7 +33,7 @@ export default css`
         NOTE: the ::backdrop element doesn't inherit properly in Safari yet, but it will in 17.4! At that time, we can
         remove the fallback values here.
       */
-      background-color: var(--quiet-backdrop-color, rgba(0 0 0 / 0.25));
+      background-color: var(--quiet-backdrop-color, rgb(0 0 0 / 0.25));
       backdrop-filter: var(--quiet-backdrop-filter);
       -webkit-backdrop-filter: var(--quiet-backdrop-filter, blur(6px));
     }
@@ -231,13 +231,6 @@ export default css`
     padding-inline: var(--spacing);
     padding-block: calc(var(--spacing) / 2);
     overflow: auto;
-
-    @supports (animation-timeline: scroll(self block)) {
-      & {
-        animation: scroll-shadow linear;
-        animation-timeline: scroll(self block);
-      }
-    }
   }
 
   /* Normalize spacing when the header and footer are absent */
@@ -258,15 +251,6 @@ export default css`
     background: var(--quiet-paper-color);
     padding-inline: var(--spacing);
     padding-block: var(--spacing);
-  }
-
-  @keyframes scroll-shadow {
-    from {
-      box-shadow: inset 0 -4px 4px 0 rgb(0 0 0 / 7.5%);
-    }
-    to {
-      box-shadow: inset 0 4px 4px 0 rgb(0 0 0 / 7.5%);
-    }
   }
 
   @keyframes show-from-center {

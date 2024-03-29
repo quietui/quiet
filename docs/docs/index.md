@@ -15,6 +15,14 @@ The autoloader will automatically register components as you add them to the DOM
 <script src="{% cdnUrl '/dist/quiet.loader.js' %}" type="module"></script>
 ```
 
+Now you can use any component in your HTML!
+
+```html {.example .no-buttons}
+<quiet-button variant="primary">
+  Click me
+</quiet-button>
+```
+
 :::info
 Quiet components are [custom HTML elements](https://developer.mozilla.org/en-US/docs/Web/API/Web_components). They're built with platform APIs, so you can use them anywhere — even in your favorite framework!
 :::

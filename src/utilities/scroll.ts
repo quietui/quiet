@@ -2,11 +2,9 @@ const locks = new Set();
 const lockStyles = document.createElement('style');
 
 lockStyles.textContent = `
-  @supports (scrollbar-gutter: stable) {
-    .quiet-scroll-lock {
-      scrollbar-gutter: stable !important;
-      overflow: hidden !important;
-    }
+  .quiet-scroll-lock {
+    scrollbar-gutter: stable !important;
+    overflow: hidden !important;
   }
 `;
 

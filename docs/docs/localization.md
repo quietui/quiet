@@ -60,7 +60,7 @@ You can use multiple languages on the same page. Start by setting the default la
 ```html
 <html lang="en">
   ...
-  <sl-spinner lang="ru"></sl-spinner>
+  <quiet-spinner lang="ru"></quiet-spinner>
 </html>
 ```
 

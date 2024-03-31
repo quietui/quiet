@@ -287,12 +287,8 @@ dt {
   font-weight: var(--quiet-font-weight-semibold);
 }
 
-dd {
-  color: var(--quiet-text-muted);
-
-  &:not(:last-of-type) {
-    margin-block-end: calc(var(--quiet-content-spacing) / 2);
-  }
+dd:not(:last-of-type) {
+  margin-block-end: calc(var(--quiet-content-spacing) / 2);
 }
 
 /* Details */

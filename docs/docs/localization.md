@@ -55,7 +55,7 @@ You can change the language at any time and components will automatically update
 
 ### Using multiple languages
 
-You can use multiple languages on the same page. Start by setting the default language on `<html>` as shown above, then add the appropriate `lang` and `dir` attributes to the components you want to localized.
+You can use multiple languages on the same page. Start by setting the default language on `<html>` as shown above, then add the appropriate `lang` and `dir` attributes to the components you want to localize.
 
 ```html
 <html lang="en">

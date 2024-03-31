@@ -4,7 +4,7 @@ description: Use Quiet in your native tongue.
 layout: docs
 ---
 
-Quiet components are fully localized using a tiny in-house library called [Squeak](https://github.com/quietui/squeak). Squeak was designed specifically for custom elements. It uses the standard `lang` and `dir` attributes to determine which language and directionality to use, making it easy to plug in to existing apps.
+Quiet components are fully localized using a tiny in-house library called [Squeak](https://github.com/quietui/squeak). Squeak was designed specifically for custom elements. It uses the standard `lang` and `dir` attributes to determine which language and directionality to use, making it easy to plug into existing apps.
 
 ## Registering translations
 

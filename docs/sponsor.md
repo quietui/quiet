@@ -33,7 +33,3 @@ I want Quiet to remain free for everyone to explore and learn from. I don't get 
 </div>
 
 Contributions sent through GitHub earn you (an optional) contributor's badge on your profile. Alternatively, I can accept [contributions through PayPal](https://paypal.me/claviska).
-
-## Contact the author
-
-Please contact me for information about sponsorship perks, consulting, speaking engagements, and more. [My DMs are open on Twitter](https://twitter.com/claviska), or you can find my email address [on this page](https://www.abeautifulsite.net/cv#contact).

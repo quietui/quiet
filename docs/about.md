@@ -57,6 +57,10 @@ I'm fully aware that I won't get it right every time for every user, so I invite
 
 This is the path forward. Together, we will continue to make accessible software for as many users as possible.
 
+## Getting in touch
+
+Please contact me for information about sponsorship perks, consulting, speaking engagements, and more. [My DMs are open on Twitter](https://twitter.com/claviska), or you can find my email address [on this page](https://www.abeautifulsite.net/cv#contact).
+
 ## What's with all the cats?
 
 I'm not really sure. They keep sneaking into the docs. I think they like the logo.

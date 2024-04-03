@@ -170,6 +170,7 @@ export class QuietTabList extends QuietElement {
       targetTab = event.key === 'Home' ? tabs[0] : tabs.slice(-1)[0];
     }
 
+    // Update the roving tab index and move focus to the target tab
     if (targetTab) {
       event.preventDefault();
       event.stopPropagation();

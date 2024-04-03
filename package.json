@@ -49,7 +49,9 @@
     "spellcheck": "cspell \"**/*.{js,ts,json,html,css,md}\" --no-progress"
   },
   "dependencies": {
+    "@floating-ui/dom": "^1.6.3",
     "@quietui/squeak": "^1.0.0",
+    "composed-offset-position": "^0.0.4",
     "lit": "^3.1.2"
   },
   "devDependencies": {

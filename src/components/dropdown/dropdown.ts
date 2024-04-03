@@ -1,0 +1,363 @@
+import '../dropdown-item/dropdown-item.js';
+import { animateWithClass } from '../../utilities/animate.js';
+import { autoUpdate, computePosition, flip, offset, platform, shift } from '@floating-ui/dom';
+import { classMap } from 'lit/directives/class-map.js';
+import { createId } from '../../utilities/math.js';
+import { customElement, property, query } from 'lit/decorators.js';
+import { html } from 'lit';
+import { offsetParent } from 'composed-offset-position';
+import { QuietElement } from '../../utilities/quiet-element.js';
+import hostStyles from '../../styles/host.styles.js';
+import styles from './dropdown.styles.js';
+import type { CSSResultGroup } from 'lit';
+import type { QuietButton } from '../button/button.js';
+import type { QuietDropdownItem } from '../dropdown-item/dropdown-item.js';
+
+/**
+ * <quiet-dropdown>
+ *
+ * @summary Dropdowns provide a menu of options that appear when the trigger is activated.
+ * @documentation https://quietui.com/docs/components/dropdown
+ * @status stable
+ * @since 1.0
+ *
+ * @slot - One or more `<dropdown-item>` elements to show in the dropdown. You can also use `<quiet-divider>` here.
+ * @slot trigger - The dropdown's trigger. Must be a `<quiet-button>` or `<button>` element.
+ *
+ * @event quiet-open - Emitted when the dropdown is instructed to open but before it is shown. This event is not
+ *  cancelable.
+ * @event quiet-opened - Emitted when the dropdown menu has opened.
+ * @event quiet-close - Emitted when the dropdown is dismissed but before it is hidden. This event is not cancelable.
+ * @event quiet-closed - Emitted when the dropdown menu has closed.
+ * @event quiet-select - Emitted when a dropdown item has been selected. You can inspect `event.detail.item` to see the
+ *  `<quiet-dropdown-item>` that was selected. Calling `event.preventDefault()` will keep the dropdown open.
+ *
+ * @csspart menu - The dropdown menu's container.
+ *
+ * @cssproperty [--show-duration=50ms] - The duration of the show/hide animation.
+ *
+ * @dependency quiet-dropdown-item
+ */
+@customElement('quiet-dropdown')
+export class QuietDropdown extends QuietElement {
+  static styles: CSSResultGroup = [hostStyles, styles];
+
+  private cleanup: ReturnType<typeof autoUpdate> | undefined;
+
+  @query('.menu') menu: HTMLDivElement;
+  @query('.menu slot') menuSlot: HTMLSlotElement;
+  @query('slot[name="trigger"]') triggerSlot: HTMLSlotElement;
+
+  /** Opens or closes the dropdown. */
+  @property({ type: Boolean, reflect: true }) open = false;
+
+  /**
+   * The placement of the dropdown menu in reference to the trigger. The menu will shift to a more optimal location if
+   * the preferred placement doesn't have enough room.
+   */
+  @property({ reflect: true }) placement:
+    | 'top'
+    | 'top-start'
+    | 'top-end'
+    | 'bottom'
+    | 'bottom-start'
+    | 'bottom-end'
+    | 'right'
+    | 'right-start'
+    | 'right-end'
+    | 'left'
+    | 'left-start'
+    | 'left-end' = 'bottom-start';
+
+  /** The distance of the dropdown menu from its trigger. */
+  @property({ type: Number }) distance = 0;
+
+  /** The offset of the dropdown menu alongside its trigger. */
+  @property({ type: Number }) offset = 0;
+
+  /**
+   * Uses a fixed positioning strategy instead of the default absolute strategy. In most cases, this will prevent the
+   * menu from being clipped when the dropdown is inside of a container with `overflow: hidden`.
+   */
+  @property({ type: Boolean }) hoist = false;
+
+  firstUpdated() {
+    this.syncAriaAttributes();
+  }
+
+  updated(changedProps: Map<string, unknown>) {
+    if (changedProps.has('open')) {
+      if (this.open) {
+        this.showMenu();
+      } else {
+        this.hideMenu();
+      }
+    }
+  }
+
+  /** Gets all <quiet-dropdown-item> elements slotted in the menu that aren't disabled. */
+  private getItems(): QuietDropdownItem[] {
+    return this.menuSlot
+      .assignedElements({ flatten: true })
+      .filter(el => el.localName === 'quiet-dropdown-item') as QuietDropdownItem[];
+  }
+
+  /** Get the slotted trigger button, a <button> element */
+  private getTrigger(): HTMLButtonElement | QuietButton | null {
+    return this.querySelector<QuietButton | HTMLButtonElement>('[slot="trigger"]');
+  }
+
+  /** Shows the dropdown menu */
+  private async showMenu() {
+    const trigger = this.getTrigger();
+
+    if (!trigger) {
+      return;
+    }
+
+    this.open = true;
+    this.syncAriaAttributes();
+    document.addEventListener('keydown', this.handleDocumentKeyDown);
+    document.addEventListener('mousedown', this.handleDocumentMouseDown);
+    document.addEventListener('focusin', this.handleDocumentFocusIn);
+
+    this.emit('quiet-open');
+    this.menu.classList.add('visible');
+    this.cleanup = autoUpdate(trigger, this.menu, () => this.reposition());
+    await animateWithClass(this.menu, 'show');
+    this.emit('quiet-opened');
+  }
+
+  /** Hides the dropdown menu */
+  private async hideMenu() {
+    this.open = false;
+    this.syncAriaAttributes();
+    document.removeEventListener('keydown', this.handleDocumentKeyDown);
+    document.removeEventListener('mousedown', this.handleDocumentMouseDown);
+    document.removeEventListener('focusin', this.handleDocumentFocusIn);
+
+    this.emit('quiet-close');
+
+    if (this.cleanup) {
+      this.cleanup();
+      this.cleanup = undefined;
+      this.removeAttribute('data-placement');
+    }
+
+    if (this.menu.classList.contains('visible')) {
+      await animateWithClass(this.menu, 'hide');
+      this.menu.classList.remove('visible');
+      this.emit('quiet-closed');
+    }
+  }
+
+  /** Repositions the dropdown menu */
+  private reposition() {
+    const trigger = this.getTrigger();
+    if (!trigger) return;
+
+    computePosition(trigger, this.menu, {
+      placement: this.placement,
+      middleware: [offset({ mainAxis: this.distance, crossAxis: this.offset }), flip(), shift()],
+      strategy: this.hoist ? 'fixed' : 'absolute',
+      platform: {
+        ...platform,
+        getOffsetParent: this.hoist
+          ? (element: Element) => platform.getOffsetParent(element, offsetParent)
+          : platform.getOffsetParent
+      }
+    }).then(({ x, y, placement }) => {
+      // Set the determined placement for users to hook into and for transform origin styles
+      this.setAttribute('data-placement', placement);
+
+      // Position it
+      Object.assign(this.menu.style, {
+        left: `${x}px`,
+        top: `${y}px`
+      });
+    });
+  }
+
+  /** If focus is set outside of the component, close the menu. */
+  private handleDocumentFocusIn = (event: FocusEvent) => {
+    const path = event.composedPath();
+
+    if (!path.includes(this)) {
+      this.open = false;
+    }
+  };
+
+  /** Listen for escape when the menu is open */
+  private handleDocumentKeyDown = (event: KeyboardEvent) => {
+    const items = this.getItems();
+    const activeItem = items.find(item => item.active);
+    const activeItemIndex = activeItem ? items.indexOf(activeItem) : 0;
+    const isFocusedOnItem = document.activeElement?.localName === 'quiet-dropdown-item';
+
+    let targetItem: QuietDropdownItem | undefined;
+
+    // Previous item
+    if (event.key === 'ArrowUp') {
+      const prevIndex = activeItemIndex === 0 ? items.length - 1 : activeItemIndex - 1;
+      targetItem = isFocusedOnItem ? items[prevIndex] : items[items.length - 1];
+    }
+
+    // Next item
+    if (event.key === 'ArrowDown') {
+      const nextIndex = activeItemIndex === items.length - 1 ? 0 : activeItemIndex + 1;
+      targetItem = isFocusedOnItem ? items[nextIndex] : items[0];
+    }
+
+    // Home + end
+    if (event.key === 'Home' || event.key === 'End') {
+      event.preventDefault();
+      targetItem = event.key === 'Home' ? items[0] : items[items.length - 1];
+    }
+
+    // Update the roving tab index and move focus to the target item
+    if (targetItem) {
+      event.preventDefault();
+      event.stopPropagation();
+      items.forEach(item => (item.active = item === targetItem));
+      targetItem.focus();
+      return;
+    }
+
+    // A selection has been made
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      event.stopPropagation();
+      if (activeItem) {
+        this.makeSelection(activeItem);
+      }
+    }
+
+    // Close the menu
+    if (event.key === 'Escape') {
+      const trigger = this.getTrigger();
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      this.open = false;
+      trigger?.focus();
+    }
+  };
+
+  /** Handles mouse down events when the dropdown is open. */
+  private handleDocumentMouseDown = (event: KeyboardEvent) => {
+    const path = event.composedPath();
+
+    if (!path.includes(this)) {
+      this.open = false;
+    }
+  };
+
+  /** Handles clicks on the menu. */
+  private handleMenuClick(event: MouseEvent) {
+    const item = (event.target as Element).closest('quiet-dropdown-item');
+    if (item) {
+      this.makeSelection(item);
+    }
+  }
+
+  /** Prepares dropdown items when they get added or removed */
+  private async handleMenuSlotChange() {
+    const items = this.getItems();
+    await Promise.all(items.map(item => item.updateComplete));
+    const hasCheckbox = items.some(item => item.type === 'checkbox');
+
+    // Setup the roving tab index
+    items.forEach((item, index) => {
+      item.active = index === 0;
+      item.checkboxAdjacent = hasCheckbox;
+    });
+  }
+
+  /** Toggles the dropdown menu */
+  private handleTriggerClick() {
+    this.open = !this.open;
+  }
+
+  /** Makes a selection, emits the quiet-select event, and closes the dropdown. */
+  private makeSelection(item: QuietDropdownItem) {
+    const trigger = this.getTrigger();
+
+    // Disabled items can't be selected
+    if (item.disabled) {
+      return;
+    }
+
+    // Toggle checkbox items and keep the dropdown open
+    if (item.type === 'checkbox') {
+      item.checked = !item.checked;
+    }
+
+    const selectEvent = this.emit('quiet-select', {
+      cancelable: true,
+      detail: { item }
+    });
+
+    // If the event was canceled, keep the dropdown open
+    if (!selectEvent.defaultPrevented && item.type !== 'checkbox') {
+      this.open = false;
+      trigger?.focus();
+    }
+  }
+
+  /** Syncs aria attributes on the slotted trigger element and the menu based on the dropdown's current state */
+  private async syncAriaAttributes() {
+    // Set aria attributes on the trigger
+    const trigger = this.getTrigger();
+    let nativeButton: HTMLButtonElement | undefined;
+
+    if (!trigger) {
+      return;
+    }
+
+    if (trigger.localName === 'quiet-button') {
+      await customElements.whenDefined('quiet-button');
+      await (trigger as QuietButton).updateComplete;
+      nativeButton = trigger.shadowRoot!.querySelector<HTMLButtonElement>('[part="button"]')!;
+    } else {
+      nativeButton = trigger as HTMLButtonElement;
+    }
+
+    // Set an id on the trigger if one doesn't already exist
+    if (!nativeButton.hasAttribute('id')) {
+      nativeButton.setAttribute('id', createId('quiet-dropdown-trigger-'));
+    }
+
+    nativeButton.setAttribute('aria-haspopup', 'menu');
+    nativeButton.setAttribute('aria-expanded', this.open ? 'true' : 'false');
+
+    this.menu.setAttribute('aria-expanded', 'false');
+  }
+
+  render() {
+    return html`
+      <slot name="trigger" @click=${this.handleTriggerClick} @slotchange=${this.syncAriaAttributes}></slot>
+
+      <div
+        part="menu"
+        id="menu"
+        class=${classMap({
+          menu: true,
+          fixed: this.hoist
+        })}
+        role="menu"
+        tabindex="-1"
+        aria-orientation="vertical"
+        @click=${this.handleMenuClick}
+      >
+        <slot @slotchange=${this.handleMenuSlotChange}></slot>
+      </div>
+    `;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'quiet-dropdown': QuietDropdown;
+  }
+}

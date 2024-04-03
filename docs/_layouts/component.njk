@@ -35,7 +35,7 @@
     <h2>Slots</h2>
 
     <div class="table-scroll">
-      <table>
+      <table class="component-table">
         <thead>
           <tr>
             <th class="table-name">Name</th>
@@ -65,15 +65,15 @@
     <h2>Properties</h2>
 
     <div class="table-scroll">
-      <table>
+      <table class="component-table">
         <thead>
           <tr>
             <th class="table-name">Name</th>
-            <th>Attribute</th>
+            <th class="table-attribute">Attribute</th>
             <th class="table-description">Description</th>
-            <th>Reflects</th>
-            <th>Type</th>
-            <th>Default</th>
+            <th class="table-reflects">Reflects</th>
+            <th class="table-type">Type</th>
+            <th class="table-default">Default</th>
           </tr>
         </thead>
         <tbody>
@@ -82,7 +82,7 @@
               <td class="table-name">
                 <code>{{ prop.name }}</code>
               </td>
-              <td class="table-name">
+              <td class="table-attribute">
                 {% if prop.attribute %}
                   <code>{{ prop.attribute }}</code>
                 {% endif %}
@@ -95,12 +95,12 @@
                   <quiet-icon name="check"></quiet-icon>
                 {% endif %}
               </td>
-              <td>
+              <td class="table-type">
                 {% if prop.type.text %}
                   <code>{{ prop.type.text | trimPipes | inlineMarkdown | safe }}</code>
                 {% endif %}
               </td>
-              <td>
+              <td class="table-default">
                 {% if prop.default %}
                   <code>{{ prop.default | inlineMarkdown | safe }}</code>
                 {% endif %}
@@ -116,12 +116,12 @@
   {% if component.methods.length %}
     <h2>Methods</h2>
     <div class="table-scroll">
-      <table>
+      <table class="component-table">
         <thead>
           <tr>
             <th class="table-name">Name</th>
             <th class="table-description">Description</th>
-            <th>Arguments</th>
+            <th class="table-arguments">Arguments</th>
           </tr>
         </thead>
         <tbody>
@@ -129,7 +129,7 @@
             <tr>
               <td class="table-name"><code>{{ method.name }}()</code></td>
               <td class="table-description">{{ method.description | inlineMarkdown | safe }}</td>
-              <td>
+              <td class="table-arguments">
                 {% if method.parameters.length %}
                   <code>
                     {% for param in method.parameters %}
@@ -149,12 +149,12 @@
   {% if component.states.length %}
     <h2>States</h2>
     <div class="table-scroll">
-      <table>
+      <table class="component-table">
         <thead>
           <tr>
             <th class="table-name">Name</th>
             <th class="table-description">Description</th>
-            <th>CSS selector</th>
+            <th class="table-selector">CSS selector</th>
           </tr>
         </thead>
         <tbody>
@@ -162,7 +162,7 @@
             <tr>
               <td class="table-name"><code>{{ state.name }}</code></td>
               <td class="table-description">{{ state.description | inlineMarkdown | safe }}</td>
-              <td><code>[data-state-{{ state.name }}]</code></td>
+              <td class="table-selector"><code>[data-state-{{ state.name }}]</code></td>
             </tr>
           {% endfor %}
         </tbody>
@@ -175,7 +175,7 @@
     <h2>Events</h2>
 
     <div class="table-scroll">
-      <table>
+      <table class="component-table">
         <thead>
           <tr>
             <th class="table-name">Name</th>
@@ -199,7 +199,7 @@
     <h2>CSS custom properties</h2>
 
     <div class="table-scroll">
-      <table>
+      <table class="component-table">
         <thead>
           <tr>
             <th class="table-name">Name</th>
@@ -212,7 +212,7 @@
             <tr>
               <td class="table-name"><code>{{ cssProperty.name }}</code></td>
               <td class="table-description">{{ cssProperty.description | inlineMarkdown | safe }}</td>
-              <td>
+              <td class="table-default">
                 {% if cssProperty.default %}
                   <code>{{ cssProperty.default }}</code>
                 {% endif %}
@@ -229,20 +229,20 @@
     <h2>CSS parts</h2>
 
     <div class="table-scroll">
-      <table>
+      <table class="component-table">
         <thead>
           <tr>
             <th class="table-name">Name</th>
             <th class="table-description">Description</th>
-            <th>CSS selector</th>
+            <th class="table-selector">CSS selector</th>
           </tr>
         </thead>
         <tbody>
           {% for cssPart in component.cssParts %}
             <tr>
-              <td><code>{{ cssPart.name }}</code></td>
+              <td class="table-name"><code>{{ cssPart.name }}</code></td>
               <td class="table-description">{{ cssPart.description | inlineMarkdown | safe }}</td>
-              <td><code>::part({{ cssPart.name }})</code></td>
+              <td class="table-selector"><code>::part({{ cssPart.name }})</code></td>
             </tr>
           {% endfor %}
         </tbody>
@@ -257,7 +257,7 @@
       This component automatically imports the following elements. Subdependencies, if any exist, will also be included in this list.
     </p>
 
-    <ul>
+    <ul class="dependency-list">
       {% for dependency in component.dependencies %}
         <li><a href="/docs/components/{{ dependency | stripQuietPrefix }}"><code>&lt;{{ dependency }}&gt;</code></a></li>
       {% endfor %}

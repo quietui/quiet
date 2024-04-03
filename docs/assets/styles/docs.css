@@ -396,10 +396,6 @@ html:not(.quiet-dark) .only-dark {
   }
 }
 
-#content code {
-  white-space: nowrap;
-}
-
 #content pre:has(code) {
   background-color: var(--quiet-neutral-900);
   padding: 0;
@@ -873,15 +869,23 @@ quiet-callout {
   overflow-x: auto;
 }
 
-.table-scroll code {
-  white-space: nowrap;
-}
-
-.table-description {
-  min-width: 40ch;
-}
-
 /* Component pages */
 .component-summary {
   font-size: 1.25rem;
+}
+
+.component-table td:not(.table-description) code,
+.dependency-list code {
+  background: none;
+}
+
+.table-description,
+.table-type {
+  min-width: 34ch;
+}
+
+.table-name code,
+.table-attribute code,
+.table-default code {
+  white-space: nowrap;
 }

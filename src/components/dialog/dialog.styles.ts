@@ -4,7 +4,7 @@ export default css`
   :host {
     --width: 30rem;
     --height: fit-content;
-    --show-duration: 200ms;
+    --show-duration: 150ms;
     --spacing: 1.5em;
 
     display: none;

@@ -1,14 +1,5 @@
 import { parse } from 'node-html-parser';
 
-function escapeHtml(html) {
-  return html
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;');
-}
-
 /**
  * Eleventy plugin to add copy buttons to code blocks.
  */

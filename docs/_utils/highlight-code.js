@@ -43,7 +43,7 @@ export function highlightCodePlugin(options = {}) {
   };
 
   return function (eleventyConfig) {
-    eleventyConfig.addTransform('highlight-code', async function (content) {
+    eleventyConfig.addTransform('highlight-code', content => {
       const doc = parse(content, { blockTextElements: { code: true } });
       const container = doc.querySelector(options.container);
 
@@ -59,7 +59,7 @@ export function highlightCodePlugin(options = {}) {
         try {
           code.innerHTML = highlightCode(code.textContent ?? '', lang);
         } catch (err) {
-          if (!opts.ignoreMissingLangs) {
+          if (!options.ignoreMissingLangs) {
             throw new Error(err.message);
           }
         }

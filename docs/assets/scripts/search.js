@@ -130,10 +130,12 @@ function handleKeyDown(event) {
 }
 
 function handleSelection(event) {
-  if (event.target.closest('a')) {
+  const link = event.target.closest('a');
+
+  if (link) {
     event.preventDefault();
     hide();
-    location.href = event.target.href;
+    location.href = link.href;
   }
 }
 

@@ -43,8 +43,8 @@
   border-bottom: none;
 
   pre {
-    border-bottom-right-radius: calc(var(--quiet-border-radius));
-    border-bottom-left-radius: calc(var(--quiet-border-radius));
+    border-bottom-right-radius: var(--quiet-border-radius);
+    border-bottom-left-radius: var(--quiet-border-radius);
   }
 }
 

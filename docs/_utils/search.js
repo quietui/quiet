@@ -24,7 +24,7 @@ export function searchPlugin(options = {}) {
   return function (eleventyConfig) {
     const pagesToIndex = [];
 
-    eleventyConfig.addTransform('search', async function (content) {
+    eleventyConfig.addTransform('search', function (content) {
       const doc = parse(content, {
         blockTextElements: {
           script: false,

@@ -7,17 +7,12 @@ export default css`
     display: inline-flex;
     width: 1em;
     height: 1em;
-    animation: 750ms infinite spin linear;
+    animation: rotate 1.5s linear infinite;
   }
 
   svg {
     width: 1em;
     height: 1em;
-  }
-
-  g {
-    animation: rotate 2s linear infinite;
-    transform-origin: center center;
   }
 
   circle {

@@ -51,7 +51,7 @@ export function searchPlugin(options = {}) {
       return content;
     });
 
-    eleventyConfig.on('eleventy.after', async ({ dir }) => {
+    eleventyConfig.on('eleventy.after', ({ dir }) => {
       const outputFilename = join(dir.output, 'search.json');
       const map = [];
       const searchIndex = lunr(async function () {

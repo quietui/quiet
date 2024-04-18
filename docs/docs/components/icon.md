@@ -62,7 +62,7 @@ By default, icons are considered presentational elements. However, you can add t
 
 ### Changing the size
 
-Icons are sized relative to the current font size. This allows you to place them into many contexts without having to explicitly size them. To change the size, set the `font-size` property on the badge or an ancestor element.
+Icons are sized relative to the current font size. This allows you to place them into many contexts without having to explicitly size them. To change the size, set the `font-size` property on the icon or an ancestor element.
 
 ```html {.example}
 <quiet-icon name="hand-thumb-up" style="font-size: 1.5em;"></quiet-icon>

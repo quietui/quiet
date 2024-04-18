@@ -175,7 +175,7 @@ You can turn a [dropdown item](/docs/components/dropdown-item) into a checkable 
   <quiet-dropdown-item type="checkbox" name="grid" checked>Show grid</quiet-dropdown-item>
   <quiet-dropdown-item type="checkbox" name="source">Show source</quiet-dropdown-item>
   <quiet-divider></quiet-divider>
-  <quiet-dropdown-item name="preferences">Preferences</quiet-dropdown-item>
+  <quiet-dropdown-item name="preferences">Preferences…</quiet-dropdown-item>
 </quiet-dropdown>
 
 <script>

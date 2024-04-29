@@ -11,8 +11,9 @@ export default css`
   }
 
   svg {
-    width: 1em;
-    height: 1em;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1;
   }
 
   circle {

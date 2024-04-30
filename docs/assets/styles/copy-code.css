@@ -1,16 +1,17 @@
 .copy-button {
   position: absolute;
-  top: 0.25rem;
-  right: 0.25rem;
+  top: 0.3875rem;
+  right: 0.3875rem;
   font-family: var(--quiet-font-family);
 
-  &::part(button) {
+  &::part(copy-button__button) {
     background: var(--quiet-neutral-900);
     color: white;
   }
 
-  &::part(button):hover {
+  &::part(copy-button__button):hover {
     background: var(--quiet-neutral-800);
+    color: white;
   }
 
   &:focus-visible {

@@ -57,7 +57,7 @@ layout: component
 
 ### Getting the selected item
 
-When an item is selected, the `quiet-select` event will be emitted by the dropdown. You can inspect `event.detail.item` to get a reference to the selected item. If you've provided a name for each [dropdown item](/docs/components/dropdown-item), it will be available in `event.detail.item.name`.
+When an item is selected, the `quiet-select` event will be emitted by the dropdown. You can inspect `event.detail.selection` to get a reference to the selected item. If you've provided a name for each [dropdown item](/docs/components/dropdown-item), it will be available in `event.detail.selection.name`.
 
 ```html {.example}
 <quiet-dropdown id="dropdown__selected">
@@ -72,7 +72,7 @@ When an item is selected, the `quiet-select` event will be emitted by the dropdo
   const dropdown = document.getElementById('dropdown__selected');
 
   dropdown.addEventListener('quiet-select', event => {
-    console.log(event.detail.item.name);
+    console.log(event.detail.selection.name);
   });
 </script>
 ```
@@ -182,15 +182,15 @@ You can turn a [dropdown item](/docs/components/dropdown-item) into a checkable 
   const dropdown = document.getElementById('dropdown__checkboxes');
 
   dropdown.addEventListener('quiet-select', event => {
-    if (event.detail.item.type === 'checkbox') {
+    if (event.detail.selection.type === 'checkbox') {
       // Checkbox
       console.log(
-        event.detail.item.name,
-        event.detail.item.checked ? 'checked' : 'unchecked'
+        event.detail.selection.name,
+        event.detail.selection.checked ? 'checked' : 'unchecked'
       );
     } else {
       // Not a checkbox
-      console.log(event.detail.item.name);
+      console.log(event.detail.selection.name);
     }
   });
 </script>

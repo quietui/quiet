@@ -6,7 +6,9 @@ import { createId } from '../../utilities/math.js';
 import { customElement, property, query } from 'lit/decorators.js';
 import { html } from 'lit';
 import { offsetParent } from 'composed-offset-position';
+import { QuietClosedEvent, QuietCloseEvent, QuietOpenedEvent, QuietOpenEvent } from '../../events/open-close.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
+import { QuietSelectEvent } from '../../events/select.js';
 import hostStyles from '../../styles/host.styles.js';
 import styles from './dropdown.styles.js';
 import type { CSSResultGroup } from 'lit';
@@ -115,28 +117,39 @@ export class QuietDropdown extends QuietElement {
       return;
     }
 
+    const openEvent = new QuietOpenEvent();
+    this.dispatchEvent(openEvent);
+    if (openEvent.defaultPrevented) {
+      this.open = false;
+      return;
+    }
+
     this.open = true;
     this.syncAriaAttributes();
     document.addEventListener('keydown', this.handleDocumentKeyDown);
     document.addEventListener('mousedown', this.handleDocumentMouseDown);
     document.addEventListener('focusin', this.handleDocumentFocusIn);
 
-    this.emit('quiet-open');
     this.menu.classList.add('visible');
     this.cleanup = autoUpdate(trigger, this.menu, () => this.reposition());
     await animateWithClass(this.menu, 'show');
-    this.emit('quiet-opened');
+    this.dispatchEvent(new QuietOpenedEvent());
   }
 
   /** Hides the dropdown menu */
   private async hideMenu() {
+    const closeEvent = new QuietCloseEvent({ source: this });
+    this.dispatchEvent(closeEvent);
+    if (closeEvent.defaultPrevented) {
+      this.open = true;
+      return;
+    }
+
     this.open = false;
     this.syncAriaAttributes();
     document.removeEventListener('keydown', this.handleDocumentKeyDown);
     document.removeEventListener('mousedown', this.handleDocumentMouseDown);
     document.removeEventListener('focusin', this.handleDocumentFocusIn);
-
-    this.emit('quiet-close');
 
     if (this.cleanup) {
       this.cleanup();
@@ -147,7 +160,7 @@ export class QuietDropdown extends QuietElement {
     if (this.menu.classList.contains('visible')) {
       await animateWithClass(this.menu, 'hide');
       this.menu.classList.remove('visible');
-      this.emit('quiet-closed');
+      this.dispatchEvent(new QuietClosedEvent());
     }
   }
 
@@ -293,10 +306,8 @@ export class QuietDropdown extends QuietElement {
       item.checked = !item.checked;
     }
 
-    const selectEvent = this.emit('quiet-select', {
-      cancelable: true,
-      detail: { item }
-    });
+    const selectEvent = new QuietSelectEvent({ selection: item });
+    this.dispatchEvent(selectEvent);
 
     // If the event was canceled, keep the dropdown open
     if (!selectEvent.defaultPrevented && item.type !== 'checkbox') {

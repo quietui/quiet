@@ -122,7 +122,7 @@ You can insert more than one item into a named slot. This card has a `footer` sl
 
 ## Events
 
-Many components emit [custom events](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent) when certain things happen. For example, a [`<quiet-button>`](/docs/components/button) emits an event called `quiet-click` when the button is activated. You can listen for custom events the same way you listen for native events.
+Many components emit custom events when certain things happen. For example, a [`<quiet-button>`](/docs/components/button) emits an event called `quiet-click` when the button is activated. You can listen for custom events the same way you listen for native events.
 
 ```html {.example .no-buttons}
 <quiet-button id="click-me">Click me</quiet-button>

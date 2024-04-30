@@ -1,6 +1,7 @@
 import { connectIcon, disconnectIcon, getLibrary } from '../../utilities/icon-library.js';
 import { customElement, property, state } from 'lit/decorators.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
+import { QuietLoadedEvent, QuietLoadErrorEvent } from '../../events/load.js';
 import hostStyles from '../../styles/host.styles.js';
 import styles from './icon.styles.js';
 import type { CSSResultGroup } from 'lit';
@@ -19,8 +20,8 @@ const requests = new Map<string, Promise<string>>();
  * @status stable
  * @since 1.0
  *
- * @event quiet-icon-load - The icon has reloaded and rendered.
- * @event quiet-icon-error - The icon failed to reload.
+ * @event quiet-loaded - The icon has reloaded and rendered. This event does not bubble.
+ * @event quiet-load-error - The icon failed to load. This event does not bubble.
  */
 @customElement('quiet-icon')
 export class QuietIcon extends QuietElement {
@@ -75,11 +76,15 @@ export class QuietIcon extends QuietElement {
     try {
       this.svg = await this.fetchIcon();
       await this.updateComplete;
-      this.emit('quiet-icon-load');
-    } catch {
+      this.dispatchEvent(new QuietLoadedEvent());
+    } catch (err: unknown) {
       this.svg = undefined;
       await this.updateComplete;
-      this.emit('quiet-icon-error');
+      this.dispatchEvent(
+        new QuietLoadErrorEvent({
+          error: new Error(`Failed to load "${this.name}" from the "${this.library}" library.`)
+        })
+      );
     }
   }
 

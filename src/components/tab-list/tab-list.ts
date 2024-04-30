@@ -4,6 +4,7 @@ import { createId } from '../../utilities/math.js';
 import { customElement, property, query } from 'lit/decorators.js';
 import { html } from 'lit';
 import { QuietElement } from '../../utilities/quiet-element.js';
+import { QuietTabHiddenEvent, QuietTabShownEvent } from '../../events/tabs.js';
 import hostStyles from '../../styles/host.styles.js';
 import styles from './tab-list.styles.js';
 import type { CSSResultGroup } from 'lit';
@@ -136,10 +137,10 @@ export class QuietTabList extends QuietElement {
       if (linkedTab && !linkedTab.disabled) {
         if (panel.name === name) {
           panel.visible = true;
-          this.emit('quiet-tab-shown', { detail: { tab: linkedTab, panel } });
+          this.dispatchEvent(new QuietTabShownEvent({ tab: linkedTab, panel }));
         } else if (panel.visible) {
           panel.visible = false;
-          this.emit('quiet-tab-hidden', { detail: { tab: linkedTab, panel } });
+          this.dispatchEvent(new QuietTabHiddenEvent({ tab: linkedTab, panel }));
         }
       }
     }

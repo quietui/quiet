@@ -3,6 +3,8 @@ import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property } from 'lit/decorators.js';
 import { html, literal } from 'lit/static-html.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
+import { QuietBlurEvent, QuietFocusEvent } from '../../events/focus-blur.js';
+import { QuietClickEvent } from '../../events/mouse.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import hostStyles from '../../styles/host.styles.js';
 import styles from './button.styles.js';
@@ -24,8 +26,8 @@ import type { CSSResultGroup } from 'lit';
  * @state toggled - Applied when a toggle button is activated.
  *
  * @event quiet-click - Emitted when the button is clicked. Will not be emitted when the button is disabled or loading.
- * @event quiet-focus - Emitted when the button receives focus.
- * @event quiet-blur - Emitted when the button loses focus.
+ * @event quiet-focus - Emitted when the button receives focus. This event does not bubble.
+ * @event quiet-blur - Emitted when the button loses focus. This event does not bubble.
  *
  * @csspart button - The internal `<button>` element. Other than `width`, this is where most custom styles should be
  *  applied.
@@ -126,12 +128,12 @@ export class QuietButton extends QuietElement {
 
   private handleBlur() {
     this.customStates.set('focused', false);
-    this.emit('quiet-blur');
+    this.dispatchEvent(new QuietBlurEvent());
   }
 
   private handleFocus() {
     this.customStates.set('focused', true);
-    this.emit('quiet-focus');
+    this.dispatchEvent(new QuietFocusEvent());
   }
 
   private handleClick() {
@@ -141,7 +143,8 @@ export class QuietButton extends QuietElement {
     }
 
     // Emit quiet-click and stop if it gets canceled
-    const clickEvent = this.emit('quiet-click');
+    const clickEvent = new QuietClickEvent();
+    this.dispatchEvent(clickEvent);
     if (clickEvent.defaultPrevented) {
       return;
     }

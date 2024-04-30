@@ -1,6 +1,7 @@
 import { customElement, property } from 'lit/decorators.js';
 import { html } from 'lit';
 import { QuietElement } from '../../utilities/quiet-element.js';
+import { QuietIncludedEvent, QuietIncludeErrorEvent } from '../../events/include.js';
 import hostStyles from '../../styles/host.styles.js';
 import styles from './include.styles.js';
 import type { CSSResultGroup } from 'lit';
@@ -20,11 +21,10 @@ const requests = new Map<string, Promise<Response>>();
  * @since 1.0
  *
  * @event quiet-included - Emitted when the include file has been fetched and rendered. The HTTP status code will be
- *  available in `event.detail.status`.
- * @event quiet-http-error - Emitted when the fetch receives an HTTP response outside of the 200 range. The HTTP status
- *  code will be `event.detail.status`.
- * @event quiet-network-error - Emitted when the fetch encounters a network error, CORS-related permission errors, etc.
- *  The error will be available in `event.detail.error`.
+ *  available in `event.detail.status`. This event does not bubble.
+ * @event quiet-include-error - Emitted when the fetch results in a network error or receives an HTTP response outside
+ *  of the 200 range. If a network error occurs, it will be available in `event.detail.error`. If an HTTP status code
+ *  was returned, it will be available in `event.detail.status`. This event does not bubble.
  */
 @customElement('quiet-include')
 export class QuietInclude extends QuietElement {
@@ -84,28 +84,21 @@ export class QuietInclude extends QuietElement {
           this.querySelectorAll('script').forEach(script => this.runScript(script));
         }
 
-        this.emit('quiet-included', {
-          detail: {
-            status: response.status
-          }
-        });
+        this.dispatchEvent(new QuietIncludedEvent({ status: response.status }));
       } else {
         // Handle HTTP codes outside the 200 range
         this.innerHTML = '';
-        this.emit('quiet-http-error', {
-          detail: {
-            status: response.status
-          }
-        });
+        this.dispatchEvent(
+          new QuietIncludeErrorEvent({
+            status: response.status,
+            error: new Error('The server responded with an HTTP code outside of the 200 range.')
+          })
+        );
       }
     } catch (error) {
       // Handle network errors, CORS permissions errors, etc.
       this.innerHTML = '';
-      this.emit('quiet-network-error', {
-        detail: {
-          error
-        }
-      });
+      this.dispatchEvent(new QuietIncludeErrorEvent({ error: error as Error }));
     }
 
     this.removeAttribute('aria-busy');

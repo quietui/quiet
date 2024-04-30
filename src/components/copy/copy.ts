@@ -1,6 +1,7 @@
 import { customElement, property, query } from 'lit/decorators.js';
 import { html } from 'lit';
 import { Localize } from '../../utilities/localize.js';
+import { QuietCopiedEvent, QuietCopyErrorEvent } from '../../events/copy.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import hostStyles from '../../styles/host.styles.js';
 import styles from './copy.styles.js';
@@ -16,11 +17,10 @@ import type { CSSResultGroup } from 'lit';
  *
  * @slot - A custom button to use instead of the default.
  *
- * @event quiet-copied - Emitted when the content has been copied. You can inspect `event.detail.text` to see the
- *  content that was copied. Calling `event.preventDefault()` will prevent the feedback from showing.
- * @event quiet-copy-error - Emitted when the browser refuses to allow the content to be copied. You can inspect
- *  `event.detail.error` to see the error that occurred. Calling `event.preventDefault()` will prevent the feedback from
- *  showing.
+ * @event quiet-copied - Emitted when the content has been copied. This event does not bubble. You can inspect
+ *  `event.detail.data` to see the content that was copied.
+ * @event quiet-copy-error - Emitted when the browser refuses to allow the content to be copied. This event does not
+ *  bubble. You can inspect `event.detail.error` to see the error that occurred.
  *
  * @csspart copy-button - The default copy button, a `<quiet-button>` element.
  * @csspart copy-button__button - The default copy button's exported `button` part.
@@ -42,7 +42,7 @@ export class QuietCopy extends QuietElement {
   @property() data: string | ClipboardItem[] = '';
 
   /** The placement of the feedback animation. */
-  @property({ attribute: 'feedback-placement', reflect: true }) feedbackPlacement: 'top' | 'bottom' = 'top';
+  @property({ attribute: 'feedback-placement', reflect: true }) feedbackPlacement: 'top' | 'bottom' | 'hidden' = 'top';
 
   private async handleClick(event: PointerEvent) {
     event.preventDefault();
@@ -70,23 +70,15 @@ export class QuietCopy extends QuietElement {
         await navigator.clipboard.write(clipboardItems);
       }
 
-      const copied = this.emit('quiet-copied', {
-        cancelable: true,
-        detail: {
-          text: this.data
-        }
-      });
+      this.dispatchEvent(new QuietCopiedEvent({ data: this.data }));
 
-      if (!copied.defaultPrevented) {
+      if (this.feedbackPlacement !== 'hidden') {
         this.showFeedback(this.localize.term('copied'));
       }
     } catch (error) {
-      const copyError = this.emit('quiet-copy-error', {
-        cancelable: true,
-        detail: { error }
-      });
+      this.dispatchEvent(new QuietCopyErrorEvent({ error: error as Error }));
 
-      if (!copyError.defaultPrevented) {
+      if (this.feedbackPlacement !== 'hidden') {
         this.showFeedback(this.localize.term('error'));
       }
     }

@@ -2,6 +2,7 @@ import { animateWithClass } from '../../utilities/animate.js';
 import { customElement, property, query } from 'lit/decorators.js';
 import { html } from 'lit';
 import { lockScrolling, unlockScrolling } from '../../utilities/scroll.js';
+import { QuietClosedEvent, QuietCloseEvent, QuietOpenedEvent, QuietOpenEvent } from '../../events/open-close.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import hostStyles from '../../styles/host.styles.js';
 import styles from './dialog.styles.js';
@@ -109,7 +110,8 @@ export class QuietDialog extends QuietElement {
 
   /** Call this to show the dialog. */
   private async show() {
-    const openEvent = this.emit('quiet-open', { cancelable: true });
+    const openEvent = new QuietOpenEvent();
+    this.dispatchEvent(openEvent);
     if (openEvent.defaultPrevented) {
       return;
     }
@@ -127,17 +129,15 @@ export class QuietDialog extends QuietElement {
     });
 
     await animateWithClass(this.dialog, 'show');
-    this.emit('quiet-opened');
+    this.dispatchEvent(new QuietOpenedEvent());
   }
 
   /** Call this to ask the dialog to close. */
   private async requestClose(source: Element) {
-    const dismissEvent = this.emit('quiet-close', {
-      cancelable: true,
-      detail: { source }
-    });
+    const closeEvent = new QuietCloseEvent({ source });
+    this.dispatchEvent(closeEvent);
 
-    if (dismissEvent.defaultPrevented) {
+    if (closeEvent.defaultPrevented) {
       this.open = true;
       animateWithClass(this.dialog, 'shake');
     } else {
@@ -145,7 +145,7 @@ export class QuietDialog extends QuietElement {
       await animateWithClass(this.dialog, 'hide');
       this.dialog.close();
       this.open = false;
-      this.emit('quiet-closed');
+      this.dispatchEvent(new QuietClosedEvent());
     }
   }
 

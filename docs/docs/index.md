@@ -27,7 +27,7 @@ Now you can use any component in your HTML!
 Quiet components are [custom HTML elements](https://developer.mozilla.org/en-US/docs/Web/API/Web_components). They're built with platform APIs, so you can use them anywhere — even in your favorite framework!
 :::
 
-### Discovery complete
+### Autoloader events
 
 Custom elements are registered with JavaScript, so you might experience <abbr title="Flash of undefined custom elements">FOUCE</abbr> when the page first loads. You can [learn more about FOUCE](https://www.abeautifulsite.net/posts/flash-of-undefined-custom-elements/) and various ways to deal with it on my blog.
 
@@ -40,20 +40,6 @@ window.addEventListener('quiet-discovery-complete', event => {
 ```
 
 You can inspect `event.detail.registered` to see an array of tag names that were found and registered. Similarly, `event.detail.unknown` will be an array of `<quiet-*>` tags that were found in the document but couldn't be registered. This can happen if you use the wrong tag name, if the files are missing, or if you're trying to use new components with an older version of the library.
-
-### Awaiting discovery
-
-The autoloader will automatically discover and register elements you add to the document after the page loads. If necessary, you can force discovery and await registration with the `discoverElements()` function.
-
-```js
-import { discoverElements } from '/dist/quiet.js';
-
-// Add components to the DOM here
-
-await discoverElements();
-
-// All custom elements have been registered!
-```
 
 ## Manually importing <quiet-badge variant="destructive" data-no-outline data-no-anchor>Advanced</quiet-badge>
 

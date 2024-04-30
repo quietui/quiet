@@ -1,3 +1,5 @@
+import '../button/button.js';
+import '../icon/icon.js';
 import { customElement, property, query } from 'lit/decorators.js';
 import { html } from 'lit';
 import { Localize } from '../../utilities/localize.js';

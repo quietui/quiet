@@ -55,7 +55,7 @@
     "lit": "^3.1.2"
   },
   "devDependencies": {
-    "@11ty/eleventy": "3.0.0-alpha.4",
+    "@11ty/eleventy": "3.0.0-alpha.9",
     "@custom-elements-manifest/analyzer": "^0.9.0",
     "@esm-bundle/chai": "^4.3.4-fix.0",
     "@open-wc/testing": "^4.0.0",

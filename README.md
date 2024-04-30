@@ -46,7 +46,7 @@ npm run
 
 ## About this project
 
-Quiet is built in New Hampshire by me, [Cory LaViska](https://twitter.com/claviska), the creator of [Shoelace](https://shoelace.style/). With the success of Shoelace, many of you are probably wondering why I'd choose to build another UI library, and that's a reasonable question.
+Quiet is maintained by [Cory LaViska](https://twitter.com/claviska), the creator of [Shoelace](https://shoelace.style/). With the success of Shoelace, many of you are probably wondering why I'd choose to build another UI library, and that's a reasonable question.
 
 The truth is, Shoelace has matured a lot over the years. While that's a great thing for its users, as an artist, I've lost my canvas for creativity. I'm still committed to Shoelace and I think it has a very promising future, but I'm no longer in charge of its design or its day to day operations. It has a full team now and we're building a product out of it. It's not my personal playground, anymore.
 

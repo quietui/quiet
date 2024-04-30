@@ -23,8 +23,8 @@ export default function (eleventyConfig) {
   eleventyConfig.addGlobalData('package', packageData);
 
   // Template filters - {{ content | filter }}
-  eleventyConfig.addFilter('inlineMarkdown', content => markdown.renderInline(content));
-  eleventyConfig.addFilter('markdown', content => markdown.render(content));
+  eleventyConfig.addFilter('inlineMarkdown', content => markdown.renderInline(content || ''));
+  eleventyConfig.addFilter('markdown', content => markdown.render(content || ''));
   eleventyConfig.addFilter('stripExtension', string => parse(string).name);
   eleventyConfig.addFilter('stripQuietPrefix', content => content.replace(/^quiet-/, ''));
   eleventyConfig.addFilter('trimPipes', content => {

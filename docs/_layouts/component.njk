@@ -68,8 +68,7 @@
       <table class="component-table">
         <thead>
           <tr>
-            <th class="table-name">Name</th>
-            <th class="table-attribute">Attribute</th>
+            <th class="table-name">Property / Attribute</th>
             <th class="table-description">Description</th>
             <th class="table-reflects">Reflects</th>
             <th class="table-type">Type</th>
@@ -81,10 +80,10 @@
             <tr>
               <td class="table-name">
                 <code>{{ prop.name }}</code>
-              </td>
-              <td class="table-attribute">
-                {% if prop.attribute %}
-                  <code>{{ prop.attribute }}</code>
+
+                {# Only show the attribute when it's different from the property #}
+                {% if prop.attribute and prop.attribute != prop.name %}
+                  <br><code>{{ prop.attribute }}</code>
                 {% endif %}
               </td>
               <td class="table-description">
@@ -97,7 +96,7 @@
               </td>
               <td class="table-type">
                 {% if prop.type.text %}
-                  <code>{{ prop.type.text | trimPipes | inlineMarkdown | safe }}</code>
+                  <code>{{ prop.type.text | splitPipes | inlineMarkdown | safe }}</code>
                 {% endif %}
               </td>
               <td class="table-default">
@@ -133,7 +132,7 @@
                 {% if method.parameters.length %}
                   <code>
                     {% for param in method.parameters %}
-                      {{ param.name }}: {{ param.type.text | trimPipes }}{% if not loop.last %},{% endif %}
+                      {{ param.name }}: {{ param.type.text | splitPipes }}{% if not loop.last %},{% endif %}
                     {% endfor %}
                   </code>
                 {% endif %}
@@ -256,7 +255,7 @@
   {% if component.dependencies.length %}
     <h2>Dependencies</h2>
     <p>
-      This component automatically imports the following elements. Subdependencies, if any exist, will also be included in this list.
+      This component automatically imports the following elements. If any subdependencies exist, they will also be included in this list.
     </p>
 
     <ul class="dependency-list">

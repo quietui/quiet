@@ -879,13 +879,15 @@ quiet-callout {
   background: none;
 }
 
-.table-description,
-.table-type {
-  min-width: 34ch;
+.table-description {
+  min-width: 30ch;
 }
 
 .table-name code,
 .table-attribute code,
+.table-type code,
+.table-selector code,
 .table-default code {
+  display: inline-block;
   white-space: nowrap;
 }

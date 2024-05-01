@@ -27,10 +27,22 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter('markdown', content => markdown.render(content || ''));
   eleventyConfig.addFilter('stripExtension', string => parse(string).name);
   eleventyConfig.addFilter('stripQuietPrefix', content => content.replace(/^quiet-/, ''));
-  eleventyConfig.addFilter('trimPipes', content => {
-    // Trims whitespace and pipes from the start and end of a string. Useful for CEM types, which can be pipe-delimited.
-    // With Prettier 3, this means a leading pipe will exist be present when the line wraps.
-    return typeof content === 'string' ? content.replace(/^(\s|\|)/g, '').replace(/(\s|\|)$/g, '') : content;
+  eleventyConfig.addFilter('splitPipes', content => {
+    // Trims whitespace and pipes from the start and end of a string and replaces them with a <br> tag. Useful for CEM
+    // types, which are pipe-delimited. With Prettier 3, a leading pipe is added when the line wraps.
+    if (typeof content === 'string') {
+      return (
+        content
+          // Removing leading whitespace and pipes
+          .replace(/^(\s|\|)/g, '')
+          // Trim whitespace from remaining pipes
+          .replace(/(\s|\|)$/g, '')
+          // Replace pipes with <br> tags
+          .replace(/\|/g, '<br>')
+      );
+    }
+
+    return content;
   });
 
   // Shortcodes - {% shortCode arg1, arg2 %}

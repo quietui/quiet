@@ -45,7 +45,7 @@ export class QuietTabList extends QuietElement {
    * An accessible label for the tab list. This won't be shown, but it will be read to assistive devices so you should
    * always include one.
    */
-  @property() label?: string;
+  @property() label: string;
 
   /** The name of the tab panel that's currently active. */
   @property({ reflect: true }) active = '';

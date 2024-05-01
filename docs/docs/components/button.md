@@ -97,12 +97,38 @@ Use the `size` attribute to change the button's size. Available sizes include `x
 Be careful to not make the button's text too small. Typically, 12px is the absolute smallest you should use to ensure your buttons are accessible.
 :::
 
-### Pill-shaped buttons
+### Outline buttons
 
-Any button can be rendered with pill-shaped edges by adding the `pill` attribute.
+Buttons can be rendered with outlines by adding the `outline` attribute.
 
 ```html {.example}
-<quiet-button pill>
+<quiet-button outline variant="primary">
+  I'm outlined
+</quiet-button>
+
+<quiet-button outline variant="secondary">
+  I'm outlined
+</quiet-button>
+
+<quiet-button outline variant="destructive">
+  I'm outlined
+</quiet-button>
+```
+
+### Pill-shaped buttons
+
+Buttons can be rendered with pill-shaped edges by adding the `pill` attribute.
+
+```html {.example}
+<quiet-button pill variant="primary">
+  I'm a pill button
+</quiet-button>
+
+<quiet-button pill variant="secondary">
+  I'm a pill button
+</quiet-button>
+
+<quiet-button pill variant="destructive">
   I'm a pill button
 </quiet-button>
 ```

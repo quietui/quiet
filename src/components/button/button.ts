@@ -1,3 +1,4 @@
+import '../icon/icon.js';
 import '../spinner/spinner.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property } from 'lit/decorators.js';
@@ -34,6 +35,7 @@ import type { CSSResultGroup } from 'lit';
  * @csspart caret - The caret icon, a `<quiet-icon>` element. Only present with the `with-caret` attribute.
  * @csspart spinner - The loading indicator, a `<quiet-spinner>` element. Only present with the `loading` attribute.
  *
+ * @dependency quiet-icon
  * @dependency quiet-spinner
  */
 @customElement('quiet-button')
@@ -67,6 +69,9 @@ export class QuietButton extends QuietElement {
    * label. The label won't be visible, but it will be available to assistive devices.
    */
   @property({ attribute: 'icon-label' }) iconLabel = '';
+
+  /** Draws the button with outlines. */
+  @property({ type: Boolean }) outline = false;
 
   /** Draws the button in a pill shape. */
   @property({ type: Boolean }) pill = false;
@@ -214,6 +219,7 @@ export class QuietButton extends QuietElement {
           lg: this.size === 'lg',
           xl: this.size === 'xl',
           // Modifiers
+          outline: this.outline,
           pill: this.pill,
           icon: this.iconLabel !== '',
           // States

@@ -159,6 +159,43 @@ export default css`
       padding-inline: 1.5em;
     }
 
+    /* Outline buttons */
+    &.outline.primary {
+      background: transparent;
+      border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-primary-fill-mid);
+      color: var(--quiet-primary-text-colorful);
+
+      @media (hover: hover) {
+        &:hover {
+          background: color-mix(in oklab, transparent, var(--quiet-primary-fill-mid) 7.5%);
+        }
+      }
+    }
+
+    &.outline.secondary {
+      background: transparent;
+      border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-fill-mid);
+      color: var(--quiet-neutral-text-colorful);
+
+      @media (hover: hover) {
+        &:hover {
+          background: color-mix(in oklab, transparent, var(--quiet-neutral-fill-mid) 7.5%);
+        }
+      }
+    }
+
+    &.outline.destructive {
+      background: transparent;
+      border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-destructive-fill-mid);
+      color: var(--quiet-destructive-text-colorful);
+
+      @media (hover: hover) {
+        &:hover {
+          background: color-mix(in oklab, transparent, var(--quiet-destructive-fill-mid) 7.5%);
+        }
+      }
+    }
+
     /* Pills */
     &.pill {
       border-radius: 9999px;

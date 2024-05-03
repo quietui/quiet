@@ -97,7 +97,7 @@ export class QuietDialog extends QuietElement {
     }
   }
 
-  private handleDialogMouseDown(event: PointerEvent) {
+  private handleDialogPointerDown(event: PointerEvent) {
     // Detect when the backdrop is clicked
     if (event.target === this.dialog) {
       if (this.lightDismiss) {
@@ -156,7 +156,7 @@ export class QuietDialog extends QuietElement {
         class="dialog"
         data-placement=${this.placement}
         @click=${this.handleDialogClick}
-        @mousedown=${this.handleDialogMouseDown}
+        @pointerdown=${this.handleDialogPointerDown}
         @cancel=${this.handleDialogCancel}
       >
         ${this.withHeader

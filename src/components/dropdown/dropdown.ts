@@ -26,11 +26,10 @@ import type { QuietDropdownItem } from '../dropdown-item/dropdown-item.js';
  * @slot - One or more `<dropdown-item>` elements to show in the dropdown. You can also use `<quiet-divider>` here.
  * @slot trigger - The dropdown's trigger. Must be a `<quiet-button>` or `<button>` element.
  *
- * @event quiet-open - Emitted when the dropdown is instructed to open but before it is shown. This event is not
- *  cancelable.
- * @event quiet-opened - Emitted when the dropdown menu has opened.
- * @event quiet-close - Emitted when the dropdown is dismissed but before it is hidden. This event is not cancelable.
- * @event quiet-closed - Emitted when the dropdown menu has closed.
+ * @event quiet-open - Emitted when the dropdown is instructed to open but before it is shown.
+ * @event quiet-opened - Emitted when the dropdown menu has opened and the animation has completed.
+ * @event quiet-close - Emitted when the dropdown is dismissed but before it is hidden.
+ * @event quiet-closed - Emitted when the dropdown menu has closed and the animation has completed.
  * @event quiet-select - Emitted when a dropdown item has been selected. You can inspect `event.detail.item` to see the
  *  `<quiet-dropdown-item>` that was selected. Calling `event.preventDefault()` will keep the dropdown open.
  *
@@ -74,9 +73,6 @@ export class QuietDropdown extends QuietElement {
   /** The distance of the dropdown menu from its trigger. */
   @property({ type: Number }) distance = 0;
 
-  /** The offset of the dropdown menu alongside its trigger. */
-  @property({ type: Number }) offset = 0;
-
   /**
    * Uses a fixed positioning strategy instead of the default absolute strategy. In most cases, this will prevent the
    * menu from being clipped when the dropdown is inside of a container with `overflow: hidden`.
@@ -109,7 +105,7 @@ export class QuietDropdown extends QuietElement {
     return this.querySelector<QuietButton | HTMLButtonElement>('[slot="trigger"]');
   }
 
-  /** Shows the dropdown menu */
+  /** Shows the dropdown menu. This should only be called from within updated(). */
   private async showMenu() {
     const trigger = this.getTrigger();
 
@@ -127,7 +123,7 @@ export class QuietDropdown extends QuietElement {
     this.open = true;
     this.syncAriaAttributes();
     document.addEventListener('keydown', this.handleDocumentKeyDown);
-    document.addEventListener('mousedown', this.handleDocumentMouseDown);
+    document.addEventListener('pointerdown', this.handleDocumentPointerDown);
     document.addEventListener('focusin', this.handleDocumentFocusIn);
 
     this.menu.classList.add('visible');
@@ -136,7 +132,7 @@ export class QuietDropdown extends QuietElement {
     this.dispatchEvent(new QuietOpenedEvent());
   }
 
-  /** Hides the dropdown menu */
+  /** Hides the dropdown menu. This should only be called from within updated(). */
   private async hideMenu() {
     const closeEvent = new QuietCloseEvent({ source: this });
     this.dispatchEvent(closeEvent);
@@ -148,19 +144,19 @@ export class QuietDropdown extends QuietElement {
     this.open = false;
     this.syncAriaAttributes();
     document.removeEventListener('keydown', this.handleDocumentKeyDown);
-    document.removeEventListener('mousedown', this.handleDocumentMouseDown);
+    document.removeEventListener('pointerdown', this.handleDocumentPointerDown);
     document.removeEventListener('focusin', this.handleDocumentFocusIn);
-
-    if (this.cleanup) {
-      this.cleanup();
-      this.cleanup = undefined;
-      this.removeAttribute('data-placement');
-    }
 
     if (this.menu.classList.contains('visible')) {
       await animateWithClass(this.menu, 'hide');
       this.menu.classList.remove('visible');
       this.dispatchEvent(new QuietClosedEvent());
+    }
+
+    if (this.cleanup) {
+      this.cleanup();
+      this.cleanup = undefined;
+      this.removeAttribute('data-placement');
     }
   }
 
@@ -171,7 +167,7 @@ export class QuietDropdown extends QuietElement {
 
     computePosition(trigger, this.menu, {
       placement: this.placement,
-      middleware: [offset({ mainAxis: this.distance, crossAxis: this.offset }), flip(), shift()],
+      middleware: [offset({ mainAxis: this.distance }), flip(), shift()],
       strategy: this.hoist ? 'fixed' : 'absolute',
       platform: {
         ...platform,
@@ -257,8 +253,8 @@ export class QuietDropdown extends QuietElement {
     }
   };
 
-  /** Handles mouse down events when the dropdown is open. */
-  private handleDocumentMouseDown = (event: KeyboardEvent) => {
+  /** Handles pointer down events when the dropdown is open. */
+  private handleDocumentPointerDown = (event: KeyboardEvent) => {
     const path = event.composedPath();
 
     if (!path.includes(this)) {

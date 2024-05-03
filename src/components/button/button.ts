@@ -5,7 +5,7 @@ import { customElement, property } from 'lit/decorators.js';
 import { html, literal } from 'lit/static-html.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { QuietBlurEvent, QuietFocusEvent } from '../../events/focus-blur.js';
-import { QuietClickEvent } from '../../events/mouse.js';
+import { QuietClickEvent } from '../../events/pointer.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import hostStyles from '../../styles/host.styles.js';
 import styles from './button.styles.js';

@@ -41,7 +41,7 @@ module.exports = {
       files: ['*.ts'],
       rules: {
         'default-param-last': 'off',
-        'no-console': 'warn',
+        'no-console': ['warn', { allow: ['warn', 'error'] }],
         'no-empty-function': 'off',
         'no-implied-eval': 'off',
         'no-invalid-this': 'off',
@@ -75,7 +75,8 @@ module.exports = {
         '@typescript-eslint/no-unnecessary-boolean-literal-compare': 'warn',
         '@typescript-eslint/no-unnecessary-condition': 'off',
         '@typescript-eslint/no-unnecessary-qualifier': 'warn',
-        '@typescript-eslint/no-unused-expressions': 'error',
+        '@typescript-eslint/no-unused-expressions': 'warn',
+        '@typescript-eslint/no-unused-vars': 'warn',
         '@typescript-eslint/non-nullable-type-assertion-style': 'warn',
         '@typescript-eslint/parameter-properties': 'error',
         '@typescript-eslint/prefer-for-of': 'warn',

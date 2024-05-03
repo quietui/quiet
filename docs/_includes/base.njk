@@ -87,14 +87,14 @@
 
         <div id="header-group-buttons" class="header-group">
           {# Search #}
-          <button type="button" title="Search this website (⌘+K)" data-search>
+          <button id="header-search-button" type="button" data-search>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
             </svg>
           </button>
 
           {# Dark mode #}
-          <button type="button" title="Toggle dark mode (backslash)" data-toggle="dark-mode">
+          <button id="header-theme-button" type="button" data-toggle="dark-mode">
             <svg class="only-light" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
             </svg>
@@ -105,9 +105,9 @@
 
           {# GitHub #}
           <a
+            id="header-github-button"
             href="https://github.com/quietui/quiet"
             type="button"
-            title="View the code on GitHub"
             noopener
             noreferrer
             target="_blank"
@@ -122,8 +122,8 @@
 
           {# Twitter #}
           <a
+            id="header-twitter-button"
             href="https://twitter.com/quiet_ui"
-            title="Follow @quiet_ui on X"
             data-no-external-icon
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16">
@@ -188,6 +188,11 @@
     {% if hasSidebar %}
       <div id="backdrop" hidden></div>
     {% endif %}
+
+    <quiet-tooltip for="header-search-button">Search this website (⌘+K)</quiet-tooltip>
+    <quiet-tooltip for="header-theme-button">Toggle dark mode (backslash)</quiet-tooltip>
+    <quiet-tooltip for="header-github-button">View the code on GitHub</quiet-tooltip>
+    <quiet-tooltip for="header-twitter-button">Follow @quiet_ui on X</quiet-tooltip>
 
     {% include 'search.njk' %}
   </body>

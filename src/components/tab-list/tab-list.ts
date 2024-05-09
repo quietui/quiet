@@ -3,6 +3,7 @@ import '../tab/tab.js';
 import { createId } from '../../utilities/math.js';
 import { customElement, property, query } from 'lit/decorators.js';
 import { html } from 'lit';
+import { Localize } from '../../utilities/localize.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import { QuietTabHiddenEvent, QuietTabShownEvent } from '../../events/tabs.js';
 import hostStyles from '../../styles/host.styles.js';
@@ -37,6 +38,8 @@ import type { QuietTabPanel } from '../tab-panel/tab-panel.js';
 @customElement('quiet-tab-list')
 export class QuietTabList extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
+
+  private localize = new Localize(this);
 
   @query('.tabs > slot') private tabSlot: HTMLSlotElement;
   @query('.panels > slot') private panelSlot: HTMLSlotElement;
@@ -151,17 +154,24 @@ export class QuietTabList extends QuietElement {
     const tabs = this.getTabs();
     const activeTab = tabs.find(tab => tab.panel === this.active);
     const activeTabIndex = activeTab ? tabs.indexOf(activeTab) : 0;
+    const isRtl = this.localize.dir() === 'rtl';
     const isVertical = ['start', 'end'].includes(this.placement);
     let targetTab: QuietTab | undefined;
 
     // Previous tab
-    if ((isVertical && event.key === 'ArrowUp') || (!isVertical && event.key === 'ArrowLeft')) {
+    if (
+      (isVertical && event.key === 'ArrowUp') ||
+      (!isVertical && event.key === (isRtl ? 'ArrowRight' : 'ArrowLeft'))
+    ) {
       const prevIndex = activeTabIndex === 0 ? tabs.length - 1 : activeTabIndex - 1;
       targetTab = tabs[prevIndex];
     }
 
     // Next tab
-    if ((isVertical && event.key === 'ArrowDown') || (!isVertical && event.key === 'ArrowRight')) {
+    if (
+      (isVertical && event.key === 'ArrowDown') ||
+      (!isVertical && event.key === (isRtl ? 'ArrowLeft' : 'ArrowRight'))
+    ) {
       const nextIndex = activeTabIndex === tabs.length - 1 ? 0 : activeTabIndex + 1;
       targetTab = tabs[nextIndex];
     }

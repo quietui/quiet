@@ -112,6 +112,11 @@ export default function (eleventyConfig) {
       {
         replace: /\[discuss:([0-9]+)\]/gs,
         replaceWith: '<a href="https://github.com/quietui/quiet/discussions/$1">#$1</a>'
+      },
+      // Replace [BREAKING] with a badge
+      {
+        replace: /\[BREAKING\]/gs,
+        replaceWith: '<quiet-badge variant="destructive">BREAKING</quiet-badge>'
       }
     ])
   );

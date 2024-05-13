@@ -4,7 +4,15 @@ description: Learn how to install the library.
 layout: docs
 ---
 
-There are two ways to install Quiet. Autoloading is the easiest way to get started using components. However, you can also import them manually from the CDN or using a bundler.
+You might be curious to find that Quiet's components aren't built with React, Vue, or any other framework. They're custom HTML elements, or [Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components), which means you can use them in regular HTML pages as well as your favorite framework.
+
+The Web platform has evolved a lot over the last few years! Every modern browser has the APIs necessary to create interoperable components that work everywhere. As a result, it makes little sense to continue building UI components in a specific framework — that creates lock-in.
+
+[Many of the world's largest companies](https://arewebcomponentsathingyet.com/) are using Web Components in production applications.
+
+With Quiet, you no longer need to learn a new UI library when you switch frameworks. Quiet is built on top of stable platform APIs, so it will continue to work for many, many years to come.
+
+==There are two ways to install Quiet.== Autoloading is the fastest way to get started — just copy and paste. However, you can also import components manually from the CDN or npm.
 
 ## Autoloading <quiet-badge variant="constructive" data-no-outline data-no-anchor>Recommended</quiet-badge>
 

@@ -4,19 +4,9 @@ description: Quiet is built using platform APIs that allow components to work an
 layout: docs
 ---
 
-You might be curious to find that Quiet's components aren't built with React, Vue, or any other framework. They're custom HTML elements, or [Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components), which means you can use them in regular HTML pages as well as your favorite framework.
+Web Components are just like native HTML elements. They have attributes, properties, events, and methods, all of which are described in the documentation for each component.
 
-The Web platform has evolved a lot over the last few years! Every modern browser has the APIs necessary to create interoperable components that work everywhere. As a result, it makes little sense to continue building UI components in a specific framework — that creates lock-in.
-
-[Many of the world's largest companies](https://arewebcomponentsathingyet.com/) are using Web Components in production applications.
-
-With Quiet, you no longer need to learn or find a new UI library when you switch frameworks. Quiet is built on top of stable platform APIs, so it will continue to work for many, many years to come.
-
-## Custom elements
-
-Custom elements are just like native HTML elements. They have attributes, properties, events, and methods, all of which are described in the documentation for each component.
-
-Once installed, simply add the tags you want to your HTML.
+Once installed, simply add the components you want to your HTML.
 
 ```html
 <quiet-button>
@@ -37,7 +27,7 @@ Some HTML elements, such as `<img>`, are [void elements](https://developer.mozil
 
 ## Attributes & properties
 
-Most components have properties that can be set with attributes. For example, button's have a `variant` attribute that let's you change the type of button that gets rendered.
+Most components have properties that can be set with attributes. For example, buttons have a `variant` attribute that let's you change the type of button that gets rendered.
 
 ```html {.example .no-buttons}
 <quiet-button variant="primary">Primary</quiet-button>
@@ -85,7 +75,7 @@ If you're updating multiple elements, you can safely use [`requestAnimationFrame
 
 ## Slots
 
-Many components accepts content through slots. Slots are a platform feature that work very similar to the slots you may have used in Vue. A custom element can have any number of slots.
+Many components accepts content through [slots](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot). Slots are a platform feature that work very similar to the slots you may have used in Vue. A custom element can have any number of slots.
 
 The default slot is almost any content inside the component. In this example, we're slotting a text node into the button to serve as its label, but it could be an HTML element as well.
 
@@ -137,10 +127,10 @@ Many components emit custom events when certain things happen. For example, a [`
 </script>
 ```
 
-You can also listen to native events on custom elements. However, it's important to understand that native events occur inside the shadow DOM and are [retargeted to the host](https://javascript.info/shadow-dom-events), so they might not work the exact way you expect. When available, it's always better to use a custom event instead of a native one.
+You can also listen to native events on custom elements. However, it's important to understand that native events occur _inside_ the component's shadow DOM and are [retargeted to the host](https://javascript.info/shadow-dom-events), so they might not work the exact way you expect. When available, it's always better to use a custom event instead of a native one.
 
 :::danger
-Event bubbling is a common pitfall. In the same way native HTML elements all dispatch a `click` event, Quiet components often dispatch custom events that aren't unique to the component. [Learn more about custom event bubbling.](https://www.abeautifulsite.net/posts/custom-event-names-and-the-bubbling-problem/)
+Event bubbling is a common pitfall. In the same way native HTML elements all dispatch a `click` event, Quiet components may dispatch custom events that aren't unique to the component. [Learn more about custom event bubbling.](https://www.abeautifulsite.net/posts/custom-event-names-and-the-bubbling-problem/)
 :::
 
 Some custom events contain a `detail` property with additional information. You can access this information through the `detail` property of the event.
@@ -184,10 +174,6 @@ Please read this section thoroughly if you've never styled custom elements befor
 
 For example, [`<quiet-spinner>`](/docs/components/spinner) renders an animated SVG in its shadow root. The color of the indicator is applied to a `<circle>` element within the SVG, but the implementation detail shouldn't matter to a user who just wants to make the spinner pink.
 
-:::info
-Abstractions like this allow custom element authors to change or even replace a custom element's internals without modifying its public API. This means less breaking changes for you later on!
-:::
-
 For this reason, this spinner exposes a custom property called `--color` that you can set to change the color. You can set a custom property just like any other CSS property.
 
 ```html {.example .no-buttons}
@@ -202,13 +188,17 @@ quiet-spinner {
 }
 ```
 
+:::info
+Abstractions like this allow custom element authors to change or even replace a custom element's internals without modifying its public API. This means less breaking changes for you later on!
+:::
+
 Not all components expose custom properties. Refer to the documentation to see which custom properties a component has.
 
 ### CSS parts
 
-Many components expose parts you can target with CSS. Unlike custom properties, which only affect individual styles, a part gives you complete control over the exposed element.
+Many components expose parts inside the shadow DOM that you can target with CSS. Unlike custom properties, which only affect individual styles, a part gives you complete control over the exposed element's styles.
 
-Use the [`::part()`](https://developer.mozilla.org/en-US/docs/Web/CSS/::part) selector to target a specific part in your CSS. This example applies a striped background image to the progress bar's indicator.
+Use the [`::part()`](https://developer.mozilla.org/en-US/docs/Web/CSS/::part) selector to target a part in your CSS. This example applies a striped background image to the progress bar's indicator.
 
 ```html {.example .no-buttons}
 <quiet-progress id="custom-progress-bg" label="Progress" value="50"></quiet-progress>
@@ -234,15 +224,15 @@ You can, however, select non-structural pseudo elements such as `::before` and `
 </style>
 ```
 
-Another caveat of parts involves animation. When you target an element with `::part()`, you're changing styles inside the shadow DOM. However, animations require keyframes to exist in the same document, and it's not currently possible to do define keyframes from outside the shadow DOM. You can, however, apply animations to the component itself.
+Another caveat of parts involves animation. When you target an element with `::part()`, you're changing styles inside the shadow DOM. However, animations require keyframes to exist in the same document, and it's not currently possible to define keyframes from outside the shadow DOM. You can, however, apply animations to the component itself.
 
 Not all components expose parts. Refer to the documentation to see which parts a component has.
 
 ### Custom states
 
-Some components expose custom states, a newer API that let's you target a custom element when it's in a particular state. This feature [hasn't landed in all browsers yet](https://caniuse.com/mdn-api_customstateset), but we can use it today thanks to Quiet's `data-state-` fallback method.
+Some components have custom states, a newer API that let's you target a custom element when it's in a particular state. This feature [hasn't landed in all browsers yet](https://caniuse.com/mdn-api_customstateset), but we can use it today thanks to Quiet's `data-state-` fallback method.
 
-Toggle buttons, for example, have a `toggled` state you can use to target buttons when they're activated. Try clicking the button below and observe its styles.
+[Toggle buttons](/docs/components/button/#toggle-buttons), for example, have a `toggled` state you can use to target buttons when they're activated. Try clicking the button below and observe its styles.
 
 ```html {.example .no-buttons}
 <quiet-button id="toggle-button" toggle="off">Toggle me</quiet-button>
@@ -255,7 +245,7 @@ Toggle buttons, for example, have a `toggled` state you can use to target button
 </style>
 ```
 
-Note the `data-state-toggled` attribute in the code. In the near future, browsers will support the following CSS to target a custom state called `toggled`. However, at the moment, it's recommended to use the `data-state-` attribute fallbacks shown in the docs.
+Note the `data-state-toggled` attribute in the code. [In the near future](https://caniuse.com/mdn-api_elementinternals_states), browsers will support the following CSS to target a custom state called `toggled`. However, at the moment, it's recommended to use the `data-state-` attribute fallbacks shown in the docs.
 
 ```css
 /* Future syntax */
@@ -264,4 +254,4 @@ Note the `data-state-toggled` attribute in the code. In the near future, browser
 }
 ```
 
-Not all components expose custom states. Refer to the documentation to see which custom states a component has.
+Not all components have custom states. Refer to the documentation to see which custom states a component has.

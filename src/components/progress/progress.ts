@@ -29,7 +29,7 @@ export class QuietProgress extends QuietElement {
   @query('.indicator') private indicator: HTMLDivElement;
 
   /** A custom label for assistive devices. */
-  @property() label = '';
+  @property() label: string;
 
   /** The progress bar's minimum value. */
   @property({ type: Number }) min = 0;

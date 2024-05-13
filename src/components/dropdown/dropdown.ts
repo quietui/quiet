@@ -13,6 +13,8 @@ import type { CSSResultGroup } from 'lit';
 import type { QuietButton } from '../button/button.js';
 import type { QuietDropdownItem } from '../dropdown-item/dropdown-item.js';
 
+const openDropdowns = new Set<QuietDropdown>();
+
 /**
  * <quiet-dropdown>
  *
@@ -112,8 +114,12 @@ export class QuietDropdown extends QuietElement {
       return;
     }
 
+    // Close other dropdowns that are open
+    openDropdowns.forEach(dropdown => (dropdown.open = false));
+
     this.menu.showPopover();
     this.open = true;
+    openDropdowns.add(this);
     this.syncAriaAttributes();
     document.addEventListener('keydown', this.handleDocumentKeyDown);
     document.addEventListener('pointerdown', this.handleDocumentPointerDown);
@@ -135,6 +141,7 @@ export class QuietDropdown extends QuietElement {
     }
 
     this.open = false;
+    openDropdowns.delete(this);
     this.syncAriaAttributes();
     document.removeEventListener('keydown', this.handleDocumentKeyDown);
     document.removeEventListener('pointerdown', this.handleDocumentPointerDown);

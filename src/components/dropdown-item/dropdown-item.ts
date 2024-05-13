@@ -44,7 +44,7 @@ export class QuietDropdownItem extends QuietElement {
    * An optional name for the menu item. This is useful for determining which item was selected when listening to the
    * dropdown's `quiet-select` event.
    */
-  @property() name = '';
+  @property() name: string;
 
   /** Set to `checkbox` to make the item a checkbox. */
   @property({ reflect: true }) type: 'normal' | 'checkbox' = 'normal';

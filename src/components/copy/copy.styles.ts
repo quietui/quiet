@@ -27,6 +27,7 @@ export default css`
     pointer-events: none;
     user-select: none;
     translate: 0 -100%;
+    z-index: 9999;
 
     &.show {
       animation: show 1s ease;

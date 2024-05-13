@@ -1,5 +1,6 @@
 import '../button/button.js';
 import '../icon/icon.js';
+import { animateWithClass } from '../../utilities/animate.js';
 import { customElement, property, query } from 'lit/decorators.js';
 import { html } from 'lit';
 import { Localize } from '../../utilities/localize.js';
@@ -87,19 +88,13 @@ export class QuietCopy extends QuietElement {
   }
 
   /** Shows copy feedback with an animation */
-  private showFeedback(message: string) {
+  private async showFeedback(message: string) {
     this.feedback.textContent = message;
     this.feedback.hidden = false;
     this.feedback.style.left = `calc(50% - ${this.feedback.offsetWidth}px / 2)`;
-    this.feedback.classList.add('show');
-    this.feedback.addEventListener(
-      'animationend',
-      () => {
-        this.feedback.hidden = true;
-        this.feedback.classList.remove('show');
-      },
-      { once: true }
-    );
+
+    await animateWithClass(this.feedback, 'show');
+    this.feedback.hidden = true;
   }
 
   render() {

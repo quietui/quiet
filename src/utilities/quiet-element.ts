@@ -2,7 +2,7 @@ import { LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 
 export class QuietElement extends LitElement {
-  protected internals?: ElementInternals;
+  protected internals: ElementInternals;
   public shadowRoot: ShadowRoot;
 
   constructor() {
@@ -28,7 +28,7 @@ export class QuietElement extends LitElement {
         try {
           // @ts-expect-error - ssh
           // eslint-disable-next-line
-          this.internals?.states?.add(state);
+          this.internals.states?.add(state);
         } catch {
           // NOTE - remove when Chrome stops throwing an error for states without -- prefixes
         }
@@ -36,7 +36,7 @@ export class QuietElement extends LitElement {
       } else {
         // @ts-expect-error - ssh
         // eslint-disable-next-line
-        this.internals?.states?.delete(state);
+        this.internals.states?.delete(state);
         this.removeAttribute(`data-state-${state}`);
       }
     },
@@ -44,7 +44,7 @@ export class QuietElement extends LitElement {
     /** Determines whether or not the element currently has the specified state. */
     has: (state: string) => {
       // @ts-expect-error - ssh
-      if (this.internals?.states) {
+      if (this.internals.states) {
         // @ts-expect-error - ssh
         // eslint-disable-next-line
         return this.internals.states.has(state);

@@ -51,7 +51,7 @@ export class QuietTabList extends QuietElement {
   @property() label: string;
 
   /** The name of the tab panel that's currently active. */
-  @property({ reflect: true }) active = '';
+  @property({ reflect: true }) active: string;
 
   /** The placement of tab controls. */
   @property({ reflect: true }) placement: 'top' | 'bottom' | 'start' | 'end' = 'top';

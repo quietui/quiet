@@ -1,6 +1,6 @@
 import '../dropdown-item/dropdown-item.js';
 import { animateWithClass } from '../../utilities/animate.js';
-import { autoUpdate, computePosition, flip, offset, platform, shift } from '@floating-ui/dom';
+import { autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
 import { createId } from '../../utilities/math.js';
 import { customElement, property, query } from 'lit/decorators.js';
 import { html } from 'lit';

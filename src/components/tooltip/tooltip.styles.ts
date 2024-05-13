@@ -11,7 +11,9 @@ export default css`
 
     display: contents;
     line-height: calc(var(--quiet-line-height) * 0.75);
+    border: none;
     outline: dotted 2px tomato;
+    margin: 0;
   }
 
   .tooltip {
@@ -21,12 +23,10 @@ export default css`
     max-width: var(--max-width);
     top: 0;
     left: 0;
-    isolation: isolate;
-    z-index: 99999; /* TODO */
-
-    &.fixed {
-      position: fixed;
-    }
+    border: none;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
 
     &.visible {
       display: flex;

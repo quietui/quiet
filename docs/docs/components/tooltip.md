@@ -103,25 +103,3 @@ Use the `--max-width` custom property to change the maximum width of the tooltip
   I'm a tooltip with a lot of content. So much, in fact, that it will wrap to the next line.
 </quiet-tooltip>
 ```
-
-### Hoisting tooltips
-
-Tooltips use an absolute positioning strategy by default. This results in less work for the browser, but subjects the menu to clipping when placed in a container with `overflow: hidden` or similar.
-
-To avoid this, you can tell the tooltip to use a fixed positioning strategy by adding the `hoist` attribute. In most cases, this will allow the tooltip to break out of the container. You can also try moving the tooltip to another place in the DOM and applying an appropriate z-index.
-
-```html {.example}
-<div style="
-  position: relative; 
-  overflow: hidden; 
-  border: solid 2px var(--quiet-neutral-fill-soft); 
-  border-radius: var(--quiet-border-radius); 
-  padding: 1rem;
-">
-  <quiet-button id="tooltip__no-hoist">Hover over me</quiet-button>
-  <quiet-tooltip for="tooltip__no-hoist">I'm a tooltip</quiet-tooltip>
-
-  <quiet-button id="tooltip__hoist">Hover over me (hoist)</quiet-button>
-  <quiet-tooltip for="tooltip__hoist" hoist>I'm a tooltip</quiet-tooltip>
-</div>
-```

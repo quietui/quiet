@@ -1,10 +1,8 @@
 import { animateWithClass } from '../../utilities/animate.js';
-import { arrow, autoUpdate, computePosition, flip, offset, platform, shift } from '@floating-ui/dom';
-import { classMap } from 'lit/directives/class-map.js';
+import { arrow, autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
 import { createId } from '../../utilities/math.js';
 import { customElement, property, query } from 'lit/decorators.js';
 import { html } from 'lit';
-import { offsetParent } from 'composed-offset-position';
 import { QuietClosedEvent, QuietCloseEvent, QuietOpenedEvent, QuietOpenEvent } from '../../events/open-close.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import hostStyles from '../../styles/host.styles.js';
@@ -82,12 +80,6 @@ export class QuietTooltip extends QuietElement {
 
   /** The distance of the tooltip from its anchor. */
   @property({ type: Number }) distance = 8;
-
-  /**
-   * Uses a fixed positioning strategy instead of the default absolute strategy. In most cases, this will prevent the
-   * tooltip from being clipped when the tooltip is inside of a container with `overflow: hidden`.
-   */
-  @property({ type: Boolean }) hoist = false;
 
   /** The number of milliseconds to wait before opening the tooltip when hovering in. */
   @property({ attribute: 'open-delay', type: Number }) openDelay = 100;
@@ -189,8 +181,9 @@ export class QuietTooltip extends QuietElement {
     }
 
     // Close other tooltips that are open
-    openTooltips.forEach(t => (t.open = false));
+    openTooltips.forEach(tooltip => (tooltip.open = false));
 
+    this.tooltip.showPopover();
     this.open = true;
     openTooltips.add(this);
     document.addEventListener('keydown', this.handleDocumentKeyDown);
@@ -224,6 +217,7 @@ export class QuietTooltip extends QuietElement {
     if (this.tooltip.classList.contains('visible')) {
       await animateWithClass(this.tooltip, 'hide');
       this.tooltip.classList.remove('visible');
+      this.tooltip.hidePopover();
       this.dispatchEvent(new QuietClosedEvent());
     }
 
@@ -247,14 +241,7 @@ export class QuietTooltip extends QuietElement {
 
     computePosition(this.anchor, this.tooltip, {
       placement: this.placement,
-      middleware: [offset({ mainAxis: this.distance }), flip(), shift(), arrow({ element: this.arrow })],
-      strategy: this.hoist ? 'fixed' : 'absolute',
-      platform: {
-        ...platform,
-        getOffsetParent: this.hoist
-          ? (element: Element) => platform.getOffsetParent(element, offsetParent)
-          : platform.getOffsetParent
-      }
+      middleware: [offset({ mainAxis: this.distance }), flip(), shift(), arrow({ element: this.arrow })]
     }).then(({ x, y, middlewareData, placement }) => {
       // Position it
       Object.assign(this.tooltip.style, {
@@ -379,13 +366,7 @@ export class QuietTooltip extends QuietElement {
 
   render() {
     return html`
-      <div
-        part="tooltip"
-        class=${classMap({
-          tooltip: true,
-          fixed: this.hoist
-        })}
-      >
+      <div part="tooltip" class="tooltip" popover="manual">
         <div part="content" class="content">
           <slot></slot>
         </div>

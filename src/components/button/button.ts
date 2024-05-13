@@ -23,8 +23,8 @@ import type { CSSResultGroup } from 'lit';
  * @slot start - An icon or similar element to place before the label. Works great with SVGs.
  * @slot end - An icon or similar element to place after the label. Works great with SVGs.
  *
- * @state focused - Applied when the button has focus.
- * @state toggled - Applied when a toggle button is activated.
+ * @cssstate focused - Applied when the button has focus.
+ * @cssstate toggled - Applied when a toggle button is activated.
  *
  * @event quiet-click - Emitted when the button is clicked. Will not be emitted when the button is disabled or loading.
  * @event quiet-focus - Emitted when the button receives focus. This event does not bubble.

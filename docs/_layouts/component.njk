@@ -145,7 +145,7 @@
   {% endif %}
 
   {# States #}
-  {% if component.states.length %}
+  {% if component.cssStates.length %}
     <h2>States</h2>
     <div class="table-scroll">
       <table class="component-table">
@@ -157,7 +157,7 @@
           </tr>
         </thead>
         <tbody>
-          {% for state in component.states %}
+          {% for state in component.cssStates %}
             <tr>
               <td class="table-name"><code>{{ state.name }}</code></td>
               <td class="table-description">{{ state.description | inlineMarkdown | safe }}</td>

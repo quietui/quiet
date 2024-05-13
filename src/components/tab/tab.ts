@@ -15,8 +15,8 @@ import type { CSSResultGroup } from 'lit';
  *
  * @slot - The tab's content. This is usually a short label, but sometimes includes an icon.
  *
- * @state active - Applied when the tab is selected.
- * @state disabled - Applied when the tab is selected.
+ * @cssstate active - Applied when the tab is selected.
+ * @cssstate disabled - Applied when the tab is selected.
  */
 @customElement('quiet-tab')
 export class QuietTab extends QuietElement {

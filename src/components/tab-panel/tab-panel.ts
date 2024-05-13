@@ -15,7 +15,7 @@ import type { CSSResultGroup } from 'lit';
  *
  * @slot - Content to show inside the tab panel.
  *
- * @state visible - Applied when the tab panel is visible.
+ * @cssstate visible - Applied when the tab panel is visible.
  */
 @customElement('quiet-tab-panel')
 export class QuietTabPanel extends QuietElement {

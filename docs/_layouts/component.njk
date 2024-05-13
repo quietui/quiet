@@ -144,31 +144,6 @@
     </div>
   {% endif %}
 
-  {# States #}
-  {% if component.cssStates.length %}
-    <h2>States</h2>
-    <div class="table-scroll">
-      <table class="component-table">
-        <thead>
-          <tr>
-            <th class="table-name">Name</th>
-            <th class="table-description">Description</th>
-            <th class="table-selector">CSS selector</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for state in component.cssStates %}
-            <tr>
-              <td class="table-name"><code>{{ state.name }}</code></td>
-              <td class="table-description">{{ state.description | inlineMarkdown | safe }}</td>
-              <td class="table-selector"><code>[data-state-{{ state.name }}]</code></td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
-  {% endif %}
-
   {# Events #}
   {% if component.events.length %}
     <h2>Events</h2>
@@ -189,6 +164,31 @@
                 <td class="table-description">{{ event.description | inlineMarkdown | safe }}</td>
               </tr>
             {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% endif %}
+
+  {# Custom States #}
+  {% if component.cssStates.length %}
+    <h2>Custom States</h2>
+    <div class="table-scroll">
+      <table class="component-table">
+        <thead>
+          <tr>
+            <th class="table-name">Name</th>
+            <th class="table-description">Description</th>
+            <th class="table-selector">CSS selector</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for state in component.cssStates %}
+            <tr>
+              <td class="table-name"><code>{{ state.name }}</code></td>
+              <td class="table-description">{{ state.description | inlineMarkdown | safe }}</td>
+              <td class="table-selector"><code>[data-state-{{ state.name }}]</code></td>
+            </tr>
           {% endfor %}
         </tbody>
       </table>

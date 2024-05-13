@@ -21,12 +21,8 @@ export default css`
     box-shadow: var(--quiet-shadow-mid);
     user-select: none;
     padding: 0.25rem;
-    z-index: 1000; /* TODO */
+    margin: 0;
     transform-origin: top left;
-
-    &.fixed {
-      position: fixed;
-    }
 
     &.visible {
       display: flex;

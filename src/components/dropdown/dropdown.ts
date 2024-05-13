@@ -1,11 +1,9 @@
 import '../dropdown-item/dropdown-item.js';
 import { animateWithClass } from '../../utilities/animate.js';
 import { autoUpdate, computePosition, flip, offset, platform, shift } from '@floating-ui/dom';
-import { classMap } from 'lit/directives/class-map.js';
 import { createId } from '../../utilities/math.js';
 import { customElement, property, query } from 'lit/decorators.js';
 import { html } from 'lit';
-import { offsetParent } from 'composed-offset-position';
 import { QuietClosedEvent, QuietCloseEvent, QuietOpenedEvent, QuietOpenEvent } from '../../events/open-close.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import { QuietSelectEvent } from '../../events/select.js';
@@ -73,12 +71,6 @@ export class QuietDropdown extends QuietElement {
   /** The distance of the dropdown menu from its trigger. */
   @property({ type: Number }) distance = 0;
 
-  /**
-   * Uses a fixed positioning strategy instead of the default absolute strategy. In most cases, this will prevent the
-   * menu from being clipped when the dropdown is inside of a container with `overflow: hidden`.
-   */
-  @property({ type: Boolean }) hoist = false;
-
   firstUpdated() {
     this.syncAriaAttributes();
   }
@@ -120,6 +112,7 @@ export class QuietDropdown extends QuietElement {
       return;
     }
 
+    this.menu.showPopover();
     this.open = true;
     this.syncAriaAttributes();
     document.addEventListener('keydown', this.handleDocumentKeyDown);
@@ -150,6 +143,7 @@ export class QuietDropdown extends QuietElement {
     if (this.menu.classList.contains('visible')) {
       await animateWithClass(this.menu, 'hide');
       this.menu.classList.remove('visible');
+      this.menu.hidePopover();
       this.dispatchEvent(new QuietClosedEvent());
     }
 
@@ -167,14 +161,7 @@ export class QuietDropdown extends QuietElement {
 
     computePosition(trigger, this.menu, {
       placement: this.placement,
-      middleware: [offset({ mainAxis: this.distance }), flip(), shift()],
-      strategy: this.hoist ? 'fixed' : 'absolute',
-      platform: {
-        ...platform,
-        getOffsetParent: this.hoist
-          ? (element: Element) => platform.getOffsetParent(element, offsetParent)
-          : platform.getOffsetParent
-      }
+      middleware: [offset({ mainAxis: this.distance }), flip(), shift()]
     }).then(({ x, y, placement }) => {
       // Set the determined placement for users to hook into and for transform origin styles
       this.setAttribute('data-placement', placement);
@@ -348,10 +335,8 @@ export class QuietDropdown extends QuietElement {
       <div
         part="menu"
         id="menu"
-        class=${classMap({
-          menu: true,
-          fixed: this.hoist
-        })}
+        class="menu"
+        popover="manual"
         role="menu"
         tabindex="-1"
         aria-orientation="vertical"

@@ -263,39 +263,3 @@ You can set the preferred placement of the dropdown menu with the `placement` at
   <quiet-dropdown-item name="sand-cat">Sand cat</quiet-dropdown-item>
 </quiet-dropdown>
 ```
-
-### Hoisting menus
-
-Dropdowns use an absolute positioning strategy by default. This results in less work for the browser, but subjects the menu to clipping when placed in a container with `overflow: hidden` or similar.
-
-To avoid this, you can tell the dropdown to use a fixed positioning strategy by adding the `hoist` attribute. In most cases, this will allow the menu to break out of the container.
-
-```html {.example}
-<div style="
-  position: relative; 
-  overflow: hidden; 
-  border: solid 2px var(--quiet-neutral-fill-soft); 
-  border-radius: var(--quiet-border-radius); 
-  padding: 1rem;
-">
-  <quiet-dropdown>
-    <quiet-button slot="trigger" with-caret>Forest animals</quiet-button>
-    <quiet-dropdown-item name="chipmunk">Chipmunk</quiet-dropdown-item>
-    <quiet-dropdown-item name="opossum">Opossum</quiet-dropdown-item>
-    <quiet-dropdown-item name="raccoon">Raccoon</quiet-dropdown-item>
-    <quiet-dropdown-item name="skunk">Skunk</quiet-dropdown-item>
-    <quiet-dropdown-item name="squirrel">Squirrel</quiet-dropdown-item>
-    <quiet-dropdown-item name="deer">White-tailed deer</quiet-dropdown-item>
-  </quiet-dropdown>
-
-  <quiet-dropdown hoist>
-    <quiet-button slot="trigger" with-caret>Forest animals (hoist)</quiet-button>
-    <quiet-dropdown-item name="chipmunk">Chipmunk</quiet-dropdown-item>
-    <quiet-dropdown-item name="opossum">Opossum</quiet-dropdown-item>
-    <quiet-dropdown-item name="raccoon">Raccoon</quiet-dropdown-item>
-    <quiet-dropdown-item name="skunk">Skunk</quiet-dropdown-item>
-    <quiet-dropdown-item name="squirrel">Squirrel</quiet-dropdown-item>
-    <quiet-dropdown-item name="deer">White-tailed deer</quiet-dropdown-item>
-  </quiet-dropdown>  
-</div>
-```

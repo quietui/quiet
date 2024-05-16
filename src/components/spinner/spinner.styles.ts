@@ -2,7 +2,8 @@ import { css } from 'lit';
 
 export default css`
   :host {
-    --color: var(--quiet-primary-fill-mid);
+    --indicator-color: var(--quiet-primary-fill-mid);
+    --track-color: var(--quiet-neutral-fill-softer);
 
     display: inline-flex;
     width: 1em;
@@ -16,8 +17,12 @@ export default css`
     aspect-ratio: 1;
   }
 
-  circle {
-    stroke: var(--color);
+  .track {
+    stroke: var(--track-color);
+  }
+
+  .indicator {
+    stroke: var(--indicator-color);
     stroke-dasharray: 75, 100;
     stroke-dashoffset: -5;
     animation: dash 1.5s ease-in-out infinite;

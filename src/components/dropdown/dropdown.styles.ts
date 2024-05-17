@@ -46,7 +46,6 @@ export default css`
 
     ::slotted(quiet-divider) {
       --spacing: 0.25rem;
-      --color: var(--quiet-neutral-stroke-softer);
     }
   }
 

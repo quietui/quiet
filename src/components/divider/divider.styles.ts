@@ -2,7 +2,7 @@ import { css } from 'lit';
 
 export default css`
   :host {
-    --color: var(--quiet-neutral-stroke-soft);
+    --color: var(--quiet-neutral-stroke-softer);
     --thickness: var(--quiet-border-width);
     --spacing: 1rem;
 

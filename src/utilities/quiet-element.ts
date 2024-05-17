@@ -1,6 +1,7 @@
 import { LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 
+/** The base class for all Quiet components */
 export class QuietElement extends LitElement {
   protected internals: ElementInternals;
   public shadowRoot: ShadowRoot;
@@ -23,34 +24,34 @@ export class QuietElement extends LitElement {
    */
   protected customStates = {
     /** Adds or removes the specified custom state. */
-    set: (state: string, active: boolean) => {
+    set: (customState: string, active: boolean) => {
       if (active) {
         try {
           // @ts-expect-error - ssh
           // eslint-disable-next-line
-          this.internals.states?.add(state);
+          this.internals.states?.add(customState);
         } catch {
           // NOTE - remove when Chrome stops throwing an error for states without -- prefixes
         }
-        this.setAttribute(`data-state-${state}`, '');
+        this.setAttribute(`data-state-${customState}`, '');
       } else {
         // @ts-expect-error - ssh
         // eslint-disable-next-line
-        this.internals.states?.delete(state);
-        this.removeAttribute(`data-state-${state}`);
+        this.internals.states?.delete(customState);
+        this.removeAttribute(`data-state-${customState}`);
       }
     },
 
     /** Determines whether or not the element currently has the specified state. */
-    has: (state: string) => {
+    has: (customState: string) => {
       // @ts-expect-error - ssh
       if (this.internals.states) {
         // @ts-expect-error - ssh
         // eslint-disable-next-line
-        return this.internals.states.has(state);
+        return this.internals.states.has(customState);
       }
 
-      return this.hasAttribute(`data-state-${state}`);
+      return this.hasAttribute(`data-state-${customState}`);
     }
   };
 }

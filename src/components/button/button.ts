@@ -4,7 +4,7 @@ import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property } from 'lit/decorators.js';
 import { html, literal } from 'lit/static-html.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { QuietBlurEvent, QuietFocusEvent } from '../../events/focus-blur.js';
+import { QuietBlurEvent, QuietFocusEvent } from '../../events/form.js';
 import { QuietClickEvent } from '../../events/pointer.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import hostStyles from '../../styles/host.styles.js';
@@ -20,15 +20,15 @@ import type { CSSResultGroup } from 'lit';
  * @since 1.0
  *
  * @slot - The button's label.
- * @slot start - An icon or similar element to place before the label. Works great with SVGs.
- * @slot end - An icon or similar element to place after the label. Works great with SVGs.
+ * @slot start - An icon or similar element to place before the label. Works great with `<quiet-icon>`.
+ * @slot end - An icon or similar element to place after the label. Works great with `<quiet-icon>`.
+ *
+ * @event quiet-blur - Emitted when the button loses focus. This event does not bubble.
+ * @event quiet-click - Emitted when the button is clicked. Will not be emitted when the button is disabled or loading.
+ * @event quiet-focus - Emitted when the button receives focus. This event does not bubble.
  *
  * @cssstate focused - Applied when the button has focus.
  * @cssstate toggled - Applied when a toggle button is activated.
- *
- * @event quiet-click - Emitted when the button is clicked. Will not be emitted when the button is disabled or loading.
- * @event quiet-focus - Emitted when the button receives focus. This event does not bubble.
- * @event quiet-blur - Emitted when the button loses focus. This event does not bubble.
  *
  * @csspart button - The internal `<button>` element. Other than `width`, this is where most custom styles should be
  *  applied.
@@ -49,7 +49,7 @@ export class QuietButton extends QuietElement {
   /** The type of button to render. */
   @property({ reflect: true }) variant: 'primary' | 'secondary' | 'destructive' | 'text' | 'image' = 'secondary';
 
-  /** Disables the button. */
+  /** Disables the button. Cannot be used with link buttons. */
   @property({ type: Boolean }) disabled = false;
 
   /** Draws the button in a loading state. */
@@ -94,16 +94,16 @@ export class QuietButton extends QuietElement {
    */
   @property() href = '';
 
-  /** Opens the link in the specified target. Only valid when `href` is used. */
+  /** Opens the link in the specified target. Only works with link buttons. */
   @property() target: '_blank' | '_parent' | '_self' | '_top' | undefined;
 
   /**
-   *  Sets the link's `rel` attribute. Only valid when `href` is used. Note that the default value is
+   *  Sets the link's `rel` attribute. Only works with link buttons. Note that the default value is
    * `noreferrer noopener`, meaning you might need to set it to an empty string if you're also using `target`.
    */
   @property() rel = 'noreferrer noopener';
 
-  /** Sets the link's `download` attribute, causing the linked file to be downloaded. Only valid when `href` is used. */
+  /** Sets the link's `download` attribute, causing the linked file to be downloaded. Only works with link buttons. */
   @property() download?: string;
 
   /**

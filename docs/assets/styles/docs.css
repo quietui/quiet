@@ -111,6 +111,13 @@ html:not(.quiet-dark) .only-dark {
   padding-inline-start: 1rem;
 }
 
+/* Splash page divider colors should match the background better */
+.layout-splash:not(.scrolled-down) {
+  .header-group:not(:first-of-type) + .header-group {
+    border-left-color: color-mix(in oklab, var(--quiet-text-body) 15%, transparent);
+  }
+}
+
 .header-group-scrollable {
   flex: 1 1 auto;
   display: flex;

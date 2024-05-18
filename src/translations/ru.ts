@@ -7,10 +7,13 @@ const translation: Translation = {
   $name: 'Русский',
   $dir: 'ltr',
 
+  clearEntry: 'Очистить запись',
   copied: 'Скопировано',
   copyToClipboard: 'Скопировать в буфер обмена',
   error: 'Ошибка',
-  loading: 'Загрузка'
+  hidePassword: 'Скрыть пароль',
+  loading: 'Загрузка',
+  showPassword: 'Показать пароль'
   /* cSpell:enable */
 };
 

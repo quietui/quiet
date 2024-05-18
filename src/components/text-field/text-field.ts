@@ -1,0 +1,480 @@
+import '../icon/icon.js';
+import { classMap } from 'lit/directives/class-map.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
+import { html } from 'lit';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { live } from 'lit/directives/live.js';
+import { Localize } from '../../utilities/localize.js';
+import { QuietBlurEvent, QuietChangeEvent, QuietFocusEvent, QuietInputEvent } from '../../events/form.js';
+import { QuietElement } from '../../utilities/quiet-element.js';
+import hostStyles from '../../styles/host.styles.js';
+import styles from './text-field.styles.js';
+import type { CSSResultGroup } from 'lit';
+
+/**
+ * <quiet-text-field>
+ *
+ * @summary Text fields let users input and edit text.
+ * @documentation https://quietui.com/docs/components/text-field
+ * @status stable
+ * @since 1.0
+ *
+ * @dependency quiet-icon
+ *
+ * @slot label - The text field's label. For plain-text labels, you can use the `label` attribute instead.
+ * @slot description - The text field's description. For plain-text descriptions, you can use the `description`
+ *  attribute instead.
+ * @slot start - An icon or similar element to place before the label. Works great with `<quiet-icon>`.
+ * @slot end - An icon or similar element to place after the label. Works great with `<quiet-icon>`.
+ *
+ * @prop {string} form - If the text field is located outside of a form...
+ *
+ * @event quiet-blur - Emitted when the text field loses focus. This event does not bubble.
+ * @event quiet-change - Emitted when the user commits changes to the text field's value.
+ * @event quiet-focus - Emitted when the text field receives focus. This event does not bubble.
+ * @event quiet-input - Emitted when the text field receives input.
+ *
+ * @cssstate disabled - Applied when the text field is disabled.
+ * @cssstate empty - Applied when the text field is empty.
+ * @cssstate focused - Applied when the text field has focus.
+ * @cssstate user-valid - Applied when the text field is valid and the user has sufficiently interacted with it.
+ * @cssstate user-invalid - Applied when the text field is invalid and the user has sufficiently interacted with it.
+ *
+ * @csspart label - The element that contains the text field's label.
+ * @csspart description - The element that contains the text field's description.
+ * @csspart box - The element that wraps the start icon, end icon, and the internal `<input>` element.
+ * @csspart input - The internal `<input>` element.
+ * @csspart clear-button - The clear button, a `<button>` element.
+ * @csspart password-toggle-button - The password toggle button, a `<button>` element.
+ */
+@customElement('quiet-text-field')
+export class QuietTextField extends QuietElement {
+  static formAssociated = true;
+  static styles: CSSResultGroup = [hostStyles, styles];
+
+  /** A reference to the `<form>` associated with the form control, or null if no form is associated. */
+  private associatedForm: HTMLFormElement | null = null;
+  private localize = new Localize(this);
+
+  @query('input') input: HTMLInputElement;
+
+  @state() isInvalid = false;
+  @state() isPasswordVisible = false;
+  @state() wasChanged = false;
+  @state() wasSubmitted = false;
+
+  /**
+   * The text field's label. If you need to provide HTML in the label, use the `label` slot instead.
+   */
+  @property() label: string;
+
+  /**
+   * The text field's description. If you need to provide HTML in the description, use the `description` slot instead.
+   */
+  @property() description: string;
+
+  /** The name of the text field. This will be submitted with the form as a name/value pair. */
+  @property() name: string;
+
+  /** The text field's value. */
+  @property() value = '';
+
+  /** A placeholder to show in the text field when it's empty. */
+  @property() placeholder: string;
+
+  /** Disables the text field. */
+  @property({ type: Boolean }) disabled = false;
+
+  /** Makes the text field a read-only field. */
+  @property({ type: Boolean }) readonly = false;
+
+  /** Adds a clear button to the text field when it's not empty. */
+  @property({ type: Boolean }) clearable = false;
+
+  /** The type of text field to render. */
+  @property() variant: 'normal' | 'filled' | 'unstyled' = 'normal';
+
+  /** The text field's size. */
+  @property() size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' = 'md';
+
+  /** Draws the text field in a pill shape. */
+  @property({ type: Boolean }) pill = false;
+
+  /** The type of data the text field will accept. */
+  @property() type:
+    | 'color'
+    | 'date'
+    | 'datetime-local'
+    | 'email'
+    | 'month'
+    | 'number'
+    | 'password'
+    | 'search'
+    | 'tel'
+    | 'text'
+    | 'time'
+    | 'url'
+    | 'week' = 'text';
+
+  /**
+   * Makes the text field required. Form submission will not be allowed when this is set and the text field is empty.
+   */
+  @property({ type: Boolean }) required = false;
+
+  /** A regular expression the value should match to be considered valid. */
+  @property() pattern: string;
+
+  /** The minimum string length that will be considered valid. */
+  @property({ attribute: 'minlength', type: Number }) minLength: number;
+
+  /** The maximum string length that will be considered valid. */
+  @property({ attribute: 'maxlength', type: Number }) maxLength: number;
+
+  /** The minimum value for date/time types. */
+  @property() min: number | string;
+
+  /** The maximum value for date/time types. */
+  @property() max: number | string;
+
+  /** The granularity the value must adhere to when incrementing and decrementing. Only applies to date/time types. */
+  @property() step: number | 'any';
+
+  /**
+   * You can provide a custom error message to force the text field to be invalid. To clear the error, set this to an
+   * empty string.
+   */
+  @property({ attribute: 'custom-validity' }) customValidity = '';
+
+  /** Turns autocapitalize on or off in supported browsers. */
+  @property() autocapitalize: 'off' | 'none' | 'on' | 'sentences' | 'words' | 'characters';
+
+  /**
+   * Tells the browser how to autocomplete the text field. See [this page](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete)
+   * for available values.
+   */
+  @property() autocomplete: string;
+
+  /** Turns autocorrect on or off in supported browsers. */
+  @property() autocorrect: 'off' | 'on';
+
+  /** Tells the browser to focus the input when the page loads or a dialog is shown. */
+  @property({ type: Boolean }) autofocus: boolean;
+
+  /** Sets the enter key label on virtual keyboards. */
+  @property() enterkeyhint: 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send';
+
+  /**
+   *
+   */
+  @property() inputmode: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
+
+  /** Turns spell checking on or off in supported browsers. */
+  @property({
+    type: Boolean,
+    converter: {
+      fromAttribute: value => (!value || value === 'false' ? false : true),
+      toAttribute: value => (value ? 'true' : 'false')
+    }
+  })
+  spellcheck: boolean;
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.addEventListener('invalid', this.handleHostInvalid);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.removeEventListener('invalid', this.handleHostInvalid);
+  }
+
+  updated(changedProps: Map<string, unknown>) {
+    // Always be updating
+    this.updateValidity();
+
+    // Handle value
+    if (changedProps.has('value')) {
+      this.customStates.set('empty', this.value === '');
+    }
+
+    // Handle disabled
+    if (changedProps.has('disabled')) {
+      this.customStates.set('disabled', this.disabled);
+    }
+
+    // Handle user interactions. When the form control's value has changed and lost focus (e.g. change event), we can
+    // show user-valid and user-invalid states. We also show it if the form has been submitted.
+    if (this.wasChanged || this.wasSubmitted) {
+      this.customStates.set('user-invalid', this.isInvalid);
+      this.customStates.set('user-valid', !this.isInvalid);
+    } else {
+      this.customStates.set('user-invalid', false);
+      this.customStates.set('user-valid', false);
+    }
+  }
+
+  /** @internal Called when the associated form element changes. */
+  formAssociatedCallback(form: HTMLFormElement | null) {
+    this.associatedForm = form;
+  }
+
+  /** @internal Called when a containing fieldset is disabled. */
+  formDisabledCallback(isDisabled: boolean) {
+    this.disabled = isDisabled;
+  }
+
+  /** @internal Called when the form is reset. */
+  formResetCallback() {
+    this.isInvalid = false;
+    this.wasChanged = false;
+    this.wasSubmitted = false;
+    this.value = this.getAttribute('value') ?? '';
+  }
+
+  private handleBlur() {
+    this.customStates.set('focused', false);
+    this.dispatchEvent(new QuietBlurEvent());
+  }
+
+  private handleBoxPointerDown(event: PointerEvent) {
+    // The box is decorated to look like the input, so clicking anywhere on it should focus the input. However, we
+    // only want to do this when the target isn't another element.
+    if (event.eventPhase === event.AT_TARGET) {
+      event.preventDefault();
+      this.input.focus();
+    }
+  }
+
+  private handleChange() {
+    this.wasChanged = true;
+    this.dispatchEvent(new QuietChangeEvent());
+  }
+
+  private handleClearClick() {
+    this.value = '';
+    this.dispatchEvent(new QuietInputEvent());
+  }
+
+  private handleFocus() {
+    this.customStates.set('focused', true);
+    this.dispatchEvent(new QuietFocusEvent());
+  }
+
+  private handleHelperButtonPointerDown(event: PointerEvent) {
+    // Prevent the text field from losing focus when the clear button is activated
+    event.preventDefault();
+  }
+
+  private handleHostInvalid() {
+    //
+    // We need to simulate the :user-invalid state when the form is submitted. Alas, there's no way to listen to form
+    // submit because validation occurs before the `formdata` and `submit` events. The only way I've found to hook into
+    // it is by listening to the `invalid` event on the host element, which is dispatched by the browser when the form
+    // is submitted and the form-associated custom element is invalid.
+    //
+    this.wasSubmitted = true;
+  }
+
+  private handleInput() {
+    this.value = this.input.value;
+    this.internals.setFormValue(this.value);
+    this.dispatchEvent(new QuietInputEvent());
+  }
+
+  private handleKeyDown(event: KeyboardEvent) {
+    // When enter is pressed in a text field, the associated form should submit.
+    if (event.key === 'Enter' && this.associatedForm) {
+      const submitter = [...this.associatedForm.elements].find((el: HTMLInputElement | HTMLButtonElement) => {
+        // The first submit button associated with the form will be the submitter. At this time, only native buttons
+        // can be submitters (see https://github.com/WICG/webcomponents/issues/814)
+        return ['button', 'input'].includes(el.localName) && el.type === 'submit';
+      }) as HTMLElement;
+
+      this.associatedForm.requestSubmit(submitter);
+    }
+  }
+
+  private handlePasswordToggleClick() {
+    this.isPasswordVisible = !this.isPasswordVisible;
+  }
+
+  /** Sets the form control's validity */
+  private async updateValidity() {
+    await this.updateComplete;
+    const hasCustomValidity = this.customValidity?.length > 0;
+    const validationMessage = hasCustomValidity ? this.customValidity : this.input.validationMessage;
+    const flags: ValidityStateFlags = {
+      badInput: this.input.validity.tooShort,
+      customError: hasCustomValidity,
+      patternMismatch: this.input.validity.patternMismatch,
+      rangeOverflow: this.input.validity.rangeOverflow,
+      rangeUnderflow: this.input.validity.rangeUnderflow,
+      stepMismatch: this.input.validity.stepMismatch,
+      tooLong: this.input.validity.tooLong,
+      tooShort: this.input.validity.tooShort,
+      typeMismatch: this.input.validity.typeMismatch,
+      valueMissing: this.input.validity.valueMissing
+    };
+
+    this.isInvalid = hasCustomValidity ? true : !this.input.validity.valid;
+    this.internals.setValidity(flags, validationMessage, this.input);
+  }
+
+  /** Sets focus to the text field. */
+  public focus() {
+    this.input.focus();
+  }
+
+  /** Removes focus from the text field. */
+  public blur() {
+    this.input.blur();
+  }
+
+  /**
+   * Checks if the form control has any restraints and whether it satisfies them. If invalid, `false` will be returned
+   * and the `invalid` event will be dispatched. If valid, `true` will be returned.
+   */
+  public checkValidity() {
+    return this.internals.checkValidity();
+  }
+
+  /**
+   * Checks if the form control has any restraints and whether it satisfies them. If invalid, `false` will be returned
+   * and the `invalid` event will be dispatched. In addition, the problem will be reported to the user. If valid, `true`
+   * will be returned.
+   */
+  public reportValidity() {
+    return this.internals.reportValidity();
+  }
+
+  /** For types that support a picker, such as color and date selectors, this will cause the picker to show. */
+  public showPicker() {
+    this.input.showPicker();
+  }
+
+  /**
+   * When a supported `type` is used, this method will decrease the text field's value by `step`. This is a programmatic
+   * change, so input and change events will not be emitted when this is called.
+   */
+  public stepDown() {
+    this.input.stepDown();
+  }
+
+  /**
+   * When a supported `type` is used, this method will increase the text field's value by `step`. This is a programmatic
+   * change, so input and change events will not be emitted when this is called.
+   */
+  public stepUp() {
+    this.input.stepUp();
+  }
+
+  render() {
+    return html`
+      <label part="label" id="label" for="text-field">
+        <slot name="label">${this.label}</slot>
+      </label>
+
+      <div
+        part="box"
+        id="box"
+        class=${classMap({
+          // Variants
+          normal: this.variant === 'normal',
+          filled: this.variant === 'filled',
+          unstyled: this.variant === 'unstyled',
+          // Sizes
+          xs: this.size === 'xs',
+          sm: this.size === 'sm',
+          md: this.size === 'md',
+          lg: this.size === 'lg',
+          xl: this.size === 'xl',
+          // Modifiers
+          color: this.type === 'color',
+          pill: this.pill,
+          // States
+          disabled: this.disabled
+        })}
+        @pointerdown=${this.handleBoxPointerDown}
+      >
+        <slot name="start"></slot>
+
+        <input
+          part="input"
+          id="text-field"
+          type=${this.type === 'password' && this.isPasswordVisible ? 'text' : this.type}
+          ?autofocus=${this.autofocus}
+          ?disabled=${this.disabled}
+          ?readonly=${this.readonly}
+          ?required=${this.required}
+          name=${ifDefined(this.name)}
+          placeholder=${ifDefined(this.placeholder)}
+          pattern=${ifDefined(this.pattern)}
+          minlength=${ifDefined(this.minLength)}
+          maxlength=${ifDefined(this.maxLength)}
+          min=${ifDefined(this.min)}
+          max=${ifDefined(this.max)}
+          step=${ifDefined(this.step)}
+          .value=${live(this.value) /* live() is required for proper validation */}
+          autocapitalize=${ifDefined(this.autocapitalize)}
+          autocomplete=${ifDefined(this.autocomplete)}
+          autocorrect=${ifDefined(this.autocorrect)}
+          spellcheck=${ifDefined(this.spellcheck)}
+          enterkeyhint=${ifDefined(this.enterkeyhint)}
+          inputmode=${ifDefined(this.inputmode)}
+          aria-describedby="description"
+          aria-invalid=${this.isInvalid ? 'true' : 'false'}
+          @change=${this.handleChange}
+          @input=${this.handleInput}
+          @focus=${this.handleFocus}
+          @blur=${this.handleBlur}
+          @keydown=${this.handleKeyDown}
+        />
+
+        ${this.type === 'password' && this.value.length > 0 && !this.disabled && !this.readonly
+          ? html`
+              <button
+                part="toggle-password-button"
+                id="password-toggle-button"
+                class="helper-button"
+                type="button"
+                aria-label=${this.localize.term(this.isPasswordVisible ? 'hidePassword' : 'showPassword')}
+                tabindex="-1"
+                @pointerdown=${this.handleHelperButtonPointerDown}
+                @click=${this.handlePasswordToggleClick}
+              >
+                <quiet-icon library="system" name=${this.isPasswordVisible ? 'eye-slash' : 'eye'}></quiet-icon>
+              </button>
+            `
+          : ''}
+        ${this.clearable && this.value.length > 0 && !this.disabled && !this.readonly
+          ? html`
+              <button
+                part="clear-button"
+                id="clear-button"
+                class="helper-button"
+                type="button"
+                aria-label=${this.localize.term('clearEntry')}
+                tabindex="-1"
+                @pointerdown=${this.handleHelperButtonPointerDown}
+                @click=${this.handleClearClick}
+              >
+                <quiet-icon library="system" name="x-circle"></quiet-icon>
+              </button>
+            `
+          : ''}
+
+        <slot name="end"></slot>
+      </div>
+
+      <div part="description" id="description">
+        <slot name="description">${this.description}</slot>
+      </div>
+    `;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'quiet-text-field': QuietTextField;
+  }
+}

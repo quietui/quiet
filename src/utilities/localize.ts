@@ -15,8 +15,11 @@ export interface Translation extends DefaultTranslation {
   $dir: 'ltr' | 'rtl';
 
   // Translated terms
+  clearEntry: string;
   copied: string;
   copyToClipboard: string;
   error: string;
+  hidePassword: string;
   loading: string;
+  showPassword: string;
 }

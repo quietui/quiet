@@ -19,8 +19,7 @@ let searchTimeout;
 function getElements() {
   return {
     dialog: document.getElementById('site-search'),
-    input: document.getElementById('site-search-input'),
-    clearButton: document.getElementById('site-search-clear'),
+    textField: document.getElementById('site-search-text-field'),
     results: document.getElementById('site-search-listbox')
   };
 }
@@ -45,10 +44,9 @@ document.addEventListener('click', event => {
 });
 
 function show() {
-  const { dialog, input, clearButton, results } = getElements();
+  const { dialog, textField, results } = getElements();
 
-  input.addEventListener('input', handleInput);
-  clearButton.addEventListener('click', handleClear);
+  textField.addEventListener('quiet-input', handleInput);
   results.addEventListener('click', handleSelection);
   dialog.addEventListener('keydown', handleKeyDown);
   dialog.addEventListener('quiet-close', hide, { once: true });
@@ -56,34 +54,23 @@ function show() {
 }
 
 function hide() {
-  const { dialog, input, clearButton, results } = getElements();
+  const { dialog, textField, results } = getElements();
 
-  input.removeEventListener('input', handleInput);
-  clearButton.removeEventListener('click', handleClear);
+  textField.removeEventListener('quiet-input', handleInput);
   results.removeEventListener('click', handleSelection);
   dialog.removeEventListener('keydown', handleKeyDown);
   dialog.open = false;
 }
 
 function handleInput() {
-  const { input, clearButton } = getElements();
+  const { textField } = getElements();
 
-  clearButton.hidden = input.value === '';
   clearTimeout(searchTimeout);
-  searchTimeout = setTimeout(() => updateResults(input.value), searchDebounce);
-}
-
-function handleClear() {
-  const { input, clearButton } = getElements();
-
-  clearButton.hidden = true;
-  input.value = '';
-  input.focus();
-  updateResults();
+  searchTimeout = setTimeout(() => updateResults(textField.value), searchDebounce);
 }
 
 function handleKeyDown(event) {
-  const { input, results } = getElements();
+  const { textField, results } = getElements();
 
   // Handle keyboard selections
   if (['ArrowDown', 'ArrowUp', 'Home', 'End', 'Enter'].includes(event.key)) {
@@ -119,7 +106,7 @@ function handleKeyDown(event) {
     // Update the selected item
     items.forEach(item => {
       if (item === nextEl) {
-        input.setAttribute('aria-activedescendant', item.id);
+        textField.setAttribute('aria-activedescendant', item.id);
         item.setAttribute('data-selected', 'true');
         nextEl.scrollIntoView({ block: 'nearest' });
       } else {
@@ -141,7 +128,7 @@ function handleSelection(event) {
 
 // Queries the search index and updates the results
 async function updateResults(query = '') {
-  const { dialog, input, results } = getElements();
+  const { dialog, textField, results } = getElements();
 
   try {
     const hasQuery = query.length > 0;
@@ -155,7 +142,7 @@ async function updateResults(query = '') {
     dialog.classList.toggle('has-results', hasQuery && hasResults);
     dialog.classList.toggle('no-results', hasQuery && !hasResults);
 
-    input.setAttribute('aria-activedescendant', '');
+    textField.setAttribute('aria-activedescendant', '');
     results.innerHTML = '';
 
     matches.forEach((match, index) => {

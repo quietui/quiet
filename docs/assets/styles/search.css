@@ -50,54 +50,8 @@ header {
   border-end-end-radius: 0;
 }
 
-#site-search-clear {
-  margin-block-start: 0.5rem;
-  margin-inline-end: 0.5rem;
-
-  quiet-icon {
-    color: var(--quiet-neutral-fill-mid);
-  }
-}
-
-#site-search-input-wrapper {
-  display: flex;
-  align-items: center;
-  margin-block-end: 0.5rem;
-
-  quiet-icon[name='magnifying-glass'] {
-    flex: 0 0 auto;
-    color: var(--quiet-neutral-fill-mid);
-    font-size: 1.5rem;
-    margin-inline-start: 1.5rem;
-    margin-block-start: 0.5rem;
-  }
-}
-
-#site-search-input {
-  flex: 1 1 auto;
-  min-width: 0;
-  border: none;
-  font: inherit;
-  font-size: 1.5rem;
-  background: transparent;
-  padding: 1rem 1rem 0.5rem 1rem;
-  margin: 0;
-
-  &::placeholder {
-    color: var(--quiet-text-muted);
-  }
-}
-
-#site-search-input::-webkit-search-decoration,
-#site-search-input::-webkit-search-cancel-button,
-#site-search-input::-webkit-search-results-button,
-#site-search-input::-webkit-search-results-decoration {
-  display: none;
-}
-
-#site-search-input:focus,
-#site-search-input:focus-visible {
-  outline: none;
+#site-search-text-field::part(box) {
+  padding-inline: 1.5rem;
 }
 
 #site-search-body {

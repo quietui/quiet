@@ -390,10 +390,6 @@ html:not(.quiet-dark) .only-dark {
     padding: 0;
     margin-inline-end: 0.25rem;
   }
-
-  .component-summary {
-    margin-block-end: 2rem;
-  }
 }
 
 #content pre:has(code) {

@@ -7,10 +7,13 @@ const translation: Translation = {
   $name: 'Español',
   $dir: 'ltr',
 
+  clearEntry: 'Borrar entrada',
   copied: 'Copiado',
   copyToClipboard: 'Copiar al portapapeles',
   error: 'Error',
-  loading: 'Cargando'
+  hidePassword: 'Ocultar contraseña',
+  loading: 'Cargando',
+  showPassword: 'Mostrar contraseña'
   /* cSpell:enable */
 };
 

@@ -6,10 +6,13 @@ const translation: Translation = {
   $name: 'English',
   $dir: 'ltr',
 
+  clearEntry: 'Clear entry',
   copied: 'Copied',
   copyToClipboard: 'Copy to clipboard',
   error: 'Error',
-  loading: 'Loading'
+  hidePassword: 'Hide password',
+  loading: 'Loading',
+  showPassword: 'Show password'
 };
 
 registerDefaultTranslation(translation);

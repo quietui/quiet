@@ -2,30 +2,29 @@
   <div id="site-search-container">
     {# Header #}
     <header>
-      <div id="site-search-input-wrapper">
-        <quiet-icon name="magnifying-glass"></quiet-icon>
-        <input
-          id="site-search-input"
-          type="search"
-          placeholder="Search"
-          autofocus
-          autocomplete="off"
-          autocorrect="off"
-          autocapitalize="off"
-          enterkeyhint="go"
-          spellcheck="false"
-          maxlength="100"
-          role="combobox"
-          aria-autocomplete="list"
-          aria-expanded="true"
-          aria-controls="site-search-listbox"
-          aria-haspopup="listbox"
-          aria-activedescendant
-        >
-        <quiet-button id="site-search-clear" size="lg" variant="text" icon-label="Clear entry" hidden>
-          <quiet-icon name="x-circle"></quiet-icon>
-        </quiet-button>
-      </div>
+      <quiet-text-field
+        id="site-search-text-field"
+        type="search"
+        variant="unstyled"
+        size="xl"
+        clearable
+        placeholder="Search"
+        autofocus
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="off"
+        enterkeyhint="go"
+        spellcheck="false"
+        maxlength="100"
+        role="combobox"
+        aria-autocomplete="list"
+        aria-expanded="true"
+        aria-controls="site-search-listbox"
+        aria-haspopup="listbox"
+        aria-activedescendant
+      >
+        <quiet-icon slot="start" name="magnifying-glass"></quiet-icon>
+      </quiet-text-field>
     </header>
 
     {# Body #}

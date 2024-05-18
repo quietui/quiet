@@ -3,7 +3,8 @@ document.addEventListener('click', event => {
   const link = event.target.closest('a');
   const id = (link?.hash ?? '').substr(1);
 
-  if (!link || link.getAttribute('data-smooth-link') === 'off') {
+  // If the pathname is different or smooth links are disabled, no need to scroll
+  if (!link || link.pathname !== location.pathname || link.getAttribute('data-smooth-link') === 'off') {
     return;
   }
 

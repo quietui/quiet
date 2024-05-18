@@ -52,6 +52,8 @@
   --quiet-form-control-font-size-lg: 1.25rem;
   --quiet-form-control-font-size-xl: 1.5rem;
 
+  --quiet-form-control-required-content: '*';
+
   /*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //
   //  The color palettes below are generated from the seed colors. The palettes remain static in both light and dark
@@ -151,8 +153,8 @@
   --quiet-primary-text-on-loud: white;
   --quiet-primary-text-colorful: color-mix(in oklab, var(--quiet-primary-600), black 12.5%);
   --quiet-primary-stroke-softer: color-mix(in oklab, var(--quiet-primary-100), black 3%);
-  --quiet-primary-stroke-soft: var(--quiet-primary-200);
-  --quiet-primary-stroke-mid: var(--quiet-primary-400);
+  --quiet-primary-stroke-soft: var(--quiet-primary-300);
+  --quiet-primary-stroke-mid: var(--quiet-primary-500);
 
   /* Secondary */
   --quiet-neutral-fill-softer: var(--quiet-neutral-100);
@@ -165,8 +167,8 @@
   --quiet-neutral-text-on-loud: white;
   --quiet-neutral-text-colorful: color-mix(in oklab, var(--quiet-neutral-600), black 12.5%);
   --quiet-neutral-stroke-softer: color-mix(in oklab, var(--quiet-neutral-100), black 3%);
-  --quiet-neutral-stroke-soft: var(--quiet-neutral-200);
-  --quiet-neutral-stroke-mid: var(--quiet-neutral-400);
+  --quiet-neutral-stroke-soft: var(--quiet-neutral-300);
+  --quiet-neutral-stroke-mid: var(--quiet-neutral-500);
 
   /* Constructive */
   --quiet-constructive-fill-softer: var(--quiet-constructive-100);
@@ -179,8 +181,8 @@
   --quiet-constructive-text-on-loud: white;
   --quiet-constructive-text-colorful: color-mix(in oklab, var(--quiet-constructive-600), black 12.5%);
   --quiet-constructive-stroke-softer: color-mix(in oklab, var(--quiet-constructive-100), black 3%);
-  --quiet-constructive-stroke-soft: var(--quiet-constructive-200);
-  --quiet-constructive-stroke-mid: var(--quiet-constructive-400);
+  --quiet-constructive-stroke-soft: var(--quiet-constructive-300);
+  --quiet-constructive-stroke-mid: var(--quiet-constructive-500);
 
   /* Destructive */
   --quiet-destructive-fill-softer: var(--quiet-destructive-100);
@@ -193,8 +195,8 @@
   --quiet-destructive-text-on-loud: white;
   --quiet-destructive-text-colorful: color-mix(in oklab, var(--quiet-destructive-600), black 12.5%);
   --quiet-destructive-stroke-softer: color-mix(in oklab, var(--quiet-destructive-100), black 3%);
-  --quiet-destructive-stroke-soft: var(--quiet-destructive-200);
-  --quiet-destructive-stroke-mid: var(--quiet-destructive-400);
+  --quiet-destructive-stroke-soft: var(--quiet-destructive-300);
+  --quiet-destructive-stroke-mid: var(--quiet-destructive-500);
 }
 
 /*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

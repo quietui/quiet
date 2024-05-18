@@ -254,7 +254,3 @@ However, these selectors will match even before the user has had a chance to fil
   }
 </style>
 ```
-:valid
-:invalid
-user-valid custom state
-user-invalid custom state

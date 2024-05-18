@@ -11,7 +11,7 @@ Tooltips follow the [ARIA APG](https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/
 ```
 
 :::info
-Due to platform limitations, some Quiet components are treated differently when used as tooltip anchors, but they will still be announced by screen readers.
+Due to platform limitations, some Quiet components are treated differently when used as tooltip anchors, but they will still be announced as expected by screen readers.
 :::
 
 ## Examples

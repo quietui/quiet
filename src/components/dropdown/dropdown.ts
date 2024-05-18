@@ -192,7 +192,7 @@ export class QuietDropdown extends QuietElement {
 
   /** Listen for escape when the menu is open */
   private handleDocumentKeyDown = (event: KeyboardEvent) => {
-    const items = this.getItems();
+    const items = this.getItems().filter(item => !item.disabled);
     const activeItem = items.find(item => item.active);
     const activeItemIndex = activeItem ? items.indexOf(activeItem) : 0;
     const isFocusedOnItem = document.activeElement?.localName === 'quiet-dropdown-item';

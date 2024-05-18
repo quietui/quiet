@@ -5,7 +5,7 @@ layout: page
 section: about
 ---
 
-<a href="https://twitter.com/claviska" data-no-external-icon>
+<a href="https://x.com/claviska" data-no-external-icon>
   <img 
     src="http://0.gravatar.com/avatar/bf1b3b95fd5b096a3592247c29667b33?s=512" 
     alt="Cory's avatar"
@@ -21,7 +21,7 @@ section: about
   >
 </a>
 
-Quiet is maintained by [Cory LaViska](https://twitter.com/claviska), the creator of [Shoelace](https://shoelace.style/). With the success of Shoelace, many of you are probably wondering why I'd choose to build another UI library, and that's a reasonable question.
+Quiet is maintained by [Cory LaViska](https://x.com/claviska), the creator of [Shoelace](https://shoelace.style/). With the success of Shoelace, many of you are probably wondering why I'd choose to build another UI library, and that's a reasonable question.
 
 The truth is, Shoelace has matured a lot over the years. While that's a great thing for its users, as an artist, I've lost my canvas for creativity. I'm still committed to Shoelace and I think it has a very promising future, but I'm no longer in charge of its design or its day to day operations. It has a full team now and we're building a product out of it. It's not my personal playground, anymore.
 
@@ -59,10 +59,10 @@ This is the path forward. Together, we will continue to make accessible software
 
 ## Getting in touch
 
-Please contact me for information about sponsorship perks, consulting, speaking engagements, and more. [My DMs are open on Twitter](https://twitter.com/claviska), or you can find my email address [on this page](https://www.abeautifulsite.net/cv#contact).
+Please contact me for information about sponsorship perks, consulting, speaking engagements, and more. [My DMs are open on Twitter](https://x.com/claviska), or you can find my email address [on this page](https://www.abeautifulsite.net/cv#contact).
 
 ## What's with all the cats?
 
 I'm not really sure. They keep sneaking into the docs. I think they like the logo.
 
-— [Cory LaViska](https://twitter.com/claviska)
+— [Cory LaViska](https://x.com/claviska)

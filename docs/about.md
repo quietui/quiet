@@ -23,7 +23,7 @@ section: about
 
 Quiet is maintained by [Cory LaViska](https://x.com/claviska), the creator of [Shoelace](https://shoelace.style/). With the success of Shoelace, many of you are probably wondering why I'd choose to build another UI library, and that's a reasonable question.
 
-The truth is, Shoelace has matured a lot over the years. While that's a great thing for its users, as an artist, I've lost my canvas for creativity. I'm still committed to Shoelace and I think it has a very promising future, but I'm no longer in charge of its design or its day to day operations. It has a full team now and we're building a product out of it. It's not my personal playground, anymore.
+The truth is, Shoelace has matured a lot over the years. While that's a great thing for its users, as an artist, I've lost my canvas for creativity. I'm still committed to Shoelace and it has a very promising future — it has a full team now and we're building an amazing product out of it. It's not my personal playground, anymore.
 
 **Enter Quiet, my creative outlet.**
 
@@ -43,7 +43,7 @@ But don't be afraid to use it, learn from it, and have fun with it!
 
 ## My commitment to accessibility
 
-I recognize the need for all users, regardless of ability and device, to have undeterred access to the websites and applications that are created with my software. This is an important goal of my projects.
+I recognize the need for all users, regardless of ability or device, to have undeterred access to the websites and applications that are created with my software. This is an important goal of my projects.
 
 Oftentimes, people will ask "is it accessible?" I'm reluctant to answer because accessibility isn't binary — there's no simple "yes" or "no" response to provide. What seems accessible to a sighted user might be completely inaccessible to a non-sighted user. And even if you optimize for various screen readers, you still have to account for low-level vision, color blindness, hearing impairments, mobility impairments, and more.
 

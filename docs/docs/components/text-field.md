@@ -66,12 +66,12 @@ Text fields support more than just text. Use the `type` attribute to change the 
 ></quiet-text-field>
 ```
 
-### Adding icons
+### Start and end content
 
-Use the `start` and `end` slots to add presentational icons. Avoid interactive elements such as buttons, links, etc. For best results, use a [`<quiet-icon>`](/docs/components/icon) or an `<svg>` element.
+Use the `start` and `end` slots to add presentational icons or text. Avoid interactive elements such as buttons, links, etc. For best results, use a [`<quiet-icon>`](/docs/components/icon) or an `<svg>` element.
 
 ```html {.example}
-<quiet-text-field type="email" name="email" label="Email">
+<quiet-text-field name="username" label="Username">
   <quiet-icon slot="start" name="at-symbol"></quiet-icon>
 </quiet-text-field>
 
@@ -79,6 +79,12 @@ Use the `start` and `end` slots to add presentational icons. Avoid interactive e
 
 <quiet-text-field type="search" name="query" label="Search">
   <quiet-icon slot="end" name="magnifying-glass"></quiet-icon>
+</quiet-text-field>
+
+<br>
+
+<quiet-text-field name="domain" label="Domain">
+  <span slot="start">https://</span>
 </quiet-text-field>
 ```
 

@@ -238,9 +238,11 @@ export class QuietTextField extends QuietElement {
   }
 
   private handleBoxPointerDown(event: PointerEvent) {
-    // The box is decorated to look like the input, so clicking anywhere on it should focus the input. However, we
-    // only want to do this when the target isn't another element.
-    if (event.eventPhase === event.AT_TARGET) {
+    const target = event.target as HTMLElement;
+    const isBox = target?.id === 'box';
+    const isSlot = target.hasAttribute('slot');
+
+    if (isBox || isSlot) {
       event.preventDefault();
       this.input.focus();
     }
@@ -253,6 +255,7 @@ export class QuietTextField extends QuietElement {
 
   private handleClearClick() {
     this.value = '';
+    this.input.focus();
     this.dispatchEvent(new QuietInputEvent());
   }
 
@@ -297,6 +300,7 @@ export class QuietTextField extends QuietElement {
 
   private handlePasswordToggleClick() {
     this.isPasswordVisible = !this.isPasswordVisible;
+    this.input.focus();
   }
 
   /** Sets the form control's validity */

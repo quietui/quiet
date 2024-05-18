@@ -22,7 +22,6 @@ export default css`
     user-select: none;
     padding: 0.25rem;
     margin: 0;
-    transform-origin: top left;
 
     &.visible {
       display: flex;

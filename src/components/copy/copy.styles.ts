@@ -31,7 +31,7 @@ export default css`
     }
   }
 
-  :host([feedback-placement='top']) #feedback {
+  #feedback[data-placement="top"] {
     --translate-x-start: 0;
     --translate-x-end: 0;
     --translate-y-start: -0.25rem;
@@ -39,7 +39,7 @@ export default css`
     translate: 0 0;
   }
 
-  :host([feedback-placement='right']) #feedback {
+  #feedback[data-placement="right"] {
     --translate-x-start: 0.25rem;
     --translate-x-end: 0.75rem;
     --translate-y-start: 0;
@@ -47,7 +47,7 @@ export default css`
     translate: 0 0;
   }
 
-  :host([feedback-placement='bottom']) #feedback {
+  #feedback[data-placement="bottom"] {
     --translate-x-start: 0;
     --translate-x-end: 0;
     --translate-y-start: 0.25rem;
@@ -55,7 +55,7 @@ export default css`
     translate: 0 0;
   }
 
-  :host([feedback-placement='left']) #feedback {
+  #feedback[data-placement="left"] {
     --translate-x-start: -0.25rem;
     --translate-x-end: -0.75rem;
     --translate-y-start: 0;

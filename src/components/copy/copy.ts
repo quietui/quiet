@@ -125,7 +125,14 @@ export class QuietCopy extends QuietElement {
         </quiet-button>
       </slot>
 
-      <div part="feedback" id="feedback" popover="manual" aria-live="polite" hidden></div>
+      <div
+        part="feedback"
+        id="feedback"
+        data-placement=${this.feedbackPlacement}
+        popover="manual"
+        aria-live="polite"
+        hidden
+      ></div>
     `;
   }
 }

@@ -15,7 +15,7 @@ export default css`
     left: 0;
     width: max-content;
     color: var(--quiet-neutral-text-on-soft);
-    background: var(--quiet-paper-color);
+    background-color: var(--quiet-paper-color);
     border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
     border-radius: var(--quiet-border-radius);
     box-shadow: var(--quiet-shadow-mid);

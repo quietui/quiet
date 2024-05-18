@@ -20,6 +20,7 @@ export default css`
     display: none;
     position: absolute;
     width: max-content;
+    background: none;
     max-width: var(--max-width);
     top: 0;
     left: 0;

@@ -33,7 +33,10 @@
   {# Slots #}
   {% if component.slots.length %}
     <h2>Slots</h2>
-
+    <p>
+      This component supports the following slots.
+      <a href="/docs/using-web-components/#slots">Learn more about using slots</a>
+    </p>
     <div class="table-scroll">
       <table class="component-table">
         <thead>
@@ -63,7 +66,12 @@
   {# Properties #}
   {% if component.properties.length %}
     <h2>Properties</h2>
-
+    <p>
+      This component has the following properties that can be set with corresponding attributes. In many cases, the
+      attribute's name is the same as the property's name. If an attribute is different, it will be displayed after the
+      property.
+      <a href="/docs/using-web-components/#attributes-and-properties">Learn more about attributes and properties</a>
+    </p>
     <div class="table-scroll">
       <table class="component-table">
         <thead>
@@ -114,6 +122,10 @@
   {# Methods #}
   {% if component.methods.length %}
     <h2>Methods</h2>
+    <p>
+      This component supports the following methods. You can obtain a reference to the element and call them like
+      functions in JavaScript. <a href="/docs/using-web-components/#methods">Learn more about methods</a>
+    </p>
     <div class="table-scroll">
       <table class="component-table">
         <thead>
@@ -147,7 +159,10 @@
   {# Events #}
   {% if component.events.length %}
     <h2>Events</h2>
-
+    <p>
+      This component dispathces the following custom events. You can listen to them the same way was native events.
+      <a href="/docs/using-web-components/#events">Learn more about custom events</a>
+    </p>
     <div class="table-scroll">
       <table class="component-table">
         <thead>
@@ -173,6 +188,10 @@
   {# Custom States #}
   {% if component.cssStates.length %}
     <h2>Custom States</h2>
+    <p>
+      This component has the following custom states. You can target them with CSS using the selectors shown below.
+      <a href="/docs/using-web-components/#custom-states">Learn more about custom states</a>
+    </p>
     <div class="table-scroll">
       <table class="component-table">
         <thead>
@@ -198,7 +217,10 @@
   {# Custom Properties #}
   {% if component.cssProperties.length %}
     <h2>CSS custom properties</h2>
-
+    <p>
+      This component supports the following CSS custom properties. You can style them like any other CSS property.
+      <a href="/docs/using-web-components/#css-custom-properties">Learn more about CSS custom properties</a>
+    </p>
     <div class="table-scroll">
       <table class="component-table">
         <thead>
@@ -228,7 +250,10 @@
   {# CSS Parts #}
   {% if component.cssParts.length %}
     <h2>CSS parts</h2>
-
+    <p>
+      This component exposes internal elements that can be styled with CSS using the selectors shown below.
+      <a href="/docs/using-web-components/#css-parts">Learn more about CSS parts</a>
+    </p>
     <div class="table-scroll">
       <table class="component-table">
         <thead>
@@ -257,7 +282,6 @@
     <p>
       This component automatically imports the following elements. If any subdependencies exist, they will also be included in this list.
     </p>
-
     <ul class="dependency-list">
       {% for dependency in component.dependencies %}
         <li><a href="/docs/components/{{ dependency | stripQuietPrefix }}"><code>&lt;{{ dependency }}&gt;</code></a></li>
@@ -270,7 +294,6 @@
   <p>
     The <a href="/docs/#autoloading">autoloader</a> is the recommended way to import components. If you prefer to do it manually, use one of the following code snippets.
   </p>
-
   <quiet-tab-list label="How would you like to import this component?">
     <quiet-tab slot="tab" panel="cdn">CDN</quiet-tab>
     <quiet-tab slot="tab" panel="npm">npm</quiet-tab>

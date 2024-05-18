@@ -85,7 +85,7 @@ The default slot is almost any content inside the component. In this example, we
 </quiet-button>
 ```
 
-However, some components also have _named slots_. To insert content into a named slot, use the `slot` attribute. The position of the slotted content doesn't matter, as long as it's a top-level child of the host element. The component will automatically render the slotted content in the correct location.
+However, some components also have _named slots_. To insert content into a named slot, add the `slot` attribute to any ==top-level child element== of the component. The position of the slotted content doesn't matter, as long as it's not nested within another element. The component will automatically render the slotted content in the correct location.
 
 ```html {.example .no-buttons}
 <quiet-button>
@@ -99,7 +99,7 @@ However, some components also have _named slots_. To insert content into a named
 </quiet-button>
 ```
 
-You can insert more than one item into a named slot. This card has a `footer` slot that houses two buttons. The text node remains in the default slot.
+You can insert more than one item into a named slot. For example, this card has a `footer` slot that houses two buttons. The text node remains in the default slot.
 
 ```html {.example .no-buttons}
 <quiet-card with-footer style="max-width: 340px;">

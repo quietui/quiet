@@ -30,9 +30,11 @@
 
 {# Component API #}
 {% block afterContent %}
+  <h2>API</h2>
+
   {# Slots #}
   {% if component.slots.length %}
-    <h2>Slots</h2>
+    <h3>Slots</h3>
     <p>
       This component supports the following slots.
       <a href="/docs/using-web-components/#slots">Learn more about using slots</a>
@@ -65,7 +67,7 @@
 
   {# Properties #}
   {% if component.properties.length %}
-    <h2>Properties</h2>
+    <h3>Properties</h3>
     <p>
       This component has the following properties that can be set with corresponding attributes. In many cases, the
       attribute's name is the same as the property's name. If an attribute is different, it will be displayed after the
@@ -121,7 +123,7 @@
 
   {# Methods #}
   {% if component.methods.length %}
-    <h2>Methods</h2>
+    <h3>Methods</h3>
     <p>
       This component supports the following methods. You can obtain a reference to the element and call them like
       functions in JavaScript. <a href="/docs/using-web-components/#methods">Learn more about methods</a>
@@ -158,7 +160,7 @@
 
   {# Events #}
   {% if component.events.length %}
-    <h2>Events</h2>
+    <h3>Events</h3>
     <p>
       This component dispathces the following custom events. You can listen to them the same way was native events.
       <a href="/docs/using-web-components/#events">Learn more about custom events</a>
@@ -187,7 +189,7 @@
 
   {# Custom States #}
   {% if component.cssStates.length %}
-    <h2>Custom States</h2>
+    <h3>Custom States</h3>
     <p>
       This component has the following custom states. You can target them with CSS using the selectors shown below.
       <a href="/docs/using-web-components/#custom-states">Learn more about custom states</a>
@@ -216,7 +218,7 @@
 
   {# Custom Properties #}
   {% if component.cssProperties.length %}
-    <h2>CSS custom properties</h2>
+    <h3>CSS custom properties</h3>
     <p>
       This component supports the following CSS custom properties. You can style them like any other CSS property.
       <a href="/docs/using-web-components/#css-custom-properties">Learn more about CSS custom properties</a>
@@ -249,7 +251,7 @@
 
   {# CSS Parts #}
   {% if component.cssParts.length %}
-    <h2>CSS parts</h2>
+    <h3>CSS parts</h3>
     <p>
       This component exposes internal elements that can be styled with CSS using the selectors shown below.
       <a href="/docs/using-web-components/#css-parts">Learn more about CSS parts</a>
@@ -278,7 +280,7 @@
 
   {# Dependencies #}
   {% if component.dependencies.length %}
-    <h2>Dependencies</h2>
+    <h3>Dependencies</h3>
     <p>
       This component automatically imports the following elements. If any subdependencies exist, they will also be included in this list.
     </p>
@@ -290,7 +292,7 @@
   {% endif %}
 
   {# Importing #}
-  <h2>Importing</h2>
+  <h3>Importing</h3>
   <p>
     The <a href="/docs/#autoloading">autoloader</a> is the recommended way to import components. If you prefer to do it manually, use one of the following code snippets.
   </p>

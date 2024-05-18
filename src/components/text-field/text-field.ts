@@ -27,7 +27,8 @@ import type { CSSResultGroup } from 'lit';
  * @slot start - An icon or similar element to place before the label. Works great with `<quiet-icon>`.
  * @slot end - An icon or similar element to place after the label. Works great with `<quiet-icon>`.
  *
- * @prop {string} form - If the text field is located outside of a form...
+ * @prop {string} form - If the text field is located outside of a form, you can associate it by setting this to the
+ *  form's `id`.
  *
  * @event quiet-blur - Emitted when the text field loses focus. This event does not bubble.
  * @event quiet-change - Emitted when the user commits changes to the text field's value.
@@ -345,6 +346,32 @@ export class QuietTextField extends QuietElement {
    */
   public reportValidity() {
     return this.internals.reportValidity();
+  }
+
+  /** Selects all text in the text field. */
+  select() {
+    this.input.select();
+  }
+
+  /** Sets the start and end positions of the current text selection in the text field. */
+  setSelectionRange(start: number, end: number, direction: 'forward' | 'backward' | 'none' = 'none') {
+    this.input.setSelectionRange(start, end, direction);
+  }
+
+  /** Replaces a range of text in the text field with a new string. */
+  setRangeText(
+    replacement: string,
+    start?: number,
+    end?: number,
+    selectMode?: 'select' | 'start' | 'end' | 'preserve'
+  ) {
+    this.input.setRangeText(
+      replacement,
+      start ?? this.input.selectionStart!,
+      end ?? this.input.selectionEnd!,
+      selectMode
+    );
+    this.value = this.input.value;
   }
 
   /** For types that support a picker, such as color and date selectors, this will cause the picker to show. */

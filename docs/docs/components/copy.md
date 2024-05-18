@@ -40,11 +40,13 @@ If your button only has an icon, be sure to add an accessible label with `aria-l
 
 ### Feedback placement
 
-Copy feedback shows above the button by default. Set the `feedback-placement` attribute to `bottom` to show it below instead.
+Copy feedback shows above the button by default. Use the `feedback-placement` attribute to change where it gets shown. To hide the feedback, set it to `hidden`.
 
 ```html {.example}
 <quiet-copy data="Top feedback"></quiet-copy>
 <quiet-copy feedback-placement="bottom" data="Bottom feedback"></quiet-copy>
+<quiet-copy feedback-placement="left" data="Left feedback"></quiet-copy>
+<quiet-copy feedback-placement="right" data="Right feedback"></quiet-copy>
 ```
 
 ### Copying HTML content

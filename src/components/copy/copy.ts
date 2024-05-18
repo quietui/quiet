@@ -1,6 +1,7 @@
 import '../button/button.js';
 import '../icon/icon.js';
 import { animateWithClass } from '../../utilities/animate.js';
+import { computePosition } from '@floating-ui/dom';
 import { customElement, property, query } from 'lit/decorators.js';
 import { html } from 'lit';
 import { Localize } from '../../utilities/localize.js';
@@ -39,13 +40,18 @@ export class QuietCopy extends QuietElement {
 
   private localize = new Localize(this);
 
-  @query('.feedback') private feedback: HTMLSlotElement;
+  @query('#feedback') private feedback: HTMLSlotElement;
 
   /** The text content that will be copied to the clipboard. */
   @property() data: string | ClipboardItem[] = '';
 
   /** The placement of the feedback animation. */
-  @property({ attribute: 'feedback-placement', reflect: true }) feedbackPlacement: 'top' | 'bottom' | 'hidden' = 'top';
+  @property({ attribute: 'feedback-placement', reflect: true }) feedbackPlacement:
+    | 'top'
+    | 'right'
+    | 'bottom'
+    | 'left'
+    | 'hidden' = 'top';
 
   private async handleClick(event: PointerEvent) {
     event.preventDefault();
@@ -74,27 +80,36 @@ export class QuietCopy extends QuietElement {
       }
 
       this.dispatchEvent(new QuietCopiedEvent({ data: this.data }));
-
-      if (this.feedbackPlacement !== 'hidden') {
-        this.showFeedback(this.localize.term('copied'));
-      }
+      this.showFeedback(this.localize.term('copied'));
     } catch (error) {
       this.dispatchEvent(new QuietCopyErrorEvent({ error: error as Error }));
-
-      if (this.feedbackPlacement !== 'hidden') {
-        this.showFeedback(this.localize.term('error'));
-      }
+      this.showFeedback(this.localize.term('error'));
     }
   }
 
   /** Shows copy feedback with an animation */
   private async showFeedback(message: string) {
+    if (this.feedbackPlacement === 'hidden') {
+      return;
+    }
+
     this.feedback.textContent = message;
     this.feedback.hidden = false;
-    this.feedback.style.left = `calc(50% - ${this.feedback.offsetWidth}px / 2)`;
+    this.feedback.showPopover();
+
+    computePosition(this, this.feedback, {
+      placement: this.feedbackPlacement
+    }).then(({ x, y }) => {
+      // Position it
+      Object.assign(this.feedback.style, {
+        left: `${x}px`,
+        top: `${y}px`
+      });
+    });
 
     await animateWithClass(this.feedback, 'show');
     this.feedback.hidden = true;
+    this.feedback.hidePopover();
   }
 
   render() {
@@ -110,7 +125,7 @@ export class QuietCopy extends QuietElement {
         </quiet-button>
       </slot>
 
-      <div part="feedback" class="feedback" aria-live="polite" hidden></div>
+      <div part="feedback" id="feedback" popover="manual" aria-live="polite" hidden></div>
     `;
   }
 }

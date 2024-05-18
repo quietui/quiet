@@ -422,6 +422,10 @@ h6 {
 }
 
 /* Anchor headings */
+.anchor-heading {
+  max-width: fit-content;
+}
+
 .anchor-heading a {
   visibility: hidden;
   text-decoration: none;

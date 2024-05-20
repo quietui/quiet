@@ -106,14 +106,6 @@ Text fields can be rendered with pill-shaped edges by adding the `pill` attribut
 <quiet-text-field pill label="Pill-shaped"></quiet-text-field>
 ```
 
-### Disabling text fields
-
-Use the `disabled` attribute to disable the text field.
-
-```html {.example}
-<quiet-text-field label="Disabled" disabled></quiet-text-field>
-```
-
 ### Adding a clear button
 
 To add a clear button to the text field, use the `clearable` attribute. The `quiet-input` event will be emitted when the clear button is activated.
@@ -125,6 +117,14 @@ To add a clear button to the text field, use the `clearable` attribute. The `qui
   value="Bobby McGee"
   clearable
 ></quiet-text-field>
+```
+
+### Disabling text fields
+
+Use the `disabled` attribute to disable the text field.
+
+```html {.example}
+<quiet-text-field label="Disabled" disabled></quiet-text-field>
 ```
 
 ### Showing labels on the side
@@ -165,8 +165,6 @@ With a bit of custom CSS, you can show labels on the side instead of on top of t
 
 A number of attributes can be used to enable client-side validation using the [Constraint Validation API](https://developer.mozilla.org/en-US/docs/Web/HTML/Constraint_validation). These include `required`, `pattern`, `minlength`, `maxlength`, `min`, `max`, and `step`. They work exactly like their native counterparts.
 
-In addition, you can set a custom error message with the `custom-validity` attribute. To clear a custom error, remove the attribute or set it to an empty string.
-
 ```html {.example}
 <form action="about:blank" method="get" target="_blank">
   <quiet-text-field name="required" label="Required" required></quiet-text-field><br>
@@ -177,10 +175,6 @@ In addition, you can set a custom error message with the `custom-validity` attri
   <quiet-button type="reset">Reset</quiet-button>
 </form>
 ```
-
-:::info
-Most validation attributes work exactly like their native counterparts. However, the `custom-validity` attribute is offered in lieu of a `setCustomValidity()` method. This allows you to declaratively set custom errors instead of having to call a method with JavaScript.
-:::
 
 ### Using custom validation
 
@@ -198,6 +192,11 @@ Use the `custom-validity` attribute to make the text field invalid and show a cu
   <quiet-button type="submit" variant="primary">Submit</quiet-button>
 </form>
 ```
+
+:::info
+Most validation attributes work exactly like their native counterparts. However, the `custom-validity` attribute is offered in lieu of a `setCustomValidity()` method. This allows you to declaratively set custom errors instead of having to call a method with JavaScript.
+:::
+
 
 ### Styling validation
 

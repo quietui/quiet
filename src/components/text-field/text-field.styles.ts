@@ -184,6 +184,11 @@ export default css`
     padding: 0;
     margin: 0;
     cursor: pointer;
+    transition: 100ms color ease;
+
+    &:active {
+      translate: 0 1px;
+    }
   }
 
   #description {

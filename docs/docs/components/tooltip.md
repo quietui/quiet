@@ -21,13 +21,13 @@ Due to platform limitations, some Quiet components are treated differently when 
 Tooltip anchors must be interactive/focusable elements such as buttons, links, etc. Use the `for` attribute on the tooltip to link it to the anchor's `id`. Do not include interactive elements _inside_ your tooltips, as they won't be accessible to users.
 
 ```html {.example}
-<button id="tooltip__anchor-button">Button with tooltip</button>
-<quiet-tooltip for="tooltip__anchor-button">Native button tooltip</quiet-tooltip>
+<quiet-button id="tooltip__anchor-button">Button with tooltip</quiet-button>
+<quiet-tooltip for="tooltip__anchor-button">Button tooltip</quiet-tooltip>
 
 <br><br>
 
-<input placeholder="Input with tooltip" id="tooltip__anchor-input">
-<quiet-tooltip for="tooltip__anchor-input">Native input tooltip</quiet-tooltip>
+<button id="tooltip__anchor-native-button">Native button with tooltip</button>
+<quiet-tooltip for="tooltip__anchor-native-button">Native button tooltip</quiet-tooltip>
 
 <br><br>
 

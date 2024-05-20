@@ -33,18 +33,6 @@ Use the `value` attribute to provide an initial value for the text field.
 <quiet-text-field name="name" label="Name" value="Bobby McGee"></quiet-text-field>
 ```
 
-### Changing the size
-
-Use the `size` attribute to change the text field's size.
-
-```html {.example}
-<quiet-text-field size="xs" label="Extra small"></quiet-text-field><br>
-<quiet-text-field size="sm" label="Small"></quiet-text-field><br>
-<quiet-text-field size="md" label="Medium"></quiet-text-field><br>
-<quiet-text-field size="lg" label="Large"></quiet-text-field><br>
-<quiet-text-field size="xl" label="Extra large"></quiet-text-field>
-```
-
 ### Changing the type
 
 Text fields support more than just text. Use the `type` attribute to change the type of input they accept.
@@ -58,11 +46,26 @@ Text fields support more than just text. Use the `type` attribute to change the 
 
 ### Adding a placeholder
 
+Use the `placeholder` attribute to show a placeholder in the text field when it's empty.
+
 ```html {.example}
 <quiet-text-field 
   type="email"
   label="Email"
   placeholder="you@example.com"
+></quiet-text-field>
+```
+
+### Adding a clear button
+
+To add a clear button to the text field, use the `clearable` attribute. The `quiet-input` event will be emitted when the clear button is activated.
+
+```html {.example}
+<quiet-text-field 
+  name="name" 
+  label="Name" 
+  value="Bobby McGee"
+  clearable
 ></quiet-text-field>
 ```
 
@@ -106,17 +109,16 @@ Text fields can be rendered with pill-shaped edges by adding the `pill` attribut
 <quiet-text-field pill label="Pill-shaped"></quiet-text-field>
 ```
 
-### Adding a clear button
+### Changing the size
 
-To add a clear button to the text field, use the `clearable` attribute. The `quiet-input` event will be emitted when the clear button is activated.
+Use the `size` attribute to change the text field's size.
 
 ```html {.example}
-<quiet-text-field 
-  name="name" 
-  label="Name" 
-  value="Bobby McGee"
-  clearable
-></quiet-text-field>
+<quiet-text-field size="xs" label="Extra small"></quiet-text-field><br>
+<quiet-text-field size="sm" label="Small"></quiet-text-field><br>
+<quiet-text-field size="md" label="Medium"></quiet-text-field><br>
+<quiet-text-field size="lg" label="Large"></quiet-text-field><br>
+<quiet-text-field size="xl" label="Extra large"></quiet-text-field>
 ```
 
 ### Disabling text fields

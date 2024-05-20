@@ -16,7 +16,7 @@ layout: component
   </quiet-button>
 </quiet-dialog>
 
-<quiet-button variant="primary">Show dialog</quiet-button>
+<quiet-button>Show dialog</quiet-button>
 
 <script>
   const dialog = document.getElementById('overview__dialog');
@@ -43,7 +43,7 @@ Add the `with-header` attribute and place elements into the `header` slot to add
   Lorem dolor sed viverra ipsum. Nisl rhoncus mattis rhoncus urna neque viverra justo nec.
 </quiet-dialog>
 
-<quiet-button variant="primary">Show dialog</quiet-button>
+<quiet-button>Show dialog</quiet-button>
 
 <script>
   const dialog = document.getElementById('header__dialog');
@@ -68,7 +68,7 @@ Add the `with-footer` attribute and place elements into the `footer` slot to add
   </quiet-button>
 </quiet-dialog>
 
-<quiet-button variant="primary">Show dialog</quiet-button>
+<quiet-button>Show dialog</quiet-button>
 
 <script>
   const dialog = document.getElementById('footer__dialog');
@@ -97,7 +97,7 @@ You can dismiss the dialog programmatically by setting the `open` property to `f
   </quiet-button>
 </quiet-dialog>
 
-<quiet-button variant="primary">Show dialog</quiet-button>
+<quiet-button>Show dialog</quiet-button>
 
 <script>
   const dialog = document.getElementById('dismissing__dialog');
@@ -126,7 +126,7 @@ When clicking outside of a dialog, it will normally pulse briefly to draw the us
   </quiet-button>
 </quiet-dialog>
 
-<quiet-button variant="primary">Show dialog</quiet-button>
+<quiet-button>Show dialog</quiet-button>
 
 <script>
   const dialog = document.getElementById('light__dialog');
@@ -163,7 +163,7 @@ By default, a close button is provided as a single action in the dialog's header
   </quiet-button>
 </quiet-dialog>
 
-<quiet-button variant="primary">Show dialog</quiet-button>
+<quiet-button>Show dialog</quiet-button>
 
 <script>
   const dialog = document.getElementById('customizing__dialog');
@@ -236,7 +236,7 @@ The `--width` and `--height` custom properties control the default width and hei
   </quiet-button>
 </quiet-dialog>
 
-<quiet-button variant="primary">Show dialog</quiet-button>
+<quiet-button>Show dialog</quiet-button>
 
 <script>
   const dialog = document.getElementById('width__dialog');
@@ -271,7 +271,7 @@ Dialogs with overflowing content will expand as the viewport allows before scrol
   </quiet-button>
 </quiet-dialog>
 
-<quiet-button variant="primary">Show dialog</quiet-button>
+<quiet-button>Show dialog</quiet-button>
 
 <script>
   const dialog = document.getElementById('scrolling__dialog');
@@ -293,13 +293,12 @@ To move focus to a specific form control when the dialog opens, use the [`autofo
     Lorem ipsum
   </h3>
 
-  <!-- TODO - replace with <quiet-input> and make sure autofocus works correctly -->
-  <input autofocus placeholder="Replace me soon" style="display: block; width: 100%; background: white; border: solid 1px lightgray; height: 50px; border-radius: var(--quiet-border-radius); padding-inline: 1rem;">
+  <quiet-text-field autofocus placeholder="Enter something"></quiet-text-field>
 
   <quiet-button slot="footer" data-dialog="dismiss" variant="primary">Close</quiet-button>
 </quiet-dialog>
 
-<quiet-button variant="primary">Show dialog</quiet-button>
+<quiet-button>Show dialog</quiet-button>
 
 <script>
   const dialog = document.getElementById('focus__dialog');
@@ -338,7 +337,7 @@ You can check `event.detail.source` to see which element triggered the dialog to
   </quiet-button>
 </quiet-dialog>
 
-<quiet-button variant="primary">Show dialog</quiet-button>
+<quiet-button>Show dialog</quiet-button>
 
 <script>
   const dialog = document.getElementById('prevent__dialog');

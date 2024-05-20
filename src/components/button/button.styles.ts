@@ -112,8 +112,7 @@ export default css`
     }
 
     /* Toggle button indicators */
-    &[aria-pressed]::after {
-      content: '';
+    #toggle-indicator {
       position: absolute;
       bottom: 0.25em;
       left: calc(50% - 0.375em);
@@ -124,7 +123,7 @@ export default css`
       opacity: 0.15;
     }
 
-    &[aria-pressed='true']::after {
+    &[aria-pressed='true'] #toggle-indicator {
       opacity: 1;
     }
 

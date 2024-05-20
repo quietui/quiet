@@ -34,6 +34,7 @@ import type { CSSResultGroup } from 'lit';
  *  applied.
  * @csspart caret - The caret icon, a `<quiet-icon>` element. Only present with the `with-caret` attribute.
  * @csspart spinner - The loading indicator, a `<quiet-spinner>` element. Only present with the `loading` attribute.
+ * @csspart toggle-indicator - When the button is a toggle button, this is the indicator that shows the current state.
  *
  * @dependency quiet-icon
  * @dependency quiet-spinner
@@ -245,6 +246,7 @@ export class QuietButton extends QuietElement {
         <slot></slot>
         <slot name="end"></slot>
         ${this.withCaret ? html`<quiet-icon part="caret" class="caret" slot="end" name="chevron-down" library="system"></quiet-icon>` : ''}
+        ${isToggle ? html`<span part="toggle-indicator" id="toggle-indicator"></span>` : ''}
         ${isLoading ? html`<quiet-spinner part="spinner" class="spinner"></quiet-spinner>` : ''}
       </${tag}>
     `;

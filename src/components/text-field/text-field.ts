@@ -352,11 +352,6 @@ export class QuietTextField extends QuietElement {
     return this.internals.reportValidity();
   }
 
-  /** Returns the form that's associated with the text field, or null if one doesn't exist. */
-  public getForm() {
-    return this.associatedForm;
-  }
-
   /** Selects all text in the text field. */
   public select() {
     this.input.select();

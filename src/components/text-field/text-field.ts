@@ -352,18 +352,23 @@ export class QuietTextField extends QuietElement {
     return this.internals.reportValidity();
   }
 
+  /** Returns the form that's associated with the text field, or null if one doesn't exist. */
+  public getForm() {
+    return this.associatedForm;
+  }
+
   /** Selects all text in the text field. */
-  select() {
+  public select() {
     this.input.select();
   }
 
   /** Sets the start and end positions of the current text selection in the text field. */
-  setSelectionRange(start: number, end: number, direction: 'forward' | 'backward' | 'none' = 'none') {
+  public setSelectionRange(start: number, end: number, direction: 'forward' | 'backward' | 'none' = 'none') {
     this.input.setSelectionRange(start, end, direction);
   }
 
   /** Replaces a range of text in the text field with a new string. */
-  setRangeText(
+  public setRangeText(
     replacement: string,
     start?: number,
     end?: number,
@@ -404,6 +409,10 @@ export class QuietTextField extends QuietElement {
       <label part="label" id="label" for="text-field">
         <slot name="label">${this.label}</slot>
       </label>
+
+      <div part="description" id="description">
+        <slot name="description">${this.description}</slot>
+      </div>
 
       <div
         part="box"
@@ -495,10 +504,6 @@ export class QuietTextField extends QuietElement {
           : ''}
 
         <slot name="end"></slot>
-      </div>
-
-      <div part="description" id="description">
-        <slot name="description">${this.description}</slot>
       </div>
     `;
   }

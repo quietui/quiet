@@ -1,5 +1,5 @@
 /** Emitted when the element is clicked. */
-export class QuietClickEvent extends Event {
+export class QuietClickEvent extends PointerEvent {
   constructor() {
     super('quiet-click', { bubbles: true, cancelable: false, composed: true });
   }

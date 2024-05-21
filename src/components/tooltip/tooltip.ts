@@ -31,7 +31,7 @@ const openTooltips = new Set<QuietTooltip>();
  * @csspart content - The element that wraps the tooltip's content.
  * @csspart arrow - The tooltip's arrow. To change the arrow's size, use `--arrow-size` instead.
  *
- * @cssproperty [--arrow-size=0.3125rem] - The maximum width the tooltip can be before wrapping.
+ * @cssproperty [--arrow-size=0.3125rem] - The size of the arrow. Set this to `0` to hide the arrow.
  * @cssproperty [--max-width=20rem] - The maximum width the tooltip can be before wrapping.
  * @cssproperty [--show-duration=50ms] - The duration of the show/hide animation.
  */

@@ -99,7 +99,7 @@ Use the `--max-width` custom property to change the maximum width of the tooltip
 
 ```html {.example}
 <quiet-button id="tooltip__max-width">Hover over me</quiet-button>
-<quiet-tooltip for="tooltip__max-width">
+<quiet-tooltip for="tooltip__max-width" style="--max-width: 160px;">
   I'm a tooltip with a lot of content. So much, in fact, that it will wrap to the next line.
 </quiet-tooltip>
 ```

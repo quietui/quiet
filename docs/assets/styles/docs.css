@@ -866,9 +866,16 @@ quiet-callout {
 }
 
 /* Tables */
-.table-checkmark svg {
-  width: 1em;
-  height: 1em;
+.table-reflects {
+  text-align: center;
+
+  [name='check'] {
+    color: var(--quiet-constructive-text-colorful);
+  }
+
+  [name='x-mark'] {
+    color: var(--quiet-destructive-text-colorful);
+  }
 }
 
 .table-scroll {

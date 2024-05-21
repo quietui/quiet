@@ -99,9 +99,11 @@
               <td class="table-description">
                 {{ prop.description | inlineMarkdown | safe }}
               </td>
-              <td class="table-checkmark">
+              <td class="table-reflects">
                 {% if prop.reflects %}
                   <quiet-icon name="check"></quiet-icon>
+                {% else %}
+                  <quiet-icon name="x-mark"></quiet-icon>
                 {% endif %}
               </td>
               <td class="table-type">

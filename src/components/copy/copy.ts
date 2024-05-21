@@ -1,7 +1,7 @@
 import '../button/button.js';
 import '../icon/icon.js';
 import { animateWithClass } from '../../utilities/animate.js';
-import { computePosition } from '@floating-ui/dom';
+import { computePosition, flip } from '@floating-ui/dom';
 import { customElement, property, query } from 'lit/decorators.js';
 import { html } from 'lit';
 import { Localize } from '../../utilities/localize.js';
@@ -94,7 +94,8 @@ export class QuietCopy extends QuietElement {
     this.feedback.showPopover();
 
     computePosition(this, this.feedback, {
-      placement: this.feedbackPlacement
+      placement: this.feedbackPlacement,
+      middleware: [flip()]
     }).then(({ x, y }) => {
       // Position it
       Object.assign(this.feedback.style, {

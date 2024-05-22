@@ -95,7 +95,7 @@ export default css`
 
     #text-area {
       min-height: var(--quiet-form-control-height-sm);
-      padding-block: 0.325em;
+      padding-block: 0.35em;
     }
   }
 
@@ -104,7 +104,7 @@ export default css`
 
     #text-area {
       min-height: var(--quiet-form-control-height-md);
-      padding-block: 0.65em;
+      padding-block: 0.7em;
     }
   }
 
@@ -122,7 +122,7 @@ export default css`
 
     #text-area {
       min-height: var(--quiet-form-control-height-xl);
-      padding-block: 0.5em;
+      padding-block: 0.55em;
     }
   }
 

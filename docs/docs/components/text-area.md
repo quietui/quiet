@@ -4,7 +4,7 @@ layout: component
 ---
 
 ```html {.example}
-<quiet-text-area label="Comments"></quiet-text-area>
+<quiet-text-area name="feedback" label="Feedback"></quiet-text-area>
 ```
 
 ## Examples
@@ -14,7 +14,7 @@ layout: component
 You can use the `label` and `description` attributes to provide plain text labels and descriptions for the text area. If you want to provide HTML, use the `label` and `description` slots instead.
 
 ```html {.example}
-<quiet-text-area label="Comments">
+<quiet-text-area name="feedback" label="Feedback">
   <span slot="description">
     For more information, <a href="https://example.com/" target="_blank">visit our website</a>.
   </span>
@@ -35,6 +35,7 @@ Use the `placeholder` attribute to show a placeholder in the text area when it's
 
 ```html {.example}
 <quiet-text-area 
+  name="bio"
   label="Biography"
   placeholder="Tell us about yourself"
 ></quiet-text-area>
@@ -162,8 +163,8 @@ You can style valid and invalid text area using the `:valid` and `:invalid` pseu
 ```html {.example}
 <form action="about:blank" method="get" target="_blank" class="text-area__validation-pseudo">
   <quiet-text-area 
-    name="comment"
-    label="Comment"
+    name="feedback"
+    label="Feedback"
     description="This field is required"
     required
   ></quiet-text-area>
@@ -192,8 +193,8 @@ However, these selectors will match even before the user has had a chance to fil
 ```html {.example}
 <form action="about:blank" method="get" target="_blank" class="text-area__validation-custom">
   <quiet-text-area 
-    name="comment"
-    label="Comment"
+    name="feedback"
+    label="Feedback"
     description="This field is required"
     required
   ></quiet-text-area>

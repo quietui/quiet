@@ -17,7 +17,9 @@ You can use the `label` and `description` attributes to provide plain text label
 
 ```html {.example}
 <quiet-text-field name="name" label="Name">
-  <span slot="description">For help with this form, <a href="https://example.com/" target="_blank">visit our website</a>.</span>
+  <span slot="description">
+    For more information, <a href="https://example.com/" target="_blank">visit our website</a>.
+  </span>
 </quiet-text-field>
 ```
 
@@ -162,7 +164,7 @@ With a bit of custom CSS, you can show labels on the side instead of on top of t
 
 ### Validating text fields
 
-A number of attributes can be used to enable client-side validation using the [Constraint Validation API](https://developer.mozilla.org/en-US/docs/Web/HTML/Constraint_validation). These include `required`, `pattern`, `minlength`, `maxlength`, `min`, `max`, and `step`. They work exactly like their native counterparts.
+A number of attributes can be used to enable validation using the [Constraint Validation API](https://developer.mozilla.org/en-US/docs/Web/HTML/Constraint_validation). These include `required`, `pattern`, `minlength`, `maxlength`, `min`, `max`, and `step`. They work exactly like their native counterparts.
 
 ```html {.example}
 <form action="about:blank" method="get" target="_blank">

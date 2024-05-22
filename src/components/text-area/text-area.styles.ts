@@ -16,10 +16,8 @@ export default css`
   }
 
   #box {
-    display: flex;
+    flex: 1 1 auto;
     position: relative;
-    gap: 0.5em;
-    align-items: center;
     font: inherit;
     cursor: text;
 
@@ -29,14 +27,15 @@ export default css`
     }
   }
 
-  #text-field {
+  #text-area {
+    display: block;
     width: 100%;
+    max-width: 100%;
     font: inherit;
     color: var(--quiet-text-body);
     border: none;
     background: none;
-    padding: 0;
-    margin: auto 0;
+    margin: 0;
     cursor: inherit;
 
     &:focus {
@@ -48,43 +47,6 @@ export default css`
       user-select: none;
       -webkit-user-select: none;
     }
-
-    &::-webkit-search-decoration,
-    &::-webkit-search-cancel-button,
-    &::-webkit-search-results-button,
-    &::-webkit-search-results-decoration {
-      -webkit-appearance: none;
-    }
-
-    &:-webkit-autofill,
-    &:-webkit-autofill:hover,
-    &:-webkit-autofill:focus,
-    &:-webkit-autofill:active {
-      -webkit-text-fill-color: var(--quiet-primary-text-colorful);
-    }
-
-    /* Color inputs */
-    &[type='color'] {
-      &::-webkit-color-swatch-wrapper {
-        padding: 0.25em 0;
-      }
-
-      &::-webkit-color-swatch {
-        border: none;
-        border-radius: calc(var(--quiet-border-radius) / 1.75);
-      }
-
-      &::-moz-color-swatch,
-      &::-moz-focus-inner {
-        padding: 0;
-        height: calc(100% - 0.5em);
-        border-radius: calc(var(--quiet-border-radius) / 1.75);
-      }
-
-      &:-moz-focus-inner {
-        padding: 0;
-      }
-    }
   }
 
   /* Normal */
@@ -92,13 +54,12 @@ export default css`
     background-color: var(--quiet-paper-color);
     border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
     border-radius: calc(var(--quiet-border-radius) / 1.5);
-    padding: 0 0.75em;
 
-    &.color {
-      padding: 0 0.25em;
+    #text-area {
+      padding-inline: 0.75em;
     }
 
-    &:has(#text-field:focus-visible) {
+    &:has(#text-area:focus-visible) {
       outline: var(--quiet-border-style) calc(var(--quiet-border-width) + 1px) var(--quiet-focus-color);
       outline-offset: calc(-1 * var(--quiet-border-width) - 1px);
     }
@@ -108,9 +69,12 @@ export default css`
   #box.filled {
     background-color: var(--quiet-neutral-fill-softer);
     border-radius: calc(var(--quiet-border-radius) / 1.5);
-    padding: 0 0.75em;
 
-    &:has(#text-field:focus-visible) {
+    #text-area {
+      padding-inline: 0.75em;
+    }
+
+    &:has(#text-area:focus-visible) {
       outline: var(--quiet-border-style) calc(var(--quiet-border-width) + 1px) var(--quiet-focus-color);
       outline-offset: calc(-1 * var(--quiet-border-width) - 1px);
     }
@@ -120,75 +84,56 @@ export default css`
   #box.xs {
     font-size: var(--quiet-form-control-font-size-xs);
 
-    #text-field {
+    #text-area {
       min-height: var(--quiet-form-control-height-xs);
+      padding-block: 0.2em;
     }
   }
 
   #box.sm {
     font-size: var(--quiet-form-control-font-size-sm);
 
-    #text-field {
+    #text-area {
       min-height: var(--quiet-form-control-height-sm);
+      padding-block: 0.325em;
     }
   }
 
   #box.md {
     font-size: var(--quiet-form-control-font-size-md);
 
-    #text-field {
+    #text-area {
       min-height: var(--quiet-form-control-height-md);
+      padding-block: 0.65em;
     }
   }
 
   #box.lg {
     font-size: var(--quiet-form-control-font-size-lg);
 
-    #text-field {
+    #text-area {
       min-height: var(--quiet-form-control-height-lg);
+      padding-block: 0.5em;
     }
   }
 
   #box.xl {
     font-size: var(--quiet-form-control-font-size-xl);
 
-    #text-field {
+    #text-area {
       min-height: var(--quiet-form-control-height-xl);
+      padding-block: 0.5em;
     }
   }
 
-  /* Pills */
-  #box.pill {
-    border-radius: 9999px;
-    padding: 0 1.25em;
-
-    #text-field::-webkit-color-swatch {
-      border-radius: 9999px;
-    }
-
-    #text-field::-moz-color-swatch,
-    #text-field::-moz-focus-inner {
-      border-radius: 9999px;
-    }
+  /* Resizing */
+  #box.resize-none #text-area,
+  #box.resize-auto #text-area {
+    resize: none;
   }
 
-  .helper-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font: inherit;
-    font-size: 1.5em;
-    border: none;
-    background: none;
-    color: var(--quiet-text-muted);
-    padding: 0;
-    margin: 0;
-    cursor: pointer;
-    transition: 100ms color ease;
-
-    &:active {
-      translate: 0 1px;
-    }
+  #box.resize-vertical #text-area {
+    resize: vertical;
   }
 
   #description {
@@ -199,24 +144,5 @@ export default css`
   :host([required]) #label::after {
     content: var(--quiet-form-control-required-content);
     margin-inline-start: -0.2em;
-  }
-
-  /* Icons */
-  slot[name='start']::slotted(*),
-  slot[name='end']::slotted(*) {
-    color: var(--quiet-text-muted) !important;
-  }
-
-  slot[name='start']::slotted(quiet-icon),
-  slot[name='end']::slotted(quiet-icon) {
-    font-size: 1.25em !important;
-    pointer-events: none;
-  }
-
-  slot[name='start']::slotted(svg),
-  slot[name='end']::slotted(svg) {
-    width: 1.25em;
-    height: 1.25em;
-    pointer-events: none;
   }
 `;

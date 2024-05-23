@@ -266,7 +266,7 @@ export class QuietTextField extends QuietElement {
     this.dispatchEvent(new QuietFocusEvent());
   }
 
-  private handleHelperButtonPointerDown(event: PointerEvent) {
+  private handleTextBoxButtonPointerDown(event: PointerEvent) {
     // Prevent the text field from losing focus when the clear button is activated
     event.preventDefault();
   }
@@ -476,7 +476,7 @@ export class QuietTextField extends QuietElement {
                 type="button"
                 aria-label=${this.localize.term(this.isPasswordVisible ? 'hidePassword' : 'showPassword')}
                 tabindex="-1"
-                @pointerdown=${this.handleHelperButtonPointerDown}
+                @pointerdown=${this.handleTextBoxButtonPointerDown}
                 @click=${this.handlePasswordToggleClick}
               >
                 <quiet-icon library="system" name=${this.isPasswordVisible ? 'eye-slash' : 'eye'}></quiet-icon>
@@ -492,7 +492,7 @@ export class QuietTextField extends QuietElement {
                 type="button"
                 aria-label=${this.localize.term('clearEntry')}
                 tabindex="-1"
-                @pointerdown=${this.handleHelperButtonPointerDown}
+                @pointerdown=${this.handleTextBoxButtonPointerDown}
                 @click=${this.handleClearClick}
               >
                 <quiet-icon library="system" name="x-circle"></quiet-icon>

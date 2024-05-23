@@ -138,7 +138,7 @@ export class QuietTextField extends QuietElement {
   /** The maximum value for date/time types. */
   @property() max: number | string;
 
-  /** The granularity the value must adhere to when incrementing and decrementing. Only applies to date/time types. */
+  /** The granularity the value must adhere to when incrementing and decrementing. */
   @property() step: number | 'any';
 
   /**

@@ -3,8 +3,6 @@ title: Text Field
 layout: component
 ---
 
-This is a form-associated custom element. You can use them within standard HTML forms and they'll submit just like native form controls.
-
 ```html {.example}
 <quiet-text-field name="name" label="Name"></quiet-text-field>
 ```

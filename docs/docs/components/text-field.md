@@ -36,6 +36,7 @@ Text fields support more than just text. Use the `type` attribute to change the 
 ```html {.example}
 <quiet-text-field type="color" label="Color" value="#787acf"></quiet-text-field><br>
 <quiet-text-field type="date" label="Date" value="1989-03-12"></quiet-text-field><br>
+<quiet-text-field type="number" label="Amount" value="42"></quiet-text-field><br>
 <quiet-text-field type="password" label="Password" value="hunter2"></quiet-text-field>
 ```
 

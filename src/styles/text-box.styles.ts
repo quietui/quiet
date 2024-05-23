@@ -78,7 +78,7 @@ export default css`
 
     &:has(#text-box:focus-visible) {
       outline: var(--quiet-border-style) calc(var(--quiet-border-width) + 1px) var(--quiet-focus-color);
-      outline-offset: calc(-1 * var(--quiet-border-width) - 1px);
+      outline-offset: calc(-1 * var(--quiet-border-width));
     }
   }
 
@@ -90,7 +90,7 @@ export default css`
 
     &:has(#text-box:focus-visible) {
       outline: var(--quiet-border-style) calc(var(--quiet-border-width) + 1px) var(--quiet-focus-color);
-      outline-offset: calc(-1 * var(--quiet-border-width) - 1px);
+      outline-offset: calc(-1 * var(--quiet-border-width));
     }
   }
 
@@ -151,6 +151,7 @@ export default css`
   }
 
   .text-box-button {
+    align-self: stretch;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -160,9 +161,10 @@ export default css`
     background: none;
     color: var(--quiet-text-muted);
     padding: 0;
+    padding-inline: 0.25em;
     margin: 0;
     cursor: pointer;
-    transition: 100ms color ease;
+    transition: 100ms translate ease;
 
     &:active {
       translate: 0 1px;

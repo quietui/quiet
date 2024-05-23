@@ -123,7 +123,7 @@ export class QuietTextArea extends QuietElement {
   /** Turns autocorrect on or off in supported browsers. */
   @property() autocorrect: 'off' | 'on';
 
-  /** Tells the browser to focus the input when the page loads or a dialog is shown. */
+  /** Tells the browser to focus the text area when the page loads or a dialog is shown. */
   @property({ type: Boolean }) autofocus: boolean;
 
   /** Sets the enter key label on virtual keyboards. */

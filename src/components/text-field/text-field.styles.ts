@@ -24,6 +24,12 @@ export default css`
         padding: 0;
       }
     }
+
+    /* Number spinners */
+    &::-webkit-inner-spin-button {
+      width: 2em;
+      height: 2em;
+    }
   }
 
   /* Color inputs */

@@ -93,10 +93,6 @@ Use the `size` attribute to change the button's size. Available sizes include `x
 <quiet-button size="xl">Extra large</quiet-button>
 ```
 
-:::info
-Be careful to not make the button's text too small. Typically, 12px is the absolute smallest you should use to ensure your buttons are accessible.
-:::
-
 ### Outline buttons
 
 Buttons can be rendered with outlines by adding the `outline` attribute.

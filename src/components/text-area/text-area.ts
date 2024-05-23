@@ -47,7 +47,7 @@ export class QuietTextArea extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, textBoxStyles, styles];
 
   /** A reference to the `<form>` associated with the form control, or null if no form is associated. */
-  private associatedForm: HTMLFormElement | null = null;
+  public associatedForm: HTMLFormElement | null = null;
   private resizeObserver: ResizeObserver;
 
   @query('textarea') textBox: HTMLInputElement;

@@ -4,7 +4,7 @@ layout: component
 ---
 
 ```html {.example}
-<quiet-text-field name="name" label="Name"></quiet-text-field>
+<quiet-text-field name="name" label="Name" type="number"></quiet-text-field>
 ```
 
 ## Examples
@@ -36,7 +36,6 @@ Text fields support more than just text. Use the `type` attribute to change the 
 ```html {.example}
 <quiet-text-field type="color" label="Color" value="#787acf"></quiet-text-field><br>
 <quiet-text-field type="date" label="Date" value="1989-03-12"></quiet-text-field><br>
-<quiet-text-field type="number" label="Number" value="42" step=".5"></quiet-text-field><br>
 <quiet-text-field type="password" label="Password" value="hunter2"></quiet-text-field>
 ```
 
@@ -67,7 +66,7 @@ To add a clear button to the text field, use the `clearable` attribute. The `qui
 
 ### Start and end content
 
-Use the `start` and `end` slots to add presentational icons or text. Avoid interactive elements such as buttons, links, etc. For best results, use a [`<quiet-icon>`](/docs/components/icon) or an `<svg>` element.
+Use the `start` and `end` slots to add presentational icons or text. Avoid interactive elements such as buttons, links, etc. Works well with [`<quiet-icon>`](/docs/components/icon) and `<svg>` elements.
 
 ```html {.example}
 <quiet-text-field name="search" label="Search">

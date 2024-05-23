@@ -50,12 +50,12 @@ Use the `rows` attribute to set the default number of text rows.
 <quiet-text-area label="Five rows" rows="5"></quiet-text-area>
 ```
 
-### Automatically resizing
+### Resizing to fit content
 
 Text areas can grow with their content by setting the `resize` property to `auto`. The minimum number of rows is determine by the `rows` attribute.
 
 ```html {.example}
-<quiet-text-area label="Automatically resizing" resize="auto"></quiet-text-area>
+<quiet-text-area label="Resizing to fit" resize="auto"></quiet-text-area>
 ```
 
 ### Filled and unstyled text areas

@@ -7,6 +7,7 @@ import { QuietBlurEvent, QuietChangeEvent, QuietFocusEvent, QuietInputEvent } fr
 import { QuietElement } from '../../utilities/quiet-element.js';
 import hostStyles from '../../styles/host.styles.js';
 import styles from './text-area.styles.js';
+import textBoxStyles from '../../styles/text-box.styles.js';
 import type { CSSResultGroup } from 'lit';
 
 /**
@@ -37,19 +38,19 @@ import type { CSSResultGroup } from 'lit';
  *
  * @csspart label - The element that contains the text area's label.
  * @csspart description - The element that contains the text area's description.
- * @csspart box - The element that wraps the internal `<textarea>` element.
- * @csspart textarea - The internal `<textarea>` element.
+ * @csspart visual-box - The element that wraps the internal text box.
+ * @csspart text-box - The internal text box, a `<textarea>` element.
  */
 @customElement('quiet-text-area')
 export class QuietTextArea extends QuietElement {
   static formAssociated = true;
-  static styles: CSSResultGroup = [hostStyles, styles];
+  static styles: CSSResultGroup = [hostStyles, textBoxStyles, styles];
 
   /** A reference to the `<form>` associated with the form control, or null if no form is associated. */
   private associatedForm: HTMLFormElement | null = null;
   private resizeObserver: ResizeObserver;
 
-  @query('textarea') textarea: HTMLInputElement;
+  @query('textarea') textBox: HTMLInputElement;
 
   @state() isInvalid = false;
   @state() isPasswordVisible = false;
@@ -98,9 +99,6 @@ export class QuietTextArea extends QuietElement {
    */
   @property({ type: Boolean }) required = false;
 
-  /** A regular expression the value should match to be considered valid. */
-  @property() pattern: string;
-
   /** The minimum string length that will be considered valid. */
   @property({ attribute: 'minlength', type: Number }) minLength: number;
 
@@ -131,6 +129,12 @@ export class QuietTextArea extends QuietElement {
   /** Sets the enter key label on virtual keyboards. */
   @property() enterkeyhint: 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send';
 
+  /**
+   * Provides the browser with a hint about the type of data that might be entered by the user, allowing the appropriate
+   * virtual keyboard to be displayed on supported devices.
+   */
+  @property() inputmode: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
+
   /** Turns spell checking on or off in supported browsers. */
   @property({
     type: Boolean,
@@ -149,7 +153,7 @@ export class QuietTextArea extends QuietElement {
     this.resizeObserver = new ResizeObserver(() => this.updateHeight());
     this.updateComplete.then(() => {
       this.updateHeight();
-      this.resizeObserver.observe(this.textarea);
+      this.resizeObserver.observe(this.textBox);
     });
   }
 
@@ -157,8 +161,8 @@ export class QuietTextArea extends QuietElement {
     super.disconnectedCallback();
     this.removeEventListener('invalid', this.handleHostInvalid);
 
-    if (this.textarea) {
-      this.resizeObserver.unobserve(this.textarea);
+    if (this.textBox) {
+      this.resizeObserver.unobserve(this.textBox);
     }
   }
 
@@ -236,7 +240,7 @@ export class QuietTextArea extends QuietElement {
   }
 
   private handleInput() {
-    this.value = this.textarea.value;
+    this.value = this.textBox.value;
     this.internals.setFormValue(this.value);
     this.dispatchEvent(new QuietInputEvent());
   }
@@ -257,11 +261,11 @@ export class QuietTextArea extends QuietElement {
   /** Updates the height of the text area based on its content and settings. */
   private updateHeight() {
     if (this.resize === 'auto') {
-      this.textarea.style.height = 'auto';
-      this.textarea.style.height = `${this.textarea.scrollHeight}px`;
+      this.textBox.style.height = 'auto';
+      this.textBox.style.height = `${this.textBox.scrollHeight}px`;
     } else {
       // @ts-expect-error - we're unsetting this value
-      this.textarea.style.height = undefined;
+      this.textBox.style.height = undefined;
     }
   }
 
@@ -269,32 +273,32 @@ export class QuietTextArea extends QuietElement {
   private async updateValidity() {
     await this.updateComplete;
     const hasCustomValidity = this.customValidity?.length > 0;
-    const validationMessage = hasCustomValidity ? this.customValidity : this.textarea.validationMessage;
+    const validationMessage = hasCustomValidity ? this.customValidity : this.textBox.validationMessage;
     const flags: ValidityStateFlags = {
-      badInput: this.textarea.validity.tooShort,
+      badInput: this.textBox.validity.tooShort,
       customError: hasCustomValidity,
-      patternMismatch: this.textarea.validity.patternMismatch,
-      rangeOverflow: this.textarea.validity.rangeOverflow,
-      rangeUnderflow: this.textarea.validity.rangeUnderflow,
-      stepMismatch: this.textarea.validity.stepMismatch,
-      tooLong: this.textarea.validity.tooLong,
-      tooShort: this.textarea.validity.tooShort,
-      typeMismatch: this.textarea.validity.typeMismatch,
-      valueMissing: this.textarea.validity.valueMissing
+      patternMismatch: this.textBox.validity.patternMismatch,
+      rangeOverflow: this.textBox.validity.rangeOverflow,
+      rangeUnderflow: this.textBox.validity.rangeUnderflow,
+      stepMismatch: this.textBox.validity.stepMismatch,
+      tooLong: this.textBox.validity.tooLong,
+      tooShort: this.textBox.validity.tooShort,
+      typeMismatch: this.textBox.validity.typeMismatch,
+      valueMissing: this.textBox.validity.valueMissing
     };
 
-    this.isInvalid = hasCustomValidity ? true : !this.textarea.validity.valid;
-    this.internals.setValidity(flags, validationMessage, this.textarea);
+    this.isInvalid = hasCustomValidity ? true : !this.textBox.validity.valid;
+    this.internals.setValidity(flags, validationMessage, this.textBox);
   }
 
   /** Sets focus to the text area. */
   public focus() {
-    this.textarea.focus();
+    this.textBox.focus();
   }
 
   /** Removes focus from the text area. */
   public blur() {
-    this.textarea.blur();
+    this.textBox.blur();
   }
 
   /**
@@ -316,12 +320,12 @@ export class QuietTextArea extends QuietElement {
 
   /** Selects all text in the text area. */
   public select() {
-    this.textarea.select();
+    this.textBox.select();
   }
 
   /** Sets the start and end positions of the current text selection in the text area. */
   public setSelectionRange(start: number, end: number, direction: 'forward' | 'backward' | 'none' = 'none') {
-    this.textarea.setSelectionRange(start, end, direction);
+    this.textBox.setSelectionRange(start, end, direction);
   }
 
   /** Replaces a range of text in the text area with a new string. */
@@ -331,18 +335,18 @@ export class QuietTextArea extends QuietElement {
     end?: number,
     selectMode?: 'select' | 'start' | 'end' | 'preserve'
   ) {
-    this.textarea.setRangeText(
+    this.textBox.setRangeText(
       replacement,
-      start ?? this.textarea.selectionStart!,
-      end ?? this.textarea.selectionEnd!,
+      start ?? this.textBox.selectionStart!,
+      end ?? this.textBox.selectionEnd!,
       selectMode
     );
-    this.value = this.textarea.value;
+    this.value = this.textBox.value;
   }
 
   render() {
     return html`
-      <label part="label" id="label" for="text-area">
+      <label part="label" id="label" for="text-box">
         <slot name="label">${this.label}</slot>
       </label>
 
@@ -351,8 +355,8 @@ export class QuietTextArea extends QuietElement {
       </div>
 
       <div
-        part="box"
-        id="box"
+        part="visual-box"
+        id="visual-box"
         class=${classMap({
           // Variants
           normal: this.variant === 'normal',
@@ -373,15 +377,14 @@ export class QuietTextArea extends QuietElement {
         })}
       >
         <textarea
-          part="text-area"
-          id="text-area"
+          part="text-box"
+          id="text-box"
           ?autofocus=${this.autofocus}
           ?disabled=${this.disabled}
           ?readonly=${this.readonly}
           ?required=${this.required}
           name=${ifDefined(this.name)}
           placeholder=${ifDefined(this.placeholder)}
-          pattern=${ifDefined(this.pattern)}
           minlength=${ifDefined(this.minLength)}
           maxlength=${ifDefined(this.maxLength)}
           .value=${live(this.value) /* live() is required for proper validation */}
@@ -391,6 +394,7 @@ export class QuietTextArea extends QuietElement {
           autocorrect=${ifDefined(this.autocorrect)}
           spellcheck=${ifDefined(this.spellcheck)}
           enterkeyhint=${ifDefined(this.enterkeyhint)}
+          inputmode=${ifDefined(this.inputmode)}
           aria-describedby="description"
           aria-invalid=${this.isInvalid ? 'true' : 'false'}
           @change=${this.handleChange}

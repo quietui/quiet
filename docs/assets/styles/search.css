@@ -50,7 +50,7 @@ header {
   border-end-end-radius: 0;
 }
 
-#site-search-text-field::part(box) {
+#site-search-text-field::part(visual-box) {
   padding-inline: 1.5rem;
 }
 

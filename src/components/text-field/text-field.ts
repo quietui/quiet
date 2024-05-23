@@ -9,6 +9,7 @@ import { QuietBlurEvent, QuietChangeEvent, QuietFocusEvent, QuietInputEvent } fr
 import { QuietElement } from '../../utilities/quiet-element.js';
 import hostStyles from '../../styles/host.styles.js';
 import styles from './text-field.styles.js';
+import textBoxStyles from '../../styles/text-box.styles.js';
 import type { CSSResultGroup } from 'lit';
 
 /**
@@ -43,21 +44,21 @@ import type { CSSResultGroup } from 'lit';
  *
  * @csspart label - The element that contains the text field's label.
  * @csspart description - The element that contains the text field's description.
- * @csspart box - The element that wraps the start icon, end icon, and the internal `<input>` element.
- * @csspart input - The internal `<input>` element.
+ * @csspart visual-box - The element that wraps the internal text box.
+ * @csspart text-box - The internal text box, an `<input>` element.
  * @csspart clear-button - The clear button, a `<button>` element.
  * @csspart password-toggle-button - The password toggle button, a `<button>` element.
  */
 @customElement('quiet-text-field')
 export class QuietTextField extends QuietElement {
   static formAssociated = true;
-  static styles: CSSResultGroup = [hostStyles, styles];
+  static styles: CSSResultGroup = [hostStyles, textBoxStyles, styles];
 
   /** A reference to the `<form>` associated with the form control, or null if no form is associated. */
   private associatedForm: HTMLFormElement | null = null;
   private localize = new Localize(this);
 
-  @query('input') input: HTMLInputElement;
+  @query('input') textBox: HTMLInputElement;
 
   @state() isInvalid = false;
   @state() isPasswordVisible = false;
@@ -165,7 +166,8 @@ export class QuietTextField extends QuietElement {
   @property() enterkeyhint: 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send';
 
   /**
-   *
+   * Provides the browser with a hint about the type of data that might be entered by the user, allowing the appropriate
+   * virtual keyboard to be displayed on supported devices.
    */
   @property() inputmode: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
 
@@ -237,14 +239,14 @@ export class QuietTextField extends QuietElement {
     this.dispatchEvent(new QuietBlurEvent());
   }
 
-  private handleBoxPointerDown(event: PointerEvent) {
+  private handleVisualBoxPointerDown(event: PointerEvent) {
     const target = event.target as HTMLElement;
-    const isBox = target?.id === 'box';
+    const isBox = target?.id === 'visual-box';
     const isSlot = target.hasAttribute('slot');
 
     if (isBox || isSlot) {
       event.preventDefault();
-      this.input.focus();
+      this.textBox.focus();
     }
   }
 
@@ -255,7 +257,7 @@ export class QuietTextField extends QuietElement {
 
   private handleClearClick() {
     this.value = '';
-    this.input.focus();
+    this.textBox.focus();
     this.dispatchEvent(new QuietInputEvent());
   }
 
@@ -280,7 +282,7 @@ export class QuietTextField extends QuietElement {
   }
 
   private handleInput() {
-    this.value = this.input.value;
+    this.value = this.textBox.value;
     this.internals.setFormValue(this.value);
     this.dispatchEvent(new QuietInputEvent());
   }
@@ -300,39 +302,39 @@ export class QuietTextField extends QuietElement {
 
   private handlePasswordToggleClick() {
     this.isPasswordVisible = !this.isPasswordVisible;
-    this.input.focus();
+    this.textBox.focus();
   }
 
   /** Sets the form control's validity */
   private async updateValidity() {
     await this.updateComplete;
     const hasCustomValidity = this.customValidity?.length > 0;
-    const validationMessage = hasCustomValidity ? this.customValidity : this.input.validationMessage;
+    const validationMessage = hasCustomValidity ? this.customValidity : this.textBox.validationMessage;
     const flags: ValidityStateFlags = {
-      badInput: this.input.validity.tooShort,
+      badInput: this.textBox.validity.tooShort,
       customError: hasCustomValidity,
-      patternMismatch: this.input.validity.patternMismatch,
-      rangeOverflow: this.input.validity.rangeOverflow,
-      rangeUnderflow: this.input.validity.rangeUnderflow,
-      stepMismatch: this.input.validity.stepMismatch,
-      tooLong: this.input.validity.tooLong,
-      tooShort: this.input.validity.tooShort,
-      typeMismatch: this.input.validity.typeMismatch,
-      valueMissing: this.input.validity.valueMissing
+      patternMismatch: this.textBox.validity.patternMismatch,
+      rangeOverflow: this.textBox.validity.rangeOverflow,
+      rangeUnderflow: this.textBox.validity.rangeUnderflow,
+      stepMismatch: this.textBox.validity.stepMismatch,
+      tooLong: this.textBox.validity.tooLong,
+      tooShort: this.textBox.validity.tooShort,
+      typeMismatch: this.textBox.validity.typeMismatch,
+      valueMissing: this.textBox.validity.valueMissing
     };
 
-    this.isInvalid = hasCustomValidity ? true : !this.input.validity.valid;
-    this.internals.setValidity(flags, validationMessage, this.input);
+    this.isInvalid = hasCustomValidity ? true : !this.textBox.validity.valid;
+    this.internals.setValidity(flags, validationMessage, this.textBox);
   }
 
   /** Sets focus to the text field. */
   public focus() {
-    this.input.focus();
+    this.textBox.focus();
   }
 
   /** Removes focus from the text field. */
   public blur() {
-    this.input.blur();
+    this.textBox.blur();
   }
 
   /**
@@ -354,12 +356,12 @@ export class QuietTextField extends QuietElement {
 
   /** Selects all text in the text field. */
   public select() {
-    this.input.select();
+    this.textBox.select();
   }
 
   /** Sets the start and end positions of the current text selection in the text field. */
   public setSelectionRange(start: number, end: number, direction: 'forward' | 'backward' | 'none' = 'none') {
-    this.input.setSelectionRange(start, end, direction);
+    this.textBox.setSelectionRange(start, end, direction);
   }
 
   /** Replaces a range of text in the text field with a new string. */
@@ -369,18 +371,18 @@ export class QuietTextField extends QuietElement {
     end?: number,
     selectMode?: 'select' | 'start' | 'end' | 'preserve'
   ) {
-    this.input.setRangeText(
+    this.textBox.setRangeText(
       replacement,
-      start ?? this.input.selectionStart!,
-      end ?? this.input.selectionEnd!,
+      start ?? this.textBox.selectionStart!,
+      end ?? this.textBox.selectionEnd!,
       selectMode
     );
-    this.value = this.input.value;
+    this.value = this.textBox.value;
   }
 
   /** For types that support a picker, such as color and date selectors, this will cause the picker to show. */
   public showPicker() {
-    this.input.showPicker();
+    this.textBox.showPicker();
   }
 
   /**
@@ -388,7 +390,7 @@ export class QuietTextField extends QuietElement {
    * change, so input and change events will not be emitted when this is called.
    */
   public stepDown() {
-    this.input.stepDown();
+    this.textBox.stepDown();
   }
 
   /**
@@ -396,12 +398,12 @@ export class QuietTextField extends QuietElement {
    * change, so input and change events will not be emitted when this is called.
    */
   public stepUp() {
-    this.input.stepUp();
+    this.textBox.stepUp();
   }
 
   render() {
     return html`
-      <label part="label" id="label" for="text-field">
+      <label part="label" id="label" for="text-box">
         <slot name="label">${this.label}</slot>
       </label>
 
@@ -410,8 +412,8 @@ export class QuietTextField extends QuietElement {
       </div>
 
       <div
-        part="box"
-        id="box"
+        part="visual-box"
+        id="visual-box"
         class=${classMap({
           // Variants
           normal: this.variant === 'normal',
@@ -429,13 +431,13 @@ export class QuietTextField extends QuietElement {
           // States
           disabled: this.disabled
         })}
-        @pointerdown=${this.handleBoxPointerDown}
+        @pointerdown=${this.handleVisualBoxPointerDown}
       >
         <slot name="start"></slot>
 
         <input
-          part="input"
-          id="text-field"
+          part="text-box"
+          id="text-box"
           type=${this.type === 'password' && this.isPasswordVisible ? 'text' : this.type}
           ?autofocus=${this.autofocus}
           ?disabled=${this.disabled}
@@ -470,7 +472,7 @@ export class QuietTextField extends QuietElement {
               <button
                 part="toggle-password-button"
                 id="password-toggle-button"
-                class="helper-button"
+                class="text-box-button"
                 type="button"
                 aria-label=${this.localize.term(this.isPasswordVisible ? 'hidePassword' : 'showPassword')}
                 tabindex="-1"
@@ -486,7 +488,7 @@ export class QuietTextField extends QuietElement {
               <button
                 part="clear-button"
                 id="clear-button"
-                class="helper-button"
+                class="text-box-button"
                 type="button"
                 aria-label=${this.localize.term('clearEntry')}
                 tabindex="-1"

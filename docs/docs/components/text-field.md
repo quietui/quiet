@@ -72,19 +72,19 @@ To add a clear button to the text field, use the `clearable` attribute. The `qui
 Use the `start` and `end` slots to add presentational icons or text. Avoid interactive elements such as buttons, links, etc. For best results, use a [`<quiet-icon>`](/docs/components/icon) or an `<svg>` element.
 
 ```html {.example}
-<quiet-text-field name="username" label="Username">
-  <quiet-icon slot="start" name="at-symbol"></quiet-icon>
+<quiet-text-field name="search" label="Search">
+  <quiet-icon slot="start" name="magnifying-glass"></quiet-icon>
 </quiet-text-field>
 
 <br>
 
-<quiet-text-field type="search" name="query" label="Search">
-  <quiet-icon slot="end" name="magnifying-glass"></quiet-icon>
+<quiet-text-field type="email" name="email" label="Email">
+  <quiet-icon slot="end" name="envelope"></quiet-icon>
 </quiet-text-field>
 
 <br>
 
-<quiet-text-field name="domain" label="Domain">
+<quiet-text-field type="url" name="url" label="URL">
   <span slot="start">https://</span>
 </quiet-text-field>
 ```

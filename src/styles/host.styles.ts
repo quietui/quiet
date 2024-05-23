@@ -1,5 +1,6 @@
 import { css } from 'lit';
 
+/** Styles that should get applied to every component. */
 export default css`
   :host {
     box-sizing: border-box;

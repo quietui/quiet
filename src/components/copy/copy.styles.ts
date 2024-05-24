@@ -36,7 +36,7 @@ export default css`
     --translate-x-end: 0;
     --translate-y-start: -0.25rem;
     --translate-y-end: -0.75rem;
-    translate: 0 0;
+    translate: 0 -0.25rem;
   }
 
   #feedback[data-placement="right"] {
@@ -44,7 +44,7 @@ export default css`
     --translate-x-end: 0.75rem;
     --translate-y-start: 0;
     --translate-y-end: 0;
-    translate: 0 0;
+    translate: 0.25rem 0;
   }
 
   #feedback[data-placement="bottom"] {
@@ -52,7 +52,7 @@ export default css`
     --translate-x-end: 0;
     --translate-y-start: 0.25rem;
     --translate-y-end: 0.75rem;
-    translate: 0 0;
+    translate: 0 0.25rem;
   }
 
   #feedback[data-placement="left"] {
@@ -60,7 +60,7 @@ export default css`
     --translate-x-end: -0.75rem;
     --translate-y-start: 0;
     --translate-y-end: 0;
-    translate: 0 0;
+    translate: -0.25rem 0;
   }
 
   @keyframes show {

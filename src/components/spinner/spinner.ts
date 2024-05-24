@@ -14,9 +14,6 @@ import type { CSSResultGroup } from 'lit';
  * @status stable
  * @since 1.0
  *
- * @csspart track - The spinner's track, an SVG `<circle>` element.
- * @csspart indicator - The spinner's indicator, an SVG `<circle>` element.
- *
  * @cssproperty [--indicator-color=var(--quiet-primary-fill-mid)] - The color of the spinner's indicator.
  * @cssproperty [--track-color=var(--quiet-primary-fill-mid)] - The color of the spinner's track.
  */
@@ -35,8 +32,8 @@ export class QuietSpinner extends QuietElement {
   render() {
     return html`
       <svg fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <circle part="track" class="track" cx="12" cy="12" r="10" fill="none" stroke-width="2" />
-        <circle part="indicator" class="indicator" cx="12" cy="12" r="10" fill="none" stroke-width="2" />
+        <circle class="track" cx="12" cy="12" r="10" fill="none" stroke-width="2" />
+        <circle class="indicator" cx="12" cy="12" r="10" fill="none" stroke-width="2" />
       </svg>
     `;
   }

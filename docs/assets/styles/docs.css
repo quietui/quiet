@@ -428,6 +428,12 @@ h6 {
   }
 }
 
+/* Experimental badges */
+quiet-badge.experimental {
+  background-color: #fbbf24;
+  color: black;
+}
+
 /* Anchor headings */
 .anchor-heading {
   max-width: fit-content;

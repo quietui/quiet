@@ -15,9 +15,28 @@ export default css`
   #label {
     display: inline-block;
     max-width: fit-content;
-    font-size: 0.9375em;
     font-weight: var(--quiet-font-weight-semibold);
     line-height: calc(var(--quiet-line-height) * 0.75);
+
+    &:has(~ .xs) {
+      font-size: var(--quiet-form-control-font-size-xs);
+    }
+
+    &:has(~ .sm) {
+      font-size: var(--quiet-form-control-font-size-sm);
+    }
+
+    &:has(~ .md) {
+      font-size: var(--quiet-form-control-font-size-md);
+    }
+
+    &:has(~ .lg) {
+      font-size: var(--quiet-form-control-font-size-lg);
+    }
+
+    &:has(~ .xl) {
+      font-size: var(--quiet-form-control-font-size-xl);
+    }
   }
 
   #visual-box {

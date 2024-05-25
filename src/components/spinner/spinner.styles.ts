@@ -3,7 +3,7 @@ import { css } from 'lit';
 export default css`
   :host {
     --indicator-color: var(--quiet-primary-fill-mid);
-    --track-color: var(--quiet-neutral-fill-softer);
+    --track-color: var(--quiet-neutral-stroke-softer);
 
     display: inline-flex;
     width: 1em;

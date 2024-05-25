@@ -244,7 +244,6 @@ export default css`
       left: calc(50% - 0.5em);
       width: 1em;
       height: 1em;
-      animation: 750ms infinite spin linear;
     }
 
     /* Visually hidden label */

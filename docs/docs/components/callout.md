@@ -6,7 +6,7 @@ layout: component
 ```html {.example}
 <quiet-callout variant="primary" with-icon>
   <quiet-icon slot="icon" name="book-open"></quiet-icon>
-  Volutpat commodo sed egestas egestas fringilla phasellus. Massa vitae tortor condimentum lacinia quis vel.
+  A playful cat's antics can brighten any day with their boundless energy and curiosity. Watching a cat pounce and chase after toys is an endless source of entertainment.
 </quiet-callout>
 ```
 
@@ -41,22 +41,22 @@ Add an icon to a callout using the `icon` slot. Works best with `<quiet-icon>` a
 ```html {.example}
 <quiet-callout variant="primary" with-icon>
   <quiet-icon slot="icon" name="information-circle"></quiet-icon>
-  Dui vivamus arcu felis bibendum ut tristique et egestas. Tortor condimentum lacinia quis vel eros.
+  A cat's soft, gentle gaze can melt even the coldest of hearts.
 </quiet-callout>
 
 <quiet-callout variant="secondary" with-icon>
   <quiet-icon slot="icon" name="cog-6-tooth"></quiet-icon>
-  Maecenas sed enim ut sem viverra aliquet eget sit amet. Id diam maecenas ultricies mi eget.
+  Sleep mode has been enabled. You can disable it in settings.
 </quiet-callout>
 
 <quiet-callout variant="constructive" with-icon>
   <quiet-icon slot="icon" name="check-circle"></quiet-icon>
-  Nunc sed augue lacus viverra vitae congue. Mattis nunc sed blandit libero volutpat sed cras.
+  Great job! The litter box has been successfully cleaned.
 </quiet-callout>
 
 <quiet-callout variant="destructive" with-icon>
   <quiet-icon slot="icon" name="exclamation-triangle"></quiet-icon>
-  Sagittis purus sit amet volutpat consequat mauris nunc congue nisi. Sociis natoque penatibus et magnis dis.
+  Doing this will anger the cats. Are you sure you want to continue?
 </quiet-callout>
 ```
 

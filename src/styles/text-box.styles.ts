@@ -18,6 +18,11 @@ export default css`
     font-weight: var(--quiet-font-weight-semibold);
     line-height: calc(var(--quiet-line-height) * 0.75);
 
+    &:has(~ .disabled) {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
     &:has(~ .xs) {
       font-size: var(--quiet-form-control-font-size-xs);
     }

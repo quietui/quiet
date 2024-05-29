@@ -95,6 +95,21 @@ export default css`
       }
     }
 
+    /* Stretch the thumb when active */
+    &:active:not(.disabled) #thumb {
+      width: calc(var(--thumb-size) * 1.25);
+    }
+
+    &.checked:not(.disabled):active #thumb {
+      &:dir(ltr) {
+        left: calc(100% - calc(var(--thumb-size) * 1.25) - var(--thumb-padding));
+      }
+
+      &:dir(rtl) {
+        right: calc(100% - calc(var(--thumb-size) * 1.25) - var(--thumb-padding));
+      }
+    }
+
     /* Inner labels */
     #on-label,
     #off-label {
@@ -112,7 +127,7 @@ export default css`
         100ms translate ease;
 
       ::slotted(quiet-icon) {
-        font-size: 2em;
+        font-size: 1.75em;
       }
     }
 

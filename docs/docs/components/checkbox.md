@@ -4,7 +4,7 @@ layout: component
 ---
 
 ```html {.example}
-<quiet-checkbox name="feed" value="yes">I agree to feed the cats</quiet-checkbox>
+<quiet-checkbox name="feed" value="yes">I will feed the cats</quiet-checkbox>
 ```
 
 ## Examples
@@ -14,7 +14,7 @@ layout: component
 Add the `checked` attribute to check the checkbox initially.
 
 ```html {.example}
-<quiet-checkbox name="feed" value="yes" checked>I agree to feed the cats</quiet-checkbox>
+<quiet-checkbox name="feed" value="yes" checked>I will feed the cats</quiet-checkbox>
 ```
 
 ### Filled and unstyled checkboxes
@@ -62,7 +62,7 @@ The `required` attribute can be applied to enable validation using the [Constrai
 
 ```html {.example}
 <form action="about:blank" method="get" target="_blank">
-  <quiet-checkbox name="feed" value="yes" required>I agree to feed the cats</quiet-checkbox>
+  <quiet-checkbox name="feed" value="yes" required>I will feed the cats</quiet-checkbox>
   <br><br>
   <quiet-button type="submit" variant="primary">Submit</quiet-button>
   <quiet-button type="reset">Reset</quiet-button>
@@ -75,7 +75,7 @@ Use the `custom-validity` attribute to make the checkbox invalid and show a cust
 
 ```html {.example}
 <form action="about:blank" method="get" target="_blank">
-  <quiet-checkbox name="feed" value="yes" required custom-validity="Don't forget to clean the litter box!">I agree to feed the cats</quiet-checkbox>
+  <quiet-checkbox name="feed" value="yes" required custom-validity="Don't forget to clean the litter box!">I will feed the cats</quiet-checkbox>
   <br><br>
   <quiet-button type="submit" variant="primary">Submit</quiet-button>
   <quiet-button type="reset">Reset</quiet-button>
@@ -92,7 +92,7 @@ You can style valid and invalid checkboxes using the `:valid` and `:invalid` pse
 
 ```html {.example}
 <form action="about:blank" method="get" target="_blank" class="checkbox__validation-pseudo">
-  <quiet-checkbox name="feed" value="yes" required>I agree to feed the cats</quiet-checkbox>
+  <quiet-checkbox name="feed" value="yes" required>I will feed the cats</quiet-checkbox>
   <br><br>
   <quiet-button type="submit" variant="primary">Submit</quiet-button>
   <quiet-button type="reset">Reset</quiet-button>
@@ -117,7 +117,7 @@ However, these selectors will match even before the user has had a chance to fil
 
 ```html {.example}
 <form action="about:blank" method="get" target="_blank" class="checkbox__validation-custom">
-  <quiet-checkbox name="feed" value="yes" required>I agree to feed the cats</quiet-checkbox>
+  <quiet-checkbox name="feed" value="yes" required>I will feed the cats</quiet-checkbox>
   <br><br>
   <quiet-button type="submit" variant="primary">Submit</quiet-button>
   <quiet-button type="reset">Reset</quiet-button>

@@ -55,6 +55,7 @@ export function highlightCodePlugin(options = {}) {
       container.querySelectorAll('code[class*="language-"]').forEach(code => {
         const langClass = [...code.classList.values()].find(val => val.startsWith('language-'));
         const lang = langClass ? langClass.replace(/^language-/, '') : 'plain';
+        code.setAttribute('tabindex', '0');
 
         try {
           code.innerHTML = highlightCode(code.textContent ?? '', lang);

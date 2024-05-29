@@ -4,7 +4,7 @@ layout: component
 ---
 
 ```html {.example}
-<quiet-checkbox name="feed" value="yes">I have fed the cats</quiet-checkbox>
+<quiet-checkbox name="feed" value="yes">I agree to feed the cats</quiet-checkbox>
 ```
 
 ## Examples
@@ -14,7 +14,7 @@ layout: component
 Add the `checked` attribute to check the checkbox initially.
 
 ```html {.example}
-<quiet-checkbox name="fed" value="yes" checked>I have fed the cats</quiet-checkbox>
+<quiet-checkbox name="feed" value="yes" checked>I agree to feed the cats</quiet-checkbox>
 ```
 
 ### Filled and unstyled text fields
@@ -39,6 +39,14 @@ Use the `size` attribute to change the text field's size.
 <quiet-checkbox size="xl">Extra large</quiet-checkbox>
 ```
 
+### Indeterminate checkboxes
+
+Use the `indeterminate` attribute to put the checkbox in an indeterminate state. This can be used to show a mixed selection in a group of "child" checkboxes.
+
+```html {.example}
+<quiet-checkbox indeterminate>Indeterminate</quiet-checkbox>
+```
+
 ### Disabling checkboxes
 
 Use the `disabled` attribute to disable the checkbox.
@@ -48,21 +56,13 @@ Use the `disabled` attribute to disable the checkbox.
 <quiet-checkbox checked disabled>Checked and disabled</quiet-checkbox>
 ```
 
-### Indeterminate checkboxes
-
-Use the `indeterminate` attribute to put the checkbox in an indeterminate state. This can be used to show a mixed selection in a group of "child" checkboxes.
-
-```html {.example}
-<quiet-checkbox indeterminate>Indeterminate</quiet-checkbox>
-```
-
 ### Validating text fields
 
 The `required` attribute can be applied to enable validation using the [Constraint Validation API](https://developer.mozilla.org/en-US/docs/Web/HTML/Constraint_validation). This will prevent form submission until the checkbox is checked.
 
 ```html {.example}
 <form action="about:blank" method="get" target="_blank">
-  <quiet-checkbox name="fed" value="yes" required>I have fed the cats</quiet-checkbox>
+  <quiet-checkbox name="feed" value="yes" required>I agree to feed the cats</quiet-checkbox>
   <br><br>
   <quiet-button type="submit" variant="primary">Submit</quiet-button>
   <quiet-button type="reset">Reset</quiet-button>
@@ -75,7 +75,7 @@ Use the `custom-validity` attribute to make the checkbox invalid and show a cust
 
 ```html {.example}
 <form action="about:blank" method="get" target="_blank">
-  <quiet-checkbox name="fed" value="yes" required custom-validity="Did you remember the catnip?">I have fed the cats</quiet-checkbox>
+  <quiet-checkbox name="feed" value="yes" required custom-validity="Don't forget to clean the litter box!">I agree to feed the cats</quiet-checkbox>
   <br><br>
   <quiet-button type="submit" variant="primary">Submit</quiet-button>
   <quiet-button type="reset">Reset</quiet-button>
@@ -92,7 +92,7 @@ You can style valid and invalid text fields using the `:valid` and `:invalid` ps
 
 ```html {.example}
 <form action="about:blank" method="get" target="_blank" class="checkbox__validation-pseudo">
-  <quiet-checkbox name="fed" value="yes" required>I have fed the cats</quiet-checkbox>
+  <quiet-checkbox name="feed" value="yes" required>I agree to feed the cats</quiet-checkbox>
   <br><br>
   <quiet-button type="submit" variant="primary">Submit</quiet-button>
   <quiet-button type="reset">Reset</quiet-button>
@@ -117,7 +117,7 @@ However, these selectors will match even before the user has had a chance to fil
 
 ```html {.example}
 <form action="about:blank" method="get" target="_blank" class="checkbox__validation-custom">
-  <quiet-checkbox name="fed" value="yes" required>I have fed the cats</quiet-checkbox>
+  <quiet-checkbox name="feed" value="yes" required>I agree to feed the cats</quiet-checkbox>
   <br><br>
   <quiet-button type="submit" variant="primary">Submit</quiet-button>
   <quiet-button type="reset">Reset</quiet-button>

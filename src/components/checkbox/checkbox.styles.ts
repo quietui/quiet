@@ -88,9 +88,10 @@ export default css`
       left: 0;
       width: 100%;
       height: 100%;
-      opacity: 0;
       height: auto;
       transition: 100ms opacity ease;
+      opacity: 0;
+      will-change: opacity; /* prevents the icon from shifting slightly in Safari when checked */
     }
 
     &.checked:not(.indeterminate) #check-icon,

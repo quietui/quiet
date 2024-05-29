@@ -29,6 +29,7 @@ import type { CSSResultGroup } from 'lit';
  *
  * @csspart label - The `<label>` that wraps the entire control.
  * @csspart visual-box - The element that wraps the internal checkbox.
+ * @csspart checkbox - The internal checkbox, an `<input type="checkbox">` element.
  * @csspart check-icon - The check icon, a `<quiet-icon>` element.
  * @csspart indeterminate-icon - The indeterminate icon, a `<quiet-icon>` element.
  *

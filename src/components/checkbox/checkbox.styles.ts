@@ -8,7 +8,7 @@ export default css`
   /* The checkbox's label */
   label {
     display: inline-flex;
-    gap: 0.5em;
+    gap: 0.75em;
     align-items: center;
     cursor: pointer;
 
@@ -40,16 +40,14 @@ export default css`
   #visual-box {
     display: flex;
     position: relative;
-    font-size: 1.25em;
     border-radius: calc(var(--quiet-border-radius) / 2);
-    width: 1em;
-    height: 1em;
+    width: 1.25em;
+    height: 1.25em;
     transition:
       100ms background-color ease,
       100ms border-color ease;
 
     &:has(:focus-visible) {
-      outline: dotted 4px tomato;
       outline: var(--quiet-border-style) calc(var(--quiet-border-width) + 1px) var(--quiet-focus-color);
       outline-offset: var(--quiet-border-width);
     }
@@ -87,8 +85,8 @@ export default css`
       top: 0;
       left: 0;
       width: 100%;
-      height: 100%;
       height: auto;
+      font-size: 1.25em;
       transition: 100ms opacity ease;
       opacity: 0;
       will-change: opacity; /* prevents the icon from shifting slightly in Safari when checked */

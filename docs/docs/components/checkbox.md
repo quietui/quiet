@@ -17,9 +17,9 @@ Add the `checked` attribute to check the checkbox initially.
 <quiet-checkbox name="feed" value="yes" checked>I agree to feed the cats</quiet-checkbox>
 ```
 
-### Filled and unstyled text fields
+### Filled and unstyled checkboxes
 
-Set the `variant` attribute to `normal` or `filled` to change the text field's appearance.
+Set the `variant` attribute to `normal` or `filled` to change the checkbox's appearance.
 
 ```html {.example}
 <quiet-checkbox variant="normal">Normal checkbox</quiet-checkbox>
@@ -29,7 +29,7 @@ Set the `variant` attribute to `normal` or `filled` to change the text field's a
 
 ### Changing the size
 
-Use the `size` attribute to change the text field's size.
+Use the `size` attribute to change the checkbox's size.
 
 ```html {.example}
 <quiet-checkbox size="xs">Extra small</quiet-checkbox><br>
@@ -56,7 +56,7 @@ Use the `disabled` attribute to disable the checkbox.
 <quiet-checkbox checked disabled>Checked and disabled</quiet-checkbox>
 ```
 
-### Validating text fields
+### Validating checkboxes
 
 The `required` attribute can be applied to enable validation using the [Constraint Validation API](https://developer.mozilla.org/en-US/docs/Web/HTML/Constraint_validation). This will prevent form submission until the checkbox is checked.
 
@@ -88,7 +88,7 @@ Most validation attributes work exactly like their native counterparts. However,
 
 ### Styling validation
 
-You can style valid and invalid text fields using the `:valid` and `:invalid` pseudo classes.
+You can style valid and invalid checkboxes using the `:valid` and `:invalid` pseudo classes.
 
 ```html {.example}
 <form action="about:blank" method="get" target="_blank" class="checkbox__validation-pseudo">

@@ -142,7 +142,6 @@ export class QuietSwitch extends QuietElement {
   private handleClick() {
     this.checked = !this.checked;
     this.internals.setFormValue(this.value);
-    this.dispatchEvent(new QuietInputEvent());
   }
 
   private handleBlur() {

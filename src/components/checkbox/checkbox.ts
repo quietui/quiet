@@ -71,7 +71,7 @@ export class QuietCheckbox extends QuietElement {
   /** The checkbox's checked state. */
   @property({ type: Boolean }) checked = false;
 
-  /** The checkbox's value. */
+  /** Puts the checkbox in an indeterminate state. */
   @property({ type: Boolean }) indeterminate = false;
 
   /** Disables the checkbox. */

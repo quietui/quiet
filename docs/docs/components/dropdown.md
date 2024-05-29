@@ -254,12 +254,12 @@ You can set the preferred placement of the dropdown menu with the `placement` at
 
 ```html {.example}
 <quiet-dropdown placement="top">
-  <quiet-button slot="trigger" with-caret>Desert animals</quiet-button>
-  <quiet-dropdown-item name="camel">Camel</quiet-dropdown-item>
-  <quiet-dropdown-item name="bearded-dragon">Bearded dragon</quiet-dropdown-item>
-  <quiet-dropdown-item name="fennec">Fennec fox</quiet-dropdown-item>
-  <quiet-dropdown-item name="rattlesnake">Rattlesnake</quiet-dropdown-item>
-  <quiet-dropdown-item name="roadrunner">Roadrunner</quiet-dropdown-item>
-  <quiet-dropdown-item name="sand-cat">Sand cat</quiet-dropdown-item>
+  <quiet-button slot="trigger" with-caret>Types of cats</quiet-button>
+  <quiet-dropdown-item name="bengal">Bengal</quiet-dropdown-item>
+  <quiet-dropdown-item name="calico">Calico</quiet-dropdown-item>
+  <quiet-dropdown-item name="maine-coon">Maine coon</quiet-dropdown-item>
+  <quiet-dropdown-item name="siamese">Siamese</quiet-dropdown-item>
+  <quiet-dropdown-item name="tabby">Tabby</quiet-dropdown-item>
+  <quiet-dropdown-item name="tuxedo">Tuxedo</quiet-dropdown-item>
 </quiet-dropdown>
 ```

@@ -12,7 +12,6 @@ export default css`
     display: contents;
     line-height: calc(var(--quiet-line-height) * 0.75);
     border: none;
-    outline: dotted 2px tomato;
     margin: 0;
   }
 

@@ -8,13 +8,13 @@ export default css`
     display: inline-flex;
     width: 1em;
     height: 1em;
-    animation: rotate 1.5s linear infinite;
   }
 
   svg {
     width: 100%;
     height: 100%;
     aspect-ratio: 1;
+    animation: rotate 1.5s linear infinite;
   }
 
   .track {

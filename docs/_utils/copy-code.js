@@ -23,7 +23,7 @@ export function copyCodePlugin(options = {}) {
         const pre = code.closest('pre');
 
         // Add a copy button (we set the copy data at runtime to reduce page bloat)
-        pre.innerHTML = `<quiet-copy class="copy-button"></quiet-copy>` + pre.innerHTML;
+        pre.innerHTML += `<quiet-copy class="copy-button"></quiet-copy>`;
       });
 
       return doc.toString();

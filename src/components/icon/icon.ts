@@ -22,6 +22,8 @@ const requests = new Map<string, Promise<string>>();
  *
  * @event quiet-loaded - The icon has reloaded and rendered. This event does not bubble.
  * @event quiet-load-error - The icon failed to load. This event does not bubble.
+ *
+ * @csspart svg - The internal SVG element.
  */
 @customElement('quiet-icon')
 export class QuietIcon extends QuietElement {
@@ -111,6 +113,7 @@ export class QuietIcon extends QuietElement {
       const doc = parser.parseFromString(responseText, 'text/html');
 
       svg = doc.querySelector<SVGSVGElement>('svg');
+      svg?.part.add('svg');
     } catch {
       return undefined;
     }

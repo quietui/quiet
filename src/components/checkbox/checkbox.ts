@@ -146,7 +146,6 @@ export class QuietCheckbox extends QuietElement {
     this.checked = !this.checked;
     this.indeterminate = false;
     this.internals.setFormValue(this.value);
-    this.dispatchEvent(new QuietInputEvent());
   }
 
   private handleBlur() {

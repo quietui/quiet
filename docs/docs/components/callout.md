@@ -72,6 +72,6 @@ Callouts are sized relative to the current font size. To change their size, appl
 
 <quiet-callout variant="constructive" with-icon style="font-size: 1.25rem;">
   <quiet-icon slot="icon" name="bulb"></quiet-icon>
-  Day by day nothing seems to change, but pretty soon everything is different.
+  You know what's weird? Day by day nothing seems to change, but pretty soon…everything is different.
 </quiet-callout>
 ```

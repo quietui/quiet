@@ -256,6 +256,21 @@ export default css`
     }
   }
 
+  /* Grouped buttons */
+  :host([data-button-group-first]) .button {
+    border-start-end-radius: 0;
+    border-end-end-radius: 0;
+  }
+
+  :host([data-button-group-middle]) .button {
+    border-radius: 0;
+  }
+
+  :host([data-button-group-last]) .button {
+    border-start-start-radius: 0;
+    border-end-start-radius: 0;
+  }
+
   /* Icons */
   ::slotted(quiet-icon) {
     font-size: 1.25em !important;

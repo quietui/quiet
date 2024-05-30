@@ -53,7 +53,8 @@ Use the `disabled` attribute to disable the checkbox.
 
 ```html {.example}
 <quiet-checkbox disabled>Unchecked and disabled</quiet-checkbox><br>
-<quiet-checkbox checked disabled>Checked and disabled</quiet-checkbox>
+<quiet-checkbox checked disabled>Checked and disabled</quiet-checkbox><br>
+<quiet-checkbox indeterminate disabled>Indeterminate and disabled</quiet-checkbox>
 ```
 
 ### Validating checkboxes

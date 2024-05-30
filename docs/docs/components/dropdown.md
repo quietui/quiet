@@ -15,25 +15,25 @@ layout: component
   <quiet-dropdown-item name="reply">
     <quiet-icon slot="icon" name="corner-up-left"></quiet-icon>
     Reply
-    <span slot="shortcut">⌘R</span>
+    <span slot="details">⌘R</span>
   </quiet-dropdown-item>
 
   <quiet-dropdown-item name="forward">
     <quiet-icon slot="icon" name="corner-up-right"></quiet-icon>
     Forward
-    <span slot="shortcut">⌘F</span>
+    <span slot="details">⌘F</span>
   </quiet-dropdown-item>
 
   <quiet-dropdown-item name="archive">
     <quiet-icon slot="icon" name="archive"></quiet-icon>
     Archive
-    <span slot="shortcut">⇧⌘A</span>
+    <span slot="details">⇧⌘A</span>
   </quiet-dropdown-item>
 
   <quiet-dropdown-item name="delete" variant="destructive">
     <quiet-icon slot="icon" name="trash"></quiet-icon>
     Delete
-    <span slot="shortcut">Delete</span>
+    <span slot="details">Delete</span>
   </quiet-dropdown-item>
 
   <quiet-divider></quiet-divider>
@@ -65,7 +65,7 @@ When an item is selected, the `quiet-select` event will be emitted by the dropdo
   <quiet-dropdown-item name="full-screen">Enter full screen</quiet-dropdown-item>
   <quiet-dropdown-item name="actual">Actual size</quiet-dropdown-item>
   <quiet-dropdown-item name="zoom-in">Zoom in</quiet-dropdown-item>
-  <quiet-dropdown-item name="zoom-out">Zoom out<quiet-dropdown-item>
+  <quiet-dropdown-item name="zoom-out">Zoom out</quiet-dropdown-item>
 </quiet-dropdown>
 
 <script>
@@ -127,9 +127,9 @@ Use the `<small>` element for labels and the [`<quiet-divider>`](/docs/component
 </quiet-dropdown>
 ```
 
-### Showing shortcuts
+### Showing details
 
-Use the `shortcut` slot to display keyboard shortcuts at the end of [dropdown items](/docs/components/dropdown-item).
+Use the `details` slot to display details, such as keyboard shortcuts, at the end of [dropdown items](/docs/components/dropdown-item).
 
 ```html {.example}
 <quiet-dropdown>
@@ -137,29 +137,29 @@ Use the `shortcut` slot to display keyboard shortcuts at the end of [dropdown it
 
   <quiet-dropdown-item name="reply">
     Reply
-    <span slot="shortcut">⌘R</span>
+    <span slot="details">⌘R</span>
   </quiet-dropdown-item>
 
   <quiet-dropdown-item name="forward">
     Forward
-    <span slot="shortcut">⌘F</span>
+    <span slot="details">⌘F</span>
   </quiet-dropdown-item>
 
   <quiet-dropdown-item name="move">
     Move
-    <span slot="shortcut">⇧⌘M</span>
+    <span slot="details">⇧⌘M</span>
   </quiet-dropdown-item>
 
   <quiet-divider></quiet-divider>
 
   <quiet-dropdown-item name="archive">
     Archive
-    <span slot="shortcut">⇧⌘A</span>
+    <span slot="details">⇧⌘A</span>
   </quiet-dropdown-item>
 
   <quiet-dropdown-item name="delete" variant="destructive">
     Delete
-    <span slot="shortcut">Delete</span>
+    <span slot="details">Delete</span>
   </quiet-dropdown-item>
 </quiet-dropdown>
 ```

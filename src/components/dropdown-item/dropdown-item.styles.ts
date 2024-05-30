@@ -36,7 +36,7 @@ export default css`
 
   /* Destructive variant */
   :host([variant='destructive']),
-  :host([variant='destructive']) .shortcut {
+  :host([variant='destructive']) .details {
     color: var(--quiet-destructive-text-colorful);
   }
 
@@ -84,7 +84,7 @@ export default css`
     flex-wrap: wrap;
   }
 
-  .shortcut {
+  .details {
     flex: 0 0 auto;
     display: flex;
     align-items: center;

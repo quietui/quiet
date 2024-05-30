@@ -15,12 +15,12 @@ import type { CSSResultGroup } from 'lit';
  *
  * @slot - The item's label or description.
  * @slot icon - An optional icon to show at the start of the item.
- * @slot shortcut - A keyboard shortcut to display at the end of the item.
+ * @slot details - Optional details, such as a keyboard shortcut, to display at the end of the item.
  *
  * @csspart checkmark - The checkmark icon that's shown when checked, a `<quiet-icon>` element.
  * @csspart icon - The container that wraps the icon.
  * @csspart label - The container that wraps the label.
- * @csspart shortcut - The container that wraps the shortcut.
+ * @csspart details - The container that wraps the menu item's details.
  */
 @customElement('quiet-dropdown-item')
 export class QuietDropdownItem extends QuietElement {
@@ -95,8 +95,8 @@ export class QuietDropdownItem extends QuietElement {
         <slot></slot>
       </span>
 
-      <span part="shortcut" class="shortcut">
-        <slot name="shortcut"></slot>
+      <span part="details" class="details">
+        <slot name="details"></slot>
       </span>
     `;
   }

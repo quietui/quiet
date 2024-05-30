@@ -47,7 +47,6 @@ export class QuietDropdown extends QuietElement {
 
   @query('.menu') private menu: HTMLDivElement;
   @query('.menu slot') private menuSlot: HTMLSlotElement;
-  @query('slot[name="trigger"]') private triggerSlot: HTMLSlotElement;
 
   /** Opens or closes the dropdown. */
   @property({ type: Boolean, reflect: true }) open = false;

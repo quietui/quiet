@@ -89,6 +89,7 @@ export default css`
       font-size: 1.25em;
       opacity: 0;
       scale: 0;
+      stroke-width: 2px;
       will-change: opacity; /* prevents the icon from shifting slightly in Safari when checked */
       transition:
         100ms opacity ease,

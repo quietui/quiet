@@ -34,7 +34,7 @@ export class QuietIcon extends QuietElement {
   /** The name of the icon library to use. */
   @property() library = 'default';
 
-  /** The name of the icon to render. */
+  /** The icon family to use for this icon, e.g. `filled` or `outline`. */
   @property() family = 'outline';
 
   /** The name of the icon to render. */

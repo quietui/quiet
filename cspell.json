@@ -61,6 +61,7 @@
     "oklab",
     "outdir",
     "packagejson",
+    "plopfile",
     "prismjs",
     "progressbar",
     "quietui",

@@ -4,7 +4,7 @@ import { distDir, docsDir, rootDir, runScript, siteDir } from './utils.js';
 import { execSync } from 'child_process';
 import { fileURLToPath } from 'url';
 import { globby } from 'globby';
-import { mkdir, readFile, unlink } from 'fs/promises';
+import { mkdir, readFile } from 'fs/promises';
 import { replace } from 'esbuild-plugin-replace';
 import browserSync from 'browser-sync';
 import chalk from 'chalk';

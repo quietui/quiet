@@ -7,9 +7,9 @@ import { live } from 'lit/directives/live.js';
 import { Localize } from '../../utilities/localize.js';
 import { QuietBlurEvent, QuietChangeEvent, QuietFocusEvent, QuietInputEvent } from '../../events/form.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
+import formControlStyles from '../../styles/form-control.styles.js';
 import hostStyles from '../../styles/host.styles.js';
 import styles from './text-field.styles.js';
-import textBoxStyles from '../../styles/text-box.styles.js';
 import type { CSSResultGroup } from 'lit';
 
 /**
@@ -52,7 +52,7 @@ import type { CSSResultGroup } from 'lit';
 @customElement('quiet-text-field')
 export class QuietTextField extends QuietElement {
   static formAssociated = true;
-  static styles: CSSResultGroup = [hostStyles, textBoxStyles, styles];
+  static styles: CSSResultGroup = [hostStyles, formControlStyles, styles];
 
   /** A reference to the `<form>` associated with the form control, or null if no form is associated. */
   public associatedForm: HTMLFormElement | null = null;
@@ -479,7 +479,7 @@ export class QuietTextField extends QuietElement {
                 @pointerdown=${this.handleTextBoxButtonPointerDown}
                 @click=${this.handlePasswordToggleClick}
               >
-                <quiet-icon library="system" name=${this.isPasswordVisible ? 'eye-slash' : 'eye'}></quiet-icon>
+                <quiet-icon library="system" name=${this.isPasswordVisible ? 'eye-off' : 'eye'}></quiet-icon>
               </button>
             `
           : ''}
@@ -495,7 +495,7 @@ export class QuietTextField extends QuietElement {
                 @pointerdown=${this.handleTextBoxButtonPointerDown}
                 @click=${this.handleClearClick}
               >
-                <quiet-icon library="system" name="x-circle"></quiet-icon>
+                <quiet-icon library="system" name="circle-x"></quiet-icon>
               </button>
             `
           : ''}

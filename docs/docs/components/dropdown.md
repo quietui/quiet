@@ -6,26 +6,26 @@ layout: component
 ```html {.example}
 <quiet-dropdown>
   <quiet-button slot="trigger" variant="primary" with-caret>
-    <quiet-icon slot="start" name="envelope"></quiet-icon>
+    <quiet-icon slot="start" name="mail"></quiet-icon>
     Message
   </quiet-button>
 
   <small>Actions</small>
 
   <quiet-dropdown-item name="reply">
-    <quiet-icon slot="icon" name="arrow-uturn-left"></quiet-icon>
+    <quiet-icon slot="icon" name="corner-up-left"></quiet-icon>
     Reply
     <span slot="shortcut">⌘R</span>
   </quiet-dropdown-item>
 
   <quiet-dropdown-item name="forward">
-    <quiet-icon slot="icon" name="arrow-right"></quiet-icon>
+    <quiet-icon slot="icon" name="corner-up-right"></quiet-icon>
     Forward
     <span slot="shortcut">⌘F</span>
   </quiet-dropdown-item>
 
   <quiet-dropdown-item name="archive">
-    <quiet-icon slot="icon" name="archive-box"></quiet-icon>
+    <quiet-icon slot="icon" name="archive"></quiet-icon>
     Archive
     <span slot="shortcut">⇧⌘A</span>
   </quiet-dropdown-item>
@@ -95,12 +95,12 @@ Use the `icon` slot to add icons to [dropdown items](/docs/components/dropdown-i
   </quiet-dropdown-item>
 
   <quiet-dropdown-item name="copy">
-    <quiet-icon slot="icon" name="clipboard"></quiet-icon>
+    <quiet-icon slot="icon" name="clipboard-copy"></quiet-icon>
       Copy
   </quiet-dropdown-item>
 
   <quiet-dropdown-item name="paste">
-    <quiet-icon slot="icon" name="clipboard-document"></quiet-icon>
+    <quiet-icon slot="icon" name="clipboard-plus"></quiet-icon>
       Paste
   </quiet-dropdown-item>
 
@@ -209,7 +209,7 @@ Add `variant="destructive"` to any [dropdown item](/docs/components/dropdown-ite
   <quiet-button slot="trigger" with-caret>Project</quiet-button>
 
   <quiet-dropdown-item name="share">
-    <quiet-icon slot="icon" name="arrow-up-tray"></quiet-icon>
+    <quiet-icon slot="icon" name="share-2"></quiet-icon>
     Share
   </quiet-dropdown-item>
 
@@ -223,7 +223,7 @@ Add `variant="destructive"` to any [dropdown item](/docs/components/dropdown-ite
   <small>Danger zone</small>
   
   <quiet-dropdown-item name="archive">
-    <quiet-icon slot="icon" name="archive-box"></quiet-icon>
+    <quiet-icon slot="icon" name="archive"></quiet-icon>
     Archive
   </quiet-dropdown-item>
 
@@ -253,7 +253,7 @@ Add the `disabled` attribute to any [dropdown item](/docs/components/dropdown-it
 You can set the preferred placement of the dropdown menu with the `placement` attribute. The menu will shift to a more optimal location if the preferred placement doesn't have enough room.
 
 ```html {.example}
-<quiet-dropdown placement="top">
+<quiet-dropdown placement="right">
   <quiet-button slot="trigger" with-caret>Types of cats</quiet-button>
   <quiet-dropdown-item name="bengal">Bengal</quiet-dropdown-item>
   <quiet-dropdown-item name="calico">Calico</quiet-dropdown-item>

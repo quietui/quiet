@@ -33,7 +33,7 @@ Use the `on` and `off` slots to show inner labels or icons that align with the s
 <quiet-switch name="mode" value="kitten">
   Kitten mode
   <quiet-icon slot="on-label" name="check" label="On"></quiet-icon>
-  <quiet-icon slot="off-label" name="x-mark" label="Off"></quiet-icon>
+  <quiet-icon slot="off-label" name="x" label="Off"></quiet-icon>
 </quiet-switch>
 ```
 

@@ -52,7 +52,7 @@ export function codeExamplesPlugin(options = {}) {
                     aria-controls="${id}"
                   >
                     Code
-                    <quiet-icon name="chevron-down" family="micro"></quiet-icon>
+                    <quiet-icon name="chevron-down"></quiet-icon>
                   </button>
 
                   ${
@@ -61,7 +61,7 @@ export function codeExamplesPlugin(options = {}) {
                       : `
                         <button class="code-example-pen" type="button">
                           Edit
-                          <quiet-icon name="arrow-top-right-on-square" family="micro"></quiet-icon>
+                          <quiet-icon name="external-link"></quiet-icon>
                         </button>
                       `
                   }

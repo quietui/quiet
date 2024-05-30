@@ -5,9 +5,9 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
 import { QuietBlurEvent, QuietChangeEvent, QuietFocusEvent, QuietInputEvent } from '../../events/form.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
+import formControlStyles from '../../styles/form-control.styles.js';
 import hostStyles from '../../styles/host.styles.js';
 import styles from './text-area.styles.js';
-import textBoxStyles from '../../styles/text-box.styles.js';
 import type { CSSResultGroup } from 'lit';
 
 /**
@@ -44,7 +44,7 @@ import type { CSSResultGroup } from 'lit';
 @customElement('quiet-text-area')
 export class QuietTextArea extends QuietElement {
   static formAssociated = true;
-  static styles: CSSResultGroup = [hostStyles, textBoxStyles, styles];
+  static styles: CSSResultGroup = [hostStyles, formControlStyles, styles];
 
   /** A reference to the `<form>` associated with the form control, or null if no form is associated. */
   public associatedForm: HTMLFormElement | null = null;

@@ -1,9 +1,10 @@
 import { css } from 'lit';
 
 /**
- * Shared text box styles for use with `<quiet-text-field>`, `<quiet-text-area>`, and similar text box components.
- * Components must render the following elements in this order: `#label`, `#description`, `#visual-box`, and `#text-box`
- * (which must be a child of `#visual-box`). See the template in `<quiet-text-area>` for an example.
+ * Shared label, description, and text box styles for use with form controls.
+ *
+ * Text box components must render the following elements in this order: `#label`, `#description`, `#visual-box`, and
+ * `#text-box` (which must be a child of `#visual-box`). See the template in `<quiet-text-area>` for an example.
  */
 export default css`
   :host {
@@ -42,6 +43,16 @@ export default css`
     &:has(~ .xl) {
       font-size: var(--quiet-form-control-font-size-xl);
     }
+  }
+
+  :host([required]) #label::after {
+    content: var(--quiet-form-control-required-content);
+    margin-inline-start: -0.2em;
+  }
+
+  #description {
+    font-size: 0.8375rem;
+    color: var(--quiet-text-muted);
   }
 
   #visual-box {
@@ -180,7 +191,7 @@ export default css`
     align-items: center;
     justify-content: center;
     font: inherit;
-    font-size: 1.5em;
+    font-size: 1.25em;
     border: none;
     background: none;
     color: var(--quiet-text-muted);
@@ -193,15 +204,5 @@ export default css`
     &:active {
       translate: 0 1px;
     }
-  }
-
-  #description {
-    font-size: 0.8375rem;
-    color: var(--quiet-text-muted);
-  }
-
-  :host([required]) #label::after {
-    content: var(--quiet-form-control-required-content);
-    margin-inline-start: -0.2em;
   }
 `;

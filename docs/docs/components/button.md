@@ -37,7 +37,7 @@ Use the `start` and `end` slots to add icons. For best results, use a [`<quiet-i
 
 ```html {.example}
 <quiet-button>
-  <quiet-icon slot="start" name="cog-6-tooth"></quiet-icon>
+  <quiet-icon slot="start" name="settings"></quiet-icon>
   Settings
 </quiet-button>
 
@@ -49,7 +49,7 @@ Use the `start` and `end` slots to add icons. For best results, use a [`<quiet-i
 <quiet-button>
   <quiet-icon slot="start" name="link"></quiet-icon>
   Open
-  <quiet-icon slot="end" name="arrow-top-right-on-square"></quiet-icon>
+  <quiet-icon slot="end" name="external-link"></quiet-icon>
 </quiet-button>
 ```
 
@@ -139,7 +139,7 @@ To create an icon button, place an icon into the button's default slot and set t
 </quiet-button>
 
 <quiet-button icon-label="Reload">
-  <quiet-icon name="arrow-path"></quiet-icon>
+  <quiet-icon name="refresh"></quiet-icon>
 </quiet-button>
 
 <quiet-button icon-label="Delete" variant="destructive">
@@ -147,7 +147,7 @@ To create an icon button, place an icon into the button's default slot and set t
 </quiet-button>
 
 <quiet-button icon-label="Close" variant="text">
-  <quiet-icon name="x-mark"></quiet-icon>
+  <quiet-icon name="x"></quiet-icon>
 </quiet-button>
 ```
 
@@ -161,7 +161,7 @@ Create a toggle button by adding the `toggle="off"` attribute. To make it active
 </quiet-button>
 
 <quiet-button variant="secondary" toggle="off" icon-label="Filter">
-  <quiet-icon name="funnel"></quiet-icon>
+  <quiet-icon name="filter"></quiet-icon>
 </quiet-button>
 
 <quiet-button variant="destructive" toggle="off" icon-label="Record">
@@ -169,7 +169,7 @@ Create a toggle button by adding the `toggle="off"` attribute. To make it active
 </quiet-button>
 
 <quiet-button variant="text" toggle="off" icon-label="Mute">
-  <quiet-icon name="speaker-wave"></quiet-icon>
+  <quiet-icon name="volume-off"></quiet-icon>
 </quiet-button>
 ```
 

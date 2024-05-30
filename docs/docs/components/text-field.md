@@ -4,7 +4,7 @@ layout: component
 ---
 
 ```html {.example}
-<quiet-text-field name="name" label="Name" type="number"></quiet-text-field>
+<quiet-text-field name="name" label="Name"></quiet-text-field>
 ```
 
 ## Examples
@@ -71,13 +71,13 @@ Use the `start` and `end` slots to add presentational icons or text. Avoid inter
 
 ```html {.example}
 <quiet-text-field name="search" label="Search">
-  <quiet-icon slot="start" name="magnifying-glass"></quiet-icon>
+  <quiet-icon slot="start" name="search"></quiet-icon>
 </quiet-text-field>
 
 <br>
 
 <quiet-text-field type="email" name="email" label="Email">
-  <quiet-icon slot="end" name="envelope"></quiet-icon>
+  <quiet-icon slot="end" name="mail"></quiet-icon>
 </quiet-text-field>
 
 <br>

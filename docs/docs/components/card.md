@@ -36,7 +36,7 @@ Add the `with-header` attribute and place elements into the `header` slot to add
 <quiet-card with-header style="max-width: 340px;">
   <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">Fact of the day</h3>
   <quiet-button slot="actions" variant="text" icon-label="Settings">
-    <quiet-icon name="cog-6-tooth"></quiet-icon>
+    <quiet-icon name="settings"></quiet-icon>
   </quiet-button>
 
   Playful cats thrive on interaction with their human companions, and their spirited nature can strengthen the bond between them, making for a loving and enriching relationship.

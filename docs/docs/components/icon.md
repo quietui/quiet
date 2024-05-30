@@ -3,12 +3,12 @@ title: Icon
 layout: component
 ---
 
-Quiet includes hundreds of beautifully designed SVG icons from the popular [Heroicons](https://heroicons.com/) library. In addition, it's flexible enough that you can [replace](#the-default-icon-library) or [supplement](#registering-icon-libraries) the default icon set.
+Quiet includes hundreds of beautifully designed SVG icons from the popular [Tabler Icons](https://tabler.io/icons) library. In addition, it's flexible enough that you can [replace](#the-default-icon-library) or [supplement](#registering-icon-libraries) the default icon set.
 
 ```html {.example}
 <div style="font-size: 1.5rem;">
-  <quiet-icon name="pencil-square"></quiet-icon>
-  <quiet-icon name="cog-6-tooth"></quiet-icon>
+  <quiet-icon name="pencil"></quiet-icon>
+  <quiet-icon name="settings"></quiet-icon>
   <quiet-icon name="trash"></quiet-icon>  
 </div>
 ```
@@ -21,32 +21,21 @@ A common pitfall of this component is not [setting the library's path](/docs/#se
 
 ### Built-in icons
 
-Quiet includes the popular [Heroicons](https://heroicons.com/) icon library out of the box. Use the `name` attribute to specify which icon should be drawn.
+Quiet includes the popular [Tabler Icons](https://tabler.io/icons) icon library out of the box. Use the `name` attribute to specify which icon should be drawn.
 
 ```html {.example}
 <div style="font-size: 1.5rem;">
   <quiet-icon name="home"></quiet-icon>
-  <quiet-icon name="bug-ant"></quiet-icon>
+  <quiet-icon name="bug"></quiet-icon>
   <quiet-icon name="bell"></quiet-icon>
   <quiet-icon name="microphone"></quiet-icon>
-  <quiet-icon name="chat-bubble-oval-left"></quiet-icon>
+  <quiet-icon name="message"></quiet-icon>
 </div>
 ```
 
 :::info
-For a list of all available icons, please refer to the [Heroicons website](https://heroicons.com/). Be careful to copy the _name_ of the icon and not the SVG code!
+For a list of all available icons, please refer to the [Tabler Icons](https://tabler.io/icons). Be careful to copy the _name_ of the icon, e.g. `arrow-up`, and not the SVG code!
 :::
-
-### Setting the icon family
-
-Some libraries have more than one family of icons. To specify the family, use the `family` attribute. Heroicons has four to choose from: `outline` (default), `solid`, `mini`, and `micro`.
-
-```html {.example}
-<quiet-icon family="outline" name="rocket-launch" style="font-size: 24px;"></quiet-icon>
-<quiet-icon family="solid" name="rocket-launch" style="font-size: 24px;"></quiet-icon>
-<quiet-icon family="mini" name="rocket-launch" style="font-size: 20px;"></quiet-icon>
-<quiet-icon family="micro" name="rocket-launch" style="font-size: 16px;"></quiet-icon>
-```
 
 ### Labeling icons
 
@@ -54,8 +43,8 @@ By default, icons are considered presentational elements. However, you can add t
 
 ```html {.example}
 <div style="font-size: 1.5rem;">
-  <quiet-icon label="Edit" name="pencil-square"></quiet-icon>
-  <quiet-icon label="Settings" name="cog-6-tooth"></quiet-icon>
+  <quiet-icon label="Edit" name="pencil"></quiet-icon>
+  <quiet-icon label="Settings" name="settings"></quiet-icon>
   <quiet-icon label="Delete" name="trash"></quiet-icon>  
 </div>
 ```
@@ -65,10 +54,26 @@ By default, icons are considered presentational elements. However, you can add t
 Icons are sized relative to the current font size. This allows you to place them into many contexts without having to explicitly size them. To change the size, set the `font-size` property on the icon or an ancestor element.
 
 ```html {.example}
-<quiet-icon name="hand-thumb-up" style="font-size: 1.5em;"></quiet-icon>
-<quiet-icon name="hand-thumb-up" style="font-size: 2em;"></quiet-icon>
-<quiet-icon name="hand-thumb-up" style="font-size: 2.5em;"></quiet-icon>
+<quiet-icon name="thumb-up" style="font-size: 1.5em;"></quiet-icon>
+<quiet-icon name="thumb-up" style="font-size: 2em;"></quiet-icon>
+<quiet-icon name="thumb-up" style="font-size: 2.5em;"></quiet-icon>
 ```
+
+### Changing the stroke
+
+You can change the thickness of the default icon library's icons by setting the `stroke-width` property on the icon. For best results, use a value between 1px and 2px at 0.25px intervals.
+
+```html {.example}
+<div style="font-size: 1.5rem;">
+  <quiet-icon name="cat" style="stroke-width: 1px;"></quiet-icon>
+  <quiet-icon name="cat" style="stroke-width: 1.5px;"></quiet-icon>
+  <quiet-icon name="cat" style="stroke-width: 2px;"></quiet-icon>
+</div>
+```
+
+:::info
+This will only work for SVG icons designed to have customizable strokes.
+:::
 
 ### Changing the color
 
@@ -132,7 +137,7 @@ unregisterIconLibrary('my-icons');
 
 ### Changing the default icon library
 
-To change the default icon library, override it by registering a new one called `default`. This will let you skip setting `<quiet-icon library="...">` on every single icon. This is only recommended if you want to completely replace the default Heroicons library.
+To change the default icon library, override it by registering a new one called `default`. This will let you skip setting `<quiet-icon library="...">` on every single icon. This is only recommended if you want to completely replace the default icon library.
 
 ```js
 import { registerIconLibrary } from '/dist/quiet.js';
@@ -288,27 +293,5 @@ This example demonstrates how to load the [Lucide](https://lucide.dev/icons/) li
   <quiet-icon library="lucide" name="bell"></quiet-icon>
   <quiet-icon library="lucide" name="mic"></quiet-icon>
   <quiet-icon library="lucide" name="message-circle"></quiet-icon>
-</div>
-```
-
-### Tabler icons
-
-This example demonstrates how to load the [Tabler icons](https://tabler.io/icons) library using the jsDelivr CDN. Only one family is available from this set.
-
-```html {.example}
-<script type="module">
-  import { registerIconLibrary } from '/dist/quiet.js';
-
-  registerIconLibrary('tabler', {
-    resolve: name => `https://cdn.jsdelivr.net/npm/@tabler/icons@2.47.0/icons/${name}.svg`
-  });
-</script>
-
-<div style="font-size: 1.5em;">
-  <quiet-icon library="tabler" name="home"></quiet-icon>
-  <quiet-icon library="tabler" name="bug"></quiet-icon>
-  <quiet-icon library="tabler" name="bell"></quiet-icon>
-  <quiet-icon library="tabler" name="microphone"></quiet-icon>
-  <quiet-icon library="tabler" name="message-circle"></quiet-icon>
 </div>
 ```

@@ -5,7 +5,7 @@ layout: component
 
 ```html {.example}
 <quiet-callout variant="primary" with-icon>
-  <quiet-icon slot="icon" name="book-open"></quiet-icon>
+  <quiet-icon slot="icon" name="book"></quiet-icon>
   A playful cat's antics can brighten any day with their boundless energy and curiosity. Watching a cat pounce and chase after toys is an endless source of entertainment.
 </quiet-callout>
 ```
@@ -40,22 +40,22 @@ Add an icon to a callout using the `icon` slot. Works best with `<quiet-icon>` a
 
 ```html {.example}
 <quiet-callout variant="primary" with-icon>
-  <quiet-icon slot="icon" name="information-circle"></quiet-icon>
+  <quiet-icon slot="icon" name="info-circle"></quiet-icon>
   A cat's soft, gentle gaze can melt even the coldest of hearts.
 </quiet-callout>
 
 <quiet-callout variant="secondary" with-icon>
-  <quiet-icon slot="icon" name="cog-6-tooth"></quiet-icon>
+  <quiet-icon slot="icon" name="settings"></quiet-icon>
   Sleep mode has been enabled. You can disable it in settings.
 </quiet-callout>
 
 <quiet-callout variant="constructive" with-icon>
-  <quiet-icon slot="icon" name="check-circle"></quiet-icon>
+  <quiet-icon slot="icon" name="circle-check"></quiet-icon>
   Great job! The litter box has been successfully cleaned.
 </quiet-callout>
 
 <quiet-callout variant="destructive" with-icon>
-  <quiet-icon slot="icon" name="exclamation-triangle"></quiet-icon>
+  <quiet-icon slot="icon" name="alert-triangle"></quiet-icon>
   Doing this will anger the cats. Are you sure you want to continue?
 </quiet-callout>
 ```
@@ -66,12 +66,12 @@ Callouts are sized relative to the current font size. To change their size, appl
 
 ```html {.example}
 <quiet-callout variant="primary" with-icon style="font-size: 1.25rem;">
-  <quiet-icon slot="icon" name="rocket-launch"></quiet-icon>
+  <quiet-icon slot="icon" name="rocket"></quiet-icon>
   It's a magical world, ol' buddy…let's go exploring!
 </quiet-callout>
 
 <quiet-callout variant="constructive" with-icon style="font-size: 1.25rem;">
-  <quiet-icon slot="icon" name="paper-airplane"></quiet-icon>
+  <quiet-icon slot="icon" name="send"></quiet-icon>
   Your message has been sent successfully!
 </quiet-callout>
 ```

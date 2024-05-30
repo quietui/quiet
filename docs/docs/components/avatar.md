@@ -37,11 +37,11 @@ When no image or letters are provided as a fallback, the default user icon will 
 
 ```html {.example}
 <quiet-avatar label="Anonymous user">
-  <quiet-icon slot="icon" family="solid" name="star"></quiet-icon>
+  <quiet-icon slot="icon" name="cat"></quiet-icon>
 </quiet-avatar>
 
 <quiet-avatar label="Anonymous user">
-  <quiet-icon slot="icon" family="solid" name="users"></quiet-icon>
+  <quiet-icon slot="icon" name="paw"></quiet-icon>
 </quiet-avatar>
 ```
 

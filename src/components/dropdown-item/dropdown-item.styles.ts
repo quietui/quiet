@@ -63,6 +63,7 @@ export default css`
   .check {
     margin-inline-start: -1.25rem;
     margin-inline-end: 0.25rem;
+    stroke-width: 2px;
     visibility: hidden;
   }
 
@@ -74,6 +75,7 @@ export default css`
     flex: 0 0 auto;
     display: flex;
     align-items: center;
+    font-size: 1.25em;
     margin-inline-end: 0.5rem !important;
   }
 

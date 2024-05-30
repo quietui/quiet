@@ -246,6 +246,10 @@ export default css`
       height: 1em;
     }
 
+    .caret {
+      stroke-width: 2px;
+    }
+
     /* Visually hidden label */
     slot[name='label'] {
       display: inline;

@@ -85,16 +85,21 @@ export default css`
       top: 0;
       left: 0;
       width: 100%;
-      height: auto;
+      height: 100%;
       font-size: 1.25em;
-      transition: 100ms opacity ease;
       opacity: 0;
+      scale: 0;
+      stroke-width: 2px;
       will-change: opacity; /* prevents the icon from shifting slightly in Safari when checked */
+      transition:
+        100ms opacity ease,
+        150ms scale ease;
     }
 
     &.checked:not(.indeterminate) #check-icon,
     &.indeterminate #indeterminate-icon {
       opacity: 1;
+      scale: 1;
     }
 
     /* The actual checkbox control */

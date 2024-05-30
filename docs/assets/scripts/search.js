@@ -6,12 +6,12 @@ const searchIndex = lunr.Index.load(searchData.searchIndex);
 const map = searchData.map;
 const searchDebounce = 100;
 const icons = {
-  about: 'information-circle',
-  component: 'cube',
-  document: 'document',
+  about: 'info-circle',
+  component: 'box',
+  document: 'file',
   home: 'home',
   sponsor: 'heart',
-  theme: 'swatch'
+  theme: 'color-swatch'
 };
 let searchTimeout;
 

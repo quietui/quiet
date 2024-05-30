@@ -883,7 +883,7 @@ quiet-callout {
     color: var(--quiet-constructive-text-colorful);
   }
 
-  [name='x-mark'] {
+  [name='x'] {
     color: var(--quiet-destructive-text-colorful);
   }
 }

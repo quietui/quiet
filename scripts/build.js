@@ -77,15 +77,15 @@ function generateManifest() {
  * Downloads and copies icons to the assets directory.
  */
 async function generateIcons() {
-  const dirToCopy = join(rootDir, 'node_modules/heroicons');
-  const filesToRemove = ['package.json', 'README.md'];
+  const dirToCopy = join(rootDir, 'node_modules/@tabler/icons/icons');
+  const licenseToCopy = join(rootDir, 'node_modules/@tabler/icons/LICENSE');
 
   spinner.start('Packaging icons');
 
   await deleteAsync(iconDir);
   await mkdir(iconDir, { recursive: true });
   await copy(dirToCopy, iconDir);
-  await Promise.all(filesToRemove.map(file => unlink(join(iconDir, file))));
+  await copy(licenseToCopy, join(iconDir, 'LICENSE'));
 
   spinner.succeed();
 

@@ -181,7 +181,7 @@ Note that we use `tabindex="-1"` on the close button to prevent it from interfer
 	<quiet-tab slot="tab" panel="first">First</quiet-tab>
 	<quiet-tab slot="tab" panel="second">Second</quiet-tab>
   <quiet-button slot="tab" variant="text" icon-label="Close second tab" tabindex="-1">
-    <quiet-icon name="x-mark" family="micro"></quiet-icon>
+    <quiet-icon name="x"></quiet-icon>
   </quiet-button>
 	<quiet-tab slot="tab" panel="third">Third</quiet-tab>
 
@@ -242,7 +242,7 @@ Note that we use `tabindex="-1"` on the close button to prevent it from interfer
     }
     
     quiet-button::part(button) {
-      border-radius: 50%;
+      border-radius: var(--quiet-border-radius);
       height: 2rem;
     }
   }

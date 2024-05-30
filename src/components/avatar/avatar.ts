@@ -58,7 +58,7 @@ export class QuietAvatar extends QuietElement {
         ? html` <span class="characters" data-length=${this.characters.length}>${this.characters.slice(0, 5)}</span> `
         : html`
             <slot name="icon">
-              <quiet-icon library="system" name="user" family="solid"></quiet-icon>
+              <quiet-icon library="system" family="filled" name="user"></quiet-icon>
             </slot>
           `}
       ${this.image ? html` <img class="image" role="presentation" src=${this.image} alt="" /> ` : ''}

@@ -8,6 +8,7 @@ const translation: Translation = {
   $dir: 'ltr',
 
   clearEntry: 'Очистить запись',
+  close: 'Закрыть',
   copied: 'Скопировано',
   copyToClipboard: 'Скопировать в буфер обмена',
   error: 'Ошибка',

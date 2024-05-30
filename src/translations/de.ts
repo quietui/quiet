@@ -8,6 +8,7 @@ const translation: Translation = {
   $dir: 'ltr',
 
   clearEntry: 'Eingabe löschen',
+  close: 'Schließen',
   copied: 'Kopiert',
   copyToClipboard: 'In die Zwischenablage kopieren',
   error: 'Fehler',

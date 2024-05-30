@@ -16,6 +16,7 @@ export interface Translation extends DefaultTranslation {
 
   // Translated terms
   clearEntry: string;
+  close: string;
   copied: string;
   copyToClipboard: string;
   error: string;

@@ -1,6 +1,7 @@
 import { animateWithClass } from '../../utilities/animate.js';
 import { customElement, property, query } from 'lit/decorators.js';
 import { html } from 'lit';
+import { Localize } from '../../utilities/localize.js';
 import { lockScrolling, unlockScrolling } from '../../utilities/scroll.js';
 import { QuietClosedEvent, QuietCloseEvent, QuietOpenedEvent, QuietOpenEvent } from '../../events/open-close.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
@@ -45,6 +46,8 @@ import type { CSSResultGroup } from 'lit';
 @customElement('quiet-dialog')
 export class QuietDialog extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
+
+  private localize = new Localize(this);
 
   @query('dialog') dialog: HTMLDialogElement;
 
@@ -164,8 +167,13 @@ export class QuietDialog extends QuietElement {
               <header part="header" class="header">
                 <slot name="header"></slot>
                 <slot name="actions" class="actions">
-                  <quiet-button slot="header" variant="text" icon-label="Close" data-dialog="dismiss">
-                    <quiet-icon library="system" name="x-mark"></quiet-icon>
+                  <quiet-button
+                    slot="header"
+                    variant="text"
+                    icon-label=${this.localize.term('close')}
+                    data-dialog="dismiss"
+                  >
+                    <quiet-icon library="system" name="x"></quiet-icon>
                   </quiet-button>
                 </slot>
               </header>

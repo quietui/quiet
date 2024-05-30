@@ -247,7 +247,7 @@ export default css`
     }
 
     .caret {
-      stroke-width: 2px;
+      font-size: 1.25em;
     }
 
     /* Visually hidden label */

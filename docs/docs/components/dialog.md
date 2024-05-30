@@ -149,11 +149,11 @@ By default, a close button is provided as a single action in the dialog's header
   </h3>
 
   <quiet-button slot="actions" variant="text" icon-label="Settings">
-    <quiet-icon name="cog-6-tooth"></quiet-icon>
+    <quiet-icon name="settings"></quiet-icon>
   </quiet-button>
 
   <quiet-button slot="actions" variant="text" icon-label="Open in a new window">
-    <quiet-icon name="arrow-top-right-on-square"></quiet-icon>
+    <quiet-icon name="external-link"></quiet-icon>
   </quiet-button>
 
   Lorem dolor sed viverra ipsum. Nisl rhoncus mattis rhoncus urna neque viverra justo nec.

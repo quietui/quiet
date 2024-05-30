@@ -37,6 +37,26 @@ Quiet includes the popular [Tabler Icons](https://tabler.io/icons) icon library 
 For a list of all available icons, please refer to the [Tabler Icons](https://tabler.io/icons). Be careful to copy the _name_ of the icon, e.g. `arrow-up`, and not the SVG code!
 :::
 
+### Setting the icon family
+
+Some libraries have more than one family of icons to group them into different styles. To specify the icon family, use the `family` attribute. [Tabler Icons](https://tabler.io/icons), the default icon library, has two families to choose from: `filled` and `outline` (default).
+
+```html {.example}
+<div style="font-size: 1.5rem;">
+  <quiet-icon family="outline" name="ghost"></quiet-icon>
+  <quiet-icon family="outline" name="star"></quiet-icon>
+  <quiet-icon family="outline" name="balloon"></quiet-icon>
+  <quiet-icon family="outline" name="heart"></quiet-icon>
+
+  <br>
+
+  <quiet-icon family="filled" name="ghost"></quiet-icon>
+  <quiet-icon family="filled" name="star"></quiet-icon>
+  <quiet-icon family="filled" name="balloon"></quiet-icon>
+  <quiet-icon family="filled" name="heart"></quiet-icon>
+</div>
+```
+
 ### Labeling icons
 
 By default, icons are considered presentational elements. However, you can add the `label` attribute to any icon to make it available to assistive devices such as screen readers.
@@ -72,7 +92,7 @@ You can change the thickness of the default icon library's icons by setting the 
 ```
 
 :::info
-This will only work for SVG icons designed to have customizable strokes.
+This will only work for SVGs designed to have customizable strokes.
 :::
 
 ### Changing the color

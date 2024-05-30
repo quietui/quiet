@@ -37,6 +37,7 @@
   "scripts": {
     "start": "node scripts/build.js --develop",
     "build": "node scripts/build.js",
+    "build:vercel": "npm run build && cp -r dist _site/dist",
     "create": "plop --plopfile src/plop/plopfile.js",
     "prepare": "npx playwright install",
     "test": "wtr --group default",

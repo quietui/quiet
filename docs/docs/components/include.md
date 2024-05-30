@@ -7,6 +7,10 @@ layout: component
 <quiet-include src="/assets/examples/include.html"></quiet-include>
 ```
 
+:::info
+The file you're including must be from a [CORS-enabled](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) endpoint.
+:::
+
 ## Examples
 
 ### Default content

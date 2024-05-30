@@ -8,7 +8,7 @@ const searchDebounce = 100;
 const icons = {
   about: 'info-circle',
   component: 'box',
-  document: 'file',
+  document: 'file-text',
   home: 'home',
   sponsor: 'heart',
   theme: 'color-swatch'

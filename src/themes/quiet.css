@@ -145,7 +145,7 @@
   /* Primary */
   --quiet-primary-fill-softer: var(--quiet-primary-100);
   --quiet-primary-fill-soft: var(--quiet-primary-200);
-  --quiet-primary-fill-mid: var(--quiet-primary-600);
+  --quiet-primary-fill-mid: color-mix(in oklab, var(--quiet-primary-600), black 7.5%);
   --quiet-primary-fill-loud: var(--quiet-primary-800);
   --quiet-primary-fill-louder: var(--quiet-primary-900);
   --quiet-primary-text-on-soft: var(--quiet-primary-900);
@@ -159,7 +159,7 @@
   /* Secondary */
   --quiet-neutral-fill-softer: var(--quiet-neutral-100);
   --quiet-neutral-fill-soft: var(--quiet-neutral-200);
-  --quiet-neutral-fill-mid: var(--quiet-neutral-600);
+  --quiet-neutral-fill-mid: color-mix(in oklab, var(--quiet-neutral-600), black 7.5%);
   --quiet-neutral-fill-loud: var(--quiet-neutral-800);
   --quiet-neutral-fill-louder: var(--quiet-neutral-900);
   --quiet-neutral-text-on-soft: var(--quiet-neutral-900);
@@ -173,7 +173,7 @@
   /* Constructive */
   --quiet-constructive-fill-softer: var(--quiet-constructive-100);
   --quiet-constructive-fill-soft: var(--quiet-constructive-200);
-  --quiet-constructive-fill-mid: var(--quiet-constructive-600);
+  --quiet-constructive-fill-mid: color-mix(in oklab, var(--quiet-constructive-600), black 8%);
   --quiet-constructive-fill-loud: var(--quiet-constructive-800);
   --quiet-constructive-fill-louder: var(--quiet-constructive-900);
   --quiet-constructive-text-on-soft: var(--quiet-constructive-900);
@@ -187,7 +187,7 @@
   /* Destructive */
   --quiet-destructive-fill-softer: var(--quiet-destructive-100);
   --quiet-destructive-fill-soft: var(--quiet-destructive-200);
-  --quiet-destructive-fill-mid: var(--quiet-destructive-600);
+  --quiet-destructive-fill-mid: color-mix(in oklab, var(--quiet-destructive-600), black 5%);
   --quiet-destructive-fill-loud: var(--quiet-destructive-800);
   --quiet-destructive-fill-louder: var(--quiet-destructive-900);
   --quiet-destructive-text-on-soft: var(--quiet-destructive-900);
@@ -255,7 +255,7 @@
   /* Constructive */
   --quiet-constructive-fill-softer: var(--quiet-constructive-900);
   --quiet-constructive-fill-soft: var(--quiet-constructive-800);
-  --quiet-constructive-fill-mid: color-mix(in oklab, var(--quiet-constructive-600), black 7.5%);
+  --quiet-constructive-fill-mid: color-mix(in oklab, var(--quiet-constructive-600), black 8%);
   --quiet-constructive-fill-loud: var(--quiet-constructive-200);
   --quiet-constructive-fill-louder: var(--quiet-constructive-100);
   --quiet-constructive-text-on-soft: var(--quiet-constructive-100);

@@ -49,7 +49,7 @@ export class QuietSwitch extends QuietElement {
   /** A reference to the `<form>` associated with the form control, or null if no form is associated. */
   public associatedForm: HTMLFormElement | null = null;
 
-  @query('input[type="checkbox"]') switch: HTMLInputElement;
+  @query('input[type="checkbox"]') private switch: HTMLInputElement;
 
   @state() isInvalid = false;
   @state() wasChanged = false;

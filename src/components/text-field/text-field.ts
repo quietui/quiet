@@ -58,7 +58,7 @@ export class QuietTextField extends QuietElement {
   public associatedForm: HTMLFormElement | null = null;
   private localize = new Localize(this);
 
-  @query('input') textBox: HTMLInputElement;
+  @query('input') private textBox: HTMLInputElement;
 
   @state() isInvalid = false;
   @state() isPasswordVisible = false;

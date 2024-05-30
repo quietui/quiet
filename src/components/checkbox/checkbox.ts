@@ -46,7 +46,7 @@ export class QuietCheckbox extends QuietElement {
   /** A reference to the `<form>` associated with the form control, or null if no form is associated. */
   public associatedForm: HTMLFormElement | null = null;
 
-  @query('input[type="checkbox"]') checkbox: HTMLInputElement;
+  @query('input[type="checkbox"]') private checkbox: HTMLInputElement;
 
   @state() isInvalid = false;
   @state() wasChanged = false;

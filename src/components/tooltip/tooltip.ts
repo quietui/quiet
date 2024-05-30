@@ -45,9 +45,9 @@ export class QuietTooltip extends QuietElement {
   private hoverOutTimeout: number | undefined;
   private anchor: Element | null;
 
-  @query('.arrow') arrow: HTMLElement;
-  @query('.polygon') polygon: HTMLElement;
-  @query('.tooltip') tooltip: HTMLElement;
+  @query('.arrow') private arrow: HTMLElement;
+  @query('.polygon') private polygon: HTMLElement;
+  @query('.tooltip') private tooltip: HTMLElement;
 
   /**
    * The id of of tooltip's anchor element. This must be an interactive/focusable element such as a button and it must

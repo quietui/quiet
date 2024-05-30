@@ -45,9 +45,9 @@ export class QuietDropdown extends QuietElement {
 
   private cleanup: ReturnType<typeof autoUpdate> | undefined;
 
-  @query('.menu') menu: HTMLDivElement;
-  @query('.menu slot') menuSlot: HTMLSlotElement;
-  @query('slot[name="trigger"]') triggerSlot: HTMLSlotElement;
+  @query('.menu') private menu: HTMLDivElement;
+  @query('.menu slot') private menuSlot: HTMLSlotElement;
+  @query('slot[name="trigger"]') private triggerSlot: HTMLSlotElement;
 
   /** Opens or closes the dropdown. */
   @property({ type: Boolean, reflect: true }) open = false;

@@ -49,7 +49,7 @@ export class QuietDialog extends QuietElement {
 
   private localize = new Localize(this);
 
-  @query('dialog') dialog: HTMLDialogElement;
+  @query('dialog') private dialog: HTMLDialogElement;
 
   /** Opens or closes the dialog. */
   @property({ type: Boolean, reflect: true }) open = false;

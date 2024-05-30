@@ -50,7 +50,7 @@ export class QuietTextArea extends QuietElement {
   public associatedForm: HTMLFormElement | null = null;
   private resizeObserver: ResizeObserver;
 
-  @query('textarea') textBox: HTMLInputElement;
+  @query('textarea') private textBox: HTMLInputElement;
 
   @state() isInvalid = false;
   @state() isPasswordVisible = false;

@@ -877,6 +877,7 @@ quiet-callout {
 
 /* Tables */
 .table-reflects {
+  font-size: 1.25em;
   text-align: center;
 
   [name='check'] {

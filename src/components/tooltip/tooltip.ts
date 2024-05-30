@@ -82,10 +82,10 @@ export class QuietTooltip extends QuietElement {
   @property({ type: Number }) distance = 8;
 
   /** The number of milliseconds to wait before opening the tooltip when hovering in. */
-  @property({ attribute: 'open-delay', type: Number }) openDelay = 100;
+  @property({ attribute: 'open-delay', type: Number }) openDelay = 50;
 
   /** The number of milliseconds to wait before closing the tooltip when hovering out. */
-  @property({ attribute: 'close-delay', type: Number }) closeDelay = 200;
+  @property({ attribute: 'close-delay', type: Number }) closeDelay = 100;
 
   connectedCallback() {
     super.connectedCallback();

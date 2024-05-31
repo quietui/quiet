@@ -3,7 +3,7 @@ title: Tab List
 layout: component
 ---
 
-Tab lists follow the [ARIA APG](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/) pattern for accessibility. They are comprised of three different components. A single tab list surrounds one or more [tabs](/docs/components/tab) and their corresponding [tab panels](/docs/components/tab-panel). Each panel must have a unique `name`, and each tab must have `slot="tab"` and a `panel` attribute that maps to a panel.
+Tab lists follow the [ARIA APG tooltip pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/) for accessibility. They are comprised of three different components. A single tab list surrounds one or more [tabs](/docs/components/tab) and their corresponding [tab panels](/docs/components/tab-panel). Each panel must have a unique `name`, and each tab must have `slot="tab"` and a `panel` attribute that maps to a panel.
 
 ```html {.example}
 <quiet-tab-list label="Select a tab">

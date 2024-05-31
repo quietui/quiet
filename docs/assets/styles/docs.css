@@ -786,7 +786,7 @@ quiet-callout {
   line-height: 1.4;
   text-align: center;
   padding-inline: 2rem;
-  margin-block: 24vh;
+  margin-block: 20dvh;
 }
 
 .splash img {
@@ -794,7 +794,7 @@ quiet-callout {
   width: 100%;
   max-width: 600px;
   margin-inline: auto;
-  margin-block-end: 4vh;
+  margin-block-end: 4dvh;
 }
 
 .splash .subtitle {

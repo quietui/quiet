@@ -77,7 +77,7 @@ window.addEventListener('turbo:render', () => {
 });
 
 // Close when clicking outside the sidebar
-document.addEventListener('pointerdown', event => {
+document.addEventListener('pointerup', event => {
   if (isSidebarOpen && !event.target.closest('#sidebar')) {
     hideSidebar();
   }

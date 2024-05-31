@@ -195,7 +195,6 @@ export class QuietDropdown extends QuietElement {
     const activeItem = items.find(item => item.active);
     const activeItemIndex = activeItem ? items.indexOf(activeItem) : 0;
     const isFocusedOnItem = document.activeElement?.localName === 'quiet-dropdown-item';
-
     let targetItem: QuietDropdownItem | undefined;
 
     // Previous item

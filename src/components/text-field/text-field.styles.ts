@@ -25,6 +25,11 @@ export default css`
       }
     }
 
+    /* Date inputs */
+    &[type='date']::-webkit-date-and-time-value {
+      text-align: start;
+    }
+
     /* Number spinners */
     &::-webkit-inner-spin-button {
       width: 2em;
@@ -35,11 +40,6 @@ export default css`
   /* Color inputs */
   #visual-box:has(#text-box[type='color']) {
     padding: 0 0.25em;
-  }
-
-  /* Date inputs */
-  #visual-box:has(#text-box[type='date']) #text-box {
-    text-align: start;
   }
 
   /* Pills */

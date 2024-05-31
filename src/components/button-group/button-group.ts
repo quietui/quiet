@@ -23,7 +23,7 @@ export class QuietButtonGroup extends QuietElement {
 
   /** Gets an array of buttons slotted into the button group. Includes slotted buttons, such as dropdown triggers. */
   private getButtons() {
-    return this.querySelectorAll<QuietButton>('quiet-button');
+    return [...this.querySelectorAll<QuietButton>('quiet-button')];
   }
 
   private handleDefaultSlotChange() {

@@ -1,9 +1,10 @@
-import { customElement, query } from 'lit/decorators.js';
+import { customElement } from 'lit/decorators.js';
 import { html } from 'lit';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import hostStyles from '../../styles/host.styles.js';
 import styles from './button-group.styles.js';
 import type { CSSResultGroup } from 'lit';
+import type { QuietButton } from '../button/button.js';
 
 /**
  * <quiet-button-group>
@@ -20,20 +21,18 @@ import type { CSSResultGroup } from 'lit';
 export class QuietButtonGroup extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
-  @query('slot') private defaultSlot: HTMLSlotElement;
+  /** Gets an array of buttons slotted into the button group. Includes slotted buttons, such as dropdown triggers. */
+  private getButtons() {
+    return this.querySelectorAll<QuietButton>('quiet-button');
+  }
 
-  handleDefaultSlotChange() {
-    const children = this.defaultSlot.assignedElements({ flatten: true });
+  private handleDefaultSlotChange() {
+    const buttons = this.getButtons();
 
-    children.forEach((child, index) => {
-      // Find the nearest button to apply the button group attributes to. This can be the child itself or a slotted
-      // button, e.g. a dropdown trigger.
-      const button = child.closest('quiet-button') || child.querySelector('quiet-button');
-      if (button) {
-        button.toggleAttribute('data-button-group-first', index === 0);
-        button.toggleAttribute('data-button-group-middle', index > 0 && index < children.length - 1);
-        button.toggleAttribute('data-button-group-last', index === children.length - 1);
-      }
+    buttons.forEach((button, index) => {
+      button.toggleAttribute('data-button-group-first', index === 0);
+      button.toggleAttribute('data-button-group-middle', index > 0 && index < buttons.length - 1);
+      button.toggleAttribute('data-button-group-last', index === buttons.length - 1);
     });
   }
 

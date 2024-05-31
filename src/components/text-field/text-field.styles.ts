@@ -1,47 +1,6 @@
 import { css } from 'lit';
 
 export default css`
-  #text-box {
-    /* Color inputs */
-    &[type='color'] {
-      &::-webkit-color-swatch-wrapper {
-        padding: 0.25em 0;
-      }
-
-      &::-webkit-color-swatch {
-        border: none;
-        border-radius: calc(var(--quiet-border-radius) / 1.75);
-      }
-
-      &::-moz-color-swatch,
-      &::-moz-focus-inner {
-        padding: 0;
-        height: calc(100% - 0.5em);
-        border-radius: calc(var(--quiet-border-radius) / 1.75);
-      }
-
-      &:-moz-focus-inner {
-        padding: 0;
-      }
-    }
-
-    /* Date inputs */
-    &[type='date']::-webkit-date-and-time-value {
-      text-align: start;
-    }
-
-    /* Number spinners */
-    &::-webkit-inner-spin-button {
-      width: 2em;
-      height: 2em;
-    }
-  }
-
-  /* Color inputs */
-  #visual-box:has(#text-box[type='color']) {
-    padding: 0 0.25em;
-  }
-
   /* Pills */
   #visual-box.pill {
     border-radius: 9999px;

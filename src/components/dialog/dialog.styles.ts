@@ -211,6 +211,7 @@ export default css`
   /* Header */
   .header {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     background: var(--quiet-paper-color);
     gap: calc(var(--spacing) / 4);
@@ -222,6 +223,7 @@ export default css`
 
   .actions {
     display: flex;
+    flex-wrap: wrap;
     margin-inline-start: auto;
   }
 
@@ -245,6 +247,7 @@ export default css`
   /* Footer */
   .footer {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: end;
     gap: calc(var(--spacing) / 4);

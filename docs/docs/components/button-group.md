@@ -80,33 +80,13 @@ Create a split button by placing a [button](/docs/components/button) and a [drop
 You can add [tooltips](/docs/components/tooltip) to improve the user experience of your button groups.
 
 ```html {.example}
-<div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-  <quiet-button-group>
-    <quiet-button id="button-group__undo" icon-label="Undo"><quiet-icon name="arrow-back-up"></quiet-icon></quiet-button>
-    <quiet-button id="button-group__redo" icon-label="Redo"><quiet-icon name="arrow-forward-up"></quiet-icon></quiet-button>
-  </quiet-button-group>
+<quiet-button-group>
+  <quiet-button id="button-group__bold" icon-label="Bold"><quiet-icon name="bold"></quiet-icon></quiet-button>
+  <quiet-button id="button-group__italic" icon-label="Italic"><quiet-icon name="italic"></quiet-icon></quiet-button>
+  <quiet-button id="button-group__underline" icon-label="Underline"><quiet-icon name="underline"></quiet-icon></quiet-button>
+</quiet-button-group>
 
-  <quiet-button-group>
-    <quiet-button id="button-group__bold" icon-label="Bold"><quiet-icon name="bold"></quiet-icon></quiet-button>
-    <quiet-button id="button-group__italic" icon-label="Italic"><quiet-icon name="italic"></quiet-icon></quiet-button>
-    <quiet-button id="button-group__underline" icon-label="Underline"><quiet-icon name="underline"></quiet-icon></quiet-button>
-  </quiet-button-group>
-
-  <quiet-button-group>
-    <quiet-button id="button-group__align-left" icon-label="Align left"><quiet-icon name="align-left"></quiet-icon></quiet-button>
-    <quiet-button id="button-group__align-center" icon-label="Align center"><quiet-icon name="align-center"></quiet-icon></quiet-button>
-    <quiet-button id="button-group__align-right" icon-label="Align right"><quiet-icon name="align-right"></quiet-icon></quiet-button>
-    <quiet-button id="button-group__justify" icon-label="Justify"><quiet-icon name="align-justified"></quiet-icon></quiet-button>
-  </quiet-button-group>
-
-  <quiet-tooltip for="button-group__undo">Undo</quiet-tooltip>
-  <quiet-tooltip for="button-group__redo">Redo</quiet-tooltip>
-  <quiet-tooltip for="button-group__bold">Bold</quiet-tooltip>
-  <quiet-tooltip for="button-group__italic">Italic</quiet-tooltip>
-  <quiet-tooltip for="button-group__underline">Underline</quiet-tooltip>
-  <quiet-tooltip for="button-group__align-left">Align left</quiet-tooltip>
-  <quiet-tooltip for="button-group__align-center">Align center</quiet-tooltip>
-  <quiet-tooltip for="button-group__align-right">Align right</quiet-tooltip>
-  <quiet-tooltip for="button-group__justify">Justify</quiet-tooltip>
-</div>
+<quiet-tooltip for="button-group__bold">Bold</quiet-tooltip>
+<quiet-tooltip for="button-group__italic">Italic</quiet-tooltip>
+<quiet-tooltip for="button-group__underline">Underline</quiet-tooltip>
 ```

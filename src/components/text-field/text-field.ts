@@ -426,7 +426,6 @@ export class QuietTextField extends QuietElement {
           lg: this.size === 'lg',
           xl: this.size === 'xl',
           // Modifiers
-          color: this.type === 'color',
           pill: this.pill,
           // States
           disabled: this.disabled

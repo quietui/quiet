@@ -33,8 +33,13 @@ export default css`
   }
 
   /* Color inputs */
-  #visual-box.color {
+  #visual-box:has(#text-box[type='color']) {
     padding: 0 0.25em;
+  }
+
+  /* Date inputs */
+  #visual-box:has(#text-box[type='date']) #text-box {
+    text-align: start;
   }
 
   /* Pills */

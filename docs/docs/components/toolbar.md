@@ -37,7 +37,10 @@ Toolbars can be used with a mixture of buttons, button groups, and dropdowns tha
 
 ```html {.example}
 <quiet-toolbar>
-  <quiet-button icon-label="New" variant="primary"><quiet-icon name="plus"></quiet-icon></quiet-button>
+  <quiet-button variant="primary">
+    <quiet-icon slot="start" name="plus"></quiet-icon>
+    New
+  </quiet-button>
 
   <quiet-button-group>
     <quiet-button icon-label="Bold"><quiet-icon name="bold"></quiet-icon></quiet-button>

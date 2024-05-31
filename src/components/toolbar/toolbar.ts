@@ -5,6 +5,7 @@ import hostStyles from '../../styles/host.styles.js';
 import styles from './toolbar.styles.js';
 import type { CSSResultGroup } from 'lit';
 import type { QuietButton } from '../button/button.js';
+import type { QuietButtonGroup } from '../button-group/button-group.js';
 
 /**
  * <quiet-toolbar>
@@ -14,14 +15,14 @@ import type { QuietButton } from '../button/button.js';
  * @status stable
  * @since 1.0
  *
- * @slot - A mixture of buttons, button groups, or dropdown menus with `<quiet-button>` triggers.
+ * @slot - A mixture of buttons and/or button groups.
  */
 @customElement('quiet-toolbar')
 export class QuietToolbar extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
   /** The toolbar's orientation. This changes which arrow keys are used to select adjacent buttons. */
-  @property() orientation: 'horizontal' | 'vertical' = 'horizontal';
+  @property({ reflect: true }) orientation: 'horizontal' | 'vertical' = 'horizontal';
 
   connectedCallback() {
     super.connectedCallback();
@@ -34,13 +35,23 @@ export class QuietToolbar extends QuietElement {
     }
   }
 
-  /** Gets an array of buttons slotted into the button group. Includes slotted buttons, such as dropdown triggers. */
+  /** Gets an array of buttons slotted into the toolbar. Includes slotted buttons, such as dropdown triggers. */
   private getButtons() {
     return [...this.querySelectorAll<QuietButton>('quiet-button')];
   }
 
+  /** Gets an array of button groups slotted into the toolbar. */
+  private getButtonGroups() {
+    return [...this.querySelectorAll<QuietButtonGroup>('quiet-button-group')];
+  }
+
   private handleDefaultSlotChange() {
+    const buttonGroups = this.getButtonGroups();
     const buttons = this.getButtons();
+
+    buttonGroups.forEach(buttonGroup => {
+      buttonGroup.orientation = this.orientation;
+    });
 
     buttons.forEach((button, index) => {
       button.tabIndex = index === 0 ? 0 : -1;

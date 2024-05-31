@@ -9,6 +9,10 @@ export default css`
     isolation: isolate;
   }
 
+  :host([orientation='vertical']) {
+    flex-direction: column;
+  }
+
   /* Show the focus indicator above other buttons */
   ::slotted(:focus) {
     z-index: 1 !important;

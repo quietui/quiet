@@ -169,7 +169,7 @@ Create a toggle button by adding the `toggle="off"` attribute. To make it active
 </quiet-button>
 
 <quiet-button variant="text" toggle="off" icon-label="Mute">
-  <quiet-icon name="volume-off"></quiet-icon>
+  <quiet-icon name="volume-3"></quiet-icon>
 </quiet-button>
 ```
 

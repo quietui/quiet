@@ -5,7 +5,7 @@ layout: component
 
 Toolbars follows the [ARIA APG toolbar pattern](https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/) for accessibility. A roving tab index is used, meaning users can tab into the control and use the arrow keys to navigate options. A subsequent tab will exit the toolbar.
 
-By organizing buttons and button groups into toolbars, you will decrease the number of tab stops in the keyboard interface, making your app more efficient and user-friendly.
+By organizing [buttons](/docs/components/button) and [button groups](/docs/components/button-group) into toolbars, you will decrease the number of tab stops in the keyboard interface, making your app more efficient and user-friendly.
 
 ```html {.example}
 <quiet-toolbar>
@@ -33,7 +33,7 @@ By organizing buttons and button groups into toolbars, you will decrease the num
 
 ### Toolbars with various components
 
-Toolbars can be used with a mixture of buttons, button groups, and dropdowns that have a `<quiet-button>` trigger. Keyboard users will be able to cycle through all buttons, as expected.
+Toolbars can be used with a mixture of buttons, button groups, and dropdowns that have a `<quiet-button>` trigger. Keyboard users will be able to cycle through all buttons with [[Left]] and [[Right]], as expected.
 
 ```html {.example}
 <quiet-toolbar>
@@ -61,5 +61,32 @@ Toolbars can be used with a mixture of buttons, button groups, and dropdowns tha
 
   <quiet-button icon-label="Print"><quiet-icon name="printer"></quiet-icon></quiet-button>
   <quiet-button icon-label="Share"><quiet-icon name="share-2"></quiet-icon></quiet-button>
+</quiet-toolbar>
+```
+
+### Vertical toolbars
+
+To make a vertical toolbar, set the `orientation` attribute to `vertical`. Keyboard users will be able to use [[Up]] and [[Down]] instead of [[Left]] and [[Right]]. Button groups will automatically assume the correct orientation.
+
+```html {.example}
+<quiet-toolbar orientation="vertical" style="max-width: 60px;">
+  <quiet-button-group>
+    <quiet-button>
+      <quiet-icon slot="start" name="plus"></quiet-icon>
+      New
+    </quiet-button>
+    <quiet-button>
+      <quiet-icon slot="start" name="folder-open"></quiet-icon>
+      Open
+    </quiet-button>
+    <quiet-button>
+      <quiet-icon slot="start" name="device-floppy"></quiet-icon>
+      Save
+    </quiet-button>
+    <quiet-button>
+      <quiet-icon slot="start" name="printer"></quiet-icon>
+      Print
+    </quiet-button>
+  </quiet-button-group>
 </quiet-toolbar>
 ```

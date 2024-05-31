@@ -1,4 +1,4 @@
-import { customElement } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 import { html } from 'lit';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import hostStyles from '../../styles/host.styles.js';
@@ -14,22 +14,37 @@ import type { QuietButton } from '../button/button.js';
  * @status stable
  * @since 1.0
  *
- * @slot - One or more `<quiet-button>` elements to place in the button group. You can also slot in dropdowns that have
- *  `<quiet-button>` triggers.
+ * @slot - One or more `<quiet-button>` elements to place in the button group.
  */
 @customElement('quiet-button-group')
 export class QuietButtonGroup extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
+
+  /** The button group's orientation. */
+  @property({ reflect: true }) orientation: 'horizontal' | 'vertical' = 'horizontal';
+
+  updated(changedProps: Map<string, unknown>) {
+    if (changedProps.has('orientation')) {
+      this.setAttribute('aria-orientation', this.orientation);
+      this.updateClassNames();
+    }
+  }
 
   /** Gets an array of buttons slotted into the button group. Includes slotted buttons, such as dropdown triggers. */
   private getButtons() {
     return [...this.querySelectorAll<QuietButton>('quiet-button')];
   }
 
-  private handleDefaultSlotChange() {
+  /** Updates slotted button class names so they get the correct button styles. */
+  private updateClassNames() {
     const buttons = this.getButtons();
 
     buttons.forEach((button, index) => {
+      // Set orientational attributes
+      button.toggleAttribute('data-button-group-horizontal', this.orientation === 'horizontal');
+      button.toggleAttribute('data-button-group-vertical', this.orientation === 'vertical');
+
+      // Set positional attributes
       button.toggleAttribute('data-button-group-first', index === 0);
       button.toggleAttribute('data-button-group-middle', index > 0 && index < buttons.length - 1);
       button.toggleAttribute('data-button-group-last', index === buttons.length - 1);
@@ -37,7 +52,7 @@ export class QuietButtonGroup extends QuietElement {
   }
 
   render() {
-    return html` <slot @slotchange=${this.handleDefaultSlotChange}></slot> `;
+    return html` <slot @slotchange=${this.updateClassNames}></slot> `;
   }
 }
 

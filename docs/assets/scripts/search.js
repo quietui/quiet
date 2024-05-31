@@ -27,8 +27,8 @@ function getElements() {
 // Show the search dialog when slash (or CMD+K) is pressed and focus is not inside a form element
 document.addEventListener('keydown', event => {
   if (
-    (event.key === '/' || (event.key === 'k' && (event.metaKey || event.ctrlKey))) &&
-    !event.composedPath().some(el => ['input', 'textarea'].includes(el?.tagName?.toLowerCase()))
+    (event.key === 'k' && (event.metaKey || event.ctrlKey)) ||
+    (event.key === '/' && !event.composedPath().some(el => ['input', 'textarea'].includes(el?.tagName?.toLowerCase())))
   ) {
     event.preventDefault();
     show();

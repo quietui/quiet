@@ -311,7 +311,7 @@ html:not(.quiet-dark) .only-dark {
   display: grid;
   grid-template-columns: auto;
   max-width: calc(var(--docs-max-width) - var(--docs-sidebar-width));
-  min-height: 100vh;
+  min-height: 100dvh;
   margin-block-start: var(--docs-header-height);
   margin: 0 auto;
 }
@@ -320,7 +320,7 @@ html:not(.quiet-dark) .only-dark {
   position: sticky;
   align-self: start;
   top: var(--docs-header-height);
-  height: calc(100vh - var(--docs-header-height));
+  height: calc(100dvh - var(--docs-header-height));
   border-right: solid var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
   background: var(--quiet-background-color);
   padding-inline-end: 2rem;
@@ -812,7 +812,8 @@ quiet-callout {
   .splash-actions {
     flex-direction: column;
     align-items: center;
-    margin-block: 8vh;
+    margin-block-start: 4rem;
+    margin-block-end: 0;
 
     quiet-button {
       width: fit-content;
@@ -824,16 +825,15 @@ quiet-callout {
   .splash {
     font-size: 1rem;
     line-height: 1.3;
+    margin-block: 2rem;
   }
 
   .splash .subtitle {
     font-size: 1.5rem;
   }
-}
 
-@media screen and (max-height: 1000px) {
-  .splash {
-    margin-block: 14vh;
+  #body:has(.splash) {
+    min-height: 0;
   }
 }
 

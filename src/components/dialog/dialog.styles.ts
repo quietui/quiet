@@ -59,8 +59,8 @@ export default css`
     /* Center placement */
     &[data-placement='center'] {
       --pulse-size: 1.02;
-      max-width: calc(100vw - 2rem);
-      max-height: calc(100vh - 2rem);
+      max-width: calc(100dvw - 2rem);
+      max-height: calc(100dvh - 2rem);
 
       &.show {
         animation: show-from-center var(--show-duration) ease;
@@ -85,9 +85,9 @@ export default css`
       inset-inline-end: 0;
       inset-block-start: 0;
       inset-block-end: auto;
-      width: 100vw;
-      max-width: 100vw;
-      max-height: 100vh;
+      width: 100dvw;
+      max-width: 100dvw;
+      max-height: 100dvh;
       border-radius: 0;
 
       &.show {
@@ -113,9 +113,9 @@ export default css`
       inset-inline-end: 0;
       inset-block-start: auto;
       inset-block-end: 0;
-      width: 100vw;
-      max-width: 100vw;
-      max-height: 100vh;
+      width: 100dvw;
+      max-width: 100dvw;
+      max-height: 100dvh;
       border-radius: 0;
 
       &.show {
@@ -141,9 +141,9 @@ export default css`
       inset-inline-end: auto;
       inset-block-start: 0;
       inset-block-end: 0;
-      max-width: 100vw;
+      max-width: 100dvw;
       max-height: none;
-      height: 100vh;
+      height: 100dvh;
       border-radius: 0;
 
       &.show {
@@ -177,9 +177,9 @@ export default css`
       inset-inline-end: 0;
       inset-block-start: 0;
       inset-block-end: 0;
-      max-width: 100vw;
+      max-width: 100dvw;
       max-height: none;
-      height: 100vh;
+      height: 100dvh;
       border-radius: 0;
 
       &.show {

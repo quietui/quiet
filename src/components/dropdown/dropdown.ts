@@ -212,6 +212,7 @@ export class QuietDropdown extends QuietElement {
     // Home + end
     if (event.key === 'Home' || event.key === 'End') {
       event.preventDefault();
+      event.stopPropagation();
       targetItem = event.key === 'Home' ? items[0] : items[items.length - 1];
     }
 
@@ -225,7 +226,7 @@ export class QuietDropdown extends QuietElement {
     }
 
     // A selection has been made
-    if (event.key === 'Enter' || event.key === ' ') {
+    if ((event.key === 'Enter' || event.key === ' ') && isFocusedOnItem) {
       event.preventDefault();
       event.stopPropagation();
       if (activeItem) {

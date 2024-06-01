@@ -13,7 +13,7 @@ layout: component
 
 Buttons have four built-in variants. Set the `variant` attribute to `primary`, `secondary`, `constructive`, or `destructive` to change the button's appearance.
 
-```html {.example}
+```html {.example .flex-row}
 <quiet-button variant="primary">
   Primary
 </quiet-button>
@@ -35,7 +35,7 @@ Buttons have four built-in variants. Set the `variant` attribute to `primary`, `
 
 Use the `start` and `end` slots to add icons. For best results, use a [`<quiet-icon>`](/docs/components/icon) or an `<svg>` element.
 
-```html {.example}
+```html {.example .flex-row}
 <quiet-button>
   <quiet-icon slot="start" name="settings"></quiet-icon>
   Settings
@@ -57,7 +57,7 @@ Use the `start` and `end` slots to add icons. For best results, use a [`<quiet-i
 
 Any button can be rendered as a link by setting the `href` attribute. This is useful to allow buttons to act as navigation. When `href` is present, other link options such as `download` and `target` also become available.
 
-```html {.example}
+```html {.example .flex-row}
 <quiet-button loading href="https://example.com/" target="_blank">
   I'm secretly a link
 </quiet-button>
@@ -85,7 +85,7 @@ To change a button's width, use the CSS `width` property.
 
 Use the `size` attribute to change the button's size. Available sizes include `xs`, `sm`, `md`, `lg`, and `xl`, with the default being `md`.
 
-```html {.example}
+```html {.example .flex-row}
 <quiet-button size="xs">Extra small</quiet-button>
 <quiet-button size="sm">Small</quiet-button>
 <quiet-button size="md">Medium</quiet-button>
@@ -97,7 +97,7 @@ Use the `size` attribute to change the button's size. Available sizes include `x
 
 Buttons can be rendered with outlines by adding the `outline` attribute.
 
-```html {.example}
+```html {.example .flex-row}
 <quiet-button outline variant="primary">
   I'm outlined
 </quiet-button>
@@ -115,7 +115,7 @@ Buttons can be rendered with outlines by adding the `outline` attribute.
 
 Buttons can be rendered with pill-shaped edges by adding the `pill` attribute.
 
-```html {.example}
+```html {.example .flex-row}
 <quiet-button pill variant="primary">
   I'm a pill button
 </quiet-button>
@@ -133,7 +133,7 @@ Buttons can be rendered with pill-shaped edges by adding the `pill` attribute.
 
 To create an icon button, place an icon into the button's default slot and set the `icon-label` attribute to an appropriate label. The label won't be visible, but it will be available to assistive devices.
 
-```html {.example}
+```html {.example .flex-row}
 <quiet-button icon-label="Accept" variant="primary">
   <quiet-icon name="check"></quiet-icon>
 </quiet-button>
@@ -155,7 +155,7 @@ To create an icon button, place an icon into the button's default slot and set t
 
 Create a toggle button by adding the `toggle="off"` attribute. To make it active by default, use `toggle="on"` instead. An indicator is shown to make it obvious when the toggle is selected.
 
-```html {.example}
+```html {.example .flex-row}
 <quiet-button variant="primary" toggle="off" icon-label="Alarm">
   <quiet-icon name="bell"></quiet-icon>
 </quiet-button>

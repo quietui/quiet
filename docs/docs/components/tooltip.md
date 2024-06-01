@@ -43,7 +43,7 @@ The anchor element must be in the DOM when the tooltip is connected, otherwise t
 
 Use the `placement` attribute to change the preferred location of the tooltip in reference to its anchor. The tooltip will shift to a more optimal location if the preferred placement doesn't have enough room. The default placement is `top`.
 
-```html {.example}
+```html {.example .flex-row}
 <quiet-button id="tooltip__top">Top</quiet-button>
 <quiet-tooltip for="tooltip__top" placement="top">I'm on the top</quiet-tooltip>
 
@@ -61,7 +61,7 @@ Use the `placement` attribute to change the preferred location of the tooltip in
 
 You can change the distance of the tooltip from the anchor by setting the `distance` attribute to the desired number of pixels.
 
-```html {.example}
+```html {.example .flex-row}
 <quiet-button id="tooltip__distance-near">Near</quiet-button>
 <quiet-tooltip for="tooltip__distance-near" distance="0">I'm so near</quiet-tooltip>
 
@@ -73,7 +73,7 @@ You can change the distance of the tooltip from the anchor by setting the `dista
 
 Tooltips allow a brief duration before opening and closing when hovering in and out with the mouse. You can control these value by setting the `open-delay` and `close-delay` attributes to the desired number of milliseconds.
 
-```html {.example}
+```html {.example .flex-row}
 <quiet-button id="tooltip__no-delay">No delay</quiet-button>
 <quiet-tooltip for="tooltip__no-delay" open-delay="0" close-delay="0">I have no delay whatsoever</quiet-tooltip>
 
@@ -85,7 +85,7 @@ Tooltips allow a brief duration before opening and closing when hovering in and 
 
 You can change the size of the tooltip's arrow with the `--arrow-size` custom property. Set it to `0` to remove the arrow.
 
-```html {.example}
+```html {.example .flex-row}
 <quiet-button id="tooltip__big-arrow">Big arrow</quiet-button>
 <quiet-tooltip for="tooltip__big-arrow" style="--arrow-size: 8px;">I have a big arrow</quiet-tooltip>
 

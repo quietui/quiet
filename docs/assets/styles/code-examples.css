@@ -9,6 +9,10 @@
   padding: 2rem;
   border-bottom: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
 
+  @media screen and (max-width: 959px) {
+    padding: 1rem;
+  }
+
   > :first-child {
     margin-block-start: 0;
   }
@@ -86,4 +90,18 @@
     height: 1em;
     vertical-align: -2px;
   }
+}
+
+/* Presentational helpers */
+.code-example-flex-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.code-example-flex-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }

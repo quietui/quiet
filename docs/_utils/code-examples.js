@@ -26,6 +26,11 @@ export function codeExamplesPlugin(options = {}) {
         const isOpen = code.classList.contains('open') || !hasButtons;
         const noEdit = code.classList.contains('no-edit');
         const id = `code-example-${uuid().slice(-12)}`;
+        const previewClasses = [...code.classList.values()]
+          // Add presentational helper classes to the preview container, prefixed with code-example-
+          .filter(className => !(className === 'example' || className.startsWith('language-')))
+          .map(className => `code-example-${className}`)
+          .join(' ');
         let preview = pre.textContent;
 
         // Run preview scripts as modules to prevent collisions
@@ -35,7 +40,7 @@ export function codeExamplesPlugin(options = {}) {
 
         const codeExample = parse(`
           <div class="code-example ${isOpen ? 'open' : ''}">
-            <div class="code-example-preview">
+            <div class="code-example-preview ${previewClasses}">
               ${preview}
             </div>
             <div class="code-example-source" id="${id}">

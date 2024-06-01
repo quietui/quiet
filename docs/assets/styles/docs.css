@@ -817,7 +817,7 @@ quiet-callout {
   }
 
   #body:has(.splash) {
-    min-height: 0;
+    min-height: 100dvh;
   }
 }
 

@@ -1,4 +1,4 @@
-/** Emitted when the element is opened. Calling `event.preventDetail` will prevent the element from opening. */
+/** Emitted when the element is opened. Calling `event.preventDefault` will prevent the element from opening. */
 export class QuietOpenEvent extends Event {
   constructor() {
     super('quiet-open', { bubbles: true, cancelable: true, composed: true });
@@ -13,7 +13,7 @@ export class QuietOpenedEvent extends Event {
 }
 
 /**
- * Emitted when the element is told to dismiss. Calling `event.preventDetail` will prevent the element from closing.
+ * Emitted when the element is told to dismiss. Calling `event.preventDefault` will prevent the element from closing.
  * You can inspect `event.detail.source` to see which element triggered dismissal.
  */
 export class QuietCloseEvent extends Event {

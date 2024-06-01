@@ -31,6 +31,7 @@ export default css`
   /* Header */
   .header {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: calc(var(--spacing) / 4);
     border-bottom: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
@@ -62,6 +63,7 @@ export default css`
   /* Footer */
   .footer {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: calc(var(--spacing) / 4);
     border-top: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);

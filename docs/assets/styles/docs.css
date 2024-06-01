@@ -125,22 +125,6 @@ html:not(.quiet-dark) .only-dark {
   overflow-x: auto;
   overflow-y: hidden;
   scrollbar-width: thin;
-
-  @supports (animation-timeline: scroll(self inline)) {
-    & {
-      animation: header-scroll-shadow linear;
-      animation-timeline: scroll(self inline);
-    }
-  }
-}
-
-@keyframes header-scroll-shadow {
-  from {
-    box-shadow: inset -4px 0 4px 0 rgb(0 0 0 / 7.5%);
-  }
-  to {
-    box-shadow: inset 4px 0 4px 0 rgb(0 0 0 / 7.5%);
-  }
 }
 
 .header-group-scrollable-interior {

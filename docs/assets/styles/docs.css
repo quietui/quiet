@@ -322,7 +322,9 @@ html:not(.quiet-dark) .only-dark {
   display: grid;
   gap: var(--docs-content-spacing);
   grid-template-columns: auto;
-  padding-block: var(--docs-header-height) 2rem;
+  padding-block-start: var(--docs-header-height);
+  padding-block-end: 0;
+  padding-inline: 2rem;
   /* Adjust for the sidebar's focus ring offset so the page is equally balanced */
   margin-inline-end: calc(var(--quiet-focus-width) + var(--quiet-focus-offset));
 }
@@ -526,7 +528,7 @@ figure.float-end {
   }
 
   #outline {
-    padding-block: 0.25rem;
+    margin-block-start: 1.5rem;
     margin-block-end: -1rem;
   }
 
@@ -818,6 +820,10 @@ quiet-callout {
 
   #body:has(.splash) {
     min-height: 100dvh;
+  }
+
+  #body.has-sidebar #page {
+    padding-inline: 1rem;
   }
 }
 

@@ -171,8 +171,8 @@ export class QuietDropdown extends QuietElement {
         offset({ mainAxis: this.distance }),
         flip(),
         size({
-          apply: ({ availableHeight }) => {
-            // this.menu.style.width = `${rects.reference.width}px`;
+          apply: ({ availableHeight, availableWidth }) => {
+            this.menu.style.maxWidth = `${availableWidth}px`;
             this.menu.style.maxHeight = `${availableHeight}px`;
           },
           padding: 16

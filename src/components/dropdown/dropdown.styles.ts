@@ -8,7 +8,7 @@ export default css`
   }
 
   .menu {
-    display: none;
+    display: flex;
     flex-direction: column;
     position: absolute;
     top: 0;
@@ -22,10 +22,6 @@ export default css`
     user-select: none;
     padding: 0.25rem;
     margin: 0;
-
-    &.visible {
-      display: flex;
-    }
 
     &.show {
       animation: show var(--show-duration) ease;

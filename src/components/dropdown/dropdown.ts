@@ -1,6 +1,6 @@
 import '../dropdown-item/dropdown-item.js';
 import { animateWithClass } from '../../utilities/animate.js';
-import { autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
+import { autoUpdate, computePosition, flip, offset, shift, size } from '@floating-ui/dom';
 import { createId } from '../../utilities/math.js';
 import { customElement, property, query } from 'lit/decorators.js';
 import { html } from 'lit';
@@ -124,7 +124,7 @@ export class QuietDropdown extends QuietElement {
     document.addEventListener('pointerdown', this.handleDocumentPointerDown);
     document.addEventListener('focusin', this.handleDocumentFocusIn);
 
-    this.menu.classList.add('visible');
+    this.menu.hidden = false;
     this.cleanup = autoUpdate(trigger, this.menu, () => this.reposition());
     await animateWithClass(this.menu, 'show');
     this.dispatchEvent(new QuietOpenedEvent());
@@ -146,9 +146,9 @@ export class QuietDropdown extends QuietElement {
     document.removeEventListener('pointerdown', this.handleDocumentPointerDown);
     document.removeEventListener('focusin', this.handleDocumentFocusIn);
 
-    if (this.menu.classList.contains('visible')) {
+    if (!this.menu.hidden) {
       await animateWithClass(this.menu, 'hide');
-      this.menu.classList.remove('visible');
+      this.menu.hidden = true;
       this.menu.hidePopover();
       this.dispatchEvent(new QuietClosedEvent());
     }
@@ -167,7 +167,18 @@ export class QuietDropdown extends QuietElement {
 
     computePosition(trigger, this.menu, {
       placement: this.placement,
-      middleware: [offset({ mainAxis: this.distance }), flip(), shift()]
+      middleware: [
+        offset({ mainAxis: this.distance }),
+        flip(),
+        size({
+          apply: ({ availableHeight }) => {
+            // this.menu.style.width = `${rects.reference.width}px`;
+            this.menu.style.maxHeight = `${availableHeight}px`;
+          },
+          padding: 16
+        }),
+        shift()
+      ]
     }).then(({ x, y, placement }) => {
       // Set the determined placement for users to hook into and for transform origin styles
       this.setAttribute('data-placement', placement);

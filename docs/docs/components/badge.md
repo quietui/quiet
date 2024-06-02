@@ -36,8 +36,8 @@ Use the `color` and `background-color` properties to change badge colors. You ca
 
 ```html {.example}
 <quiet-badge style="background-color: royalblue; color: white; border: none;">Royal Blue</quiet-badge>
-<quiet-badge style="background-color: purple; color: white; border: none;">Deep Pink</quiet-badge>
-<quiet-badge style="background-color: darkgreen; color: white; border: none;">Forest Green</quiet-badge>
+<quiet-badge style="background-color: deeppink; color: white; border: none;">Deep Pink</quiet-badge>
+<quiet-badge style="background-color: forestgreen; color: white; border: none;">Forest Green</quiet-badge>
 <quiet-badge style="background-image: linear-gradient(45.8deg, #af68fe 9.3%, #65dfff 75.1%); color: black; border: none;">Gradient</quiet-badge>
 ```
 

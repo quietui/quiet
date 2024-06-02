@@ -357,6 +357,7 @@ export class QuietDropdown extends QuietElement {
         role="menu"
         tabindex="-1"
         aria-orientation="vertical"
+        hidden
         @click=${this.handleMenuClick}
       >
         <slot @slotchange=${this.handleMenuSlotChange}></slot>

@@ -12,25 +12,25 @@ layout: component
 
   <small>Actions</small>
 
-  <quiet-dropdown-item name="reply">
+  <quiet-dropdown-item value="reply">
     <quiet-icon slot="icon" name="corner-up-left"></quiet-icon>
     Reply
     <span slot="details">⌘R</span>
   </quiet-dropdown-item>
 
-  <quiet-dropdown-item name="forward">
+  <quiet-dropdown-item value="forward">
     <quiet-icon slot="icon" name="corner-up-right"></quiet-icon>
     Forward
     <span slot="details">⌘F</span>
   </quiet-dropdown-item>
 
-  <quiet-dropdown-item name="archive">
+  <quiet-dropdown-item value="archive">
     <quiet-icon slot="icon" name="archive"></quiet-icon>
     Archive
     <span slot="details">⇧⌘A</span>
   </quiet-dropdown-item>
 
-  <quiet-dropdown-item name="delete" variant="destructive">
+  <quiet-dropdown-item value="delete" variant="destructive">
     <quiet-icon slot="icon" name="trash"></quiet-icon>
     Delete
     <span slot="details">Delete</span>
@@ -38,17 +38,17 @@ layout: component
 
   <quiet-divider></quiet-divider>
 
-  <quiet-dropdown-item name="images" type="checkbox" checked>
+  <quiet-dropdown-item value="images" type="checkbox" checked>
     Show images
   </quiet-dropdown-item>
 
-  <quiet-dropdown-item name="wrap" type="checkbox" checked>
+  <quiet-dropdown-item value="wrap" type="checkbox" checked>
     Word wrap
   </quiet-dropdown-item>
 
   <quiet-divider></quiet-divider>
 
-  <quiet-dropdown-item name="preferences">
+  <quiet-dropdown-item value="preferences">
     <quiet-icon slot="icon" name="adjustments-horizontal"></quiet-icon>
     Preferences
   </quiet-dropdown-item>
@@ -57,22 +57,22 @@ layout: component
 
 ### Getting the selected item
 
-When an item is selected, the `quiet-select` event will be emitted by the dropdown. You can inspect `event.detail.selection` to get a reference to the selected item. If you've provided a name for each [dropdown item](/docs/components/dropdown-item), it will be available in `event.detail.selection.name`.
+When an item is selected, the `quiet-select` event will be emitted by the dropdown. You can inspect `event.detail.selection` to get a reference to the selected item. If you've provided a value for each [dropdown item](/docs/components/dropdown-item), it will be available in `event.detail.selection.value`.
 
 ```html {.example}
 <quiet-dropdown id="dropdown__selected">
   <quiet-button slot="trigger" with-caret>View</quiet-button>
-  <quiet-dropdown-item name="full-screen">Enter full screen</quiet-dropdown-item>
-  <quiet-dropdown-item name="actual">Actual size</quiet-dropdown-item>
-  <quiet-dropdown-item name="zoom-in">Zoom in</quiet-dropdown-item>
-  <quiet-dropdown-item name="zoom-out">Zoom out</quiet-dropdown-item>
+  <quiet-dropdown-item value="full-screen">Enter full screen</quiet-dropdown-item>
+  <quiet-dropdown-item value="actual">Actual size</quiet-dropdown-item>
+  <quiet-dropdown-item value="zoom-in">Zoom in</quiet-dropdown-item>
+  <quiet-dropdown-item value="zoom-out">Zoom out</quiet-dropdown-item>
 </quiet-dropdown>
 
 <script>
   const dropdown = document.getElementById('dropdown__selected');
 
   dropdown.addEventListener('quiet-select', event => {
-    console.log(event.detail.selection.name);
+    console.log(event.detail.selection.value);
   });
 </script>
 ```
@@ -89,22 +89,22 @@ Use the `icon` slot to add icons to [dropdown items](/docs/components/dropdown-i
 <quiet-dropdown>
   <quiet-button slot="trigger" with-caret>Edit</quiet-button>
 
-  <quiet-dropdown-item name="cut">
+  <quiet-dropdown-item value="cut">
     <quiet-icon slot="icon" name="scissors"></quiet-icon>
       Cut
   </quiet-dropdown-item>
 
-  <quiet-dropdown-item name="copy">
+  <quiet-dropdown-item value="copy">
     <quiet-icon slot="icon" name="clipboard-copy"></quiet-icon>
       Copy
   </quiet-dropdown-item>
 
-  <quiet-dropdown-item name="paste">
+  <quiet-dropdown-item value="paste">
     <quiet-icon slot="icon" name="clipboard-plus"></quiet-icon>
       Paste
   </quiet-dropdown-item>
 
-  <quiet-dropdown-item name="delete">
+  <quiet-dropdown-item value="delete">
     <quiet-icon slot="icon" name="backspace"></quiet-icon>
       Delete
   </quiet-dropdown-item>
@@ -119,11 +119,11 @@ Use the `<small>` element for labels and the [`<quiet-divider>`](/docs/component
 <quiet-dropdown>
   <quiet-button slot="trigger" with-caret>Device</quiet-button>
   <small>Type</small>
-  <quiet-dropdown-item name="phone">Phone</quiet-dropdown-item>
-  <quiet-dropdown-item name="tablet">Tablet</quiet-dropdown-item>
-  <quiet-dropdown-item name="desktop">Desktop</quiet-dropdown-item>
+  <quiet-dropdown-item value="phone">Phone</quiet-dropdown-item>
+  <quiet-dropdown-item value="tablet">Tablet</quiet-dropdown-item>
+  <quiet-dropdown-item value="desktop">Desktop</quiet-dropdown-item>
   <quiet-divider></quiet-divider>
-  <quiet-dropdown-item name="more">More options…</quiet-dropdown-item>
+  <quiet-dropdown-item value="more">More options…</quiet-dropdown-item>
 </quiet-dropdown>
 ```
 
@@ -135,29 +135,29 @@ Use the `details` slot to display details, such as keyboard shortcuts, at the en
 <quiet-dropdown>
   <quiet-button slot="trigger" with-caret>Message</quiet-button>
 
-  <quiet-dropdown-item name="reply">
+  <quiet-dropdown-item value="reply">
     Reply
     <span slot="details">⌘R</span>
   </quiet-dropdown-item>
 
-  <quiet-dropdown-item name="forward">
+  <quiet-dropdown-item value="forward">
     Forward
     <span slot="details">⌘F</span>
   </quiet-dropdown-item>
 
-  <quiet-dropdown-item name="move">
+  <quiet-dropdown-item value="move">
     Move
     <span slot="details">⇧⌘M</span>
   </quiet-dropdown-item>
 
   <quiet-divider></quiet-divider>
 
-  <quiet-dropdown-item name="archive">
+  <quiet-dropdown-item value="archive">
     Archive
     <span slot="details">⇧⌘A</span>
   </quiet-dropdown-item>
 
-  <quiet-dropdown-item name="delete" variant="destructive">
+  <quiet-dropdown-item value="delete" variant="destructive">
     Delete
     <span slot="details">Delete</span>
   </quiet-dropdown-item>
@@ -171,11 +171,11 @@ You can turn a [dropdown item](/docs/components/dropdown-item) into a checkable 
 ```html {.example}
 <quiet-dropdown id="dropdown__checkboxes">
   <quiet-button slot="trigger" with-caret>View</quiet-button>
-  <quiet-dropdown-item type="checkbox" name="canvas" checked>Show canvas</quiet-dropdown-item>
-  <quiet-dropdown-item type="checkbox" name="grid" checked>Show grid</quiet-dropdown-item>
-  <quiet-dropdown-item type="checkbox" name="source">Show source</quiet-dropdown-item>
+  <quiet-dropdown-item type="checkbox" value="canvas" checked>Show canvas</quiet-dropdown-item>
+  <quiet-dropdown-item type="checkbox" value="grid" checked>Show grid</quiet-dropdown-item>
+  <quiet-dropdown-item type="checkbox" value="source">Show source</quiet-dropdown-item>
   <quiet-divider></quiet-divider>
-  <quiet-dropdown-item name="preferences">Preferences…</quiet-dropdown-item>
+  <quiet-dropdown-item value="preferences">Preferences…</quiet-dropdown-item>
 </quiet-dropdown>
 
 <script>
@@ -185,12 +185,12 @@ You can turn a [dropdown item](/docs/components/dropdown-item) into a checkable 
     if (event.detail.selection.type === 'checkbox') {
       // Checkbox
       console.log(
-        event.detail.selection.name,
+        event.detail.selection.value,
         event.detail.selection.checked ? 'checked' : 'unchecked'
       );
     } else {
       // Not a checkbox
-      console.log(event.detail.selection.name);
+      console.log(event.detail.selection.value);
     }
   });
 </script>
@@ -208,12 +208,12 @@ Add `variant="destructive"` to any [dropdown item](/docs/components/dropdown-ite
 <quiet-dropdown>
   <quiet-button slot="trigger" with-caret>Project</quiet-button>
 
-  <quiet-dropdown-item name="share">
+  <quiet-dropdown-item value="share">
     <quiet-icon slot="icon" name="share-2"></quiet-icon>
     Share
   </quiet-dropdown-item>
 
-  <quiet-dropdown-item name="preferences">
+  <quiet-dropdown-item value="preferences">
     <quiet-icon slot="icon" name="adjustments-horizontal"></quiet-icon>
     Preferences
   </quiet-dropdown-item>
@@ -222,12 +222,12 @@ Add `variant="destructive"` to any [dropdown item](/docs/components/dropdown-ite
 
   <small>Danger zone</small>
   
-  <quiet-dropdown-item name="archive">
+  <quiet-dropdown-item value="archive">
     <quiet-icon slot="icon" name="archive"></quiet-icon>
     Archive
   </quiet-dropdown-item>
 
-  <quiet-dropdown-item name="delete" variant="destructive">
+  <quiet-dropdown-item value="delete" variant="destructive">
     <quiet-icon slot="icon" name="trash"></quiet-icon>
     Delete
   </quiet-dropdown-item>
@@ -241,10 +241,10 @@ Add the `disabled` attribute to any [dropdown item](/docs/components/dropdown-it
 ```html {.example}
 <quiet-dropdown>
   <quiet-button slot="trigger" with-caret>Payment method</quiet-button>
-  <quiet-dropdown-item name="cash">Cash</quiet-dropdown-item>
-  <quiet-dropdown-item name="check" disabled>Personal check</quiet-dropdown-item>
-  <quiet-dropdown-item name="credit">Credit card</quiet-dropdown-item>
-  <quiet-dropdown-item name="gift-card">Gift card</quiet-dropdown-item>
+  <quiet-dropdown-item value="cash">Cash</quiet-dropdown-item>
+  <quiet-dropdown-item value="check" disabled>Personal check</quiet-dropdown-item>
+  <quiet-dropdown-item value="credit">Credit card</quiet-dropdown-item>
+  <quiet-dropdown-item value="gift-card">Gift card</quiet-dropdown-item>
 </quiet-dropdown>
 ```
 
@@ -255,11 +255,11 @@ You can set the preferred placement of the dropdown menu with the `placement` at
 ```html {.example}
 <quiet-dropdown placement="right">
   <quiet-button slot="trigger" with-caret>Types of cats</quiet-button>
-  <quiet-dropdown-item name="bengal">Bengal</quiet-dropdown-item>
-  <quiet-dropdown-item name="calico">Calico</quiet-dropdown-item>
-  <quiet-dropdown-item name="maine-coon">Maine coon</quiet-dropdown-item>
-  <quiet-dropdown-item name="siamese">Siamese</quiet-dropdown-item>
-  <quiet-dropdown-item name="tabby">Tabby</quiet-dropdown-item>
-  <quiet-dropdown-item name="tuxedo">Tuxedo</quiet-dropdown-item>
+  <quiet-dropdown-item value="bengal">Bengal</quiet-dropdown-item>
+  <quiet-dropdown-item value="calico">Calico</quiet-dropdown-item>
+  <quiet-dropdown-item value="maine-coon">Maine coon</quiet-dropdown-item>
+  <quiet-dropdown-item value="siamese">Siamese</quiet-dropdown-item>
+  <quiet-dropdown-item value="tabby">Tabby</quiet-dropdown-item>
+  <quiet-dropdown-item value="tuxedo">Tuxedo</quiet-dropdown-item>
 </quiet-dropdown>
 ```

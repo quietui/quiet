@@ -50,11 +50,11 @@ Toolbars can be used with a mixture of buttons, button groups, and dropdowns tha
 
     <quiet-dropdown id="dropdown__checkboxes">
       <quiet-button slot="trigger" with-caret>View</quiet-button>
-      <quiet-dropdown-item type="checkbox" name="canvas" checked>Show canvas</quiet-dropdown-item>
-      <quiet-dropdown-item type="checkbox" name="grid" checked>Show grid</quiet-dropdown-item>
-      <quiet-dropdown-item type="checkbox" name="source">Show source</quiet-dropdown-item>
+      <quiet-dropdown-item type="checkbox" value="canvas" checked>Show canvas</quiet-dropdown-item>
+      <quiet-dropdown-item type="checkbox" value="grid" checked>Show grid</quiet-dropdown-item>
+      <quiet-dropdown-item type="checkbox" value="source">Show source</quiet-dropdown-item>
       <quiet-divider></quiet-divider>
-      <quiet-dropdown-item name="preferences">Preferences…</quiet-dropdown-item>
+      <quiet-dropdown-item value="preferences">Preferences…</quiet-dropdown-item>
     </quiet-dropdown>    
   </quiet-button-group>
 

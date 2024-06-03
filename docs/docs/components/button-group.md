@@ -49,11 +49,11 @@ You can nest [dropdowns](/docs/components/dropdown) inside button groups to give
       <quiet-icon slot="start" name="download"></quiet-icon>
       Download
     </quiet-button>
-    <quiet-dropdown-item name="sm">Small <span slot="details">640&times;480</span></quiet-dropdown-item>
-    <quiet-dropdown-item name="md">Medium <span slot="details">800&times;600</span></quiet-dropdown-item>
-    <quiet-dropdown-item name="lg">Large <span slot="details">1280&times;1024</span></quiet-dropdown-item>
+    <quiet-dropdown-item value="sm">Small <span slot="details">640&times;480</span></quiet-dropdown-item>
+    <quiet-dropdown-item value="md">Medium <span slot="details">800&times;600</span></quiet-dropdown-item>
+    <quiet-dropdown-item value="lg">Large <span slot="details">1280&times;1024</span></quiet-dropdown-item>
     <quiet-divider></quiet-divider>
-    <quiet-dropdown-item name="og">Custom…</quiet-dropdown-item>
+    <quiet-dropdown-item value="og">Custom…</quiet-dropdown-item>
   </quiet-dropdown>  
 </quiet-button-group>
 ```
@@ -118,11 +118,11 @@ Create a split button by placing a [button](/docs/components/button) and a [drop
   </quiet-button>
   <quiet-dropdown placement="bottom-end">
     <quiet-button slot="trigger" variant="primary" icon-label="Save options" with-caret></quiet-button>
-    <quiet-dropdown-item name="cats">Share with cats</quiet-dropdown-item>
-    <quiet-dropdown-item name="dogs" disabled>Share with dogs</quiet-dropdown-item>
+    <quiet-dropdown-item value="cats">Share with cats</quiet-dropdown-item>
+    <quiet-dropdown-item value="dogs" disabled>Share with dogs</quiet-dropdown-item>
     <quiet-divider></quiet-divider>
-    <quiet-dropdown-item name="url">Copy URL</quiet-dropdown-item>
-    <quiet-dropdown-item name="embed">Copy embed code</quiet-dropdown-item>
+    <quiet-dropdown-item value="url">Copy URL</quiet-dropdown-item>
+    <quiet-dropdown-item value="embed">Copy embed code</quiet-dropdown-item>
   </quiet-dropdown>  
 </quiet-button-group>
 ```

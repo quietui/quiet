@@ -41,10 +41,10 @@ export class QuietDropdownItem extends QuietElement {
   @property({ attribute: 'checkbox-adjacent', type: Boolean, reflect: true }) checkboxAdjacent = false;
 
   /**
-   * An optional name for the menu item. This is useful for determining which item was selected when listening to the
+   * An optional value for the menu item. This is useful for determining which item was selected when listening to the
    * dropdown's `quiet-select` event.
    */
-  @property() name: string;
+  @property() value: string;
 
   /** Set to `checkbox` to make the item a checkbox. */
   @property({ reflect: true }) type: 'normal' | 'checkbox' = 'normal';

@@ -83,7 +83,7 @@ function setThemeColor(newColor) {
 // Update when a new color is selected
 document.addEventListener('quiet-select', event => {
   if (event.target.id === 'header-color-picker') {
-    setThemeColor(event.detail.selection.name);
+    setThemeColor(event.detail.selection.value);
   }
 });
 

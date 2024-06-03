@@ -146,7 +146,7 @@
               }
             %}
             {% for name, color in colors %}
-              <quiet-dropdown-item name="{{ color }}"><span slot="icon" class="color-picker-swatch" style="background-color: {{ color }};"></span> {{ name }}</quiet-dropdown-item>
+              <quiet-dropdown-item value="{{ color }}"><span slot="icon" class="color-picker-swatch" style="background-color: {{ color }};"></span> {{ name }}</quiet-dropdown-item>
             {% endfor %}
           </quiet-dropdown>
         </div>

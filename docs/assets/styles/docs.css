@@ -333,6 +333,7 @@ html:not(.quiet-dark) .only-dark {
   position: relative;
   display: grid;
   grid-template-columns: auto;
+  height: 100%;
   max-width: calc(var(--docs-max-width) - var(--docs-sidebar-width));
   min-height: 100dvh;
   margin-block-start: var(--docs-header-height);
@@ -859,10 +860,6 @@ quiet-callout {
 
   .splash .subtitle {
     font-size: 1.5rem;
-  }
-
-  #body:has(.splash) {
-    min-height: 100dvh;
   }
 
   #body.has-sidebar #page {

@@ -4,8 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="{{ description }}">
-    <meta name="theme-color" content="#787acf">
+    <meta name="theme-color" content="var(--quiet-primary-seed)">
     {% if noindex %}<meta name="robots" content="noindex">{% endif %}
+
+    {# Set the theme and theme color here to prevent flashing #}
+    <script>
+      document.documentElement.classList.toggle(
+        'quiet-dark',
+        sessionStorage.getItem('theme') === 'dark' || window.matchMedia('(prefers-color-scheme: dark)').matches
+      );
+
+      if (sessionStorage.getItem('primary-seed')) {
+        document.documentElement.style.setProperty('--quiet-primary-seed', sessionStorage.getItem('primary-seed'));
+        document.head.querySelector('meta[name="theme-color"]').content = sessionStorage.getItem('primary-seed');
+      }
+    </script>
 
     <title>{{ title }}</title>
 
@@ -28,18 +41,6 @@
     <script type="module" src="/dist/quiet.loader.js"></script>
     <link rel="stylesheet" href="/dist/themes/quiet.css" />
     <link rel="stylesheet" href="/dist/themes/restyle.css" />
-
-    {# Set the theme and primary seed here to prevent flashing #}
-    <script>
-      document.documentElement.classList.toggle(
-        'quiet-dark',
-        sessionStorage.getItem('theme') === 'dark' || window.matchMedia('(prefers-color-scheme: dark)').matches
-      );
-
-      if (sessionStorage.getItem('primary-seed')) {
-        document.documentElement.style.setProperty('--quiet-primary-seed', sessionStorage.getItem('primary-seed'));
-      }
-    </script>
   </head>
   <body class="layout-{{ layout | stripExtension }}">
     <a id="skip-to-main" href="#content" data-smooth-link="off">Skip to content</a>

@@ -304,7 +304,7 @@ html:not(.quiet-dark) .only-dark {
   padding-inline: 0.33rem;
 
   &.current {
-    border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-primary-stroke-mid);
+    border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-primary-stroke-soft);
     background-color: var(--quiet-primary-fill-softer);
   }
 }

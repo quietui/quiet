@@ -44,6 +44,8 @@ export class QuietDropdown extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
   private cleanup: ReturnType<typeof autoUpdate> | undefined;
+  private userTypedQuery = '';
+  private userTypedTimeout: number;
 
   @query('.menu') private menu: HTMLDivElement;
   @query('.menu slot') private menuSlot: HTMLSlotElement;
@@ -206,38 +208,68 @@ export class QuietDropdown extends QuietElement {
     const activeItem = items.find(item => item.active);
     const activeItemIndex = activeItem ? items.indexOf(activeItem) : 0;
     const isFocusedOnItem = document.activeElement?.localName === 'quiet-dropdown-item';
-    let targetItem: QuietDropdownItem | undefined;
+    let itemToSelect: QuietDropdownItem | undefined;
 
     // Previous item
     if (event.key === 'ArrowUp') {
       const prevIndex = activeItemIndex === 0 ? items.length - 1 : activeItemIndex - 1;
-      targetItem = isFocusedOnItem ? items[prevIndex] : items[items.length - 1];
+      itemToSelect = isFocusedOnItem ? items[prevIndex] : items[items.length - 1];
     }
 
     // Next item
     if (event.key === 'ArrowDown') {
       const nextIndex = activeItemIndex === items.length - 1 ? 0 : activeItemIndex + 1;
-      targetItem = isFocusedOnItem ? items[nextIndex] : items[0];
+      itemToSelect = isFocusedOnItem ? items[nextIndex] : items[0];
     }
 
     // Home + end
     if (event.key === 'Home' || event.key === 'End') {
       event.preventDefault();
       event.stopPropagation();
-      targetItem = event.key === 'Home' ? items[0] : items[items.length - 1];
+      itemToSelect = event.key === 'Home' ? items[0] : items[items.length - 1];
     }
 
-    // Update the roving tab index and move focus to the target item
-    if (targetItem) {
+    // Update the selection as the user types
+    if (
+      event.key.length === 1 &&
+      // Ignore special key combinations
+      !(event.metaKey || event.ctrlKey || event.altKey) &&
+      // Ignore spaces if the query is empty
+      !(event.key === ' ' && this.userTypedQuery === '')
+    ) {
+      // Reset the query after a second of inactivity
+      clearTimeout(this.userTypedTimeout);
+      this.userTypedTimeout = setTimeout(() => {
+        this.userTypedQuery = '';
+      }, 1000);
+
+      this.userTypedQuery += event.key;
+
+      // Move selection to the first matching item
+      items.some(item => {
+        const label = (item.textContent || '').trim().toLowerCase();
+        const selectionQuery = this.userTypedQuery.trim().toLowerCase();
+
+        if (label.startsWith(selectionQuery)) {
+          itemToSelect = item;
+          return true;
+        }
+
+        return false;
+      });
+    }
+
+    // If a new item will be selected, update the roving tab index and move focus to it
+    if (itemToSelect) {
       event.preventDefault();
       event.stopPropagation();
-      items.forEach(item => (item.active = item === targetItem));
-      targetItem.focus();
+      items.forEach(item => (item.active = item === itemToSelect));
+      itemToSelect.focus();
       return;
     }
 
-    // A selection has been made
-    if ((event.key === 'Enter' || event.key === ' ') && isFocusedOnItem) {
+    // A selection has been made if enter has been pressed, or if space has been pressed and no query is in progress
+    if ((event.key === 'Enter' || (event.key === ' ' && this.userTypedQuery === '')) && isFocusedOnItem) {
       event.preventDefault();
       event.stopPropagation();
       if (activeItem) {

@@ -7,7 +7,7 @@ section: about
 
 <a href="https://x.com/claviska" data-no-external-icon>
   <img 
-    src="http://0.gravatar.com/avatar/bf1b3b95fd5b096a3592247c29667b33?s=512" 
+    src="https://gravatar.com/avatar/bf1b3b95fd5b096a3592247c29667b33?s=400"
     alt="Cory's avatar"
     width="96"
     height="96"

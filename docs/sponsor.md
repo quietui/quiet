@@ -16,7 +16,7 @@ I want Quiet to remain free for everyone to explore and learn from. I don't get 
 <div class="sponsorship-quote">
 <div class="quote">
   <img 
-    src="http://0.gravatar.com/avatar/bf1b3b95fd5b096a3592247c29667b33?s=512" 
+    src="https://gravatar.com/avatar/bf1b3b95fd5b096a3592247c29667b33?s=400" 
     alt="Cory's avatar"
   >
   <div>

@@ -15,6 +15,11 @@
   --docs-sidebar-width: 17rem;
   --docs-sidebar-width-mobile: 20rem;
   --docs-sidebar-speed: 250ms;
+  --docs-wordmark-accent-color: var(--quiet-primary-fill-mid);
+}
+
+html.quiet-dark {
+  --docs-wordmark-accent-color: color-mix(in oklab, var(--quiet-primary-fill-mid), white 9.5%);
 }
 
 /* Utility classes */
@@ -264,6 +269,15 @@ html:not(.quiet-dark) .only-dark {
   margin: 0;
 }
 
+#header-group-buttons quiet-icon {
+  font-size: 1.25rem;
+
+  /* Carets */
+  &[name='chevron-down'] {
+    font-size: 1em;
+  }
+}
+
 #header-group-buttons a svg,
 #header-group-buttons button svg {
   height: 1.25rem;
@@ -275,6 +289,31 @@ html:not(.quiet-dark) .only-dark {
   #header-group-buttons button:hover svg {
     color: var(--quiet-primary-text-colorful);
   }
+}
+
+/* Color picker dropdowns */
+.color-picker::part(menu) {
+  display: block;
+  columns: 3;
+  gap: 0.5rem;
+}
+
+.color-picker quiet-dropdown-item {
+  font-size: 0.8375rem;
+  padding-block: 0.125rem;
+  padding-inline: 0.33rem;
+
+  &.current {
+    border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-primary-stroke-mid);
+    background-color: var(--quiet-primary-fill-softer);
+  }
+}
+
+.color-picker-swatch {
+  width: 1.25rem;
+  height: 1.25rem;
+  aspect-ratio: 1;
+  border-radius: calc(var(--quiet-border-radius) / 2);
 }
 
 #open-sidebar,
@@ -346,10 +385,6 @@ html:not(.quiet-dark) .only-dark {
 
 #page.has-outline {
   grid-template-columns: auto var(--docs-outline-width);
-}
-
-.layout-splash {
-  display: block;
 }
 
 .layout-splash #page {
@@ -745,6 +780,9 @@ quiet-callout {
 
 /* Splash */
 .layout-splash {
+  /* Keep homepage colors violet */
+  --quiet-primary-text-colorful: #787acf;
+  --docs-wordmark-accent-color: var(--quiet-primary-text-colorful);
   background-color: var(--quiet-silent);
   background-attachment: fixed;
   background-size: cover;
@@ -792,6 +830,11 @@ quiet-callout {
   gap: 1rem;
   justify-content: center;
   margin-block-start: 4rem;
+
+  /* Keep homepage colors violet */
+  quiet-button[variant='primary'] {
+    --quiet-primary-fill-mid: #787acf;
+  }
 }
 
 @media screen and (max-width: 600px) {

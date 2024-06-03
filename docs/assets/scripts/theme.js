@@ -55,3 +55,30 @@ document.addEventListener('keydown', event => {
     toggleTheme();
   }
 });
+
+//
+// Primary color picker
+//
+
+document.addEventListener('quiet-select', event => {
+  if (event.target.id === 'header-color-picker') {
+    const color = event.detail.selection.name;
+    sessionStorage.setItem('primary-seed', color);
+    document.documentElement.style.setProperty('--quiet-primary-seed', color);
+    syncColorPicker();
+  }
+});
+
+// Syncs the color picker's current color
+function syncColorPicker() {
+  const dropdown = document.getElementById('header-color-picker');
+  const color = sessionStorage.getItem('primary-seed') || '#989cff';
+  dropdown.querySelectorAll('quiet-dropdown-item').forEach(item => {
+    item.classList.toggle('current', item.getAttribute('name') === color);
+    if (item.getAttribute('name') === color) {
+    }
+  });
+}
+
+document.addEventListener('turbo:load', syncColorPicker);
+syncColorPicker();

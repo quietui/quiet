@@ -7,6 +7,10 @@ layout: component
 <quiet-copy data="https://quietui.com/"></quiet-copy>
 ```
 
+:::info
+This component uses the Clipboard API's [`writeText()`](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard/writeText) method, which requires a [secure context](https://developer.mozilla.org/en-US/docs/Web/Security/Secure_Contexts). In other words, for maximum browser support, make sure the URL starts with `https://`.
+:::
+
 ## Examples
 
 ### Copying text

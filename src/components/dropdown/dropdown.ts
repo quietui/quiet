@@ -48,7 +48,6 @@ export class QuietDropdown extends QuietElement {
   private userTypedTimeout: number;
 
   @query('.menu') private menu: HTMLDivElement;
-  @query('.menu slot') private menuSlot: HTMLSlotElement;
 
   /** Opens or closes the dropdown. */
   @property({ type: Boolean, reflect: true }) open = false;
@@ -90,9 +89,7 @@ export class QuietDropdown extends QuietElement {
 
   /** Gets all <quiet-dropdown-item> elements slotted in the menu that aren't disabled. */
   private getItems(): QuietDropdownItem[] {
-    return this.menuSlot
-      .assignedElements({ flatten: true })
-      .filter(el => el.localName === 'quiet-dropdown-item') as QuietDropdownItem[];
+    return [...this.querySelectorAll('quiet-dropdown-item')].filter(el => el.localName === 'quiet-dropdown-item');
   }
 
   /** Get the slotted trigger button, a <button> element */

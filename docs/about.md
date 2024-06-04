@@ -7,17 +7,11 @@ section: about
 
 <a href="https://x.com/claviska" data-no-external-icon>
   <img 
+    class="avatar"
     src="https://gravatar.com/avatar/bf1b3b95fd5b096a3592247c29667b33?s=400"
     alt="Cory's avatar"
     width="96"
     height="96"
-    style="
-      float: right;
-      max-width: 10em;
-      height: auto;
-      border-radius: var(--quiet-border-radius);
-      margin-inline-start: 2rem; 
-      margin-block-end: 1rem;"
   >
 </a>
 

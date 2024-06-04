@@ -965,3 +965,17 @@ quiet-callout {
     max-height: 7.5rem;
   }
 }
+
+/* Avatars */
+.avatar {
+  float: right;
+  max-width: 10rem;
+  height: auto;
+  border-radius: var(--quiet-border-radius);
+  margin-inline-start: 2rem;
+  margin-block-end: 1rem;
+
+  @media screen and (max-width: 959px) {
+    max-width: 7.5rem;
+  }
+}

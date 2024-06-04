@@ -197,7 +197,7 @@ html:not(.quiet-dark) .only-dark {
 #header-group-links a[href*='/sponsor'] {
   span {
     display: inline-block;
-    animation: 1.5s infinite heartbeat alternate ease;
+    animation: 0.8375s infinite heartbeat alternate ease;
   }
 
   svg {
@@ -950,4 +950,18 @@ quiet-callout {
 .table-default code {
   display: inline-block;
   white-space: nowrap;
+}
+
+/* Mascot images */
+.whiskers {
+  display: inline;
+  float: right;
+  width: auto;
+  max-height: 10rem;
+  margin-inline-start: 1.5rem;
+  margin-block-end: 1.5rem;
+
+  @media screen and (max-width: 959px) {
+    max-height: 7.5rem;
+  }
 }

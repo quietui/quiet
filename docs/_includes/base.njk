@@ -134,20 +134,25 @@
               <quiet-icon family="filled" name="square" style="color: var(--quiet-primary-seed);"></quiet-icon>
               <quiet-icon name="chevron-down"></quiet-icon>
             </button>
-            {%
-              set colors = {
-                Red: '#ec8786', Orange: '#e98d61', Amber: '#db9640',
-                Yellow: '#c5a231', Lime: '#b0aa39', Green: '#97b14c',
-                Emerald: '#7db664', Teal: '#5ab983', Cyan: '#39baa4',
-                Sky: '#2ab6d1', Blue: '#58acf2', Indigo: '#79a4fe',
-                Violet: '#989cff', Purple: '#b394f4', Fuschia: '#ca8de1',
-                Pink: '#dc88c7', Rose: '#e886a7', Slate: '#a3a6b5',
-                Zinc: '#a5a6ab', Stone: '#a9a6a2', Sand: '#aaa69f'
-              }
-            %}
-            {% for name, color in colors %}
-              <quiet-dropdown-item value="{{ color }}"><span slot="icon" class="color-picker-swatch" style="background-color: {{ color }};"></span> {{ name }}</quiet-dropdown-item>
-            {% endfor %}
+            <div class="color-picker-swatches">
+              {%
+                set colors = {
+                  Red: '#ec8786', Orange: '#e98d61', Amber: '#db9640',
+                  Yellow: '#c5a231', Lime: '#b0aa39', Green: '#97b14c',
+                  Emerald: '#7db664', Teal: '#5ab983', Cyan: '#39baa4',
+                  Sky: '#2ab6d1', Blue: '#58acf2', Indigo: '#79a4fe',
+                  Violet: '#989cff', Purple: '#b394f4', Fuschia: '#ca8de1',
+                  Pink: '#dc88c7', Rose: '#e886a7', Slate: '#a3a6b5',
+                  Zinc: '#a5a6ab', Stone: '#a9a6a2', Sand: '#aaa69f'
+                }
+              %}
+              {% for name, color in colors %}
+                <quiet-dropdown-item value="{{ color }}">
+                  <span slot="icon" class="color-picker-swatch" style="background-color: {{ color }};"></span>
+                  {{ name }}
+                </quiet-dropdown-item>
+              {% endfor %}
+            </div>
           </quiet-dropdown>
         </div>
       </div>

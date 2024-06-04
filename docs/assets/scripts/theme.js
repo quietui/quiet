@@ -74,9 +74,7 @@ function setThemeColor(newColor) {
 
   // Update the color picker dropdown
   dropdown.querySelectorAll('quiet-dropdown-item').forEach(item => {
-    item.classList.toggle('current', item.getAttribute('name') === color);
-    if (item.getAttribute('name') === color) {
-    }
+    item.classList.toggle('current', item.getAttribute('value') === color);
   });
 }
 

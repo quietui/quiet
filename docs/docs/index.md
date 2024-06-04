@@ -4,6 +4,9 @@ description: Learn how to install the library.
 layout: docs
 ---
 
+<img class="whiskers only-light" src="/assets/images/whiskers/whiskers-happy-light.svg" alt="Whiskers the mouse standing and smiling">
+<img class="whiskers only-dark" src="/assets/images/whiskers/whiskers-happy-dark.svg" alt="Whiskers the mouse standing and smiling">
+
 You might be curious to learn that Quiet's components aren't built with React, Vue, or any other framework. They're custom HTML elements, or [Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components), which means you can use them in regular HTML pages as well as your favorite framework.
 
 The Web platform has evolved a lot over the last few years! Every modern browser has the APIs necessary to create interoperable components that work everywhere. As a result, it makes little sense to continue building UI components in a specific framework — that promotes lock-in.
@@ -12,13 +15,13 @@ The Web platform has evolved a lot over the last few years! Every modern browser
 
 With Quiet, you no longer need to learn a new UI library when you switch frameworks. And since it's built on top of stable platform APIs, it will continue to work for many, many years to come.
 
-**There are two ways to install Quiet.** Autoloading is the fastest way to get started — just copy and paste. However, you can also import components manually from the CDN or npm.
+**There are two ways to install Quiet.** [Autoloading](#autoloading) is the fastest way to get started — just copy and paste. Or you can [manually import](#manually-importing) components from the CDN or npm.
 
 ---
 
 ## Autoloading <quiet-badge variant="constructive" data-no-outline data-no-anchor>Recommended</quiet-badge>
 
-The autoloader will automatically register components as you add them to the DOM. Just place the following code into the `<head>` section of an HTML document and you can use all of Quiet's components via CDN without any further effort.
+Copy and paste the following code into the `<head>` section of any HTML document. The autoloader will automatically load components from the CDN as you add them to the DOM.
 
 ```html
 <link rel="stylesheet" href="{% cdnUrl '/dist/quiet.css' %}">
@@ -27,9 +30,9 @@ The autoloader will automatically register components as you add them to the DOM
 
 Now you can use any component in your HTML!
 
-```html {.example .no-buttons}
+```html {.example .no-buttons .flex-row}
 <quiet-button variant="primary">
-  Click me
+  This is amazing
 </quiet-button>
 ```
 
@@ -50,6 +53,8 @@ window.addEventListener('quiet-discovery-complete', event => {
 ```
 
 You can inspect `event.detail.registered` to see an array of tag names that were found and registered. Similarly, `event.detail.unknown` will be an array of `<quiet-*>` tags that were found in the document but couldn't be registered. This can happen if you use the wrong tag name, if the files are missing, or if you're trying to use new components with an older version of the library.
+
+---
 
 ## Manually importing <quiet-badge variant="destructive" data-no-outline data-no-anchor>Advanced</quiet-badge>
 
@@ -77,7 +82,7 @@ await Promise.all([
 ```
 
 :::info
-You can copy and paste the code to import a component from the _Importing_ section of its documentation.
+The imports above are just examples. You can copy and paste the import code for each component you need from the _Importing_ section of the docs.
 :::
 
 ## Setting the library path

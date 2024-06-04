@@ -65,6 +65,20 @@ Technically, <quiet-badge variant="primary" style="font-size: 0.9375rem; color: 
 _[Refer to this article](https://medium.com/@think_ui/why-color-contrast-is-not-as-black-and-white-as-it-seems-94197a72b005) to learn more about why WCAG 2 isn't a great standard for measuring perceptual contrast._
 :::
 
+## A special thanks
+
+<img class="whiskers only-light" src="/assets/images/whiskers/whiskers-whistling-light.svg" alt="Whiskers the mouse walking and whistling">
+<img class="whiskers only-dark" src="/assets/images/whiskers/whiskers-whistling-dark.svg" alt="Whiskers the mouse walking and whistling">
+
+I'd like to thank the following people and projects for making Quiet UI possible.
+
+- [Lit](https://lit.dev/) for making Web Components so fun to build
+- [The Harmony color palette](https://evilmartians.com/opensource/harmony) for color inspiration
+- [Floating UI](https://floating-ui.com/) for positioning all the things
+- [Eleventy](https://www.11ty.dev/) for generating the docs
+- [The Custom Elements Manifest project](https://custom-elements-manifest.open-wc.org/) for making API documentation easy
+- [Tabler Icons](https://tabler.io/icons) for thousands of beautiful, open source icons
+- [James Duncan](https://x.com/JamesDuncanArt) for drawing a super cool mascot
 
 ## Getting in touch
 
@@ -73,5 +87,3 @@ Please contact me for information about sponsorship perks, consulting, speaking 
 ## What's with all the cats?
 
 I'm not really sure. They keep sneaking into the docs. I think they like the logo.
-
-— [Cory LaViska](https://x.com/claviska)

@@ -18,7 +18,9 @@ To add Restyle to your app, first [include a theme](/docs/themes) and add the fo
 
 Restyle uses your theme's variables as a baseline, so things will look familiar right away. Feel free to customize any of its styles in your own CSS by overriding the properties you want to change.
 
+:::info
 Restyle is just a starting point. Feel free to customize it and make it your own!
+:::
 
 ## Style demonstration
 
@@ -82,7 +84,7 @@ _italic_
 
 subscript<sub>sub</sub>
 
-superscript<sub>sup</sub>
+superscript<sup>sup</sup>
 
 [hyperlinks](#)
 

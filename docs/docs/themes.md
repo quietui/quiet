@@ -455,7 +455,7 @@ These tokens represent pure black and white, but their values invert in dark mod
 
 ### Design tokens
 
-The following tokens are used to set the overall appearance of the default theme. More granular customizations can be made to components with [CSS parts](/docs/using-web-components/#css-parts).
+The following tokens are used to set the overall appearance of the default theme. More granular customizations can be made to components with [CSS parts](/docs/using-components/#css-parts).
 
 #### Application tokens
 

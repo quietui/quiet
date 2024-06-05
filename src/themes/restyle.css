@@ -31,7 +31,7 @@ body {
 
 ::selection {
   background-color: var(--quiet-selection-background-color);
-  color: var(--quiet-text-body);
+  color: var(--quiet-selection-color);
   text-shadow: none !important;
 }
 

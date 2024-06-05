@@ -1,5 +1,4 @@
-:root,
-:host {
+:root {
   /*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //
   //  These base tokens are used to seed the color palettes. For best results, always use a midtone color such as any of
@@ -123,7 +122,6 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
 :root,
-:host,
 .quiet-light {
   color-scheme: light;
 
@@ -137,6 +135,7 @@
   --quiet-focus-ring: var(--quiet-border-style) var(--quiet-focus-width) var(--quiet-focus-color);
   --quiet-backdrop-color: rgb(0 0 0 / 0.25);
   --quiet-selection-background-color: var(--quiet-primary-300);
+  --quiet-selection-color: var(--quiet-text-body);
   --quiet-shadow-color: black;
   --quiet-shadow-softer: 0 1px 2px color-mix(in oklab, transparent, var(--quiet-shadow-color) 4%);
   --quiet-shadow-mid: 0 4px 8px color-mix(in oklab, transparent, var(--quiet-shadow-color) 6%);
@@ -205,7 +204,6 @@
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
-:host,
 .quiet-dark {
   color-scheme: dark;
 

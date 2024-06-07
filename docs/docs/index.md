@@ -7,15 +7,15 @@ layout: docs
 <img class="whiskers only-light" src="/assets/images/whiskers/whiskers-happy-light.svg" alt="Whiskers the mouse standing and smiling">
 <img class="whiskers only-dark" src="/assets/images/whiskers/whiskers-happy-dark.svg" alt="Whiskers the mouse standing and smiling">
 
-You might be curious to learn that Quiet's components aren't built with React, Vue, or any other framework. They're custom HTML elements, or [Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components), which means you can use them in regular HTML pages as well as your favorite framework.
+Quiet is a user interface library for the modern Web. It features dozens of accessible, performant, and interoperable components along with an optional CSS reset to streamline development of websites and apps.
 
-The Web platform has evolved a lot over the last few years! Every modern browser has the APIs necessary to create interoperable components that work everywhere. As a result, it makes little sense to continue building UI components in a specific framework — that promotes lock-in.
+You might be curious to learn that Quiet's components aren't built with React, Vue, or any other framework. They're custom HTML elements, or [Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components), which means you can use them in plain ol' HTML pages as well as your favorite frameworks.
 
-[Many of the world's largest companies](https://arewebcomponentsathingyet.com/) have been using Web Components in production applications for years.
+Every modern browser has the APIs necessary to create interoperable components that work everywhere. As a result, it makes little sense to continue building UI components in a specific framework — that promotes lock-in. [Many of the world's largest companies](https://arewebcomponentsathingyet.com/) have been using Web Components in production applications for years.
 
-With Quiet, you no longer need to learn a new UI library when you switch frameworks. And since it's built on top of stable platform APIs, it will continue to work for many, many years to come.
+With Quiet, you no longer need to learn a new UI library when you switch frameworks. And since it's built on top of stable platform APIs, it will continue to work for many years to come.
 
-**There are two ways to install Quiet.** [Autoloading](#autoloading) is the fastest way to get started — just copy and paste. Or you can [manually import](#manually-importing) components from the CDN or npm.
+**There are two ways to install Quiet.** [Autoloading](#autoloading) is the fastest way to get started — just copy, paste, and start coding. Or you can [import components manually](#manually-importing) from npm or the CDN.
 
 ---
 

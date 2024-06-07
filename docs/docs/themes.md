@@ -24,7 +24,9 @@ Light mode "just works" once you import the default theme. To switch to dark mod
 </html>
 ```
 
+:::info
 If you're using [Quiet Restyle](/docs/restyle), the entire page will enter dark mode. If you're not using Restyle, only the components will change and it's up to you to style the rest of your app accordingly.
+:::
 
 ## Theme concepts
 
@@ -220,7 +222,7 @@ While not recommended, it is possible to override primitives for even more contr
 
 ### Adaptive colors
 
-Adaptive colors automatically change between light and dark modes. Instead of numeric values, they use a scale that indicates their "volume" relative to the the app's background. Thus, "softer" colors have less contrast than "louder" ones. This approach lets you style most things once, but have them look great in light and dark modes.
+Adaptive colors automatically change between light and dark modes. Instead of numeric values, they use a scale that indicates their "volume" relative to the the app's background. Thus, "softer" colors have less contrast than "louder" ones. This approach lets you style things once, but have them look great in light and dark modes.
 
 #### Fill colors
 

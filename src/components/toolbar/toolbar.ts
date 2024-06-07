@@ -7,6 +7,10 @@ import type { CSSResultGroup } from 'lit';
 import type { QuietButton } from '../button/button.js';
 import type { QuietButtonGroup } from '../button-group/button-group.js';
 
+interface GetButtonsOptions {
+  ignoreDisabled: boolean;
+}
+
 /**
  * <quiet-toolbar>
  *
@@ -36,8 +40,13 @@ export class QuietToolbar extends QuietElement {
   }
 
   /** Gets an array of buttons slotted into the toolbar. Includes slotted buttons, such as dropdown triggers. */
-  private getButtons() {
-    return [...this.querySelectorAll<QuietButton>('quiet-button')];
+
+  private getButtons(options?: GetButtonsOptions) {
+    if (options?.ignoreDisabled) {
+      return [...this.querySelectorAll<QuietButton>('quiet-button:not([data-state-disabled])')];
+    } else {
+      return [...this.querySelectorAll<QuietButton>('quiet-button')];
+    }
   }
 
   /** Gets an array of button groups slotted into the toolbar. */
@@ -59,7 +68,7 @@ export class QuietToolbar extends QuietElement {
   }
 
   private handleKeyDown(event: KeyboardEvent) {
-    const buttons = this.getButtons();
+    const buttons = this.getButtons({ ignoreDisabled: true });
     const activeIndex = buttons.findIndex(button => button.tabIndex === 0);
     const isVertical = this.orientation === 'vertical';
     let nextIndex = -1;

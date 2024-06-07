@@ -5,7 +5,7 @@ export default css`
     display: flex;
   }
 
-  .tabs {
+  #tabs {
     position: relative;
     display: flex;
   }
@@ -15,14 +15,14 @@ export default css`
     flex-direction: column;
   }
 
-  :host([placement='top']) .tabs {
+  :host([placement='top']) #tabs {
     align-items: center;
     overflow-x: auto;
     scrollbar-width: thin;
     scroll-behavior: smooth;
   }
 
-  :host([placement='top']) .panels {
+  :host([placement='top']) #panels {
     border-top: var(--quiet-border-style) calc(var(--quiet-border-width) * 2) var(--quiet-neutral-stroke-softer);
     padding-top: 2rem;
     margin-top: calc(var(--quiet-border-width) * -2);
@@ -41,14 +41,14 @@ export default css`
     flex-direction: column;
   }
 
-  :host([placement='bottom']) .tabs {
+  :host([placement='bottom']) #tabs {
     align-items: center;
     order: 2;
     overflow-x: auto;
     scrollbar-width: thin;
   }
 
-  :host([placement='bottom']) .panels {
+  :host([placement='bottom']) #panels {
     order: 1;
     border-bottom: var(--quiet-border-style) calc(var(--quiet-border-width) * 2) var(--quiet-neutral-stroke-softer);
     padding-bottom: 2rem;
@@ -68,19 +68,19 @@ export default css`
     flex-direction: row;
   }
 
-  :host([placement='start']) .tabs {
+  :host([placement='start']) #tabs {
     flex: 0 0 auto;
     flex-direction: column;
   }
 
-  :host([placement='start']) .panels {
+  :host([placement='start']) #panels {
     flex: 1 1 auto;
     border-left: var(--quiet-border-style) calc(var(--quiet-border-width) * 2) var(--quiet-neutral-fill-soft);
     margin-inline-start: calc(var(--quiet-border-width) * -2);
     padding-inline-start: 2rem;
   }
 
-  :host([placement='start']) .panels:dir(rtl) {
+  :host([placement='start']) #panels:dir(rtl) {
     border-left: none;
     border-right: var(--quiet-border-style) calc(var(--quiet-border-width) * 2) var(--quiet-neutral-fill-soft);
   }
@@ -103,13 +103,13 @@ export default css`
     flex-direction: row;
   }
 
-  :host([placement='end']) .tabs {
+  :host([placement='end']) #tabs {
     order: 2;
     flex: 0 0 auto;
     flex-direction: column;
   }
 
-  :host([placement='end']) .panels {
+  :host([placement='end']) #panels {
     order: 1;
     flex: 1 1 auto;
     border-right: var(--quiet-border-style) calc(var(--quiet-border-width) * 2) var(--quiet-neutral-fill-soft);
@@ -117,7 +117,7 @@ export default css`
     padding-inline-end: 2rem;
   }
 
-  :host([placement='end']) .panels:dir(rtl) {
+  :host([placement='end']) #panels:dir(rtl) {
     border-right: none;
     border-left: var(--quiet-border-style) calc(var(--quiet-border-width) * 2) var(--quiet-neutral-fill-soft);
   }

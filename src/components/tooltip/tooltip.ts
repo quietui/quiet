@@ -45,9 +45,9 @@ export class QuietTooltip extends QuietElement {
   private hoverOutTimeout: number | undefined;
   private anchor: Element | null;
 
-  @query('.arrow') private arrow: HTMLElement;
-  @query('.polygon') private polygon: HTMLElement;
-  @query('.tooltip') private tooltip: HTMLElement;
+  @query('#arrow') private arrow: HTMLElement;
+  @query('#polygon') private polygon: HTMLElement;
+  @query('#tooltip') private tooltip: HTMLElement;
 
   /**
    * The id of of tooltip's anchor element. This must be an interactive/focusable element such as a button and it must
@@ -366,12 +366,12 @@ export class QuietTooltip extends QuietElement {
 
   render() {
     return html`
-      <div part="tooltip" class="tooltip" popover="manual">
-        <div part="content" class="content">
+      <div id="tooltip" part="tooltip" popover="manual">
+        <div id="content" part="content">
           <slot></slot>
         </div>
-        <div part="arrow" class="arrow" role="presentation"></div>
-        <div class="polygon" role="presentation"></div>
+        <div id="arrow" part="arrow" role="presentation"></div>
+        <div id="polygon" role="presentation"></div>
       </div>
     `;
   }

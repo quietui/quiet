@@ -20,7 +20,7 @@ export default css`
     overflow: hidden;
   }
 
-  .image {
+  #image {
     position: absolute;
     top: 0;
     left: 0;
@@ -39,7 +39,7 @@ export default css`
     height: 1.5em !important;
   }
 
-  .characters {
+  #characters {
     font-size: calc(var(--size) / 5.5);
     text-transform: uppercase;
 

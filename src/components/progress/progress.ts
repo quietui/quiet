@@ -26,7 +26,7 @@ import type { CSSResultGroup } from 'lit';
 export class QuietProgress extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
-  @query('.indicator') private indicator: HTMLDivElement;
+  @query('#indicator') private indicator: HTMLDivElement;
 
   /** A custom label for assistive devices. */
   @property() label: string;
@@ -83,9 +83,9 @@ export class QuietProgress extends QuietElement {
   render() {
     return html`
       <div
+        id="indicator"
         part="indicator"
         class=${classMap({
-          indicator: true,
           indeterminate: this.indeterminate
         })}
       >

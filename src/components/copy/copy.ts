@@ -123,8 +123,8 @@ export class QuietCopy extends QuietElement {
       </slot>
 
       <div
-        part="feedback"
         id="feedback"
+        part="feedback"
         data-placement=${this.feedbackPlacement}
         popover="manual"
         aria-live="polite"

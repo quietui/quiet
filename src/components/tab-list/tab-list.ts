@@ -41,8 +41,8 @@ export class QuietTabList extends QuietElement {
 
   private localize = new Localize(this);
 
-  @query('.tabs > slot') private tabSlot: HTMLSlotElement;
-  @query('.panels > slot') private panelSlot: HTMLSlotElement;
+  @query('#tabs > slot') private tabSlot: HTMLSlotElement;
+  @query('#panels > slot') private panelSlot: HTMLSlotElement;
 
   /**
    * An accessible label for the tab list. This won't be shown, but it will be read to assistive devices so you should
@@ -192,11 +192,11 @@ export class QuietTabList extends QuietElement {
 
   render() {
     return html`
-      <div part="tabs" class="tabs" role="tablist" @click=${this.handleTabsClick} @keydown=${this.handleTabsKeyDown}>
+      <div id="tabs" part="tabs" role="tablist" @click=${this.handleTabsClick} @keydown=${this.handleTabsKeyDown}>
         <slot name="tab" @slotchange=${this.handleSlotChange}></slot>
       </div>
 
-      <div part="panels" class="panels">
+      <div id="panels" part="panels">
         <slot @slotchange=${this.handleSlotChange}></slot>
       </div>
     `;

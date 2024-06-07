@@ -16,7 +16,7 @@ export default css`
     background-color: var(--quiet-primary-fill-softer);
   }
 
-  :host([variant='primary']) .icon {
+  :host([variant='primary']) #icon {
     color: var(--quiet-primary-text-colorful);
   }
 
@@ -25,7 +25,7 @@ export default css`
     background-color: var(--quiet-neutral-fill-softer);
   }
 
-  :host([variant='secondary']) .icon {
+  :host([variant='secondary']) #icon {
     color: var(--quiet-neutral-text-colorful);
   }
 
@@ -34,7 +34,7 @@ export default css`
     background-color: var(--quiet-constructive-fill-softer);
   }
 
-  :host([variant='constructive']) .icon {
+  :host([variant='constructive']) #icon {
     color: var(--quiet-constructive-text-colorful);
   }
 
@@ -43,11 +43,11 @@ export default css`
     background-color: var(--quiet-destructive-fill-softer);
   }
 
-  :host([variant='destructive']) .icon {
+  :host([variant='destructive']) #icon {
     color: var(--quiet-destructive-text-colorful);
   }
 
-  .icon {
+  #icon {
     flex: 0 0 auto;
     align-self: start;
     display: flex;

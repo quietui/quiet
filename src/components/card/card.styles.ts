@@ -12,7 +12,7 @@ export default css`
   }
 
   /* Media */
-  .media {
+  #media {
     position: relative;
     margin: calc(-1 * var(--quiet-border-width));
 
@@ -29,7 +29,7 @@ export default css`
   }
 
   /* Header */
-  .header {
+  #header {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -49,19 +49,19 @@ export default css`
     }
   }
 
-  .actions {
+  #actions {
     display: flex;
     flex-wrap: wrap;
     margin-inline-start: auto;
   }
 
   /* Body */
-  .body {
+  #body {
     padding: var(--spacing);
   }
 
   /* Footer */
-  .footer {
+  #footer {
     display: flex;
     flex-wrap: wrap;
     align-items: center;

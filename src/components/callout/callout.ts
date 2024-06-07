@@ -38,13 +38,13 @@ export class QuietCallout extends QuietElement {
     return html`
       ${this.withIcon
         ? html`
-            <div part="icon" class="icon">
+            <div id="icon" part="icon">
               <slot name="icon"></slot>
             </div>
           `
         : ''}
 
-      <div part="body" class="body">
+      <div part="body">
         <slot></slot>
       </div>
     `;

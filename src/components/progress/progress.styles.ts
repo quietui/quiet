@@ -15,7 +15,7 @@ export default css`
     overflow: hidden;
   }
 
-  .indicator {
+  #indicator {
     --percentage: 0%;
 
     display: grid;

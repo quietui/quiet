@@ -346,17 +346,17 @@ export class QuietTextArea extends QuietElement {
 
   render() {
     return html`
-      <label part="label" id="label" for="text-box">
+      <label id="label" part="label" for="text-box">
         <slot name="label">${this.label}</slot>
       </label>
 
-      <div part="description" id="description">
+      <div id="description" part="description">
         <slot name="description">${this.description}</slot>
       </div>
 
       <div
-        part="visual-box"
         id="visual-box"
+        part="visual-box"
         class=${classMap({
           // Variants
           normal: this.variant === 'normal',
@@ -377,8 +377,8 @@ export class QuietTextArea extends QuietElement {
         })}
       >
         <textarea
-          part="text-box"
           id="text-box"
+          part="text-box"
           ?autofocus=${this.autofocus}
           ?disabled=${this.disabled}
           ?readonly=${this.readonly}

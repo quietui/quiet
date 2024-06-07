@@ -41,21 +41,21 @@ export class QuietCard extends QuietElement {
 
   render() {
     return html`
-      ${this.withMedia ? html` <div part="media" class="media"><slot name="media"></slot></div> ` : ''}
+      ${this.withMedia ? html` <div id="media" part="media"><slot name="media"></slot></div> ` : ''}
       ${this.withHeader
         ? html`
-            <header part="header" class="header">
+            <header id="header" part="header">
               <slot name="header"></slot>
-              <slot name="actions" class="actions"></slot>
+              <slot id="actions" name="actions"></slot>
             </header>
           `
         : ''}
 
-      <div part="body" class="body">
+      <div id="body" part="body">
         <slot></slot>
       </div>
 
-      ${this.withFooter ? html` <footer part="footer" class="footer"><slot name="footer"></slot></footer> ` : ''}
+      ${this.withFooter ? html` <footer id="footer" part="footer"><slot name="footer"></slot></footer> ` : ''}
     `;
   }
 }

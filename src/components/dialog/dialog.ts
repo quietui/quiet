@@ -49,7 +49,7 @@ export class QuietDialog extends QuietElement {
 
   private localize = new Localize(this);
 
-  @query('dialog') private dialog: HTMLDialogElement;
+  @query('#dialog') private dialog: HTMLDialogElement;
 
   /** Opens or closes the dialog. */
   @property({ type: Boolean, reflect: true }) open = false;
@@ -155,8 +155,8 @@ export class QuietDialog extends QuietElement {
   render() {
     return html`
       <dialog
+        id="dialog"
         part="dialog"
-        class="dialog"
         data-placement=${this.placement}
         @click=${this.handleDialogClick}
         @pointerdown=${this.handleDialogPointerDown}
@@ -164,9 +164,9 @@ export class QuietDialog extends QuietElement {
       >
         ${this.withHeader
           ? html`
-              <header part="header" class="header">
+              <header id="header" part="header">
                 <slot name="header"></slot>
-                <slot name="actions" class="actions">
+                <slot id="actions" name="actions">
                   <quiet-button
                     slot="header"
                     variant="text"
@@ -180,11 +180,11 @@ export class QuietDialog extends QuietElement {
             `
           : ''}
 
-        <div part="body" class="body">
+        <div id="body" part="body">
           <slot></slot>
         </div>
 
-        ${this.withFooter ? html` <footer part="footer" class="footer"><slot name="footer"></slot></footer> ` : ''}
+        ${this.withFooter ? html` <footer id="footer" part="footer"><slot name="footer"></slot></footer> ` : ''}
       </dialog>
     `;
   }

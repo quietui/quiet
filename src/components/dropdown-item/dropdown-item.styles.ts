@@ -36,7 +36,7 @@ export default css`
 
   /* Destructive variant */
   :host([variant='destructive']),
-  :host([variant='destructive']) .details {
+  :host([variant='destructive']) #details {
     color: var(--quiet-destructive-text-colorful);
   }
 
@@ -60,18 +60,18 @@ export default css`
     padding-inline-start: 1.5rem;
   }
 
-  .check {
+  #check {
     font-size: 1.25em;
     margin-inline-start: -1.25rem;
     margin-inline-end: 0.25rem;
     visibility: hidden;
   }
 
-  :host([data-state-checked]) .check {
+  :host([data-state-checked]) #check {
     visibility: visible;
   }
 
-  .icon ::slotted(*) {
+  #icon ::slotted(*) {
     flex: 0 0 auto;
     display: flex;
     align-items: center;
@@ -79,12 +79,12 @@ export default css`
     margin-inline-end: 0.5rem !important;
   }
 
-  .label {
+  #label {
     flex: 1 1 auto;
     flex-wrap: wrap;
   }
 
-  .details {
+  #details {
     flex: 0 0 auto;
     display: flex;
     align-items: center;

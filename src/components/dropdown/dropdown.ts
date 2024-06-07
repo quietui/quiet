@@ -47,7 +47,7 @@ export class QuietDropdown extends QuietElement {
   private userTypedQuery = '';
   private userTypedTimeout: number;
 
-  @query('.menu') private menu: HTMLDivElement;
+  @query('#menu') private menu: HTMLDivElement;
 
   /** Opens or closes the dropdown. */
   @property({ type: Boolean, reflect: true }) open = false;
@@ -379,9 +379,8 @@ export class QuietDropdown extends QuietElement {
       <slot name="trigger" @click=${this.handleTriggerClick} @slotchange=${this.syncAriaAttributes}></slot>
 
       <div
-        part="menu"
         id="menu"
-        class="menu"
+        part="menu"
         popover="manual"
         role="menu"
         tabindex="-1"

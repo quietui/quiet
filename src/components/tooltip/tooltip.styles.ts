@@ -15,7 +15,7 @@ export default css`
     margin: 0;
   }
 
-  .tooltip {
+  #tooltip {
     display: none;
     position: absolute;
     width: max-content;
@@ -41,7 +41,7 @@ export default css`
     }
   }
 
-  .content {
+  #content {
     border-radius: var(--quiet-border-radius);
     background-color: var(--quiet-neutral-fill-louder);
     color: var(--quiet-neutral-text-on-loud);
@@ -52,7 +52,7 @@ export default css`
     z-index: 3;
   }
 
-  .arrow {
+  #arrow {
     position: absolute;
     width: calc(var(--arrow-diagonal-size) * 2);
     height: calc(var(--arrow-diagonal-size) * 2);
@@ -61,7 +61,7 @@ export default css`
     z-index: 2;
   }
 
-  .polygon {
+  #polygon {
     position: fixed;
     top: 0;
     right: 0;

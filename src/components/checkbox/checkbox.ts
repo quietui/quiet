@@ -219,10 +219,10 @@ export class QuietCheckbox extends QuietElement {
 
   render() {
     return html`
-      <label part="label" id="label">
+      <label id="label" part="label">
         <div
-          part="visual-box"
           id="visual-box"
+          part="visual-box"
           class=${classMap({
             /* Variants */
             normal: this.variant === 'normal',
@@ -241,8 +241,8 @@ export class QuietCheckbox extends QuietElement {
           })}
         >
           <input
-            part="checkbox"
             id="checkbox"
+            part="checkbox"
             type="checkbox"
             name=${ifDefined(this.name)}
             value=${ifDefined(this.value)}
@@ -256,8 +256,8 @@ export class QuietCheckbox extends QuietElement {
             @focus=${this.handleFocus}
             @blur=${this.handleBlur}
           />
-          <quiet-icon part="check-icon" id="check-icon" library="system" name="check"></quiet-icon>
-          <quiet-icon part="indeterminate-icon" id="indeterminate-icon" library="system" name="minus"></quiet-icon>
+          <quiet-icon id="check-icon" part="check-icon" library="system" name="check"></quiet-icon>
+          <quiet-icon id="indeterminate-icon" part="indeterminate-icon" library="system" name="minus"></quiet-icon>
         </div>
         <slot>${this.label}</slot>
       </label>

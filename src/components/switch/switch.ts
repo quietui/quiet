@@ -223,8 +223,8 @@ export class QuietSwitch extends QuietElement {
     return html`
       <label part="label" id="label">
         <div
-          part="visual-box"
           id="visual-box"
+          part="visual-box"
           class=${classMap({
             /* Sizes */
             xs: this.size === 'xs',
@@ -239,8 +239,8 @@ export class QuietSwitch extends QuietElement {
           })}
         >
           <input
-            part="switch"
             id="switch"
+            part="switch"
             type="checkbox"
             name=${ifDefined(this.name)}
             value=${ifDefined(this.value)}
@@ -256,9 +256,9 @@ export class QuietSwitch extends QuietElement {
             @focus=${this.handleFocus}
             @blur=${this.handleBlur}
           />
-          <span part="on-label" id="on-label"><slot name="on-label"></slot></span>
-          <span part="off-label" id="off-label"><slot name="off-label"></slot></span>
-          <span part="thumb" id="thumb"></span>
+          <span id="on-label" part="on-label"><slot name="on-label"></slot></span>
+          <span id="off-label" part="off-label"><slot name="off-label"></slot></span>
+          <span id="thumb" part="thumb"></span>
         </div>
         <slot>${this.label}</slot>
       </label>

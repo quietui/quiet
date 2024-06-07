@@ -7,7 +7,7 @@ export default css`
     display: contents;
   }
 
-  .menu {
+  #menu {
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -44,35 +44,35 @@ export default css`
     }
   }
 
-  :host([data-placement^='top']) .menu {
+  :host([data-placement^='top']) #menu {
     transform-origin: bottom;
   }
 
-  :host([data-placement^='bottom']) .menu {
+  :host([data-placement^='bottom']) #menu {
     transform-origin: top;
   }
 
-  :host([data-placement^='left']) .menu {
+  :host([data-placement^='left']) #menu {
     transform-origin: right;
   }
 
-  :host([data-placement^='right']) .menu {
+  :host([data-placement^='right']) #menu {
     transform-origin: left;
   }
 
-  :host([data-placement='left-start']) .menu {
+  :host([data-placement='left-start']) #menu {
     transform-origin: right top;
   }
 
-  :host([data-placement='left-end']) .menu {
+  :host([data-placement='left-end']) #menu {
     transform-origin: right bottom;
   }
 
-  :host([data-placement='right-start']) .menu {
+  :host([data-placement='right-start']) #menu {
     transform-origin: left top;
   }
 
-  :host([data-placement='right-end']) .menu {
+  :host([data-placement='right-end']) #menu {
     transform-origin: left bottom;
   }
 

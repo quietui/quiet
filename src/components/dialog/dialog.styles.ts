@@ -14,7 +14,7 @@ export default css`
     display: block;
   }
 
-  .dialog {
+  #dialog {
     position: fixed;
     inset-block-start: 0;
     inset-block-end: 0;
@@ -209,7 +209,7 @@ export default css`
   }
 
   /* Header */
-  .header {
+  #header {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -221,14 +221,14 @@ export default css`
     padding-block-end: calc(var(--spacing) / 2);
   }
 
-  .actions {
+  #actions {
     display: flex;
     flex-wrap: wrap;
     margin-inline-start: auto;
   }
 
   /* Body */
-  .body {
+  #body {
     flex: 1 1 auto;
     padding-inline: var(--spacing);
     padding-block: calc(var(--spacing) / 2);
@@ -236,16 +236,16 @@ export default css`
   }
 
   /* Normalize spacing when the header and footer are absent */
-  :host(:not([with-header])) .body {
+  :host(:not([with-header])) #body {
     padding-block-start: var(--spacing);
   }
 
-  :host(:not([with-footer])) .body {
+  :host(:not([with-footer])) #body {
     padding-block-end: var(--spacing);
   }
 
   /* Footer */
-  .footer {
+  #footer {
     display: flex;
     flex-wrap: wrap;
     align-items: center;

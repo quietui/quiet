@@ -90,18 +90,18 @@ export class QuietDropdownItem extends QuietElement {
   render() {
     return html`
       ${this.type === 'checkbox'
-        ? html`<quiet-icon part="checkmark" class="check" library="system" name="check"></quiet-icon>`
+        ? html`<quiet-icon id="check" part="checkmark" library="system" name="check"></quiet-icon>`
         : ''}
 
-      <span part="icon" class="icon">
+      <span id="icon" part="icon">
         <slot name="icon"></slot>
       </span>
 
-      <span part="label" class="label">
+      <span id="label" part="label">
         <slot></slot>
       </span>
 
-      <span part="details" class="details">
+      <span id="details" part="details">
         <slot name="details"></slot>
       </span>
     `;

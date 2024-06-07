@@ -403,17 +403,17 @@ export class QuietTextField extends QuietElement {
 
   render() {
     return html`
-      <label part="label" id="label" for="text-box">
+      <label id="label" part="label" for="text-box">
         <slot name="label">${this.label}</slot>
       </label>
 
-      <div part="description" id="description">
+      <div id="description" part="description">
         <slot name="description">${this.description}</slot>
       </div>
 
       <div
-        part="visual-box"
         id="visual-box"
+        part="visual-box"
         class=${classMap({
           // Variants
           normal: this.variant === 'normal',
@@ -435,8 +435,8 @@ export class QuietTextField extends QuietElement {
         <slot name="start"></slot>
 
         <input
-          part="text-box"
           id="text-box"
+          part="text-box"
           type=${this.type === 'password' && this.isPasswordVisible ? 'text' : this.type}
           ?autofocus=${this.autofocus}
           ?disabled=${this.disabled}
@@ -469,8 +469,8 @@ export class QuietTextField extends QuietElement {
         ${this.type === 'password' && this.value.length > 0 && !this.disabled && !this.readonly
           ? html`
               <button
-                part="toggle-password-button"
                 id="password-toggle-button"
+                part="toggle-password-button"
                 class="text-box-button"
                 type="button"
                 aria-label=${this.localize.term(this.isPasswordVisible ? 'hidePassword' : 'showPassword')}
@@ -485,8 +485,8 @@ export class QuietTextField extends QuietElement {
         ${this.clearable && this.value.length > 0 && !this.disabled && !this.readonly
           ? html`
               <button
-                part="clear-button"
                 id="clear-button"
+                part="clear-button"
                 class="text-box-button"
                 type="button"
                 aria-label=${this.localize.term('clearEntry')}

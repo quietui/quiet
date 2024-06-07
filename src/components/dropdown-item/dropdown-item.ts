@@ -21,6 +21,10 @@ import type { CSSResultGroup } from 'lit';
  * @csspart icon - The container that wraps the icon.
  * @csspart label - The container that wraps the label.
  * @csspart details - The container that wraps the menu item's details.
+ *
+ * @cssstate active - Applied when the dropdown item is active.
+ * @cssstate disabled - Applied when the dropdown item is disabled.
+ * @cssstate checked - Applied when the dropdown item is checked.
  */
 @customElement('quiet-dropdown-item')
 export class QuietDropdownItem extends QuietElement {
@@ -56,7 +60,7 @@ export class QuietDropdownItem extends QuietElement {
   @property({ reflect: true, type: Boolean }) checked = false;
 
   /** Disables the dropdown item. */
-  @property({ type: Boolean, reflect: true }) disabled = false;
+  @property({ reflect: true, type: Boolean }) disabled = false;
 
   updated(changedProps: Map<string, unknown>) {
     if (changedProps.has('active')) {
@@ -66,10 +70,12 @@ export class QuietDropdownItem extends QuietElement {
 
     if (changedProps.has('checked')) {
       this.setAttribute('aria-checked', this.checked ? 'true' : 'false');
+      this.customStates.set('checked', this.checked);
     }
 
     if (changedProps.has('disabled')) {
       this.setAttribute('aria-disabled', this.disabled ? 'true' : 'false');
+      this.customStates.set('disabled', this.disabled);
     }
 
     if (changedProps.has('type')) {

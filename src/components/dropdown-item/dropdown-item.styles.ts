@@ -16,7 +16,7 @@ export default css`
   }
 
   @media (hover: hover) {
-    :host(:hover:not([disabled])) {
+    :host(:hover:not([data-state-disabled])) {
       background-color: var(--quiet-neutral-fill-softer);
       color: var(--quiet-neutral-text-on-soft);
     }
@@ -30,7 +30,7 @@ export default css`
     z-index: 1;
   }
 
-  :host([disabled]) {
+  :host([data-state-disabled]) {
     cursor: not-allowed;
   }
 
@@ -52,7 +52,7 @@ export default css`
     color: var(--quiet-destructive-text-colorful);
   }
 
-  :host([disabled]) {
+  :host([data-state-disabled]) {
     opacity: 0.5;
   }
 
@@ -67,7 +67,7 @@ export default css`
     visibility: hidden;
   }
 
-  :host([checked]) .check {
+  :host([data-state-checked]) .check {
     visibility: visible;
   }
 

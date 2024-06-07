@@ -6,8 +6,8 @@ layout: splash
 
 <div class="splash">
 <h1 class="visually-hidden">Quiet UI</h1>
-<img class="only-light" src="/assets/images/wordmark-light.svg" alt="">
-<img class="only-dark" src="/assets/images/wordmark-dark.svg" alt="">
+
+{% include 'wordmark.njk' %}
 
 <p class="subtitle">{{ description }}</p>
 

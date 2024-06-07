@@ -299,6 +299,7 @@ html:not(.quiet-dark) .only-dark {
 
   quiet-dropdown-item {
     font-size: 0.8375rem;
+    text-transform: capitalize;
     padding-block: 0.125rem;
     padding-inline: 0.33rem;
 
@@ -785,28 +786,59 @@ quiet-callout {
 
 /* Splash */
 .layout-splash {
-  /* Keep homepage colors violet */
-  --quiet-primary-text-colorful: #787acf;
-  --docs-wordmark-accent-color: var(--quiet-primary-text-colorful);
-  background-color: var(--quiet-silent);
+  background-color: var(--quiet-background-color);
   background-attachment: fixed;
-  background-size: cover;
   background-position: center;
-  /* cspell:disable-next-line */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 800 400'%3E%3Cdefs%3E%3CradialGradient id='a' cx='396' cy='281' r='514' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23C6CBFF'/%3E%3Cstop offset='1' stop-color='%23DFE2FE'/%3E%3C/radialGradient%3E%3ClinearGradient id='b' gradientUnits='userSpaceOnUse' x1='400' y1='148' x2='400' y2='333'%3E%3Cstop offset='0' stop-color='%23989CFF' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23989CFF' stop-opacity='0.5'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23a)' width='800' height='400'/%3E%3Cg fill-opacity='0.4'%3E%3Ccircle fill='url(%23b)' cx='267.5' cy='61' r='300'/%3E%3Ccircle fill='url(%23b)' cx='532.5' cy='61' r='300'/%3E%3Ccircle fill='url(%23b)' cx='400' cy='30' r='300'/%3E%3C/g%3E%3C/svg%3E");
-}
+  background-repeat: repeat;
 
-.quiet-dark .layout-splash {
-  /* cspell:disable-next-line */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 800 400'%3E%3Cdefs%3E%3CradialGradient id='a' cx='396' cy='281' r='514' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23434578'/%3E%3Cstop offset='1' stop-color='%23000000'/%3E%3C/radialGradient%3E%3ClinearGradient id='b' gradientUnits='userSpaceOnUse' x1='400' y1='148' x2='400' y2='333'%3E%3Cstop offset='0' stop-color='%23292A4D' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23292A4D' stop-opacity='0.5'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23a)' width='800' height='400'/%3E%3Cg fill-opacity='0.4'%3E%3Ccircle fill='url(%23b)' cx='267.5' cy='61' r='300'/%3E%3Ccircle fill='url(%23b)' cx='532.5' cy='61' r='300'/%3E%3Ccircle fill='url(%23b)' cx='400' cy='30' r='300'/%3E%3C/g%3E%3C/svg%3E");
+  /* Cubes represent the awesome shit we're gonna build */
+  --cube-size: 404px;
+  --cube-color-dark: color-mix(in oklab, var(--quiet-primary-500), var(--quiet-background-color) 90%);
+  --cube-color-mid: color-mix(in oklab, var(--quiet-primary-500), var(--quiet-background-color) 95%);
+  --cube-color-light: var(--quiet-background-color);
+  --cube-gradient: var(--cube-color-mid) 0 120deg, #0000 0;
+
+  background-image: conic-gradient(from -60deg at 50% calc(100% / 3), var(--cube-gradient)),
+    conic-gradient(from 120deg at 50% calc(200% / 3), var(--cube-gradient)),
+    conic-gradient(from 60deg at calc(200% / 3), var(--cube-color-mid) 60deg, var(--cube-color-light) 0 120deg, #0000 0),
+    conic-gradient(from 180deg at calc(100% / 3), var(--cube-color-dark) 60deg, var(--cube-gradient)),
+    linear-gradient(
+      90deg,
+      var(--cube-color-dark) calc(100% / 6),
+      var(--cube-color-light) 0 50%,
+      var(--cube-color-dark) 0 calc(500% / 6),
+      var(--cube-color-light) 0
+    );
+  background-size: calc(1.732 * var(--cube-size)) var(--cube-size);
+
+  @media screen and (max-width: 959px) {
+    --cube-size: 240px;
+  }
 }
 
 .layout-splash:not(.scrolled-down) #header {
   background-color: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 .layout-splash:not(.scrolled-down) #header::after {
   border-color: transparent;
+}
+
+.layout-splash #page {
+  height: 100dvh;
+
+  /* Don't overflow in landscape + mobile */
+  @media screen and (max-height: 600px) {
+    height: auto;
+  }
+}
+
+.layout-splash #content {
+  display: flex;
+  height: calc(100% - var(--docs-header-height));
+  align-items: center;
 }
 
 .splash {
@@ -815,15 +847,22 @@ quiet-callout {
   line-height: 1.4;
   text-align: center;
   padding-inline: 2rem;
-  margin-block: 20dvh;
 }
 
-.splash img {
-  display: block;
-  width: 100%;
-  max-width: 600px;
-  margin-inline: auto;
-  margin-block-end: 4dvh;
+.splash-image {
+  img,
+  svg {
+    display: block;
+    width: 100%;
+    max-width: 600px;
+    margin-inline: auto;
+
+    /* Smaller logo on mobile */
+    @media screen and (max-width: 959px) {
+      max-width: 320px;
+      margin-block: -2.5rem;
+    }
+  }
 }
 
 .splash .subtitle {
@@ -835,11 +874,6 @@ quiet-callout {
   gap: 1rem;
   justify-content: center;
   margin-block-start: 4rem;
-
-  /* Keep homepage colors violet */
-  quiet-button[variant='primary'] {
-    --quiet-primary-fill-mid: #787acf;
-  }
 }
 
 @media screen and (max-width: 600px) {

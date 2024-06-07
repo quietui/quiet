@@ -136,17 +136,14 @@
             </button>
             <div class="color-picker-swatches">
               {%
-                set colors = {
-                  Red: '#ec8786', Orange: '#e98d61', Amber: '#db9640',
-                  Yellow: '#c5a231', Lime: '#b0aa39', Green: '#97b14c',
-                  Emerald: '#7db664', Teal: '#5ab983', Cyan: '#39baa4',
-                  Sky: '#2ab6d1', Blue: '#58acf2', Indigo: '#79a4fe',
-                  Violet: '#989cff', Purple: '#b394f4', Fuschia: '#ca8de1',
-                  Pink: '#dc88c7', Rose: '#e886a7', Slate: '#a3a6b5',
-                  Zinc: '#a5a6ab', Stone: '#a9a6a2', Sand: '#aaa69f'
+                set themeColors = {
+                  red: '#ec8786', orange: '#e98d61', amber: '#db9640', yellow: '#c5a231', lime: '#b0aa39',
+                  green: '#97b14c', emerald: '#7db664', teal: '#5ab983', cyan: '#39baa4', sky: '#2ab6d1',
+                  blue: '#58acf2', indigo: '#79a4fe', violet: '#989cff', purple: '#b394f4', fuschia: '#ca8de1',
+                  pink: '#dc88c7', rose: '#e886a7', slate: '#a3a6b5', zinc: '#a5a6ab', stone: '#a9a6a2', sand: '#aaa69f'
                 }
               %}
-              {% for name, color in colors %}
+              {% for name, color in themeColors %}
                 <quiet-dropdown-item value="{{ color }}">
                   <span slot="icon" class="color-picker-swatch" style="background-color: {{ color }};"></span>
                   {{ name }}

@@ -27,6 +27,7 @@ import type { CSSResultGroup } from 'lit';
  * @event quiet-click - Emitted when the button is clicked. Will not be emitted when the button is disabled or loading.
  * @event quiet-focus - Emitted when the button receives focus. This event does not bubble.
  *
+ * @cssstate disabled - Applied when the button is disabled.
  * @cssstate focused - Applied when the button has focus.
  * @cssstate toggled - Applied when a toggle button is activated.
  *
@@ -131,6 +132,12 @@ export class QuietButton extends QuietElement {
 
   /** Overrides the containing form's `target` attribute. */
   @property({ attribute: 'formtarget' }) formTarget: '_self' | '_blank' | '_parent' | '_top' | string | undefined;
+
+  updated(changedProps: Map<string, unknown>) {
+    if (changedProps.has('disabled')) {
+      this.customStates.set('disabled', this.disabled);
+    }
+  }
 
   private handleBlur() {
     this.customStates.set('focused', false);

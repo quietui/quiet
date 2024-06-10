@@ -29,7 +29,7 @@ If Quiet isn't exactly what you want, it's probably not a good choice for your p
 
 **But be warned…**
 
-Expect a long beta period…maybe forever. Expect breaking changes. Expect that issues and <abbr title="Pull requests">PRs</abbr> will be closed when they don't align with my vision for the project. Expect that features will land when I get around to them. Expect me to be very picky about what makes it into the library, the quality of code, and every other aspect of how the project is maintained. Expect that I won't always want to accept a PR because I consider it out of scope or want to take my own shot at it.
+Expect a long beta period. Expect breaking changes. Expect that issues and <abbr title="Pull requests">PRs</abbr> will be closed when they don't align with my vision for the project. Expect that features will land when I get around to them. Expect me to be very picky about what makes it into the library, the quality of code, and every other aspect of how the project is maintained. Expect that I won't always want to accept a PR because I consider it out of scope or want to take my own shot at it.
 
 _With all due respect, I'm not building this for you. I'm building it for me._
 

@@ -376,6 +376,14 @@ Text-on colors provide adequate contrast when used on top of their respective fi
   </div>  
 </div>
 
+:::details A note about WCAG 2
+You might discover that some elements are reported to have insufficient contrast, according to [WCAG 2](https://www.w3.org/WAI/standards-guidelines/wcag/). This occurs due to the standard not accounting for _perceptual_ contrast and only affects Quiet's text-on midtone colors.
+
+Technically, <quiet-badge variant="primary" style="font-size: 0.9375rem; color: black;">black text</quiet-badge> has a higher contrast ratio than <quiet-badge variant="primary" style="font-size: 0.9375rem;">white text</quiet-badge> on these backgrounds, despite the former being harder for most people to see. While these design token combinations don't meet WCAG 2, they do meet the the forthcoming [APCA](https://github.com/Myndex/SAPC-APCA) standard, which is the likely candidate contrast method for WCAG 3.
+
+_[Refer to this article](https://medium.com/@think_ui/why-color-contrast-is-not-as-black-and-white-as-it-seems-94197a72b005) to learn more about why WCAG 2 isn't a great standard for measuring perceptual contrast._
+:::
+
 #### Stroke colors
 
 Stroke colors are used to draw borders and outlines around elements and UI chrome.

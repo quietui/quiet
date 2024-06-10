@@ -1,18 +1,18 @@
 ---
 title: Quiet UI
-description: A hand-crafted UI library for the Web with a focus on accessibility, longevity, performance, and simplicity.
+description: A hand-crafted UI library for the Web.
 layout: splash
 ---
 
 <div class="splash">
 <h1 class="visually-hidden">Quiet UI</h1>
 
-{% include 'wordmark.njk' %}
+{% include 'splash-image.njk' %}
 
 <p class="subtitle">{{ description }}</p>
 
 <p>
-Professionally designed. Platform-built. Open source.
+ Focusing on accessibility, longevity, performance, and simplicity
 </p>
 
 <div class="splash-actions">

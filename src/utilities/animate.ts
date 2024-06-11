@@ -4,14 +4,35 @@
  */
 export function animateWithClass(el: Element, className: string) {
   return new Promise<void>(resolve => {
+    const controller = new AbortController();
+
     el.classList.add(className);
+
+    // If no animations are queued after adding the class, there's nothing to do
+    if (el.getAnimations().length === 0) {
+      resolve();
+    }
+
+    // Wait for the animation to end
     el.addEventListener(
       'animationend',
       () => {
         el.classList.remove(className);
+        controller.abort();
         resolve();
       },
       { once: true }
+    );
+
+    // If the animation is canceled, abort and resolve
+    el.addEventListener(
+      'animationcancel',
+      () => {
+        el.classList.remove(className);
+        resolve();
+        controller.abort();
+      },
+      { once: true, signal: controller.signal }
     );
   });
 }

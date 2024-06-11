@@ -152,7 +152,8 @@ export class QuietTooltip extends QuietElement {
           this.removeAttribute('aria-hidden');
           this.anchor?.setAttribute('aria-describedby', this.id);
         }
-      } else {
+      } else if (this.for) {
+        // If `for` is provided and the element isn't found, show a warning
         console.warn(
           `A tooltip was assigned to to an element with an id of "${this.for}" but the element could not be found.`,
           this

@@ -5,7 +5,7 @@ layout: component
 
 Toolbars follows the [ARIA APG toolbar pattern](https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/) for accessibility. A roving tab index is used, meaning users can tab into the control and use the arrow keys to navigate options. A subsequent tab will exit the toolbar.
 
-By grouping related [buttons](/docs/components/button) and [button groups](/docs/components/button-group) into toolbars, you will decrease the number of tab stops in the keyboard interface, making your app more efficient and user-friendly.
+By grouping related [buttons](/docs/components/button) and [button groups](/docs/components/button-group) into toolbars, the number of tab stops in the keyboard interface is reduced, resulting in a more user-friendly experience.
 
 ```html {.example}
 <quiet-toolbar>

@@ -792,7 +792,7 @@ quiet-callout {
   background-repeat: repeat;
 
   /* Cubes represent the awesome shit we're gonna build */
-  --cube-size: 740px;
+  --cube-size: 750px;
   --cube-color-dark: color-mix(in oklab, var(--quiet-primary-500), var(--quiet-background-color) 90%);
   --cube-color-mid: color-mix(in oklab, var(--quiet-primary-500), var(--quiet-background-color) 95%);
   --cube-color-light: var(--quiet-background-color);

@@ -855,7 +855,7 @@ quiet-callout {
   svg {
     display: block;
     width: 100%;
-    max-width: 500px;
+    max-width: 540px;
     margin-inline: auto;
 
     /* Smaller logo on mobile */

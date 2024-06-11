@@ -792,7 +792,7 @@ quiet-callout {
   background-repeat: repeat;
 
   /* Cubes represent the awesome shit we're gonna build */
-  --cube-size: 404px;
+  --cube-size: 740px;
   --cube-color-dark: color-mix(in oklab, var(--quiet-primary-500), var(--quiet-background-color) 90%);
   --cube-color-mid: color-mix(in oklab, var(--quiet-primary-500), var(--quiet-background-color) 95%);
   --cube-color-light: var(--quiet-background-color);
@@ -812,7 +812,7 @@ quiet-callout {
   background-size: calc(1.732 * var(--cube-size)) var(--cube-size);
 
   @media screen and (max-width: 959px) {
-    --cube-size: 240px;
+    --cube-size: 330px;
   }
 }
 
@@ -847,6 +847,7 @@ quiet-callout {
   line-height: 1.4;
   text-align: center;
   padding-inline: 2rem;
+  margin-inline: auto;
 }
 
 .splash-image {
@@ -854,7 +855,7 @@ quiet-callout {
   svg {
     display: block;
     width: 100%;
-    max-width: 600px;
+    max-width: 500px;
     margin-inline: auto;
 
     /* Smaller logo on mobile */

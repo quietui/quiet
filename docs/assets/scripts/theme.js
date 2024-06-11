@@ -1,20 +1,18 @@
-//
-// Dark mode
-//
+/** Sets the theme to light or dark mode */
 function setTheme(name, skipTransition = false) {
   const isDark = name === 'dark';
+  const toggleThemeClass = () => document.documentElement.classList.toggle('quiet-dark', isDark);
+
   sessionStorage.setItem('theme', isDark ? 'dark' : 'light');
 
   if (skipTransition || !document.startViewTransition) {
-    document.documentElement.classList.toggle('quiet-dark', isDark);
-    return;
+    toggleThemeClass();
+  } else if (document.startViewTransition) {
+    document.startViewTransition(() => toggleThemeClass());
   }
-
-  document.startViewTransition(() => {
-    document.documentElement.classList.toggle('quiet-dark', isDark);
-  });
 }
 
+/** Gets the current theme */
 function getTheme() {
   // Use session preference, if one exists
   if (sessionStorage.getItem('theme')) {
@@ -25,6 +23,7 @@ function getTheme() {
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
 
+/** Toggles the current theme between light and dark */
 function toggleTheme() {
   setTheme(getTheme() === 'dark' ? 'light' : 'dark');
 }
@@ -56,18 +55,13 @@ document.addEventListener('keydown', event => {
   }
 });
 
-//
-// Sets the theme color and updates the UI
-//
-function setThemeColor(newColor) {
+/** Sets the theme color and updates the UI */
+function setThemeColor(newColor, skipTransition = false) {
   const color = newColor || '#989cff';
   const dropdown = document.getElementById('header-color-picker');
+  const updateSeedColor = () => document.documentElement.style.setProperty('--quiet-primary-seed', color);
 
-  // Remember it
   sessionStorage.setItem('primary-seed', color);
-
-  // Update the seed color
-  document.documentElement.style.setProperty('--quiet-primary-seed', color);
 
   // Update the theme color
   document.head.querySelector('meta[name="theme-color"]').content = color;
@@ -76,6 +70,13 @@ function setThemeColor(newColor) {
   dropdown.querySelectorAll('quiet-dropdown-item').forEach(item => {
     item.classList.toggle('current', item.getAttribute('value') === color);
   });
+
+  // Update the seed color
+  if (skipTransition || !document.startViewTransition) {
+    updateSeedColor();
+  } else if (document.startViewTransition) {
+    document.startViewTransition(() => updateSeedColor());
+  }
 }
 
 // Update when a new color is selected
@@ -87,8 +88,8 @@ document.addEventListener('quiet-select', event => {
 
 // Keep the theme in sync when new pages load
 document.addEventListener('turbo:load', () => {
-  setThemeColor(sessionStorage.getItem('primary-seed'));
+  setThemeColor(sessionStorage.getItem('primary-seed'), true);
 });
 
 // Initial sync
-setThemeColor(sessionStorage.getItem('primary-seed'));
+setThemeColor(sessionStorage.getItem('primary-seed'), true);

@@ -22,7 +22,7 @@ Badges have four variants. Primary badges are intended to be more obvious. Secon
 
 ### Changing the size
 
-Spinners are sized relative to the current font size. This allows you to place them into many contexts without having to explicitly size them. To change the size, set the `font-size` property on the badge or an ancestor element.
+Badges are sized relative to the current font size. This allows you to place them into many contexts without having to explicitly size them. To change the size, set the `font-size` property on the badge or an ancestor element.
 
 ```html {.example}
 <quiet-badge>Normal</quiet-badge>

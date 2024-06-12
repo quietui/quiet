@@ -17,11 +17,11 @@ export default css`
     animation: rotate 1.5s linear infinite;
   }
 
-  .track {
+  #track {
     stroke: var(--track-color);
   }
 
-  .indicator {
+  #indicator {
     stroke: var(--indicator-color);
     stroke-dasharray: 75, 100;
     stroke-dashoffset: -5;

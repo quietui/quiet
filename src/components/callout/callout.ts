@@ -44,7 +44,7 @@ export class QuietCallout extends QuietElement {
           `
         : ''}
 
-      <div part="body">
+      <div id="body" part="body">
         <slot></slot>
       </div>
     `;

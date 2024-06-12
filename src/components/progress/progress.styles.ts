@@ -37,15 +37,16 @@ export default css`
       margin-inline: 1em;
       overflow: hidden;
     }
+  }
 
-    &.indeterminate {
-      width: 50%;
-      border-radius: inherit;
-      animation: 2.5s indeterminate infinite cubic-bezier(0.45, 0, 0.55, 1);
+  /* Indeterminate */
+  :host([indeterminate]) #indicator {
+    width: 50%;
+    border-radius: inherit;
+    animation: 2.5s indeterminate infinite cubic-bezier(0.45, 0, 0.55, 1);
 
-      &:dir(rtl) {
-        animation-name: indeterminate-rtl;
-      }
+    &:dir(rtl) {
+      animation-name: indeterminate-rtl;
     }
   }
 

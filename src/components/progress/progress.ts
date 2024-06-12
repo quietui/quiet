@@ -1,5 +1,4 @@
 import { clamp } from '../../utilities/math.js';
-import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property, query } from 'lit/decorators.js';
 import { html } from 'lit';
 import { QuietElement } from '../../utilities/quiet-element.js';
@@ -38,7 +37,7 @@ export class QuietProgress extends QuietElement {
   @property({ type: Number }) max = 100;
 
   /** The progress bar's current value. */
-  @property({ type: Number, reflect: true }) value = 0;
+  @property({ type: Number }) value = 0;
 
   /** The progress bar's current value as a percentage. This is a readonly property. */
   public get percentage() {
@@ -49,7 +48,7 @@ export class QuietProgress extends QuietElement {
    * When the completion status can't be determined, the progress bar is considered indeterminate and the value is
    * ignored. Useful for tasks whose progress can't be reported.
    */
-  @property({ type: Boolean }) indeterminate = false;
+  @property({ type: Boolean, reflect: true }) indeterminate = false;
 
   connectedCallback() {
     super.connectedCallback();
@@ -82,13 +81,7 @@ export class QuietProgress extends QuietElement {
 
   render() {
     return html`
-      <div
-        id="indicator"
-        part="indicator"
-        class=${classMap({
-          indeterminate: this.indeterminate
-        })}
-      >
+      <div id="indicator" part="indicator">
         <slot></slot>
       </div>
     `;

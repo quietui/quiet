@@ -21,7 +21,7 @@ export class QuietDivider extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
   /** Sets the divider's orientation. */
-  @property() orientation: 'horizontal' | 'vertical' = 'horizontal';
+  @property({ reflect: true }) orientation: 'horizontal' | 'vertical' = 'horizontal';
 
   connectedCallback() {
     super.connectedCallback();

@@ -211,9 +211,9 @@ export class QuietButton extends QuietElement {
     /* eslint-disable lit/binding-positions, lit/no-invalid-html */
     return html`
       <${tag}
+        id="button"
         part="button"
         class=${classMap({
-          button: true,
           // Variants
           primary: this.variant === 'primary',
           secondary: this.variant === 'secondary',
@@ -234,7 +234,6 @@ export class QuietButton extends QuietElement {
           disabled: isDisabled,
           loading: isLoading
         })}
-        id="button"
         type=${ifDefined(isLink ? undefined : this.type)}
         ?disabled=${ifDefined(isLink ? undefined : this.disabled)}
         name=${ifDefined(isLink ? undefined : this.name)}

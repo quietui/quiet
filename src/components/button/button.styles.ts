@@ -7,7 +7,7 @@ export default css`
     width: auto;
   }
 
-  .button {
+  #button {
     appearance: none;
     position: relative;
     display: inline-flex;
@@ -257,26 +257,26 @@ export default css`
   }
 
   /* Grouped buttons */
-  :host([data-button-group-middle]) .button {
+  :host([data-button-group-middle]) #button {
     border-radius: 0;
   }
 
-  :host([data-button-group-horizontal][data-button-group-first]) .button {
+  :host([data-button-group-horizontal][data-button-group-first]) #button {
     border-start-end-radius: 0;
     border-end-end-radius: 0;
   }
 
-  :host([data-button-group-horizontal][data-button-group-last]) .button {
+  :host([data-button-group-horizontal][data-button-group-last]) #button {
     border-start-start-radius: 0;
     border-end-start-radius: 0;
   }
 
-  :host([data-button-group-vertical][data-button-group-first]) .button {
+  :host([data-button-group-vertical][data-button-group-first]) #button {
     border-end-start-radius: 0;
     border-end-end-radius: 0;
   }
 
-  :host([data-button-group-vertical][data-button-group-last]) .button {
+  :host([data-button-group-vertical][data-button-group-last]) #button {
     border-start-start-radius: 0;
     border-start-end-radius: 0;
   }

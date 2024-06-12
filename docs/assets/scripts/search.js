@@ -49,7 +49,6 @@ function show() {
   textField.addEventListener('quiet-input', handleInput);
   results.addEventListener('click', handleSelection);
   dialog.addEventListener('keydown', handleKeyDown);
-  dialog.addEventListener('quiet-close', hide, { once: true });
   dialog.open = true;
 }
 

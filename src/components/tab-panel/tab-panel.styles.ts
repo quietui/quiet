@@ -5,7 +5,7 @@ export default css`
     display: block;
   }
 
-  :host(:not([data-state-visible])) {
+  :host(:not(:state(visible))) {
     display: none;
   }
 `;

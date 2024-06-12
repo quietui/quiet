@@ -126,12 +126,12 @@ However, these selectors will match even before the user has had a chance to fil
 
 <style>
   .checkbox__validation-custom {
-    quiet-checkbox[data-state-user-valid] {
+    quiet-checkbox:state(user-valid) {
       outline: solid 2px var(--quiet-constructive-stroke-mid);
       outline-offset: .5rem;
     }
 
-    quiet-checkbox[data-state-user-invalid] {
+    quiet-checkbox:state(user-invalid) {
       outline: solid 2px var(--quiet-destructive-stroke-mid);
       outline-offset: .5rem;
     }

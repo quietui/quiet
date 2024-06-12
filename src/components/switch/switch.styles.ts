@@ -33,7 +33,7 @@ export default css`
     }
   }
 
-  :host([data-state-disabled]) label {
+  :host(:state(disabled)) label {
     cursor: not-allowed;
   }
 
@@ -186,7 +186,7 @@ export default css`
     }
   }
 
-  :host([data-state-disabled]) {
+  :host(:state(disabled)) {
     opacity: 0.5;
     cursor: not-allowed;
   }

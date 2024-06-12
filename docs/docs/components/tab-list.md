@@ -294,7 +294,7 @@ Tab lists come with a simple, minimal appearance. Feel free to customize them wi
       margin-inline-start: 0;
     }
 
-    quiet-tab[data-state-active] {
+    quiet-tab:state(active) {
       border-bottom-color: var(--quiet-background-color);
       color: var(--quiet-text-body);
     }
@@ -329,7 +329,7 @@ Tab lists come with a simple, minimal appearance. Feel free to customize them wi
       margin-inline-start: 0;
     }
 
-    quiet-tab[data-state-active] {
+    quiet-tab:state(active) {
       border: none;
       background-color: var(--quiet-background-color);
       color: var(--quiet-text-body);

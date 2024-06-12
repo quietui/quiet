@@ -13,31 +13,31 @@ export default css`
   }
 
   /* Primary */
-  :host([variant='primary']) {
+  .primary {
     background-color: var(--quiet-primary-fill-mid);
     color: var(--quiet-primary-text-on-mid);
   }
 
   /* Secondary */
-  :host([variant='secondary']) {
+  .secondary {
     background-color: var(--quiet-neutral-fill-softer);
     color: var(--quiet-primary-text-on-soft);
   }
 
   /* Constructive */
-  :host([variant='constructive']) {
+  .constructive {
     background-color: var(--quiet-constructive-fill-mid);
     color: var(--quiet-constructive-text-on-mid);
   }
 
   /* Destructive */
-  :host([variant='destructive']) {
+  .destructive {
     background-color: var(--quiet-destructive-fill-mid);
     color: var(--quiet-destructive-text-on-mid);
   }
 
   /* Pulse */
-  :host([attention='pulse']) {
+  .pulse {
     animation: var(--attention-duration) infinite pulse var(--attention-easing);
   }
 
@@ -54,7 +54,7 @@ export default css`
   }
 
   /* Shake */
-  :host([attention='shake']) {
+  .shake {
     animation: var(--attention-duration) infinite shake var(--attention-easing);
   }
 
@@ -83,7 +83,7 @@ export default css`
   }
 
   /* Wobble */
-  :host([attention='wobble']) {
+  .wobble {
     animation: var(--attention-duration) infinite wobble var(--attention-easing);
   }
 

@@ -1,3 +1,4 @@
+import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property } from 'lit/decorators.js';
 import { html } from 'lit';
 import { QuietElement } from '../../utilities/quiet-element.js';
@@ -29,7 +30,21 @@ export class QuietBadge extends QuietElement {
   @property({ reflect: true }) attention?: 'pulse' | 'shake' | 'wobble';
 
   render() {
-    return html` <slot></slot> `;
+    return html`
+      <slot
+        class=${classMap({
+          // Variants
+          primary: this.variant === 'primary',
+          secondary: this.variant === 'secondary',
+          constructive: this.variant === 'constructive',
+          destructive: this.variant === 'destructive',
+          // Modifiers
+          pulse: this.attention === 'pulse',
+          shake: this.attention === 'shake',
+          wobble: this.attention === 'wobble'
+        })}
+      ></slot>
+    `;
   }
 }
 

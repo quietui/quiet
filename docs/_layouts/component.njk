@@ -205,7 +205,7 @@
             <tr>
               <td class="table-name"><code>{{ state.name }}</code></td>
               <td class="table-description">{{ state.description | inlineMarkdown | safe }}</td>
-              <td class="table-selector"><code>[data-state-{{ state.name }}]</code></td>
+              <td class="table-selector"><code>:state({{ state.name }})</code></td>
             </tr>
           {% endfor %}
         </tbody>

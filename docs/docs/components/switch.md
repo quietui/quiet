@@ -125,12 +125,12 @@ However, these selectors will match even before the user has had a chance to fil
 
 <style>
   .switch__validation-custom {
-    quiet-switch[data-state-user-valid] {
+    quiet-switch:state(user-valid) {
       outline: solid 2px var(--quiet-constructive-stroke-mid);
       outline-offset: .5rem;
     }
 
-    quiet-switch[data-state-user-invalid] {
+    quiet-switch:state(user-invalid) {
       outline: solid 2px var(--quiet-destructive-stroke-mid);
       outline-offset: .5rem;
     }

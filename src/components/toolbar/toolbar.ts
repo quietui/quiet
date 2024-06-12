@@ -43,7 +43,7 @@ export class QuietToolbar extends QuietElement {
 
   private getButtons(options?: GetButtonsOptions) {
     if (options?.ignoreDisabled) {
-      return [...this.querySelectorAll<QuietButton>('quiet-button:not([data-state-disabled])')];
+      return [...this.querySelectorAll<QuietButton>('quiet-button:not(:state(disabled))')];
     } else {
       return [...this.querySelectorAll<QuietButton>('quiet-button')];
     }

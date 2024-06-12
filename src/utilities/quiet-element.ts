@@ -26,32 +26,22 @@ export class QuietElement extends LitElement {
     /** Adds or removes the specified custom state. */
     set: (customState: string, active: boolean) => {
       if (active) {
-        try {
-          // @ts-expect-error - ssh
-          // eslint-disable-next-line
-          this.internals.states?.add(customState);
-        } catch {
-          // NOTE - remove when Chrome stops throwing an error for states without -- prefixes
-        }
-        this.setAttribute(`data-state-${customState}`, '');
+        this.internals.states.add(customState);
       } else {
-        // @ts-expect-error - ssh
-        // eslint-disable-next-line
-        this.internals.states?.delete(customState);
-        this.removeAttribute(`data-state-${customState}`);
+        this.internals.states.delete(customState);
       }
     },
 
     /** Determines whether or not the element currently has the specified state. */
     has: (customState: string) => {
-      // @ts-expect-error - ssh
-      if (this.internals.states) {
-        // @ts-expect-error - ssh
-        // eslint-disable-next-line
-        return this.internals.states.has(customState);
-      }
-
-      return this.hasAttribute(`data-state-${customState}`);
+      return this.internals.states.has(customState);
     }
   };
+}
+
+// Until TypeScript supports it - https://github.com/microsoft/TypeScript/issues/33218
+declare global {
+  interface ElementInternals {
+    states: Pick<Set<string>, 'add' | 'clear' | 'delete' | 'entries' | 'forEach' | 'has' | 'keys' | 'size' | 'values'>;
+  }
 }

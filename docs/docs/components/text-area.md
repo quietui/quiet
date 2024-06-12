@@ -205,12 +205,12 @@ However, these selectors will match even before the user has had a chance to fil
 
 <style>
   .text-area__validation-custom {
-    quiet-text-area[data-state-user-valid] {
+    quiet-text-area:state(user-valid) {
       outline: solid 2px var(--quiet-constructive-stroke-mid);
       outline-offset: .5rem;
     }
 
-    quiet-text-area[data-state-user-invalid] {
+    quiet-text-area:state(user-invalid) {
       outline: solid 2px var(--quiet-destructive-stroke-mid);
       outline-offset: .5rem;
     }

@@ -230,7 +230,7 @@ Not all components expose parts. Refer to the documentation to see which parts a
 
 ### Custom states
 
-Some components have custom states, a newer API that let's you target a custom element when it's in a particular state. This feature [hasn't landed in all browsers yet](https://caniuse.com/mdn-api_customstateset), but we can use it today thanks to Quiet's `data-state-` fallback method.
+Some components have custom states, a newer API that let's you target a custom element when it's in a particular state, such as active or disabled.
 
 [Toggle buttons](/docs/components/button/#toggle-buttons), for example, have a `toggled` state you can use to target buttons when they're activated. Try clicking the button below and observe its styles.
 
@@ -238,20 +238,11 @@ Some components have custom states, a newer API that let's you target a custom e
 <quiet-button id="toggle-button" toggle="off">Toggle me</quiet-button>
 
 <style>
-  #toggle-button[data-state-toggled] {
+  #toggle-button:state(toggled) {
     outline: dashed 4px deeppink;
     outline-offset: 4px;
   }
 </style>
-```
-
-Note the `data-state-toggled` attribute in the code. [In the near future](https://caniuse.com/mdn-api_elementinternals_states), browsers will support the following CSS to target a custom state called `toggled`. However, at the moment, it's recommended to use the `data-state-` attribute fallbacks shown in the docs.
-
-```css
-/* Future syntax */
-#toggle-button:state(toggled) {
-  /* ... */
-}
 ```
 
 Not all components have custom states. Refer to the documentation to see which custom states a component has.

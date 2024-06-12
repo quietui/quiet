@@ -101,8 +101,7 @@ export default css`
 
       @media (hover: hover) {
         &:hover {
-          background-color: color-mix(in oklab, transparent, var(--quiet-text-body) 2.5%);
-          color: var(--quiet-neutral-text-on-soft);
+          background-color: color-mix(in oklab, transparent, var(--quiet-text-body) 5%);
         }
       }
 

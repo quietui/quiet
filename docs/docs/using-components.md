@@ -4,7 +4,7 @@ description: Quiet is built using platform APIs that allow components to work an
 layout: docs
 ---
 
-Quiet's includes a collection of [Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components), or custom HTML elements. They have attributes, properties, events, and methods, all of which are described in the documentation for each component.
+Quiet includes a collection of [Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components), or custom HTML elements. They have attributes, properties, events, and methods, all of which are described in the documentation for each component.
 
 Once installed, simply add the components you want to your HTML.
 

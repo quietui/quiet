@@ -160,6 +160,7 @@ html:not(.quiet-dark) .only-dark {
 }
 
 #header-logo svg.only-mobile {
+  max-width: 2em;
   padding-block: 0.125rem;
 }
 
@@ -300,12 +301,11 @@ html:not(.quiet-dark) .only-dark {
   quiet-dropdown-item {
     font-size: 0.8375rem;
     text-transform: capitalize;
-    padding-block: 0.125rem;
-    padding-inline: 0.33rem;
+    padding-block: 0.25rem;
+    padding-inline: 0.5rem;
 
     &.current {
-      border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-primary-stroke-soft);
-      background-color: var(--quiet-primary-fill-softer);
+      background-color: var(--quiet-primary-fill-soft);
     }
   }
 }
@@ -332,6 +332,10 @@ html:not(.quiet-dark) .only-dark {
   gap: 1rem;
   width: 100%;
   max-width: var(--docs-max-width);
+
+  @media screen and (max-width: 959px) {
+    gap: 0.5rem;
+  }
 }
 
 #body {

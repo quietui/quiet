@@ -4,6 +4,7 @@ export default css`
   :host {
     display: inline-flex;
     position: relative;
+    align-self: stretch;
     align-items: center;
     gap: 0.5em;
     font-weight: var(--quiet-font-weight-semibold);

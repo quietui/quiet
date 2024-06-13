@@ -5,14 +5,6 @@ const searchData = await res[1].json();
 const searchIndex = lunr.Index.load(searchData.searchIndex);
 const map = searchData.map;
 const searchDebounce = 100;
-const icons = {
-  about: 'info-circle',
-  component: 'box',
-  document: 'file-text',
-  home: 'home',
-  sponsor: 'heart',
-  theme: 'color-swatch'
-};
 let searchTimeout;
 
 // We're using Turbo, so references to these elements aren't guaranteed to remain intact
@@ -49,6 +41,7 @@ function show() {
   textField.addEventListener('quiet-input', handleInput);
   results.addEventListener('click', handleSelection);
   dialog.addEventListener('keydown', handleKeyDown);
+  dialog.addEventListener('quiet-closed', handleClosed);
   dialog.open = true;
 }
 
@@ -58,7 +51,15 @@ function hide() {
   textField.removeEventListener('quiet-input', handleInput);
   results.removeEventListener('click', handleSelection);
   dialog.removeEventListener('keydown', handleKeyDown);
+  dialog.removeEventListener('quiet-closed', handleClosed);
   dialog.open = false;
+}
+
+function handleClosed() {
+  const { textField } = getElements();
+
+  textField.value = '';
+  updateResults();
 }
 
 function handleInput() {
@@ -121,7 +122,12 @@ function handleSelection(event) {
   if (link) {
     event.preventDefault();
     hide();
-    location.href = link.href;
+
+    if (/^https?:\/\//s.test(link)) {
+      window.open(link.href, '_blank');
+    } else {
+      location.href = link.href;
+    }
   }
 }
 
@@ -151,18 +157,23 @@ async function updateResults(query = '') {
       const displayTitle = page.title ?? '';
       const displayDescription = page.description ?? '';
       const displayUrl = page.url.replace(/^\//, '');
-      let icon = icons.document;
+      let icon = 'file-text';
 
       li.classList.add('site-search-result');
       li.setAttribute('role', 'option');
       li.setAttribute('id', `search-result-item-${match.ref}`);
       li.setAttribute('data-selected', index === 0 ? 'true' : 'false');
 
-      if (page.url === '/') icon = icons.home;
-      if (page.url.startsWith('/about')) icon = icons.about;
-      if (page.url.startsWith('/docs/components')) icon = icons.component;
-      if (page.url.startsWith('/sponsor')) icon = icons.sponsor;
-      if (page.url.startsWith('/docs/theme') || page.url.startsWith('/docs/restyle')) icon = icons.theme;
+      if (page.url === '/') icon = 'home';
+      if (page.url.startsWith('/about')) icon = 'info-circle';
+      if (page.url.startsWith('/docs/components')) icon = 'box';
+      if (page.url.startsWith('/sponsor')) icon = 'heart';
+      if (page.url.startsWith('/docs/theme') || page.url.startsWith('/docs/restyle')) icon = 'color-swatch';
+      if (page.url.includes('github.com')) icon = 'brand-github';
+      if (page.url.includes('github.com') && page.url.endsWith('/issues')) icon = 'bug';
+      if (page.url.includes('github.com') && page.url.endsWith('/discussions')) icon = 'help';
+      if (page.url.includes('github.com') && page.url.endsWith('/stargazers')) icon = 'star';
+      if (page.url.includes('x.com')) icon = 'brand-x';
 
       a.href = page.url;
       a.innerHTML = `

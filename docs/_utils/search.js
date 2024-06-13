@@ -22,7 +22,41 @@ export function searchPlugin(options = {}) {
   };
 
   return function (eleventyConfig) {
-    const pagesToIndex = [];
+    const pagesToIndex = [
+      //
+      // Let's add some some useful pages into the search
+      //
+      {
+        title: 'Quiet UI on GitHub',
+        description: 'View the source code, report a bug, and more!',
+        url: 'https://github.com/quietui/quiet'
+      },
+      {
+        title: 'Report a bug',
+        description: `Found an issue? Report it here on GitHub.`,
+        url: 'https://github.com/quietui/quiet/issues'
+      },
+      {
+        title: 'Get help or ask a question',
+        description: 'The community forum on GitHub is the best place to get support.',
+        url: 'https://github.com/quietui/quiet/discussions'
+      },
+      {
+        title: 'Star this project on GitHub',
+        description: `It might be a silly metric, but it can't hurt.`,
+        url: 'https://github.com/quietui/quiet/stargazers'
+      },
+      {
+        title: 'Quiet UI on X (Twitter)',
+        description: 'Follow the project on the platform formerly known as Twitter.',
+        url: 'https://x.com/quiet_ui'
+      },
+      {
+        title: 'Cory LaViska on X (Twitter)',
+        description: 'Follow the author on the platform formerly known as Twitter.',
+        url: 'https://x.com/claviska'
+      }
+    ];
 
     eleventyConfig.addTransform('search', function (content) {
       const doc = parse(content, {
@@ -63,10 +97,11 @@ export function searchPlugin(options = {}) {
         this.field('c');
 
         for (const page of pagesToIndex) {
-          this.add({ id: index, t: page.title, h: page.headings, c: page.content });
+          this.add({ id: index, t: page.title, h: page.headings || page.description, c: page.content });
           map[index] = { title: page.title, description: page.description, url: page.url };
           index++;
         }
+
         await mkdir(dirname(outputFilename), { recursive: true });
         await writeFile(outputFilename, JSON.stringify({ searchIndex, map }), 'utf-8');
       });

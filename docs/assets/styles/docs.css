@@ -700,8 +700,10 @@ figure.float-end {
 }
 
 .docs-aside ul ul {
+  border-inline-start: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
+  padding-inline-start: 0.75rem;
+  margin-inline-start: 0.25rem;
   margin-block: 0.5rem;
-  margin-inline: 1rem;
 }
 
 .docs-aside li {

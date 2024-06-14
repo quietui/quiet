@@ -51,7 +51,7 @@ export class QuietTabList extends QuietElement {
   @property() label: string;
 
   /** The name of the tab panel that's currently active. */
-  @property({ reflect: true }) active: string;
+  @property({ reflect: true }) tab: string;
 
   /** The placement of tab controls. */
   @property({ reflect: true }) placement: 'top' | 'bottom' | 'start' | 'end' = 'top';
@@ -63,8 +63,8 @@ export class QuietTabList extends QuietElement {
     }
 
     // Set the active tab
-    if (changedProps.has('active')) {
-      this.setActive(this.active);
+    if (changedProps.has('tab')) {
+      this.setActiveTab(this.tab);
     }
 
     // Set orientation
@@ -79,7 +79,7 @@ export class QuietTabList extends QuietElement {
     const tab = target.closest<QuietTab>('quiet-tab');
 
     if (tab?.panel && !tab.disabled) {
-      this.active = tab.panel || '';
+      this.tab = tab.panel || '';
     }
   }
 
@@ -114,19 +114,19 @@ export class QuietTabList extends QuietElement {
     });
 
     // Set the initial active tab
-    if (!this.active) {
-      this.active = tabs[0].panel || '';
+    if (!this.tab) {
+      this.tab = tabs[0].panel || '';
     }
   }
 
   /** Sets the active tab + panel. */
-  private setActive(name: string | undefined) {
+  private setActiveTab(name: string | undefined) {
     const tabs = this.getTabs();
     const panels = this.getPanels();
 
     if (!name) return;
 
-    this.active = name;
+    this.tab = name;
 
     // Update the tab
     for (const tab of tabs) {
@@ -152,7 +152,7 @@ export class QuietTabList extends QuietElement {
   /** Keyboard navigation */
   private handleTabsKeyDown(event: KeyboardEvent) {
     const tabs = this.getTabs();
-    const activeTab = tabs.find(tab => tab.panel === this.active);
+    const activeTab = tabs.find(tab => tab.panel === this.tab);
     const activeTabIndex = activeTab ? tabs.indexOf(activeTab) : 0;
     const isRtl = this.localize.dir() === 'rtl';
     const isVertical = ['start', 'end'].includes(this.placement);
@@ -185,7 +185,7 @@ export class QuietTabList extends QuietElement {
     if (targetTab) {
       event.preventDefault();
       event.stopPropagation();
-      this.active = targetTab.panel || '';
+      this.tab = targetTab.panel || '';
       targetTab.focus();
     }
   }

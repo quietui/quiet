@@ -25,10 +25,10 @@ In the same way that images require `alt` text, you should add a `label` to ever
 
 ### Setting the active tab
 
-To make a specific tab show initially, or to programmatically activate a tab, set the `active` attribute to the name of the desired panel.
+To make a specific tab show initially, or to programmatically activate a tab, set the `tab` attribute to the name of the desired panel.
 
 ```html {.example}
-<quiet-tab-list label="Select a tab" active="second">
+<quiet-tab-list label="Select a tab" tab="second">
 	<quiet-tab slot="tab" panel="first">First</quiet-tab>
 	<quiet-tab slot="tab" panel="second">Second</quiet-tab>
 	<quiet-tab slot="tab" panel="third">Third</quiet-tab>

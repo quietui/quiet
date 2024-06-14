@@ -250,9 +250,10 @@ export class QuietTextField extends QuietElement {
     }
   }
 
-  private handleChange() {
+  private handleChange(event: Event) {
     this.wasChanged = true;
     this.dispatchEvent(new QuietChangeEvent());
+    this.relayNativeEvent(event);
   }
 
   private handleClearClick() {
@@ -281,10 +282,11 @@ export class QuietTextField extends QuietElement {
     this.wasSubmitted = true;
   }
 
-  private handleInput() {
+  private handleInput(event: InputEvent) {
     this.value = this.textBox.value;
     this.internals.setFormValue(this.value);
     this.dispatchEvent(new QuietInputEvent());
+    this.relayNativeEvent(event);
   }
 
   private handleKeyDown(event: KeyboardEvent) {

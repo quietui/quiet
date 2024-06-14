@@ -103,6 +103,13 @@ Add parts only to internals that should be exposed as part of the component's pu
 
 Icons that are rendered in a component's shadow root _must_ use the `system` icon library. The system icon library uses inline SVGs for performance, so they load instantly instead of requiring additional HTTP requests. System icons _must not_ be used in examples.
 
+### Creating form controls
+
+Form controls must be form-associated custom elements and should follow patterns of existing form controls, for familiarity. Use `value` for value, `disable` to disable, `require` to require, etc.
+
+Form controls must prevent and relay all `change` and `input` events using `this.relayNativeEvent()`. Doing so will allow frameworks to bind to Quiet form controls just like native ones.
+
+
 ### Dependencies
 
 A component should import and mark another component as a dependency when a) the dependency is rendered as part of the host element's shadow root or b) the dependency must be slotted in for the host element to function. For example, `<quiet-dropdown-item>` is a dependency of `<quiet-dropdown>`, even though the user slots it in.

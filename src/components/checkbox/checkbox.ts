@@ -153,13 +153,15 @@ export class QuietCheckbox extends QuietElement {
     this.dispatchEvent(new QuietBlurEvent());
   }
 
-  private handleChange() {
+  private handleChange(event: Event) {
     this.wasChanged = true;
     this.dispatchEvent(new QuietChangeEvent());
+    this.relayNativeEvent(event);
   }
 
-  private handleInput() {
+  private handleInput(event: InputEvent) {
     this.dispatchEvent(new QuietInputEvent());
+    this.relayNativeEvent(event);
   }
 
   private handleFocus() {

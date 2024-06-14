@@ -37,6 +37,30 @@ export class QuietElement extends LitElement {
       return this.internals.states.has(customState);
     }
   };
+
+  /**
+   * Prevents retargeting and relays an event emitted from within the shadow DOM to a new event emitted from the host
+   * element. This can be useful for dispatching `change` and `input` events, which will allow frameworks to bind form
+   * controls just like native elements.
+   */
+  protected relayNativeEvent(event: Event) {
+    let newEvent: typeof event;
+
+    event.stopImmediatePropagation();
+
+    if (event instanceof InputEvent) {
+      newEvent = new InputEvent('input', {
+        bubbles: event.bubbles,
+        cancelable: event.cancelable,
+        inputType: event.inputType,
+        data: event.data
+      });
+    } else {
+      newEvent = new Event(event.type, { bubbles: event.bubbles, cancelable: event.cancelable });
+    }
+
+    this.dispatchEvent(newEvent);
+  }
 }
 
 // Until TypeScript supports it - https://github.com/microsoft/TypeScript/issues/33218

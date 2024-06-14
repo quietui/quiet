@@ -63,7 +63,7 @@ export class QuietCheckbox extends QuietElement {
   @property() description: string;
 
   /** The name of the checkbox. This will be submitted with the form as a name/value pair. */
-  @property() name: string;
+  @property({ reflect: true }) name: string;
 
   /** The checkbox's value. */
   @property() value = '';
@@ -78,15 +78,15 @@ export class QuietCheckbox extends QuietElement {
   @property({ type: Boolean }) disabled = false;
 
   /** The type of checkbox to render. */
-  @property() variant: 'normal' | 'filled' = 'normal';
+  @property({ reflect: true }) variant: 'normal' | 'filled' = 'normal';
 
   /** The checkbox's size. */
-  @property() size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' = 'md';
+  @property({ reflect: true }) size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' = 'md';
 
   /**
    * Makes the checkbox required. Form submission will not be allowed until the checkbox is checked.
    */
-  @property({ type: Boolean }) required = false;
+  @property({ type: Boolean, reflect: true }) required = false;
 
   /**
    * You can provide a custom error message to force the checkbox to be invalid. To clear the error, set this to an

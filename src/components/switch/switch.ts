@@ -66,7 +66,7 @@ export class QuietSwitch extends QuietElement {
   @property() description: string;
 
   /** The name of the switch. This will be submitted with the form as a name/value pair. */
-  @property() name: string;
+  @property({ reflect: true }) name: string;
 
   /** The switch's value. */
   @property() value = '';
@@ -83,7 +83,7 @@ export class QuietSwitch extends QuietElement {
   /**
    * Makes the switch required. Form submission will not be allowed until the switch is checked.
    */
-  @property({ type: Boolean }) required = false;
+  @property({ type: Boolean, reflect: true }) required = false;
 
   /**
    * You can provide a custom error message to force the switch to be invalid. To clear the error, set this to an

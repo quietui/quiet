@@ -29,6 +29,7 @@ import type { CSSResultGroup } from 'lit';
  *
  * @cssstate disabled - Applied when the button is disabled.
  * @cssstate focused - Applied when the button has focus.
+ * @cssstate loading - Applied when a toggle button is loading.
  * @cssstate toggled - Applied when a toggle button is activated.
  *
  * @csspart button - The internal `<button>` element. Other than `width`, this is where most custom styles should be
@@ -52,10 +53,10 @@ export class QuietButton extends QuietElement {
   @property({ reflect: true }) variant: 'primary' | 'secondary' | 'destructive' | 'text' | 'image' = 'secondary';
 
   /** Disables the button. Cannot be used with link buttons. */
-  @property({ type: Boolean }) disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Draws the button in a loading state. */
-  @property({ type: Boolean }) loading = false;
+  @property({ type: Boolean, reflect: true }) loading = false;
 
   /**
    * Turns the button into a two-state toggle button. Clicking once will turn it on. Clicking again will turn it off.
@@ -64,7 +65,7 @@ export class QuietButton extends QuietElement {
   @property({ reflect: true }) toggle?: 'on' | 'off';
 
   /** The button's size. */
-  @property() size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' = 'md';
+  @property({ reflect: true }) size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' = 'md';
 
   /**
    * To create an icon button, slot an icon into the button's default slot and set this attribute to an appropriate
@@ -73,22 +74,22 @@ export class QuietButton extends QuietElement {
   @property({ attribute: 'icon-label' }) iconLabel = '';
 
   /** Draws the button with outlines. */
-  @property({ type: Boolean }) outline = false;
+  @property({ type: Boolean, reflect: true }) outline = false;
 
   /** Draws the button in a pill shape. */
-  @property({ type: Boolean }) pill = false;
+  @property({ type: Boolean, reflect: true }) pill = false;
 
   /** Determines the button's type. */
   @property() type: 'button' | 'submit' | 'reset' = 'button';
 
   /** The name to submit when the button is used to submit the form. */
-  @property() name = '';
+  @property({ reflect: true }) name: string;
 
   /** The value to submit when the button is used to submit the form. */
   @property() value = '';
 
   /** When true, the button will be rendered with a caret to indicate a dropdown menu. */
-  @property({ attribute: 'with-caret', type: Boolean }) withCaret = false;
+  @property({ attribute: 'with-caret', type: Boolean, reflect: true }) withCaret = false;
 
   /**
    * Set this to render the button as an `<a>` tag instead of a `<button>`. The button will act as a link. When this is
@@ -136,6 +137,10 @@ export class QuietButton extends QuietElement {
   updated(changedProps: Map<string, unknown>) {
     if (changedProps.has('disabled')) {
       this.customStates.set('disabled', this.disabled);
+    }
+
+    if (changedProps.has('loading')) {
+      this.customStates.set('loading', this.loading);
     }
   }
 

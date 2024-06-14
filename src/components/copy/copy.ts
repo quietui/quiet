@@ -46,8 +46,12 @@ export class QuietCopy extends QuietElement {
   @property() data: string | ClipboardItem[] = '';
 
   /** The placement of the feedback animation. */
-  @property({ attribute: 'feedback-placement' }) feedbackPlacement: 'top' | 'right' | 'bottom' | 'left' | 'hidden' =
-    'top';
+  @property({ attribute: 'feedback-placement', reflect: true }) feedbackPlacement:
+    | 'top'
+    | 'right'
+    | 'bottom'
+    | 'left'
+    | 'hidden' = 'top';
 
   private async handleClick(event: PointerEvent) {
     event.preventDefault();

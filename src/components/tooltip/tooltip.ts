@@ -31,6 +31,8 @@ const openTooltips = new Set<QuietTooltip>();
  * @csspart content - The element that wraps the tooltip's content.
  * @csspart arrow - The tooltip's arrow. To change the arrow's size, use `--arrow-size` instead.
  *
+ * @cssstate open - Applied when the tooltip is open.
+ *
  * @cssproperty [--arrow-size=0.3125rem] - The size of the arrow. Set this to `0` to hide the arrow.
  * @cssproperty [--max-width=20rem] - The maximum width the tooltip can be before wrapping.
  * @cssproperty [--show-duration=50ms] - The duration of the show/hide animation.
@@ -53,7 +55,7 @@ export class QuietTooltip extends QuietElement {
    * The id of of tooltip's anchor element. This must be an interactive/focusable element such as a button and it must
    * be in the same document as the tooltip.
    */
-  @property() for = '';
+  @property({ reflect: true }) for = '';
 
   /**
    * Shows or hides the tooltip.
@@ -185,6 +187,7 @@ export class QuietTooltip extends QuietElement {
     openTooltips.forEach(tooltip => (tooltip.open = false));
 
     this.tooltip.showPopover();
+    this.customStates.set('open', true);
     this.open = true;
     openTooltips.add(this);
     document.addEventListener('keydown', this.handleDocumentKeyDown);
@@ -210,6 +213,7 @@ export class QuietTooltip extends QuietElement {
       button?.removeAttribute('aria-description');
     }
 
+    this.customStates.set('open', false);
     this.open = false;
     openTooltips.delete(this);
     document.removeEventListener('keydown', this.handleDocumentKeyDown);

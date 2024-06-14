@@ -8,15 +8,15 @@ export default css`
   #group {
     display: flex;
     margin-block: 0.5rem;
+  }
 
-    &.horizontal {
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
+  :host([orientation='horizontal']) #group {
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
 
-    &.vertical {
-      flex-direction: column;
-      gap: 0.25rem;
-    }
+  :host([orientation='vertical']) #group {
+    flex-direction: column;
+    gap: 0.25rem;
   }
 `;

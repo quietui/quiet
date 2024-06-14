@@ -57,10 +57,10 @@ export class QuietDropdownItem extends QuietElement {
   @property({ reflect: true }) variant: 'destructive' | 'secondary' = 'secondary';
 
   /** Set to true to check the dropdown item. Only valid when `type` is `checkbox`. */
-  @property({ reflect: true, type: Boolean }) checked = false;
+  @property({ type: Boolean }) checked = false;
 
   /** Disables the dropdown item. */
-  @property({ reflect: true, type: Boolean }) disabled = false;
+  @property({ type: Boolean }) disabled = false;
 
   updated(changedProps: Map<string, unknown>) {
     if (changedProps.has('active')) {

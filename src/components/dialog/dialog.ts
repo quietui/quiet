@@ -38,6 +38,8 @@ import type { CSSResultGroup } from 'lit';
  * @csspart header - The container that wraps the dialog's header. A flex container, by default.
  * @csspart footer - The container that wraps the dialog's footer. A flex container, by default.
  *
+ * @cssstate open - Applied when the dialog is open.
+ *
  * @cssproperty [--height=fit-content] - The default height of the dialog. Note that dialogs shrink to fit as necessary.
  * @cssproperty [--show-duration=200ms] - The duration of the show/hide animation.
  * @cssproperty [--spacing=1.5rem] - The spacing to use throughout the dialog.
@@ -58,7 +60,7 @@ export class QuietDialog extends QuietElement {
    * By default, the dialog will appear in the center of the screen. Changing the placement will cause the dialog to
    * slide in from the side of the screen like a drawer.
    */
-  @property() placement: 'center' | 'top' | 'bottom' | 'start' | 'end' = 'center';
+  @property({ reflect: true }) placement: 'center' | 'top' | 'bottom' | 'start' | 'end' = 'center';
 
   /** Renders the dialog with the `header` slot. */
   @property({ attribute: 'with-header', type: Boolean, reflect: true }) withHeader = false;
@@ -121,6 +123,7 @@ export class QuietDialog extends QuietElement {
 
     lockScrolling(this.dialog);
     this.dialog.showModal();
+    this.customStates.set('open', true);
 
     // Autofocus in <dialog> seems to work inconsistently across browsers, so we look for the first element with the
     // attribute and set focus as soon as the dialog is visible.
@@ -148,6 +151,7 @@ export class QuietDialog extends QuietElement {
       await animateWithClass(this.dialog, 'hide');
       this.dialog.close();
       this.open = false;
+      this.customStates.set('open', false);
       this.dispatchEvent(new QuietClosedEvent());
     }
   }

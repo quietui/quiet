@@ -76,7 +76,7 @@ export class QuietTextField extends QuietElement {
   @property() description: string;
 
   /** The name of the text field. This will be submitted with the form as a name/value pair. */
-  @property() name: string;
+  @property({ reflect: true }) name: string;
 
   /** The text field's value. */
   @property() value = '';
@@ -94,13 +94,13 @@ export class QuietTextField extends QuietElement {
   @property({ type: Boolean }) clearable = false;
 
   /** The type of text field to render. */
-  @property() variant: 'normal' | 'filled' | 'unstyled' = 'normal';
+  @property({ reflect: true }) variant: 'normal' | 'filled' | 'unstyled' = 'normal';
 
   /** The text field's size. */
-  @property() size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' = 'md';
+  @property({ reflect: true }) size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' = 'md';
 
   /** Draws the text field in a pill shape. */
-  @property({ type: Boolean }) pill = false;
+  @property({ type: Boolean, reflect: true }) pill = false;
 
   /** The type of data the text field will accept. */
   @property() type:
@@ -121,7 +121,7 @@ export class QuietTextField extends QuietElement {
   /**
    * Makes the text field required. Form submission will not be allowed when this is set and the text field is empty.
    */
-  @property({ type: Boolean }) required = false;
+  @property({ type: Boolean, reflect: true }) required = false;
 
   /** A regular expression the value should match to be considered valid. */
   @property() pattern: string;

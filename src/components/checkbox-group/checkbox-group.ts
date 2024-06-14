@@ -1,4 +1,3 @@
-import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property } from 'lit/decorators.js';
 import { html } from 'lit';
 import { QuietElement } from '../../utilities/quiet-element.js';
@@ -39,13 +38,13 @@ export class QuietCheckboxGroup extends QuietElement {
   @property() description: string;
 
   /** The orientation of grouped items. */
-  @property() orientation: 'horizontal' | 'vertical' = 'horizontal';
+  @property({ reflect: true }) orientation: 'horizontal' | 'vertical' = 'horizontal';
 
   /**
    * Indicates at least one option in the checkbox group is required. This just adds a visual indicator. To perform
    * validation, use the checkbox's `required` and/or `custom-validity` attributes.
    */
-  @property({ type: Boolean }) required = false;
+  @property({ type: Boolean, reflect: true }) required = false;
 
   render() {
     return html`
@@ -57,17 +56,7 @@ export class QuietCheckboxGroup extends QuietElement {
         <slot name="description">${this.description}</slot>
       </div>
 
-      <div
-        id="group"
-        part="group"
-        class=${classMap({
-          horizontal: this.orientation === 'horizontal',
-          vertical: this.orientation === 'vertical'
-        })}
-        role="group"
-        aria-labelledby="label"
-        aria-describedby="description"
-      >
+      <div id="group" part="group" role="group" aria-labelledby="label" aria-describedby="description">
         <slot></slot>
       </div>
     `;

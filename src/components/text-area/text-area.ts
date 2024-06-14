@@ -68,7 +68,7 @@ export class QuietTextArea extends QuietElement {
   @property() description: string;
 
   /** The name of the text area. This will be submitted with the form as a name/value pair. */
-  @property() name: string;
+  @property({ reflect: true }) name: string;
 
   /** The text area's value. */
   @property() value = '';
@@ -89,15 +89,15 @@ export class QuietTextArea extends QuietElement {
   @property({ type: Number }) rows = 3;
 
   /** The type of text area to render. */
-  @property() variant: 'normal' | 'filled' | 'unstyled' = 'normal';
+  @property({ reflect: true }) variant: 'normal' | 'filled' | 'unstyled' = 'normal';
 
   /** The text area's size. */
-  @property() size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' = 'md';
+  @property({ reflect: true }) size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' = 'md';
 
   /**
    * Makes the text area required. Form submission will not be allowed when this is set and the text area is empty.
    */
-  @property({ type: Boolean }) required = false;
+  @property({ type: Boolean, reflect: true }) required = false;
 
   /** The minimum string length that will be considered valid. */
   @property({ attribute: 'minlength', type: Number }) minLength: number;

@@ -26,13 +26,13 @@ export class QuietTab extends QuietElement {
   @property({ type: Boolean }) active = false;
 
   /**
-   * The name of the tab panel this tab will link to. The tab panel must be an HTML element inside the `<quiet-tab-list>`
-   * element with a `name` attribute.
+   * The name of the tab panel this tab will link to. The tab panel must be an HTML element inside the
+   * `<quiet-tab-list>` element with a `name` attribute.
    */
-  @property() panel?: string;
+  @property({ reflect: true }) panel?: string;
 
   /** Disables the tab, preventing it from being activated. */
-  @property({ type: Boolean, reflect: true }) disabled = false;
+  @property({ type: Boolean }) disabled = false;
 
   connectedCallback() {
     super.connectedCallback();

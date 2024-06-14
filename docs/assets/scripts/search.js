@@ -122,12 +122,7 @@ function handleSelection(event) {
   if (link) {
     event.preventDefault();
     hide();
-
-    if (/^https?:\/\//s.test(link)) {
-      window.open(link.href, '_blank');
-    } else {
-      location.href = link.href;
-    }
+    location.href = link.href;
   }
 }
 

@@ -165,9 +165,11 @@ html:not(.quiet-dark) .only-dark {
 }
 
 /* Header group links */
-#header-group-links > :first-child {
-  /* Allow header links to be scrollable and right aligned */
-  margin-inline-start: auto;
+@media screen and (min-width: 960px) {
+  #header-group-links > :first-child {
+    /* Allow header links to be scrollable and right aligned on larger screens */
+    margin-inline-start: auto;
+  }
 }
 
 #header-group-links a {
@@ -597,7 +599,7 @@ figure.float-end {
   }
 
   #navbar {
-    padding-inline: 1rem;
+    padding-inline: 0.5rem;
   }
 
   #open-sidebar,

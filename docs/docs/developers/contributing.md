@@ -106,3 +106,25 @@ Icons that are rendered in a component's shadow root _must_ use the `system` ico
 ### Dependencies
 
 A component should import and mark another component as a dependency when a) the dependency is rendered as part of the host element's shadow root or b) the dependency must be slotted in for the host element to function. For example, `<quiet-dropdown-item>` is a dependency of `<quiet-dropdown>`, even though the user slots it in.
+
+### Attribute reflection
+
+Attribute reflection in custom elements is [an interesting challenge](https://www.abeautifulsite.net/posts/reflection-and-custom-states-in-web-components/) because the platform hasn't established a clear pattern for it. This section defines such a pattern to enable consistency throughout the library.
+
+#### An attribute _should_ reflect when
+
+- It represents a current state that the user can modify and/or may be interested in observing, such as checked, disabled, open, readonly, etc.
+- It represents a value that affects how the component is styled internally or externally. This allows us to target variants without using an internal wrapper and/or replicating values internally.
+- It makes the debugging experience more intuitive for authors and consumers.
+
+#### An attribute _should not_ reflect when
+
+- The data type is neither string, number, nor boolean.
+- The value is content or otherwise too cumbersome to store in the DOM, e.g. the content of a text area.
+- The user is unlikely to have interest in observing the attribute for state or styling purposes.
+
+#### Special cases
+
+- All `with-` attributes must reflect.
+- In form controls, the `name` and `required` attributes must always reflect, like the platform.
+- States such as `disabled`, `checked`, `active`, etc. must not reflect.

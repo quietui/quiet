@@ -41,7 +41,7 @@ export class QuietElement extends LitElement {
   /**
    * Prevents retargeting and relays an event emitted from within the shadow DOM to a new event emitted from the host
    * element. This can be useful for dispatching `change` and `input` events, which will allow frameworks to bind form
-   * controls just like native elements.
+   * controls as if they were native ones.
    */
   protected relayNativeEvent(event: Event) {
     let newEvent: typeof event;

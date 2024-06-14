@@ -87,10 +87,6 @@ You can copy HTML content using the [ClipboardItem API](https://developer.mozill
 </script>
 ```
 
-:::danger
-The `ClipboardItem` API used in this example [isn't available in Firefox yet](https://caniuse.com/mdn-api_clipboarditem).
-:::
-
 ### Copying PNG images
 
 Most browsers support writing PNG image data with the `ClipboardItem` API used in this example. Try copying the image using the button below, then paste it into an image editing app.
@@ -119,10 +115,6 @@ Most browsers support writing PNG image data with the `ClipboardItem` API used i
   });
 </script>
 ```
-
-:::danger
-The `ClipboardItem` API used in this example [isn't available in Firefox yet](https://caniuse.com/mdn-api_clipboarditem).
-:::
 
 ### Copying non-PNG images
 
@@ -167,7 +159,3 @@ For now, the most effective way to copy a non-PNG image is to render it in a `<c
   });
 </script>
 ```
-
-:::danger
-The `ClipboardItem` API used in this example [isn't available in Firefox yet](https://caniuse.com/mdn-api_clipboarditem).
-:::

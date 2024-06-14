@@ -93,7 +93,7 @@ export default css`
       will-change: opacity; /* prevents the icon from shifting slightly in Safari when checked */
       transition:
         100ms opacity ease,
-        150ms scale ease;
+        100ms scale ease;
     }
 
     &.checked:not(.indeterminate) #check-icon,

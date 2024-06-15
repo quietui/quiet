@@ -278,3 +278,88 @@
   --quiet-destructive-stroke-soft: var(--quiet-destructive-800);
   --quiet-destructive-stroke-mid: var(--quiet-destructive-600);
 }
+
+/* Presets */
+.quiet-red {
+  --quiet-primary-seed: #ee6766;
+}
+
+.quiet-orange {
+  --quiet-primary-seed: #e68d5b;
+}
+
+.quiet-amber {
+  --quiet-primary-seed: #db9640;
+}
+
+.quiet-yellow {
+  --quiet-primary-seed: #ceb333;
+}
+
+.quiet-lime {
+  --quiet-primary-seed: #b0aa39;
+}
+
+.quiet-green {
+  --quiet-primary-seed: #97b14c;
+}
+
+.quiet-emerald {
+  --quiet-primary-seed: #7db664;
+}
+
+.quiet-teal {
+  --quiet-primary-seed: #5ab983;
+}
+
+.quiet-cyan {
+  --quiet-primary-seed: #39baa4;
+}
+
+.quiet-sky {
+  --quiet-primary-seed: #2ab6d1;
+}
+
+.quiet-blue {
+  --quiet-primary-seed: #58acf2;
+}
+
+.quiet-indigo {
+  --quiet-primary-seed: #79a4fe;
+}
+
+.quiet-violet {
+  --quiet-primary-seed: #989cff;
+}
+
+.quiet-purple {
+  --quiet-primary-seed: #b394f4;
+}
+
+.quiet-fuschia {
+  --quiet-primary-seed: #ca8de1;
+}
+
+.quiet-pink {
+  --quiet-primary-seed: #dc88c7;
+}
+
+.quiet-rose {
+  --quiet-primary-seed: #e886a7;
+}
+
+.quiet-slate {
+  --quiet-primary-seed: #a3a6b5;
+}
+
+.quiet-zinc {
+  --quiet-primary-seed: #a5a6ab;
+}
+
+.quiet-stone {
+  --quiet-primary-seed: #a9a6a2;
+}
+
+.quiet-sand {
+  --quiet-primary-seed: #aaa69f;
+}

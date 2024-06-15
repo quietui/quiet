@@ -57,11 +57,15 @@ document.addEventListener('keydown', event => {
 
 /** Sets the theme color and updates the UI */
 function setThemeColor(newColor, skipTransition = false) {
-  const color = newColor || '#989cff';
   const dropdown = document.getElementById('header-color-picker');
-  const updateSeedColor = () => document.documentElement.style.setProperty('--quiet-primary-seed', color);
+  const colors = [...dropdown.querySelectorAll('quiet-dropdown-item')].map(item => item.textContent.trim());
+  const color = newColor || 'violet';
+  const updateSeedColor = () => {
+    colors.forEach(color => document.documentElement.classList.remove(`quiet-${color}`));
+    document.documentElement.classList.add(`quiet-${color}`);
+  };
 
-  sessionStorage.setItem('primary-seed', color);
+  sessionStorage.setItem('primary-color', color);
 
   // Update the theme color
   document.head.querySelector('meta[name="theme-color"]').content = color;
@@ -79,17 +83,24 @@ function setThemeColor(newColor, skipTransition = false) {
   }
 }
 
-// Update when a new color is selected
+// Update when a new color is selected from the theme picker
 document.addEventListener('quiet-select', event => {
   if (event.target.id === 'header-color-picker') {
     setThemeColor(event.detail.selection.value);
   }
 });
 
+// Update when a new color is selected from a data-preset attribute
+document.addEventListener('click', event => {
+  if (event.target.closest('[data-preset]')) {
+    setThemeColor(event.target.getAttribute('data-preset'));
+  }
+});
+
 // Keep the theme in sync when new pages load
 document.addEventListener('turbo:load', () => {
-  setThemeColor(sessionStorage.getItem('primary-seed'), true);
+  setThemeColor(sessionStorage.getItem('primary-color'), true);
 });
 
 // Initial sync
-setThemeColor(sessionStorage.getItem('primary-seed'), true);
+setThemeColor(sessionStorage.getItem('primary-color'), true);

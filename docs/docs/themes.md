@@ -54,6 +54,18 @@ This means you can customize an entire palette by setting a single custom proper
 For best results, use midtone colors to seed palettes. Any of the 500-level colors from [color.surf](https://color.surf) or similar palettes will work well.
 :::
 
+### Built-in presets
+
+For convenience, Quiet ships with 21 built-in color presets you can use to change the primary seed color. Use the theme picker at the top of the page to preview them.
+
+To use a preset in your app, add the `quiet-{preset}` class to the `<html>` element, where `{preset}` is one of the following values: red, orange, amber, yellow, lime, green, emerald, teal, cyan, sky, blue, indigo, violet, purple, fuschia, pink, rose, slate, zinc, stone, or sand.
+
+```html
+<html class="quiet-blue">
+  ...
+</html>
+```
+
 ### Color primitives
 
 Four primitive color palettes are generated based on the aforementioned seed colors. These palettes correspond with the four variants used throughout the library and remain static in light and dark mode.
@@ -461,7 +473,7 @@ These tokens represent pure black and white, but their values invert in dark mod
   <quiet-copy data="var(--quiet-strident)">
     <button aria-label="Strident" style="background-color: var(--quiet-strident); border: solid 1px var(--quiet-silent);"></button> strident
   </quiet-copy>
-</div>  
+</div>
 
 ### Design tokens
 

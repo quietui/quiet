@@ -14,9 +14,8 @@
         sessionStorage.getItem('theme') === 'dark' || window.matchMedia('(prefers-color-scheme: dark)').matches
       );
 
-      if (sessionStorage.getItem('primary-seed')) {
-        document.documentElement.style.setProperty('--quiet-primary-seed', sessionStorage.getItem('primary-seed'));
-        document.head.querySelector('meta[name="theme-color"]').content = sessionStorage.getItem('primary-seed');
+      if (sessionStorage.getItem('primary-color')) {
+        document.documentElement.classList.add(`quiet-${sessionStorage.getItem('primary-color')}`);
       }
     </script>
 
@@ -147,7 +146,7 @@
                 }
               %}
               {% for name, color in themeColors %}
-                <quiet-dropdown-item value="{{ color }}">
+                <quiet-dropdown-item value="{{ name }}">
                   <span slot="icon" class="color-picker-swatch" style="background-color: {{ color }};"></span>
                   {{ name }}
                 </quiet-dropdown-item>

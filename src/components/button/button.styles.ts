@@ -239,8 +239,9 @@ export default css`
       }
     }
 
-    .spinner {
-      --color: currentColor;
+    #spinner {
+      --indicator-color: currentColor;
+      --track-color: color-mix(in oklab, currentColor, transparent 75%);
       position: absolute;
       top: calc(50% - 0.5em);
       left: calc(50% - 0.5em);
@@ -248,7 +249,7 @@ export default css`
       height: 1em;
     }
 
-    .caret {
+    #caret {
       font-size: 1.25em;
     }
 

@@ -258,9 +258,9 @@ export class QuietButton extends QuietElement {
         <slot name="start"></slot>
         <slot></slot>
         <slot name="end"></slot>
-        ${this.withCaret ? html`<quiet-icon part="caret" class="caret" slot="end" name="chevron-down" library="system"></quiet-icon>` : ''}
+        ${this.withCaret ? html`<quiet-icon id="caret" part="caret" slot="end" name="chevron-down" library="system"></quiet-icon>` : ''}
         ${isToggle ? html`<span part="toggle-indicator" id="toggle-indicator"></span>` : ''}
-        ${isLoading ? html`<quiet-spinner part="spinner" class="spinner"></quiet-spinner>` : ''}
+        ${isLoading ? html`<quiet-spinner id="spinner" part="spinner"></quiet-spinner>` : ''}
       </${tag}>
     `;
     /* eslint-enable lit/binding-positions, lit/no-invalid-html */

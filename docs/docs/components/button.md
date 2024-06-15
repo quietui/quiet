@@ -119,7 +119,7 @@ Set the `appearance` attribute to `text` to draw text buttons. Text buttons shar
 
 ### Image buttons
 
-Image buttons are a special appearance that let you create application icons and other picture-based buttons using images. Unlike other variants, image buttons conform to the size of the image you slot in.
+Image buttons are a special appearance that let you create application icons and other picture-based buttons using images. Set the `appearance` attribute to `image` to create an image button. Image buttons are designed to conform to the size of the image you slot in.
 
 ```html {.example}
 <quiet-button appearance="image">

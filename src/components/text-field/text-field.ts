@@ -94,7 +94,7 @@ export class QuietTextField extends QuietElement {
   @property({ type: Boolean }) clearable = false;
 
   /** The type of text field to render. */
-  @property({ reflect: true }) variant: 'normal' | 'filled' | 'unstyled' = 'normal';
+  @property({ reflect: true }) appearance: 'normal' | 'filled' | 'unstyled' = 'normal';
 
   /** The text field's size. */
   @property({ reflect: true }) size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' = 'md';
@@ -417,10 +417,10 @@ export class QuietTextField extends QuietElement {
         id="visual-box"
         part="visual-box"
         class=${classMap({
-          // Variants
-          normal: this.variant === 'normal',
-          filled: this.variant === 'filled',
-          unstyled: this.variant === 'unstyled',
+          // Appearances
+          normal: this.appearance === 'normal',
+          filled: this.appearance === 'filled',
+          unstyled: this.appearance === 'unstyled',
           // Sizes
           xs: this.size === 'xs',
           sm: this.size === 'sm',

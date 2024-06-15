@@ -78,7 +78,7 @@ export class QuietCheckbox extends QuietElement {
   @property({ type: Boolean }) disabled = false;
 
   /** The type of checkbox to render. */
-  @property({ reflect: true }) variant: 'normal' | 'filled' = 'normal';
+  @property({ reflect: true }) appearance: 'normal' | 'filled' = 'normal';
 
   /** The checkbox's size. */
   @property({ reflect: true }) size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' = 'md';
@@ -226,9 +226,9 @@ export class QuietCheckbox extends QuietElement {
           id="visual-box"
           part="visual-box"
           class=${classMap({
-            /* Variants */
-            normal: this.variant === 'normal',
-            filled: this.variant === 'filled',
+            /* Appearances */
+            normal: this.appearance === 'normal',
+            filled: this.appearance === 'filled',
             /* Sizes */
             xs: this.size === 'xs',
             sm: this.size === 'sm',

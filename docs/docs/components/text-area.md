@@ -60,12 +60,12 @@ Text areas can grow with their content by setting the `resize` property to `auto
 
 ### Filled and unstyled text areas
 
-Set the `variant` attribute to `normal`, `filled`, or `unstyled` to change the text area's appearance.
+Set the `appearance` attribute to `normal`, `filled`, or `unstyled` to change the text area's appearance.
 
 ```html {.example}
-<quiet-text-area variant="normal" label="Normal text field" placeholder="Enter some text"></quiet-text-area><br>
-<quiet-text-area variant="filled" label="Filled" placeholder="Enter some text"></quiet-text-area><br>
-<quiet-text-area variant="unstyled" label="Unstyled" placeholder="Enter some text"></quiet-text-area>
+<quiet-text-area appearance="normal" label="Normal text field" placeholder="Enter some text"></quiet-text-area><br>
+<quiet-text-area appearance="filled" label="Filled" placeholder="Enter some text"></quiet-text-area><br>
+<quiet-text-area appearance="unstyled" label="Unstyled" placeholder="Enter some text"></quiet-text-area>
 ```
 
 ### Changing the size

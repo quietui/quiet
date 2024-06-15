@@ -89,12 +89,12 @@ Use the `start` and `end` slots to add presentational icons or text. Avoid inter
 
 ### Filled and unstyled text fields
 
-Set the `variant` attribute to `normal`, `filled`, or `unstyled` to change the text field's appearance.
+Set the `appearance` attribute to `normal`, `filled`, or `unstyled` to change the text field's appearance.
 
 ```html {.example}
-<quiet-text-field variant="normal" label="Normal text field" placeholder="Enter some text"></quiet-text-field><br>
-<quiet-text-field variant="filled" label="Filled text field" placeholder="Enter some text"></quiet-text-field><br>
-<quiet-text-field variant="unstyled" label="Unstyled text field" placeholder="Enter some text"></quiet-text-field>
+<quiet-text-field appearance="normal" label="Normal text field" placeholder="Enter some text"></quiet-text-field><br>
+<quiet-text-field appearance="filled" label="Filled text field" placeholder="Enter some text"></quiet-text-field><br>
+<quiet-text-field appearance="unstyled" label="Unstyled text field" placeholder="Enter some text"></quiet-text-field>
 ```
 
 ### Pill-shaped text fields

@@ -89,7 +89,7 @@ export class QuietTextArea extends QuietElement {
   @property({ type: Number }) rows = 3;
 
   /** The type of text area to render. */
-  @property({ reflect: true }) variant: 'normal' | 'filled' | 'unstyled' = 'normal';
+  @property({ reflect: true }) appearance: 'normal' | 'filled' | 'unstyled' = 'normal';
 
   /** The text area's size. */
   @property({ reflect: true }) size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' = 'md';
@@ -360,10 +360,10 @@ export class QuietTextArea extends QuietElement {
         id="visual-box"
         part="visual-box"
         class=${classMap({
-          // Variants
-          normal: this.variant === 'normal',
-          filled: this.variant === 'filled',
-          unstyled: this.variant === 'unstyled',
+          // Appearances
+          normal: this.appearance === 'normal',
+          filled: this.appearance === 'filled',
+          unstyled: this.appearance === 'unstyled',
           // Sizes
           xs: this.size === 'xs',
           sm: this.size === 'sm',

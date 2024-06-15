@@ -19,12 +19,12 @@ Add the `checked` attribute to check the checkbox initially.
 
 ### Filled and unstyled checkboxes
 
-Set the `variant` attribute to `normal` or `filled` to change the checkbox's appearance.
+Set the `appearance` attribute to `normal` or `filled` to change the checkbox's appearance.
 
 ```html {.example}
-<quiet-checkbox variant="normal">Normal checkbox</quiet-checkbox>
+<quiet-checkbox appearance="normal">Normal checkbox</quiet-checkbox>
 <br>
-<quiet-checkbox variant="filled">Filled checkbox</quiet-checkbox>
+<quiet-checkbox appearance="filled">Filled checkbox</quiet-checkbox>
 ```
 
 ### Changing the size

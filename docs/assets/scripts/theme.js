@@ -58,17 +58,19 @@ document.addEventListener('keydown', event => {
 /** Sets the theme color and updates the UI */
 function setThemeColor(newColor, skipTransition = false) {
   const dropdown = document.getElementById('header-color-picker');
-  const colors = [...dropdown.querySelectorAll('quiet-dropdown-item')].map(item => item.textContent.trim());
+  const items = [...dropdown.querySelectorAll('quiet-dropdown-item')];
+  const colorNames = items.map(item => item.textContent.trim());
   const color = newColor || 'violet';
   const updateSeedColor = () => {
-    colors.forEach(color => document.documentElement.classList.remove(`quiet-${color}`));
+    colorNames.forEach(color => document.documentElement.classList.remove(`quiet-${color}`));
     document.documentElement.classList.add(`quiet-${color}`);
+
+    // Update the theme color
+    const hex = getComputedStyle(document.documentElement).getPropertyValue('--quiet-primary-seed');
+    document.head.querySelector('meta[name="theme-color"]').content = hex;
   };
 
   sessionStorage.setItem('primary-color', color);
-
-  // Update the theme color
-  document.head.querySelector('meta[name="theme-color"]').content = color;
 
   // Update the color picker dropdown
   dropdown.querySelectorAll('quiet-dropdown-item').forEach(item => {

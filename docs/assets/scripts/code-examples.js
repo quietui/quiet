@@ -1,6 +1,7 @@
 document.addEventListener('click', event => {
   const toggle = event.target?.closest('.code-example-toggle');
   const pen = event.target?.closest('.code-example-pen');
+  const dir = event.target?.closest('.code-example-dir');
 
   // Toggle source
   if (toggle) {
@@ -9,6 +10,14 @@ document.addEventListener('click', event => {
 
     toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     codeExample.classList.toggle('open', isOpen);
+  }
+
+  // Directionality
+  if (dir) {
+    const codeExample = dir.closest('.code-example');
+    const preview = codeExample.querySelector('.code-example-preview');
+
+    preview.dir = preview.dir === 'rtl' ? 'ltr' : 'rtl';
   }
 
   // Edit in CodePen

@@ -25,6 +25,7 @@ export function codeExamplesPlugin(options = {}) {
         const hasButtons = !code.classList.contains('no-buttons');
         const isOpen = code.classList.contains('open') || !hasButtons;
         const noEdit = code.classList.contains('no-edit');
+        const noDir = code.classList.contains('no-dir');
         const id = `code-example-${uuid().slice(-12)}`;
         const previewClasses = [...code.classList.values()]
           // Add presentational helper classes to the preview container, prefixed with code-example-
@@ -71,6 +72,16 @@ export function codeExamplesPlugin(options = {}) {
                       `
                   }
 
+                  ${
+                    noDir
+                      ? ''
+                      : `
+                        <button class="code-example-dir" type="button">
+                          <quiet-icon label="Change direction to LTR" name="text-direction-ltr"></quiet-icon>
+                          <quiet-icon label="Change direction to RTL" name="text-direction-rtl"></quiet-icon>
+                        </button>
+                      `
+                  }
                 `
                 : ''
             }

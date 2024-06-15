@@ -180,7 +180,7 @@ Note that we use `tabindex="-1"` on the close button to prevent it from interfer
 <quiet-tab-list label="Select a tab" id="tab-list__closable">
 	<quiet-tab slot="tab" panel="first">First</quiet-tab>
 	<quiet-tab slot="tab" panel="second">Second</quiet-tab>
-  <quiet-button slot="tab" variant="text" icon-label="Close second tab" tabindex="-1">
+  <quiet-button slot="tab" appearance="text" size="xs" icon-label="Close second tab" tabindex="-1">
     <quiet-icon name="x"></quiet-icon>
   </quiet-button>
 	<quiet-tab slot="tab" panel="third">Third</quiet-tab>

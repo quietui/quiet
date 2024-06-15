@@ -46,86 +46,6 @@ export default css`
       outline-offset: var(--quiet-focus-offset);
     }
 
-    /* Primary */
-    &.primary {
-      background-color: var(--quiet-primary-fill-mid);
-      color: var(--quiet-primary-text-on-mid);
-
-      @media (hover: hover) {
-        &:hover:not(.disabled, [aria-pressed='true']) {
-          background-color: color-mix(in oklab, var(--quiet-primary-fill-mid), black 5%);
-        }
-      }
-
-      &[aria-pressed='true'] {
-        background-color: color-mix(in oklab, var(--quiet-primary-fill-mid), var(--quiet-strident) 7.5%);
-      }
-    }
-
-    /* Secondary */
-    &.secondary {
-      background-color: var(--quiet-neutral-fill-softer);
-      color: var(--quiet-neutral-text-on-soft);
-
-      @media (hover: hover) {
-        &:hover:not(.disabled, [aria-pressed='true']) {
-          background-color: color-mix(in oklab, var(--quiet-neutral-fill-softer), black 5%);
-        }
-      }
-
-      &[aria-pressed='true'] {
-        background-color: color-mix(in oklab, var(--quiet-neutral-fill-softer), var(--quiet-strident) 7.5%);
-      }
-    }
-
-    /* Destructive */
-    &.destructive {
-      background-color: var(--quiet-destructive-fill-mid);
-      color: var(--quiet-destructive-text-on-mid);
-
-      @media (hover: hover) {
-        &:hover:not(.disabled, [aria-pressed='true']) {
-          background-color: color-mix(in oklab, var(--quiet-destructive-fill-mid), black 5%);
-        }
-      }
-
-      &[aria-pressed='true'] {
-        background-color: color-mix(in oklab, var(--quiet-destructive-fill-mid), var(--quiet-strident) 7.5%);
-      }
-    }
-
-    /* Text */
-    &.text {
-      background: none;
-      color: var(--quiet-neutral-text-on-soft);
-
-      @media (hover: hover) {
-        &:hover {
-          background-color: color-mix(in oklab, transparent, var(--quiet-text-body) 5%);
-        }
-      }
-
-      &[aria-pressed='true'] {
-        background-color: color-mix(in oklab, transparent, var(--quiet-text-body) 5%);
-      }
-    }
-
-    /* Toggle button indicators */
-    #toggle-indicator {
-      position: absolute;
-      bottom: 0.25em;
-      left: calc(50% - 0.375em);
-      width: 0.75em;
-      height: 0.2em;
-      background-color: currentColor;
-      border-radius: 9999px;
-      opacity: 0.15;
-    }
-
-    &[aria-pressed='true'] #toggle-indicator {
-      opacity: 1;
-    }
-
     /* Sizes */
     &.xs {
       min-height: var(--quiet-form-control-height-xs);
@@ -155,6 +75,57 @@ export default css`
       min-height: var(--quiet-form-control-height-xl);
       font-size: var(--quiet-form-control-font-size-xl);
       padding-inline: 1.5em;
+    }
+
+    /* Normal buttons */
+    &.normal {
+      /* Primary */
+      &.primary {
+        background-color: var(--quiet-primary-fill-mid);
+        color: var(--quiet-primary-text-on-mid);
+
+        @media (hover: hover) {
+          &:hover:not(.disabled, [aria-pressed='true']) {
+            background-color: color-mix(in oklab, var(--quiet-primary-fill-mid), black 5%);
+          }
+        }
+
+        &[aria-pressed='true'] {
+          background-color: color-mix(in oklab, var(--quiet-primary-fill-mid), var(--quiet-strident) 7.5%);
+        }
+      }
+
+      /* Secondary */
+      &.secondary {
+        background-color: var(--quiet-neutral-fill-softer);
+        color: var(--quiet-neutral-text-on-soft);
+
+        @media (hover: hover) {
+          &:hover:not(.disabled, [aria-pressed='true']) {
+            background-color: color-mix(in oklab, var(--quiet-neutral-fill-softer), black 5%);
+          }
+        }
+
+        &[aria-pressed='true'] {
+          background-color: color-mix(in oklab, var(--quiet-neutral-fill-softer), var(--quiet-strident) 7.5%);
+        }
+      }
+
+      /* Destructive */
+      &.destructive {
+        background-color: var(--quiet-destructive-fill-mid);
+        color: var(--quiet-destructive-text-on-mid);
+
+        @media (hover: hover) {
+          &:hover:not(.disabled, [aria-pressed='true']) {
+            background-color: color-mix(in oklab, var(--quiet-destructive-fill-mid), black 5%);
+          }
+        }
+
+        &[aria-pressed='true'] {
+          background-color: color-mix(in oklab, var(--quiet-destructive-fill-mid), var(--quiet-strident) 7.5%);
+        }
+      }
     }
 
     /* Outline buttons */
@@ -194,18 +165,23 @@ export default css`
       }
     }
 
-    /* Pills */
-    &.pill {
-      border-radius: 9999px;
+    /* Text buttons */
+    &.text {
+      background: none;
+      color: var(--quiet-neutral-text-on-soft);
+
+      @media (hover: hover) {
+        &:hover {
+          background-color: color-mix(in oklab, transparent, var(--quiet-text-body) 5%);
+        }
+      }
+
+      &[aria-pressed='true'] {
+        background-color: color-mix(in oklab, transparent, var(--quiet-text-body) 5%);
+      }
     }
 
-    /* Icon buttons */
-    &.icon {
-      aspect-ratio: 1 / 1;
-      padding-inline: 0.75em;
-    }
-
-    /* image buttons */
+    /* Image buttons */
     &.image {
       height: auto;
       min-height: 0;
@@ -217,7 +193,34 @@ export default css`
       }
     }
 
-    /* Disable */
+    /* Icon buttons */
+    &.icon {
+      aspect-ratio: 1 / 1;
+      padding-inline: 0.75em;
+    }
+
+    /* Pills */
+    &.pill {
+      border-radius: 9999px;
+    }
+
+    /* Toggle button indicators */
+    #toggle-indicator {
+      position: absolute;
+      bottom: 0.25em;
+      left: calc(50% - 0.375em);
+      width: 0.75em;
+      height: 0.2em;
+      background-color: currentColor;
+      border-radius: 9999px;
+      opacity: 0.15;
+    }
+
+    &[aria-pressed='true'] #toggle-indicator {
+      opacity: 1;
+    }
+
+    /* Disabled */
     &.disabled:not(.loading) {
       opacity: 0.5;
       cursor: not-allowed;

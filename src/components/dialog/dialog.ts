@@ -183,7 +183,7 @@ export class QuietDialog extends QuietElement {
                 <slot id="actions" name="actions">
                   <quiet-button
                     slot="header"
-                    variant="text"
+                    appearance="text"
                     icon-label=${this.localize.term('close')}
                     data-dialog="close"
                   >

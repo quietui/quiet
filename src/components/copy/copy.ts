@@ -119,7 +119,7 @@ export class QuietCopy extends QuietElement {
         <quiet-button
           part="copy-button"
           exportparts="button:copy-button__button"
-          variant="text"
+          appearance="text"
           icon-label=${this.localize.term('copyToClipboard')}
         >
           <quiet-icon part="copy-icon" library="system" name="copy"></quiet-icon>

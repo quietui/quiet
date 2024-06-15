@@ -49,8 +49,11 @@ export class QuietButton extends QuietElement {
 
   protected internals: ElementInternals;
 
-  /** The type of button to render. */
-  @property({ reflect: true }) variant: 'primary' | 'secondary' | 'destructive' | 'text' | 'image' = 'secondary';
+  /** Determines the button's appearance. */
+  @property({ reflect: true }) appearance: 'normal' | 'outline' | 'text' | 'image' = 'normal';
+
+  /** The type of button to render. This attribute has no effect on text or image buttons. */
+  @property({ reflect: true }) variant: 'primary' | 'secondary' | 'destructive' = 'secondary';
 
   /** Disables the button. Cannot be used with link buttons. */
   @property({ type: Boolean, reflect: true }) disabled = false;
@@ -72,9 +75,6 @@ export class QuietButton extends QuietElement {
    * label. The label won't be visible, but it will be available to assistive devices.
    */
   @property({ attribute: 'icon-label' }) iconLabel = '';
-
-  /** Draws the button with outlines. */
-  @property({ type: Boolean, reflect: true }) outline = false;
 
   /** Draws the button in a pill shape. */
   @property({ type: Boolean, reflect: true }) pill = false;
@@ -223,8 +223,11 @@ export class QuietButton extends QuietElement {
           primary: this.variant === 'primary',
           secondary: this.variant === 'secondary',
           destructive: this.variant === 'destructive',
-          text: this.variant === 'text',
-          image: this.variant === 'image',
+          // Appearances
+          normal: this.appearance === 'normal',
+          outline: this.appearance === 'outline',
+          text: this.appearance === 'text',
+          image: this.appearance === 'image',
           // Sizes
           xs: this.size === 'xs',
           sm: this.size === 'sm',
@@ -232,7 +235,6 @@ export class QuietButton extends QuietElement {
           lg: this.size === 'lg',
           xl: this.size === 'xl',
           // Modifiers
-          outline: this.outline,
           pill: this.pill,
           icon: this.iconLabel !== '',
           // States

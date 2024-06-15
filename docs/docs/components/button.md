@@ -25,10 +25,6 @@ Buttons have four built-in variants. Set the `variant` attribute to `primary`, `
 <quiet-button variant="destructive">
   Destructive
 </quiet-button>
-
-<quiet-button variant="text">
-  Text Button
-</quiet-button>
 ```
 
 ### Start & end icons
@@ -95,21 +91,45 @@ Use the `size` attribute to change the button's size. Available sizes include `x
 
 ### Outline buttons
 
-Buttons can be rendered with outlines by adding the `outline` attribute.
+Set the `appearance` attribute to `outline` to draw outlined buttons.
 
 ```html {.example .flex-row}
-<quiet-button outline variant="primary">
+<quiet-button appearance="outline" variant="primary">
   I'm outlined
 </quiet-button>
 
-<quiet-button outline variant="secondary">
+<quiet-button appearance="outline" variant="secondary">
   I'm outlined
 </quiet-button>
 
-<quiet-button outline variant="destructive">
+<quiet-button appearance="outline" variant="destructive">
   I'm outlined
 </quiet-button>
 ```
+
+### Text buttons
+
+Set the `appearance` attribute to `text` to draw text buttons. Text buttons share the same side and padding as normal buttons, but don't have a background.
+
+```html {.example .flex-row}
+<quiet-button appearance="text">
+  I'm a text button
+</quiet-button>
+```
+
+### Image buttons
+
+Image buttons are a special appearance that let you create application icons and other picture-based buttons using images. Unlike other variants, image buttons conform to the size of the image you slot in.
+
+```html {.example}
+<quiet-button appearance="image">
+  <img src="/assets/images/app-icon.png" alt="Launch Quiet" style="width: 60px; height: 60px;">
+</quiet-button>
+```
+
+:::info
+Don't forget to include `alt` text on images for assistive devices.
+:::
 
 ### Pill-shaped buttons
 
@@ -146,7 +166,7 @@ To create an icon button, place an icon into the button's default slot and set t
   <quiet-icon name="trash"></quiet-icon>
 </quiet-button>
 
-<quiet-button icon-label="Close" variant="text">
+<quiet-button icon-label="Close" appearance="text">
   <quiet-icon name="x"></quiet-icon>
 </quiet-button>
 ```
@@ -168,27 +188,13 @@ Create a toggle button by adding the `toggle="off"` attribute. To make it active
   <quiet-icon name="camera"></quiet-icon>
 </quiet-button>
 
-<quiet-button variant="text" toggle="off" icon-label="Mute">
+<quiet-button appearance="text" toggle="off" icon-label="Mute">
   <quiet-icon name="volume-3"></quiet-icon>
 </quiet-button>
 ```
 
 :::danger
 Toggle buttons cannot be used with link buttons or submit buttons.
-:::
-
-### Image buttons
-
-Image buttons are a special variant that let you create application icons and other picture-based buttons using images. Unlike other variants, image buttons conform to the size of the image you slot in.
-
-```html {.example}
-<quiet-button variant="image">
-  <img src="/assets/images/app-icon.png" alt="Launch Quiet" style="width: 60px; height: 60px;">
-</quiet-button>
-```
-
-:::info
-Don't forget to include `alt` text on images for assistive devices.
 :::
 
 ### Loading buttons

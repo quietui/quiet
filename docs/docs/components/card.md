@@ -35,7 +35,7 @@ Add the `with-header` attribute and place elements into the `header` slot to add
 ```html {.example}
 <quiet-card with-header style="max-width: 340px;">
   <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">Fact of the day</h3>
-  <quiet-button slot="actions" variant="text" icon-label="Settings">
+  <quiet-button slot="actions" appearance="text" icon-label="Settings">
     <quiet-icon name="settings"></quiet-icon>
   </quiet-button>
 

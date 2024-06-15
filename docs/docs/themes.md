@@ -56,7 +56,7 @@ For best results, use midtone colors to seed palettes. Any of the 500-level colo
 
 ### Built-in presets
 
-For convenience, Quiet ships with 21 built-in color presets you can use to change the primary seed color. Use the theme picker at the top of the page to preview them.
+For convenience, Quiet ships with 21 built-in color presets you can use to change the primary seed color. The theme picker at the top of the page allows you to preview them.
 
 To use a preset in your app, add the `quiet-{preset}` class to the `<html>` element, where `{preset}` is one of the following values: red, orange, amber, yellow, lime, green, emerald, teal, cyan, sky, blue, indigo, violet, purple, fuschia, pink, rose, slate, zinc, stone, or sand.
 

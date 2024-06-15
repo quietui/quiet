@@ -10,7 +10,7 @@ export default css`
     display: none;
   }
 
-  :host([open]) {
+  :host(:state(open)) {
     display: block;
   }
 

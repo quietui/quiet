@@ -3,6 +3,7 @@ import { customElement, property, query } from 'lit/decorators.js';
 import { html } from 'lit';
 import { Localize } from '../../utilities/localize.js';
 import { lockScrolling, unlockScrolling } from '../../utilities/scroll.js';
+import { parseSpaceDelimitedTokens } from '../../utilities/parse.js';
 import { QuietClosedEvent, QuietCloseEvent, QuietOpenedEvent, QuietOpenEvent } from '../../events/open-close.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import hostStyles from '../../styles/host.styles.js';
@@ -77,7 +78,6 @@ export class QuietDialog extends QuietElement {
       if (this.open && !this.dialog.open) {
         this.show();
       } else if (this.dialog.open) {
-        this.open = true;
         this.requestClose(this.dialog);
       }
     }
@@ -93,9 +93,9 @@ export class QuietDialog extends QuietElement {
 
   private handleDialogClick(event: PointerEvent) {
     const target = event.target as HTMLElement;
-    const button = target.closest('[data-dialog="dismiss"]');
+    const button = target.closest('[data-dialog="close"]');
 
-    // Close when a button with [data-dialog="dismiss"] is clicked
+    // Watch for [data-dialog="close"] clicks
     if (button) {
       event.stopPropagation();
       this.requestClose(button);
@@ -113,6 +113,14 @@ export class QuietDialog extends QuietElement {
     }
   }
 
+  private handleDocumentKeyDown = (event: KeyboardEvent) => {
+    // Pressing escape will close the dialog, so let's prevent that here and map it to requestClose
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      this.requestClose(this);
+    }
+  };
+
   /** Call this to show the dialog. */
   private async show() {
     const openEvent = new QuietOpenEvent();
@@ -121,6 +129,7 @@ export class QuietDialog extends QuietElement {
       return;
     }
 
+    document.addEventListener('keydown', this.handleDocumentKeyDown);
     lockScrolling(this.dialog);
     this.dialog.showModal();
     this.customStates.set('open', true);
@@ -147,6 +156,7 @@ export class QuietDialog extends QuietElement {
       this.open = true;
       animateWithClass(this.dialog, 'shake');
     } else {
+      document.removeEventListener('keydown', this.handleDocumentKeyDown);
       unlockScrolling(this.dialog);
       await animateWithClass(this.dialog, 'hide');
       this.dialog.close();
@@ -175,7 +185,7 @@ export class QuietDialog extends QuietElement {
                     slot="header"
                     variant="text"
                     icon-label=${this.localize.term('close')}
-                    data-dialog="dismiss"
+                    data-dialog="close"
                   >
                     <quiet-icon library="system" name="x"></quiet-icon>
                   </quiet-button>
@@ -193,6 +203,28 @@ export class QuietDialog extends QuietElement {
     `;
   }
 }
+
+//
+// Watch for data-dialog="open *" clicks
+//
+document.addEventListener('click', (event: PointerEvent) => {
+  const target = event.target;
+
+  if (target instanceof HTMLElement && target.hasAttribute('data-dialog')) {
+    const [command, id] = parseSpaceDelimitedTokens(target.getAttribute('data-dialog') || '');
+
+    if (command === 'open' && id?.length) {
+      const doc = target.getRootNode() as Document | ShadowRoot;
+      const dialog = doc.getElementById(id) as QuietDialog;
+
+      if (dialog?.localName === 'quiet-dialog') {
+        dialog.open = true;
+      } else {
+        console.warn(`A dialog with an id of "${id}" could not be found in this document.`);
+      }
+    }
+  }
+});
 
 declare global {
   interface HTMLElementTagNameMap {

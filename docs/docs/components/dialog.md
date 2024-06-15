@@ -4,38 +4,64 @@ layout: component
 ---
 
 ```html {.example}
-<quiet-dialog with-header with-footer id="overview__dialog">
+<quiet-dialog with-header with-footer id="dialog__overview">
   <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">
     Lorem ipsum
   </h3>
 
   Lorem dolor sed viverra ipsum. Nisl rhoncus mattis rhoncus urna neque viverra justo nec.
   
-  <quiet-button slot="footer" data-dialog="dismiss" variant="primary">
+  <quiet-button slot="footer" data-dialog="close" variant="primary">
     Close
   </quiet-button>
 </quiet-dialog>
 
-<quiet-button>Show dialog</quiet-button>
-
-<script>
-  const dialog = document.getElementById('overview__dialog');
-  const openButton = dialog.nextElementSibling;
-
-  openButton.addEventListener('quiet-click', () => {
-    dialog.open = true;
-  });
-</script>
+<quiet-button data-dialog="open dialog__overview">Show dialog</quiet-button>
 ```
 
 ## Examples
+
+### Opening and closing dialogs
+
+You can open and close a dialog programmatically by obtaining a reference to it and setting the `open` property to `true` or `false`, respectively.
+
+```js
+const dialog = document.querySelector('quiet-dialog');
+
+// Open the dialog
+dialog.open = true;
+
+// Close the dialog
+dialog.open = false;
+```
+
+However, it's often more convenient for a button to control the dialog _without_ additional scripting. In this case, you can add the `data-dialog="open *"` attribute to any button in the document, where `*` is the target dialog's `id`.
+
+Similarly, you can add `data-dialog="close"` to any button inside a dialog to close it.
+
+```html {.example}
+<quiet-dialog with-header with-footer id="dialog__opening">
+  <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">
+    Opening and closing
+  </h3>
+
+  <p>The button you clicked has <code>data-dialog="open <em>id</em>"</code> so it opens the dialog that a matching id.</p>
+  <p style="margin-block-end: 0;">The button below has <code>data-dialog="dismiss"</code> so it will close the dialog when you click on it.</p>
+
+  <quiet-button slot="footer" data-dialog="close" variant="primary">
+    Close
+  </quiet-button>
+</quiet-dialog>
+
+<quiet-button data-dialog="open dialog__opening">Show dialog</quiet-button>
+```
 
 ### With header
 
 Add the `with-header` attribute and place elements into the `header` slot to add content at the start of the dialog.
 
 ```html {.example}
-<quiet-dialog with-header id="header__dialog">
+<quiet-dialog with-header id="dialog__header">
   <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">
     Lorem ipsum
   </h3>
@@ -43,16 +69,7 @@ Add the `with-header` attribute and place elements into the `header` slot to add
   Lorem dolor sed viverra ipsum. Nisl rhoncus mattis rhoncus urna neque viverra justo nec.
 </quiet-dialog>
 
-<quiet-button>Show dialog</quiet-button>
-
-<script>
-  const dialog = document.getElementById('header__dialog');
-  const openButton = dialog.nextElementSibling;
-
-  openButton.addEventListener('quiet-click', () => {
-    dialog.open = true;
-  });
-</script>
+<quiet-button data-dialog="open dialog__header">Show dialog</quiet-button>
 ```
 
 ### With footer
@@ -60,82 +77,35 @@ Add the `with-header` attribute and place elements into the `header` slot to add
 Add the `with-footer` attribute and place elements into the `footer` slot to add actions or other supplemental information at the end of the dialog.
 
 ```html {.example}
-<quiet-dialog with-footer id="footer__dialog">
+<quiet-dialog with-footer id="dialog__footer">
   Lorem dolor sed viverra ipsum. Nisl rhoncus mattis rhoncus urna neque viverra justo nec.
 
-  <quiet-button slot="footer" data-dialog="dismiss" variant="primary">
+  <quiet-button slot="footer" data-dialog="close" variant="primary">
     Close
   </quiet-button>
 </quiet-dialog>
 
-<quiet-button>Show dialog</quiet-button>
-
-<script>
-  const dialog = document.getElementById('footer__dialog');
-  const openButton = dialog.nextElementSibling;
-
-  openButton.addEventListener('quiet-click', () => {
-    dialog.open = true;
-  });
-</script>
+<quiet-button data-dialog="open dialog__footer">Show dialog</quiet-button>
 ```
-
-### Dismissing the dialog
-
-You can dismiss the dialog programmatically by setting the `open` property to `false`. However, it's often convenient to have a button close the dialog without additional scripting. In that case, you can add the `data-dialog="dismiss"` attribute to any button within the dialog.
-
-```html {.example}
-<quiet-dialog with-header with-footer id="dismissing__dialog">
-  <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">
-    Dismiss me
-  </h3>
-
-  The button below has <code>data-dialog="dismiss"</code> so it will close when you click on it.
-
-  <quiet-button slot="footer" data-dialog="dismiss" variant="primary">
-    Close
-  </quiet-button>
-</quiet-dialog>
-
-<quiet-button>Show dialog</quiet-button>
-
-<script>
-  const dialog = document.getElementById('dismissing__dialog');
-  const openButton = dialog.nextElementSibling;
-
-  openButton.addEventListener('quiet-click', () => {
-    dialog.open = true;
-  });
-</script>
-``` 
 
 ### Light dismissal
 
 When clicking outside of a dialog, it will normally pulse briefly to draw the user's attention. If you want these clicks to dismiss the dialog instead, use the `light-dismiss` attribute.
 
 ```html {.example}
-<quiet-dialog light-dismiss with-header with-footer id="light__dialog">
+<quiet-dialog light-dismiss with-header with-footer id="dialog__light">
   <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">
     Lorem ipsum
   </h3>
 
   Clicking outside the dialog will cause it to close.
 
-  <quiet-button slot="footer" data-dialog="dismiss" variant="primary">
+  <quiet-button slot="footer" data-dialog="close" variant="primary">
     Close
   </quiet-button>
 </quiet-dialog>
 
-<quiet-button>Show dialog</quiet-button>
-
-<script>
-  const dialog = document.getElementById('light__dialog');
-  const openButton = dialog.nextElementSibling;
-
-  openButton.addEventListener('quiet-click', () => {
-    dialog.open = true;
-  });
-</script>
+<quiet-button data-dialog="open dialog__light">Show dialog</quiet-button>
 ``` 
 
 ### Customizing actions
@@ -143,7 +113,7 @@ When clicking outside of a dialog, it will normally pulse briefly to draw the us
 By default, a close button is provided as a single action in the dialog's header. You can add your own header actions by slotting text buttons into the `actions` slot. Note that adding your own actions will remove the default close button.
 
 ```html {.example}
-<quiet-dialog with-header with-footer id="customizing__dialog">
+<quiet-dialog with-header with-footer id="dialog__customizing">
   <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">
     Lorem ipsum
   </h3>
@@ -158,21 +128,12 @@ By default, a close button is provided as a single action in the dialog's header
 
   Lorem dolor sed viverra ipsum. Nisl rhoncus mattis rhoncus urna neque viverra justo nec.
 
-  <quiet-button slot="footer" data-dialog="dismiss" variant="primary">
+  <quiet-button slot="footer" data-dialog="close" variant="primary">
     Close
   </quiet-button>
 </quiet-dialog>
 
-<quiet-button>Show dialog</quiet-button>
-
-<script>
-  const dialog = document.getElementById('customizing__dialog');
-  const openButton = dialog.nextElementSibling;
-
-  openButton.addEventListener('quiet-click', () => {
-    dialog.open = true;
-  });
-</script>
+<quiet-button data-dialog="open dialog__customizing">Show dialog</quiet-button>
 ```
 
 :::info
@@ -184,14 +145,14 @@ The `actions` slot is only available when the header is enabled using the `with-
 By default, dialogs appear in the center of the screen. To make the dialog slide in from the side of the screen like a drawer, set the `placement` attribute to `start`, `end`, `top`, or `bottom`.
 
 ```html {.example}
-<quiet-dialog with-header with-footer id="placement__dialog">
+<quiet-dialog with-header with-footer id="dialog__placement">
   <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">
     Lorem ipsum
   </h3>
 
   Nec nam aliquam sem et tortor consequat id porta nibh. Amet risus nullam eget felis eget nunc.
 
-  <quiet-button slot="footer" data-dialog="dismiss" variant="primary">
+  <quiet-button slot="footer" data-dialog="close" variant="primary">
     Close
   </quiet-button>
 </quiet-dialog>
@@ -204,7 +165,7 @@ By default, dialogs appear in the center of the screen. To make the dialog slide
 </div>
 
 <script>
-  const dialog = document.getElementById('placement__dialog');
+  const dialog = document.getElementById('dialog__placement');
   const container = dialog.nextElementSibling;
 
   container.addEventListener('quiet-click', event => {
@@ -223,7 +184,7 @@ The `--width` custom property has no effect on dialogs with `top` and `bottom` p
 The `--width` and `--height` custom properties control the default width and height of the dialog, respectively. On smaller screens, the dialog will shrink to fit the viewport.
 
 ```html {.example}
-<quiet-dialog id="width__dialog" with-header with-footer style="--width: 800px;">
+<quiet-dialog id="dialog__width" with-header with-footer style="--width: 800px;">
   <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">
     Lorem ipsum
   </h3>
@@ -231,21 +192,12 @@ The `--width` and `--height` custom properties control the default width and hei
   <p>Lobortis feugiat vivamus at augue eget arcu dictum. Nulla at volutpat diam ut venenatis tellus in metus vulputate. Venenatis tellus in metus vulputate eu scelerisque felis.</p>
   <p style="margin-block-end: 0;">Et malesuada fames ac turpis egestas maecenas pharetra. Eu lobortis elementum nibh tellus molestie nunc. Nisl purus in mollis nunc sed id semper risus in. Ultricies mi quis hendrerit dolor magna eget. Venenatis cras sed felis eget velit aliquet sagittis.</p>
 
-  <quiet-button slot="footer" data-dialog="dismiss" variant="primary">
+  <quiet-button slot="footer" data-dialog="close" variant="primary">
     Close
   </quiet-button>
 </quiet-dialog>
 
-<quiet-button>Show dialog</quiet-button>
-
-<script>
-  const dialog = document.getElementById('width__dialog');
-  const openButton = dialog.nextElementSibling;
-
-  openButton.addEventListener('quiet-click', () => {
-    dialog.open = true;
-  });
-</script>
+<quiet-button data-dialog="open dialog__width">Show dialog</quiet-button>
 ```
 
 ### Scrolling dialogs
@@ -253,7 +205,7 @@ The `--width` and `--height` custom properties control the default width and hei
 Dialogs with overflowing content will expand as the viewport allows before scrolling. By design, the header and footer will remain visible so users don't get confused and have an easy way to exit the dialog.
 
 ```html {.example}
-<quiet-dialog id="scrolling__dialog" with-header with-footer>
+<quiet-dialog id="dialog__scrolling" with-header with-footer>
   <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">
     Lorem ipsum
   </h3>
@@ -266,21 +218,12 @@ Dialogs with overflowing content will expand as the viewport allows before scrol
   <p>In ante metus dictum at. Eget sit amet tellus cras adipiscing. Hendrerit gravida rutrum quisque non. Mattis pellentesque id nibh tortor id aliquet lectus. Velit ut tortor pretium viverra. Ut tortor pretium viverra suspendisse potenti. Urna molestie at elementum eu. Vel risus commodo viverra maecenas accumsan lacus vel. Eget dolor morbi non arcu risus quis varius quam quisque. Orci porta non pulvinar neque laoreet suspendisse. Eros donec ac odio tempor orci. Auctor neque vitae tempus quam pellentesque nec nam aliquam sem. Eget gravida cum sociis natoque penatibus et magnis. Non blandit massa enim nec dui nunc mattis enim.</p>
   <p style="margin-block-end: 0;">In nibh mauris cursus mattis molestie. Semper feugiat nibh sed pulvinar proin gravida hendrerit lectus. Lorem ipsum dolor sit amet consectetur adipiscing elit ut aliquam. Maecenas pharetra convallis posuere morbi leo urna molestie at. Nunc aliquet bibendum enim facilisis gravida neque convallis. In nulla posuere sollicitudin aliquam ultrices. At lectus urna duis convallis convallis tellus. Sapien nec sagittis aliquam malesuada bibendum. In massa tempor nec feugiat nisl pretium fusce. Enim sit amet venenatis urna cursus eget nunc scelerisque viverra. Venenatis cras sed felis eget velit aliquet sagittis. Ultrices neque ornare aenean euismod. Malesuada nunc vel risus commodo viverra maecenas accumsan. Donec pretium vulputate sapien nec. Massa ultricies mi quis hendrerit dolor magna eget est.</p>
 
-  <quiet-button slot="footer" data-dialog="dismiss" variant="primary">
+  <quiet-button slot="footer" data-dialog="close" variant="primary">
     Close
   </quiet-button>
 </quiet-dialog>
 
-<quiet-button>Show dialog</quiet-button>
-
-<script>
-  const dialog = document.getElementById('scrolling__dialog');
-  const openButton = dialog.nextElementSibling;
-
-  openButton.addEventListener('quiet-click', () => {
-    dialog.open = true;
-  });
-</script>
+<quiet-button data-dialog="open dialog__scrolling">Show dialog</quiet-button>
 ```
 
 ### Setting focus on open
@@ -288,30 +231,17 @@ Dialogs with overflowing content will expand as the viewport allows before scrol
 To move focus to a specific form control when the dialog opens, use the [`autofocus`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/autofocus) global attribute.
 
 ```html {.example}
-<quiet-dialog id="focus__dialog" with-header with-footer>
+<quiet-dialog id="dialog__focus" with-header with-footer>
   <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">
     Lorem ipsum
   </h3>
 
   <quiet-text-field autofocus placeholder="Enter something"></quiet-text-field>
 
-  <quiet-button slot="footer" data-dialog="dismiss" variant="primary">Close</quiet-button>
+  <quiet-button slot="footer" data-dialog="close" variant="primary">Close</quiet-button>
 </quiet-dialog>
 
-<quiet-button>Show dialog</quiet-button>
-
-<script>
-  const dialog = document.getElementById('focus__dialog');
-  const openButton = dialog.nextElementSibling;
-
-  openButton.addEventListener('quiet-click', () => {
-    dialog.open = true;
-  });
-
-  dialog.addEventListener('quiet-visible', () => {
-    dialog.querySelector('input').focus();
-  });
-</script>
+<quiet-button data-dialog="open dialog__focus">Show dialog</quiet-button>
 ```
 
 ### Preventing the dialog from closing
@@ -321,32 +251,27 @@ You can stop the dialog from closing by preventing the `quiet-close` event. The 
 You can check `event.detail.source` to see which element triggered the dialog to close, such as a button. If the source is the dialog itself, you can assume that the user has pressed [[Escape]] or the dialog has been closed programmatically.
 
 ```html {.example}
-<quiet-dialog with-header with-footer id="prevent__dialog">
+<quiet-dialog with-header with-footer id="dialog__prevent">
   <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">
     Try closing me
   </h3>
 
   Only clicking the last button will close this dialog. Not even the <kbd>Escape</kbd> key will save you!
 
-  <quiet-button slot="footer" data-dialog="dismiss">
+  <quiet-button slot="footer" data-dialog="close">
     I won't close it
   </quiet-button>
   
-  <quiet-button slot="footer" data-dialog="dismiss" variant="primary">
+  <quiet-button slot="footer" data-dialog="close" variant="primary">
     Only I will close it
   </quiet-button>
 </quiet-dialog>
 
-<quiet-button>Show dialog</quiet-button>
+<quiet-button data-dialog="open dialog__prevent">Show dialog</quiet-button>
 
 <script>
-  const dialog = document.getElementById('prevent__dialog');
-  const openButton = dialog.nextElementSibling;
+  const dialog = document.getElementById('dialog__prevent');
   const closeButton = dialog.querySelector('quiet-button:last-of-type');
-
-  openButton.addEventListener('quiet-click', () => {
-    dialog.open = true;
-  });
 
   dialog.addEventListener('quiet-close', event => {
     if (event.detail.source !== closeButton) {
@@ -359,3 +284,30 @@ You can check `event.detail.source` to see which element triggered the dialog to
 :::info
 For best results, avoid using this feature unless something severe will result from the user not making an explicit choice, e.g. data loss.
 :::
+
+### Styling dialogs
+
+Dialogs come with a simple, minimal appearance. Feel free to customize them with your own styles. Here's a quick way to turn a dialog into an action sheet.
+
+```html {.example}
+<quiet-dialog class="action-sheet" placement="bottom" id="dialog__styling">
+  <quiet-button data-dialog="close" pill>Cancel</quiet-button>
+  <quiet-button variant="destructive" pill data-dialog="close">Delete</quiet-button>
+</quiet-dialog>
+
+<quiet-button variant="destructive" data-dialog="open dialog__styling">Delete</quiet-button>
+
+<style>
+  quiet-dialog.action-sheet::part(dialog) {
+    background: transparent;
+    box-shadow: none;
+  }
+  
+  quiet-dialog.action-sheet::part(body) {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+}
+</style>
+```

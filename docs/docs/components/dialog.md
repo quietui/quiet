@@ -287,7 +287,7 @@ For best results, avoid using this feature unless something severe will result f
 
 ### Styling dialogs
 
-Dialogs come with a simple, minimal appearance. Feel free to customize them with your own styles. Here's a quick way to turn a dialog into an action sheet.
+Dialogs come with a simple, minimal appearance. Feel free to customize them with your own styles. Here's a quick way to turn a dialog into an action sheet which work great on smaller devices.
 
 ```html {.example}
 <quiet-dialog class="action-sheet" placement="bottom" id="dialog__styling">

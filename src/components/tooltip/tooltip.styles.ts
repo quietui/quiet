@@ -66,20 +66,40 @@ export default css`
   }
 
   /* Rotate border position based on placement */
-  :host([data-placement^='top']) #arrow {
-    rotate: 45deg;
+  :host([data-placement^='top']) {
+    --show-x: 0;
+    --show-y: 0.25em;
+
+    #arrow {
+      rotate: 45deg;
+    }
   }
 
-  :host([data-placement^='right']) #arrow {
-    rotate: 135deg;
+  :host([data-placement^='right']) {
+    --show-x: -0.25em;
+    --show-y: 0;
+
+    #arrow {
+      rotate: 135deg;
+    }
   }
 
-  :host([data-placement^='bottom']) #arrow {
-    rotate: 225deg;
+  :host([data-placement^='bottom']) {
+    --show-x: 0;
+    --show-y: -0.25em;
+
+    #arrow {
+      rotate: 225deg;
+    }
   }
 
-  :host([data-placement^='left']) #arrow {
-    rotate: 315deg;
+  :host([data-placement^='left']) {
+    --show-x: 0.25em;
+    --show-y: 0;
+
+    #arrow {
+      rotate: 315deg;
+    }
   }
 
   #polygon {
@@ -100,7 +120,7 @@ export default css`
     from {
       opacity: 0;
       scale: 0.9;
-      translate: 0 0.25em;
+      translate: var(--show-x) var(--show-y);
     }
     to {
       opacity: 1;

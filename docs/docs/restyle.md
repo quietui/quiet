@@ -12,7 +12,7 @@ You can think of Restyle as a smarter, prettier user agent stylesheet.
 
 To add Restyle to your app, first [include a theme](/docs/themes) and add the following markup to the `<head>` of your document.
 
-```html
+```css
 <link rel="stylesheet" href="{% cdnUrl '/dist/themes/restyle.css' %}">
 ```
 

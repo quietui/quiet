@@ -195,7 +195,7 @@ kbd {
 }
 
 mark {
-  background-color: var(--quiet-constructive-fill-soft);
+  background-color: color-mix(in oklab, #f4dd01, transparent 75%);
   border-radius: 0;
   color: inherit;
   border-radius: calc(var(--quiet-border-radius) / 2);

@@ -29,16 +29,16 @@ export class QuietAvatar extends QuietElement {
    * An accessible label for the avatar. This won't be shown, but it will be read to assistive devices so you should
    * always include one.
    */
-  @property() label?: string;
+  @property() label = '';
 
   /**
    * A string of characters to display in the avatar when an image isn't available or fails to load. Up to five
    * characters are supported.
    */
-  @property() characters?: string;
+  @property() characters = '';
 
   /** The URL of an image to display in the avatar. Non-square images will be clipped to fit. */
-  @property() image?: string;
+  @property() image = '';
 
   connectedCallback() {
     super.connectedCallback();

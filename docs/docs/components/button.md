@@ -95,15 +95,15 @@ Set the `appearance` attribute to `outline` to draw outlined buttons.
 
 ```html {.example .flex-row}
 <quiet-button appearance="outline" variant="primary">
-  I'm outlined
+  I'm outline
 </quiet-button>
 
 <quiet-button appearance="outline" variant="secondary">
-  I'm outlined
+  I'm outline
 </quiet-button>
 
 <quiet-button appearance="outline" variant="destructive">
-  I'm outlined
+  I'm outline
 </quiet-button>
 ```
 
@@ -113,7 +113,7 @@ Set the `appearance` attribute to `text` to draw text buttons. Text buttons shar
 
 ```html {.example .flex-row}
 <quiet-button appearance="text">
-  I'm a text button
+  I'm text
 </quiet-button>
 ```
 

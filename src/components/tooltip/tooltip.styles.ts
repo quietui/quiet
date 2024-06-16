@@ -42,23 +42,44 @@ export default css`
   }
 
   #content {
+    background-color: var(--quiet-paper-color);
     border-radius: var(--quiet-border-radius);
-    background-color: var(--quiet-neutral-fill-louder);
-    color: var(--quiet-neutral-text-on-loud);
+    border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
+    box-shadow: var(--quiet-shadow-mid);
+    color: var(--quiet-neutral-text-on-soft);
     font-size: 0.875em;
     padding: 0.5em 0.75em;
     user-select: none;
     -webkit-user-select: none;
-    z-index: 3;
+    z-index: 2;
   }
 
   #arrow {
     position: absolute;
     width: calc(var(--arrow-diagonal-size) * 2);
     height: calc(var(--arrow-diagonal-size) * 2);
-    background-color: var(--quiet-neutral-fill-louder);
+    background-color: var(--quiet-paper-color);
+    border-right: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
+    border-bottom: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
+    box-shadow: var(--quiet-shadow-mid);
+    z-index: 3;
+  }
+
+  /* Rotate border position based on placement */
+  :host([data-placement^='top']) #arrow {
     rotate: 45deg;
-    z-index: 2;
+  }
+
+  :host([data-placement^='right']) #arrow {
+    rotate: 135deg;
+  }
+
+  :host([data-placement^='bottom']) #arrow {
+    rotate: 225deg;
+  }
+
+  :host([data-placement^='left']) #arrow {
+    rotate: 315deg;
   }
 
   #polygon {
@@ -78,9 +99,13 @@ export default css`
   @keyframes show {
     from {
       opacity: 0;
+      scale: 0.9;
+      translate: 0 0.25em;
     }
     to {
       opacity: 1;
+      scale: 1;
+      translate: 0 0;
     }
   }
 `;

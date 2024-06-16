@@ -229,6 +229,7 @@ export class QuietTooltip extends QuietElement {
     if (this.cleanup) {
       this.cleanup();
       this.cleanup = undefined;
+      this.removeAttribute('data-placement');
     }
   }
 
@@ -248,6 +249,9 @@ export class QuietTooltip extends QuietElement {
       placement: this.placement,
       middleware: [offset({ mainAxis: this.distance }), flip(), shift(), arrow({ element: this.arrow })]
     }).then(({ x, y, middlewareData, placement }) => {
+      // Set the determined placement for users to hook into and for transform origin styles
+      this.setAttribute('data-placement', placement);
+
       // Position it
       Object.assign(this.tooltip.style, {
         left: `${x}px`,

@@ -236,7 +236,7 @@ export class QuietButton extends QuietElement {
           xl: this.size === 'xl',
           // Modifiers
           pill: this.pill,
-          icon: this.iconLabel !== '',
+          icon: this.iconLabel?.length > 0,
           // States
           disabled: isDisabled,
           loading: isLoading

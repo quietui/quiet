@@ -51,6 +51,7 @@ document.addEventListener('keydown', event => {
     event.key === '\\' &&
     !event.composedPath().some(el => ['input', 'textarea'].includes(el?.tagName?.toLowerCase()))
   ) {
+    event.preventDefault();
     toggleTheme();
   }
 });

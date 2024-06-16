@@ -306,7 +306,9 @@ Dialogs come with a simple, minimal appearance. Feel free to customize them with
   quiet-dialog.action-sheet::part(body) {
     display: flex;
     flex-direction: column;
-    text-align: center;
+    width: 100%;
+    max-width: 500px;
+    align-self: center;
     gap: 1rem;
 }
 </style>

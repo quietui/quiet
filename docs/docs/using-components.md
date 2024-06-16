@@ -89,13 +89,13 @@ However, some components also have _named slots_. To insert content into a named
 
 ```html {.example .no-buttons}
 <quiet-button>
-  <quiet-icon slot="start" name="thumbs-up"></quiet-icon>
+  <quiet-icon slot="start" name="thumb-up"></quiet-icon>
   Like
 </quiet-button>
 
 <quiet-button>
   Like
-  <quiet-icon slot="start" name="thumbs-up"></quiet-icon>
+  <quiet-icon slot="start" name="thumb-up"></quiet-icon>
 </quiet-button>
 ```
 

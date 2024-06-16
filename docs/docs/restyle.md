@@ -171,22 +171,22 @@ export function thing(arg) {
 
 ### Details
 
-<details>
+<details name="example">
   <summary>Amet nisl purus</summary>
   <p>Scelerisque varius morbi enim nunc faucibus a pellentesque sit. Volutpat blandit aliquam etiam erat velit scelerisque. Non sodales neque sodales ut etiam sit amet.</p>
   <p>Cras tincidunt lobortis feugiat vivamus at augue eget arcu. Risus pretium quam vulputate dignissim suspendisse.</p>
 </details>
 
-<details>
+<details name="example">
   <summary>Scelerisque varius</summary>
   <p>Pretium vulputate sapien nec sagittis. Pretium fusce id velit ut. Justo eget magna fermentum iaculis eu non diam phasellus. Purus in mollis nunc sed.</p>
   <p>Turpis egestas pretium aenean pharetra magna ac placerat vestibulum. Lacus vestibulum sed arcu non odio euismod lacinia.</p>
 </details>
 
-<details>
+<details name="example">
   <summary>A diam sollicitudin</summary>
   <p>Enim diam vulputate ut pharetra sit amet aliquam id diam. Suscipit tellus mauris a diam maecenas sed enim ut sem. Sit amet mattis vulputate enim nulla.</p>
-  <p>Tristique et egestas quis ipsum. Volutpat lacus laoreet non curabitur gravida arcu. Fermentum posuere urna nec tincidunt. Mattis enim ut tellus elementum. Quam lacus suspendisse faucibus interdum posuere lorem ipsum.</p>
+  <p>Tristique et egestas quis ipsum. Volutpat lacus laoreet non curabitur gravida arcu. Fermentum posuere urna nec tincidunt. Mattis enim ut tellus elementum.
 </details>
 
 ### Definition Lists

@@ -74,7 +74,7 @@ export class QuietButton extends QuietElement {
    * To create an icon button, slot an icon into the button's default slot and set this attribute to an appropriate
    * label. The label won't be visible, but it will be available to assistive devices.
    */
-  @property({ attribute: 'icon-label' }) iconLabel = '';
+  @property({ attribute: 'icon-label' }) iconLabel: string;
 
   /** Draws the button in a pill shape. */
   @property({ type: Boolean, reflect: true }) pill = false;
@@ -95,7 +95,7 @@ export class QuietButton extends QuietElement {
    * Set this to render the button as an `<a>` tag instead of a `<button>`. The button will act as a link. When this is
    * set, form attributes and features will not work.
    */
-  @property() href = '';
+  @property() href: string;
 
   /** Opens the link in the specified target. Only works with link buttons. */
   @property() target: '_blank' | '_parent' | '_self' | '_top' | undefined;

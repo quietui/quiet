@@ -468,7 +468,7 @@ export class QuietTextField extends QuietElement {
           @keydown=${this.handleKeyDown}
         />
 
-        ${this.type === 'password' && this.value.length > 0 && !this.disabled && !this.readonly
+        ${this.type === 'password' && this.value?.length > 0 && !this.disabled && !this.readonly
           ? html`
               <button
                 id="password-toggle-button"
@@ -484,7 +484,7 @@ export class QuietTextField extends QuietElement {
               </button>
             `
           : ''}
-        ${this.clearable && this.value.length > 0 && !this.disabled && !this.readonly
+        ${this.clearable && this.value?.length > 0 && !this.disabled && !this.readonly
           ? html`
               <button
                 id="clear-button"

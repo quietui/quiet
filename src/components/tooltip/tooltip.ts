@@ -55,7 +55,7 @@ export class QuietTooltip extends QuietElement {
    * The id of of tooltip's anchor element. This must be an interactive/focusable element such as a button and it must
    * be in the same document as the tooltip.
    */
-  @property({ reflect: true }) for = '';
+  @property({ reflect: true }) for: string;
 
   /**
    * Shows or hides the tooltip.

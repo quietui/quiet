@@ -25,7 +25,7 @@ export class QuietTabPanel extends QuietElement {
   @property({ type: Boolean }) visible = false;
 
   /** The name of the tab panel. Used for assigning tabs to panels. */
-  @property({ reflect: true }) name = '';
+  @property({ reflect: true }) name: string;
 
   connectedCallback() {
     super.connectedCallback();

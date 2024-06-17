@@ -19,9 +19,11 @@ Quiet is maintained by [Cory LaViska](https://x.com/claviska), the creator of [S
 
 The truth is, Shoelace has matured a lot over the years. While that's a great thing for its users, as an artist, I've lost my canvas for creativity. I'm still committed to Shoelace and it has a very promising future — it has a full team now and we're building an amazing product out of it. But it's not my personal playground, anymore.
 
-**Enter Quiet, my creative outlet.**
+==**Enter Quiet, my creative outlet.**==
 
-A passion project. Something I'm building from scratch to explore new ideas and have fun with. It leans towards the bleeding edge of what's become possible with browsers in recent years. It uses modern features more than it probably should. It goes further than just components. Quiet isn't meant to compete with Shoelace — it's a testbed for me to try new things that may or may not work and improve my skills as a designer and developer.
+A passion project. Something I'm building from scratch to explore new ideas and have fun with. A place where I can satisfy my component addiction without breaking things for paying customers.
+
+Quiet leans towards the bleeding edge of what's become possible with browsers in recent years. It uses modern features more than it probably should. It goes further than just components. Quiet isn't meant to compete with Shoelace — it's a testbed for me to try new things that may or may not work and improve my skills as a designer and developer.
 
 As a result, you'll find that Quiet is rather opinionated. I carefully curate everything from the project's scope down to every individual line of code. Oftentimes, saying "no" is key to maintaining the quality of the library and my ability to steward it effectively.
 
@@ -29,7 +31,7 @@ If Quiet isn't exactly what you want, it's probably not a good choice for your p
 
 **But be warned…**
 
-Expect a long beta period. Expect breaking changes. Expect that issues and <abbr title="Pull requests">PRs</abbr> will be closed when they don't align with my vision for the project. Expect that features will land when I get around to them. Expect me to be very picky about what makes it into the library, the quality of code, and every other aspect of how the project is maintained. Expect that I won't always want to accept a PR because I consider it out of scope or want to take my own shot at it.
+Expect things to take time. Expect experimental things to break. Expect that issues and <abbr title="Pull requests">PRs</abbr> will be closed when they don't align with my vision for the project. Expect that features will land when I get around to them. ==Expect me to be very picky about what makes it into the library==, the quality of code, and every other aspect of how the project is maintained. Expect that I won't always want to accept a PR because I consider it out of scope or want to take my own shot at it.
 
 _With all due respect, I'm not building this for you. I'm building it for me._
 

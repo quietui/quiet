@@ -629,7 +629,7 @@ figure.float-end {
     font-size: 1rem;
     border-right: none;
     padding-inline: 1rem;
-    padding-block: 3.25rem 2rem;
+    padding-block: 3.25rem 1rem;
     translate: -100%;
     transition:
       var(--docs-sidebar-speed) translate cubic-bezier(0.33, 1, 0.68, 1),
@@ -704,6 +704,10 @@ figure.float-end {
 
 .docs-aside ul {
   margin-inline: 0;
+
+  &:last-child {
+    margin-block-end: 0;
+  }
 }
 
 .docs-aside ul ul {

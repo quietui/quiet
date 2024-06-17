@@ -29,6 +29,7 @@ I want Quiet to remain free for everyone to explore and learn from, but I don't 
   <img 
     src="/assets/images/public-sponsor.png" 
     alt="Cory's avatar"
+    class="not-mobile"
   >
 </div>
 </div>

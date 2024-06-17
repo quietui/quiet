@@ -1023,7 +1023,7 @@ quiet-callout {
   float: right;
   max-width: 10rem;
   height: auto;
-  border-radius: var(--quiet-border-radius);
+  border-radius: 50%;
   margin-inline-start: 2rem;
   margin-block-end: 1rem;
 

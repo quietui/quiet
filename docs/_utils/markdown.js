@@ -25,7 +25,7 @@ markdown.use(markdownItMark);
   markdown.use(markdownItContainer, type, {
     render: function (tokens, idx) {
       const variant = type === 'danger' ? 'destructive' : 'primary';
-      const icon = type === 'danger' ? 'flag' : 'sparkles';
+      const icon = type === 'danger' ? 'mood-nervous' : 'mood-happy';
       if (tokens[idx].nesting === 1) {
         return `
           <quiet-callout variant="${variant}" with-icon>

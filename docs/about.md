@@ -1,7 +1,7 @@
 ---
 title: About this project
 description: Learn more about the project and the person behind it.
-layout: page
+layout: page-outline
 section: about
 ---
 

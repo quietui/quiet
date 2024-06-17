@@ -140,6 +140,10 @@ html:not(.quiet-dark) .only-dark {
 /* Header logo */
 #header-logo {
   flex: 0 0 auto;
+
+  @media screen and (max-width: 959px) {
+    margin-inline-start: 0.5rem;
+  }
 }
 
 #header-logo a {
@@ -610,7 +614,7 @@ figure.float-end {
   #close-sidebar {
     position: absolute;
     top: 0.5rem;
-    left: 1rem;
+    left: 0.5rem;
   }
 
   #sidebar {
@@ -622,8 +626,9 @@ figure.float-end {
     width: var(--docs-sidebar-width-mobile);
     max-width: calc(100% - 2rem);
     height: 100%;
+    font-size: 1rem;
     border-right: none;
-    padding-inline: 1.5rem;
+    padding-inline: 1rem;
     padding-block: 3.25rem 2rem;
     translate: -100%;
     transition:
@@ -650,7 +655,7 @@ figure.float-end {
 
   #page {
     max-width: 70ch;
-    padding-inline: 1.5rem;
+    padding-inline: 1rem;
     margin: 0 auto;
   }
 

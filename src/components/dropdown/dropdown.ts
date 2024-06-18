@@ -92,7 +92,7 @@ export class QuietDropdown extends QuietElement {
     return [...this.querySelectorAll('quiet-dropdown-item')].filter(el => el.localName === 'quiet-dropdown-item');
   }
 
-  /** Get the slotted trigger button, a <button> element */
+  /** Get the slotted trigger button, a <quiet-button< or <button> element */
   private getTrigger(): HTMLButtonElement | QuietButton | null {
     return this.querySelector<QuietButton | HTMLButtonElement>('[slot="trigger"]');
   }
@@ -287,7 +287,7 @@ export class QuietDropdown extends QuietElement {
   };
 
   /** Handles pointer down events when the dropdown is open. */
-  private handleDocumentPointerDown = (event: KeyboardEvent) => {
+  private handleDocumentPointerDown = (event: PointerEvent) => {
     const path = event.composedPath();
 
     if (!path.includes(this)) {

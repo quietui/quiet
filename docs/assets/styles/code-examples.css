@@ -68,11 +68,11 @@
 
     &:first-of-type {
       border-inline-start: none;
-      border-start-start-radius: var(--quiet-border-radius);
+      border-end-start-radius: var(--quiet-border-radius);
     }
 
     &:last-of-type {
-      border-start-end-radius: var(--quiet-border-radius);
+      border-end-end-radius: var(--quiet-border-radius);
     }
 
     &:focus-visible {

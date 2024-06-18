@@ -102,9 +102,9 @@ export class QuietTooltip extends QuietElement {
     // Handle open
     if (changedProps.has('open')) {
       if (this.open) {
-        this.showTooltip();
+        this.show();
       } else {
-        this.hideTooltip();
+        this.hide();
       }
     }
 
@@ -165,7 +165,7 @@ export class QuietTooltip extends QuietElement {
   }
 
   /** Shows the tooltip. This should only be called from within updated(). */
-  private async showTooltip() {
+  private async show() {
     if (!this.anchor) {
       return;
     }
@@ -199,7 +199,7 @@ export class QuietTooltip extends QuietElement {
   }
 
   /** Hides the tooltip. This should only be called from within updated(). */
-  private async hideTooltip() {
+  private async hide() {
     const closeEvent = new QuietCloseEvent({ source: this });
     this.dispatchEvent(closeEvent);
     if (closeEvent.defaultPrevented) {

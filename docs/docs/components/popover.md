@@ -3,7 +3,7 @@ title: Popover
 layout: component
 ---
 
-Popovers appear when a corresponding anchor element is clicked. Unlike [tooltips](/docs/components/tooltip), popovers can contain interactive content such as links, buttons, and form controls. Popovers are not modal, so no overlay is shown when they're open. Popovers open when the anchor is activated and close when the user clicks outside of them or presses [[Escape]]. Only one popover may be open at a time.
+Popovers appear when a corresponding anchor element is clicked. Unlike [tooltips](/docs/components/tooltip), popovers can contain interactive content such as links, buttons, and form controls. They are not modal, so no overlay is shown when open. Popovers will close when the user clicks outside of them or presses [[Escape]]. Only one popover can be open at a time.
 
 ```html {.example}
 <quiet-popover for="popover__overview">

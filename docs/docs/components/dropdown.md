@@ -3,6 +3,8 @@ title: Dropdown
 layout: component
 ---
 
+Dropdown menus appear when their trigger element is clicked. They are not modal, so no overlay is shown when open. Dropdowns will close when the user selects an item, clicks outside of them, or presses [[Escape]]. Only one dropdown can be open at a time.
+
 ```html {.example}
 <quiet-dropdown>
   <quiet-button slot="trigger" variant="primary" with-caret>

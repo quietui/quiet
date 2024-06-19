@@ -56,7 +56,7 @@ This is the path forward. Together, we will continue to make accessible software
 <img class="whiskers only-light" src="/assets/images/whiskers/whiskers-whistling-light.svg" alt="Whiskers the mouse walking and whistling">
 <img class="whiskers only-dark" src="/assets/images/whiskers/whiskers-whistling-dark.svg" alt="Whiskers the mouse walking and whistling">
 
-## A special thanks
+## Special thanks
 
 I'd like to thank the following people and projects for making Quiet UI possible.
 

@@ -112,12 +112,12 @@ Create a split button by placing a [button](/docs/components/button) and a [drop
 
 ```html {.example}
 <quiet-button-group>
-  <quiet-button variant="primary">
+  <quiet-button>
     <quiet-icon name="share-2" slot="start"></quiet-icon>
     Share
   </quiet-button>
   <quiet-dropdown placement="bottom-end">
-    <quiet-button slot="trigger" variant="primary" icon-label="Save options" with-caret></quiet-button>
+    <quiet-button slot="trigger" icon-label="Save options" with-caret></quiet-button>
     <quiet-dropdown-item value="cats">Share with cats</quiet-dropdown-item>
     <quiet-dropdown-item value="dogs" disabled>Share with dogs</quiet-dropdown-item>
     <quiet-divider></quiet-divider>

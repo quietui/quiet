@@ -164,6 +164,7 @@ Checkboxes come with a simple, minimal appearance. Feel free to customize them w
     position: relative;
     border: solid 1px var(--quiet-neutral-stroke-soft);
     border-radius: var(--quiet-border-radius);
+    box-shadow: var(--quiet-shadow-softer);
 
     &::part(label) {
       display: flex;

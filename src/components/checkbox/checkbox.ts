@@ -33,6 +33,7 @@ import type { CSSResultGroup } from 'lit';
  * @csspart check-icon - The check icon, a `<quiet-icon>` element.
  * @csspart indeterminate-icon - The indeterminate icon, a `<quiet-icon>` element.
  *
+ * @cssstate checked - Applied when the checkbox is checked.
  * @cssstate disabled - Applied when the checkbox is disabled.
  * @cssstate focused - Applied when the checkbox has focus.
  * @cssstate user-valid - Applied when the checkbox is valid and the user has sufficiently interacted with it.
@@ -107,6 +108,11 @@ export class QuietCheckbox extends QuietElement {
   updated(changedProps: Map<string, unknown>) {
     // Always be updating
     this.updateValidity();
+
+    // Handle checked
+    if (changedProps.has('checked')) {
+      this.customStates.set('checked', this.checked);
+    }
 
     // Handle disabled
     if (changedProps.has('disabled')) {

@@ -41,11 +41,11 @@ const openTooltips = new Set<QuietTooltip>();
 export class QuietTooltip extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
+  private anchor: Element | null;
   private cleanup: ReturnType<typeof autoUpdate> | undefined;
-  private isAnchorFocused = false;
   private hoverInTimeout: number | undefined;
   private hoverOutTimeout: number | undefined;
-  private anchor: Element | null;
+  private isAnchorFocused = false;
 
   @query('#arrow') private arrow: HTMLElement;
   @query('#polygon') private polygon: HTMLElement;

@@ -138,3 +138,65 @@ However, these selectors will match even before the user has had a chance to fil
   }
 </style>
 ```
+
+### Styling checkboxes
+
+Checkboxes come with a simple, minimal appearance. Feel free to customize them with your own styles. Here's a quick way to turn a checkbox into a selectable tile.
+
+```html {.example .flex-row}
+<quiet-checkbox checked class="checkbox__tile">
+  <quiet-icon name="ball-basketball"></quiet-icon>
+  <span>Basketball</span>
+</quiet-checkbox>
+
+<quiet-checkbox class="checkbox__tile">
+  <quiet-icon name="ball-american-football"></quiet-icon>
+  <span>Football</span>
+</quiet-checkbox>
+
+<quiet-checkbox class="checkbox__tile">
+  <quiet-icon name="ping-pong"></quiet-icon>
+  <span>Ping-pong</span>
+</quiet-checkbox>
+
+<style>
+  .checkbox__tile {
+    position: relative;
+    border: solid 1px var(--quiet-neutral-stroke-soft);
+    border-radius: var(--quiet-border-radius);
+
+    &::part(label) {
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+      padding: 2rem 1.5rem .5rem 1.5rem;
+    }
+
+    &::part(visual-box) {
+      position: absolute;
+      top: 0.5rem;
+      left: 0.5rem;
+      border-radius: calc(var(--quiet-border-radius) - 1px);
+    }
+
+    quiet-icon {
+      font-size: 4rem;
+      stroke-width: 1px;
+    }
+
+    span {
+      font-size: .875rem;
+      color: var(--quiet-text-muted);
+    }
+
+    &:state(checked) {
+      background-color: var(--quiet-primary-fill-softer);
+      border-color: var(--quiet-primary-stroke-mid);
+    }
+  }
+</style>
+```
+
+:::warn
+It's not recommended to hide the checkbox unless your styles make it very clear to users that the control is checkable.
+:::

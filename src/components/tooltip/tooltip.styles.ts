@@ -43,7 +43,7 @@ export default css`
     background-color: var(--quiet-paper-color);
     border-radius: var(--quiet-border-radius);
     border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
-    box-shadow: var(--quiet-shadow-mid);
+    box-shadow: var(--quiet-shadow-soft);
     color: var(--quiet-neutral-text-on-soft);
     font-size: 0.875em;
     padding: 0.5em 0.75em;

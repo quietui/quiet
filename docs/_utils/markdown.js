@@ -21,11 +21,11 @@ markdown.use(markdownItIns);
 markdown.use(markdownItKbd);
 markdown.use(markdownItMark);
 
-['info', 'danger'].forEach(type => {
+['info', 'warn'].forEach(type => {
   markdown.use(markdownItContainer, type, {
     render: function (tokens, idx) {
-      const variant = type === 'danger' ? 'destructive' : 'primary';
-      const icon = type === 'danger' ? 'mood-nervous' : 'mood-happy';
+      const variant = type === 'warn' ? 'destructive' : 'primary';
+      const icon = type === 'warn' ? 'hand-stop' : 'sparkles';
       if (tokens[idx].nesting === 1) {
         return `
           <quiet-callout variant="${variant}" with-icon>

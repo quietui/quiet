@@ -74,7 +74,7 @@ export class QuietTabList extends QuietElement {
     }
   }
 
-  private handleTabsClick(event: PointerEvent) {
+  private handleTabsClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
     const tab = target.closest<QuietTab>('quiet-tab');
 

@@ -187,7 +187,7 @@ Checkboxes come with a simple, minimal appearance. Feel free to customize them w
 
     span {
       font-size: .875rem;
-      color: var(--quiet-text-muted);
+      color: var(--quiet-primary-text-on-soft);
     }
 
     &:state(checked) {

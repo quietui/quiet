@@ -64,6 +64,17 @@ export default css`
     z-index: 3;
   }
 
+  /* Prevent the popover from touching the edge of the viewport */
+  :host([data-placement^='top']) #dialog,
+  :host([data-placement^='bottom']) #dialog {
+    padding-inline: 0.5rem;
+  }
+
+  :host([data-placement^='left']) #dialog,
+  :host([data-placement^='right']) #dialog {
+    padding-block: 0.5rem;
+  }
+
   /* Rotate border position based on placement */
   :host([data-placement^='top']) {
     --show-x: 0;

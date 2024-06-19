@@ -150,6 +150,30 @@ export class QuietPopover extends QuietElement {
     }
   }
 
+  /** When a key is pressed when the popover is open. */
+  private handleDocumentKeyDown = (event: KeyboardEvent) => {
+    // Hide the popover when escape is pressed
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      this.open = false;
+      this.anchor?.focus();
+    }
+  };
+
+  private handleDocumentPointerDown = (event: PointerEvent) => {
+    const target = event.target as HTMLElement;
+
+    // Ignore clicks on the anchor so it will toggle the popover in that handler
+    if (this.anchor && event.composedPath().includes(this.anchor)) {
+      return;
+    }
+
+    // Detect when clicks occur outside the popover
+    if (target.closest('quiet-popover') !== this) {
+      this.open = false;
+    }
+  };
+
   /** Shows the popover. This should only be called from within updated(). */
   private async show() {
     if (!this.anchor) {
@@ -251,30 +275,6 @@ export class QuietPopover extends QuietElement {
       }
     });
   }
-
-  /** When a key is pressed when the popover is open. */
-  private handleDocumentKeyDown = (event: KeyboardEvent) => {
-    // Hide the popover when escape is pressed
-    if (event.key === 'Escape') {
-      event.preventDefault();
-      this.open = false;
-      this.anchor?.focus();
-    }
-  };
-
-  private handleDocumentPointerDown = (event: PointerEvent) => {
-    const target = event.target as HTMLElement;
-
-    // Ignore clicks on the anchor so it will toggle the popover in that handler
-    if (this.anchor && event.composedPath().includes(this.anchor)) {
-      return;
-    }
-
-    // Detect when clicks occur outside the popover
-    if (target.closest('quiet-popover') !== this) {
-      this.open = false;
-    }
-  };
 
   render() {
     return html`

@@ -42,7 +42,7 @@ export default css`
   #content {
     background-color: var(--quiet-paper-color);
     border-radius: var(--quiet-border-radius);
-    border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
+    border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
     box-shadow: var(--quiet-shadow-soft);
     color: var(--quiet-neutral-text-on-soft);
     font-size: 0.875em;
@@ -57,8 +57,8 @@ export default css`
     width: calc(var(--arrow-diagonal-size) * 2);
     height: calc(var(--arrow-diagonal-size) * 2);
     background-color: var(--quiet-paper-color);
-    border-right: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
-    border-bottom: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
+    border-right: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
+    border-bottom: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
     z-index: 3;
   }
 

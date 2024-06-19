@@ -48,7 +48,7 @@ export default css`
     max-width: var(--max-width);
     background-color: var(--quiet-paper-color);
     border-radius: var(--quiet-border-radius);
-    border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
+    border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
     box-shadow: var(--quiet-shadow-mid);
     padding: 1rem;
     z-index: 2;
@@ -59,8 +59,8 @@ export default css`
     width: calc(var(--arrow-diagonal-size) * 2);
     height: calc(var(--arrow-diagonal-size) * 2);
     background-color: var(--quiet-paper-color);
-    border-right: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
-    border-bottom: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
+    border-right: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
+    border-bottom: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
     z-index: 3;
   }
 

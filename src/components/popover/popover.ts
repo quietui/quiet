@@ -139,7 +139,7 @@ export class QuietPopover extends QuietElement {
     this.open = !this.open;
   };
 
-  private handleDialogClick(event: PointerEvent) {
+  private handleDialogClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
     const button = target.closest('[data-popover="close"]');
 
@@ -160,10 +160,10 @@ export class QuietPopover extends QuietElement {
     }
   };
 
-  private handleDocumentPointerDown = (event: PointerEvent) => {
+  private handleDocumentClick = (event: PointerEvent) => {
     const target = event.target as HTMLElement;
 
-    // Ignore clicks on the anchor so it will toggle the popover in that handler
+    // Ignore clicks on the anchor so it will be closed by the anchor's click handler
     if (this.anchor && event.composedPath().includes(this.anchor)) {
       return;
     }
@@ -195,7 +195,7 @@ export class QuietPopover extends QuietElement {
     this.open = true;
     openPopovers.add(this);
     document.addEventListener('keydown', this.handleDocumentKeyDown);
-    document.addEventListener('pointerdown', this.handleDocumentPointerDown);
+    document.addEventListener('click', this.handleDocumentClick);
     this.dialog.classList.add('visible');
     this.cleanup = autoUpdate(this.anchor, this.dialog, () => this.reposition());
 
@@ -228,7 +228,7 @@ export class QuietPopover extends QuietElement {
     this.open = false;
     openPopovers.delete(this);
     document.removeEventListener('keydown', this.handleDocumentKeyDown);
-    document.removeEventListener('pointerdown', this.handleDocumentPointerDown);
+    document.removeEventListener('click', this.handleDocumentClick);
 
     if (this.dialog.classList.contains('visible')) {
       await animateWithClass(this.dialog, 'hide');

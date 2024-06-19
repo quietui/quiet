@@ -135,6 +135,7 @@ export class QuietPopover extends QuietElement {
   }
 
   private handleAnchorClick = () => {
+    // Clicks on the anchor should toggle the popover
     this.open = !this.open;
   };
 
@@ -264,8 +265,8 @@ export class QuietPopover extends QuietElement {
   private handleDocumentPointerDown = (event: PointerEvent) => {
     const target = event.target as HTMLElement;
 
-    // Ignore anchor clicks when the popover is open
-    if (this.anchor !== null && event.composedPath().includes(this.anchor)) {
+    // Ignore clicks on the anchor so it will toggle the popover in that handler
+    if (this.anchor && event.composedPath().includes(this.anchor)) {
       return;
     }
 

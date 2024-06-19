@@ -996,6 +996,7 @@ quiet-callout {
 }
 
 .table-name code,
+.table-description code,
 .table-attribute code,
 .table-type code,
 .table-selector code,

@@ -31,7 +31,7 @@ Scripts included in the fetched HTML will not be executed by default. If you tru
 <quiet-include allow-scripts src="/assets/examples/include-scripts.html"></quiet-include>
 ```
 
-:::danger
+:::warn
 Using this option can be dangerous! Make sure you trust the included content, otherwise your app may become vulnerable to XSS exploits!
 :::
 

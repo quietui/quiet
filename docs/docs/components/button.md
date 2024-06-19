@@ -193,7 +193,7 @@ Create a toggle button by adding the `toggle="off"` attribute. To make it active
 </quiet-button>
 ```
 
-:::danger
+:::warn
 Toggle buttons cannot be used with link buttons or submit buttons.
 :::
 

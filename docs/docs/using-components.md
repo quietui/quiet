@@ -129,7 +129,7 @@ Many components emit custom events when certain things happen. For example, a [`
 
 You can also listen to native events on custom elements. However, it's important to understand that native events occur _inside_ the component's shadow DOM and are [retargeted to the host](https://javascript.info/shadow-dom-events), so they might not work the exact way you expect. When available, it's always better to use a custom event instead of a native one.
 
-:::danger
+:::warn
 Event bubbling is a common pitfall. In the same way native HTML elements all dispatch a `click` event, Quiet components may dispatch custom events that aren't unique to the component. [Learn more about custom event bubbling.](https://www.abeautifulsite.net/posts/custom-event-names-and-the-bubbling-problem/)
 :::
 
@@ -164,7 +164,7 @@ Speaking of internals…it's important to look at the documentation for each com
 
 By design, some styles, such as font size and family, will inherit _through_ the shadow DOM. However, the majority of them do not. Thus, you cannot  use standard CSS selectors to target a custom element's internals. Instead, you need to use one of the following APIs.
 
-:::danger
+:::warn
 Please read this section thoroughly if you've never styled custom elements before. It's a common frustration because it involves CSS features you may not have used before.
 :::
 

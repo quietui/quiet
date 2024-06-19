@@ -181,7 +181,7 @@ registerIconLibrary('system', {
 });
 ```
 
-:::danger
+:::warn
 If you choose to change the system library, you must reimplement _all_ of the system icons found in `src/utilities/icon-library.ts`. Otherwise, icons will be absent from the components that use them.
 :::
 

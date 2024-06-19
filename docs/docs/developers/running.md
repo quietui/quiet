@@ -16,7 +16,7 @@ cd quiet
 npm install
 ```
 
-:::danger
+:::warn
 Please read the [contribution guidelines](/docs/developers/contributing) before submitting a pull request.
 :::
 

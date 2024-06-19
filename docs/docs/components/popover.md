@@ -33,7 +33,7 @@ Popover anchors should be `<quiet-button>` or `<button>` elements. Use the `for`
 <quiet-button id="popover__anchor-button">Show popover</quiet-button>
 
 <quiet-popover for="popover__anchor-button">
-  I'm just a regular ol' popover anchored to a button.
+  I'm just a popover anchored to a button.
 </quiet-popover>
 
 <br><br>
@@ -41,7 +41,7 @@ Popover anchors should be `<quiet-button>` or `<button>` elements. Use the `for`
 <button id="popover__anchor-native-button">Show popover</button>
 
 <quiet-popover for="popover__anchor-native-button">
-  I'm just a regular ol' popover anchored to a native button.
+  I'm just a popover anchored to a native button.
 </quiet-popover>
 ```
 

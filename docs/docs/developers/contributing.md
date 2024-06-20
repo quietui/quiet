@@ -147,7 +147,7 @@ Elements that hold grouped content and require a defined border, such as cards, 
 }
 ```
 
-Tooltip-like elements, such as the tooltip itself and the copy button's feedback, should use the following border and background styles along with the appropriate shadow. Note the more defined border, which is used to draw attention to these smaller elements.
+Smaller popover elements that dismiss on their own, such as tooltips and the copy button's feedback, should use the following border and background styles along with the appropriate shadow. Note the more defined border, which is used to draw attention to these smaller elements.
 
 ```css
 .tooltip {

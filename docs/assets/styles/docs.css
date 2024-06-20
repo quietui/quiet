@@ -613,8 +613,8 @@ figure.float-end {
 
   #close-sidebar {
     position: absolute;
-    top: 0.5rem;
-    left: 0.5rem;
+    top: 0.75rem;
+    right: 0.75rem;
   }
 
   #sidebar {
@@ -628,8 +628,8 @@ figure.float-end {
     height: 100%;
     font-size: 1rem;
     border-right: none;
-    padding-inline: 1rem;
-    padding-block: 3.25rem 1rem;
+    padding-inline: 1.5rem;
+    padding-block: 1rem;
     translate: -100%;
     transition:
       var(--docs-sidebar-speed) translate cubic-bezier(0.33, 1, 0.68, 1),

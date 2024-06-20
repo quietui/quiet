@@ -76,6 +76,13 @@ window.addEventListener('turbo:render', () => {
   hideSidebar();
 });
 
+// Close when clicking outside the sidebar
+document.addEventListener('pointerup', event => {
+  if (isSidebarOpen && !event.target.closest('#sidebar')) {
+    hideSidebar();
+  }
+});
+
 // Close when pressing escape
 document.addEventListener('keydown', event => {
   if (event.key === 'Escape' && isSidebarOpen) {

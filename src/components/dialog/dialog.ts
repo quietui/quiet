@@ -226,6 +226,13 @@ document.addEventListener('click', (event: PointerEvent) => {
   }
 });
 
+//
+// NOTE: This is required for light dismiss to work in mobile Safari
+//  See https://bugs.webkit.org/show_bug.cgi?id=267688
+//
+// prettier-ignore
+document.addEventListener('pointerdown', () => { /* do nothing */ });
+
 declare global {
   interface HTMLElementTagNameMap {
     'quiet-dialog': QuietDialog;

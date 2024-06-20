@@ -14,7 +14,7 @@ export default css`
     left: 0;
     background-color: var(--quiet-paper-color);
     border-radius: var(--quiet-border-radius);
-    border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
+    border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
     box-shadow: var(--quiet-shadow-soft);
     color: var(--quiet-neutral-text-on-soft);
     font-size: 0.75rem;

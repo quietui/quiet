@@ -135,3 +135,23 @@ Attribute reflection in custom elements is [an interesting challenge](https://ww
 - All `with-` attributes must reflect.
 - In form controls, the `name` and `required` attributes must always reflect, like the platform.
 - States such as `disabled`, `checked`, `active`, etc. must not reflect.
+
+### Styling elements with borders
+
+Elements that hold grouped content and require a defined border, such as cards, popovers, and dropdown menus, should use the following border and background styles along with the appropriate shadow.
+
+```css
+.card {
+  background-color: var(--quiet-paper-color);
+  border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
+}
+```
+
+Tooltip-like elements, such as the tooltip itself and the copy button's feedback, should use the following border and background styles along with the appropriate shadow. Note the more defined border, which is used to draw attention to these smaller elements.
+
+```css
+.tooltip {
+  background-color: var(--quiet-paper-color);
+  border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
+}
+```

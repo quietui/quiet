@@ -12,10 +12,11 @@ export default css`
     width: fit-content;
     top: 0;
     left: 0;
-    background-color: var(--quiet-neutral-fill-louder);
-    border: none;
+    background-color: var(--quiet-paper-color);
     border-radius: var(--quiet-border-radius);
-    color: var(--quiet-neutral-text-on-loud);
+    border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
+    box-shadow: var(--quiet-shadow-soft);
+    color: var(--quiet-neutral-text-on-soft);
     font-size: 0.75rem;
     font-weight: var(--quiet-font-weight-semibold);
     text-align: center;

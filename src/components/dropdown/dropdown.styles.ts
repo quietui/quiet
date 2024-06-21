@@ -16,7 +16,7 @@ export default css`
     width: max-content;
     color: var(--quiet-neutral-text-on-soft);
     background-color: var(--quiet-paper-color);
-    border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
+    border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
     border-radius: var(--quiet-border-radius);
     box-shadow: var(--quiet-shadow-mid);
     user-select: none;

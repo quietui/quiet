@@ -51,8 +51,8 @@ Add the `with-footer` attribute and place elements into the `footer` slot to add
 <quiet-card with-footer style="max-width: 340px;">
   Playful cats are known for their lively and energetic nature, often engaging in interactive games and activities that stimulate their physical and mental well-being.
 
-  <quiet-button slot="footer" variant="primary">Learn more</quiet-button>
-  <quiet-button slot="footer">Continue reading</quiet-button>
+  <quiet-button slot="footer" variant="primary">Continue reading</quiet-button>
+  <quiet-button slot="footer">More info</quiet-button>
 </quiet-card>
 ```
 

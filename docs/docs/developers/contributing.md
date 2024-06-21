@@ -138,7 +138,7 @@ Attribute reflection in custom elements is [an interesting challenge](https://ww
 
 ### Styling elements with borders
 
-Elements that hold grouped content and require a defined border, such as cards, popovers, and dropdown menus, should use the following border and background styles along with the appropriate shadow.
+On-page elements that hold grouped content inside a border, such as cards, should use the following border and background styles along with an appropriate shadow.
 
 ```css
 .card {
@@ -147,7 +147,7 @@ Elements that hold grouped content and require a defined border, such as cards, 
 }
 ```
 
-Smaller popover elements that dismiss on their own, such as tooltips and the copy button's feedback, should use the following border and background styles along with the appropriate shadow. Note the more defined border, which is used to draw attention to these smaller elements.
+Above-page elements, such as popovers, tooltips, and the copy button's feedback, should have a more prominent border so they can be seen easily. These elements should use the following border and background styles along with an appropriate shadow.
 
 ```css
 .tooltip {

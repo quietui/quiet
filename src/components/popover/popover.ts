@@ -92,7 +92,7 @@ export class QuietPopover extends QuietElement {
   updated(changedProps: Map<string, unknown>) {
     // Handle open
     if (changedProps.has('open')) {
-      if (this.open) {
+      if (this.open && !this.dialog.classList.contains('visible')) {
         this.show();
       } else {
         this.hide();

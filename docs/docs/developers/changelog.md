@@ -8,6 +8,37 @@ You should feel comfortable using any component marked [stable] in production. S
 
 This project is [not anchored to a major version](https://www.abeautifulsite.net/posts/anchoring-software-to-major-versions/). Breaking changes will be made when necessary and a new major version will be released to reflect that. When breaking changes do happen, they'll be clearly marked with [breaking] so you can upgrade with minimal friction. 
 
+<form 
+  action="https://www.createsend.com/t/subscribeerror?description=" 
+  method="post" 
+  class="whiskers-email" 
+  data-id="A61C50BEC994754B1D79C5819EC1255C1B31244D333BF1BA7C7110C86FE7CF7856BEBB1CE5FB5F305E491256458DDB0D84C7F6E7E798917706F78CD30AA744D5"
+>
+  <img class="only-light" src="/assets/images/whiskers/whiskers-banner-light.svg" alt="Whiskers holding a banner in front of himself">
+  <img class="only-dark" src="/assets/images/whiskers/whiskers-banner-dark.svg" alt="Whiskers holding a banner in front of himself">
+  <div class="whiskers-email-controls">
+    <quiet-text-field
+      name="cm-tydiudd-tydiudd" 
+      type="email" 
+      label="Email"
+      maxlength="200"
+      placeholder="you@example.com" 
+      appearance="unstyled"
+      autocomplete="Email"
+      required 
+    ></quiet-text-field>    
+    <quiet-button icon-label="Sign up" type="submit" variant="primary">
+      <quiet-icon name="send"></quiet-icon>
+    </quiet-button>
+  </div>
+  <small>
+    Get notified about new releases!<br>
+    No spam. Easy unsubscribe.
+  </small>
+</form>
+
+---
+
 ## 1.0.0-beta.1
 
 - Initial release

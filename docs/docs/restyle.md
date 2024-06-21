@@ -186,7 +186,7 @@ export function thing(arg) {
 <details name="example">
   <summary>A diam sollicitudin</summary>
   <p>Enim diam vulputate ut pharetra sit amet aliquam id diam. Suscipit tellus mauris a diam maecenas sed enim ut sem. Sit amet mattis vulputate enim nulla.</p>
-  <p>Tristique et egestas quis ipsum. Volutpat lacus laoreet non curabitur gravida arcu. Fermentum posuere urna nec tincidunt. Mattis enim ut tellus elementum.
+  <p>Tristique et egestas quis ipsum. Volutpat lacus laoreet non curabitur gravida arcu. Fermentum posuere urna nec tincidunt. Mattis enim ut tellus elementum.</p>
 </details>
 
 ### Definition Lists

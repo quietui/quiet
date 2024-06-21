@@ -476,15 +476,21 @@ quiet-badge.experimental {
   max-width: fit-content;
 }
 
-.anchor-heading a {
-  visibility: hidden;
-  text-decoration: none;
-}
-
 @media (hover: hover) {
+  .anchor-heading a {
+    visibility: hidden;
+    text-decoration: none;
+  }
+
   .anchor-heading:hover a {
     visibility: visible;
     padding: 0 0.125em;
+  }
+}
+
+@media not (hover: hover) {
+  .anchor-heading a {
+    display: none;
   }
 }
 

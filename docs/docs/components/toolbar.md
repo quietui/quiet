@@ -21,9 +21,9 @@ By grouping related [buttons](/docs/components/button) and [button groups](/docs
   </quiet-button-group>
 
   <quiet-button-group>
-    <quiet-button  icon-label="Align left"><quiet-icon name="align-left"></quiet-icon></quiet-button>
-    <quiet-button  icon-label="Align center"><quiet-icon name="align-center"></quiet-icon></quiet-button>
-    <quiet-button  icon-label="Align right"><quiet-icon name="align-right"></quiet-icon></quiet-button>
+    <quiet-button icon-label="Align left"><quiet-icon name="align-left"></quiet-icon></quiet-button>
+    <quiet-button icon-label="Align center"><quiet-icon name="align-center"></quiet-icon></quiet-button>
+    <quiet-button icon-label="Align right"><quiet-icon name="align-right"></quiet-icon></quiet-button>
     <quiet-button icon-label="Justify"><quiet-icon name="align-justified"></quiet-icon></quiet-button>
   </quiet-button-group>
 </quiet-toolbar>

@@ -49,14 +49,13 @@ export class QuietElement extends LitElement {
     event.stopImmediatePropagation();
 
     if (event instanceof InputEvent) {
-      newEvent = new InputEvent('input', {
-        bubbles: event.bubbles,
-        cancelable: event.cancelable,
-        inputType: event.inputType,
-        data: event.data
-      });
+      newEvent = new InputEvent(event.type, { ...event });
+    } else if (event instanceof MouseEvent) {
+      newEvent = new MouseEvent(event.type, { ...event });
+    } else if (event instanceof PointerEvent) {
+      newEvent = new PointerEvent(event.type, { ...event });
     } else {
-      newEvent = new Event(event.type, { bubbles: event.bubbles, cancelable: event.cancelable });
+      newEvent = new Event(event.type, { ...event });
     }
 
     this.dispatchEvent(newEvent);

@@ -155,3 +155,11 @@ Above-page elements, such as popovers, tooltips, and the copy button's feedback,
   border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
 }
 ```
+
+Modal elements that feature a visible backdrop, such as dialogs, should not have a border. These elements should use the following background styles along with an appropriate shadow.
+
+```css
+.dialog {
+  background: var(--quiet-paper-color);
+}
+```

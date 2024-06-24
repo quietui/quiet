@@ -81,16 +81,6 @@ export class QuietRelativeTime extends QuietElement {
     // Calculate iso time
     const isoDate = targetDate.toISOString();
 
-    // Calculate title time
-    const titleDate = this.localize.date(targetDate, {
-      month: 'long',
-      year: 'numeric',
-      day: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric',
-      timeZoneName: 'short'
-    });
-
     // Calculate relative time
     const difference = targetDate.getTime() - currentDate.getTime();
     const { unit, value } = UNITS.find(u => Math.abs(difference) < u.max)!;

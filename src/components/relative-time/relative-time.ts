@@ -88,8 +88,7 @@ export class QuietRelativeTime extends QuietElement {
       numeric: this.numeric,
       style: this.format
     });
-
-    return html` <time datetime=${isoDate} title=${relativeDate}>${relativeDate}</time> `;
+    return html` <time datetime=${isoDate}>${relativeDate}</time> `;
   }
 }
 

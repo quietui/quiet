@@ -109,6 +109,16 @@ Form controls must be form-associated custom elements and should follow patterns
 
 Form controls must prevent and relay all `change` and `input` events using `this.relayNativeEvent()`. Doing so will allow frameworks to bind to Quiet form controls just like native ones.
 
+### Component sizing and scaling
+
+Components can be sized one of three ways.
+
+1. Relative to the current font size (e.g. badge, callout, icon, spinner, tooltip)
+2. Based on a `size` attribute (e.g. form controls)
+3. Based on a CSS custom property (e.g. avatar, progress)
+
+By default, components should scale relative to the current font size unless they're a form control or sizing makes more sense to be done with a custom property.
+
 ### Dependencies
 
 A component should import and mark another component as a dependency when a) the dependency is rendered as part of the host element's shadow root or b) the dependency must be slotted in for the host element to function. For example, `<quiet-dropdown-item>` is a dependency of `<quiet-dropdown>`, even though the user slots it in.

@@ -15,6 +15,7 @@ export default css`
     font-size: 0.9375em;
     font-weight: var(--quiet-font-weight-semibold);
     color: var(--quiet-primary-text-colorful);
+    line-height: 1;
     text-decoration: inherit;
 
     &:focus {

@@ -62,7 +62,7 @@ Add an icon to a callout using the `icon` slot. Works best with `<quiet-icon>` a
 
 ### Changing the size
 
-Callouts are sized relative to the current font size. To change their size, apply `font-size` to the button or an ancestor element.
+Callouts are sized relative to the current font size. To change their size, apply `font-size` to the callout or an ancestor element.
 
 ```html {.example}
 <quiet-callout variant="primary" with-icon style="font-size: 1.25rem;">

@@ -343,8 +343,7 @@ export class QuietTooltip extends QuietElement {
 
   /** When the pointer moves while the tooltip is visible. */
   private handleDocumentPointerMove = (event: PointerEvent) => {
-    if (!this.anchor) return;
-    if (this.isAnchorFocused) return;
+    if (!this.anchor || this.isAnchorFocused) return;
 
     const isHoveringAnchor = event.composedPath().includes(this.anchor);
     const isHoveringTooltip = event.composedPath().includes(this.tooltip);

@@ -3,7 +3,7 @@ title: Breadcrumb
 layout: component
 ---
 
-Breadcrumbs follow the [ARIA APG breadcrumb pattern](https://www.w3.org/WAI/ARIA/apg/patterns/breadcrumb/examples/breadcrumb/) for accessibility. The breadcrumb is a labeled for assistive devices and breadcrumb items are announced as links. The breadcrumb corresponding to the current page is styled differently, but remains a functional link. Separators are presentational and will not be announced by screen readers.
+Breadcrumbs follow the [ARIA APG breadcrumb pattern](https://www.w3.org/WAI/ARIA/apg/patterns/breadcrumb/examples/breadcrumb/) for accessibility. The breadcrumb is labeled for assistive devices and breadcrumb items are announced as links. The breadcrumb corresponding to the current page is styled differently, but remains a functional link. Separators are presentational and will not be announced by screen readers.
 
 ```html {.example}
 <quiet-breadcrumb>

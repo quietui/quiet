@@ -7,6 +7,7 @@ const translation: Translation = {
   $name: 'Deutsch',
   $dir: 'ltr',
 
+  breadcrumbs: 'Brotkrumens',
   clearEntry: 'Eingabe löschen',
   close: 'Schließen',
   copied: 'Kopiert',

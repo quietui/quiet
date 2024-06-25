@@ -223,7 +223,7 @@ To create icon-only breadcrumb item, slot in an icon and a visually hidden label
 You can create a collapsed breadcrumb item by adding a [dropdown](/docs/components/dropdown) with additional options. In this case, omit the `href` attribute so the dropdown won't be wrapped with a link.
 
 ```html {.example}
-<quiet-breadcrumb>
+<quiet-breadcrumb id="breadcrumb__collapsed">
   <quiet-breadcrumb-item href="https://example.com/">
     Home
   </quiet-breadcrumb-item>
@@ -237,10 +237,10 @@ You can create a collapsed breadcrumb item by adding a [dropdown](/docs/componen
       <quiet-button slot="trigger" appearance="text" icon-label="More pages" size="sm">
         <quiet-icon name="dots"></quiet-icon>
       </quiet-button>
-      <quiet-dropdown-item>Birds</quiet-dropdown-item>
-      <quiet-dropdown-item>Cats</quiet-dropdown-item>
-      <quiet-dropdown-item>Dogs</quiet-dropdown-item>
-      <quiet-dropdown-item>All animals</quiet-dropdown-item>
+      <quiet-dropdown-item value="https://example.com/pets/birds">Birds</quiet-dropdown-item>
+      <quiet-dropdown-item value="https://example.com/pets/cats">Cats</quiet-dropdown-item>
+      <quiet-dropdown-item value="https://example.com/pets/dogs">Dogs</quiet-dropdown-item>
+      <quiet-dropdown-item value="https://example.com/pets/all">All animals</quiet-dropdown-item>
     </quiet-dropdown>
   </quiet-breadcrumb-item>
 
@@ -248,6 +248,14 @@ You can create a collapsed breadcrumb item by adding a [dropdown](/docs/componen
     Favorites
   </quiet-breadcrumb-item>
 </quiet-breadcrumb>
+
+<script>
+  const breadcrumb = document.getElementById('breadcrumb__collapsed');
+
+  breadcrumb.addEventListener('quiet-select', event => {
+    location.href = event.detail.selection.value;
+  });
+</script>
 ```
 
 ### Styling breadcrumbs

@@ -251,7 +251,7 @@ Note that we use `tabindex="-1"` on the close button to prevent it from interfer
 
 ### Styling tab lists
 
-Tab lists come with a simple, minimal appearance. Feel free to customize them with your own styles. Here are some variations, for inspiration.
+Tab lists come with a simple, minimal appearance. Feel free to customize them with your own styles.
 
 ```html {.example}
 <!-- Cards -->

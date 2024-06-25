@@ -45,14 +45,17 @@ export class QuietIcon extends QuietElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.setAttribute('role', 'img');
-    this.setAttribute('aria-hidden', 'true');
     connectIcon(this);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     disconnectIcon(this);
+  }
+
+  firstUpdated() {
+    this.setAttribute('role', 'img');
+    this.setAttribute('aria-hidden', 'true');
   }
 
   async updated(changedProps: Map<string, unknown>) {

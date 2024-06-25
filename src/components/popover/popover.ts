@@ -80,9 +80,7 @@ export class QuietPopover extends QuietElement {
   /** The distance of the popover from its anchor. */
   @property({ type: Number }) distance = 8;
 
-  connectedCallback() {
-    super.connectedCallback();
-
+  firstUpdated() {
     // Make sure the host element has an id
     if (!this.id) {
       this.id = createId('quiet-popover-');

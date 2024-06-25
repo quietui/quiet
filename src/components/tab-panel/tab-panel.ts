@@ -27,8 +27,7 @@ export class QuietTabPanel extends QuietElement {
   /** The name of the tab panel. Used for assigning tabs to panels. */
   @property({ reflect: true }) name: string;
 
-  connectedCallback() {
-    super.connectedCallback();
+  firstUpdated() {
     this.setAttribute('role', 'tabpanel');
   }
 

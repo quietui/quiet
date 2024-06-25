@@ -24,8 +24,7 @@ export class QuietBreadcrumb extends QuietElement {
 
   private localize = new Localize(this);
 
-  connectedCallback() {
-    super.connectedCallback();
+  firstUpdated() {
     this.setAttribute('role', 'list');
     this.setAttribute('aria-label', this.localize.term('breadcrumbs'));
   }

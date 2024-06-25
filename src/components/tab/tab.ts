@@ -34,8 +34,7 @@ export class QuietTab extends QuietElement {
   /** Disables the tab, preventing it from being activated. */
   @property({ type: Boolean }) disabled = false;
 
-  connectedCallback() {
-    super.connectedCallback();
+  firstUpdated() {
     this.setAttribute('role', 'tab');
     this.setAttribute('aria-selected', 'false');
     this.setAttribute('aria-disabled', 'false');

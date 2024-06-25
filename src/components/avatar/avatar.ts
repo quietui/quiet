@@ -40,8 +40,7 @@ export class QuietAvatar extends QuietElement {
   /** The URL of an image to display in the avatar. Non-square images will be clipped to fit. */
   @property() image?: string;
 
-  connectedCallback() {
-    super.connectedCallback();
+  firstUpdated() {
     this.setAttribute('role', 'img');
     this.setAttribute('aria-label', this.label ?? '');
   }

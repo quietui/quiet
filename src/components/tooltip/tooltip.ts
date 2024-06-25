@@ -89,9 +89,7 @@ export class QuietTooltip extends QuietElement {
   /** The number of milliseconds to wait before closing the tooltip when hovering out. */
   @property({ attribute: 'close-delay', type: Number }) closeDelay = 100;
 
-  connectedCallback() {
-    super.connectedCallback();
-
+  firstUpdated() {
     // Make sure the host element has an id
     if (!this.id) {
       this.id = createId('quiet-tooltip-');

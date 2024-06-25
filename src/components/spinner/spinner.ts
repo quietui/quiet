@@ -23,8 +23,7 @@ export class QuietSpinner extends QuietElement {
 
   private localize = new Localize(this);
 
-  connectedCallback() {
-    super.connectedCallback();
+  firstUpdated() {
     this.setAttribute('role', 'progressbar');
     this.setAttribute('aria-label', this.localize.term('loading'));
   }

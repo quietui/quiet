@@ -30,8 +30,7 @@ import type { CSSResultGroup } from 'lit';
 export class QuietDropdownItem extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
-  connectedCallback() {
-    super.connectedCallback();
+  firstUpdated() {
     this.setAttribute('tabindex', '-1');
   }
 

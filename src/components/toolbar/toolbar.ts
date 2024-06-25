@@ -28,8 +28,7 @@ export class QuietToolbar extends QuietElement {
   /** The toolbar's orientation. This changes which arrow keys are used to select adjacent buttons. */
   @property({ reflect: true }) orientation: 'horizontal' | 'vertical' = 'horizontal';
 
-  connectedCallback() {
-    super.connectedCallback();
+  firstUpdated() {
     this.setAttribute('role', 'toolbar');
   }
 

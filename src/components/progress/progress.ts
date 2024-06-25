@@ -50,8 +50,7 @@ export class QuietProgress extends QuietElement {
    */
   @property({ type: Boolean, reflect: true }) indeterminate = false;
 
-  connectedCallback() {
-    super.connectedCallback();
+  firstUpdated() {
     this.setAttribute('role', 'progressbar');
   }
 

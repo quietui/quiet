@@ -23,8 +23,7 @@ export class QuietDivider extends QuietElement {
   /** Sets the divider's orientation. */
   @property({ reflect: true }) orientation: 'horizontal' | 'vertical' = 'horizontal';
 
-  connectedCallback() {
-    super.connectedCallback();
+  firstUpdated() {
     this.setAttribute('role', 'separator');
   }
 

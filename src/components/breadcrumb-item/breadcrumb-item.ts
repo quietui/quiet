@@ -45,8 +45,7 @@ export class QuietBreadcrumbItem extends QuietElement {
    */
   @property() rel = 'noreferrer noopener';
 
-  connectedCallback() {
-    super.connectedCallback();
+  firstUpdated() {
     this.setAttribute('role', 'listitem');
   }
 

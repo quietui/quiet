@@ -5,10 +5,10 @@ export default css`
     display: flex;
     align-items: center;
     border-radius: calc(var(--quiet-border-radius) / 1.5);
-    font-size: 0.9375rem;
+    font-size: 0.9375em;
     color: var(--quiet-neutral-text-on-soft);
     line-height: var(--quiet-line-height);
-    padding: 0.33rem 1rem;
+    padding: 0.33em 1em;
     cursor: pointer;
     transition:
       100ms background-color ease,
@@ -58,13 +58,13 @@ export default css`
   }
 
   :host([checkbox-adjacent]) {
-    padding-inline-start: 1.5rem;
+    padding-inline-start: 1.5em;
   }
 
   #check {
     font-size: 1.25em;
-    margin-inline-start: -1.25rem;
-    margin-inline-end: 0.25rem;
+    margin-inline-start: -1.25em;
+    margin-inline-end: 0.25em;
     visibility: hidden;
   }
 
@@ -77,7 +77,7 @@ export default css`
     display: flex;
     align-items: center;
     font-size: 1.25em;
-    margin-inline-end: 0.5rem !important;
+    margin-inline-end: 0.5em !important;
   }
 
   #label {
@@ -90,11 +90,11 @@ export default css`
     display: flex;
     align-items: center;
     justify-content: end;
-    font-size: 0.75rem !important;
+    font-size: 0.75em !important;
     color: var(--quiet-text-muted);
 
     ::slotted(*) {
-      margin-inline-start: 2rem !important;
+      margin-inline-start: 2em !important;
     }
   }
 `;

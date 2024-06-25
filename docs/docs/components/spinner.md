@@ -19,14 +19,14 @@ Spinners are sized relative to the current font size. This allows you to place t
 <quiet-spinner style="font-size: 3rem;"></quiet-spinner>
 ```
 
-### Changing the color
+### Changing the colors
 
-To change the color, set the `--color` custom property on the spinner.
+To change the spinner's colors, set the `--indicator-color` and `--track-color` custom properties on the spinner.
 
 ```html {.example}
 <div style="font-size: 2rem;">
-  <quiet-spinner style="--color: royalblue;"></quiet-spinner>
-  <quiet-spinner style="--color: deeppink;"></quiet-spinner>
-  <quiet-spinner style="--color: forestgreen;"></quiet-spinner>
+  <quiet-spinner style="--indicator-color: royalblue;"></quiet-spinner>
+  <quiet-spinner style="--indicator-color: deeppink;"></quiet-spinner>
+  <quiet-spinner style="--indicator-color: forestgreen;"></quiet-spinner>
 </div>
 ```

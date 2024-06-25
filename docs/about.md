@@ -39,6 +39,9 @@ But don't be afraid to use it, learn from it, and have fun with it!
 
 ## My commitment to accessibility
 
+<img class="whiskers only-light" src="/assets/images/whiskers/whiskers-whistling-light.svg" alt="Whiskers the mouse walking and whistling">
+<img class="whiskers only-dark" src="/assets/images/whiskers/whiskers-whistling-dark.svg" alt="Whiskers the mouse walking and whistling">
+
 I recognize the need for all users, regardless of ability or device, to have undeterred access to the websites and applications that are created with my software. This is an important goal of my projects.
 
 Oftentimes, people will ask "is it accessible?" I'm reluctant to answer because accessibility isn't binary — there's no simple "yes" or "no" response to provide. What seems accessible to a sighted user might be completely inaccessible to a non-sighted user. And even if you optimize for various screen readers, you still have to account for low-level vision, color blindness, hearing impairments, mobility impairments, and more.
@@ -52,9 +55,6 @@ My commitment to my users is this: everything I develop will be built with acces
 I'm fully aware that I won't get it right every time for every user, so I invite the community to participate in this ongoing effort by submitting issues, pull requests, and discussions. Many accessibility improvements have already been made thanks to contributors submitting code, feedback, and suggestions.
 
 This is the path forward. Together, we will continue to make accessible software for as many users as possible.
-
-<img class="whiskers only-light" src="/assets/images/whiskers/whiskers-whistling-light.svg" alt="Whiskers the mouse walking and whistling">
-<img class="whiskers only-dark" src="/assets/images/whiskers/whiskers-whistling-dark.svg" alt="Whiskers the mouse walking and whistling">
 
 ## Special thanks
 
@@ -74,4 +74,4 @@ Please contact me for information about sponsorship perks, consulting, speaking 
 
 ## What's with all the cats?
 
-I'm not really sure. They keep sneaking into the docs. I think they like the logo.
+I'm not really sure. They keep sneaking into the docs. I think they like the logo. <quiet-icon name="paw" style="rotate: -10deg; translate: 0 2px;"></quiet-icon> <quiet-icon name="paw" style="rotate: 15deg; translate: 0 -4px;"></quiet-icon>

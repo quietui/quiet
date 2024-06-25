@@ -8,7 +8,7 @@ export default css`
     display: flex;
     align-items: center;
     width: 100%;
-    height: 1.5rem;
+    height: 1.5em;
     font-size: 0.875em;
     background-color: var(--track-color);
     border-radius: 9999px;

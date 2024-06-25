@@ -3,7 +3,7 @@ title: Tooltip
 layout: component
 ---
 
-Tooltips follow the [ARIA APG tooltip pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/) for accessibility. They show on hover and on focus. A transparent "safe polygon" is drawn between the tooltip and its anchor element to allow mouse users to hover over the tooltip without closing it. Only one tooltip will be visible on the page at a time.
+Tooltips follow the [ARIA APG tooltip pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/) for accessibility. They show on hover and on focus. A transparent "safe polygon" is drawn between the tooltip and its anchor element to allow mouse users to hover over the tooltip without closing it. Only one tooltip will be visible on the page at a time. Tooltips are not be shown when the pointer type is `touch`.
 
 ```html {.example}
 <quiet-button id="tooltip__overview">Hover over me</quiet-button>

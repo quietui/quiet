@@ -326,7 +326,9 @@ export class QuietTooltip extends QuietElement {
   };
 
   /** When the pointer enters the anchor. */
-  private handleAnchorPointerEnter = () => {
+  private handleAnchorPointerEnter = (event: PointerEvent) => {
+    if (event.pointerType === 'touch') return;
+
     if (!this.hoverInTimeout) {
       this.hoverInTimeout = setTimeout(() => {
         this.hoverInTimeout = undefined;

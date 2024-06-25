@@ -7,6 +7,7 @@ export default css`
     border-radius: calc(var(--quiet-border-radius) / 1.5);
     font-size: 0.9375rem;
     color: var(--quiet-neutral-text-on-soft);
+    line-height: var(--quiet-line-height);
     padding: 0.33rem 1rem;
     cursor: pointer;
     transition:

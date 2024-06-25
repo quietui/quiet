@@ -485,7 +485,7 @@ The following tokens are used to set the overall appearance of the default theme
 
 ==TODO - document shadow tokens with examples==
 
-<div class="table-scroll" tabindex="0">
+<div class="table-scroll table-theme" tabindex="0">
 
 | Custom property | Description | Default |
 | --------------- | ----------- | ------- |
@@ -509,7 +509,7 @@ The following tokens are used to set the overall appearance of the default theme
 
 #### Form control tokens
 
-<div class="table-scroll" tabindex="0">
+<div class="table-scroll table-theme" tabindex="0">
 
 | Custom property | Description | Default |
 | --------------- | ----------- | ------- |

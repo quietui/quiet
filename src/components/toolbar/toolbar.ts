@@ -8,7 +8,7 @@ import type { QuietButton } from '../button/button.js';
 import type { QuietButtonGroup } from '../button-group/button-group.js';
 
 interface GetButtonsOptions {
-  ignoreDisabled: boolean;
+  includeDisabled: boolean;
 }
 
 /**
@@ -39,12 +39,11 @@ export class QuietToolbar extends QuietElement {
   }
 
   /** Gets an array of buttons slotted into the toolbar. Includes slotted buttons, such as dropdown triggers. */
-
-  private getButtons(options?: GetButtonsOptions) {
-    if (options?.ignoreDisabled) {
-      return [...this.querySelectorAll<QuietButton>('quiet-button:not(:state(disabled))')];
-    } else {
+  private getButtons(options?: Partial<GetButtonsOptions>) {
+    if (options?.includeDisabled) {
       return [...this.querySelectorAll<QuietButton>('quiet-button')];
+    } else {
+      return [...this.querySelectorAll<QuietButton>('quiet-button:not(:state(disabled))')];
     }
   }
 
@@ -55,7 +54,7 @@ export class QuietToolbar extends QuietElement {
 
   private handleDefaultSlotChange() {
     const buttonGroups = this.getButtonGroups();
-    const buttons = this.getButtons();
+    const buttons = this.getButtons({ includeDisabled: true });
 
     buttonGroups.forEach(buttonGroup => {
       buttonGroup.orientation = this.orientation;
@@ -67,7 +66,7 @@ export class QuietToolbar extends QuietElement {
   }
 
   private handleKeyDown(event: KeyboardEvent) {
-    const buttons = this.getButtons({ ignoreDisabled: true });
+    const buttons = this.getButtons();
     const activeIndex = buttons.findIndex(button => button.tabIndex === 0);
     const isVertical = this.orientation === 'vertical';
     let nextIndex = -1;
@@ -111,7 +110,7 @@ export class QuietToolbar extends QuietElement {
   }
 
   private handlePointerDown(event: PointerEvent) {
-    const buttons = this.getButtons();
+    const buttons = this.getButtons({ includeDisabled: true });
     const targetButton = (event.target as HTMLElement).closest('quiet-button');
     if (!targetButton) return;
 

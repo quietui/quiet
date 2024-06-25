@@ -23,7 +23,7 @@ export default css`
     color: var(--quiet-primary-text-colorful);
   }
 
-  :host([disabled]) {
+  :host(:state(disabled)) {
     opacity: 0.5;
     cursor: not-allowed;
   }

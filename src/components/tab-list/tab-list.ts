@@ -12,6 +12,10 @@ import type { CSSResultGroup } from 'lit';
 import type { QuietTab } from '../tab/tab.js';
 import type { QuietTabPanel } from '../tab-panel/tab-panel.js';
 
+interface GetTabsOptions {
+  includeDisabled: boolean;
+}
+
 /**
  * <quiet-tab-list>
  *
@@ -83,9 +87,15 @@ export class QuietTabList extends QuietElement {
     }
   }
 
-  private getTabs() {
+  /** Gets an array of tabs slotted into the tab list. */
+  private getTabs(options?: Partial<GetTabsOptions>) {
     const tabs = this.tabSlot.assignedElements({ flatten: true }) as QuietTab[];
-    return tabs.filter(tab => tab.localName === 'quiet-tab' && !tab.disabled);
+
+    if (options?.includeDisabled) {
+      return tabs.filter(tab => tab.localName === 'quiet-tab');
+    } else {
+      return tabs.filter(tab => tab.localName === 'quiet-tab' && !tab.disabled);
+    }
   }
 
   private getPanels() {
@@ -121,7 +131,7 @@ export class QuietTabList extends QuietElement {
 
   /** Sets the active tab + panel. */
   private setActiveTab(name: string | undefined) {
-    const tabs = this.getTabs();
+    const tabs = this.getTabs({ includeDisabled: true });
     const panels = this.getPanels();
 
     if (!name) return;
@@ -137,14 +147,12 @@ export class QuietTabList extends QuietElement {
     for (const panel of panels) {
       const linkedTab = tabs.find(tab => tab.panel === panel.name);
 
-      if (linkedTab && !linkedTab.disabled) {
-        if (panel.name === name) {
-          panel.visible = true;
-          this.dispatchEvent(new QuietTabShownEvent({ tab: linkedTab, panel }));
-        } else if (panel.visible) {
-          panel.visible = false;
-          this.dispatchEvent(new QuietTabHiddenEvent({ tab: linkedTab, panel }));
-        }
+      if (panel.name === name && linkedTab && !linkedTab.disabled) {
+        panel.visible = true;
+        this.dispatchEvent(new QuietTabShownEvent({ tab: linkedTab, panel }));
+      } else if (linkedTab && panel.visible) {
+        panel.visible = false;
+        this.dispatchEvent(new QuietTabHiddenEvent({ tab: linkedTab, panel }));
       }
     }
   }

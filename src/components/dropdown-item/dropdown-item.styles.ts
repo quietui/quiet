@@ -63,7 +63,7 @@ export default css`
 
   #check {
     font-size: 1.25em;
-    margin-inline-start: -1.25em;
+    margin-inline-start: -1em;
     margin-inline-end: 0.25em;
     visibility: hidden;
   }

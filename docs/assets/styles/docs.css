@@ -372,6 +372,19 @@ html:not(.quiet-dark) .only-dark {
   translate: calc(-1 * (var(--quiet-focus-width) + var(--quiet-focus-offset)) - 0.25rem);
 }
 
+#sidebar-meta {
+  svg {
+    display: block;
+    max-width: 1.75rem;
+    max-height: 1.75rem;
+    margin-block-end: -0.33rem;
+  }
+
+  small {
+    color: var(--quiet-text-muted);
+  }
+}
+
 #page {
   position: relative;
   display: grid;

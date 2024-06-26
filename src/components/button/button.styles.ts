@@ -50,7 +50,7 @@ export default css`
     &.xs {
       min-height: var(--quiet-form-control-height-xs);
       font-size: var(--quiet-form-control-font-size-xs);
-      padding-inline: 0.75em;
+      padding-inline: 0.85em;
     }
 
     &.sm {
@@ -196,6 +196,22 @@ export default css`
     /* Icon buttons */
     &.icon {
       padding-inline: 0.75em;
+
+      &.xs {
+        padding-inline: 0.525em;
+      }
+
+      &.sm {
+        padding-inline: 0.65em;
+      }
+
+      &.lg {
+        padding-inline: 0.675em;
+      }
+
+      &.xl {
+        padding-inline: 0.55em;
+      }
     }
 
     /* Pills */

@@ -16,6 +16,7 @@ import type { CSSResultGroup } from 'lit';
  *
  * @cssproperty [--indicator-color=var(--quiet-primary-fill-mid)] - The color of the spinner's indicator.
  * @cssproperty [--track-color=var(--quiet-primary-fill-mid)] - The color of the spinner's track.
+ * @cssproperty [--speed=0.75s] - The speed for one complete rotation.
  */
 @customElement('quiet-spinner')
 export class QuietSpinner extends QuietElement {

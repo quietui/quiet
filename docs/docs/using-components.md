@@ -174,17 +174,17 @@ Please read this section thoroughly if you've never styled custom elements befor
 
 For example, [`<quiet-spinner>`](/docs/components/spinner) renders an animated SVG in its shadow root. The color of the indicator is applied to a `<circle>` element within the SVG, but the implementation detail shouldn't matter to a user who just wants to make the spinner pink.
 
-For this reason, this spinner exposes a custom property called `--color` that you can set to change the color. You can set a custom property just like any other CSS property.
+For this reason, this spinner exposes a custom property called `--indicator-color` that you can set to change the color. You can set a custom property just like any other CSS property.
 
 ```html {.example .no-buttons}
-<quiet-spinner style="--color: deeppink;"></quiet-spinner>
+<quiet-spinner style="--indicator-color: deeppink;"></quiet-spinner>
 ```
 
 You can also set custom properties inside a stylesheet or a `<style>` element.
 
 ```css
 quiet-spinner {
-  --color: deeppink;
+  --indicator-color: deeppink;
 }
 ```
 

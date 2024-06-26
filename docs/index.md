@@ -13,9 +13,7 @@ layout: splash
 
 <p class="subtitle">{{ description }}</p>
 
-<p>
-Focusing on accessibility, longevity, performance, and simplicity
-</p>
+<p>Focusing on accessibility, longevity, performance, and simplicity</p>
 
 <div class="splash-actions">
 

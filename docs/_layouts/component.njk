@@ -301,7 +301,7 @@
   {% if component.dependencies.length %}
     <h3>Dependencies</h3>
     <p>
-      This component automatically imports the following elements. If any subdependencies exist, they will also be included in this list.
+      This component automatically imports the following elements. Sub-dependencies are also included in this list.
     </p>
     <ul class="dependency-list">
       {% for dependency in component.dependencies %}

@@ -13,6 +13,7 @@ export default css`
 
   svg {
     animation: rotate var(--speed) linear infinite;
+    transform-origin: center;
   }
 
   #track {
@@ -30,6 +31,7 @@ export default css`
     0% {
       transform: rotate(0deg);
     }
+
     100% {
       transform: rotate(360deg);
     }

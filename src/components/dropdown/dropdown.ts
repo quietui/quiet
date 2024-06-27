@@ -296,7 +296,7 @@ export class QuietDropdown extends QuietElement {
   };
 
   /** Handles clicks on the menu. */
-  private handleMenuClick(event: MouseEvent) {
+  private handleMenuClick(event: PointerEvent) {
     const item = (event.target as Element).closest('quiet-dropdown-item');
     if (item) {
       this.makeSelection(item);

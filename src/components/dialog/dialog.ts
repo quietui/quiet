@@ -91,7 +91,7 @@ export class QuietDialog extends QuietElement {
     }
   }
 
-  private handleDialogClick(event: MouseEvent) {
+  private handleDialogClick(event: PointerEvent) {
     const target = event.target as HTMLElement;
     const button = target.closest('[data-dialog="close"]');
 

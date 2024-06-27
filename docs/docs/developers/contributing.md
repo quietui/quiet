@@ -99,6 +99,8 @@ Classes should be used to apply modifiers and reusable styles to elements. Avoid
 
 Add parts only to internals that should be exposed as part of the component's public API. Only one part should be applied to an element. Avoid using parts to represent state. It's usually better to apply a custom state to the host element instead.
 
+When nested components export parts, they should be delimited by two underscores, e.g. `copy-button__button`, where `button` is a `<quiet-button>` and `button__button` is the `<button>` inside of its shadow root.
+
 ### Using icons
 
 Icons that are rendered in a component's shadow root _must_ use the `system` icon library. The system icon library uses inline SVGs for performance, so they load instantly instead of requiring additional HTTP requests. System icons _must not_ be used in examples.
@@ -176,3 +178,7 @@ Modal elements that feature a visible backdrop, such as dialogs, should not have
   background: var(--quiet-paper-color);
 }
 ```
+
+### Event naming
+
+Open, close, and similar events should be named present tense, e.g. `open` and `close`. When it makes sense, they should be cancelable which will prevent the component from opening or closing. After opening or closing, and after all animations are complete, a past tense version of the event should be emitted, e.g. `opened` and `closed`.

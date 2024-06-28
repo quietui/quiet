@@ -17,13 +17,11 @@ Add the `checked` attribute to check the checkbox initially.
 <quiet-checkbox name="feed" value="yes" checked>I will feed the cats</quiet-checkbox>
 ```
 
-### Filled and unstyled checkboxes
+### Filled checkboxes
 
-Set the `appearance` attribute to `normal` or `filled` to change the checkbox's appearance.
+Set the `appearance` attribute to `filled` to change the checkbox's appearance.
 
 ```html {.example}
-<quiet-checkbox appearance="normal">Normal checkbox</quiet-checkbox>
-<br>
 <quiet-checkbox appearance="filled">Filled checkbox</quiet-checkbox>
 ```
 

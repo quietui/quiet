@@ -7,9 +7,7 @@ layout: splash
 <div class="splash">
 <h1 class="visually-hidden">Quiet UI</h1>
 
-<div class="splash-image">
 {% include 'splash-image.njk' %}
-</div>
 
 <p class="subtitle">{{ description }}</p>
 

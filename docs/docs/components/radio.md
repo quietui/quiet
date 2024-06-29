@@ -208,6 +208,28 @@ Radios come with a simple, minimal appearance. Feel free to customize them with 
     <quiet-icon name="password"></quiet-icon> Password
   </quiet-radio-item>
 </quiet-radio>
+
+<style>
+  .radio__auth {
+    quiet-radio-item {
+      background: var(--quiet-paper);
+      border: solid 1px var(--quiet-neutral-stroke-soft);
+      border-radius: .5rem;
+      box-shadow: var(--quiet-shadow-softer);
+      padding: 1rem;
+    }
+
+    quiet-radio-item:state(checked) {
+      background-color: var(--quiet-primary-fill-softer);
+      border-color: var(--quiet-primary-stroke-soft);
+    }
+
+    quiet-radio-item:focus-visible {
+      outline: var(--quiet-focus-ring);
+      outline-offset: var(--quiet-focus-offset);
+    }    
+  }
+</style>
 ```
 
 ```html {.example}
@@ -234,21 +256,6 @@ Radios come with a simple, minimal appearance. Feel free to customize them with 
 </quiet-radio>
 
 <style>
-  .radio__auth {
-    quiet-radio-item {
-      background: var(--quiet-paper);
-      border: solid 1px var(--quiet-neutral-stroke-soft);
-      border-radius: .5rem;
-      box-shadow: var(--quiet-shadow-softer);
-      padding: 1rem;
-    }
-
-    quiet-radio-item:state(checked) {
-      background-color: var(--quiet-primary-fill-softer);
-      border-color: var(--quiet-primary-stroke-soft);
-    }
-  }
-
   .radio__hosting {
     quiet-radio-item {
       position: relative;
@@ -275,6 +282,11 @@ Radios come with a simple, minimal appearance. Feel free to customize them with 
       background-color: var(--quiet-primary-fill-softer);
       border-color: var(--quiet-primary-stroke-soft);
     }
+
+    quiet-radio-item:focus-visible {
+      outline: var(--quiet-focus-ring);
+      outline-offset: 2px;
+    }    
 
     small {
       color: var(--quiet-text-muted);
@@ -333,3 +345,7 @@ Radios come with a simple, minimal appearance. Feel free to customize them with 
   }
 </style>
 ```
+
+:::warn
+It's not recommended to hide the radio button unless your styles make it very clear to users that the control is selectable.
+:::

@@ -35,7 +35,8 @@ body {
   text-shadow: none !important;
 }
 
-:focus-visible {
+/* Ignore the custom "focused" state so those components can set their own focus styles */
+:focus-visible:not(:state(:focused)) {
   outline: var(--quiet-focus-ring);
   outline-offset: var(--quiet-focus-offset);
 }

@@ -189,8 +189,8 @@ export class QuietButton extends QuietElement {
       const submitter = document.createElement('button');
       submitter.classList.add('visually-hidden');
       submitter.type = 'submit';
-      submitter.name = this.name;
-      submitter.value = this.value;
+      if (this.name) submitter.name = this.name;
+      if (this.value) submitter.value = this.value;
 
       // Pass form attributes through
       ['formaction', 'formenctype', 'formmethod', 'formnovalidate', 'formtarget'].forEach(attr => {

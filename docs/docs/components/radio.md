@@ -3,6 +3,8 @@ title: Radio
 layout: component
 ---
 
+Radios follow the [ARIA APG radio group pattern](https://www.w3.org/WAI/ARIA/apg/patterns/radio/) for accessibility. Unlike native radio buttons, Quiet radio items must be placed inside a radio controller as shown below.
+
 ```html {.example}
 <quiet-radio 
   label="Color" 
@@ -217,6 +219,7 @@ Radios come with a simple, minimal appearance. Feel free to customize them with 
       border-radius: .5rem;
       box-shadow: var(--quiet-shadow-softer);
       padding: 1rem;
+      cursor: pointer;
     }
 
     quiet-radio-item:state(checked) {

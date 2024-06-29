@@ -74,7 +74,7 @@ Use the `custom-validity` attribute to make the checkbox invalid and show a cust
 
 ```html {.example}
 <form action="about:blank" method="get" target="_blank">
-  <quiet-checkbox name="feed" value="yes" required custom-validity="Don't forget to clean the litter box!">I will feed the cats</quiet-checkbox>
+  <quiet-checkbox name="feed" value="yes" required custom-validity="Not so fast, bubba!">I will feed the cats</quiet-checkbox>
   <br><br>
   <quiet-button type="submit" variant="primary">Submit</quiet-button>
   <quiet-button type="reset">Reset</quiet-button>

@@ -29,7 +29,6 @@ import type { CSSResultGroup } from 'lit';
  *
  * @csspart label - The `<label>` that wraps the entire control.
  * @csspart visual-box - The element that wraps the internal checkbox.
- * @csspart checkbox - The internal checkbox, an `<input type="checkbox">` element.
  * @csspart check-icon - The check icon, a `<quiet-icon>` element.
  * @csspart indeterminate-icon - The indeterminate icon, a `<quiet-icon>` element.
  *
@@ -44,7 +43,7 @@ export class QuietCheckbox extends QuietElement {
   static formAssociated = true;
   static styles: CSSResultGroup = [hostStyles, styles];
 
-  /** A reference to the `<form>` associated with the form control, or null if no form is associated. */
+  /** A reference to the `<form>` associated with the form control, or `null` if no form is associated. */
   public associatedForm: HTMLFormElement | null = null;
 
   @query('input[type="checkbox"]') private checkbox: HTMLInputElement;
@@ -250,7 +249,6 @@ export class QuietCheckbox extends QuietElement {
         >
           <input
             id="checkbox"
-            part="checkbox"
             type="checkbox"
             name=${ifDefined(this.name)}
             value=${ifDefined(this.value)}

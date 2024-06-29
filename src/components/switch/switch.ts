@@ -46,7 +46,7 @@ export class QuietSwitch extends QuietElement {
   static formAssociated = true;
   static styles: CSSResultGroup = [hostStyles, styles];
 
-  /** A reference to the `<form>` associated with the form control, or null if no form is associated. */
+  /** A reference to the `<form>` associated with the form control, or `null` if no form is associated. */
   public associatedForm: HTMLFormElement | null = null;
 
   @query('input[type="checkbox"]') private switch: HTMLInputElement;

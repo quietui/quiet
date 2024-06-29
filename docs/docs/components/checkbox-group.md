@@ -32,10 +32,9 @@ You can use the `label` and `description` attributes to provide plain text label
 </quiet-checkbox-group>
 ```
 
-
 ### Changing the orientation
 
-You can change the orientation of grouped checkboxes by setting the `orientation` attribute to `horizontal` or `vertical`.
+To stack checkboxes on top of each other instead of side by side, set the `orientation` attribute to `vertical`.
 
 ```html {.example}
 <quiet-checkbox-group label="Places to hide" orientation="vertical">

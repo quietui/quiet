@@ -54,7 +54,7 @@ export class QuietTextField extends QuietElement {
   static formAssociated = true;
   static styles: CSSResultGroup = [hostStyles, formControlStyles, styles];
 
-  /** A reference to the `<form>` associated with the form control, or null if no form is associated. */
+  /** A reference to the `<form>` associated with the form control, or `null` if no form is associated. */
   public associatedForm: HTMLFormElement | null = null;
   private localize = new Localize(this);
 

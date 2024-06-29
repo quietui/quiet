@@ -6,7 +6,7 @@ export default css`
   }
 
   /* The checkbox's label */
-  label {
+  #label {
     display: inline-flex;
     gap: 0.75em;
     align-items: center;
@@ -33,7 +33,7 @@ export default css`
     }
   }
 
-  :host(:state(disabled)) label {
+  :host(:state(disabled)) #label {
     cursor: not-allowed;
   }
 

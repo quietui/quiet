@@ -60,6 +60,7 @@ export class QuietToolbar extends QuietElement {
       buttonGroup.orientation = this.orientation;
     });
 
+    // Reset the roving tab index when the slot changes
     buttons.forEach((button, index) => {
       button.tabIndex = index === 0 ? 0 : -1;
     });

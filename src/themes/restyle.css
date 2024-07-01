@@ -35,12 +35,6 @@ body {
   text-shadow: none !important;
 }
 
-/* Ignore the custom "focused" state so those components can set their own focus styles */
-:focus-visible:not(:state(:focused)) {
-  outline: var(--quiet-focus-ring);
-  outline-offset: var(--quiet-focus-offset);
-}
-
 /* Content spacing */
 address,
 audio,
@@ -162,6 +156,14 @@ a {
     &:hover {
       color: color-mix(in oklab, var(--quiet-primary-text-colorful), black 10%);
     }
+  }
+}
+
+a,
+button {
+  &:focus-visible {
+    outline: var(--quiet-focus-ring);
+    outline-offset: var(--quiet-focus-offset);
   }
 }
 

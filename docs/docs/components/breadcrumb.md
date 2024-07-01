@@ -282,27 +282,6 @@ Breadcrumbs come with a simple, minimal appearance. Feel free to customize them 
   </quiet-breadcrumb-item>
 </quiet-breadcrumb>
 
-<br>
-
-<quiet-breadcrumb class="breadcrumb-borders">
-  <quiet-breadcrumb-item href="https://example.com/">
-    <quiet-icon slot="start" name="music"></quiet-icon>
-    Music
-  </quiet-breadcrumb-item>
-
-  <quiet-breadcrumb-item href="https://example.com/products/">
-    Artist
-  </quiet-breadcrumb-item>
-
-  <quiet-breadcrumb-item href="https://example.com/products/pets/">
-    Album
-  </quiet-breadcrumb-item>
-
-  <quiet-breadcrumb-item current href="">
-    Song
-  </quiet-breadcrumb-item>
-</quiet-breadcrumb>
-
 <style>
   .breadcrumb-bar {
     background-color: var(--quiet-neutral-fill-softer);
@@ -324,6 +303,47 @@ Breadcrumbs come with a simple, minimal appearance. Feel free to customize them 
     }
   }
 
+  .breadcrumb-borders {
+    quiet-breadcrumb-item::part(label) {
+      padding: .33em .5em;
+    }
+
+    quiet-breadcrumb-item:not([current])::part(label) {
+      background-color: var(--quiet-paper);
+      border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
+      border-radius: calc(var(--quiet-border-radius) / 1.25);
+      box-shadow: var(--quiet-shadow-softer);
+    }
+
+    quiet-breadcrumb-item::part(separator) {
+      display: none;
+    }
+  }
+</style>
+```
+
+
+```html {.example}
+<quiet-breadcrumb class="breadcrumb-borders">
+  <quiet-breadcrumb-item href="https://example.com/">
+    <quiet-icon slot="start" name="music"></quiet-icon>
+    Music
+  </quiet-breadcrumb-item>
+
+  <quiet-breadcrumb-item href="https://example.com/products/">
+    Artist
+  </quiet-breadcrumb-item>
+
+  <quiet-breadcrumb-item href="https://example.com/products/pets/">
+    Album
+  </quiet-breadcrumb-item>
+
+  <quiet-breadcrumb-item current href="">
+    Song
+  </quiet-breadcrumb-item>
+</quiet-breadcrumb>
+
+<style>
   .breadcrumb-borders {
     quiet-breadcrumb-item::part(label) {
       padding: .33em .5em;

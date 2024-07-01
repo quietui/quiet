@@ -16,21 +16,6 @@ export default css`
     border-radius: 9999px;
   }
 
-  #text-box::-webkit-datetime-edit-year-field:focus,
-  #text-box::-webkit-datetime-edit-month-field:focus,
-  #text-box::-webkit-datetime-edit-week-field:focus,
-  #text-box::-webkit-datetime-edit-day-field:focus,
-  #text-box::-webkit-datetime-edit-ampm-field:focus, /* Chrome */
-  #text-box::-webkit-datetime-edit-meridiem-field:focus, /* Safari */
-  #text-box::-webkit-datetime-edit-hour-field:focus,
-  #text-box::-webkit-datetime-edit-millisecond-field:focus,
-  #text-box::-webkit-datetime-edit-minute-field:focus,
-  #text-box::-webkit-datetime-edit-second-field:focus {
-    background-color: var(--quiet-selection-background-color);
-    color: var(--quiet-selection-color);
-    outline: none;
-  }
-
   /* Icons */
   slot[name='start']::slotted(*),
   slot[name='end']::slotted(*) {

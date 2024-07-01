@@ -93,11 +93,9 @@ export default css`
       -webkit-user-select: none;
     }
 
-    &::-webkit-search-decoration,
-    &::-webkit-search-cancel-button,
-    &::-webkit-search-results-button,
-    &::-webkit-search-results-decoration {
-      -webkit-appearance: none;
+    &::selection {
+      background-color: var(--quiet-selection-background-color);
+      color: var(--quiet-selection-color);
     }
 
     &:-webkit-autofill,
@@ -105,6 +103,28 @@ export default css`
     &:-webkit-autofill:focus,
     &:-webkit-autofill:active {
       -webkit-text-fill-color: var(--quiet-primary-text-colorful);
+    }
+
+    &::-webkit-search-decoration,
+    &::-webkit-search-cancel-button,
+    &::-webkit-search-results-button,
+    &::-webkit-search-results-decoration {
+      -webkit-appearance: none;
+    }
+
+    &::-webkit-datetime-edit-year-field:focus,
+    &::-webkit-datetime-edit-month-field:focus,
+    &::-webkit-datetime-edit-week-field:focus,
+    &::-webkit-datetime-edit-day-field:focus,
+    &::-webkit-datetime-edit-ampm-field:focus, /* Chrome */
+    &::-webkit-datetime-edit-meridiem-field:focus, /* Safari */
+    &::-webkit-datetime-edit-hour-field:focus,
+    &::-webkit-datetime-edit-millisecond-field:focus,
+    &::-webkit-datetime-edit-minute-field:focus,
+    &::-webkit-datetime-edit-second-field:focus {
+      background-color: var(--quiet-selection-background-color);
+      color: var(--quiet-selection-color);
+      outline: none;
     }
 
     /* Color inputs */
@@ -213,12 +233,12 @@ export default css`
     border-radius: 9999px;
     padding: 0 1.25em;
 
-    #text-box::-webkit-color-swatch {
+    &::-webkit-color-swatch {
       border-radius: 9999px;
     }
 
-    #text-box::-moz-color-swatch,
-    #text-box::-moz-focus-inner {
+    &::-moz-color-swatch,
+    &::-moz-focus-inner {
       border-radius: 9999px;
     }
   }

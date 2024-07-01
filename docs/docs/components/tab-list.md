@@ -254,7 +254,6 @@ Note that we use `tabindex="-1"` on the close button to prevent it from interfer
 Tab lists come with a simple, minimal appearance. Feel free to customize them with your own styles.
 
 ```html {.example}
-<!-- Cards -->
 <quiet-tab-list label="Select a tab" class="tab-list-cards">
 	<quiet-tab slot="tab" panel="first">First</quiet-tab>
 	<quiet-tab slot="tab" panel="second">Second</quiet-tab>
@@ -265,21 +264,7 @@ Tab lists come with a simple, minimal appearance. Feel free to customize them wi
 	<quiet-tab-panel name="third">Pretium vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae. Mattis enim ut tellus elementum. Ultrices dui sapien eget mi proin sed libero.</quiet-tab-panel>
 </quiet-tab-list>
 
-<br><br>
-
-<!-- Segmented -->
-<quiet-tab-list label="Select a tab" class="tab-list-segments">
-	<quiet-tab slot="tab" panel="first">First</quiet-tab>
-	<quiet-tab slot="tab" panel="second">Second</quiet-tab>
-	<quiet-tab slot="tab" panel="third">Third</quiet-tab>
-
-	<quiet-tab-panel name="first">Lobortis mattis aliquam faucibus purus in massa tempor. Eu lobortis elementum nibh tellus molestie nunc non blandit. Ultrices sagittis orci a scelerisque purus.</quiet-tab-panel>
-	<quiet-tab-panel name="second">Vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum. Aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices.</quiet-tab-panel>
-	<quiet-tab-panel name="third">Pretium vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae. Mattis enim ut tellus elementum. Ultrices dui sapien eget mi proin sed libero.</quiet-tab-panel>
-</quiet-tab-list>
-
 <style>
-  /* Cards */
   .tab-list-cards {
     quiet-tab {
       border: solid 1px var(--quiet-neutral-stroke-softer);
@@ -303,9 +288,22 @@ Tab lists come with a simple, minimal appearance. Feel free to customize them wi
       border-top-width: 1px;
       margin-top: -1px;
     }
-  }
+  }  
+</style>
+```
 
-  /* Segments */
+```html {.example}
+<quiet-tab-list label="Select a tab" class="tab-list-segments">
+	<quiet-tab slot="tab" panel="first">First</quiet-tab>
+	<quiet-tab slot="tab" panel="second">Second</quiet-tab>
+	<quiet-tab slot="tab" panel="third">Third</quiet-tab>
+
+	<quiet-tab-panel name="first">Lobortis mattis aliquam faucibus purus in massa tempor. Eu lobortis elementum nibh tellus molestie nunc non blandit. Ultrices sagittis orci a scelerisque purus.</quiet-tab-panel>
+	<quiet-tab-panel name="second">Vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum. Aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices.</quiet-tab-panel>
+	<quiet-tab-panel name="third">Pretium vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae. Mattis enim ut tellus elementum. Ultrices dui sapien eget mi proin sed libero.</quiet-tab-panel>
+</quiet-tab-list>
+
+<style>
   .tab-list-segments {
     &::part(tabs) {
       justify-content: space-between;

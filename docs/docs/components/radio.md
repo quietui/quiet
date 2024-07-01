@@ -305,10 +305,10 @@ Radios come with a simple, minimal appearance. Feel free to customize them with 
   name="color" 
   class="radio__colors"
 >
-  <quiet-radio-item value="silver" style="color: #b6b9c9;">Silver</quiet-radio-item>
-  <quiet-radio-item value="blue" style="color: #aad4f8;">Blue</quiet-radio-item>
-  <quiet-radio-item value="rose" style="color: #f4c0cf;">Rose</quiet-radio-item>
-  <quiet-radio-item value="gold" style="color: #dfce9b;">Gold</quiet-radio-item>
+  <quiet-radio-item value="silver" style="color: #a3a6b5;">Silver</quiet-radio-item>
+  <quiet-radio-item value="blue" style="color: #58acf2;">Blue</quiet-radio-item>
+  <quiet-radio-item value="rose" style="color: #e886a7;">Rose</quiet-radio-item>
+  <quiet-radio-item value="gold" style="color: #c5a231;">Gold</quiet-radio-item>
 </quiet-radio>
 
 <style>

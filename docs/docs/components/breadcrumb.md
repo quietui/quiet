@@ -233,7 +233,7 @@ You can create a collapsed breadcrumb item by adding a [dropdown](/docs/componen
   </quiet-breadcrumb-item>
 
   <quiet-breadcrumb-item>
-    <quiet-dropdown>
+    <quiet-dropdown style="font-size: 1rem;">
       <quiet-button slot="trigger" appearance="text" icon-label="More pages" size="sm">
         <quiet-icon name="dots"></quiet-icon>
       </quiet-button>

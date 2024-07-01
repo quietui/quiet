@@ -52,10 +52,10 @@ export class QuietTextArea extends QuietElement {
 
   @query('textarea') private textBox: HTMLInputElement;
 
-  @state() isInvalid = false;
+  @state() private isInvalid = false;
   @state() isPasswordVisible = false;
-  @state() wasChanged = false;
-  @state() wasSubmitted = false;
+  @state() private wasChanged = false;
+  @state() private wasSubmitted = false;
 
   /**
    * The text area's label. If you need to provide HTML in the label, use the `label` slot instead.

@@ -55,9 +55,9 @@ export class QuietRadio extends QuietElement {
 
   @query('#group') group: HTMLElement;
 
-  @state() isInvalid = false;
-  @state() wasChanged = false;
-  @state() wasSubmitted = false;
+  @state() private isInvalid = false;
+  @state() private wasChanged = false;
+  @state() private wasSubmitted = false;
 
   /**
    * The radio's label. If you need to provide HTML in the label, use the `label` slot instead.

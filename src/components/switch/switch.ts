@@ -51,9 +51,9 @@ export class QuietSwitch extends QuietElement {
 
   @query('input[type="checkbox"]') private switch: HTMLInputElement;
 
-  @state() isInvalid = false;
-  @state() wasChanged = false;
-  @state() wasSubmitted = false;
+  @state() private isInvalid = false;
+  @state() private wasChanged = false;
+  @state() private wasSubmitted = false;
 
   /**
    * The switch's label. If you need to provide HTML in the label, use the `label` slot instead.

@@ -137,7 +137,7 @@ export class QuietPopover extends QuietElement {
     this.open = !this.open;
   };
 
-  private handleDialogClick(event: PointerEvent) {
+  private handleDialogClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
     const button = target.closest('[data-popover="close"]');
 
@@ -158,7 +158,7 @@ export class QuietPopover extends QuietElement {
     }
   };
 
-  private handleDocumentClick = (event: PointerEvent) => {
+  private handleDocumentClick = (event: MouseEvent) => {
     const target = event.target as HTMLElement;
 
     // Ignore clicks on the anchor so it will be closed by the anchor's click handler

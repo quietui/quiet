@@ -53,7 +53,7 @@ export class QuietCopy extends QuietElement {
     | 'left'
     | 'hidden' = 'top';
 
-  private async handleClick(event: PointerEvent) {
+  private async handleClick(event: MouseEvent) {
     event.preventDefault();
     event.stopPropagation();
 

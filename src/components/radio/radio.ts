@@ -169,7 +169,7 @@ export class QuietRadio extends QuietElement {
     this.wasSubmitted = true;
   }
 
-  private async handleGroupClick(event: PointerEvent) {
+  private async handleGroupClick(event: MouseEvent) {
     const selectedItem = this.getSelectedItem();
     const radioItem = (event.target as HTMLElement).closest('quiet-radio-item');
 

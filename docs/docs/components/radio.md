@@ -322,6 +322,7 @@ Radios come with a simple, minimal appearance. Feel free to customize them with 
       height: 3rem;
       background-color: currentColor;
       background-image: linear-gradient(#fff8, transparent);
+      box-shadow: inset 0 1px 2px color-mix(in oklab, currentColor, black 12.5%);
       border-radius: 50%;
       cursor: pointer;
     }

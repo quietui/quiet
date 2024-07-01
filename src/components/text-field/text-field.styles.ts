@@ -5,15 +5,23 @@ export default css`
   #visual-box.pill {
     border-radius: 9999px;
     padding: 0 1.25em;
+  }
 
-    #text-box::-webkit-color-swatch {
-      border-radius: 9999px;
-    }
+  #text-box::-webkit-color-swatch {
+    border-radius: 9999px;
+  }
 
-    #text-box::-moz-color-swatch,
-    #text-box::-moz-focus-inner {
-      border-radius: 9999px;
-    }
+  #text-box::-moz-color-swatch,
+  #text-box::-moz-focus-inner {
+    border-radius: 9999px;
+  }
+
+  #text-box::-webkit-datetime-edit-day-field:focus,
+  #text-box::-webkit-datetime-edit-month-field:focus,
+  #text-box::-webkit-datetime-edit-year-field:focus {
+    background-color: var(--quiet-selection-background-color);
+    color: var(--quiet-selection-color);
+    outline: none;
   }
 
   /* Icons */

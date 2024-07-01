@@ -16,6 +16,7 @@ export default css`
   }
 
   :host(:focus-visible) {
+    outline: var(--quiet-focus-ring);
     outline-offset: calc(var(--quiet-focus-width) * -1) !important;
   }
 

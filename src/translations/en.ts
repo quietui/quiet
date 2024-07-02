@@ -8,12 +8,14 @@ const translation: Translation = {
 
   breadcrumbs: 'Breadcrumbs',
   clearEntry: 'Clear entry',
+  clickToSelectOrDropFilesHere: 'Click to select or drop files here',
   close: 'Close',
   copied: 'Copied',
   copyToClipboard: 'Copy to clipboard',
   error: 'Error',
   hidePassword: 'Hide password',
   loading: 'Loading',
+  remove: 'Remove',
   showPassword: 'Show password'
 };
 

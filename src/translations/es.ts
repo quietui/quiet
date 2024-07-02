@@ -9,12 +9,14 @@ const translation: Translation = {
 
   breadcrumbs: 'Migas de pan',
   clearEntry: 'Borrar entrada',
+  clickToSelectOrDropFilesHere: 'Haga clic para seleccionar o soltar archivos aquí',
   close: 'Cerrar',
   copied: 'Copiado',
   copyToClipboard: 'Copiar al portapapeles',
   error: 'Error',
   hidePassword: 'Ocultar contraseña',
   loading: 'Cargando',
+  remove: 'Remover',
   showPassword: 'Mostrar contraseña'
   /* cSpell:enable */
 };

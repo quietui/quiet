@@ -9,12 +9,14 @@ const translation: Translation = {
 
   breadcrumbs: 'Панировочные сухари',
   clearEntry: 'Очистить запись',
+  clickToSelectOrDropFilesHere: 'Нажмите, чтобы выбрать или перетащить сюда файлы',
   close: 'Закрыть',
   copied: 'Скопировано',
   copyToClipboard: 'Скопировать в буфер обмена',
   error: 'Ошибка',
   hidePassword: 'Скрыть пароль',
   loading: 'Загрузка',
+  remove: 'Удалять',
   showPassword: 'Показать пароль'
   /* cSpell:enable */
 };

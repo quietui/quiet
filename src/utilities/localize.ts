@@ -17,11 +17,13 @@ export interface Translation extends DefaultTranslation {
   // Translated terms
   breadcrumbs: string;
   clearEntry: string;
+  clickToSelectOrDropFilesHere: string;
   close: string;
   copied: string;
   copyToClipboard: string;
   error: string;
   hidePassword: string;
   loading: string;
+  remove: string;
   showPassword: string;
 }

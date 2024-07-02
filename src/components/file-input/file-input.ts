@@ -126,6 +126,12 @@ export class QuietFileInput extends QuietElement {
       this.customStates.set('empty', this.files.length === 0);
       // Update the file list so assistive devices read the correct number of files
       this.fileInput.files = this.getFileList();
+
+      // Safari's accessibility tree doesn't seem to update when the files property is set, but toggling an aria-
+      // attribute seems to do the trick. Without it, VoiceOver won't announce the updated file list.
+      this.fileInput.setAttribute('aria-hidden', 'true');
+      this.fileInput.removeAttribute('aria-hidden');
+
       this.updateFormValue();
     }
 

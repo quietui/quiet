@@ -250,7 +250,6 @@ export class QuietCheckbox extends QuietElement {
           <input
             id="checkbox"
             type="checkbox"
-            name=${ifDefined(this.name)}
             value=${ifDefined(this.value)}
             .indeterminate=${live(this.indeterminate)}
             .checked=${live(this.checked)}

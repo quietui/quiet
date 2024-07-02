@@ -385,7 +385,6 @@ export class QuietTextArea extends QuietElement {
           ?disabled=${this.disabled}
           ?readonly=${this.readonly}
           ?required=${this.required}
-          name=${ifDefined(this.name)}
           placeholder=${ifDefined(this.placeholder)}
           minlength=${ifDefined(this.minLength)}
           maxlength=${ifDefined(this.maxLength)}

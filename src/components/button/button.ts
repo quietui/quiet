@@ -243,7 +243,6 @@ export class QuietButton extends QuietElement {
         })}
         type=${ifDefined(isLink ? undefined : this.type)}
         ?disabled=${ifDefined(isLink ? undefined : this.disabled)}
-        name=${ifDefined(isLink ? undefined : this.name)}
         value=${ifDefined(isLink ? undefined : this.value)}
         href=${ifDefined(isLink ? this.href : undefined)}
         target=${ifDefined(isLink ? this.target : undefined)}

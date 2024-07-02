@@ -444,7 +444,6 @@ export class QuietTextField extends QuietElement {
           ?disabled=${this.disabled}
           ?readonly=${this.readonly}
           ?required=${this.required}
-          name=${ifDefined(this.name)}
           placeholder=${ifDefined(this.placeholder)}
           pattern=${ifDefined(this.pattern)}
           minlength=${ifDefined(this.minLength)}

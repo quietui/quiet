@@ -244,7 +244,6 @@ export class QuietSwitch extends QuietElement {
             id="switch"
             part="switch"
             type="checkbox"
-            name=${ifDefined(this.name)}
             value=${ifDefined(this.value)}
             role="switch"
             aria-checked=${this.checked ? 'true' : 'false'}

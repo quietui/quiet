@@ -35,6 +35,7 @@ import type { CSSResultGroup } from 'lit';
  * @csspart button - The internal `<button>` element. Other than `width`, this is where most custom styles should be
  *  applied.
  * @csspart caret - The caret icon, a `<quiet-icon>` element. Only present with the `with-caret` attribute.
+ * @csspart caret__svg - The caret icon's `<svg>` part.
  * @csspart spinner - The loading indicator, a `<quiet-spinner>` element. Only present with the `loading` attribute.
  * @csspart toggle-indicator - When the button is a toggle button, this is the indicator that shows the current state.
  *
@@ -257,7 +258,7 @@ export class QuietButton extends QuietElement {
         <slot name="start"></slot>
         <slot></slot>
         <slot name="end"></slot>
-        ${this.withCaret ? html`<quiet-icon id="caret" part="caret" slot="end" name="chevron-down" library="system"></quiet-icon>` : ''}
+        ${this.withCaret ? html`<quiet-icon id="caret" part="caret" exportparts="svg:caret__svg" slot="end" name="chevron-down" library="system"></quiet-icon>` : ''}
         ${isToggle ? html`<span part="toggle-indicator" id="toggle-indicator"></span>` : ''}
         ${isLoading ? html`<quiet-spinner id="spinner" part="spinner"></quiet-spinner>` : ''}
       </${tag}>

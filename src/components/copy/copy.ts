@@ -29,6 +29,7 @@ import type { CSSResultGroup } from 'lit';
  * @csspart copy-button - The default copy button, a `<quiet-button>` element.
  * @csspart copy-button__button - The default copy button's exported `button` part.
  * @csspart copy-icon - The default copy icon, a `<quiet-icon>` element.
+ * @csspart copy-icon__svg - The copy icon's `svg` part.
  * @csspart feedback - The feedback that shows when copying.
  *
  * @dependency quiet-button
@@ -122,7 +123,7 @@ export class QuietCopy extends QuietElement {
           appearance="text"
           icon-label=${this.localize.term('copyToClipboard')}
         >
-          <quiet-icon part="copy-icon" library="system" name="copy"></quiet-icon>
+          <quiet-icon part="copy-icon" exportparts="svg:copy-icon__svg" library="system" name="copy"></quiet-icon>
         </quiet-button>
       </slot>
 

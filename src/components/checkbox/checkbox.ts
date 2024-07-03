@@ -30,7 +30,9 @@ import type { CSSResultGroup } from 'lit';
  * @csspart label - The `<label>` that wraps the entire control.
  * @csspart visual-box - The element that wraps the internal checkbox.
  * @csspart check-icon - The check icon, a `<quiet-icon>` element.
+ * @csspart check-icon__svg - The check icon's `svg` part.
  * @csspart indeterminate-icon - The indeterminate icon, a `<quiet-icon>` element.
+ * @csspart indeterminate-icon__svg - The indeterminate icon's `<svg>` part.
  *
  * @cssstate checked - Applied when the checkbox is checked.
  * @cssstate disabled - Applied when the checkbox is disabled.
@@ -261,8 +263,20 @@ export class QuietCheckbox extends QuietElement {
             @focus=${this.handleFocus}
             @blur=${this.handleBlur}
           />
-          <quiet-icon id="check-icon" part="check-icon" library="system" name="check"></quiet-icon>
-          <quiet-icon id="indeterminate-icon" part="indeterminate-icon" library="system" name="minus"></quiet-icon>
+          <quiet-icon
+            id="check-icon"
+            part="check-icon"
+            exportparts="svg:check-icon__svg"
+            library="system"
+            name="check"
+          ></quiet-icon>
+          <quiet-icon
+            id="indeterminate-icon"
+            part="indeterminate-icon"
+            exportparts="svg:indeterminate-icon__svg"
+            library="system"
+            name="minus"
+          ></quiet-icon>
         </div>
         <slot>${this.label}</slot>
       </label>

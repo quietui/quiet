@@ -18,6 +18,7 @@ import type { CSSResultGroup } from 'lit';
  * @slot details - Optional details, such as a keyboard shortcut, to display at the end of the item.
  *
  * @csspart checkmark - The checkmark icon that's shown when checked, a `<quiet-icon>` element.
+ * @csspart checkmark__svg - The checkmark icon's `svg` part.
  * @csspart icon - The container that wraps the icon.
  * @csspart label - The container that wraps the label.
  * @csspart details - The container that wraps the menu item's details.
@@ -89,7 +90,15 @@ export class QuietDropdownItem extends QuietElement {
   render() {
     return html`
       ${this.type === 'checkbox'
-        ? html`<quiet-icon id="check" part="checkmark" library="system" name="check"></quiet-icon>`
+        ? html`
+            <quiet-icon
+              id="check"
+              part="checkmark"
+              exportparts="svg:checkmark__svg"
+              library="system"
+              name="check"
+            ></quiet-icon>
+          `
         : ''}
 
       <span id="icon" part="icon">

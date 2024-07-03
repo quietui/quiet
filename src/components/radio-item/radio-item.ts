@@ -30,6 +30,7 @@ import type { CSSResultGroup } from 'lit';
  * @csspart label - The `<label>` that wraps the entire control.
  * @csspart visual-box - The element that wraps the internal radio.
  * @csspart radio-icon - The radio icon, a `<quiet-icon>` element.
+ * @csspart radio-icon__svg - The radio icon's `svg` part.
  */
 @customElement('quiet-radio-item')
 export class QuietRadioItem extends QuietElement {
@@ -144,7 +145,14 @@ export class QuietRadioItem extends QuietElement {
             disabled: this.disabled
           })}
         >
-          <quiet-icon id="radio-icon" part="radio-icon" library="system" family="filled" name="circle"></quiet-icon>
+          <quiet-icon
+            id="radio-icon"
+            part="radio-icon"
+            exportparts="radio-icon__svg"
+            library="system"
+            family="filled"
+            name="circle"
+          ></quiet-icon>
         </div>
         <slot>${this.label}</slot>
       </div>

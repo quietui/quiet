@@ -46,9 +46,21 @@ const VALIDATION_MESSAGE = nativeFileInput.validationMessage;
  * @cssstate user-valid - Applied when the file input is valid and the user has sufficiently interacted with it.
  * @cssstate user-invalid - Applied when the file input is invalid and the user has sufficiently interacted with it.
  *
- * @csspart label - The element that contains the text field's label.
+ * @csspart label - The element that contains the text field's label, a `<label>` element.
  * @csspart description - The element that contains the text field's description.
  * @csspart dropzone - The bordered region where files can be dropped.
+ * @csspart file-list - The list of files shown when at least one file is selected.
+ * @csspart file - A selected file will be drawn in this container.
+ * @csspart file-thumbnail - The container that hold's the file's image or icon.
+ * @csspart file-image - The file's image preview (if it's an image).
+ * @csspart file-icon - The file's icon (if it's not an image).
+ * @csspart file-icon__svg - The `<svg>` part of the file icon.
+ * @csspart file-details - The container that holds the filename and size.
+ * @csspart file-name - The container that holds the file's name, a `<span>` element.
+ * @csspart file-size - The container that holds the file's size, a `<small>` element.
+ * @csspart file-actions - The container that holds the file's remove button.
+ * @csspart file-remove-button - The file's remove button.
+ * @csspart file-remove-button__button - The `button` part of the file's remove button.
  */
 @customElement('quiet-file-input')
 export class QuietFileInput extends QuietElement {
@@ -62,11 +74,13 @@ export class QuietFileInput extends QuietElement {
   @query('#dropzone') dropzone: HTMLLabelElement;
   @query('#file-input') fileInput: HTMLInputElement;
 
-  @state() private files: File[] = [];
   @state() private isDragging = false;
   @state() private isInvalid = false;
   @state() private wasChanged = false;
   @state() private wasSubmitted = false;
+
+  /** An array of files that are currently selected. (Property only)*/
+  @state() public files: File[] = [];
 
   /**
    * The text field's label. If you need to provide HTML in the label, use the `label` slot instead.
@@ -253,11 +267,49 @@ export class QuietFileInput extends QuietElement {
     this.dispatchEvent(new QuietChangeEvent());
   }
 
-  /** Determines if a File object is an image. */
+  /** Determines if a File object is an image type the browser can render. */
   private isImage(file: File) {
     return ['image/apng', 'image/avif', 'image/gif', 'image/jpeg', 'image/png', 'image/svg+xml', 'image/webp'].includes(
       file.type
     );
+  }
+
+  /** Returns a system icon name based on the provided mime type. */
+  private mimeTypeToIconName(mimeType: string) {
+    // Archives
+    if (
+      [
+        'application/x-freearc', // cspell:disable-line
+        'application/x-bzip',
+        'application/x-bzip2',
+        'application/gzip',
+        'application/java-archive',
+        'application/vnd.rar',
+        'application/x-tar',
+        'application/zip',
+        'application/x-zip-compressed',
+        'application/x-7z-compressed'
+      ].includes(mimeType)
+    ) {
+      return 'file-zip';
+    }
+
+    // Audio
+    if (mimeType.startsWith('audio')) {
+      return 'music';
+    }
+
+    // Images
+    if (mimeType.startsWith('image')) {
+      return 'photo';
+    }
+
+    // Video
+    if (mimeType.startsWith('video')) {
+      return 'video';
+    }
+
+    return 'file';
   }
 
   /** Updates the form value based on this.files. Call this after adding or removing files to/from this.files. */
@@ -305,6 +357,7 @@ export class QuietFileInput extends QuietElement {
           disabled: this.disabled,
           dragging: this.isDragging
         })}"
+        role="presentation"
         @focus=${this.handleFocus}
         @blur=${this.handleBlur}
         @dragenter=${this.handleDragEnter}
@@ -346,22 +399,30 @@ export class QuietFileInput extends QuietElement {
       >
         ${this.files.map((file, index) => {
           const isImage = this.isImage(file);
+          const iconName = this.mimeTypeToIconName(file.type);
 
           return html`
-            <div class="file">
-              <span class="file-visual">
+            <div part="file" class="file">
+              <span part="file-thumbnail" class="file-thumbnail">
                 ${isImage
-                  ? html`<img src=${URL.createObjectURL(file)} alt="${file.name}" />`
-                  : html`<quiet-icon library="system" name="file"></quiet-icon>`}
+                  ? html`<img part="file-image" src=${URL.createObjectURL(file)} alt="" aria-hidden="true" />`
+                  : html`<quiet-icon
+                      part="file-icon"
+                      exportparts="svg:file-icon__svg"
+                      library="system"
+                      name="${iconName}"
+                    ></quiet-icon>`}
               </span>
               <div class="file-details">
-                <span class="file-name"> ${file.name} </span>
+                <span class="file-name">${file.name}</span>
                 <small class="file-size">
                   <quiet-bytes value=${file.size} lang=${this.localize.lang()}></quiet-bytes>
                 </small>
               </div>
               <div class="file-actions">
                 <quiet-button
+                  part="file-remove-button"
+                  exportparts="button:file-remove-button__button"
                   class="file-remove"
                   name="x"
                   appearance="text"

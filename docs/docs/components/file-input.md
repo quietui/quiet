@@ -4,10 +4,43 @@ layout: component
 ---
 
 ```html {.example}
-<form id="file-input__overview" enctype="multipart/form-data" method="post" action="about:blank" target="_blank">
+<quiet-file-input 
+  name="file"
+  label="Select a file" 
+  description="Files must be 20MB or less"
+  multiple
+></quiet-file-input>
+```
+
+## Examples
+
+### Labels and descriptions
+
+You can use the `label` and `description` attributes to provide plain text labels and descriptions for the file input. If you want to provide HTML, use the `label` and `description` slots instead.
+
+```html {.example}
+<quiet-file-input name="file" label="Select a file">
+  <span slot="description">
+    For more information, <a href="https://example.com/" target="_blank">visit our website</a>.
+  </span>
+</quiet-file-input>
+```
+
+### Uploading with forms
+
+When uploading a file from a form, you'll probably want to add [`method="post"`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form#method) and [`enctype="multipart/form-data"`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/enctype) to the form so the files will be sent to the server correctly.
+
+```html {.example}
+<form 
+  id="file-input__uploading" 
+  enctype="multipart/form-data" 
+  method="post" 
+  action="about:blank" 
+  target="_blank"
+>
   <quiet-file-input 
     name="file"
-    label="Select a file" 
+    label="Select some files" 
     description="Files must be 20MB or less"
     multiple
   ></quiet-file-input>
@@ -16,7 +49,7 @@ layout: component
 </form>
 
 <script>
-  const form = document.getElementById('file-input__overview');
+  const form = document.getElementById('file-input__uploading');
 
   form.addEventListener('submit', event => {
     event.preventDefault();
@@ -27,22 +60,44 @@ layout: component
 </script>
 ```
 
-## Examples
+### Working with files
 
-### Labels and descriptions
+Use the `files` property to get an array of selected files. Note the use of an array instead of a [`FileList`](https://developer.mozilla.org/en-US/docs/Web/API/FileList), which allows you to add, modify, and remove files more easily than a native file input.
 
-You can use the `label` and `description` attributes to provide plain text labels and descriptions for the file input. If you want to provide HTML, use the `label` and `description` slots instead.
+Try selecting a few files and then clicking each button.
 
 ```html {.example}
 <quiet-file-input 
+  id="file-input__accessing"
   name="file"
-  label="Select a file" 
->
-  <span slot="description">
-    For more information, <a href="https://example.com/" target="_blank">visit our website</a>.
-  </span>
-</quiet-file-input>
+  label="Select some files" 
+  description="Files must be 20MB or less"
+  multiple
+></quiet-file-input>
+<br>
+<quiet-button type="submit">Reverse</quiet-button>
+<quiet-button type="submit">Clear</quiet-button>
+
+<script>
+  const fileInput = document.getElementById('file-input__accessing');
+  const reverseButton = fileInput.nextElementSibling.nextElementSibling;
+  const clearButton = reverseButton.nextElementSibling;
+
+  // Reverse
+  reverseButton.addEventListener('quiet-click', event => {
+    fileInput.files = fileInput.files.toReversed();
+  });
+
+  // Clear
+  clearButton.addEventListener('quiet-click', event => {
+    fileInput.files = [];
+  });
+</script>
 ```
+
+:::warn
+The `files` property must be reassigned, not mutated! Avoid using functions that mutate the array, such as [`reverse()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse) and [`sort()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort), because they won't trigger an update.
+:::
 
 ### Accepting multiple files
 
@@ -51,7 +106,7 @@ Add the `multiple` attribute to allow the file input to accept more than one fil
 ```html {.example}
 <quiet-file-input 
   name="file" 
-  label="Upload your cat's vet records" 
+  label="Select the files you want to upload" 
   multiple
 >
 </quiet-file-input>
@@ -85,13 +140,41 @@ To limit the file input to certain file types, set the `accept` attribute to a c
 Use the `dropzone` slot to customize what appears inside the dropzone.
 
 ```html {.example}
-<quiet-file-input name="file" label="Select a file">
+<quiet-file-input name="file" label="Upload a file" multiple>
   <div slot="dropzone">
     <quiet-icon name="cloud-upload" style="font-size: 2rem;"></quiet-icon>
     <br>
-    Send it to the cloud
+    Choose some files to send to the cloud
   </div>
 </quiet-file-input>
+```
+
+### Button-only file inputs
+
+Button-only file inputs aren't supported, but you can achieve this pattern with a button, a native `<input type="file">`, and a bit of JavaScript. If you're using [Quiet Restyle](/docs/restyle), you can use the `visually-hidden` utility class to hide the input.
+
+```html {.example}
+<quiet-button id="file-input__button-only">Select files</quiet-button>
+<input class="visually-hidden" type="file" name="file">
+
+<script>
+  const button = document.getElementById('file-input__button-only');
+  const fileInput = button.nextElementSibling;
+
+  // Open the system file browser when the button is clicked
+  button.addEventListener('click', () => {
+    fileInput.click();
+  });
+
+  // Listen for files to be selected
+  fileInput.addEventListener('change', () => {
+    // Do something with the files
+    console.log(...fileInput.files);
+
+    // Reset the input
+    fileInput.value = '';
+  });
+</script>
 ```
 
 ### Validating file inputs

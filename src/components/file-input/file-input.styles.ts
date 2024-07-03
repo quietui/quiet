@@ -96,7 +96,7 @@ export default css`
       }
 
       quiet-icon {
-        font-size: 2em;
+        font-size: 1.5em;
         color: var(--quiet-text-muted);
       }
     }

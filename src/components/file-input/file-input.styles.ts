@@ -67,12 +67,13 @@ export default css`
     display: flex;
     align-items: center;
     gap: 1em;
+    background-color: var(--quiet-paper-color);
     border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
     border-radius: var(--quiet-border-radius);
     box-shadow: var(--quiet-shadow-softer);
-    padding: 0.75em;
+    padding: 0.5em;
 
-    .file-visual {
+    .file-thumbnail {
       position: relative;
       flex: 0 0 4em;
       display: flex;
@@ -86,7 +87,7 @@ export default css`
         width: 100%;
         height: 100%;
         object-fit: cover;
-        border-radius: var(--quiet-border-radius);
+        border-radius: calc(var(--quiet-border-radius) * 0.5);
       }
 
       &:has(quiet-icon) {
@@ -95,7 +96,7 @@ export default css`
       }
 
       quiet-icon {
-        font-size: 1.25em;
+        font-size: 2em;
         color: var(--quiet-text-muted);
       }
     }

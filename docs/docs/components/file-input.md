@@ -5,7 +5,7 @@ layout: component
 
 ```html {.example}
 <quiet-file-input 
-  name="file"
+  name="files"
   label="Select a file" 
   description="Files must be 20MB or less"
   multiple
@@ -39,7 +39,7 @@ When uploading a file from a form, you'll probably want to add [`method="post"`]
   target="_blank"
 >
   <quiet-file-input 
-    name="file"
+    name="files"
     label="Select some files" 
     description="Files must be 20MB or less"
     multiple
@@ -69,7 +69,7 @@ Try selecting a few files and then clicking each button.
 ```html {.example}
 <quiet-file-input 
   id="file-input__accessing"
-  name="file"
+  name="files"
   label="Select some files" 
   description="Files must be 20MB or less"
   multiple
@@ -105,7 +105,7 @@ Add the `multiple` attribute to allow the file input to accept more than one fil
 
 ```html {.example}
 <quiet-file-input 
-  name="file" 
+  name="files" 
   label="Select the files you want to upload" 
   multiple
 >
@@ -140,7 +140,7 @@ To limit the file input to certain file types, set the `accept` attribute to a c
 Use the `dropzone` slot to customize what appears inside the dropzone.
 
 ```html {.example}
-<quiet-file-input name="file" label="Upload a file" multiple>
+<quiet-file-input name="files" label="Upload a file" multiple>
   <div slot="dropzone">
     <quiet-icon name="cloud-upload" style="font-size: 2rem;"></quiet-icon>
     <br>

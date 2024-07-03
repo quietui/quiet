@@ -12,6 +12,10 @@ layout: component
 ></quiet-file-input>
 ```
 
+:::info
+This component works like a [native file input](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file). Files can be posted to your server as multipart form data or you can access them via JavaScript for processing.
+:::
+
 ## Examples
 
 ### Labels and descriptions

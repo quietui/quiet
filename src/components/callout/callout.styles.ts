@@ -9,7 +9,6 @@ export default css`
     border-style: var(--quiet-border-style);
     border-width: var(--quiet-border-width);
     border-radius: var(--quiet-border-radius);
-    box-shadow: var(--quiet-shadow-softer);
     padding-inline: 1em;
     padding-block: 1em;
   }

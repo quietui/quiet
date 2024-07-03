@@ -8,7 +8,7 @@ section: sponsor
 <img class="whiskers only-light" src="/assets/images/whiskers/whiskers-neutral-light.svg" alt="Whiskers the mouse standing in a neutral position">
 <img class="whiskers only-dark" src="/assets/images/whiskers/whiskers-neutral-dark.svg" alt="Whiskers the mouse standing in a neutral position">
 
-Quiet is open source and available under the terms of the [MIT license](https://www.tldrlegal.com/license/mit-license). This means you can use it for free and without attribution in any software project you want — even closed source applications.
+Quiet is an open source project and is made available under the terms of the [MIT license](https://www.tldrlegal.com/license/mit-license). This means you can use it for free and without attribution in any software project you want — even closed source applications.
 
 If you've made it to this page, there's a good chance I've already saved you a lot of time.
 

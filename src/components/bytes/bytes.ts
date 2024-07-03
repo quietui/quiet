@@ -8,7 +8,7 @@ import type { CSSResultGroup } from 'lit';
 /**
  * <quiet-bytes>
  *
- * @summary Turns an arbitrary number of bytes or bits into a human-readable output.
+ * @summary Formats an arbitrary number of bytes or bits into a human-readable size.
  * @documentation https://quietui.com/docs/components/bytes
  * @status stable
  * @since 1.0

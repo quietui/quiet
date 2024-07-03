@@ -24,7 +24,7 @@ With Quiet, you no longer need to learn a new UI library when you switch framewo
 Copy and paste the following code into the `<head>` section of any HTML document. The autoloader will automatically load components from the CDN as you add them to the DOM.
 
 ```html
-<link rel="stylesheet" href="{% cdnUrl '/dist/quiet.css' %}">
+<link rel="stylesheet" href="{% cdnUrl '/dist/themes/quiet.css' %}">
 <script src="{% cdnUrl '/dist/quiet.loader.js' %}" type="module"></script>
 ```
 

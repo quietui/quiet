@@ -11,7 +11,7 @@ The default theme provides simple, elegant styles with support for light and dar
 To import the default theme from the CDN, add the following code to the `<head>` of your page.
 
 ```html
-<link rel="stylesheet" href="{% cdnUrl '/dist/quiet.css' %}">
+<link rel="stylesheet" href="{% cdnUrl '/dist/themes/quiet.css' %}">
 ```
 
 ### Activating dark mode

@@ -96,6 +96,11 @@ export default css`
         100ms scale ease;
     }
 
+    /* Fix check alignment */
+    #check-icon {
+      margin-inline: -0.5px;
+    }
+
     &.checked:not(.indeterminate) #check-icon,
     &.indeterminate #indeterminate-icon {
       opacity: 1;

@@ -180,7 +180,7 @@ Checkboxes come with a simple, minimal appearance. Feel free to customize them w
 
     quiet-icon {
       font-size: 4rem;
-      stroke-width: 1px;
+      stroke-width: .75px;
     }
 
     span {
@@ -191,6 +191,54 @@ Checkboxes come with a simple, minimal appearance. Feel free to customize them w
     &:state(checked) {
       background-color: var(--quiet-primary-fill-softer);
       border-color: var(--quiet-primary-stroke-mid);
+    }
+  }
+</style>
+```
+
+```html {.example .flex-row}
+<quiet-checkbox checked class="checkbox__image">
+  <img draggable="false" src="https://images.unsplash.com/photo-1620196244888-d31ff5bbf163?q=80&w=400&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="A gray kitten plays with a blue toy mouse">
+</quiet-checkbox>
+
+<quiet-checkbox class="checkbox__image">
+  <img draggable="false" src="https://images.unsplash.com/photo-1597239351814-a5f03b4663c0?q=80&w=400&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="A gray kitten practices prowling on a brown floor">
+</quiet-checkbox>
+
+<quiet-checkbox class="checkbox__image">
+  <img draggable="false" src="https://images.unsplash.com/photo-1503844281047-cf42eade5ca5?q=80&w=400&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="A gray kitten looks at the camera from behind a tree">
+</quiet-checkbox>
+
+<style>
+  .checkbox__image {
+    isolation: isolate;
+    position: relative;
+    
+    img {
+      display: block;
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: .5rem;
+    }
+
+    &::part(visual-box) {
+      position: absolute;
+      bottom: .5rem;
+      left: .5rem;
+      width: 1.5rem;
+      height: 1.5rem;
+      border: none;
+      border-radius: 50%;
+      background-color: color-mix(in oklab, black, transparent 50%);
+    }
+
+    &:state(checked)::part(visual-box) {
+      background-color: var(--quiet-primary-fill-mid);
+    }
+
+    &::part(check-icon) {
+      scale: .75;
     }
   }
 </style>

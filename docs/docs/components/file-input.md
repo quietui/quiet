@@ -42,12 +42,7 @@ When uploading a file from a form, you'll probably want to add [`method="post"`]
   action="about:blank" 
   target="_blank"
 >
-  <quiet-file-input 
-    name="files"
-    label="Select some files" 
-    description="Files must be 20MB or less"
-    multiple
-  ></quiet-file-input>
+  <quiet-file-input name="files" label="Select a file"></quiet-file-input>
   <br>
   <quiet-button type="submit" variant="primary">Upload</quiet-button>
 </form>

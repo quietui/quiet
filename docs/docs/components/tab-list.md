@@ -254,7 +254,7 @@ Note that we use `tabindex="-1"` on the close button to prevent it from interfer
 Tab lists come with a simple, minimal appearance. Feel free to customize them with your own styles.
 
 ```html {.example}
-<quiet-tab-list label="Select a tab" class="tab-list-cards">
+<quiet-tab-list label="Select a tab" class="tab-list__cards">
 	<quiet-tab slot="tab" panel="first">First</quiet-tab>
 	<quiet-tab slot="tab" panel="second">Second</quiet-tab>
 	<quiet-tab slot="tab" panel="third">Third</quiet-tab>
@@ -265,7 +265,7 @@ Tab lists come with a simple, minimal appearance. Feel free to customize them wi
 </quiet-tab-list>
 
 <style>
-  .tab-list-cards {
+  .tab-list__cards {
     quiet-tab {
       border: solid 1px var(--quiet-neutral-stroke-softer);
       border-start-start-radius: var(--quiet-border-radius);
@@ -293,7 +293,7 @@ Tab lists come with a simple, minimal appearance. Feel free to customize them wi
 ```
 
 ```html {.example}
-<quiet-tab-list label="Select a tab" class="tab-list-segments">
+<quiet-tab-list label="Select a tab" class="tab-list__segments">
 	<quiet-tab slot="tab" panel="first">First</quiet-tab>
 	<quiet-tab slot="tab" panel="second">Second</quiet-tab>
 	<quiet-tab slot="tab" panel="third">Third</quiet-tab>
@@ -304,7 +304,7 @@ Tab lists come with a simple, minimal appearance. Feel free to customize them wi
 </quiet-tab-list>
 
 <style>
-  .tab-list-segments {
+  .tab-list__segments {
     &::part(tabs) {
       justify-content: space-between;
       background-color: var(--quiet-neutral-fill-softer);

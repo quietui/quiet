@@ -290,7 +290,7 @@ For best results, avoid using this feature unless something severe will result f
 Dialogs come with a simple, minimal appearance. Feel free to customize them with your own styles. Here's a quick way to turn a dialog into an action sheet that works great on mobile devices.
 
 ```html {.example}
-<quiet-dialog class="action-sheet" placement="bottom" id="dialog__styling">
+<quiet-dialog class="dialog__action-sheet" placement="bottom" id="dialog__styling">
   <quiet-button data-dialog="close" pill>Cancel</quiet-button>
   <quiet-button variant="destructive" pill data-dialog="close">Delete</quiet-button>
 </quiet-dialog>
@@ -298,12 +298,12 @@ Dialogs come with a simple, minimal appearance. Feel free to customize them with
 <quiet-button variant="destructive" data-dialog="open dialog__styling">Delete</quiet-button>
 
 <style>
-  quiet-dialog.action-sheet::part(dialog) {
+  quiet-dialog.dialog__action-sheet::part(dialog) {
     background: transparent;
     box-shadow: none;
   }
   
-  quiet-dialog.action-sheet::part(body) {
+  quiet-dialog.dialog__action-sheet::part(body) {
     display: flex;
     flex-direction: column;
     width: 100%;

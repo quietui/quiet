@@ -263,7 +263,7 @@ You can create a collapsed breadcrumb item by adding a [dropdown](/docs/componen
 Breadcrumbs come with a simple, minimal appearance. Feel free to customize them with your own styles.
 
 ```html {.example}
-<quiet-breadcrumb class="breadcrumb-bar">
+<quiet-breadcrumb class="breadcrumb__bar">
   <quiet-breadcrumb-item href="https://example.com/">
     <quiet-icon slot="start" name="music"></quiet-icon>
     Music
@@ -283,7 +283,7 @@ Breadcrumbs come with a simple, minimal appearance. Feel free to customize them 
 </quiet-breadcrumb>
 
 <style>
-  .breadcrumb-bar {
+  .breadcrumb__bar {
     background-color: var(--quiet-neutral-fill-softer);
     border-radius: 9999px;
     padding-inline: 1em;
@@ -302,29 +302,12 @@ Breadcrumbs come with a simple, minimal appearance. Feel free to customize them 
       text-underline-offset: 0.125em;
     }
   }
-
-  .breadcrumb-borders {
-    quiet-breadcrumb-item::part(label) {
-      padding: .33em .5em;
-    }
-
-    quiet-breadcrumb-item:not([current])::part(label) {
-      background-color: var(--quiet-paper);
-      border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
-      border-radius: calc(var(--quiet-border-radius) / 1.25);
-      box-shadow: var(--quiet-shadow-softer);
-    }
-
-    quiet-breadcrumb-item::part(separator) {
-      display: none;
-    }
-  }
 </style>
 ```
 
 
 ```html {.example}
-<quiet-breadcrumb class="breadcrumb-borders">
+<quiet-breadcrumb class="breadcrumb__borders">
   <quiet-breadcrumb-item href="https://example.com/">
     <quiet-icon slot="start" name="music"></quiet-icon>
     Music
@@ -344,7 +327,7 @@ Breadcrumbs come with a simple, minimal appearance. Feel free to customize them 
 </quiet-breadcrumb>
 
 <style>
-  .breadcrumb-borders {
+  .breadcrumb__borders {
     quiet-breadcrumb-item::part(label) {
       padding: .33em .5em;
     }

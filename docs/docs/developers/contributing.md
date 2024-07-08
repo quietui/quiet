@@ -95,6 +95,10 @@ The `id` attribute should be used to reference unique elements within each compo
 
 Classes should be used to apply modifiers and reusable styles to elements. Avoid using classes to reference individual elements. 
 
+### Using ids and classes in examples
+
+When creating examples, use the `tag-name__id` or `tag-name__class` convention to assign ids or classes within the example. This is an easy way to scope examples and it prevents styles and behaviors from affecting other examples.
+
 ### Using parts
 
 Add parts only to internals that should be exposed as part of the component's public API. Only one part should be applied to an element. Avoid using parts to represent state. It's usually better to apply a custom state to the host element instead.

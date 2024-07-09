@@ -45,6 +45,6 @@ This project is [not anchored to a major version](https://www.abeautifulsite.net
 
 ---
 
-## 1.0.0-beta.1
+## 1.0.0
 
 - Initial release

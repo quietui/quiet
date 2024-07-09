@@ -150,8 +150,9 @@ export default css`
       }
     }
 
-    /* Date inputs */
-    &[type='date']::-webkit-date-and-time-value {
+    /* Date and time inputs */
+    &[type='date']::-webkit-date-and-time-value,
+    &[type='time']::-webkit-date-and-time-value {
       text-align: start;
     }
 

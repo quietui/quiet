@@ -37,9 +37,9 @@
     <script type="module" src="/assets/scripts/turbo.js"></script>
 
     {# Quiet #}
-    <script type="module" src="/dist/quiet.loader.js"></script>
-    <link rel="stylesheet" href="/dist/themes/quiet.css" />
-    <link rel="stylesheet" href="/dist/themes/restyle.css" />
+    <script type="module" src="/dist/quiet.loader.js?v={{ package.version }}"></script>
+    <link rel="stylesheet" href="/dist/themes/quiet.css?v={{ package.version }}" />
+    <link rel="stylesheet" href="/dist/themes/restyle.css?v={{ package.version }}" />
   </head>
   <body class="layout-{{ layout | stripExtension }}">
     <a id="skip-to-main" href="#content" data-smooth-link="off">Skip to content</a>

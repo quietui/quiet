@@ -19,7 +19,7 @@ Quiet is maintained by [Cory LaViska](https://x.com/claviska), the creator of [S
 
 The truth is, Shoelace has matured a lot over the years. While that's a great thing for its users, as an artist, I've lost my canvas for creativity. I'm still committed to Shoelace and it has a very promising future — it has a full team now and we're building an amazing product out of it. But it's not my personal playground anymore.
 
-==**Enter Quiet, my creative outlet.**==
+**Enter Quiet, my creative outlet.**
 
 A passion project. Something I'm building from scratch to explore new ideas and have fun with. A place where I can satisfy my component addiction without breaking things for paying customers.
 

@@ -75,7 +75,7 @@ If you're updating multiple elements, you can safely use [`requestAnimationFrame
 
 ## Slots
 
-Many components accepts content through [slots](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot). Slots are a platform feature that work very similar to the slots you may have used in Vue. A custom element can have any number of slots.
+Many components accept content through [slots](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot). Slots are a platform feature that work very similar to the slots you may have used in Vue. A custom element can have any number of slots.
 
 The default slot is almost any content inside the component. In this example, we're slotting a text node into the button to serve as its label, but it could be an HTML element as well.
 

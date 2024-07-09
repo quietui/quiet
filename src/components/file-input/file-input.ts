@@ -406,12 +406,14 @@ export class QuietFileInput extends QuietElement {
               <span part="file-thumbnail" class="file-thumbnail">
                 ${isImage
                   ? html`<img part="file-image" src=${URL.createObjectURL(file)} alt="" aria-hidden="true" />`
-                  : html`<quiet-icon
-                      part="file-icon"
-                      exportparts="svg:file-icon__svg"
-                      library="system"
-                      name="${iconName}"
-                    ></quiet-icon>`}
+                  : html`
+                      <quiet-icon
+                        part="file-icon"
+                        exportparts="svg:file-icon__svg"
+                        library="system"
+                        name="${iconName}"
+                      ></quiet-icon>
+                    `}
               </span>
               <div class="file-details">
                 <span class="file-name">${file.name}</span>

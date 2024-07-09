@@ -16,8 +16,8 @@ export interface Translation extends DefaultTranslation {
 
   // Translated terms
   breadcrumbs: string;
+  browseForFilesOrDragAndDrop: string;
   clearEntry: string;
-  clickToSelectOrDropFilesHere: string;
   close: string;
   copied: string;
   copyToClipboard: string;

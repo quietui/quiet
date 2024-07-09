@@ -7,8 +7,8 @@ const translation: Translation = {
   $dir: 'ltr',
 
   breadcrumbs: 'Breadcrumbs',
+  browseForFilesOrDragAndDrop: 'Browse for files or drag and drop',
   clearEntry: 'Clear entry',
-  clickToSelectOrDropFilesHere: 'Click to select or drop files here',
   close: 'Close',
   copied: 'Copied',
   copyToClipboard: 'Copy to clipboard',

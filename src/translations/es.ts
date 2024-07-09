@@ -8,8 +8,8 @@ const translation: Translation = {
   $dir: 'ltr',
 
   breadcrumbs: 'Migas de pan',
+  browseForFilesOrDragAndDrop: 'Busque archivos o arrástrelos y suéltelos',
   clearEntry: 'Borrar entrada',
-  clickToSelectOrDropFilesHere: 'Haga clic para seleccionar o soltar archivos aquí',
   close: 'Cerrar',
   copied: 'Copiado',
   copyToClipboard: 'Copiar al portapapeles',

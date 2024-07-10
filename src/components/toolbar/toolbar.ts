@@ -62,6 +62,11 @@ export class QuietToolbar extends QuietElement {
 
     // Reset the roving tab index when the slot changes
     buttons.forEach((button, index) => {
+      //
+      // TODO - find the first non-disabled tab and set it
+      //
+      // TODO - add a method to reset the roving tab index so users can call it when buttons get disabled
+      //
       button.tabIndex = index === 0 ? 0 : -1;
     });
   }

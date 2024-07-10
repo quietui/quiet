@@ -90,7 +90,7 @@ export default css`
 
     &.checked #radio-icon {
       opacity: 1;
-      scale: 0.5;
+      scale: 0.667;
     }
 
     /* The actual radio control */

@@ -7,7 +7,7 @@ Dropdown menus appear when their trigger element is clicked. They are not modal,
 
 ```html {.example}
 <quiet-dropdown>
-  <quiet-button slot="trigger" variant="primary" with-caret>
+  <quiet-button slot="trigger" with-caret>
     <quiet-icon slot="start" name="mail"></quiet-icon>
     Message
   </quiet-button>

@@ -183,6 +183,12 @@ Modal elements that feature a visible backdrop, such as dialogs, should not have
 }
 ```
 
-### Event naming
+### Naming events
 
-Open, close, and similar events should be named present tense, e.g. `open` and `close`. When it makes sense, they should be cancelable which will prevent the component from opening or closing. After opening or closing, and after all animations are complete, a past tense version of the event should be emitted, e.g. `opened` and `closed`.
+Open, close, and similar events should be named present tense, e.g. `quiet-open` and `quiet-close`. When it makes sense, they should be cancelable which will prevent the component from opening or closing. After opening or closing, and after all animations are complete, a past tense version of the event should be emitted, e.g. `quiet-opened` and `quiet-closed`.
+
+### Dispatching events
+
+Events must extend the `Event` object and start with `quiet-`. You can dispatch events using `this.dispatchEvent()`. Although the `CustomEvent` type is unused, event details must be made available to the user in `event.detail`. Take a look at existing events to see how to extend and provide details. Event declarations do include some boilerplate, but they enable strong typing and help keep usage consistent.
+
+Events should always be composed. Events should only be cancelable if they're actually cancelable by the end user. Event should bubble to support delegation unless there's a specific reason not to or if it makes sense to align with the platform, e.g. `quiet-focus` and `quiet-blur`.

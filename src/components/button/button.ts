@@ -19,6 +19,9 @@ import type { CSSResultGroup } from 'lit';
  * @status stable
  * @since 1.0
  *
+ * @dependency quiet-icon
+ * @dependency quiet-spinner
+ *
  * @slot - The button's label.
  * @slot start - An icon or similar element to place before the label. Works great with `<quiet-icon>`.
  * @slot end - An icon or similar element to place after the label. Works great with `<quiet-icon>`.
@@ -38,9 +41,6 @@ import type { CSSResultGroup } from 'lit';
  * @csspart caret__svg - The caret icon's `<svg>` part.
  * @csspart spinner - The loading indicator, a `<quiet-spinner>` element. Only present with the `loading` attribute.
  * @csspart toggle-indicator - When the button is a toggle button, this is the indicator that shows the current state.
- *
- * @dependency quiet-icon
- * @dependency quiet-spinner
  */
 @customElement('quiet-button')
 export class QuietButton extends QuietElement {

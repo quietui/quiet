@@ -19,6 +19,9 @@ import type { CSSResultGroup } from 'lit';
  * @status stable
  * @since 1.0
  *
+ * @dependency quiet-button
+ * @dependency quiet-icon
+ *
  * @slot - A custom button to use instead of the default.
  *
  * @event quiet-copied - Emitted when the content has been copied. This event does not bubble. You can inspect
@@ -31,9 +34,6 @@ import type { CSSResultGroup } from 'lit';
  * @csspart copy-icon - The default copy icon, a `<quiet-icon>` element.
  * @csspart copy-icon__svg - The copy icon's `svg` part.
  * @csspart feedback - The feedback that shows when copying.
- *
- * @dependency quiet-button
- * @dependency quiet-icon
  */
 @customElement('quiet-copy')
 export class QuietCopy extends QuietElement {

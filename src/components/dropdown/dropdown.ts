@@ -23,6 +23,8 @@ const openDropdowns = new Set<QuietDropdown>();
  * @status stable
  * @since 1.0
  *
+ * @dependency quiet-dropdown-item
+ *
  * @slot - One or more `<dropdown-item>` elements to show in the dropdown. You can also use `<quiet-divider>` here.
  * @slot trigger - The dropdown's trigger. Must be a `<quiet-button>` or `<button>` element.
  *
@@ -36,8 +38,6 @@ const openDropdowns = new Set<QuietDropdown>();
  * @csspart menu - The dropdown menu's container.
  *
  * @cssproperty [--show-duration=50ms] - The duration of the show/hide animation.
- *
- * @dependency quiet-dropdown-item
  */
 @customElement('quiet-dropdown')
 export class QuietDropdown extends QuietElement {

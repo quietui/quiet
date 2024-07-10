@@ -25,6 +25,9 @@ interface GetTabsOptions {
  * @status stable
  * @since 1.0
  *
+ * @dependency quiet-tab
+ * @dependency quiet-tab-panel
+ *
  * @slot - One or more `<quiet-tab-panel>` elements, each with a `name` attribute unique to the tab list.
  * @slot tab - One or more `<quiet-tab>` elements, each with a `panel` attribute linked to the `name` of a tab panel.
  *
@@ -35,9 +38,6 @@ interface GetTabsOptions {
  *
  * @csspart tabs - The container that holds all of the tabs.
  * @csspart panels - The container that holds all of the tab panels.
- *
- * @dependency quiet-tab
- * @dependency quiet-tab-panel
  */
 @customElement('quiet-tab-list')
 export class QuietTabList extends QuietElement {

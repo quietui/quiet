@@ -28,7 +28,7 @@ const VALIDATION_MESSAGE = nativeRadio.validationMessage;
  * @status stable
  * @since 1.0
  *
- * @dependency radio-item
+ * @dependency quiet-radio-item
  *
  * @slot - The radio items to place in the group.
  * @slot label - The radio's label. For plain-text labels, you can use the `label` attribute instead.

@@ -37,13 +37,13 @@
     <quiet-tab slot="tab" panel="npm">npm</quiet-tab>
     <quiet-tab-panel name="cdn">
       <p>
-        To manually import this component from the CDN, use the following code.
+        To manually import <code>&lt;{{ component.tagName }}&gt;</code> from the CDN, use the following code.
       </p>
       <pre><code class="language-js">import '{% cdnUrl component.path %}';</code></pre>
     </quiet-tab-panel>
     <quiet-tab-panel name="npm">
       <p>
-        To manually import this component from npm, use the following code.
+        To manually import <code>&lt;{{ component.tagName }}&gt;</code> from npm, use the following code.
       </p>
       <pre><code class="language-js">import '@quietui/quiet/{{ component.path }}';</code></pre>
     </quiet-tab-panel>
@@ -53,7 +53,7 @@
   {% if component.slots.length %}
     <h3>Slots</h3>
     <p>
-      This component supports the following slots.
+      {{ title }} supports the following slots.
       <a href="/docs/using-components/#slots">Learn more about using slots</a>
     </p>
     <div class="table-scroll" tabindex="0">
@@ -86,7 +86,7 @@
   {% if component.properties.length %}
     <h3>Properties</h3>
     <p>
-      This component has the following properties that can be set with corresponding attributes. In many cases, the
+      {{ title }} has the following properties that can be set with corresponding attributes. In many cases, the
       attribute's name is the same as the property's name. If an attribute is different, it will be displayed after the
       property.
       <a href="/docs/using-components/#attributes-and-properties">Learn more about attributes and properties</a>
@@ -144,7 +144,7 @@
   {% if component.methods.length %}
     <h3>Methods</h3>
     <p>
-      This component supports the following methods. You can obtain a reference to the element and call them like
+      {{ title }} supports the following methods. You can obtain a reference to the element and call them like
       functions in JavaScript. <a href="/docs/using-components/#methods">Learn more about methods</a>
     </p>
     <div class="table-scroll" tabindex="0">
@@ -181,7 +181,7 @@
   {% if component.events.length %}
     <h3>Events</h3>
     <p>
-      This component dispathces the following custom events. You can listen to them the same way was native events.
+      {{ title }} dispatches the following custom events. You can listen to them the same way was native events.
       <a href="/docs/using-components/#events">Learn more about custom events</a>
     </p>
     <div class="table-scroll" tabindex="0">
@@ -210,7 +210,7 @@
   {% if component.cssProperties.length %}
     <h3>CSS custom properties</h3>
     <p>
-      This component supports the following CSS custom properties. You can style them like any other CSS property.
+      {{ title }} supports the following CSS custom properties. You can style them like any other CSS property.
       <a href="/docs/using-components/#css-custom-properties">Learn more about CSS custom properties</a>
     </p>
     <div class="table-scroll" tabindex="0">
@@ -243,7 +243,7 @@
   {% if component.cssParts.length %}
     <h3>CSS parts</h3>
     <p>
-      This component exposes internal elements that can be styled with CSS using the selectors shown below.
+      {{ title }} exposes internal elements that can be styled with CSS using the selectors shown below.
       <a href="/docs/using-components/#css-parts">Learn more about CSS parts</a>
     </p>
     <div class="table-scroll" tabindex="0">
@@ -272,7 +272,7 @@
   {% if component.cssStates.length %}
     <h3>Custom States</h3>
     <p>
-      This component has the following custom states. You can target them with CSS using the selectors shown below.
+      {{ title }} has the following custom states. You can target them with CSS using the selectors shown below.
       <a href="/docs/using-components/#custom-states">Learn more about custom states</a>
     </p>
     <div class="table-scroll" tabindex="0">
@@ -301,7 +301,7 @@
   {% if component.dependencies.length %}
     <h3>Dependencies</h3>
     <p>
-      This component automatically imports the following elements. Sub-dependencies are also included in this list.
+      {{ title }} automatically imports the following elements. Sub-dependencies are also included in this list.
     </p>
     <ul class="dependency-list">
       {% for dependency in component.dependencies %}

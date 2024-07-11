@@ -11,7 +11,7 @@ layout: component
 
 ### Variants
 
-Buttons have four built-in variants. Set the `variant` attribute to `primary`, `secondary`, `constructive`, or `destructive` to change the button's appearance.
+Buttons have four built-in variants. Set the `variant` attribute to `primary`, `secondary`, or `destructive` to change the button's appearance.
 
 ```html {.example .flex-row}
 <quiet-button variant="primary">

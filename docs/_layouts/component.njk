@@ -206,35 +206,6 @@
     </div>
   {% endif %}
 
-  {# Custom States #}
-  {% if component.cssStates.length %}
-    <h3>Custom States</h3>
-    <p>
-      This component has the following custom states. You can target them with CSS using the selectors shown below.
-      <a href="/docs/using-components/#custom-states">Learn more about custom states</a>
-    </p>
-    <div class="table-scroll" tabindex="0">
-      <table class="component-table">
-        <thead>
-          <tr>
-            <th class="table-name">Name</th>
-            <th class="table-description">Description</th>
-            <th class="table-selector">CSS selector</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for state in component.cssStates %}
-            <tr>
-              <td class="table-name"><code>{{ state.name }}</code></td>
-              <td class="table-description">{{ state.description | inlineMarkdown | safe }}</td>
-              <td class="table-selector"><code>:state({{ state.name }})</code></td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
-  {% endif %}
-
   {# Custom Properties #}
   {% if component.cssProperties.length %}
     <h3>CSS custom properties</h3>
@@ -290,6 +261,35 @@
               <td class="table-name"><code>{{ cssPart.name }}</code></td>
               <td class="table-description">{{ cssPart.description | inlineMarkdown | safe }}</td>
               <td class="table-selector"><code>::part({{ cssPart.name }})</code></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% endif %}
+
+  {# Custom States #}
+  {% if component.cssStates.length %}
+    <h3>Custom States</h3>
+    <p>
+      This component has the following custom states. You can target them with CSS using the selectors shown below.
+      <a href="/docs/using-components/#custom-states">Learn more about custom states</a>
+    </p>
+    <div class="table-scroll" tabindex="0">
+      <table class="component-table">
+        <thead>
+          <tr>
+            <th class="table-name">Name</th>
+            <th class="table-description">Description</th>
+            <th class="table-selector">CSS selector</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for state in component.cssStates %}
+            <tr>
+              <td class="table-name"><code>{{ state.name }}</code></td>
+              <td class="table-description">{{ state.description | inlineMarkdown | safe }}</td>
+              <td class="table-selector"><code>:state({{ state.name }})</code></td>
             </tr>
           {% endfor %}
         </tbody>

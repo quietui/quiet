@@ -19,12 +19,12 @@ import type { CSSResultGroup } from 'lit';
  *  is enabled.
  * @slot footer - Content to place in the dialog's footer.
  *
+ * @cssproperty [--spacing=1.5rem] - The spacing to use throughout the card.
+ *
  * @csspart body - The container that wraps the card's body.
  * @csspart header - The container that wraps the card's header. A flex container, by default.
  * @csspart footer - The container that wraps the card's footer. A flex container, by default.
  * @csspart media - The container that wraps the card's media.
- *
- * @cssproperty [--spacing=1.5rem] - The spacing to use throughout the card.
  */
 @customElement('quiet-card')
 export class QuietCard extends QuietElement {

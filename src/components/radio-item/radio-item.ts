@@ -23,14 +23,14 @@ import type { CSSResultGroup } from 'lit';
  * @event quiet-blur - Emitted when the radio item loses focus. This event does not bubble.
  * @event quiet-focus - Emitted when the radio item receives focus. This event does not bubble.
  *
- * @cssstate checked - Applied when the radio item is checked.
- * @cssstate disabled - Applied when the radio item is disabled.
- * @cssstate focused - Applied when the radio item has focus.
- *
  * @csspart label - The `<label>` that wraps the entire control.
  * @csspart visual-box - The element that wraps the internal radio.
  * @csspart radio-icon - The radio icon, a `<quiet-icon>` element.
  * @csspart radio-icon__svg - The radio icon's `svg` part.
+ *
+ * @cssstate checked - Applied when the radio item is checked.
+ * @cssstate disabled - Applied when the radio item is disabled.
+ * @cssstate focused - Applied when the radio item has focus.
  */
 @customElement('quiet-radio-item')
 export class QuietRadioItem extends QuietElement {

@@ -40,12 +40,6 @@ const VALIDATION_MESSAGE = nativeFileInput.validationMessage;
  * @event quiet-focus - Emitted when the file input receives focus. This event does not bubble.
  * @event quiet-input - Emitted when the file input receives input.
  *
- * @cssstate disabled - Applied when the file input is disabled.
- * @cssstate empty - Applied when the file input is empty.
- * @cssstate focused - Applied when the file input has focus.
- * @cssstate user-valid - Applied when the file input is valid and the user has sufficiently interacted with it.
- * @cssstate user-invalid - Applied when the file input is invalid and the user has sufficiently interacted with it.
- *
  * @csspart label - The element that contains the text field's label, a `<label>` element.
  * @csspart description - The element that contains the text field's description.
  * @csspart dropzone - The bordered region where files can be dropped.
@@ -61,6 +55,12 @@ const VALIDATION_MESSAGE = nativeFileInput.validationMessage;
  * @csspart file-actions - The container that holds the file's remove button.
  * @csspart file-remove-button - The file's remove button.
  * @csspart file-remove-button__button - The `button` part of the file's remove button.
+ *
+ * @cssstate disabled - Applied when the file input is disabled.
+ * @cssstate empty - Applied when the file input is empty.
+ * @cssstate focused - Applied when the file input has focus.
+ * @cssstate user-valid - Applied when the file input is valid and the user has sufficiently interacted with it.
+ * @cssstate user-invalid - Applied when the file input is invalid and the user has sufficiently interacted with it.
  */
 @customElement('quiet-file-input')
 export class QuietFileInput extends QuietElement {

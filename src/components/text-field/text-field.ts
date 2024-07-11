@@ -36,18 +36,18 @@ import type { CSSResultGroup } from 'lit';
  * @event quiet-focus - Emitted when the text field receives focus. This event does not bubble.
  * @event quiet-input - Emitted when the text field receives input.
  *
- * @cssstate disabled - Applied when the text field is disabled.
- * @cssstate empty - Applied when the text field is empty.
- * @cssstate focused - Applied when the text field has focus.
- * @cssstate user-valid - Applied when the text field is valid and the user has sufficiently interacted with it.
- * @cssstate user-invalid - Applied when the text field is invalid and the user has sufficiently interacted with it.
- *
  * @csspart label - The element that contains the text field's label.
  * @csspart description - The element that contains the text field's description.
  * @csspart visual-box - The element that wraps the internal text box.
  * @csspart text-box - The internal text box, an `<input>` element.
  * @csspart clear-button - The clear button, a `<button>` element.
  * @csspart password-toggle-button - The password toggle button, a `<button>` element.
+ *
+ * @cssstate disabled - Applied when the text field is disabled.
+ * @cssstate empty - Applied when the text field is empty.
+ * @cssstate focused - Applied when the text field has focus.
+ * @cssstate user-valid - Applied when the text field is valid and the user has sufficiently interacted with it.
+ * @cssstate user-invalid - Applied when the text field is invalid and the user has sufficiently interacted with it.
  */
 @customElement('quiet-text-field')
 export class QuietTextField extends QuietElement {

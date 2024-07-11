@@ -30,16 +30,16 @@ import type { CSSResultGroup } from 'lit';
  * @event quiet-focus - Emitted when the text area receives focus. This event does not bubble.
  * @event quiet-input - Emitted when the text area receives input.
  *
+ * @csspart label - The element that contains the text area's label.
+ * @csspart description - The element that contains the text area's description.
+ * @csspart visual-box - The element that wraps the internal text box.
+ * @csspart text-box - The internal text box, a `<textarea>` element.
+ *
  * @cssstate disabled - Applied when the text area is disabled.
  * @cssstate empty - Applied when the text area is empty.
  * @cssstate focused - Applied when the text area has focus.
  * @cssstate user-valid - Applied when the text area is valid and the user has sufficiently interacted with it.
  * @cssstate user-invalid - Applied when the text area is invalid and the user has sufficiently interacted with it.
- *
- * @csspart label - The element that contains the text area's label.
- * @csspart description - The element that contains the text area's description.
- * @csspart visual-box - The element that wraps the internal text box.
- * @csspart text-box - The internal text box, a `<textarea>` element.
  */
 @customElement('quiet-text-area')
 export class QuietTextArea extends QuietElement {

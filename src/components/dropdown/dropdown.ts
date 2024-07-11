@@ -35,9 +35,11 @@ const openDropdowns = new Set<QuietDropdown>();
  * @event quiet-select - Emitted when a dropdown item has been selected. You can inspect `event.detail.item` to see the
  *  `<quiet-dropdown-item>` that was selected. Calling `event.preventDefault()` will keep the dropdown open.
  *
+ * @cssproperty [--show-duration=50ms] - The duration of the show/hide animation.
+ *
  * @csspart menu - The dropdown menu's container.
  *
- * @cssproperty [--show-duration=50ms] - The duration of the show/hide animation.
+ * @cssstate open - Applied when the dropdown is open.
  */
 @customElement('quiet-dropdown')
 export class QuietDropdown extends QuietElement {
@@ -79,6 +81,8 @@ export class QuietDropdown extends QuietElement {
 
   updated(changedProps: Map<string, unknown>) {
     if (changedProps.has('open')) {
+      this.customStates.set('open', this.open);
+
       if (this.open) {
         this.showMenu();
       } else {

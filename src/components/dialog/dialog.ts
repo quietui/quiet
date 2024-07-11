@@ -34,17 +34,17 @@ import type { CSSResultGroup } from 'lit';
  *  dialog has been closed programmatically.
  * @event quiet-closed - Emitted after the dialog has been closed and the hide animation has completed.
  *
+ * @cssproperty [--height=fit-content] - The default height of the dialog. Note that dialogs shrink to fit as necessary.
+ * @cssproperty [--show-duration=200ms] - The duration of the show/hide animation.
+ * @cssproperty [--spacing=1.5rem] - The spacing to use throughout the dialog.
+ * @cssproperty [--width=30rem] - The default width of the dialog. Note that dialogs shrink to fit as necessary.
+ *
  * @csspart dialog - The internal `<dialog>` element.
  * @csspart body - The container that wraps the dialog's body.
  * @csspart header - The container that wraps the dialog's header. A flex container, by default.
  * @csspart footer - The container that wraps the dialog's footer. A flex container, by default.
  *
  * @cssstate open - Applied when the dialog is open.
- *
- * @cssproperty [--height=fit-content] - The default height of the dialog. Note that dialogs shrink to fit as necessary.
- * @cssproperty [--show-duration=200ms] - The duration of the show/hide animation.
- * @cssproperty [--spacing=1.5rem] - The spacing to use throughout the dialog.
- * @cssproperty [--width=30rem] - The default width of the dialog. Note that dialogs shrink to fit as necessary.
  */
 @customElement('quiet-dialog')
 export class QuietDialog extends QuietElement {

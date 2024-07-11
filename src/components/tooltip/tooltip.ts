@@ -27,15 +27,15 @@ const openTooltips = new Set<QuietTooltip>();
  * @event quiet-close - Emitted when the tooltip is dismissed but before it is hidden.
  * @event quiet-closed - Emitted when the tooltip has closed. and the animation has completed.
  *
+ * @cssproperty [--arrow-size=0.3125rem] - The size of the arrow. Set this to `0` to hide the arrow.
+ * @cssproperty [--max-width=20rem] - The maximum width the tooltip can be before wrapping.
+ * @cssproperty [--show-duration=100ms] - The duration of the show/hide animation.
+ *
  * @csspart tooltip - The element that powers the tooltip.
  * @csspart content - The element that wraps the tooltip's content.
  * @csspart arrow - The tooltip's arrow. To change the arrow's size, use `--arrow-size` instead.
  *
  * @cssstate open - Applied when the tooltip is open.
- *
- * @cssproperty [--arrow-size=0.3125rem] - The size of the arrow. Set this to `0` to hide the arrow.
- * @cssproperty [--max-width=20rem] - The maximum width the tooltip can be before wrapping.
- * @cssproperty [--show-duration=100ms] - The duration of the show/hide animation.
  */
 @customElement('quiet-tooltip')
 export class QuietTooltip extends QuietElement {

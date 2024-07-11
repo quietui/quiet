@@ -30,17 +30,17 @@ import type { CSSResultGroup } from 'lit';
  * @event quiet-click - Emitted when the button is clicked. Will not be emitted when the button is disabled or loading.
  * @event quiet-focus - Emitted when the button receives focus. This event does not bubble.
  *
- * @cssstate disabled - Applied when the button is disabled.
- * @cssstate focused - Applied when the button has focus.
- * @cssstate loading - Applied when a toggle button is loading.
- * @cssstate toggled - Applied when a toggle button is activated.
- *
  * @csspart button - The internal `<button>` element. Other than `width`, this is where most custom styles should be
  *  applied.
  * @csspart caret - The caret icon, a `<quiet-icon>` element. Only present with the `with-caret` attribute.
  * @csspart caret__svg - The caret icon's `<svg>` part.
  * @csspart spinner - The loading indicator, a `<quiet-spinner>` element. Only present with the `loading` attribute.
  * @csspart toggle-indicator - When the button is a toggle button, this is the indicator that shows the current state.
+
+ * @cssstate disabled - Applied when the button is disabled.
+ * @cssstate focused - Applied when the button has focus.
+ * @cssstate loading - Applied when a toggle button is loading.
+ * @cssstate toggled - Applied when a toggle button is activated.
  */
 @customElement('quiet-button')
 export class QuietButton extends QuietElement {

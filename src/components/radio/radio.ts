@@ -38,12 +38,12 @@ const VALIDATION_MESSAGE = nativeRadio.validationMessage;
  * @event quiet-change - Emitted when the user commits changes to the radio's value.
  * @event quiet-input - Emitted when the radio receives input.
  *
- * @cssstate user-valid - Applied when the radio is valid and the user has sufficiently interacted with it.
- * @cssstate user-invalid - Applied when the radio is invalid and the user has sufficiently interacted with it.
- *
  * @csspart label - The element that contains the radio's label.
  * @csspart description - The element that contains the radio's description.
  * @csspart group - The element that wraps the grouped radios.
+ *
+ * @cssstate user-valid - Applied when the radio is valid and the user has sufficiently interacted with it.
+ * @cssstate user-invalid - Applied when the radio is invalid and the user has sufficiently interacted with it.
  */
 @customElement('quiet-radio')
 export class QuietRadio extends QuietElement {

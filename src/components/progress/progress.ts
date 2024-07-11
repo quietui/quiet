@@ -16,10 +16,10 @@ import type { CSSResultGroup } from 'lit';
  *
  * @slot - Text to render inside the progress bar.
  *
- * @csspart indicator - The progress bar's current value indicator.
- *
  * @cssproperty [--indicator-color=var(--quiet-primary-fill-mid)] - The color of the progress bar's value indicator.
  * @cssproperty [--track-color=var(--quiet-neutral-fill-softer)] - The color of the progress bar's track.
+ *
+ * @csspart indicator - The progress bar's current value indicator.
  */
 @customElement('quiet-progress')
 export class QuietProgress extends QuietElement {

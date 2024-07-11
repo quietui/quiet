@@ -175,7 +175,6 @@ Checkboxes come with a simple, minimal appearance. Feel free to customize them w
       position: absolute;
       top: 0.5rem;
       left: 0.5rem;
-      border-radius: calc(var(--quiet-border-radius) - 1px);
     }
 
     quiet-icon {
@@ -219,7 +218,7 @@ Checkboxes come with a simple, minimal appearance. Feel free to customize them w
       width: 150px;
       height: 150px;
       object-fit: cover;
-      border-radius: .5rem;
+      border-radius: .25rem;
     }
 
     &::part(visual-box) {
@@ -229,7 +228,6 @@ Checkboxes come with a simple, minimal appearance. Feel free to customize them w
       width: 1.5rem;
       height: 1.5rem;
       border: none;
-      border-radius: 50%;
       background-color: color-mix(in oklab, black, transparent 50%);
     }
 

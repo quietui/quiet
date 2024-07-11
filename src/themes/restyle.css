@@ -310,6 +310,15 @@ details {
 
   summary {
     font-weight: var(--quiet-font-weight-semibold);
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &:has(summary:focus-visible) {
+    outline: var(--quiet-focus-ring);
+    outline-offset: var(--quiet-focus-offset);
   }
 
   > :first-child {
@@ -335,7 +344,7 @@ summary {
   position: relative;
   display: block;
   cursor: pointer;
-  text-indent: 1.4em;
+  padding-inline-end: 2em;
   padding-block: calc(var(--quiet-content-spacing) / 2);
   margin: 0;
   user-select: none;
@@ -351,7 +360,7 @@ summary {
     border-color: transparent transparent transparent currentColor;
     position: absolute;
     top: calc(50% - 0.4rem);
-    left: 0.2rem;
+    right: 0.2rem;
     transform-origin: 0.2rem 50%;
   }
 

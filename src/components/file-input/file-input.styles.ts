@@ -9,9 +9,6 @@ export default css`
     text-align: center;
     font-weight: var(--quiet-font-weight-semibold);
     color: var(--quiet-primary-text-colorful);
-    text-decoration: underline;
-    text-decoration-thickness: 0.09375em;
-    text-underline-offset: 0.125em;
     padding: 2em;
     cursor: pointer;
     transition: 150ms color ease;

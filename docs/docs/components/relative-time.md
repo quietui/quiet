@@ -4,7 +4,7 @@ layout: component
 ---
 
 ```html {.example}
-<quiet-relative-time date="2024-01-01 12:00:00"></quiet-relative-time>
+<quiet-relative-time date="2024-02-02 12:39:00"></quiet-relative-time>
 ```
 
 :::info
@@ -23,7 +23,7 @@ You can change how the time is displayed with the `format` attribute. Available 
 <quiet-relative-time format="long" date="2024-01-01 12:00:00"></quiet-relative-time>
 ```
 
-### Using date objects
+### Using date object
 
 If you have a reference to the element, you can pass a [Date object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) instead of a string.
 

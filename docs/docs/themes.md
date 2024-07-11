@@ -66,6 +66,16 @@ To use a preset in your app, add the `quiet-{preset}` class to the `<html>` elem
 </html>
 ```
 
+### Adapting to existing brands
+
+Using a preset is an easy way to change the library's overall appearance, but it probably won't be a perfect match if you already have brand guidelines to follow. In that case, it might be tempting to set `--quiet-primary-seed` to whatever your brand color is.
+
+However, that will only work well if your brand color happens to be a midtone, otherwise the generated design tokens may not have enough contrast. A better approach is to use the nearest midtone color that fits with your brand.
+
+_"But my buttons don't match my brand color exactly…"_
+
+Components should absolutely be _on brand_, but that doesn't mean they have to be the exact hex color as your brand! However, if you insist on such a style, the correct way to achieve it is by overriding component styles using CSS and ensuring proper contrast manually — not by setting the seed color to an inappropriate value.
+
 ### Color primitives
 
 Four primitive color palettes are generated based on the aforementioned seed colors. These palettes correspond with the four variants used throughout the library and remain static in light and dark mode.

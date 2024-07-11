@@ -18,9 +18,9 @@ If you pass a string to the `date` attribute, always use the [ISO 8601 format](h
 You can change how the time is displayed with the `format` attribute. Available options include `narrow`, `short`, and `long`.
 
 ```html {.example}
-<quiet-relative-time format="narrow" date="2024-01-01 12:00:00"></quiet-relative-time><br>
-<quiet-relative-time format="short" date="2024-01-01 12:00:00"></quiet-relative-time><br>
-<quiet-relative-time format="long" date="2024-01-01 12:00:00"></quiet-relative-time>
+<quiet-relative-time format="narrow" date="2024-02-02 12:39:00"></quiet-relative-time><br>
+<quiet-relative-time format="short" date="2024-02-02 12:39:00"></quiet-relative-time><br>
+<quiet-relative-time format="long" date="2024-02-02 12:39:00"></quiet-relative-time>
 ```
 
 ### Using date object
@@ -65,9 +65,9 @@ Add the `live` attribute to automatically update the time as it passes.
 Set the `lang` attribute on the element to change the language.
 
 ```html {.example}
-<quiet-relative-time lang="es" date="2024-01-01 12:00:00"></quiet-relative-time><br>
-<quiet-relative-time lang="de" date="2024-01-01 12:00:00"></quiet-relative-time><br>
-<quiet-relative-time lang="ru" date="2024-01-01 12:00:00"></quiet-relative-time>
+<quiet-relative-time lang="es" date="2024-02-02 12:39:00"></quiet-relative-time><br>
+<quiet-relative-time lang="de" date="2024-02-02 12:39:00"></quiet-relative-time><br>
+<quiet-relative-time lang="ru" date="2024-02-02 12:39:00"></quiet-relative-time>
 ```
 
 :::info

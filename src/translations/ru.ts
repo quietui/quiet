@@ -8,11 +8,12 @@ const translation: Translation = {
   $dir: 'ltr',
 
   breadcrumbs: 'Панировочные сухари',
-  browseForFilesOrDragAndDrop: 'Просматривайте файлы или перетаскивайте их',
   clearEntry: 'Очистить запись',
   close: 'Закрыть',
   copied: 'Скопировано',
   copyToClipboard: 'Скопировать в буфер обмена',
+  dragFileHereOrChooseFromFolder: 'Перетащите файл сюда или выберите из папки',
+  dragFilesHereOrChooseFromFolder: 'Перетащите файлы сюда или выберите из папки',
   error: 'Ошибка',
   hidePassword: 'Скрыть пароль',
   loading: 'Загрузка',

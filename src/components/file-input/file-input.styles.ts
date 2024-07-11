@@ -7,9 +7,20 @@ export default css`
     border-radius: var(--quiet-border-radius);
     background-color: var(--quiet-paper-color);
     text-align: center;
-    color: var(--quiet-text-muted);
+    font-weight: var(--quiet-font-weight-semibold);
+    color: var(--quiet-primary-text-colorful);
+    text-decoration: underline;
+    text-decoration-thickness: 0.09375em;
+    text-underline-offset: 0.125em;
     padding: 2em;
     cursor: pointer;
+    transition: 150ms color ease;
+
+    @media (hover: hover) {
+      &:hover {
+        color: color-mix(in oklab, var(--quiet-primary-text-colorful), black 10%);
+      }
+    }
 
     &:focus {
       outline: none;
@@ -28,7 +39,6 @@ export default css`
 
     quiet-icon {
       font-size: 2em;
-      color: var(--quiet-primary-text-colorful);
     }
 
     /* Position the file input to stretch the entire dropzone so validation errors are positioned properly. */

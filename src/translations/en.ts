@@ -7,11 +7,12 @@ const translation: Translation = {
   $dir: 'ltr',
 
   breadcrumbs: 'Breadcrumbs',
-  browseForFilesOrDragAndDrop: 'Browse for files or drag and drop',
   clearEntry: 'Clear entry',
   close: 'Close',
   copied: 'Copied',
   copyToClipboard: 'Copy to clipboard',
+  dragFileHereOrChooseFromFolder: 'Drag file here or choose from folder',
+  dragFilesHereOrChooseFromFolder: 'Drag files here or choose from folder',
   error: 'Error',
   hidePassword: 'Hide password',
   loading: 'Loading',

@@ -368,7 +368,9 @@ export class QuietFileInput extends QuietElement {
         <slot name="dropzone">
           <quiet-icon library="system" name="upload"></quiet-icon>
           <br />
-          ${this.localize.term('browseForFilesOrDragAndDrop')}
+          ${this.multiple
+            ? this.localize.term('dragFilesHereOrChooseFromFolder')
+            : this.localize.term('dragFileHereOrChooseFromFolder')}
         </slot>
 
         <input

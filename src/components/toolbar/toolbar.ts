@@ -61,14 +61,11 @@ export class QuietToolbar extends QuietElement {
     });
 
     // Reset the roving tab index when the slot changes
-    buttons.forEach((button, index) => {
-      //
-      // TODO - find the first non-disabled tab and set it
-      //
-      // TODO - add a method to reset the roving tab index so users can call it when buttons get disabled
-      //
-      button.tabIndex = index === 0 ? 0 : -1;
-    });
+    buttons
+      .filter(button => !button.hasAttribute('disabled'))
+      .forEach((button, index) => {
+        button.tabIndex = index === 0 ? 0 : -1;
+      });
   }
 
   private handleKeyDown(event: KeyboardEvent) {
@@ -105,6 +102,8 @@ export class QuietToolbar extends QuietElement {
     // Update the roving tab index and move focus to the target
     if (nextIndex > -1) {
       buttons.forEach((button, index) => {
+        if (button.disabled) return;
+
         if (index === nextIndex) {
           button.tabIndex = 0;
           button.focus();
@@ -121,6 +120,8 @@ export class QuietToolbar extends QuietElement {
     if (!targetButton) return;
 
     buttons.forEach(button => {
+      if (button.disabled) return;
+
       if (button === targetButton) {
         button.tabIndex = 0;
       } else {

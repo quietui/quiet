@@ -27,6 +27,10 @@ Buttons have four built-in variants. Set the `variant` attribute to `primary`, `
 </quiet-button>
 ```
 
+:::info
+There is no `constructive` variant by design. Use the `primary` variant for constructive actions.
+:::
+
 ### Start & end icons
 
 Use the `start` and `end` slots to add icons. For best results, use a [`<quiet-icon>`](/docs/components/icon) or an `<svg>` element.

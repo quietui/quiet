@@ -91,18 +91,15 @@ export default css`
       justify-content: center;
       width: 100%;
       aspect-ratio: 1;
+      background: var(--quiet-neutral-fill-softer);
+      border-radius: var(--quiet-border-radius);
+      border-radius: calc(var(--quiet-border-radius) * 0.5);
 
       img {
         display: block;
         width: 100%;
         height: 100%;
         object-fit: cover;
-        border-radius: calc(var(--quiet-border-radius) * 0.5);
-      }
-
-      &:has(quiet-icon) {
-        background: var(--quiet-neutral-fill-softer);
-        border-radius: var(--quiet-border-radius);
       }
 
       quiet-icon {

@@ -53,7 +53,6 @@ export class QuietTextArea extends QuietElement {
   @query('textarea') private textBox: HTMLInputElement;
 
   @state() private isInvalid = false;
-  @state() isPasswordVisible = false;
   @state() private wasChanged = false;
   @state() private wasSubmitted = false;
 
@@ -247,19 +246,6 @@ export class QuietTextArea extends QuietElement {
     this.relayNativeEvent(event);
   }
 
-  private handleKeyDown(event: KeyboardEvent) {
-    // When enter is pressed in a text area, the associated form should submit.
-    if (event.key === 'Enter' && this.associatedForm) {
-      const submitter = [...this.associatedForm.elements].find((el: HTMLInputElement | HTMLButtonElement) => {
-        // The first submit button associated with the form will be the submitter. At this time, only native buttons
-        // can be submitters (see https://github.com/WICG/webcomponents/issues/814)
-        return ['button', 'input'].includes(el.localName) && el.type === 'submit';
-      }) as HTMLElement;
-
-      this.associatedForm.requestSubmit(submitter);
-    }
-  }
-
   /** Updates the height of the text area based on its content and settings. */
   private updateHeight() {
     if (this.resize === 'auto') {
@@ -402,7 +388,6 @@ export class QuietTextArea extends QuietElement {
           @input=${this.handleInput}
           @focus=${this.handleFocus}
           @blur=${this.handleBlur}
-          @keydown=${this.handleKeyDown}
         ></textarea>
       </div>
     `;

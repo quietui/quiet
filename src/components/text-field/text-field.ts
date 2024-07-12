@@ -61,9 +61,9 @@ export class QuietTextField extends QuietElement {
   @query('input') private textBox: HTMLInputElement;
 
   @state() private isInvalid = false;
-  @state() isPasswordVisible = false;
   @state() private wasChanged = false;
   @state() private wasSubmitted = false;
+  @state() isPasswordVisible = false;
 
   /**
    * The text field's label. If you need to provide HTML in the label, use the `label` slot instead.
@@ -133,13 +133,13 @@ export class QuietTextField extends QuietElement {
   @property({ attribute: 'maxlength', type: Number }) maxLength: number;
 
   /** The minimum value for date/time types. */
-  @property() min: number | string;
+  @property({ type: Number }) min: number;
 
   /** The maximum value for date/time types. */
-  @property() max: number | string;
+  @property({ type: Number }) max: number;
 
   /** The granularity the value must adhere to when incrementing and decrementing. */
-  @property() step: number | 'any';
+  @property({ type: Number }) step: number | 'any';
 
   /**
    * You can provide a custom error message to force the text field to be invalid. To clear the error, set this to an
@@ -290,7 +290,7 @@ export class QuietTextField extends QuietElement {
   }
 
   private handleKeyDown(event: KeyboardEvent) {
-    // When enter is pressed in a text field, the associated form should submit.
+    // When enter is pressed in a text field, the associated form should submit
     if (event.key === 'Enter' && this.associatedForm) {
       const submitter = [...this.associatedForm.elements].find((el: HTMLInputElement | HTMLButtonElement) => {
         // The first submit button associated with the form will be the submitter. At this time, only native buttons
@@ -389,7 +389,7 @@ export class QuietTextField extends QuietElement {
 
   /**
    * When a supported `type` is used, this method will decrease the text field's value by `step`. This is a programmatic
-   * change, so input and change events will not be emitted when this is called.
+   * change, so `input` and `change` events will not be emitted when this is called.
    */
   public stepDown() {
     this.textBox.stepDown();
@@ -397,7 +397,7 @@ export class QuietTextField extends QuietElement {
 
   /**
    * When a supported `type` is used, this method will increase the text field's value by `step`. This is a programmatic
-   * change, so input and change events will not be emitted when this is called.
+   * change, so `input` and `change` events will not be emitted when this is called.
    */
   public stepUp() {
     this.textBox.stepUp();

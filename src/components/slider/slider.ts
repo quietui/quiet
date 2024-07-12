@@ -1,0 +1,585 @@
+import { animateWithClass } from '../../utilities/animate.js';
+import { arrow, autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
+import { clamp } from '../../utilities/math.js';
+import { classMap } from 'lit/directives/class-map.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
+import { html } from 'lit';
+import { Localize } from '../../utilities/localize.js';
+import { QuietBlurEvent, QuietChangeEvent, QuietFocusEvent, QuietInputEvent } from '../../events/form.js';
+import { QuietElement } from '../../utilities/quiet-element.js';
+import formControlStyles from '../../styles/form-control.styles.js';
+import hostStyles from '../../styles/host.styles.js';
+import styles from './slider.styles.js';
+import type { CSSResultGroup } from 'lit';
+
+/**
+ * <quiet-slider>
+ *
+ * @summary Sliders let users select numeric values within a given range by moving a thumb along a track.
+ * @documentation https://quietui.com/docs/components/slider
+ * @status stable
+ * @since 1.0.0
+ *
+ * @slot label - The slider's label. For plain-text labels, you can use the `label` attribute instead.
+ * @slot description - The slider's description. For plain-text descriptions, you can use the `description` attribute
+ *  instead.
+ *
+ * @prop {string} form - If the slider is located outside of a form, you can associate it by setting this to the
+ *  form's `id`.
+ *
+ * @event quiet-blur - Emitted when the slider loses focus. This event does not bubble.
+ * @event quiet-change - Emitted when the user commits changes to the slider's value.
+ * @event quiet-focus - Emitted when the slider receives focus. This event does not bubble.
+ * @event quiet-input - Emitted when the slider receives input.
+ *
+ * @csspart label - The element that contains the sliders's label.
+ * @csspart description - The element that contains the slider's description.
+ * @csspart slider - The slider element. The background is the slider's track.
+ * @csspart thumb - The slider's thumb.
+ * @csspart indicator - The colored indicator that shows from the start of the slider to the current value.
+ * @csspart marker - The individual markers that are shown when `with-markers` is used.
+ *
+ * @cssstate disabled - Applied when the slider is disabled.
+ * @cssstate focused - Applied when the slider has focus.
+ * @cssstate user-valid - Applied when the slider is valid and the user has sufficiently interacted with it.
+ * @cssstate user-invalid - Applied when the slider is invalid and the user has sufficiently interacted with it.
+ *
+ * @cssproperty [--arrow-size=0.3125rem] - The size of the tooltip's arrow. Set this to `0` to hide the arrow.
+ * @cssproperty [--marker-size=0.25em] - The size of each individual marker.
+ */
+@customElement('quiet-slider')
+export class QuietSlider extends QuietElement {
+  static formAssociated = true;
+  static styles: CSSResultGroup = [hostStyles, formControlStyles, styles];
+
+  /** A reference to the `<form>` associated with the form control, or `null` if no form is associated. */
+  public associatedForm: HTMLFormElement | null = null;
+  private cleanup: ReturnType<typeof autoUpdate> | undefined;
+  private localize = new Localize(this);
+  private pointerDownValue: number | undefined;
+
+  @query('#thumb') thumb: HTMLElement;
+  @query('#slider') slider: HTMLElement;
+  @query('#tooltip') tooltip: HTMLElement;
+  @query('#tooltip-arrow') tooltipArrow: HTMLElement;
+
+  @state() private isInvalid = false;
+  @state() private wasChanged = false;
+  @state() private wasSubmitted = false;
+
+  /**
+   * The slider's label. If you need to provide HTML in the label, use the `label` slot instead.
+   */
+  @property() label: string;
+
+  /**
+   * The slider's description. If you need to provide HTML in the description, use the `description` slot instead.
+   */
+  @property() description: string;
+
+  /** The name of the slider. This will be submitted with the form as a name/value pair. */
+  @property({ reflect: true }) name: string;
+
+  /** The slider's value. */
+  @property({ type: Number }) value = 0;
+
+  /** Disables the slider. */
+  @property({ type: Boolean }) disabled = false;
+
+  /** Makes the slider a read-only field. */
+  @property({ type: Boolean }) readonly = false;
+
+  /** Makes the slider a dual-thumb slider with min and max values. */
+  @property({ type: Boolean }) dual = false;
+
+  /** The orientation of the slider. */
+  @property({ reflect: true }) orientation: 'horizontal' | 'vertical' = 'horizontal';
+
+  /** The slider's size. */
+  @property({ reflect: true }) size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' = 'md';
+
+  /** The minimum value allowed. */
+  @property({ type: Number }) min: number = 0;
+
+  /** The maximum value allowed. */
+  @property({ type: Number }) max: number = 100;
+
+  /** The granularity the value must adhere to when incrementing and decrementing. */
+  @property({ type: Number }) step: number = 1;
+
+  /**
+   * You can provide a custom error message to force the slider to be invalid. To clear the error, set this to an empty
+   * string.
+   */
+  @property({ attribute: 'custom-validity' }) customValidity = '';
+
+  /** Tells the browser to focus the slider when the page loads or a dialog is shown. */
+  @property({ type: Boolean }) autofocus: boolean;
+
+  /** Draws markers at each step along the slider. */
+  @property({ attribute: 'with-markers', type: Boolean }) withMarkers = false;
+
+  /** Draws a tooltip above the thumb when the control has focus. */
+  @property({ attribute: 'with-tooltip', type: Boolean }) withTooltip = false;
+
+  /**
+   * The placement of the tooltip in reference to the anchor. The menu will shift to a more optimal location if the
+   * preferred placement doesn't have enough room.
+   */
+  @property({ attribute: 'tooltip-placement', reflect: true }) tooltipPlacement:
+    | 'top'
+    | 'top-start'
+    | 'top-end'
+    | 'bottom'
+    | 'bottom-start'
+    | 'bottom-end'
+    | 'right'
+    | 'right-start'
+    | 'right-end'
+    | 'left'
+    | 'left-start'
+    | 'left-end' = 'top';
+
+  /** A custom formatting function to apply to the tooltip's value. Must be set with JavaScript. Property only. */
+  @property({ attribute: false }) tooltipFormatter: (value: number) => string;
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.addEventListener('invalid', this.handleHostInvalid);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.removeEventListener('invalid', this.handleHostInvalid);
+  }
+
+  updated(changedProps: Map<string, unknown>) {
+    // Always be updating
+    this.updateValidity();
+
+    // Handle value
+    if (changedProps.has('value')) {
+      this.value = clamp(this.value, this.min, this.max);
+      this.internals.setFormValue(String(this.value));
+    }
+
+    // Handle min/max
+    if (changedProps.has('min') || changedProps.has('max')) {
+      this.value = clamp(this.value, this.min, this.max);
+    }
+
+    // Handle disabled
+    if (changedProps.has('disabled')) {
+      this.customStates.set('disabled', this.disabled);
+    }
+
+    // Handle user interactions. When the form control's value has changed and lost focus (e.g. change event), we can
+    // show user-valid and user-invalid states. We also show it if the form has been submitted.
+    if (this.wasChanged || this.wasSubmitted) {
+      this.customStates.set('user-invalid', this.isInvalid);
+      this.customStates.set('user-valid', !this.isInvalid);
+    } else {
+      this.customStates.set('user-invalid', false);
+      this.customStates.set('user-valid', false);
+    }
+  }
+
+  /** @internal Called when the associated form element changes. */
+  formAssociatedCallback(form: HTMLFormElement | null) {
+    this.associatedForm = form;
+  }
+
+  /** @internal Called when a containing fieldset is disabled. */
+  formDisabledCallback(isDisabled: boolean) {
+    this.disabled = isDisabled;
+  }
+
+  /** @internal Called when the form is reset. */
+  formResetCallback() {
+    this.isInvalid = false;
+    this.wasChanged = false;
+    this.wasSubmitted = false;
+    this.value = parseFloat(this.getAttribute('value') ?? '');
+  }
+
+  /** Clamps a number to min/max while ensuring it's a valid step interval. */
+  private clampAndRoundToStep(value: number) {
+    const stepPrecision = (String(this.step).split('.')[1] || '').replace(/0+$/g, '').length;
+    value = Math.round(value / this.step) * this.step;
+    value = clamp(value, this.min, this.max);
+
+    return parseFloat(value.toFixed(stepPrecision));
+  }
+
+  /** Given a value, returns its percentage within a range of min/max. */
+  private getPercentageFromValue(value: number) {
+    return ((value - this.min) / (this.max - this.min)) * 100;
+  }
+
+  private handleBlur() {
+    this.hideTooltip();
+    this.customStates.set('focused', false);
+    this.dispatchEvent(new QuietBlurEvent());
+  }
+
+  private handleFocus() {
+    this.showTooltip();
+    this.customStates.set('focused', true);
+    this.dispatchEvent(new QuietFocusEvent());
+  }
+
+  private handleHostInvalid() {
+    //
+    // We need to simulate the :user-invalid state when the form is submitted. Alas, there's no way to listen to form
+    // submit because validation occurs before the `formdata` and `submit` events. The only way I've found to hook into
+    // it is by listening to the `invalid` event on the host element, which is dispatched by the browser when the form
+    // is submitted and the form-associated custom element is invalid.
+    //
+    this.wasSubmitted = true;
+  }
+
+  private handleDragStart(event: PointerEvent | TouchEvent) {
+    if (this.disabled || this.readonly) return;
+
+    document.addEventListener('pointermove', this.handleDragMove);
+    document.addEventListener('pointerup', this.handleDragStop);
+    document.addEventListener('touchmove', this.handleDragMove);
+    document.addEventListener('touchend', this.handleDragStop);
+
+    this.setValueFromCoordinates(event);
+    this.showTooltip();
+    this.pointerDownValue = this.value;
+    event.preventDefault();
+  }
+
+  private handleDragMove = (event: PointerEvent | TouchEvent) => {
+    this.setValueFromCoordinates(event);
+    event.preventDefault();
+  };
+
+  private handleDragStop = (event: PointerEvent | TouchEvent) => {
+    document.removeEventListener('pointermove', this.handleDragMove);
+    document.removeEventListener('pointerup', this.handleDragStop);
+    document.removeEventListener('touchmove', this.handleDragMove);
+    document.removeEventListener('touchend', this.handleDragStop);
+
+    // Dispatch change events when dragging stops
+    if (this.value !== this.pointerDownValue) {
+      this.dispatchEvent(new QuietChangeEvent());
+      this.dispatchEvent(new Event('change'));
+    }
+
+    this.hideTooltip();
+    this.pointerDownValue = undefined;
+    event.preventDefault();
+  };
+
+  private async showTooltip() {
+    if (this.withTooltip) {
+      this.tooltip.showPopover();
+      this.tooltip.classList.add('visible');
+      this.cleanup = autoUpdate(this.thumb, this.tooltip, () => this.repositionTooltip());
+      await animateWithClass(this.tooltip, 'show');
+    }
+  }
+
+  private async hideTooltip() {
+    if (this.tooltip.classList.contains('visible')) {
+      await animateWithClass(this.tooltip, 'hide');
+      this.tooltip.classList.remove('visible');
+      this.tooltip.hidePopover();
+    }
+
+    if (this.cleanup) {
+      this.cleanup();
+      this.cleanup = undefined;
+      this.removeAttribute('data-placement');
+    }
+  }
+
+  /** Repositions the tooltip */
+  private repositionTooltip() {
+    computePosition(this.thumb, this.tooltip, {
+      placement: this.tooltipPlacement,
+      middleware: [offset({ mainAxis: 8 }), flip(), shift(), arrow({ element: this.tooltipArrow })]
+    }).then(({ x, y, middlewareData, placement }) => {
+      // Set the determined placement for users to hook into and for transform origin styles
+      this.setAttribute('data-placement', placement);
+
+      // Position it
+      Object.assign(this.tooltip.style, {
+        left: `${x}px`,
+        top: `${y}px`
+      });
+
+      // Position the arrow
+      if (middlewareData.arrow) {
+        const arrowX = middlewareData.arrow.x;
+        const arrowY = middlewareData.arrow.y;
+        const staticSide = { top: 'bottom', right: 'left', bottom: 'top', left: 'right' }[placement.split('-')[0]]!;
+
+        Object.assign(this.tooltipArrow.style, {
+          left: typeof arrowX === 'number' ? `${arrowX}px` : '',
+          top: typeof arrowY === 'number' ? `${arrowY}px` : '',
+          [staticSide]: 'calc(var(--tooltip-arrow-diagonal-size) * -1)'
+        });
+      }
+    });
+  }
+
+  private setValueFromCoordinates(event: PointerEvent | TouchEvent) {
+    const isVertical = this.orientation === 'vertical';
+    const oldValue = this.value;
+    const { top, right, bottom, left, height, width } = this.slider.getBoundingClientRect();
+    const x = event instanceof PointerEvent ? event.clientX : event.touches[0].clientX;
+    const y = event instanceof PointerEvent ? event.clientY : event.touches[0].clientY;
+    const pointerPosition = isVertical ? y : x;
+    const sliderCoords = isVertical
+      ? { start: top, end: bottom, size: height }
+      : { start: left, end: right, size: width };
+
+    const relativePosition = isVertical ? sliderCoords.end - pointerPosition : pointerPosition - sliderCoords.start;
+    const percentage = relativePosition / sliderCoords.size;
+    this.value = this.clampAndRoundToStep(this.min + (this.max - this.min) * percentage);
+
+    // Dispatch input events when the value changes by dragging
+    if (this.value !== oldValue) {
+      this.dispatchEvent(new QuietInputEvent());
+      this.dispatchEvent(new InputEvent('input'));
+    }
+  }
+
+  private handleKeyDown(event: KeyboardEvent) {
+    const isRtl = this.localize.dir() === 'rtl';
+    let newValue = this.value;
+
+    if (this.disabled && this.readonly) return;
+
+    // Increase
+    if (event.key === 'ArrowUp' || event.key === (isRtl ? 'ArrowLeft' : 'ArrowRight')) {
+      event.preventDefault();
+      newValue = this.clampAndRoundToStep(newValue + this.step);
+    }
+
+    // Decrease
+    if (event.key === 'ArrowDown' || event.key === (isRtl ? 'ArrowRight' : 'ArrowLeft')) {
+      event.preventDefault();
+      newValue = this.clampAndRoundToStep(newValue - this.step);
+    }
+
+    // Minimum value
+    if (event.key === 'Home') {
+      event.preventDefault();
+      newValue = this.clampAndRoundToStep(this.min);
+    }
+
+    // Maximum value
+    if (event.key === 'End') {
+      event.preventDefault();
+      newValue = this.clampAndRoundToStep(this.max);
+    }
+
+    // Move up 10%
+    if (event.key === 'PageUp') {
+      event.preventDefault();
+      newValue = this.clampAndRoundToStep(newValue + (this.max - this.min) / 10);
+    }
+
+    // Move down 10%
+    if (event.key === 'PageDown') {
+      event.preventDefault();
+      newValue = this.clampAndRoundToStep(newValue - (this.max - this.min) / 10);
+    }
+
+    // If a key trigger a change, update the value and dispatch events
+    if (newValue !== this.value) {
+      // Keep within range
+      if (newValue < this.min) newValue = this.min;
+      if (newValue > this.max) newValue = this.max;
+
+      this.value = newValue;
+
+      this.dispatchEvent(new QuietInputEvent());
+      this.dispatchEvent(new QuietChangeEvent());
+
+      // Dispatch native change/input events for better framework binding support
+      this.dispatchEvent(new InputEvent('input'));
+      this.dispatchEvent(new Event('change'));
+    }
+
+    // When enter is pressed in a slider, the associated form should submit
+    if (event.key === 'Enter' && this.associatedForm) {
+      const submitter = [...this.associatedForm.elements].find((el: HTMLInputElement | HTMLButtonElement) => {
+        // The first submit button associated with the form will be the submitter. At this time, only native buttons
+        // can be submitters (see https://github.com/WICG/webcomponents/issues/814)
+        return ['button', 'input'].includes(el.localName) && el.type === 'submit';
+      }) as HTMLElement;
+
+      this.associatedForm.requestSubmit(submitter);
+    }
+  }
+
+  private handleLabelPointerDown(event: PointerEvent) {
+    event.preventDefault();
+
+    if (!this.disabled) {
+      this.thumb.focus();
+    }
+  }
+
+  /** Sets the form control's validity */
+  private async updateValidity() {
+    await this.updateComplete;
+    const hasCustomValidity = this.customValidity?.length > 0;
+    const validationMessage = this.customValidity;
+    const flags: ValidityStateFlags = {
+      badInput: false,
+      customError: hasCustomValidity,
+      patternMismatch: false,
+      rangeOverflow: false,
+      rangeUnderflow: false,
+      stepMismatch: false,
+      tooLong: false,
+      tooShort: false,
+      typeMismatch: false,
+      valueMissing: false
+    };
+
+    this.isInvalid = hasCustomValidity ? true : !hasCustomValidity;
+    this.internals.setValidity(flags, validationMessage, this.thumb);
+  }
+
+  /** Sets focus to the slider. */
+  public focus() {
+    this.thumb.focus();
+  }
+
+  /** Removes focus from the slider. */
+  public blur() {
+    this.thumb.blur();
+  }
+
+  /**
+   * Checks if the form control has any restraints and whether it satisfies them. If invalid, `false` will be returned
+   * and the `invalid` event will be dispatched. If valid, `true` will be returned.
+   */
+  public checkValidity() {
+    return this.internals.checkValidity();
+  }
+
+  /**
+   * Checks if the form control has any restraints and whether it satisfies them. If invalid, `false` will be returned
+   * and the `invalid` event will be dispatched. In addition, the problem will be reported to the user. If valid, `true`
+   * will be returned.
+   */
+  public reportValidity() {
+    return this.internals.reportValidity();
+  }
+
+  /**
+   * Decreases the slider's value by `step`. This is a programmatic change, so `input` and `change` events will not be
+   * emitted when this is called.
+   */
+  public stepDown() {
+    const newValue = this.clampAndRoundToStep(this.value - this.step);
+    this.value = newValue;
+  }
+
+  /**
+   * Increases the slider's value by `step`. This is a programmatic change, so `input` and `change` events will not be
+   * emitted when this is called.
+   */
+  public stepUp() {
+    const newValue = this.clampAndRoundToStep(this.value + this.step);
+    this.value = newValue;
+  }
+
+  render() {
+    const thumbPosition = clamp(this.getPercentageFromValue(this.value), 0, 100);
+    const markers: number[] = [];
+
+    // Determine marker positions
+    if (this.withMarkers) {
+      for (let i = this.min + this.step; i < this.max; i += this.step) {
+        markers.push(this.getPercentageFromValue(i));
+      }
+    }
+
+    return html`
+      <label id="label" part="label" for="text-box" @pointerdown=${this.handleLabelPointerDown}>
+        <slot name="label">${this.label}</slot>
+      </label>
+
+      <div id="description" part="description">
+        <slot name="description">${this.description}</slot>
+      </div>
+
+      <div
+        id="slider"
+        part="slider"
+        class=${classMap({
+          // Sizes
+          xs: this.size === 'xs',
+          sm: this.size === 'sm',
+          md: this.size === 'md',
+          lg: this.size === 'lg',
+          xl: this.size === 'xl',
+          // Modifiers
+          horizontal: this.orientation === 'horizontal',
+          vertical: this.orientation === 'vertical',
+          // States
+          disabled: this.disabled
+        })}
+        @pointerdown=${this.handleDragStart}
+        @touchstart=${this.handleDragStart}
+      >
+        <div id="indicator" part="indicator" style="--start: 0; --end: ${thumbPosition}%"></div>
+
+        ${this.withMarkers
+          ? html`
+              ${markers.map(marker => {
+                return html` <span part="marker" class="marker" style="--position: ${marker}%"></span> `;
+              })}
+            `
+          : ''}
+
+        <span
+          id="thumb"
+          part="thumb"
+          role="slider"
+          style="--position: ${thumbPosition}%"
+          aria-disabled=${this.disabled ? 'true' : 'false'}
+          aria-orientation=${this.orientation}
+          aria-valuemin=${this.min}
+          aria-valuenow=${this.value}
+          aria-valuemax=${this.max}
+          aria-labelledby="label"
+          aria-describedby="description"
+          tabindex=${this.disabled ? -1 : 0}
+          @blur=${this.handleBlur}
+          @focus=${this.handleFocus}
+          @keydown=${this.handleKeyDown}
+        ></span>
+      </div>
+
+      ${this.withTooltip
+        ? html`
+            <div id="tooltip" popover="manual">
+              <div id="tooltip-content">
+                ${typeof this.tooltipFormatter === 'function'
+                  ? this.tooltipFormatter(this.value)
+                  : this.localize.number(this.value)}
+              </div>
+              <div id="tooltip-arrow" role="presentation"></div>
+            </div>
+          `
+        : ''}
+    `;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'quiet-slider': QuietSlider;
+  }
+}

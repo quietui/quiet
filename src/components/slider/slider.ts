@@ -328,6 +328,7 @@ export class QuietSlider extends QuietElement {
   }
 
   private setValueFromCoordinates(event: PointerEvent | TouchEvent) {
+    const isRtl = this.localize.dir() === 'rtl';
     const isVertical = this.orientation === 'vertical';
     const oldValue = this.value;
     const { top, right, bottom, left, height, width } = this.slider.getBoundingClientRect();
@@ -337,8 +338,11 @@ export class QuietSlider extends QuietElement {
     const sliderCoords = isVertical
       ? { start: top, end: bottom, size: height }
       : { start: left, end: right, size: width };
-
-    const relativePosition = isVertical ? sliderCoords.end - pointerPosition : pointerPosition - sliderCoords.start;
+    const relativePosition = isVertical
+      ? sliderCoords.end - pointerPosition
+      : isRtl
+        ? sliderCoords.end - pointerPosition
+        : pointerPosition - sliderCoords.start;
     const percentage = relativePosition / sliderCoords.size;
     this.value = this.clampAndRoundToStep(this.min + (this.max - this.min) * percentage);
 

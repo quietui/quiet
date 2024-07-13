@@ -2,7 +2,7 @@ import { css } from 'lit';
 
 export default css`
   :host {
-    --marker-size: 0.25em;
+    --marker-size: 0.1875em;
     --tooltip-arrow-size: 0.3125rem;
     --tooltip-show-duration: 100ms;
 
@@ -23,7 +23,7 @@ export default css`
   }
 
   #slider {
-    --thumb-size: 1.5em;
+    --thumb-size: 1.25em;
     --thumb-border-width: 2px;
     --track-size: 0.75em;
     position: relative;
@@ -116,10 +116,10 @@ export default css`
     &::before {
       content: '';
       position: absolute;
-      top: calc(var(--thumb-size) / 5);
-      right: calc(var(--thumb-size) / 5);
-      bottom: calc(var(--thumb-size) / 5);
-      left: calc(var(--thumb-size) / 5);
+      top: 0.125em;
+      right: 0.125em;
+      bottom: 0.125em;
+      left: 0.125em;
       background-color: white;
       border-radius: 50%;
     }

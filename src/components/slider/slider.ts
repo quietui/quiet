@@ -125,6 +125,9 @@ export class QuietSlider extends QuietElement {
   /** Draws a tooltip above the thumb when the control has focus or is dragged. */
   @property({ attribute: 'with-tooltip', type: Boolean }) withTooltip = false;
 
+  /** The distance of the tooltip from the slider's thumb. */
+  @property({ attribute: 'tooltip-distance', type: Number }) tooltipDistance = 8;
+
   /** The placement of the tooltip in reference to the slider's thumb. */
   @property({ attribute: 'tooltip-placement', reflect: true }) tooltipPlacement: 'top' | 'right' | 'bottom' | 'left' =
     'top';
@@ -520,6 +523,7 @@ export class QuietSlider extends QuietElement {
               id="tooltip"
               part="tooltip"
               exportparts="tooltip:tooltip__tooltip, content:tooltip__content, arrow:tooltip__arrow"
+              distance=${this.tooltipDistance}
               placement=${this.tooltipPlacement}
               for="thumb"
               trigger="manual"

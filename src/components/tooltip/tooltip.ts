@@ -89,6 +89,9 @@ export class QuietTooltip extends QuietElement {
   /** The number of milliseconds to wait before closing the tooltip when hovering out. */
   @property({ attribute: 'close-delay', type: Number }) closeDelay = 100;
 
+  /** Set to manual if you plan to show/hide the tooltip programmatically. */
+  @property() trigger: 'auto' | 'manual' = 'auto';
+
   firstUpdated() {
     // Make sure the host element has an id
     if (!this.id) {
@@ -107,7 +110,7 @@ export class QuietTooltip extends QuietElement {
     }
 
     // Handle anchor changes
-    if (changedProps.has('for')) {
+    if (changedProps.has('for') || changedProps.has('trigger')) {
       const root = this.getRootNode() as Document | ShadowRoot;
 
       // Tear down the old anchor
@@ -124,11 +127,13 @@ export class QuietTooltip extends QuietElement {
       this.anchor = this.for ? root.querySelector(`#${this.for}`) : null;
 
       if (this.anchor) {
-        this.anchor.addEventListener('pointerenter', this.handleAnchorPointerEnter);
-        this.anchor.addEventListener('pointerleave', this.handleAnchorPointerLeave);
-        this.anchor.addEventListener('pointerup', this.handleAnchorPointerUp);
-        this.anchor.addEventListener('focus', this.handleAnchorFocus);
-        this.anchor.addEventListener('blur', this.handleAnchorBlur);
+        if (this.trigger === 'auto') {
+          this.anchor.addEventListener('pointerenter', this.handleAnchorPointerEnter);
+          this.anchor.addEventListener('pointerleave', this.handleAnchorPointerLeave);
+          this.anchor.addEventListener('pointerup', this.handleAnchorPointerUp);
+          this.anchor.addEventListener('focus', this.handleAnchorFocus);
+          this.anchor.addEventListener('blur', this.handleAnchorBlur);
+        }
 
         if (this.anchor.localName === 'quiet-button') {
           //
@@ -188,8 +193,12 @@ export class QuietTooltip extends QuietElement {
     this.customStates.set('open', true);
     this.open = true;
     openTooltips.add(this);
-    document.addEventListener('keydown', this.handleDocumentKeyDown);
-    document.addEventListener('pointermove', this.handleDocumentPointerMove);
+
+    if (this.trigger === 'auto') {
+      document.addEventListener('keydown', this.handleDocumentKeyDown);
+      document.addEventListener('pointermove', this.handleDocumentPointerMove);
+    }
+
     this.tooltip.classList.add('visible');
     this.cleanup = autoUpdate(this.anchor, this.tooltip, () => this.reposition());
     await animateWithClass(this.tooltip, 'show');

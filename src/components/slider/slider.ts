@@ -568,7 +568,6 @@ export class QuietSlider extends QuietElement {
         ></span>
       </div>
 
-      ${this.customValidity}
       ${this.withTooltip
         ? html`
             <div id="tooltip" popover="manual">

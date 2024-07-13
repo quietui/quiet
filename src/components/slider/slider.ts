@@ -267,6 +267,7 @@ export class QuietSlider extends QuietElement {
     if (this.value !== this.pointerDownValue) {
       this.dispatchEvent(new QuietChangeEvent());
       this.dispatchEvent(new Event('change'));
+      this.wasChanged = true;
     }
 
     this.hideTooltip();
@@ -409,6 +410,7 @@ export class QuietSlider extends QuietElement {
       // Dispatch native change/input events for better framework binding support
       this.dispatchEvent(new InputEvent('input'));
       this.dispatchEvent(new Event('change'));
+      this.wasChanged = true;
     }
 
     // When enter is pressed in a slider, the associated form should submit
@@ -449,7 +451,7 @@ export class QuietSlider extends QuietElement {
       valueMissing: false
     };
 
-    this.isInvalid = hasCustomValidity ? true : !hasCustomValidity;
+    this.isInvalid = hasCustomValidity;
     this.internals.setValidity(flags, validationMessage, this.thumb);
   }
 
@@ -566,6 +568,7 @@ export class QuietSlider extends QuietElement {
         ></span>
       </div>
 
+      ${this.customValidity}
       ${this.withTooltip
         ? html`
             <div id="tooltip" popover="manual">

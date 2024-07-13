@@ -1,5 +1,4 @@
-import { animateWithClass } from '../../utilities/animate.js';
-import { arrow, autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
+import '../tooltip/tooltip.js';
 import { clamp } from '../../utilities/math.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property, query, state } from 'lit/decorators.js';
@@ -11,6 +10,7 @@ import formControlStyles from '../../styles/form-control.styles.js';
 import hostStyles from '../../styles/host.styles.js';
 import styles from './slider.styles.js';
 import type { CSSResultGroup } from 'lit';
+import type { QuietTooltip } from '../tooltip/tooltip.js';
 
 /**
  * <quiet-slider>
@@ -19,6 +19,8 @@ import type { CSSResultGroup } from 'lit';
  * @documentation https://quietui.com/docs/components/slider
  * @status stable
  * @since 1.0.0
+ *
+ * @dependency quiet-tooltip
  *
  * @slot label - The slider's label. For plain-text labels, you can use the `label` attribute instead.
  * @slot description - The slider's description. For plain-text descriptions, you can use the `description` attribute
@@ -44,7 +46,6 @@ import type { CSSResultGroup } from 'lit';
  * @cssstate user-valid - Applied when the slider is valid and the user has sufficiently interacted with it.
  * @cssstate user-invalid - Applied when the slider is invalid and the user has sufficiently interacted with it.
  *
- * @cssproperty [--arrow-size=0.3125rem] - The size of the tooltip's arrow. Set this to `0` to hide the arrow.
  * @cssproperty [--marker-size=0.25em] - The size of each individual marker.
  */
 @customElement('quiet-slider')
@@ -54,14 +55,12 @@ export class QuietSlider extends QuietElement {
 
   /** A reference to the `<form>` associated with the form control, or `null` if no form is associated. */
   public associatedForm: HTMLFormElement | null = null;
-  private cleanup: ReturnType<typeof autoUpdate> | undefined;
   private localize = new Localize(this);
   private pointerDownValue: number | undefined;
 
   @query('#thumb') thumb: HTMLElement;
   @query('#slider') slider: HTMLElement;
-  @query('#tooltip') tooltip: HTMLElement;
-  @query('#tooltip-arrow') tooltipArrow: HTMLElement;
+  @query('#tooltip') tooltip: QuietTooltip;
 
   @state() private isInvalid = false;
   @state() private wasChanged = false;
@@ -127,7 +126,7 @@ export class QuietSlider extends QuietElement {
     'top';
 
   /** A custom formatting function to apply to the tooltip's value. Must be set with JavaScript. Property only. */
-  @property({ attribute: false }) tooltipFormatter: (value: number) => string;
+  @property({ attribute: false }) formatter: (value: number) => string;
 
   connectedCallback() {
     super.connectedCallback();
@@ -261,57 +260,14 @@ export class QuietSlider extends QuietElement {
     event.preventDefault();
   };
 
-  private async showTooltip() {
+  private showTooltip() {
     if (this.withTooltip) {
-      this.tooltip.showPopover();
-      this.tooltip.classList.add('visible');
-      this.cleanup = autoUpdate(this.thumb, this.tooltip, () => this.repositionTooltip());
-      await animateWithClass(this.tooltip, 'show');
+      this.tooltip.open = true;
     }
   }
 
-  private async hideTooltip() {
-    if (this.tooltip.classList.contains('visible')) {
-      await animateWithClass(this.tooltip, 'hide');
-      this.tooltip.classList.remove('visible');
-      this.tooltip.hidePopover();
-    }
-
-    if (this.cleanup) {
-      this.cleanup();
-      this.cleanup = undefined;
-      this.removeAttribute('data-placement');
-    }
-  }
-
-  /** Repositions the tooltip */
-  private repositionTooltip() {
-    computePosition(this.thumb, this.tooltip, {
-      placement: this.tooltipPlacement,
-      middleware: [offset({ mainAxis: 8 }), flip(), shift(), arrow({ element: this.tooltipArrow })]
-    }).then(({ x, y, middlewareData, placement }) => {
-      // Set the determined placement for users to hook into and for transform origin styles
-      this.setAttribute('data-placement', placement);
-
-      // Position it
-      Object.assign(this.tooltip.style, {
-        left: `${x}px`,
-        top: `${y}px`
-      });
-
-      // Position the arrow
-      if (middlewareData.arrow) {
-        const arrowX = middlewareData.arrow.x;
-        const arrowY = middlewareData.arrow.y;
-        const staticSide = { top: 'bottom', right: 'left', bottom: 'top', left: 'right' }[placement.split('-')[0]]!;
-
-        Object.assign(this.tooltipArrow.style, {
-          left: typeof arrowX === 'number' ? `${arrowX}px` : '',
-          top: typeof arrowY === 'number' ? `${arrowY}px` : '',
-          [staticSide]: 'calc(var(--tooltip-arrow-diagonal-size) * -1)'
-        });
-      }
-    });
+  private hideTooltip() {
+    this.tooltip.open = false;
   }
 
   private setValueFromCoordinates(event: PointerEvent | TouchEvent) {
@@ -344,7 +300,7 @@ export class QuietSlider extends QuietElement {
     const isRtl = this.localize.dir() === 'rtl';
     let newValue = this.value;
 
-    if (this.disabled && this.readonly) return;
+    if (this.disabled || this.readonly) return;
 
     // Increase
     if (event.key === 'ArrowUp' || event.key === (isRtl ? 'ArrowLeft' : 'ArrowRight')) {
@@ -556,14 +512,17 @@ export class QuietSlider extends QuietElement {
 
       ${this.withTooltip
         ? html`
-            <div id="tooltip" popover="manual">
-              <div id="tooltip-content">
-                ${typeof this.tooltipFormatter === 'function'
-                  ? this.tooltipFormatter(this.value)
-                  : this.localize.number(this.value)}
-              </div>
-              <div id="tooltip-arrow" role="presentation"></div>
-            </div>
+            <quiet-tooltip
+              id="tooltip"
+              part="tooltip"
+              exportparts="tooltip:tooltip__tooltip, content:tooltip__content, arrow:tooltip__arrow"
+              placement=${this.tooltipPlacement}
+              for="thumb"
+              trigger="manual"
+              dir=${this.localize.dir()}
+            >
+              ${typeof this.formatter === 'function' ? this.formatter(this.value) : this.localize.number(this.value)}
+            </quiet-tooltip>
           `
         : ''}
     `;

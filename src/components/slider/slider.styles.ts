@@ -3,11 +3,6 @@ import { css } from 'lit';
 export default css`
   :host {
     --marker-size: 0.1875em;
-    --tooltip-arrow-size: 0.3125rem;
-    --tooltip-show-duration: 100ms;
-
-    /* Internal calculated properties */
-    --tooltip-arrow-diagonal-size: calc(var(--tooltip-arrow-size) * sin(45deg));
   }
 
   #label:has(~ .vertical) {
@@ -175,105 +170,5 @@ export default css`
   .vertical .marker {
     top: calc(var(--position) - var(--marker-size) / 2);
     left: calc(50% - var(--marker-size) / 2);
-  }
-
-  /* Tooltip */
-  #tooltip {
-    display: none;
-    position: absolute;
-    width: max-content;
-    background: none;
-    top: 0;
-    left: 0;
-    border: none;
-    padding: 0;
-    margin: 0;
-    overflow: visible;
-
-    &.visible {
-      display: flex;
-      opacity: 1;
-    }
-
-    &.show {
-      animation: show-tooltip var(--tooltip-show-duration) ease;
-    }
-
-    &.hide {
-      animation: show-tooltip var(--tooltip-show-duration) ease reverse;
-    }
-  }
-
-  #tooltip-content {
-    background-color: var(--quiet-paper-color);
-    border-radius: var(--quiet-border-radius);
-    border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
-    box-shadow: var(--quiet-shadow-soft);
-    color: var(--quiet-neutral-text-on-soft);
-    font-size: 0.875em;
-    padding: 0.3em 0.6em;
-    user-select: none;
-    -webkit-user-select: none;
-    z-index: 2;
-  }
-
-  #tooltip-arrow {
-    position: absolute;
-    width: calc(var(--tooltip-arrow-diagonal-size) * 2);
-    height: calc(var(--tooltip-arrow-diagonal-size) * 2);
-    background-color: var(--quiet-paper-color);
-    border-right: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
-    border-bottom: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
-    z-index: 3;
-  }
-
-  /* Rotate border position based on placement */
-  :host([data-placement^='top']) {
-    --show-x: 0;
-    --show-y: 0.25em;
-  }
-
-  :host([data-placement^='top']) #tooltip-arrow {
-    rotate: 45deg;
-  }
-
-  :host([data-placement^='right']) {
-    --show-x: -0.25em;
-    --show-y: 0;
-  }
-
-  :host([data-placement^='right']) #tooltip-arrow {
-    rotate: 135deg;
-  }
-
-  :host([data-placement^='bottom']) {
-    --show-x: 0;
-    --show-y: -0.25em;
-  }
-
-  :host([data-placement^='bottom']) #tooltip-arrow {
-    rotate: 225deg;
-  }
-
-  :host([data-placement^='left']) {
-    --show-x: 0.25em;
-    --show-y: 0;
-  }
-
-  :host([data-placement^='left']) #tooltip-arrow {
-    rotate: 315deg;
-  }
-
-  @keyframes show-tooltip {
-    from {
-      opacity: 0;
-      scale: 0.9;
-      translate: var(--show-x) var(--show-y);
-    }
-    to {
-      opacity: 1;
-      scale: 1;
-      translate: 0 0;
-    }
   }
 `;

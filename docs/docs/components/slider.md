@@ -65,9 +65,10 @@ Add the `with-tooltip` attribute to show a tooltip when the slider has focus or 
 
 ### Formatting tooltips
 
-To format the tooltip's value, set the `tooltipFormatter` property to a function that accepts a numeric value and returns a string. The [`Intl.FormatNumber API`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat) can be really useful here.
+To format the tooltip's value, set the `formatter` property to a function that accepts a numeric value and returns a string. The [`Intl.FormatNumber API`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat) can be really useful here.
 
 ```html {.example}
+<!-- Percent -->
 <quiet-slider 
   id="slider__percent"
   label="Percentage"
@@ -84,10 +85,11 @@ To format the tooltip's value, set the `tooltipFormatter` property to a function
   const formatter = new Intl.NumberFormat('en-US', { style: 'percent' });
 
   customElements.whenDefined('quiet-slider').then(() => {
-    percentSlider.tooltipFormatter = value => formatter.format(value);
+    percentSlider.formatter = value => formatter.format(value);
   });
 </script>
 
+<!-- Duration -->
 <quiet-slider 
   id="slider__duration"
   label="Duration"
@@ -103,10 +105,11 @@ To format the tooltip's value, set the `tooltipFormatter` property to a function
   const formatter = new Intl.NumberFormat('en-US', { style: 'unit', unit: 'hour', unitDisplay: 'long' });
 
   customElements.whenDefined('quiet-slider').then(() => {
-    hourSlider.tooltipFormatter = value => formatter.format(value);
+    hourSlider.formatter = value => formatter.format(value);
   });
 </script>
 
+<!-- Angle -->
 <quiet-slider 
   id="slider__angle"
   label="Angle"
@@ -122,11 +125,11 @@ To format the tooltip's value, set the `tooltipFormatter` property to a function
   const formatter = new Intl.NumberFormat('en-US', { style: 'unit', unit: 'degree', unitDisplay: 'narrow' });
 
   customElements.whenDefined('quiet-slider').then(() => {
-    angleSlider.tooltipFormatter = value => formatter.format(value);
+    angleSlider.formatter = value => formatter.format(value);
   });
 </script>
 
-
+<!-- Currency -->
 <quiet-slider 
   id="slider__currency"
   label="Currency"
@@ -147,7 +150,7 @@ To format the tooltip's value, set the `tooltipFormatter` property to a function
   });
 
   customElements.whenDefined('quiet-slider').then(() => {
-    currencySlider.tooltipFormatter = value => formatter.format(value);
+    currencySlider.formatter = value => formatter.format(value);
   });
 </script>
 ```

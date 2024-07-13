@@ -119,26 +119,12 @@ export class QuietSlider extends QuietElement {
   /** Draws markers at each step along the slider. */
   @property({ attribute: 'with-markers', type: Boolean }) withMarkers = false;
 
-  /** Draws a tooltip above the thumb when the control has focus. */
+  /** Draws a tooltip above the thumb when the control has focus or is dragged. */
   @property({ attribute: 'with-tooltip', type: Boolean }) withTooltip = false;
 
-  /**
-   * The placement of the tooltip in reference to the anchor. The menu will shift to a more optimal location if the
-   * preferred placement doesn't have enough room.
-   */
-  @property({ attribute: 'tooltip-placement', reflect: true }) tooltipPlacement:
-    | 'top'
-    | 'top-start'
-    | 'top-end'
-    | 'bottom'
-    | 'bottom-start'
-    | 'bottom-end'
-    | 'right'
-    | 'right-start'
-    | 'right-end'
-    | 'left'
-    | 'left-start'
-    | 'left-end' = 'top';
+  /** The placement of the tooltip in reference to the slider's thumb. */
+  @property({ attribute: 'tooltip-placement', reflect: true }) tooltipPlacement: 'top' | 'right' | 'bottom' | 'left' =
+    'top';
 
   /** A custom formatting function to apply to the tooltip's value. Must be set with JavaScript. Property only. */
   @property({ attribute: false }) tooltipFormatter: (value: number) => string;

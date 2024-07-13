@@ -331,33 +331,39 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
 
 ```html {.example}
 <div style="display: flex; gap: 2rem;">
-  <div class="slider__brightness">
+  <div class="slider__touch">
     <quiet-slider 
       label="Brightness"
       orientation="vertical"
       name="value" 
-      value="60"
-      min="1"
-      max="100"
+      min="0"
+      max="1"
+      step=".01"
+      value="0.6"
+      with-tooltip
+      tooltip-distance="20"
     ></quiet-slider>
     <quiet-icon name="sun"></quiet-icon>
   </div>
 
-  <div class="slider__brightness">
+  <div class="slider__touch">
     <quiet-slider 
       label="Volume"
       orientation="vertical"
       name="value" 
-      value="40"
-      min="1"
-      max="100"
+      min="0"
+      max="1"
+      step=".01"
+      value="0.4"
+      with-tooltip
+      tooltip-distance="20"
     ></quiet-slider>
     <quiet-icon name="volume"></quiet-icon>
   </div>
 </div>
 
 <style>
-  .slider__brightness {
+  .slider__touch {
     position: relative;
     max-width: fit-content;
 
@@ -367,17 +373,28 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
       &::part(slider) {
         width: 4rem;
         background-color: var(--quiet-neutral-fill-softer);
+        box-shadow: inset 0 1px 2px color-mix(in oklab, var(--quiet-neutral-fill-softer), black 5%);
         cursor: pointer;
         overflow: hidden;
       }
 
       &::part(indicator) {
-        background-color: var(--quiet-primary-fill-mid);
+        background-color: #22c55e;
         border-radius: 0;
       }    
 
       &::part(thumb) {
         opacity: 0;
+      }
+
+      &::part(tooltip__arrow) {
+        display: none;
+      }
+
+      &::part(tooltip__content) {
+        background-color: var(--quiet-neutral-fill-louder);
+        border: none;
+        color: var(--quiet-primary-text-on-loud);
       }
 
       &:focus-within {
@@ -396,4 +413,15 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
     }
   }
 </style>
+
+<script>
+  // Format tooltips a percentage
+  const formatter = new Intl.NumberFormat('en-US', { style: 'percent' });
+
+  customElements.whenDefined('quiet-slider').then(() => {
+    document.querySelectorAll('.slider__touch').forEach(el => {
+      el.querySelector('quiet-slider').tooltipFormatter = value => formatter.format(value);
+    });
+  });
+</script>
 ```

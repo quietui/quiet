@@ -179,14 +179,6 @@ To make a vertical slider, set the `orientation` attribute to `vertical`. Vertic
 
   <quiet-slider
     orientation="vertical" 
-    label="Mid" 
-    name="mid"
-    value="60"
-    style="width: 80px"
-  ></quiet-slider>
-
-  <quiet-slider
-    orientation="vertical" 
     label="Treble" 
     name="treble"
     value="40"

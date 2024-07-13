@@ -85,7 +85,7 @@ To format the tooltip's value, set the `formatter` property to a function that a
   const formatter = new Intl.NumberFormat('en-US', { style: 'percent' });
 
   customElements.whenDefined('quiet-slider').then(() => {
-    percentSlider.formatter = value => formatter.format(value);
+    percentSlider.tooltipFormatter = value => formatter.format(value);
   });
 </script>
 
@@ -105,7 +105,7 @@ To format the tooltip's value, set the `formatter` property to a function that a
   const formatter = new Intl.NumberFormat('en-US', { style: 'unit', unit: 'hour', unitDisplay: 'long' });
 
   customElements.whenDefined('quiet-slider').then(() => {
-    hourSlider.formatter = value => formatter.format(value);
+    hourSlider.tooltipFormatter = value => formatter.format(value);
   });
 </script>
 
@@ -125,7 +125,7 @@ To format the tooltip's value, set the `formatter` property to a function that a
   const formatter = new Intl.NumberFormat('en-US', { style: 'unit', unit: 'degree', unitDisplay: 'narrow' });
 
   customElements.whenDefined('quiet-slider').then(() => {
-    angleSlider.formatter = value => formatter.format(value);
+    angleSlider.tooltipFormatter = value => formatter.format(value);
   });
 </script>
 
@@ -150,7 +150,7 @@ To format the tooltip's value, set the `formatter` property to a function that a
   });
 
   customElements.whenDefined('quiet-slider').then(() => {
-    currencySlider.formatter = value => formatter.format(value);
+    currencySlider.tooltipFormatter = value => formatter.format(value);
   });
 </script>
 ```

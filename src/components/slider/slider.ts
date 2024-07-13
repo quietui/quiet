@@ -37,9 +37,13 @@ import type { QuietTooltip } from '../tooltip/tooltip.js';
  * @csspart label - The element that contains the sliders's label.
  * @csspart description - The element that contains the slider's description.
  * @csspart slider - The slider element. The background is the slider's track.
- * @csspart thumb - The slider's thumb.
  * @csspart indicator - The colored indicator that shows from the start of the slider to the current value.
  * @csspart marker - The individual markers that are shown when `with-markers` is used.
+ * @csspart thumb - The slider's thumb.
+ * @csspart tooltip - The tooltip, a `<quiet-tooltip>` element.
+ * @csspart tooltip__tooltip - The tooltip's `tooltip` part.
+ * @csspart tooltip__content - The tooltip's `content` part.
+ * @csspart tooltip__arrow - The tooltip's `arrow` part.
  *
  * @cssstate disabled - Applied when the slider is disabled.
  * @cssstate focused - Applied when the slider has focus.
@@ -126,7 +130,7 @@ export class QuietSlider extends QuietElement {
     'top';
 
   /** A custom formatting function to apply to the tooltip's value. Must be set with JavaScript. Property only. */
-  @property({ attribute: false }) formatter: (value: number) => string;
+  @property({ attribute: false }) tooltipFormatter: (value: number) => string;
 
   connectedCallback() {
     super.connectedCallback();
@@ -521,7 +525,9 @@ export class QuietSlider extends QuietElement {
               trigger="manual"
               dir=${this.localize.dir()}
             >
-              ${typeof this.formatter === 'function' ? this.formatter(this.value) : this.localize.number(this.value)}
+              ${typeof this.tooltipFormatter === 'function'
+                ? this.tooltipFormatter(this.value)
+                : this.localize.number(this.value)}
             </quiet-tooltip>
           `
         : ''}

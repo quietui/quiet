@@ -6,7 +6,7 @@ layout: component
 ```html {.example}
 <quiet-slider 
   label="Number of cats"
-  description="More cats will mean you have more fun."
+  description="Limit six per household"
   name="value" 
   value="3"
   min="0"
@@ -24,7 +24,7 @@ Use the `min` and `max` attributes to set a minimum and maximum value for the sl
 
 ```html {.example}
 <quiet-slider 
-  label="Choose a value between 1 and 0"
+  label="Between zero and one"
   min="0"
   max="1"
   step="0.1"
@@ -35,31 +35,30 @@ Use the `min` and `max` attributes to set a minimum and maximum value for the sl
 
 ### Showing markers
 
-Add the `--with-markers` attribute to show visual markers at each step. This works best with sliders that have smaller ranges, e.g. 1–10.
+Add the `--with-markers` attribute to show visual markers at each step. Markers work best with sliders that have shorter ranges.
 
 ```html {.example}
 <quiet-slider 
-  label="How many cats would you like"
-  name="cats" 
+  label="Size"
+  name="size" 
   min="0"
-  max="10"
-  value="5"
+  max="8"
+  value="4"
   with-markers
 ></quiet-slider>
 ```
 
 ### Showing tooltips
 
-Add the `with-tooltip` attribute to show a tooltip when the slider is dragged or focused.
+Add the `with-tooltip` attribute to show a tooltip when the slider has focus or is dragged.
 
 ```html {.example}
 <quiet-slider 
-  label="Number of cats"
-  description="More cats will mean you have more fun."
-  name="value" 
-  value="5"
-  min="1"
-  max="10"
+  label="Quality"
+  name="quality" 
+  min="0"
+  max="100"
+  value="50"
   with-tooltip
 ></quiet-slider>
 ```
@@ -78,7 +77,7 @@ To format the tooltip's value, set the `tooltipFormatter` property to a function
   max="1"
   step=".01"
   with-tooltip
-></quiet-slider>
+></quiet-slider><br>
 
 <script>
   const percentSlider = document.getElementById('slider__percent');
@@ -89,24 +88,66 @@ To format the tooltip's value, set the `tooltipFormatter` property to a function
   });
 </script>
 
-<br>
-
 <quiet-slider 
-  id="slider__hour"
+  id="slider__duration"
   label="Duration"
   name="duration"
   value="12"
   min="0"
   max="24"
   with-tooltip
-></quiet-slider>
+></quiet-slider><br>
 
 <script>
-  const hourSlider = document.getElementById('slider__hour');
+  const hourSlider = document.getElementById('slider__duration');
   const formatter = new Intl.NumberFormat('en-US', { style: 'unit', unit: 'hour', unitDisplay: 'long' });
 
   customElements.whenDefined('quiet-slider').then(() => {
     hourSlider.tooltipFormatter = value => formatter.format(value);
+  });
+</script>
+
+<quiet-slider 
+  id="slider__angle"
+  label="Angle"
+  name="angle"
+  min="0"
+  max="360"
+  value="180"
+  with-tooltip
+></quiet-slider><br>
+
+<script>
+  const angleSlider = document.getElementById('slider__angle');
+  const formatter = new Intl.NumberFormat('en-US', { style: 'unit', unit: 'degree', unitDisplay: 'narrow' });
+
+  customElements.whenDefined('quiet-slider').then(() => {
+    angleSlider.tooltipFormatter = value => formatter.format(value);
+  });
+</script>
+
+
+<quiet-slider 
+  id="slider__currency"
+  label="Currency"
+  name="currency"
+  min="0"
+  max="100"
+  value="50"
+  with-tooltip
+></quiet-slider>
+
+<script>
+  const currencySlider = document.getElementById('slider__currency');
+  const formatter = new Intl.NumberFormat('en-US', { 
+    style: 'currency', 
+    currency: 'USD', 
+    currencyDisplay: 'symbol', 
+    maximumFractionDigits: 0 
+  });
+
+  customElements.whenDefined('quiet-slider').then(() => {
+    currencySlider.tooltipFormatter = value => formatter.format(value);
   });
 </script>
 ```
@@ -116,7 +157,7 @@ To format the tooltip's value, set the `tooltipFormatter` property to a function
 To make a vertical slider, set the `orientation` attribute to `vertical`. Vertical sliders are centered and will span 100% of the available space by default.
 
 ```html {.example}
-<div style="display: flex; gap: 1rem;">
+<div style="display: flex; gap: 1rem; flex-wrap: wrap;">
   <quiet-slider
     orientation="vertical" 
     label="Volume" 
@@ -135,9 +176,17 @@ To make a vertical slider, set the `orientation` attribute to `vertical`. Vertic
 
   <quiet-slider
     orientation="vertical" 
+    label="Mid" 
+    name="mid"
+    value="60"
+    style="width: 80px"
+  ></quiet-slider>
+
+  <quiet-slider
+    orientation="vertical" 
     label="Treble" 
     name="treble"
-    value="35"
+    value="40"
     style="width: 80px"
   ></quiet-slider>
 </div>
@@ -160,7 +209,7 @@ Use the `size` attribute to change the slider's size.
 Use the `disabled` attribute to disable the slider.
 
 ```html {.example}
-<quiet-slider label="Disabled" disabled></quiet-slider>
+<quiet-slider label="Disabled" value="50" disabled></quiet-slider>
 ```
 
 ### Using custom validation
@@ -194,7 +243,7 @@ You can style valid and invalid sliders using the `:valid` and `:invalid` pseudo
   <quiet-slider
     name="value"
     label="Select a value"
-    custom-validity="Please select a value"
+    custom-validity="Select a number greater than zero"
     min="0"
     max="5"
     value="0"
@@ -225,7 +274,7 @@ You can style valid and invalid sliders using the `:valid` and `:invalid` pseudo
   const slider = form.querySelector('quiet-slider');
 
   slider.addEventListener('quiet-input', () => {
-    slider.customValidity = slider.value > 0 ? '' : 'Please select a value';
+    slider.customValidity = slider.value > 0 ? '' : 'Select a number greater than zero';
   });
 </script>
 ```
@@ -237,7 +286,7 @@ However, these selectors will match even before the user has had a chance to fil
   <quiet-slider
     name="value"
     label="Select a value"
-    custom-validity="Please select a value"
+    custom-validity="Select a number greater than zero"
     min="0"
     max="5"
     value="0"
@@ -268,7 +317,7 @@ However, these selectors will match even before the user has had a chance to fil
   const slider = form.querySelector('quiet-slider');
 
   slider.addEventListener('quiet-input', () => {
-    slider.customValidity = slider.value > 0 ? '' : 'Please select a value';
+    slider.customValidity = slider.value > 0 ? '' : 'Select a number greater than zero';
   });
 </script>
 ```
@@ -286,7 +335,7 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
       name="value" 
       value="60"
       min="1"
-      max="100"    
+      max="100"
     ></quiet-slider>
     <quiet-icon name="sun"></quiet-icon>
   </div>
@@ -298,7 +347,7 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
       name="value" 
       value="40"
       min="1"
-      max="100"    
+      max="100"
     ></quiet-slider>
     <quiet-icon name="volume"></quiet-icon>
   </div>
@@ -325,13 +374,7 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
       }    
 
       &::part(thumb) {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        overflow: hidden;
-        white-space: nowrap;
-        clip: rect(0 0 0 0);
-        clip-path: inset(50%);
+        opacity: 0;
       }
 
       &:focus-within {

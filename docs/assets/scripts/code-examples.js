@@ -16,8 +16,14 @@ document.addEventListener('click', event => {
   if (dir) {
     const codeExample = dir.closest('.code-example');
     const preview = codeExample.querySelector('.code-example-preview');
+    const newDir = preview.dir === 'rtl' ? 'ltr' : 'rtl';
 
-    preview.dir = preview.dir === 'rtl' ? 'ltr' : 'rtl';
+    preview.dir = newDir;
+    preview.querySelectorAll('*').forEach(el => {
+      if (el.localName.startsWith('quiet-')) {
+        el.setAttribute('dir', newDir);
+      }
+    });
   }
 
   // Edit in CodePen

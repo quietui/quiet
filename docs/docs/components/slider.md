@@ -263,6 +263,3 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
   }
 </style>
 ```
-
-
-- https://x.com/jh3yy/status/1801770679442018309

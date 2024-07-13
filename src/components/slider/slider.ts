@@ -238,15 +238,15 @@ export class QuietSlider extends QuietElement {
     document.addEventListener('touchmove', this.handleDragMove);
     document.addEventListener('touchend', this.handleDragStop);
 
+    event.preventDefault();
+    this.pointerDownValue = this.value;
     this.setValueFromCoordinates(event);
     this.showTooltip();
-    this.pointerDownValue = this.value;
-    event.preventDefault();
   }
 
   private handleDragMove = (event: PointerEvent | TouchEvent) => {
-    this.setValueFromCoordinates(event);
     event.preventDefault();
+    this.setValueFromCoordinates(event);
   };
 
   private handleDragStop = (event: PointerEvent | TouchEvent) => {
@@ -262,9 +262,9 @@ export class QuietSlider extends QuietElement {
       this.wasChanged = true;
     }
 
+    event.preventDefault();
     this.hideTooltip();
     this.pointerDownValue = undefined;
-    event.preventDefault();
   };
 
   private showTooltip() {

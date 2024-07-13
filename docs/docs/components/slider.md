@@ -18,6 +18,36 @@ layout: component
 
 ## Examples
 
+### Setting min, max, and step
+
+Use the `min` and `max` attributes to set a minimum and maximum value for the slider. Use the `step` attribute to change the granularity the value must adhere to.
+
+```html {.example}
+<quiet-slider 
+  label="Choose a value between 1 and 0"
+  min="0"
+  max="1"
+  step="0.1"
+  value="0.5"
+  with-tooltip
+></quiet-slider>
+```
+
+### Showing markers
+
+Add the `--with-markers` attribute to show visual markers at each step. This works best with sliders that have smaller ranges, e.g. 1–10.
+
+```html {.example}
+<quiet-slider 
+  label="How many cats would you like"
+  name="cats" 
+  min="0"
+  max="10"
+  value="5"
+  with-markers
+></quiet-slider>
+```
+
 ### Showing tooltips
 
 Add the `with-tooltip` attribute to show a tooltip when the slider is dragged or focused.
@@ -57,7 +87,6 @@ To format the tooltip's value, set the `tooltipFormatter` property to a function
   customElements.whenDefined('quiet-slider').then(() => {
     percentSlider.tooltipFormatter = value => formatter.format(value);
   });
-
 </script>
 
 <br>
@@ -80,36 +109,6 @@ To format the tooltip's value, set the `tooltipFormatter` property to a function
     hourSlider.tooltipFormatter = value => formatter.format(value);
   });
 </script>
-```
-
-### Setting min, max, and step
-
-Use the `min` and `max` attributes to set a minimum and maximum value for the slider. Use the `step` attribute to change the granularity the value must adhere to.
-
-```html {.example}
-<quiet-slider 
-  label="Choose a value between 1 and 0"
-  min="0"
-  max="1"
-  step="0.1"
-  value="0.5"
-  with-tooltip
-></quiet-slider>
-```
-
-### Showing markers
-
-Add the `--with-markers` attribute to show visual markers at each step. This works best with sliders that have smaller ranges, e.g. 1–10.
-
-```html {.example}
-<quiet-slider 
-  label="How many cats would you like"
-  name="cats" 
-  min="0"
-  max="10"
-  with-markers
-  with-tooltip
-></quiet-slider>
 ```
 
 ### Changing the orientation
@@ -166,7 +165,7 @@ Use the `disabled` attribute to disable the slider.
 
 ### Using custom validation
 
-Use the `custom-validity` attribute to make the slider invalid and show a custom error message on submit. To clear the error, remove the attribute or set it to an empty string.
+Sliders don't have built-in validation attributes like many other form controls. However, you can use the `custom-validity` attribute to make the slider invalid and show a custom error message on submit. To clear the error, remove the attribute or set it to an empty string.
 
 ```html {.example}
 <form action="about:blank" method="get" target="_blank">
@@ -184,6 +183,95 @@ Use the `custom-validity` attribute to make the slider invalid and show a custom
 :::info
 Most validation attributes work exactly like their native counterparts. However, the `custom-validity` attribute is offered in lieu of a `setCustomValidity()` method. This allows you to declaratively set custom errors instead of having to call a method with JavaScript.
 :::
+
+
+### Styling validation
+
+You can style valid and invalid sliders using the `:valid` and `:invalid` pseudo classes.
+
+```html {.example}
+<form action="about:blank" method="get" target="_blank" class="slider__validation-pseudo">
+  <quiet-slider
+    name="value"
+    label="Select a value"
+    custom-validity="Please select a value"
+    min="0"
+    max="5"
+    value="0"
+    with-markers
+    with-tooltip
+  ></quiet-slider>
+  <br>
+  <quiet-button type="submit" variant="primary">Submit</quiet-button>
+  <quiet-button type="reset">Reset</quiet-button>
+</form>
+
+<style>
+  .slider__validation-pseudo {
+    quiet-slider:valid {
+      outline: solid 2px var(--quiet-constructive-stroke-mid);
+      outline-offset: 1rem;
+    }
+
+    quiet-slider:invalid {
+      outline: solid 2px var(--quiet-destructive-stroke-mid);
+      outline-offset: 1rem;
+    }
+  }
+</style>
+
+<script>
+  const form = document.querySelector('.slider__validation-pseudo');
+  const slider = form.querySelector('quiet-slider');
+
+  slider.addEventListener('quiet-input', () => {
+    slider.customValidity = slider.value > 0 ? '' : 'Please select a value';
+  });
+</script>
+```
+
+However, these selectors will match even before the user has had a chance to fill out the form. More often than not, you'll want to use the `user-valid` and `user-invalid` [custom states](#custom-states) instead. This way, validation styles are only shown _after_ the user interacts with the form control or when the form is submitted.
+
+```html {.example}
+<form action="about:blank" method="get" target="_blank" class="slider__validation-custom">
+  <quiet-slider
+    name="value"
+    label="Select a value"
+    custom-validity="Please select a value"
+    min="0"
+    max="5"
+    value="0"
+    with-markers
+    with-tooltip
+  ></quiet-slider>
+  <br>
+  <quiet-button type="submit" variant="primary">Submit</quiet-button>
+  <quiet-button type="reset">Reset</quiet-button>
+</form>
+
+<style>
+  .slider__validation-custom {
+    quiet-slider:state(user-valid) {
+      outline: solid 2px var(--quiet-constructive-stroke-mid);
+      outline-offset: 1rem;
+    }
+
+    quiet-slider:state(user-invalid) {
+      outline: solid 2px var(--quiet-destructive-stroke-mid);
+      outline-offset: 1rem;
+    }
+  }
+</style>
+
+<script>
+  const form = document.querySelector('.slider__validation-custom');
+  const slider = form.querySelector('quiet-slider');
+
+  slider.addEventListener('quiet-input', () => {
+    slider.customValidity = slider.value > 0 ? '' : 'Please select a value';
+  });
+</script>
+```
 
 ### Styling sliders
 

@@ -111,16 +111,15 @@ export default css`
     height: var(--thumb-size);
     border-radius: 50%;
     background-color: var(--quiet-primary-fill-mid);
-    border: solid var(--thumb-border-width) var(--quiet-paper-color);
     cursor: pointer;
 
     &::before {
       content: '';
       position: absolute;
-      top: calc(var(--thumb-size) / 4);
-      right: calc(var(--thumb-size) / 4);
-      bottom: calc(var(--thumb-size) / 4);
-      left: calc(var(--thumb-size) / 4);
+      top: calc(var(--thumb-size) / 5);
+      right: calc(var(--thumb-size) / 5);
+      bottom: calc(var(--thumb-size) / 5);
+      left: calc(var(--thumb-size) / 5);
       background-color: white;
       border-radius: 50%;
     }
@@ -131,7 +130,7 @@ export default css`
 
     &:focus-visible {
       outline: var(--quiet-focus-ring);
-      outline-offset: -1px;
+      outline-offset: calc(var(--quiet-focus-offset) * 2);
     }
   }
 

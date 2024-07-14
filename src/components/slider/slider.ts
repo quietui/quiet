@@ -61,6 +61,7 @@ export class QuietSlider extends QuietElement {
   public associatedForm: HTMLFormElement | null = null;
   private localize = new Localize(this);
   private pointerDownValue: number | undefined;
+  private sliderBoundingClientRect: DOMRect;
 
   @query('#thumb') thumb: HTMLElement;
   @query('#slider') slider: HTMLElement;
@@ -239,6 +240,9 @@ export class QuietSlider extends QuietElement {
     document.addEventListener('touchend', this.handleDragStop);
 
     event.preventDefault();
+
+    // Cache coords when dragging starts to avoid calling it on every move
+    this.sliderBoundingClientRect = this.slider.getBoundingClientRect();
     this.pointerDownValue = this.value;
     this.setValueFromCoordinates(event);
     this.showTooltip();
@@ -274,14 +278,16 @@ export class QuietSlider extends QuietElement {
   }
 
   private hideTooltip() {
-    this.tooltip.open = false;
+    if (this.withTooltip) {
+      this.tooltip.open = false;
+    }
   }
 
   private setValueFromCoordinates(event: PointerEvent | TouchEvent) {
     const isRtl = this.localize.dir() === 'rtl';
     const isVertical = this.orientation === 'vertical';
     const oldValue = this.value;
-    const { top, right, bottom, left, height, width } = this.slider.getBoundingClientRect();
+    const { top, right, bottom, left, height, width } = this.sliderBoundingClientRect;
     const x = event instanceof PointerEvent ? event.clientX : event.touches[0].clientX;
     const y = event instanceof PointerEvent ? event.clientY : event.touches[0].clientY;
     const pointerPosition = isVertical ? y : x;

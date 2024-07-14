@@ -89,8 +89,11 @@ export class QuietTooltip extends QuietElement {
   /** The number of milliseconds to wait before closing the tooltip when hovering out. */
   @property({ attribute: 'close-delay', type: Number }) closeDelay = 100;
 
-  /** Set to manual if you plan to show/hide the tooltip programmatically. */
-  @property() trigger: 'auto' | 'manual' = 'auto';
+  /**
+   * By default, the tooltip automatically shows when the user focuses or hovers over the anchor. If you want to control
+   * the tooltip programmatically, set this to `manual`.
+   */
+  @property() activation: 'auto' | 'manual' = 'auto';
 
   firstUpdated() {
     // Make sure the host element has an id
@@ -127,7 +130,7 @@ export class QuietTooltip extends QuietElement {
       this.anchor = this.for ? root.querySelector(`#${this.for}`) : null;
 
       if (this.anchor) {
-        if (this.trigger === 'auto') {
+        if (this.activation === 'auto') {
           this.anchor.addEventListener('pointerenter', this.handleAnchorPointerEnter);
           this.anchor.addEventListener('pointerleave', this.handleAnchorPointerLeave);
           this.anchor.addEventListener('pointerup', this.handleAnchorPointerUp);
@@ -194,7 +197,7 @@ export class QuietTooltip extends QuietElement {
     this.open = true;
     openTooltips.add(this);
 
-    if (this.trigger === 'auto') {
+    if (this.activation === 'auto') {
       document.addEventListener('keydown', this.handleDocumentKeyDown);
       document.addEventListener('pointermove', this.handleDocumentPointerMove);
     }

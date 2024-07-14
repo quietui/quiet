@@ -526,7 +526,7 @@ export class QuietSlider extends QuietElement {
               distance=${this.tooltipDistance}
               placement=${this.tooltipPlacement}
               for="thumb"
-              trigger="manual"
+              activation="manual"
               dir=${this.localize.dir()}
             >
               ${typeof this.tooltipFormatter === 'function'

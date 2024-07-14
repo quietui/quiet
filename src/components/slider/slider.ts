@@ -93,7 +93,7 @@ export class QuietSlider extends QuietElement {
   /** Makes the slider a read-only field. */
   @property({ type: Boolean }) readonly = false;
 
-  /** Makes the slider a dual-thumb slider with min and max values. */
+  /** TODO - Makes the slider a dual-thumb slider with min and max values. */
   @property({ type: Boolean }) dual = false;
 
   /** The orientation of the slider. */

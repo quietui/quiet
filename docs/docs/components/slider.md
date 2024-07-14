@@ -268,9 +268,13 @@ You can style valid and invalid sliders using the `:valid` and `:invalid` pseudo
   const form = document.querySelector('.slider__validation-pseudo');
   const slider = form.querySelector('quiet-slider');
 
-  slider.addEventListener('quiet-input', () => {
+  async function updateValidity() {
+    await slider.updateComplete;
     slider.customValidity = slider.value > 0 ? '' : 'Select a number greater than zero';
-  });
+  }
+
+  slider.addEventListener('quiet-input', () => updateValidity());
+  form.addEventListener('reset', () => updateValidity());
 </script>
 ```
 
@@ -311,9 +315,13 @@ However, these selectors will match even before the user has had a chance to fil
   const form = document.querySelector('.slider__validation-custom');
   const slider = form.querySelector('quiet-slider');
 
-  slider.addEventListener('quiet-input', () => {
+  async function updateValidity() {
+    await slider.updateComplete;
     slider.customValidity = slider.value > 0 ? '' : 'Select a number greater than zero';
-  });
+  }
+
+  slider.addEventListener('quiet-input', () => updateValidity());
+  form.addEventListener('reset', () => updateValidity());
 </script>
 ```
 

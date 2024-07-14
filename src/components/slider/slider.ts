@@ -188,10 +188,10 @@ export class QuietSlider extends QuietElement {
 
   /** @internal Called when the form is reset. */
   formResetCallback() {
+    this.value = parseFloat(this.getAttribute('value') ?? '');
     this.isInvalid = false;
     this.wasChanged = false;
     this.wasSubmitted = false;
-    this.value = parseFloat(this.getAttribute('value') ?? '');
   }
 
   /** Clamps a number to min/max while ensuring it's a valid step interval. */

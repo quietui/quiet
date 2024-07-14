@@ -113,7 +113,7 @@ export class QuietTooltip extends QuietElement {
     }
 
     // Handle anchor changes
-    if (changedProps.has('for') || changedProps.has('trigger')) {
+    if (changedProps.has('for') || changedProps.has('activation')) {
       const root = this.getRootNode() as Document | ShadowRoot;
 
       // Tear down the old anchor

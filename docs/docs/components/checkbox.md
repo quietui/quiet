@@ -82,7 +82,7 @@ Use the `custom-validity` attribute to make the checkbox invalid and show a cust
 ```
 
 :::info
-Most validation attributes work exactly like their native counterparts. However, the `custom-validity` attribute is offered in lieu of a `setCustomValidity()` method. This allows you to declaratively set custom errors instead of having to call a method with JavaScript.
+Most validation attributes work exactly like their native counterparts. However, the `custom-validity` attribute is offered in lieu of the `setCustomValidity()` method. This allows you to declaratively set custom errors instead of having to call a method with JavaScript.
 :::
 
 ### Styling validation

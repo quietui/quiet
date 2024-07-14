@@ -221,16 +221,6 @@ export class QuietSlider extends QuietElement {
     this.dispatchEvent(new QuietFocusEvent());
   }
 
-  private handleHostInvalid() {
-    //
-    // We need to simulate the :user-invalid state when the form is submitted. Alas, there's no way to listen to form
-    // submit because validation occurs before the `formdata` and `submit` events. The only way I've found to hook into
-    // it is by listening to the `invalid` event on the host element, which is dispatched by the browser when the form
-    // is submitted and the form-associated custom element is invalid.
-    //
-    this.wasSubmitted = true;
-  }
-
   private handleDragStart(event: PointerEvent | TouchEvent) {
     if (this.disabled || this.readonly) return;
 
@@ -271,42 +261,14 @@ export class QuietSlider extends QuietElement {
     this.pointerDownValue = undefined;
   };
 
-  private showTooltip() {
-    if (this.withTooltip) {
-      this.tooltip.open = true;
-    }
-  }
-
-  private hideTooltip() {
-    if (this.withTooltip) {
-      this.tooltip.open = false;
-    }
-  }
-
-  private setValueFromCoordinates(event: PointerEvent | TouchEvent) {
-    const isRtl = this.localize.dir() === 'rtl';
-    const isVertical = this.orientation === 'vertical';
-    const oldValue = this.value;
-    const { top, right, bottom, left, height, width } = this.sliderBoundingClientRect;
-    const x = event instanceof PointerEvent ? event.clientX : event.touches[0].clientX;
-    const y = event instanceof PointerEvent ? event.clientY : event.touches[0].clientY;
-    const pointerPosition = isVertical ? y : x;
-    const sliderCoords = isVertical
-      ? { start: top, end: bottom, size: height }
-      : { start: left, end: right, size: width };
-    const relativePosition = isVertical
-      ? sliderCoords.end - pointerPosition
-      : isRtl
-        ? sliderCoords.end - pointerPosition
-        : pointerPosition - sliderCoords.start;
-    const percentage = relativePosition / sliderCoords.size;
-    this.value = this.clampAndRoundToStep(this.min + (this.max - this.min) * percentage);
-
-    // Dispatch input events when the value changes by dragging
-    if (this.value !== oldValue) {
-      this.dispatchEvent(new QuietInputEvent());
-      this.dispatchEvent(new InputEvent('input'));
-    }
+  private handleHostInvalid() {
+    //
+    // We need to simulate the :user-invalid state when the form is submitted. Alas, there's no way to listen to form
+    // submit because validation occurs before the `formdata` and `submit` events. The only way I've found to hook into
+    // it is by listening to the `invalid` event on the host element, which is dispatched by the browser when the form
+    // is submitted and the form-associated custom element is invalid.
+    //
+    this.wasSubmitted = true;
   }
 
   private handleKeyDown(event: KeyboardEvent) {
@@ -385,6 +347,44 @@ export class QuietSlider extends QuietElement {
 
     if (!this.disabled) {
       this.thumb.focus();
+    }
+  }
+
+  private setValueFromCoordinates(event: PointerEvent | TouchEvent) {
+    const isRtl = this.localize.dir() === 'rtl';
+    const isVertical = this.orientation === 'vertical';
+    const oldValue = this.value;
+    const { top, right, bottom, left, height, width } = this.sliderBoundingClientRect;
+    const x = event instanceof PointerEvent ? event.clientX : event.touches[0].clientX;
+    const y = event instanceof PointerEvent ? event.clientY : event.touches[0].clientY;
+    const pointerPosition = isVertical ? y : x;
+    const sliderCoords = isVertical
+      ? { start: top, end: bottom, size: height }
+      : { start: left, end: right, size: width };
+    const relativePosition = isVertical
+      ? sliderCoords.end - pointerPosition
+      : isRtl
+        ? sliderCoords.end - pointerPosition
+        : pointerPosition - sliderCoords.start;
+    const percentage = relativePosition / sliderCoords.size;
+    this.value = this.clampAndRoundToStep(this.min + (this.max - this.min) * percentage);
+
+    // Dispatch input events when the value changes by dragging
+    if (this.value !== oldValue) {
+      this.dispatchEvent(new QuietInputEvent());
+      this.dispatchEvent(new InputEvent('input'));
+    }
+  }
+
+  private showTooltip() {
+    if (this.withTooltip) {
+      this.tooltip.open = true;
+    }
+  }
+
+  private hideTooltip() {
+    if (this.withTooltip) {
+      this.tooltip.open = false;
     }
   }
 

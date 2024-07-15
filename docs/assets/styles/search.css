@@ -132,9 +132,6 @@
   .site-search-result-description,
   .site-search-result-url {
     max-width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 
   .site-search-result-details {

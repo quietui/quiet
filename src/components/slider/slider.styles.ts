@@ -2,8 +2,8 @@ import { css } from 'lit';
 
 export default css`
   :host {
-    --thumb-width: 1.25em;
-    --thumb-height: 1.25em;
+    --thumb-width: 1.4em;
+    --thumb-height: 1.4em;
     --marker-width: 0.1875em;
     --marker-height: 0.1875em;
   }
@@ -21,7 +21,6 @@ export default css`
   }
 
   #slider {
-    --thumb-border-width: 2px;
     --track-size: 0.75em;
     position: relative;
     isolation: isolate;
@@ -108,7 +107,7 @@ export default css`
     height: var(--thumb-height);
     border-radius: 50%;
     background-color: white;
-    border: solid 2px var(--quiet-primary-fill-mid);
+    border: var(--quiet-border-style) calc(var(--quiet-border-width) * 1) var(--quiet-primary-fill-mid);
     cursor: pointer;
 
     &:focus {

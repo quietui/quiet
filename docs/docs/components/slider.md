@@ -415,13 +415,113 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
 </style>
 
 <script>
-  // Format tooltips a percentage
+  // Format tooltips as a percentage
   const formatter = new Intl.NumberFormat('en-US', { style: 'percent' });
 
   customElements.whenDefined('quiet-slider').then(() => {
     document.querySelectorAll('.slider__touch').forEach(el => {
       el.querySelector('quiet-slider').tooltipFormatter = value => formatter.format(value);
     });
+  });
+</script>
+```
+
+```html {.example}
+<quiet-slider 
+  id="slider__color"
+  label="Color"
+  name="color" 
+  min="0"
+  max="360"
+  style="--hue: hsl(0deg 100% 50%);"
+></quiet-slider>
+
+<br>
+
+<quiet-slider 
+  id="slider__opacity"
+  label="Opacity"
+  name="opacity" 
+  min="0"
+  max="1"
+  step=".01"
+  style="--opacity: 0%;"
+></quiet-slider>
+
+<style>
+  #slider__color,
+  #slider__opacity {
+    &::part(thumb) {
+      --thumb-width: 1.5em;
+      --thumb-height: 1.5em;
+      border-color: var(--quiet-silent);
+      box-shadow: 0 0 0 2px var(--quiet-strident);
+      outline-offset: 3px;
+    }
+  }
+
+  #slider__color {
+    &::part(slider) {
+      height: 1em;
+      background-image: 
+        linear-gradient(
+          to right, 
+          rgb(255, 0, 0) 0%, 
+          rgb(255, 255, 0) 17%, 
+          rgb(0, 255, 0) 33%, 
+          rgb(0, 255, 255) 50%, 
+          rgb(0, 0, 255) 67%, 
+          rgb(255, 0, 255) 83%, 
+          rgb(255, 0, 0) 100%
+        );
+    }
+
+    &::part(indicator) {
+      display: none;
+    }
+
+    &::part(thumb) {
+      background-color: var(--hue);
+    }    
+  }
+
+  #slider__opacity {
+    &::part(slider) {
+      height: 1em;
+      background: var(--quiet-silent);
+      background-size: 12px 12px;
+      background-position: 0px 0px, 0px 0px, -6px -6px, 6px 6px;
+      background-image: 
+        linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, var(--quiet-neutral-fill-soft) 75%),
+        linear-gradient(45deg, transparent 75%, var(--quiet-neutral-fill-soft) 75%),
+        linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%);
+    }
+
+    &::part(indicator) {
+      width: 100% !important;
+      background-color: transparent;
+      background-image: linear-gradient(to right, #0000 0%, #000f 100%);
+    }    
+
+    &::part(thumb) {
+      background-color: color-mix(in oklab, white, black var(--opacity));
+    }
+  }
+</style>
+
+<script>
+  const colorSlider = document.getElementById('slider__color');
+  const opacitySlider = document.getElementById('slider__opacity');
+  
+  // Set the color slider's thumb color when the value changes
+  colorSlider.addEventListener('input', () => {
+    colorSlider.style.setProperty('--hue', `hsl(${colorSlider.value}deg 100% 50%)`);
+  });
+
+  // Set the opacity slider's thumb color when the value changes
+  opacitySlider.addEventListener('input', () => {
+    opacitySlider.style.setProperty('--opacity', `${opacitySlider.value * 100}%`);
   });
 </script>
 ```

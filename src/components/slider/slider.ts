@@ -273,6 +273,7 @@ export class QuietSlider extends QuietElement {
 
   private handleKeyDown(event: KeyboardEvent) {
     const isRtl = this.localize.dir() === 'rtl';
+    const oldValue = this.value;
     let newValue = this.value;
 
     if (this.disabled || this.readonly) return;
@@ -314,7 +315,7 @@ export class QuietSlider extends QuietElement {
     }
 
     // If a key trigger a change, update the value and dispatch events
-    if (newValue !== this.value) {
+    if (newValue !== oldValue) {
       // Keep within range
       if (newValue < this.min) newValue = this.min;
       if (newValue > this.max) newValue = this.max;

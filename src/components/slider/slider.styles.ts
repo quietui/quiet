@@ -2,7 +2,10 @@ import { css } from 'lit';
 
 export default css`
   :host {
-    --marker-size: 0.1875em;
+    --thumb-width: 1.25em;
+    --thumb-height: 1.25em;
+    --marker-width: 0.1875em;
+    --marker-height: 0.1875em;
   }
 
   #label:has(~ .vertical) {
@@ -18,7 +21,6 @@ export default css`
   }
 
   #slider {
-    --thumb-size: 1.25em;
     --thumb-border-width: 2px;
     --track-size: 0.75em;
     position: relative;
@@ -102,22 +104,12 @@ export default css`
   #thumb {
     position: absolute;
     z-index: 3;
-    width: var(--thumb-size);
-    height: var(--thumb-size);
+    width: var(--thumb-width);
+    height: var(--thumb-height);
     border-radius: 50%;
-    background-color: var(--quiet-primary-fill-mid);
+    background-color: white;
+    border: solid 2px var(--quiet-primary-fill-mid);
     cursor: pointer;
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0.125em;
-      right: 0.125em;
-      bottom: 0.125em;
-      left: 0.125em;
-      background-color: white;
-      border-radius: 50%;
-    }
 
     &:focus {
       outline: none;
@@ -134,41 +126,41 @@ export default css`
   }
 
   .horizontal #thumb {
-    top: calc(50% - var(--thumb-size) / 2);
+    top: calc(50% - var(--thumb-height) / 2);
 
     &:dir(ltr) {
-      left: calc(var(--position) - var(--thumb-size) / 2);
+      left: calc(var(--position) - var(--thumb-width) / 2);
       right: auto;
     }
 
     &:dir(rtl) {
       left: auto;
-      right: calc(var(--position) - var(--thumb-size) / 2);
+      right: calc(var(--position) - var(--thumb-width) / 2);
     }
   }
 
   .vertical #thumb {
-    left: calc(50% - var(--thumb-size) / 2);
-    bottom: calc(var(--position) - var(--thumb-size) / 2);
+    left: calc(50% - var(--thumb-width) / 2);
+    bottom: calc(var(--position) - var(--thumb-height) / 2);
   }
 
   /* Markers */
   .marker {
     position: absolute;
     z-index: 2;
-    width: var(--marker-size);
-    height: var(--marker-size);
+    width: var(--marker-width);
+    height: var(--marker-height);
     background-color: var(--quiet-silent);
     border-radius: 50%;
   }
 
   .horizontal .marker {
-    top: calc(50% - var(--marker-size) / 2);
-    left: calc(var(--position) - var(--marker-size) / 2);
+    top: calc(50% - var(--marker-height) / 2);
+    left: calc(var(--position) - var(--marker-width) / 2);
   }
 
   .vertical .marker {
-    top: calc(var(--position) - var(--marker-size) / 2);
-    left: calc(50% - var(--marker-size) / 2);
+    top: calc(var(--position) - var(--marker-height) / 2);
+    left: calc(50% - var(--marker-width) / 2);
   }
 `;

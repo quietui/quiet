@@ -50,7 +50,10 @@ import type { QuietTooltip } from '../tooltip/tooltip.js';
  * @cssstate user-valid - Applied when the slider is valid and the user has sufficiently interacted with it.
  * @cssstate user-invalid - Applied when the slider is invalid and the user has sufficiently interacted with it.
  *
- * @cssproperty [--marker-size=0.25em] - The size of each individual marker.
+ * @cssproperty [--marker-width=0.1875em] - The width of each individual marker.
+ * @cssproperty [--marker-height=0.1875em] - The height of each individual marker.
+ * @cssproperty [--thumb-width=1.25em] - The width of the thumb.
+ * @cssproperty [--thumb-height=1.25em] - The height of the thumb.
  */
 @customElement('quiet-slider')
 export class QuietSlider extends QuietElement {

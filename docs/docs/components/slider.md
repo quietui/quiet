@@ -451,10 +451,21 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
 <style>
   #slider__color,
   #slider__opacity {
+    &::part(slider) {
+      height: 1em;
+      box-shadow: inset 0 0 0 0.0625em color-mix(in oklab, black, transparent 90%);
+    }
+
     &::part(thumb) {
-      --thumb-width: 1.75em;
-      --thumb-height: 1.75em;
-      border: solid 1px rgb(0 0 0 / 25%);
+      --thumb-width: 1.5em;
+      --thumb-height: 1.5em;
+      border: solid 0.0625em rgb(0 0 0 / 25%);
+      transition: 100ms scale ease;
+    }
+
+    &:state(focused)::part(thumb),
+    &:state(dragging)::part(thumb) {
+      scale: 1.2;
     }
 
     &::part(thumb)::after {
@@ -465,14 +476,13 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
       width: 100%;
       height: 100%;
       border-radius: inherit;
-      border: solid 3px white;
-      box-shadow: inset 0 0 0 1px rgb(0 0 0 / 25%);
+      border: solid 0.1875em white;
+      box-shadow: inset 0 0 0 0.0625em rgb(0 0 0 / 25%);
     }
   }
 
   #slider__color {
     &::part(slider) {
-      height: 1em;
       background-image: 
         linear-gradient(
           to right,
@@ -497,10 +507,9 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
 
   #slider__opacity {
     &::part(slider) {
-      height: 1em;
       background: var(--quiet-silent);
       background-size: 1em 1em;
-      background-position: 0px 0px, 0px 0px, -.5em -.5em, .5em .5em;
+      background-position: 0 0, 0 0, -0.5em -0.5em, 0.5em 0.5em;
       background-image: 
         linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%),
         linear-gradient(45deg, transparent 75%, var(--quiet-neutral-fill-soft) 75%),

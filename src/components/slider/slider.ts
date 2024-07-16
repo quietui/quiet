@@ -46,6 +46,7 @@ import type { QuietTooltip } from '../tooltip/tooltip.js';
  * @csspart tooltip__arrow - The tooltip's `arrow` part.
  *
  * @cssstate disabled - Applied when the slider is disabled.
+ * @cssstate dragging - Applied when the slider is being dragged.
  * @cssstate focused - Applied when the slider has focus.
  * @cssstate user-valid - Applied when the slider is valid and the user has sufficiently interacted with it.
  * @cssstate user-invalid - Applied when the slider is invalid and the user has sufficiently interacted with it.
@@ -237,6 +238,7 @@ export class QuietSlider extends QuietElement {
     // Cache coords when dragging starts to avoid calling it on every move
     this.sliderBoundingClientRect = this.slider.getBoundingClientRect();
     this.pointerDownValue = this.value;
+    this.customStates.set('dragging', true);
     this.setValueFromCoordinates(event);
     this.showTooltip();
   }
@@ -261,6 +263,7 @@ export class QuietSlider extends QuietElement {
 
     event.preventDefault();
     this.hideTooltip();
+    this.customStates.set('dragging', false);
     this.pointerDownValue = undefined;
   };
 

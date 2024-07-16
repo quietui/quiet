@@ -452,11 +452,21 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
   #slider__color,
   #slider__opacity {
     &::part(thumb) {
-      --thumb-width: 1.5em;
-      --thumb-height: 1.5em;
-      border-color: var(--quiet-silent);
-      box-shadow: 0 0 0 2px var(--quiet-strident);
-      outline-offset: 3px;
+      --thumb-width: 1.75em;
+      --thumb-height: 1.75em;
+      border: solid 1px rgb(0 0 0 / 25%);
+    }
+
+    &::part(thumb)::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      border: solid 3px white;
+      box-shadow: inset 0 0 0 1px rgb(0 0 0 / 25%);
     }
   }
 
@@ -465,13 +475,13 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
       height: 1em;
       background-image: 
         linear-gradient(
-          to right, 
-          rgb(255, 0, 0) 0%, 
-          rgb(255, 255, 0) 17%, 
-          rgb(0, 255, 0) 33%, 
-          rgb(0, 255, 255) 50%, 
-          rgb(0, 0, 255) 67%, 
-          rgb(255, 0, 255) 83%, 
+          to right,
+          rgb(255, 0, 0) 0%,
+          rgb(255, 255, 0) 17%,
+          rgb(0, 255, 0) 33%,
+          rgb(0, 255, 255) 50%,
+          rgb(0, 0, 255) 67%,
+          rgb(255, 0, 255) 83%,
           rgb(255, 0, 0) 100%
         );
     }
@@ -489,8 +499,8 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
     &::part(slider) {
       height: 1em;
       background: var(--quiet-silent);
-      background-size: 12px 12px;
-      background-position: 0px 0px, 0px 0px, -6px -6px, 6px 6px;
+      background-size: 1em 1em;
+      background-position: 0px 0px, 0px 0px, -.5em -.5em, .5em .5em;
       background-image: 
         linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%),
         linear-gradient(45deg, transparent 75%, var(--quiet-neutral-fill-soft) 75%),

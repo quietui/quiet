@@ -2,6 +2,7 @@ import { css } from 'lit';
 
 export default css`
   :host {
+    --track-size: 0.75em;
     --thumb-width: 1.4em;
     --thumb-height: 1.4em;
     --marker-width: 0.1875em;
@@ -21,7 +22,6 @@ export default css`
   }
 
   #slider {
-    --track-size: 0.75em;
     position: relative;
     isolation: isolate;
     background: var(--quiet-neutral-fill-soft);
@@ -175,16 +175,33 @@ export default css`
   /* Marker labels */
   #references {
     position: relative;
+    height: 100%;
 
     slot {
       display: flex;
       justify-content: space-between;
+      height: 100%;
     }
 
     ::slotted(*) {
       font-size: 0.875em;
       color: var(--quiet-text-muted);
-      margin-block: 0.25em;
+    }
+  }
+
+  .horizontal #references slot {
+    translate: 0 calc(var(--track-size) + 0.5em);
+  }
+
+  .vertical #references slot {
+    flex-direction: column;
+
+    &:dir(ltr) {
+      translate: calc(var(--track-size) + 0.75em);
+    }
+
+    &:dir(rtl) {
+      translate: calc(-1 * (var(--track-size) + 0.75em));
     }
   }
 `;

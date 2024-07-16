@@ -54,6 +54,7 @@ import type { QuietTooltip } from '../tooltip/tooltip.js';
  * @cssstate user-valid - Applied when the slider is valid and the user has sufficiently interacted with it.
  * @cssstate user-invalid - Applied when the slider is invalid and the user has sufficiently interacted with it.
  *
+ * @cssproperty [--track-size=0.75em] - The height or width of the slider's track.
  * @cssproperty [--marker-width=0.1875em] - The width of each individual marker.
  * @cssproperty [--marker-height=0.1875em] - The height of each individual marker.
  * @cssproperty [--thumb-width=1.25em] - The width of the thumb.
@@ -539,10 +540,10 @@ export class QuietSlider extends QuietElement {
           @focus=${this.handleFocus}
           @keydown=${this.handleKeyDown}
         ></span>
-      </div>
 
-      <div id="references" part="references" aria-hidden="true">
-        <slot name="reference"></slot>
+        <div id="references" part="references" aria-hidden="true">
+          <slot name="reference"></slot>
+        </div>
       </div>
 
       ${this.withTooltip

@@ -4,7 +4,7 @@ layout: component
 ---
 
 ```html {.example}
-<quiet-slider 
+<quiet-slider
   label="Number of cats"
   description="Limit six per household"
   name="value" 
@@ -86,7 +86,7 @@ Use the `reference` slot to add visual references below the slider. By default, 
 ```
 
 :::info
-If you want to show a reference next to a specific marker, you can add `position: absolute` to it and set the `left` or `right` property to a percentage that corresponds to the marker's position.
+If you want to show a reference next to a specific marker, you can add `position: absolute` to it and set the `left`, `right`, `top`, or `bottom` property to a percentage that corresponds to the marker's position.
 :::
 
 ### Formatting the value
@@ -366,9 +366,8 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
       max="1"
       step=".01"
       value="0.6"
-      with-tooltip
-      tooltip-distance="20"
-    ></quiet-slider>
+    >
+    </quiet-slider>
     <quiet-icon name="sun"></quiet-icon>
   </div>
 
@@ -381,8 +380,6 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
       max="1"
       step=".01"
       value="0.4"
-      with-tooltip
-      tooltip-distance="20"
     ></quiet-slider>
     <quiet-icon name="volume"></quiet-icon>
   </div>
@@ -394,10 +391,10 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
     max-width: fit-content;
 
     quiet-slider {
+      --track-size: 4rem;
       max-width: fit-content;
 
       &::part(slider) {
-        width: 4rem;
         background-color: var(--quiet-neutral-fill-softer);
         box-shadow: inset 0 1px 2px color-mix(in oklab, var(--quiet-neutral-fill-softer), black 5%);
         cursor: pointer;
@@ -439,17 +436,6 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
     }
   }
 </style>
-
-<script>
-  // Format tooltips as a percentage
-  const formatter = new Intl.NumberFormat('en-US', { style: 'percent' });
-
-  customElements.whenDefined('quiet-slider').then(() => {
-    document.querySelectorAll('.slider__touch').forEach(el => {
-      el.querySelector('quiet-slider').valueFormatter = value => formatter.format(value);
-    });
-  });
-</script>
 ```
 
 ```html {.example}

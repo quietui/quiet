@@ -185,22 +185,25 @@ export default css`
 
     ::slotted(*) {
       font-size: 0.875em;
+      line-height: 1;
       color: var(--quiet-text-muted);
     }
   }
 
   .horizontal #references slot {
-    translate: 0 calc(var(--track-size) + 0.5em);
+    &::slotted(*) {
+      translate: 0 calc(var(--track-size) + 0.75em);
+    }
   }
 
   .vertical #references slot {
     flex-direction: column;
 
-    &:dir(ltr) {
+    &:dir(ltr)::slotted(*) {
       translate: calc(var(--track-size) + 0.75em);
     }
 
-    &:dir(rtl) {
+    &:dir(rtl)::slotted(*) {
       translate: calc(-1 * (var(--track-size) + 0.75em));
     }
   }

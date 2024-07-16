@@ -144,6 +144,10 @@ export default css`
   }
 
   /* Markers */
+  #markers {
+    pointer-events: none;
+  }
+
   .marker {
     position: absolute;
     z-index: 2;
@@ -151,6 +155,11 @@ export default css`
     height: var(--marker-height);
     background-color: var(--quiet-silent);
     border-radius: 50%;
+  }
+
+  .marker:first-of-type,
+  .marker:last-of-type {
+    display: none;
   }
 
   .horizontal .marker {

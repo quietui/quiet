@@ -38,6 +38,7 @@ import type { QuietTooltip } from '../tooltip/tooltip.js';
  * @csspart description - The element that contains the slider's description.
  * @csspart slider - The slider element. The background is the slider's track.
  * @csspart indicator - The colored indicator that shows from the start of the slider to the current value.
+ * @csspart markers - The container that holds all the markers when `with-markers` is used.
  * @csspart marker - The individual markers that are shown when `with-markers` is used.
  * @csspart thumb - The slider's thumb.
  * @csspart tooltip - The tooltip, a `<quiet-tooltip>` element.
@@ -471,7 +472,7 @@ export class QuietSlider extends QuietElement {
 
     // Determine marker positions
     if (this.withMarkers) {
-      for (let i = this.min + this.step; i < this.max; i += this.step) {
+      for (let i = this.min; i <= this.max; i += this.step) {
         markers.push(this.getPercentageFromValue(i));
       }
     }
@@ -508,9 +509,11 @@ export class QuietSlider extends QuietElement {
 
         ${this.withMarkers
           ? html`
-              ${markers.map(marker => {
-                return html` <span part="marker" class="marker" style="--position: ${marker}%"></span> `;
-              })}
+              <div id="markers" part="markers">
+                ${markers.map(marker => {
+                  return html` <span part="marker" class="marker" style="--position: ${marker}%"></span> `;
+                })}
+              </div>
             `
           : ''}
 

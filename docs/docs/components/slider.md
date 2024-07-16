@@ -63,9 +63,9 @@ Add the `with-tooltip` attribute to show a tooltip when the slider has focus or 
 ></quiet-slider>
 ```
 
-### Formatting tooltips
+### Formatting the value
 
-To format the tooltip's value, set the `formatter` property to a function that accepts a numeric value and returns a string. The [`Intl.FormatNumber API`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat) can be really useful here.
+To format the value for tooltips and screen readers, set the `valueFormatter` property to a function that accepts a numeric value and returns a string. The [`Intl.FormatNumber API`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat) can be really useful here.
 
 ```html {.example}
 <!-- Percent -->
@@ -85,7 +85,7 @@ To format the tooltip's value, set the `formatter` property to a function that a
   const formatter = new Intl.NumberFormat('en-US', { style: 'percent' });
 
   customElements.whenDefined('quiet-slider').then(() => {
-    percentSlider.tooltipFormatter = value => formatter.format(value);
+    percentSlider.valueFormatter = value => formatter.format(value);
   });
 </script>
 
@@ -105,7 +105,7 @@ To format the tooltip's value, set the `formatter` property to a function that a
   const formatter = new Intl.NumberFormat('en-US', { style: 'unit', unit: 'hour', unitDisplay: 'long' });
 
   customElements.whenDefined('quiet-slider').then(() => {
-    hourSlider.tooltipFormatter = value => formatter.format(value);
+    hourSlider.valueFormatter = value => formatter.format(value);
   });
 </script>
 
@@ -125,7 +125,7 @@ To format the tooltip's value, set the `formatter` property to a function that a
   const formatter = new Intl.NumberFormat('en-US', { style: 'unit', unit: 'degree', unitDisplay: 'narrow' });
 
   customElements.whenDefined('quiet-slider').then(() => {
-    angleSlider.tooltipFormatter = value => formatter.format(value);
+    angleSlider.valueFormatter = value => formatter.format(value);
   });
 </script>
 
@@ -150,7 +150,7 @@ To format the tooltip's value, set the `formatter` property to a function that a
   });
 
   customElements.whenDefined('quiet-slider').then(() => {
-    currencySlider.tooltipFormatter = value => formatter.format(value);
+    currencySlider.valueFormatter = value => formatter.format(value);
   });
 </script>
 ```
@@ -420,7 +420,7 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
 
   customElements.whenDefined('quiet-slider').then(() => {
     document.querySelectorAll('.slider__touch').forEach(el => {
-      el.querySelector('quiet-slider').tooltipFormatter = value => formatter.format(value);
+      el.querySelector('quiet-slider').valueFormatter = value => formatter.format(value);
     });
   });
 </script>
@@ -532,15 +532,23 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
 <script>
   const colorSlider = document.getElementById('slider__color');
   const opacitySlider = document.getElementById('slider__opacity');
-  
-  // Set the color slider's thumb color when the value changes
-  colorSlider.addEventListener('input', () => {
-    colorSlider.style.setProperty('--hue', `hsl(${colorSlider.value}deg 100% 50%)`);
-  });
+  const degreeFormatter = new Intl.NumberFormat('en-US', { style: 'unit', unit: 'degree', unitDisplay: 'narrow' });
+  const percentFormatter = new Intl.NumberFormat('en-US', { style: 'percent' });
 
-  // Set the opacity slider's thumb color when the value changes
-  opacitySlider.addEventListener('input', () => {
-    opacitySlider.style.setProperty('--opacity', `${opacitySlider.value * 100}%`);
+  customElements.whenDefined('quiet-slider').then(() => {
+    // Set formatters for screen readers
+    colorSlider.valueFormatter = value => degreeFormatter.format(value);
+    opacitySlider.valueFormatter = value => percentFormatter.format(value);
+
+    // Set the color slider's thumb color when the value changes
+    colorSlider.addEventListener('input', () => {
+      colorSlider.style.setProperty('--hue', `hsl(${colorSlider.value}deg 100% 50%)`);
+    });
+
+    // Set the opacity slider's thumb color when the value changes
+    opacitySlider.addEventListener('input', () => {
+      opacitySlider.style.setProperty('--opacity', `${opacitySlider.value * 100}%`);
+    });
   });
 </script>
 ```

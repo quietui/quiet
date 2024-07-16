@@ -137,8 +137,11 @@ export class QuietSlider extends QuietElement {
   @property({ attribute: 'tooltip-placement', reflect: true }) tooltipPlacement: 'top' | 'right' | 'bottom' | 'left' =
     'top';
 
-  /** A custom formatting function to apply to the tooltip's value. Must be set with JavaScript. Property only. */
-  @property({ attribute: false }) tooltipFormatter: (value: number) => string;
+  /**
+   * A custom formatting function to apply to the value. This will be shown in the tooltip and announced by screen
+   * readers. Must be set with JavaScript. Property only.
+   */
+  @property({ attribute: false }) valueFormatter: (value: number) => string;
 
   connectedCallback() {
     super.connectedCallback();
@@ -520,6 +523,9 @@ export class QuietSlider extends QuietElement {
           aria-orientation=${this.orientation}
           aria-valuemin=${this.min}
           aria-valuenow=${this.value}
+          aria-valuetext=${typeof this.valueFormatter === 'function'
+            ? this.valueFormatter(this.value)
+            : this.localize.number(this.value)}
           aria-valuemax=${this.max}
           aria-labelledby="label"
           aria-describedby="description"
@@ -542,9 +548,11 @@ export class QuietSlider extends QuietElement {
               activation="manual"
               dir=${this.localize.dir()}
             >
-              ${typeof this.tooltipFormatter === 'function'
-                ? this.tooltipFormatter(this.value)
-                : this.localize.number(this.value)}
+              <span aria-hidden="true">
+                ${typeof this.valueFormatter === 'function'
+                  ? this.valueFormatter(this.value)
+                  : this.localize.number(this.value)}
+              </span>
             </quiet-tooltip>
           `
         : ''}

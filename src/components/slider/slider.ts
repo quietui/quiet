@@ -25,6 +25,7 @@ import type { QuietTooltip } from '../tooltip/tooltip.js';
  * @slot label - The slider's label. For plain-text labels, you can use the `label` attribute instead.
  * @slot description - The slider's description. For plain-text descriptions, you can use the `description` attribute
  *  instead.
+ * @slot reference - One or more reference labels to show visually below the slider.
  *
  * @prop {string} form - If the slider is located outside of a form, you can associate it by setting this to the
  *  form's `id`.
@@ -40,6 +41,7 @@ import type { QuietTooltip } from '../tooltip/tooltip.js';
  * @csspart indicator - The colored indicator that shows from the start of the slider to the current value.
  * @csspart markers - The container that holds all the markers when `with-markers` is used.
  * @csspart marker - The individual markers that are shown when `with-markers` is used.
+ * @csspart references - The container that holds references that get slotted in.
  * @csspart thumb - The slider's thumb.
  * @csspart tooltip - The tooltip, a `<quiet-tooltip>` element.
  * @csspart tooltip__tooltip - The tooltip's `tooltip` part.
@@ -537,6 +539,10 @@ export class QuietSlider extends QuietElement {
           @focus=${this.handleFocus}
           @keydown=${this.handleKeyDown}
         ></span>
+      </div>
+
+      <div id="references" part="references" aria-hidden="true">
+        <slot name="reference"></slot>
       </div>
 
       ${this.withTooltip

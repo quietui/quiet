@@ -171,4 +171,20 @@ export default css`
     top: calc(var(--position) - var(--marker-height) / 2);
     left: calc(50% - var(--marker-width) / 2);
   }
+
+  /* Marker labels */
+  #references {
+    position: relative;
+
+    slot {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    ::slotted(*) {
+      font-size: 0.875em;
+      color: var(--quiet-text-muted);
+      margin-block: 0.25em;
+    }
+  }
 `;

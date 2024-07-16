@@ -13,10 +13,28 @@ layout: component
   max="6"
   with-markers
   with-tooltip
-></quiet-slider>
+>
+  <span slot="reference">Less</span>
+  <span slot="reference">More</span>
+</quiet-slider>
 ```
 
 ## Examples
+
+### Showing tooltips
+
+Add the `with-tooltip` attribute to show a tooltip when the slider has focus or is dragged.
+
+```html {.example}
+<quiet-slider 
+  label="Quality"
+  name="quality" 
+  min="0"
+  max="100"
+  value="50"
+  with-tooltip
+></quiet-slider>
+```
 
 ### Setting min, max, and step
 
@@ -48,20 +66,28 @@ Add the `--with-markers` attribute to show visual markers at each step. Markers 
 ></quiet-slider>
 ```
 
-### Showing tooltips
+### Adding references
 
-Add the `with-tooltip` attribute to show a tooltip when the slider has focus or is dragged.
+Use the `reference` slot to add visual references below the slider. By default, references are positioned with `space-between`, making it easy to align them with starting and ending markers.
 
 ```html {.example}
 <quiet-slider 
-  label="Quality"
-  name="quality" 
-  min="0"
-  max="100"
-  value="50"
-  with-tooltip
-></quiet-slider>
+  label="Speed"
+  name="speed" 
+  min="1"
+  max="5"
+  value="3"
+  with-markers
+>
+  <span slot="reference">Slow</span>
+  <span slot="reference">Medium</span>
+  <span slot="reference">Fast</span>
+</quiet-slider>
 ```
+
+:::info
+If you want to show a reference next to a specific marker, you can add `position: absolute` to it and set the `left` or `right` property to a percentage that corresponds to the marker's position.
+:::
 
 ### Formatting the value
 
@@ -560,10 +586,14 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
   label="Key repeat rate"
   name="repeat" 
   value="5"
-  min="1"
-  max="8"
+  min="0"
+  max="7"
   with-markers
-></quiet-slider>
+>
+  <span slot="reference">Off</span>
+  <span slot="reference" style="position: absolute; left: 14%;">Slow</span>
+  <span slot="reference">Fast</span>
+</quiet-slider>
 
 <style>
   #slider__repeat {
@@ -601,8 +631,6 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
       border-radius: 0.125em;
       background-color: var(--quiet-neutral-fill-mid);
     }
-
-]
   }
 </style>
 ```

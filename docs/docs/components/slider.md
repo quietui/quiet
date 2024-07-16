@@ -65,7 +65,7 @@ Add the `with-tooltip` attribute to show a tooltip when the slider has focus or 
 
 ### Formatting the value
 
-To format the value for tooltips and screen readers, set the `valueFormatter` property to a function that accepts a numeric value and returns a string. The [`Intl.FormatNumber API`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat) can be really useful here.
+You can format the value that gets shown in tooltips and/or announced by screen readers with the `valueFormatter` property. Using JavaScript, set the property to a function that accepts a numeric value and returns a string. The [`Intl.FormatNumber API`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat) can be really useful here.
 
 ```html {.example}
 <!-- Percent -->
@@ -451,14 +451,15 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
 <style>
   #slider__color,
   #slider__opacity {
+    --thumb-width: 1.5em;
+    --thumb-height: 1.5em;
+
     &::part(slider) {
       height: 1em;
       box-shadow: inset 0 0 0 0.0625em color-mix(in oklab, black, transparent 90%);
     }
 
     &::part(thumb) {
-      --thumb-width: 1.5em;
-      --thumb-height: 1.5em;
       border: solid 0.0625em rgb(0 0 0 / 25%);
       transition: 100ms scale ease;
     }
@@ -551,4 +552,57 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
     });
   });
 </script>
+```
+
+```html {.example}
+<quiet-slider
+  id="slider__repeat"
+  label="Key repeat rate"
+  name="repeat" 
+  value="5"
+  min="1"
+  max="8"
+  with-markers
+></quiet-slider>
+
+<style>
+  #slider__repeat {
+    --thumb-width: 0.75em;
+    --thumb-height: 1.5em;
+    --marker-height: 0.5em;
+
+    &::part(slider) {
+      height: 1em;
+      background: none;
+    }
+
+    &::part(slider)::after {
+      content: '';
+      position: absolute;
+      top: calc(50% - .125em);
+      left: 0;
+      width: 100%;
+      height: .25em;
+      background-color: var(--quiet-neutral-fill-soft);
+    }
+
+    &::part(indicator) {
+      display: none;
+    }
+
+    &::part(thumb) {
+      border-radius: 0.25em;      
+      border: none;
+      background-color: var(--quiet-neutral-fill-loud);
+    }
+
+    &::part(marker) {
+      display: initial;
+      border-radius: 0.125em;
+      background-color: var(--quiet-neutral-fill-mid);
+    }
+
+]
+  }
+</style>
 ```

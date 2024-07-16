@@ -89,7 +89,6 @@ export default css`
       width: 100%;
       aspect-ratio: 1;
       background: var(--quiet-neutral-fill-softer);
-      border-radius: var(--quiet-border-radius);
       border-radius: calc(var(--quiet-border-radius) * 0.5);
 
       img {
@@ -97,6 +96,7 @@ export default css`
         width: 100%;
         height: 100%;
         object-fit: cover;
+        border-radius: inherit;
       }
 
       quiet-icon {

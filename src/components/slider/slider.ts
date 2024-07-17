@@ -37,7 +37,8 @@ import type { QuietTooltip } from '../tooltip/tooltip.js';
  *
  * @csspart label - The element that contains the sliders's label.
  * @csspart description - The element that contains the slider's description.
- * @csspart slider - The slider element. The background is the slider's track.
+ * @csspart slider - The element containing the track and reference slot.
+ * @csspart track - The slider's track.
  * @csspart indicator - The colored indicator that shows from the start of the slider to the current value.
  * @csspart markers - The container that holds all the markers when `with-markers` is used.
  * @csspart marker - The individual markers that are shown when `with-markers` is used.
@@ -69,10 +70,10 @@ export class QuietSlider extends QuietElement {
   public associatedForm: HTMLFormElement | null = null;
   private localize = new Localize(this);
   private pointerDownValue: number | undefined;
-  private sliderBoundingClientRect: DOMRect;
+  private trackBoundingClientRect: DOMRect;
 
   @query('#thumb') thumb: HTMLElement;
-  @query('#slider') slider: HTMLElement;
+  @query('#track') track: HTMLElement;
   @query('#tooltip') tooltip: QuietTooltip;
 
   @state() private isInvalid = false;
@@ -128,18 +129,21 @@ export class QuietSlider extends QuietElement {
   /** Tells the browser to focus the slider when the page loads or a dialog is shown. */
   @property({ type: Boolean }) autofocus: boolean;
 
-  /** Draws markers at each step along the slider. */
-  @property({ attribute: 'with-markers', type: Boolean }) withMarkers = false;
-
-  /** Draws a tooltip above the thumb when the control has focus or is dragged. */
-  @property({ attribute: 'with-tooltip', type: Boolean }) withTooltip = false;
-
   /** The distance of the tooltip from the slider's thumb. */
   @property({ attribute: 'tooltip-distance', type: Number }) tooltipDistance = 8;
 
   /** The placement of the tooltip in reference to the slider's thumb. */
   @property({ attribute: 'tooltip-placement', reflect: true }) tooltipPlacement: 'top' | 'right' | 'bottom' | 'left' =
     'top';
+
+  /** Draws markers at each step along the slider. */
+  @property({ attribute: 'with-markers', type: Boolean }) withMarkers = false;
+
+  /** Renders the slider with the `references` slot. */
+  @property({ attribute: 'with-references', type: Boolean, reflect: true }) withReferences = false;
+
+  /** Draws a tooltip above the thumb when the control has focus or is dragged. */
+  @property({ attribute: 'with-tooltip', type: Boolean }) withTooltip = false;
 
   /**
    * A custom formatting function to apply to the value. This will be shown in the tooltip and announced by screen
@@ -243,7 +247,7 @@ export class QuietSlider extends QuietElement {
     event.preventDefault();
 
     // Cache coords when dragging starts to avoid calling it on every move
-    this.sliderBoundingClientRect = this.slider.getBoundingClientRect();
+    this.trackBoundingClientRect = this.track.getBoundingClientRect();
     this.pointerDownValue = this.value;
     this.customStates.set('dragging', true);
     this.setValueFromCoordinates(event);
@@ -368,7 +372,7 @@ export class QuietSlider extends QuietElement {
     const isRtl = this.localize.dir() === 'rtl';
     const isVertical = this.orientation === 'vertical';
     const oldValue = this.value;
-    const { top, right, bottom, left, height, width } = this.sliderBoundingClientRect;
+    const { top, right, bottom, left, height, width } = this.trackBoundingClientRect;
     const x = event instanceof PointerEvent ? event.clientX : event.touches[0].clientX;
     const y = event instanceof PointerEvent ? event.clientY : event.touches[0].clientY;
     const pointerPosition = isVertical ? y : x;
@@ -505,45 +509,49 @@ export class QuietSlider extends QuietElement {
           // States
           disabled: this.disabled
         })}
-        @pointerdown=${this.handleDragStart}
-        @touchstart=${this.handleDragStart}
       >
-        <div id="indicator" part="indicator" style="--start: 0; --end: ${thumbPosition}%"></div>
+        <div id="track" part="track" @pointerdown=${this.handleDragStart} @touchstart=${this.handleDragStart}>
+          <div id="indicator" part="indicator" style="--start: 0; --end: ${thumbPosition}%"></div>
 
-        ${this.withMarkers
+          ${this.withMarkers
+            ? html`
+                <div id="markers" part="markers">
+                  ${markers.map(marker => {
+                    return html` <span part="marker" class="marker" style="--position: ${marker}%"></span> `;
+                  })}
+                </div>
+              `
+            : ''}
+
+          <span
+            id="thumb"
+            part="thumb"
+            role="slider"
+            style="--position: ${thumbPosition}%"
+            aria-disabled=${this.disabled ? 'true' : 'false'}
+            aria-orientation=${this.orientation}
+            aria-valuemin=${this.min}
+            aria-valuenow=${this.value}
+            aria-valuetext=${typeof this.valueFormatter === 'function'
+              ? this.valueFormatter(this.value)
+              : this.localize.number(this.value)}
+            aria-valuemax=${this.max}
+            aria-labelledby="label"
+            aria-describedby="description"
+            tabindex=${this.disabled ? -1 : 0}
+            @blur=${this.handleBlur}
+            @focus=${this.handleFocus}
+            @keydown=${this.handleKeyDown}
+          ></span>
+        </div>
+
+        ${this.withReferences
           ? html`
-              <div id="markers" part="markers">
-                ${markers.map(marker => {
-                  return html` <span part="marker" class="marker" style="--position: ${marker}%"></span> `;
-                })}
+              <div id="references" part="references" aria-hidden="true">
+                <slot name="reference"></slot>
               </div>
             `
           : ''}
-
-        <span
-          id="thumb"
-          part="thumb"
-          role="slider"
-          style="--position: ${thumbPosition}%"
-          aria-disabled=${this.disabled ? 'true' : 'false'}
-          aria-orientation=${this.orientation}
-          aria-valuemin=${this.min}
-          aria-valuenow=${this.value}
-          aria-valuetext=${typeof this.valueFormatter === 'function'
-            ? this.valueFormatter(this.value)
-            : this.localize.number(this.value)}
-          aria-valuemax=${this.max}
-          aria-labelledby="label"
-          aria-describedby="description"
-          tabindex=${this.disabled ? -1 : 0}
-          @blur=${this.handleBlur}
-          @focus=${this.handleFocus}
-          @keydown=${this.handleKeyDown}
-        ></span>
-
-        <div id="references" part="references" aria-hidden="true">
-          <slot name="reference"></slot>
-        </div>
       </div>
 
       ${this.withTooltip

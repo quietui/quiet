@@ -21,12 +21,19 @@ export default css`
     text-align: center;
   }
 
-  #slider {
+  #slider.horizontal {
+    margin-block-start: 0.5em;
+  }
+
+  #slider.vertical {
+    margin-block-end: 0.5em;
+  }
+
+  #track {
     position: relative;
     isolation: isolate;
     background: var(--quiet-neutral-fill-soft);
     border-radius: 9999px;
-    margin-block-start: 0.5em;
 
     /* Sizes */
     &.xs {
@@ -48,25 +55,23 @@ export default css`
     &.xl {
       font-size: var(--quiet-form-control-font-size-xl);
     }
+  }
 
-    /* Orientation */
-    &.horizontal {
-      height: var(--track-size);
-    }
+  /* Orientation */
+  .horizontal #track {
+    height: var(--track-size);
+  }
 
-    &.vertical {
-      order: 1;
-      width: var(--track-size);
-      height: 200px;
-      margin-inline: auto;
-      margin-block-end: 0.5em;
-    }
+  .vertical #track {
+    order: 1;
+    width: var(--track-size);
+    height: 200px;
+  }
 
-    /* Disabled */
-    &.disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
+  /* Disabled */
+  .disabled #track {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 
   /* Indicator */
@@ -175,7 +180,6 @@ export default css`
   /* Marker labels */
   #references {
     position: relative;
-    height: 100%;
 
     slot {
       display: flex;
@@ -185,23 +189,37 @@ export default css`
 
     ::slotted(*) {
       font-size: 0.875em;
+      line-height: 1;
       color: var(--quiet-text-muted);
     }
   }
 
-  .horizontal #references slot {
-    translate: 0 calc(var(--track-size) + 0.5em);
+  .horizontal {
+    #references {
+      margin-block-start: 0.5em;
+    }
+  }
+
+  .vertical {
+    display: flex;
+    margin-inline: auto;
+
+    #track {
+      order: 1;
+    }
+
+    #references {
+      width: min-content;
+      order: 2;
+      margin-inline-start: 0.75em;
+
+      slot {
+        flex-direction: column;
+      }
+    }
   }
 
   .vertical #references slot {
     flex-direction: column;
-
-    &:dir(ltr) {
-      translate: calc(var(--track-size) + 0.75em);
-    }
-
-    &:dir(rtl) {
-      translate: calc(-1 * (var(--track-size) + 0.75em));
-    }
   }
 `;

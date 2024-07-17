@@ -13,6 +13,7 @@ layout: component
   max="6"
   with-markers
   with-tooltip
+  with-references
 >
   <span slot="reference">Less</span>
   <span slot="reference">More</span>
@@ -78,6 +79,7 @@ Use the `reference` slot to add visual references below the slider. By default, 
   max="5"
   value="3"
   with-markers
+  with-references
 >
   <span slot="reference">Slow</span>
   <span slot="reference">Medium</span>
@@ -394,7 +396,7 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
       --track-size: 4rem;
       max-width: fit-content;
 
-      &::part(slider) {
+      &::part(track) {
         background-color: var(--quiet-neutral-fill-softer);
         box-shadow: inset 0 1px 2px color-mix(in oklab, var(--quiet-neutral-fill-softer), black 5%);
         cursor: pointer;
@@ -466,7 +468,7 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
     --thumb-width: 1.5em;
     --thumb-height: 1.5em;
 
-    &::part(slider) {
+    &::part(track) {
       height: 1em;
       box-shadow: inset 0 0 0 0.0625em color-mix(in oklab, black, transparent 90%);
     }
@@ -495,7 +497,7 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
   }
 
   #slider__color {
-    &::part(slider) {
+    &::part(track) {
       background-image: 
         linear-gradient(
           to right,
@@ -519,7 +521,7 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
   }
 
   #slider__opacity {
-    &::part(slider) {
+    &::part(track) {
       background: var(--quiet-silent);
       background-size: 1em 1em;
       background-position: 0 0, 0 0, -0.5em -0.5em, 0.5em 0.5em;
@@ -575,6 +577,7 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
   min="0"
   max="7"
   with-markers
+  with-references
 >
   <span slot="reference">Off</span>
   <span slot="reference" style="position: absolute; left: 14%;">Slow</span>
@@ -587,12 +590,12 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
     --thumb-height: 1.5em;
     --marker-height: 0.5em;
 
-    &::part(slider) {
+    &::part(track) {
       height: 1em;
       background: none;
     }
 
-    &::part(slider)::after {
+    &::part(track)::after {
       content: '';
       position: absolute;
       top: calc(50% - .125em);

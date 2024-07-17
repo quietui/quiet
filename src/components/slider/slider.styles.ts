@@ -112,7 +112,7 @@ export default css`
     height: var(--thumb-height);
     border-radius: 50%;
     background-color: white;
-    border: var(--quiet-border-style) calc(var(--quiet-border-width) * 1) var(--quiet-primary-fill-mid);
+    border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-primary-fill-mid);
     cursor: pointer;
 
     &:focus {

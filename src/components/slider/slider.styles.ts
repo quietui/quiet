@@ -21,20 +21,7 @@ export default css`
     text-align: center;
   }
 
-  #slider.horizontal {
-    margin-block-start: 0.5em;
-  }
-
-  #slider.vertical {
-    margin-block-end: 0.5em;
-  }
-
-  #track {
-    position: relative;
-    isolation: isolate;
-    background: var(--quiet-neutral-fill-soft);
-    border-radius: 9999px;
-
+  #slider {
     /* Sizes */
     &.xs {
       font-size: var(--quiet-form-control-font-size-xs);
@@ -55,6 +42,22 @@ export default css`
     &.xl {
       font-size: var(--quiet-form-control-font-size-xl);
     }
+
+    /* Orientation */
+    &.horizontal {
+      margin-block-start: 0.5em;
+    }
+
+    &.vertical {
+      margin-block-end: 0.5em;
+    }
+  }
+
+  #track {
+    position: relative;
+    isolation: isolate;
+    background: var(--quiet-neutral-fill-soft);
+    border-radius: 9999px;
   }
 
   /* Orientation */

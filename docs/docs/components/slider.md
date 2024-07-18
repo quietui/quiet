@@ -465,11 +465,11 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
 <style>
   #slider__color,
   #slider__opacity {
+    --track-size: 1.25rem;
     --thumb-width: 1.5em;
     --thumb-height: 1.5em;
 
     &::part(track) {
-      height: 1em;
       box-shadow: inset 0 0 0 0.0625em color-mix(in oklab, black, transparent 90%);
     }
 

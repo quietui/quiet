@@ -14,6 +14,9 @@ import type { CSSResultGroup } from 'lit';
  * @status stable
  * @since 1.0
  *
+ * @slot - A custom spinner to show in lieu of the default one. Works best with `<img>` and `<svg>` elements. Custom
+ *  spinners will not be animated, allowing you to use animated GIF, APNG, and SVG animations without conflict.
+ *
  * @cssproperty [--indicator-color=var(--quiet-primary-fill-mid)] - The color of the spinner's indicator.
  * @cssproperty [--track-color=var(--quiet-primary-fill-mid)] - The color of the spinner's track.
  * @cssproperty [--speed=0.75s] - The speed for one complete rotation.
@@ -31,10 +34,12 @@ export class QuietSpinner extends QuietElement {
 
   render() {
     return html`
-      <svg fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <circle id="track" cx="12" cy="12" r="10" fill="none" stroke-width="3" />
-        <circle id="indicator" cx="12" cy="12" r="10" fill="none" stroke-width="3" />
-      </svg>
+      <slot>
+        <svg fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <circle id="track" cx="12" cy="12" r="10" fill="none" stroke-width="3" />
+          <circle id="indicator" cx="12" cy="12" r="10" fill="none" stroke-width="3" />
+        </svg>
+      </slot>
     `;
   }
 }

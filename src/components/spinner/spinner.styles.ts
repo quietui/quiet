@@ -11,6 +11,7 @@ export default css`
     height: 1em;
   }
 
+  /* Default spinner */
   svg {
     animation: rotate var(--speed) linear infinite;
     transform-origin: center;
@@ -25,6 +26,13 @@ export default css`
     stroke-dasharray: 30, 50;
     stroke-dashoffset: -5;
     stroke-linecap: round;
+  }
+
+  /* Custom spinners */
+  ::slotted(img),
+  ::slotted(svg) {
+    min-width: 1em;
+    min-height: 1em;
   }
 
   @keyframes rotate {

@@ -466,8 +466,8 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
   #slider__color,
   #slider__opacity {
     --track-size: 1.25rem;
-    --thumb-width: 1.5em;
-    --thumb-height: 1.5em;
+    --thumb-width: 1.25em;
+    --thumb-height: 1.25em;
 
     &::part(track) {
       box-shadow: inset 0 0 0 0.0625em color-mix(in oklab, black, transparent 90%);
@@ -480,7 +480,7 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
 
     &:state(focused)::part(thumb),
     &:state(dragging)::part(thumb) {
-      scale: 1.2;
+      scale: 1.25;
     }
 
     &::part(thumb)::after {

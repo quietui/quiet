@@ -523,8 +523,8 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
   #slider__opacity {
     &::part(track) {
       background: var(--quiet-silent);
-      background-size: 1em 1em;
-      background-position: 0 0, 0 0, -0.5em -0.5em, 0.5em 0.5em;
+      background-size: 1.25em 1.25em;
+      background-position: 0 0, 0 0, -0.625em -0.625em, 0.625em 0.625em;
       background-image: 
         linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%),
         linear-gradient(45deg, transparent 75%, var(--quiet-neutral-fill-soft) 75%),

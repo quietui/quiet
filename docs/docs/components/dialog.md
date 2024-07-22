@@ -226,6 +226,10 @@ Dialogs with overflowing content will expand as the viewport allows before scrol
 <quiet-button data-dialog="open dialog__scrolling">Show dialog</quiet-button>
 ```
 
+:::info
+By default, dialogs will maintain their scroll position when closed. Use the `reset-scroll` attribute to tell the dialog to reset scrolling each time it's closed.
+:::
+
 ### Setting focus on open
 
 To move focus to a specific form control when the dialog opens, use the [`autofocus`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/autofocus) global attribute.

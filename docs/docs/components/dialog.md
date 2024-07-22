@@ -205,7 +205,7 @@ The `--width` and `--height` custom properties control the default width and hei
 Dialogs with overflowing content will expand as the viewport allows before scrolling. By design, the header and footer will remain visible so users don't get confused and have an easy way to exit the dialog.
 
 ```html {.example}
-<quiet-dialog id="dialog__scrolling" with-header with-footer>
+<quiet-dialog id="dialog__scrolling" with-header with-footer reset-scroll>
   <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">
     Lorem ipsum
   </h3>

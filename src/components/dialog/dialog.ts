@@ -52,6 +52,7 @@ export class QuietDialog extends QuietElement {
 
   private localize = new Localize(this);
 
+  @query('#body') private body: HTMLElement;
   @query('#dialog') private dialog: HTMLDialogElement;
 
   /** Opens or closes the dialog. */
@@ -71,6 +72,9 @@ export class QuietDialog extends QuietElement {
 
   /** Allows the dialog to be closed when clicking outside of it. */
   @property({ attribute: 'light-dismiss', type: Boolean }) lightDismiss = false;
+
+  /** For dialogs that scroll, this will reset the scroll position when the dialog closes. */
+  @property({ attribute: 'reset-scroll', type: Boolean }) resetScroll = false;
 
   updated(changedProps: Map<string, unknown>) {
     // Open or close the dialog
@@ -159,11 +163,22 @@ export class QuietDialog extends QuietElement {
       document.removeEventListener('keydown', this.handleDocumentKeyDown);
       unlockScrolling(this.dialog);
       await animateWithClass(this.dialog, 'hide');
+
+      // Reset the dialog body's scroll position
+      if (this.resetScroll) {
+        this.scrollBodyTo({ top: 0, left: 0 });
+      }
+
       this.dialog.close();
       this.open = false;
       this.customStates.set('open', false);
       this.dispatchEvent(new QuietClosedEvent());
     }
+  }
+
+  /** Scrolls the dialog's body to the specified position. */
+  public scrollBodyTo(options: ScrollToOptions) {
+    this.body.scrollTo(options);
   }
 
   render() {

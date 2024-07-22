@@ -18,6 +18,7 @@ const translation: Translation = {
   hidePassword: 'Ocultar contraseña',
   loading: 'Cargando',
   remove: 'Remover',
+  selectAColorFromTheScreen: 'Seleccione un color de la pantalla',
   showPassword: 'Mostrar contraseña'
   /* cSpell:enable */
 };

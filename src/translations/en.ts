@@ -17,6 +17,7 @@ const translation: Translation = {
   hidePassword: 'Hide password',
   loading: 'Loading',
   remove: 'Remove',
+  selectAColorFromTheScreen: 'Select a color from the screen using the eye dropper',
   showPassword: 'Show password'
 };
 

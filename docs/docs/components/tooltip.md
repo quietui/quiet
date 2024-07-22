@@ -103,3 +103,34 @@ Use the `--max-width` custom property to change the maximum width of the tooltip
   I'm a tooltip with a lot of content. So much, in fact, that it will wrap to the next line.
 </quiet-tooltip>
 ```
+
+
+### Manual activation
+
+Set the `activation` attribute to `manual` if you want to control the tooltip programmatically. This will prevent the tooltip from opening or closing on its own, including when users press the [[Escape]] key.
+
+```html {.example}
+<quiet-tooltip for="tooltip__manual-anchor" activation="manual">
+  I will only show or hide when you click the button.
+</quiet-tooltip>
+
+<div 
+  id="tooltip__manual-anchor" 
+  style="display: inline-block; place-items: center; padding: 2rem; border: dashed 2px var(--quiet-neutral-stroke-soft); border-radius: var(--quiet-border-radius);"
+>
+  The tooltip will be anchored here
+</div>
+
+<br><br>
+
+<quiet-button id="tooltip__manual-button">Click to toggle the tooltip</quiet-button>
+
+<script>
+  const tooltip = document.querySelector('[for="tooltip__manual-anchor"]');
+  const button = document.getElementById('tooltip__manual-button');
+ 
+  button.addEventListener('click', () => {
+    tooltip.open = !tooltip.open;
+  });
+</script>
+```

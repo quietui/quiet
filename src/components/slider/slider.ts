@@ -319,23 +319,13 @@ export class QuietSlider extends QuietElement {
     // Move up 10%
     if (event.key === 'PageUp') {
       event.preventDefault();
-      newValue = this.clampAndRoundToStep(
-        Math.max(
-          newValue + (this.max - this.min) / 10,
-          newValue + this.step // make sure we at least move up to the next step
-        )
-      );
+      newValue = this.clampAndRoundToStep(newValue + (this.max - this.min) / 10);
     }
 
     // Move down 10%
     if (event.key === 'PageDown') {
       event.preventDefault();
-      newValue = this.clampAndRoundToStep(
-        Math.min(
-          newValue - (this.max - this.min) / 10,
-          newValue - this.step // make sure we at least move down to the previous step
-        )
-      );
+      newValue = this.clampAndRoundToStep(newValue - (this.max - this.min) / 10);
     }
 
     // If a key trigger a change, update the value and dispatch events

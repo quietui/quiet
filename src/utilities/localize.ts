@@ -26,5 +26,6 @@ export interface Translation extends DefaultTranslation {
   hidePassword: string;
   loading: string;
   remove: string;
+  selectAColorFromTheScreen: string;
   showPassword: string;
 }

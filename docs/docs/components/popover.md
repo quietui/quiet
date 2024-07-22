@@ -165,3 +165,33 @@ You can use [tab lists](/docs/components/tab-list) in popovers to categorize con
   }
 </style>
 ```
+
+### Manual activation
+
+Set the `activation` attribute to `manual` if you want to control the popover programmatically. This will prevent the popover from opening or closing on its own, including when users press the [[Escape]] key.
+
+```html {.example}
+<quiet-popover for="popover__manual-anchor" activation="manual">
+  I will only show or hide when you click the button.
+</quiet-popover>
+
+<div 
+  id="popover__manual-anchor" 
+  style="display: inline-block; place-items: center; padding: 2rem; border: dashed 2px var(--quiet-neutral-stroke-soft); border-radius: var(--quiet-border-radius);"
+>
+  The popover will be anchored here
+</div>
+
+<br><br>
+
+<quiet-button id="popover__manual-button">Click to toggle the popover</quiet-button>
+
+<script>
+  const popover = document.querySelector('[for="popover__manual-anchor"]');
+  const button = document.getElementById('popover__manual-button');
+ 
+  button.addEventListener('click', () => {
+    popover.open = !popover.open;
+  });
+</script>
+```

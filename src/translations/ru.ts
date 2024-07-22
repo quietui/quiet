@@ -18,6 +18,7 @@ const translation: Translation = {
   hidePassword: 'Скрыть пароль',
   loading: 'Загрузка',
   remove: 'Удалять',
+  selectAColorFromTheScreen: 'Выберите цвет на экране',
   showPassword: 'Показать пароль'
   /* cSpell:enable */
 };

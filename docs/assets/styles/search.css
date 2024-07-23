@@ -115,6 +115,7 @@
 
 /* Search results */
 .site-search-result {
+  list-style: none;
   padding: 0;
   margin: 0;
 

@@ -50,6 +50,10 @@ Use the `value` attribute to provide an initial value for the radio. The value s
 </quiet-radio-item>
 ```
 
+:::warn
+This behavior is different from native radios that use the `checked` attribute to set the value. With `<quiet-radio>`, always use the `value` attribute to set the value.
+:::
+
 ### Changing the orientation
 
 To stack radio items on top of each other instead of side by side, set the `orientation` attribute to `vertical`.

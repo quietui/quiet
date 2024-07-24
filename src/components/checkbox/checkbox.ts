@@ -110,6 +110,11 @@ export class QuietCheckbox extends QuietElement {
     // Always be updating
     this.updateValidity();
 
+    // Handle value
+    if (changedProps.has('checked') || changedProps.has('value')) {
+      this.internals.setFormValue(this.checked ? this.value : null);
+    }
+
     // Handle checked
     if (changedProps.has('checked')) {
       this.customStates.set('checked', this.checked);
@@ -152,7 +157,6 @@ export class QuietCheckbox extends QuietElement {
   private handleClick() {
     this.checked = !this.checked;
     this.indeterminate = false;
-    this.internals.setFormValue(this.value);
   }
 
   private handleBlur() {

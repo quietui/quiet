@@ -172,6 +172,7 @@ export class QuietTextArea extends QuietElement {
     // Handle value
     if (changedProps.has('value')) {
       this.customStates.set('empty', this.value === '');
+      this.internals.setFormValue(this.value);
     }
 
     // Handle disabled
@@ -239,9 +240,9 @@ export class QuietTextArea extends QuietElement {
     this.wasSubmitted = true;
   }
 
-  private handleInput(event: InputEvent) {
+  private async handleInput(event: InputEvent) {
     this.value = this.textBox.value;
-    this.internals.setFormValue(this.value);
+    await this.updateComplete;
     this.dispatchEvent(new QuietInputEvent());
     this.relayNativeEvent(event);
   }

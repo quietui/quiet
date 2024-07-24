@@ -216,9 +216,9 @@ export class QuietSelect extends QuietElement {
     this.wasSubmitted = true;
   }
 
-  private handleInput(event: InputEvent) {
+  private async handleInput(event: InputEvent) {
     this.value = this.textBox.value;
-    this.internals.setFormValue(this.value);
+    await this.updateComplete;
     this.dispatchEvent(new QuietInputEvent());
     this.relayNativeEvent(event);
   }

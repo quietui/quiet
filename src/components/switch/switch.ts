@@ -105,6 +105,11 @@ export class QuietSwitch extends QuietElement {
     // Always be updating
     this.updateValidity();
 
+    // Handle value
+    if (changedProps.has('checked') || changedProps.has('value')) {
+      this.internals.setFormValue(this.checked ? this.value : null);
+    }
+
     // Handle disabled
     if (changedProps.has('disabled')) {
       this.customStates.set('disabled', this.disabled);
@@ -141,7 +146,6 @@ export class QuietSwitch extends QuietElement {
 
   private handleClick() {
     this.checked = !this.checked;
-    this.internals.setFormValue(this.value);
   }
 
   private handleBlur() {

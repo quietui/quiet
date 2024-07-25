@@ -131,7 +131,7 @@ Use the `<small>` element for labels and the [`<quiet-divider>`](/docs/component
 
 ### Showing details
 
-Use the `details` slot to display details, such as keyboard shortcuts, at the end of [dropdown items](/docs/components/dropdown-item).
+Use the `details` slot to display details, such as keyboard shortcuts, inside [dropdown items](/docs/components/dropdown-item).
 
 ```html {.example}
 <quiet-dropdown>

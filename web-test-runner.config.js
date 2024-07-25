@@ -26,18 +26,20 @@ export default {
     playwrightLauncher({ product: 'firefox' }),
     playwrightLauncher({ product: 'webkit' })
   ],
-  testRunnerHtml: testFramework => `
-    <html lang="en-US">
-      <head></head>
-      <body>
-        <link rel="stylesheet" href="dist/light.css">
-        <script>
-          window.process = {env: { NODE_ENV: "production" }}
-        </script>
-        <script type="module" src="${testFramework}"></script>
-      </body>
-    </html>
-  `,
+  testRunnerHtml: testFramework =>
+    `
+<!DOCTYPE html>
+<html lang="en-US">
+  <head></head>
+  <body>
+    <link rel="stylesheet" href="dist/light.css">
+    <script>
+      window.process = {env: { NODE_ENV: "production" }}
+    </script>
+    <script type="module" src="${testFramework}"></script>
+  </body>
+</html>
+  `.trim(),
   // Create a named group for every test file to enable running single tests. If a test file is `split-panel.test.ts`
   // then you can run `npm run test -- --group split-panel` to run only that component's tests.
   groups: globbySync('src/**/*.test.ts').map(path => {

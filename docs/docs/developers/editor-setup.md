@@ -4,7 +4,6 @@ description: TODO
 layout: docs
 ---
 
-
 ## Visual Studio Code
 
 Quiet generates a file called `vscode.html-custom-data.json` that informs VS Code of your custom elements. To enable code completion, you need to tell VS Code where the file is.

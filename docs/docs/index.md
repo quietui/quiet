@@ -1,6 +1,6 @@
 ---
 title: Installation
-description: Learn how to install the library.
+description: Start using Quiet with just a couple lines of code.
 layout: docs
 ---
 

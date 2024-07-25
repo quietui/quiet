@@ -1,6 +1,6 @@
 ---
 title: Editor setup
-description: TODO
+description: Configure your editor for a better DX when using the library.
 layout: docs
 ---
 

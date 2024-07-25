@@ -1,10 +1,8 @@
 ---
 title: Running the Project
-description: TODO
+description: Learn how to develop and build the project locally.
 layout: docs
 ---
-
-
 
 ## Cloning the repo
 

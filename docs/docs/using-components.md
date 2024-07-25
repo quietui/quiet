@@ -1,6 +1,6 @@
 ---
 title: Using components
-description: Quiet is built using platform APIs that allow components to work anywhere.
+description: Quiet was built with platform APIs that allow its components to work everywhere.
 layout: docs
 ---
 

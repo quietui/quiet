@@ -1,6 +1,6 @@
 ---
 title: Themes
-description: Customize Quiet with themes.
+description: Theme concepts, color palettes, and design tokens.
 layout: docs
 ---
 
@@ -31,7 +31,6 @@ If you're using [Quiet Restyle](/docs/restyle), the entire page will enter dark 
 ## Theme concepts
 
 Quiet's default theme is designed to be highly customizable with minimal effort. The following seed colors are used to generate color palettes with pure CSS — one for each variant.
-
 
 ```css
 :root {

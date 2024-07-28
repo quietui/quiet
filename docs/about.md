@@ -1,6 +1,6 @@
 ---
 title: About this project
-description: Learn more about the project and the person behind it.
+description: Learn more about Quiet and the person behind it.
 layout: page-outline
 section: about
 ---

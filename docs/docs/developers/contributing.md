@@ -1,6 +1,6 @@
 ---
 title: Contributing
-description: Learn how contributions work in this project.
+description: Please read the project's contribution guidelines.
 layout: docs
 ---
 

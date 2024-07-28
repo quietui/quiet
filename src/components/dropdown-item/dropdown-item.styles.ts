@@ -90,7 +90,7 @@ export default css`
     display: flex;
     align-items: center;
     justify-content: end;
-    font-size: 0.75em !important;
+    font-size: 0.933334em !important;
     color: var(--quiet-text-muted);
 
     ::slotted(*) {

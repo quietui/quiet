@@ -82,6 +82,7 @@ export default css`
     padding: 0;
     margin: auto 0;
     cursor: inherit;
+    appearance: none;
 
     &:focus {
       outline: none;
@@ -263,5 +264,24 @@ export default css`
     &:active {
       translate: 0 1px;
     }
+  }
+
+  /* Icons */
+  slot[name='start']::slotted(*),
+  slot[name='end']::slotted(*) {
+    color: var(--quiet-text-muted) !important;
+  }
+
+  slot[name='start']::slotted(quiet-icon),
+  slot[name='end']::slotted(quiet-icon) {
+    font-size: 1.25em !important;
+    pointer-events: none;
+  }
+
+  slot[name='start']::slotted(svg),
+  slot[name='end']::slotted(svg) {
+    width: 1.25em;
+    height: 1.25em;
+    pointer-events: none;
   }
 `;

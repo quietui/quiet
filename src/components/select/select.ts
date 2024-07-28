@@ -1,5 +1,6 @@
 import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property, query, state } from 'lit/decorators.js';
+import { getSlotHtml } from '../../utilities/html.js';
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
@@ -7,162 +8,130 @@ import { QuietBlurEvent, QuietChangeEvent, QuietFocusEvent, QuietInputEvent } fr
 import { QuietElement } from '../../utilities/quiet-element.js';
 import formControlStyles from '../../styles/form-control.styles.js';
 import hostStyles from '../../styles/host.styles.js';
-import styles from './text-area.styles.js';
+import styles from './select.styles.js';
 import type { CSSResultGroup } from 'lit';
 
 /**
- * <quiet-text-area>
+ * <quiet-select>
  *
- * @summary Text area let users edit multi-line, plain text content.
- * @documentation https://quietui.com/docs/components/text-area
+ * @summary Selects let users choose an option from a predefined list of options.
+ * @documentation https://quietui.com/docs/components/select
  * @status stable
  * @since 1.0
  *
- * @slot label - The text area's label. For plain-text labels, you can use the `label` attribute instead.
- * @slot description - The text area's description. For plain-text descriptions, you can use the `description`
- *  attribute instead.
+ * @dependency quiet-icon
  *
- * @prop {string} form - If the text area is located outside of a form, you can associate it by setting this to the
+ * @slot label - The select's label. For plain-text labels, you can use the `label` attribute instead.
+ * @slot description - The select's description. For plain-text descriptions, you can use the `description` attribute
+ *  instead.
+ * @slot start - An icon or similar element to place before the label. Works great with `<quiet-icon>`.
+ * @slot end - An icon or similar element to place after the label. Works great with `<quiet-icon>`.
+ *
+ * @prop {string} form - If the select is located outside of a form, you can associate it by setting this to the
  *  form's `id`.
  *
- * @event quiet-blur - Emitted when the text area loses focus. This event does not bubble.
- * @event quiet-change - Emitted when the user commits changes to the text area's value.
- * @event quiet-focus - Emitted when the text area receives focus. This event does not bubble.
- * @event quiet-input - Emitted when the text area receives input.
+ * @event quiet-blur - Emitted when the select loses focus. This event does not bubble.
+ * @event quiet-change - Emitted when the user commits changes to the select's value.
+ * @event quiet-focus - Emitted when the select receives focus. This event does not bubble.
+ * @event quiet-input - Emitted when the select receives input.
  *
- * @csspart label - The element that contains the text area's label.
- * @csspart description - The element that contains the text area's description.
+ * @csspart label - The element that contains the select's label.
+ * @csspart description - The element that contains the select's description.
  * @csspart visual-box - The element that wraps the internal text box.
- * @csspart text-box - The internal text box, a `<textarea>` element.
+ * @csspart text-box - The internal text box, a `<select>` element.
+ * @csspart chevron - The chevron icon, a `<quiet-icon>` element.
+ * @csspart chevron__svg - The chevron icon's `<svg>` part.
  *
- * @cssstate disabled - Applied when the text area is disabled.
- * @cssstate empty - Applied when the text area is empty.
- * @cssstate focused - Applied when the text area has focus.
- * @cssstate user-valid - Applied when the text area is valid and the user has sufficiently interacted with it.
- * @cssstate user-invalid - Applied when the text area is invalid and the user has sufficiently interacted with it.
+ * @cssstate disabled - Applied when the select is disabled.
+ * @cssstate empty - Applied when the selected option has an empty value.
+ * @cssstate focused - Applied when the select has focus.
+ * @cssstate user-valid - Applied when the select is valid and the user has sufficiently interacted with it.
+ * @cssstate user-invalid - Applied when the select is invalid and the user has sufficiently interacted with it.
  */
-@customElement('quiet-text-area')
-export class QuietTextArea extends QuietElement {
+@customElement('quiet-select')
+export class QuietSelect extends QuietElement {
   static formAssociated = true;
   static styles: CSSResultGroup = [hostStyles, formControlStyles, styles];
 
   /** A reference to the `<form>` associated with the form control, or `null` if no form is associated. */
   public associatedForm: HTMLFormElement | null = null;
-  private resizeObserver: ResizeObserver;
 
-  @query('textarea') private textBox: HTMLInputElement;
+  @query('slot:not([name])') private defaultSlot: HTMLSlotElement;
+  @query('#text-box') private textBox: HTMLSelectElement;
 
   @state() private isInvalid = false;
   @state() private wasChanged = false;
   @state() private wasSubmitted = false;
+  @state() options: string;
 
   /**
-   * The text area's label. If you need to provide HTML in the label, use the `label` slot instead.
+   * The select's label. If you need to provide HTML in the label, use the `label` slot instead.
    */
   @property() label: string;
 
   /**
-   * The text area's description. If you need to provide HTML in the description, use the `description` slot instead.
+   * The select's description. If you need to provide HTML in the description, use the `description` slot instead.
    */
   @property() description: string;
 
-  /** The name of the text area. This will be submitted with the form as a name/value pair. */
+  /** The name of the select. This will be submitted with the form as a name/value pair. */
   @property({ reflect: true }) name: string;
 
-  /** The text area's value. */
+  /** The select's value. */
   @property() value = '';
 
-  /** A placeholder to show in the text area when it's empty. */
-  @property() placeholder: string;
-
-  /** Disables the text area. */
+  /** Disables the select. */
   @property({ type: Boolean }) disabled = false;
 
-  /** Makes the text area a read-only area. */
+  /** Makes the select a read-only field. */
   @property({ type: Boolean }) readonly = false;
 
-  /** Determines how the text area can be resized. */
-  @property() resize: 'vertical' | 'auto' | 'none' = 'vertical';
-
-  /** The default number of rows visible in the text area. */
-  @property({ type: Number }) rows = 3;
-
-  /** The type of text area to render. */
+  /** The type of select to render. */
   @property({ reflect: true }) appearance: 'normal' | 'filled' | 'unstyled' = 'normal';
 
-  /** The text area's size. */
+  /** The select's size. */
   @property({ reflect: true }) size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' = 'md';
 
+  /** Draws the select in a pill shape. */
+  @property({ type: Boolean, reflect: true }) pill = false;
+
   /**
-   * Makes the text area required. Form submission will not be allowed when this is set and the text area is empty.
+   * Makes the select required. Form submission will not be allowed when this is set and the select is empty.
    */
   @property({ type: Boolean, reflect: true }) required = false;
 
-  /** The minimum string length that will be considered valid. */
-  @property({ attribute: 'minlength', type: Number }) minLength: number;
-
-  /** The maximum string length that will be considered valid. */
-  @property({ attribute: 'maxlength', type: Number }) maxLength: number;
-
   /**
-   * You can provide a custom error message to force the text area to be invalid. To clear the error, set this to an
+   * You can provide a custom error message to force the select to be invalid. To clear the error, set this to an
    * empty string.
    */
   @property({ attribute: 'custom-validity' }) customValidity = '';
 
-  /** Turns autocapitalize on or off in supported browsers. */
-  @property() autocapitalize: 'off' | 'none' | 'on' | 'sentences' | 'words' | 'characters';
-
   /**
-   * Tells the browser how to autocomplete the text area. See [this page](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete)
+   * Tells the browser how to autocomplete the select. See [this page](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete)
    * for available values.
    */
   @property() autocomplete: string;
 
-  /** Turns autocorrect on or off in supported browsers. */
-  @property() autocorrect: 'off' | 'on';
-
-  /** Tells the browser to focus the text area when the page loads or a dialog is shown. */
-  @property({ type: Boolean }) autofocus: boolean;
-
   /** Sets the enter key label on virtual keyboards. */
   @property() enterkeyhint: 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send';
-
-  /**
-   * Provides the browser with a hint about the type of data that might be entered by the user, allowing the appropriate
-   * virtual keyboard to be displayed on supported devices.
-   */
-  @property() inputmode: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
-
-  /** Turns spell checking on or off in supported browsers. */
-  @property({
-    type: Boolean,
-    converter: {
-      fromAttribute: value => (!value || value === 'false' ? false : true),
-      toAttribute: value => (value ? 'true' : 'false')
-    }
-  })
-  spellcheck: boolean;
 
   connectedCallback() {
     super.connectedCallback();
     this.addEventListener('invalid', this.handleHostInvalid);
-
-    // Update auto-height when the text area is resized
-    this.resizeObserver = new ResizeObserver(() => this.updateHeight());
-    this.updateComplete.then(() => {
-      this.updateHeight();
-      this.resizeObserver.observe(this.textBox);
-    });
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     this.removeEventListener('invalid', this.handleHostInvalid);
+  }
 
-    if (this.textBox) {
-      this.resizeObserver.unobserve(this.textBox);
-    }
+  firstUpdated() {
+    // Re-sync when options change
+    const observer = new MutationObserver(() => this.syncOptions());
+    observer.observe(this, { subtree: true, childList: true, attributes: true });
+
+    // Initial sync
+    this.syncOptions();
   }
 
   updated(changedProps: Map<string, unknown>) {
@@ -178,11 +147,6 @@ export class QuietTextArea extends QuietElement {
     // Handle disabled
     if (changedProps.has('disabled')) {
       this.customStates.set('disabled', this.disabled);
-    }
-
-    // Handle auto-size
-    if (changedProps.has('value') || changedProps.has('rows')) {
-      this.updateHeight();
     }
 
     // Handle user interactions. When the form control's value has changed and lost focus (e.g. change event), we can
@@ -219,6 +183,18 @@ export class QuietTextArea extends QuietElement {
     this.dispatchEvent(new QuietBlurEvent());
   }
 
+  private handleVisualBoxPointerDown(event: PointerEvent) {
+    const target = event.target as HTMLElement;
+    const isBox = target?.id === 'visual-box';
+    const isSlot = target.hasAttribute('slot');
+
+    if (isBox || isSlot) {
+      event.preventDefault();
+      this.textBox.focus();
+      this.textBox.showPicker();
+    }
+  }
+
   private handleChange(event: Event) {
     this.wasChanged = true;
     this.dispatchEvent(new QuietChangeEvent());
@@ -247,14 +223,16 @@ export class QuietTextArea extends QuietElement {
     this.relayNativeEvent(event);
   }
 
-  /** Updates the height of the text area based on its content and settings. */
-  private updateHeight() {
-    if (this.resize === 'auto') {
-      this.textBox.style.height = 'auto';
-      this.textBox.style.height = `${this.textBox.scrollHeight}px`;
+  private syncOptions() {
+    this.textBox.innerHTML = getSlotHtml(this.defaultSlot);
+
+    if (this.value) {
+      this.textBox.value = this.value;
     } else {
-      // @ts-expect-error - we're unsetting this value
-      this.textBox.style.height = undefined;
+      const firstOption = this.textBox.querySelector('option');
+      if (firstOption) {
+        this.value = firstOption.value;
+      }
     }
   }
 
@@ -280,12 +258,12 @@ export class QuietTextArea extends QuietElement {
     this.internals.setValidity(flags, validationMessage, this.textBox);
   }
 
-  /** Sets focus to the text area. */
+  /** Sets focus to the select. */
   public focus() {
     this.textBox.focus();
   }
 
-  /** Removes focus from the text area. */
+  /** Removes focus from the select. */
   public blur() {
     this.textBox.blur();
   }
@@ -305,32 +283,6 @@ export class QuietTextArea extends QuietElement {
    */
   public reportValidity() {
     return this.internals.reportValidity();
-  }
-
-  /** Selects all text in the text area. */
-  public select() {
-    this.textBox.select();
-  }
-
-  /** Sets the start and end positions of the current text selection in the text area. */
-  public setSelectionRange(start: number, end: number, direction: 'forward' | 'backward' | 'none' = 'none') {
-    this.textBox.setSelectionRange(start, end, direction);
-  }
-
-  /** Replaces a range of text in the text area with a new string. */
-  public setRangeText(
-    replacement: string,
-    start?: number,
-    end?: number,
-    selectMode?: 'select' | 'start' | 'end' | 'preserve'
-  ) {
-    this.textBox.setRangeText(
-      replacement,
-      start ?? this.textBox.selectionStart!,
-      end ?? this.textBox.selectionEnd!,
-      selectMode
-    );
-    this.value = this.textBox.value;
   }
 
   render() {
@@ -358,38 +310,43 @@ export class QuietTextArea extends QuietElement {
           lg: this.size === 'lg',
           xl: this.size === 'xl',
           // Modifiers
-          'resize-vertical': this.resize === 'vertical',
-          'resize-auto': this.resize === 'auto',
-          'resize-none': this.resize === 'none',
+          pill: this.pill,
           // States
           disabled: this.disabled
         })}
+        @pointerdown=${this.handleVisualBoxPointerDown}
       >
-        <textarea
+        <slot name="start"></slot>
+
+        <select
           id="text-box"
           part="text-box"
           ?autofocus=${this.autofocus}
           ?disabled=${this.disabled}
           ?readonly=${this.readonly}
           ?required=${this.required}
-          placeholder=${ifDefined(this.placeholder)}
-          minlength=${ifDefined(this.minLength)}
-          maxlength=${ifDefined(this.maxLength)}
           .value=${live(this.value) /* live() is required for proper validation */}
-          rows=${this.rows}
-          autocapitalize=${ifDefined(this.autocapitalize)}
           autocomplete=${ifDefined(this.autocomplete)}
-          autocorrect=${ifDefined(this.autocorrect)}
-          spellcheck=${ifDefined(this.spellcheck)}
           enterkeyhint=${ifDefined(this.enterkeyhint)}
-          inputmode=${ifDefined(this.inputmode)}
           aria-describedby="description"
           aria-invalid=${this.isInvalid ? 'true' : 'false'}
           @change=${this.handleChange}
           @input=${this.handleInput}
           @focus=${this.handleFocus}
           @blur=${this.handleBlur}
-        ></textarea>
+        ></select>
+
+        <slot hidden></slot>
+
+        <slot name="end"></slot>
+
+        <quiet-icon
+          id="chevron"
+          part="chevron"
+          exportparts="svg:chevron__svg"
+          library="system"
+          name="chevron-down"
+        ></quiet-icon>
       </div>
     `;
   }
@@ -397,6 +354,6 @@ export class QuietTextArea extends QuietElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'quiet-text-area': QuietTextArea;
+    'quiet-select': QuietSelect;
   }
 }

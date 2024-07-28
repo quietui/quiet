@@ -1,6 +1,6 @@
 ---
 title: Changelog
-description: Every release ships with a changelog entry showing what's new.
+description: Every release ships with a changelog entry that shows what's new.
 layout: docs
 ---
 

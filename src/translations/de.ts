@@ -17,8 +17,11 @@ const translation: Translation = {
   error: 'Fehler',
   hidePassword: 'Passwort verbergen',
   loading: 'Wird geladen',
+  hue: 'Farbton',
+  opacity: 'Opazität',
+  percentLuminosity: (percentage: string) => `${percentage} Leuchtkraft`,
+  percentSaturation: (percentage: string) => `${percentage} Sättigung`,
   remove: 'Entfernen',
-  selectAColorFromTheScreen: 'Farbe vom Bildschirm auswählen',
   showPassword: 'Passwort anzeigen'
   /* cSpell:enable */
 };

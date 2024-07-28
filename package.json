@@ -50,10 +50,13 @@
     "spellcheck": "cspell \"**/*.{js,ts,json,html,css,md}\" --no-progress"
   },
   "dependencies": {
+    "@ctrl/tinycolor": "^4.1.0",
     "@floating-ui/dom": "^1.6.3",
     "@quietui/squeak": "^1.1.0",
+    "install": "^0.13.0",
     "lit": "^3.1.2",
-    "nanoid": "^5.0.7"
+    "nanoid": "^5.0.7",
+    "npm": "^10.8.2"
   },
   "devDependencies": {
     "@11ty/eleventy": "3.0.0-alpha.9",

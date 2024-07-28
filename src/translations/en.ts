@@ -16,8 +16,11 @@ const translation: Translation = {
   error: 'Error',
   hidePassword: 'Hide password',
   loading: 'Loading',
+  hue: 'Hue',
+  opacity: 'Opacity',
+  percentLuminosity: (percentage: string) => `${percentage} luminosity`,
+  percentSaturation: (percentage: string) => `${percentage} saturation`,
   remove: 'Remove',
-  selectAColorFromTheScreen: 'Select a color from the screen using the eye dropper',
   showPassword: 'Show password'
 };
 

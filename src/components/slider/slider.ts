@@ -69,8 +69,8 @@ export class QuietSlider extends QuietElement {
   /** A reference to the `<form>` associated with the form control, or `null` if no form is associated. */
   public associatedForm: HTMLFormElement | null = null;
   private localize = new Localize(this);
-  private pointerDownValue: number | undefined;
   private trackBoundingClientRect: DOMRect;
+  private valueWhenDraggingStarted: number | undefined;
 
   @query('#thumb') thumb: HTMLElement;
   @query('#track') track: HTMLElement;
@@ -234,6 +234,9 @@ export class QuietSlider extends QuietElement {
   }
 
   private handleDragStart(event: PointerEvent | TouchEvent) {
+    const x = event instanceof PointerEvent ? event.clientX : event.touches[0].clientX;
+    const y = event instanceof PointerEvent ? event.clientY : event.touches[0].clientY;
+
     if (this.disabled || this.readonly) return;
 
     document.addEventListener('pointermove', this.handleDragMove);
@@ -245,15 +248,18 @@ export class QuietSlider extends QuietElement {
 
     // Cache coords when dragging starts to avoid calling it on every move
     this.trackBoundingClientRect = this.track.getBoundingClientRect();
-    this.pointerDownValue = this.value;
+    this.valueWhenDraggingStarted = this.value;
     this.customStates.set('dragging', true);
-    this.setValueFromCoordinates(event);
+    this.setValueFromCoordinates(x, y);
     this.showTooltip();
   }
 
   private handleDragMove = (event: PointerEvent | TouchEvent) => {
+    const x = event instanceof PointerEvent ? event.clientX : event.touches[0].clientX;
+    const y = event instanceof PointerEvent ? event.clientY : event.touches[0].clientY;
+
     event.preventDefault();
-    this.setValueFromCoordinates(event);
+    this.setValueFromCoordinates(x, y);
   };
 
   private handleDragStop = (event: PointerEvent | TouchEvent) => {
@@ -263,7 +269,7 @@ export class QuietSlider extends QuietElement {
     document.removeEventListener('touchend', this.handleDragStop);
 
     // Dispatch change events when dragging stops
-    if (this.value !== this.pointerDownValue) {
+    if (this.value !== this.valueWhenDraggingStarted) {
       this.dispatchEvent(new QuietChangeEvent());
       this.dispatchEvent(new Event('change'));
       this.wasChanged = true;
@@ -272,7 +278,7 @@ export class QuietSlider extends QuietElement {
     event.preventDefault();
     this.hideTooltip();
     this.customStates.set('dragging', false);
-    this.pointerDownValue = undefined;
+    this.valueWhenDraggingStarted = undefined;
   };
 
   private handleHostInvalid() {
@@ -319,13 +325,23 @@ export class QuietSlider extends QuietElement {
     // Move up 10%
     if (event.key === 'PageUp') {
       event.preventDefault();
-      newValue = this.clampAndRoundToStep(newValue + (this.max - this.min) / 10);
+      newValue = this.clampAndRoundToStep(
+        Math.max(
+          newValue + (this.max - this.min) / 10,
+          newValue + this.step // make sure we at least move up to the next step
+        )
+      );
     }
 
     // Move down 10%
     if (event.key === 'PageDown') {
       event.preventDefault();
-      newValue = this.clampAndRoundToStep(newValue - (this.max - this.min) / 10);
+      newValue = this.clampAndRoundToStep(
+        Math.min(
+          newValue - (this.max - this.min) / 10,
+          newValue - this.step // make sure we at least move down to the previous step
+        )
+      );
     }
 
     // If a key trigger a change, update the value and dispatch events
@@ -365,13 +381,11 @@ export class QuietSlider extends QuietElement {
     }
   }
 
-  private setValueFromCoordinates(event: PointerEvent | TouchEvent) {
+  private setValueFromCoordinates(x: number, y: number) {
     const isRtl = this.localize.dir() === 'rtl';
     const isVertical = this.orientation === 'vertical';
     const oldValue = this.value;
     const { top, right, bottom, left, height, width } = this.trackBoundingClientRect;
-    const x = event instanceof PointerEvent ? event.clientX : event.touches[0].clientX;
-    const y = event instanceof PointerEvent ? event.clientY : event.touches[0].clientY;
     const pointerPosition = isVertical ? y : x;
     const sliderCoords = isVertical
       ? { start: top, end: bottom, size: height }

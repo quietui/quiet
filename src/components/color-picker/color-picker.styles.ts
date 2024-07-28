@@ -1,29 +1,291 @@
 import { css } from 'lit';
 
 export default css`
-  #color-preview {
-    flex: 0 0 auto;
-    width: 1.75em;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    box-shadow: inset 0 0 0 0.0625em color-mix(in oklab, black, transparent 85%);
-    pointer-events: none;
+  #picker {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-width: 16rem;
+
+    &.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
   }
 
-  /* Utilities */
-  .transparent-bg {
-    --size: 0.5em;
+  /* Color slider */
+  #color-slider {
+    position: relative;
+    aspect-ratio: 1.4;
+    background-color: var(--color-slider-background);
+    border-radius: var(--quiet-border-radius);
+    box-shadow: inset 0 0 0 0.0625rem color-mix(in oklab, black, transparent 90%);
+    cursor: crosshair;
+
+    &:dir(ltr) {
+      background-image: linear-gradient(rgba(0, 0, 0, 0) 0%, rgb(0, 0, 0) 100%),
+        linear-gradient(to right, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0) 100%);
+    }
+
+    &:dir(rtl) {
+      background-image: linear-gradient(rgba(0, 0, 0, 0) 0%, rgb(0, 0, 0) 100%),
+        linear-gradient(to left, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0) 100%);
+    }
+
+    &:active {
+      cursor: none;
+    }
+  }
+
+  :host([disabled]) #color-slider {
+    cursor: not-allowed;
+  }
+
+  #color-slider-thumb {
+    --thumb-width: 1.25rem;
+    --thumb-height: 1.25rem;
+
+    position: absolute;
+    width: var(--thumb-width);
+    height: var(--thumb-height);
+    border: solid 0.0625rem rgb(0 0 0 / 33%);
+    border-radius: 50%;
+    translate: calc(var(--thumb-width) / -2) calc(var(--thumb-height) / -2);
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      border: solid 0.125rem white;
+      box-shadow: inset 0 0 0 0.0625rem rgb(0 0 0 / 33%);
+    }
+
+    &:focus-visible {
+      outline: var(--quiet-focus-ring);
+      outline-offset: calc(var(--quiet-focus-offset) * 2);
+    }
+  }
+
+  #controls {
     display: flex;
-    background: var(--quiet-silent);
-    background-size: var(--size) var(--size);
+    gap: 0.25rem;
+    align-items: center;
+  }
+
+  #sliders {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    justify-content: center;
+  }
+
+  :host([with-preview]) {
+    #sliders {
+      margin-inline-end: 0.5rem;
+    }
+  }
+
+  quiet-copy {
+    display: flex;
+  }
+
+  #preview {
+    position: relative;
+    width: var(--quiet-form-control-height-md);
+    height: var(--quiet-form-control-height-md);
+    border: none;
+    border-radius: 50%;
+    background-color: transparent;
+    background-size: 0.5rem 0.5rem;
     background-position:
       0 0,
       0 0,
-      calc(var(--size) / -2) calc(var(--size) / -2),
-      calc(var(--size) / 2) calc(var(--size) / 2);
+      -0.25rem -0.25rem,
+      0.25rem 0.25rem;
     background-image: linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%),
       linear-gradient(45deg, transparent 75%, var(--quiet-neutral-fill-soft) 75%),
       linear-gradient(45deg, transparent 75%, var(--quiet-neutral-fill-soft) 75%),
       linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%);
+    cursor: copy;
+    padding: 0;
+    margin: 0;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: var(--current-color);
+      border-radius: inherit;
+      box-shadow: inset 0 0 0 0.0625rem color-mix(in oklab, black, transparent 90%);
+    }
+  }
+
+  /* Hue and opacity sliders */
+  #hue,
+  #opacity {
+    --thumb-width: 0.75rem;
+    --thumb-height: 1.5rem;
+    --track-size: 1.25rem;
+
+    /* Visually hidden */
+    &::part(label),
+    &::part(description) {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      white-space: nowrap;
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+    }
+
+    &::part(slider) {
+      margin-block: 0;
+    }
+
+    &::part(track) {
+      box-shadow: inset 0 0 0 0.0625rem color-mix(in oklab, black, transparent 90%);
+      border-radius: var(--quiet-border-radius);
+    }
+
+    &::part(thumb) {
+      border: solid 0.0625rem rgb(0 0 0 / 33%);
+      border-radius: 9999px;
+    }
+
+    &::part(thumb)::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: solid 0.125rem white;
+      border-radius: 9999px;
+      box-shadow: inset 0 0 0 0.0625rem rgb(0 0 0 / 33%);
+    }
+  }
+
+  #hue {
+    &:dir(ltr)::part(track) {
+      background-image: linear-gradient(
+        to right,
+        rgb(255, 0, 0) 0%,
+        rgb(255, 255, 0) 17%,
+        rgb(0, 255, 0) 33%,
+        rgb(0, 255, 255) 50%,
+        rgb(0, 0, 255) 67%,
+        rgb(255, 0, 255) 83%,
+        rgb(255, 0, 0) 100%
+      );
+    }
+
+    &:dir(rtl)::part(track) {
+      background-image: linear-gradient(
+        to left,
+        rgb(255, 0, 0) 0%,
+        rgb(255, 255, 0) 17%,
+        rgb(0, 255, 0) 33%,
+        rgb(0, 255, 255) 50%,
+        rgb(0, 0, 255) 67%,
+        rgb(255, 0, 255) 83%,
+        rgb(255, 0, 0) 100%
+      );
+    }
+
+    &::part(indicator) {
+      display: none;
+    }
+
+    &::part(thumb) {
+      background-color: var(--hue-thumb-color);
+    }
+  }
+
+  #opacity {
+    &::part(track) {
+      background-color: transparent;
+      background-size: 0.5rem 0.5rem;
+      background-position:
+        0 0,
+        0 0,
+        -0.25rem -0.25rem,
+        0.25rem 0.25rem;
+      background-image: linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, var(--quiet-neutral-fill-soft) 75%),
+        linear-gradient(45deg, transparent 75%, var(--quiet-neutral-fill-soft) 75%),
+        linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%);
+    }
+
+    &::part(indicator) {
+      width: 100% !important;
+      background-color: transparent;
+    }
+
+    &:dir(ltr)::part(indicator) {
+      background-image: linear-gradient(to right, transparent 0%, var(--current-color-without-opacity) 100%);
+    }
+
+    &:dir(rtl)::part(indicator) {
+      background-image: linear-gradient(to left, transparent 0%, var(--current-color-without-opacity) 100%);
+    }
+
+    &::part(thumb) {
+      background-color: var(--opacity-thumb-color);
+    }
+  }
+
+  /* Swatches */
+  #swatches {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 0.25rem;
+
+    button {
+      position: relative;
+      display: inline-block;
+      aspect-ratio: 1;
+      background: none;
+      background-color: transparent;
+      background-size: 0.5rem 0.5rem;
+      background-position:
+        0 0,
+        0 0,
+        -0.25rem -0.25rem,
+        0.25rem 0.25rem;
+      background-image: linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, var(--quiet-neutral-fill-soft) 75%),
+        linear-gradient(45deg, transparent 75%, var(--quiet-neutral-fill-soft) 75%),
+        linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%);
+      border: none;
+      border-radius: calc(var(--quiet-border-radius) / 2);
+      padding: 0;
+      margin: 0;
+      cursor: pointer;
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--swatch-color);
+        border-radius: inherit;
+        box-shadow: inset 0 0 0 0.0625rem color-mix(in oklab, black, transparent 90%);
+      }
+    }
+  }
+
+  :host([disabled]) #swatches button {
+    cursor: not-allowed;
   }
 `;

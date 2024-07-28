@@ -24,8 +24,11 @@ export interface Translation extends DefaultTranslation {
   dragFilesHereOrChooseFromFolder: string;
   error: string;
   hidePassword: string;
+  hue: string;
+  opacity: string;
+  percentLuminosity: (percentage: string) => string;
+  percentSaturation: (percentage: string) => string;
   loading: string;
   remove: string;
-  selectAColorFromTheScreen: string;
   showPassword: string;
 }

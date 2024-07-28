@@ -1,34 +1,46 @@
-import '../icon/icon.js';
+import '../copy/copy.js';
+import '../slider/slider.js';
+import { clamp } from '../../utilities/math.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { html } from 'lit';
-import { ifDefined } from 'lit/directives/if-defined.js';
-import { live } from 'lit/directives/live.js';
 import { Localize } from '../../utilities/localize.js';
 import { QuietBlurEvent, QuietChangeEvent, QuietFocusEvent, QuietInputEvent } from '../../events/form.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
+import { TinyColor } from '@ctrl/tinycolor';
 import formControlStyles from '../../styles/form-control.styles.js';
 import hostStyles from '../../styles/host.styles.js';
 import styles from './color-picker.styles.js';
 import type { CSSResultGroup } from 'lit';
-
-const isEyeDropperSupported = 'EyeDropper' in window;
-
-interface SetColorOptions {
-  /** When true, change and inputs events will be emitted. */
-  withEvents: boolean;
-}
+import type { QuietSlider } from '../slider/slider.js';
 
 /**
  * <quiet-color-picker>
  *
- * @summary TODO
+ * @summary Color pickers provide an interface for selecting a color using a two-dimension slider for luminosity and
+ *  saturation and regular sliders for hue and opacity.
  * @documentation https://quietui.com/docs/components/color-picker
- * @status experimental
- * @since TODO
+ * @status stable
+ * @since 1.0
+ *
+ * @dependency quiet-copy
+ * @dependency quiet-slider
  *
  * @slot - The default slot.
  * @slot named - A named slot.
+ *
+ * @event quiet-blur - Emitted when the color picker loses focus. This event does not bubble.
+ * @event quiet-change - Emitted when the user commits changes to the color picker's value.
+ * @event quiet-focus - Emitted when the color picker receives focus. This event does not bubble.
+ * @event quiet-input - Emitted when the color picker receives input.
+ *
+ * @csspart label - The element that contains the color picker's label.
+ * @csspart description - The element that contains the color picker's description.
+ *
+ * @cssstate disabled - Applied when the color picker is disabled.
+ * @cssstate focused - Applied when the color picker has focus.
+ * @cssstate user-valid - Applied when the color picker is valid and the user has sufficiently interacted with it.
+ * @cssstate user-invalid - Applied when the color picker is invalid and the user has sufficiently interacted with it.
  */
 @customElement('quiet-color-picker')
 export class QuietColorPicker extends QuietElement {
@@ -37,18 +49,29 @@ export class QuietColorPicker extends QuietElement {
 
   /** A reference to the `<form>` associated with the form control, or `null` if no form is associated. */
   public associatedForm: HTMLFormElement | null = null;
+  private colorSliderBoundingClientRect: DOMRect;
+  private isDragging = false;
   private localize = new Localize(this);
+  private valueWhenDraggingStarted: string | undefined;
+  private wasValueSetInternally = false;
 
-  @query('input') private textBox: HTMLInputElement;
+  @query('#color-slider') private colorSlider: HTMLElement;
+  @query('#color-slider-thumb') private colorSliderThumb: HTMLElement;
 
+  @state() private h = 0;
+  @state() private s = 0;
+  @state() private v = 1;
+  @state() private a = 1;
+  @state() private colorSliderThumbX = 0;
+  @state() private colorSliderThumbY = 0;
+  @state() private isChangingV = false;
+  @state() private isChangingS = false;
+  // @ts-expect-error - hush
   @state() private isInvalid = false;
-  // @state() private hue = 0;
-  // @state() private satuation = 100;
-  // @state() private brightness = 100;
-  // @state() private opacity = 100;
+  // @ts-expect-error - hush
   @state() private wasChanged = false;
+  // @ts-expect-error - hush
   @state() private wasSubmitted = false;
-  @state() isPasswordVisible = false;
 
   /**
    * The color picker's label. If you need to provide HTML in the label, use the `label` slot instead.
@@ -66,47 +89,29 @@ export class QuietColorPicker extends QuietElement {
   /** The color picker's value. */
   @property() value = '';
 
-  /** A placeholder to show in the color picker when it's empty. */
-  @property() placeholder: string;
+  /** The format to use for the value. */
+  @property() format: 'hex' | 'rgb' | 'hsl' = 'hex';
 
   /** Disables the color picker. */
   @property({ type: Boolean }) disabled = false;
 
-  /** Makes the color picker a read-only field. */
-  @property({ type: Boolean }) readonly = false;
-
-  /** Adds a clear button to the color picker when it's not empty. */
-  @property({ type: Boolean }) clearable = false;
-
-  /** The type of color picker to render. */
-  @property({ reflect: true }) appearance: 'normal' | 'filled' | 'unstyled' = 'normal';
-
-  /** The color picker's size. */
-  @property({ reflect: true }) size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' = 'md';
-
-  /** Draws the color picker in a pill shape. */
-  @property({ type: Boolean, reflect: true }) pill = false;
-
   /**
-   * Makes the color picker required. Form submission will not be allowed when this is set and the color picker is
-   * empty.
+   * One or more space-delimited hex colors or CSS color names (e.g. lightblue) to show as preset swatches below the
+   * color picker.
    */
-  @property({ type: Boolean, reflect: true }) required = false;
-
-  /** A regular expression the value should match to be considered valid. */
-  @property() pattern: string;
+  @property() swatches = '';
 
   /**
-   * You can provide a custom error message to force the color picker to be invalid. To clear the error, set this to an
+   * You can provide a custom error message to force the text field to be invalid. To clear the error, set this to an
    * empty string.
    */
   @property({ attribute: 'custom-validity' }) customValidity = '';
 
-  /** Tells the browser to focus the color picker when the page loads or a dialog is shown. */
-  @property({ type: Boolean }) autofocus: boolean;
+  /** Enables the opacity slider. */
+  @property({ attribute: 'with-opacity', type: Boolean, reflect: true }) withOpacity = false;
 
-  /** Sets the enter key label on virtual keyboards. */
-  @property() enterkeyhint: 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send';
+  /** Shows a preview of the selected color that will copy the current color when clicked. */
+  @property({ attribute: 'with-preview', type: Boolean, reflect: true }) withPreview = false;
 
   connectedCallback() {
     super.connectedCallback();
@@ -118,28 +123,38 @@ export class QuietColorPicker extends QuietElement {
     this.removeEventListener('invalid', this.handleHostInvalid);
   }
 
+  firstUpdated() {
+    this.setColor(this.value);
+  }
+
   updated(changedProps: Map<string, unknown>) {
     // Always be updating
     this.updateValidity();
 
-    // Handle value
-    if (changedProps.has('value')) {
-      this.customStates.set('empty', this.value === '');
+    // Value
+    if (changedProps.has('value') && !this.isDragging && !this.wasValueSetInternally) {
+      this.setColor(this.value);
+      this.internals.setFormValue(this.value);
     }
 
-    // Handle disabled
-    if (changedProps.has('disabled')) {
-      this.customStates.set('disabled', this.disabled);
+    // Opacity
+    if (changedProps.has('withOpacity') && !this.withOpacity) {
+      this.a = 1;
     }
 
-    // Handle user interactions. When the form control's value has changed and lost focus (e.g. change event), we can
-    // show user-valid and user-invalid states. We also show it if the form has been submitted.
-    if (this.wasChanged || this.wasSubmitted) {
-      this.customStates.set('user-invalid', this.isInvalid);
-      this.customStates.set('user-valid', !this.isInvalid);
-    } else {
-      this.customStates.set('user-invalid', false);
-      this.customStates.set('user-valid', false);
+    // Format
+    if (changedProps.has('format')) {
+      this.updateValue();
+    }
+
+    // Update the formatted value when HSVA changes
+    if (changedProps.has('h') || changedProps.has('s') || changedProps.has('v') || changedProps.has('a')) {
+      this.updateValue();
+    }
+
+    // Update the color area thumb when switching directions
+    if (changedProps.has('dir')) {
+      this.updateColorSliderThumbPosition();
     }
   }
 
@@ -161,62 +176,113 @@ export class QuietColorPicker extends QuietElement {
     this.value = this.getAttribute('value') ?? '';
   }
 
+  private formatHue(value: number) {
+    return this.localize.number(value.toFixed(0), { style: 'unit', unit: 'degree', unitDisplay: 'narrow' });
+  }
+
+  private formatOpacity(value: number) {
+    return this.localize.number(value, { style: 'percent' });
+  }
+
+  // @ts-expect-error - hush
   private handleBlur() {
     this.customStates.set('focused', false);
     this.dispatchEvent(new QuietBlurEvent());
   }
 
-  private handleVisualBoxPointerDown(event: PointerEvent) {
-    const target = event.target as HTMLElement;
-    const isBox = target?.id === 'visual-box';
-    const isSlot = target.hasAttribute('slot');
-
-    if (isBox || isSlot) {
-      event.preventDefault();
-      this.textBox.focus();
-    }
-  }
-
-  private handleChange(event: Event) {
-    this.wasChanged = true;
-    this.dispatchEvent(new QuietChangeEvent());
-    this.relayNativeEvent(event);
-  }
-
-  private handleClearClick() {
-    this.value = '';
-    this.textBox.focus();
-    this.dispatchEvent(new QuietInputEvent());
-  }
-
-  private handleEyeDropperClick() {
-    if (!isEyeDropperSupported) {
-      return;
-    }
-
-    const eyeDropper = new EyeDropper();
-
-    eyeDropper
-      .open()
-      .then(colorSelectionResult => {
-        this.setColor(colorSelectionResult.sRGBHex, {
-          withEvents: true
-        });
-      })
-      .catch(() => {
-        /* cancelled by user */
-      });
-  }
-
+  // @ts-expect-error - hush
   private handleFocus() {
     this.customStates.set('focused', true);
     this.dispatchEvent(new QuietFocusEvent());
   }
 
-  private handleTextBoxButtonPointerDown(event: PointerEvent) {
-    // Prevent the number field from losing focus when text box buttons are activated
-    event.preventDefault();
+  handleColorSliderBlur() {
+    this.isChangingS = false;
+    this.isChangingV = false;
   }
+
+  handleColorSliderThumbKeyDown(event: KeyboardEvent) {
+    const isRtl = this.localize.dir() === 'rtl';
+
+    // Adjust saturation
+    if (['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown'].includes(event.key)) {
+      let increment = 0;
+      if (event.key === 'ArrowUp') increment = 0.01;
+      if (event.key === 'ArrowDown') increment = -0.01;
+      if (event.key === 'PageUp') increment = 0.1;
+      if (event.key === 'PageDown') increment = -0.1;
+
+      event.preventDefault();
+
+      this.v = clamp(this.v + increment, 0, 1);
+      this.isChangingV = true;
+      this.isChangingS = false;
+      this.updateColorSliderThumbPosition();
+    }
+
+    // Adjust brightness
+    if (['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) {
+      let increment = 0;
+      if (event.key === 'ArrowLeft') increment = -0.01;
+      if (event.key === 'ArrowRight') increment = 0.01;
+      if (event.key === 'Home') increment = -0.1;
+      if (event.key === 'End') increment = 0.1;
+      if (isRtl) increment *= -1;
+
+      event.preventDefault();
+
+      this.s = clamp(this.s + increment, 0, 1);
+      this.isChangingS = true;
+      this.isChangingV = false;
+      this.updateColorSliderThumbPosition();
+    }
+  }
+
+  private handleDragStart(event: PointerEvent | TouchEvent) {
+    const x = event instanceof PointerEvent ? event.clientX : event.touches[0].clientX;
+    const y = event instanceof PointerEvent ? event.clientY : event.touches[0].clientY;
+
+    if (this.disabled) return;
+
+    document.addEventListener('pointermove', this.handleDragMove);
+    document.addEventListener('pointerup', this.handleDragStop);
+    document.addEventListener('touchmove', this.handleDragMove);
+    document.addEventListener('touchend', this.handleDragStop);
+
+    event.preventDefault();
+
+    // Cache coords when dragging starts to avoid calling it on every move
+    this.colorSliderBoundingClientRect = this.colorSlider.getBoundingClientRect();
+    this.isDragging = true;
+    this.valueWhenDraggingStarted = this.value;
+    this.setColorFromCoordinates(x, y);
+  }
+
+  private handleDragMove = (event: PointerEvent | TouchEvent) => {
+    const x = event instanceof PointerEvent ? event.clientX : event.touches[0].clientX;
+    const y = event instanceof PointerEvent ? event.clientY : event.touches[0].clientY;
+
+    event.preventDefault();
+
+    this.setColorFromCoordinates(x, y);
+  };
+
+  private handleDragStop = (event: PointerEvent | TouchEvent) => {
+    document.removeEventListener('pointermove', this.handleDragMove);
+    document.removeEventListener('pointerup', this.handleDragStop);
+    document.removeEventListener('touchmove', this.handleDragMove);
+    document.removeEventListener('touchend', this.handleDragStop);
+
+    // Dispatch change events when dragging stops
+    if (this.value !== this.valueWhenDraggingStarted) {
+      this.dispatchEvent(new QuietChangeEvent());
+      this.dispatchEvent(new Event('change'));
+    }
+
+    event.preventDefault();
+    this.isDragging = false;
+    this.valueWhenDraggingStarted = undefined;
+  };
 
   private handleHostInvalid() {
     //
@@ -228,82 +294,124 @@ export class QuietColorPicker extends QuietElement {
     this.wasSubmitted = true;
   }
 
-  private handleInput(event: InputEvent) {
-    this.value = this.textBox.value;
-    this.internals.setFormValue(this.value);
-    this.dispatchEvent(new QuietInputEvent());
-    this.relayNativeEvent(event);
+  private handleHueSliderInput(event: QuietInputEvent) {
+    this.h = (event.target as QuietSlider).value;
   }
 
-  private handleKeyDown(event: KeyboardEvent) {
-    // When enter is pressed in a color picker, the associated form should submit
-    if (event.key === 'Enter' && this.associatedForm) {
-      const submitter = [...this.associatedForm.elements].find((el: HTMLInputElement | HTMLButtonElement) => {
-        // The first submit button associated with the form will be the submitter. At this time, only native buttons
-        // can be submitters (see https://github.com/WICG/webcomponents/issues/814)
-        return ['button', 'input'].includes(el.localName) && el.type === 'submit';
-      }) as HTMLElement;
-
-      this.associatedForm.requestSubmit(submitter);
-    }
+  private handleLabelClick() {
+    this.colorSliderThumb.focus();
   }
 
-  private setColor(color: string, options: Partial<SetColorOptions>) {
-    const opts: SetColorOptions = {
-      withEvents: false,
-      ...options
-    };
-    const oldValue = this.value;
+  private handleOpacitySliderInput(event: QuietInputEvent) {
+    this.a = (event.target as QuietSlider).value;
+  }
 
-    console.log(opts);
+  private async handleSwatchClick(color: string) {
+    if (this.disabled) return;
 
-    //
-    // TODO - parse color here
-    //
     this.value = color;
+    await this.updateComplete;
 
-    if (this.value !== oldValue) {
-      this.dispatchEvent(new QuietChangeEvent());
-      this.dispatchEvent(new QuietInputEvent());
+    this.dispatchEvent(new QuietInputEvent());
+    this.dispatchEvent(new Event('input'));
+    this.dispatchEvent(new QuietChangeEvent());
+    this.dispatchEvent(new Event('change'));
+  }
 
-      // Dispatch native change/input events for better framework binding support
-      this.dispatchEvent(new InputEvent('input'));
-      this.dispatchEvent(new Event('change'));
+  /** Call this when this.h, this.s, this.v, or this.a updates to set the value in the correct format. */
+  private async updateValue() {
+    const color = new TinyColor({ h: this.h, s: this.s, v: this.v, a: this.a });
 
-      this.wasChanged = true;
+    this.wasValueSetInternally = true;
+
+    switch (this.format) {
+      case 'rgb':
+        this.value = color.toRgbString();
+        break;
+      case 'hsl':
+        this.value = color.toHslString();
+        break;
+      default:
+        this.value = this.withOpacity ? color.toHex8String() : color.toHexString();
+        break;
     }
+
+    await this.updateComplete;
+
+    this.wasValueSetInternally = false;
+  }
+
+  /**
+   * Parses an arbitrary color and sets the current color. Returns a promise that resolves after the component updates.
+   */
+  private async setColor(color: string) {
+    const newColor = new TinyColor(color);
+    const hsv = newColor.toHsv();
+
+    this.h = hsv.h;
+    this.s = hsv.s;
+    this.v = hsv.v;
+    this.a = hsv.a;
+    this.updateColorSliderThumbPosition();
+
+    return this.updateComplete;
+  }
+
+  private async setColorFromCoordinates(x: number, y: number) {
+    const isRtl = this.localize.dir() === 'rtl';
+    const oldValue = this.value;
+    const { top, left, height, width } = this.colorSliderBoundingClientRect;
+    const relativeXPercent = isRtl ? clamp(1 - (x - left) / width, 0, 1) : clamp((x - left) / width, 0, 1);
+    const relativeYPercent = clamp((y - top) / height, 0, 1);
+
+    this.s = relativeXPercent;
+    this.v = 1 - relativeYPercent;
+    this.updateColorSliderThumbPosition();
+
+    // Dispatch input events when dragging, but only when the value changes
+    if (this.value !== oldValue) {
+      await this.updateComplete;
+      this.dispatchEvent(new QuietInputEvent());
+      this.dispatchEvent(new InputEvent('input'));
+    }
+  }
+
+  private updateColorSliderThumbPosition() {
+    const isRtl = this.localize.dir() === 'rtl';
+    this.colorSliderThumbX = isRtl ? (1 - this.s) * 100 : this.s * 100;
+    this.colorSliderThumbY = (1 - this.v) * 100;
   }
 
   /** Sets the form control's validity */
   private async updateValidity() {
     await this.updateComplete;
     const hasCustomValidity = this.customValidity?.length > 0;
-    const validationMessage = hasCustomValidity ? this.customValidity : this.textBox.validationMessage;
+    const validationMessage = hasCustomValidity ? this.customValidity : '';
     const flags: ValidityStateFlags = {
-      badInput: this.textBox.validity.tooShort,
+      badInput: false,
       customError: hasCustomValidity,
-      patternMismatch: this.textBox.validity.patternMismatch,
-      rangeOverflow: this.textBox.validity.rangeOverflow,
-      rangeUnderflow: this.textBox.validity.rangeUnderflow,
-      stepMismatch: this.textBox.validity.stepMismatch,
-      tooLong: this.textBox.validity.tooLong,
-      tooShort: this.textBox.validity.tooShort,
-      typeMismatch: this.textBox.validity.typeMismatch,
-      valueMissing: this.textBox.validity.valueMissing
+      patternMismatch: false,
+      rangeOverflow: false,
+      rangeUnderflow: false,
+      stepMismatch: false,
+      tooLong: false,
+      tooShort: false,
+      typeMismatch: false,
+      valueMissing: false
     };
 
-    this.isInvalid = hasCustomValidity ? true : !this.textBox.validity.valid;
-    this.internals.setValidity(flags, validationMessage, this.textBox);
+    this.isInvalid = hasCustomValidity;
+    this.internals.setValidity(flags, validationMessage, this.colorSliderThumb);
   }
 
-  /** Sets focus to the color picker. */
+  /** Sets focus to the text field. */
   public focus() {
-    this.textBox.focus();
+    this.colorSliderThumb.focus();
   }
 
-  /** Removes focus from the color picker. */
+  /** Removes focus from the text field. */
   public blur() {
-    this.textBox.blur();
+    this.colorSliderThumb.blur();
   }
 
   /**
@@ -323,56 +431,29 @@ export class QuietColorPicker extends QuietElement {
     return this.internals.reportValidity();
   }
 
-  /** Selects all text in the color picker. */
-  public select() {
-    this.textBox.select();
-  }
-
-  /** Sets the start and end positions of the current text selection in the color picker. */
-  public setSelectionRange(start: number, end: number, direction: 'forward' | 'backward' | 'none' = 'none') {
-    this.textBox.setSelectionRange(start, end, direction);
-  }
-
-  /** Replaces a range of text in the color picker with a new string. */
-  public setRangeText(
-    replacement: string,
-    start?: number,
-    end?: number,
-    selectMode?: 'select' | 'start' | 'end' | 'preserve'
-  ) {
-    this.textBox.setRangeText(
-      replacement,
-      start ?? this.textBox.selectionStart!,
-      end ?? this.textBox.selectionEnd!,
-      selectMode
-    );
-    this.value = this.textBox.value;
-  }
-
-  /** For types that support a picker, such as color and date selectors, this will cause the picker to show. */
-  public showPicker() {
-    this.textBox.showPicker();
-  }
-
-  /**
-   * When a supported `type` is used, this method will decrease the color picker's value by `step`. This is a programmatic
-   * change, so `input` and `change` events will not be emitted when this is called.
-   */
-  public stepDown() {
-    this.textBox.stepDown();
-  }
-
-  /**
-   * When a supported `type` is used, this method will increase the color picker's value by `step`. This is a programmatic
-   * change, so `input` and `change` events will not be emitted when this is called.
-   */
-  public stepUp() {
-    this.textBox.stepUp();
-  }
-
   render() {
+    const isRtl = this.localize.dir() === 'rtl';
+    const color = new TinyColor({ h: this.h, s: this.s, v: this.v, a: this.a });
+    const colorWithoutOpacity = new TinyColor({ h: this.h, s: this.s, v: this.v, a: 1 });
+    const colorSliderBackground = new TinyColor({ h: this.h, s: 1, v: 1, a: 1 }).toHexString();
+    const hueThumbColor = new TinyColor({ h: this.h, s: 1, v: 1, a: 1 }).toHexString();
+    const opacityThumbColor = `color-mix(in oklab, var(--quiet-silent), ${color.toHexString()} ${this.a * 100}%);`;
+    const colorSliderThumbBackground = new TinyColor({ h: this.h, s: this.s, v: this.v, a: 100 }).toHexString();
+    const swatches = this.swatches.split(' ').filter(val => val.trim() !== '');
+    const luminosityText = this.localize.term('percentLuminosity', this.localize.number(this.v, { style: 'percent' }));
+    const saturationText = this.localize.term('percentSaturation', this.localize.number(this.s, { style: 'percent' }));
+    let valueText = '';
+
+    if (this.isChangingV) {
+      valueText = luminosityText;
+    } else if (this.isChangingS) {
+      valueText = saturationText;
+    } else {
+      valueText = `${luminosityText}, ${saturationText}`;
+    }
+
     return html`
-      <label id="label" part="label" for="text-box">
+      <label id="label" part="label" for="color-slider-thumb" @click=${this.handleLabelClick}>
         <slot name="label">${this.label}</slot>
       </label>
 
@@ -381,88 +462,99 @@ export class QuietColorPicker extends QuietElement {
       </div>
 
       <div
-        id="visual-box"
-        part="visual-box"
+        id="picker"
         class=${classMap({
-          // Appearances
-          normal: this.appearance === 'normal',
-          filled: this.appearance === 'filled',
-          unstyled: this.appearance === 'unstyled',
-          // Sizes
-          xs: this.size === 'xs',
-          sm: this.size === 'sm',
-          md: this.size === 'md',
-          lg: this.size === 'lg',
-          xl: this.size === 'xl',
-          // Modifiers
-          pill: this.pill,
-          // States
           disabled: this.disabled
         })}
-        @pointerdown=${this.handleVisualBoxPointerDown}
+        style="
+          --current-color: ${color.toHex8String()};
+          --current-color-without-opacity: ${colorWithoutOpacity.toHexString()};
+          --hue-thumb-color: ${hueThumbColor};
+          --opacity-thumb-color: ${opacityThumbColor};
+        "
       >
-        <span id="color-preview" class="transparent-bg" style="--color: "></span>
+        <div
+          id="color-slider"
+          style="background-color: ${colorSliderBackground};"
+          @pointerdown=${this.handleDragStart}
+          @touchstart=${this.handleDragStart}
+        >
+          <span
+            id="color-slider-thumb"
+            style="
+              top: ${this.colorSliderThumbY}%;
+              left: ${this.colorSliderThumbX}%;
+              background-color: ${colorSliderThumbBackground};
+            "
+            tabindex="${this.disabled ? '-1' : '0'}"
+            role="slider"
+            aria-roledescription="2d slider"
+            aria-labelledby="label"
+            aria-describedby="description"
+            aria-valuenow="0"
+            aria-valuetext="${valueText}"
+            @blur=${this.handleColorSliderBlur}
+            @keydown=${this.handleColorSliderThumbKeyDown}
+          ></span>
+        </div>
 
-        <input
-          id="text-box"
-          part="text-box"
-          type="text"
-          ?autofocus=${this.autofocus}
-          ?disabled=${this.disabled}
-          ?readonly=${this.readonly}
-          ?required=${this.required}
-          placeholder=${ifDefined(this.placeholder)}
-          pattern=${ifDefined(this.pattern)}
-          .value=${live(this.value) /* live() is required for proper validation */}
-          autocapitalize="off"
-          autocomplete="off"
-          autocorrect="off"
-          spellcheck="false"
-          enterkeyhint=${ifDefined(this.enterkeyhint)}
-          inputmode="text"
-          aria-describedby="description"
-          aria-invalid=${this.isInvalid ? 'true' : 'false'}
-          @change=${this.handleChange}
-          @input=${this.handleInput}
-          @focus=${this.handleFocus}
-          @blur=${this.handleBlur}
-          @keydown=${this.handleKeyDown}
-        />
+        <div id="controls">
+          <div id="sliders">
+            <quiet-slider
+              dir=${isRtl ? 'rtl' : ' ltr'}
+              label="${this.localize.term('hue')}"
+              id="hue"
+              min="0"
+              max="359"
+              value=${this.h}
+              .valueFormatter=${this.formatHue}
+              ?disabled=${this.disabled}
+              @quiet-input=${this.handleHueSliderInput}
+            ></quiet-slider>
 
-        ${this.clearable && this.value?.length > 0 && !this.disabled && !this.readonly
+            ${this.withOpacity
+              ? html`
+                  <quiet-slider
+                    id="opacity"
+                    dir=${isRtl ? 'rtl' : ' ltr'}
+                    label=${this.localize.term('opacity')}
+                    min="0"
+                    max="1"
+                    step="0.01"
+                    value=${this.a}
+                    .valueFormatter=${this.formatOpacity}
+                    ?disabled=${this.disabled}
+                    @quiet-input=${this.handleOpacitySliderInput}
+                  ></quiet-slider>
+                `
+              : ''}
+          </div>
+
+          ${this.withPreview
+            ? html`
+                <quiet-copy id="copy-button" data=${this.value}>
+                  <button id="preview" aria-label="${this.localize.term('copyToClipboard')}"></button>
+                </quiet-copy>
+              `
+            : ''}
+        </div>
+
+        ${swatches.length > 0
           ? html`
-              <button
-                id="clear-button"
-                part="clear-button"
-                class="text-box-button"
-                type="button"
-                aria-label=${this.localize.term('clearEntry')}
-                tabindex="-1"
-                @pointerdown=${this.handleTextBoxButtonPointerDown}
-                @click=${this.handleClearClick}
-              >
-                <quiet-icon library="system" name="circle-x"></quiet-icon>
-              </button>
+              <div id="swatches">
+                ${swatches.map(swatch => {
+                  return html`
+                    <button
+                      aria-label="${swatch}"
+                      style="--swatch-color: ${swatch}"
+                      tabindex=${this.disabled ? '-1' : '0'}
+                      @click=${() => this.handleSwatchClick(swatch)}
+                    ></button>
+                  `;
+                })}
+              </div>
             `
           : ''}
-        ${isEyeDropperSupported && !this.disabled && !this.readonly
-          ? html`
-              <button
-                id="eye-dropper-button"
-                part="eye-dropper-button"
-                class="text-box-button"
-                type="button"
-                aria-label=${this.localize.term('selectAColorFromTheScreen')}
-                tabindex="-1"
-                @pointerdown=${this.handleTextBoxButtonPointerDown}
-                @click=${this.handleEyeDropperClick}
-              >
-                <quiet-icon library="system" name="color-picker"></quiet-icon>
-              </button>
-            `
-          : ''}
-
-        <slot name="end"></slot>
       </div>
     `;
   }
@@ -473,13 +565,3 @@ declare global {
     'quiet-color-picker': QuietColorPicker;
   }
 }
-
-interface EyeDropperConstructor {
-  new (): EyeDropperInterface;
-}
-
-interface EyeDropperInterface {
-  open: () => Promise<{ sRGBHex: string }>;
-}
-
-declare const EyeDropper: EyeDropperConstructor;

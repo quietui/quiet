@@ -465,21 +465,23 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
 <style>
   #slider__color,
   #slider__opacity {
-    --track-size: 1.25rem;
-    --thumb-width: 1.25em;
-    --thumb-height: 1.25em;
+    --track-size: 1.25em;
+    --thumb-width: 0.875em;
+    --thumb-height: 1.5em;
 
     &::part(track) {
       box-shadow: inset 0 0 0 0.0625em color-mix(in oklab, black, transparent 90%);
+      border-radius: var(--quiet-border-radius);
     }
 
     &::part(thumb) {
-      border: solid 0.0625em rgb(0 0 0 / 25%);
+      border: solid 0.0625em rgb(0 0 0 / 33%);
+      border-radius: 9999px;
       transition: 100ms scale ease;
     }
 
-    &:state(focused)::part(thumb),
-    &:state(dragging)::part(thumb) {
+    &:state(dragging)::part(thumb),
+    &::part(thumb):focus-visible {
       scale: 1.25;
     }
 
@@ -491,8 +493,8 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
       width: 100%;
       height: 100%;
       border-radius: inherit;
-      border: solid 0.1875em white;
-      box-shadow: inset 0 0 0 0.0625em rgb(0 0 0 / 25%);
+      border: solid 0.125em white;
+      box-shadow: inset 0 0 0 0.0625em rgb(0 0 0 / 33%);
     }
   }
 
@@ -522,15 +524,17 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
 
   #slider__opacity {
     &::part(track) {
-      background: var(--quiet-silent);
-      background-size: 1.25em 1.25em;
-      background-position: 0 0, 0 0, -0.625em -0.625em, 0.625em 0.625em;
-      background-image: 
-        linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%),
+      background-color: transparent;
+      background-size: 0.5em 0.5em;
+      background-position:
+        0 0,
+        0 0,
+        -0.25em -0.25em,
+        0.25em 0.25em;
+      background-image: linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%),
         linear-gradient(45deg, transparent 75%, var(--quiet-neutral-fill-soft) 75%),
         linear-gradient(45deg, transparent 75%, var(--quiet-neutral-fill-soft) 75%),
-        linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%);
-    }
+        linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%);    }
 
     &::part(indicator) {
       width: 100% !important;

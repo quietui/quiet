@@ -80,12 +80,6 @@ export class QuietPopover extends QuietElement {
   /** The distance of the popover from its anchor. */
   @property({ type: Number }) distance = 8;
 
-  /**
-   * By default, the popover automatically shows when the user clicks on the anchor. If you want to control the popover
-   * programmatically, set this to `manual`.
-   */
-  @property() activation: 'auto' | 'manual' = 'auto';
-
   firstUpdated() {
     // Make sure the host element has an id
     if (!this.id) {
@@ -115,9 +109,7 @@ export class QuietPopover extends QuietElement {
       this.anchor = this.for ? root.querySelector(`#${this.for}`) : null;
 
       if (this.anchor) {
-        if (this.activation === 'auto') {
-          this.anchor.addEventListener('click', this.handleAnchorClick);
-        }
+        this.anchor.addEventListener('click', this.handleAnchorClick);
 
         // Add aria-haspopup="dialog" to the corresponding button
         if (this.anchor.localName === 'quiet-button') {
@@ -200,10 +192,8 @@ export class QuietPopover extends QuietElement {
     this.customStates.set('open', true);
     this.open = true;
     openPopovers.add(this);
-    if (this.activation === 'auto') {
-      document.addEventListener('keydown', this.handleDocumentKeyDown);
-      document.addEventListener('click', this.handleDocumentClick);
-    }
+    document.addEventListener('keydown', this.handleDocumentKeyDown);
+    document.addEventListener('click', this.handleDocumentClick);
     this.dialog.classList.add('visible');
     this.cleanup = autoUpdate(this.anchor, this.dialog, () => this.reposition());
 

@@ -13,6 +13,27 @@ export default css`
     gap: 0.25em;
   }
 
+  /* Sizes */
+  :host([size='xs']) {
+    font-size: var(--quiet-form-control-font-size-xs);
+  }
+
+  :host([size='sm']) {
+    font-size: var(--quiet-form-control-font-size-sm);
+  }
+
+  :host([size='md']) {
+    font-size: var(--quiet-form-control-font-size-md);
+  }
+
+  :host([size='lg']) {
+    font-size: var(--quiet-form-control-font-size-lg);
+  }
+
+  :host([size='xl']) {
+    font-size: var(--quiet-form-control-font-size-xl);
+  }
+
   #label {
     display: inline-block;
     max-width: fit-content;
@@ -22,26 +43,6 @@ export default css`
     &:has(~ .disabled) {
       opacity: 0.5;
       cursor: not-allowed;
-    }
-
-    &:has(~ .xs) {
-      font-size: var(--quiet-form-control-font-size-xs);
-    }
-
-    &:has(~ .sm) {
-      font-size: var(--quiet-form-control-font-size-sm);
-    }
-
-    &:has(~ .md) {
-      font-size: var(--quiet-form-control-font-size-md);
-    }
-
-    &:has(~ .lg) {
-      font-size: var(--quiet-form-control-font-size-lg);
-    }
-
-    &:has(~ .xl) {
-      font-size: var(--quiet-form-control-font-size-xl);
     }
   }
 

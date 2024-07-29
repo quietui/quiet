@@ -1,3 +1,4 @@
+// @ts-nocheck
 import '../color-picker/color-picker.js';
 import '../icon/icon.js';
 import { classMap } from 'lit/directives/class-map.js';

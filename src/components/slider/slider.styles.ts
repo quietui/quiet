@@ -22,27 +22,6 @@ export default css`
   }
 
   #slider {
-    /* Sizes */
-    &.xs {
-      font-size: var(--quiet-form-control-font-size-xs);
-    }
-
-    &.sm {
-      font-size: var(--quiet-form-control-font-size-sm);
-    }
-
-    &.md {
-      font-size: var(--quiet-form-control-font-size-md);
-    }
-
-    &.lg {
-      font-size: var(--quiet-form-control-font-size-lg);
-    }
-
-    &.xl {
-      font-size: var(--quiet-form-control-font-size-xl);
-    }
-
     /* Orientation */
     &.horizontal {
       margin-block-start: 0.5em;

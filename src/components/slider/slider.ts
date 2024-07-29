@@ -237,7 +237,14 @@ export class QuietSlider extends QuietElement {
     const x = event instanceof PointerEvent ? event.clientX : event.touches[0].clientX;
     const y = event instanceof PointerEvent ? event.clientY : event.touches[0].clientY;
 
-    if (this.disabled || this.readonly) return;
+    if (
+      this.disabled ||
+      this.readonly ||
+      // Prevent right-clicks from triggering drags
+      (event instanceof PointerEvent && event.buttons > 1)
+    ) {
+      return;
+    }
 
     document.addEventListener('pointermove', this.handleDragMove);
     document.addEventListener('pointerup', this.handleDragStop);

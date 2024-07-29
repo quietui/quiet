@@ -133,26 +133,26 @@ export default css`
   /* Sizes */
   #dropzone.xs,
   #file-list.xs {
-    font-size: calc(var(--quiet-form-control-font-size-xs) * 0.875);
+    font-size: calc(var(--quiet-form-control-font-size-xs) * 0.8375);
   }
 
   #dropzone.sm,
   #file-list.sm {
-    font-size: calc(var(--quiet-form-control-font-size-sm) * 0.875);
+    font-size: calc(var(--quiet-form-control-font-size-sm) * 0.8375);
   }
 
   #dropzone.md,
   #file-list.md {
-    font-size: calc(var(--quiet-form-control-font-size-md) * 0.875);
+    font-size: calc(var(--quiet-form-control-font-size-md) * 0.8375);
   }
 
   #dropzone.lg,
   #file-list.lg {
-    font-size: calc(var(--quiet-form-control-font-size-lg) * 0.875);
+    font-size: calc(var(--quiet-form-control-font-size-lg) * 0.8375);
   }
 
   #dropzone.xl,
   #file-list.xl {
-    font-size: calc(var(--quiet-form-control-font-size-xl) * 0.875);
+    font-size: calc(var(--quiet-form-control-font-size-xl) * 0.8375);
   }
 `;

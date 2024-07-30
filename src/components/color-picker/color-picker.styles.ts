@@ -165,7 +165,7 @@ export default css`
       left: 0;
       background-color: var(--current-color);
       border-radius: inherit;
-      box-shadow: inset 0 0 0 1px color-mix(in oklab, black, transparent 90%);
+      box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--quiet-strident), transparent 90%);
     }
 
     &:focus {
@@ -204,7 +204,7 @@ export default css`
 
     &::part(track) {
       font-size: inherit;
-      box-shadow: inset 0 0 0 1px color-mix(in oklab, black, transparent 90%);
+      box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--quiet-strident), transparent 90%);
       border-radius: calc(var(--quiet-border-radius) * 0.75);
     }
 
@@ -341,7 +341,7 @@ export default css`
         height: 100%;
         background-color: var(--swatch-color);
         border-radius: inherit;
-        box-shadow: inset 0 0 0 1px color-mix(in oklab, black, transparent 90%);
+        box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--quiet-strident), transparent 90%);
       }
     }
   }

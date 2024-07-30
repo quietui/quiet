@@ -87,9 +87,9 @@ export class QuietColorPicker extends QuietElement {
   @state() private a = 1;
   @state() private colorSliderThumbX = 0;
   @state() private colorSliderThumbY = 0;
+  @state() private hasFocus = false;
   @state() private isChangingV = false;
   @state() private isChangingS = false;
-  @state() private isFocused = false;
   @state() private isInvalid = false;
   @state() private wasChanged = false;
   @state() private wasSubmitted = false;
@@ -134,9 +134,6 @@ export class QuietColorPicker extends QuietElement {
   /** Enables the opacity slider. */
   @property({ attribute: 'with-opacity', type: Boolean, reflect: true }) withOpacity = false;
 
-  /** Shows a preview of the selected color that will copy the current color when clicked. */
-  @property({ attribute: 'with-preview', type: Boolean, reflect: true }) withPreview = false;
-
   connectedCallback() {
     super.connectedCallback();
     this.addEventListener('invalid', this.handleHostInvalid);
@@ -152,8 +149,7 @@ export class QuietColorPicker extends QuietElement {
   }
 
   firstUpdated() {
-    this.updateValue();
-    this.setColor(this.value);
+    this.setColorFromString(this.value);
   }
 
   updated(changedProps: Map<string, unknown>) {
@@ -165,13 +161,13 @@ export class QuietColorPicker extends QuietElement {
       this.internals.setFormValue(this.value);
 
       if (!this.isDragging && !this.wasValueSetInternally) {
-        this.setColor(this.value);
+        this.setColorFromString(this.value);
       }
     }
 
-    // Handle opacity
-    if (changedProps.has('withOpacity') && !this.withOpacity) {
-      this.a = 1;
+    // Update the color area thumb when switching directions
+    if (changedProps.has('dir')) {
+      this.updateColorSliderThumbPosition();
     }
 
     // Handle disabled
@@ -180,13 +176,13 @@ export class QuietColorPicker extends QuietElement {
     }
 
     // Handle focused
-    if (changedProps.has('isFocused')) {
-      this.customStates.set('focused', this.isFocused);
+    if (changedProps.has('hasFocus')) {
+      this.customStates.set('focused', this.hasFocus);
     }
 
-    // Handle format changes
-    if (changedProps.has('format')) {
-      this.updateValue();
+    // Handle opacity
+    if (changedProps.has('withOpacity') && !this.withOpacity) {
+      this.a = 1;
     }
 
     // Handle user interactions. When the form control's value has changed and lost focus (e.g. change event), we can
@@ -199,14 +195,38 @@ export class QuietColorPicker extends QuietElement {
       this.customStates.set('user-valid', false);
     }
 
-    // Update the formatted value when HSVA changes
-    if (changedProps.has('h') || changedProps.has('s') || changedProps.has('v') || changedProps.has('a')) {
-      this.updateValue();
-    }
+    // Update the formatted value when HSVA, format, or value changes. This ensures the value is always in sync with
+    // HSVA and is in a valid format.
+    if (
+      changedProps.has('h') ||
+      changedProps.has('s') ||
+      changedProps.has('v') ||
+      changedProps.has('a') ||
+      changedProps.has('format') ||
+      changedProps.has('value')
+    ) {
+      const color = new TinyColor({ h: this.h, s: this.s, v: this.v, a: this.a });
 
-    // Update the color area thumb when switching directions
-    if (changedProps.has('dir')) {
+      // Update the color slider's thumb position
       this.updateColorSliderThumbPosition();
+
+      // We want to temporarily avoid triggering value changes when we set the value from within this block, otherwise
+      // it will cause subtle shifts in the color slider's thumb position due to conversion/rounding.
+      this.wasValueSetInternally = true;
+
+      switch (this.format) {
+        case 'rgb':
+          this.value = color.toRgbString();
+          break;
+        case 'hsl':
+          this.value = color.toHslString();
+          break;
+        default:
+          this.value = this.withOpacity ? color.toHex8String() : color.toHexString();
+          break;
+      }
+
+      this.updateComplete.then(() => (this.wasValueSetInternally = false));
     }
   }
 
@@ -258,8 +278,6 @@ export class QuietColorPicker extends QuietElement {
       this.v = clamp(this.v + increment, 0, 1);
       this.isChangingV = true;
       this.isChangingS = false;
-      this.updateColorSliderThumbPosition();
-      this.updateValue();
     }
 
     // Adjust brightness
@@ -276,7 +294,6 @@ export class QuietColorPicker extends QuietElement {
       this.s = clamp(this.s + increment, 0, 1);
       this.isChangingS = true;
       this.isChangingV = false;
-      this.updateColorSliderThumbPosition();
     }
 
     await this.updateComplete;
@@ -334,6 +351,7 @@ export class QuietColorPicker extends QuietElement {
 
     // Dispatch change events when dragging stops
     if (this.value !== this.valueWhenDraggingStarted) {
+      this.wasChanged = true;
       this.dispatchEvent(new QuietChangeEvent());
       this.dispatchEvent(new Event('change'));
     }
@@ -344,8 +362,8 @@ export class QuietColorPicker extends QuietElement {
   };
 
   private handleFocusIn = (event: Event) => {
-    if (!this.isFocused && event.target === event.currentTarget) {
-      this.isFocused = true;
+    if (!this.hasFocus && event.target === event.currentTarget) {
+      this.hasFocus = true;
       this.dispatchEvent(new QuietFocusEvent());
     }
   };
@@ -356,7 +374,7 @@ export class QuietColorPicker extends QuietElement {
       return;
     }
 
-    this.isFocused = false;
+    this.hasFocus = false;
     this.dispatchEvent(new QuietBlurEvent());
   };
 
@@ -372,9 +390,7 @@ export class QuietColorPicker extends QuietElement {
 
   private async handleHueSliderInput(event: QuietInputEvent) {
     event.stopImmediatePropagation();
-
     this.h = (event.target as QuietSlider).value;
-    this.wasChanged = true;
 
     await this.updateComplete;
 
@@ -383,6 +399,7 @@ export class QuietColorPicker extends QuietElement {
       this.dispatchEvent(new QuietInputEvent());
       this.dispatchEvent(new Event('input'));
     } else if (event.type === 'quiet-change') {
+      this.wasChanged = true;
       this.dispatchEvent(new QuietChangeEvent());
       this.dispatchEvent(new Event('change'));
     }
@@ -394,9 +411,7 @@ export class QuietColorPicker extends QuietElement {
 
   private async handleOpacitySliderInput(event: QuietInputEvent) {
     event.stopImmediatePropagation();
-
     this.a = (event.target as QuietSlider).value;
-    this.wasChanged = true;
 
     await this.updateComplete;
 
@@ -405,15 +420,17 @@ export class QuietColorPicker extends QuietElement {
       this.dispatchEvent(new QuietInputEvent());
       this.dispatchEvent(new Event('input'));
     } else if (event.type === 'quiet-change') {
+      this.wasChanged = true;
       this.dispatchEvent(new QuietChangeEvent());
       this.dispatchEvent(new Event('change'));
     }
   }
 
+  /** Sets the color when a swatch is clicked. */
   private async handleSwatchClick(color: string) {
     if (this.disabled) return;
 
-    this.setColor(color);
+    this.setColorFromString(color);
     this.wasChanged = true;
 
     await this.updateComplete;
@@ -425,35 +442,9 @@ export class QuietColorPicker extends QuietElement {
   }
 
   /**
-   * Call this when `this.h`, `this.s`, `this.v`, this.a, or `this.value` updates to set the value in the correct
-   * format. No events will be emitted when this function is called.
+   * Parses an arbitrary color string and sets the corresponding HSVA values.
    */
-  private async updateValue() {
-    const color = new TinyColor({ h: this.h, s: this.s, v: this.v, a: this.a });
-
-    this.wasValueSetInternally = true;
-
-    switch (this.format) {
-      case 'rgb':
-        this.value = color.toRgbString();
-        break;
-      case 'hsl':
-        this.value = color.toHslString();
-        break;
-      default:
-        this.value = this.withOpacity ? color.toHex8String() : color.toHexString();
-        break;
-    }
-
-    await this.updateComplete;
-
-    this.wasValueSetInternally = false;
-  }
-
-  /**
-   * Parses an arbitrary color and sets the current color. Returns a promise that resolves after the component updates.
-   */
-  private async setColor(color: string) {
+  private setColorFromString(color: string) {
     const newColor = new TinyColor(color);
     const hsv = newColor.toHsv();
 
@@ -461,11 +452,9 @@ export class QuietColorPicker extends QuietElement {
     this.s = hsv.s;
     this.v = hsv.v;
     this.a = hsv.a;
-    this.updateColorSliderThumbPosition();
-
-    return this.updateComplete;
   }
 
+  /** Sets the S and V value based on the pointer's x and y coordinates. */
   private async setColorFromCoordinates(x: number, y: number) {
     const isRtl = this.localize.dir() === 'rtl';
     const oldValue = this.value;
@@ -475,8 +464,6 @@ export class QuietColorPicker extends QuietElement {
 
     this.s = relativeXPercent;
     this.v = 1 - relativeYPercent;
-    this.wasChanged = true;
-    this.updateColorSliderThumbPosition();
 
     await this.updateComplete;
 
@@ -491,6 +478,7 @@ export class QuietColorPicker extends QuietElement {
     event.stopImmediatePropagation();
   }
 
+  /** Updates the color slider's thumb position based on S and V. */
   private updateColorSliderThumbPosition() {
     const isRtl = this.localize.dir() === 'rtl';
     this.colorSliderThumbX = isRtl ? (1 - this.s) * 100 : this.s * 100;
@@ -565,17 +553,18 @@ export class QuietColorPicker extends QuietElement {
 
   render() {
     const isRtl = this.localize.dir() === 'rtl';
-    const color = new TinyColor({ h: this.h, s: this.s, v: this.v, a: this.a });
+    const currentColor = new TinyColor({ h: this.h, s: this.s, v: this.v, a: this.a });
     const colorWithoutOpacity = new TinyColor({ h: this.h, s: this.s, v: this.v, a: 1 });
-    const colorSliderBackground = new TinyColor({ h: this.h, s: 1, v: 1, a: 1 }).toHexString();
-    const hueThumbColor = new TinyColor({ h: this.h, s: 1, v: 1, a: 1 }).toHexString();
-    const opacityThumbColor = `color-mix(in oklab, var(--quiet-silent), ${color.toHexString()} ${this.a * 100}%);`;
-    const colorSliderThumbBackground = new TinyColor({ h: this.h, s: this.s, v: this.v, a: 100 }).toHexString();
+    const hueColor = new TinyColor({ h: this.h, s: 1, v: 1, a: 1 });
+    const opacityColor = `color-mix(in oklab, var(--quiet-silent), ${currentColor.toHexString()} ${this.a * 100}%);`;
     const swatches = this.swatches.split(' ').filter(val => val.trim() !== '');
     const luminosityText = this.localize.term('percentLuminosity', this.localize.number(this.v, { style: 'percent' }));
     const saturationText = this.localize.term('percentSaturation', this.localize.number(this.s, { style: 'percent' }));
     let valueText = '';
 
+    // We need to set aria-valuetext dynamically on the 2d slider based on which value is being changed. By default, it
+    // reads both luminosity and saturation levels. However, when you're changing one axis at a time with the keyboard,
+    // we only want it to read that axis. On focus out, it will revert to the default.
     if (this.isChangingV) {
       valueText = luminosityText;
     } else if (this.isChangingS) {
@@ -607,16 +596,16 @@ export class QuietColorPicker extends QuietElement {
           disabled: this.disabled
         })}
         style="
-          --current-color: ${color.toHex8String()};
+          --current-color: ${currentColor.toHex8String()};
           --current-color-without-opacity: ${colorWithoutOpacity.toHexString()};
-          --hue-thumb-color: ${hueThumbColor};
-          --opacity-thumb-color: ${opacityThumbColor};
+          --hue-thumb-color: ${hueColor.toHexString()};
+          --opacity-thumb-color: ${opacityColor};
         "
       >
         <div
           id="color-slider"
           part="color-slider"
-          style="background-color: ${colorSliderBackground};"
+          style="background-color: ${hueColor.toHexString()};"
           @pointerdown=${this.handleDragStart}
           @touchstart=${this.handleDragStart}
         >
@@ -626,7 +615,7 @@ export class QuietColorPicker extends QuietElement {
             style="
               top: ${this.colorSliderThumbY}%;
               left: ${this.colorSliderThumbX}%;
-              background-color: ${colorSliderThumbBackground};
+              background-color: ${colorWithoutOpacity.toHexString()};
             "
             tabindex="${this.disabled ? '-1' : '0'}"
             role="slider"
@@ -696,13 +685,14 @@ export class QuietColorPicker extends QuietElement {
               : ''}
           </div>
 
-          ${this.withPreview
-            ? html`
-                <quiet-copy id="copy-button" data=${this.value}>
-                  <button id="preview" part="preview" aria-label="${this.localize.term('copyToClipboard')}"></button>
-                </quiet-copy>
-              `
-            : ''}
+          <quiet-copy id="copy-button" data=${this.value}>
+            <button
+              id="preview"
+              part="preview"
+              ?disabled=${this.disabled}
+              aria-label="${this.localize.term('copyToClipboard')}"
+            ></button>
+          </quiet-copy>
         </div>
 
         ${swatches.length > 0

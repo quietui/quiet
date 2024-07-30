@@ -3,7 +3,7 @@ import { css } from 'lit';
 export default css`
   :host {
     display: flex;
-    width: 18em;
+    max-width: 100%;
   }
 
   :host([size='xs']) {
@@ -75,9 +75,10 @@ export default css`
     position: absolute;
     width: 1.25em;
     height: 1.25em;
+    translate: calc(1.25em / -2) calc(1.25em / -2);
     border: solid 0.0625rem rgb(0 0 0 / 33%);
     border-radius: 50%;
-    translate: calc(1.25em / -2) calc(1.25em / -2);
+    transition: 100ms scale ease;
 
     &::after {
       content: '';
@@ -88,7 +89,8 @@ export default css`
       height: 100%;
       border-radius: inherit;
       border: solid max(0.125em, 1px) white;
-      box-shadow: inset 0 0 0 1px rgb(0 0 0 / 33%);
+      box-shadow: inset 0 0 0 0.0625rem rgb(0 0 0 / 33%);
+      transition: 100ms scale ease;
     }
 
     &:focus-visible {
@@ -97,9 +99,17 @@ export default css`
     }
   }
 
+  :host(:not([disabled])) #color-slider:active #color-slider-thumb {
+    scale: 1.5;
+
+    &::after {
+      border-width: 0.09375em;
+    }
+  }
+
   #controls {
     display: flex;
-    gap: 0.25em;
+    gap: 0.75em;
     align-items: center;
   }
 
@@ -109,15 +119,10 @@ export default css`
     flex-direction: column;
     gap: 1em;
     justify-content: center;
+    margin-inline-end: 0.5em;
 
     &::part(slider) {
       border-radius: 0;
-    }
-  }
-
-  :host([with-preview]) {
-    #sliders {
-      margin-inline-end: 0.5em;
     }
   }
 
@@ -147,6 +152,10 @@ export default css`
     padding: 0;
     margin: 0;
 
+    &:disabled {
+      cursor: not-allowed;
+    }
+
     &::after {
       content: '';
       position: absolute;
@@ -172,11 +181,10 @@ export default css`
   /* Hue and opacity sliders */
   #hue,
   #opacity {
-    font-size: inherit;
-
     --track-size: 1em;
     --thumb-width: 1.25em;
     --thumb-height: 1.25em;
+    font-size: inherit;
 
     /* Visually hidden */
     &::part(label),

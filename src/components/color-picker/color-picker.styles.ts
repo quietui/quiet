@@ -100,7 +100,7 @@ export default css`
   }
 
   :host(:not([disabled])) #color-slider:active #color-slider-thumb {
-    scale: 1.5;
+    scale: 1.4;
 
     &::after {
       border-width: 0.09375em;
@@ -109,7 +109,7 @@ export default css`
 
   #controls {
     display: flex;
-    gap: 0.75em;
+    gap: 0.5em;
     align-items: center;
   }
 
@@ -126,59 +126,6 @@ export default css`
     }
   }
 
-  quiet-copy {
-    display: flex;
-  }
-
-  #preview {
-    position: relative;
-    width: 2.75em;
-    height: 2.75em;
-    font-size: inherit;
-    border: none;
-    border-radius: 50%;
-    background-color: transparent;
-    background-size: 0.5em 0.5em;
-    background-position:
-      0 0,
-      0 0,
-      -0.25em -0.25em,
-      0.25em 0.25em;
-    background-image: linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%),
-      linear-gradient(45deg, transparent 75%, var(--quiet-neutral-fill-soft) 75%),
-      linear-gradient(45deg, transparent 75%, var(--quiet-neutral-fill-soft) 75%),
-      linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%);
-    cursor: copy;
-    padding: 0;
-    margin: 0;
-
-    &:disabled {
-      cursor: not-allowed;
-    }
-
-    &::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      background-color: var(--current-color);
-      border-radius: inherit;
-      box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--quiet-strident), transparent 90%);
-    }
-
-    &:focus {
-      outline: none;
-    }
-
-    &:focus-visible {
-      outline: var(--quiet-focus-ring);
-      outline-offset: var(--quiet-focus-offset);
-    }
-  }
-
-  /* Hue and opacity sliders */
   #hue,
   #opacity {
     --track-size: 1em;
@@ -292,6 +239,67 @@ export default css`
 
     &::part(thumb) {
       background-color: var(--opacity-thumb-color);
+    }
+  }
+
+  /* Eye dropper button */
+  #eye-dropper::part(button) {
+    font-size: inherit;
+    min-height: 2.75em;
+    border-radius: 50%;
+  }
+
+  /* Preview/copy button */
+  #copy-button {
+    display: flex;
+  }
+
+  #preview-button {
+    &::part(button) {
+      position: relative;
+      min-height: 0;
+      height: 2.75em;
+      width: 2.75em;
+      font-size: inherit;
+      border: none;
+      border-radius: 50%;
+      background-color: transparent;
+      background-size: 0.5em 0.5em;
+      background-position:
+        0 0,
+        0 0,
+        -0.25em -0.25em,
+        0.25em 0.25em;
+      background-image: linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, var(--quiet-neutral-fill-soft) 75%),
+        linear-gradient(45deg, transparent 75%, var(--quiet-neutral-fill-soft) 75%),
+        linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%);
+      cursor: copy;
+    }
+
+    &::part(button)::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: var(--current-color);
+      border-radius: inherit;
+      box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--quiet-strident), transparent 90%);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-visible {
+      outline: var(--quiet-focus-ring);
+      outline-offset: var(--quiet-focus-offset);
     }
   }
 

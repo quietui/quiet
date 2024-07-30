@@ -30,5 +30,6 @@ export interface Translation extends DefaultTranslation {
   percentSaturation: (percentage: string) => string;
   loading: string;
   remove: string;
+  selectAColorFromTheScreen: string;
   showPassword: string;
 }

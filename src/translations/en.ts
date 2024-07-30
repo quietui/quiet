@@ -21,6 +21,7 @@ const translation: Translation = {
   percentLuminosity: (percentage: string) => `${percentage} luminosity`,
   percentSaturation: (percentage: string) => `${percentage} saturation`,
   remove: 'Remove',
+  selectAColorFromTheScreen: 'Select a color from the screen',
   showPassword: 'Show password'
 };
 

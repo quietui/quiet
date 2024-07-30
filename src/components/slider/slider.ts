@@ -577,7 +577,11 @@ export class QuietSlider extends QuietElement {
             <quiet-tooltip
               id="tooltip"
               part="tooltip"
-              exportparts="tooltip:tooltip__tooltip, content:tooltip__content, arrow:tooltip__arrow"
+              exportparts="
+                tooltip:tooltip__tooltip,
+                content:tooltip__content,
+                arrow:tooltip__arrow
+              "
               distance=${this.tooltipDistance}
               placement=${this.tooltipPlacement}
               for="thumb"

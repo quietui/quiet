@@ -22,6 +22,7 @@ const translation: Translation = {
   percentLuminosity: (percentage: string) => `${percentage} luminosidad`,
   percentSaturation: (percentage: string) => `${percentage} de saturación`,
   remove: 'Remover',
+  selectAColorFromTheScreen: 'Seleccione un color de la pantalla',
   showPassword: 'Mostrar contraseña'
   /* cSpell:enable */
 };

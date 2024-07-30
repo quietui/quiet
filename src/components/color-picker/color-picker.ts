@@ -1,3 +1,4 @@
+import '../button/button.js';
 import '../copy/copy.js';
 import '../slider/slider.js';
 import { clamp } from '../../utilities/math.js';
@@ -14,6 +15,8 @@ import styles from './color-picker.styles.js';
 import type { CSSResultGroup } from 'lit';
 import type { QuietSlider } from '../slider/slider.js';
 
+const hasEyeDropper = 'EyeDropper' in window;
+
 /**
  * <quiet-color-picker>
  *
@@ -23,6 +26,7 @@ import type { QuietSlider } from '../slider/slider.js';
  * @status stable
  * @since 1.0
  *
+ * @dependency quiet-button
  * @dependency quiet-copy
  * @dependency quiet-slider
  *
@@ -55,7 +59,8 @@ import type { QuietSlider } from '../slider/slider.js';
  * @csspart opacity-slider__track - The opacity slider's `track` part.
  * @csspart opacity-slider__indicator - The opacity slider's `indicator` part.
  * @csspart opacity-slider__thumb - The opacity slider's `thumb` part.
- * @csspart preview - The element that shows a preview of the current color.
+ * @csspart eye-dropper-button - The eye dropper button, a `<quiet-button>` element.
+ * @csspart preview-button - The button that shows a preview of the current color, a `<quiet-button>` element.
  * @csspart swatches - The element that contains swatches.
  * @csspart swatch - Each individual swatch.
  *
@@ -133,6 +138,12 @@ export class QuietColorPicker extends QuietElement {
 
   /** Enables the opacity slider. */
   @property({ attribute: 'with-opacity', type: Boolean, reflect: true }) withOpacity = false;
+
+  /**
+   * Enables the eye dropper button. Only available in
+   * [supportive browsers](https://caniuse.com/?search=eyedropper%20API).
+   */
+  @property({ attribute: 'with-eye-dropper', type: Boolean, reflect: true }) withEyeDropper = false;
 
   connectedCallback() {
     super.connectedCallback();
@@ -361,6 +372,30 @@ export class QuietColorPicker extends QuietElement {
     this.valueWhenDraggingStarted = undefined;
   };
 
+  private handleEyeDropperClick() {
+    const eyeDropper = new EyeDropper();
+
+    eyeDropper
+      .open()
+      .then(async result => {
+        const oldValue = this.value;
+
+        this.setColorFromString(result.sRGBHex);
+
+        await this.updateComplete;
+
+        if (this.value !== oldValue) {
+          this.dispatchEvent(new QuietInputEvent());
+          this.dispatchEvent(new Event('input'));
+          this.dispatchEvent(new QuietChangeEvent());
+          this.dispatchEvent(new Event('change'));
+        }
+      })
+      .catch(() => {
+        // canceled by the user
+      });
+  }
+
   private handleFocusIn = (event: Event) => {
     if (!this.hasFocus && event.target === event.currentTarget) {
       this.hasFocus = true;
@@ -432,6 +467,7 @@ export class QuietColorPicker extends QuietElement {
 
     this.setColorFromString(color);
     this.wasChanged = true;
+    this.colorSliderThumb.focus();
 
     await this.updateComplete;
 
@@ -685,13 +721,29 @@ export class QuietColorPicker extends QuietElement {
               : ''}
           </div>
 
+          ${this.withEyeDropper && hasEyeDropper
+            ? html`
+                <quiet-button
+                  id="eye-dropper"
+                  part="eye-dropper-button"
+                  appearance="text"
+                  ?disabled=${this.disabled}
+                  icon-label=${this.localize.term('selectAColorFromTheScreen')}
+                  @click=${this.handleEyeDropperClick}
+                >
+                  <quiet-icon library="system" name="color-picker"></quiet-icon>
+                </quiet-button>
+              `
+            : ''}
+
           <quiet-copy id="copy-button" data=${this.value}>
-            <button
-              id="preview"
-              part="preview"
+            <quiet-button
+              id="preview-button"
+              part="preview-button"
+              appearance="text"
               ?disabled=${this.disabled}
-              aria-label="${this.localize.term('copyToClipboard')}"
-            ></button>
+              icon-label=${this.localize.term('copyToClipboard')}
+            ></quiet-button>
           </quiet-copy>
         </div>
 
@@ -722,3 +774,14 @@ declare global {
     'quiet-color-picker': QuietColorPicker;
   }
 }
+
+// The EyeDropper API isn't in all browsers or TypeScript yet
+interface EyeDropperConstructor {
+  new (): EyeDropperInterface;
+}
+
+interface EyeDropperInterface {
+  open: () => Promise<{ sRGBHex: string }>;
+}
+
+declare const EyeDropper: EyeDropperConstructor;

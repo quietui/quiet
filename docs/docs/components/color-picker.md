@@ -10,6 +10,7 @@ layout: component
   name="color"
   value="#7578c5" 
   with-opacity
+  with-eye-dropper
   swatches="
     #09090b #71717a #ef4444 #f97316 
     #f59e0b #eab308 #84cc16 #22c55e 
@@ -58,6 +59,22 @@ Add the `with-opacity` attribute to allow the user to adjust transparency.
   with-opacity 
 ></quiet-color-picker>
 ```
+
+### Enabling the eye dropper
+
+Add the `with-eye-dropper` attribute to show the eye dropper button, which allows the user to select a color from anywhere on the screen.
+
+```html {.example}
+<quiet-color-picker 
+  label="Select a color"
+  name="color"
+  with-eye-dropper
+></quiet-color-picker>
+```
+
+:::warn
+The EyeDropper API is only available in [supportive browsers](https://caniuse.com/?search=eyedropper%20API).
+:::
 
 ### Showing swatches
 
@@ -154,6 +171,7 @@ Use the `size` attribute to change the color pickers's size.
     #6366f1 #a855f7 #d946ef #ec4899
   "  
   with-opacity
+  with-eye-dropper
   id="color-picker__size"
 ></quiet-color-picker>
 

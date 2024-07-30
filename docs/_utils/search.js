@@ -85,10 +85,10 @@ export function searchPlugin(options = {}) {
       return content;
     });
 
-    eleventyConfig.on('eleventy.after', ({ dir }) => {
+    eleventyConfig.on('eleventy.after', async ({ dir }) => {
       const outputFilename = join(dir.output, 'search.json');
       const map = [];
-      const searchIndex = lunr(async function () {
+      const searchIndex = lunr(function () {
         let index = 0;
 
         this.ref('id');
@@ -101,10 +101,10 @@ export function searchPlugin(options = {}) {
           map[index] = { title: page.title, description: page.description, url: page.url };
           index++;
         }
-
-        await mkdir(dirname(outputFilename), { recursive: true });
-        await writeFile(outputFilename, JSON.stringify({ searchIndex, map }), 'utf-8');
       });
+
+      await mkdir(dirname(outputFilename), { recursive: true });
+      await writeFile(outputFilename, JSON.stringify({ searchIndex, map }), 'utf-8');
     });
   };
 }

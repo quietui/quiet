@@ -122,7 +122,12 @@ function handleSelection(event) {
   if (link) {
     event.preventDefault();
     hide();
-    location.href = link.href;
+
+    if (window.Turbo) {
+      Turbo.visit(link.href);
+    } else {
+      location.href = link.href;
+    }
   }
 }
 

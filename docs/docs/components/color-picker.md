@@ -42,7 +42,7 @@ Use the `value` attribute to provide an initial value for the color picker. You 
 <quiet-color-picker 
   label="Select a color"
   name="color" 
-  value="#ce2380"
+  value="#71e0f3"
 >
 </quiet-color-picker>
 ```
@@ -55,7 +55,7 @@ Add the `with-opacity` attribute to allow the user to adjust transparency.
 <quiet-color-picker 
   label="Select a color"
   name="color"
-  value="#398fa0cc" 
+  value="#ce2380cc" 
   with-opacity 
 ></quiet-color-picker>
 ```
@@ -117,7 +117,7 @@ Use the `format` attribute to set the format of the value. Valid options include
 ```
 
 :::info
-You can set the color picker's value using any format and it will immediately be converted to the format specified by the `format` attribute.
+You can set the color picker's value using any format and it will automatically be converted to the format specified by the `format` attribute.
 :::
 
 ### Getting the value as an object

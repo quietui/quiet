@@ -9,7 +9,7 @@ layout: splash
 
 {% include 'splash-image.njk' %}
 
-<p class="subtitle">{{ description }}</p>
+<p class="subtitle">A hand-crafted UI library for the Web</p>
 
 <p>Focusing on accessibility, longevity, performance, and simplicity</p>
 

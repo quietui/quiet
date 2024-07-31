@@ -55,7 +55,7 @@ Add the `with-opacity` attribute to allow the user to adjust transparency.
 <quiet-color-picker 
   label="Select a color"
   name="color"
-  value="##ce2380cc" 
+  value="#ce2380cc" 
   with-opacity 
 ></quiet-color-picker>
 ```

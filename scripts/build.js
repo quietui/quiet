@@ -20,7 +20,6 @@ const iconDir = join(distDir, 'assets/icons');
 const spinner = ora({ text: 'Quiet UI', color: 'magenta' }).start();
 const packageData = JSON.parse(await readFile(join(rootDir, 'package.json'), 'utf-8'));
 const version = JSON.stringify(packageData.version.toString());
-const rebuilds = new Set();
 let buildContext;
 
 /**
@@ -270,7 +269,6 @@ if (isDeveloping) {
   // Rebuild and reload when source files change
   bs.watch('src/**/!(*.test).*').on('change', async filename => {
     spinner.info(`File modified ${chalk.gray(`(${relative(rootDir, filename)})`)}`);
-    rebuilds.add(filename);
 
     try {
       const isTestFile = filename.includes('.test.ts');
@@ -299,11 +297,7 @@ if (isDeveloping) {
         await generateDocs();
       }
 
-      // Don't reload until all rebuilds are finished
-      rebuilds.delete(filename);
-      if (rebuilds.size === 0) {
-        reload();
-      }
+      reload();
     } catch (err) {
       console.error(chalk.red(err));
     }

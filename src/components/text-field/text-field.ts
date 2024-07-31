@@ -240,17 +240,6 @@ export class QuietTextField extends QuietElement {
     this.dispatchEvent(new QuietBlurEvent());
   }
 
-  private handleVisualBoxPointerDown(event: PointerEvent) {
-    const target = event.target as HTMLElement;
-    const isBox = target?.id === 'visual-box';
-    const isSlot = target.hasAttribute('slot');
-
-    if (isBox || isSlot) {
-      event.preventDefault();
-      this.textBox.focus();
-    }
-  }
-
   private handleChange(event: Event) {
     this.wasChanged = true;
     this.dispatchEvent(new QuietChangeEvent());
@@ -266,11 +255,6 @@ export class QuietTextField extends QuietElement {
   private handleFocus() {
     this.customStates.set('focused', true);
     this.dispatchEvent(new QuietFocusEvent());
-  }
-
-  private handleTextBoxButtonPointerDown(event: PointerEvent) {
-    // Prevent the number field from losing focus when text box buttons are activated
-    event.preventDefault();
   }
 
   private handleHostInvalid() {
@@ -306,6 +290,22 @@ export class QuietTextField extends QuietElement {
   private handlePasswordToggleClick() {
     this.isPasswordVisible = !this.isPasswordVisible;
     this.textBox.focus();
+  }
+
+  private handleTextBoxButtonPointerDown(event: PointerEvent) {
+    // Prevent the number field from losing focus when text box buttons are activated
+    event.preventDefault();
+  }
+
+  private handleVisualBoxPointerDown(event: PointerEvent) {
+    const target = event.target as HTMLElement;
+    const isBox = target?.id === 'visual-box';
+    const isSlot = target.hasAttribute('slot');
+
+    if (isBox || isSlot) {
+      event.preventDefault();
+      this.textBox.focus();
+    }
   }
 
   /** Sets the form control's validity */

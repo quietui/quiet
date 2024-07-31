@@ -42,7 +42,7 @@ Use the `value` attribute to provide an initial value for the color picker. You 
 <quiet-color-picker 
   label="Select a color"
   name="color" 
-  value="#ce2380"
+  value="#71e0f3"
 >
 </quiet-color-picker>
 ```
@@ -55,7 +55,7 @@ Add the `with-opacity` attribute to allow the user to adjust transparency.
 <quiet-color-picker 
   label="Select a color"
   name="color"
-  value="#398fa0cc" 
+  value="##ce2380cc" 
   with-opacity 
 ></quiet-color-picker>
 ```

@@ -6,7 +6,7 @@ layout: docs
 
 Components marked [stable] are well-tested, ready for production, and less likely to see breaking changes. Components marked [experimental] are offered as prototypes. Experimental components are less stable, subject to change, and may receive breaking changes or be removed without a major version bump.
 
-This project is [not anchored to a major version](https://www.abeautifulsite.net/posts/anchoring-software-to-major-versions/). Breaking changes will be made when necessary and a new major version will be released to reflect that. When breaking changes do happen, they'll be clearly marked with [breaking] so you can upgrade with minimal friction. 
+This project is [not anchored to a major version](https://www.abeautifulsite.net/posts/anchoring-software-to-major-versions/). Breaking changes will be made when necessary and a new major version will be released to reflect them. When breaking changes do happen, they'll be clearly marked with [breaking] so you can upgrade with minimal friction. 
 
 <form 
   class="js-cm-form whiskers-email" 

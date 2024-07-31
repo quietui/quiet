@@ -117,7 +117,7 @@ Use the `format` attribute to set the format of the value. Valid options include
 ```
 
 :::info
-You can set the color picker's value using any format and it will immediately be converted to the format specified by the `format` attribute.
+You can set the color picker's value using any format and it will automatically be converted to the format specified by the `format` attribute.
 :::
 
 ### Getting the value as an object

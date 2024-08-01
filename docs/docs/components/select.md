@@ -216,7 +216,7 @@ Use the `disabled` attribute to disable individual options.
 
 ### Disabling option groups
 
-Use the `disabled` attribute to disable an option groups
+Use the `disabled` attribute to disable an option group.
 
 ```html {.example}
 <quiet-select label="Disabled option groups">
@@ -232,6 +232,10 @@ Use the `disabled` attribute to disable an option groups
   </optgroup>
 </quiet-select>
 ```
+
+:::warn
+Disabled option groups [don't currently work](https://bugs.webkit.org/show_bug.cgi?id=227042) in iOS Safari.
+:::
 
 ### Disabling selects
 
@@ -291,7 +295,7 @@ With a bit of custom CSS, you can show labels on the side instead of on top of t
 </style>
 ```
 
-### Validating selects
+### Validation
 
 The `required` attribute can be applied to enable validation using the [Constraint Validation API](https://developer.mozilla.org/en-US/docs/Web/HTML/Constraint_validation). This will prevent form submission until an option with a non-empty value is selected.
 

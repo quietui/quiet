@@ -41,7 +41,7 @@ Use the `color` and `background-color` properties to change badge colors. You ca
 <quiet-badge style="background-image: linear-gradient(45.8deg, #af68fe 9.3%, #65dfff 75.1%); color: black; border: none;">Gradient</quiet-badge>
 ```
 
-### Getting attention with animation
+### Drawing attention
 
 Use the `attention` attribute to draw attention to a badge with an animation. Valid options include `pulse`, `shake`, and `wobble`.
 

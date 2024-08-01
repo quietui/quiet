@@ -47,7 +47,7 @@ Use the `size` attribute to change the text field's size.
 <quiet-switch size="xl">Extra large</quiet-switch>
 ```
 
-### Disabling switches
+### Disabling
 
 Use the `disabled` attribute to disable the switch.
 
@@ -56,7 +56,7 @@ Use the `disabled` attribute to disable the switch.
 <quiet-switch checked disabled>Checked and disabled</quiet-switch>
 ```
 
-### Validating switches
+### Validation
 
 The `required` attribute can be applied to enable validation using the [Constraint Validation API](https://developer.mozilla.org/en-US/docs/Web/HTML/Constraint_validation). This will prevent form submission until the switch is checked.
 

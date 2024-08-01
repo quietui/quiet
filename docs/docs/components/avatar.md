@@ -99,7 +99,7 @@ You can group avatars with some custom CSS.
 </style>
 ```
 
-### Wrapping with a link
+### Wrapping with links
 
 You can wrap links around avatars to make the avatar clickable.
 

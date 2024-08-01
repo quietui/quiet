@@ -176,7 +176,7 @@ Button-only file inputs aren't supported, but you can achieve this pattern with 
 </script>
 ```
 
-### Validating file inputs
+### Validation
 
 The `required` attribute can be applied to enable validation using the [Constraint Validation API](https://developer.mozilla.org/en-US/docs/Web/HTML/Constraint_validation). This will prevent form submission until the user has selected a file.
 

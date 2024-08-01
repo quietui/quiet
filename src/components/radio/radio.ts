@@ -241,8 +241,8 @@ export class QuietRadio extends QuietElement {
   }
 
   /**
-   * @internal Makes only the selected radio item tabbable. If no radio item is selected, the first radio item will be
-   * tabbable.
+   * @internal Makes only the selected radio item tabbable. If no radio item is selected, the first non-disabled radio
+   * item will be tabbable.
    */
   public resetRovingTabIndex() {
     const radioItems = this.getItems();

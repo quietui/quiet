@@ -19,12 +19,22 @@
       }
     </script>
 
-    <title>{{ title }}</title>
-
+    <title>{{ title }}{% if page.url != '/' %} &middot; Quiet UI{% endif %}</title>
     <link rel="icon" href="/assets/images/logo-light.svg" media="(prefers-color-scheme: light)" />
     <link rel="icon" href="/assets/images/logo-dark.svg" media="(prefers-color-scheme: dark)" />
     <link rel="apple-touch-icon" href="/assets/images/app-icon.png">
     <link rel="stylesheet" href="/assets/styles/docs.css" />
+
+    {# Twitter card #}
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:creator" content="quiet_ui" />
+    <meta name="twitter:image" content="{{ shareImage | default("https://quietui.com/assets/images/og-image.png") }}" />
+
+    {# OpenGraph #}
+    <meta property="og:url" content="https://quietui.com{{page.url}}" />
+    <meta property="og:title" content="{{ title }}{% if page.url != '/' %} &middot; Quiet UI{% endif %}" />
+    <meta property="og:description" content="{{ description }}" />
+    <meta property="og:image" content="{{ shareImage | default("https://quietui.com/assets/images/og-image.png") }}" />
 
     {# Scripts #}
     <script type="module" src="/assets/scripts/theme.js"></script>

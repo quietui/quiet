@@ -78,15 +78,6 @@ export class QuietTabList extends QuietElement {
     }
   }
 
-  private handleTabsClick(event: MouseEvent) {
-    const target = event.target as HTMLElement;
-    const tab = target.closest<QuietTab>('quiet-tab');
-
-    if (tab?.panel && !tab.disabled) {
-      this.tab = tab.panel || '';
-    }
-  }
-
   /** Gets an array of tabs slotted into the tab list. */
   private getTabs(options?: Partial<GetTabsOptions>) {
     const tabs = this.tabSlot.assignedElements({ flatten: true }) as QuietTab[];
@@ -103,61 +94,15 @@ export class QuietTabList extends QuietElement {
     return panels.filter(panel => panel.localName === 'quiet-tab-panel');
   }
 
-  private handleSlotChange() {
-    const tabs = this.getTabs();
-    const panels = this.getPanels();
+  private handleTabsClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    const tab = target.closest<QuietTab>('quiet-tab');
 
-    // Ensure tabs and panels have ids
-    tabs.forEach(tab => (tab.id = tab.id || createId('quiet-tab-')));
-    panels.forEach(panel => (panel.id = panel.id || createId('quiet-tab-panel-')));
-
-    // Link tabs and panels
-    tabs.forEach(tab => {
-      const name = tab.panel;
-      if (!name) return;
-
-      const panel = panels.find(p => p.name === name);
-      if (!panel) return;
-
-      tab.setAttribute('aria-controls', panel.id);
-      panel.setAttribute('aria-describedby', tab.id);
-    });
-
-    // Set the initial active tab
-    if (!this.tab) {
-      this.tab = tabs[0].panel || '';
+    if (tab?.panel && !tab.disabled) {
+      this.tab = tab.panel || '';
     }
   }
 
-  /** Sets the active tab + panel. */
-  private setActiveTab(name: string | undefined) {
-    const tabs = this.getTabs({ includeDisabled: true });
-    const panels = this.getPanels();
-
-    if (!name) return;
-
-    this.tab = name;
-
-    // Update the tab
-    for (const tab of tabs) {
-      tab.active = tab.panel === name && !tab.disabled;
-    }
-
-    // Show the active panel
-    for (const panel of panels) {
-      const linkedTab = tabs.find(tab => tab.panel === panel.name);
-
-      if (panel.name === name && linkedTab && !linkedTab.disabled) {
-        panel.visible = true;
-        this.dispatchEvent(new QuietTabShownEvent({ tab: linkedTab, panel }));
-      } else if (linkedTab && panel.visible) {
-        panel.visible = false;
-        this.dispatchEvent(new QuietTabHiddenEvent({ tab: linkedTab, panel }));
-      }
-    }
-  }
-
-  /** Keyboard navigation */
   private handleTabsKeyDown(event: KeyboardEvent) {
     const tabs = this.getTabs();
     const activeTab = tabs.find(tab => tab.panel === this.tab);
@@ -195,6 +140,68 @@ export class QuietTabList extends QuietElement {
       event.stopPropagation();
       this.tab = targetTab.panel || '';
       targetTab.focus();
+    }
+  }
+
+  private handleSlotChange() {
+    const tabs = this.getTabs();
+    const panels = this.getPanels();
+
+    // Ensure tabs and panels have ids
+    tabs.forEach(tab => (tab.id = tab.id || createId('quiet-tab-')));
+    panels.forEach(panel => (panel.id = panel.id || createId('quiet-tab-panel-')));
+
+    // Link tabs and panels
+    tabs.forEach(tab => {
+      const name = tab.panel;
+      if (!name) return;
+
+      const panel = panels.find(p => p.name === name);
+      if (!panel) return;
+
+      tab.setAttribute('aria-controls', panel.id);
+      panel.setAttribute('aria-describedby', tab.id);
+    });
+
+    this.resetRovingTabIndex();
+  }
+
+  /** Sets the active tab + panel. */
+  private setActiveTab(name: string | undefined) {
+    const tabs = this.getTabs({ includeDisabled: true });
+    const panels = this.getPanels();
+
+    if (!name) return;
+
+    this.tab = name;
+
+    // Update the tab
+    for (const tab of tabs) {
+      tab.active = tab.panel === name && !tab.disabled;
+    }
+
+    // Show the active panel
+    for (const panel of panels) {
+      const linkedTab = tabs.find(tab => tab.panel === panel.name);
+
+      if (panel.name === name && linkedTab && !linkedTab.disabled) {
+        panel.visible = true;
+        this.dispatchEvent(new QuietTabShownEvent({ tab: linkedTab, panel }));
+      } else if (linkedTab && panel.visible) {
+        panel.visible = false;
+        this.dispatchEvent(new QuietTabHiddenEvent({ tab: linkedTab, panel }));
+      }
+    }
+  }
+
+  /** @internal Makes only the active tab tabbable. If no tab is active, the first non-disabled tab will be tabbable. */
+  public resetRovingTabIndex() {
+    const tabs = this.getTabs();
+    const activeTab = tabs.find(tab => tab.active);
+    const targetTab = activeTab || tabs[0];
+
+    if (targetTab) {
+      this.setActiveTab(targetTab.panel);
     }
   }
 

@@ -56,9 +56,10 @@ export class QuietTab extends QuietElement {
     if (changedProps.has('disabled')) {
       this.setAttribute('aria-disabled', this.disabled ? 'true' : 'false');
       this.customStates.set('disabled', this.disabled);
-      this.customStates.set('active', false);
-      if (this.disabled) {
+
+      if (this.active && this.disabled) {
         this.active = false;
+        this.closest('quiet-tab-list')?.resetRovingTabIndex();
       }
     }
   }

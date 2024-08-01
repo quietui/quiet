@@ -21,6 +21,8 @@ const DICTIONARY = 'lorem ipsum dolor sit amet consectetur adipiscing elit mauri
 export class QuietLoremIpsum extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
+  private currentSeed = 0;
+
   /** The type of HTML content to generate. */
   @property() type: 'sentence' | 'title' | 'paragraph' | 'ol' | 'ul' = 'sentence';
 
@@ -29,6 +31,12 @@ export class QuietLoremIpsum extends QuietElement {
    * be a number or a range in the format of `{min}-{max}`, e.g. `2-4`.
    */
   @property() length: number | string = '3-5';
+
+  /**
+   * By default, the generator will produce random content every time it runs. Use this option to seed the generator and
+   * force it to output the same content every time.
+   */
+  @property({ type: Number }) seed: number;
 
   /**
    * The number of words that should occur in a sentence or list item. This should be a number or a range in the format
@@ -42,12 +50,20 @@ export class QuietLoremIpsum extends QuietElement {
    */
   @property({ attribute: 'sentences-per-paragraph' }) sentencesPerParagraph: number | string = '3-6';
 
+  private getNextSeed(): number | undefined {
+    return typeof this.seed === 'undefined'
+      ? undefined
+      : // Increase the current seed by a predictable amount, but make sure it's enough to offset the content being output
+        // so it doesn't repeat when using seeds that are close to each other.
+        (this.currentSeed += randomInteger(50, 100, this.currentSeed));
+  }
+
   /** Returns an array of words of the specified length. */
   private generateWords(length: number) {
     const words: string[] = [];
 
     for (let i = 0; i < length; i++) {
-      const index = randomInteger(0, DICTIONARY.length - 1);
+      const index = randomInteger(0, DICTIONARY.length - 1, this.getNextSeed());
       words.push(DICTIONARY[index]);
     }
 
@@ -64,7 +80,7 @@ export class QuietLoremIpsum extends QuietElement {
     const parsedRange = String(range).split('-');
     const min = Number(parsedRange[0]) || 0;
     const max = Number(parsedRange[1]) || 0;
-    return randomInteger(min, max);
+    return randomInteger(min, max, this.getNextSeed());
   }
 
   /** Generates a list of random items based on the properties that are currently set */
@@ -119,8 +135,8 @@ export class QuietLoremIpsum extends QuietElement {
 
         // Add commas and semicolons (but not near the end of the sentence)
         if (j < words.length - 3) {
-          const addComma = randomInteger(0, commaFrequency) === 0;
-          const addSemicolon = addComma ? false : randomInteger(0, semicolonFrequency) === 0;
+          const addComma = randomInteger(0, commaFrequency, this.getNextSeed()) === 0;
+          const addSemicolon = addComma ? false : randomInteger(0, semicolonFrequency, this.getNextSeed()) === 0;
           if (addComma) sentence += ', ';
           if (addSemicolon) sentence += '; ';
         }
@@ -148,6 +164,9 @@ export class QuietLoremIpsum extends QuietElement {
   }
 
   render() {
+    // Reset the current seed on render to ensure we get the same result
+    this.currentSeed = typeof this.seed === 'number' ? this.seed : parseInt(this.seed);
+
     if (this.type === 'sentence') {
       this.innerHTML = this.generateSentences();
     }

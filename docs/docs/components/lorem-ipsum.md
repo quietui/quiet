@@ -5,7 +5,7 @@ layout: component
 
 Placeholder text, commonly referred to as [lorem ipsum](https://en.wikipedia.org/wiki/Lorem_ipsum), is useful for displaying the visual form of a document without using actual content. You can use this component instead of copying and pasting large quantities of text from online generators.
 
-Each refresh will yield unique content, allowing you to test the flexibility of your designs with dynamic content. The default behavior outputs a few sentences.
+Unless you [provide a seed](#seeding-the-generator), each refresh will yield unique content, allowing you to test the flexibility of your designs. The default behavior outputs a few sentences.
 
 ```html {.example}
 <quiet-lorem-ipsum></quiet-lorem-ipsum>
@@ -51,6 +51,30 @@ Set the `type` attribute to `ol` or `ul` to generate HTML lists. The `length` at
 <quiet-lorem-ipsum type="ul" length="3-6" words-per-sentence="2-3"></quiet-lorem-ipsum>
 ```
 
+### Seeding the generator
+
+By default, the generator will produce random content every time it runs. If you want to force the output to be the same every time, provide a seed number using the `seed` attribute.
+
+```html {.example}
+<quiet-slider 
+  label="Seed" 
+  min="10" 
+  max="50"
+  step="10"
+  value="30" 
+  with-markers 
+  with-tooltip 
+  style="margin-block-end: 2rem;"
+></quiet-slider>
+<quiet-lorem-ipsum seed="30" id="lorem-ipsum__seed"></quiet-lorem-ipsum>
+
+<script>
+  const loremIpsum = document.getElementById('lorem-ipsum__seed');
+  const slider = loremIpsum.previousElementSibling;
+
+  slider.addEventListener('quiet-input', () => loremIpsum.seed = slider.value);
+</script>
+```
 
 <style>
   /* For the demos */

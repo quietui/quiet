@@ -13,6 +13,15 @@ export function createId(prefix = '') {
 }
 
 /** Generates a random integer from min to max. */
-export function randomInteger(min: number, max: number) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+export function randomInteger(min: number, max: number, seed?: number) {
+  let num: number;
+
+  if (typeof seed === 'number') {
+    num = Math.sin(seed) * 10000;
+    num -= Math.floor(num);
+  } else {
+    num = Math.random();
+  }
+
+  return Math.floor(num * (max - min + 1)) + min;
 }

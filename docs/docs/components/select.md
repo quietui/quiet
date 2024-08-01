@@ -233,6 +233,10 @@ Use the `disabled` attribute to disable an option group.
 </quiet-select>
 ```
 
+:::warn
+Disabled option groups [don't currently work](https://bugs.webkit.org/show_bug.cgi?id=227042) in iOS Safari.
+:::
+
 ### Disabling selects
 
 Use the `disabled` attribute to disable the select.

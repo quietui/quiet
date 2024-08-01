@@ -14,7 +14,7 @@ export function searchPlugin(options = {}) {
   options = {
     filename: '',
     selectorsToIgnore: [],
-    getTitle: doc => doc.querySelector('title')?.textContent ?? '',
+    getTitle: doc => (doc.querySelector('title')?.textContent ?? '').split('·')[0].trim(),
     getDescription: doc => doc.querySelector('meta[name="description"]')?.getAttribute('content') ?? '',
     getHeadings: doc => [...doc.querySelectorAll('h1, h2, h3, h4, h5, h6')].map(heading => heading.textContent ?? ''),
     getContent: doc => doc.querySelector('body')?.textContent ?? '',

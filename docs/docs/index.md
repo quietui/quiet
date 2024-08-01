@@ -31,7 +31,7 @@ Copy and paste the following code into the `<head>` section of any HTML document
 
 ```html
 <link rel="stylesheet" href="{% cdnUrl '/dist/themes/quiet.css' %}">
-<script src="{% cdnUrl '/dist/quiet.loader.js' %}" type="module"></script>
+<script type="module" src="{% cdnUrl '/dist/quiet.loader.js' %}"></script>
 ```
 
 Now you can use any component in your HTML!
@@ -41,10 +41,6 @@ Now you can use any component in your HTML!
   This is amazing
 </quiet-button>
 ```
-
-:::info
-Quiet components are [custom HTML elements](https://developer.mozilla.org/en-US/docs/Web/API/Web_components). They're built with platform APIs, so you can use them anywhere — even in your favorite framework!
-:::
 
 ### Autoloader events
 
@@ -93,7 +89,7 @@ The imports above are just examples. You can copy and paste the import code for 
 
 ## Setting the library path
 
-Quiet uses something called the _library path_ to load components and assets at runtime. It will try to guess the library path by looking for a script called `quiet.js` or `quiet.loader.js` on the page. If you're using the CDN or consuming the library in a similar way, you can skip this section.
+Quiet uses something called the _library path_ to load components and assets at runtime. It will try to guess the library path by looking for a script called `quiet.js` or `quiet.loader.js` on the page. If you're using the CDN or consuming the library in a similar way, you can probably skip this section.
 
 **If you're using a bundler,** you will need to create a task that copies Quiet's `dist` folder into your project and set the library path to point to there.
 

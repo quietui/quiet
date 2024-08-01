@@ -5,7 +5,6 @@ import { execSync } from 'child_process';
 import { fileURLToPath } from 'url';
 import { globby } from 'globby';
 import { mkdir, readFile } from 'fs/promises';
-import { replace } from 'esbuild-plugin-replace';
 import browserSync from 'browser-sync';
 import chalk from 'chalk';
 import copy from 'recursive-copy';
@@ -19,7 +18,7 @@ const isDeveloping = process.argv.includes('--develop');
 const iconDir = join(distDir, 'assets/icons');
 const spinner = ora({ text: 'Quiet UI', color: 'magenta' }).start();
 const packageData = JSON.parse(await readFile(join(rootDir, 'package.json'), 'utf-8'));
-const version = JSON.stringify(packageData.version.toString());
+const version = packageData.version;
 let buildContext;
 
 /**
@@ -29,6 +28,8 @@ async function buildAll() {
   const start = Date.now();
 
   try {
+    spinner.info(`Quiet UI v${version}`);
+
     await cleanup();
     await generateManifest();
     await generateIcons();
@@ -113,10 +114,9 @@ function generateTypes() {
   try {
     execSync(`tsc --project ./tsconfig.prod.json --outdir "${distDir}"`);
   } catch (error) {
-    return Promise.reject(error.stdout);
+    // Report the error, but don't break the build
+    spinner.fail(`TypeScript reported problems:\n\n${chalk.red(error.stdout.toString().trim())}\n`);
   }
-
-  spinner.succeed();
 
   return Promise.resolve();
 }
@@ -130,6 +130,7 @@ async function generateBundle() {
   const config = {
     format: 'esm',
     target: 'es2020',
+    logLevel: 'silent',
     entryPoints: [
       //
       // IMPORTANT: Entry points MUST be mapped in package.json => exports
@@ -150,17 +151,22 @@ async function generateBundle() {
     },
     bundle: true,
     legalComments: 'none',
-    splitting: true,
-    plugins: [replace({ __QUIET_VERSION__: version })]
+    splitting: true
   };
 
-  if (isDeveloping) {
-    // Incremental builds for dev
-    buildContext = await esbuild.context(config);
-    await buildContext.rebuild();
-  } else {
-    // One-time build for production
-    await esbuild.build(config);
+  try {
+    if (isDeveloping) {
+      // Incremental builds for dev
+      buildContext = await esbuild.context(config);
+      await buildContext.rebuild();
+    } else {
+      // One-time build for production
+      await esbuild.build(config);
+    }
+  } catch (error) {
+    // Report the error, but don't break the build
+    spinner.fail(`esbuild reported problems:\n\n${chalk.red(error)}\n`);
+    return;
   }
 
   spinner.succeed();

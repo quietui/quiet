@@ -77,7 +77,6 @@
     "custom-element-vs-code-integration": "^1.2.2",
     "del": "^7.1.0",
     "esbuild": "^0.20.0",
-    "esbuild-plugin-replace": "^1.4.0",
     "eslint": "^8.56.0",
     "eslint-plugin-chai-expect": "^3.0.0",
     "eslint-plugin-chai-friendly": "^0.7.4",

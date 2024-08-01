@@ -118,7 +118,7 @@ Use the `size` attribute to change the text field's size.
 <quiet-text-field size="xl" label="Extra large"></quiet-text-field>
 ```
 
-### Disabling text fields
+### Disabling
 
 Use the `disabled` attribute to disable the text field.
 
@@ -161,7 +161,7 @@ With a bit of custom CSS, you can show labels on the side instead of on top of t
 </style>
 ```
 
-### Validating text fields
+### Validation
 
 A number of attributes can be used to enable validation using the [Constraint Validation API](https://developer.mozilla.org/en-US/docs/Web/HTML/Constraint_validation). These include `required`, `pattern`, `minlength`, `maxlength`, `min`, `max`, and `step`. They work exactly like their native counterparts.
 

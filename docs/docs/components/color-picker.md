@@ -185,7 +185,7 @@ Use the `size` attribute to change the color pickers's size.
 </script>
 ```
 
-### Disabling color pickers
+### Disabling
 
 To disable a color picker, add the `disabled` attribute.
 

@@ -121,7 +121,7 @@ When the number of tabs exceeds the available space in a top or bottom placement
 If you don't want the tabs to scroll, you can apply `flex-wrap: wrap` to the `tabs` part to force them to wrap instead.
 :::
 
-### Disabling tabs
+### Disabling
 
 To disable a tab, add the `disabled` attribute to it. Since tabs use [automatic activation](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/examples/tabs-automatic/), disabled tabs are not focusable but are still recognized by assistive devices as disabled tabs.
 

@@ -227,7 +227,7 @@ Use the `size` attribute to change the slider's size.
 <quiet-slider size="xl" value="50" label="Extra large"></quiet-slider>
 ```
 
-### Disabling sliders
+### Disabling
 
 Use the `disabled` attribute to disable the slider.
 

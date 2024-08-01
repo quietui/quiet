@@ -37,7 +37,7 @@ Use the `size` attribute to change the checkbox's size.
 <quiet-checkbox size="xl">Extra large</quiet-checkbox>
 ```
 
-### Indeterminate checkboxes
+### Indeterminate
 
 Use the `indeterminate` attribute to put the checkbox in an indeterminate state. This can be used to show a mixed selection in a group of "child" checkboxes.
 
@@ -45,7 +45,7 @@ Use the `indeterminate` attribute to put the checkbox in an indeterminate state.
 <quiet-checkbox indeterminate>Indeterminate</quiet-checkbox>
 ```
 
-### Disabling checkboxes
+### Disabling
 
 Use the `disabled` attribute to disable the checkbox.
 
@@ -55,7 +55,7 @@ Use the `disabled` attribute to disable the checkbox.
 <quiet-checkbox indeterminate disabled>Indeterminate and disabled</quiet-checkbox>
 ```
 
-### Validating checkboxes
+### Validation
 
 The `required` attribute can be applied to enable validation using the [Constraint Validation API](https://developer.mozilla.org/en-US/docs/Web/HTML/Constraint_validation). This will prevent form submission until the checkbox is checked.
 

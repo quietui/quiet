@@ -94,7 +94,7 @@ Use the `size` attribute to change a radio item's size.
 </quiet-radio>
 ```
 
-### Disabling radio items
+### Disabling
 
 You can disable one or more radio items by adding the `disabled` attribute.
 
@@ -106,7 +106,7 @@ You can disable one or more radio items by adding the `disabled` attribute.
   <quiet-radio-item value="lizard">Lizard</quiet-radio-item></quiet-radio>
 ```
 
-### Validating radios
+### Validation
 
 The `required` attribute can be applied to enable validation using the [Constraint Validation API](https://developer.mozilla.org/en-US/docs/Web/HTML/Constraint_validation). This will prevent form submission until a radio item is checked.
 

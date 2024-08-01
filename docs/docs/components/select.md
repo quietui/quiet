@@ -291,7 +291,7 @@ With a bit of custom CSS, you can show labels on the side instead of on top of t
 </style>
 ```
 
-### Validating selects
+### Validation
 
 The `required` attribute can be applied to enable validation using the [Constraint Validation API](https://developer.mozilla.org/en-US/docs/Web/HTML/Constraint_validation). This will prevent form submission until an option with a non-empty value is selected.
 

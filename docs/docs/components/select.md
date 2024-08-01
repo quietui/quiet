@@ -216,7 +216,7 @@ Use the `disabled` attribute to disable individual options.
 
 ### Disabling option groups
 
-Use the `disabled` attribute to disable an option groups
+Use the `disabled` attribute to disable an option group.
 
 ```html {.example}
 <quiet-select label="Disabled option groups">

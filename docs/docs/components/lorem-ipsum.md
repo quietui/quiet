@@ -58,15 +58,14 @@ By default, the generator will produce random content every time it runs. If you
 ```html {.example}
 <quiet-slider 
   label="Seed" 
-  min="10" 
-  max="50"
-  step="10"
-  value="30" 
+  min="1" 
+  max="5"
+  value="3" 
   with-markers 
   with-tooltip 
   style="margin-block-end: 2rem;"
 ></quiet-slider>
-<quiet-lorem-ipsum seed="30" id="lorem-ipsum__seed"></quiet-lorem-ipsum>
+<quiet-lorem-ipsum seed="3" id="lorem-ipsum__seed"></quiet-lorem-ipsum>
 
 <script>
   const loremIpsum = document.getElementById('lorem-ipsum__seed');

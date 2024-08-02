@@ -17,7 +17,8 @@ export function randomInteger(min: number, max: number, seed?: number) {
   let num: number;
 
   if (typeof seed === 'number') {
-    num = Math.sin(seed) * 10000 - Math.floor(Math.sin(seed) * 10000);
+    num = Math.sin(seed) * 10000;
+    num -= Math.floor(num);
   } else {
     num = Math.random();
   }

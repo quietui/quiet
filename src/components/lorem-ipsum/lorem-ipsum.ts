@@ -1,13 +1,19 @@
 import { customElement, property } from 'lit/decorators.js';
 import { html } from 'lit';
 import { QuietElement } from '../../utilities/quiet-element.js';
-import { randomInteger } from '../../utilities/math.js';
+import { seededNumberGenerator } from '../../utilities/math.js';
 import hostStyles from '../../styles/host.styles.js';
 import styles from './lorem-ipsum.styles.js';
 import type { CSSResultGroup } from 'lit';
 
+type NumberGenerator = ReturnType<typeof seededNumberGenerator>;
+
 // prettier-ignore
 const DICTIONARY = 'lorem ipsum dolor sit amet consectetur adipiscing elit mauris scelerisque tortor vel nulla lacinia a rhoncus neque suscipit duis ultrices iaculis viverra id pulvinar ex vestibulum ante primis in faucibus orci luctus et posuere cubilia curae sed nisl pharetra velit ut dictum suspendisse non porttitor dui nunc interdum tempor risus eu aliquet praesent magna leo varius etiam eget sapien vulputate venenatis ligula augue ac pretium odio proin placerat fringilla libero laoreet nec nullam malesuada at facilisis integer aliquam auctor bibendum molestie sem felis quis semper quisque massa vehicula maximus convallis lacus pellentesque tristique dignissim turpis erat justo fermentum porta egestas quam condimentum vivamus mi finibus enim euismod tempus fusce hendrerit ullamcorper est morbi consequat ornare congue aenean'.split(' ');
+
+function clampRandom(value: number, min: number, max: number) {
+  return Math.floor(value * (max - min + 1)) + min;
+}
 
 /**
  * <quiet-lorem-ipsum>
@@ -21,7 +27,7 @@ const DICTIONARY = 'lorem ipsum dolor sit amet consectetur adipiscing elit mauri
 export class QuietLoremIpsum extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
-  private currentSeed = 0;
+  private generateNumber: NumberGenerator;
 
   /** The type of HTML content to generate. */
   @property() type: 'sentence' | 'title' | 'paragraph' | 'ol' | 'ul' = 'sentence';
@@ -33,8 +39,8 @@ export class QuietLoremIpsum extends QuietElement {
   @property() length: number | string = '3-5';
 
   /**
-   * By default, the generator will produce random content every time it runs. Use this option to seed the generator and
-   * force it to output the same content every time.
+   * By default, the generator will produce random content every time it runs. Use this option to seed the generator
+   * with a non-zero number and force it to output the same content every time.
    */
   @property({ type: Number }) seed: number;
 
@@ -50,20 +56,12 @@ export class QuietLoremIpsum extends QuietElement {
    */
   @property({ attribute: 'sentences-per-paragraph' }) sentencesPerParagraph: number | string = '3-6';
 
-  private getNextSeed(): number | undefined {
-    return typeof this.seed === 'undefined'
-      ? undefined
-      : // Increase the current seed by a predictable amount, but make sure it's enough to offset the content being output
-        // so it doesn't repeat when using seeds that are close to each other.
-        (this.currentSeed += randomInteger(50, 100, this.currentSeed));
-  }
-
   /** Returns an array of words of the specified length. */
   private generateWords(length: number) {
     const words: string[] = [];
 
     for (let i = 0; i < length; i++) {
-      const index = randomInteger(0, DICTIONARY.length - 1, this.getNextSeed());
+      const index = clampRandom(this.generateNumber(), 0, DICTIONARY.length - 1);
       words.push(DICTIONARY[index]);
     }
 
@@ -80,7 +78,7 @@ export class QuietLoremIpsum extends QuietElement {
     const parsedRange = String(range).split('-');
     const min = Number(parsedRange[0]) || 0;
     const max = Number(parsedRange[1]) || 0;
-    return randomInteger(min, max, this.getNextSeed());
+    return clampRandom(this.generateNumber(), min, max);
   }
 
   /** Generates a list of random items based on the properties that are currently set */
@@ -135,8 +133,8 @@ export class QuietLoremIpsum extends QuietElement {
 
         // Add commas and semicolons (but not near the end of the sentence)
         if (j < words.length - 3) {
-          const addComma = randomInteger(0, commaFrequency, this.getNextSeed()) === 0;
-          const addSemicolon = addComma ? false : randomInteger(0, semicolonFrequency, this.getNextSeed()) === 0;
+          const addComma = clampRandom(this.generateNumber(), 0, commaFrequency);
+          const addSemicolon = addComma ? false : clampRandom(this.generateNumber(), 0, semicolonFrequency) === 0;
           if (addComma) sentence += ', ';
           if (addSemicolon) sentence += '; ';
         }
@@ -164,8 +162,9 @@ export class QuietLoremIpsum extends QuietElement {
   }
 
   render() {
-    // Reset the current seed on render to ensure we get the same result
-    this.currentSeed = typeof this.seed === 'number' ? this.seed : parseInt(this.seed);
+    // Setup the number generator so it's the same for each render if we have a seed
+    const seed = typeof this.seed === 'number' ? this.seed : parseFloat(this.seed);
+    this.generateNumber = typeof this.seed === 'undefined' ? () => Math.random() : seededNumberGenerator(seed);
 
     if (this.type === 'sentence') {
       this.innerHTML = this.generateSentences();

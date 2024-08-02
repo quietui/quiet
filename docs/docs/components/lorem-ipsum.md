@@ -53,7 +53,7 @@ Set the `type` attribute to `ol` or `ul` to generate HTML lists. The `length` at
 
 ### Seeding the generator
 
-By default, the generator will produce random content every time it runs. If you want to force the output to be the same every time, provide a seed number using the `seed` attribute.
+By default, the generator will produce random content every time it runs. If you want to force the output to be the same every time, provide a non-zero seed number using the `seed` attribute.
 
 ```html {.example}
 <quiet-slider 

@@ -53,6 +53,8 @@
 
   --quiet-form-control-required-content: '*';
 
+  --quiet-button-active-offset: 1px;
+
   /*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //
   //  The color palettes below are generated from the seed colors. The palettes remain static in both light and dark

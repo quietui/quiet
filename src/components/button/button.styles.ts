@@ -34,7 +34,7 @@ export default css`
       100ms translate ease;
 
     &:active:not(.disabled) {
-      translate: 0 0.0625em;
+      translate: 0 var(--quiet-button-active-offset);
     }
 
     &:focus {

@@ -666,6 +666,31 @@ export class QuietColorPicker extends QuietElement {
         </div>
 
         <div id="controls" part="controls">
+          <quiet-copy id="copy-button" data=${this.value}>
+            <quiet-button
+              id="preview-button"
+              part="preview-button"
+              appearance="text"
+              ?disabled=${this.disabled}
+              icon-label=${this.localize.term('copyToClipboard')}
+            ></quiet-button>
+          </quiet-copy>
+
+          ${this.withEyeDropper && hasEyeDropper
+            ? html`
+                <quiet-button
+                  id="eye-dropper"
+                  part="eye-dropper-button"
+                  appearance="text"
+                  ?disabled=${this.disabled}
+                  icon-label=${this.localize.term('selectAColorFromTheScreen')}
+                  @click=${this.handleEyeDropperClick}
+                >
+                  <quiet-icon library="system" name="color-picker"></quiet-icon>
+                </quiet-button>
+              `
+            : ''}
+
           <div id="sliders" part="sliders">
             <quiet-slider
               id="hue"
@@ -720,31 +745,6 @@ export class QuietColorPicker extends QuietElement {
                 `
               : ''}
           </div>
-
-          ${this.withEyeDropper && hasEyeDropper
-            ? html`
-                <quiet-button
-                  id="eye-dropper"
-                  part="eye-dropper-button"
-                  appearance="text"
-                  ?disabled=${this.disabled}
-                  icon-label=${this.localize.term('selectAColorFromTheScreen')}
-                  @click=${this.handleEyeDropperClick}
-                >
-                  <quiet-icon library="system" name="color-picker"></quiet-icon>
-                </quiet-button>
-              `
-            : ''}
-
-          <quiet-copy id="copy-button" data=${this.value}>
-            <quiet-button
-              id="preview-button"
-              part="preview-button"
-              appearance="text"
-              ?disabled=${this.disabled}
-              icon-label=${this.localize.term('copyToClipboard')}
-            ></quiet-button>
-          </quiet-copy>
         </div>
 
         ${swatches.length > 0

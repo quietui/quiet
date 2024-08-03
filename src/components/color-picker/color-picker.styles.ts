@@ -119,7 +119,7 @@ export default css`
     flex-direction: column;
     gap: 1em;
     justify-content: center;
-    margin-inline-end: 0.5em;
+    margin-inline-start: 0.5em;
 
     &::part(slider) {
       border-radius: 0;
@@ -152,7 +152,7 @@ export default css`
     &::part(track) {
       font-size: inherit;
       box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--quiet-strident), transparent 90%);
-      border-radius: calc(var(--quiet-border-radius) * 0.75);
+      border-radius: calc(var(--quiet-border-radius) / 2);
     }
 
     &::part(thumb) {
@@ -307,7 +307,7 @@ export default css`
   #swatches {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
-    gap: 0.25em;
+    gap: 0.5em;
 
     button {
       position: relative;
@@ -330,6 +330,11 @@ export default css`
       padding: 0;
       margin: 0;
       cursor: pointer;
+      transition: 100ms translate ease;
+
+      &:active:not(.disabled) {
+        translate: 0 var(--quiet-button-active-offset);
+      }
 
       &:focus {
         outline: none;

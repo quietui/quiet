@@ -834,7 +834,7 @@ quiet-callout {
     100%;
   /* prettier-ignore */
   background-image:
-    radial-gradient(color-mix(in oklab, var(--quiet-primary-fill-mid) 12.5%, transparent) 1.5px, transparent 0),
+    radial-gradient(color-mix(in oklab, var(--quiet-primary-fill-mid) 20%, transparent) 1.5px, transparent 0),
     radial-gradient(at 50% 46%, color-mix(in oklab, transparent, var(--quiet-primary-fill-mid) 18%) 0px, transparent 50%),
     radial-gradient(at 90% 9%, color-mix(in oklab, transparent, var(--quiet-primary-fill-mid) 21%) 0px, transparent 50%),
     radial-gradient(at 13% 34%, color-mix(in oklab, transparent, var(--quiet-primary-fill-mid) 26%) 0px, transparent 50%),

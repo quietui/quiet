@@ -139,7 +139,7 @@ export class QuietTextField extends QuietElement {
   @property({ type: Number }) max: number;
 
   /** The granularity the value must adhere to when incrementing and decrementing. */
-  @property({ type: Number }) step: number | 'any';
+  @property() step: number | 'any';
 
   /**
    * You can provide a custom error message to force the text field to be invalid. To clear the error, set this to an

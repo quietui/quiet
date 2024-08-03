@@ -823,6 +823,7 @@ quiet-callout {
 /* Splash */
 .layout-splash {
   /* Light mode mesh gradient */
+  background-position: center;
   background-color: var(--quiet-background-color);
   background-repeat: repeat;
   background-size:

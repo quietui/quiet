@@ -822,34 +822,33 @@ quiet-callout {
 
 /* Splash */
 .layout-splash {
+  /* Light mode mesh gradient */
   background-color: var(--quiet-background-color);
-  background-attachment: fixed;
-  background-position: center;
   background-repeat: repeat;
+  background-size:
+    40px 40px,
+    100%,
+    100%,
+    100%,
+    100%;
+  /* prettier-ignore */
+  background-image:
+    radial-gradient(color-mix(in oklab, var(--quiet-primary-fill-mid) 12.5%, transparent) 1.5px, transparent 0),
+    radial-gradient(at 50% 46%, color-mix(in oklab, transparent, var(--quiet-primary-fill-mid) 18%) 0px, transparent 50%),
+    radial-gradient(at 90% 9%, color-mix(in oklab, transparent, var(--quiet-primary-fill-mid) 21%) 0px, transparent 50%),
+    radial-gradient(at 13% 34%, color-mix(in oklab, transparent, var(--quiet-primary-fill-mid) 26%) 0px, transparent 50%),
+    radial-gradient(at 75% 75%, color-mix(in oklab, transparent, var(--quiet-primary-fill-mid) 24%) 0px, transparent 50%);
+}
 
-  /* Cubes represent the awesome shit we're gonna build */
-  --cube-size: 750px;
-  --cube-color-dark: color-mix(in oklab, var(--quiet-primary-500), var(--quiet-background-color) 90%);
-  --cube-color-mid: color-mix(in oklab, var(--quiet-primary-500), var(--quiet-background-color) 95%);
-  --cube-color-light: var(--quiet-background-color);
-  --cube-gradient: var(--cube-color-mid) 0 120deg, #0000 0;
-
-  background-image: conic-gradient(from -60deg at 50% calc(100% / 3), var(--cube-gradient)),
-    conic-gradient(from 120deg at 50% calc(200% / 3), var(--cube-gradient)),
-    conic-gradient(from 60deg at calc(200% / 3), var(--cube-color-mid) 60deg, var(--cube-color-light) 0 120deg, #0000 0),
-    conic-gradient(from 180deg at calc(100% / 3), var(--cube-color-dark) 60deg, var(--cube-gradient)),
-    linear-gradient(
-      90deg,
-      var(--cube-color-dark) calc(100% / 6),
-      var(--cube-color-light) 0 50%,
-      var(--cube-color-dark) 0 calc(500% / 6),
-      var(--cube-color-light) 0
-    );
-  background-size: calc(1.732 * var(--cube-size)) var(--cube-size);
-
-  @media screen and (max-width: 959px) {
-    --cube-size: 330px;
-  }
+/* Dark mode mesh gradient */
+.quiet-dark .layout-splash {
+  /* prettier-ignore */
+  background-image:
+    radial-gradient(color-mix(in oklab, var(--quiet-primary-fill-mid) 12.5%, transparent) 1.5px, transparent 0),
+    radial-gradient(at 50% 46%, color-mix(in oklab, transparent, var(--quiet-primary-fill-mid) 8%) 0px, transparent 50%),
+    radial-gradient(at 90% 9%, color-mix(in oklab, transparent, var(--quiet-primary-fill-mid) 11%) 0px, transparent 50%),
+    radial-gradient(at 13% 34%, color-mix(in oklab, transparent, var(--quiet-primary-fill-mid) 16%) 0px, transparent 50%),
+    radial-gradient(at 75% 75%, color-mix(in oklab, transparent, var(--quiet-primary-fill-mid) 14%) 0px, transparent 50%);
 }
 
 .layout-splash:not(.scrolled-down) #header {

@@ -26,6 +26,13 @@ export class QuietInputEvent extends Event {
   }
 }
 
+/** Emitted when a fixed-length input is completely filled out. */
+export class QuietInputComplete extends Event {
+  constructor() {
+    super('quiet-input-complete', { bubbles: true, cancelable: false, composed: true });
+  }
+}
+
 declare global {
   interface GlobalEventHandlersEventMap {
     'quiet-blur': QuietBlurEvent;

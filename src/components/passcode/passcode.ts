@@ -362,36 +362,33 @@ export class QuietPasscode extends QuietElement {
         })}
       >
         ${boxes.map((box, index) => {
-          const part = box === 'delimiter' ? 'delimiter' : 'character-box';
+          if (box === 'character') charPosition++;
+          const isCharacter = box === 'character';
+          const isCurrent =
+            isCharacter && (charPosition === this.value.length + 1 || (isFull && charPosition === totalCharacters));
+          const isEmpty = this.value.charAt(charPosition - 1) === '';
+          const isLast = charPosition === totalCharacters;
 
-          if (box === 'character') {
-            charPosition++;
+          // Character boxes
+          if (isCharacter) {
+            return html`
+              <div
+                part="character-box"
+                class=${classMap({
+                  character: true,
+                  current: isCurrent,
+                  empty: isEmpty,
+                  last: isLast
+                })}
+                aria-hidden="true"
+              >
+                ${this.masked ? '' : this.value.charAt(charPosition - 1) || ''}
+              </div>
+            `;
           }
 
-          const current =
-            box === 'character' &&
-            (charPosition === this.value.length + 1 || (isFull && charPosition === totalCharacters));
-          const empty = this.value.charAt(charPosition - 1) === '';
-          const last = charPosition === totalCharacters;
-
-          return html`
-            <div
-              part="${part}"
-              class=${classMap({
-                placeholder: true,
-                character: box === 'character',
-                delimiter: box === 'delimiter',
-                current,
-                empty,
-                last
-              })}
-              aria-hidden="true"
-            >
-              ${box === 'delimiter'
-                ? html`${this.format.charAt(index)}`
-                : html`${this.masked ? '' : this.value.charAt(charPosition - 1) || ''}`}
-            </div>
-          `;
+          // Delimiters
+          return html` <div part="delimiter" class="delimiter">${this.format.charAt(index)}</div>`;
         })}
 
         <input

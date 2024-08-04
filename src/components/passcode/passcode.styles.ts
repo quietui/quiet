@@ -6,7 +6,6 @@ export default css`
     display: flex;
     gap: 0.125em;
     width: fit-content;
-    color: var(--quiet-text-muted);
 
     /* Unset default visual box styles */
     &.normal,
@@ -30,22 +29,26 @@ export default css`
       opacity: 0.5;
     }
 
-    /* Placeholders */
-    .placeholder {
+    /* Delimiters */
+    .delimiter {
       position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
+      min-width: 0.5em;
+      translate: 0 -0.0625em;
+      color: var(--quiet-text-muted);
     }
 
+    /* Characters */
     .character {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       aspect-ratio: 9 / 11;
       border-radius: calc(var(--quiet-border-radius) / 1.5);
       color: var(--quiet-text-body);
-
-      &.empty {
-        color: var(--quiet-text-muted);
-      }
     }
 
     /* Masked */
@@ -103,11 +106,6 @@ export default css`
       }
     }
 
-    .delimiter {
-      min-width: 0.5em;
-      translate: 0 -0.0625em;
-    }
-
     /* Normal */
     &.normal .character {
       background-color: var(--quiet-paper-color);
@@ -120,28 +118,26 @@ export default css`
     }
   }
 
-  :host(:state(focused)) .placeholder {
-    &.current {
-      outline: var(--quiet-focus-ring);
-      outline-offset: calc(-1 * var(--quiet-border-width));
+  :host(:state(focused)) .character.current {
+    outline: var(--quiet-focus-ring);
+    outline-offset: calc(-1 * var(--quiet-border-width));
 
-      &::after {
-        content: '';
-        position: absolute;
-        top: calc(50% - 0.5em);
-        left: calc(50% - 0.09375em / 2);
-        height: 1em;
-        border-left: solid 0.09375em currentColor;
-        animation: 1s cursor infinite;
-      }
+    &::after {
+      content: '';
+      position: absolute;
+      top: calc(50% - 0.5em);
+      left: calc(50% - 0.09375em / 2);
+      height: 1em;
+      border-left: solid 0.09375em currentColor;
+      animation: 1s cursor infinite;
+    }
 
-      &.last:not(.empty)::after {
-        left: calc(100% - 0.25em);
-      }
+    &.last:not(.empty)::after {
+      left: calc(100% - 0.25em);
+    }
 
-      &.last:not(.empty):dir(rtl)::after {
-        left: 0.25em;
-      }
+    &.last:not(.empty):dir(rtl)::after {
+      left: 0.25em;
     }
   }
 

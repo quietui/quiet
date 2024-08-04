@@ -828,13 +828,15 @@ quiet-callout {
   background-repeat: repeat;
   background-size:
     44px 44px,
+    44px 44px,
     100%,
     100%,
     100%,
     100%;
   /* prettier-ignore */
   background-image:
-    radial-gradient(color-mix(in oklab, var(--quiet-primary-fill-mid) 20%, transparent) 1.5px, transparent 0),
+    linear-gradient(to right, color-mix(in oklab, var(--quiet-primary-stroke-mid) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--quiet-primary-stroke-mid) 7%, transparent) 1px, transparent 1px),
     radial-gradient(at 50% 46%, color-mix(in oklab, transparent, var(--quiet-primary-fill-mid) 18%) 0px, transparent 50%),
     radial-gradient(at 90% 9%, color-mix(in oklab, transparent, var(--quiet-primary-fill-mid) 21%) 0px, transparent 50%),
     radial-gradient(at 13% 34%, color-mix(in oklab, transparent, var(--quiet-primary-fill-mid) 26%) 0px, transparent 50%),
@@ -845,7 +847,8 @@ quiet-callout {
 .quiet-dark .layout-splash {
   /* prettier-ignore */
   background-image:
-    radial-gradient(color-mix(in oklab, var(--quiet-primary-fill-mid) 15%, transparent) 1.5px, transparent 0),
+    linear-gradient(to right, color-mix(in oklab, var(--quiet-primary-stroke-mid) 3.5%, transparent) 1px 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--quiet-primary-stroke-mid) 3.5%, transparent) 1px 1px, transparent 1px),
     radial-gradient(at 50% 46%, color-mix(in oklab, transparent, var(--quiet-primary-fill-mid) 8%) 0px, transparent 50%),
     radial-gradient(at 90% 9%, color-mix(in oklab, transparent, var(--quiet-primary-fill-mid) 11%) 0px, transparent 50%),
     radial-gradient(at 13% 34%, color-mix(in oklab, transparent, var(--quiet-primary-fill-mid) 16%) 0px, transparent 50%),

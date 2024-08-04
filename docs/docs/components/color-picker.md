@@ -120,11 +120,11 @@ Use the `format` attribute to set the format of the value. Valid options include
 You can set the color picker's value using any format and it will automatically be converted to the format specified by the `format` attribute.
 :::
 
-### Getting the value as an object
+### Getting the value programmatically
 
-If you need to access the value as an object instead of a string, use the `getValueAsObject()` method. You can pass `rgb` (default) or `hsl` to get a corresponding object back.
+If you need to access the value in a specific format, use the `getValueAs()` method. You can pass `rgb` (default), `hsl`, `hex`, or `hex8` to get a corresponding value.
 
-For `rgb`, an object with `{ r, g, b, a }` properties will be returned where `r`/`g`/`b` range from 0-255 and `a` (alpha) ranges from 0–1. For `hsl`, an object with `{ h, s, l, a }` properties will be returned where `h` ranges from 0–360 and `s`/`l`/`a` range from 0–1/
+For `rgb`, an object with `{ r, g, b, a }` properties will be returned where `r`, `g`, and `b` range from 0-255 and `a` (alpha) ranges from 0–1. For `hsl`, an object with `{ h, s, l, a }` properties will be returned where `h` ranges from 0–360 and `s`, `l`, and `a` range from 0–1. For `hex` and `hex8`, a string in the format of `#RRGGBB` and `#RRGGBBAA` will be returned, respectively.
 
 ```html {.example}
 <quiet-color-picker 
@@ -141,8 +141,10 @@ For `rgb`, an object with `{ r, g, b, a }` properties will be returned where `r`
   // Outputs two objects when the color changes
   colorPicker.addEventListener('quiet-change', () => {
     console.log(
-      colorPicker.getValueAsObject('rgb'),
-      colorPicker.getValueAsObject('hsl')
+      colorPicker.getValueAs('rgb'),
+      colorPicker.getValueAs('hex'),
+      colorPicker.getValueAs('hex8'),
+      colorPicker.getValueAs('hsl')
     );
   });
 </script>

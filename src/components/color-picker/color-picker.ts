@@ -556,13 +556,18 @@ export class QuietColorPicker extends QuietElement {
   }
 
   /**
-   * Gets the current value as an RGB object with `r`, `g`, and `b` properties ranging from 0–255 and an `a` property
-   * (representing opacity) that ranges from 0-1.
+   * Gets the current value as a hex string, a hex8 string, an RGB object, or an HSL object. RBG objects have `r`, `g`,
+   * and `b` properties ranging from 0–255 and an `a` property (representing opacity) that ranges from 0-1. HSL objects
+   * have an `h` property ranging from `0-359` and `s`, `l`, and `a` properties ranging from 0–1.
    */
-  public getValueAsObject(format: 'rgb' | 'hsl' = 'rgb') {
+  public getValueAs(format: 'hex' | 'hex8' | 'hsl' | 'rgb' = 'rgb') {
     const color = new TinyColor({ h: this.h, s: this.s, v: this.v, a: this.a });
 
     switch (format) {
+      case 'hex':
+        return color.toHexString();
+      case 'hex8':
+        return color.toHex8String();
       case 'hsl':
         return color.toHsl();
       default:

@@ -141,16 +141,21 @@ export default css`
     }
   }
 
-  /* Visually hidden text box */
+  /*
+    The invisible text box. We don't want to use 0% opacity or visually hidden classes here because that prevents iOS
+    users from being able to paste into the passcode.
+  */
   #text-box {
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    outline: solid 1px tomato;
-    opacity: 0;
     cursor: text;
+    color: transparent;
+    border: none;
+    background: none;
+    caret-color: transparent;
 
     &:disabled {
       cursor: not-allowed;

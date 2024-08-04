@@ -41,7 +41,7 @@ import type { CSSResultGroup } from 'lit';
  * @csspart label - The element that contains the passcode's label.
  * @csspart description - The element that contains the passcode's description.
  * @csspart visual-box - The element that wraps the characters, delimiters, and the hidden input.
- * @csspart box - Each individual character box.
+ * @csspart character-box - Each individual character box.
  * @csspart delimiter - Each individual delimiter.
  *
  * @cssstate disabled - Applied when the passcode is disabled.
@@ -267,6 +267,12 @@ export class QuietPasscode extends QuietElement {
     }
   }
 
+  private handlePointerDown(event: PointerEvent) {
+    this.focus();
+    this.moveCursorToEnd();
+    event.preventDefault();
+  }
+
   private moveCursorToEnd() {
     this.textBox.setSelectionRange(this.value.length, this.value.length);
   }
@@ -356,7 +362,7 @@ export class QuietPasscode extends QuietElement {
         })}
       >
         ${boxes.map((box, index) => {
-          const part = box === 'delimiter' ? 'delimiter' : 'box';
+          const part = box === 'delimiter' ? 'delimiter' : 'character-box';
 
           if (box === 'character') {
             charPosition++;
@@ -411,6 +417,7 @@ export class QuietPasscode extends QuietElement {
           @focus=${this.handleFocus}
           @blur=${this.handleBlur}
           @keydown=${this.handleKeyDown}
+          @pointerdown=${this.handlePointerDown}
         />
       </div>
     `;

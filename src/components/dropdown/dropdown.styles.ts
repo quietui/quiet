@@ -14,6 +14,7 @@ export default css`
     top: 0;
     left: 0;
     width: max-content;
+    text-align: start;
     color: var(--quiet-neutral-text-on-soft);
     background-color: var(--quiet-paper-color);
     border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);

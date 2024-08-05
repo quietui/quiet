@@ -38,21 +38,18 @@
   --quiet-focus-offset: 1px;
   --quiet-backdrop-filter: blur(6px);
 
-  /* Form controls */
+  /* Form control tokens */
   --quiet-form-control-height-xs: 1.75rem;
   --quiet-form-control-height-sm: 2.25rem;
   --quiet-form-control-height-md: 2.75rem;
   --quiet-form-control-height-lg: 3.25rem;
   --quiet-form-control-height-xl: 3.75rem;
-
   --quiet-form-control-font-size-xs: 0.75rem;
   --quiet-form-control-font-size-sm: 0.875rem;
   --quiet-form-control-font-size-md: 1rem;
   --quiet-form-control-font-size-lg: 1.25rem;
   --quiet-form-control-font-size-xl: 1.6rem;
-
   --quiet-form-control-required-content: '*';
-
   --quiet-button-active-offset: 1px;
 
   /*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -221,10 +218,13 @@
   --quiet-focus-ring: var(--quiet-border-style) var(--quiet-focus-width) var(--quiet-focus-color);
   --quiet-backdrop-color: rgb(0 0 0 / 0.25);
   --quiet-selection-background-color: var(--quiet-primary-700);
+  --quiet-selection-color: var(--quiet-text-body);
   --quiet-shadow-color: transparent;
   --quiet-shadow-softer: none;
+  --quiet-shadow-soft: none;
   --quiet-shadow-mid: none;
   --quiet-shadow-loud: none;
+  --quiet-shadow-louder: none;
 
   /* Primary */
   --quiet-primary-fill-softer: var(--quiet-primary-900);

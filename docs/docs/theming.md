@@ -1,5 +1,5 @@
 ---
-title: Themes
+title: Theming
 description: Theme concepts, color palettes, and design tokens.
 layout: docs
 ---
@@ -8,7 +8,7 @@ The default theme provides simple, elegant styles with support for light and dar
 
 ## Using the default theme
 
-To import the default theme from the CDN, add the following code to the `<head>` of your page.
+To import the default theme from the CDN, add the following code to the `<head>` section of each page.
 
 ```html
 <link rel="stylesheet" href="{% cdnUrl '/dist/themes/quiet.css' %}">
@@ -55,7 +55,7 @@ For best results, use midtone colors to seed palettes. Any of the 500-level colo
 
 ### Built-in presets
 
-For convenience, Quiet ships with 21 built-in color presets you can use to change the primary seed color. The theme picker at the top of the page allows you to preview them.
+For convenience, Quiet's default theme ships with 21 color presets. The theme picker at the top of the page allows you to preview them.
 
 To use a preset in your app, add the `quiet-{preset}` class to the `<html>` element, where `{preset}` is one of the following values: red, orange, amber, yellow, lime, green, emerald, teal, cyan, sky, blue, indigo, violet, purple, fuschia, pink, rose, slate, zinc, stone, or sand.
 
@@ -69,7 +69,7 @@ To use a preset in your app, add the `quiet-{preset}` class to the `<html>` elem
 
 Using a preset is an easy way to change the library's overall appearance, but it probably won't be a perfect match if you already have brand guidelines to follow. In that case, it might be tempting to set `--quiet-primary-seed` to whatever your brand color is.
 
-However, that will only work well if your brand color happens to be a midtone, otherwise the generated design tokens may not have enough contrast. A better approach is to use the nearest midtone color that fits with your brand.
+However, that will only work well if your brand color happens to be a midtone, otherwise the generated color tokens may not have enough contrast. A better approach is to use the nearest midtone color that fits with your brand.
 
 _"But my buttons don't match my brand color exactly…"_
 
@@ -400,7 +400,7 @@ Text-on colors provide adequate contrast when used on top of their respective fi
 :::details A note about WCAG 2
 You might discover that some elements are reported to have insufficient contrast, according to [WCAG 2](https://www.w3.org/WAI/standards-guidelines/wcag/). This occurs due to the standard not accounting for _perceptual_ contrast and only affects Quiet's text-on midtone colors.
 
-Technically, <quiet-badge variant="primary" style="font-size: 0.9375rem; color: black;">black text</quiet-badge> has a higher contrast ratio than <quiet-badge variant="primary" style="font-size: 0.9375rem;">white text</quiet-badge> on these backgrounds, despite the former being harder for most people to see. While these design token combinations don't meet WCAG 2, they do meet the the forthcoming [APCA](https://github.com/Myndex/SAPC-APCA) standard, which is the likely candidate contrast method for WCAG 3.
+Technically, <quiet-badge variant="primary" style="font-size: 0.9375rem; color: black;">black text</quiet-badge> has a higher contrast ratio than <quiet-badge variant="primary" style="font-size: 0.9375rem;">white text</quiet-badge> on these backgrounds, despite the former being harder for most people to see. While these color token combinations don't meet WCAG 2, they do meet the the forthcoming [APCA](https://github.com/Myndex/SAPC-APCA) standard, which is the likely candidate contrast method for WCAG 3.
 
 _[Refer to this article](https://medium.com/@think_ui/why-color-contrast-is-not-as-black-and-white-as-it-seems-94197a72b005) to learn more about why WCAG 2 isn't a great standard for measuring perceptual contrast._
 :::
@@ -486,33 +486,63 @@ These tokens represent pure black and white, but their values invert in dark mod
 
 ### Design tokens
 
-The following tokens are used to set the overall appearance of the default theme. More granular customizations can be made to components with [CSS parts](/docs/using-components/#css-parts).
+The following design tokens are used to set the overall appearance of the default theme. You can customize tokens by reassigning them as shown below. More granular customizations can be made to components with [CSS parts](/docs/using-components/#css-parts).
+
+```css
+/* Design token overrides */
+:root {
+  --quiet-background-color: white;
+  --quiet-text-body: black;
+}
+
+/* Dark theme design token overrides */
+.quiet-dark {
+  --quiet-background-color: black;
+  --quiet-text-body: white;
+}
+```
+
+:::warn
+Always scope design tokens overrides to the `:root` node (i.e. `<html>` element), otherwise calculated values may not propagate as expected.
+:::
 
 #### Application tokens
 
-==TODO - document color app tokens==
-
-==TODO - document shadow tokens with examples==
-
 <div class="table-scroll table-theme" tabindex="0">
 
-| Custom property | Description | Default |
-| --------------- | ----------- | ------- |
-| `--quiet-border-style` | The default border style for most elements. | `solid` |
-| `--quiet-border-width` | The default border width for most elements. | `1px` |
-| `--quiet-border-radius` | The base border radius for elements. Often used with `calc()` to scale to smaller and larger elements. | `0.375rem` |
-| `--quiet-content-spacing` | The spacing between blocks of content. Used primarily in Restyle to space content consistently. | `2rem` |
-| `--quiet-font-family` | The default font. | `system-ui, sans-serif` |
-| `--quiet-font-heading` | The font used for headings. | `var(--quiet-font-family)` |
-| `--quiet-font-code` | The font used for code and code blocks. | `SFMono-Regular, Consolas, Menlo, Monaco, 'liberation mono', 'courier new', monospace` |
-| `--quiet-font-size` | The base font size for the application. (The default theme is optimized for a 16px font size.) | `16px` |
-| `--quiet-font-weight-normal` | The font weight for normal text. | `400` |
-| `--quiet-font-weight-semibold` | The font weight for semibold text. | `500` |
-| `--quiet-font-weight-bold` | The font weight for bold text. | `600` |
-| `--quiet-line-height` | The default line height for text. | `1.6` |
-| `--quiet-focus-width` | The width of the focus ring's border. | `3px` |
-| `--quiet-focus-offset` | The outline offset of the focus ring. | `1px` |
-| `--quiet-backdrop-filter` | The filter to apply to dialog backdrops and similar overlays. | `blur(6px)` |
+| Custom property | Description |
+| --------------- | ----------- |
+| `--quiet-background-color` | The application's background color. |
+| `--quiet-paper-color` | An alternative background color for slightly lifted surfaces such as a card. |
+| `--quiet-text-body` | The default text color of the app. |
+| `--quiet-text-muted` | The color to use for muted text such as form control descriptions. |
+| `--quiet-font-family` | The default font. |
+| `--quiet-font-family-heading` | The font used for headings. |
+| `--quiet-font-family-code` | The font used for code and code blocks. |
+| `--quiet-font-size` | The base font size for the application. (The default theme is optimized for a 16px font size.)  |
+| `--quiet-font-weight-normal` | The font weight for normal text. |
+| `--quiet-font-weight-semibold` | The font weight for semibold text. |
+| `--quiet-font-weight-bold` | The font weight for bold text. |
+| `--quiet-line-height` | The default line height for text. |
+| `--quiet-content-spacing` | The spacing between blocks of content. Used primarily in Restyle to space content consistently. |
+| `--quiet-focus-color` | The color of the focus ring. |
+| `--quiet-focus-ring` | The outline-friendly property used to show focus rings. |
+| `--quiet-selection-background-color` | The background color of selected text. |
+| `--quiet-selection-color` | The color of selected text. |
+| `--quiet-backdrop-color` | The color of backdrops for modal components such as dialog.  |
+| `--quiet-backdrop-filter` | The filter to apply to dialog backdrops and similar overlays. |
+| `--quiet-border-style` | The default border style for most elements. |
+| `--quiet-border-width` | The default border width for most elements. |
+| `--quiet-border-radius` | The base border radius for elements. Often used with `calc()` to scale to smaller and larger elements. |
+| `--quiet-focus-width` | The width of the focus ring's border. |
+| `--quiet-focus-offset` | The outline offset of the focus ring. |
+| `--quiet-shadow-color` | The base color used in all shadows. |
+| `--quiet-shadow-softer` | The softest shadow, a box-shadow-friendly property. |
+| `--quiet-shadow-soft` | A soft shadow, a box-shadow-friendly property. |
+| `--quiet-shadow-mid` | A mid-level shadow, a box-shadow-friendly property. |
+| `--quiet-shadow-loud` | A loud shadow, a box-shadow-friendly property. |
+| `--quiet-shadow-louder` | The loudest shadow, a box-shadow-friendly property. |
+
 
 </div>
 
@@ -520,18 +550,20 @@ The following tokens are used to set the overall appearance of the default theme
 
 <div class="table-scroll table-theme" tabindex="0">
 
-| Custom property | Description | Default |
-| --------------- | ----------- | ------- |
-| `--quiet-form-control-height-xs` | The height of extra small form controls. | `1.5rem` |
-| `--quiet-form-control-height-sm` | The height of small form controls. | `2rem` |
-| `--quiet-form-control-height-md` | The height of medium form controls. | `2.75rem` |
-| `--quiet-form-control-height-lg` | The height of large form controls. | `3.25rem` |
-| `--quiet-form-control-height-xl` | The height of extra large form controls. | `4rem` |
-| `--quiet-form-control-font-size-xs` | The font size of extra small form controls. | `0.75rem` |
-| `--quiet-form-control-font-size-sm` | The font size of small form controls. | `0.875rem` |
-| `--quiet-form-control-font-size-md` | The font size of medium form controls. | `0.9375rem` |
-| `--quiet-form-control-font-size-lg` | The font size of large form controls. | `1.25rem` |
-| `--quiet-form-control-font-size-xl` | The font size of extra large form controls. | `1.5rem` |
+| Custom property | Description |
+| --------------- | ----------- |
+| `--quiet-form-control-height-xs` | The height of extra small form controls. |
+| `--quiet-form-control-height-sm` | The height of small form controls. |
+| `--quiet-form-control-height-md` | The height of medium form controls. |
+| `--quiet-form-control-height-lg` | The height of large form controls. |
+| `--quiet-form-control-height-xl` | The height of extra large form controls. |
+| `--quiet-form-control-font-size-xs` | The font size of extra small form controls. |
+| `--quiet-form-control-font-size-sm` | The font size of small form controls. |
+| `--quiet-form-control-font-size-md` | The font size of medium form controls. |
+| `--quiet-form-control-font-size-lg` | The font size of large form controls. |
+| `--quiet-form-control-font-size-xl` | The font size of extra large form controls. |
+| `--quiet-form-control-required-content` | The content to show next to the label when the form control is required. |
+| `--quiet-button-active-offset` | The amount of vertical shift to apply to buttons when they're pressed. |
 
 </div>
 

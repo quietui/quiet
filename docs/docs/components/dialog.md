@@ -45,7 +45,7 @@ Similarly, you can add `data-dialog="close"` to any button inside a dialog to cl
     Opening and closing
   </h3>
 
-  <p>The button you clicked has <code>data-dialog="open <em>id</em>"</code> so it opens the dialog that a matching id.</p>
+  <p>The button you clicked has <code>data-dialog="open <em>id</em>"</code> so it opens the dialog that has a matching id.</p>
   <p style="margin-block-end: 0;">The button below has <code>data-dialog="dismiss"</code> so it will close the dialog when you click on it.</p>
 
   <quiet-button slot="footer" data-dialog="close" variant="primary">

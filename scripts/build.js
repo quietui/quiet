@@ -332,5 +332,7 @@ function terminate() {
   process.exit();
 }
 
-process.on('SIGINT', terminate);
-process.on('SIGTERM', terminate);
+process.on('exit', () => terminate());
+process.on('SIGHUP', () => terminate());
+process.on('SIGINT', () => terminate());
+process.on('SIGTERM', () => terminate());

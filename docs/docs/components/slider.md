@@ -446,7 +446,8 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
   label="Color"
   name="color" 
   min="0"
-  max="360"
+  max="359"
+  with-tooltip
   style="--hue: hsl(0deg 100% 50%);"
 ></quiet-slider>
 
@@ -459,6 +460,7 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
   min="0"
   max="1"
   step=".01"
+  with-tooltip
   style="--opacity: 0%;"
 ></quiet-slider>
 
@@ -584,7 +586,7 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
   with-references
 >
   <span slot="reference">Off</span>
-  <span slot="reference" style="position: absolute; left: 14%;">Slow</span>
+  <span slot="reference" class="repeat-slow">Slow</span>
   <span slot="reference">Fast</span>
 </quiet-slider>
 
@@ -623,6 +625,18 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
       display: initial;
       border-radius: 0.125em;
       background-color: var(--quiet-neutral-fill-mid);
+    }
+
+    .repeat-slow {
+      position: absolute;
+
+      &:dir(ltr) {
+        left: 14%;
+      }
+
+      &:dir(rtl) {
+        right: 14%;
+      }
     }
   }
 </style>

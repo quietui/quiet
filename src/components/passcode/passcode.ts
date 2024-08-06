@@ -3,6 +3,7 @@ import { customElement, property, query, state } from 'lit/decorators.js';
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
+import { Localize } from '../../utilities/localize.js';
 import {
   QuietBlurEvent,
   QuietChangeEvent,
@@ -54,6 +55,8 @@ import type { CSSResultGroup } from 'lit';
 export class QuietPasscode extends QuietElement {
   static formAssociated = true;
   static styles: CSSResultGroup = [hostStyles, formControlStyles, styles];
+
+  private localize = new Localize(this);
 
   /** A reference to the `<form>` associated with the form control, or `null` if no form is associated. */
   public associatedForm: HTMLFormElement | null = null;
@@ -246,7 +249,10 @@ export class QuietPasscode extends QuietElement {
     }
   }
 
-  private handleKeyDown(event: KeyboardEvent) {
+  private async handleKeyDown(event: KeyboardEvent) {
+    const isRtl = this.localize.dir() === 'rtl';
+    const oldValue = this.value;
+
     // When enter is pressed in a passcode, the associated form should submit
     if (event.key === 'Enter' && this.associatedForm) {
       const submitter = [...this.associatedForm.elements].find((el: HTMLInputElement | HTMLButtonElement) => {
@@ -260,10 +266,31 @@ export class QuietPasscode extends QuietElement {
 
     if (event.key === 'Escape') {
       this.value = '';
+
+      if (oldValue !== this.value) {
+        await this.updateComplete;
+        this.dispatchEvent(new QuietInputEvent());
+        this.dispatchEvent(new InputEvent('input'));
+        this.dispatchEvent(new QuietChangeEvent());
+        this.dispatchEvent(new InputEvent('change'));
+      }
     }
 
     if (event.key !== 'Tab') {
       requestAnimationFrame(() => this.moveCursorToEnd());
+    }
+
+    // Delete when arrow keys are pressed
+    if ((!isRtl && event.key === 'ArrowLeft') || (isRtl && event.key === 'ArrowRight')) {
+      this.value = this.value.slice(0, this.value.length - 1);
+
+      if (oldValue !== this.value) {
+        await this.updateComplete;
+        this.dispatchEvent(new QuietInputEvent());
+        this.dispatchEvent(new InputEvent('input'));
+        this.dispatchEvent(new QuietChangeEvent());
+        this.dispatchEvent(new InputEvent('change'));
+      }
     }
   }
 

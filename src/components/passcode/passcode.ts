@@ -19,8 +19,8 @@ import type { CSSResultGroup } from 'lit';
 /**
  * <quiet-passcode>
  *
- * @summary Passcodes let users enter fixed-length passcodes, verification tokens, and similar data in a user-friendly
- *  way.
+ * @summary Passcodes let users enter fixed-length passcodes, verification tokens, one-time codes, and similar data in a
+ *  user-friendly way.
  * @documentation https://quietui.com/docs/components/passcode
  * @status stable
  * @since 1.0

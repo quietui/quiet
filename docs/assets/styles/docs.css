@@ -119,7 +119,7 @@ html:not(.quiet-dark) .only-dark {
 /* Splash page divider colors should match the background better */
 .layout-splash:not(.scrolled-down) {
   .header-group:not(:first-of-type) + .header-group {
-    border-left-color: color-mix(in oklab, var(--quiet-text-body) 15%, transparent);
+    border-left-color: color-mix(in oklab, var(--quiet-strident) 15%, transparent);
   }
 }
 
@@ -822,37 +822,48 @@ quiet-callout {
 
 /* Splash */
 .layout-splash {
+  --grid-size: 44px;
+  --grid-color: white;
+
   /* Light mode mesh gradient */
+  background-attachment: fixed;
   background-position: center;
   background-color: var(--quiet-background-color);
   background-repeat: repeat;
   background-size:
-    44px 44px,
-    44px 44px,
     100%,
     100%,
     100%,
-    100%;
+    100%,
+    100%,
+    100%,
+    var(--grid-size) var(--grid-size),
+    var(--grid-size) var(--grid-size);
+
   /* prettier-ignore */
   background-image:
-    linear-gradient(to right, color-mix(in oklab, var(--quiet-primary-stroke-mid) 7%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in oklab, var(--quiet-primary-stroke-mid) 7%, transparent) 1px, transparent 1px),
     radial-gradient(at 50% 46%, color-mix(in oklab, transparent, var(--quiet-primary-fill-mid) 18%) 0px, transparent 50%),
     radial-gradient(at 90% 9%, color-mix(in oklab, transparent, var(--quiet-primary-fill-mid) 21%) 0px, transparent 50%),
     radial-gradient(at 13% 34%, color-mix(in oklab, transparent, var(--quiet-primary-fill-mid) 26%) 0px, transparent 50%),
-    radial-gradient(at 75% 75%, color-mix(in oklab, transparent, var(--quiet-primary-fill-mid) 24%) 0px, transparent 50%);
+    radial-gradient(at 75% 75%, color-mix(in oklab, transparent, var(--quiet-primary-fill-mid) 24%) 0px, transparent 50%),
+    linear-gradient(to top right, transparent 75%, var(--quiet-background-color) 100%),
+    linear-gradient(to bottom left, transparent 75%, var(--quiet-background-color) 100%),
+    linear-gradient(to right, color-mix(in oklab, var(--quiet-primary-stroke-mid) 8%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--quiet-primary-stroke-mid) 8%, transparent) 1px, transparent 1px);
 }
 
 /* Dark mode mesh gradient */
 .quiet-dark .layout-splash {
   /* prettier-ignore */
   background-image:
-    linear-gradient(to right, color-mix(in oklab, var(--quiet-primary-stroke-mid) 3.5%, transparent) 1px 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in oklab, var(--quiet-primary-stroke-mid) 3.5%, transparent) 1px 1px, transparent 1px),
     radial-gradient(at 50% 46%, color-mix(in oklab, transparent, var(--quiet-primary-fill-mid) 8%) 0px, transparent 50%),
     radial-gradient(at 90% 9%, color-mix(in oklab, transparent, var(--quiet-primary-fill-mid) 11%) 0px, transparent 50%),
     radial-gradient(at 13% 34%, color-mix(in oklab, transparent, var(--quiet-primary-fill-mid) 16%) 0px, transparent 50%),
-    radial-gradient(at 75% 75%, color-mix(in oklab, transparent, var(--quiet-primary-fill-mid) 14%) 0px, transparent 50%);
+    radial-gradient(at 75% 75%, color-mix(in oklab, transparent, var(--quiet-primary-fill-mid) 14%) 0px, transparent 50%),
+    linear-gradient(to top right, transparent 75%, var(--quiet-background-color) 100%),
+    linear-gradient(to bottom left, transparent 75%, var(--quiet-background-color) 100%),
+    linear-gradient(to right, color-mix(in oklab, var(--quiet-primary-stroke-mid) 6%, transparent) 1px 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--quiet-primary-stroke-mid) 6%, transparent) 1px 1px, transparent 1px);
 }
 
 .layout-splash:not(.scrolled-down) #header {

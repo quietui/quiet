@@ -62,9 +62,9 @@ I'd like to thank the following people and projects for making Quiet UI possible
 
 - [Lit](https://lit.dev/) for making Web Components so fun to build
 - [The Harmony color palette](https://evilmartians.com/opensource/harmony) for color inspiration
-- [Floating UI](https://floating-ui.com/) for positioning all the things
 - [Eleventy](https://www.11ty.dev/) for generating the docs
 - [The Custom Elements Manifest project](https://custom-elements-manifest.open-wc.org/) for making API documentation easy
+- [Floating UI](https://floating-ui.com/) for positioning all the things
 - [Tabler Icons](https://tabler.io/icons) for thousands of beautiful, open source icons
 - [James Duncan](https://x.com/JamesDuncanArt) for drawing a super cool mascot
 

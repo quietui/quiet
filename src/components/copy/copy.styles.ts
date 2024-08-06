@@ -7,6 +7,11 @@ export default css`
     white-space: normal;
   }
 
+  quiet-button,
+  ::slotted(*) {
+    cursor: copy;
+  }
+
   #feedback {
     position: absolute;
     width: fit-content;

@@ -5,6 +5,7 @@ export default css`
     display: inline-block;
     position: relative;
     width: auto;
+    cursor: pointer;
   }
 
   #button {
@@ -22,7 +23,7 @@ export default css`
     background: none;
     border: none;
     border-radius: var(--quiet-border-radius);
-    cursor: pointer;
+    cursor: inherit;
     touch-action: manipulation;
     user-select: none;
     -webkit-user-select: none;

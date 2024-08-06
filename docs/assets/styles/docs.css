@@ -16,6 +16,9 @@
   --docs-sidebar-width-mobile: 20rem;
   --docs-sidebar-speed: 250ms;
   --docs-wordmark-accent-color: var(--quiet-primary-fill-mid);
+
+  --grid-size: 44px;
+  --grid-color: white;
 }
 
 html.quiet-dark {
@@ -361,7 +364,6 @@ html:not(.quiet-dark) .only-dark {
   top: var(--docs-header-height);
   height: calc(100dvh - var(--docs-header-height));
   border-right: solid var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
-  background: var(--quiet-background-color);
   padding-inline-end: 2rem;
   padding-block: 3rem 2rem;
   overflow-x: hidden;
@@ -646,6 +648,7 @@ figure.float-end {
     max-width: calc(100% - 2rem);
     height: 100%;
     font-size: 1rem;
+    background: var(--quiet-background-color);
     border-right: none;
     padding-inline: 1.5rem;
     padding-block: 1rem;
@@ -822,10 +825,6 @@ quiet-callout {
 
 /* Splash */
 .layout-splash {
-  --grid-size: 44px;
-  --grid-color: white;
-
-  /* Light mode mesh gradient */
   background-attachment: fixed;
   background-position: center;
   background-color: var(--quiet-background-color);
@@ -840,6 +839,7 @@ quiet-callout {
     var(--grid-size) var(--grid-size),
     var(--grid-size) var(--grid-size);
 
+  /* Light mode mesh gradient */
   /* prettier-ignore */
   background-image:
     radial-gradient(at 50% 46%, color-mix(in oklab, transparent, var(--quiet-primary-fill-mid) 18%) 0px, transparent 50%),
@@ -848,12 +848,12 @@ quiet-callout {
     radial-gradient(at 75% 75%, color-mix(in oklab, transparent, var(--quiet-primary-fill-mid) 24%) 0px, transparent 50%),
     linear-gradient(to top right, transparent 75%, var(--quiet-background-color) 100%),
     linear-gradient(to bottom left, transparent 75%, var(--quiet-background-color) 100%),
-    linear-gradient(to right, color-mix(in oklab, var(--quiet-primary-stroke-mid) 8%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in oklab, var(--quiet-primary-stroke-mid) 8%, transparent) 1px, transparent 1px);
+    linear-gradient(to right, color-mix(in oklab, var(--quiet-primary-stroke-mid) 10%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--quiet-primary-stroke-mid) 10%, transparent) 1px, transparent 1px);
 }
 
-/* Dark mode mesh gradient */
 .quiet-dark .layout-splash {
+  /* Dark mode mesh gradient */
   /* prettier-ignore */
   background-image:
     radial-gradient(at 50% 46%, color-mix(in oklab, transparent, var(--quiet-primary-fill-mid) 8%) 0px, transparent 50%),
@@ -862,8 +862,8 @@ quiet-callout {
     radial-gradient(at 75% 75%, color-mix(in oklab, transparent, var(--quiet-primary-fill-mid) 14%) 0px, transparent 50%),
     linear-gradient(to top right, transparent 75%, var(--quiet-background-color) 100%),
     linear-gradient(to bottom left, transparent 75%, var(--quiet-background-color) 100%),
-    linear-gradient(to right, color-mix(in oklab, var(--quiet-primary-stroke-mid) 6%, transparent) 1px 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in oklab, var(--quiet-primary-stroke-mid) 6%, transparent) 1px 1px, transparent 1px);
+    linear-gradient(to right, color-mix(in oklab, var(--quiet-primary-stroke-mid) 5%, transparent) 1px 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--quiet-primary-stroke-mid) 5%, transparent) 1px 1px, transparent 1px);
 }
 
 .layout-splash:not(.scrolled-down) #header {
@@ -956,7 +956,53 @@ quiet-callout {
   }
 }
 
+/* Add the grid at the bottom of every page except the splash */
+body:not(.layout-splash) {
+  /* Light mode mesh gradient */
+  background-position: bottom center;
+  background-color: var(--quiet-background-color);
+  background-repeat: repeat;
+  background-size:
+    100%,
+    100%,
+    100%,
+    100%,
+    100%,
+    100%,
+    100%,
+    var(--grid-size) var(--grid-size),
+    var(--grid-size) var(--grid-size);
+
+  /* prettier-ignore */
+  background-image:
+    linear-gradient(to top, transparent, var(--quiet-background-color) 50vh),
+    radial-gradient(at 50% 46%, color-mix(in oklab, transparent, var(--quiet-primary-fill-mid) 18%) 0px, transparent 50%),
+    radial-gradient(at 90% 9%, color-mix(in oklab, transparent, var(--quiet-primary-fill-mid) 21%) 0px, transparent 50%),
+    radial-gradient(at 13% 34%, color-mix(in oklab, transparent, var(--quiet-primary-fill-mid) 26%) 0px, transparent 50%),
+    radial-gradient(at 75% 75%, color-mix(in oklab, transparent, var(--quiet-primary-fill-mid) 24%) 0px, transparent 50%),
+    linear-gradient(to top right, transparent 75%, var(--quiet-background-color) 100%),
+    linear-gradient(to bottom left, transparent 75%, var(--quiet-background-color) 100%),
+    linear-gradient(to right, color-mix(in oklab, var(--quiet-primary-stroke-mid) 10%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--quiet-primary-stroke-mid) 10%, transparent) 1px, transparent 1px);
+}
+
+/* Dark mode mesh gradient */
+.quiet-dark body:not(.layout-splash) {
+  /* prettier-ignore */
+  background-image:
+    linear-gradient(to top, transparent, var(--quiet-background-color) 50vh),
+    radial-gradient(at 50% 46%, color-mix(in oklab, transparent, var(--quiet-primary-fill-mid) 8%) 0px, transparent 50%),
+    radial-gradient(at 90% 9%, color-mix(in oklab, transparent, var(--quiet-primary-fill-mid) 11%) 0px, transparent 50%),
+    radial-gradient(at 13% 34%, color-mix(in oklab, transparent, var(--quiet-primary-fill-mid) 16%) 0px, transparent 50%),
+    radial-gradient(at 75% 75%, color-mix(in oklab, transparent, var(--quiet-primary-fill-mid) 14%) 0px, transparent 50%),
+    linear-gradient(to top right, transparent 75%, var(--quiet-background-color) 100%),
+    linear-gradient(to bottom left, transparent 75%, var(--quiet-background-color) 100%),
+    linear-gradient(to right, color-mix(in oklab, var(--quiet-primary-stroke-mid) 5%, transparent) 1px 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--quiet-primary-stroke-mid) 5%, transparent) 1px 1px, transparent 1px);
+}
+
 .sponsorship-quote {
+  background-color: var(--quiet-paper-color);
   border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
   border-radius: calc(var(--quiet-border-radius) * 6);
   box-shadow: var(--quiet-shadow-softer);

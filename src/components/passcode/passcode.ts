@@ -300,6 +300,10 @@ export class QuietPasscode extends QuietElement {
     event.preventDefault();
   }
 
+  private handleSelect() {
+    this.moveCursorToEnd();
+  }
+
   private moveCursorToEnd() {
     this.textBox.setSelectionRange(this.value.length, this.value.length);
   }
@@ -442,6 +446,7 @@ export class QuietPasscode extends QuietElement {
           @blur=${this.handleBlur}
           @keydown=${this.handleKeyDown}
           @pointerdown=${this.handlePointerDown}
+          @select=${this.handleSelect}
         />
       </div>
     `;

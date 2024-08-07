@@ -160,6 +160,12 @@ export default css`
     &:disabled {
       cursor: not-allowed;
     }
+
+    /* The input's text can get highlighted when right-clicking the input, so we make the selection invisible. */
+    &::selection {
+      color: transparent;
+      background: transparent;
+    }
   }
 
   @keyframes cursor {

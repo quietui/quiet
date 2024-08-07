@@ -274,7 +274,6 @@ export default css`
         linear-gradient(45deg, transparent 75%, var(--quiet-neutral-fill-soft) 75%),
         linear-gradient(45deg, transparent 75%, var(--quiet-neutral-fill-soft) 75%),
         linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%);
-      cursor: copy;
     }
 
     &::part(button)::after {

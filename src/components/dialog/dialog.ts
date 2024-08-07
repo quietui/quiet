@@ -19,7 +19,8 @@ import type { CSSResultGroup } from 'lit';
  * @status stable
  * @since 1.0
  *
- * @slot - Content to place in the dialog's body.
+ * @slot - Content to place in the dialog's body. Note that, due to [this Chrome bug](https://issues.chromium.org/issues/40800208),
+ *  you should wrap text nodes in an element to allow text selection in that browser.
  * @slot header - Content to place in the dialog's header.
  * @slot actions - Slot in one or more text buttons to customize the actions that appear in the dialog's header. Only
  *  available when the header is enabled.

@@ -15,6 +15,10 @@ export default css`
   svg {
     animation: rotate var(--speed) linear infinite;
     transform-origin: center;
+
+    &:dir(rtl) {
+      animation-name: rotate-rtl;
+    }
   }
 
   #track {
@@ -42,6 +46,16 @@ export default css`
 
     100% {
       transform: rotate(360deg);
+    }
+  }
+
+  @keyframes rotate-rtl {
+    0% {
+      transform: rotate(360deg);
+    }
+
+    100% {
+      transform: rotate(0deg);
     }
   }
 `;

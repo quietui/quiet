@@ -1,5 +1,5 @@
 import { clamp } from '../../utilities/math.js';
-import { customElement, property, query } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 import { html } from 'lit';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import hostStyles from '../../styles/host.styles.js';
@@ -16,19 +16,25 @@ import type { CSSResultGroup } from 'lit';
  *
  * @slot - Text to render inside the progress bar.
  *
- * @cssproperty [--indicator-color=var(--quiet-primary-fill-mid)] - The color of the progress bar's value indicator.
  * @cssproperty [--track-color=var(--quiet-neutral-fill-softer)] - The color of the progress bar's track.
+ * @cssproperty [--track-size=1.5em | 1em] - The height or thickness of the track, depending on the type of progress bar.
+ * @cssproperty [--indicator-color=var(--quiet-primary-fill-mid)] - The color of the progress bar's value indicator.
+ * @cssproperty [--diameter=10em] - For progress rings, the diameter of the ring.
  *
- * @csspart indicator - The progress bar's current value indicator.
+ * @csspart track - The progress bar's track, a `<div>` for progress bars and a `<circle>` for progress rings.
+ * @csspart indicator - The progress bar's current value indicator, a `<div>` for progress bars and an SVG `<circle>`
+ *  for progress rings.
+ * @csspart content - The container that holds any content that's been slotted in.
  */
 @customElement('quiet-progress')
 export class QuietProgress extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
-  @query('#indicator') private indicator: HTMLDivElement;
-
   /** A custom label for assistive devices. */
   @property() label: string;
+
+  /** The type of progress bar to render. */
+  @property({ reflect: true }) type: 'bar' | 'ring' = 'bar';
 
   /** The progress bar's minimum value. */
   @property({ type: Number }) min = 0;
@@ -67,7 +73,7 @@ export class QuietProgress extends QuietElement {
       changedProps.has('value') ||
       changedProps.has('indeterminate')
     ) {
-      this.indicator.style.setProperty('--percentage', `${clamp(this.percentage, 0, 100)}%`);
+      this.style.setProperty('--percentage', `${clamp(this.percentage, 0, 100)}`);
       this.setAttribute('aria-valuemin', String(this.min));
       this.setAttribute('aria-valuemax', String(this.max));
       if (this.indeterminate) {
@@ -79,9 +85,28 @@ export class QuietProgress extends QuietElement {
   }
 
   render() {
+    // Progress ring
+    if (this.type === 'ring') {
+      return html`
+        <svg>
+          <circle id="track" part="track"></circle>
+          <circle id="indicator" part="indicator"></circle>
+        </svg>
+
+        <div id="content" part="content">
+          <slot></slot>
+        </div>
+      `;
+    }
+
+    // Progress bar
     return html`
-      <div id="indicator" part="indicator">
-        <slot></slot>
+      <div id="track" part="track">
+        <div id="indicator" part="indicator">
+          <div id="content" part="content">
+            <slot></slot>
+          </div>
+        </div>
       </div>
     `;
   }

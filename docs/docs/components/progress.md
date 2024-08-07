@@ -27,34 +27,58 @@ Slot in some text to show content in the progress bar's indicator.
 <quiet-progress label="Progress" value="75">75%</quiet-progress>
 ```
 
+### Progress rings
+
+Set the `type` attribute to `ring` to show progress in the shape of a ring.
+
+```html {.example .flex-row}
+<quiet-progress label="Completion" type="ring" value="50">
+  50%
+</quiet-progress>
+```
+
 ### Indeterminate progress
 
 When the completion status can't be determined, the progress bar is considered indeterminate. Add the `indeterminate` attribute for tasks whose progress can't be reported.
 
 ```html {.example}
 <quiet-progress label="Waiting for response" indeterminate></quiet-progress>
+
+<br>
+
+<quiet-progress label="Waiting for response" type="ring" indeterminate></quiet-progress>
 ```
 
 ### Changing the size
 
-Use the `width` and `height` properties to change the progress bar's size. If you're displaying text inside the progress bar, use `font-size` to change its size.
+Use `--track-size` property to change the track size. For progress rings, use the `--diameter` custom property to change the size of the ring.
 
 ```html {.example}
 <quiet-progress 
-  style="width: 50%; height: 10px;"
   label="Progress"
   value="50"
+  style="--track-size: 10px;"
 >
 </quiet-progress>
 
 <br>
 
 <quiet-progress 
-  style="width: 50%; height: 60px; font-size: 1.25rem;"
   label="Progress"
   value="50"
+  style="--track-size: 60px; font-size: 1.5rem;"
 >
   Loading
+</quiet-progress>
+
+<br>
+
+<quiet-progress 
+  type="ring"
+  value="50"
+  style="--track-size: 4px; --diameter: 100px;"
+>
+  50%
 </quiet-progress>
 ```
 
@@ -69,5 +93,16 @@ Use the `--track-color` custom property to change the progress bar's track color
   value="75"
 >
   Almost there!
+</quiet-progress>
+
+<br>
+
+<quiet-progress 
+  style="--track-color: mistyrose; --indicator-color: deeppink;"
+  type="ring"
+  label="Progress" 
+  value="75"
+>
+  75%
 </quiet-progress>
 ```

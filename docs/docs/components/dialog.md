@@ -9,7 +9,7 @@ layout: component
     Lorem ipsum
   </h3>
 
-  Lorem dolor sed viverra ipsum. Nisl rhoncus mattis rhoncus urna neque viverra justo nec.
+  <p>Lorem dolor sed viverra ipsum. Nisl rhoncus mattis rhoncus urna neque viverra justo nec.</p>
   
   <quiet-button slot="footer" data-dialog="close" variant="primary">
     Close
@@ -46,7 +46,7 @@ Similarly, you can add `data-dialog="close"` to any button inside a dialog to cl
   </h3>
 
   <p>The button you clicked has <code>data-dialog="open <em>id</em>"</code> so it opens the dialog that has a matching id.</p>
-  <p style="margin-block-end: 0;">The button below has <code>data-dialog="dismiss"</code> so it will close the dialog when you click on it.</p>
+  <p>The button below has <code>data-dialog="dismiss"</code> so it will close the dialog when you click on it.</p>
 
   <quiet-button slot="footer" data-dialog="close" variant="primary">
     Close
@@ -66,7 +66,7 @@ Add the `with-header` attribute and place elements into the `header` slot to add
     Lorem ipsum
   </h3>
 
-  Lorem dolor sed viverra ipsum. Nisl rhoncus mattis rhoncus urna neque viverra justo nec.
+  <p>Lorem dolor sed viverra ipsum. Nisl rhoncus mattis rhoncus urna neque viverra justo nec.</p>
 </quiet-dialog>
 
 <quiet-button data-dialog="open dialog__header">Show dialog</quiet-button>
@@ -78,7 +78,7 @@ Add the `with-footer` attribute and place elements into the `footer` slot to add
 
 ```html {.example}
 <quiet-dialog with-footer id="dialog__footer">
-  Lorem dolor sed viverra ipsum. Nisl rhoncus mattis rhoncus urna neque viverra justo nec.
+  <p>Lorem dolor sed viverra ipsum. Nisl rhoncus mattis rhoncus urna neque viverra justo nec.</p>
 
   <quiet-button slot="footer" data-dialog="close" variant="primary">
     Close
@@ -98,7 +98,7 @@ When clicking outside of a dialog, it will normally pulse briefly to draw the us
     Lorem ipsum
   </h3>
 
-  Clicking outside the dialog will cause it to close.
+  <p>Clicking outside the dialog will cause it to close.</p>
 
   <quiet-button slot="footer" data-dialog="close" variant="primary">
     Close
@@ -126,7 +126,7 @@ By default, a close button is provided as a single action in the dialog's header
     <quiet-icon name="external-link"></quiet-icon>
   </quiet-button>
 
-  Lorem dolor sed viverra ipsum. Nisl rhoncus mattis rhoncus urna neque viverra justo nec.
+  <p>Lorem dolor sed viverra ipsum. Nisl rhoncus mattis rhoncus urna neque viverra justo nec.</p>
 
   <quiet-button slot="footer" data-dialog="close" variant="primary">
     Close
@@ -150,7 +150,7 @@ By default, dialogs appear in the center of the screen. To make the dialog slide
     Lorem ipsum
   </h3>
 
-  Nec nam aliquam sem et tortor consequat id porta nibh. Amet risus nullam eget felis eget nunc.
+  <p>Nec nam aliquam sem et tortor consequat id porta nibh. Amet risus nullam eget felis eget nunc.</p>
 
   <quiet-button slot="footer" data-dialog="close" variant="primary">
     Close
@@ -190,7 +190,7 @@ The `--width` and `--height` custom properties control the default width and hei
   </h3>
 
   <p>Lobortis feugiat vivamus at augue eget arcu dictum. Nulla at volutpat diam ut venenatis tellus in metus vulputate. Venenatis tellus in metus vulputate eu scelerisque felis.</p>
-  <p style="margin-block-end: 0;">Et malesuada fames ac turpis egestas maecenas pharetra. Eu lobortis elementum nibh tellus molestie nunc. Nisl purus in mollis nunc sed id semper risus in. Ultricies mi quis hendrerit dolor magna eget. Venenatis cras sed felis eget velit aliquet sagittis.</p>
+  <p>Et malesuada fames ac turpis egestas maecenas pharetra. Eu lobortis elementum nibh tellus molestie nunc. Nisl purus in mollis nunc sed id semper risus in. Ultricies mi quis hendrerit dolor magna eget. Venenatis cras sed felis eget velit aliquet sagittis.</p>
 
   <quiet-button slot="footer" data-dialog="close" variant="primary">
     Close
@@ -216,7 +216,7 @@ Dialogs with overflowing content will expand as the viewport allows before scrol
   <p>Faucibus pulvinar elementum integer enim. Bibendum at varius vel pharetra vel turpis nunc eget. Amet est placerat in egestas erat imperdiet sed. Eu non diam phasellus vestibulum lorem sed risus ultricies tristique. Ut tellus elementum sagittis vitae et leo duis. Amet mattis vulputate enim nulla aliquet porttitor lacus. Vitae et leo duis ut diam quam. Volutpat ac tincidunt vitae semper quis lectus nulla at volutpat. Et malesuada fames ac turpis egestas maecenas pharetra. In hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit.</p>
   <p>Sapien et ligula ullamcorper malesuada proin. Nulla facilisi cras fermentum odio eu. Lacus suspendisse faucibus interdum posuere lorem. Ac turpis egestas integer eget aliquet. Id nibh tortor id aliquet. Non quam lacus suspendisse faucibus interdum posuere. Ac turpis egestas maecenas pharetra convallis posuere morbi leo. Tellus elementum sagittis vitae et leo duis ut diam quam. Lobortis scelerisque fermentum dui faucibus in ornare quam. Et malesuada fames ac turpis egestas maecenas pharetra convallis posuere. Pellentesque massa placerat duis ultricies lacus sed turpis tincidunt.</p>
   <p>In ante metus dictum at. Eget sit amet tellus cras adipiscing. Hendrerit gravida rutrum quisque non. Mattis pellentesque id nibh tortor id aliquet lectus. Velit ut tortor pretium viverra. Ut tortor pretium viverra suspendisse potenti. Urna molestie at elementum eu. Vel risus commodo viverra maecenas accumsan lacus vel. Eget dolor morbi non arcu risus quis varius quam quisque. Orci porta non pulvinar neque laoreet suspendisse. Eros donec ac odio tempor orci. Auctor neque vitae tempus quam pellentesque nec nam aliquam sem. Eget gravida cum sociis natoque penatibus et magnis. Non blandit massa enim nec dui nunc mattis enim.</p>
-  <p style="margin-block-end: 0;">In nibh mauris cursus mattis molestie. Semper feugiat nibh sed pulvinar proin gravida hendrerit lectus. Lorem ipsum dolor sit amet consectetur adipiscing elit ut aliquam. Maecenas pharetra convallis posuere morbi leo urna molestie at. Nunc aliquet bibendum enim facilisis gravida neque convallis. In nulla posuere sollicitudin aliquam ultrices. At lectus urna duis convallis convallis tellus. Sapien nec sagittis aliquam malesuada bibendum. In massa tempor nec feugiat nisl pretium fusce. Enim sit amet venenatis urna cursus eget nunc scelerisque viverra. Venenatis cras sed felis eget velit aliquet sagittis. Ultrices neque ornare aenean euismod. Malesuada nunc vel risus commodo viverra maecenas accumsan. Donec pretium vulputate sapien nec. Massa ultricies mi quis hendrerit dolor magna eget est.</p>
+  <p>In nibh mauris cursus mattis molestie. Semper feugiat nibh sed pulvinar proin gravida hendrerit lectus. Lorem ipsum dolor sit amet consectetur adipiscing elit ut aliquam. Maecenas pharetra convallis posuere morbi leo urna molestie at. Nunc aliquet bibendum enim facilisis gravida neque convallis. In nulla posuere sollicitudin aliquam ultrices. At lectus urna duis convallis convallis tellus. Sapien nec sagittis aliquam malesuada bibendum. In massa tempor nec feugiat nisl pretium fusce. Enim sit amet venenatis urna cursus eget nunc scelerisque viverra. Venenatis cras sed felis eget velit aliquet sagittis. Ultrices neque ornare aenean euismod. Malesuada nunc vel risus commodo viverra maecenas accumsan. Donec pretium vulputate sapien nec. Massa ultricies mi quis hendrerit dolor magna eget est.</p>
 
   <quiet-button slot="footer" data-dialog="close" variant="primary">
     Close
@@ -260,7 +260,7 @@ You can check `event.detail.source` to see which element triggered the dialog to
     Try closing me
   </h3>
 
-  Only clicking the last button will close this dialog. Not even the <kbd>Escape</kbd> key will save you!
+  <p>Only clicking the last button will close this dialog. Not even the <kbd>Escape</kbd> key will save you!</p>
 
   <quiet-button slot="footer" data-dialog="close">
     I won't close it
@@ -317,3 +317,10 @@ Dialogs come with a simple, minimal appearance. Feel free to customize them with
 }
 </style>
 ```
+
+<!-- For the examples -->
+<style>
+  quiet-dialog > p:last-of-type {
+    margin-block-end: 0;
+  }
+</style>

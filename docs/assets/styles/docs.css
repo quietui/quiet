@@ -477,6 +477,10 @@ h6 {
   }
 }
 
+p code {
+  white-space: nowrap;
+}
+
 /* Experimental badges */
 quiet-badge.experimental {
   background-color: #fbbf24;

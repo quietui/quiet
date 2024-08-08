@@ -391,13 +391,17 @@ tfoot td {
 th,
 td[scope],
 tfoot td {
-  font-weight: var(--quiet-font-weight-semibold);
+  font-weight: var(--quiet-font-weight-bold);
 }
 
 th,
 td {
   text-align: start;
   padding: 0.75em;
+}
+
+table.striped tbody tr:nth-child(odd) {
+  background-color: color-mix(in oklab, transparent, var(--quiet-strident) 3.5%);
 }
 
 /* Form controls */

@@ -168,7 +168,7 @@ Use the `details` slot to display details, such as keyboard shortcuts, inside [d
 
 ### Checkable items
 
-You can turn a [dropdown item](/docs/components/dropdown-item) into a checkable option by setting `type="checkbox"`. Add the `checked` attribute to make it checked initially. When clicked, the item's checked state will toggle but the dropdown will remain open.
+You can turn a [dropdown item](/docs/components/dropdown-item) into a checkable option by setting `type="checkbox"`. Add the `checked` attribute to make it checked initially. When clicked, the item's checked state will toggle and the dropdown will close. You can cancel the `quiet-select` event if you want to keep it open instead.
 
 ```html {.example}
 <quiet-dropdown id="dropdown__checkboxes">
@@ -265,3 +265,50 @@ You can set the preferred placement of the dropdown menu with the `placement` at
   <quiet-dropdown-item value="tuxedo">Tuxedo</quiet-dropdown-item>
 </quiet-dropdown>
 ```
+
+### Context menus
+
+To turn a dropdown menu into a context menu, omit the trigger and set the `context-menu` attribute to the id of an element in the same document. When you right-click or long-press (touch only) the target element, the context menu will be shown.
+
+```html {.example}
+<div id="dropdown__actions" tabindex="0">
+  Right-click or long-press here to show the context menu
+</div>
+
+<quiet-dropdown id="dropdown__selected" context-menu="dropdown__actions">
+  <quiet-dropdown-item type="checkbox" value="canvas" checked>Show canvas</quiet-dropdown-item>
+  <quiet-dropdown-item type="checkbox" value="grid" checked>Show grid</quiet-dropdown-item>
+  <quiet-dropdown-item type="checkbox" value="source">Show source</quiet-dropdown-item>
+  <quiet-divider></quiet-divider>
+  <quiet-dropdown-item value="preferences">Preferences…</quiet-dropdown-item>
+</quiet-dropdown>
+
+<style>
+  #dropdown__actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 200px;
+    color: var(--quiet-text-muted);
+    background-color: var(--quiet-paper-color);
+    border: dashed var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
+    border-radius: var(--quiet-border-radius);
+    padding: 1rem;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-visible {
+      outline: var(--quiet-focus-ring);
+      outline-offset: calc(var(--quiet-border-width) * -1);
+    }
+  }
+</style>
+```
+
+:::warn
+The context menu element must be in the DOM when the dropdown is connected, otherwise the dropdown won't be attached and a warning will be shown in the console.
+:::
+

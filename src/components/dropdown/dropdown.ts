@@ -4,14 +4,18 @@ import { autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/d
 import { createId } from '../../utilities/math.js';
 import { customElement, property, query } from 'lit/decorators.js';
 import { html } from 'lit';
+import { lockScrolling, unlockScrolling } from '../../utilities/scroll.js';
+import { LongPress } from '../../utilities/long-press.js';
 import { QuietClosedEvent, QuietCloseEvent, QuietOpenedEvent, QuietOpenEvent } from '../../events/open-close.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import { QuietSelectEvent } from '../../events/select.js';
 import hostStyles from '../../styles/host.styles.js';
 import styles from './dropdown.styles.js';
 import type { CSSResultGroup } from 'lit';
+import type { LongPressEvent } from '../../utilities/long-press.js';
 import type { QuietButton } from '../button/button.js';
 import type { QuietDropdownItem } from '../dropdown-item/dropdown-item.js';
+import type { VirtualElement } from '@floating-ui/dom';
 
 const openDropdowns = new Set<QuietDropdown>();
 
@@ -46,6 +50,9 @@ export class QuietDropdown extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
   private cleanup: ReturnType<typeof autoUpdate> | undefined;
+  private contextMenuElement: HTMLElement | null;
+  private contextMenuLongPress: LongPress;
+  private contextMenuVirtualElement: VirtualElement | undefined;
   private userTypedQuery = '';
   private userTypedTimeout: number;
 
@@ -53,6 +60,9 @@ export class QuietDropdown extends QuietElement {
 
   /** Opens or closes the dropdown. */
   @property({ type: Boolean, reflect: true }) open = false;
+
+  /** The id of an element to apply the dropdown as a context menu. */
+  @property({ attribute: 'context-menu' }) contextMenu = '';
 
   /**
    * The placement of the dropdown menu in reference to the trigger. The menu will shift to a more optimal location if
@@ -89,6 +99,34 @@ export class QuietDropdown extends QuietElement {
         this.hideMenu();
       }
     }
+
+    // Handle context element changes
+    if (changedProps.has('contextMenu')) {
+      const root = this.getRootNode() as Document | ShadowRoot;
+
+      // Tear down the old context element
+      if (this.contextMenuElement) {
+        this.contextMenuLongPress?.stop();
+        this.contextMenuElement.removeEventListener('contextmenu', this.handleContextMenu);
+        this.contextMenuElement.removeEventListener('quiet-longpress', this.handleContextMenu);
+      }
+
+      // Setup the new context element
+      this.contextMenuElement = this.contextMenu ? root.querySelector(`#${this.contextMenu}`) : null;
+
+      if (this.contextMenuElement) {
+        this.contextMenuLongPress = new LongPress(this.contextMenuElement, { eventName: 'quiet-longpress' });
+        this.contextMenuLongPress.start();
+        this.contextMenuElement.addEventListener('contextmenu', this.handleContextMenu);
+        this.contextMenuElement.addEventListener('quiet-longpress', this.handleContextMenu);
+      } else if (this.contextMenu) {
+        // If `context` is provided and the element isn't found, show a warning
+        console.warn(
+          `A dropdown was assigned as a context menu to an element with an id of "${this.contextMenu}" but the element could not be found.`,
+          this
+        );
+      }
+    }
   }
 
   /** Gets all <quiet-dropdown-item> elements slotted in the menu that aren't disabled. */
@@ -103,11 +141,8 @@ export class QuietDropdown extends QuietElement {
 
   /** Shows the dropdown menu. This should only be called from within updated(). */
   private async showMenu() {
-    const trigger = this.getTrigger();
-
-    if (!trigger) {
-      return;
-    }
+    const anchor = this.contextMenu ? this.contextMenuVirtualElement : this.getTrigger();
+    if (!anchor) return;
 
     const openEvent = new QuietOpenEvent();
     this.dispatchEvent(openEvent);
@@ -121,6 +156,7 @@ export class QuietDropdown extends QuietElement {
 
     this.menu.showPopover();
     this.open = true;
+    if (this.contextMenu) lockScrolling(this);
     openDropdowns.add(this);
     this.syncAriaAttributes();
     document.addEventListener('keydown', this.handleDocumentKeyDown);
@@ -128,7 +164,7 @@ export class QuietDropdown extends QuietElement {
     document.addEventListener('focusin', this.handleDocumentFocusIn);
 
     this.menu.hidden = false;
-    this.cleanup = autoUpdate(trigger, this.menu, () => this.reposition());
+    this.cleanup = autoUpdate(anchor, this.menu, () => this.reposition());
     await animateWithClass(this.menu, 'show');
     this.dispatchEvent(new QuietOpenedEvent());
   }
@@ -143,6 +179,7 @@ export class QuietDropdown extends QuietElement {
     }
 
     this.open = false;
+    unlockScrolling(this);
     openDropdowns.delete(this);
     this.syncAriaAttributes();
     document.removeEventListener('keydown', this.handleDocumentKeyDown);
@@ -165,10 +202,10 @@ export class QuietDropdown extends QuietElement {
 
   /** Repositions the dropdown menu */
   private reposition() {
-    const trigger = this.getTrigger();
-    if (!trigger) return;
+    const anchor = this.contextMenu ? this.contextMenuVirtualElement : this.getTrigger();
+    if (!anchor) return;
 
-    computePosition(trigger, this.menu, {
+    computePosition(anchor, this.menu, {
       placement: this.placement,
       middleware: [offset({ mainAxis: this.distance }), flip(), shift()]
     }).then(({ x, y, placement }) => {
@@ -187,7 +224,7 @@ export class QuietDropdown extends QuietElement {
   private handleDocumentFocusIn = (event: FocusEvent) => {
     const path = event.composedPath();
 
-    if (!path.includes(this)) {
+    if (!path.includes(this) && this.contextMenuElement && !path.includes(this.contextMenuElement)) {
       this.open = false;
     }
   };
@@ -314,6 +351,40 @@ export class QuietDropdown extends QuietElement {
     this.open = !this.open;
   }
 
+  /** Given an x and y coordinate, a virtual element for Floating UI is returned.  */
+  private getContextMenuVirtualElement(clientX: number, clientY: number) {
+    return {
+      getBoundingClientRect: () => {
+        return {
+          x: clientX,
+          y: clientY,
+          top: clientY,
+          left: clientX,
+          bottom: clientY,
+          right: clientX,
+          width: 0,
+          height: 0
+        };
+      }
+    };
+  }
+
+  /** Shows the dropdown when the contextmenu event is dispatched. */
+  private handleContextMenu = (event: PointerEvent | LongPressEvent) => {
+    const originalEvent = event instanceof PointerEvent ? event : event.detail.originalEvent;
+    const clientX = originalEvent instanceof PointerEvent ? originalEvent.clientX : originalEvent.touches[0].clientX;
+    const clientY = originalEvent instanceof PointerEvent ? originalEvent.clientY : originalEvent.touches[0].clientY;
+
+    event.preventDefault();
+
+    // Only open the context menu if it's currently hidden. This prevents a second right-click from closing and then
+    // re-opening the menu. Instead, a second right-click will just close it.
+    if (this.menu.hidden) {
+      this.contextMenuVirtualElement = this.getContextMenuVirtualElement(clientX, clientY);
+      this.open = true;
+    }
+  };
+
   /** Makes a selection, emits the quiet-select event, and closes the dropdown. */
   private makeSelection(item: QuietDropdownItem) {
     const trigger = this.getTrigger();
@@ -323,7 +394,7 @@ export class QuietDropdown extends QuietElement {
       return;
     }
 
-    // Toggle checkbox items and keep the dropdown open
+    // Toggle checkbox items
     if (item.type === 'checkbox') {
       item.checked = !item.checked;
     }
@@ -332,7 +403,7 @@ export class QuietDropdown extends QuietElement {
     this.dispatchEvent(selectEvent);
 
     // If the event was canceled, keep the dropdown open
-    if (!selectEvent.defaultPrevented && item.type !== 'checkbox') {
+    if (!selectEvent.defaultPrevented) {
       this.open = false;
       trigger?.focus();
     }

@@ -112,8 +112,7 @@ export class QuietLoremIpsum extends QuietElement {
 
   /** Generates random sentences based on the properties that are currently set */
   private generateSentences() {
-    const commaFrequency = 20;
-    const semicolonFrequency = 100;
+    const commaFrequency = 10;
     const numSentences = this.getNumberWithinRange(this.length);
     let sentences = '';
 
@@ -131,12 +130,10 @@ export class QuietLoremIpsum extends QuietElement {
           continue;
         }
 
-        // Add commas and semicolons (but not near the end of the sentence)
+        // Add commas (but not near the end of the sentence)
         if (j < words.length - 3) {
-          const addComma = clampRandom(this.generateNumber(), 0, commaFrequency);
-          const addSemicolon = addComma ? false : clampRandom(this.generateNumber(), 0, semicolonFrequency) === 0;
+          const addComma = clampRandom(this.generateNumber(), 0, commaFrequency) === 0;
           if (addComma) sentence += ', ';
-          if (addSemicolon) sentence += '; ';
         }
 
         sentence += ` ${word}`;

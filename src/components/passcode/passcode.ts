@@ -268,6 +268,10 @@ export class QuietPasscode extends QuietElement {
     }
 
     if (event.key === 'Escape') {
+      // If it's already clear, let the event bubble
+      if (this.value === '') return;
+
+      event.stopPropagation();
       this.value = '';
 
       if (oldValue !== this.value) {

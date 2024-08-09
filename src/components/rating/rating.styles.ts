@@ -3,7 +3,7 @@ import { css } from 'lit';
 export default css`
   :host {
     --symbol-selected-color: #f59e0b;
-    --symbol-unselected-color: var(--quiet-neutral-fill-soft);
+    --symbol-unselected-color: var(--quiet-neutral-fill-mid);
   }
 
   #rating {
@@ -12,6 +12,8 @@ export default css`
     align-items: center;
     width: fit-content;
     border-radius: var(--quiet-border-radius);
+    gap: 0.0625em;
+    cursor: pointer;
 
     &:focus {
       outline: none;
@@ -22,12 +24,12 @@ export default css`
       outline-offset: var(--quiet-focus-offset);
     }
 
-    &.disabled #symbols {
+    &.disabled {
       opacity: 0.5;
       cursor: not-allowed;
     }
 
-    &.readonly #symbols {
+    &.readonly {
       cursor: default;
     }
 
@@ -53,22 +55,20 @@ export default css`
     }
   }
 
-  /* Symbols */
-  #symbols {
-    display: flex;
-    align-items: center;
-    gap: 0.0625em;
-    cursor: pointer;
-  }
-
   .symbol {
     display: inline-flex;
     align-items: center;
     position: relative;
     transition:
+      100ms clip-path ease,
       100ms color ease,
       100ms scale ease,
       100ms translate ease;
+
+    > :first-child,
+    > :last-child {
+      transition: inherit;
+    }
 
     /* Selected symbols */
     > :first-child {

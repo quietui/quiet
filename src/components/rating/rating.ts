@@ -30,9 +30,6 @@ const VALIDATION_MESSAGE = nativeFileInput.validationMessage;
  * @slot description - The rating's description. For plain-text descriptions, you can use the `description` attribute
  *  instead.
  *
- * @prop {string} form - If the rating is located outside of a form, you can associate it by setting this to the form's
- *  `id`.
- *
  * @event quiet-blur - Emitted when the rating loses focus. This event does not bubble.
  * @event quiet-change - Emitted when the user commits changes to the rating's value.
  * @event quiet-focus - Emitted when the rating receives focus. This event does not bubble.
@@ -40,6 +37,8 @@ const VALIDATION_MESSAGE = nativeFileInput.validationMessage;
  *
  * @csspart label - The element that contains the ratings's label.
  * @csspart description - The element that contains the rating's description.
+ * @csspart rating - The element that wraps all of the rating's symbols.
+ * @csspart symbol - The container that holds the selected and unselected version of each symbol.
  *
  * @cssstate disabled - Applied when the rating is disabled.
  * @cssstate focused - Applied when the rating has focus.
@@ -90,6 +89,12 @@ export class QuietRating extends QuietElement {
   /** The rating's size. */
   @property({ reflect: true }) size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' = 'md';
 
+  /**
+   * The form to associate this control with. If omitted, the closest containing `<form>` will be used. The value of
+   * this attribute must be an id of a form in the same document or shadow root.
+   */
+  @property() form: string;
+
   /** Makes the rating required. Form submission will not be allowed when this is set and the rating is empty. */
   @property({ type: Boolean, reflect: true }) required = false;
 
@@ -113,8 +118,11 @@ export class QuietRating extends QuietElement {
    * that you can use to customize the symbol based on specific values or whether the symbol is in the selected state.
    * You should only return trusted HTML from this function, otherwise you may become vulnerable to XSS exploits.
    */
-  @property({ attribute: false }) getSymbol: (step: number, isSelected: boolean) => string = () =>
-    `<quiet-icon library="system" name="star" family="filled"></quiet-icon>`;
+  @property({ attribute: false }) getSymbol: (step: number, isSelected: boolean) => string = (_, isSelected) => {
+    return isSelected
+      ? `<quiet-icon library="system" name="star" family="filled"></quiet-icon>`
+      : `<quiet-icon library="system" name="star" family="outline"></quiet-icon>`;
+  };
 
   connectedCallback() {
     super.connectedCallback();
@@ -394,9 +402,6 @@ export class QuietRating extends QuietElement {
       typeMismatch: false,
       valueMissing: isValueMissing
     };
-
-    console.log(this.required, isValueMissing);
-
     this.isInvalid = isValueMissing || hasCustomValidity;
     this.internals.setValidity(flags, validationMessage, this.rating);
   }
@@ -463,6 +468,7 @@ export class QuietRating extends QuietElement {
 
       <div
         id="rating"
+        part="rating"
         class=${classMap({
           // Sizes
           xs: this.size === 'xs',
@@ -490,15 +496,13 @@ export class QuietRating extends QuietElement {
         @pointerdown=${this.handleDragStart}
         @touchstart=${this.handleDragStart}
       >
-        <div id="symbols">
-          ${symbols.map((symbol, index) => {
-            return html`
-              <span class="symbol" style="--clip-percentage: ${(this.value - index) * 100}%;">
-                ${unsafeHTML(symbol[0])} ${unsafeHTML(symbol[1])}
-              </span>
-            `;
-          })}
-        </div>
+        ${symbols.map((symbol, index) => {
+          return html`
+            <span part="symbol" class="symbol" style="--clip-percentage: ${(this.value - index) * 100}%;">
+              ${unsafeHTML(symbol[0])} ${unsafeHTML(symbol[1])}
+            </span>
+          `;
+        })}
       </div>
     `;
   }

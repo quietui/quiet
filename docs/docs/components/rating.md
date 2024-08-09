@@ -85,8 +85,7 @@ To customize the symbols shown, use JavaScript to set the `getSymbol` property t
 <quiet-rating 
   label="Show some love" 
   id="rating__custom-symbols" 
-  step="0.5"
-  value="2.5"
+  value="3"
   style="
     --symbol-selected-color: deeppink;
     --symbol-unselected-color: gray;
@@ -97,11 +96,9 @@ To customize the symbols shown, use JavaScript to set the `getSymbol` property t
   const rating = document.getElementById('rating__custom-symbols');
 
   rating.getSymbol = (value, isSelected) => {
-    if (isSelected) {
-      return `<quiet-icon family="filled" name="heart"></quiet-icon>`;
-    } else {
-      return `<quiet-icon family="outline" name="heart"></quiet-icon>`;
-    }
+    return isSelected ? 
+      `<quiet-icon family="filled" name="heart"></quiet-icon>` : 
+      `<quiet-icon family="outline" name="heart"></quiet-icon>`;
   }
 </script>
 ```
@@ -109,17 +106,36 @@ To customize the symbols shown, use JavaScript to set the `getSymbol` property t
 ```html {.example}
 <quiet-rating 
   label="How satisfied are you?" 
-  id="rating__like" 
-  max="5" 
+  id="rating__numbers" 
+  value="3"
   style="--symbol-selected-color: dodgerblue;"
 ></quiet-rating>
 
 <script>
-  const rating = document.getElementById('rating__like');
+  const rating = document.getElementById('rating__numbers');
 
   rating.getSymbol = (value, isSelected) => {
     const family = isSelected ? 'filled' : 'outline';
     return `<quiet-icon family="${family}" name="square-number-${value}"></quiet-icon>`
+  }
+</script>
+```
+
+```html {.example}
+<quiet-rating 
+  label="How satisfied are you?" 
+  id="rating__diamonds" 
+  value="3"
+  style="--symbol-selected-color: #2bb7d1;"
+></quiet-rating>
+
+<script>
+  const rating = document.getElementById('rating__diamonds');
+
+  rating.getSymbol = (value, isSelected) => {
+    const family = isSelected ? 'filled' : 'outline';
+    const name = isSelected ? 'diamond' : 'point'
+    return `<quiet-icon family="${family}" name="${name}"></quiet-icon>`
   }
 </script>
 ```

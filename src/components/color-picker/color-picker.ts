@@ -34,6 +34,9 @@ const hasEyeDropper = 'EyeDropper' in window;
  * @slot description - The color picker's description. For plain-text descriptions, you can use the `description`
  *  attribute instead.
  *
+ * @prop {string} form - If the color picker is located outside of a form, you can associate it by setting this to the
+ *  form's `id`.
+ *
  * @event quiet-change - Emitted when the user commits changes to the color picker's value.
  * @event quiet-input - Emitted when the color picker receives input. This can fire very frequently during dragging, so
  *  avoid doing expensive operations in the handler. If you don't live feedback, use the `quiet-change` event instead.
@@ -336,7 +339,9 @@ export class QuietColorPicker extends QuietElement {
     document.addEventListener('touchmove', this.handleDragMove);
     document.addEventListener('touchend', this.handleDragStop);
 
-    event.preventDefault();
+    if (event.type === 'touchstart') {
+      event.preventDefault();
+    }
 
     // Cache coords when dragging starts to avoid calling it on every move
     this.colorSliderBoundingClientRect = this.colorSlider.getBoundingClientRect();

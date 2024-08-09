@@ -251,7 +251,9 @@ export class QuietSlider extends QuietElement {
     document.addEventListener('touchmove', this.handleDragMove);
     document.addEventListener('touchend', this.handleDragStop);
 
-    event.preventDefault();
+    if (event.type === 'touchstart') {
+      event.preventDefault();
+    }
 
     // Cache coords when dragging starts to avoid calling it on every move
     this.trackBoundingClientRect = this.track.getBoundingClientRect();

@@ -36,7 +36,7 @@ Tooltip anchors must be interactive/focusable elements such as buttons, links, e
 ```
 
 :::warn
-The anchor element must be in the DOM when the tooltip is connected, otherwise the tooltip won't be attached and a warning will be shown.
+The anchor element must be in the DOM when the tooltip is connected, otherwise the tooltip won't be attached and a warning will be shown in the console.
 :::
 
 ### Placement

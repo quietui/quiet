@@ -125,7 +125,7 @@ export class QuietPopover extends QuietElement {
       } else if (this.for) {
         // If `for` is provided and the element isn't found, show a warning
         console.warn(
-          `A popover was assigned to to an element with an id of "${this.for}" but the element could not be found.`,
+          `A popover was assigned to an element with an id of "${this.for}" but the element could not be found.`,
           this
         );
       }

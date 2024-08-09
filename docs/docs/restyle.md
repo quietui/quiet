@@ -135,7 +135,7 @@ export function thing(arg) {
 
 ### Tables
 
-<table class="striped">
+<table>
   <thead>
     <tr>
       <th>First column</th>
@@ -158,6 +158,11 @@ export function thing(arg) {
       <td>Placerat duis</td>
       <td>Eu volutpat</td>
       <td>Morbi enim</td>
+    </tr>
+    <tr>
+      <td>Pellentesque primis</td>
+      <td>Aliquam etiam</td>
+      <td>Fusce pharetra</td>
     </tr>
   </tbody>
   <tfoot>
@@ -230,6 +235,5 @@ export function thing(arg) {
 
 Restyle ships with a handful of helpful utility classes. Use `class="..."` to apply them to any HTML element.
 
-- `striped` - Add to `<table>` elements to draw striped rows.
 - `visually-hidden` - Use when an element must be accessible to assistive technologies like screen readers but should remain hidden in other circumstances.
 - `visually-hidden-focusable` - The same as `visually-hidden`, but it will show when the element or any of its children receive focus. Useful for things like "skip to content" links.

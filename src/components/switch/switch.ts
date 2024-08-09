@@ -81,6 +81,12 @@ export class QuietSwitch extends QuietElement {
   @property() size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' = 'md';
 
   /**
+   * The form to associate this control with. If omitted, the closest containing `<form>` will be used. The value of
+   * this attribute must be an id of a form in the same document or shadow root.
+   */
+  @property() form: string;
+
+  /**
    * Makes the switch required. Form submission will not be allowed until the switch is checked.
    */
   @property({ type: Boolean, reflect: true }) required = false;

@@ -22,9 +22,6 @@ import type { CSSResultGroup } from 'lit';
  * @slot description - The text area's description. For plain-text descriptions, you can use the `description`
  *  attribute instead.
  *
- * @prop {string} form - If the text area is located outside of a form, you can associate it by setting this to the
- *  form's `id`.
- *
  * @event quiet-blur - Emitted when the text area loses focus. This event does not bubble.
  * @event quiet-change - Emitted when the user commits changes to the text area's value.
  * @event quiet-focus - Emitted when the text area receives focus. This event does not bubble.
@@ -92,6 +89,12 @@ export class QuietTextArea extends QuietElement {
 
   /** The text area's size. */
   @property({ reflect: true }) size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' = 'md';
+
+  /**
+   * The form to associate this control with. If omitted, the closest containing `<form>` will be used. The value of
+   * this attribute must be an id of a form in the same document or shadow root.
+   */
+  @property() form: string;
 
   /**
    * Makes the text area required. Form submission will not be allowed when this is set and the text area is empty.

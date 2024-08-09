@@ -28,9 +28,6 @@ import type { CSSResultGroup } from 'lit';
  * @slot start - An icon or similar element to place before the label. Works great with `<quiet-icon>`.
  * @slot end - An icon or similar element to place after the label. Works great with `<quiet-icon>`.
  *
- * @prop {string} form - If the text field is located outside of a form, you can associate it by setting this to the
- *  form's `id`.
- *
  * @event quiet-blur - Emitted when the text field loses focus. This event does not bubble.
  * @event quiet-change - Emitted when the user commits changes to the text field's value.
  * @event quiet-focus - Emitted when the text field receives focus. This event does not bubble.
@@ -117,6 +114,12 @@ export class QuietTextField extends QuietElement {
     | 'time'
     | 'url'
     | 'week' = 'text';
+
+  /**
+   * The form to associate this control with. If omitted, the closest containing `<form>` will be used. The value of
+   * this attribute must be an id of a form in the same document or shadow root.
+   */
+  @property() form: string;
 
   /**
    * Makes the text field required. Form submission will not be allowed when this is set and the text field is empty.

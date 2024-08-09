@@ -111,10 +111,10 @@ export class QuietButton extends QuietElement {
   @property() download?: string;
 
   /**
-   * The form to associate the button with. If omitted, the closest containing form element will be used. The value of
-   * this attribute must be an id of a form in the same document or shadow root as the button.
+   * The form to associate this control with. If omitted, the closest containing `<form>` will be used. The value of
+   * this attribute must be an id of a form in the same document or shadow root.
    */
-  @property() form: string | undefined;
+  @property() form: string;
 
   /** Overrides the containing form's `action` attribute. */
   @property({ attribute: 'formaction' }) formAction: string | undefined;

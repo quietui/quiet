@@ -34,9 +34,6 @@ const hasEyeDropper = 'EyeDropper' in window;
  * @slot description - The color picker's description. For plain-text descriptions, you can use the `description`
  *  attribute instead.
  *
- * @prop {string} form - If the color picker is located outside of a form, you can associate it by setting this to the
- *  form's `id`.
- *
  * @event quiet-change - Emitted when the user commits changes to the color picker's value.
  * @event quiet-input - Emitted when the color picker receives input. This can fire very frequently during dragging, so
  *  avoid doing expensive operations in the handler. If you don't live feedback, use the `quiet-change` event instead.
@@ -132,6 +129,12 @@ export class QuietColorPicker extends QuietElement {
    * color picker.
    */
   @property() swatches = '';
+
+  /**
+   * The form to associate this control with. If omitted, the closest containing `<form>` will be used. The value of
+   * this attribute must be an id of a form in the same document or shadow root.
+   */
+  @property() form: string;
 
   /**
    * You can provide a custom error message to force the color picker to be invalid. To clear the error, set this to an
@@ -468,6 +471,7 @@ export class QuietColorPicker extends QuietElement {
 
   /** Sets the color when a swatch is clicked. */
   private async handleSwatchClick(color: string) {
+    const oldValue = this.value;
     if (this.disabled) return;
 
     this.setColorFromString(color);
@@ -476,10 +480,12 @@ export class QuietColorPicker extends QuietElement {
 
     await this.updateComplete;
 
-    this.dispatchEvent(new QuietInputEvent());
-    this.dispatchEvent(new Event('input'));
-    this.dispatchEvent(new QuietChangeEvent());
-    this.dispatchEvent(new Event('change'));
+    if (this.value !== oldValue) {
+      this.dispatchEvent(new QuietInputEvent());
+      this.dispatchEvent(new Event('input'));
+      this.dispatchEvent(new QuietChangeEvent());
+      this.dispatchEvent(new Event('change'));
+    }
   }
 
   /**
@@ -515,6 +521,7 @@ export class QuietColorPicker extends QuietElement {
     }
   }
 
+  /** Prevent custom events that bubble from propagating outside of the component */
   private stopPropagation(event: Event) {
     event.stopImmediatePropagation();
   }

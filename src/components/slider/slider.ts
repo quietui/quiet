@@ -27,9 +27,6 @@ import type { QuietTooltip } from '../tooltip/tooltip.js';
  *  instead.
  * @slot reference - One or more reference labels to show visually below the slider.
  *
- * @prop {string} form - If the slider is located outside of a form, you can associate it by setting this to the
- *  form's `id`.
- *
  * @event quiet-blur - Emitted when the slider loses focus. This event does not bubble.
  * @event quiet-change - Emitted when the user commits changes to the slider's value.
  * @event quiet-focus - Emitted when the slider receives focus. This event does not bubble.
@@ -107,6 +104,12 @@ export class QuietSlider extends QuietElement {
 
   /** The slider's size. */
   @property({ reflect: true }) size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' = 'md';
+
+  /**
+   * The form to associate this control with. If omitted, the closest containing `<form>` will be used. The value of
+   * this attribute must be an id of a form in the same document or shadow root.
+   */
+  @property() form: string;
 
   /** The minimum value allowed. */
   @property({ type: Number }) min: number = 0;

@@ -111,6 +111,12 @@ export class QuietFileInput extends QuietElement {
   @property({ reflect: true }) size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' = 'md';
 
   /**
+   * The form to associate this control with. If omitted, the closest containing `<form>` will be used. The value of
+   * this attribute must be an id of a form in the same document or shadow root.
+   */
+  @property() form: string;
+
+  /**
    * Makes the file input required. Form submission will not be allowed when this is set and no files are selected.
    */
   @property({ type: Boolean, reflect: true }) required = false;

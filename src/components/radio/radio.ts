@@ -78,6 +78,12 @@ export class QuietRadio extends QuietElement {
   /** The orientation of grouped items. */
   @property({ reflect: true }) orientation: 'horizontal' | 'vertical' = 'horizontal';
 
+  /**
+   * The form to associate this control with. If omitted, the closest containing `<form>` will be used. The value of
+   * this attribute must be an id of a form in the same document or shadow root.
+   */
+  @property() form: string;
+
   /** Indicates at least one option in the radio is required. */
   @property({ type: Boolean, reflect: true }) required = false;
 

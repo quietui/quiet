@@ -17,6 +17,7 @@ const translation: Translation = {
   hidePassword: 'Hide password',
   loading: 'Loading',
   hue: 'Hue',
+  numberOutOfTotal: (number, total) => `${number} out of ${total}`,
   opacity: 'Opacity',
   percentLuminosity: (percentage: string) => `${percentage} luminosity`,
   percentSaturation: (percentage: string) => `${percentage} saturation`,

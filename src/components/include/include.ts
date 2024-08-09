@@ -38,7 +38,7 @@ export class QuietInclude extends QuietElement {
 
   /**
    * By default, scripts in included files will not be executed. Setting this to true will allow them to run. If you use
-   * this option, make sure you trust the included content, otherwise you may be vulnerable to XSS exploits.
+   * this option, make sure you trust the included HTML, otherwise you may become vulnerable to XSS exploits.
    */
   @property({ attribute: 'allow-scripts', type: Boolean }) allowScripts = false;
 

@@ -26,6 +26,7 @@ export interface Translation extends DefaultTranslation {
   hidePassword: string;
   hue: string;
   opacity: string;
+  numberOutOfTotal: (number: number, total: number) => string;
   percentLuminosity: (percentage: string) => string;
   percentSaturation: (percentage: string) => string;
   loading: string;

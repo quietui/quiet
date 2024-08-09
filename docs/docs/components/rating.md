@@ -186,7 +186,7 @@ You can style valid and invalid ratings using the `:valid` and `:invalid` pseudo
 <form action="about:blank" method="get" target="_blank" class="rating__validation-pseudo">
   <quiet-rating 
     name="food" 
-    label="Rating" 
+    label="Food quality" 
     description="This field is required."
     required
   ></quiet-rating>
@@ -216,7 +216,7 @@ However, these selectors will match even before the user has had a chance to fil
 <form action="about:blank" method="get" target="_blank" class="rating__validation-custom">
   <quiet-rating 
     name="food" 
-    label="Rating" 
+    label="Food quality" 
     description="This field is required."
     required
   ></quiet-rating>

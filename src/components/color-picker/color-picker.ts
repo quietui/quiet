@@ -326,6 +326,10 @@ export class QuietColorPicker extends QuietElement {
     const x = event instanceof PointerEvent ? event.clientX : event.touches[0].clientX;
     const y = event instanceof PointerEvent ? event.clientY : event.touches[0].clientY;
 
+    if (event.type === 'touchstart') {
+      event.preventDefault();
+    }
+
     if (
       this.disabled ||
       // Prevent right-clicks from triggering drags
@@ -338,10 +342,6 @@ export class QuietColorPicker extends QuietElement {
     document.addEventListener('pointerup', this.handleDragStop);
     document.addEventListener('touchmove', this.handleDragMove);
     document.addEventListener('touchend', this.handleDragStop);
-
-    if (event.type === 'touchstart') {
-      event.preventDefault();
-    }
 
     // Cache coords when dragging starts to avoid calling it on every move
     this.colorSliderBoundingClientRect = this.colorSlider.getBoundingClientRect();

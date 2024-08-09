@@ -201,7 +201,7 @@ export class QuietSlider extends QuietElement {
 
   /** @internal Called when the form is reset. */
   formResetCallback() {
-    this.value = parseFloat(this.getAttribute('value') ?? '');
+    this.value = parseFloat(this.getAttribute('value') ?? String(this.min));
     this.isInvalid = false;
     this.wasChanged = false;
     this.wasSubmitted = false;
@@ -237,6 +237,10 @@ export class QuietSlider extends QuietElement {
     const x = event instanceof PointerEvent ? event.clientX : event.touches[0].clientX;
     const y = event instanceof PointerEvent ? event.clientY : event.touches[0].clientY;
 
+    if (event.type === 'touchstart') {
+      event.preventDefault();
+    }
+
     if (
       this.disabled ||
       this.readonly ||
@@ -250,10 +254,6 @@ export class QuietSlider extends QuietElement {
     document.addEventListener('pointerup', this.handleDragStop);
     document.addEventListener('touchmove', this.handleDragMove);
     document.addEventListener('touchend', this.handleDragStop);
-
-    if (event.type === 'touchstart') {
-      event.preventDefault();
-    }
 
     // Cache coords when dragging starts to avoid calling it on every move
     this.trackBoundingClientRect = this.track.getBoundingClientRect();
@@ -549,6 +549,7 @@ export class QuietSlider extends QuietElement {
             role="slider"
             style="--position: ${thumbPosition}%"
             aria-disabled=${this.disabled ? 'true' : 'false'}
+            aria-readonly=${this.disabled ? 'true' : 'false'}
             aria-orientation=${this.orientation}
             aria-valuemin=${this.min}
             aria-valuenow=${this.value}

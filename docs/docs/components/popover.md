@@ -46,7 +46,7 @@ Popover anchors should be `<quiet-button>` or `<button>` elements. Use the `for`
 ```
 
 :::warn
-The anchor element must be in the DOM when the popover is connected, otherwise the popover won't be attached and a warning will be shown.
+The anchor element must be in the DOM when the popover is connected, otherwise the popover won't be attached and a warning will be shown in the console.
 :::
 
 ### Placement

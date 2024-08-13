@@ -17,8 +17,9 @@
  *
  * const longPress = new LongPress(element);
  *
- * element.addEventListener('longpress', (clientX, clientY) => {
- *   // a long press has occurred at clientX, clientY
+ * element.addEventListener('longpress', (event) => {
+ *   // a long press has occurred at originalEvent.clientX, originalEvent.clientY
+ *   const originalEvent = event.detail.originalEvent;
  * });
  */
 export class LongPress {
@@ -128,9 +129,12 @@ export class LongPress {
     this.target.removeEventListener('touchstart', this.handlePress);
     this.target.removeEventListener('touchmove', this.handleMove);
     this.target.removeEventListener('touchend', this.handleRelease);
-    this.target.removeEventListener('pointerdown', this.handlePress);
-    this.target.removeEventListener('pointermove', this.handleMove);
-    this.target.removeEventListener('pointerup', this.handleRelease);
+
+    if (this.options.allowPointerEvents) {
+      this.target.removeEventListener('pointerdown', this.handlePress);
+      this.target.removeEventListener('pointermove', this.handleMove);
+      this.target.removeEventListener('pointerup', this.handleRelease);
+    }
   }
 }
 

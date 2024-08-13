@@ -101,10 +101,10 @@ export default css`
       &:hover {
         scale: 1.2;
       }
-    }
 
-    &:active {
-      translate: 0 var(--quiet-button-active-offset);
+      &:hover:active {
+        translate: 0 var(--quiet-button-active-offset);
+      }
     }
   }
 `;

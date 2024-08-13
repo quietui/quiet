@@ -322,8 +322,8 @@ Use the `custom-validity` attribute to make the select invalid and show a custom
 ```html {.example}
 <form action="about:blank" method="get" target="_blank">
   <quiet-select 
-    name="name"
-    label="Name"
+    name="animal"
+    label="Animal"
     description="This field will be invalid until the custom-validity attribute is removed"
     custom-validity="Not so fast, bubba!"
   >
@@ -348,8 +348,8 @@ You can style valid and invalid selects using the `:valid` and `:invalid` pseudo
 ```html {.example}
 <form action="about:blank" method="get" target="_blank" class="select__validation-pseudo">
   <quiet-select 
-    name="name"
-    label="Name"
+    name="animal"
+    label="Animal"
     description="This field is required"
     required
   >
@@ -384,8 +384,8 @@ However, these selectors will match even before the user has had a chance to fil
 ```html {.example}
 <form action="about:blank" method="get" target="_blank" class="select__validation-custom">
   <quiet-select 
-    name="name"
-    label="Name"
+    name="animal"
+    label="Animal"
     description="This field is required"
     required
   >

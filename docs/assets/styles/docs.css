@@ -28,6 +28,17 @@ html:not(.quiet-dark) .only-dark {
   display: none !important;
 }
 
+.unstyled-list {
+  padding-inline: 0;
+  margin-inline: 0;
+
+  li {
+    list-style: none;
+    padding-inline: 0;
+    margin-inline: 0;
+  }
+}
+
 @media screen and (min-width: 960px) {
   .two-columns {
     columns: 2;
@@ -201,7 +212,7 @@ html:not(.quiet-dark) .only-dark {
   }
 }
 
-#header-group-links a[href*='/sponsor'] {
+#header-group-links a[href*='/license'] {
   span {
     display: inline-block;
     animation: 0.8375s infinite heartbeat alternate ease;
@@ -953,46 +964,6 @@ quiet-callout {
 
   #body.has-sidebar #page {
     padding-inline: 1rem;
-  }
-}
-
-.sponsorship-quote {
-  background-color: var(--quiet-paper-color);
-  border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
-  border-radius: calc(var(--quiet-border-radius) * 6);
-  box-shadow: var(--quiet-shadow-softer);
-  text-align: center;
-  padding: 2rem;
-  margin-block: calc(var(--quiet-content-spacing) * 1.5);
-  scale: 1.025;
-
-  .quote {
-    display: flex;
-    align-items: start;
-    gap: 2rem;
-    font-size: 1.25rem;
-  }
-
-  quiet-button {
-    width: 100%;
-    margin-block-start: 2rem;
-  }
-
-  img {
-    max-width: 5rem;
-    height: auto;
-    border-radius: 50%;
-  }
-
-  @media screen and (max-width: 959px) {
-    & .quote {
-      flex-direction: column;
-      align-items: center;
-    }
-
-    & quiet-button {
-      max-width: 80%;
-    }
   }
 }
 

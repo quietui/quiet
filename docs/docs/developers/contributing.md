@@ -75,7 +75,7 @@ If you need help with documentation, feel free to reach out on the [discussion f
 
 ## Code contributions & licensing
 
-By submitting a contribution to this project, you are agreeing to license your entire contribution under the same terms of the project's license(s). If you do not agree to license your contribution under these terms, please do not contribute to the project.
+By submitting a contribution to this project, you are agreeing to license your entire contribution under the same terms of the project's license(s). This includes open source and commercial licenses chosen by the author. If you do not agree to license your contribution under these terms, do not contribute to the project.
 
 ## AI-generated code
 

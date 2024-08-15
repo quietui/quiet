@@ -24,12 +24,12 @@
  */
 export class LongPress {
   private options: LongPressOptions;
-  private target: HTMLElement;
+  private target: Element;
   private timeout: number;
   private startCoords: { x: number; y: number };
   private wasStarted = false;
 
-  constructor(el: HTMLElement, options?: Partial<LongPressOptions>) {
+  constructor(el: Element, options?: Partial<LongPressOptions>) {
     this.target = el;
     this.options = {
       allowPointerEvents: false,
@@ -100,7 +100,7 @@ export class LongPress {
 
     this.wasStarted = true;
 
-    if (this.options.overrideStyles) {
+    if (this.options.overrideStyles && this.target instanceof HTMLElement) {
       this.target.style.setProperty('-webkit-touch-callout', 'none', 'important');
       this.target.style.setProperty('-webkit-user-select', 'none', 'important');
       this.target.style.setProperty('user-select', 'none', 'important');
@@ -120,7 +120,7 @@ export class LongPress {
 
     this.wasStarted = false;
 
-    if (this.options.overrideStyles) {
+    if (this.options.overrideStyles && this.target instanceof HTMLElement) {
       this.target.style.removeProperty('-webkit-touch-callout');
       this.target.style.removeProperty('-webkit-user-select');
       this.target.style.removeProperty('user-select');

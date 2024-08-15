@@ -83,6 +83,9 @@ export class QuietTooltip extends QuietElement {
   /** The distance of the tooltip from its anchor. */
   @property({ type: Number }) distance = 8;
 
+  /** The offset of the tooltip along its trigger. */
+  @property({ type: Number }) offset = 0;
+
   /** The number of milliseconds to wait before opening the tooltip when hovering in. */
   @property({ attribute: 'open-delay', type: Number }) openDelay = 50;
 
@@ -257,7 +260,12 @@ export class QuietTooltip extends QuietElement {
 
     computePosition(this.anchor, this.tooltip, {
       placement: this.placement,
-      middleware: [offset({ mainAxis: this.distance }), flip(), shift(), arrow({ element: this.arrow })]
+      middleware: [
+        offset({ mainAxis: this.distance, crossAxis: this.offset }),
+        flip(),
+        shift(),
+        arrow({ element: this.arrow })
+      ]
     }).then(({ x, y, middlewareData, placement }) => {
       // Set the determined placement for users to hook into and for transform origin styles
       this.setAttribute('data-placement', placement);

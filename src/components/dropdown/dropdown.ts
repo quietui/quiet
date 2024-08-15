@@ -85,6 +85,9 @@ export class QuietDropdown extends QuietElement {
   /** The distance of the dropdown menu from its trigger. */
   @property({ type: Number }) distance = 0;
 
+  /** The offset of the dropdown menu along its trigger. */
+  @property({ type: Number }) offset = 0;
+
   firstUpdated() {
     this.syncAriaAttributes();
   }
@@ -207,7 +210,7 @@ export class QuietDropdown extends QuietElement {
 
     computePosition(anchor, this.menu, {
       placement: this.placement,
-      middleware: [offset({ mainAxis: this.distance }), flip(), shift()]
+      middleware: [offset({ mainAxis: this.distance, crossAxis: this.offset }), flip(), shift()]
     }).then(({ x, y, placement }) => {
       // Set the determined placement for users to hook into and for transform origin styles
       this.setAttribute('data-placement', placement);

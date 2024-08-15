@@ -28,6 +28,10 @@ Light mode "just works" once you import the default theme. To switch to dark mod
 If you're using [Quiet Restyle](/docs/restyle), the entire page will enter dark mode. If you're not using Restyle, only the components will change and it's up to you to style the rest of your app accordingly.
 :::
 
+### Using light and dark on the same page
+
+Sometimes, it's desirable to have a contrasting theme for certain sections of the page. For example, a light-themed page might have a dark-themed sidebar or footer. You can achieve this by applying the `quiet-light` or `quiet-dark` class to any element on the page. Everything _inside_ that element will use the specified theme.
+
 ## Theme concepts
 
 Quiet's default theme is designed to be highly customizable with minimal effort. The following seed colors are used to generate color palettes with pure CSS — one for each variant.
@@ -247,7 +251,7 @@ Adaptive colors automatically change between light and dark modes. Instead of nu
 
 #### Fill colors
 
-Fill colors are primarily used for backgrounds and surfaces. For example, buttons use midtone fills for their backgrounds.
+Fill colors are primarily used for backgrounds and surfaces. For example, certain buttons use midtone fills for their backgrounds.
 
 **Syntax:** `--quiet-{variant}-fill-{volume}`
 

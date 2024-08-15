@@ -38,7 +38,7 @@ export function searchPlugin(options = {}) {
       },
       {
         title: 'Get help or ask a question',
-        description: 'The community forum on GitHub is the best place to get support.',
+        description: 'The discussion forum on GitHub is the best place to get support.',
         url: 'https://github.com/quietui/quiet/discussions'
       },
       {

@@ -11,8 +11,8 @@ section: sponsor
 Quiet is an open source project made available under the terms of the [GNU Lesser General Public License v3.0](https://www.tldrlegal.com/license/gnu-lesser-general-public-license-v3-lgpl-3) ("LGPL"). This means you can:
 
 - **Use it in commercial and non-commercial software** without having to release your own source code.
-- **Modify the library for your own needs** as long as you distribute your changes under the LGPL.
-- **Distribute the library** as part of your application, so long as any changes to the library are made available under the LGPL.
+- **Modify the library** for your own needs as long as you distribute the changes under the same license.
+- **Distribute the library** as part of your application, as long as any changes to the library are made available under the same license.
 
 If you're developing a commercial application and would like to use Quiet without the restrictions of the LGPL, you can purchase a commercial license.
 

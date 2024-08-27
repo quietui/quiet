@@ -60,7 +60,6 @@ export default css`
     align-items: center;
     position: relative;
     transition:
-      100ms clip-path ease,
       100ms color ease,
       100ms scale ease,
       100ms translate ease;

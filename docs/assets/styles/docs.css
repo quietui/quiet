@@ -837,8 +837,8 @@ quiet-callout {
 
 /* Splash */
 .layout-splash {
-  --grid-size: 44px;
-  --dot-size: 2px;
+  --grid-size: 30px;
+  --dot-size: 1.5px;
   background-attachment: fixed;
   background-position: center;
   background-color: var(--quiet-background-color);

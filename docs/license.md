@@ -121,12 +121,12 @@ Can't find your question below? [Ask it here!](https://github.com/quietui/quiet/
 
 <details name="faq">
   <summary>Can I change the tag names?</summary>
-  Tag names cannot be changed due to the way they're referenced in supporting code and styles. Attempting to change tag names, e.g. by extending the associated classes, will cause unexpected behaviors and isn't a supported feature of the library.
+  Component tag names, e.g. <code>&lt;quiet-button&gt;</code>, cannot be changed due to the way they're referenced in supporting code and styles. Attempting to change tag names, e.g. by extending the associated classes, will cause unexpected behaviors and isn't a supported feature of the library.
 </details>
 
 <details name="faq">
   <summary>Can I use this library with a micro frontend?</summary>
-  Because custom elements are registered globally, I don't recommend using Quiet in a micro frontend architecture <em>unless</em> you move it to the top of the stack. Avoid loading the library multiple times (e.g. once per module), as this will cause version conflicts and load more code than is necessary.
+  Because custom elements are registered globally, I don't recommend using Quiet in a micro frontend architecture <em>unless</em> you move it to the top of the stack. Avoid loading the library multiple times, as this will cause version conflicts and load more code than is necessary.
 </details>
 
 <small class="copyright">

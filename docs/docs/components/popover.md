@@ -49,6 +49,21 @@ Popover anchors should be `<quiet-button>` or `<button>` elements. Use the `for`
 The anchor element must be in the DOM when the popover is connected, otherwise the popover won't be attached and a warning will be shown in the console.
 :::
 
+### Opening and closing popovers
+
+Popovers will be shown when their anchor element is clicked. You can open and close a popover programmatically by obtaining a reference to it and setting the `open` property to `true` or `false`, respectively.
+
+As a convenience, you can add `data-popover="close"` to any button inside a popover to close it without additional JavaScript.
+
+```html {.example}
+<quiet-popover for="popover__opening">
+  <p>The button below has <code>data-popover="close"</code> so clicking it will close the popover.</p>
+  <quiet-button data-popover="close" variant="primary">Dismiss</quiet-button>
+</quiet-popover>
+
+<quiet-button id="popover__opening">Show popover</quiet-button>
+```
+
 ### Placement
 
 Use the `placement` attribute to change the preferred location of the popover in reference to its anchor. The popover will shift to a more optimal location if the preferred placement doesn't have enough room. The default placement is `top`.

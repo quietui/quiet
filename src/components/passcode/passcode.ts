@@ -8,7 +8,7 @@ import {
   QuietBlurEvent,
   QuietChangeEvent,
   QuietFocusEvent,
-  QuietInputComplete,
+  QuietInputCompleteEvent,
   QuietInputEvent
 } from '../../events/form.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
@@ -248,7 +248,7 @@ export class QuietPasscode extends QuietElement {
     this.relayNativeEvent(event);
 
     if (this.value.length === this.getTotalCharacters()) {
-      this.dispatchEvent(new QuietInputComplete());
+      this.dispatchEvent(new QuietInputCompleteEvent());
     }
   }
 

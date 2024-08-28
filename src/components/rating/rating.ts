@@ -200,9 +200,7 @@ export class QuietRating extends QuietElement {
   private handleDragStart(event: PointerEvent | TouchEvent) {
     const x = event instanceof PointerEvent ? event.clientX : event.touches[0].clientX;
 
-    if (event.type === 'touchstart') {
-      event.preventDefault();
-    }
+    event.preventDefault();
 
     if (
       this.isDragging ||

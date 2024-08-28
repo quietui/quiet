@@ -329,9 +329,7 @@ export class QuietColorPicker extends QuietElement {
     const x = event instanceof PointerEvent ? event.clientX : event.touches[0].clientX;
     const y = event instanceof PointerEvent ? event.clientY : event.touches[0].clientY;
 
-    if (event.type === 'touchstart') {
-      event.preventDefault();
-    }
+    event.preventDefault();
 
     if (
       this.disabled ||

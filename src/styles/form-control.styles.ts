@@ -195,7 +195,7 @@ export default css`
     font-size: var(--quiet-form-control-font-size-xs);
 
     #text-box {
-      min-height: var(--quiet-form-control-height-xs);
+      min-height: calc(var(--quiet-form-control-height-xs) - var(--quiet-border-width) * 2);
     }
   }
 
@@ -203,7 +203,7 @@ export default css`
     font-size: var(--quiet-form-control-font-size-sm);
 
     #text-box {
-      min-height: var(--quiet-form-control-height-sm);
+      min-height: calc(var(--quiet-form-control-height-sm) - var(--quiet-border-width) * 2);
     }
   }
 
@@ -211,7 +211,7 @@ export default css`
     font-size: var(--quiet-form-control-font-size-md);
 
     #text-box {
-      min-height: var(--quiet-form-control-height-md);
+      min-height: calc(var(--quiet-form-control-height-md) - var(--quiet-border-width) * 2);
     }
   }
 
@@ -219,7 +219,7 @@ export default css`
     font-size: var(--quiet-form-control-font-size-lg);
 
     #text-box {
-      min-height: var(--quiet-form-control-height-lg);
+      min-height: calc(var(--quiet-form-control-height-lg) - var(--quiet-border-width) * 2);
     }
   }
 
@@ -227,7 +227,7 @@ export default css`
     font-size: var(--quiet-form-control-font-size-xl);
 
     #text-box {
-      min-height: var(--quiet-form-control-height-xl);
+      min-height: calc(var(--quiet-form-control-height-xl) - var(--quiet-border-width) * 2);
     }
   }
 

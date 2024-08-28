@@ -256,7 +256,10 @@ You can set the preferred placement of the dropdown menu with the `placement` at
 
 ```html {.example}
 <quiet-dropdown placement="right">
-  <quiet-button slot="trigger" with-caret>Types of cats</quiet-button>
+  <quiet-button slot="trigger">
+    Types of cats
+    <quiet-icon slot="end" name="chevron-right"></quiet-icon>
+  </quiet-button>
   <quiet-dropdown-item value="bengal">Bengal</quiet-dropdown-item>
   <quiet-dropdown-item value="calico">Calico</quiet-dropdown-item>
   <quiet-dropdown-item value="maine-coon">Maine coon</quiet-dropdown-item>

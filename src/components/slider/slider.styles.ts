@@ -30,6 +30,15 @@ export default css`
     &.vertical {
       margin-block-end: 0.5em;
     }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-visible:not(.disabled) #thumb {
+      outline: var(--quiet-focus-ring);
+      outline-offset: calc(var(--quiet-focus-offset) * 2);
+    }
   }
 
   #track {
@@ -96,15 +105,6 @@ export default css`
     background-color: white;
     border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-primary-fill-mid);
     cursor: pointer;
-
-    &:focus {
-      outline: none;
-    }
-
-    &:focus-visible {
-      outline: var(--quiet-focus-ring);
-      outline-offset: calc(var(--quiet-focus-offset) * 2);
-    }
   }
 
   .disabled #thumb {

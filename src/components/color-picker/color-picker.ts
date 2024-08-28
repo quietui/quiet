@@ -4,6 +4,7 @@ import '../slider/slider.js';
 import { clamp } from '../../utilities/math.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property, query, state } from 'lit/decorators.js';
+import { DraggableElement } from '../../utilities/drag.js';
 import { html } from 'lit';
 import { Localize } from '../../utilities/localize.js';
 import { QuietBlurEvent, QuietChangeEvent, QuietFocusEvent, QuietInputEvent } from '../../events/form.js';
@@ -78,6 +79,7 @@ export class QuietColorPicker extends QuietElement {
   public associatedForm: HTMLFormElement | null = null;
   private colorSliderBoundingClientRect: DOMRect;
 
+  private draggableThumb: DraggableElement;
   private isDragging = false;
   private localize = new Localize(this);
   private valueWhenDraggingStarted: string | undefined;
@@ -167,6 +169,31 @@ export class QuietColorPicker extends QuietElement {
 
   firstUpdated() {
     this.setColorFromString(this.value);
+
+    // Enable dragging on the color slider thumb
+    this.draggableThumb = new DraggableElement(this.colorSlider, {
+      start: (x, y) => {
+        // Cache coords when dragging starts to avoid calling it on every move
+        this.colorSliderBoundingClientRect = this.colorSlider.getBoundingClientRect();
+        this.isDragging = true;
+        this.valueWhenDraggingStarted = this.value;
+        this.setColorFromCoordinates(x, y);
+      },
+      move: (x, y) => {
+        this.setColorFromCoordinates(x, y);
+      },
+      stop: () => {
+        // Dispatch change events when dragging stops
+        if (this.value !== this.valueWhenDraggingStarted) {
+          this.wasChanged = true;
+          this.dispatchEvent(new QuietChangeEvent());
+          this.dispatchEvent(new Event('change'));
+        }
+
+        this.isDragging = false;
+        this.valueWhenDraggingStarted = undefined;
+      }
+    });
   }
 
   updated(changedProps: Map<string, unknown>) {
@@ -190,6 +217,7 @@ export class QuietColorPicker extends QuietElement {
     // Handle disabled
     if (changedProps.has('disabled')) {
       this.customStates.set('disabled', this.disabled);
+      this.draggableThumb.toggle(!this.disabled);
     }
 
     // Handle focused
@@ -324,59 +352,6 @@ export class QuietColorPicker extends QuietElement {
       this.dispatchEvent(new Event('change'));
     }
   }
-
-  private handleDragStart(event: PointerEvent | TouchEvent) {
-    const x = event instanceof PointerEvent ? event.clientX : event.touches[0].clientX;
-    const y = event instanceof PointerEvent ? event.clientY : event.touches[0].clientY;
-
-    event.preventDefault();
-
-    if (
-      this.disabled ||
-      // Prevent right-clicks from triggering drags
-      (event instanceof PointerEvent && event.buttons > 1)
-    ) {
-      return;
-    }
-
-    document.addEventListener('pointermove', this.handleDragMove);
-    document.addEventListener('pointerup', this.handleDragStop);
-    document.addEventListener('touchmove', this.handleDragMove);
-    document.addEventListener('touchend', this.handleDragStop);
-
-    // Cache coords when dragging starts to avoid calling it on every move
-    this.colorSliderBoundingClientRect = this.colorSlider.getBoundingClientRect();
-    this.isDragging = true;
-    this.valueWhenDraggingStarted = this.value;
-    this.setColorFromCoordinates(x, y);
-  }
-
-  private handleDragMove = (event: PointerEvent | TouchEvent) => {
-    const x = event instanceof PointerEvent ? event.clientX : event.touches[0].clientX;
-    const y = event instanceof PointerEvent ? event.clientY : event.touches[0].clientY;
-
-    event.preventDefault();
-
-    this.setColorFromCoordinates(x, y);
-  };
-
-  private handleDragStop = (event: PointerEvent | TouchEvent) => {
-    document.removeEventListener('pointermove', this.handleDragMove);
-    document.removeEventListener('pointerup', this.handleDragStop);
-    document.removeEventListener('touchmove', this.handleDragMove);
-    document.removeEventListener('touchend', this.handleDragStop);
-
-    // Dispatch change events when dragging stops
-    if (this.value !== this.valueWhenDraggingStarted) {
-      this.wasChanged = true;
-      this.dispatchEvent(new QuietChangeEvent());
-      this.dispatchEvent(new Event('change'));
-    }
-
-    event.preventDefault();
-    this.isDragging = false;
-    this.valueWhenDraggingStarted = undefined;
-  };
 
   private handleEyeDropperClick() {
     const eyeDropper = new EyeDropper();
@@ -653,13 +628,7 @@ export class QuietColorPicker extends QuietElement {
           --opacity-thumb-color: ${opacityColor};
         "
       >
-        <div
-          id="color-slider"
-          part="color-slider"
-          style="background-color: ${hueColor.toHexString()};"
-          @pointerdown=${this.handleDragStart}
-          @touchstart=${this.handleDragStart}
-        >
+        <div id="color-slider" part="color-slider" style="background-color: ${hueColor.toHexString()};">
           <span
             id="color-slider-thumb"
             part="color-slider-thumb"

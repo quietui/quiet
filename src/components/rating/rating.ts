@@ -1,6 +1,7 @@
 import { clamp } from '../../utilities/math.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property, query, state } from 'lit/decorators.js';
+import { DraggableElement } from '../../utilities/drag.js';
 import { html } from 'lit';
 import { Localize } from '../../utilities/localize.js';
 import { QuietBlurEvent, QuietChangeEvent, QuietFocusEvent, QuietInputEvent } from '../../events/form.js';
@@ -53,7 +54,7 @@ export class QuietRating extends QuietElement {
   /** A reference to the `<form>` associated with the form control, or `null` if no form is associated. */
   public associatedForm: HTMLFormElement | null = null;
   private didDragOverOthers = false;
-  private isDragging = false;
+  private draggableRating: DraggableElement;
   private localize = new Localize(this);
   private ratingBoundingClientRect: DOMRect;
   private valueWhenDraggingStarted: number | undefined;
@@ -134,6 +135,42 @@ export class QuietRating extends QuietElement {
     this.removeEventListener('invalid', this.handleHostInvalid);
   }
 
+  firstUpdated() {
+    // Enable dragging on the rating
+    this.draggableRating = new DraggableElement(this.rating, {
+      start: x => {
+        // Cache coords when dragging starts to avoid calling it on every move
+        this.didDragOverOthers = false;
+        this.valueWhenDraggingStarted = this.value;
+        this.ratingBoundingClientRect = this.rating.getBoundingClientRect();
+        this.setValueFromCoordinates(x);
+      },
+      move: x => {
+        this.setValueFromCoordinates(x);
+
+        if (this.value !== this.valueWhenDraggingStarted) {
+          this.didDragOverOthers = true;
+        }
+      },
+      stop: () => {
+        // Dispatch change events when dragging stops
+        if (this.value !== this.valueWhenDraggingStarted) {
+          this.dispatchEvent(new QuietChangeEvent());
+          this.dispatchEvent(new Event('change'));
+          this.wasChanged = true;
+        }
+
+        // Reset the value when clicking on the same one
+        if (this.value === this.valueWhenDraggingStarted && !this.didDragOverOthers) {
+          this.value = 0;
+        }
+
+        this.didDragOverOthers = false;
+        this.valueWhenDraggingStarted = undefined;
+      }
+    });
+  }
+
   updated(changedProps: Map<string, unknown>) {
     // Always be updating
     this.updateValidity();
@@ -152,6 +189,11 @@ export class QuietRating extends QuietElement {
     // Handle disabled
     if (changedProps.has('disabled')) {
       this.customStates.set('disabled', this.disabled);
+    }
+
+    // Disable dragging when disabled or readonly
+    if (changedProps.has('disabled') || changedProps.has('readonly')) {
+      this.draggableRating.toggle(!(this.disabled || this.readonly));
     }
 
     // Handle user interactions. When the form control's value has changed and lost focus (e.g. change event), we can
@@ -196,69 +238,6 @@ export class QuietRating extends QuietElement {
     this.customStates.set('focused', false);
     this.dispatchEvent(new QuietBlurEvent());
   }
-
-  private handleDragStart(event: PointerEvent | TouchEvent) {
-    const x = event instanceof PointerEvent ? event.clientX : event.touches[0].clientX;
-
-    event.preventDefault();
-
-    if (
-      this.isDragging ||
-      this.disabled ||
-      this.readonly ||
-      // Prevent right-clicks from triggering drags
-      (event instanceof PointerEvent && event.buttons > 1)
-    ) {
-      return;
-    }
-
-    document.addEventListener('pointermove', this.handleDragMove);
-    document.addEventListener('pointerup', this.handleDragStop);
-    document.addEventListener('touchmove', this.handleDragMove);
-    document.addEventListener('touchend', this.handleDragStop);
-
-    // Cache coords when dragging starts to avoid calling it on every move
-    this.isDragging = true;
-    this.didDragOverOthers = false;
-    this.valueWhenDraggingStarted = this.value;
-    this.ratingBoundingClientRect = this.rating.getBoundingClientRect();
-    this.setValueFromCoordinates(x);
-  }
-
-  private handleDragMove = (event: PointerEvent | TouchEvent) => {
-    const x = event instanceof PointerEvent ? event.clientX : event.touches[0].clientX;
-
-    event.preventDefault();
-    this.setValueFromCoordinates(x);
-
-    if (this.value !== this.valueWhenDraggingStarted) {
-      this.didDragOverOthers = true;
-    }
-  };
-
-  private handleDragStop = (event: PointerEvent | TouchEvent) => {
-    document.removeEventListener('pointermove', this.handleDragMove);
-    document.removeEventListener('pointerup', this.handleDragStop);
-    document.removeEventListener('touchmove', this.handleDragMove);
-    document.removeEventListener('touchend', this.handleDragStop);
-
-    // Dispatch change events when dragging stops
-    if (this.value !== this.valueWhenDraggingStarted) {
-      this.dispatchEvent(new QuietChangeEvent());
-      this.dispatchEvent(new Event('change'));
-      this.wasChanged = true;
-    }
-
-    // Reset the value when clicking on the same one
-    if (this.value === this.valueWhenDraggingStarted && !this.didDragOverOthers) {
-      this.value = 0;
-    }
-
-    event.preventDefault();
-    this.didDragOverOthers = false;
-    this.isDragging = false;
-    this.valueWhenDraggingStarted = undefined;
-  };
 
   private handleFocus() {
     this.customStates.set('focused', true);
@@ -491,8 +470,6 @@ export class QuietRating extends QuietElement {
         @focus=${this.handleFocus}
         @blur=${this.handleBlur}
         @keydown=${this.handleKeyDown}
-        @pointerdown=${this.handleDragStart}
-        @touchstart=${this.handleDragStart}
       >
         ${symbols.map((symbol, index) => {
           return html`

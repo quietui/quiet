@@ -2,6 +2,7 @@ import '../tooltip/tooltip.js';
 import { clamp } from '../../utilities/math.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { customElement, property, query, state } from 'lit/decorators.js';
+import { DraggableElement } from '../../utilities/drag.js';
 import { html } from 'lit';
 import { Localize } from '../../utilities/localize.js';
 import { QuietBlurEvent, QuietChangeEvent, QuietFocusEvent, QuietInputEvent } from '../../events/form.js';
@@ -65,10 +66,12 @@ export class QuietSlider extends QuietElement {
 
   /** A reference to the `<form>` associated with the form control, or `null` if no form is associated. */
   public associatedForm: HTMLFormElement | null = null;
+  private draggableTrack: DraggableElement;
   private localize = new Localize(this);
   private trackBoundingClientRect: DOMRect;
   private valueWhenDraggingStarted: number | undefined;
 
+  @query('#slider') slider: HTMLElement;
   @query('#thumb') thumb: HTMLElement;
   @query('#track') track: HTMLElement;
   @query('#tooltip') tooltip: QuietTooltip;
@@ -161,6 +164,35 @@ export class QuietSlider extends QuietElement {
     this.removeEventListener('invalid', this.handleHostInvalid);
   }
 
+  firstUpdated() {
+    // Enable dragging on the slider's track
+    this.draggableTrack = new DraggableElement(this.slider, {
+      start: (x, y) => {
+        // Cache coords when dragging starts to avoid calling it on every move
+        this.trackBoundingClientRect = this.track.getBoundingClientRect();
+        this.valueWhenDraggingStarted = this.value;
+        this.customStates.set('dragging', true);
+        this.setValueFromCoordinates(x, y);
+        this.showTooltip();
+      },
+      move: (x, y) => {
+        this.setValueFromCoordinates(x, y);
+      },
+      stop: () => {
+        // Dispatch change events when dragging stops
+        if (this.value !== this.valueWhenDraggingStarted) {
+          this.dispatchEvent(new QuietChangeEvent());
+          this.dispatchEvent(new Event('change'));
+          this.wasChanged = true;
+        }
+
+        this.hideTooltip();
+        this.customStates.set('dragging', false);
+        this.valueWhenDraggingStarted = undefined;
+      }
+    });
+  }
+
   updated(changedProps: Map<string, unknown>) {
     // Always be updating
     this.updateValidity();
@@ -179,6 +211,11 @@ export class QuietSlider extends QuietElement {
     // Handle disabled
     if (changedProps.has('disabled')) {
       this.customStates.set('disabled', this.disabled);
+    }
+
+    // Disable dragging when disabled or readonly
+    if (changedProps.has('disabled') || changedProps.has('readonly')) {
+      this.draggableTrack.toggle(!(this.disabled || this.readonly));
     }
 
     // Handle user interactions. When the form control's value has changed and lost focus (e.g. change event), we can
@@ -235,61 +272,6 @@ export class QuietSlider extends QuietElement {
     this.customStates.set('focused', true);
     this.dispatchEvent(new QuietFocusEvent());
   }
-
-  private handleDragStart(event: PointerEvent | TouchEvent) {
-    const x = event instanceof PointerEvent ? event.clientX : event.touches[0].clientX;
-    const y = event instanceof PointerEvent ? event.clientY : event.touches[0].clientY;
-
-    event.preventDefault();
-
-    if (
-      this.disabled ||
-      this.readonly ||
-      // Prevent right-clicks from triggering drags
-      (event instanceof PointerEvent && event.buttons > 1)
-    ) {
-      return;
-    }
-
-    document.addEventListener('pointermove', this.handleDragMove);
-    document.addEventListener('pointerup', this.handleDragStop);
-    document.addEventListener('touchmove', this.handleDragMove);
-    document.addEventListener('touchend', this.handleDragStop);
-
-    // Cache coords when dragging starts to avoid calling it on every move
-    this.trackBoundingClientRect = this.track.getBoundingClientRect();
-    this.valueWhenDraggingStarted = this.value;
-    this.customStates.set('dragging', true);
-    this.setValueFromCoordinates(x, y);
-    this.showTooltip();
-  }
-
-  private handleDragMove = (event: PointerEvent | TouchEvent) => {
-    const x = event instanceof PointerEvent ? event.clientX : event.touches[0].clientX;
-    const y = event instanceof PointerEvent ? event.clientY : event.touches[0].clientY;
-
-    event.preventDefault();
-    this.setValueFromCoordinates(x, y);
-  };
-
-  private handleDragStop = (event: PointerEvent | TouchEvent) => {
-    document.removeEventListener('pointermove', this.handleDragMove);
-    document.removeEventListener('pointerup', this.handleDragStop);
-    document.removeEventListener('touchmove', this.handleDragMove);
-    document.removeEventListener('touchend', this.handleDragStop);
-
-    // Dispatch change events when dragging stops
-    if (this.value !== this.valueWhenDraggingStarted) {
-      this.dispatchEvent(new QuietChangeEvent());
-      this.dispatchEvent(new Event('change'));
-      this.wasChanged = true;
-    }
-
-    event.preventDefault();
-    this.hideTooltip();
-    this.customStates.set('dragging', false);
-    this.valueWhenDraggingStarted = undefined;
-  };
 
   private handleHostInvalid() {
     //
@@ -530,8 +512,24 @@ export class QuietSlider extends QuietElement {
           // States
           disabled: this.disabled
         })}
+        role="slider"
+        aria-disabled=${this.disabled ? 'true' : 'false'}
+        aria-readonly=${this.disabled ? 'true' : 'false'}
+        aria-orientation=${this.orientation}
+        aria-valuemin=${this.min}
+        aria-valuenow=${this.value}
+        aria-valuetext=${typeof this.valueFormatter === 'function'
+          ? this.valueFormatter(this.value)
+          : this.localize.number(this.value)}
+        aria-valuemax=${this.max}
+        aria-labelledby="label"
+        aria-describedby="description"
+        tabindex=${this.disabled ? -1 : 0}
+        @blur=${this.handleBlur}
+        @focus=${this.handleFocus}
+        @keydown=${this.handleKeyDown}
       >
-        <div id="track" part="track" @pointerdown=${this.handleDragStart} @touchstart=${this.handleDragStart}>
+        <div id="track" part="track">
           <div id="indicator" part="indicator" style="--start: 0; --end: ${thumbPosition}%"></div>
 
           ${this.withMarkers
@@ -544,27 +542,7 @@ export class QuietSlider extends QuietElement {
               `
             : ''}
 
-          <span
-            id="thumb"
-            part="thumb"
-            role="slider"
-            style="--position: ${thumbPosition}%"
-            aria-disabled=${this.disabled ? 'true' : 'false'}
-            aria-readonly=${this.disabled ? 'true' : 'false'}
-            aria-orientation=${this.orientation}
-            aria-valuemin=${this.min}
-            aria-valuenow=${this.value}
-            aria-valuetext=${typeof this.valueFormatter === 'function'
-              ? this.valueFormatter(this.value)
-              : this.localize.number(this.value)}
-            aria-valuemax=${this.max}
-            aria-labelledby="label"
-            aria-describedby="description"
-            tabindex=${this.disabled ? -1 : 0}
-            @blur=${this.handleBlur}
-            @focus=${this.handleFocus}
-            @keydown=${this.handleKeyDown}
-          ></span>
+          <span id="thumb" part="thumb" style="--position: ${thumbPosition}%"></span>
         </div>
 
         ${this.withReferences

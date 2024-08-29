@@ -232,7 +232,7 @@ By default, dialogs will maintain their scroll position when closed. Use the `re
 
 ### Setting focus on open
 
-To move focus to a specific form control when the dialog opens, use the [`autofocus`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/autofocus) global attribute.
+To move focus to a specific form control when the dialog opens, add the [`autofocus`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/autofocus) attribute to it.
 
 ```html {.example}
 <quiet-dialog id="dialog__focus" with-header with-footer>

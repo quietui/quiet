@@ -35,7 +35,7 @@ import type { QuietTooltip } from '../tooltip/tooltip.js';
  *
  * @csspart label - The element that contains the sliders's label.
  * @csspart description - The element that contains the slider's description.
- * @csspart slider - The element containing the track and reference slot.
+ * @csspart slider - The focusable element with `role="slider"`. Contains the track and reference slot.
  * @csspart track - The slider's track.
  * @csspart indicator - The colored indicator that shows from the start of the slider to the current value.
  * @csspart markers - The container that holds all the markers when `with-markers` is used.

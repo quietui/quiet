@@ -201,7 +201,7 @@ Create a toggle button by adding the `toggle="off"` attribute. To make it active
 Toggle buttons cannot be used with link buttons or submit buttons.
 :::
 
-### Loading buttongs
+### Loading buttons
 
 To show the button in a loading state, add the `loading` attribute. When a button is loading, it is effectively disabled and the `quiet-click` event will not be emitted.
 

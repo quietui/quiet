@@ -422,7 +422,7 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
         color: var(--quiet-primary-text-on-loud);
       }
 
-      &:focus-within {
+      &::part(slider):focus-visible {
         outline: var(--quiet-focus-ring);
         outline-offset: var(--quiet-focus-offset);
       }

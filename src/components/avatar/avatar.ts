@@ -1,5 +1,5 @@
 import '../icon/icon.js';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 import { html } from 'lit';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import hostStyles from '../../styles/host.styles.js';
@@ -24,6 +24,8 @@ import type { CSSResultGroup } from 'lit';
 @customElement('quiet-avatar')
 export class QuietAvatar extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
+
+  @state() private hasImageLoaded = false;
 
   /**
    * An accessible label for the avatar. This won't be shown, but it will be read to assistive devices so you should
@@ -60,7 +62,19 @@ export class QuietAvatar extends QuietElement {
               <quiet-icon library="system" family="filled" name="user"></quiet-icon>
             </slot>
           `}
-      ${this.image ? html` <img id="image" role="presentation" src=${this.image} alt="" /> ` : ''}
+      ${this.image
+        ? html`
+            <img
+              id="image"
+              role="presentation"
+              src=${this.image}
+              alt=""
+              @load=${() => (this.hasImageLoaded = true)}
+              @error=${() => (this.hasImageLoaded = false)}
+              ?hidden=${!this.hasImageLoaded}
+            />
+          `
+        : ''}
     `;
   }
 }

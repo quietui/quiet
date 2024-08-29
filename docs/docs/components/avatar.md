@@ -15,7 +15,7 @@ In the same way that images require `alt` text, you should add a label to every 
 
 ### Images
 
-Avatars are best used with images to create a more personalized experience. Set the `image` attribute to any valid image URL.
+Avatars are best used with images to create a more personalized experience. Set the `image` attribute to any valid image URL. If the image fails to load, it will show characters or the default image instead.
 
 ```html {.example}
 <quiet-avatar label="Sky kitty" image="https://images.unsplash.com/photo-1574158622682-e40e69881006?q=80&w=256&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"></quiet-avatar>

@@ -101,7 +101,7 @@ Can't find your question below? [Ask it here!](https://github.com/quietui/quiet/
 
 <details name="faq">
   <summary>Can I buy more seats later?</summary>
-  You can purchase additional seats any time using the form on this page. However, the discount for additional seats cannot be combined into subsequent purchases, so it's best to buy more up front to get maximum discount!
+  You can purchase additional seats any time using the form on this page. However, the discount for additional seats cannot be honored for subsequent purchases, so it's better to buy more up front to get the maximum discount!
 </details>
 
 <details name="faq">
@@ -120,8 +120,8 @@ Can't find your question below? [Ask it here!](https://github.com/quietui/quiet/
 </details>
 
 <details name="faq">
-  <summary>How do I request a feature?</summary>
-  Features can be requested in the <a href="https://github.com/quietui/quiet/discussions/categories/feature-requests">discussion forum</a>. Please search before posting to avoid creating a duplicate request.
+  <summary>Can I request a feature?</summary>
+  Features can be requested in the <a href="https://github.com/quietui/quiet/discussions/categories/feature-requests">discussion forum</a>. Please search before posting to avoid creating duplicate requests.
 </details>
 
 <details name="faq">

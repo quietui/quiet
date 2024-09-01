@@ -3,7 +3,7 @@ function setTheme(name, skipTransition = false) {
   const isDark = name === 'dark';
   const toggleThemeClass = () => document.documentElement.classList.toggle('quiet-dark', isDark);
 
-  sessionStorage.setItem('theme', isDark ? 'dark' : 'light');
+  localStorage.setItem('theme', isDark ? 'dark' : 'light');
 
   if (skipTransition || !document.startViewTransition) {
     toggleThemeClass();
@@ -15,8 +15,8 @@ function setTheme(name, skipTransition = false) {
 /** Gets the current theme */
 function getTheme() {
   // Use session preference, if one exists
-  if (sessionStorage.getItem('theme')) {
-    return sessionStorage.getItem('theme') === 'dark' ? 'dark' : 'light';
+  if (localStorage.getItem('theme')) {
+    return localStorage.getItem('theme') === 'dark' ? 'dark' : 'light';
   }
 
   // Fall back to system
@@ -70,7 +70,7 @@ function setThemeColor(newColor, skipTransition = false) {
     document.head.querySelector('meta[name="theme-color"]').content = hex;
   };
 
-  sessionStorage.setItem('primary-color', color);
+  localStorage.setItem('primary-color', color);
 
   // Update the color picker dropdown
   dropdown.querySelectorAll('quiet-dropdown-item').forEach(item => {
@@ -101,8 +101,8 @@ document.addEventListener('click', event => {
 
 // Keep the theme in sync when new pages load
 document.addEventListener('turbo:load', () => {
-  setThemeColor(sessionStorage.getItem('primary-color'), true);
+  setThemeColor(localStorage.getItem('primary-color'), true);
 });
 
 // Initial sync
-setThemeColor(sessionStorage.getItem('primary-color'), true);
+setThemeColor(localStorage.getItem('primary-color'), true);

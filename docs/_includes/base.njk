@@ -11,11 +11,11 @@
     <script>
       document.documentElement.classList.toggle(
         'quiet-dark',
-        sessionStorage.getItem('theme') === 'dark' || window.matchMedia('(prefers-color-scheme: dark)').matches
+        localStorage.getItem('theme') === 'dark' || window.matchMedia('(prefers-color-scheme: dark)').matches
       );
 
-      if (sessionStorage.getItem('primary-color')) {
-        document.documentElement.classList.add(`quiet-${sessionStorage.getItem('primary-color')}`);
+      if (localStorage.getItem('primary-color')) {
+        document.documentElement.classList.add(`quiet-${localStorage.getItem('primary-color')}`);
       }
     </script>
 

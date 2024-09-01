@@ -80,6 +80,16 @@ Commercial licenses are available starting at $200 USD. This is a one-time cost 
 Can't find your question below? [Ask it here!](https://github.com/quietui/quiet/discussions)
 
 <details name="faq">
+  <summary>Forever is a long time…are you sure?</summary>
+  Yes. And the price has been intentionally set to less than the estimated <abbr title="Lifetime Value">LTV</abbr> of an average user. I don't need a lambo — just help me keep this thing going. 🫡
+</details>
+
+<details name="faq">
+  <summary>Can I use Quiet for my design system?</summary>
+  Yes, but you will need a commercial license if you don't wish to make your modifications available under the LGPL.
+</details>
+
+<details name="faq">
   <summary>Do you offer a free trial?</summary>
   You can use the open source version of Quiet in a non-production environment to determine if it's a good fit for your needs. A commercial license is required before deploying the software to production unless your project is LGPL-compatible.
 </details>
@@ -87,11 +97,6 @@ Can't find your question below? [Ask it here!](https://github.com/quietui/quiet/
 <details name="faq">
   <summary>What is a "seat?"</summary>
   In the context of licensing, a "seat" is any user who designs, develops, and/or works with the library's HTML, CSS, or JavaScript on a regular basis. For example, a small team with one designer and two developers would purchase a license for three seats.
-</details>
-
-<details name="faq">
-  <summary>Can I use Quiet in my design system?</summary>
-  Yes, but you will need a commercial license if you don't wish to make your modifications available under the LGPL.
 </details>
 
 <details name="faq">

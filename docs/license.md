@@ -10,21 +10,15 @@ section: sponsor
 
 Quiet is an open source project made available under the terms of the [GNU Lesser General Public License v3.0](https://www.tldrlegal.com/license/gnu-lesser-general-public-license-v3-lgpl-3) ("LGPL"). This means you can:
 
-- **Use it in commercial and non-commercial software** without having to release your own source code.
-- **Modify the library** for your own needs as long as you distribute the changes under the same license.
-- **Distribute the library** as part of your application, as long as any changes to the library are made available under the same license.
+- **Use the library** in commercial and non-commercial software without having to release your own source code.
+- **Modify the library** as long as you distribute the changes under the LGPL.
+- **Distribute the library** with your application as long as all changes are distributed under the LGPL.
 
 If you're developing a commercial application and would like to use Quiet without the restrictions of the LGPL, you can purchase a commercial license.
 
 ## Commercial licenses
 
 Commercial licenses are available starting at $200 USD. ==This is a one-time cost== for unlimited projects and zero LGPL restrictions. A discount is offered when multiple seats are purchased at the same time. Please [review the full license](TODO) prior to making a purchase.
-
-:::info
-**Ask yourself this:** how long would it take to build all of this yourself? Quiet is less than a day's wage for most software engineers, and it's yours forever!
-
-[“Shut up and take my money!”](#pricing-callout)
-:::
 
 <div style="max-width: fit-content; margin: 1rem auto;">
   <ul class="two-columns unstyled-list" style="font-size: 1.125em; line-height: 3;">
@@ -46,7 +40,7 @@ Commercial licenses are available starting at $200 USD. ==This is a one-time cos
     alt="Cory's avatar"
   >
   <div>
-  <p>It would take most organizations over a year to build everything you can get instantly with Quiet. Time is the most valuable resource we have, and it's hard to put a price on it.</p>
+  <p>It will take most organizations at least a year to build everything you can get instantly with Quiet. Time is the most valuable resource we have. It's hard to put a price on.</p>
   <p><strong>For a limited time, I'm offering commercial licenses for <mark>only $200 per seat!</mark></strong></p>
   <p style="margin-block-end: 0;">Buy it once and it's yours forever.</p>
 
@@ -87,12 +81,12 @@ Can't find your question below? [Ask it here!](https://github.com/quietui/quiet/
 
 <details name="faq">
   <summary>Forever is a long time…are you sure?</summary>
-  Yes. And the price has been intentionally set to less than the estimated <abbr title="Lifetime Value">LTV</abbr> of an average user. I don't need a lambo — just help me keep this thing going. 🫡
+  Yes. The price has been intentionally set to less than the estimated <abbr title="Lifetime Value">LTV</abbr> of a paying user. I don't need a lambo — just help me keep this thing going. 🫡
 </details>
 
 <details name="faq">
   <summary>Can I use Quiet for my design system?</summary>
-  Yes, but you will need a commercial license if you don't wish to make your modifications available under the LGPL.
+  Yes, but you will need a commercial license if you don't want to make your modifications available under the LGPL. A commercial license removes that restriction instantly.
 </details>
 
 <details name="faq">
@@ -107,17 +101,17 @@ Can't find your question below? [Ask it here!](https://github.com/quietui/quiet/
 
 <details name="faq">
   <summary>Can I buy more seats later?</summary>
-  You can purchase additional seats using the form on this page. However, the discount for additional seats cannot be combined into subsequent purchases.
+  You can purchase additional seats any time using the form on this page. However, the discount for additional seats cannot be combined into subsequent purchases, so it's best to buy more up front to get maximum discount!
 </details>
 
 <details name="faq">
   <summary>Will my license continue to work for new major versions?</summary>
-  All licenses purchased today will work for all future versions of the library. If pricing changes in the future, licenses purchased before said changes will be grandfathered in.
+  All licenses purchased today will be valid for all future versions of the library. If pricing changes later on, licenses purchased prior to the change will be grandfathered in.
 </details>
 
 <details name="faq">
   <summary>What is your refund policy?</summary>
-  Refunds are offered up to 30 days from the date of purchase. I want you to be happy! Remember that you can try it before you buy it!
+  Refunds are offered up to 30 days from the date of purchase. I want you to be happy. And remember, you can try it before you buy it!
 </details>
 
 <details name="faq">

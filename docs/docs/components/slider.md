@@ -406,7 +406,7 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
       &::part(indicator) {
         background-color: #22c55e;
         border-radius: 0;
-      }    
+      }
 
       &::part(thumb) {
         opacity: 0;

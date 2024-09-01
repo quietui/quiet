@@ -24,6 +24,7 @@ export default function (eleventyConfig) {
 
   // Template filters - {{ content | filter }}
   eleventyConfig.addFilter('inlineMarkdown', content => markdown.renderInline(content || ''));
+  eleventyConfig.addFilter('majorVersion', string => string.split('.')[0]);
   eleventyConfig.addFilter('markdown', content => markdown.render(content || ''));
   eleventyConfig.addFilter('stripExtension', string => parse(string).name);
   eleventyConfig.addFilter('stripQuietPrefix', content => content.replace(/^quiet-/, ''));

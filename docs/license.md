@@ -1,7 +1,7 @@
 ---
 title: License
 description: 
-layout: page
+layout: page-outline
 section: sponsor
 ---
 
@@ -27,7 +27,7 @@ Commercial licenses are available starting at $200 USD. ==This is a one-time cos
     <li>⛓️‍💥 No LGPL restrictions</li>
     <li>🗓️ All future versions</li>
     <li>🎨 Professionally designed</li>
-    <li>⏳ Platform-based for longevity</li>
+    <li>⏳ Platform-based (for longevity)</li>
     <li>💺 Add more seats any time</li>
     <li>🚀 Start using instantly</li>
   </ul>
@@ -40,7 +40,7 @@ Commercial licenses are available starting at $200 USD. ==This is a one-time cos
     alt="Cory's avatar"
   >
   <div>
-  <p>It will take most organizations at least a year to build everything you can get instantly with Quiet. Time is the most valuable resource we have. It's hard to put a price on.</p>
+  <p>It would take most orgs over a year to build everything you can get instantly with Quiet. Time is the most valuable resource we have — it's hard to put a price on.</p>
   <p><strong>For a limited time, I'm offering commercial licenses for <mark>only $200 per seat!</mark></strong></p>
   <p style="margin-block-end: 0;">Buy it once and it's yours forever.</p>
 
@@ -81,7 +81,7 @@ Can't find your question below? [Ask it here!](https://github.com/quietui/quiet/
 
 <details name="faq">
   <summary>Forever is a long time…are you sure?</summary>
-  Yes. The price has been intentionally set to less than the estimated <abbr title="Lifetime Value">LTV</abbr> of a paying user. I don't need a lambo — just help me keep this thing going. 🫡
+  Yes. The price has been intentionally set to less than the estimated <abbr title="Lifetime Value">LTV</abbr> of a paying user. I don't need a lambo — just help me keep things going. 🫡
 </details>
 
 <details name="faq">

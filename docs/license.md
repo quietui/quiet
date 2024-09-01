@@ -18,17 +18,23 @@ If you're developing a commercial application and would like to use Quiet withou
 
 ## Commercial licenses
 
-Commercial licenses are available starting at $200 USD. This is a one-time cost for unlimited projects and zero LGPL restrictions. A discount is offered when multiple seats are purchased at the same time. Please [review the full commercial license](TODO) prior to making a purchase.
+Commercial licenses are available starting at $200 USD. ==This is a one-time cost== for unlimited projects and zero LGPL restrictions. A discount is offered when multiple seats are purchased at the same time. Please [review the full license](TODO) prior to making a purchase.
+
+:::info
+**Ask yourself this:** how long would it take to build all of this yourself? Quiet is less than a day's wage for most software engineers, and it's yours forever!
+
+[“Shut up and take my money!”](#pricing-callout)
+:::
 
 <div style="max-width: fit-content; margin: 1rem auto;">
   <ul class="two-columns unstyled-list" style="font-size: 1.125em; line-height: 3;">
     <li>💵 One-time payment</li>
     <li>♾️ Unlimited projects</li>
     <li>⛓️‍💥 No LGPL restrictions</li>
-    <li>🗓️ Free upgrades forever</li>
+    <li>🗓️ All future versions</li>
     <li>🎨 Professionally designed</li>
     <li>⏳ Platform-based for longevity</li>
-    <li>💺 Add seats any time</li>
+    <li>💺 Add more seats any time</li>
     <li>🚀 Start using instantly</li>
   </ul>
 </div>
@@ -91,7 +97,7 @@ Can't find your question below? [Ask it here!](https://github.com/quietui/quiet/
 
 <details name="faq">
   <summary>Do you offer a free trial?</summary>
-  You can use the open source version of Quiet in a non-production environment to determine if it's a good fit for your needs. A commercial license is required before deploying the software to production unless your project is LGPL-compatible.
+  You can use the open source version of Quiet in a non-production environment to determine if it's a good fit for your needs. A commercial license is required before deploying the software to production unless you fully comply with the LGPL.
 </details>
 
 <details name="faq">
@@ -101,22 +107,22 @@ Can't find your question below? [Ask it here!](https://github.com/quietui/quiet/
 
 <details name="faq">
   <summary>Can I buy more seats later?</summary>
-  You can purchase additional seats using the form on this page. However, the discount for additional seats cannot be combined for subsequent purchases.
+  You can purchase additional seats using the form on this page. However, the discount for additional seats cannot be combined into subsequent purchases.
 </details>
 
 <details name="faq">
   <summary>Will my license continue to work for new major versions?</summary>
-  All licenses purchased today will work for all future versions of the library. If pricing changes in the future, licenses purchased before such changes will be grandfathered in.
+  All licenses purchased today will work for all future versions of the library. If pricing changes in the future, licenses purchased before said changes will be grandfathered in.
 </details>
 
 <details name="faq">
   <summary>What is your refund policy?</summary>
-  Refunds are offered up to 30 days from the date of purchase. I want you to be happy with your purchase! (Remember that you can try it before you buy it!)
+  Refunds are offered up to 30 days from the date of purchase. I want you to be happy! Remember that you can try it before you buy it!
 </details>
 
 <details name="faq">
   <summary>Do you offer support?</summary>
-  I actively try to fix bugs, improve the library, and answer all users' questions. However, a commercial license isn't a guarantee of support. I ask that bugs be <a href="https://github.com/quietui/quiet/issues">reported on GitHub</a> and support questions be asked in the <a href="https://github.com/quietui/quiet/discussions">discussion forum</a> for the benefit of the community. I will always do my best to help you!
+  I actively work on bugs, improve the library, and answer questions from the community. However, a commercial license isn't a guarantee of support. I ask that bugs be <a href="https://github.com/quietui/quiet/issues">reported on GitHub</a> and support questions be asked in the <a href="https://github.com/quietui/quiet/discussions">discussion forum</a> for the benefit of the community. I will always do my best to help and prioritize important bugs.
 </details>
 
 <details name="faq">
@@ -126,7 +132,7 @@ Can't find your question below? [Ask it here!](https://github.com/quietui/quiet/
 
 <details name="faq">
   <summary>Can I change the tag names?</summary>
-  Component tag names, e.g. <code>&lt;quiet-button&gt;</code>, cannot be changed due to the way they're referenced in supporting code and styles. Attempting to change tag names, e.g. by extending the associated classes, will cause unexpected behaviors and isn't a supported feature of the library.
+  Component tag names, e.g. <code>&lt;quiet-button&gt;</code>, cannot be changed without modifying the source code due to the way tags are referenced in code and styles. Attempting to change tag names, e.g. by extending the associated classes, will cause unexpected breakages and isn't a supported feature of the library.
 </details>
 
 <details name="faq">

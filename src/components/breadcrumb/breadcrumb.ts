@@ -9,7 +9,8 @@ import type { CSSResultGroup } from 'lit';
 /**
  * <quiet-breadcrumb>
  *
- * @summary Breadcrumbs offer a trail of links that correspond to an app or website's hierarchy, making navigation more predictable for users.
+ * @summary Breadcrumbs offer a trail of links that correspond to an app or website's hierarchy, making navigation more
+ *  predictable for users.
  * @documentation https://quietui.com/docs/components/breadcrumb
  * @status stable
  * @since 1.0

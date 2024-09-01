@@ -8,7 +8,8 @@ import type { CSSResultGroup } from 'lit';
 /**
  * <quiet-card>
  *
- * @summary Cards provide a flexible and visually appealing way to organize and present content in a consistent and easily digestible format.
+ * @summary Cards provide a flexible and visually appealing way to organize and present content in a consistent and
+ *  easily digestible format.
  * @documentation https://quietui.com/docs/components/card
  * @status stable
  * @since 1.0

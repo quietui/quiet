@@ -81,7 +81,7 @@ Can't find your question below? [Ask it here!](https://github.com/quietui/quiet/
 
 <details name="faq">
   <summary>Forever is a long time…are you sure?</summary>
-  Yes. The price has been intentionally set to less than the estimated <abbr title="Lifetime Value">LTV</abbr> of a paying user. I don't need a lambo — just help me keep things going. 🫡
+  Yes. The price has been intentionally set to less than the estimated <abbr title="Lifetime Value">LTV</abbr> of a paying user. I don't need a lambo — just help me keep this thing going. 🫡
 </details>
 
 <details name="faq">

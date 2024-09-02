@@ -12,7 +12,7 @@ Quiet is an open source project made available under the terms of the [GNU Lesse
 
 - **Use the library** in commercial and non-commercial software without having to release your own source code.
 - **Modify the library** as long as you distribute the changes under the LGPL.
-- **Distribute the library** with your application as long as all changes are distributed under the LGPL.
+- **Distribute the library** with your application as long as the library and any changes are distributed under the LGPL.
 
 If you're developing a commercial application and would like to use Quiet without the restrictions of the LGPL, you can purchase a commercial license.
 

@@ -8,7 +8,7 @@ section: sponsor
 <img class="whiskers only-light" src="/assets/images/whiskers/whiskers-neutral-light.svg" alt="Whiskers the mouse standing in a neutral position">
 <img class="whiskers only-dark" src="/assets/images/whiskers/whiskers-neutral-dark.svg" alt="Whiskers the mouse standing in a neutral position">
 
-Quiet is an open source project made available under the terms of the [GNU Lesser General Public License v3.0](https://www.tldrlegal.com/license/gnu-lesser-general-public-license-v3-lgpl-3) ("LGPL"). This means you can:
+Quiet is an open source project made available under the [GNU Lesser General Public License v3.0](https://www.tldrlegal.com/license/gnu-lesser-general-public-license-v3-lgpl-3) ("LGPL"). This means you can:
 
 - **Use the library** in commercial and non-commercial software without having to release your own source code.
 - **Modify the library** as long as you distribute the changes under the LGPL.
@@ -25,7 +25,7 @@ Commercial licenses are available starting at $200 USD. ==This is a one-time cos
     <li>💵 One-time payment</li>
     <li>♾️ Unlimited projects</li>
     <li>⛓️‍💥 No LGPL restrictions</li>
-    <li>🗓️ All future versions</li>
+    <li>🗓️ Lifetime upgrades</li>
     <li>🎨 Professionally designed</li>
     <li>⏳ Platform-based (for longevity)</li>
     <li>💺 Add more seats any time</li>
@@ -40,7 +40,7 @@ Commercial licenses are available starting at $200 USD. ==This is a one-time cos
     alt="Cory's avatar"
   >
   <div>
-  <p>It would take most orgs over a year to build everything you can get instantly with Quiet. Time is the most valuable resource we have — it's hard to put a price on.</p>
+  <p>It would take most teams over a year to build everything you can get instantly with Quiet. Time is the most valuable resource we have…why waste it?</p>
   <p><strong>For a limited time, I'm offering commercial licenses for <mark>only $200 per seat!</mark></strong></p>
   <p style="margin-block-end: 0;">Buy it once and it's yours forever.</p>
 
@@ -82,6 +82,11 @@ Can't find your question below? [Ask it here!](https://github.com/quietui/quiet/
 <details name="faq">
   <summary>Forever is a long time…are you sure?</summary>
   Yes. The price has been intentionally set to less than the estimated <abbr title="Lifetime Value">LTV</abbr> of a paying user. I don't need a lambo — just help me keep this thing going. 🫡
+</details>
+
+<details name="faq">
+  <summary>Why the LGPL?</summary>
+  Good software takes time. Great software takes patience, passion, and a relentless pursuit of perfection. Quiet wasn't built by a corporation, it was built by me, an independent developer. The LGPL gives me the flexibility to open source the software with reasonable restrictions and commercial licensing gives me the means to continue improving it.
 </details>
 
 <details name="faq">

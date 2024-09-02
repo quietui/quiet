@@ -12,7 +12,7 @@ Quiet is an open source project made available under the [GNU Lesser General Pub
 
 - **Use the library** in commercial and non-commercial software without having to release your own source code.
 - **Modify the library** as long as you distribute the changes under the LGPL.
-- **Distribute the library** with your application as long as the library and any changes are distributed under the LGPL.
+- **Distribute the library** with your application as long as the library and any changes to it are distributed under the LGPL.
 
 If you're developing a commercial application and would like to use Quiet without the restrictions of the LGPL, you can purchase a commercial license.
 
@@ -40,7 +40,7 @@ Commercial licenses are available starting at $200 USD. ==This is a one-time cos
     alt="Cory's avatar"
   >
   <div>
-  <p>It would take most teams over a year to build everything you can get instantly with Quiet. Time is the most valuable resource we have…why waste it?</p>
+  <p>It would take most teams over a year to build everything you can get instantly with Quiet. Time is the most valuable resource you have…why waste it?</p>
   <p><strong>For a limited time, I'm offering commercial licenses for <mark>only $200 per seat!</mark></strong></p>
   <p style="margin-block-end: 0;">Buy it once and it's yours forever.</p>
 
@@ -112,6 +112,11 @@ Can't find your question below? [Ask it here!](https://github.com/quietui/quiet/
 <details name="faq">
   <summary>Will my license continue to work for new major versions?</summary>
   All licenses purchased today will be valid for all future versions of the library. If pricing changes later on, licenses purchased prior to the change will be grandfathered in.
+</details>
+
+<details name="faq">
+  <summary>How do you enforce licensing?</summary>
+  I have neither the time, energy, nor resources to police the Internet for every user who consumes this software illegally. I will, however, defend against obvious rip offs and violations. For the value this software provides, it's just easier to do the right thing.
 </details>
 
 <details name="faq">

@@ -24,6 +24,7 @@ export interface Translation extends DefaultTranslation {
   dragFilesHereOrChooseFromFolder: string;
   error: string;
   hidePassword: string;
+  hide: string;
   hue: string;
   opacity: string;
   numberOutOfTotal: (number: number, total: number) => string;
@@ -33,4 +34,6 @@ export interface Translation extends DefaultTranslation {
   remove: string;
   selectAColorFromTheScreen: string;
   showPassword: string;
+  show: string;
+  spoiler: string;
 }

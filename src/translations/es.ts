@@ -16,6 +16,7 @@ const translation: Translation = {
   dragFilesHereOrChooseFromFolder: 'Arrastra archivos aquí o elige una carpeta',
   error: 'Error',
   hidePassword: 'Ocultar contraseña',
+  hide: 'Ocultar',
   loading: 'Cargando',
   hue: 'Matiz',
   numberOutOfTotal: (number, total) => `${number} de ${total}`,
@@ -24,7 +25,9 @@ const translation: Translation = {
   percentSaturation: (percentage: string) => `${percentage} de saturación`,
   remove: 'Remover',
   selectAColorFromTheScreen: 'Seleccione un color de la pantalla',
-  showPassword: 'Mostrar contraseña'
+  showPassword: 'Mostrar contraseña',
+  show: 'Mostrar',
+  spoiler: 'Spoiler'
   /* cSpell:enable */
 };
 

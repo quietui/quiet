@@ -11,8 +11,8 @@ import type { CSSResultGroup } from 'lit';
 /**
  * <quiet-spoiler>
  *
- * @summary Spoilers conceal content and give the user the option of showing it or not, preventing unintentional
- *  disclosure.
+ * @summary Spoilers conceal sensitive content and give the user the option of showing it or not, preventing
+ *  unintentional disclosure.
  * @documentation https://quietui.com/docs/components/spoiler
  * @status stable
  * @since 1.0

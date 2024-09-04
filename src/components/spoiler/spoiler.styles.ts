@@ -74,7 +74,7 @@ export default css`
       0.25s scale ease;
 
     &.blur {
-      background-color: color-mix(in oklab, var(--quiet-neutral-fill-soft), transparent 50%);
+      background-color: color-mix(in oklab, var(--quiet-neutral-fill-soft), transparent 75%);
       backdrop-filter: blur(var(--blur));
       -webkit-backdrop-filter: blur(var(--blur));
       color: var(--quiet-neutral-text-on-soft);

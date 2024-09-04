@@ -59,8 +59,8 @@ The default spoiler effect is `blur`, which blurs the content but still leave a 
 You can show images in a spoiler just like any other content.
 
 ```html {.example}
-<quiet-spoiler label="Show me the kittens!">
-  <img src="https://images.unsplash.com/photo-1517164368115-9e52989f4f6d?q=80&w=1024&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Two kittens caught by surprise">
+<quiet-spoiler label="Show me the kitten!">
+  <img src="https://images.unsplash.com/photo-1516750105099-4b8a83e217ee?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="A kitten plays with toys">
 </quiet-spoiler>
 ```
 

@@ -1,11 +1,20 @@
 import { esbuildPlugin } from '@web/dev-server-esbuild';
 import { globbySync } from 'globby';
 import { playwrightLauncher } from '@web/test-runner-playwright';
+import os from 'os';
 
+// Only run one browser per core
+const cores = os.availableParallelism?.() ?? os.cpus.length;
+const browsers = ['chromium', 'firefox', 'webkit'];
+const concurrentBrowsers = Math.min(browsers.length, cores);
+const concurrency = Math.max(Math.floor(cores / browsers.length), 1);
+
+// https://modern-web.dev/docs/test-runner/cli-and-configuration/
 export default {
   rootDir: '.',
   files: 'src/**/*.test.ts', // "default" group
-  concurrentBrowsers: 3,
+  concurrency,
+  concurrentBrowsers,
   nodeResolve: {
     exportConditions: ['production', 'default']
   },
@@ -21,11 +30,7 @@ export default {
       target: 'es2020'
     })
   ],
-  browsers: [
-    playwrightLauncher({ product: 'chromium' }),
-    playwrightLauncher({ product: 'firefox' }),
-    playwrightLauncher({ product: 'webkit' })
-  ],
+  browsers: browsers.map(product => playwrightLauncher({ product })),
   testRunnerHtml: testFramework =>
     `
 <!DOCTYPE html>

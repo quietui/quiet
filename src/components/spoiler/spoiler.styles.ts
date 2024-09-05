@@ -109,27 +109,25 @@ export default css`
     justify-content: center;
     position: absolute;
     z-index: 2;
-    top: calc(-1.5em - var(--quiet-border-width));
+    top: calc(-1.5em - 0.5em);
+    left: calc(50% - 0.75em);
     width: 1.5em;
     height: 1.5em;
     font-size: 1.25em;
     background-color: var(--quiet-neutral-fill-mid);
+    border-radius: 50% 50% 50% 0;
     color: var(--quiet-neutral-text-on-mid);
     translate: 0 0;
     scale: 1;
+    rotate: -45deg;
+
     transition:
       0.25s translate ease,
       0.25s scale ease,
       0.25s opacity ease;
 
-    &:dir(ltr) {
-      right: calc(-1.5em - var(--quiet-border-width));
-      border-radius: 50% 50% 50% 0;
-    }
-
-    &:dir(rtl) {
-      left: calc(-1.5em - var(--quiet-border-width));
-      border-radius: 50% 50% 0 50%;
+    quiet-icon {
+      rotate: 45deg;
     }
 
     &:active {
@@ -140,14 +138,7 @@ export default css`
   :host(:not([visible])) #hide-button {
     opacity: 0;
     scale: 0.9;
+    translate: 0 25%;
     pointer-events: none;
-
-    &:dir(ltr) {
-      translate: -25% 25%;
-    }
-
-    &:dir(rtl) {
-      translate: 25% 25%;
-    }
   }
 `;

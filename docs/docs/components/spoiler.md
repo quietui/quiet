@@ -65,15 +65,6 @@ The default spoiler effect is `blur`, which blurs the content but still leave a 
   the emotional rollercoaster, and the gradual unveiling of characters' depths are all diminished. In a book about 
   kittens, you might expect tales of mischief, growth, and perhaps even a bit of heart-warming drama.
 </quiet-spoiler>
-
-<br>
-
-<quiet-spoiler effect="pixelate">
-  Spoiling a good book, even one about something as universally beloved as kittens, robs you of the journey the author 
-  intended. Imagine unfolding a mystery only to have the solution handed to you at the start; the delight of discovery, 
-  the emotional rollercoaster, and the gradual unveiling of characters' depths are all diminished. In a book about 
-  kittens, you might expect tales of mischief, growth, and perhaps even a bit of heart-warming drama.
-</quiet-spoiler>
 ```
 
 ### Showing images and videos in spoilers

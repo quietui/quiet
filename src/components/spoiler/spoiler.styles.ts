@@ -94,7 +94,7 @@ export default css`
 
   :host(:not([inline])) #label {
     background-color: color-mix(in oklab, var(--quiet-neutral-fill-loud), transparent 50%);
-    color: var(--quiet-neutral-text-on-mid); /* due to transparency */
+    color: var(--quiet-neutral-text-on-loud);
     border-radius: 9999px;
     padding: 0.25em 1em;
     transition: 0.2s background-color ease;

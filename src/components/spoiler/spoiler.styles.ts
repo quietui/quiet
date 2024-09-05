@@ -56,6 +56,7 @@ export default css`
     }
   }
 
+  /* Show button */
   #show-button {
     display: flex;
     flex-direction: column;
@@ -74,7 +75,7 @@ export default css`
       0.25s scale ease;
 
     &.blur {
-      background-color: color-mix(in oklab, var(--quiet-neutral-fill-soft), transparent 75%);
+      background-color: color-mix(in oklab, var(--quiet-neutral-fill-soft), transparent 50%);
       backdrop-filter: blur(var(--blur));
       -webkit-backdrop-filter: blur(var(--blur));
       color: var(--quiet-neutral-text-on-soft);
@@ -92,14 +93,16 @@ export default css`
     pointer-events: none;
   }
 
+  /* Label */
   :host(:not([inline])) #label {
-    background-color: color-mix(in oklab, var(--quiet-neutral-fill-loud), transparent 50%);
+    background-color: color-mix(in oklab, var(--quiet-neutral-fill-mid), transparent 0%);
     color: var(--quiet-neutral-text-on-mid); /* intentional (due to transparency) */
     border-radius: 9999px;
     padding: 0.25em 1em;
     transition: 0.2s background-color ease;
   }
 
+  /* Hide button */
   #hide-button {
     display: flex;
     align-items: center;

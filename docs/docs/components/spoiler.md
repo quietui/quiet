@@ -20,13 +20,20 @@ Content inside a spoiler is rendered [inert](https://developer.mozilla.org/en-US
 Use the `label` attribute to provide a plain text label for the spoiler's reveal. If you want to provide HTML, use the `label` slot instead.
 
 ```html {.example}
-<quiet-spoiler>
+<quiet-spoiler class="spoiler__reveal">
   <span slot="label">
     <quiet-icon name="hand-stop" style="font-size: 1.5rem;"></quiet-icon><br>
     Warning! NSFW
   </span>
   In the quiet hours of the night, when the house is still, the kittens decide it's time for their raucous escapades. They've discovered the laundry basket, not for napping, but for a game of 'who can make the most noise with the least amount of fabric.' Tumbling into a pile of freshly washed socks, they wrestle and roll, occasionally getting their tiny claws stuck in more intimate articles of clothing, leading to a flurry of playful, albeit slightly embarrassing, attempts to free themselves. Their innocent chaos turns the bedroom into a scene that's part comedy, part mild scandal, as they inadvertently create a kitten burlesque show with every leap and pounce.
 </quiet-spoiler>
+
+<style>
+  .spoiler__reveal::part(label) {
+    border-radius: 1rem;
+    padding-block: 1rem;
+  }
+</style>
 ```
 
 ### Inline spoilers
@@ -54,14 +61,20 @@ The default spoiler effect is `blur`, which blurs the content but still leave a 
 </quiet-spoiler>
 ```
 
-### Showing images in spoilers
+### Showing images and videos in spoilers
 
 You can show images in a spoiler just like any other content.
 
 ```html {.example}
-<quiet-spoiler label="Show me the kitten!">
+<quiet-spoiler class="spoiler__image">
+  <span slot="label">Show me the kitten!</span>
   <img src="https://images.unsplash.com/photo-1516750105099-4b8a83e217ee?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="A kitten plays with toys">
 </quiet-spoiler>
+
+<style>
+  .spoiler__image::part(label) {
+  }
+</style>
 ```
 
 ### Showing videos in spoilers

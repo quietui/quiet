@@ -24,6 +24,7 @@ import type { CSSResultGroup } from 'lit';
  *
  * @csspart content - The container that holds the spoiler's content.
  * @csspart show-button - The button that shows the spoiler, a `<button>` element. Covers the content by default.
+ * @csspart label - The container that wraps the label, a `<span>` element.
  * @csspart hide-button - The button that hides the spoiler, a `<button>` element containing an icon.
  * @csspart hide-icon - The hide icon, a `<quiet-icon>` element.
  * @csspart hide-icon__svg - The hide icon's `svg` part.
@@ -100,7 +101,9 @@ export class QuietSpoiler extends QuietElement {
         ?inert=${this.visible}
         @click=${this.handleButtonClick}
       >
-        <slot name="label">${this.label || this.localize.term('show')}</slot>
+        <span id="label" part="label">
+          <slot name="label">${this.label || this.localize.term('show')}</slot>
+        </span>
       </button>
 
       <button

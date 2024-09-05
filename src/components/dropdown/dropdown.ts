@@ -5,14 +5,13 @@ import { createId } from '../../utilities/math.js';
 import { customElement, property, query } from 'lit/decorators.js';
 import { html } from 'lit';
 import { lockScrolling, unlockScrolling } from '../../utilities/scroll.js';
-import { LongPress } from '../../utilities/long-press.js';
+import { LongPress, LongPressEvent } from '../../utilities/long-press.js';
 import { QuietClosedEvent, QuietCloseEvent, QuietOpenedEvent, QuietOpenEvent } from '../../events/open-close.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import { QuietSelectEvent } from '../../events/select.js';
 import hostStyles from '../../styles/host.styles.js';
 import styles from './dropdown.styles.js';
 import type { CSSResultGroup } from 'lit';
-import type { LongPressEvent } from '../../utilities/long-press.js';
 import type { QuietButton } from '../button/button.js';
 import type { QuietDropdownItem } from '../dropdown-item/dropdown-item.js';
 import type { VirtualElement } from '@floating-ui/dom';
@@ -374,9 +373,17 @@ export class QuietDropdown extends QuietElement {
 
   /** Shows the dropdown when the contextmenu event is dispatched. */
   private handleContextMenu = (event: PointerEvent | LongPressEvent) => {
-    const originalEvent = event instanceof PointerEvent ? event : event.detail.originalEvent;
-    const clientX = originalEvent instanceof PointerEvent ? originalEvent.clientX : originalEvent.touches[0].clientX;
-    const clientY = originalEvent instanceof PointerEvent ? originalEvent.clientY : originalEvent.touches[0].clientY;
+    const originalEvent = event instanceof LongPressEvent ? event.detail.originalEvent : event;
+
+    const clientX =
+      originalEvent instanceof MouseEvent || originalEvent instanceof PointerEvent
+        ? originalEvent.clientX
+        : originalEvent.touches[0].clientX;
+
+    const clientY =
+      originalEvent instanceof MouseEvent || originalEvent instanceof PointerEvent
+        ? originalEvent.clientY
+        : originalEvent.touches[0].clientY;
 
     event.preventDefault();
 

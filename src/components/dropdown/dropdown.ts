@@ -374,12 +374,10 @@ export class QuietDropdown extends QuietElement {
   /** Shows the dropdown when the contextmenu event is dispatched. */
   private handleContextMenu = (event: PointerEvent | LongPressEvent) => {
     const originalEvent = event instanceof LongPressEvent ? event.detail.originalEvent : event;
-
     const clientX =
       originalEvent instanceof MouseEvent || originalEvent instanceof PointerEvent
         ? originalEvent.clientX
         : originalEvent.touches[0].clientX;
-
     const clientY =
       originalEvent instanceof MouseEvent || originalEvent instanceof PointerEvent
         ? originalEvent.clientY

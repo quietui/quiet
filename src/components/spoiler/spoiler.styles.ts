@@ -13,17 +13,17 @@ export default css`
     width: 100%;
   }
 
+  /* Content */
+  #content {
+    position: relative;
+    z-index: 1;
+  }
+
   /* Inline */
   :host([inline]) {
     display: inline-flex;
     width: auto;
     white-space: nowrap;
-  }
-
-  /* Content */
-  #content {
-    position: relative;
-    z-index: 1;
   }
 
   :host([inline][visible]) #content {
@@ -93,8 +93,8 @@ export default css`
   }
 
   :host(:not([inline])) #label {
-    background-color: color-mix(in oklab, var(--quiet-neutral-fill-louder), transparent 50%);
-    color: var(--quiet-neutral-text-on-loud);
+    background-color: color-mix(in oklab, var(--quiet-neutral-fill-loud), transparent 50%);
+    color: var(--quiet-neutral-text-on-mid); /* due to transparency */
     border-radius: 9999px;
     padding: 0.25em 1em;
     transition: 0.2s background-color ease;
@@ -110,8 +110,8 @@ export default css`
     width: 1.5em;
     height: 1.5em;
     font-size: 1.25em;
-    background-color: var(--quiet-neutral-fill-soft);
-    color: var(--quiet-neutral-text-on-soft);
+    background-color: var(--quiet-neutral-fill-mid);
+    color: var(--quiet-neutral-text-on-mid);
     translate: 0 0;
     scale: 1;
     transition:

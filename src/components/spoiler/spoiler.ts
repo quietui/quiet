@@ -23,7 +23,7 @@ import type { CSSResultGroup } from 'lit';
  * @slot label - A custom label for the reveal text. For plain-text labels, you can use the `label` attribute instead.
  *
  * @csspart content - The container that holds the spoiler's content.
- * @csspart show-button - The button that shows the spoiler, a `<button>` element. Covers the content by default.
+ * @csspart cover - The element that covers the spoiler, a `<button>` element.
  * @csspart label - The container that wraps the label, a `<span>` element.
  * @csspart hide-button - The button that hides the spoiler, a `<button>` element containing an icon.
  * @csspart hide-icon - The hide icon, a `<quiet-icon>` element.
@@ -38,7 +38,7 @@ export class QuietSpoiler extends QuietElement {
   private localize = new Localize(this);
 
   @query('#hide-button') private hideButton: HTMLButtonElement;
-  @query('#show-button') private showButton: HTMLButtonElement;
+  @query('#cover') private cover: HTMLButtonElement;
 
   /** Shows or hides the spoiler's content. */
   @property({ type: Boolean, reflect: true }) visible = false;
@@ -47,7 +47,7 @@ export class QuietSpoiler extends QuietElement {
   @property({ type: Boolean, reflect: true }) inline = false;
 
   /** Determines how the spoiler is hidden. */
-  @property({ reflect: true }) effect: 'solid' | 'blur' = 'blur';
+  @property({ reflect: true }) effect: 'blur' | 'cover' = 'blur';
 
   /**
    * The spoiler's label. If you need to provide HTML in the label, use the `label` slot instead.
@@ -74,7 +74,7 @@ export class QuietSpoiler extends QuietElement {
   }
 
   private handleButtonClick() {
-    const buttonToFocus = this.visible ? this.showButton : this.hideButton;
+    const buttonToFocus = this.visible ? this.cover : this.hideButton;
 
     this.visible = !this.visible;
     this.updateComplete.then(() => buttonToFocus.focus({ preventScroll: true }));
@@ -90,11 +90,11 @@ export class QuietSpoiler extends QuietElement {
   render() {
     return html`
       <button
-        id="show-button"
-        part="show-button"
+        id="cover"
+        part="cover"
         class=${classMap({
           blur: this.effect === 'blur',
-          solid: this.effect === 'solid'
+          cover: this.effect === 'cover'
         })}
         type="button"
         aria-expanded=${this.visible ? 'true' : 'false'}

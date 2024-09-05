@@ -17,6 +17,7 @@ export default css`
   #content {
     position: relative;
     z-index: 1;
+    width: 100%;
   }
 
   /* Inline */
@@ -33,7 +34,7 @@ export default css`
     text-underline-offset: 0.125em;
   }
 
-  /* Buttons */
+  /* All buttons */
   button {
     background: none;
     border: none;
@@ -56,8 +57,8 @@ export default css`
     }
   }
 
-  /* Show button */
-  #show-button {
+  /* Cover (shows the spoiler when clicked) */
+  #cover {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -70,9 +71,7 @@ export default css`
     left: 0;
     font-size: 0.9375em;
     overflow: hidden;
-    transition:
-      0.25s opacity ease,
-      0.25s scale ease;
+    transition: 0.25s opacity ease;
 
     &.blur {
       background-color: color-mix(in oklab, var(--quiet-neutral-fill-soft), transparent 50%);
@@ -81,22 +80,21 @@ export default css`
       color: var(--quiet-neutral-text-on-soft);
     }
 
-    &.solid {
+    &.cover {
       background-color: var(--quiet-neutral-fill-soft);
       color: var(--quiet-neutral-text-on-soft);
     }
   }
 
-  :host([visible]) #show-button {
-    scale: 1.1;
+  :host([visible]) #cover {
     opacity: 0;
     pointer-events: none;
   }
 
   /* Label */
   :host(:not([inline])) #label {
-    background-color: color-mix(in oklab, var(--quiet-neutral-fill-mid), transparent 0%);
-    color: var(--quiet-neutral-text-on-mid); /* intentional (due to transparency) */
+    background-color: var(--quiet-neutral-fill-mid);
+    color: var(--quiet-neutral-text-on-mid);
     border-radius: 9999px;
     padding: 0.25em 1em;
     transition: 0.2s background-color ease;
@@ -109,7 +107,7 @@ export default css`
     justify-content: center;
     position: absolute;
     z-index: 2;
-    top: calc(-1.5em - var(--quiet-border-width));
+    top: -1.5em;
     width: 1.5em;
     height: 1.5em;
     font-size: 1.25em;
@@ -123,12 +121,12 @@ export default css`
       0.25s opacity ease;
 
     &:dir(ltr) {
-      right: calc(-1.5em - var(--quiet-border-width));
+      right: -1.5em;
       border-radius: 50% 50% 50% 0;
     }
 
     &:dir(rtl) {
-      left: calc(-1.5em - var(--quiet-border-width));
+      left: -1.5em;
       border-radius: 50% 50% 0 50%;
     }
 

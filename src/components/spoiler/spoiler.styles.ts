@@ -97,7 +97,14 @@ export default css`
     color: var(--quiet-neutral-text-on-mid);
     border-radius: 9999px;
     padding: 0.25em 1em;
-    transition: 0.2s background-color ease;
+    scale: 1;
+    transition:
+      0.2s background-color ease,
+      0.2s scale ease;
+  }
+
+  :host([visible]:not([inline])) #label {
+    scale: 0.75;
   }
 
   /* Hide button */
@@ -113,6 +120,7 @@ export default css`
     height: 1.5em;
     font-size: 1.25em;
     background-color: var(--quiet-neutral-fill-mid);
+    box-shadow: 0 0 0 var(--quiet-focus-offset) var(--quiet-silent);
     border-radius: 50% 50% 50% 0;
     color: var(--quiet-neutral-text-on-mid);
     translate: 0 0;

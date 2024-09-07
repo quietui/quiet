@@ -37,7 +37,7 @@ export class QuietSpoiler extends QuietElement {
 
   private localize = new Localize(this);
 
-  @query('#hide-button') private hideButton: HTMLButtonElement;
+  @query('#hide-button') private hideButton?: HTMLButtonElement;
   @query('#cover') private cover: HTMLButtonElement;
 
   /** Shows or hides the spoiler's content. */
@@ -45,6 +45,9 @@ export class QuietSpoiler extends QuietElement {
 
   /** Renders the spoiler inline. */
   @property({ type: Boolean, reflect: true }) inline = false;
+
+  /** Removes the hide button and persists the content when shown. */
+  @property({ type: Boolean, reflect: true }) persist = false;
 
   /** Determines how the spoiler is hidden. */
   @property({ reflect: true }) effect: 'blur' | 'cover' = 'blur';
@@ -77,7 +80,7 @@ export class QuietSpoiler extends QuietElement {
     const buttonToFocus = this.visible ? this.cover : this.hideButton;
 
     this.visible = !this.visible;
-    this.updateComplete.then(() => buttonToFocus.focus({ preventScroll: true }));
+    this.updateComplete.then(() => buttonToFocus?.focus({ preventScroll: true }));
   }
 
   private handleKeyDown(event: KeyboardEvent) {
@@ -106,23 +109,27 @@ export class QuietSpoiler extends QuietElement {
         </span>
       </button>
 
-      <button
-        id="hide-button"
-        part="hide-button"
-        type="button"
-        aria-expanded=${this.visible ? 'true' : 'false'}
-        ?inert=${!this.visible}
-        @click=${this.handleButtonClick}
-        @keydown=${this.handleKeyDown}
-      >
-        <quiet-icon
-          part="hide-icon"
-          exportparts="svg:hide-icon__svg"
-          library="system"
-          name="x"
-          label=${this.localize.term('hide')}
-        ></quiet-icon>
-      </button>
+      ${this.persist
+        ? ''
+        : html`
+            <button
+              id="hide-button"
+              part="hide-button"
+              type="button"
+              aria-expanded=${this.visible ? 'true' : 'false'}
+              ?inert=${!this.visible}
+              @click=${this.handleButtonClick}
+              @keydown=${this.handleKeyDown}
+            >
+              <quiet-icon
+                part="hide-icon"
+                exportparts="svg:hide-icon__svg"
+                library="system"
+                name="x"
+                label=${this.localize.term('hide')}
+              ></quiet-icon>
+            </button>
+          `}
 
       <div part="content" id="content" ?inert=${!this.visible}>
         <slot></slot>

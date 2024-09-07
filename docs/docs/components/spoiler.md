@@ -67,7 +67,7 @@ The default spoiler effect is `blur`, which blurs the content but still leave a 
 </quiet-spoiler>
 ```
 
-### Showing images and videos in spoilers
+### Showing images
 
 You can show images in a spoiler just like any other content.
 
@@ -78,7 +78,7 @@ You can show images in a spoiler just like any other content.
 </quiet-spoiler>
 ```
 
-### Showing videos in spoilers
+### Showing videos
 
 You can show videos in a spoiler just like any other content.
 
@@ -86,6 +86,35 @@ You can show videos in a spoiler just like any other content.
 <quiet-spoiler label="Show the video">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/fOd16PT1S7A?si=J8Z5QmCZvUhZ4r1M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="margin-block-end: 0;"></iframe>
 </quiet-spoiler>
+```
+
+### Persisting spoilers
+
+To persist the spoiler once shown, add the `persist` attribute. To programmatically hide it again, set the `visible` property to `false`.
+
+```html {.example}
+<div id="spoiler__persist">
+  <quiet-spoiler persist>
+    Spoiling a book or movie, especially one centered around a theme as universally beloved as cats, can significantly 
+    detract from the enjoyment of the narrative. The joy of diving into a story about cats, with their mysterious and 
+    often whimsical nature, lies in the unexpected twists and turns that mirror their unpredictable behavior.
+  </quiet-spoiler>
+
+  <p style="margin-block-start: 2rem;">
+    If you really want to know, just ask <quiet-spoiler persist inline label="?">the gray cat</quiet-spoiler>!
+  </p>
+
+  <quiet-button>Reset demos</quiet-button>
+</div>
+
+<script>
+  const container = document.getElementById('spoiler__persist');
+  const resetButton = container.querySelector('quiet-button');
+
+  resetButton.addEventListener('quiet-click', () => {
+    container.querySelectorAll('quiet-spoiler').forEach(spoiler => spoiler.visible = false);
+  });
+</script>
 ```
 
 ### Grouping spoilers

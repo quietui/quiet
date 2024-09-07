@@ -27,7 +27,7 @@ export default css`
     white-space: nowrap;
   }
 
-  :host([inline][visible]) #content {
+  :host([inline][visible]:not([persist])) #content {
     text-decoration: underline;
     text-decoration-style: wavy;
     text-decoration-color: color-mix(in oklab, currentColor, transparent 75%);
@@ -74,7 +74,7 @@ export default css`
     transition: 0.25s opacity ease;
 
     &.blur {
-      background-color: color-mix(in oklab, var(--quiet-neutral-fill-soft), transparent 50%);
+      background-color: color-mix(in oklab, var(--quiet-neutral-fill-softer), transparent 50%);
       backdrop-filter: blur(var(--blur));
       -webkit-backdrop-filter: blur(var(--blur));
       color: var(--quiet-neutral-text-on-soft);

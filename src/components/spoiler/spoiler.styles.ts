@@ -97,7 +97,14 @@ export default css`
     color: var(--quiet-neutral-text-on-mid);
     border-radius: 9999px;
     padding: 0.25em 1em;
-    transition: 0.2s background-color ease;
+    scale: 1;
+    transition:
+      0.2s background-color ease,
+      0.2s scale ease;
+  }
+
+  :host([visible]:not([inline])) #label {
+    scale: 0.75;
   }
 
   /* Hide button */
@@ -107,27 +114,26 @@ export default css`
     justify-content: center;
     position: absolute;
     z-index: 2;
-    top: -1.5em;
+    top: calc(-1.5em - 0.5em);
+    left: calc(50% - 0.75em);
     width: 1.5em;
     height: 1.5em;
     font-size: 1.25em;
     background-color: var(--quiet-neutral-fill-mid);
+    box-shadow: 0 0 0 var(--quiet-focus-offset) var(--quiet-silent);
+    border-radius: 50% 50% 50% 0;
     color: var(--quiet-neutral-text-on-mid);
     translate: 0 0;
     scale: 1;
+    rotate: -45deg;
+
     transition:
       0.25s translate ease,
       0.25s scale ease,
       0.25s opacity ease;
 
-    &:dir(ltr) {
-      right: -1.5em;
-      border-radius: 50% 50% 50% 0;
-    }
-
-    &:dir(rtl) {
-      left: -1.5em;
-      border-radius: 50% 50% 0 50%;
+    quiet-icon {
+      rotate: 45deg;
     }
 
     &:active {
@@ -138,14 +144,7 @@ export default css`
   :host(:not([visible])) #hide-button {
     opacity: 0;
     scale: 0.9;
+    translate: 0 25%;
     pointer-events: none;
-
-    &:dir(ltr) {
-      translate: -25% 25%;
-    }
-
-    &:dir(rtl) {
-      translate: 25% 25%;
-    }
   }
 `;

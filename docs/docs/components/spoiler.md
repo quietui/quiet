@@ -25,7 +25,7 @@ Use the `label` attribute to provide a plain text label for the spoiler's reveal
     <quiet-icon name="hand-stop"></quiet-icon><br>
     Warning! NSFW
   </span>
-  In the quiet hours of the night, when the house is still, the kittens decide it's time for their raucous escapades. They've discovered the laundry basket, not for napping, but for a game of 'who can make the most noise with the least amount of fabric.' Tumbling into a pile of freshly washed socks, they wrestle and roll, occasionally getting their tiny claws stuck in more intimate articles of clothing, leading to a flurry of playful, albeit slightly embarrassing, attempts to free themselves. Their innocent chaos turns the bedroom into a scene that's part comedy, part mild scandal, as they inadvertently create a kitten burlesque show with every leap and pounce.
+  In the quiet hours of the night, when the house is still, the kittens decide it's time for their raucous escapades. They've discovered the laundry basket, not for napping, but for a game of 'who can make the most noise with the least amount of fabric. Tumbling into a pile of freshly washed socks, they wrestle and roll, occasionally getting their tiny claws stuck in more intimate articles of clothing, leading to a flurry of playful, albeit slightly embarrassing, attempts to free themselves. Their innocent chaos turns the bedroom into a scene that's part comedy, part mild scandal, as they inadvertently create a kitten burlesque show with every leap and pounce.
 </quiet-spoiler>
 
 <style>

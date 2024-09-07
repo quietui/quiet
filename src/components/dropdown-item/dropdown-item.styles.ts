@@ -58,13 +58,13 @@ export default css`
   }
 
   :host([checkbox-adjacent]) {
-    padding-inline-start: 1.5em;
+    padding-inline-start: 2em;
   }
 
   #check {
     font-size: 1.25em;
-    margin-inline-start: -1.125em;
-    margin-inline-end: 0.125em;
+    margin-inline-start: -1.25em;
+    margin-inline-end: 0.25em;
     visibility: hidden;
   }
 

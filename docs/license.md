@@ -8,7 +8,11 @@ section: sponsor
 <img class="whiskers only-light" src="/assets/images/whiskers/whiskers-neutral-light.svg" alt="Whiskers the mouse standing in a neutral position">
 <img class="whiskers only-dark" src="/assets/images/whiskers/whiskers-neutral-dark.svg" alt="Whiskers the mouse standing in a neutral position">
 
-Quiet is an open source project made available under the [GNU Lesser General Public License v3.0](https://www.tldrlegal.com/license/gnu-lesser-general-public-license-v3-lgpl-3) ("LGPL"). This means you can:
+Quiet is an open source project made available under the:
+
+[GNU Lesser General Public License v3.0](https://www.tldrlegal.com/license/gnu-lesser-general-public-license-v3-lgpl-3) ("LGPL")
+
+This means you can:
 
 - **Use the library** in commercial and non-commercial software without having to release your own source code.
 - **Modify the library** as long as you distribute all changes under the LGPL.
@@ -18,20 +22,7 @@ If you're developing a commercial application and would like to use Quiet withou
 
 ## Commercial licenses
 
-Commercial licenses are available starting at $200 USD. ==This is a one-time cost== for unlimited projects and zero LGPL restrictions. A discount is offered when multiple seats are purchased at the same time. Please [review the full license](TODO) prior to making a purchase.
-
-<div style="max-width: fit-content; margin: 1rem auto;">
-  <ul class="two-columns unstyled-list" style="font-size: 1.125em; line-height: 3;">
-    <li>💵 One-time payment</li>
-    <li>♾️ Unlimited projects</li>
-    <li>⛓️‍💥 No LGPL restrictions</li>
-    <li>🗓️ Lifetime upgrades</li>
-    <li>🎨 Professionally designed</li>
-    <li>⏳ Platform-based (for longevity)</li>
-    <li>💺 Add more seats any time</li>
-    <li>🚀 Start using instantly</li>
-  </ul>
-</div>
+Commercial licenses are available for a ==one-time cost== of $200 USD per seat. This includes unlimited projects and zero LGPL restrictions. A discount is offered when multiple seats are purchased at the same time. Please [review the full license](TODO) prior to making a purchase.
 
 <div id="pricing-callout">
 <div class="quote">
@@ -40,11 +31,12 @@ Commercial licenses are available starting at $200 USD. ==This is a one-time cos
     alt="Cory's avatar"
   >
   <div>
-  <p>It would take most teams over a year to build everything you can get instantly with Quiet. Time is the most valuable resource you have…why waste it?</p>
-  <p><strong>For a limited time, I'm offering commercial licenses for <mark>only $200 per seat!</mark></strong></p>
+  <p>It would take most teams over a year to build everything you can get instantly with Quiet. Time is the most valuable resource we have…why waste it?</p>
+  <p><strong>For a limited time, commercial licenses are available for only $200 per seat!</strong></p>
   <p style="margin-block-end: 0;">Buy it once and it's yours forever.</p>
 
-  <quiet-select id="seats-select" label="Number of seats" size="lg" pill>
+  <form id="purchase-form">
+  <quiet-select label="Number of seats" size="lg" pill>
     <optgroup label="Small teams">
       <option name="1">1 seat – $200</option>
       <option name="2">2 seats – $300</option>
@@ -62,10 +54,10 @@ Commercial licenses are available starting at $200 USD. ==This is a one-time cos
       <option disabled>Please inquire about larger packages</option>
     </optgroup>
   </quiet-select>
-
   <quiet-button variant="primary" size="lg" pill href="TODO" target="_blank">
     Purchase
   </quiet-button>
+  </form>
   </div>
   <img 
     src="/assets/images/heart.png" 
@@ -74,6 +66,17 @@ Commercial licenses are available starting at $200 USD. ==This is a one-time cos
   >
 </div>
 </div>
+
+<ul id="features-list" aria-label="Features">
+  <li><quiet-icon name="cash-banknote" style="color: #7db664;"></quiet-icon><br>One-time payment</li>
+  <li><quiet-icon name="infinity" style="color: #b394f4;"></quiet-icon><br>Unlimited projects</li>
+  <li><quiet-icon name="unlink" style="color: #a3a6b5;"></quiet-icon><br>No LGPL restrictions</li>
+  <li><quiet-icon name="calendar" style="color: #58acf2;"></quiet-icon><br>Lifetime upgrades</li>
+  <li><quiet-icon name="tools" style="color: #e98d61;"></quiet-icon><br>Professionally designed</li>
+  <li><quiet-icon name="hourglass" style="color: #39baa4;"></quiet-icon><br>Platform-based (for longevity)</li>
+  <li><quiet-icon name="armchair" style="color: #989cff;"></quiet-icon><br>Add more seats any time</li>
+  <li><quiet-icon name="rocket" style="color: #ec8786;"></quiet-icon><br>Start using instantly</li>
+</ul>
 
 ## Frequently asked questions
 
@@ -155,8 +158,7 @@ Can't find your question below? [Ask it here!](https://github.com/quietui/quiet/
     background-color: var(--quiet-paper-color);
     border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
     border-radius: calc(var(--quiet-border-radius) * 6);
-    box-shadow: var(--quiet-shadow-softer);
-    text-align: center;
+    box-shadow: var(--quiet-shadow-soft);
     padding: 2rem;
     margin-block: calc(var(--quiet-content-spacing) * 1.5);
     scale: 1.025;
@@ -188,25 +190,67 @@ Can't find your question below? [Ask it here!](https://github.com/quietui/quiet/
         flex-direction: column;
         align-items: center;
       }
+    }
+  }
 
-      & quiet-button {
-        max-width: 80%;
+  #purchase-form {
+    max-width: 360px;
+    margin-inline: auto;
+    margin-block-start: 2rem;
+
+    quiet-select {
+      &::part(label),
+      &::part(description) {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        white-space: nowrap;
+        clip-path: inset(50%);   
+      }    
+    }
+  }
+
+  #features-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: 0;
+    margin: 0;
+    margin-block-end: 2rem;
+   
+    li {
+      display: block;
+      list-style: none;
+      font-size: 1.125rem;
+      text-align: center;
+      line-height: 1.6;
+      color: var(--quiet-text-muted);
+      border-radius: 1rem;
+      background: var(--quiet-neutral-fill-softer);
+      box-shadow: var(--quiet-shadow-softer);
+      padding: 1rem;
+      margin: 0;
+
+      quiet-icon {
+        font-size: 2.5rem;
+        stroke-width: 1.25px;
       }
     }
   }
 
-  #seats-select {
-    margin-block-start: 2rem;
-  }
+  @media screen and (max-width: 650px) {
+    #features-list {
+      gap: 1rem;
 
-  #seats-select::part(label),
-  #seats-select::part(description) {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    white-space: nowrap;
-    clip-path: inset(50%);   
+      li {
+        font-size: 1rem;
+      }
+
+      &::first-letter {
+        font-size: 1rem;
+      }
+    }
   }
 
   .copyright {

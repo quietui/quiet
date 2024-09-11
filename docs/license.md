@@ -89,12 +89,12 @@ Can't find your question below? [Ask it here!](https://github.com/quietui/quiet/
 
 <details name="faq">
   <summary>Does my stylesheet need to be released under the LGPL?</summary>
-  No, stylesheets you create with your own custom CSS do not need to be licensed under the LGPL.
+  No, stylesheets you create with your own custom CSS are not considered derivative works and do not need to be licensed under the LGPL.
 </details>
 
 <details name="faq">
   <summary>Can I use Quiet for my design system?</summary>
-  Yes, but you will need a commercial license if you don't want to make your modifications available under the LGPL. A commercial license removes that restriction instantly.
+  Yes, but you will need a commercial license if you don't want to make your modifications available under the LGPL. A commercial license removes that requirement instantly.
 </details>
 
 <details name="faq">
@@ -119,7 +119,7 @@ Can't find your question below? [Ask it here!](https://github.com/quietui/quiet/
 
 <details name="faq">
   <summary>How do you enforce licensing?</summary>
-  My time is not well spent policing the Internet for people who use my software illegally. I will, however, defend against obvious rip offs and violations.
+  I have better things to do than policing people who choose to use software illegally. I will, however, actively defend against rip offs and violations that are brought to my attention. The LGPL has very reasonable terms that permit everyone to use the library as-is without cost as long as certain requirements are met. If those conditions aren't acceptable to you, please purchase a commercial license.
 </details>
 
 <details name="faq">

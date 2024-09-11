@@ -22,7 +22,7 @@ If you're developing a commercial application and would like to use Quiet withou
 
 ## Commercial licenses
 
-Commercial licenses are available for a ==one-time cost== of $200 USD per seat. This includes unlimited projects and zero LGPL restrictions. A discount is offered when multiple seats are purchased at the same time. Please [review the full license](TODO) prior to making a purchase.
+Commercial licenses are available for a ==one-time cost== per seat. This includes unlimited projects and zero LGPL restrictions. A discount is offered when multiple seats are purchased at the same time. Please [review the full license](TODO) prior to making a purchase.
 
 <div id="pricing-callout">
 <div class="quote">
@@ -32,26 +32,26 @@ Commercial licenses are available for a ==one-time cost== of $200 USD per seat. 
   >
   <div>
   <p>It would take most teams over a year to build everything you can get instantly with Quiet. Time is the most valuable resource we have…why waste it?</p>
-  <p><strong>For a limited time, commercial licenses are available for only $200 per seat!</strong></p>
+  <p><strong>For a limited time, commercial licenses are available for only $99 per seat!</strong></p>
   <p style="margin-block-end: 0;">Buy it once and it's yours forever.</p>
 
   <form id="purchase-form">
   <quiet-select label="Number of seats" size="lg" pill>
-    <optgroup label="Small teams">
-      <option name="1">1 seat – $200</option>
-      <option name="2">2 seats – $300</option>
-      <option name="3">3 seats – $400</option>
-      <option name="4">4 seats – $500</option>
-      <option name="5">5 seats – $600</option>
+    <optgroup label="Smaller teams">
+      <option name="1">1 seat – $99</option>
+      <option name="2">2 seats – $149</option>
+      <option name="3">3 seats – $199</option>
+      <option name="4">4 seats – $249</option>
+      <option name="5">5 seats – $299</option>
     </optgroup>
     <optgroup label="Organizations">
-      <option name="10">10 seats – $1,000</option>
-      <option name="25">25 seats – $3,500</option>
-      <option name="50">50 seats – $7,000</option>
-      <option name="100">100 seats – $15,000</option>
+      <option name="10">10 seats – $549</option>
+      <option name="25">25 seats – $1,299</option>
+      <option name="50">50 seats – $2,499</option>
+      <option name="100">100 seats – $4,999</option>
     </optgroup>
-    <optgroup label="Need more?">
-      <option disabled>Please inquire about larger packages</option>
+    <optgroup label="Enterprise">
+      <option name="enterprise">Unlimited – $9,999</option>
     </optgroup>
   </quiet-select>
   <quiet-button variant="primary" size="lg" pill href="TODO" target="_blank">
@@ -75,7 +75,7 @@ Commercial licenses are available for a ==one-time cost== of $200 USD per seat. 
   <li><quiet-icon name="tools" style="color: #e98d61;"></quiet-icon><br>Professionally designed</li>
   <li><quiet-icon name="hourglass" style="color: #39baa4;"></quiet-icon><br>Platform-based (for longevity)</li>
   <li><quiet-icon name="armchair" style="color: #989cff;"></quiet-icon><br>Add more seats any time</li>
-  <li><quiet-icon name="rocket" style="color: #ec8786;"></quiet-icon><br>Start using instantly</li>
+  <li><quiet-icon name="rocket" style="color: #ec8786;"></quiet-icon><br>Start using it instantly</li>
 </ul>
 
 ## Frequently asked questions
@@ -83,13 +83,13 @@ Commercial licenses are available for a ==one-time cost== of $200 USD per seat. 
 Can't find your question below? [Ask it here!](https://github.com/quietui/quiet/discussions)
 
 <details name="faq">
-  <summary>Forever is a long time…are you sure?</summary>
-  Yes. The price has been intentionally set to less than the estimated <abbr title="Lifetime Value">LTV</abbr> of a paying user. I don't need a lambo — just help me keep this thing going. 🫡
+  <summary>Why the LGPL?</summary>
+  Good software takes time. Great software takes patience, passion, and a relentless pursuit of perfection. Quiet wasn't built by a corporation, it was built by me, an independent developer. The LGPL gives me the flexibility to open source the software with reasonable restrictions and commercial licensing gives me the means to continue improving it.
 </details>
 
 <details name="faq">
-  <summary>Why the LGPL?</summary>
-  Good software takes time. Great software takes patience, passion, and a relentless pursuit of perfection. Quiet wasn't built by a corporation, it was built by me, an independent developer. The LGPL gives me the flexibility to open source the software with reasonable restrictions and commercial licensing gives me the means to continue improving it.
+  <summary>Does my stylesheet need to be released under the LGPL?</summary>
+  No, stylesheets you create with your own custom CSS do not need to be licensed under the LGPL.
 </details>
 
 <details name="faq">
@@ -119,7 +119,7 @@ Can't find your question below? [Ask it here!](https://github.com/quietui/quiet/
 
 <details name="faq">
   <summary>How do you enforce licensing?</summary>
-  I have neither the time, energy, nor resources to police the Internet for every user who consumes this software illegally. I will, however, defend against obvious rip offs and violations. For the value this software provides, it's just easier to do the right thing.
+  My time is not well spent policing the Internet for people who use my software illegally. I will, however, defend against obvious rip offs and violations.
 </details>
 
 <details name="faq">
@@ -134,7 +134,7 @@ Can't find your question below? [Ask it here!](https://github.com/quietui/quiet/
 
 <details name="faq">
   <summary>Can I request a feature?</summary>
-  Features can be requested in the <a href="https://github.com/quietui/quiet/discussions/categories/feature-requests">discussion forum</a>. Please search before posting to avoid creating duplicate requests.
+  Features can be requested in the <a href="https://github.com/quietui/quiet/discussions/categories/feature-requests">discussion forum</a>. Please search before posting to prevent duplicate requests. Use the 👍 reaction to vote for a feature.
 </details>
 
 <details name="faq">

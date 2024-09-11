@@ -27,16 +27,6 @@ Quiet leans towards the bleeding edge of what's become possible with browsers in
 
 As a result, you'll find that Quiet is rather opinionated. I carefully curate everything from the project's scope down to every individual line of code. Oftentimes, saying "no" is key to maintaining the quality of the library and my ability to steward it effectively.
 
-If Quiet isn't exactly what you want, it's probably not a good choice for your project. For the rest of you — those who see the vision and like living on the edge — go ahead and use it to your heart's content.
-
-**But be warned…**
-
-Expect things to take time. Expect that issues and <abbr title="Pull requests">PRs</abbr> will be closed when they don't align with my vision for the project. Expect that features will land when I get around to them. ==Expect me to be very picky about what makes it into the library==, the quality of code, and every other aspect of how the project is maintained. Expect that I won't always want to accept a PR because I consider it out of scope or want to take my own shot at it.
-
-_With all due respect, I'm not building this for you. I'm building it for me._
-
-But don't be afraid to use it, learn from it, and have fun with it!
-
 ## My commitment to accessibility
 
 <img class="whiskers only-light" src="/assets/images/whiskers/whiskers-whistling-light.svg" alt="Whiskers the mouse walking and whistling">
@@ -58,7 +48,7 @@ This is the path forward. Together, we will continue to make accessible software
 
 ## Special thanks
 
-I'd like to thank the following people and projects for making Quiet UI possible.
+I'd like to thank the following projects and people for making Quiet UI possible.
 
 - [Lit](https://lit.dev/) for making Web Components so fun to build
 - [The Harmony color palette](https://evilmartians.com/opensource/harmony) for color inspiration

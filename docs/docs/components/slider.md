@@ -69,7 +69,7 @@ Add the `--with-markers` attribute to show visual markers at each step. Markers 
 
 ### Adding references
 
-Use the `reference` slot to add visual references below the slider. By default, references are positioned with `space-between`, making it easy to align them with starting and ending markers.
+Use the `with-references` attribute and the `reference` slot to add visual references below the slider. By default, references are positioned with `space-between`, making it easy to align them with starting, ending, and center markers.
 
 ```html {.example}
 <quiet-slider 

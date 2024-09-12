@@ -84,7 +84,7 @@ Can't find your question below? [Ask it here!](https://github.com/quietui/quiet/
 
 <details name="faq">
   <summary>Why the LGPL?</summary>
-  Good software takes time. Great software takes patience, passion, and a relentless pursuit of perfection. Quiet wasn't built by a corporation, it was built by me, an independent developer. The LGPL gives me the flexibility to open source the software with reasonable restrictions and commercial licensing gives me the means to continue improving it.
+  Good software takes time. Great software takes patience, passion, and a relentless pursuit of perfection. Quiet wasn't built by a corporation, it was built by me, an independent developer. The LGPL gives me the flexibility to open source the software with reasonable requirements and commercial licenses give me the means to continue improving it.
 </details>
 
 <details name="faq">

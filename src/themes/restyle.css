@@ -16,15 +16,15 @@ html {
 
 html,
 body {
-  font-family: var(--quiet-font-family);
-  font-size: var(--quiet-font-size);
-  font-weight: var(--quiet-font-weight-normal);
-  color: var(--quiet-text-body);
-  background-color: var(--quiet-background-color);
-  line-height: var(--quiet-line-height);
-  text-rendering: optimizeLegibility;
-  padding: 0;
   margin: 0;
+  padding: 0;
+  background-color: var(--quiet-background-color);
+  color: var(--quiet-text-body);
+  font-weight: var(--quiet-font-weight-normal);
+  font-size: var(--quiet-font-size);
+  line-height: var(--quiet-line-height);
+  font-family: var(--quiet-font-family);
+  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -66,13 +66,13 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--quiet-font-family-heading);
-  font-weight: var(--quiet-font-weight-bold);
-  line-height: 1.3;
-  overflow-wrap: break-word;
-  text-wrap: balance;
   margin: 0;
   margin-block-end: calc(var(--quiet-content-spacing) / 4);
+  font-weight: var(--quiet-font-weight-bold);
+  line-height: 1.3;
+  font-family: var(--quiet-font-family-heading);
+  text-wrap: balance;
+  overflow-wrap: break-word;
 
   &:not(:first-child) {
     margin-block-start: var(--quiet-content-spacing);
@@ -114,17 +114,17 @@ p {
 /* Block quotes */
 blockquote {
   position: relative;
-  font-size: 1.125em;
-  color: var(--quiet-text-muted);
-  border-left: var(--quiet-border-style) calc(var(--quiet-border-width) * 4) var(--quiet-neutral-stroke-softer);
   padding: calc(var(--quiet-content-spacing) / 1.5) var(--quiet-content-spacing);
+  border-left: var(--quiet-border-style) calc(var(--quiet-border-width) * 4) var(--quiet-neutral-stroke-softer);
+  color: var(--quiet-text-muted);
+  font-size: 1.125em;
 }
 
 /* Dividers */
 hr {
+  margin: calc(var(--quiet-content-spacing) * 2) 0;
   border: none;
   border-top: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
-  margin: calc(var(--quiet-content-spacing) * 2) 0;
 }
 
 /* Media */
@@ -134,20 +134,20 @@ picture,
 video,
 canvas {
   display: block;
-  border-radius: var(--quiet-border-radius);
   width: 100%;
   max-width: 100%;
+  border-radius: var(--quiet-border-radius);
 }
 
 iframe {
-  width: 100%;
   aspect-ratio: 9 / 6;
+  width: 100%;
 }
 
 /* Inline text elements */
 a {
-  font-weight: var(--quiet-font-weight-semibold);
   color: var(--quiet-primary-text-colorful);
+  font-weight: var(--quiet-font-weight-semibold);
   text-decoration-thickness: 0.09375em;
   text-underline-offset: 0.125em;
   transition: 150ms color ease;
@@ -170,44 +170,44 @@ button {
 abbr[title] {
   text-decoration: underline;
   text-decoration-style: dotted;
-  text-decoration-thickness: 0.09375em;
   text-decoration-color: var(--quiet-neutral-fill-mid);
+  text-decoration-thickness: 0.09375em;
   text-underline-offset: 0.125em;
   cursor: help;
 }
 
 del {
-  text-decoration-color: var(--quiet-destructive-fill-mid);
   text-decoration-style: solid;
+  text-decoration-color: var(--quiet-destructive-fill-mid);
   text-decoration-thickness: 0.09375em;
 }
 
 ins {
-  text-decoration-color: var(--quiet-constructive-fill-mid);
   text-decoration-style: solid;
+  text-decoration-color: var(--quiet-constructive-fill-mid);
   text-decoration-thickness: 0.09375em;
   text-underline-offset: 0.125em;
 }
 
 kbd {
-  font-size: 0.875em;
-  border: solid max(1px, 0.0715em) var(--quiet-neutral-fill-soft);
-  box-shadow: 0 max(1px, 0.0715em) 0 0 var(--quiet-neutral-fill-soft);
-  border-radius: calc(var(--quiet-border-radius) / 2);
   padding: 0.125em 0.33em;
+  border: solid max(1px, 0.0715em) var(--quiet-neutral-fill-soft);
+  border-radius: calc(var(--quiet-border-radius) / 2);
+  box-shadow: 0 max(1px, 0.0715em) 0 0 var(--quiet-neutral-fill-soft);
+  font-size: 0.875em;
 }
 
 mark {
-  background-color: color-mix(in oklab, #f4dd01, transparent 75%);
-  border-radius: 0;
-  color: inherit;
-  border-radius: calc(var(--quiet-border-radius) / 2);
   padding: 0.125em 0.25em;
+  border-radius: 0;
+  border-radius: calc(var(--quiet-border-radius) / 2);
+  background-color: color-mix(in oklab, #f4dd01, transparent 75%);
+  color: inherit;
 }
 
 small {
-  font-size: 0.875em;
   color: var(---quiet-text-muted);
+  font-size: 0.875em;
 }
 
 strong {
@@ -223,11 +223,11 @@ u {
 code,
 samp,
 tt {
-  background: var(--quiet-neutral-fill-softer);
-  border-radius: calc(var(--quiet-border-radius) / 2);
-  font-family: var(--quiet-font-family-code);
-  font-size: 0.875em;
   padding: 0.125em 0.25em;
+  border-radius: calc(var(--quiet-border-radius) / 2);
+  background: var(--quiet-neutral-fill-softer);
+  font-size: 0.875em;
+  font-family: var(--quiet-font-family-code);
 }
 
 a:has(code, samp, tt, pre) {
@@ -236,12 +236,12 @@ a:has(code, samp, tt, pre) {
 
 pre {
   position: relative;
-  background: var(--quiet-neutral-fill-softer);
-  border-radius: var(--quiet-border-radius);
-  font-family: var(--quiet-font-family-code);
-  font-size: 0.9375rem;
-  color: var(--quiet-neutral-text-on-soft);
   padding: calc(var(--quiet-content-spacing) / 2);
+  border-radius: var(--quiet-border-radius);
+  background: var(--quiet-neutral-fill-softer);
+  color: var(--quiet-neutral-text-on-soft);
+  font-size: 0.9375rem;
+  font-family: var(--quiet-font-family-code);
 
   code {
     font-size: inherit;
@@ -251,8 +251,8 @@ pre {
 /* Lists */
 ul,
 ol {
-  padding: 0;
   margin-inline-start: 1.1em;
+  padding: 0;
 }
 
 ul li {
@@ -275,10 +275,10 @@ li p:last-child {
 
 /* Figures */
 figure {
-  box-shadow: var(--quiet-shadow-softer);
+  padding: calc(var(--quiet-content-spacing) / 2);
   border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
   border-radius: var(--quiet-border-radius);
-  padding: calc(var(--quiet-content-spacing) / 2);
+  box-shadow: var(--quiet-shadow-softer);
 }
 
 figcaption {
@@ -296,9 +296,9 @@ dd:not(:last-of-type) {
 
 /* Details */
 details {
-  background-color: var(--quiet-neutral-fill-softer);
-  border-radius: var(--quiet-border-radius);
   padding-inline: calc(var(--quiet-content-spacing) / 2);
+  border-radius: var(--quiet-border-radius);
+  background-color: var(--quiet-neutral-fill-softer);
 
   &[open] {
     padding-block-end: calc(var(--quiet-content-spacing) / 2);
@@ -341,12 +341,12 @@ details {
 }
 
 summary {
-  position: relative;
   display: block;
-  cursor: pointer;
+  position: relative;
+  margin: 0;
   padding-inline-end: 2em;
   padding-block: calc(var(--quiet-content-spacing) / 2);
-  margin: 0;
+  cursor: pointer;
   user-select: none;
 
   ~ * {
@@ -354,14 +354,14 @@ summary {
   }
 
   &::before {
-    content: '';
-    border-width: 0.4rem;
-    border-style: solid;
-    border-color: transparent transparent transparent currentColor;
     position: absolute;
     top: calc(50% - 0.4rem);
     right: 0.2rem;
     transform-origin: 0.2rem 50%;
+    border-width: 0.4rem;
+    border-style: solid;
+    border-color: transparent transparent transparent currentColor;
+    content: '';
   }
 
   &::-webkit-details-marker {
@@ -396,8 +396,8 @@ tfoot td {
 
 th,
 td {
-  text-align: start;
   padding: 0.75em;
+  text-align: start;
 }
 
 /* Form controls */
@@ -409,12 +409,12 @@ select {
 }
 
 fieldset {
-  border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
-  border-radius: var(--quiet-border-radius);
-  padding: 1.5rem;
-  padding-block-start: 1rem;
   margin: 0;
   margin-block-end: var(--quiet-content-spacing);
+  padding: 1.5rem;
+  padding-block-start: 1rem;
+  border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
+  border-radius: var(--quiet-border-radius);
 }
 
 /* Utilities */

@@ -1,8 +1,8 @@
 .code-example {
+  margin-block-end: var(--quiet-content-spacing);
   border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
   border-radius: var(--quiet-border-radius);
   color: var(--quiet-text-body);
-  margin-block-end: var(--quiet-content-spacing);
 }
 
 .code-example-preview {
@@ -35,8 +35,8 @@
 }
 
 .code-example-source pre {
-  border-radius: 0;
   margin: 0;
+  border-radius: 0;
 
   code {
     background: transparent;
@@ -59,11 +59,11 @@
   button {
     all: unset;
     flex: 1 0 auto;
-    font-size: 0.875rem;
-    color: var(--quiet-text-muted);
-    border-inline-start: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
-    text-align: center;
     padding: 0.5rem;
+    border-inline-start: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
+    color: var(--quiet-text-muted);
+    font-size: 0.875rem;
+    text-align: center;
     cursor: pointer;
 
     &:first-of-type {

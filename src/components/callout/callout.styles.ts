@@ -3,20 +3,20 @@ import { css } from 'lit';
 export default css`
   :host {
     display: flex;
-    gap: 1em;
     align-items: center;
     width: 100%;
-    border-style: var(--quiet-border-style);
-    border-width: var(--quiet-border-width);
-    border-radius: var(--quiet-border-radius);
     padding-inline: 1em;
     padding-block: 1em;
+    gap: 1em;
+    border-width: var(--quiet-border-width);
+    border-style: var(--quiet-border-style);
+    border-radius: var(--quiet-border-radius);
   }
 
   /* Primary */
   :host([variant='primary']) {
-    background-color: var(--quiet-primary-fill-softer);
     border-color: var(--quiet-primary-stroke-softer);
+    background-color: var(--quiet-primary-fill-softer);
   }
 
   :host([variant='primary']) #icon {
@@ -25,8 +25,8 @@ export default css`
 
   /* Secondary */
   :host([variant='secondary']) {
-    background-color: var(--quiet-neutral-fill-softer);
     border-color: var(--quiet-neutral-stroke-softer);
+    background-color: var(--quiet-neutral-fill-softer);
   }
 
   :host([variant='secondary']) #icon {
@@ -35,8 +35,8 @@ export default css`
 
   /* Constructive */
   :host([variant='constructive']) {
-    background-color: var(--quiet-constructive-fill-softer);
     border-color: var(--quiet-constructive-stroke-softer);
+    background-color: var(--quiet-constructive-fill-softer);
   }
 
   :host([variant='constructive']) #icon {
@@ -45,8 +45,8 @@ export default css`
 
   /* Destructive */
   :host([variant='destructive']) {
-    background-color: var(--quiet-destructive-fill-softer);
     border-color: var(--quiet-destructive-stroke-softer);
+    background-color: var(--quiet-destructive-fill-softer);
   }
 
   :host([variant='destructive']) #icon {
@@ -54,13 +54,13 @@ export default css`
   }
 
   #icon {
-    flex: 0 0 auto;
-    align-self: start;
     display: flex;
+    flex: 0 0 auto;
     align-items: center;
+    align-self: start;
     justify-content: center;
-    font-size: 1.5em;
     max-width: 1.5em;
     max-height: 1.5em;
+    font-size: 1.5em;
   }
 `;

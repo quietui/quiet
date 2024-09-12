@@ -19,12 +19,12 @@ export default css`
     ::slotted(*) {
       display: block !important;
       width: 100% !important;
-      object-fit: cover !important;
-      border-top-left-radius: var(--quiet-border-radius) !important;
-      border-top-right-radius: var(--quiet-border-radius) !important;
-      border-bottom-left-radius: 0 !important;
-      border-bottom-right-radius: 0 !important;
       margin: 0 !important;
+      object-fit: cover !important;
+      border-top-right-radius: var(--quiet-border-radius) !important;
+      border-top-left-radius: var(--quiet-border-radius) !important;
+      border-bottom-right-radius: 0 !important;
+      border-bottom-left-radius: 0 !important;
     }
   }
 
@@ -33,11 +33,11 @@ export default css`
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: calc(var(--spacing) / 4);
-    border-bottom: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
     padding-inline-start: var(--spacing);
     padding-inline-end: calc(var(--spacing) / 2); /* less spacing to better align buttons as actions */
     padding-block: calc(var(--spacing) * 0.875);
+    gap: calc(var(--spacing) / 4);
+    border-bottom: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
 
     /*
       Set negative margins on slotted buttons to prevent the header from growing too tall due to padding. We only do
@@ -65,8 +65,8 @@ export default css`
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    padding: var(--spacing);
     gap: calc(var(--spacing) / 4);
     border-top: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
-    padding: var(--spacing);
   }
 `;

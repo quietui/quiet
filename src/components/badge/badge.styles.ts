@@ -6,10 +6,10 @@ export default css`
     --attention-easing: ease;
 
     display: inline-flex;
-    font-size: 0.75em;
-    font-weight: var(--quiet-font-weight-semibold);
-    border-radius: 9999px;
     padding: 0.1em 0.7em;
+    border-radius: 9999px;
+    font-weight: var(--quiet-font-weight-semibold);
+    font-size: 0.75em;
   }
 
   /* Primary */

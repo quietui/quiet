@@ -8,8 +8,8 @@ export default css`
   /* The checkbox's label */
   #label {
     display: inline-flex;
-    gap: 0.75em;
     align-items: center;
+    gap: 0.75em;
     cursor: pointer;
 
     &:has(.xs) {
@@ -40,9 +40,9 @@ export default css`
   #visual-box {
     display: flex;
     position: relative;
-    border-radius: calc(var(--quiet-border-radius) / 2);
     width: 1.25em;
     height: 1.25em;
+    border-radius: calc(var(--quiet-border-radius) / 2);
     transition:
       100ms background-color ease,
       100ms border-color ease;
@@ -54,14 +54,14 @@ export default css`
 
     /* Normal */
     &.normal {
-      background-color: var(--quiet-paper-color);
       border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
+      background-color: var(--quiet-paper-color);
       color: var(--quiet-primary-text-on-mid);
 
       &.checked,
       &.indeterminate {
-        background-color: var(--quiet-primary-fill-mid);
         border-color: var(--quiet-primary-fill-mid);
+        background-color: var(--quiet-primary-fill-mid);
       }
     }
 
@@ -73,8 +73,8 @@ export default css`
 
       &.checked,
       &.indeterminate {
-        background-color: var(--quiet-primary-fill-mid);
         border-color: var(--quiet-primary-fill-mid);
+        background-color: var(--quiet-primary-fill-mid);
       }
     }
 
@@ -86,14 +86,14 @@ export default css`
       left: 0;
       width: 100%;
       height: 100%;
+      scale: 0;
       font-size: 1.25em;
       opacity: 0;
-      scale: 0;
       stroke-width: 2px;
-      will-change: opacity; /* prevents the icon from shifting slightly in Safari when checked */
       transition:
         100ms opacity ease,
         100ms scale ease;
+      will-change: opacity; /* prevents the icon from shifting slightly in Safari when checked */
     }
 
     /* Fix check alignment */
@@ -103,22 +103,22 @@ export default css`
 
     &.checked:not(.indeterminate) #check-icon,
     &.indeterminate #indeterminate-icon {
-      opacity: 1;
       scale: 1;
+      opacity: 1;
     }
 
     /* The actual checkbox control */
     #checkbox {
+      appearance: none;
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      appearance: none;
-      background: none;
-      border: none;
-      padding: 0;
       margin: 0;
+      padding: 0;
+      border: none;
+      background: none;
       cursor: inherit;
 
       &:focus {
@@ -128,7 +128,7 @@ export default css`
   }
 
   :host(:state(disabled)) {
-    opacity: 0.5;
     cursor: not-allowed;
+    opacity: 0.5;
   }
 `;

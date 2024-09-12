@@ -10,8 +10,8 @@ export default css`
   }
 
   #label:has(~ .vertical) {
-    order: 2;
     display: block;
+    order: 2;
     max-width: none;
     text-align: center;
   }
@@ -43,9 +43,9 @@ export default css`
 
   #track {
     position: relative;
-    isolation: isolate;
-    background: var(--quiet-neutral-fill-soft);
     border-radius: 9999px;
+    background: var(--quiet-neutral-fill-soft);
+    isolation: isolate;
   }
 
   /* Orientation */
@@ -61,24 +61,24 @@ export default css`
 
   /* Disabled */
   .disabled #track {
-    opacity: 0.5;
     cursor: not-allowed;
+    opacity: 0.5;
   }
 
   /* Indicator */
   #indicator {
     position: absolute;
-    background-color: var(--quiet-primary-fill-mid);
     border-radius: inherit;
+    background-color: var(--quiet-primary-fill-mid);
 
     &:dir(ltr) {
-      left: var(--start);
       right: calc(100% - var(--end));
+      left: var(--start);
     }
 
     &:dir(rtl) {
-      left: calc(100% - var(--end));
       right: var(--start);
+      left: calc(100% - var(--end));
     }
   }
 
@@ -88,22 +88,22 @@ export default css`
   }
 
   .vertical #indicator {
-    left: 0;
-    width: 100%;
+    top: calc(100% - var(--end));
 
     bottom: var(--start);
-    top: calc(100% - var(--end));
+    left: 0;
+    width: 100%;
   }
 
   /* Thumb */
   #thumb {
-    position: absolute;
     z-index: 3;
+    position: absolute;
     width: var(--thumb-width);
     height: var(--thumb-height);
+    border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-primary-fill-mid);
     border-radius: 50%;
     background-color: white;
-    border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-primary-fill-mid);
     cursor: pointer;
   }
 
@@ -115,19 +115,19 @@ export default css`
     top: calc(50% - var(--thumb-height) / 2);
 
     &:dir(ltr) {
-      left: calc(var(--position) - var(--thumb-width) / 2);
       right: auto;
+      left: calc(var(--position) - var(--thumb-width) / 2);
     }
 
     &:dir(rtl) {
-      left: auto;
       right: calc(var(--position) - var(--thumb-width) / 2);
+      left: auto;
     }
   }
 
   .vertical #thumb {
-    left: calc(50% - var(--thumb-width) / 2);
     bottom: calc(var(--position) - var(--thumb-height) / 2);
+    left: calc(50% - var(--thumb-width) / 2);
   }
 
   /* Markers */
@@ -136,12 +136,12 @@ export default css`
   }
 
   .marker {
-    position: absolute;
     z-index: 2;
+    position: absolute;
     width: var(--marker-width);
     height: var(--marker-height);
-    background-color: var(--quiet-silent);
     border-radius: 50%;
+    background-color: var(--quiet-silent);
   }
 
   .marker:first-of-type,
@@ -170,9 +170,9 @@ export default css`
     }
 
     ::slotted(*) {
+      color: var(--quiet-text-muted);
       font-size: 0.875em;
       line-height: 1;
-      color: var(--quiet-text-muted);
     }
   }
 
@@ -191,8 +191,8 @@ export default css`
     }
 
     #references {
-      width: min-content;
       order: 2;
+      width: min-content;
       margin-inline-start: 0.75em;
 
       slot {

@@ -5,8 +5,8 @@ export default css`
     --item-spacing: 0.5em;
 
     display: flex;
-    align-items: center;
     flex-wrap: wrap;
+    align-items: center;
     gap: var(--item-spacing);
   }
 `;

@@ -15,27 +15,27 @@ export default css`
   }
 
   #dialog {
-    position: fixed;
-    inset-block-start: 0;
-    inset-block-end: 0;
     display: flex;
+    position: fixed;
     flex-direction: column;
     width: var(--width);
     height: var(--height);
+    inset-block-end: 0;
+    inset-block-start: 0;
+    padding: 0;
     border: none;
     border-radius: var(--quiet-border-radius);
     background: var(--quiet-paper-color);
     box-shadow: var(--quiet-shadow-loud);
-    padding: 0;
 
     &::backdrop {
+      backdrop-filter: var(--quiet-backdrop-filter);
+      -webkit-backdrop-filter: var(--quiet-backdrop-filter, blur(6px));
       /*
         NOTE: the ::backdrop element doesn't inherit properly in Safari yet, but it will in 17.4! At that time, we can
         remove the fallback values here.
       */
       background-color: var(--quiet-backdrop-color, rgb(0 0 0 / 0.25));
-      backdrop-filter: var(--quiet-backdrop-filter);
-      -webkit-backdrop-filter: var(--quiet-backdrop-filter, blur(6px));
     }
 
     &:focus {
@@ -81,13 +81,13 @@ export default css`
 
     /* Top placement */
     &[data-placement='top'] {
-      inset-inline-start: 0;
-      inset-inline-end: 0;
-      inset-block-start: 0;
-      inset-block-end: auto;
       width: 100dvw;
       max-width: 100dvw;
       max-height: 100dvh;
+      inset-block-end: auto;
+      inset-block-start: 0;
+      inset-inline-end: 0;
+      inset-inline-start: 0;
       border-radius: 0;
 
       &.show {
@@ -109,13 +109,13 @@ export default css`
 
     /* Bottom placement */
     &[data-placement='bottom'] {
-      inset-inline-start: 0;
-      inset-inline-end: 0;
-      inset-block-start: auto;
-      inset-block-end: 0;
       width: 100dvw;
       max-width: 100dvw;
       max-height: 100dvh;
+      inset-block-end: 0;
+      inset-block-start: auto;
+      inset-inline-end: 0;
+      inset-inline-start: 0;
       border-radius: 0;
 
       &.show {
@@ -137,13 +137,13 @@ export default css`
 
     /* Start placement */
     &[data-placement='start'] {
-      inset-inline-start: 0;
-      inset-inline-end: auto;
-      inset-block-start: 0;
-      inset-block-end: 0;
       max-width: 100dvw;
-      max-height: none;
       height: 100dvh;
+      max-height: none;
+      inset-block-end: 0;
+      inset-block-start: 0;
+      inset-inline-end: auto;
+      inset-inline-start: 0;
       border-radius: 0;
 
       &.show {
@@ -173,13 +173,13 @@ export default css`
 
     /* End placement */
     &[data-placement='end'] {
-      inset-inline-start: auto;
-      inset-inline-end: 0;
-      inset-block-start: 0;
-      inset-block-end: 0;
       max-width: 100dvw;
-      max-height: none;
       height: 100dvh;
+      max-height: none;
+      inset-block-end: 0;
+      inset-block-start: 0;
+      inset-inline-end: 0;
+      inset-inline-start: auto;
       border-radius: 0;
 
       &.show {
@@ -213,12 +213,12 @@ export default css`
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    background: var(--quiet-paper-color);
-    gap: calc(var(--spacing) / 4);
     padding-inline-start: var(--spacing);
     padding-inline-end: calc(var(--spacing) / 2); /* less spacing to better align buttons as actions */
     padding-block-start: calc(var(--spacing) / 2);
     padding-block-end: calc(var(--spacing) / 2);
+    gap: calc(var(--spacing) / 4);
+    background: var(--quiet-paper-color);
   }
 
   #actions {
@@ -250,64 +250,64 @@ export default css`
     flex-wrap: wrap;
     align-items: center;
     justify-content: end;
-    gap: calc(var(--spacing) / 4);
-    background: var(--quiet-paper-color);
     padding-inline: var(--spacing);
     padding-block: var(--spacing);
+    gap: calc(var(--spacing) / 4);
+    background: var(--quiet-paper-color);
   }
 
   @keyframes show-from-center {
     from {
-      opacity: 0;
       scale: 0.9;
+      opacity: 0;
     }
     to {
-      opacity: 1;
       scale: 1;
+      opacity: 1;
     }
   }
 
   @keyframes show-from-top {
     from {
-      opacity: 0;
       translate: 0 -75%;
+      opacity: 0;
     }
     to {
-      opacity: 1;
       translate: 0 0;
+      opacity: 1;
     }
   }
 
   @keyframes show-from-bottom {
     from {
-      opacity: 0;
       translate: 0 75%;
+      opacity: 0;
     }
     to {
-      opacity: 1;
       translate: 0 0;
+      opacity: 1;
     }
   }
 
   @keyframes show-from-left {
     from {
-      opacity: 0;
       translate: -75%;
+      opacity: 0;
     }
     to {
-      opacity: 1;
       translate: 0 0;
+      opacity: 1;
     }
   }
 
   @keyframes show-from-right {
     from {
-      opacity: 0;
       translate: 75%;
+      opacity: 0;
     }
     to {
-      opacity: 1;
       translate: 0 0;
+      opacity: 1;
     }
   }
 

@@ -5,9 +5,9 @@ export default css`
     --color: var(--quiet-neutral-stroke-softer);
     --thickness: var(--quiet-border-width);
     --spacing: 1rem;
+    border-radius: 9999px;
 
     background: var(--color);
-    border-radius: 9999px;
   }
 
   :host([aria-orientation='horizontal']) {

@@ -8,8 +8,8 @@ export default css`
   /* The radio item's label */
   #label {
     display: inline-flex;
-    gap: 0.75em;
     align-items: center;
+    gap: 0.75em;
     cursor: pointer;
 
     &:has(.xs) {
@@ -40,22 +40,22 @@ export default css`
   #visual-box {
     display: flex;
     position: relative;
-    border-radius: 50%;
     width: 1.25em;
     height: 1.25em;
+    border-radius: 50%;
     transition:
       100ms background-color ease,
       100ms border-color ease;
 
     /* Normal */
     &.normal {
-      background-color: var(--quiet-paper-color);
       border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
+      background-color: var(--quiet-paper-color);
       color: var(--quiet-primary-text-on-mid);
 
       &.checked {
-        background-color: var(--quiet-primary-fill-mid);
         border-color: var(--quiet-primary-fill-mid);
+        background-color: var(--quiet-primary-fill-mid);
       }
     }
 
@@ -66,8 +66,8 @@ export default css`
       color: var(--quiet-primary-text-on-mid);
 
       &.checked {
-        background-color: var(--quiet-primary-fill-mid);
         border-color: var(--quiet-primary-fill-mid);
+        background-color: var(--quiet-primary-fill-mid);
       }
     }
 
@@ -78,33 +78,33 @@ export default css`
       left: 0;
       width: 100%;
       height: 100%;
+      scale: 0;
       font-size: 1.25em;
       opacity: 0;
-      scale: 0;
       stroke-width: 2px;
-      will-change: opacity; /* prevents the icon from shifting slightly in Safari when checked */
       transition:
         100ms opacity ease,
         100ms scale ease;
+      will-change: opacity; /* prevents the icon from shifting slightly in Safari when checked */
     }
 
     &.checked #radio-icon {
-      opacity: 1;
       scale: 0.6;
+      opacity: 1;
     }
 
     /* The actual radio control */
     #radio {
+      appearance: none;
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      appearance: none;
-      background: none;
-      border: none;
-      padding: 0;
       margin: 0;
+      padding: 0;
+      border: none;
+      background: none;
       cursor: inherit;
 
       &:focus {
@@ -124,7 +124,7 @@ export default css`
   }
 
   :host(:state(disabled)) {
-    opacity: 0.5;
     cursor: not-allowed;
+    opacity: 0.5;
   }
 `;

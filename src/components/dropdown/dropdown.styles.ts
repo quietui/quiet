@@ -9,20 +9,20 @@ export default css`
 
   #menu {
     display: flex;
-    flex-direction: column;
     position: absolute;
     top: 0;
     left: 0;
+    flex-direction: column;
     width: max-content;
-    text-align: start;
-    color: var(--quiet-neutral-text-on-soft);
-    background-color: var(--quiet-paper-color);
+    margin: 0;
+    padding: 0.25rem;
     border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
     border-radius: var(--quiet-border-radius);
+    background-color: var(--quiet-paper-color);
     box-shadow: var(--quiet-shadow-mid);
+    color: var(--quiet-neutral-text-on-soft);
+    text-align: start;
     user-select: none;
-    padding: 0.25rem;
-    margin: 0;
 
     &.show {
       animation: show var(--show-duration) ease;
@@ -34,10 +34,10 @@ export default css`
 
     ::slotted(small) {
       display: block !important;
-      font-size: 0.75rem !important;
-      font-weight: var(--quiet-font-weight-semibold) !important;
-      color: var(--quiet-text-muted) !important;
       padding: 0.25rem 1rem !important;
+      color: var(--quiet-text-muted) !important;
+      font-weight: var(--quiet-font-weight-semibold) !important;
+      font-size: 0.75rem !important;
     }
 
     ::slotted(quiet-divider) {
@@ -79,12 +79,12 @@ export default css`
 
   @keyframes show {
     from {
-      opacity: 0;
       scale: 0.9;
+      opacity: 0;
     }
     to {
-      opacity: 1;
       scale: 1;
+      opacity: 1;
     }
   }
 `;

@@ -3,8 +3,8 @@ import { css } from 'lit';
 export default css`
   /* Pills */
   #visual-box.pill {
-    border-radius: 9999px;
     padding: 0 1.25em;
+    border-radius: 9999px;
   }
 
   #text-box::-webkit-color-swatch {

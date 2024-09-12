@@ -3,13 +3,13 @@ import { css } from 'lit';
 export default css`
   #dropzone {
     position: relative;
+    padding: 2em;
     border: dashed var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
     border-radius: var(--quiet-border-radius);
     background-color: var(--quiet-paper-color);
-    text-align: center;
-    font-weight: var(--quiet-font-weight-semibold);
     color: var(--quiet-primary-text-colorful);
-    padding: 2em;
+    font-weight: var(--quiet-font-weight-semibold);
+    text-align: center;
     cursor: pointer;
     transition: 150ms color ease;
 
@@ -24,14 +24,14 @@ export default css`
     }
 
     &:has(input:focus-visible) {
-      outline: var(--quiet-focus-ring);
       border-color: transparent;
+      outline: var(--quiet-focus-ring);
     }
 
     &.dragging {
-      background-color: var(--quiet-primary-fill-softer);
-      border-color: var(--quiet-primary-stroke-mid);
       border-style: solid;
+      border-color: var(--quiet-primary-stroke-mid);
+      background-color: var(--quiet-primary-fill-softer);
     }
 
     quiet-icon {
@@ -51,12 +51,12 @@ export default css`
 
     /* Create an invisible overlay to prevent dragleave from firing on child elements */
     &::after {
-      content: '';
       position: absolute;
       top: 0;
       right: 0;
       bottom: 0;
       left: 0;
+      content: '';
       opacity: 0;
     }
   }
@@ -73,23 +73,23 @@ export default css`
   .file {
     display: flex;
     align-items: center;
+    padding: 0.5em;
     gap: 1em;
-    background-color: var(--quiet-paper-color);
     border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
     border-radius: var(--quiet-border-radius);
+    background-color: var(--quiet-paper-color);
     box-shadow: var(--quiet-shadow-softer);
-    padding: 0.5em;
 
     .file-thumbnail {
+      display: flex;
       position: relative;
       flex: 0 0 4em;
-      display: flex;
       align-items: center;
       justify-content: center;
-      width: 100%;
       aspect-ratio: 1;
-      background: var(--quiet-neutral-fill-softer);
+      width: 100%;
       border-radius: calc(var(--quiet-border-radius) * 0.5);
+      background: var(--quiet-neutral-fill-softer);
 
       img {
         display: block;
@@ -100,14 +100,14 @@ export default css`
       }
 
       quiet-icon {
-        font-size: 1.5em;
         color: var(--quiet-text-muted);
+        font-size: 1.5em;
       }
     }
 
     .file-details {
-      flex: 1 1 auto;
       display: flex;
+      flex: 1 1 auto;
       flex-direction: column;
 
       .file-name {
@@ -120,8 +120,8 @@ export default css`
     }
 
     .file-actions {
-      flex: 0 0 auto;
       display: flex;
+      flex: 0 0 auto;
       align-items: center;
     }
 

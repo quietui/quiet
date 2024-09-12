@@ -2,10 +2,10 @@
   --width: 35rem;
 
   &::part(dialog) {
-    border-radius: calc(var(--quiet-border-radius) * 2);
-    padding: 0;
     margin: 10rem auto;
+    padding: 0;
     overflow: hidden;
+    border-radius: calc(var(--quiet-border-radius) * 2);
   }
 
   &::part(body) {
@@ -66,17 +66,17 @@
 
 /* Results */
 #site-search-listbox {
+  margin: 0;
+  padding: 0;
   line-height: 1.4;
   list-style: none;
-  padding: 0;
-  margin: 0;
 
   a {
     display: flex;
-    gap: 1rem;
     align-items: center;
-    text-decoration: none;
     padding: 0.5rem 1.5rem;
+    gap: 1rem;
+    text-decoration: none;
   }
 
   a:focus-visible {
@@ -99,8 +99,8 @@
   }
 
   h3 {
-    font-weight: var(--quiet-font-weight-semibold);
     margin: 0;
+    font-weight: var(--quiet-font-weight-semibold);
   }
 
   small {
@@ -115,17 +115,17 @@
 
 /* Search results */
 .site-search-result {
-  list-style: none;
-  padding: 0;
   margin: 0;
+  padding: 0;
+  list-style: none;
 
   .site-search-result-icon {
-    flex: 0 0 auto;
     display: flex;
+    flex: 0 0 auto;
 
     quiet-icon {
-      font-size: 2rem;
       color: var(--quiet-neutral-fill-mid);
+      font-size: 2rem;
     }
   }
 
@@ -140,29 +140,29 @@
   }
 
   .site-search-result-title {
-    font-size: 1.25rem;
-    font-weight: var(--quiet-font-weight-semibold);
     color: var(--quiet-primary-text-colorful);
+    font-weight: var(--quiet-font-weight-semibold);
+    font-size: 1.25rem;
   }
 
   .site-search-result-description {
-    font-size: 0.875rem;
     color: var(--quiet-text-body);
+    font-size: 0.875rem;
   }
 
   .site-search-result-url {
-    font-size: 0.875rem;
     color: var(--quiet-text-muted);
+    font-size: 0.875rem;
   }
 }
 
 /* Empty state */
 #site-search-empty {
   display: none;
-  text-align: center;
-  font-size: 0.875rem;
-  color: var(--quiet-text-muted);
   padding: 3rem 2rem;
+  color: var(--quiet-text-muted);
+  font-size: 0.875rem;
+  text-align: center;
 
   quiet-icon {
     display: block;
@@ -179,20 +179,20 @@
 
 /* Footer */
 #site-search footer {
-  flex: 0 0 auto;
   display: flex;
+  flex: 0 0 auto;
   justify-content: center;
-  gap: 2rem;
-  color: var(--quiet-text-muted);
-  border-bottom-left-radius: inherit;
-  border-bottom-right-radius: inherit;
   padding: 1rem;
+  gap: 2rem;
+  border-bottom-right-radius: inherit;
+  border-bottom-left-radius: inherit;
+  color: var(--quiet-text-muted);
 
   kbd {
     display: inline-flex;
-    height: 1.5rem;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    height: 1.5rem;
 
     &:last-of-type {
       margin-inline-end: 0.25rem;

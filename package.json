@@ -84,6 +84,7 @@
     "ora": "^8.0.1",
     "plop": "^4.0.1",
     "prettier": "^3.2.4",
+    "prettier-plugin-css-order": "^2.1.2",
     "prettier-plugin-organize-imports": "^4.0.0",
     "prismjs": "^1.29.0",
     "recursive-copy": "^2.0.14",

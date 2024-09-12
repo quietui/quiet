@@ -3,9 +3,9 @@ import { css } from 'lit';
 export default css`
   :host {
     display: flex;
-    gap: var(--quiet-border-width);
-    flex-wrap: wrap;
     position: relative;
+    flex-wrap: wrap;
+    gap: var(--quiet-border-width);
     isolation: isolate;
   }
 

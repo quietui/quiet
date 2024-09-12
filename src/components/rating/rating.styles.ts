@@ -7,12 +7,12 @@ export default css`
   }
 
   #rating {
-    position: relative;
     display: inline-flex;
+    position: relative;
     align-items: center;
     width: fit-content;
-    border-radius: var(--quiet-border-radius);
     gap: 0.0625em;
+    border-radius: var(--quiet-border-radius);
     cursor: pointer;
 
     &:focus {
@@ -25,8 +25,8 @@ export default css`
     }
 
     &.disabled {
-      opacity: 0.5;
       cursor: not-allowed;
+      opacity: 0.5;
     }
 
     &.readonly {
@@ -57,8 +57,8 @@ export default css`
 
   .symbol {
     display: inline-flex;
-    align-items: center;
     position: relative;
+    align-items: center;
     transition:
       100ms color ease,
       100ms scale ease,

@@ -13,8 +13,8 @@ export default css`
 
   /* Default spinner */
   svg {
-    animation: rotate var(--speed) linear infinite;
     transform-origin: center;
+    animation: rotate var(--speed) linear infinite;
 
     &:dir(rtl) {
       animation-name: rotate-rtl;

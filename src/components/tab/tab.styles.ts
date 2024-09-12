@@ -4,13 +4,13 @@ export default css`
   :host {
     display: inline-flex;
     position: relative;
-    align-self: stretch;
     align-items: center;
+    align-self: stretch;
+    padding-inline: 1.5em;
+    padding-block: 1em;
     gap: 0.5em;
     font-weight: var(--quiet-font-weight-semibold);
     font-size: 0.9375em;
-    padding-inline: 1.5em;
-    padding-block: 1em;
     cursor: pointer;
     user-select: none;
   }
@@ -25,7 +25,7 @@ export default css`
   }
 
   :host(:state(disabled)) {
-    opacity: 0.5;
     cursor: not-allowed;
+    opacity: 0.5;
   }
 `;

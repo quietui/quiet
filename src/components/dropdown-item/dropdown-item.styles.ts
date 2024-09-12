@@ -4,16 +4,16 @@ export default css`
   :host {
     display: flex;
     align-items: center;
-    border-radius: calc(var(--quiet-border-radius) / 1.5);
-    font-size: 0.9375em;
-    color: var(--quiet-neutral-text-on-soft);
-    line-height: var(--quiet-line-height);
     padding: 0.33em 1em;
+    border-radius: calc(var(--quiet-border-radius) / 1.5);
+    isolation: isolate;
+    color: var(--quiet-neutral-text-on-soft);
+    font-size: 0.9375em;
+    line-height: var(--quiet-line-height);
     cursor: pointer;
     transition:
       100ms background-color ease,
       100ms color ease;
-    isolation: isolate;
   }
 
   @media (hover: hover) {
@@ -24,11 +24,11 @@ export default css`
   }
 
   :host(:focus-visible) {
-    background-color: var(--quiet-neutral-fill-softer);
-    color: var(--quiet-neutral-text-on-soft);
+    z-index: 1;
     outline: var(--quiet-focus-ring);
     outline-offset: var(--quiet-focus-ring-offset);
-    z-index: 1;
+    background-color: var(--quiet-neutral-fill-softer);
+    color: var(--quiet-neutral-text-on-soft);
   }
 
   :host(:state(disabled)) {
@@ -62,10 +62,10 @@ export default css`
   }
 
   #check {
-    font-size: 1.25em;
+    visibility: hidden;
     margin-inline-start: -1.25em;
     margin-inline-end: 0.25em;
-    visibility: hidden;
+    font-size: 1.25em;
   }
 
   :host(:state(checked)) #check {
@@ -73,11 +73,11 @@ export default css`
   }
 
   #icon ::slotted(*) {
-    flex: 0 0 auto;
     display: flex;
+    flex: 0 0 auto;
     align-items: center;
-    font-size: 1.25em;
     margin-inline-end: 0.5em !important;
+    font-size: 1.25em;
   }
 
   #label {
@@ -86,12 +86,12 @@ export default css`
   }
 
   #details {
-    flex: 0 0 auto;
     display: flex;
+    flex: 0 0 auto;
     align-items: center;
     justify-content: end;
-    font-size: 0.933334em !important;
     color: var(--quiet-text-muted);
+    font-size: 0.933334em !important;
 
     ::slotted(*) {
       margin-inline-start: 2em !important;

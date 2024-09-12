@@ -8,8 +8,8 @@ export default css`
   /* The switch's label */
   label {
     display: inline-flex;
-    gap: 0.75em;
     align-items: center;
+    gap: 0.75em;
     cursor: pointer;
 
     &:has(.xs) {
@@ -43,19 +43,19 @@ export default css`
     --thumb-size: calc(var(--height) - 4px);
     --thumb-padding: calc((var(--height) - var(--thumb-size)) / 2);
     display: flex;
-    align-items: center;
     position: relative;
-    border-radius: 9999px;
-    background-color: var(--quiet-neutral-fill-soft);
+    align-items: center;
     width: var(--width);
     height: var(--height);
+    border-radius: 9999px;
+    background-color: var(--quiet-neutral-fill-soft);
     transition:
       100ms background-color ease,
       100ms border-color ease;
 
     &.checked {
-      background-color: var(--quiet-primary-fill-mid);
       border-color: transparent;
+      background-color: var(--quiet-primary-fill-mid);
     }
 
     &:has(:focus-visible) {
@@ -113,15 +113,15 @@ export default css`
     /* Inner labels */
     #on-label,
     #off-label {
-      width: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.625em;
+      width: 50%;
+      overflow: hidden;
       font-weight: var(--quiet-font-weight-semibold);
+      font-size: 0.625em;
       text-transform: uppercase;
       white-space: nowrap;
-      overflow: hidden;
       transition:
         100ms opacity ease,
         100ms translate ease;
@@ -132,13 +132,13 @@ export default css`
     }
 
     #on-label {
-      color: var(--quiet-primary-text-on-mid);
       margin-inline-start: calc(var(--thumb-padding) * 2);
+      color: var(--quiet-primary-text-on-mid);
     }
 
     #off-label {
-      color: var(--quiet-primary-text-on-soft);
       margin-inline-end: calc(var(--thumb-padding) * 2);
+      color: var(--quiet-primary-text-on-soft);
     }
 
     &:not(.checked) #on-label {
@@ -167,18 +167,18 @@ export default css`
 
     /* The actual checkbox control */
     #switch {
+      appearance: none;
+      z-index: 1000;
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      appearance: none;
-      background: none;
-      border: none;
-      padding: 0;
       margin: 0;
+      padding: 0;
+      border: none;
+      background: none;
       cursor: inherit;
-      z-index: 1000;
 
       &:focus {
         outline: none;
@@ -187,7 +187,7 @@ export default css`
   }
 
   :host(:state(disabled)) {
-    opacity: 0.5;
     cursor: not-allowed;
+    opacity: 0.5;
   }
 `;

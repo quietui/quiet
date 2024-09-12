@@ -9,30 +9,30 @@ export default css`
   }
 
   #button {
+    display: inline-flex;
     appearance: none;
     position: relative;
-    display: inline-flex;
-    gap: 0.4em;
     align-items: center;
     justify-content: center;
     width: 100%;
+    gap: 0.4em;
+    border: none;
+    border-radius: var(--quiet-border-radius);
+    background: none;
     font: inherit;
     font-weight: var(--quiet-font-weight-semibold);
     text-decoration: none;
     vertical-align: middle;
-    background: none;
-    border: none;
-    border-radius: var(--quiet-border-radius);
+    white-space: nowrap;
     cursor: inherit;
     touch-action: manipulation;
-    user-select: none;
-    -webkit-user-select: none;
-    white-space: nowrap;
     transition:
       100ms color ease,
       100ms border-color ease,
       100ms background-color ease,
       100ms translate ease;
+    user-select: none;
+    -webkit-user-select: none;
 
     &:active:not(.disabled) {
       translate: 0 var(--quiet-button-active-offset);
@@ -50,32 +50,32 @@ export default css`
     /* Sizes */
     &.xs {
       min-height: var(--quiet-form-control-height-xs);
-      font-size: var(--quiet-form-control-font-size-xs);
       padding-inline: 0.85em;
+      font-size: var(--quiet-form-control-font-size-xs);
     }
 
     &.sm {
       min-height: var(--quiet-form-control-height-sm);
-      font-size: var(--quiet-form-control-font-size-sm);
       padding-inline: 1em;
+      font-size: var(--quiet-form-control-font-size-sm);
     }
 
     &.md {
       min-height: var(--quiet-form-control-height-md);
-      font-size: var(--quiet-form-control-font-size-md);
       padding-inline: 1.25em;
+      font-size: var(--quiet-form-control-font-size-md);
     }
 
     &.lg {
       min-height: var(--quiet-form-control-height-lg);
-      font-size: var(--quiet-form-control-font-size-lg);
       padding-inline: 1.33em;
+      font-size: var(--quiet-form-control-font-size-lg);
     }
 
     &.xl {
       min-height: var(--quiet-form-control-height-xl);
-      font-size: var(--quiet-form-control-font-size-xl);
       padding-inline: 1.5em;
+      font-size: var(--quiet-form-control-font-size-xl);
     }
 
     /* Normal buttons */
@@ -131,8 +131,8 @@ export default css`
 
     /* Outline buttons */
     &.outline.primary {
-      background: transparent;
       border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-primary-fill-mid);
+      background: transparent;
       color: var(--quiet-primary-text-colorful);
 
       @media (hover: hover) {
@@ -143,8 +143,8 @@ export default css`
     }
 
     &.outline.secondary {
-      background: transparent;
       border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-fill-mid);
+      background: transparent;
       color: var(--quiet-neutral-text-colorful);
 
       @media (hover: hover) {
@@ -155,8 +155,8 @@ export default css`
     }
 
     &.outline.destructive {
-      background: transparent;
       border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-destructive-fill-mid);
+      background: transparent;
       color: var(--quiet-destructive-text-colorful);
 
       @media (hover: hover) {
@@ -186,8 +186,8 @@ export default css`
     &.image {
       height: auto;
       min-height: 0;
-      border-radius: calc(var(--quiet-border-radius) * 2);
       padding: 0;
+      border-radius: calc(var(--quiet-border-radius) * 2);
 
       ::slotted(*) {
         border-radius: calc(var(--quiet-border-radius) * 2) !important;
@@ -227,8 +227,8 @@ export default css`
       left: calc(50% - 0.375em);
       width: 0.75em;
       height: 0.2em;
-      background-color: currentColor;
       border-radius: 9999px;
+      background-color: currentColor;
       opacity: 0.15;
     }
 
@@ -238,8 +238,8 @@ export default css`
 
     /* Disabled */
     &.disabled:not(.loading) {
-      opacity: 0.5;
       cursor: not-allowed;
+      opacity: 0.5;
     }
 
     /* Loading */

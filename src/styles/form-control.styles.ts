@@ -41,32 +41,32 @@ export default css`
     line-height: calc(var(--quiet-line-height) * 0.75);
 
     &:has(~ .disabled) {
-      opacity: 0.5;
       cursor: not-allowed;
+      opacity: 0.5;
     }
   }
 
   :host([required]) #label::after {
-    content: var(--quiet-form-control-required-content);
     margin-inline-start: -0.2em;
+    content: var(--quiet-form-control-required-content);
   }
 
   #description {
-    font-size: 0.8375rem;
     color: var(--quiet-text-muted);
+    font-size: 0.8375rem;
   }
 
   #visual-box {
     display: flex;
     position: relative;
-    gap: 0.5em;
     align-items: center;
+    gap: 0.5em;
     font: inherit;
     cursor: text;
 
     &.disabled {
-      opacity: 0.5;
       cursor: not-allowed;
+      opacity: 0.5;
     }
 
     &:has(#text-box[type='color']) {
@@ -75,15 +75,15 @@ export default css`
   }
 
   #text-box {
+    appearance: none;
     width: 100%;
-    font: inherit;
-    color: var(--quiet-text-body);
+    margin: auto 0;
+    padding: 0;
     border: none;
     background: none;
-    padding: 0;
-    margin: auto 0;
+    color: var(--quiet-text-body);
+    font: inherit;
     cursor: inherit;
-    appearance: none;
 
     &:focus {
       outline: none;
@@ -124,9 +124,9 @@ export default css`
     &::-webkit-datetime-edit-millisecond-field:focus,
     &::-webkit-datetime-edit-minute-field:focus,
     &::-webkit-datetime-edit-second-field:focus {
+      outline: none;
       background-color: var(--quiet-selection-background-color);
       color: var(--quiet-selection-color);
-      outline: none;
     }
 
     /* Color inputs */
@@ -142,8 +142,8 @@ export default css`
 
       &::-moz-color-swatch,
       &::-moz-focus-inner {
-        padding: 0;
         height: calc(100% - 0.5em);
+        padding: 0;
         border-radius: calc(var(--quiet-border-radius) / 1.75);
       }
 
@@ -167,10 +167,10 @@ export default css`
 
   /* Normal */
   #visual-box.normal {
-    background-color: var(--quiet-paper-color);
+    padding: 0 0.75em;
     border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
     border-radius: calc(var(--quiet-border-radius) / 1.5);
-    padding: 0 0.75em;
+    background-color: var(--quiet-paper-color);
 
     &:has(#text-box:focus-visible) {
       outline: var(--quiet-border-style) calc(var(--quiet-border-width) + 1px) var(--quiet-focus-color);
@@ -180,9 +180,9 @@ export default css`
 
   /* Filled */
   #visual-box.filled {
-    background-color: var(--quiet-neutral-fill-softer);
-    border-radius: calc(var(--quiet-border-radius) / 1.5);
     padding: 0 0.75em;
+    border-radius: calc(var(--quiet-border-radius) / 1.5);
+    background-color: var(--quiet-neutral-fill-softer);
 
     &:has(#text-box:focus-visible) {
       outline: var(--quiet-border-style) calc(var(--quiet-border-width) + 1px) var(--quiet-focus-color);
@@ -233,8 +233,8 @@ export default css`
 
   /* Pills */
   #visual-box.pill {
-    border-radius: 9999px;
     padding: 0 1.25em;
+    border-radius: 9999px;
 
     &::-webkit-color-swatch {
       border-radius: 9999px;
@@ -247,18 +247,18 @@ export default css`
   }
 
   .text-box-button {
-    align-self: stretch;
     display: flex;
     align-items: center;
+    align-self: stretch;
     justify-content: center;
-    font: inherit;
-    font-size: 1.25em;
+    margin: 0;
+    padding: 0;
+    padding-inline: 0.25em;
     border: none;
     background: none;
     color: var(--quiet-text-muted);
-    padding: 0;
-    padding-inline: 0.25em;
-    margin: 0;
+    font: inherit;
+    font-size: 1.25em;
     cursor: pointer;
     transition: 100ms translate ease;
 

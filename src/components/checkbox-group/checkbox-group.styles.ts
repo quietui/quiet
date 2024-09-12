@@ -11,8 +11,8 @@ export default css`
   }
 
   :host([orientation='horizontal']) #group {
-    gap: 1rem;
     flex-wrap: wrap;
+    gap: 1rem;
   }
 
   :host([orientation='vertical']) #group {

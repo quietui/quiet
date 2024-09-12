@@ -5,11 +5,11 @@
   font-family: var(--quiet-font-family);
 
   &::part(copy-button__button) {
+    min-height: 2.2rem;
+    padding-inline: 0.525rem;
     background: var(--quiet-neutral-900);
     color: white;
     font-size: 0.875rem;
-    min-height: 2.2rem;
-    padding-inline: 0.525rem;
   }
 
   &::part(copy-button__button):hover {

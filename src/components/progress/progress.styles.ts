@@ -19,10 +19,10 @@ export default css`
     align-items: center;
     width: 100%;
     height: var(--track-size);
-    font-size: 0.875em;
-    background-color: var(--track-color);
-    border-radius: 9999px;
     overflow: hidden;
+    border-radius: 9999px;
+    background-color: var(--track-color);
+    font-size: 0.875em;
   }
 
   :host([type='bar']) #indicator {
@@ -41,11 +41,11 @@ export default css`
 
   :host([type='bar']) #content {
     display: block;
-    white-space: nowrap;
-    text-overflow: ellipsis;
     margin-inline: 1em;
     overflow: hidden;
     translate: 0 -0.0625em; /* better vertical alignment */
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   /* Indeterminate */
@@ -110,8 +110,8 @@ export default css`
     r: var(--radius);
     cx: calc(var(--diameter) / 2);
     cy: calc(var(--diameter) / 2);
-    rotate: -90deg;
     transform-origin: 50% 50%;
+    rotate: -90deg;
   }
 
   :host([type='ring']) #track {
@@ -144,13 +144,13 @@ export default css`
 
   :host([type='ring']) #content {
     display: flex;
+    position: absolute;
     align-items: center;
     justify-content: center;
-    position: absolute;
     width: var(--diameter);
     height: var(--diameter);
-    text-align: center;
     padding: var(--track-size);
+    text-align: center;
   }
 
   @keyframes ring-indeterminate {

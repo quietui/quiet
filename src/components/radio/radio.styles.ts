@@ -11,8 +11,8 @@ export default css`
   }
 
   :host([orientation='horizontal']) #group {
-    gap: 1rem;
     flex-wrap: wrap;
+    gap: 1rem;
   }
 
   :host([orientation='vertical']) #group {
@@ -22,7 +22,7 @@ export default css`
 
   :host(:state(disabled)) #label,
   :host(:state(disabled)) #description {
-    opacity: 0.5;
     cursor: not-allowed;
+    opacity: 0.5;
   }
 `;

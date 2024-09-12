@@ -27,19 +27,19 @@ export default css`
   }
 
   #picker {
-    flex: 1 1 auto;
     display: flex;
+    flex: 1 1 auto;
     flex-direction: column;
+    padding: 1em;
     gap: 1em;
-    background-color: var(--quiet-paper-color);
     border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
     border-radius: var(--quiet-border-radius);
+    background-color: var(--quiet-paper-color);
     box-shadow: var(--quiet-shadow-softer);
-    padding: 1em;
 
     &.disabled {
-      opacity: 0.5;
       cursor: not-allowed;
+      opacity: 0.5;
     }
   }
 
@@ -47,8 +47,8 @@ export default css`
   #color-slider {
     position: relative;
     aspect-ratio: 1.4;
-    background-color: var(--color-slider-background);
     border-radius: calc(var(--quiet-border-radius) * 0.75);
+    background-color: var(--color-slider-background);
     box-shadow: inset 0 0 0 0.0625rem color-mix(in oklab, black, transparent 90%);
     cursor: crosshair;
 
@@ -81,15 +81,15 @@ export default css`
     transition: 100ms scale ease;
 
     &::after {
-      content: '';
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      border-radius: inherit;
       border: solid max(0.125em, 1px) white;
+      border-radius: inherit;
       box-shadow: inset 0 0 0 0.0625rem rgb(0 0 0 / 33%);
+      content: '';
       transition: 100ms scale ease;
     }
 
@@ -109,17 +109,17 @@ export default css`
 
   #controls {
     display: flex;
-    gap: 0.5em;
     align-items: center;
+    gap: 0.5em;
   }
 
   #sliders {
-    flex: 1 1 auto;
     display: flex;
+    flex: 1 1 auto;
     flex-direction: column;
-    gap: 1em;
     justify-content: center;
     margin-inline-start: 0.5em;
+    gap: 1em;
 
     &::part(slider) {
       border-radius: 0;
@@ -149,9 +149,9 @@ export default css`
     }
 
     &::part(track) {
-      font-size: inherit;
-      box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--quiet-strident), transparent 90%);
       border-radius: calc(var(--quiet-border-radius) / 2);
+      box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--quiet-strident), transparent 90%);
+      font-size: inherit;
     }
 
     &::part(thumb) {
@@ -160,7 +160,6 @@ export default css`
     }
 
     &::part(thumb)::after {
-      content: '';
       position: absolute;
       top: 0;
       left: 0;
@@ -169,6 +168,7 @@ export default css`
       border: solid max(0.125em, 1px) white;
       border-radius: 9999px;
       box-shadow: inset 0 0 0 1px rgb(0 0 0 / 33%);
+      content: '';
     }
   }
 
@@ -210,17 +210,17 @@ export default css`
 
   #opacity {
     &::part(track) {
-      background-color: transparent;
-      background-size: 0.5em 0.5em;
+      background-image: linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, var(--quiet-neutral-fill-soft) 75%),
+        linear-gradient(45deg, transparent 75%, var(--quiet-neutral-fill-soft) 75%),
+        linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%);
       background-position:
         0 0,
         0 0,
         -0.25em -0.25em,
         0.25em 0.25em;
-      background-image: linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%),
-        linear-gradient(45deg, transparent 75%, var(--quiet-neutral-fill-soft) 75%),
-        linear-gradient(45deg, transparent 75%, var(--quiet-neutral-fill-soft) 75%),
-        linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%);
+      background-size: 0.5em 0.5em;
+      background-color: transparent;
     }
 
     &::part(indicator) {
@@ -243,9 +243,9 @@ export default css`
 
   /* Eye dropper button */
   #eye-dropper::part(button) {
-    font-size: inherit;
     min-height: 2.75em;
     border-radius: 50%;
+    font-size: inherit;
   }
 
   /* Preview/copy button */
@@ -256,35 +256,35 @@ export default css`
   #preview-button {
     &::part(button) {
       position: relative;
-      min-height: 0;
-      height: 2.75em;
       width: 2.75em;
-      font-size: inherit;
+      height: 2.75em;
+      min-height: 0;
       border: none;
       border-radius: 50%;
-      background-color: transparent;
-      background-size: 0.5em 0.5em;
+      background-image: linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, var(--quiet-neutral-fill-soft) 75%),
+        linear-gradient(45deg, transparent 75%, var(--quiet-neutral-fill-soft) 75%),
+        linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%);
       background-position:
         0 0,
         0 0,
         -0.25em -0.25em,
         0.25em 0.25em;
-      background-image: linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%),
-        linear-gradient(45deg, transparent 75%, var(--quiet-neutral-fill-soft) 75%),
-        linear-gradient(45deg, transparent 75%, var(--quiet-neutral-fill-soft) 75%),
-        linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%);
+      background-size: 0.5em 0.5em;
+      background-color: transparent;
+      font-size: inherit;
     }
 
     &::part(button)::after {
-      content: '';
       position: absolute;
       top: 0;
       right: 0;
       bottom: 0;
       left: 0;
-      background-color: var(--current-color);
       border-radius: inherit;
+      background-color: var(--current-color);
       box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--quiet-strident), transparent 90%);
+      content: '';
     }
 
     &:disabled {
@@ -308,25 +308,25 @@ export default css`
     gap: 0.25em;
 
     button {
-      position: relative;
       display: inline-block;
+      position: relative;
       aspect-ratio: 1;
+      margin: 0;
+      padding: 0;
+      border: none;
+      border-radius: calc(var(--quiet-border-radius) / 2);
       background: none;
-      background-color: transparent;
-      background-size: 0.5em 0.5em;
+      background-image: linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, var(--quiet-neutral-fill-soft) 75%),
+        linear-gradient(45deg, transparent 75%, var(--quiet-neutral-fill-soft) 75%),
+        linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%);
       background-position:
         0 0,
         0 0,
         -0.25em -0.25em,
         0.25em 0.25em;
-      background-image: linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%),
-        linear-gradient(45deg, transparent 75%, var(--quiet-neutral-fill-soft) 75%),
-        linear-gradient(45deg, transparent 75%, var(--quiet-neutral-fill-soft) 75%),
-        linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%);
-      border: none;
-      border-radius: calc(var(--quiet-border-radius) / 2);
-      padding: 0;
-      margin: 0;
+      background-size: 0.5em 0.5em;
+      background-color: transparent;
       cursor: pointer;
       transition: 100ms translate ease;
 
@@ -344,15 +344,15 @@ export default css`
       }
 
       &::after {
-        content: '';
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: var(--swatch-color);
         border-radius: inherit;
+        background-color: var(--swatch-color);
         box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--quiet-strident), transparent 90%);
+        content: '';
       }
     }
   }

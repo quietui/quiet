@@ -15,13 +15,13 @@ export default css`
   #dialog {
     display: none;
     position: absolute;
-    background: none;
     top: 0;
     left: 0;
-    border: none;
-    padding: 0;
     margin: 0;
+    padding: 0;
     overflow: visible;
+    border: none;
+    background: none;
 
     &:focus {
       outline: none;
@@ -45,23 +45,23 @@ export default css`
   }
 
   #content {
-    max-width: var(--max-width);
-    background-color: var(--quiet-paper-color);
-    border-radius: var(--quiet-border-radius);
-    border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
-    box-shadow: var(--quiet-shadow-mid);
-    padding: 1rem;
     z-index: 2;
+    max-width: var(--max-width);
+    padding: 1rem;
+    border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
+    border-radius: var(--quiet-border-radius);
+    background-color: var(--quiet-paper-color);
+    box-shadow: var(--quiet-shadow-mid);
   }
 
   #arrow {
+    z-index: 3;
     position: absolute;
     width: calc(var(--arrow-diagonal-size) * 2);
     height: calc(var(--arrow-diagonal-size) * 2);
-    background-color: var(--quiet-paper-color);
     border-right: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
     border-bottom: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
-    z-index: 3;
+    background-color: var(--quiet-paper-color);
   }
 
   /* Prevent the popover from touching the edge of the viewport */
@@ -114,14 +114,14 @@ export default css`
 
   @keyframes show {
     from {
-      opacity: 0;
-      scale: 0.9;
       translate: var(--show-x) var(--show-y);
+      scale: 0.9;
+      opacity: 0;
     }
     to {
-      opacity: 1;
-      scale: 1;
       translate: 0 0;
+      scale: 1;
+      opacity: 1;
     }
   }
 `;

@@ -3,21 +3,21 @@ import { css } from 'lit';
 export default css`
   :host {
     --size: 3rem;
+    display: inline-flex;
 
     position: relative;
-    display: inline-flex;
     align-items: center;
     justify-content: center;
+    aspect-ratio: 1 / 1;
     width: var(--size);
     height: var(--size);
-    aspect-ratio: 1 / 1;
-    font-size: calc(var(--size) / 3);
-    font-weight: var(--quiet-font-weight-semibold);
-    vertical-align: middle;
+    overflow: hidden;
     border-radius: 50%;
     background-color: var(--quiet-neutral-fill-softer);
     color: var(--quiet-neutral-text-on-soft);
-    overflow: hidden;
+    font-weight: var(--quiet-font-weight-semibold);
+    font-size: calc(var(--size) / 3);
+    vertical-align: middle;
   }
 
   #image {
@@ -26,8 +26,8 @@ export default css`
     left: 0;
     width: var(--size);
     height: var(--size);
-    object-fit: cover;
     overflow: hidden;
+    object-fit: cover;
   }
 
   slot[name='icon'] quiet-icon,

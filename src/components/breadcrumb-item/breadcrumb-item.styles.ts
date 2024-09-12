@@ -2,8 +2,8 @@ import { css } from 'lit';
 
 export default css`
   :host {
-    flex: 0 0 auto;
     display: inline-flex;
+    flex: 0 0 auto;
     align-items: center;
     gap: var(--item-spacing);
   }
@@ -12,9 +12,9 @@ export default css`
     display: inline-flex;
     align-items: center;
     gap: calc(var(--item-spacing) / 2);
-    font-size: 0.9375em;
-    font-weight: var(--quiet-font-weight-semibold);
     color: var(--quiet-primary-text-colorful);
+    font-weight: var(--quiet-font-weight-semibold);
+    font-size: 0.9375em;
     text-decoration: inherit;
 
     &:focus {

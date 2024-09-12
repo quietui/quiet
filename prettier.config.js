@@ -15,5 +15,8 @@ export default {
   tabWidth: 2,
   trailingComma: 'none',
   useTabs: false,
-  plugins: ['prettier-plugin-organize-imports']
+
+  // Plugins
+  plugins: ['prettier-plugin-organize-imports', 'prettier-plugin-css-order'],
+  cssDeclarationSorterOrder: 'smacss'
 };

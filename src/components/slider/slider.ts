@@ -428,7 +428,7 @@ export class QuietSlider extends QuietElement {
     };
 
     this.isInvalid = hasCustomValidity;
-    this.internals.setValidity(flags, validationMessage, this.thumb);
+    this.internals.setValidity(flags, validationMessage, this.slider);
   }
 
   /** Sets focus to the slider. */

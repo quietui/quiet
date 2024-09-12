@@ -1,9 +1,22 @@
-const tabs = document.getElementById('import-tabs');
+function restore() {
+  const importTabs = document.getElementById('import-tabs');
+  if (importTabs) {
+    importTabs.setAttribute('tab', localStorage.getItem('import-tab') || 'cdn');
+  }
+}
 
-// Remember the selected tab when it changes
-tabs.addEventListener('quiet-tab-shown', event => {
-  localStorage.setItem('import-tab', event.detail.tab.panel);
+function save(tab) {
+  localStorage.setItem('import-tab', tab);
+}
+
+// Listen for tab clicks
+document.addEventListener('click', async event => {
+  const importTabs = event.target.closest('#import-tabs');
+  if (!importTabs) return;
+  await importTabs.updateComplete;
+  save(importTabs.tab);
 });
 
 // Restore it on page load
-tabs.setAttribute('tab', localStorage.getItem('import-tab') || 'cdn');
+document.addEventListener('turbo:load', restore);
+document.addEventListener('turbo:render', restore);

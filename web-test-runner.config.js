@@ -37,7 +37,7 @@ export default {
 <html lang="en-US">
   <head></head>
   <body>
-    <link rel="stylesheet" href="dist/light.css">
+    <link rel="stylesheet" href="dist/quiet.css">
     <script>
       window.process = {env: { NODE_ENV: "production" }}
     </script>

@@ -1,6 +1,6 @@
-import '../translations/en.js';
-import { Localize as LocalizeController } from '@quietui/squeak';
 import type { Translation as DefaultTranslation } from '@quietui/squeak';
+import { Localize as LocalizeController } from '@quietui/squeak';
+import '../translations/en.js';
 
 // Extend the controller and apply our own translation interface for better typings
 export class Localize extends LocalizeController<Translation> {}

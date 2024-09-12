@@ -1,7 +1,7 @@
-import { parse } from 'node-html-parser';
-import lunr from 'lunr';
-import { dirname, join } from 'path';
 import { mkdir, writeFile } from 'fs/promises';
+import lunr from 'lunr';
+import { parse } from 'node-html-parser';
+import { dirname, join } from 'path';
 
 function collapseWhitespace(string) {
   return string.replace(/\s+/g, ' ');

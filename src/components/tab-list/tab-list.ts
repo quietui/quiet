@@ -1,16 +1,16 @@
-import '../tab-panel/tab-panel.js';
-import '../tab/tab.js';
-import { createId } from '../../utilities/math.js';
-import { customElement, property, query } from 'lit/decorators.js';
+import type { CSSResultGroup } from 'lit';
 import { html } from 'lit';
-import { Localize } from '../../utilities/localize.js';
-import { QuietElement } from '../../utilities/quiet-element.js';
+import { customElement, property, query } from 'lit/decorators.js';
 import { QuietTabHiddenEvent, QuietTabShownEvent } from '../../events/tabs.js';
 import hostStyles from '../../styles/host.styles.js';
-import styles from './tab-list.styles.js';
-import type { CSSResultGroup } from 'lit';
-import type { QuietTab } from '../tab/tab.js';
+import { Localize } from '../../utilities/localize.js';
+import { createId } from '../../utilities/math.js';
+import { QuietElement } from '../../utilities/quiet-element.js';
+import '../tab-panel/tab-panel.js';
 import type { QuietTabPanel } from '../tab-panel/tab-panel.js';
+import '../tab/tab.js';
+import type { QuietTab } from '../tab/tab.js';
+import styles from './tab-list.styles.js';
 
 interface GetTabsOptions {
   includeDisabled: boolean;

@@ -1,16 +1,16 @@
-import '../bytes/bytes.js';
-import '../icon/icon.js';
-import { classMap } from 'lit/directives/class-map.js';
-import { customElement, property, query, state } from 'lit/decorators.js';
+import type { CSSResultGroup } from 'lit';
 import { html } from 'lit';
+import { customElement, property, query, state } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { Localize } from '../../utilities/localize.js';
 import { QuietBlurEvent, QuietChangeEvent, QuietFocusEvent, QuietInputEvent } from '../../events/form.js';
-import { QuietElement } from '../../utilities/quiet-element.js';
 import formControlStyles from '../../styles/form-control.styles.js';
 import hostStyles from '../../styles/host.styles.js';
+import { Localize } from '../../utilities/localize.js';
+import { QuietElement } from '../../utilities/quiet-element.js';
+import '../bytes/bytes.js';
+import '../icon/icon.js';
 import styles from './file-input.styles.js';
-import type { CSSResultGroup } from 'lit';
 
 // Borrow the native file input's validation message
 const nativeFileInput = document.createElement('input');

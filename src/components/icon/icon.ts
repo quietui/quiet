@@ -1,10 +1,10 @@
-import { connectIcon, disconnectIcon, getLibrary } from '../../utilities/icon-library.js';
+import type { CSSResultGroup } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { QuietElement } from '../../utilities/quiet-element.js';
 import { QuietLoadedEvent, QuietLoadErrorEvent } from '../../events/load.js';
 import hostStyles from '../../styles/host.styles.js';
+import { connectIcon, disconnectIcon, getLibrary } from '../../utilities/icon-library.js';
+import { QuietElement } from '../../utilities/quiet-element.js';
 import styles from './icon.styles.js';
-import type { CSSResultGroup } from 'lit';
 
 /**
  * Store a cache of icon requests by URL to prevent HTTP requests to the same resources from stacking up and to make

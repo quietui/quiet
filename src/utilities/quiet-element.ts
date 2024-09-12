@@ -61,10 +61,3 @@ export class QuietElement extends LitElement {
     this.dispatchEvent(newEvent);
   }
 }
-
-// Until TypeScript supports it - https://github.com/microsoft/TypeScript/issues/33218
-declare global {
-  interface ElementInternals {
-    states: Pick<Set<string>, 'add' | 'clear' | 'delete' | 'entries' | 'forEach' | 'has' | 'keys' | 'size' | 'values'>;
-  }
-}

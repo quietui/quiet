@@ -1,9 +1,9 @@
-import { customElement, property } from 'lit/decorators.js';
-import { html } from 'lit';
-import { QuietElement } from '../../utilities/quiet-element.js';
-import hostStyles from '../../styles/host.styles.js';
-import styles from './callout.styles.js';
 import type { CSSResultGroup } from 'lit';
+import { html } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
+import hostStyles from '../../styles/host.styles.js';
+import { QuietElement } from '../../utilities/quiet-element.js';
+import styles from './callout.styles.js';
 
 /**
  * <quiet-callout>

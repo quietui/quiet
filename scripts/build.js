@@ -1,17 +1,17 @@
-import { deleteAsync } from 'del';
-import { dirname, join, relative } from 'path';
-import { distDir, docsDir, rootDir, runScript, siteDir } from './utils.js';
-import { execSync } from 'child_process';
-import { fileURLToPath } from 'url';
-import { globby } from 'globby';
-import { mkdir, readFile } from 'fs/promises';
 import browserSync from 'browser-sync';
 import chalk from 'chalk';
-import copy from 'recursive-copy';
+import { execSync } from 'child_process';
+import { deleteAsync } from 'del';
 import esbuild from 'esbuild';
+import { mkdir, readFile } from 'fs/promises';
 import getPort, { portNumbers } from 'get-port';
+import { globby } from 'globby';
 import ora from 'ora';
+import { dirname, join, relative } from 'path';
 import process from 'process';
+import copy from 'recursive-copy';
+import { fileURLToPath } from 'url';
+import { distDir, docsDir, rootDir, runScript, siteDir } from './utils.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const isDeveloping = process.argv.includes('--develop');

@@ -1,13 +1,13 @@
-import { animateWithClass } from '../../utilities/animate.js';
 import { arrow, autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
-import { createId } from '../../utilities/math.js';
-import { customElement, property, query } from 'lit/decorators.js';
-import { html } from 'lit';
-import { QuietClosedEvent, QuietCloseEvent, QuietOpenedEvent, QuietOpenEvent } from '../../events/open-close.js';
-import { QuietElement } from '../../utilities/quiet-element.js';
-import hostStyles from '../../styles/host.styles.js';
-import styles from './tooltip.styles.js';
 import type { CSSResultGroup } from 'lit';
+import { html } from 'lit';
+import { customElement, property, query } from 'lit/decorators.js';
+import { QuietClosedEvent, QuietCloseEvent, QuietOpenedEvent, QuietOpenEvent } from '../../events/open-close.js';
+import hostStyles from '../../styles/host.styles.js';
+import { animateWithClass } from '../../utilities/animate.js';
+import { createId } from '../../utilities/math.js';
+import { QuietElement } from '../../utilities/quiet-element.js';
+import styles from './tooltip.styles.js';
 
 const openTooltips = new Set<QuietTooltip>();
 

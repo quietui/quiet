@@ -1,10 +1,10 @@
-import { customElement, property } from 'lit/decorators.js';
+import type { CSSResultGroup } from 'lit';
 import { html } from 'lit';
-import { QuietElement } from '../../utilities/quiet-element.js';
+import { customElement, property } from 'lit/decorators.js';
 import { QuietIncludedEvent, QuietIncludeErrorEvent } from '../../events/include.js';
 import hostStyles from '../../styles/host.styles.js';
+import { QuietElement } from '../../utilities/quiet-element.js';
 import styles from './include.styles.js';
-import type { CSSResultGroup } from 'lit';
 
 /**
  * Store a cache of fetch requests by URL to prevent HTTP requests to the same resources from stacking up and to make

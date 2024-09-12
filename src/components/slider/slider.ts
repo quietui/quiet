@@ -1,17 +1,17 @@
-import '../tooltip/tooltip.js';
-import { clamp } from '../../utilities/math.js';
-import { classMap } from 'lit/directives/class-map.js';
-import { customElement, property, query, state } from 'lit/decorators.js';
-import { DraggableElement } from '../../utilities/drag.js';
+import type { CSSResultGroup } from 'lit';
 import { html } from 'lit';
-import { Localize } from '../../utilities/localize.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
 import { QuietBlurEvent, QuietChangeEvent, QuietFocusEvent, QuietInputEvent } from '../../events/form.js';
-import { QuietElement } from '../../utilities/quiet-element.js';
 import formControlStyles from '../../styles/form-control.styles.js';
 import hostStyles from '../../styles/host.styles.js';
-import styles from './slider.styles.js';
-import type { CSSResultGroup } from 'lit';
+import { DraggableElement } from '../../utilities/drag.js';
+import { Localize } from '../../utilities/localize.js';
+import { clamp } from '../../utilities/math.js';
+import { QuietElement } from '../../utilities/quiet-element.js';
+import '../tooltip/tooltip.js';
 import type { QuietTooltip } from '../tooltip/tooltip.js';
+import styles from './slider.styles.js';
 
 /**
  * <quiet-slider>

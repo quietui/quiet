@@ -1,5 +1,5 @@
-import { registerDefaultTranslation } from '../utilities/localize.js';
 import type { Translation } from '../utilities/localize.js';
+import { registerDefaultTranslation } from '../utilities/localize.js';
 
 const translation: Translation = {
   $code: 'en',

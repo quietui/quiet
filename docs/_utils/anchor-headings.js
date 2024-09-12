@@ -1,6 +1,6 @@
 import { parse } from 'node-html-parser';
-import { v4 as uuid } from 'uuid';
 import slugify from 'slugify';
+import { v4 as uuid } from 'uuid';
 
 function createId(text) {
   let slug = slugify(String(text), {

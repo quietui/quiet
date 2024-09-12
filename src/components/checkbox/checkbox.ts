@@ -1,14 +1,14 @@
-import '../icon/icon.js';
-import { classMap } from 'lit/directives/class-map.js';
-import { customElement, property, query, state } from 'lit/decorators.js';
+import type { CSSResultGroup } from 'lit';
 import { html } from 'lit';
+import { customElement, property, query, state } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
 import { QuietBlurEvent, QuietChangeEvent, QuietFocusEvent, QuietInputEvent } from '../../events/form.js';
-import { QuietElement } from '../../utilities/quiet-element.js';
 import hostStyles from '../../styles/host.styles.js';
+import { QuietElement } from '../../utilities/quiet-element.js';
+import '../icon/icon.js';
 import styles from './checkbox.styles.js';
-import type { CSSResultGroup } from 'lit';
 
 /**
  * <quiet-checkbox>

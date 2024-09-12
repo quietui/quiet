@@ -1,9 +1,9 @@
+import type { CSSResultGroup } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import hostStyles from '../../styles/host.styles.js';
 import { Localize } from '../../utilities/localize.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
-import hostStyles from '../../styles/host.styles.js';
 import styles from './bytes.styles.js';
-import type { CSSResultGroup } from 'lit';
 
 /**
  * <quiet-bytes>

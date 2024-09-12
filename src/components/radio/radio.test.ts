@@ -1,5 +1,5 @@
-import '../../../dist/quiet.loader.js';
 import { expect, fixture, html } from '@open-wc/testing';
+import '../../../dist/quiet.loader.js';
 import type { QuietRadio } from './radio.js';
 
 describe('<quiet-radio>', () => {

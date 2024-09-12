@@ -1,5 +1,5 @@
-import '../../../dist/quiet.js';
 import { expect, fixture, html } from '@open-wc/testing';
+import '../../../dist/quiet.js';
 import type { QuietDialog } from './dialog.js';
 
 describe('<quiet-dialog>', () => {

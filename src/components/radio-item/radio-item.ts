@@ -1,12 +1,12 @@
-import '../icon/icon.js';
-import { classMap } from 'lit/directives/class-map.js';
-import { customElement, property } from 'lit/decorators.js';
-import { html } from 'lit';
-import { QuietBlurEvent, QuietFocusEvent } from '../../events/form.js';
-import { QuietElement } from '../../utilities/quiet-element.js';
-import hostStyles from '../../styles/host.styles.js';
-import styles from './radio-item.styles.js';
 import type { CSSResultGroup } from 'lit';
+import { html } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
+import { QuietBlurEvent, QuietFocusEvent } from '../../events/form.js';
+import hostStyles from '../../styles/host.styles.js';
+import { QuietElement } from '../../utilities/quiet-element.js';
+import '../icon/icon.js';
+import styles from './radio-item.styles.js';
 
 /**
  * <quiet-radio-item>

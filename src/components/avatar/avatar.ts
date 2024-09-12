@@ -1,10 +1,10 @@
-import '../icon/icon.js';
-import { customElement, property, state } from 'lit/decorators.js';
-import { html } from 'lit';
-import { QuietElement } from '../../utilities/quiet-element.js';
-import hostStyles from '../../styles/host.styles.js';
-import styles from './avatar.styles.js';
 import type { CSSResultGroup } from 'lit';
+import { html } from 'lit';
+import { customElement, property, state } from 'lit/decorators.js';
+import hostStyles from '../../styles/host.styles.js';
+import { QuietElement } from '../../utilities/quiet-element.js';
+import '../icon/icon.js';
+import styles from './avatar.styles.js';
 
 /**
  * <quiet-avatar>

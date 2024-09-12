@@ -1,10 +1,10 @@
-import { customElement, property } from 'lit/decorators.js';
-import { html, literal } from 'lit/static-html.js';
-import { ifDefined } from 'lit/directives/if-defined.js';
-import { QuietElement } from '../../utilities/quiet-element.js';
-import hostStyles from '../../styles/host.styles.js';
-import styles from './breadcrumb-item.styles.js';
 import type { CSSResultGroup } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { html, literal } from 'lit/static-html.js';
+import hostStyles from '../../styles/host.styles.js';
+import { QuietElement } from '../../utilities/quiet-element.js';
+import styles from './breadcrumb-item.styles.js';
 
 /**
  * <quiet-breadcrumb-item>
@@ -64,7 +64,6 @@ export class QuietBreadcrumbItem extends QuietElement {
     const isLink = typeof this.href === 'string';
     const tag = isLink ? literal`a` : literal`span`;
 
-    /* eslint-disable lit/binding-positions, lit/no-invalid-html */
     return html`
       <${tag}
         id="label"
@@ -84,7 +83,6 @@ export class QuietBreadcrumbItem extends QuietElement {
         </slot>
       </span>
     `;
-    /* eslint-enable lit/binding-positions, lit/no-invalid-html */
   }
 }
 

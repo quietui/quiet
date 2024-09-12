@@ -1,20 +1,20 @@
-import '../dropdown-item/dropdown-item.js';
-import { animateWithClass } from '../../utilities/animate.js';
+import type { VirtualElement } from '@floating-ui/dom';
 import { autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
-import { createId } from '../../utilities/math.js';
-import { customElement, property, query } from 'lit/decorators.js';
+import type { CSSResultGroup } from 'lit';
 import { html } from 'lit';
-import { lockScrolling, unlockScrolling } from '../../utilities/scroll.js';
-import { LongPress, LongPressEvent } from '../../utilities/long-press.js';
+import { customElement, property, query } from 'lit/decorators.js';
 import { QuietClosedEvent, QuietCloseEvent, QuietOpenedEvent, QuietOpenEvent } from '../../events/open-close.js';
-import { QuietElement } from '../../utilities/quiet-element.js';
 import { QuietSelectEvent } from '../../events/select.js';
 import hostStyles from '../../styles/host.styles.js';
-import styles from './dropdown.styles.js';
-import type { CSSResultGroup } from 'lit';
+import { animateWithClass } from '../../utilities/animate.js';
+import { LongPress, LongPressEvent } from '../../utilities/long-press.js';
+import { createId } from '../../utilities/math.js';
+import { QuietElement } from '../../utilities/quiet-element.js';
+import { lockScrolling, unlockScrolling } from '../../utilities/scroll.js';
 import type { QuietButton } from '../button/button.js';
+import '../dropdown-item/dropdown-item.js';
 import type { QuietDropdownItem } from '../dropdown-item/dropdown-item.js';
-import type { VirtualElement } from '@floating-ui/dom';
+import styles from './dropdown.styles.js';
 
 const openDropdowns = new Set<QuietDropdown>();
 

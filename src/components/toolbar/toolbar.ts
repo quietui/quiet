@@ -1,11 +1,11 @@
-import { customElement, property } from 'lit/decorators.js';
-import { html } from 'lit';
-import { QuietElement } from '../../utilities/quiet-element.js';
-import hostStyles from '../../styles/host.styles.js';
-import styles from './toolbar.styles.js';
 import type { CSSResultGroup } from 'lit';
-import type { QuietButton } from '../button/button.js';
+import { html } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
+import hostStyles from '../../styles/host.styles.js';
+import { QuietElement } from '../../utilities/quiet-element.js';
 import type { QuietButtonGroup } from '../button-group/button-group.js';
+import type { QuietButton } from '../button/button.js';
+import styles from './toolbar.styles.js';
 
 interface GetButtonsOptions {
   includeDisabled: boolean;

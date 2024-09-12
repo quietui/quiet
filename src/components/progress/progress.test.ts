@@ -1,5 +1,5 @@
-import '../../../dist/quiet.js';
 import { expect, fixture, html } from '@open-wc/testing';
+import '../../../dist/quiet.js';
 import type { QuietProgress } from './progress.js';
 
 describe('<quiet-progress>', () => {

@@ -1,8 +1,8 @@
-import { customElement, property } from 'lit/decorators.js';
-import { QuietElement } from '../../utilities/quiet-element.js';
-import hostStyles from '../../styles/host.styles.js';
-import styles from './divider.styles.js';
 import type { CSSResultGroup } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
+import hostStyles from '../../styles/host.styles.js';
+import { QuietElement } from '../../utilities/quiet-element.js';
+import styles from './divider.styles.js';
 
 /**
  * <quiet-divider>

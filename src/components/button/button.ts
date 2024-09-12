@@ -1,15 +1,15 @@
-import '../icon/icon.js';
-import '../spinner/spinner.js';
-import { classMap } from 'lit/directives/class-map.js';
+import type { CSSResultGroup } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { html, literal } from 'lit/static-html.js';
+import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
+import { html, literal } from 'lit/static-html.js';
 import { QuietBlurEvent, QuietFocusEvent } from '../../events/form.js';
 import { QuietClickEvent } from '../../events/pointer.js';
-import { QuietElement } from '../../utilities/quiet-element.js';
 import hostStyles from '../../styles/host.styles.js';
+import { QuietElement } from '../../utilities/quiet-element.js';
+import '../icon/icon.js';
+import '../spinner/spinner.js';
 import styles from './button.styles.js';
-import type { CSSResultGroup } from 'lit';
 
 /**
  * <quiet-button>
@@ -214,7 +214,6 @@ export class QuietButton extends QuietElement {
     const isToggle = this.toggle !== undefined && !isLink && !isSubmit;
     const tag = isLink ? literal`a` : literal`button`;
 
-    /* eslint-disable lit/binding-positions, lit/no-invalid-html */
     return html`
       <${tag}
         id="button"
@@ -263,7 +262,6 @@ export class QuietButton extends QuietElement {
         ${isLoading ? html`<quiet-spinner id="spinner" part="spinner"></quiet-spinner>` : ''}
       </${tag}>
     `;
-    /* eslint-enable lit/binding-positions, lit/no-invalid-html */
   }
 }
 

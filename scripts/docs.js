@@ -1,7 +1,7 @@
-import { deleteAsync } from 'del';
-import { docsDir, siteDir } from './utils.js';
-import { join } from 'path';
 import Eleventy from '@11ty/eleventy';
+import { deleteAsync } from 'del';
+import { join } from 'path';
+import { docsDir, siteDir } from './utils.js';
 
 const elev = new Eleventy(docsDir, siteDir, {
   quietMode: true,

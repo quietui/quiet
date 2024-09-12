@@ -1,5 +1,5 @@
-import { customElementVsCodePlugin } from 'custom-element-vs-code-integration';
 import { parse } from 'comment-parser';
+import { customElementVsCodePlugin } from 'custom-element-vs-code-integration';
 import { readFileSync } from 'fs';
 
 const packageData = JSON.parse(readFileSync('./package.json', 'utf8'));

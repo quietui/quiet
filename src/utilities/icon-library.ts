@@ -1,5 +1,5 @@
-import { getLibraryPath } from './library.js';
 import type { QuietIcon } from '../components/icon/icon.js';
+import { getLibraryPath } from './library.js';
 
 export type ResolveFunction = (name: string, family: string) => string;
 export type MutateFunction = (svg: SVGElement) => void;

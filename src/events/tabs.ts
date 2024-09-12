@@ -1,5 +1,5 @@
-import type { QuietTab } from '../components/tab/tab.js';
 import type { QuietTabPanel } from '../components/tab-panel/tab-panel.js';
+import type { QuietTab } from '../components/tab/tab.js';
 
 /**
  * Emitted after a tab is shown. The event will include a `detail` object with `tab` and `panel`properties that

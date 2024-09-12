@@ -1,6 +1,6 @@
 import { esbuildPlugin } from '@web/dev-server-esbuild';
-import { globbySync } from 'globby';
 import { playwrightLauncher } from '@web/test-runner-playwright';
+import { globbySync } from 'globby';
 import os from 'os';
 
 // Only run one browser per core

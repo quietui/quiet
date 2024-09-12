@@ -1,19 +1,19 @@
+import { readFile } from 'fs/promises';
 import { parse } from 'path';
-import { markdown } from './_utils/markdown.js';
+import process from 'process';
+import { analyticsPlugin } from './_utils/analytics.js';
 import { anchorHeadingsPlugin } from './_utils/anchor-headings.js';
 import { codeExamplesPlugin } from './_utils/code-examples.js';
-import { analyticsPlugin } from './_utils/analytics.js';
 import { copyCodePlugin } from './_utils/copy-code.js';
 import { currentLink } from './_utils/current-link.js';
-import { highlightCodePlugin } from './_utils/highlight-code.js';
-import { formatCodePlugin } from './_utils/format-code.js';
 import { externalLinksPlugin } from './_utils/external-links.js';
+import { formatCodePlugin } from './_utils/format-code.js';
+import { highlightCodePlugin } from './_utils/highlight-code.js';
+import { getComponents } from './_utils/manifest.js';
+import { markdown } from './_utils/markdown.js';
+import { outlinePlugin } from './_utils/outline.js';
 import { replaceTextPlugin } from './_utils/replace-text.js';
 import { searchPlugin } from './_utils/search.js';
-import { readFile } from 'fs/promises';
-import { outlinePlugin } from './_utils/outline.js';
-import { getComponents } from './_utils/manifest.js';
-import process from 'process';
 
 const packageData = JSON.parse(await readFile('./package.json', 'utf-8'));
 const isDeveloping = process.argv.includes('--develop');

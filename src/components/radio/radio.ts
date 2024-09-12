@@ -1,13 +1,13 @@
-import '../radio-item/radio-item.js';
-import { customElement, property, query, state } from 'lit/decorators.js';
+import type { CSSResultGroup } from 'lit';
 import { html } from 'lit';
+import { customElement, property, query, state } from 'lit/decorators.js';
 import { QuietChangeEvent, QuietInputEvent } from '../../events/form.js';
-import { QuietElement } from '../../utilities/quiet-element.js';
 import formControlStyles from '../../styles/form-control.styles.js';
 import hostStyles from '../../styles/host.styles.js';
-import styles from './radio.styles.js';
-import type { CSSResultGroup } from 'lit';
+import { QuietElement } from '../../utilities/quiet-element.js';
+import '../radio-item/radio-item.js';
 import type { QuietRadioItem } from '../radio-item/radio-item.js';
+import styles from './radio.styles.js';
 
 interface GetRadioItemOptions {
   includeDisabled: boolean;

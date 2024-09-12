@@ -1,10 +1,10 @@
-import { customElement, property } from 'lit/decorators.js';
+import type { CSSResultGroup } from 'lit';
 import { html } from 'lit';
-import { QuietElement } from '../../utilities/quiet-element.js';
+import { customElement, property } from 'lit/decorators.js';
 import formControlStyles from '../../styles/form-control.styles.js';
 import hostStyles from '../../styles/host.styles.js';
+import { QuietElement } from '../../utilities/quiet-element.js';
 import styles from './checkbox-group.styles.js';
-import type { CSSResultGroup } from 'lit';
 
 /**
  * <quiet-checkbox-group>

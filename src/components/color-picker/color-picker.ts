@@ -1,20 +1,20 @@
+import { TinyColor } from '@ctrl/tinycolor';
+import type { CSSResultGroup } from 'lit';
+import { html } from 'lit';
+import { customElement, property, query, state } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
+import { QuietBlurEvent, QuietChangeEvent, QuietFocusEvent, QuietInputEvent } from '../../events/form.js';
+import formControlStyles from '../../styles/form-control.styles.js';
+import hostStyles from '../../styles/host.styles.js';
+import { DraggableElement } from '../../utilities/drag.js';
+import { Localize } from '../../utilities/localize.js';
+import { clamp } from '../../utilities/math.js';
+import { QuietElement } from '../../utilities/quiet-element.js';
 import '../button/button.js';
 import '../copy/copy.js';
 import '../slider/slider.js';
-import { clamp } from '../../utilities/math.js';
-import { classMap } from 'lit/directives/class-map.js';
-import { customElement, property, query, state } from 'lit/decorators.js';
-import { DraggableElement } from '../../utilities/drag.js';
-import { html } from 'lit';
-import { Localize } from '../../utilities/localize.js';
-import { QuietBlurEvent, QuietChangeEvent, QuietFocusEvent, QuietInputEvent } from '../../events/form.js';
-import { QuietElement } from '../../utilities/quiet-element.js';
-import { TinyColor } from '@ctrl/tinycolor';
-import formControlStyles from '../../styles/form-control.styles.js';
-import hostStyles from '../../styles/host.styles.js';
-import styles from './color-picker.styles.js';
-import type { CSSResultGroup } from 'lit';
 import type { QuietSlider } from '../slider/slider.js';
+import styles from './color-picker.styles.js';
 
 const hasEyeDropper = 'EyeDropper' in window;
 

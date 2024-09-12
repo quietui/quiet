@@ -1,5 +1,5 @@
-import '../../../dist/quiet.loader.js';
 import { expect, fixture, html } from '@open-wc/testing';
+import '../../../dist/quiet.loader.js';
 import type { QuietTextField } from './text-field.js';
 
 describe('<quiet-text-field>', () => {

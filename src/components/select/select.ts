@@ -1,15 +1,15 @@
-import { classMap } from 'lit/directives/class-map.js';
-import { customElement, property, query, state } from 'lit/decorators.js';
-import { getSlotHtml } from '../../utilities/html.js';
+import type { CSSResultGroup } from 'lit';
 import { html } from 'lit';
+import { customElement, property, query, state } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
 import { QuietBlurEvent, QuietChangeEvent, QuietFocusEvent, QuietInputEvent } from '../../events/form.js';
-import { QuietElement } from '../../utilities/quiet-element.js';
 import formControlStyles from '../../styles/form-control.styles.js';
 import hostStyles from '../../styles/host.styles.js';
+import { getSlotHtml } from '../../utilities/html.js';
+import { QuietElement } from '../../utilities/quiet-element.js';
 import styles from './select.styles.js';
-import type { CSSResultGroup } from 'lit';
 
 /**
  * <quiet-select>

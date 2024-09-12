@@ -1,16 +1,16 @@
-import { clamp } from '../../utilities/math.js';
-import { classMap } from 'lit/directives/class-map.js';
-import { customElement, property, query, state } from 'lit/decorators.js';
-import { DraggableElement } from '../../utilities/drag.js';
+import type { CSSResultGroup } from 'lit';
 import { html } from 'lit';
-import { Localize } from '../../utilities/localize.js';
-import { QuietBlurEvent, QuietChangeEvent, QuietFocusEvent, QuietInputEvent } from '../../events/form.js';
-import { QuietElement } from '../../utilities/quiet-element.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
+import { QuietBlurEvent, QuietChangeEvent, QuietFocusEvent, QuietInputEvent } from '../../events/form.js';
 import formControlStyles from '../../styles/form-control.styles.js';
 import hostStyles from '../../styles/host.styles.js';
+import { DraggableElement } from '../../utilities/drag.js';
+import { Localize } from '../../utilities/localize.js';
+import { clamp } from '../../utilities/math.js';
+import { QuietElement } from '../../utilities/quiet-element.js';
 import styles from './rating.styles.js';
-import type { CSSResultGroup } from 'lit';
 
 // Borrow the native input's validation message
 const nativeFileInput = document.createElement('input');

@@ -81,7 +81,11 @@ If you do not agree to license your contribution under these terms, do not make 
 
 ## Conventions for component development
 
-### Internal structure
+### Code formatting
+
+This project uses [Prettier](https://prettier.io/) to format code consistently. It also uses Prettier plugins to sort imports and CSS rules. By design, code that hasn't been run through Prettier will trigger a build error. You can either turn "format on save" on in your editor, or you can run `npm run prettier:fix` manually before committing changes.
+
+### Component structure
 
 A simple structure is preferred. Avoid adding unnecessary elements or wrapping whenever possible. Do what users expect and ensure the structure is reasonably customizable using the appropriate parts.
 

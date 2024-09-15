@@ -21,7 +21,7 @@
     "components"
   ],
   "author": "Cory LaViska",
-  "license": "LGPL-3.0-only",
+  "license": "MIT",
   "homepage": "https://github.com/quietui/components#readme",
   "repository": {
     "type": "git",

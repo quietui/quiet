@@ -5,7 +5,6 @@
     margin: 10rem auto;
     padding: 0;
     overflow: hidden;
-    border: solid 2px var(--quiet-neutral-stroke-softer);
     border-radius: calc(var(--quiet-border-radius) * 2);
   }
 

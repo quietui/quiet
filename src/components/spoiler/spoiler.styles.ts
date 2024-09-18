@@ -2,7 +2,7 @@ import { css } from 'lit';
 
 export default css`
   :host {
-    --blur: 8px;
+    --blur: 16px;
 
     display: flex;
     position: relative;
@@ -80,7 +80,17 @@ export default css`
       color: var(--quiet-neutral-text-on-soft);
     }
 
-    &.cover {
+    &.noise {
+      backdrop-filter: blur(var(--blur));
+      -webkit-backdrop-filter: blur(var(--blur));
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="8" stitchTiles="stitch" /><feColorMatrix type="matrix" values="0.33 0.33 0.33 0 0 0.33 0.33 0.33 0 0 0.33 0.33 0.33 0 0 0 0 0 1 0" /></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity=".5" /></svg>');
+      background-size: 600px 600px;
+      background-repeat: repeat;
+      background-color: color-mix(in oklab, var(--quiet-neutral-fill-softer), transparent 50%);
+      color: var(--quiet-neutral-text-on-soft);
+    }
+
+    &.solid {
       background-color: var(--quiet-neutral-fill-soft);
       color: var(--quiet-neutral-text-on-soft);
     }

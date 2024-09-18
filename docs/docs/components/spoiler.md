@@ -56,10 +56,17 @@ Keep it short! The content within inline spoilers won't wrap.
 
 ### Changing the effect
 
-The default spoiler effect is `blur`, which blurs the content but still leave a visual hints. To completely cover the spoiler, use the `cover` effect.
+The default spoiler effect is `blur`, which blurs the content but still leave a visual hints. To completely cover the spoiler, use the `solid` effect. To add noise, use the `noise` effect.
 
-```html {.example}
-<quiet-spoiler effect="cover">
+```html {.example .flex-column}
+<quiet-spoiler effect="solid">
+  Spoiling a good book, even one about something as universally beloved as kittens, robs you of the journey the author 
+  intended. Imagine unfolding a mystery only to have the solution handed to you at the start; the delight of discovery, 
+  the emotional rollercoaster, and the gradual unveiling of characters' depths are all diminished. In a book about 
+  kittens, you might expect tales of mischief, growth, and perhaps even a bit of heart-warming drama.
+</quiet-spoiler>
+
+<quiet-spoiler effect="noise">
   Spoiling a good book, even one about something as universally beloved as kittens, robs you of the journey the author 
   intended. Imagine unfolding a mystery only to have the solution handed to you at the start; the delight of discovery, 
   the emotional rollercoaster, and the gradual unveiling of characters' depths are all diminished. In a book about 

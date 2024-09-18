@@ -29,7 +29,7 @@ import styles from './spoiler.styles.js';
  * @csspart hide-icon - The hide icon, a `<quiet-icon>` element.
  * @csspart hide-icon__svg - The hide icon's `svg` part.
  *
- * @cssproperty [--blur=8px] - The amount of blur when using the blur effect.
+ * @cssproperty [--blur=16px] - The amount of blur when using the blur effect.
  */
 @customElement('quiet-spoiler')
 export class QuietSpoiler extends QuietElement {
@@ -50,7 +50,7 @@ export class QuietSpoiler extends QuietElement {
   @property({ type: Boolean, reflect: true }) persist = false;
 
   /** Determines how the spoiler is hidden. */
-  @property({ reflect: true }) effect: 'blur' | 'cover' = 'blur';
+  @property({ reflect: true }) effect: 'blur' | 'solid' | 'noise' = 'blur';
 
   /**
    * The spoiler's label. If you need to provide HTML in the label, use the `label` slot instead.
@@ -97,7 +97,8 @@ export class QuietSpoiler extends QuietElement {
         part="cover"
         class=${classMap({
           blur: this.effect === 'blur',
-          cover: this.effect === 'cover'
+          solid: this.effect === 'solid',
+          noise: this.effect === 'noise'
         })}
         type="button"
         aria-expanded=${this.visible ? 'true' : 'false'}

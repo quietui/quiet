@@ -1,5 +1,5 @@
 ---
-title: License
+title: Available licenses
 description: 
 layout: page
 section: license
@@ -23,14 +23,14 @@ section: license
   </div>
 
   <div class="pricing-plan">
-    <quiet-icon class="pricing-plan-icon" name="sparkles" style="color: #e98d61;"></quiet-icon>
+    <quiet-icon class="pricing-plan-icon" name="award" style="color: #e98d61;"></quiet-icon>
     <h3 data-no-anchor>Premium</h3><br>
     <ul>
       <li><strong>Starting at $199</strong></li>
       <li>Premium support</li>
       <li>Priority bug fixes</li>
       <li>Discord channel</li>
-      <li>Commercial license</li>
+      <li>1 year of updates</li>
     </ul>
     <quiet-button variant="primary" pill href="#" target="_blank">
       Buy now
@@ -38,19 +38,21 @@ section: license
   </div>
 </div>
 
+Quiet can be used for free under the standard license. For personal support, prioritized bug fixes, and more, commercial licenses are available starting at $199 USD.
+
 <ul class="features-grid" aria-label="Features">
   <li><quiet-icon name="heart-handshake" style="color: #e886a7;"></quiet-icon><br>Premium support</li>
   <li><quiet-icon name="bug" style="color: #e98d61;"></quiet-icon><br>Priority bug fixes</li>
   <li><quiet-icon name="puzzle" style="color: #c5a231;"></quiet-icon><br>Use in any framework</li>
   <li><quiet-icon name="leaf" style="color: #7db664;"></quiet-icon><br>Standards-based</li>
   <li><quiet-icon name="brand-discord" style="color: #b394f4;"></quiet-icon><br>Discord channel access</li>
-  <li><quiet-icon name="calendar" style="color: #58acf2;"></quiet-icon><br>One year of updates</li>
+  <li><quiet-icon name="calendar" style="color: #58acf2;"></quiet-icon><br>1 year of updates</li>
   <li><quiet-icon name="infinity" style="color: #a4a6b0;"></quiet-icon><br>Unlimited projects</li>
   <li><quiet-icon name="trophy" style="color: #c5a231;"></quiet-icon><br>Support indie software</li>
 </ul>
 
 <div style="text-align: center;">
-  <quiet-button id="big-buy-button" variant="primary" size="lg" pill href="#" target="_blank">
+  <quiet-button variant="primary" size="lg" pill href="#" target="_blank" style="margin-block-start: var(--quiet-content-spacing);">
     Purchase a license
   </quiet-button>
 </div>

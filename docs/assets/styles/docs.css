@@ -1126,7 +1126,7 @@ quiet-callout {
 .pricing-plans {
   display: grid;
   grid-template-columns: 2fr 2fr;
-  margin-block: 4rem;
+  margin-block-end: var(--quiet-content-spacing);
   gap: 2rem;
   text-align: center;
 
@@ -1142,14 +1142,14 @@ quiet-callout {
 
 .pricing-plan {
   padding: 1.5rem 1rem 2rem 1rem;
-  border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
+  border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
   border-radius: 1rem;
   background-color: var(--quiet-paper-color);
   box-shadow: var(--quiet-shadow-softer);
 
   .pricing-plan-icon {
     font-size: 4rem;
-    stroke-width: 0.75px;
+    stroke-width: 1px;
   }
 
   ul {
@@ -1176,4 +1176,9 @@ quiet-callout {
       color: deeppink;
     }
   }
+}
+
+/* FAQ */
+h2 + details {
+  margin-block-start: var(--quiet-content-spacing);
 }

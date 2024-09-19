@@ -1,8 +1,8 @@
 ---
-title: Pricing
+title: License
 description: 
 layout: page
-section: sponsor
+section: license
 ---
 
 

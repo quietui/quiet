@@ -41,6 +41,12 @@ export function anchorHeadingsPlugin(options = {}) {
         const hasAnchor = heading.querySelector('a');
         const clone = parse(heading.outerHTML);
 
+        // Ignore headings that have the data-no-anchor attribute
+        if (heading.hasAttribute('data-no-anchor')) {
+          heading.removeAttribute('data-no-anchor');
+          return;
+        }
+
         // Create a clone of the heading so we can remove [data-no-anchor] elements from the text content
         clone.querySelectorAll('[data-no-anchor]').forEach(el => el.remove());
 

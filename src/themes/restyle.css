@@ -52,7 +52,7 @@ table,
 ul,
 video {
   margin: 0;
-  margin-block-end: calc(var(--quiet-content-spacing));
+  margin-block-end: var(--quiet-content-spacing);
 
   & > :last-child {
     margin-block-end: 0;

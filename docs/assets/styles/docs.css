@@ -211,7 +211,7 @@ html:not(.quiet-dark) .only-dark {
   }
 }
 
-#header-group-links a[href*='/pricing'] {
+#header-group-links [data-with-heart] {
   span {
     display: inline-block;
     animation: 0.8375s infinite heartbeat alternate ease;
@@ -1076,5 +1076,104 @@ quiet-callout {
 
   @media screen and (max-width: 959px) {
     max-width: 7.5rem;
+  }
+}
+
+/* Features grid */
+.features-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 0;
+  margin-block-end: 2rem;
+  padding: 0;
+  gap: 2rem;
+
+  li {
+    display: block;
+    margin: 0;
+    padding: 1rem;
+    border-radius: 1rem;
+    background: var(--quiet-neutral-fill-softer);
+    box-shadow: var(--quiet-shadow-softer);
+    color: var(--quiet-text-muted);
+    font-size: 1.125rem;
+    line-height: 1.6;
+    list-style: none;
+    text-align: center;
+
+    quiet-icon {
+      font-size: 2.5rem;
+      stroke-width: 1.25px;
+    }
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .features-grid {
+    gap: 1rem;
+
+    li {
+      font-size: 1rem;
+    }
+
+    &::first-letter {
+      font-size: 1rem;
+    }
+  }
+}
+
+/* Pricing table */
+.pricing-plans {
+  display: grid;
+  grid-template-columns: 2fr 2fr;
+  margin-block: 4rem;
+  gap: 2rem;
+  text-align: center;
+
+  @media screen and (max-width: 767px) {
+    grid-template-columns: 2fr;
+  }
+
+  h3:first-of-type {
+    margin-block: 0;
+    text-align: center;
+  }
+}
+
+.pricing-plan {
+  padding: 1.5rem 1rem 2rem 1rem;
+  border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
+  border-radius: 1rem;
+  background-color: var(--quiet-paper-color);
+  box-shadow: var(--quiet-shadow-softer);
+
+  .pricing-plan-icon {
+    font-size: 4rem;
+    stroke-width: 0.75px;
+  }
+
+  ul {
+    margin: 0 0 2rem 0;
+    padding: 0;
+  }
+
+  li {
+    margin: 0;
+    padding: 0;
+    font-size: 1.125rem;
+    list-style: none;
+
+    &:not(:first-of-type) {
+      color: var(--quiet-text-muted);
+      font-size: 0.9375rem;
+    }
+  }
+
+  quiet-button {
+    width: 12.5rem;
+
+    quiet-icon[name='heart'] {
+      color: deeppink;
+    }
   }
 }

@@ -215,8 +215,9 @@ To show the button in a loading state, add the `loading` attribute. When a butto
 
 To disable a button, add the `disabled` attribute. When a button is disabled, the `quiet-click` event will not be emitted.
 
-```html {.example}
-<quiet-button disabled>Click me</quiet-button>
+```html {.example .flex-row}
+<quiet-button disabled>Regular button</quiet-button>
+<quiet-button href="https://example.com/" disabled>Link button</quiet-button>
 ```
 
 ### Adding a dropdown caret

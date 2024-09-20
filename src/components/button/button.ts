@@ -56,7 +56,7 @@ export class QuietButton extends QuietElement {
   /** The type of button to render. This attribute has no effect on text or image buttons. */
   @property({ reflect: true }) variant: 'primary' | 'secondary' | 'destructive' = 'secondary';
 
-  /** Disables the button. Cannot be used with link buttons. */
+  /** Disables the button. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Draws the button in a loading state. */
@@ -208,7 +208,7 @@ export class QuietButton extends QuietElement {
 
   render() {
     const isLink = typeof this.href === 'string';
-    const isDisabled = !isLink && (this.disabled || this.loading);
+    const isDisabled = this.disabled || this.loading;
     const isLoading = !isLink && this.loading;
     const isSubmit = this.type === 'submit';
     const isToggle = this.toggle !== undefined && !isLink && !isSubmit;
@@ -244,7 +244,7 @@ export class QuietButton extends QuietElement {
         type=${ifDefined(isLink ? undefined : this.type)}
         ?disabled=${ifDefined(isLink ? undefined : this.disabled)}
         value=${ifDefined(isLink ? undefined : this.value)}
-        href=${ifDefined(isLink ? this.href : undefined)}
+        href=${ifDefined(isLink && !this.disabled ? this.href : undefined)}
         target=${ifDefined(isLink ? this.target : undefined)}
         download=${ifDefined(isLink ? this.download : undefined)}
         rel=${ifDefined(isLink ? this.rel : undefined)}

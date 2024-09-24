@@ -348,7 +348,7 @@ export class QuietSelect extends QuietElement {
           part="chevron"
           exportparts="svg:chevron__svg"
           library="system"
-          name="chevron-down"
+          name="selector"
         ></quiet-icon>
       </div>
     `;

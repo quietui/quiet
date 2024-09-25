@@ -48,6 +48,17 @@ You can format a variety of different units. [Possible values can be found here.
 <quiet-number type="unit" unit="inch" number="1"></quiet-number><br>
 <quiet-number type="unit" unit="fahrenheit" number="75"></quiet-number><br>
 <quiet-number type="unit" unit="celsius" number="24"></quiet-number><br>
+<quiet-number type="unit" unit="hour" number="6"></quiet-number><br>
+<quiet-number type="unit" unit="minute" number="45"></quiet-number><br>
+<quiet-number type="unit" unit="second" number="8"></quiet-number><br>
+```
+
+Use the `unit-display` attribute to change how units are output. Possible values include `narrow`, `short`, and `long`.
+
+```html {.example}
+<quiet-number type="unit" unit="hour" number="12" unit-display="narrow"></quiet-number><br>
+<quiet-number type="unit" unit="hour" number="12" unit-display="short"></quiet-number><br>
+<quiet-number type="unit" unit="hour" number="12" unit-display="long"></quiet-number><br>
 ```
 
 ### Localization

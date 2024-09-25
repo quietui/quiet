@@ -44,7 +44,7 @@ export class QuietNumber extends QuietElement {
   @property() unit: string;
 
   /** The unit formatting style to use in unit formatting. */
-  @property({ attribute: 'unit-display' }) unitDisplay: 'short' | 'narrow' | 'long';
+  @property({ attribute: 'unit-display' }) unitDisplay: 'narrow' | 'short' | 'long';
 
   /**
    * The minimum number of integer digits to use. A value with a smaller number of integer digits than this number will

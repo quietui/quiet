@@ -2,7 +2,7 @@ import { css } from 'lit';
 
 export default css`
   :host {
-    --blur: 16px;
+    --blur: 8px;
 
     display: flex;
     position: relative;

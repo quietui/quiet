@@ -29,7 +29,7 @@ import styles from './spoiler.styles.js';
  * @csspart hide-icon - The hide icon, a `<quiet-icon>` element.
  * @csspart hide-icon__svg - The hide icon's `svg` part.
  *
- * @cssproperty [--blur=16px] - The amount of blur when using the blur effect.
+ * @cssproperty [--blur=8px] - The amount of blur when using the blur effect.
  */
 @customElement('quiet-spoiler')
 export class QuietSpoiler extends QuietElement {

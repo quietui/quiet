@@ -13,7 +13,8 @@ section: license
       <li><strong>Free</strong></li>
       <li><s>Premium support</s></li>
       <li><s>Priority bug fixes</s></li>
-      <li><s>Discord channel</s></li>
+      <li><s>1 year of updates</s></li>
+      <li><s>24 hour response time</s></li>
       <li>MIT license</li>
     </ul>
     <quiet-button pill href="https://github.com/sponsors/claviska" target="_blank">
@@ -29,8 +30,9 @@ section: license
       <li><strong>Starting at $199</strong></li>
       <li>Premium support</li>
       <li>Priority bug fixes</li>
-      <li>Discord channel</li>
       <li>1 year of updates</li>
+      <li>24 hour response time</li>
+      <li>Pro license</li>
     </ul>
     <quiet-button variant="primary" pill href="#" target="_blank">
       Buy now
@@ -38,17 +40,15 @@ section: license
   </div>
 </div>
 
-Quiet can be used for free under the standard license. For personal support, prioritized bug fixes, and more, commercial licenses are available starting at $199 USD.
+Quiet can be used for free under the MIT license. For personal support, prioritized bug fixes, a perpetual use license for unlimited projects, and a full year of updates, pro licenses are available starting at $199 USD.
 
 <ul class="features-grid" aria-label="Features">
   <li><quiet-icon name="heart-handshake" style="color: #e886a7;"></quiet-icon><br>Premium support</li>
   <li><quiet-icon name="bug" style="color: #e98d61;"></quiet-icon><br>Priority bug fixes</li>
-  <li><quiet-icon name="puzzle" style="color: #c5a231;"></quiet-icon><br>Use in any framework</li>
-  <li><quiet-icon name="leaf" style="color: #7db664;"></quiet-icon><br>Standards-based</li>
-  <li><quiet-icon name="brand-discord" style="color: #b394f4;"></quiet-icon><br>Discord channel access</li>
-  <li><quiet-icon name="calendar" style="color: #58acf2;"></quiet-icon><br>1 year of updates</li>
   <li><quiet-icon name="infinity" style="color: #a4a6b0;"></quiet-icon><br>Unlimited projects</li>
-  <li><quiet-icon name="trophy" style="color: #c5a231;"></quiet-icon><br>Support indie software</li>
+  <li><quiet-icon name="calendar" style="color: #58acf2;"></quiet-icon><br>1 year of updates</li>
+  <li><quiet-icon name="puzzle" style="color: #b394f4;"></quiet-icon><br>Works with all frameworks</li>
+  <li><quiet-icon name="leaf" style="color: #7db664;"></quiet-icon><br>Built with Web standards</li>
 </ul>
 
 <div style="text-align: center;">
@@ -73,12 +73,12 @@ Quiet can be used for free under the standard license. For personal support, pri
 
 <details name="faq">
   <summary>Do you offer support?</summary>
-  You can ask questions in the <a href="https://github.com/quietui/quiet/discussions">public discussion forum</a>. If you need additional support directly from the maintainer, please purchase a commercial license.
+  You can ask questions in the <a href="https://github.com/quietui/quiet/discussions">public discussion forum</a>. If you need additional support directly from the maintainer, please purchase a pro license.
 </details>
 
 <details name="faq">
   <summary>How can I report a bug?</summary>
-  Bugs should be <a href="https://github.com/quietui/quiet/issues">reported on GitHub</a>. Priority is given to commercial license holders, but cannot be guaranteed. For best results, please include a minimal reproduction with your report.
+  Bugs should be <a href="https://github.com/quietui/quiet/issues">reported on GitHub</a>. Priority is given to pro license holders, but cannot be guaranteed. For best results, please include a minimal reproduction with your report.
 </details>
 
 <details name="faq">

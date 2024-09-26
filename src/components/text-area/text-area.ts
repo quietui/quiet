@@ -46,6 +46,7 @@ export class QuietTextArea extends QuietElement {
   /** A reference to the `<form>` associated with the form control, or `null` if no form is associated. */
   public associatedForm: HTMLFormElement | null = null;
   private resizeObserver: ResizeObserver;
+  private textAreaAutoSizer: HTMLTextAreaElement = document.createElement('textarea');
 
   @query('textarea') private textBox: HTMLInputElement;
 
@@ -253,8 +254,31 @@ export class QuietTextArea extends QuietElement {
   /** Updates the height of the text area based on its content and settings. */
   private updateHeight() {
     if (this.resize === 'auto') {
-      this.textBox.style.height = 'auto';
-      this.textBox.style.height = `${this.textBox.scrollHeight}px`;
+      //
+      // To measure the correct height of a resizable text area, we create a mirror element and copy over the value. The
+      // resulting scrollHeight is the measurement we're looking for. Once we get it, we immediately disconnect the
+      // sizer element from the DOM.
+      //
+      // Previous solutions involved setting the original text area's height to `auto`, capturing its scrollHeight, and
+      // then setting the height to match. However, this causes the page to jump back to the top sometimes. Using a
+      // separate sizing element (that never has focus) prevents this.
+      //
+      // NOTE: We'll soon be able to use `field-sizing: content` for this: https://caniuse.com/?search=field-sizing)
+      //
+      this.textAreaAutoSizer.id = this.textBox.id; // briefly use the same id to match styles
+      this.textAreaAutoSizer.inert = true;
+      this.textAreaAutoSizer.value = this.value;
+      this.textAreaAutoSizer.style.position = 'absolute';
+      this.textAreaAutoSizer.style.top = '0';
+      this.textAreaAutoSizer.style.left = '0';
+      this.textAreaAutoSizer.style.width = '100%';
+      this.textAreaAutoSizer.style.height = 'auto';
+      this.textAreaAutoSizer.style.pointerEvents = 'none';
+      this.textAreaAutoSizer.style.opacity = '0';
+      this.textBox.insertAdjacentElement('afterend', this.textAreaAutoSizer);
+      this.textBox.style.height = `${this.textAreaAutoSizer.scrollHeight}px`;
+      this.textAreaAutoSizer.remove();
+      this.textAreaAutoSizer.id = '';
     } else {
       // @ts-expect-error - we're unsetting this value
       this.textBox.style.height = undefined;

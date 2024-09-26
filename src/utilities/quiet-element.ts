@@ -1,45 +1,10 @@
 import { LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 
-/**
- * A class that prevents DOM morphing libraries from breaking reflected attributes. Adapted from
- * https://www.konnorrogers.com/posts/2024/making-lit-components-morphable
- */
-class DurableAttributesElement extends LitElement {
+/** The base class for all Quiet components */
+export class QuietElement extends LitElement {
   private hasRecordedInitialProperties = false;
   private initialReflectedProperties: Map<string, unknown> = new Map();
-
-  attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null) {
-    // Only run the first time attributeChangedCallback is called. It runs just after all constructors, but before Lit
-    // has coerced any properties
-    if (!this.hasRecordedInitialProperties) {
-      (this.constructor as typeof LitElement).elementProperties.forEach((obj, prop: keyof typeof this & string) => {
-        if (obj.reflect && this[prop] != null) {
-          this.initialReflectedProperties.set(prop, this[prop]);
-        }
-      });
-
-      this.hasRecordedInitialProperties = true;
-    }
-
-    super.attributeChangedCallback(name, oldValue, newValue);
-  }
-
-  protected willUpdate(changedProperties: Parameters<LitElement['willUpdate']>[0]): void {
-    // Make sure `willUpdate` runs first in case it does any coercion or fixing of null-ish values
-    super.willUpdate(changedProperties);
-
-    this.initialReflectedProperties.forEach((value, prop: string & keyof typeof this) => {
-      // If a prop changes to `null` or `undefined`, we assume it happened because an attribute was removed
-      if (changedProperties.has(prop) && (this[prop] === null || this[prop] === undefined)) {
-        (this as Record<string, unknown>)[prop] = value;
-      }
-    });
-  }
-}
-
-/** The base class for all Quiet components */
-export class QuietElement extends DurableAttributesElement {
   protected internals: ElementInternals;
   public shadowRoot: ShadowRoot;
 
@@ -96,5 +61,41 @@ export class QuietElement extends DurableAttributesElement {
     }
 
     this.dispatchEvent(newEvent);
+  }
+
+  /**
+   * Hook into the attributeChangedCallback to enable durable attributes. This prevents DOM morphing libraries from
+   * breaking reflected attributes + default values. Adapted from:
+   *
+   * https://www.konnorrogers.com/posts/2024/making-lit-components-morphable
+   */
+  attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null) {
+    // Only run the first time attributeChangedCallback is called
+    if (!this.hasRecordedInitialProperties) {
+      (this.constructor as typeof LitElement).elementProperties.forEach((obj, prop: keyof typeof this & string) => {
+        if (obj.reflect && this[prop] != null) {
+          this.initialReflectedProperties.set(prop, this[prop]);
+        }
+      });
+
+      this.hasRecordedInitialProperties = true;
+    }
+
+    super.attributeChangedCallback(name, oldValue, newValue);
+  }
+
+  /**
+   * Hook into the willUpdate lifecycle method to enable durable attributes.
+   *
+   */
+  protected willUpdate(changedProperties: Parameters<LitElement['willUpdate']>[0]): void {
+    super.willUpdate(changedProperties);
+
+    this.initialReflectedProperties.forEach((value, prop: string & keyof typeof this) => {
+      // If a prop changes to `null` or `undefined`, we assume it happened because an attribute was removed
+      if (changedProperties.has(prop) && (this[prop] === null || this[prop] === undefined)) {
+        (this as Record<string, unknown>)[prop] = value;
+      }
+    });
   }
 }

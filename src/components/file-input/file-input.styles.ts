@@ -7,17 +7,14 @@ export default css`
     border: dashed var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
     border-radius: var(--quiet-border-radius);
     background-color: var(--quiet-paper-color);
-    color: var(--quiet-primary-text-colorful);
+    color: var(--quiet-neutral-text-colorful);
     font-weight: var(--quiet-font-weight-semibold);
     text-align: center;
     cursor: pointer;
-    transition: 150ms color ease;
-
-    @media (hover: hover) {
-      &:hover {
-        color: color-mix(in oklab, var(--quiet-primary-text-colorful), black 10%);
-      }
-    }
+    transition:
+      150ms background-color ease,
+      150ms border-color ease,
+      150ms color ease;
 
     &:focus {
       outline: none;
@@ -32,6 +29,7 @@ export default css`
       border-style: solid;
       border-color: var(--quiet-primary-stroke-mid);
       background-color: var(--quiet-primary-fill-softer);
+      color: var(--quiet-primary-text-colorful);
     }
 
     quiet-icon {

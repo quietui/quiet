@@ -139,7 +139,7 @@ Attribute reflection in custom elements is [an interesting challenge](https://ww
 
 #### An attribute _should_ reflect when
 
-- It represents a current state that the user can modify and/or may be interested in observing, such as checked, disabled, open, readonly, etc.
+- It represents a current state that the user can modify and/or may be interested in observing, such as open, readonly, etc.
 - It represents a value that affects how the component is styled internally or externally. This allows us to target variants without using an internal wrapper and/or replicating values internally.
 - It makes the debugging experience more intuitive for authors and consumers.
 

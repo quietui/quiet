@@ -236,16 +236,6 @@ export class QuietRadio extends QuietElement {
     }
   }
 
-  /** Focus on the selected item when clicking the label. */
-  private handleLabelClick() {
-    const items = this.getItems();
-    const itemToFocus = items.find(item => item.checked) || items[0];
-
-    if (itemToFocus) {
-      itemToFocus.focus();
-    }
-  }
-
   /**
    * @internal Makes only the selected radio item tabbable. If no radio item is selected, the first non-disabled radio
    * item will be tabbable.
@@ -310,9 +300,19 @@ export class QuietRadio extends QuietElement {
     this.internals.setValidity(flags, validationMessage, firstItem);
   }
 
+  /** Sets focus to the selected item or the first item if none are selected. */
+  public focusSelectedItem(options?: FocusOptions) {
+    const items = this.getItems();
+    const itemToFocus = items.find(item => item.checked) || items[0];
+
+    if (itemToFocus) {
+      itemToFocus.focus(options);
+    }
+  }
+
   render() {
     return html`
-      <label id="label" part="label" for="text-box" @click=${this.handleLabelClick}>
+      <label id="label" part="label" for="text-box" @click=${this.focusSelectedItem}>
         <slot name="label">${this.label}</slot>
       </label>
 

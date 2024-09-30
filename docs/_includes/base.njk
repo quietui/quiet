@@ -52,7 +52,7 @@
     <link rel="stylesheet" href="/dist/themes/quiet.css?v={{ package.version }}" />
     <link rel="stylesheet" href="/dist/themes/restyle.css?v={{ package.version }}" />
   </head>
-  <body class="layout-{{ layout | stripExtension }}">
+  <body class="layout-{{ layout | stripExtension }} {% if isWide %}layout-wide{% endif %}">
     <a id="skip-to-main" href="#content" data-smooth-link="off">Skip to content</a>
 
     <header id="header">

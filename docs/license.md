@@ -13,9 +13,9 @@ section: license
     <ul>
       <li><strong>Free</strong></li>
       <li><s>One-time payment</s></li>
+      <li><s>Updates forever</s></li>
       <li><s>Premium support</s></li>
       <li><s>Priority bug fixes</s></li>
-      <li><s>Updates forever</s></li>
       <li><s>Pro community access</s></li>
       <li>MIT license</li>
     </ul>
@@ -29,11 +29,11 @@ section: license
     <quiet-icon class="pricing-plan-icon" name="user-circle" style="color: #e98d61;"></quiet-icon>
     <h3 data-no-anchor>Individual</h3><br>
     <ul>
-      <li><strong>$199</strong></li>
+      <li><strong>$99</strong></li>
       <li><mark>One-time payment</mark></li>
+      <li>Updates forever</li>
       <li>Premium support</li>
       <li>Priority bug fixes</li>
-      <li>Updates forever</li>
       <li>Pro community access</li>
       <li>Commercial license</li>
     </ul>
@@ -48,9 +48,9 @@ section: license
     <ul>
       <li><strong>$999</strong></li>
       <li>One-time payment</li>
+      <li>Updates forever</li>
       <li>Premium support</li>
       <li>Priority bug fixes</li>
-      <li>Updates forever</li>
       <li>Pro community access</li>
       <li>Commercial license</li>
     </ul>
@@ -60,7 +60,7 @@ section: license
   </div>  
 </div>
 
-Quiet can be used for free under the MIT license. For personal support, prioritized bug fixes, a perpetual use license for unlimited projects, and a full year of updates, pro licenses are available starting at $199 USD.
+Quiet can be used for free under the MIT license. For personal support, prioritized bug fixes, a perpetual use license for unlimited projects, and a lifetime of updates, please purchase a pro license. For teams larger than 10
 
 <ul class="features-grid" aria-label="Features">
   <li><quiet-icon name="heart-handshake" style="color: #e886a7;"></quiet-icon><br>Premium support</li>
@@ -84,8 +84,13 @@ Quiet can be used for free under the MIT license. For personal support, prioriti
 ## Frequently asked questions
 
 <details name="faq">
+  <summary>Forever is a long time…are you sure?</summary>
+  Yes! I don't need a lambo — just help me keep this thing going. ✌️
+</details>
+
+<details name="faq">
   <summary>Do you offer support?</summary>
-  You can ask questions in the <a href="https://github.com/quietui/quiet/discussions">public discussion forum</a>. If you need additional support directly from the maintainer, please purchase a pro license.
+  You can ask questions in the <a href="https://github.com/quietui/quiet/discussions">public discussion forum</a>. For additional support, please purchase a license for direct support from the maintainer and access to the pro community.
 </details>
 
 <details name="faq">

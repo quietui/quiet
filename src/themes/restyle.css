@@ -18,8 +18,6 @@ html,
 body {
   margin: 0;
   padding: 0;
-  background-color: var(--quiet-background-color);
-  color: var(--quiet-text-body);
   font-weight: var(--quiet-font-weight-normal);
   font-size: var(--quiet-font-size);
   line-height: var(--quiet-line-height);
@@ -27,6 +25,15 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Adjust text colors for the main page and any nested themes */
+html,
+body,
+.quiet-light,
+.quiet-dark {
+  background-color: var(--quiet-background-color);
+  color: var(--quiet-text-body);
 }
 
 ::selection {

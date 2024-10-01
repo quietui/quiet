@@ -301,7 +301,7 @@ export class QuietRadio extends QuietElement {
   }
 
   /** Sets focus to the selected item or the first item if none are selected. */
-  public focusSelectedItem(options?: FocusOptions) {
+  public focus(options?: FocusOptions) {
     const items = this.getItems();
     const itemToFocus = items.find(item => item.checked) || items[0];
 
@@ -312,7 +312,7 @@ export class QuietRadio extends QuietElement {
 
   render() {
     return html`
-      <label id="label" part="label" for="text-box" @click=${this.focusSelectedItem}>
+      <label id="label" part="label" for="text-box" @click=${this.focus}>
         <slot name="label">${this.label}</slot>
       </label>
 

@@ -29,7 +29,7 @@ section: license
     <quiet-icon class="pricing-plan-icon" name="user-circle" style="color: #e98d61;"></quiet-icon>
     <h3 data-no-anchor>Individual</h3><br>
     <ul>
-      <li><strong>$99</strong></li>
+      <li><strong>$199</strong></li>
       <li><mark>One-time payment</mark></li>
       <li>Updates forever</li>
       <li>Premium support</li>
@@ -54,7 +54,7 @@ section: license
       <li>Pro community access</li>
       <li>Commercial license</li>
     </ul>
-    <quiet-button pill href="#" target="_blank">
+    <quiet-button variant="primary" pill href="#" target="_blank">
       Buy now
     </quiet-button>
   </div>  

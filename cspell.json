@@ -67,6 +67,7 @@
     "noopener",
     "noreferrer",
     "novalidate",
+    "nums",
     "oklab",
     "outdir",
     "packagejson",

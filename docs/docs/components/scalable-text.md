@@ -4,11 +4,11 @@ layout: component
 ---
 
 ```html {.example}
-<quiet-scalable-text id="st" text="Be Quiet"></quiet-scalable-text>
+<quiet-scalable-text id="st" text="Be Quiet" style="border: solid 1px deeppink;"></quiet-scalable-text>
 
 <br>
 
-<quiet-text-field id="tf" value="Be Quiet"></quiet-scalable-text>
+<quiet-text-field id="tf" value="Be Quiet" clearable></quiet-scalable-text>
 
 <script>
   const text = document.getElementById('st');

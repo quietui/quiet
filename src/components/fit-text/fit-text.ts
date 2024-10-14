@@ -9,7 +9,7 @@ import styles from './fit-text.styles.js';
 /**
  * <quiet-fit-text>
  *
- * @summary Fit text scales a line of text to meet the width of its container.
+ * @summary Scales a line of text to fit within its container.
  * @documentation https://quietui.com/docs/components/fit-text
  * @status experimental
  * @since 1.0
@@ -34,20 +34,29 @@ export class QuietFitText extends QuietElement {
   @state() private containerWidth = 0;
   @state() private text = '';
 
-  /** The minimum font size, in pixels, to use when scaling. */
+  /**
+   * The minimum font size to use when scaling, in pixels. The text will never be smaller than this value, which may
+   * lead to overflows if the text is excessively long.
+   */
   @property({ attribute: 'min-font-size', type: Number }) minFontSize = 1;
 
-  /** The maximum font size, in pixels, to use when scaling. */
+  /**
+   * The maximum font size to use when scaling, in pixels. The text will never be larger than this value, which may
+   * cause the text to not scale the full width of the container.
+   */
   @property({ attribute: 'max-font-size', type: Number }) maxFontSize = 128;
 
-  /** The precision, in pixels, at which to scale text with. */
+  /**
+   * The precision, in pixels, used to scale the text to fit. Larger values are more performant but result in less
+   * accurate measurements.
+   */
   @property({ type: Number }) precision = 0.1;
 
   firstUpdated() {
     this.resizeObserver.observe(this);
   }
 
-  protected update(changedProperties: Map<PropertyKey, unknown>) {
+  update(changedProperties: Map<PropertyKey, unknown>) {
     super.update(changedProperties);
 
     if (
@@ -57,7 +66,7 @@ export class QuietFitText extends QuietElement {
       changedProperties.has('maxFontSize') ||
       changedProperties.has('precision')
     ) {
-      this.resizeText();
+      this.resize();
     }
   }
 
@@ -65,8 +74,11 @@ export class QuietFitText extends QuietElement {
     this.text = getSlotText(this.defaultSlot);
   }
 
-  /** Resizes the text to fit inside the container. */
-  private resizeText() {
+  /**
+   * Resizes the text to fit inside the container. You probably won't need to call this unless you're loading a font
+   * dynamically and need to resize the text after it loads.
+   */
+  public resize() {
     if (this.containerWidth === 0) return;
 
     let minSize = this.minFontSize;

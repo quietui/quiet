@@ -17,5 +17,6 @@ export default css`
     outline: dotted 2px green;
     white-space: nowrap;
     clip-path: inset(50%);
+    pointer-events: none;
   }
 `;

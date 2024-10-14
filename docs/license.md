@@ -1,6 +1,6 @@
 ---
 title: Available licenses
-description: 
+description: Open source and commercial licenses are available.
 layout: page
 isWide: true
 section: license

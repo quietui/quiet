@@ -9,13 +9,12 @@ import styles from './fit-text.styles.js';
 /**
  * <quiet-fit-text>
  *
- * @summary Fit text scales a string of text to match the width of its container.
+ * @summary Fit text scales a line of text to meet the width of its container.
  * @documentation https://quietui.com/docs/components/fit-text
  * @status experimental
  * @since 1.0
  *
- * @slot - The default slot.
- * @slot named - A named slot.
+ * @slot - One or more text nodes to display. Non-text nodes will be ignored.
  */
 @customElement('quiet-fit-text')
 export class QuietFitText extends QuietElement {
@@ -35,13 +34,13 @@ export class QuietFitText extends QuietElement {
   @state() private containerWidth = 0;
   @state() private text = '';
 
-  /** The minimum font size in pixels to use when scaling. */
+  /** The minimum font size, in pixels, to use when scaling. */
   @property({ attribute: 'min-font-size', type: Number }) minFontSize = 1;
 
-  /** The maximum font size in pixels to use when scaling. */
+  /** The maximum font size, in pixels, to use when scaling. */
   @property({ attribute: 'max-font-size', type: Number }) maxFontSize = 128;
 
-  /** The precision at which to scale text with. */
+  /** The precision, in pixels, at which to scale text with. */
   @property({ type: Number }) precision = 0.1;
 
   firstUpdated() {

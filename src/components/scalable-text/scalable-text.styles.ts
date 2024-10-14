@@ -17,6 +17,6 @@ export default css`
     display: inline-block;
     width: auto;
     max-width: 100%;
-    overflow: hidden;
+    min-height: 1lh;
   }
 `;

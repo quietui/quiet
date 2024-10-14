@@ -1,17 +1,9 @@
 import type { CSSResultGroup } from 'lit';
 import { html } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
 import hostStyles from '../../styles/host.styles.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import styles from './scalable-text.styles.js';
-
-//
-// TODO - a race condition exists in the resize logic that can result in incorrect measurements when typing fast or
-// when resizing the window, especially when you hit a breakpoint. The measurement of text seems stable, but resizing
-// the container at the right time remains a problem.
-//
-// NOTE - it might help to debounce the resize and clearTimeout as resizing occurs.
-//
 
 /**
  * <quiet-scalable-text>
@@ -28,7 +20,13 @@ import styles from './scalable-text.styles.js';
 export class QuietScalableText extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
-  private resizeObserver = new ResizeObserver(() => this.resizeText());
+  private resizeObserver = new ResizeObserver(entries => {
+    for (const entry of entries) {
+      if (entry.target === this) {
+        this.containerWidth = this.offsetWidth;
+      }
+    }
+  });
 
   @query('#container') container: HTMLDivElement;
   @query('#text') textEl: HTMLDivElement;
@@ -40,29 +38,38 @@ export class QuietScalableText extends QuietElement {
   @property({ attribute: 'min-font-size', type: Number }) minFontSize = 1;
 
   /** The text to scale. */
-  @property({ attribute: 'max-font-size', type: Number }) maxFontSize = 256;
+  @property({ attribute: 'max-font-size', type: Number }) maxFontSize = 128;
 
   /** The text to scale. */
   @property({ type: Number }) precision = 0.1;
+
+  @state() private containerWidth = 0;
 
   firstUpdated() {
     this.resizeObserver.observe(this);
   }
 
-  updated(changedProps: Map<string, unknown>) {
-    if (changedProps.has('text')) {
+  protected update(changedProperties: Map<PropertyKey, unknown>) {
+    super.update(changedProperties);
+
+    if (
+      changedProperties.has('containerWidth') ||
+      changedProperties.has('text') ||
+      changedProperties.has('minFontSize') ||
+      changedProperties.has('maxFontSize') ||
+      changedProperties.has('precision')
+    ) {
       this.resizeText();
     }
   }
 
   /** Resizes the text to fit inside the container. */
   private resizeText() {
-    const containerWidth = this.container.offsetWidth;
+    if (!this.textEl || this.containerWidth === 0) return;
+
     let minSize = this.minFontSize;
     let maxSize = this.maxFontSize;
     let currentSize = maxSize;
-
-    console.log('reflow');
 
     // Clone the text element to measure without affecting the existing DOM
     const clone = this.textEl.cloneNode(true) as HTMLElement;
@@ -77,9 +84,9 @@ export class QuietScalableText extends QuietElement {
       clone.style.fontSize = `${currentSize}px`;
       const textWidth = clone.offsetWidth;
 
-      if (textWidth === containerWidth) {
+      if (textWidth === this.containerWidth) {
         break; // Perfect fit
-      } else if (textWidth > containerWidth) {
+      } else if (textWidth > this.containerWidth) {
         maxSize = currentSize;
       } else {
         minSize = currentSize;

@@ -5,7 +5,7 @@ layout: component
 
 The fit text component is useful for displaying titles, headings, and content of varying lengths on a single line. Instead of wrapping, the text will scale to fit its container within the minimum and maximum font sizes allowed.
 
-A [Resize Observer](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) is used internally to make the text respond to window resizing and orientation changes. Try resizing the window or turning your devices to see the text update.
+A [Resize Observer](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) is used internally to make the text respond to window resizing and orientation changes. Try resizing the window or turning your device to see the text update.
 
 ```html {.example}
 <quiet-fit-text id="fit-text__editable" style="border: dashed 2px var(--quiet-neutral-stroke-soft);">

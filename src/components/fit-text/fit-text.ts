@@ -53,7 +53,11 @@ export class QuietFitText extends QuietElement {
   @property({ type: Number }) precision = 0.1;
 
   firstUpdated() {
+    // Resize text when the container gets resized
     this.resizeObserver.observe(this);
+
+    // Resize text after all fonts load
+    document.fonts.ready.then(() => this.resize());
   }
 
   update(changedProperties: Map<PropertyKey, unknown>) {

@@ -74,16 +74,3 @@ Text styles are inherited, so you can set text-related properties on the compone
   </quiet-fit-text>
 </div>
 ```
-
-### Using Web fonts
-
-Web Fonts must be loaded _before_ the component renders, otherwise the calculated size might be incorrect. It may help to use [Font Face Observer](https://fontfaceobserver.com/) and manually call `resize()` on the component when the Web font loads.
-
-```js
-const font = new FontFaceObserver('Open Sans');
-
-// Tell the component to resize as soon as the font loads
-font.load().then(() => {
-  document.querySelector('quiet-fit-text').resize();
-});
-```

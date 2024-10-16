@@ -2,21 +2,22 @@ import { css } from 'lit';
 
 export default css`
   :host {
-    display: inline-block;
-    perspective: 1000px;
+    --duration: 0.5s;
+    --spacing: 1.5em;
+
+    display: flex;
+    width: 100%;
   }
 
-  .card {
+  #card {
+    display: grid;
     position: relative;
-    width: 200px;
-    height: 300px;
+    flex: 1 1 auto;
+    transform-origin: center;
     transform-style: preserve-3d;
-    border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
     border-radius: var(--quiet-border-radius);
-    background: var(--quiet-paper-color);
-    box-shadow: var(--quiet-shadow-softer);
     cursor: pointer;
-    transition: transform 0.6s;
+    transition: var(--duration) transform ease-in-out;
 
     &:focus {
       outline: none;
@@ -26,27 +27,46 @@ export default css`
       outline: var(--quiet-focus-ring);
       outline-offset: var(--quiet-focus-offset);
     }
+
+    &.horizontal.flipped {
+      transform: rotateY(-180deg);
+    }
+
+    &.vertical.flipped {
+      transform: rotateX(180deg);
+    }
+
+    &.vertical #back {
+      transform: rotateX(-180deg);
+    }
   }
 
-  .card.flipped {
-    transform: rotateY(180deg);
-  }
-
-  .face {
-    display: flex;
-    position: absolute;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
+  #front,
+  #back {
+    grid-row: 1/2;
+    grid-column: 1/2;
+    overflow: hidden;
+    border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
+    border-radius: inherit;
     backface-visibility: hidden;
+    background-color: var(--quiet-paper-color);
+    box-shadow: var(--quiet-shadow-softer);
   }
 
-  .front {
-    z-index: 2;
+  #front {
+    transform: rotateY(0deg);
   }
 
-  .back {
-    transform: rotateY(180deg);
+  #back {
+    transform: rotateY(-180deg);
+  }
+
+  ::slotted(*) {
+    margin: var(--spacing);
+  }
+
+  /* We need a nested element to apply padding because both faces are grid items */
+  .body {
+    padding: var(--spacing);
   }
 `;

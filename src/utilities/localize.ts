@@ -26,10 +26,11 @@ export interface Translation extends DefaultTranslation {
   hidePassword: string;
   hide: string;
   hue: string;
-  opacity: string;
   numberOutOfTotal: (number: number, total: number) => string;
+  opacity: string;
   percentLuminosity: (percentage: string) => string;
   percentSaturation: (percentage: string) => string;
+  pressSpaceToFlipTheCard: string;
   loading: string;
   remove: string;
   selectAColorFromTheScreen: string;

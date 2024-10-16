@@ -1,15 +1,11 @@
 import type { CSSResultGroup } from 'lit';
 import { html } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
 import hostStyles from '../../styles/host.styles.js';
+import { Localize } from '../../utilities/localize.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import styles from './flip-card.styles.js';
-
-//
-// TODO - make it announce the card's content, maybe move the "card flipped to front/back" text to aria-live
-//
-// TODO - make the width/height more variable so they don't have to be specific pixel values
-//
 
 /**
  * <quiet-flip-card>
@@ -19,59 +15,56 @@ import styles from './flip-card.styles.js';
  * @status experimental
  * @since 1.0
  *
- * @slot - The default slot.
- * @slot named - A named slot.
+ * @slot card - The element that wraps the front and back card faces. (Required to link aria- attributes.)
+ * @slot front - Content to show on the front of the card.
+ * @slot back - Content to show on the back of the card.
  */
 @customElement('quiet-flip-card')
 export class QuietFlipCard extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
-  @query('.card') card!: HTMLElement;
+  private localize = new Localize(this);
 
+  /** Flips the card. */
   @property({ type: Boolean, reflect: true }) flipped = false;
+
+  /** Determines the flip direction. */
+  @property({ reflect: true }) direction: 'horizontal' | 'vertical' = 'horizontal';
 
   handleClick() {
     this.flipped = !this.flipped;
   }
 
-  handleKeydown(e: KeyboardEvent) {
+  handleKeyDown(e: KeyboardEvent) {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
       this.handleClick();
     }
   }
 
-  updated(changedProperties: Map<string, unknown>) {
-    if (changedProperties.has('flipped')) {
-      this.updateAccessibility();
-    }
-  }
-
-  updateAccessibility() {
-    const activeSlot = this.flipped ? 'back' : 'front';
-
-    // Announce the flip action for screen readers
-    this.card.setAttribute('aria-label', `Card flipped to ${activeSlot}`);
-
-    // Blur the card, then refocus it so it announces in screen readers
-    this.card.blur();
-    setTimeout(() => this.card.focus(), 100);
-  }
-
   render() {
     return html`
       <div
-        class="card ${this.flipped ? 'flipped' : ''}"
-        @click="${this.handleClick}"
-        @keydown="${this.handleKeydown}"
+        id="card"
+        part="card"
+        class=${classMap({
+          flipped: this.flipped,
+          horizontal: this.direction === 'horizontal',
+          vertical: this.direction === 'vertical'
+        })}
         role="button"
         tabindex="0"
-        aria-label="Flip card"
+        role="button"
+        aria-expanded=${this.flipped ? 'true' : 'false'}
+        aria-description=${this.localize.term('pressSpaceToFlipTheCard')}
+        aria-controls="back"
+        @click="${this.handleClick}"
+        @keydown="${this.handleKeyDown}"
       >
-        <div class="face front">
+        <div id="front" part="front" aria-hidden=${this.flipped ? 'true' : 'false'}>
           <slot name="front"></slot>
         </div>
-        <div class="face back">
+        <div id="back" part="back" ?inert=${!this.flipped} aria-hidden=${this.flipped ? 'false' : 'true'}>
           <slot name="back"></slot>
         </div>
       </div>

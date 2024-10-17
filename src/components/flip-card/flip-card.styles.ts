@@ -2,7 +2,7 @@ import { css } from 'lit';
 
 export default css`
   :host {
-    --duration: 0.5s;
+    --flip-duration: 0.5s;
     --spacing: 1.5em;
 
     display: flex;
@@ -16,8 +16,7 @@ export default css`
     transform-origin: center;
     transform-style: preserve-3d;
     border-radius: var(--quiet-border-radius);
-    cursor: pointer;
-    transition: var(--duration) transform ease-in-out;
+    transition: var(--flip-duration) transform ease-in-out;
 
     &:focus {
       outline: none;
@@ -51,6 +50,7 @@ export default css`
     backface-visibility: hidden;
     background-color: var(--quiet-paper-color);
     box-shadow: var(--quiet-shadow-softer);
+    cursor: pointer;
   }
 
   #front {

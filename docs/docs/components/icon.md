@@ -315,3 +315,36 @@ This example demonstrates how to load the [Lucide](https://lucide.dev/icons/) li
   <quiet-icon library="lucide" name="message-circle"></quiet-icon>
 </div>
 ```
+
+### Myna UI icons
+
+This example demonstrates how to load the [Myna UI icons](https://mynaui.com/icons) library using the jsDelivr CDN. Available families include `outline` (default) and `solid`.
+
+```html {.example}
+<script type="module">
+  import { registerIconLibrary } from '/dist/quiet.js';
+
+  registerIconLibrary('myna', {
+    resolve: (name, family) => {
+      const folder = family === 'solid' ? 'icons-solid' : 'icons';
+      return `https://cdn.jsdelivr.net/npm/@mynaui/icons@0.3.2/${folder}/${name}.svg`;
+    }
+  });
+</script>
+
+<div style="font-size: 1.5em;">
+  <quiet-icon library="myna" name="home"></quiet-icon>
+  <quiet-icon library="myna" name="daze-ghost"></quiet-icon>
+  <quiet-icon library="myna" name="bell"></quiet-icon>
+  <quiet-icon library="myna" name="microphone"></quiet-icon>
+  <quiet-icon library="myna" name="message"></quiet-icon>
+
+  <br>
+
+  <quiet-icon library="myna" name="home" family="solid"></quiet-icon>
+  <quiet-icon library="myna" name="daze-ghost" family="solid"></quiet-icon>
+  <quiet-icon library="myna" name="bell" family="solid"></quiet-icon>
+  <quiet-icon library="myna" name="microphone" family="solid"></quiet-icon>
+  <quiet-icon library="myna" name="message" family="solid"></quiet-icon>  
+</div>
+```

@@ -18,6 +18,9 @@ import styles from './flip-card.styles.js';
  * @slot card - The element that wraps the front and back card faces. (Required to link aria- attributes.)
  * @slot front - Content to show on the front of the card.
  * @slot back - Content to show on the back of the card.
+ *
+ * @cssproperty [--flip-duration=0.5s] - The duration of the card flip animation.
+ * @cssproperty [--spacing=1.5em] - The spacing to use throughout the flip card.
  */
 @customElement('quiet-flip-card')
 export class QuietFlipCard extends QuietElement {

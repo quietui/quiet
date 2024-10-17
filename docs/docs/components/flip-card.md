@@ -37,16 +37,16 @@ TODO
 <quiet-flip-card id="flip-card__playing">
   <div slot="front"><span class="visually-hidden">Flip me over to see which card I am</span></div>
   <div slot="back">
-    <quiet-icon name="heart" family="filled"></quiet-icon>
-    <quiet-icon name="heart" family="filled"></quiet-icon>
+    <quiet-icon name="letter-a"></quiet-icon>
+    <quiet-icon name="letter-a"></quiet-icon>
     <quiet-icon label="Ace of hearts" name="heart" family="filled"></quiet-icon>
   </div>
 </quiet-flip-card>
 
 <style>
   #flip-card__playing {
-    width: 170px;
-    height: 260px;
+    width: 150px;
+    height: 230px;
 
     &::part(card) {
       border-radius: 1rem;
@@ -62,7 +62,7 @@ TODO
       align-items: center;
       justify-content: center;
       font-size: 4rem;
-      background-color: var(--quiet-paper-color);
+      background-color: white;
       color: #b91c1c;
     }
 

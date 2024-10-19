@@ -35,6 +35,7 @@ section: license
       <li>Premium support</li>
       <li>Priority bug fixes</li>
       <li>Pro community access</li>
+      <li>Single user</li>
       <li>Commercial license</li>
     </ul>
     <quiet-button variant="primary" pill href="#" target="_blank">
@@ -52,6 +53,7 @@ section: license
       <li>Premium support</li>
       <li>Priority bug fixes</li>
       <li>Pro community access</li>
+      <li>Up to 10 users</li>
       <li>Commercial license</li>
     </ul>
     <quiet-button variant="primary" pill href="#" target="_blank">
@@ -60,7 +62,7 @@ section: license
   </div>  
 </div>
 
-Quiet can be used for free under the MIT license. For personal support, prioritized bug fixes, a perpetual use license for unlimited projects, and a lifetime of updates, please purchase a pro license. For teams larger than 10
+Quiet can be used for free under the MIT license. For support, prioritized bug fixes, a perpetual use license for unlimited projects, and a lifetime of updates, please purchase a pro license.
 
 <ul class="features-grid" aria-label="Features">
   <li><quiet-icon name="heart-handshake" style="color: #e886a7;"></quiet-icon><br>Premium support</li>
@@ -91,6 +93,11 @@ Quiet can be used for free under the MIT license. For personal support, prioriti
 <details name="faq">
   <summary>Do you offer support?</summary>
   You can ask questions in the <a href="https://github.com/quietui/quiet/discussions">public discussion forum</a>. For additional support, please purchase a license for direct support from the maintainer and access to the pro community.
+</details>
+
+<details name="faq">
+  <summary>What if I have more than 10 people on my team?</summary>
+  Please purchase multiple team licenses to account for additional users. For example, a team of 18 would need to purchase two team licenses.
 </details>
 
 <details name="faq">

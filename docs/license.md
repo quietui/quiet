@@ -97,7 +97,7 @@ Quiet can be used for free under the MIT license. For support, prioritized bug f
 
 <details name="faq">
   <summary>What if I have more than 10 people on my team?</summary>
-  Please purchase multiple team licenses to account for additional users. For example, a team of 18 would need to purchase two team licenses.
+  Please purchase multiple team licenses to account for additional users. For example, a team of 11–20 would need to purchase two team licenses. You can adjust the quantity at checkout to avoid making separate purchases.
 </details>
 
 <details name="faq">

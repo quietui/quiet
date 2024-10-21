@@ -4,7 +4,7 @@ description: An opinionated CSS reset you can use with or without Quiet's compon
 layout: docs
 ---
 
-Quiet Restyle™ is an opinionated, minimal CSS reset you can use with or without Quiet's components. It lets you kick off a new website or app that looks great without worrying about styling native HTML elements right away. Just include it and start writing HTML!
+Quiet Restyle™ is an opinionated CSS reset you can use with or without Quiet's components. It lets you kick off a new website or app that looks great without worrying about styling native HTML elements right away. Just include it and start writing HTML!
 
 You can think of Restyle as a smarter, prettier user agent stylesheet.
 
@@ -27,6 +27,8 @@ Restyle is just a starting point. Feel free to customize any of its styles in yo
 The following content shows how Restyle affects native HTML elements using the current theme. Feel free to inspect the source to view the markup.
 
 ---
+
+<h3 class="visually-hidden">Headings</h3>
 
 <div data-no-outline>
 
@@ -54,7 +56,7 @@ Ultrices dui sapien eget mi proin sed libero enim sed. Adipiscing bibendum est u
 
 Amet nisl purus in mollis nunc sed id semper risus. Risus viverra adipiscing at in tellus integer feugiat scelerisque. Blandit volutpat maecenas volutpat blandit aliquam etiam erat. Consectetur lorem donec massa sapien.
 
----
+</div>
 
 ### Paragraphs
 
@@ -205,13 +207,6 @@ export function thing(arg) {
   <dd>Odio facilisis mauris sit amet massa vitae. Venenatis lectus magna fringilla urna porttitor rhoncus dolor. Eu ultrices vitae auctor eu augue ut.</dd>
 </dl>
 
-### Fieldsets
-
-<fieldset>
-  <legend>Legend</legend>
-  Nunc mi ipsum faucibus vitae aliquet nec ullamcorper. Tincidunt id aliquet risus feugiat in ante. Ac turpis egestas integer eget aliquet nibh praesent tristique magna.
-</fieldset>
-
 ### Figures
 
 <figure>
@@ -227,6 +222,44 @@ export function thing(arg) {
 
 <iframe src="https://www.youtube.com/embed/ALGG6ptfLdc?si=03a9K9QigWi2A9Wt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
+### Fieldsets
+
+<fieldset>
+  <legend>Legend</legend>
+  Nunc mi ipsum faucibus vitae aliquet nec ullamcorper. Tincidunt id aliquet risus feugiat in ante. Ac turpis egestas integer eget aliquet nibh praesent tristique magna.
+</fieldset>
+
+### Native form controls
+
+<div style="display: flex; flex-direction: column; gap: 1rem;">
+  <input id="text" placeholder="Text">
+  <input type="color" placeholder="Color">
+  <input type="date" placeholder="Date">
+  <input type="time" placeholder="Time">
+  <input type="number" placeholder="Number">
+  <input type="password" placeholder="Password">
+  <select name="size" label="Select a size">
+    <option value="xs">Extra small</option>
+    <option value="sm">Small</option>
+    <option value="md">Medium</option>
+    <option value="lg">Large</option>
+    <option value="xl">Extra large</option>
+  </select>
+  <textarea placeholder="Tell us something about yourself" rows="3"></textarea>
+  <div>
+    <label><input type="radio" name="a" value="1" checked> Option 1</label>
+    <label><input type="radio" name="a" value="2"> Option 2</label>
+    <label><input type="radio" name="a" value="3"> Option 3</label>
+  </div>
+  <div>
+    <label><input type="checkbox" checked> Feature A</label>
+    <label><input type="checkbox"> Feature B</label>
+    <label><input type="checkbox"> Feature C</label>
+  </div>
+  <div style="display: flex; gap: 0.5rem;">
+    <button type="button" class="primary">Primary</button>
+    <button type="button">Default</button>
+  </div>
 </div>
 
 ---

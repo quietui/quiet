@@ -231,6 +231,8 @@ export function thing(arg) {
 
 ### Native form controls
 
+For consistency, native form controls are styled to look similar to Quiet form controls.
+
 <div style="display: flex; flex-direction: column; gap: 1rem;">
   <input id="text" placeholder="Text">
   <input type="color" placeholder="Color">

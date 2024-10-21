@@ -555,7 +555,7 @@ button {
   text-decoration: none;
   vertical-align: middle;
   white-space: nowrap;
-  cursor: inherit;
+  cursor: pointer;
   touch-action: manipulation;
   transition:
     100ms color ease,

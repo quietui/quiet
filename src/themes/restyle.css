@@ -573,12 +573,6 @@ button {
     &[aria-pressed='true'] {
       background-color: color-mix(in oklab, var(--quiet-primary-fill-mid), var(--quiet-strident) 7.5%);
     }
-
-    @media (hover: hover) {
-      &:hover:where(:not(.disabled, [aria-pressed='true'])) {
-        background-color: color-mix(in oklab, var(--quiet-primary-fill-mid), black 5%);
-      }
-    }
   }
 
   /* Secondary buttons */
@@ -589,15 +583,9 @@ button {
     &[aria-pressed='true'] {
       background-color: color-mix(in oklab, var(--quiet-neutral-fill-softer), var(--quiet-strident) 7.5%);
     }
-
-    @media (hover: hover) {
-      &:hover:where(:not(.disabled, [aria-pressed='true'])) {
-        background-color: color-mix(in oklab, var(--quiet-neutral-fill-softer), black 5%);
-      }
-    }
   }
 
-  &:active:where(:not(.disabled)) {
+  &:active:where(:not(:disabled)) {
     translate: 0 var(--quiet-button-active-offset);
   }
 

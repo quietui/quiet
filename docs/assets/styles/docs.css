@@ -13,7 +13,6 @@
   --docs-header-z-index: 10;
   --docs-sidebar-z-index: 20;
   --docs-sidebar-width: 17rem;
-  --docs-sidebar-width-mobile: 20rem;
   --docs-sidebar-speed: 250ms;
   --docs-wordmark-accent-color: var(--quiet-primary-fill-mid);
 }
@@ -340,6 +339,7 @@ html:not(.quiet-dark) .only-dark {
 #open-sidebar,
 #close-sidebar {
   display: none;
+  border-radius: var(--quiet-border-radius);
 }
 
 #navbar {
@@ -648,9 +648,9 @@ figure.float-end {
   }
 
   #close-sidebar {
-    position: absolute;
+    position: sticky;
     top: 0.75rem;
-    right: 0.75rem;
+    left: calc(100% - 0.75rem);
   }
 
   #sidebar {
@@ -658,19 +658,26 @@ figure.float-end {
     position: fixed;
     top: 0;
     bottom: 0;
-    left: 0;
-    width: var(--docs-sidebar-width-mobile);
+    left: 1rem;
+    width: 100%;
     max-width: calc(100% - 2rem);
-    height: 100%;
+    height: calc(100% - 2rem);
+    margin-block-start: 2rem;
     padding-inline: 1.5rem;
     padding-block: 1rem;
-    translate: -100%;
+    translate: 0 100%;
     border-right: none;
+    border-start-start-radius: calc(var(--quiet-border-radius) * 2);
+    border-start-end-radius: calc(var(--quiet-border-radius) * 2);
     background: var(--quiet-background-color);
     font-size: 1rem;
     transition:
       var(--docs-sidebar-speed) translate cubic-bezier(0.33, 1, 0.68, 1),
       var(--docs-sidebar-speed) box-shadow cubic-bezier(0.33, 1, 0.68, 1);
+
+    nav {
+      margin-block-start: -1.5rem;
+    }
   }
 
   .docs-sidebar-open #sidebar {

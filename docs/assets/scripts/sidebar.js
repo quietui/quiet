@@ -9,6 +9,7 @@ function showSidebar() {
 
   document.documentElement.classList.add('docs-sidebar-open');
   isSidebarOpen = true;
+  sidebar.scrollTop = 0;
   sidebar.inert = false;
   backdrop.hidden = false;
   closeButton.focus();

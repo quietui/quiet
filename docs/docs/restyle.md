@@ -4,7 +4,7 @@ description: An opinionated CSS reset you can use with or without Quiet's compon
 layout: docs
 ---
 
-Quiet Restyle™ is an opinionated CSS reset you can use with or without Quiet's components. It lets you kick off a new website or app that looks great without worrying about styling native HTML elements right away. Just include it and start writing HTML!
+Quiet Restyle™ is an opinionated CSS reset that provides consistent styles to HTML documents by making use of Quiet's [design token API](/docs/theming/#theme-concepts). Restyle is entirely optional, but it's a great way to kick off new websites and apps without worrying about initial styles. As you [customize your theme](/docs/theming) with CSS, Restyle will adapt accordingly.
 
 You can think of Restyle as a smarter, prettier user agent stylesheet.
 
@@ -241,11 +241,10 @@ For consistency, native form controls are styled to look similar to Quiet form c
   <input type="number" placeholder="Number">
   <input type="password" placeholder="Password">
   <select name="size" label="Select a size">
-    <option value="xs">Extra small</option>
+    <option value=""></option>
     <option value="sm">Small</option>
     <option value="md">Medium</option>
     <option value="lg">Large</option>
-    <option value="xl">Extra large</option>
   </select>
   <textarea placeholder="Tell us something about yourself" rows="3"></textarea>
   <div>

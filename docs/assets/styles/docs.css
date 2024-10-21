@@ -661,10 +661,10 @@ figure.float-end {
     left: 1rem;
     width: 100%;
     max-width: calc(100% - 2rem);
-    height: calc(100% - 2rem);
-    margin-block-start: 2rem;
+    height: calc(100% - 1rem);
+    margin-block-start: 1rem;
     padding-inline: 1.5rem;
-    padding-block: 1rem;
+    padding-block: 1rem 2rem;
     translate: 0 100%;
     border-right: none;
     border-start-start-radius: calc(var(--quiet-border-radius) * 2);

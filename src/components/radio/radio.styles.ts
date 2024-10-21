@@ -12,7 +12,7 @@ export default css`
 
   :host([orientation='horizontal']) #group {
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 1.5rem;
   }
 
   :host([orientation='vertical']) #group {

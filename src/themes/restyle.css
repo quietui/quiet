@@ -81,7 +81,7 @@ h6 {
   text-wrap: balance;
   overflow-wrap: break-word;
 
-  &:not(:first-child) {
+  &:where(:not(:first-child)) {
     margin-block-start: var(--quiet-content-spacing);
   }
 }
@@ -113,7 +113,7 @@ h6 {
 p {
   overflow-wrap: break-word;
 
-  &:has(+ p) {
+  &:where(+ p) {
     margin-block-end: calc(var(--quiet-content-spacing) / 2);
   }
 }
@@ -297,7 +297,7 @@ dt {
   font-weight: var(--quiet-font-weight-bold);
 }
 
-dd:not(:last-of-type) {
+dd:where(:not(:last-of-type)) {
   margin-block-end: calc(var(--quiet-content-spacing) / 2);
 }
 
@@ -385,8 +385,8 @@ table {
 
 thead th,
 thead td,
-tr:not(:last-of-type) th,
-tr:not(:last-of-type) td {
+tr:where(:not(:last-of-type)) th,
+tr:where(:not(:last-of-type)) td {
   border-bottom: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
 }
 
@@ -431,7 +431,7 @@ fieldset {
 }
 
 /* Text fields + text areas + selects */
-input:not([type='checkbox'], [type='radio'], [type='range'], [type='file']),
+input:where(:not([type='checkbox'], [type='radio'], [type='range'], [type='file'])),
 select,
 textarea {
   display: block;
@@ -498,7 +498,7 @@ textarea {
 }
 
 /* Selects */
-select:not([multiple]) {
+select:where(:not([multiple])) {
   padding-inline-end: 2.5em;
   background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icons-tabler-outline icon-tabler-selector'%3e%3cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3e%3cpath d='M8 9l4 -4l4 4' /%3e%3cpath d='M16 15l-4 4l-4 -4' /%3e%3c/svg%3e");
   background-position: right 0.75em top 50%;
@@ -506,7 +506,7 @@ select:not([multiple]) {
   background-repeat: no-repeat;
 }
 
-:where(.quiet-dark) select:not([multiple]) {
+:where(.quiet-dark) select:where(:not([multiple])) {
   background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icons-tabler-outline icon-tabler-selector'%3e%3cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3e%3cpath d='M8 9l4 -4l4 4' /%3e%3cpath d='M16 15l-4 4l-4 -4' /%3e%3c/svg%3e");
 }
 
@@ -575,14 +575,14 @@ button {
     }
 
     @media (hover: hover) {
-      &:hover:not(.disabled, [aria-pressed='true']) {
+      &:hover:where(:not(.disabled, [aria-pressed='true'])) {
         background-color: color-mix(in oklab, var(--quiet-primary-fill-mid), black 5%);
       }
     }
   }
 
   /* Secondary buttons */
-  &:not(.primary) {
+  &:where(:not(.primary)) {
     background-color: var(--quiet-neutral-fill-softer);
     color: var(--quiet-neutral-text-on-soft);
 
@@ -591,13 +591,13 @@ button {
     }
 
     @media (hover: hover) {
-      &:hover:not(.disabled, [aria-pressed='true']) {
+      &:hover:where(:not(.disabled, [aria-pressed='true'])) {
         background-color: color-mix(in oklab, var(--quiet-neutral-fill-softer), black 5%);
       }
     }
   }
 
-  &:active:not(.disabled) {
+  &:active:where(:not(.disabled)) {
     translate: 0 var(--quiet-button-active-offset);
   }
 
@@ -677,14 +677,14 @@ label:has(input[type='checkbox'], input[type='radio']) {
     margin-inline-end: 0.5em;
   }
 
-  &:not(:last-child) {
+  &:where(:not(:last-child)) {
     margin-inline-end: 1em;
   }
 }
 
 /* Utilities */
 .visually-hidden,
-.visually-hidden-focusable:not(:focus-within) {
+.visually-hidden-focusable:where(:not(:focus-within)) {
   position: absolute;
   width: 1px;
   height: 1px;

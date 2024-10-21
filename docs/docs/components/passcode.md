@@ -219,7 +219,7 @@ However, these selectors will match even before the user has had a chance to fil
 
 ### Styling passcodes
 
-Passcodes are styled to like form controls for consistency, but feel free to customize them to your liking. Here's an example using a [card](/docs/components/card) and some custom CSS.
+Passcodes are styled like form controls for consistency, but feel free to customize them to your liking. Here's an example using a [card](/docs/components/card) and some custom CSS.
 
 ```html {.example}
 <quiet-card class="passcode__centered">

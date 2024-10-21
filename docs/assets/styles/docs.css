@@ -649,8 +649,8 @@ figure.float-end {
 
   #close-sidebar {
     position: sticky;
-    top: 0.75rem;
-    left: calc(100% - 0.75rem);
+    top: 0.5rem;
+    left: calc(100% - 0.5rem);
   }
 
   #sidebar {
@@ -661,14 +661,13 @@ figure.float-end {
     left: 1rem;
     width: 100%;
     max-width: calc(100% - 2rem);
-    height: calc(100% - 1rem);
+    height: calc(100% - 2rem);
     margin-block-start: 1rem;
     padding-inline: 1.5rem;
     padding-block: 1rem 2rem;
     translate: 0 100%;
     border-right: none;
-    border-start-start-radius: calc(var(--quiet-border-radius) * 2);
-    border-start-end-radius: calc(var(--quiet-border-radius) * 2);
+    border-radius: calc(var(--quiet-border-radius) * 2);
     background: var(--quiet-background-color);
     font-size: 1rem;
     transition:

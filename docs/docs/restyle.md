@@ -229,7 +229,7 @@ export function thing(arg) {
   Nunc mi ipsum faucibus vitae aliquet nec ullamcorper. Tincidunt id aliquet risus feugiat in ante. Ac turpis egestas integer eget aliquet nibh praesent tristique magna.
 </fieldset>
 
-### Native form controls
+### Form controls
 
 For consistency, native form controls are styled to look similar to Quiet form controls.
 
@@ -241,9 +241,8 @@ For consistency, native form controls are styled to look similar to Quiet form c
   <input type="number" placeholder="Number">
   <input type="password" placeholder="Password">
   <select name="size" label="Select a size">
-    <option value=""></option>
     <option value="sm">Small</option>
-    <option value="md">Medium</option>
+    <option value="md" selected>Medium</option>
     <option value="lg">Large</option>
   </select>
   <textarea placeholder="Tell us something about yourself" rows="3"></textarea>

@@ -58,7 +58,7 @@ Use the `start` and `end` slots to add icons. For best results, use a [`<quiet-i
 Any button can be rendered as a link by setting the `href` attribute. This is useful to allow buttons to act as navigation. When `href` is present, other link options such as `download` and `target` also become available.
 
 ```html {.example .flex-row}
-<quiet-button loading href="https://example.com/" target="_blank">
+<quiet-button href="https://example.com/" target="_blank">
   I'm secretly a link
 </quiet-button>
 

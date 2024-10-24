@@ -37,8 +37,8 @@ TODO
 <quiet-flip-card id="flip-card__playing">
   <div slot="front"><span class="visually-hidden">Flip me over to see which card I am</span></div>
   <div slot="back">
-    <quiet-icon name="letter-a"></quiet-icon>
-    <quiet-icon name="letter-a"></quiet-icon>
+    <span class="corner">A<br><quiet-icon name="heart" family="filled"></quiet-icon></span>
+    <span class="corner">A<br><quiet-icon name="heart" family="filled"></quiet-icon></span>
     <quiet-icon label="Ace of hearts" name="heart" family="filled"></quiet-icon>
   </div>
 </quiet-flip-card>
@@ -64,20 +64,32 @@ TODO
       font-size: 4rem;
       background-color: white;
       color: #b91c1c;
+      line-height: 1;
     }
 
-    quiet-icon:nth-child(1) {
+    .corner {
+      display: flex;
+      flex-direction: column;
+      font-size: 1.5rem;
+      justify-content: center;
+      align-items: center;
+
+      quiet-icon {
+        font-size: 1.25rem;
+      }
+    }
+
+    .corner:nth-child(1) {
       position: absolute;
       top: 0.75rem;
       left: 0.75rem;
-      font-size: 2rem;
     }
 
-    quiet-icon:nth-child(2) {
+    .corner:nth-child(2) {
       position: absolute;
-      font-size: 2rem;
       bottom: 0.75rem;
       right: 0.75rem;
+      scale: 1 -1;
     }
   }
 </style>

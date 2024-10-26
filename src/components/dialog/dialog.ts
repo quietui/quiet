@@ -224,13 +224,13 @@ export class QuietDialog extends QuietElement {
 // Watch for data-dialog="open *" clicks
 //
 document.addEventListener('click', (event: MouseEvent) => {
-  const target = event.target;
+  const dialogAttrEl = (event.target as Element).closest('[data-dialog]');
 
-  if (target instanceof HTMLElement && target.hasAttribute('data-dialog')) {
-    const [command, id] = parseSpaceDelimitedTokens(target.getAttribute('data-dialog') || '');
+  if (dialogAttrEl instanceof Element) {
+    const [command, id] = parseSpaceDelimitedTokens(dialogAttrEl.getAttribute('data-dialog') || '');
 
     if (command === 'open' && id?.length) {
-      const doc = target.getRootNode() as Document | ShadowRoot;
+      const doc = dialogAttrEl.getRootNode() as Document | ShadowRoot;
       const dialog = doc.getElementById(id) as QuietDialog;
 
       if (dialog?.localName === 'quiet-dialog') {

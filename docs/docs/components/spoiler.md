@@ -56,7 +56,7 @@ Keep it short! The content within inline spoilers won't wrap.
 
 ### Changing the effect
 
-The default spoiler effect is `blur`, which blurs the content but still leave a visual hints. To completely cover the spoiler, use the `solid` effect. To add noise, use the `noise` effect.
+The default spoiler effect is `blur`, which blurs the content but still leaves a visual hint. To completely cover the spoiler, use the `solid` effect. To add noise, use the `noise` effect.
 
 ```html {.example .flex-column}
 <quiet-spoiler effect="solid">
@@ -97,7 +97,7 @@ You can show videos in a spoiler just like any other content.
 
 ### Persisting spoilers
 
-To persist the spoiler once shown, add the `persist` attribute. To programmatically hide it again, set the `visible` property to `false`.
+To persist the spoiler once shown, add the `persist` attribute. This will remove the spoiler's close button. To programmatically hide it again, set the `visible` property to `false`.
 
 ```html {.example}
 <div id="spoiler__persist">

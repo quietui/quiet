@@ -208,7 +208,7 @@ export class QuietButton extends QuietElement {
 
   render() {
     const isLink = typeof this.href === 'string';
-    const isDisabled = this.disabled || this.loading;
+    const isDisabled = this.disabled || (!isLink && this.loading);
     const isLoading = !isLink && this.loading;
     const isSubmit = this.type === 'submit';
     const isToggle = this.toggle !== undefined && !isLink && !isSubmit;

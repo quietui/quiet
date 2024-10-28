@@ -280,8 +280,7 @@ export class QuietTextArea extends QuietElement {
       this.textAreaAutoSizer.remove();
       this.textAreaAutoSizer.id = '';
     } else {
-      // @ts-expect-error - we're unsetting this value
-      this.textBox.style.height = undefined;
+      this.textBox.style.height = '';
     }
   }
 

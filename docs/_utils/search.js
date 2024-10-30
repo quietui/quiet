@@ -54,7 +54,7 @@ export function searchPlugin(options = {}) {
       {
         title: 'Cory LaViska on X (Twitter)',
         description: 'Follow the author on the platform formerly known as Twitter.',
-        url: 'https://x.com/claviska'
+        url: 'https://x.com/cory_laviska'
       }
     ];
 

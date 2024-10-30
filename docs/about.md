@@ -5,7 +5,7 @@ layout: page-outline
 section: about
 ---
 
-<a href="https://x.com/claviska" data-no-external-icon>
+<a href="https://x.com/cory_laviska" data-no-external-icon>
   <img 
     class="avatar"
     src="https://gravatar.com/avatar/bf1b3b95fd5b096a3592247c29667b33?s=400"
@@ -15,7 +15,7 @@ section: about
   >
 </a>
 
-Quiet was built by [Cory LaViska](https://x.com/claviska), the creator of [Shoelace](https://shoelace.style/). With the success of Shoelace, many of you are probably wondering why I'd choose to build another UI library, and that's a reasonable question.
+Quiet was built by [Cory LaViska](https://x.com/cory_laviska), the creator of [Shoelace](https://shoelace.style/). With the success of Shoelace, many of you are probably wondering why I'd choose to build another UI library, and that's a reasonable question.
 
 The truth is, Shoelace has matured a lot over the years. While that's a great thing for its users, as an artist, I've lost my canvas for creativity. I'm still committed to Shoelace and it has a very promising future — it has a full team now and we're building an amazing product out of it. But it's not my personal playground anymore.
 
@@ -58,7 +58,7 @@ I'd like to thank the following projects and people for making Quiet UI possible
 
 ## Getting in touch
 
-Please contact me for information about sponsorship perks, consulting, speaking engagements, and more. [My DMs are open on Twitter](https://x.com/claviska), or you can find my email address [on this page](https://www.abeautifulsite.net/cv#contact).
+Please contact me for information about sponsorship perks, consulting, speaking engagements, and more. [My DMs are open on Twitter](https://x.com/cory_laviska), or you can find my email address [on this page](https://www.abeautifulsite.net/cv#contact).
 
 ## What's with all the cats?
 

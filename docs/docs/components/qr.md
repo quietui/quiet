@@ -6,7 +6,7 @@ layout: component
 [QR codes](https://www.qrcode.com/) offer an efficient way to direct mobile users to websites, exchange contact details, process mobile transactions, and other digital interactions through a simple scan.
 
 ```html {.example}
-<quiet-qr data="https://quietui.com/" label="Visit this great website"></quiet-qr>
+<quiet-qr data="https://quietui.com/" label="QR code to visit Quiet UI on the Web"></quiet-qr>
 ```
 
 ## Examples
@@ -77,7 +77,10 @@ You can apply `max-width` and/or `max-height` styles to the host element to make
 The QR code's color is determined by the current text color. To change it, set the CSS `color` property on the host element or an ancestor element.
 
 ```html {.example}
-<quiet-qr data="https://x.com/quiet_ui/" style="color: deeppink;"></quiet-qr>
+<quiet-qr 
+  data="Cats cannot scan these codes" 
+  style="color: deeppink;"
+></quiet-qr>
 ```
 
 ### Styling QR codes

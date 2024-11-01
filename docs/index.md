@@ -9,9 +9,9 @@ layout: splash
 
 {% include 'splash-image.njk' %}
 
-<p class="subtitle">A hand-crafted UI library for&nbsp;the&nbsp;Web</p>
+<p class="subtitle">A hand-crafted UI library for the Web</p>
 
-<p>Focusing on accessibility, longevity, performance,&nbsp;and&nbsp;simplicity</p>
+<p>Focusing on accessibility, longevity, performance, and simplicity</p>
 
 <div class="splash-actions">
 

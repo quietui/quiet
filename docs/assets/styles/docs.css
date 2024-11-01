@@ -867,6 +867,7 @@ quiet-callout {
   background-repeat: repeat;
   background-attachment: fixed;
   background-color: var(--quiet-background-color);
+  text-wrap: balance;
 }
 
 .quiet-dark .layout-splash {

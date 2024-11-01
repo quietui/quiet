@@ -52,7 +52,7 @@ export class QuietQr extends QuietElement {
       changedProps.has('corners') ||
       changedProps.has('size')
     ) {
-      this.redraw();
+      this.draw();
     }
 
     if (changedProps.has('label') || changedProps.has('data')) {
@@ -60,8 +60,8 @@ export class QuietQr extends QuietElement {
     }
   }
 
-  /** Redraws the QR code. Call this when you change the color and want the component to update. */
-  public redraw() {
+  /** Draws the QR code in the canvas. */
+  private draw() {
     this.canvas.style.maxWidth = `${this.size}px`;
     this.canvas.style.maxHeight = `${this.size}px`;
 
@@ -80,7 +80,7 @@ export class QuietQr extends QuietElement {
   }
 
   render() {
-    return html` <canvas aria-hidden="true"></canvas> `;
+    return html` <canvas aria-hidden="true" @transitionend=${() => this.draw()}></canvas> `;
   }
 }
 

@@ -111,6 +111,7 @@ h6 {
 }
 
 p {
+  text-wrap: pretty;
   overflow-wrap: break-word;
 
   &:where(+ p) {

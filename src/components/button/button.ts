@@ -102,10 +102,10 @@ export class QuietButton extends QuietElement {
   @property() target: '_blank' | '_parent' | '_self' | '_top' | undefined;
 
   /**
-   *  Sets the link's `rel` attribute. Only works with link buttons. Note that the default value is
-   * `noreferrer noopener`, meaning you might need to set it to an empty string if you're also using `target`.
+   * Sets the link's `rel` attribute. Only works with link buttons. When linking to an external domain, you should
+   * probably set this to `noreferrer noopener`.
    */
-  @property() rel = 'noreferrer noopener';
+  @property() rel?: string;
 
   /** Sets the link's `download` attribute, causing the linked file to be downloaded. Only works with link buttons. */
   @property() download?: string;
@@ -247,7 +247,7 @@ export class QuietButton extends QuietElement {
         href=${ifDefined(isLink && !this.disabled ? this.href : undefined)}
         target=${ifDefined(isLink ? this.target : undefined)}
         download=${ifDefined(isLink ? this.download : undefined)}
-        rel=${ifDefined(isLink ? this.rel : undefined)}
+        rel=${ifDefined(isLink && this.rel ? this.rel : undefined)}
         aria-label=${ifDefined(this.iconLabel ? this.iconLabel : undefined)}
         aria-pressed=${ifDefined(isToggle ? (this.toggle === 'on' ? 'true' : 'false') : undefined)}
         @blur=${this.handleBlur}

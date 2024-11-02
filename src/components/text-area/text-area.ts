@@ -13,7 +13,7 @@ import styles from './text-area.styles.js';
 /**
  * <quiet-text-area>
  *
- * @summary Text area let users edit multi-line, plain text content.
+ * @summary Text areas let users edit multi-line, plain text content.
  * @documentation https://quietui.com/docs/components/text-area
  * @status stable
  * @since 1.0

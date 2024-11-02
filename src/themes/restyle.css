@@ -318,6 +318,7 @@ details {
 
   summary {
     font-weight: var(--quiet-font-weight-semibold);
+    text-wrap: balance;
 
     &:focus {
       outline: none;

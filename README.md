@@ -15,11 +15,11 @@ You might be curious to learn that Quiet's components aren't built with React, V
 
 ## Where do I…?
 
-- [Get started using Quiet UI](https://quietui.com/)
-- [Meet the community and talk about the project](https://github.com/quietui/components/discussions)
-- [Get help](https://github.com/quietui/components/discussions/categories/help-support)
-- [Request a feature](https://github.com/quietui/components/discussions/categories/feature-requests)
-- [Submit a bug report](https://github.com/quietui/components/issues/new/choose)
+- [Get started using Quiet UI](https://quietui.org/)
+- [Ask for help](https://github.com/quietui/quiet/discussions/categories/help-support)
+- [Follow the project on X](https://x.com/quiet_ui)
+- [Request a feature](https://github.com/quietui/quiet/discussions/categories/feature-requests)
+- [Submit a bug report](https://github.com/quietui/quiet/issues/new/choose)
 
 ## Developer instructions
 

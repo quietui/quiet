@@ -21,7 +21,7 @@ interface GetTabsOptions {
  *
  * @summary Tab lists let users switch between different sections of content without leaving the page, providing a clean
  *  and organized interface.
- * @documentation https://quietui.com/docs/components/tab-list
+ * @documentation https://quietui.org/docs/components/tab-list
  * @status stable
  * @since 1.0
  *

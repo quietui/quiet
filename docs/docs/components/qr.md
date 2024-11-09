@@ -6,7 +6,7 @@ layout: component
 [QR codes](https://www.qrcode.com/) offer an efficient way to direct mobile users to websites, exchange contact details, process mobile transactions, and other digital interactions through a simple scan.
 
 ```html {.example}
-<quiet-qr data="https://quietui.com/" label="QR code to visit Quiet UI on the Web"></quiet-qr>
+<quiet-qr data="https://quietui.org/" label="QR code to visit Quiet UI on the Web"></quiet-qr>
 ```
 
 ## Examples
@@ -17,8 +17,8 @@ Set the `data` attribute to a URL, email address, or any other string you want t
 
 ```html {.example}
 <div id="qr__text">
-  <quiet-qr data="https://quietui.com/"></quiet-qr>
-  <quiet-text-field label="URL, email address, or other text" value="https://quietui.com/" clearable></quiet-text-field>
+  <quiet-qr data="https://quietui.org/"></quiet-qr>
+  <quiet-text-field label="URL, email address, or other text" value="https://quietui.org/" clearable></quiet-text-field>
 </div>
 
 <script>
@@ -89,7 +89,7 @@ The element's background is transparent by default, but you can style it with CS
 
 ```html {.example .flex-row}
 <quiet-qr 
-  data="https://quietui.com/" 
+  data="https://quietui.org/" 
   corners="0.5"
   style="
     background: radial-gradient(circle at 10% 20%, rgb(255, 200, 124) 0%, rgb(252, 251, 121) 90%);

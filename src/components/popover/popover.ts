@@ -16,7 +16,7 @@ const openPopovers = new Set<QuietPopover>();
  * <quiet-popover>
  *
  * @summary Popovers provide additional information or functionality without interrupting the flow of content.
- * @documentation https://quietui.com/docs/components/popover
+ * @documentation https://quietui.org/docs/components/popover
  * @status stable
  * @since 1.0
  *

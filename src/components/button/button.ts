@@ -15,7 +15,7 @@ import styles from './button.styles.js';
  * <quiet-button>
  *
  * @summary Buttons allow users to navigate, submit forms, and perform other actions.
- * @documentation https://quietui.com/docs/components/button
+ * @documentation https://quietui.org/docs/components/button
  * @status stable
  * @since 1.0
  *

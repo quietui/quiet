@@ -10,7 +10,7 @@ import styles from './qr.styles.js';
  * <quiet-qr>
  *
  * @summary Generates a QR Code.
- * @documentation https://quietui.com/docs/components/qr
+ * @documentation https://quietui.org/docs/components/qr
  * @status stable
  * @since 1.0
  */

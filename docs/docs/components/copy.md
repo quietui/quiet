@@ -4,7 +4,7 @@ layout: component
 ---
 
 ```html {.example}
-<quiet-copy data="https://quietui.com/"></quiet-copy>
+<quiet-copy data="https://quietui.org/"></quiet-copy>
 ```
 
 :::info

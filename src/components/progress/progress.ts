@@ -10,7 +10,7 @@ import styles from './progress.styles.js';
  * <quiet-progress>
  *
  * @summary Progress bars represent the completion status of a request or task.
- * @documentation https://quietui.com/docs/components/progress
+ * @documentation https://quietui.org/docs/components/progress
  * @status stable
  * @since 1.0
  *

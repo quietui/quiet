@@ -22,7 +22,7 @@ const openDropdowns = new Set<QuietDropdown>();
  * <quiet-dropdown>
  *
  * @summary Dropdowns provide a menu of options that appear when the corresponding trigger is activated.
- * @documentation https://quietui.com/docs/components/dropdown
+ * @documentation https://quietui.org/docs/components/dropdown
  * @status stable
  * @since 1.0
  *

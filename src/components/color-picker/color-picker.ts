@@ -23,7 +23,7 @@ const hasEyeDropper = 'EyeDropper' in window;
  *
  * @summary Color pickers provide an interface for selecting a color using a two-dimension slider for luminosity and
  *  saturation and regular sliders for hue and opacity.
- * @documentation https://quietui.com/docs/components/color-picker
+ * @documentation https://quietui.org/docs/components/color-picker
  * @status stable
  * @since 1.0
  *

@@ -9,7 +9,7 @@ import styles from './number.styles.js';
  * <quiet-number>
  *
  * @summary Outputs a number in the specified format.
- * @documentation https://quietui.com/docs/components/number
+ * @documentation https://quietui.org/docs/components/number
  * @status stable
  * @since 1.0
  */

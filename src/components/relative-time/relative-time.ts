@@ -22,7 +22,7 @@ let liveInterval: number | undefined;
  * <quiet-relative-time>
  *
  * @summary Outputs a relative time in a human-readable format.
- * @documentation https://quietui.com/docs/components/relative-time
+ * @documentation https://quietui.org/docs/components/relative-time
  * @status stable
  * @since 1.0
  */

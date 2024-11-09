@@ -15,7 +15,7 @@ import styles from './dialog.styles.js';
  *
  * @summary Dialogs display modal content for alerts, confirmations, configurations, and other important interactions
  *  that require immediate attention.
- * @documentation https://quietui.com/docs/components/dialog
+ * @documentation https://quietui.org/docs/components/dialog
  * @status stable
  * @since 1.0
  *

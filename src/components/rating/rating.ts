@@ -23,7 +23,7 @@ const VALIDATION_MESSAGE = nativeFileInput.validationMessage;
  * <quiet-rating>
  *
  * @summary Ratings let users provide feedback based on their satisfaction with a product or service.
- * @documentation https://quietui.com/docs/components/rating
+ * @documentation https://quietui.org/docs/components/rating
  * @status stable
  * @since 1.0
  *

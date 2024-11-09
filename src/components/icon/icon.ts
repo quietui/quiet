@@ -16,7 +16,7 @@ const requests = new Map<string, Promise<string>>();
  * <quiet-icon>
  *
  * @summary Icons provide a visual representation of an object, action, or idea.
- * @documentation https://quietui.com/docs/components/icon
+ * @documentation https://quietui.org/docs/components/icon
  * @status stable
  * @since 1.0
  *

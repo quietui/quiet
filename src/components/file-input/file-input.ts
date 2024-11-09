@@ -23,7 +23,7 @@ const VALIDATION_MESSAGE = nativeFileInput.validationMessage;
  * <quiet-file-input>
  *
  * @summary File inputs let the user select files to upload to the server.
- * @documentation https://quietui.com/docs/components/file
+ * @documentation https://quietui.org/docs/components/file
  * @status stable
  * @since 1.0
  *

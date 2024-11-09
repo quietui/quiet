@@ -14,7 +14,7 @@ import styles from './checkbox.styles.js';
  * <quiet-checkbox>
  *
  * @summary Checkboxes let users select one or more options from a list or toggle single options on and off.
- * @documentation https://quietui.com/docs/components/checkbox
+ * @documentation https://quietui.org/docs/components/checkbox
  * @status stable
  * @since 1.0
  *

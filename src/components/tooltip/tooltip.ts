@@ -15,7 +15,7 @@ const openTooltips = new Set<QuietTooltip>();
  * <quiet-tooltip>
  *
  * @summary Tooltips provides additional information when users hover or focus on an element.
- * @documentation https://quietui.com/docs/components/tooltip
+ * @documentation https://quietui.org/docs/components/tooltip
  * @status stable
  * @since 1.0
  *

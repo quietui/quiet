@@ -19,7 +19,7 @@ function clampRandom(value: number, min: number, max: number) {
  * <quiet-lorem-ipsum>
  *
  * @summary Outputs placeholder text for testing designs with random content.
- * @documentation https://quietui.com/docs/components/lorem-ipsum
+ * @documentation https://quietui.org/docs/components/lorem-ipsum
  * @status stable
  * @since 1.0
  */

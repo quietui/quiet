@@ -147,7 +147,7 @@ export default function (eleventyConfig) {
     eleventyConfig.addPlugin(formatCodePlugin());
 
     // Add privacy-friendly analytics
-    eleventyConfig.addPlugin(analyticsPlugin({ domain: 'quietui.com' }));
+    eleventyConfig.addPlugin(analyticsPlugin({ domain: 'quietui.org' }));
   }
 
   return {

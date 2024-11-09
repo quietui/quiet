@@ -210,7 +210,7 @@ html:not(.quiet-dark) .only-dark {
   }
 }
 
-#header-group-links [data-with-heart] {
+#header-group-links .with-heart {
   span {
     display: inline-block;
     animation: 0.8375s infinite heartbeat alternate ease;

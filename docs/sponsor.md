@@ -1,6 +1,6 @@
 ---
-title: Available licenses
-description: Open source and commercial licenses are available.
+title: Sponsor
+description: Sponsor the project to get access to support and 
 layout: page
 isWide: true
 section: license

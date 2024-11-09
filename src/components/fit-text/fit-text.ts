@@ -10,7 +10,7 @@ import styles from './fit-text.styles.js';
  * <quiet-fit-text>
  *
  * @summary Scales a line of text to fit within its container.
- * @documentation https://quietui.com/docs/components/fit-text
+ * @documentation https://quietui.org/docs/components/fit-text
  * @status experimental
  * @since 1.0
  *

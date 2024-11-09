@@ -9,7 +9,7 @@ import styles from './dropdown-item.styles.js';
  * <quiet-dropdown-item>
  *
  * @summary Dropdown items can be selected from inside a dropdown menu.
- * @documentation https://quietui.com/docs/components/dropdown-item
+ * @documentation https://quietui.org/docs/components/dropdown-item
  * @status stable
  * @since 1.0
  *

@@ -15,7 +15,7 @@ import styles from './select.styles.js';
  * <quiet-select>
  *
  * @summary Selects let users choose an option from a predefined list of options.
- * @documentation https://quietui.com/docs/components/select
+ * @documentation https://quietui.org/docs/components/select
  * @status stable
  * @since 1.0
  *

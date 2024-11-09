@@ -17,7 +17,7 @@ import styles from './slider.styles.js';
  * <quiet-slider>
  *
  * @summary Sliders let users select numeric values within a given range by moving a thumb along a track.
- * @documentation https://quietui.com/docs/components/slider
+ * @documentation https://quietui.org/docs/components/slider
  * @status stable
  * @since 1.0.0
  *

@@ -24,7 +24,7 @@ const VALIDATION_MESSAGE = nativeRadio.validationMessage;
  * <quiet-radio>
  *
  * @summary Radios let the user select one option from a group of choices.
- * @documentation https://quietui.com/docs/components/radio
+ * @documentation https://quietui.org/docs/components/radio
  * @status stable
  * @since 1.0
  *

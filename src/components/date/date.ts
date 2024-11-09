@@ -10,7 +10,7 @@ import styles from './date.styles.js';
  * <quiet-date>
  *
  * @summary Outputs a date or time in the specified format.
- * @documentation https://quietui.com/docs/components/date
+ * @documentation https://quietui.org/docs/components/date
  * @status stable
  * @since 1.0
  */

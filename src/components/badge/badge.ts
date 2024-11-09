@@ -9,7 +9,7 @@ import styles from './badge.styles.js';
  * <quiet-badge>
  *
  * @summary Badges display useful information or notifications such as a new feature or an unread message count.
- * @documentation https://quietui.com/docs/components/badge
+ * @documentation https://quietui.org/docs/components/badge
  * @status stable
  * @since 1.0
  *

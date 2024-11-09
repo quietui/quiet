@@ -9,7 +9,7 @@ import styles from './tab.styles.js';
  * <quiet-tab>
  *
  * @summary Tabs describe and select a tab panel within a tab list.
- * @documentation https://quietui.com/docs/components/tab
+ * @documentation https://quietui.org/docs/components/tab
  * @status stable
  * @since 1.0
  *

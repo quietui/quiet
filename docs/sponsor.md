@@ -86,18 +86,13 @@ Quiet can be used for free under the MIT license. For support, prioritized bug f
 ## Frequently asked questions
 
 <details name="faq">
-  <summary>Forever is a long time…are you sure?</summary>
-  Yes! I don't need a lambo — just help me keep this thing going. ✌️
-</details>
-
-<details name="faq">
   <summary>Do you offer support?</summary>
-  You can ask questions in the <a href="https://github.com/quietui/quiet/discussions">public discussion forum</a>. For additional support, please purchase a license for direct support from the maintainer and access to the pro community.
+  Yes. You can <a href="https://github.com/sponsors/claviska">sponsor Quiet on GitHub</a> to unlock access to a <a href="https://github.com/quietui/sponsors/discussions">sponsors-only discussion forum</a> where you can get help directly from me, the maintainer, as well as other members of the community. I typically respond within 24 hours.
 </details>
 
 <details name="faq">
-  <summary>What if I have more than 10 people on my team?</summary>
-  Please purchase multiple team licenses to account for additional users. For example, a team of 11–20 would need to purchase two team licenses. You can adjust the quantity at checkout to avoid making separate purchases.
+  <summary>Can I cancel my sponsorship?</summary>
+  Yes. You can cancel your sponsorship any time, but you will lose access to the sponsors-only benefits when the sponsorship period expires.
 </details>
 
 <details name="faq">
@@ -111,11 +106,6 @@ Quiet can be used for free under the MIT license. For support, prioritized bug f
 </details>
 
 <details name="faq">
-  <summary>What is your refund policy?</summary>
-  Refunds are offered up to 14 days from the date of purchase.
-</details>
-
-<details name="faq">
   <summary>Can I change the tag names?</summary>
   Component tag names, e.g. <code>&lt;quiet-button&gt;</code>, cannot be changed without modifying the source code due to the way tags are referenced in code and styles. Attempting to change tag names, e.g. by extending the associated classes, will cause unexpected breakages and isn't a supported feature of the library.
 </details>
@@ -124,8 +114,6 @@ Quiet can be used for free under the MIT license. For support, prioritized bug f
   <summary>Can I use this library with a micro frontend?</summary>
   Because custom elements are registered globally, I don't recommend using Quiet in a micro frontend architecture <em>unless</em> you move it to the top of the stack. Avoid loading the library multiple times, as this will cause version conflicts and load more code than is necessary.
 </details>
-
-Don't see your question above? [Ask it here!](https://github.com/quietui/quiet/discussions)
 
 <small class="copyright">
   Quiet UI is product of A Beautiful Site, LLC

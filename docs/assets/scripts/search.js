@@ -173,6 +173,7 @@ async function updateResults(query = '') {
       if (page.url.includes('github.com') && page.url.endsWith('/issues')) icon = 'bug';
       if (page.url.includes('github.com') && page.url.endsWith('/discussions')) icon = 'help';
       if (page.url.includes('github.com') && page.url.endsWith('/stargazers')) icon = 'star';
+      if (page.url.includes('bsky.app')) icon = 'brand-bluesky';
       if (page.url.includes('x.com')) icon = 'brand-x';
 
       a.href = page.url;

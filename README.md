@@ -18,6 +18,7 @@ You might be curious to learn that Quiet's components aren't built with React, V
 - [Get started using Quiet UI](https://quietui.org/)
 - [Ask for help](https://github.com/quietui/quiet/discussions/2)
 - [Follow the project on X](https://x.com/quiet_ui)
+- [Follow the project on Bluesky](https://bsky.app/profile/quietui.org)
 - [Request a feature](https://github.com/quietui/quiet/discussions/categories/feature-requests)
 - [Submit a bug report](https://github.com/quietui/quiet/issues/new/choose)
 

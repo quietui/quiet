@@ -129,6 +129,16 @@
             <quiet-icon name="brand-github"></quiet-icon>
           </a>
 
+          {# Bluesky #}
+          <a
+            id="header-bluesky-button"
+            class="not-mobile"
+            href="https://bsky.app/profile/quietui.org"
+            data-no-external-icon
+          >
+            <quiet-icon name="brand-bluesky"></quiet-icon>
+          </a>
+
           {# Twitter #}
           <a
             id="header-twitter-button"
@@ -237,6 +247,7 @@
     <quiet-tooltip for="header-search-button">Search this website (⌘+K)</quiet-tooltip>
     <quiet-tooltip for="header-theme-button">Toggle dark mode (backslash)</quiet-tooltip>
     <quiet-tooltip for="header-github-button">View the code on GitHub</quiet-tooltip>
+    <quiet-tooltip for="header-bluesky-button">Follow @quietui.org on Bluesky</quiet-tooltip>
     <quiet-tooltip for="header-twitter-button">Follow @quiet_ui on X</quiet-tooltip>
 
     {% include 'search.njk' %}

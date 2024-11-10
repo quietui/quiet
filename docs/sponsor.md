@@ -6,7 +6,7 @@ isWide: true
 section: sponsor
 ---
 
-Quiet can be used for free under the MIT license. Unfortunately, I can't offer free support for every user, but if you want personal support and priority bug fixes, [you can sponsor the project](https://github.com/sponsors/claviska) to unlock all of the sponsor-only benefits shown below.
+Quiet can be used for free under the MIT license. Unfortunately, I can't offer free support for every user, but if you want personal support and priority bug fixes, [you can sponsor the project](https://github.com/sponsors/quietui) to unlock all of the sponsor-only benefits shown below.
 
 <div class="sponsor-tiers" style="margin-block-start: 2.5rem;">
   <div class="sponsor-tier">
@@ -71,7 +71,7 @@ Quiet can be used for free under the MIT license. Unfortunately, I can't offer f
 </ul>
 
 <div style="display: flex; gap: 1rem; justify-content: center;">
-  <quiet-button variant="primary" size="lg" pill href="https://github.com/sponsors/claviska" target="_blank" style="margin-block-start: var(--quiet-content-spacing);">
+  <quiet-button variant="primary" size="lg" pill href="https://github.com/sponsors/quietui" target="_blank" style="margin-block-start: var(--quiet-content-spacing);">
     <quiet-icon slot="start" name="lock-open"></quiet-icon>
     Unlock sponsor-only access
   </quiet-button>
@@ -83,7 +83,7 @@ Quiet can be used for free under the MIT license. Unfortunately, I can't offer f
 
 <details name="faq">
   <summary>Do you offer support?</summary>
-  Yes. You can <a href="https://github.com/sponsors/claviska">sponsor Quiet on GitHub</a> to unlock access to a <a href="https://github.com/quietui/sponsors/discussions">sponsors-only discussion forum</a> where you can get help directly from me, the maintainer, as well as other members of the community. I typically respond within 24 hours.
+  Yes. You can <a href="https://github.com/sponsors/quietui">sponsor Quiet on GitHub</a> to unlock access to a <a href="https://github.com/quietui/sponsors/discussions">sponsors-only discussion forum</a> where you can get help directly from me, the maintainer, as well as other members of the community. I typically respond within 24 hours.
 </details>
 
 <details name="faq">

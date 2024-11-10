@@ -32,7 +32,7 @@
   },
   "funding": {
     "type": "individual",
-    "url": "https://github.com/sponsors/claviska"
+    "url": "https://github.com/sponsors/quietui"
   },
   "scripts": {
     "start": "node scripts/build.js --develop",

@@ -1,83 +1,79 @@
 ---
 title: Sponsor
-description: Sponsor the project to get access to support and 
+description: Sponsor the project for support and sponsor-only benefits.
 layout: page
 isWide: true
-section: license
+section: sponsor
 ---
 
-<div class="pricing-plans">
-  <div class="pricing-plan">
-    <quiet-icon class="pricing-plan-icon" name="code" style="color: #58acf2;"></quiet-icon>
-    <h3 data-no-anchor>Standard</h3><br>
+Quiet can be used for free under the MIT license. Unfortunately, I can't offer free support for every user, but if you want personal support and priority bug fixes, [you can sponsor the project](https://github.com/sponsors/claviska) to unlock all of the sponsor-only benefits shown below.
+
+<div class="sponsor-tiers" style="margin-block-start: 2.5rem;">
+  <div class="sponsor-tier">
+    <quiet-icon class="sponsor-tier-icon" name="code" style="color: #7db664;"></quiet-icon>
+    <h3 data-no-anchor>Coder</h3><br>
     <ul>
-      <li><strong>Free</strong></li>
-      <li><s>One-time payment</s></li>
-      <li><s>Updates forever</s></li>
-      <li><s>Premium support</s></li>
+      <li><s>Maintainer support</s></li>
       <li><s>Priority bug fixes</s></li>
-      <li><s>Pro community access</s></li>
+      <li><s>Sponsors-only forums</s></li>
+      <li><s>Sponsors badge</s></li>
+      <li><s>Attribution on website</s></li>
       <li>MIT license</li>
     </ul>
-    <quiet-button pill href="https://github.com/sponsors/claviska" target="_blank">
+    <quiet-button pill href="https://github.com/quietui/quiet/" target="_blank">
+      <quiet-icon slot="start" name="brand-github"></quiet-icon>
+      Get the code
+    </quiet-button>
+  </div>
+
+  <div class="sponsor-tier">
+    <quiet-icon class="sponsor-tier-icon" name="heart-handshake" style="color: #7577c5;"></quiet-icon>
+    <h3 data-no-anchor>Sponsor</h3><br>
+    <ul>
+      <li>Maintainer support</li>
+      <li>Priority bug fixes</li>
+      <li>Sponsors-only forums</li>
+      <li>Sponsors badge</li>
+      <li>Attribution on website</li>
+      <li>MIT license</li>
+    </ul>
+    <quiet-button variant="primary" appearance="outline" pill href="#" target="_blank">
       <quiet-icon slot="start" family="filled" name="heart"></quiet-icon>
       Sponsor
     </quiet-button>
   </div>
 
-  <div class="pricing-plan">
-    <quiet-icon class="pricing-plan-icon" name="user-circle" style="color: #e98d61;"></quiet-icon>
-    <h3 data-no-anchor>Individual</h3><br>
+  <div class="sponsor-tier">
+    <quiet-icon class="sponsor-tier-icon" name="comet" style="color: #c5a231;"></quiet-icon>
+    <h3 data-no-anchor>Stargazer</h3><br>
     <ul>
-      <li><strong>$199</strong></li>
-      <li><mark>One-time payment</mark></li>
-      <li>Updates forever</li>
-      <li>Premium support</li>
-      <li>Priority bug fixes</li>
-      <li>Pro community access</li>
-      <li>Single user</li>
-      <li>Commercial license</li>
+      <li>Completely free</li>
+      <li>Only takes a click</li>
+      <li>Raises awareness</li>
+      <li>Legitimizes the project</li>
+      <li>Good karma</li>
+      <li>Makes the cats happy</li>
     </ul>
-    <quiet-button variant="primary" pill href="#" target="_blank">
-      Buy now
-    </quiet-button>
-  </div>
-
-  <div class="pricing-plan">
-    <quiet-icon class="pricing-plan-icon" name="buildings" style="color: #7db664;"></quiet-icon>
-    <h3 data-no-anchor>Team</h3><br>
-    <ul>
-      <li><strong>$999</strong></li>
-      <li>One-time payment</li>
-      <li>Updates forever</li>
-      <li>Premium support</li>
-      <li>Priority bug fixes</li>
-      <li>Pro community access</li>
-      <li>Up to 10 users</li>
-      <li>Commercial license</li>
-    </ul>
-    <quiet-button variant="primary" pill href="#" target="_blank">
-      Buy now
+    <quiet-button pill href="https://github.com/quietui/quiet/stargazers" target="_blank">
+      <quiet-icon slot="start" name="brand-github"></quiet-icon>
+      Star on GitHub
     </quiet-button>
   </div>  
 </div>
 
-Quiet can be used for free under the MIT license. For support, prioritized bug fixes, a perpetual use license for unlimited projects, and a lifetime of updates, please purchase a pro license.
-
 <ul class="features-grid" aria-label="Features">
-  <li><quiet-icon name="heart-handshake" style="color: #e886a7;"></quiet-icon><br>Premium support</li>
+  <li><quiet-icon name="send" style="color: #58acf2;"></quiet-icon><br>Support from the maintainer</li>
   <li><quiet-icon name="bug" style="color: #e98d61;"></quiet-icon><br>Priority bug fixes</li>
-  <li><quiet-icon name="infinity" style="color: #a4a6b0;"></quiet-icon><br>Unlimited projects</li>
-  <li><quiet-icon name="calendar" style="color: #58acf2;"></quiet-icon><br>Updates forever</li>
-  <li><quiet-icon name="license" style="color: #ec8786;"></quiet-icon><br>Commercial license</li>
-  <li><quiet-icon name="key" style="color: #c5a231;"></quiet-icon><br>Pro community access</li>
+  <li><quiet-icon name="circle-dashed-check" style="color: #e886a7;"></quiet-icon><br>Sponsors badge on GitHub</li>
+  <li><quiet-icon name="key" style="color: #c5a231;"></quiet-icon><br>Access to sponsors-only forums</li>
   <li><quiet-icon name="puzzle" style="color: #b394f4;"></quiet-icon><br>Works with all frameworks</li>
-  <li><quiet-icon name="leaf" style="color: #7db664;"></quiet-icon><br>Built with Web standards</li>
+  <li><quiet-icon name="school" style="color: #7db664;"></quiet-icon><br>Learn once, use forever</li>
 </ul>
 
-<div style="text-align: center;">
-  <quiet-button variant="primary" size="lg" pill href="#" target="_blank" style="margin-block-start: var(--quiet-content-spacing);">
-    Purchase a license
+<div style="display: flex; gap: 1rem; justify-content: center;">
+  <quiet-button variant="primary" size="lg" pill href="https://github.com/sponsors/claviska" target="_blank" style="margin-block-start: var(--quiet-content-spacing);">
+    <quiet-icon slot="start" name="lock-open"></quiet-icon>
+    Unlock sponsor-only access
   </quiet-button>
 </div>
 
@@ -97,7 +93,7 @@ Quiet can be used for free under the MIT license. For support, prioritized bug f
 
 <details name="faq">
   <summary>How can I report a bug?</summary>
-  Bugs should be <a href="https://github.com/quietui/quiet/issues">reported on GitHub</a>. Priority is given to pro license holders, but cannot be guaranteed. For best results, please include a minimal reproduction with your report.
+  Bugs should be <a href="https://github.com/quietui/quiet/issues">reported on GitHub</a>. Priority is given to sponsors, but cannot be guaranteed. For best results, please include a minimal reproduction with your report.
 </details>
 
 <details name="faq">

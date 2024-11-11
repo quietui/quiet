@@ -29,13 +29,13 @@ Quiet can be used for free under the MIT license. Unfortunately, I can't offer f
   <div class="sponsor-tier">
     <quiet-icon class="sponsor-tier-icon" name="heart-handshake" style="color: #7577c5;"></quiet-icon>
     <h3 data-no-anchor>Sponsor</h3><br>
-    <ul>
-      <li>Maintainer support</li>
-      <li>Priority bug fixes</li>
-      <li>Sponsors-only forums</li>
-      <li>Sponsors badge</li>
-      <li>Attribution on website</li>
-      <li>MIT license</li>
+    <ul class="with-checks">
+      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Maintainer support</li>
+      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Priority bug fixes</li>
+      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Sponsors-only forums</li>
+      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Sponsors badge</li>
+      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Attribution on website</li>
+      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> MIT license</li>
     </ul>
     <quiet-button variant="primary" appearance="outline" pill href="#" target="_blank">
       <quiet-icon slot="start" family="filled" name="heart"></quiet-icon>

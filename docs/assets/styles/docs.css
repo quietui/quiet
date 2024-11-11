@@ -1166,11 +1166,14 @@ quiet-callout {
   }
 
   @media screen and (max-width: 767px) {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  @media screen and (max-width: 600px) {
     grid-template-columns: 1fr;
+    max-width: 320px;
+    margin-inline: auto;
+    gap: 0.5rem;
+
+    .sponsor-tier:nth-child(2) {
+      scale: 1.09;
+    }
   }
 }
 
@@ -1189,6 +1192,12 @@ quiet-callout {
   ul {
     margin: 0 0 2rem 0;
     padding: 0;
+
+    &.with-checks {
+      width: fit-content;
+      margin-inline: auto;
+      text-align: start;
+    }
   }
 
   li {

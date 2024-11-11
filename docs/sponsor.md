@@ -98,7 +98,7 @@ Quiet can be used for free under the MIT license. Unfortunately, I can't offer f
 
 <details name="faq">
   <summary>Where are the sponsors-only forums?</summary>
-  [The forums are located here.](https://github.com/quietui/sponsors) Note that the link will not be available until you're an active sponsor.
+  <a href="https://github.com/quietui/sponsors">The forums are located here.</a> Note that the link will not be available until you're an active sponsor.
 </details>
 
 <details name="faq">

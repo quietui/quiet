@@ -1210,10 +1210,6 @@ quiet-callout {
 
   quiet-button {
     min-width: 85%;
-
-    quiet-icon[name='heart'] {
-      color: deeppink;
-    }
   }
 }
 

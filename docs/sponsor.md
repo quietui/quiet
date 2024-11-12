@@ -55,7 +55,7 @@ Quiet can be used for free under the MIT license. Unfortunately, I can't offer f
       <li><quiet-icon name="cat" style="color: #b394f4;"></quiet-icon> Makes the cats happy</li>
     </ul>
     <quiet-button pill href="https://github.com/quietui/quiet/stargazers" target="_blank">
-      <quiet-icon slot="start" name="brand-github"></quiet-icon>
+      <quiet-icon slot="start" name="star"></quiet-icon>
       Star on GitHub
     </quiet-button>
   </div>  

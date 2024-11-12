@@ -123,7 +123,7 @@ Quiet can be used for free under the MIT license. Unfortunately, I can't offer f
 
 <details name="faq">
   <summary>Can I subclass the components?</summary>
-  While components are written as classes, they aren't designed to be subclassed. This is not an objective of the library. Instead, use composition when possible.
+  While components are written as classes, they aren't designed to be subclassed. This is not supported and isn't an objective of the library. Instead, use composition when possible.
 </details>
 
 <details name="faq">

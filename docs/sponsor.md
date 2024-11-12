@@ -13,12 +13,12 @@ Quiet can be used for free under the MIT license. Unfortunately, I can't offer f
     <quiet-icon class="sponsor-tier-icon" name="code" style="color: #7db664;"></quiet-icon>
     <h3 data-no-anchor>Developer</h3><br>
     <ul>
-      <li><s>Maintainer support</s></li>
-      <li><s>Priority bug fixes</s></li>
-      <li><s>Sponsors-only forums</s></li>
-      <li><s>Sponsors badge</s></li>
-      <li><s>Attribution on website</s></li>
-      <li>MIT license</li>
+      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> MIT license</li>
+      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Community support</li>
+      <li><quiet-icon name="x" style="color: #b91c1c;"></quiet-icon> <s>Priority bug fixes</s></li>
+      <li><quiet-icon name="x" style="color: #b91c1c;"></quiet-icon> <s>Sponsors-only forums</s></li>
+      <li><quiet-icon name="x" style="color: #b91c1c;"></quiet-icon> <s>Sponsors badge</s></li>
+      <li><quiet-icon name="x" style="color: #b91c1c;"></quiet-icon> <s>Attribution on website</s></li>
     </ul>
     <quiet-button pill href="https://github.com/quietui/quiet/" target="_blank">
       <quiet-icon slot="start" name="brand-github"></quiet-icon>
@@ -29,13 +29,13 @@ Quiet can be used for free under the MIT license. Unfortunately, I can't offer f
   <div class="sponsor-tier">
     <quiet-icon class="sponsor-tier-icon" name="heart-handshake" style="color: #7577c5;"></quiet-icon>
     <h3 data-no-anchor>Sponsor</h3><br>
-    <ul class="with-checks">
+    <ul>
+      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> MIT license</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Maintainer support</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Priority bug fixes</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Sponsors-only forums</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Sponsors badge</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Attribution on website</li>
-      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> MIT license</li>
     </ul>
     <quiet-button variant="primary" appearance="outline" pill href="#" target="_blank">
       <quiet-icon slot="start" family="filled" name="heart" style="color: deeppink;"></quiet-icon>
@@ -47,12 +47,12 @@ Quiet can be used for free under the MIT license. Unfortunately, I can't offer f
     <quiet-icon class="sponsor-tier-icon" name="comet" style="color: #c5a231;"></quiet-icon>
     <h3 data-no-anchor>Stargazer</h3><br>
     <ul>
-      <li>Completely free</li>
-      <li>Only takes a click</li>
-      <li>Raises awareness</li>
-      <li>Legitimizes the project</li>
-      <li>Good karma</li>
-      <li>Makes the cats happy</li>
+      <li><quiet-icon name="coins" style="color: #c5a231;"></quiet-icon> Completely free</li>
+      <li><quiet-icon name="pointer" style="color: #e886a7;"></quiet-icon> Only takes a click</li>
+      <li><quiet-icon name="award" style="color: #58acf2;"></quiet-icon> Raises awareness</li>
+      <li><quiet-icon name="rosette-discount-check" style="color: #7db664;"></quiet-icon> Legitimizes the project</li>
+      <li><quiet-icon name="yin-yang" style="color: #e98d61;"></quiet-icon> Good karma</li>
+      <li><quiet-icon name="cat" style="color: #b394f4;"></quiet-icon> Makes the cats happy</li>
     </ul>
     <quiet-button pill href="https://github.com/quietui/quiet/stargazers" target="_blank">
       <quiet-icon slot="start" name="brand-github"></quiet-icon>
@@ -119,6 +119,11 @@ Quiet can be used for free under the MIT license. Unfortunately, I can't offer f
 <details name="faq">
   <summary>Can I change the tag names?</summary>
   Component tag names, e.g. <code>&lt;quiet-button&gt;</code>, cannot be changed without modifying the source code due to the way tags are referenced in code and styles. Attempting to change tag names, e.g. by extending the associated classes, will cause unexpected breakages and isn't a supported feature of the library.
+</details>
+
+<details name="faq">
+  <summary>Can I subclass the components?</summary>
+  While components are written as classes, they aren't designed to be subclassed. This is not an objective of the library. Instead, use composition when possible.
 </details>
 
 <details name="faq">

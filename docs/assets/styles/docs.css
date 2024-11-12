@@ -1176,7 +1176,7 @@ quiet-callout {
     gap: 0.5rem;
 
     .sponsor-tier:nth-child(2) {
-      scale: 1.09;
+      scale: 1.1;
     }
   }
 }
@@ -1194,14 +1194,11 @@ quiet-callout {
   }
 
   ul {
+    width: fit-content;
     margin: 0 0 2rem 0;
+    margin-inline: auto;
     padding: 0;
-
-    &.with-checks {
-      width: fit-content;
-      margin-inline: auto;
-      text-align: start;
-    }
+    text-align: start;
   }
 
   li {

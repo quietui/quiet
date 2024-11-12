@@ -108,5 +108,5 @@ setLibraryPath('/path/to/quiet');
 ```
 
 :::warn
-If you're not seeing components or icons load, make sure you've copied the necessary files into your project and set the library path correctly!
+If components or icons aren't loading, make sure you've copied the necessary files into your project and set the library path correctly!
 :::

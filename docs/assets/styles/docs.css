@@ -734,6 +734,10 @@ figure.float-end {
   height: 1.5rem;
 }
 
+.docs-icon-button > quiet-icon {
+  font-size: 1.5rem;
+}
+
 /* Aside content */
 .docs-aside {
   font-size: 0.875rem;

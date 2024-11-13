@@ -23,3 +23,5 @@ This is the path forward. Together, we will continue to make accessible software
 
 — Cory LaViska<br>
 _Creator of Quiet UI_
+
+[_Source_](https://www.abeautifulsite.net/posts/my-commitment-to-accessibility/)

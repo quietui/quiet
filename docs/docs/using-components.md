@@ -20,6 +20,14 @@ You can obtain references using `document.querySelector()` and `document.getElem
 const button = document.querySelector('quiet-button');
 ```
 
+Before accessing any properties or methods on an element, make sure it has a chance to register first. You can use [`customElements.whenDefined()`](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/whenDefined) which returns a promise.
+
+```js
+await customElements.whenDefined('quiet-button');
+
+// <quiet-button> is defined and ready to use!
+```
+
 :::info
 Some HTML elements, such as `<img>`, are [void elements](https://developer.mozilla.org/en-US/docs/Glossary/Void_element), meaning you can omit their closing tag. Custom elements cannot be void elements, so make sure you always close their tags!
 :::
@@ -198,7 +206,7 @@ Not all components expose custom properties. Refer to the documentation to see w
 
 Many components expose parts inside the shadow DOM that you can target with CSS. Unlike custom properties, which only affect individual styles, a part gives you complete control over the exposed element's styles.
 
-Use the [`::part()`](https://developer.mozilla.org/en-US/docs/Web/CSS/::part) selector to target a part in your CSS. This example applies a striped background image to the progress bar's indicator.
+Use the [`::part()`](https://developer.mozilla.org/en-US/docs/Web/CSS/::part) selector to target a specific part in your CSS. This example applies a striped background image to the progress bar's indicator.
 
 ```html {.example .no-buttons}
 <quiet-progress id="custom-progress-bg" label="Progress" value="50"></quiet-progress>

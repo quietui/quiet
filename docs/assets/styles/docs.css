@@ -665,7 +665,7 @@ figure.float-end {
     margin-block-start: 1rem;
     padding-inline: 1.5rem;
     padding-block: 1rem 2rem;
-    translate: 0 100%;
+    translate: 0 100vh;
     border-right: none;
     border-radius: calc(var(--quiet-border-radius) * 2);
     background: var(--quiet-background-color);

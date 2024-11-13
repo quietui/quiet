@@ -1024,7 +1024,19 @@ quiet-callout {
 }
 
 /* Mascot images */
-.whiskers {
+.whiskers-center {
+  display: block;
+  width: auto;
+  max-height: 10rem;
+  margin-inline: auto;
+  margin-block-end: 1.5rem;
+
+  @media screen and (max-width: 959px) {
+    max-height: 7.5rem;
+  }
+}
+
+.whiskers-end {
   display: inline;
   width: auto;
   max-height: 10rem;
@@ -1051,6 +1063,7 @@ quiet-callout {
     top: 78px;
     left: 16px;
     width: 210px;
+    gap: 8px;
   }
 
   small {

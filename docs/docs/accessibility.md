@@ -4,8 +4,8 @@ description: Everything as accessible as possible by default.
 layout: docs
 ---
 
-<img class="whiskers only-light" src="/assets/images/whiskers/whiskers-whistling-light.svg" alt="Whiskers the mouse walking and whistling">
-<img class="whiskers only-dark" src="/assets/images/whiskers/whiskers-whistling-dark.svg" alt="Whiskers the mouse walking and whistling">
+<img class="whiskers-end only-light" src="/assets/images/whiskers/whiskers-whistling-light.svg" alt="Whiskers the mouse walking and whistling">
+<img class="whiskers-end only-dark" src="/assets/images/whiskers/whiskers-whistling-dark.svg" alt="Whiskers the mouse walking and whistling">
 
 I recognize the need for all users, regardless of ability or device, to have undeterred access to the websites and applications that are created with my software. This is an important goal of my projects.
 

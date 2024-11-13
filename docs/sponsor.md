@@ -140,7 +140,7 @@ Quiet can be used for free under the MIT license. Unfortunately, I can't offer f
 <img class="whiskers-center whiskers-center only-dark" src="/assets/images/whiskers/whiskers-NEUTRAL-dark.svg" alt="Whiskers the mouse standing with a neutral expression">
 
 <small class="copyright">
-  Quiet UI is product of A Beautiful Site, LLC
+  Quiet UI is a project of A Beautiful Site, LLC
   &copy;<quiet-date year="numeric"></quiet-date>
 </small>
 

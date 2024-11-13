@@ -117,6 +117,11 @@ Quiet can be used for free under the MIT license. Unfortunately, I can't offer f
 </details>
 
 <details name="faq">
+  <summary>Can I sponsor/prioritize a feature?</summary>
+  I generally don't accept sponsorships for specific features. This lets me focus on what's best for the library.
+</details>
+
+<details name="faq">
   <summary>Can I change the tag names?</summary>
   Component tag names, e.g. <code>&lt;quiet-button&gt;</code>, cannot be changed without modifying the source code due to the way tags are referenced in code and styles. Attempting to change tag names, e.g. by extending the associated classes, will cause unexpected breakages and isn't a supported feature of the library.
 </details>

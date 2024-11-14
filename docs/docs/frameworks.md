@@ -1,10 +1,8 @@
 ---
-title: Using a framework
+title: Frameworks
 description: How to get started with Quiet and your favorite framework.
 layout: docs
 ---
-
-## Installation
 
 If you're using a framework, you shouldn't use the autoloader. Instead, install Quiet via npm and manually [import each component](/docs/#manually-importing) as shown in the examples below.
 

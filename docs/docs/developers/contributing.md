@@ -193,6 +193,12 @@ Events must extend the `Event` object and start with `quiet-`. You can dispatch 
 
 Events should always be composed. Events should only be cancelable if they're actually cancelable by the end user. Events should bubble to support delegation unless there's a specific reason not to or if it makes sense to align with the platform, e.g. `quiet-focus` and `quiet-blur`.
 
+### Console logging
+
+When necessary, make use of `console.warn()` to inform users of warnings and `console.error()` of errors. Use `console.error()` more sparingly. The first argument should always be a human-readable message explaining what happened and how to fix it. Be verbose, but concise. If necessary, the second argument should be a reference to the dispatching element.
+
+Components should never use `console.log()`.
+
 ### Whiskers
 
-Whiskers may only appear on pages where cats are not present.
+For his own safety, Whiskers may only appear on pages where cats are not present.

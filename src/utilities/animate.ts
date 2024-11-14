@@ -29,8 +29,8 @@ export function animateWithClass(el: Element, className: string) {
       'animationcancel',
       () => {
         el.classList.remove(className);
-        resolve();
         controller.abort();
+        resolve();
       },
       { once: true, signal: controller.signal }
     );

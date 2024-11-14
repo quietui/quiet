@@ -80,7 +80,6 @@ You can add [tooltips](/docs/components/tooltip) to improve the user experience 
 <quiet-tooltip for="button-group__tooltip-download">Download</quiet-tooltip>
 ```
 
-
 ### Vertical button groups
 
 To make a vertical button group, set the `orientation` attribute to `vertical`.

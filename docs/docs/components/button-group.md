@@ -35,7 +35,7 @@ Button groups work really well in conjunction with the [toolbar component](/docs
 You can nest [dropdowns](/docs/components/dropdown) inside button groups to give users additional options.
 
 ```html {.example}
-<quiet-button-group>
+<quiet-button-group label="Options">
   <quiet-button>
     <quiet-icon slot="start" name="photo"></quiet-icon>
     Details
@@ -63,7 +63,7 @@ You can nest [dropdowns](/docs/components/dropdown) inside button groups to give
 You can add [tooltips](/docs/components/tooltip) to improve the user experience of your button groups.
 
 ```html {.example}
-<quiet-button-group>
+<quiet-button-group label="Options">
   <quiet-button icon-label="View image details" id="button-group__tooltip-image">
     <quiet-icon name="photo"></quiet-icon>
   </quiet-button>
@@ -86,7 +86,7 @@ You can add [tooltips](/docs/components/tooltip) to improve the user experience 
 To make a vertical button group, set the `orientation` attribute to `vertical`.
 
 ```html {.example}
-<quiet-button-group orientation="vertical" style="max-width: 60px;">
+<quiet-button-group orientation="vertical" label="Options" style="max-width: 60px;">
   <quiet-button>
     <quiet-icon slot="start" name="plus"></quiet-icon>
     New
@@ -111,7 +111,7 @@ To make a vertical button group, set the `orientation` attribute to `vertical`.
 Create a split button by placing a [button](/docs/components/button) and a [dropdown](/docs/components/dropdown) inside a button group.
 
 ```html {.example}
-<quiet-button-group>
+<quiet-button-group label="Options">
   <quiet-button>
     <quiet-icon name="share-2" slot="start"></quiet-icon>
     Share

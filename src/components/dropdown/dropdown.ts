@@ -1,12 +1,12 @@
 import type { VirtualElement } from '@floating-ui/dom';
 import { autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
+import animateWithClass from '@quietui/scurry/dist/utilities/animate-with-class.js';
 import type { CSSResultGroup } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { QuietClosedEvent, QuietCloseEvent, QuietOpenedEvent, QuietOpenEvent } from '../../events/open-close.js';
 import { QuietSelectEvent } from '../../events/select.js';
 import hostStyles from '../../styles/host.styles.js';
-import { animateWithClass } from '../../utilities/animate.js';
 import { LongPress, LongPressEvent } from '../../utilities/long-press.js';
 import { createId } from '../../utilities/math.js';
 import { QuietElement } from '../../utilities/quiet-element.js';

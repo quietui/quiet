@@ -91,7 +91,7 @@ Alternatively, you can set it programmatically using the `setLibraryPath()` func
 ```js
 import { setLibraryPath } from '/path/to/quiet.js';
 
-setLibraryPath('/path/to/quiet');
+setLibraryPath('/path/to/quiet/dist');
 ```
 
 :::warn

@@ -1,10 +1,8 @@
 ---
-title: Using a framework
+title: Frameworks
 description: How to get started with Quiet and your favorite framework.
 layout: docs
 ---
-
-## Installation
 
 If you're using a framework, you shouldn't use the autoloader. Instead, install Quiet via npm and manually [import each component](/docs/#manually-importing) as shown in the examples below.
 
@@ -24,11 +22,7 @@ setLibraryPath('/path/to/quiet/dist');
 Since you're using npm instead of the autoloader, you only need to copy `dist/assets`. You can safely ignore all other files and folders in `dist`. However, make sure the library path points to `dist` and not `dist/assets`.
 :::
 
----
-
-## Framework-specific instructions
-
-Some frameworks require configuration for them to recognize custom elements. Look for your framework below for more information.
+Some frameworks require configuration for them to recognize custom elements. Look for your framework below for more details.
 
 ### Angular
 

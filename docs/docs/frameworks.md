@@ -22,11 +22,7 @@ setLibraryPath('/path/to/quiet/dist');
 Since you're using npm instead of the autoloader, you only need to copy `dist/assets`. You can safely ignore all other files and folders in `dist`. However, make sure the library path points to `dist` and not `dist/assets`.
 :::
 
----
-
-## Framework-specific instructions
-
-Some frameworks require configuration for them to recognize custom elements. Look for your framework below for more information.
+Some frameworks require configuration for them to recognize custom elements. Look for your framework below for more details.
 
 ### Angular
 

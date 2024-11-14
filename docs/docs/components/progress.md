@@ -32,7 +32,7 @@ Slot in some text to show content in the progress bar's indicator.
 Set the `type` attribute to `ring` to show progress in the shape of a ring.
 
 ```html {.example .flex-row}
-<quiet-progress label="Completion" type="ring" value="50">
+<quiet-progress label="Completion" appearance="ring" value="50">
   50%
 </quiet-progress>
 ```
@@ -46,7 +46,7 @@ When the completion status can't be determined, the progress bar is considered i
 
 <br>
 
-<quiet-progress label="Waiting for response" type="ring" indeterminate></quiet-progress>
+<quiet-progress label="Waiting for response" appearance="ring" indeterminate></quiet-progress>
 ```
 
 ### Changing the size
@@ -74,7 +74,7 @@ Use `--track-size` property to change the track size. For progress rings, use th
 <br>
 
 <quiet-progress 
-  type="ring"
+  appearance="ring"
   value="50"
   style="--track-size: 4px; --diameter: 100px;"
 >
@@ -99,7 +99,7 @@ Use the `--track-color` custom property to change the progress bar's track color
 
 <quiet-progress 
   style="--track-color: mistyrose; --indicator-color: deeppink;"
-  type="ring"
+  appearance="ring"
   label="Progress" 
   value="75"
 >

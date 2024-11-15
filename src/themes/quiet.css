@@ -210,7 +210,7 @@
 
   --quiet-silent: black;
   --quiet-strident: white;
-  --quiet-background-color: color-mix(in oklab, var(--quiet-neutral-950), white 3%);
+  --quiet-background-color: color-mix(in oklab, var(--quiet-neutral-950), black 2.5%);
   --quiet-paper-color: color-mix(in oklab, var(--quiet-background-color), white 1.5%);
   --quiet-text-body: var(--quiet-neutral-100);
   --quiet-text-muted: var(--quiet-neutral-text-colorful);

@@ -466,7 +466,7 @@ export class QuietRating extends QuietElement {
         aria-valuenow=${this.value}
         aria-valuetext="${this.localize.term('numberOutOfTotal', this.value, this.max)}"
         aria-valuemax=${this.max}
-        tabindex=${this.disabled ? '-1' : '0'}
+        tabindex=${this.disabled || this.readonly ? '-1' : '0'}
         @focus=${this.handleFocus}
         @blur=${this.handleBlur}
         @keydown=${this.handleKeyDown}

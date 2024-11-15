@@ -8,7 +8,7 @@ section: about
 <img class="whiskers-end only-light" src="/assets/images/whiskers/whiskers-happy-light.svg" alt="Whiskers the mouse standing and smiling">
 <img class="whiskers-end only-dark" src="/assets/images/whiskers/whiskers-happy-dark.svg" alt="Whiskers the mouse standing and smiling">
 
-Quiet is an open source, MIT-licensed user interface library for the modern Web. It features dozens of accessible, performant, localized, and interoperable components along with an optional CSS reset to streamline development of websites and apps.
+Quiet is an open source, MIT-licensed user interface library for the modern Web. It features dozens of accessible, performant, localized, and interoperable components along with an optional CSS reset and animation utilities to streamline development of websites and apps.
 
 You might be curious to learn that Quiet's components aren't built with React, Vue, or any other framework. They're custom HTML elements, or [Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components), which means you can use them in plain ol' HTML pages as well as your favorite frameworks.
 

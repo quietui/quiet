@@ -4,6 +4,37 @@ description: Start using Quiet with just a couple lines of code.
 layout: docs
 ---
 
+Quiet is your go-to library for building modern Web interfaces. It's open source and features more than just components. Here's what's in the box.
+
+<ul class="features-grid">
+  <li>
+    <a class="stretch" href="/docs/using-components">
+      <quiet-icon name="packages" style="color: #b394f4;"></quiet-icon><br>
+      Dozens of high-quality, accessible, interoperable UI components
+    </a>
+  </li>
+  <li>
+    <a class="stretch" href="/docs/theming">
+      <quiet-icon name="color-swatch" style="color: #e98d61;"></quiet-icon><br>
+      Modern theme with light and dark mode and 21 color presets
+    </a>
+  </li>
+  <li>
+    <a class="stretch" href="/docs/restyle">
+      <quiet-icon name="seeding" style="color: #7db664;"></quiet-icon><br>
+      Optional CSS reset for jump-starting new apps with consistent styles
+    </a>
+  </li>
+  <li>
+    <a class="stretch" href="/docs/animation">
+      <quiet-icon name="bounce-right" style="color: #58acf2;"></quiet-icon><br>
+      Animations, easings, and utilities for the Web Animations API
+    </a>
+  </li>  
+</ul>
+
+---
+
 **There are two ways to install Quiet.** [Autoloading](#autoloading) is the fastest way to get started — just copy, paste, and start coding. Or you can [import components manually](#manually-importing) from npm or the CDN.
 
 :::info

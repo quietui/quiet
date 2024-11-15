@@ -66,7 +66,7 @@ Quiet can be used for free under the MIT license. Unfortunately, I can't offer f
   <li><quiet-icon name="bug" style="color: #e98d61;"></quiet-icon><br>Priority bug fixes</li>
   <li><quiet-icon name="circle-dashed-check" style="color: #e886a7;"></quiet-icon><br>Sponsors badge on GitHub</li>
   <li><quiet-icon name="key" style="color: #c5a231;"></quiet-icon><br>Access to sponsors-only forums</li>
-  <li><quiet-icon name="puzzle" style="color: #b394f4;"></quiet-icon><br>Works with all frameworks</li>
+  <li><quiet-icon name="plug" style="color: #b394f4;"></quiet-icon><br>Works with all frameworks</li>
   <li><quiet-icon name="school" style="color: #7db664;"></quiet-icon><br>Learn once, use forever</li>
 </ul>
 

@@ -1,8 +1,9 @@
 function restore() {
-  const importTabs = document.getElementById('import-tabs');
-  if (importTabs) {
-    importTabs.setAttribute('tab', localStorage.getItem('import-tab') || 'cdn');
-  }
+  const importTabLists = document.querySelectorAll('.import-tabs');
+
+  importTabLists.forEach(tabList => {
+    tabList.setAttribute('tab', localStorage.getItem('import-tab') || 'cdn');
+  });
 }
 
 function save(tab) {
@@ -11,7 +12,8 @@ function save(tab) {
 
 // Listen for tab clicks
 document.addEventListener('click', async event => {
-  const importTabs = event.target.closest('#import-tabs');
+  const importTabs = event.target.closest('.import-tabs');
+  console.log(importTabs);
   if (!importTabs) return;
   await importTabs.updateComplete;
   save(importTabs.tab);

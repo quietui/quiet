@@ -15,7 +15,7 @@ Quiet is your go-to library for building modern Web interfaces. It's open source
   </li>
   <li>
     <a class="stretch" href="/docs/theming">
-      <quiet-icon name="color-swatch" style="color: #e98d61;"></quiet-icon><br>
+      <quiet-icon name="palette" style="color: #e98d61;"></quiet-icon><br>
       Modern theme with light and dark mode and 21 color presets
     </a>
   </li>
@@ -28,7 +28,7 @@ Quiet is your go-to library for building modern Web interfaces. It's open source
   <li>
     <a class="stretch" href="/docs/animation">
       <quiet-icon name="bounce-right" style="color: #58acf2;"></quiet-icon><br>
-      Animations, easings, and utilities for the Web Animations API
+      Animations, easings, and utilities built for the Web Animations API
     </a>
   </li>  
 </ul>

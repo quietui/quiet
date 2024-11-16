@@ -13,10 +13,14 @@ function save(tab) {
 // Listen for tab clicks
 document.addEventListener('click', async event => {
   const importTabs = event.target.closest('.import-tabs');
-  console.log(importTabs);
   if (!importTabs) return;
   await importTabs.updateComplete;
   save(importTabs.tab);
+
+  // Update all other import tabs on the page
+  document.querySelectorAll('.import-tabs').forEach(tabList => {
+    tabList.tab = importTabs.tab;
+  });
 });
 
 // Restore it on page load

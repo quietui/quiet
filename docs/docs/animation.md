@@ -4,25 +4,45 @@ description: Animations, easings, and utilities for use with the Web Animations 
 layout: docs
 ---
 
+
+TODO - to make this page more impressive, add great examples and take time with them.
+
+
 Quiet offers an optional, in-house library for animation called [Scurry](https://github.com/quietui/scurry). Scurry was designed to work well with the [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API).
 
 ## Installation
 
-Scurry must be installed separately before using it. The following npm command will install it for you.
+If you're using the CDN, you can skip this section. For npm users, Scurry must be installed separately using the following command.
 
 ```sh
 npm install @quietui/scurry
 ```
 
-TODO - show CDN instructions, maybe in a tablist, and talk about tree shaking
-
 ## Animations
 
 Almost 100 animations are built-in to Scurry. To import an animation:
 
+TODO - some way to click to copy here
+TODO - update scurry versions in each URL
+
+<quiet-tab-list class="import-tabs" label="How would you like to import animations?">
+<quiet-tab slot="tab" panel="cdn">CDN</quiet-tab>
+<quiet-tab slot="tab" panel="npm">npm</quiet-tab>
+<quiet-tab-panel name="cdn">
+
 ```js
-import { tada } from '@quietui/scurry';
+import { tada } from 'https://cdn.jsdelivr.net/npm/@quietui/scurry@3.0.1/dist/animations/tada.js';
 ```
+
+</quiet-tab-panel>
+<quiet-tab-panel name="npm">
+
+```js
+import { tada } from '@quietui/scurry/dist/animations/tada.js';
+```
+
+</quiet-tab-panel>
+</quiet-tab-list>
 
 <details>
   <summary>Show all available animations</summary>
@@ -133,9 +153,28 @@ import { tada } from '@quietui/scurry';
 
 There are many commonly used easings built-in to Scurry. To import an easing:
 
+<quiet-tab-list class="import-tabs" label="How would you like to import easings?">
+<quiet-tab slot="tab" panel="cdn">CDN</quiet-tab>
+<quiet-tab slot="tab" panel="npm">npm</quiet-tab>
+<quiet-tab-panel name="cdn">
+
 ```js
-import { easeInOut } from '@quietui/scurry';
+import { easeInOut } from 'https://cdn.jsdelivr.net/npm/@quietui/scurry@3.0.1/dist/easings/ease-in-out.js';
 ```
+
+</quiet-tab-panel>
+<quiet-tab-panel name="npm">
+
+```js
+import { easeInOut } from '@quietui/scurry/dist/easings/ease-in-out.js';
+```
+
+</quiet-tab-panel>
+</quiet-tab-list>
+
+
+TODO - grid here too
+
 
 <details>
   <summary>Show all available easings</summary>
@@ -178,9 +217,24 @@ Runs an animation on an element, canceling any existing animations immediately. 
 
 To import this function in your app:
 
-```ts
-import { animate } from '@quietui/scurry';
+<quiet-tab-list class="import-tabs" label="How would you like to import the function?">
+<quiet-tab slot="tab" panel="cdn">CDN</quiet-tab>
+<quiet-tab slot="tab" panel="npm">npm</quiet-tab>
+<quiet-tab-panel name="cdn">
+
+```js
+import { animate } from 'https://cdn.jsdelivr.net/npm/@quietui/scurry@3.0.1/dist/utilities/animate.js';
 ```
+
+</quiet-tab-panel>
+<quiet-tab-panel name="npm">
+
+```js
+import { animate } from '@quietui/scurry/dist/utilities/animate.js';
+```
+
+</quiet-tab-panel>
+</quiet-tab-list>
 
 #### Arguments
 
@@ -225,9 +279,24 @@ This function applies a CSS class to the specified element to animate it. The cl
 
 To import this function in your app:
 
-```ts
-import { animateWithClass } from '@quietui/scurry';
+<quiet-tab-list class="import-tabs" label="How would you like to import the function?">
+<quiet-tab slot="tab" panel="cdn">CDN</quiet-tab>
+<quiet-tab slot="tab" panel="npm">npm</quiet-tab>
+<quiet-tab-panel name="cdn">
+
+```js
+import { animateWithClass } from 'https://cdn.jsdelivr.net/npm/@quietui/scurry@3.0.1/dist/utilities/animate-with-class.js';
 ```
+
+</quiet-tab-panel>
+<quiet-tab-panel name="npm">
+
+```js
+import { animateWithClass } from '@quietui/scurry/dist/utilities/animateWithClass.js';
+```
+
+</quiet-tab-panel>
+</quiet-tab-list>
 
 ### Example
 

@@ -84,7 +84,6 @@ If you don't want to use the autoloader, you can import components manually from
 npm install @quietui/quiet
 ```
 
-
 Quiet ships standard ES modules, so you can use [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) or [`import()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import) to pull in exactly the components and utilities you need.
 
 ```js

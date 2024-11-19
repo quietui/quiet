@@ -48,7 +48,7 @@ All of these features are part of [Baseline 2023–2024](https://web.dev/baselin
 Copy and paste the following code into the `<head>` section of any HTML document. The autoloader will automatically load components from the CDN as you add them to the DOM.
 
 ```html
-<!-- Quiet components -->
+<!-- Quiet theme + components -->
 <link rel="stylesheet" href="{% cdnUrl '/dist/themes/quiet.css' %}">
 <script type="module" src="{% cdnUrl '/dist/quiet.loader.js' %}"></script>
 

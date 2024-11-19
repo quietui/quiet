@@ -566,6 +566,74 @@ textarea {
   }
 }
 
+/* Range sliders */
+input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  margin: 0.5em 0;
+  background: transparent;
+  cursor: pointer;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+/* Avoid nesting these, since it breaks styles */
+input[type='range']::-webkit-slider-runnable-track {
+  height: 0.75em;
+  border-radius: 9999px;
+  background: var(--quiet-neutral-fill-soft);
+}
+
+input[type='range']::-moz-range-track {
+  height: 0.75em;
+  border-radius: 9999px;
+  background: var(--quiet-neutral-fill-soft);
+}
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 1.4em;
+  height: 1.4em;
+  margin-top: calc((0.75em - 1.4em) / 2);
+  border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-fill-mid);
+  border-radius: 50%;
+  background-color: white;
+}
+
+input[type='range']::-moz-range-thumb {
+  width: 1.4em;
+  height: 1.4em;
+  border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-fill-mid);
+  border-radius: 50%;
+  background-color: white;
+}
+
+input[type='range']:focus::-webkit-slider-thumb {
+  outline: var(--quiet-focus-ring);
+  outline-offset: calc(var(--quiet-focus-offset) * 2);
+}
+
+input[type='range']:focus::-moz-range-thumb {
+  outline: var(--quiet-focus-ring);
+  outline-offset: calc(var(--quiet-focus-offset) * 2);
+}
+
+input[type='range']::-moz-range-progress {
+  /* Firefox progress fill */
+  height: 0.75em;
+  border-radius: var(--quiet-border-radius);
+  background-color: var(--quiet-primary-fill-mid);
+}
+
 /* Text areas */
 textarea {
   resize: vertical;
@@ -717,6 +785,50 @@ label:has(input[type='checkbox'], input[type='radio']) {
 
   &:where(:not(:last-child)) {
     margin-inline-end: 1em;
+  }
+}
+
+/* Dialogs */
+dialog {
+  &[open] {
+    display: flex;
+    position: fixed;
+    flex-direction: column;
+    width: 30rem;
+    height: fit-content;
+    inset-block-end: 0;
+    inset-block-start: 0;
+    padding: 1.5rem;
+    transform: scale(1);
+    border: none;
+    border-radius: var(--quiet-border-radius);
+    background: var(--quiet-paper-color);
+    box-shadow: var(--quiet-shadow-loud);
+    opacity: 1;
+    transition:
+      opacity 150ms ease,
+      transform 150ms ease;
+
+    @starting-style {
+      transform: scale(0.7);
+      opacity: 0;
+    }
+  }
+
+  &::backdrop {
+    backdrop-filter: var(--quiet-backdrop-filter);
+    -webkit-backdrop-filter: var(--quiet-backdrop-filter, blur(6px));
+    /*
+      NOTE: the ::backdrop element doesn't inherit properly in Safari yet, but it will in 17.4! At that time, we can
+      remove the fallback values here.
+    */
+    background-color: var(--quiet-backdrop-color, rgb(0 0 0 / 0.25));
+    opacity: 1;
+    transition: opacity 150ms ease;
+
+    @starting-style {
+      opacity: 0;
+    }
   }
 }
 

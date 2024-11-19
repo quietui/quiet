@@ -234,7 +234,7 @@ export function thing(arg) {
 For consistency, native form controls are styled to look similar to Quiet form controls.
 
 <div style="display: flex; flex-direction: column; gap: 1rem;">
-  <input id="text" placeholder="Text">
+  <input type="text" placeholder="Text">
   <input type="color" placeholder="Color" value="#787acf">
   <input type="date" placeholder="Date" value="1989-03-12">
   <input type="time" placeholder="Time" value="12:00:00">
@@ -246,6 +246,7 @@ For consistency, native form controls are styled to look similar to Quiet form c
     <option value="lg">Large</option>
   </select>
   <textarea placeholder="Tell us something about yourself" rows="3"></textarea>
+  <input type="range">
   <div>
     <label><input type="radio" name="a" value="1" checked> Option 1</label>
     <label><input type="radio" name="a" value="2"> Option 2</label>
@@ -262,6 +263,30 @@ For consistency, native form controls are styled to look similar to Quiet form c
   </div>
 </div>
 
+### Dialogs
+
+<dialog id="restyle-dialog">
+  <p>This is a native dialog.</p>
+  <footer>
+    <button type="button">Close</button>
+  </footer>
+</dialog>
+
+<button type="button" id="open-restyle-dialog">Open dialog</button>
+
+<script type="module">
+  const dialog = document.getElementById('restyle-dialog');
+  const openButton = document.getElementById('open-restyle-dialog');
+  const closeButton = dialog.querySelector('button');
+  
+  openButton.addEventListener('click', () => {
+    dialog.showModal();
+  });
+
+  closeButton.addEventListener('click', () => {
+    dialog.close();
+  });
+</script>
 ---
 
 ## Utility classes

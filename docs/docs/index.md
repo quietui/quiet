@@ -15,7 +15,7 @@ Quiet is your go-to library for building modern Web interfaces. It's open source
   </li>
   <li>
     <a class="stretch" href="/docs/theming">
-      <quiet-icon name="color-swatch" style="color: #e98d61;"></quiet-icon><br>
+      <quiet-icon name="palette" style="color: #e98d61;"></quiet-icon><br>
       Modern theme with light and dark mode and 21 color presets
     </a>
   </li>
@@ -28,7 +28,7 @@ Quiet is your go-to library for building modern Web interfaces. It's open source
   <li>
     <a class="stretch" href="/docs/animation">
       <quiet-icon name="bounce-right" style="color: #58acf2;"></quiet-icon><br>
-      Animations, easings, and utilities for the Web Animations API
+      Animations, easings, and utilities built for the Web Animations API
     </a>
   </li>  
 </ul>
@@ -48,8 +48,12 @@ All of these features are part of [Baseline 2023–2024](https://web.dev/baselin
 Copy and paste the following code into the `<head>` section of any HTML document. The autoloader will automatically load components from the CDN as you add them to the DOM.
 
 ```html
+<!-- Quiet components -->
 <link rel="stylesheet" href="{% cdnUrl '/dist/themes/quiet.css' %}">
 <script type="module" src="{% cdnUrl '/dist/quiet.loader.js' %}"></script>
+
+<!-- Optional CSS reset -->
+<link rel="stylesheet" href="{% cdnUrl '/dist/themes/restyle.css' %}">
 ```
 
 Now you can use any component in your HTML!
@@ -82,6 +86,16 @@ If you don't want to use the autoloader, you can import components manually from
 
 ```sh
 npm install @quietui/quiet
+```
+
+First, add the [default theme](/docs/theming) and the [optional CSS reset](/docs/restyle).
+
+```html
+<!-- Quiet styles -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@quietui/quiet@1.0.0/dist/themes/quiet.css">
+
+<!-- Optional CSS reset -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@quietui/quiet@1.0.0/dist/themes/restyle.css">
 ```
 
 Quiet ships standard ES modules, so you can use [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) or [`import()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import) to pull in exactly the components and utilities you need.

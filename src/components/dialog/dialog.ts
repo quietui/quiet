@@ -1,4 +1,4 @@
-import { animateWithClass } from '@quietui/scurry';
+import { animateWithClass } from '@quietui/scurry/dist/utilities/animate-with-class.js';
 import type { CSSResultGroup } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';

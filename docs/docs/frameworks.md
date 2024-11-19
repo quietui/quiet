@@ -7,7 +7,7 @@ layout: docs
 If you're using a framework, you shouldn't use the autoloader. Instead, install Quiet via npm and manually [import each component](/docs/#manually-importing) as shown in the examples below.
 
 ```sh
-npm install @quietui/quiet
+npm install @quietui/quie
 ```
 
 You will need to copy Quiet's `dist/assets` folder into your app and [configure the library path](/docs/#setting-the-library-path) for icons and other assets to work.
@@ -84,15 +84,15 @@ export default {
 SolidJS plays nicely with custom elements without additional configuration. Just import the component and use it like a regular HTML element.
 
 ```tsx
-import '@shoelace-style/shoelace@2.18.0/dist/components/button/button.js';
+import { h } from 'preact';
+import { useState } from 'preact/hooks';
+import '@quietui/quiet/dist/components/button/button.js';
 
-const ShoelaceButton = () => {
+export function Component() {
   return (
-    <sl-button variant="primary">Click me</sl-button>
+    <quiet-button variant="primary">Click me</quiet-button>
   );
-};
-
-export default ShoelaceButton;
+}
 ```
 
 ### SolidJS

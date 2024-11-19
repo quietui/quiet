@@ -139,8 +139,6 @@ async function generateBundle() {
       './src/quiet.ts',
       // Autoloader + utilities
       './src/quiet.loader.ts',
-      // Animations
-      './src/animation.ts',
       // Individual components
       ...(await globby('./src/components/**/!(*.(style|test)).ts')),
       // Translations

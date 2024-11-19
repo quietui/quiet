@@ -1,10 +1,10 @@
 import { arrow, autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
-import { animateWithClass } from '@quietui/scurry';
 import type { CSSResultGroup } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { QuietClosedEvent, QuietCloseEvent, QuietOpenedEvent, QuietOpenEvent } from '../../events/open-close.js';
 import hostStyles from '../../styles/host.styles.js';
+import { animateWithClass } from '../../utilities/animate.js';
 import { createId } from '../../utilities/math.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import styles from './tooltip.styles.js';

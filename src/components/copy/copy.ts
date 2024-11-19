@@ -1,10 +1,10 @@
 import { computePosition, flip } from '@floating-ui/dom';
-import { animateWithClass } from '@quietui/scurry';
 import type { CSSResultGroup } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { QuietCopiedEvent, QuietCopyErrorEvent } from '../../events/copy.js';
 import hostStyles from '../../styles/host.styles.js';
+import { animateWithClass } from '../../utilities/animate.js';
 import { Localize } from '../../utilities/localize.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import '../button/button.js';

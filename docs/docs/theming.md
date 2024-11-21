@@ -573,6 +573,12 @@ Always scope design tokens overrides to the `:root` node (i.e. `<html>` element)
 
 </div>
 
+## Creating a new theme
+
+If you want to create an entirely new theme, the most efficient way is to fork ("copy") the [default theme's CSS](https://github.com/quietui/quiet/blob/main/src/themes/quiet.css) and modify it instead of writing everything from scratch. This method is faster, easier, and less prone to mistakes.
+
+If you just want to change a few things here and there, it's usually better to leave the default theme intact and extend it by adding your own stylesheet with the specific rules you want.
+
 <style>
   .palette {
     margin-block-end: var(--quiet-content-spacing);

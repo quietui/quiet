@@ -144,7 +144,7 @@ Event bubbling is a common pitfall. In the same way native HTML elements all dis
 Some custom events contain a `detail` property with additional information. You can access this information through the `detail` property of the event.
 
 ```js
-window.addEventListener('quiet-discovery-complete', event => {
+document.addEventListener('quiet-discovery-complete', event => {
   console.log(event.detail);
   // result { registered: [], unknown: [] }
 });

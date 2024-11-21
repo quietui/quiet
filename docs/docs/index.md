@@ -69,7 +69,7 @@ Custom elements are registered with JavaScript, so you might experience <abbr ti
 As a convenience, Quiet's autoloader emits an event called `quiet-discovery-complete` when all elements on the page have been "discovered" and registered. This is useful if you want to show, for example, a loading indicator until all components are registered.
 
 ```js
-window.addEventListener('quiet-discovery-complete', event => {
+document.addEventListener('quiet-discovery-complete', event => {
   // All custom elements have been registered!
 }, { once: true });
 ```

@@ -90,6 +90,6 @@ export async function discoverElements(root: Element | ShadowRoot) {
   // The event is wrapped in requestAnimationFrame() to ensure registered components have time to run the first update.
   //
   requestAnimationFrame(() => {
-    window.dispatchEvent(new CustomEvent('quiet-discovery-complete', { detail: { registered, unknown } }));
+    document.dispatchEvent(new CustomEvent('quiet-discovery-complete', { detail: { registered, unknown } }));
   });
 }

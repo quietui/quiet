@@ -16,10 +16,11 @@
     "./custom-elements.json": "./dist/custom-elements.json"
   },
   "keywords": [
-    "web components",
+    "components",
     "custom elements",
+    "design systems",
     "ui",
-    "components"
+    "web components"
   ],
   "author": "Cory LaViska",
   "license": "MIT",

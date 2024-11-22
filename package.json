@@ -47,7 +47,8 @@
     "test:watch": "wtr --watch --group default",
     "prettier": "prettier --check --log-level=warn .",
     "prettier:fix": "prettier --write --log-level=warn .",
-    "spellcheck": "cspell \"**/*.{js,ts,json,html,css,md}\" --no-progress"
+    "spellcheck": "cspell \"**/*.{js,ts,json,html,css,md}\" --no-progress",
+    "check-updates": "npx npm-check-updates -i"
   },
   "dependencies": {
     "@ctrl/tinycolor": "^4.1.0",
@@ -84,6 +85,7 @@
     "markdown-it-kbd": "^2.2.2",
     "markdown-it-mark": "^4.0.0",
     "node-html-parser": "^6.1.12",
+    "npm-check-updates": "^17.1.11",
     "ora": "^8.0.1",
     "plop": "^4.0.1",
     "prettier": "^3.2.4",

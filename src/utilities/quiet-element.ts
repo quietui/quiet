@@ -4,7 +4,7 @@ import { property } from 'lit/decorators.js';
 /** The base class for all Quiet components */
 export class QuietElement extends LitElement {
   /** When set, the component will automatically assign the specified slot to the host element. */
-  protected static autoSlot: string;
+  protected static assignSlotToHost: string;
 
   private hasRecordedInitialProperties = false;
   private initialReflectedProperties: Map<string, unknown> = new Map();
@@ -16,8 +16,8 @@ export class QuietElement extends LitElement {
     this.internals = this.attachInternals();
 
     const constructor = this.constructor as typeof QuietElement;
-    if (constructor.autoSlot) {
-      this.setAttribute('slot', constructor.autoSlot);
+    if (constructor.assignSlotToHost) {
+      this.setAttribute('slot', constructor.assignSlotToHost);
     }
   }
 

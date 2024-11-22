@@ -1,4 +1,4 @@
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import hostStyles from '../../styles/host.styles.js';
@@ -42,13 +42,13 @@ export class QuietButtonGroup extends QuietElement {
     }
   }
 
-  updated(changedProps: Map<string, unknown>) {
-    if (changedProps.has('label')) {
+  updated(changedProperties: PropertyValues<this>) {
+    if (changedProperties.has('label')) {
       this.setAttribute('aria-label', this.label);
       this.updateClassNames();
     }
 
-    if (changedProps.has('orientation')) {
+    if (changedProperties.has('orientation')) {
       this.setAttribute('aria-orientation', this.orientation);
       this.updateClassNames();
     }

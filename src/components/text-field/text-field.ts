@@ -1,4 +1,4 @@
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
@@ -57,10 +57,10 @@ export class QuietTextField extends QuietElement {
 
   @query('input') private textBox: HTMLInputElement;
 
-  @state() private isInvalid = false;
-  @state() private wasChanged = false;
-  @state() private wasSubmitted = false;
-  @state() private isPasswordVisible = false;
+  @state() isInvalid = false;
+  @state() wasChanged = false;
+  @state() wasSubmitted = false;
+  @state() isPasswordVisible = false;
 
   /**
    * The text field's label. If you need to provide HTML in the label, use the `label` slot instead.
@@ -194,18 +194,18 @@ export class QuietTextField extends QuietElement {
     this.removeEventListener('invalid', this.handleHostInvalid);
   }
 
-  updated(changedProps: Map<string, unknown>) {
+  updated(changedProperties: PropertyValues<this>) {
     // Always be updating
     this.updateValidity();
 
     // Handle value
-    if (changedProps.has('value')) {
+    if (changedProperties.has('value')) {
       this.customStates.set('empty', this.value === '');
       this.internals.setFormValue(this.value);
     }
 
     // Handle disabled
-    if (changedProps.has('disabled')) {
+    if (changedProperties.has('disabled')) {
       this.customStates.set('disabled', this.disabled);
     }
 

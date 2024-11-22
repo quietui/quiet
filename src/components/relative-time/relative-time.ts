@@ -1,4 +1,4 @@
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import hostStyles from '../../styles/host.styles.js';
@@ -48,9 +48,9 @@ export class QuietRelativeTime extends QuietElement {
   /** When set, the time will update itself. */
   @property({ type: Boolean, reflect: true }) live = false;
 
-  updated(changedProps: Map<string, unknown>) {
+  updated(changedProperties: PropertyValues<this>) {
     // Live updates
-    if (changedProps.has('live')) {
+    if (changedProperties.has('live')) {
       // Keep track of live elements so we can use a single timer to update them at the same time
       if (this.live) {
         connectedElements.add(this);

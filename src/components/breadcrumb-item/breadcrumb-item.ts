@@ -1,4 +1,4 @@
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { html, literal } from 'lit/static-html.js';
@@ -49,9 +49,9 @@ export class QuietBreadcrumbItem extends QuietElement {
     this.setAttribute('role', 'listitem');
   }
 
-  updated(changedProps: Map<string, unknown>) {
+  updated(changedProperties: PropertyValues<this>) {
     // Set the aria-current attribute on current items
-    if (changedProps.has('current')) {
+    if (changedProperties.has('current')) {
       if (this.current) {
         this.setAttribute('aria-current', 'page');
       } else {

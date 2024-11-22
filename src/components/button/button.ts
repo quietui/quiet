@@ -1,4 +1,4 @@
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
@@ -135,12 +135,12 @@ export class QuietButton extends QuietElement {
   /** Overrides the containing form's `target` attribute. */
   @property({ attribute: 'formtarget' }) formTarget: '_self' | '_blank' | '_parent' | '_top' | string | undefined;
 
-  updated(changedProps: Map<string, unknown>) {
-    if (changedProps.has('disabled')) {
+  updated(changedProperties: PropertyValues<this>) {
+    if (changedProperties.has('disabled')) {
       this.customStates.set('disabled', this.disabled);
     }
 
-    if (changedProps.has('loading')) {
+    if (changedProperties.has('loading')) {
       this.customStates.set('loading', this.loading);
     }
   }

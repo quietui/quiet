@@ -1,4 +1,4 @@
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import hostStyles from '../../styles/host.styles.js';
@@ -25,7 +25,7 @@ import styles from './avatar.styles.js';
 export class QuietAvatar extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
-  @state() private hasImageLoaded = false;
+  @state() hasImageLoaded = false;
 
   /**
    * An accessible label for the avatar. This won't be shown, but it will be read to assistive devices so you should
@@ -47,8 +47,8 @@ export class QuietAvatar extends QuietElement {
     this.setAttribute('aria-label', this.label ?? '');
   }
 
-  updated(changedProps: Map<string, unknown>) {
-    if (changedProps.has('label') && this.label) {
+  updated(changedProperties: PropertyValues<this>) {
+    if (changedProperties.has('label') && this.label) {
       this.setAttribute('aria-label', this.label);
     }
   }

@@ -1,4 +1,4 @@
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
@@ -56,9 +56,9 @@ export class QuietSelect extends QuietElement {
   @query('slot:not([name])') private defaultSlot: HTMLSlotElement;
   @query('#text-box') private textBox: HTMLSelectElement;
 
-  @state() private isInvalid = false;
-  @state() private wasChanged = false;
-  @state() private wasSubmitted = false;
+  @state() isInvalid = false;
+  @state() wasChanged = false;
+  @state() wasSubmitted = false;
   @state() options: string;
 
   /**
@@ -137,18 +137,18 @@ export class QuietSelect extends QuietElement {
     this.syncOptions();
   }
 
-  updated(changedProps: Map<string, unknown>) {
+  updated(changedProperties: PropertyValues<this>) {
     // Always be updating
     this.updateValidity();
 
     // Handle value
-    if (changedProps.has('value')) {
+    if (changedProperties.has('value')) {
       this.customStates.set('empty', this.value === '');
       this.internals.setFormValue(this.value);
     }
 
     // Handle disabled
-    if (changedProps.has('disabled')) {
+    if (changedProperties.has('disabled')) {
       this.customStates.set('disabled', this.disabled);
     }
 

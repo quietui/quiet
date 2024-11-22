@@ -1,4 +1,4 @@
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import hostStyles from '../../styles/host.styles.js';
@@ -32,8 +32,8 @@ export class QuietToolbar extends QuietElement {
     this.setAttribute('role', 'toolbar');
   }
 
-  updated(changedProps: Map<string, unknown>) {
-    if (changedProps.has('orientation')) {
+  updated(changedProperties: PropertyValues<this>) {
+    if (changedProperties.has('orientation')) {
       this.setAttribute('aria-orientation', this.orientation);
     }
   }

@@ -1,6 +1,6 @@
 import type { VirtualElement } from '@floating-ui/dom';
 import { autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { QuietClosedEvent, QuietCloseEvent, QuietOpenedEvent, QuietOpenEvent } from '../../events/open-close.js';
@@ -91,8 +91,8 @@ export class QuietDropdown extends QuietElement {
     this.syncAriaAttributes();
   }
 
-  updated(changedProps: Map<string, unknown>) {
-    if (changedProps.has('open')) {
+  updated(changedProperties: PropertyValues) {
+    if (changedProperties.has('open')) {
       this.customStates.set('open', this.open);
 
       if (this.open) {
@@ -103,7 +103,7 @@ export class QuietDropdown extends QuietElement {
     }
 
     // Handle context element changes
-    if (changedProps.has('contextMenu')) {
+    if (changedProperties.has('contextMenu')) {
       const root = this.getRootNode() as Document | ShadowRoot;
 
       // Tear down the old context element

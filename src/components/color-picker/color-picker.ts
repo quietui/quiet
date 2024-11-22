@@ -1,5 +1,5 @@
 import { TinyColor } from '@ctrl/tinycolor';
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
@@ -88,18 +88,18 @@ export class QuietColorPicker extends QuietElement {
   @query('#color-slider') private colorSlider: HTMLElement;
   @query('#color-slider-thumb') private colorSliderThumb: HTMLElement;
 
-  @state() private h = 0;
-  @state() private s = 0;
-  @state() private v = 1;
-  @state() private a = 1;
-  @state() private colorSliderThumbX = 0;
-  @state() private colorSliderThumbY = 0;
-  @state() private hasFocus = false;
-  @state() private isChangingV = false;
-  @state() private isChangingS = false;
-  @state() private isInvalid = false;
-  @state() private wasChanged = false;
-  @state() private wasSubmitted = false;
+  @state() h = 0;
+  @state() s = 0;
+  @state() v = 1;
+  @state() a = 1;
+  @state() colorSliderThumbX = 0;
+  @state() colorSliderThumbY = 0;
+  @state() hasFocus = false;
+  @state() isChangingV = false;
+  @state() isChangingS = false;
+  @state() isInvalid = false;
+  @state() wasChanged = false;
+  @state() wasSubmitted = false;
 
   /**
    * The color picker's label. If you need to provide HTML in the label, use the `label` slot instead.
@@ -196,12 +196,12 @@ export class QuietColorPicker extends QuietElement {
     });
   }
 
-  updated(changedProps: Map<string, unknown>) {
+  updated(changedProperties: PropertyValues<this>) {
     // Always be updating
     this.updateValidity();
 
     // Handle value
-    if (changedProps.has('value')) {
+    if (changedProperties.has('value')) {
       this.internals.setFormValue(this.value);
 
       if (!this.isDragging && !this.wasValueSetInternally) {
@@ -210,23 +210,23 @@ export class QuietColorPicker extends QuietElement {
     }
 
     // Update the color area thumb when switching directions
-    if (changedProps.has('dir')) {
+    if (changedProperties.has('dir')) {
       this.updateColorSliderThumbPosition();
     }
 
     // Handle disabled
-    if (changedProps.has('disabled')) {
+    if (changedProperties.has('disabled')) {
       this.customStates.set('disabled', this.disabled);
       this.draggableThumb.toggle(!this.disabled);
     }
 
     // Handle focused
-    if (changedProps.has('hasFocus')) {
+    if (changedProperties.has('hasFocus')) {
       this.customStates.set('focused', this.hasFocus);
     }
 
     // Handle opacity
-    if (changedProps.has('withOpacity') && !this.withOpacity) {
+    if (changedProperties.has('withOpacity') && !this.withOpacity) {
       this.a = 1;
     }
 
@@ -243,12 +243,12 @@ export class QuietColorPicker extends QuietElement {
     // Update the formatted value when HSVA, format, or value changes. This ensures the value is always in sync with
     // HSVA and is in a valid format.
     if (
-      changedProps.has('h') ||
-      changedProps.has('s') ||
-      changedProps.has('v') ||
-      changedProps.has('a') ||
-      changedProps.has('format') ||
-      changedProps.has('value')
+      changedProperties.has('h') ||
+      changedProperties.has('s') ||
+      changedProperties.has('v') ||
+      changedProperties.has('a') ||
+      changedProperties.has('format') ||
+      changedProperties.has('value')
     ) {
       const color = new TinyColor({ h: this.h, s: this.s, v: this.v, a: this.a });
 

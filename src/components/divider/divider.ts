@@ -1,4 +1,4 @@
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import hostStyles from '../../styles/host.styles.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
@@ -27,8 +27,8 @@ export class QuietDivider extends QuietElement {
     this.setAttribute('role', 'separator');
   }
 
-  updated(changedProps: Map<string, unknown>) {
-    if (changedProps.has('orientation')) {
+  updated(changedProperties: PropertyValues<this>) {
+    if (changedProperties.has('orientation')) {
       this.setAttribute('aria-orientation', this.orientation === 'vertical' ? 'vertical' : 'horizontal');
     }
   }

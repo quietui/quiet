@@ -1,4 +1,4 @@
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import hostStyles from '../../styles/host.styles.js';
@@ -19,6 +19,12 @@ import styles from './{{ removePrefix tag }}.styles.js';
 @customElement('{{ tag }}')
 export class {{ tagToClassName tag }} extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
+
+  updated(changedProperties: PropertyValues<this>) {
+    if (changedProperties.has('example')) {
+      // this.example has changed
+    }
+  }
 
   /** Description of the property. */
   @property() example = '';

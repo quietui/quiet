@@ -1,4 +1,4 @@
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import hostStyles from '../../styles/host.styles.js';
@@ -62,23 +62,23 @@ export class QuietDropdownItem extends QuietElement {
   /** Disables the dropdown item. */
   @property({ type: Boolean }) disabled = false;
 
-  updated(changedProps: Map<string, unknown>) {
-    if (changedProps.has('active')) {
+  updated(changedProperties: PropertyValues<this>) {
+    if (changedProperties.has('active')) {
       this.setAttribute('tabindex', this.active ? '0' : '-1');
       this.customStates.set('active', this.active);
     }
 
-    if (changedProps.has('checked')) {
+    if (changedProperties.has('checked')) {
       this.setAttribute('aria-checked', this.checked ? 'true' : 'false');
       this.customStates.set('checked', this.checked);
     }
 
-    if (changedProps.has('disabled')) {
+    if (changedProperties.has('disabled')) {
       this.setAttribute('aria-disabled', this.disabled ? 'true' : 'false');
       this.customStates.set('disabled', this.disabled);
     }
 
-    if (changedProps.has('type')) {
+    if (changedProperties.has('type')) {
       if (this.type === 'checkbox') {
         this.setAttribute('role', 'menuitemcheckbox');
       } else {

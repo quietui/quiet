@@ -1,4 +1,4 @@
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import QrCreator from 'qr-creator';
@@ -45,17 +45,17 @@ export class QuietQr extends QuietElement {
     this.setAttribute('role', 'img');
   }
 
-  updated(changedProps: Map<string, unknown>) {
+  updated(changedProperties: PropertyValues<this>) {
     if (
-      changedProps.has('data') ||
-      changedProps.has('errorCorrection') ||
-      changedProps.has('corners') ||
-      changedProps.has('size')
+      changedProperties.has('data') ||
+      changedProperties.has('errorCorrection') ||
+      changedProperties.has('corners') ||
+      changedProperties.has('size')
     ) {
       this.draw();
     }
 
-    if (changedProps.has('label') || changedProps.has('data')) {
+    if (changedProperties.has('label') || changedProperties.has('data')) {
       this.setAttribute('aria-label', this.label || this.data);
     }
   }

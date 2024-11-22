@@ -1,4 +1,4 @@
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { QuietClosedEvent, QuietCloseEvent, QuietOpenedEvent, QuietOpenEvent } from '../../events/open-close.js';
@@ -77,9 +77,9 @@ export class QuietDialog extends QuietElement {
   /** For dialogs that scroll, this will reset the scroll position when the dialog closes. */
   @property({ attribute: 'reset-scroll', type: Boolean }) resetScroll = false;
 
-  updated(changedProps: Map<string, unknown>) {
+  updated(changedProperties: PropertyValues<this>) {
     // Open or close the dialog
-    if (changedProps.has('open')) {
+    if (changedProperties.has('open')) {
       if (this.open && !this.dialog.open) {
         this.show();
       } else if (this.dialog.open) {

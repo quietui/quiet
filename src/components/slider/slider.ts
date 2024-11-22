@@ -1,4 +1,4 @@
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
@@ -76,9 +76,9 @@ export class QuietSlider extends QuietElement {
   @query('#track') track: HTMLElement;
   @query('#tooltip') tooltip: QuietTooltip;
 
-  @state() private isInvalid = false;
-  @state() private wasChanged = false;
-  @state() private wasSubmitted = false;
+  @state() isInvalid = false;
+  @state() wasChanged = false;
+  @state() wasSubmitted = false;
 
   /**
    * The slider's label. If you need to provide HTML in the label, use the `label` slot instead.
@@ -193,28 +193,28 @@ export class QuietSlider extends QuietElement {
     });
   }
 
-  updated(changedProps: Map<string, unknown>) {
+  updated(changedProperties: PropertyValues<this>) {
     // Always be updating
     this.updateValidity();
 
     // Handle value
-    if (changedProps.has('value')) {
+    if (changedProperties.has('value')) {
       this.value = clamp(this.value, this.min, this.max);
       this.internals.setFormValue(String(this.value));
     }
 
     // Handle min/max
-    if (changedProps.has('min') || changedProps.has('max')) {
+    if (changedProperties.has('min') || changedProperties.has('max')) {
       this.value = clamp(this.value, this.min, this.max);
     }
 
     // Handle disabled
-    if (changedProps.has('disabled')) {
+    if (changedProperties.has('disabled')) {
       this.customStates.set('disabled', this.disabled);
     }
 
     // Disable dragging when disabled or readonly
-    if (changedProps.has('disabled') || changedProps.has('readonly')) {
+    if (changedProperties.has('disabled') || changedProperties.has('readonly')) {
       this.draggableTrack.toggle(!(this.disabled || this.readonly));
     }
 

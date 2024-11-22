@@ -1,4 +1,4 @@
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
@@ -65,9 +65,9 @@ export class QuietSpoiler extends QuietElement {
     this.setAttribute('aria-label', this.localize.term('spoiler'));
   }
 
-  updated(changedProps: Map<string, unknown>) {
+  updated(changedProperties: PropertyValues<this>) {
     // When showing a spoiler, hide other spoilers with the same name
-    if (changedProps.has('visible') && this.visible && this.name) {
+    if (changedProperties.has('visible') && this.visible && this.name) {
       const doc = this.getRootNode() as Document | ShadowRoot;
 
       doc.querySelectorAll<QuietSpoiler>(`quiet-spoiler[name=${this.name}]`).forEach(spoiler => {

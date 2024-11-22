@@ -4,7 +4,7 @@ function removeLoadingClass() {
 
 // Remove the loading class from <html> after discovery or after three seconds (in case of problems)
 document.addEventListener('quiet-discovery-complete', removeLoadingClass);
-setTimeout(removeLoadingClass, 3000);
+setTimeout(removeLoadingClass, 2000);
 
 /** Sets the theme to light or dark mode */
 function setTheme(name, skipTransition = false) {

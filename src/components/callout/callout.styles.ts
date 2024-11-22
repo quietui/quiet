@@ -8,14 +8,11 @@ export default css`
     padding-inline: 1em;
     padding-block: 1em;
     gap: 1em;
-    border-width: var(--quiet-border-width);
-    border-style: var(--quiet-border-style);
     border-radius: var(--quiet-border-radius);
   }
 
   /* Primary */
   :host([variant='primary']) {
-    border-color: var(--quiet-primary-stroke-softer);
     background-color: var(--quiet-primary-fill-softer);
   }
 
@@ -25,7 +22,6 @@ export default css`
 
   /* Secondary */
   :host([variant='secondary']) {
-    border-color: var(--quiet-neutral-stroke-softer);
     background-color: var(--quiet-neutral-fill-softer);
   }
 
@@ -35,7 +31,6 @@ export default css`
 
   /* Constructive */
   :host([variant='constructive']) {
-    border-color: var(--quiet-constructive-stroke-softer);
     background-color: var(--quiet-constructive-fill-softer);
   }
 
@@ -45,7 +40,6 @@ export default css`
 
   /* Destructive */
   :host([variant='destructive']) {
-    border-color: var(--quiet-destructive-stroke-softer);
     background-color: var(--quiet-destructive-fill-softer);
   }
 

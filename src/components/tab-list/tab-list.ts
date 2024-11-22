@@ -1,4 +1,4 @@
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { QuietTabHiddenEvent, QuietTabShownEvent } from '../../events/tabs.js';
@@ -30,6 +30,7 @@ interface GetTabsOptions {
  *
  * @slot - One or more `<quiet-tab-panel>` elements, each with a `name` attribute unique to the tab list.
  * @slot tab - One or more `<quiet-tab>` elements, each with a `panel` attribute linked to the `name` of a tab panel.
+ *  Note that tabs will automatically apply this slot to themselves, so you can safely omit `slot="tab"` in your markup.
  *
  * @event quiet-tab-shown - Emitted after a tab is shown. The event will include a `detail` object with `tab` and
  *  `panel`properties that reference the respective tab and panel elements.
@@ -60,19 +61,19 @@ export class QuietTabList extends QuietElement {
   /** The placement of tab controls. */
   @property({ reflect: true }) placement: 'top' | 'bottom' | 'start' | 'end' = 'top';
 
-  updated(changedProps: Map<string, unknown>) {
+  updated(changedProperties: PropertyValues<this>) {
     // Set the label
-    if (changedProps.has('label')) {
+    if (changedProperties.has('label')) {
       this.setAttribute('aria-label', this.label ?? '');
     }
 
     // Set the active tab
-    if (changedProps.has('tab')) {
+    if (changedProperties.has('tab')) {
       this.setActiveTab(this.tab);
     }
 
     // Set orientation
-    if (changedProps.has('placement')) {
+    if (changedProperties.has('placement')) {
       const orientation = ['top', 'bottom'].includes(this.placement) ? 'horizontal' : 'vertical';
       this.setAttribute('aria-orientation', orientation);
     }

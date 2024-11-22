@@ -1,4 +1,4 @@
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import hostStyles from '../../styles/host.styles.js';
@@ -36,8 +36,8 @@ export class QuietTabPanel extends QuietElement {
     this.visible = false;
   }
 
-  updated(changedProps: Map<string, unknown>) {
-    if (changedProps.has('visible')) {
+  updated(changedProperties: PropertyValues<this>) {
+    if (changedProperties.has('visible')) {
       this.customStates.set('visible', this.visible);
     }
   }

@@ -79,8 +79,8 @@ You can register your own translation by creating a new JavaScript or TypeScript
 Refer to the [default translation](https://github.com/quietui/quiet/tree/main/src/translations/en.ts) to see all terms that need to be translated.
 
 <quiet-tab-list label="Select your flavor">
-<quiet-tab slot="tab" panel="ts">TypeScript</quiet-tab>
-<quiet-tab slot="tab" panel="js">JavaScript</quiet-tab>
+<quiet-tab panel="ts">TypeScript</quiet-tab>
+<quiet-tab panel="js">JavaScript</quiet-tab>
 <quiet-tab-panel name="ts">
 
 ```ts

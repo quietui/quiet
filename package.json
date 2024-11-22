@@ -73,7 +73,6 @@
     "comment-parser": "^1.4.1",
     "cspell": "^8.16.0",
     "custom-element-vs-code-integration": "^1.4.1",
-    "del": "^7.1.0",
     "esbuild": "^0.24.0",
     "get-port": "^7.1.0",
     "globby": "^14.0.2",

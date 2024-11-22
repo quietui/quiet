@@ -1,5 +1,5 @@
 import Eleventy from '@11ty/eleventy';
-import { deleteAsync } from 'del';
+import { rm } from 'fs/promises';
 import { join } from 'path';
 import { docsDir, siteDir } from './utils.js';
 
@@ -9,7 +9,7 @@ const elev = new Eleventy(docsDir, siteDir, {
 });
 
 // Cleanup
-await deleteAsync(siteDir);
+await rm(siteDir, { recursive: true, force: true });
 
 // Write it
 await elev.write();

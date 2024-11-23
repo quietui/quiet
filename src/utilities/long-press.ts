@@ -7,8 +7,8 @@
  * touch, set `ignorePointerEvents` to `true`.
  *
  * The `long-press` event is cancelable and bubbles by default. To prevent browsers (e.g. iOS) from showing touch
- * callouts and text selection, the `-webkit-touch-callout`, `-webkit-user-select`, and `user-select` properties are all set to
- * `none !important` temporarily.
+ * callouts and text selection, the `-webkit-touch-callout`, `-webkit-user-select`, and `user-select` properties are all
+ * set to `none !important` temporarily.
  *
  * The event will start functioning as soon as the constructor is called. A `start()` and `stop()` method can be used to
  * start and stop the event listener programmatically, if needed.
@@ -62,6 +62,7 @@ export class LongPress {
     clearTimeout(this.timeout);
     this.timeout = setTimeout(() => {
       const longPressEvent = new LongPressEvent(this.options.eventName, this.options.eventOptions, {
+        type: event.type === 'touchstart' ? 'touch' : 'pointer',
         originalEvent: event
       });
       this.target.dispatchEvent(longPressEvent);
@@ -148,6 +149,8 @@ export class LongPressEvent extends Event {
 }
 
 export interface LongPressEventDetail {
+  /** The type of event. This will be `touch` for taps and `pointer` for clicks. */
+  type: 'touch' | 'pointer';
   /** The event that initiated the long press. Useful for determining the target, coordinates, etc. */
   originalEvent: TouchEvent | PointerEvent;
 }

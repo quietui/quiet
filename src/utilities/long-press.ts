@@ -1,12 +1,12 @@
 /**
- * Adds a configurable longpress event to the target element.
+ * Adds a configurable long press event to the target element.
  *
- * By default, a `longpress` event will be dispatched 500ms after `touchstart` if the user hasn't moved the pointer far
- * from the original position. You can listen for this event with `el.addEventListener('longpress')` like any other
- * event. By design, this utility works with touch events. To enable it for other pointer events, set
- * `allowPointerEvents` to `true`.
+ * By default, a `long press` event will be dispatched 500ms after `touchstart` if the user hasn't moved the pointer far
+ * from the original position. You can listen for this event with `el.addEventListener('long-press')` like any other
+ * event. By design, this utility works with both touch and pointer events. To disable pointer events and only listen to
+ * touch, set `ignorePointerEvents` to `true`.
  *
- * The `longpress` event is cancelable and bubbles by default. To prevent browsers (e.g. iOS) from showing touch
+ * The `long-press` event is cancelable and bubbles by default. To prevent browsers (e.g. iOS) from showing touch
  * callouts and text selection, the `-webkit-touch-callout`, `-webkit-user-select`, and `user-select` properties are all set to
  * `none !important` temporarily.
  *
@@ -17,7 +17,7 @@
  *
  * const longPress = new LongPress(element);
  *
- * element.addEventListener('longpress', (event) => {
+ * element.addEventListener('long-press', (event) => {
  *   // a long press has occurred at originalEvent.clientX, originalEvent.clientY
  *   const originalEvent = event.detail.originalEvent;
  * });
@@ -32,14 +32,14 @@ export class LongPress {
   constructor(el: Element, options?: Partial<LongPressOptions>) {
     this.target = el;
     this.options = {
-      allowPointerEvents: false,
-      eventName: 'longpress',
+      eventName: 'long-press',
       eventOptions: {
         bubbles: true,
         cancelable: true,
         composed: true
       },
       duration: 500,
+      ignorePointerEvents: false,
       maxDelta: 10,
       overrideStyles: true,
       ...options
@@ -71,7 +71,7 @@ export class LongPress {
     this.target.addEventListener('touchmove', this.handleMove);
     this.target.addEventListener('touchend', this.handleRelease);
 
-    if (this.options.allowPointerEvents) {
+    if (!this.options.ignorePointerEvents) {
       this.target.addEventListener('pointermove', this.handleMove);
       this.target.addEventListener('pointerup', this.handleRelease);
     }
@@ -84,7 +84,7 @@ export class LongPress {
     const deltaY = Math.abs(this.startCoords.y - y);
     const deltaRoot = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 
-    // Cancel the longpress if the delta is too big or 2+ finger touches
+    // Cancel the long press if the delta is too big or 2+ finger touches
     if (deltaRoot > this.options.maxDelta || (event instanceof TouchEvent && event.touches.length > 1)) {
       clearTimeout(this.timeout);
     }
@@ -109,7 +109,7 @@ export class LongPress {
     // Listen for touchstart / pointerdown
     this.target.addEventListener('touchstart', this.handlePress);
 
-    if (this.options.allowPointerEvents) {
+    if (!this.options.ignorePointerEvents) {
       this.target.addEventListener('pointerdown', this.handlePress);
     }
   }
@@ -130,7 +130,7 @@ export class LongPress {
     this.target.removeEventListener('touchmove', this.handleMove);
     this.target.removeEventListener('touchend', this.handleRelease);
 
-    if (this.options.allowPointerEvents) {
+    if (!this.options.ignorePointerEvents) {
       this.target.removeEventListener('pointerdown', this.handlePress);
       this.target.removeEventListener('pointermove', this.handleMove);
       this.target.removeEventListener('pointerup', this.handleRelease);
@@ -154,10 +154,10 @@ export interface LongPressEventDetail {
 
 export interface LongPressOptions {
   /**
-   * By default, only touch events will dispatch a long press event. Set this to `true` to enable mouse events to
-   * dispatch the event as well.
+   * By default, both touch and pointers events will dispatch a long press event. Set this to `true` to disable pointer
+   * events and only listen to touch events.
    */
-  allowPointerEvents: boolean;
+  ignorePointerEvents: boolean;
   /** The name of the event to emit. */
   eventName: string;
   /** Options to pass to the event. */

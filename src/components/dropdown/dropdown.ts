@@ -110,17 +110,20 @@ export class QuietDropdown extends QuietElement {
       if (this.contextMenuElement) {
         this.contextMenuLongPress?.stop();
         this.contextMenuElement.removeEventListener('contextmenu', this.handleContextMenu);
-        this.contextMenuElement.removeEventListener('quiet-longpress', this.handleContextMenu);
+        this.contextMenuElement.removeEventListener('quiet-long-press', this.handleContextMenu);
       }
 
       // Setup the new context element
       this.contextMenuElement = this.contextMenu ? root.querySelector(`#${this.contextMenu}`) : null;
 
       if (this.contextMenuElement) {
-        this.contextMenuLongPress = new LongPress(this.contextMenuElement, { eventName: 'quiet-longpress' });
+        this.contextMenuLongPress = new LongPress(this.contextMenuElement, {
+          eventName: 'quiet-long-press',
+          ignorePointerEvents: true
+        });
         this.contextMenuLongPress.start();
         this.contextMenuElement.addEventListener('contextmenu', this.handleContextMenu);
-        this.contextMenuElement.addEventListener('quiet-longpress', this.handleContextMenu);
+        this.contextMenuElement.addEventListener('quiet-long-press', this.handleContextMenu);
       } else if (this.contextMenu) {
         // If `context` is provided and the element isn't found, show a warning
         console.warn(

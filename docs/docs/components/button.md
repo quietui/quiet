@@ -227,3 +227,31 @@ A caret can be shown to indicate the button opens a dropdown menu by adding the 
 ```html {.example}
 <quiet-button with-caret>Dropdown</quiet-button>
 ```
+
+### Listening for long press
+
+A common request, especially on mobile, is to be able to detect a long press. Buttons dispatch a `quiet-long-press` event when the button is clicked or tapped and held for 500 milliseconds. You can determine if the event was triggered by a click (`pointerdown`) or tap (`touchstart`) by looking at `event.detail.originalEvent.type`.
+
+```html {.example}
+<quiet-button id="button__long-press">Press and hold</quiet-button>
+
+<script>
+  const button = document.getElementById('button__long-press');
+
+  button.addEventListener('quiet-long-press', async event => {
+    // Log the type of event that initiated the long press, 
+    // i.e. pointerdown or touchstart
+    console.log(event.detail.originalEvent.type);    
+
+    // Animate the button
+    button.animate([
+      { scale: 1, offset: 0 },
+      { scale: 1.2, offset: 0.1 },
+      { scale: 1, offset: 1 }
+    ], {
+      duration: 500,
+      easing: 'linear'
+    });
+  });
+</script>
+```

@@ -20,8 +20,10 @@ import styles from './tab.styles.js';
  */
 @customElement('quiet-tab')
 export class QuietTab extends QuietElement {
-  static assignSlotToHost = 'tab';
   static styles: CSSResultGroup = [hostStyles, styles];
+
+  // Automatically slot tabs into the "tab" slot of the tab list
+  public slot = 'tab';
 
   /** @internal The controller will set this property to true when the tab is active. */
   @property({ type: Boolean }) active = false;

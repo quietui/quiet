@@ -12,7 +12,7 @@ Quiet is an open source, MIT-licensed user interface library for the modern Web.
 
 You might be curious to learn that Quiet's components aren't built with React, Vue, or any other framework. They're custom HTML elements, or [Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components), which means you can use them in plain ol' HTML pages as well as your favorite frameworks.
 
-Every modern browser has the APIs necessary to allow us to create interoperable components that work everywhere. As a result, it makes little sense to continue building UI components in a specific framework — that promotes lock-in. [Many of the world's largest companies](https://arewebcomponentsathingyet.com/) have been using Web Components in production applications for years.
+Every modern browser has the APIs necessary to support interoperable components that work everywhere. As a result, it makes little sense to continue building UI components in a specific framework — that promotes lock-in. [Many of the world's largest companies](https://arewebcomponentsathingyet.com/) have been using Web Components in production applications for years.
 
 With Quiet, you no longer need to learn a new UI library when you switch frameworks — just take it with you! And since it's built on top of stable platform APIs, it will continue to work for many years to come.
 

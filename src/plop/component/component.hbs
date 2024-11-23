@@ -20,14 +20,14 @@ import styles from './{{ removePrefix tag }}.styles.js';
 export class {{ tagToClassName tag }} extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
+  /** Description of the property. */
+  @property() example = '';
+
   updated(changedProperties: PropertyValues<this>) {
     if (changedProperties.has('example')) {
       // this.example has changed
     }
   }
-
-  /** Description of the property. */
-  @property() example = '';
 
   render() {
     return html` <slot></slot> `;

@@ -45,6 +45,7 @@
     "formaction",
     "formdata",
     "formenctype",
+    "formkit",
     "formmethod",
     "formnovalidate",
     "formtarget",

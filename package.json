@@ -53,7 +53,6 @@
   "dependencies": {
     "@ctrl/tinycolor": "^4.1.0",
     "@floating-ui/dom": "^1.6.12",
-    "@formkit/auto-animate": "^0.8.2",
     "@quietui/squeak": "^1.1.0",
     "lit": "^3.2.1",
     "nanoid": "^5.0.8",

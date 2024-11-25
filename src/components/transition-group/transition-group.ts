@@ -1,15 +1,14 @@
-import type { AnimationController } from '@formkit/auto-animate';
-import autoAnimate from '@formkit/auto-animate';
 import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import hostStyles from '../../styles/host.styles.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
+import type { AnimationController } from './auto-animate.js';
+import autoAnimate from './auto-animate.js';
 import styles from './transition-group.styles.js';
 
 //
 //
-// TODO - Explore View Transitions as an alternative
 // TODO - remove pause when container doesn't change width/height
 // TODO - shuffle() method
 // TODO - reverse() method

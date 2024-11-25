@@ -11,8 +11,8 @@ layout: component
   <div class="box">4</div>
 </quiet-transition-group>
 
-<quiet-button id="tg__randomize">Randomize</quiet-button>
 <quiet-button id="tg__add">Add</quiet-button>
+<quiet-button id="tg__randomize">Randomize</quiet-button>
 
 <script>
   const transitionGroup = document.getElementById('tg__overview');

@@ -6,6 +6,7 @@ import { html, literal } from 'lit/static-html.js';
 import { QuietBlurEvent, QuietFocusEvent } from '../../events/form.js';
 import { QuietClickEvent } from '../../events/pointer.js';
 import hostStyles from '../../styles/host.styles.js';
+import { LongPress } from '../../utilities/long-press.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import '../icon/icon.js';
 import '../spinner/spinner.js';
@@ -28,6 +29,8 @@ import styles from './button.styles.js';
  *
  * @event quiet-blur - Emitted when the button loses focus. This event does not bubble.
  * @event quiet-click - Emitted when the button is clicked. Will not be emitted when the button is disabled or loading.
+ * @event quiet-long-press - Emitted when the button is pressed and held by tapping or with the mouse. You can look at
+ *  `event.detail.originalEvent.type` to see the type of event that initiated the long press.
  * @event quiet-focus - Emitted when the button receives focus. This event does not bubble.
  *
  * @csspart button - The internal `<button>` element. Other than `width`, this is where most custom styles should be
@@ -49,6 +52,7 @@ export class QuietButton extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
   protected internals: ElementInternals;
+  private longPress: LongPress;
 
   /** Determines the button's appearance. */
   @property({ reflect: true }) appearance: 'normal' | 'outline' | 'text' | 'image' = 'normal';
@@ -134,6 +138,12 @@ export class QuietButton extends QuietElement {
 
   /** Overrides the containing form's `target` attribute. */
   @property({ attribute: 'formtarget' }) formTarget: '_self' | '_blank' | '_parent' | '_top' | string | undefined;
+
+  firstUpdated() {
+    const button = this.shadowRoot.getElementById('button')!;
+    this.longPress = new LongPress(button, { eventName: 'quiet-long-press' });
+    this.longPress.start();
+  }
 
   updated(changedProperties: PropertyValues<this>) {
     if (changedProperties.has('disabled')) {

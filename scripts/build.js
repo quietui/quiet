@@ -257,9 +257,13 @@ if (isDeveloping) {
               // Make sure SVGs error out in dev instead of serve the 404 page
               res.writeHead(404);
             } else {
-              const notFoundTemplate = await readFile(join(siteDir, '404.html'), 'utf-8');
-              res.writeHead(404);
-              res.write(notFoundTemplate || 'Page Not Found');
+              try {
+                const notFoundTemplate = await readFile(join(siteDir, '404.html'), 'utf-8');
+                res.writeHead(404);
+                res.write(notFoundTemplate || 'Page Not Found');
+              } catch {
+                // We're probably disconnected for some reason, so fail gracefully
+              }
             }
 
             res.end();

@@ -1,23 +1,9 @@
-import type { CSSResultGroup, PropertyValues } from 'lit';
+import type { CSSResultGroup } from 'lit';
 import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import hostStyles from '../../styles/host.styles.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
-import type { AnimationController } from './auto-animate.js';
-import autoAnimate from './auto-animate.js';
 import styles from './transition-group.styles.js';
-
-//
-//
-// TODO - remove pause when container doesn't change width/height
-// TODO - shuffle() method
-// TODO - reverse() method
-// TODO - insert(el, 4) method to insert at a specific position (appends if omitted)
-// TODO - remove(el)
-// TODO - replace(oldEl, newEl)
-// TODO - swap(el1, el2)
-//
-//
 
 /**
  * <quiet-transition-group>
@@ -33,7 +19,7 @@ import styles from './transition-group.styles.js';
 export class QuietTransitionGroup extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
-  private animation: AnimationController;
+  private observer: MutationObserver;
 
   /** The duration to use when transitioning. */
   @property({ type: Number }) duration = 250;
@@ -46,21 +32,73 @@ export class QuietTransitionGroup extends QuietElement {
    * to override this behavior when necessary. */
   @property({ attribute: 'ignore-reduced-motion', type: Boolean }) ignoreReducedMotion = false;
 
-  updated(changedProperties: PropertyValues<this>) {
-    if (
-      changedProperties.has('duration') ||
-      changedProperties.has('easing') ||
-      changedProperties.has('ignoreReducedMotion')
-    ) {
-      if (this.animation) {
-        this.animation.disable();
-      }
+  connectedCallback() {
+    super.connectedCallback();
 
-      this.animation = autoAnimate(this, {
-        duration: this.duration,
-        easing: this.easing,
-        disrespectUserMotionPreference: this.ignoreReducedMotion
+    if (!this.observer) {
+      this.observer = new MutationObserver(this.handleMutations);
+    }
+
+    this.observer.observe(this, {
+      childList: true,
+      characterData: false
+    });
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.observer.disconnect();
+  }
+
+  private handleMutations = (mutations: MutationRecord[]) => {
+    const added: Map<Element, Element> = new Map();
+    const removed: Map<Element, Element> = new Map();
+    const moved: Set<Element> = new Set();
+
+    mutations.forEach(mutation => {
+      // Identify added elements
+      mutation.addedNodes.forEach(node => {
+        if (node.nodeType === Node.ELEMENT_NODE) {
+          added.set(node as Element, mutation.target as Element);
+        }
       });
+
+      // Identify removed elements
+      mutation.removedNodes.forEach(node => {
+        if (node.nodeType === Node.ELEMENT_NODE) {
+          removed.set(node as Element, mutation.target as Element);
+        }
+      });
+    });
+
+    // Identify elements that moved by comparing add/remove parents
+    added.forEach((addedParent, element) => {
+      const removedParent = removed.get(element);
+      if (removedParent && addedParent === removedParent) {
+        moved.add(element);
+        added.delete(element);
+        removed.delete(element);
+      }
+    });
+
+    // TODO - Undo each add, remove, and move by removing, adding, or moving the element respectively
+
+    this.runViewTransition(() => {
+      // TODO - replay each action here to restore the items except with view transition animations
+    });
+
+    console.log('Added:', Array.from(added.keys()));
+    console.log('Removed:', Array.from(removed.keys()));
+    console.log('Moved:', Array.from(moved));
+  };
+
+  private runViewTransition(callback: () => void) {
+    if ('startViewTransition' in document) {
+      document.startViewTransition(() => {
+        requestAnimationFrame(() => callback());
+      });
+    } else {
+      callback();
     }
   }
 

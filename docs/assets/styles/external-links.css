@@ -1,5 +1,6 @@
 a.external {
-  white-space: nowrap;
+  display: inline-block;
+  text-wrap: pretty;
 
   > svg {
     width: 0.875em;

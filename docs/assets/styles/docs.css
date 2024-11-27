@@ -981,7 +981,11 @@ quiet-callout {
 }
 
 /* Tables */
-.table-reflects {
+th.table-reflects {
+  text-align: center;
+}
+
+td.table-reflects {
   font-size: 1.25em;
   text-align: center;
 

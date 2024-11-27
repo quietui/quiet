@@ -51,13 +51,13 @@ export class QuietTransitionGroup extends QuietElement {
    * Disables transition animations. However, the `quiet-transition-start` and `quiet-transition-end` events will still
    * be dispatched.
    */
-  @property({ attribute: 'disable-transitions', type: Boolean }) disableTransitions = false;
+  @property({ attribute: 'disable-transitions', type: Boolean, reflect: true }) disableTransitions = false;
 
   /**
    * By default, no transition will occur when the user indicates a preference for reduced motion. Use this attribute
    * to override this behavior when necessary.
    */
-  @property({ attribute: 'ignore-reduced-motion', type: Boolean }) ignoreReducedMotion = false;
+  @property({ attribute: 'ignore-reduced-motion', type: Boolean, reflect: true }) ignoreReducedMotion = false;
 
   connectedCallback() {
     super.connectedCallback();

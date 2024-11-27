@@ -7,8 +7,6 @@ import { QuietElement } from '../../utilities/quiet-element.js';
 import styles from './transition-group.styles.js';
 
 //
-// TODO - support reduced motion
-// TODO - add an orientation attribute?
 // TODO - make duration/easing customizable for add/remove/move animations?
 // TODO - use --custom properties for duration/easing?
 // TODO - test with CSS grid to make sure it doesn't blow up

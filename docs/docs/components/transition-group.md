@@ -164,6 +164,10 @@ layout: component
 </style>
 ```
 
+:::info
+This component honors the user's [`prefers-reduced-motion`](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion) setting, so animations won't occur when enabled. To override this behavior, use the `ignore-reduced-motion` attribute.
+:::
+
 ## Examples
 
 ```html {.example}

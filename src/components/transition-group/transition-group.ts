@@ -98,7 +98,6 @@ export class QuietTransitionGroup extends QuietElement {
       // Added
       mutation.addedNodes.forEach(node => {
         if (node.nodeType === Node.ELEMENT_NODE) {
-          console.log('add', node);
           addedElements.set(node as HTMLElement, {
             parent: mutation.target as HTMLElement,
             nextSibling: mutation.nextSibling as HTMLElement | null

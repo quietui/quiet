@@ -106,8 +106,8 @@ export default css`
     padding: 0.25em 1em;
     scale: 1;
     border-radius: 9999px;
-    background-color: var(--quiet-neutral-fill-mid);
-    color: var(--quiet-neutral-text-on-mid);
+    background-color: var(--quiet-neutral-fill-loud);
+    color: var(--quiet-neutral-text-on-loud);
     transition:
       0.2s background-color ease,
       0.2s scale ease;
@@ -132,9 +132,9 @@ export default css`
     rotate: -45deg;
     scale: 1;
     border-radius: 50% 50% 50% 0;
-    background-color: var(--quiet-neutral-fill-mid);
+    background-color: var(--quiet-neutral-fill-loud);
     box-shadow: 0 0 0 var(--quiet-focus-offset) var(--quiet-silent);
-    color: var(--quiet-neutral-text-on-mid);
+    color: var(--quiet-neutral-text-on-loud);
     font-size: 1.25em;
 
     transition:

@@ -8,10 +8,8 @@ import { QuietElement } from '../../utilities/quiet-element.js';
 import styles from './transition-group.styles.js';
 
 //
-// TODO - make duration/easing customizable for add/remove/move animations?
-// TODO - use --custom properties for duration/easing?
-// TODO - test with CSS grid to make sure it doesn't blow up
-// TODO - add example with lists (e.g. role="list" with role="listitem" elements)
+// BUG - when navigating to the Transition Group page via Turbo, it animates
+// TODO - add example with lists (e.g. role="list" with role="listitem" elements) and a disclaimer about <ol> and <ul>
 // TODO - more examples
 //
 

@@ -11,8 +11,10 @@ Wrap your elements in a transition group, then use normal DOM APIs to add, remov
   <template>
     <div class="list-item">
       <span class="label"></span>
-      <quiet-button size="sm" data-action="up" icon-label="Move up"><quiet-icon name="arrow-up"></quiet-icon></quiet-button>
-      <quiet-button size="sm" data-action="down" icon-label="Move down"><quiet-icon name="arrow-down"></quiet-icon></quiet-button>
+      <quiet-button-group>
+        <quiet-button size="sm" data-action="up" icon-label="Move up"><quiet-icon name="arrow-up"></quiet-icon></quiet-button>
+        <quiet-button size="sm" data-action="down" icon-label="Move down"><quiet-icon name="arrow-down"></quiet-icon></quiet-button>
+      </quiet-button-group>
       <quiet-button size="sm" data-action="delete" icon-label="Delete"><quiet-icon name="trash"></quiet-icon></quiet-button>
     </div>
   </template>

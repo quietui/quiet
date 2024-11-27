@@ -3,6 +3,7 @@ title: Transition Group
 layout: component
 ---
 
+Wrap your elements in a transition group, then use normal DOM APIs to add, remove, and reorder them. The transition group will automatically apply the appropriate animations as elements enter and exit the group.
 
 ```html {.example}
 <div id="transition-group__list">
@@ -146,6 +147,7 @@ layout: component
       align-items: center;
       justify-content: start;
       width: 100%;
+      background-color: var(--quiet-paper-color);
       border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
       border-radius: var(--quiet-border-radius);
       box-shadow: var(--quiet-shadow-softer);

@@ -3,6 +3,7 @@ import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { QuietTransitionEndEvent, QuietTransitionStartEvent } from '../../events/transition.js';
 import hostStyles from '../../styles/host.styles.js';
+import { parseCssDuration } from '../../utilities/animate.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import styles from './transition-group.styles.js';
 
@@ -29,6 +30,9 @@ import styles from './transition-group.styles.js';
  * @event quiet-transition-end - Emitted when transition animations end.
  *
  * @cssstate transitioning - Applied when a transition is active.
+ *
+ * @cssproperty [--duration=0.25s] - The base duration of transition animations.
+ * @cssproperty [--easing=cubic-bezier(0.45, 0, 0.55, 1)] - The easing to use for transition animations.
  */
 @customElement('quiet-transition-group')
 export class QuietTransitionGroup extends QuietElement {
@@ -42,7 +46,7 @@ export class QuietTransitionGroup extends QuietElement {
   private resizeObserver: ResizeObserver;
 
   /** The duration to use when transitioning. */
-  @property({ type: Number }) duration = 150;
+  @property({ type: Number }) duration = 300;
 
   /** The easing to use when transitioning. */
   @property() easing = 'linear';
@@ -83,6 +87,10 @@ export class QuietTransitionGroup extends QuietElement {
     const addAnimations: Promise<Animation>[] = [];
     const removeAnimations: Promise<Animation>[] = [];
     const moveAnimations: Promise<Animation>[] = [];
+
+    const computedStyle = getComputedStyle(this);
+    const duration = parseCssDuration(computedStyle.getPropertyValue('--duration'));
+    const easing = computedStyle.getPropertyValue('--easing');
 
     // Turn off the mutation observer while we work with the DOM
     if (this.isTransitioning) return;
@@ -142,20 +150,19 @@ export class QuietTransitionGroup extends QuietElement {
       const isWidthExpanding = newContainerCoords.width < this.cachedContainerPosition.width;
       const isHeightExpanding = newContainerCoords.height < this.cachedContainerPosition.height;
 
+      // If the container is getting thinner, animate it now
       if (isWidthContracting) {
         this.animate(
           [{ width: `${this.cachedContainerPosition.width}px` }, { width: `${newContainerCoords.width}px` }],
-          {
-            duration: this.duration,
-            easing: this.easing
-          }
+          { duration, easing }
         );
       }
 
+      // If the container is getting shorter, animate it now
       if (isHeightContracting) {
         this.animate(
           [{ height: `${this.cachedContainerPosition.height}px` }, { height: `${newContainerCoords.height}px` }],
-          { duration: this.duration, easing: this.easing }
+          { duration, easing }
         );
       }
 
@@ -163,28 +170,25 @@ export class QuietTransitionGroup extends QuietElement {
       removedElements.forEach((opts, el) => {
         this.insertBefore(el, opts.nextSibling);
         removeAnimations.push(
-          el
-            .animate([{ opacity: 0 }], { duration: this.duration, easing: this.easing })
-            .finished.finally(() => el.remove())
+          el.animate([{ opacity: 0 }], { duration: duration / 2, easing }).finished.finally(() => el.remove())
         );
       });
 
       await Promise.allSettled(removeAnimations);
 
+      // If the container is getting wider, animate it now
       if (isWidthExpanding) {
         this.animate(
           [{ width: `${this.cachedContainerPosition.width}px` }, { width: `${newContainerCoords.width}px` }],
-          {
-            duration: this.duration,
-            easing: this.easing
-          }
+          { duration, easing }
         );
       }
 
+      // If the container is getting taller, animate it now
       if (isHeightExpanding) {
         this.animate(
           [{ height: `${this.cachedContainerPosition.height}px` }, { height: `${newContainerCoords.height}px` }],
-          { duration: this.duration, easing: this.easing }
+          { duration, easing }
         );
       }
 
@@ -197,7 +201,7 @@ export class QuietTransitionGroup extends QuietElement {
               height: `${newContainerCoords.height}px`
             }
           ],
-          { duration: this.duration, easing: this.easing }
+          { duration, easing }
         );
       }
 
@@ -222,7 +226,7 @@ export class QuietTransitionGroup extends QuietElement {
                   translate: `0 0`
                 }
               ],
-              { duration: this.duration, easing: this.easing }
+              { duration, easing }
             ).finished
           );
         }
@@ -239,9 +243,7 @@ export class QuietTransitionGroup extends QuietElement {
           el.style.removeProperty('opacity');
         }
 
-        addAnimations.push(
-          el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: this.duration, easing: this.easing }).finished
-        );
+        addAnimations.push(el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: duration / 2, easing }).finished);
       });
 
       await Promise.allSettled(addAnimations);

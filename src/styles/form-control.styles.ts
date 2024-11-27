@@ -213,6 +213,7 @@ export default css`
   /* Filled */
   #visual-box.filled {
     padding: 0 0.75em;
+    border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-fill-softer);
     border-radius: calc(var(--quiet-border-radius) / 1.5);
     background-color: var(--quiet-neutral-fill-softer);
 

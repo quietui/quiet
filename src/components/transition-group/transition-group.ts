@@ -51,8 +51,8 @@ export class QuietTransitionGroup extends QuietElement {
   @property({ attribute: 'disable-transitions', type: Boolean, reflect: true }) disableTransitions = false;
 
   /**
-   * By default, no transition will occur when the user indicates a preference for reduced motion. Use this attribute
-   * to override this behavior when necessary.
+   * By default, no animation will occur when the user indicates a preference for reduced motion. Use this attribute to
+   * override this behavior when necessary.
    */
   @property({ attribute: 'ignore-reduced-motion', type: Boolean, reflect: true }) ignoreReducedMotion = false;
 

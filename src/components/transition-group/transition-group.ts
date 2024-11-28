@@ -1,30 +1,25 @@
 import type { CSSResultGroup } from 'lit';
 import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { QuietTransitionEndEvent, QuietTransitionStartEvent } from '../../events/transition.js';
+import { QuietContentChangedEvent } from '../../events/content.js';
+import { QuietTransitionEndEvent } from '../../events/transition.js';
 import hostStyles from '../../styles/host.styles.js';
 import { parseCssDuration } from '../../utilities/animate.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import styles from './transition-group.styles.js';
 
-//
-// BUG - when navigating to the Transition Group page via Turbo, it animates
-// TODO - add example with lists (e.g. role="list" with role="listitem" elements) and a disclaimer about <ol> and <ul>
-// TODO - more examples
-//
-
 /**
  * <quiet-transition-group>
  *
- * @summary Transition groups improve the user experience by adding subtle animations to items in the group as they're
- *  added, removed, and reordered from the DOM.
+ * @summary Transition groups improve the user's experience by adding subtle animations as items are added, removed, and
+ *  reordered in the group.
  * @documentation https://quietui.org/docs/components/transition-group
  * @status experimental
  * @since 1.0
  *
  * @slot - One or more elements to transition when adding, removing, and reordering the DOM.
  *
- * @event quiet-transition-start - Emitted when transition animations begin.
+ * @event quiet-content-changed - Emitted when content changes and before the transition animation begins.
  * @event quiet-transition-end - Emitted when transition animations end.
  *
  * @cssstate transitioning - Applied when a transition is active.
@@ -50,7 +45,7 @@ export class QuietTransitionGroup extends QuietElement {
   @property() easing = 'linear';
 
   /**
-   * Disables transition animations. However, the `quiet-transition-start` and `quiet-transition-end` events will still
+   * Disables transition animations. However, the `quiet-content-changed` and `quiet-transition-end` events will still
    * be dispatched.
    */
   @property({ attribute: 'disable-transitions', type: Boolean, reflect: true }) disableTransitions = false;
@@ -90,14 +85,21 @@ export class QuietTransitionGroup extends QuietElement {
     const duration = parseCssDuration(computedStyle.getPropertyValue('--duration'));
     const easing = computedStyle.getPropertyValue('--easing');
 
+    // Dispatch the quiet-content-changed event
+    this.dispatchEvent(new QuietContentChangedEvent({ mutations }));
+
+    // Stop here if transitions are disabled
+    if (prefersReducedMotion || this.disableTransitions) {
+      this.isTransitioning = false;
+      this.updateElementPositions();
+      return;
+    }
+
     // Turn off the mutation observer while we work with the DOM
     if (this.isTransitioning) return;
     this.isTransitioning = true;
     this.customStates.set('transitioning', true);
     this.mutationObserver.disconnect();
-
-    // Dispatch the quiet-transition-start event
-    this.dispatchEvent(new QuietTransitionStartEvent());
 
     // Find elements that were added and removed in this mutation
     mutations.forEach(mutation => {
@@ -142,110 +144,113 @@ export class QuietTransitionGroup extends QuietElement {
     await new Promise(requestAnimationFrame);
     const newContainerCoords = this.getBoundingClientRect();
 
-    if (!prefersReducedMotion && !this.disableTransitions) {
-      const isWidthContracting = newContainerCoords.width > this.cachedContainerPosition.width;
-      const isHeightContracting = newContainerCoords.height > this.cachedContainerPosition.height;
-      const isWidthExpanding = newContainerCoords.width < this.cachedContainerPosition.width;
-      const isHeightExpanding = newContainerCoords.height < this.cachedContainerPosition.height;
+    const isWidthContracting = newContainerCoords.width > this.cachedContainerPosition.width;
+    const isHeightContracting = newContainerCoords.height > this.cachedContainerPosition.height;
+    const isWidthExpanding = newContainerCoords.width < this.cachedContainerPosition.width;
+    const isHeightExpanding = newContainerCoords.height < this.cachedContainerPosition.height;
 
-      // If the container is getting thinner, animate it now
-      if (isWidthContracting) {
-        this.animate(
-          [{ width: `${this.cachedContainerPosition.width}px` }, { width: `${newContainerCoords.width}px` }],
-          { duration, easing }
-        );
-      }
-
-      // If the container is getting shorter, animate it now
-      if (isHeightContracting) {
-        this.animate(
-          [{ height: `${this.cachedContainerPosition.height}px` }, { height: `${newContainerCoords.height}px` }],
-          { duration, easing }
-        );
-      }
-
-      // Animate removed elements to make room before we handle moved elements
-      removedElements.forEach((opts, el) => {
-        this.insertBefore(el, opts.nextSibling);
-        removeAnimations.push(
-          el.animate([{ opacity: 0 }], { duration: duration / 2, easing }).finished.finally(() => el.remove())
-        );
+    // If the container is getting thinner, animate it now
+    if (isWidthContracting) {
+      this.animate([{ width: `${this.cachedContainerPosition.width}px` }, { width: `${newContainerCoords.width}px` }], {
+        duration,
+        easing
       });
-
-      await Promise.allSettled(removeAnimations);
-
-      // If the container is getting wider, animate it now
-      if (isWidthExpanding) {
-        this.animate(
-          [{ width: `${this.cachedContainerPosition.width}px` }, { width: `${newContainerCoords.width}px` }],
-          { duration, easing }
-        );
-      }
-
-      // If the container is getting taller, animate it now
-      if (isHeightExpanding) {
-        this.animate(
-          [{ height: `${this.cachedContainerPosition.height}px` }, { height: `${newContainerCoords.height}px` }],
-          { duration, easing }
-        );
-      }
-
-      if (this.cachedContainerPosition.height > newContainerCoords.height) {
-        this.animate(
-          [
-            { width: `${this.cachedContainerPosition.width}px`, height: `${this.cachedContainerPosition.height}px` },
-            {
-              width: `${newContainerCoords.width}px`,
-              height: `${newContainerCoords.height}px`
-            }
-          ],
-          { duration, easing }
-        );
-      }
-
-      // Animate moved elements
-      for await (const el of this.children) {
-        const oldCoordinates = this.cachedElementPositions.get(el as HTMLElement);
-        const newCoordinates = el.getBoundingClientRect();
-
-        if (oldCoordinates) {
-          const translateX = oldCoordinates.left - newCoordinates.left - (window.scrollX - this.cachedScrollPosition.x);
-          const translateY = oldCoordinates.top - newCoordinates.top - (window.scrollY - this.cachedScrollPosition.y);
-
-          moveAnimations.push(
-            el.animate(
-              [
-                {
-                  // from
-                  translate: `${translateX}px ${translateY}px`
-                },
-                {
-                  // to
-                  translate: `0 0`
-                }
-              ],
-              { duration, easing }
-            ).finished
-          );
-        }
-      }
-
-      await Promise.allSettled(moveAnimations);
-
-      // Show the added elements now that there's space for them
-      addedElements.forEach(async (_info, el) => {
-        // Restore the original opacity, if provided
-        if (el.dataset.originalOpacity) {
-          el.style.opacity = el.dataset.originalOpacity;
-        } else {
-          el.style.removeProperty('opacity');
-        }
-
-        addAnimations.push(el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: duration / 2, easing }).finished);
-      });
-
-      await Promise.allSettled(addAnimations);
     }
+
+    // If the container is getting shorter, animate it now
+    if (isHeightContracting) {
+      this.animate(
+        [{ height: `${this.cachedContainerPosition.height}px` }, { height: `${newContainerCoords.height}px` }],
+        { duration, easing }
+      );
+    }
+
+    // Animate removed elements to make room before we handle moved elements
+    removedElements.forEach((opts, el) => {
+      if (opts.nextSibling) {
+        opts.nextSibling.before(el);
+      } else {
+        this.append(el);
+      }
+
+      removeAnimations.push(
+        el.animate([{ opacity: 0 }], { duration: duration / 2, easing }).finished.finally(() => el.remove())
+      );
+    });
+
+    await Promise.allSettled(removeAnimations);
+
+    // If the container is getting wider, animate it now
+    if (isWidthExpanding) {
+      this.animate([{ width: `${this.cachedContainerPosition.width}px` }, { width: `${newContainerCoords.width}px` }], {
+        duration,
+        easing
+      });
+    }
+
+    // If the container is getting taller, animate it now
+    if (isHeightExpanding) {
+      this.animate(
+        [{ height: `${this.cachedContainerPosition.height}px` }, { height: `${newContainerCoords.height}px` }],
+        { duration, easing }
+      );
+    }
+
+    if (this.cachedContainerPosition.height > newContainerCoords.height) {
+      this.animate(
+        [
+          { width: `${this.cachedContainerPosition.width}px`, height: `${this.cachedContainerPosition.height}px` },
+          {
+            width: `${newContainerCoords.width}px`,
+            height: `${newContainerCoords.height}px`
+          }
+        ],
+        { duration, easing }
+      );
+    }
+
+    // Animate moved elements
+    for await (const el of this.children) {
+      const oldCoordinates = this.cachedElementPositions.get(el as HTMLElement);
+      const newCoordinates = el.getBoundingClientRect();
+
+      if (oldCoordinates) {
+        const translateX = oldCoordinates.left - newCoordinates.left - (window.scrollX - this.cachedScrollPosition.x);
+        const translateY = oldCoordinates.top - newCoordinates.top - (window.scrollY - this.cachedScrollPosition.y);
+
+        moveAnimations.push(
+          el.animate(
+            [
+              {
+                // from
+                translate: `${translateX}px ${translateY}px`
+              },
+              {
+                // to
+                translate: `0 0`
+              }
+            ],
+            { duration, easing }
+          ).finished
+        );
+      }
+    }
+
+    await Promise.allSettled(moveAnimations);
+
+    // Show the added elements now that there's space for them
+    addedElements.forEach(async (_info, el) => {
+      // Restore the original opacity, if provided
+      if (el.dataset.originalOpacity) {
+        el.style.opacity = el.dataset.originalOpacity;
+      } else {
+        el.style.removeProperty('opacity');
+      }
+
+      addAnimations.push(el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: duration / 2, easing }).finished);
+    });
+
+    await Promise.allSettled(addAnimations);
 
     // Cache new positions
     this.updateElementPositions();
@@ -258,11 +263,17 @@ export class QuietTransitionGroup extends QuietElement {
       characterData: false
     });
 
-    // Dispatch the quiet-transition-end event
-    this.dispatchEvent(new QuietTransitionEndEvent());
+    // Dispatch the quiet-transition-end event unless disabled
+    if (!this.disableTransitions) {
+      this.dispatchEvent(new QuietTransitionEndEvent());
+    }
   };
 
   private handleResizes = () => {
+    this.updateElementPositions();
+  };
+
+  private handleVisibilityChange = () => {
     this.updateElementPositions();
   };
 
@@ -283,11 +294,14 @@ export class QuietTransitionGroup extends QuietElement {
 
     // Start observing resizes
     this.resizeObserver.observe(document.documentElement);
+
+    document.addEventListener('visibilitychange', this.handleVisibilityChange);
   }
 
   private stopObservers() {
     this.mutationObserver.disconnect();
     this.resizeObserver.disconnect();
+    document.removeEventListener('visibilitychange', this.handleVisibilityChange);
   }
 
   /**

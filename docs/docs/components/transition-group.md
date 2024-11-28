@@ -3,7 +3,135 @@ title: Transition Group
 layout: component
 ---
 
-Wrap your elements in a transition group, then use normal DOM APIs to add, remove, and reorder them. The transition group will automatically apply the appropriate animations as elements enter and exit the group.
+Just wrap a collection of elements in a transition group and use normal DOM APIs to add, remove, and reorder them. The transition group will automatically apply the appropriate animations as elements enter and exit the group.
+
+```html {.example}
+<div id="transition-group__boxes">
+  <!-- Add your elements here -->
+  <quiet-transition-group>
+    <div class="box">1</div>
+    <div class="box">2</div>
+    <div class="box">3</div>
+    <div class="box">4</div>
+    <div class="box">5</div>
+    <div class="box">6</div>
+    <div class="box">7</div>
+    <div class="box">8</div>
+  </quiet-transition-group>
+
+  <div class="buttons">
+    <quiet-button data-action="add">Add random</quiet-button>
+    <quiet-button data-action="remove">Remove random</quiet-button>
+    <quiet-button data-action="shuffle">Shuffle</quiet-button>
+    <quiet-button data-action="disable" toggle="off">Disable transitions</quiet-button>
+  </div>
+</div>
+
+<!-- Everything below is for the demo -->
+<script>
+  const container = document.getElementById('transition-group__boxes');
+  const transitionGroup = container.querySelector('quiet-transition-group');
+  const shuffleButton = container.querySelector('quiet-button[data-action="shuffle"]');
+  const addButton = container.querySelector('quiet-button[data-action="add"]');
+  const removeButton = container.querySelector('quiet-button[data-action="remove"]');
+  const disableButton = container.querySelector('quiet-button[data-action="disable"]');
+  let count = transitionGroup.children.length;
+
+  // Add a box
+  addButton.addEventListener('quiet-click', () => {
+    const children = [...transitionGroup.children];
+    const randomSibling = children[Math.floor(Math.random() * children.length)];
+    const box = document.createElement('div');
+    box.classList.add('box');
+    box.textContent = String(++count);
+
+    if (randomSibling) {
+      randomSibling.before(box);
+    } else {
+      transitionGroup.append(box)
+    }
+  });   
+
+  // Remove a box
+  removeButton.addEventListener('quiet-click', () => {
+    const boxes = [...transitionGroup.children];
+    if (boxes.length > 0) {
+      const randomIndex = Math.floor(Math.random() * boxes.length);
+      boxes[randomIndex].remove();
+    }
+  });  
+
+  // Shuffle boxes
+  shuffleButton.addEventListener('quiet-click', () => {
+    const boxes = [...transitionGroup.children];
+    boxes.sort(() => Math.random() - 0.5);
+    boxes.forEach(box => transitionGroup.append(box));
+  });
+
+  // Disable
+  disableButton.addEventListener('quiet-click', () => {
+    console.log(transitionGroup.disableTransitions);
+    transitionGroup.disableTransitions = disableButton.toggle === 'off';
+  });
+</script>
+
+<style>
+  #transition-group__boxes {
+    quiet-transition-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      flex-direction: row;
+      margin-block-end: 2rem;
+    }
+
+    .buttons {
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+    }
+
+    .box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100px;
+      height: 100px;
+      font-size: 1.5rem;
+      font-weight: var(--quiet-font-weight-semibold);
+      background: var(--quiet-primary-fill-mid);
+      border-radius: var(--quiet-border-radius);
+      color: var(--quiet-primary-text-on-mid);
+
+      @media screen and (max-width: 959px) {
+        font-size: 1.25rem;
+        width: 80px;
+        height: 80px;  
+      }
+    }
+  }
+</style>
+```
+
+This example includes logic and styles for the demo, but the minimal markup you need for a transition group is shown below. Note that only _direct children_ of the transition group will be animated.
+
+```html
+<quiet-transition-group>
+  <div class="item">...</div>
+  <div class="item">...</div>
+  <div class="item">...</div>
+</quiet-transition-group>
+```
+
+:::info
+Transition groups honor the user's [`prefers-reduced-motion`](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion) setting. If you're not seeing animations, this might be why. To override this behavior, which is generally not recommended, use the `ignore-reduced-motion` attribute.
+:::
+
+## Examples
+
+### Working with elements
+
+Use standard DOM APIs to add, remove, and reorder elements and the transition group will automatically animate your changes. This example demonstrates how adding, removing, and reordering list items will be handled by the transition group.
 
 ```html {.example}
 <div id="transition-group__list">
@@ -11,11 +139,11 @@ Wrap your elements in a transition group, then use normal DOM APIs to add, remov
   <template>
     <div class="list-item">
       <span class="label"></span>
-      <quiet-button-group>
+      <quiet-button-group label="Sort">
         <quiet-button size="sm" data-action="up" icon-label="Move up"><quiet-icon name="arrow-up"></quiet-icon></quiet-button>
         <quiet-button size="sm" data-action="down" icon-label="Move down"><quiet-icon name="arrow-down"></quiet-icon></quiet-button>
       </quiet-button-group>
-      <quiet-button size="sm" data-action="delete" icon-label="Delete"><quiet-icon name="trash"></quiet-icon></quiet-button>
+      <quiet-button size="sm" variant="text" data-action="delete" icon-label="Delete"><quiet-icon name="trash"></quiet-icon></quiet-button>
     </div>
   </template>
 
@@ -24,10 +152,10 @@ Wrap your elements in a transition group, then use normal DOM APIs to add, remov
   </quiet-transition-group>
 
   <form>
-    <quiet-text-field placeholder="New item" appearance="filled"></quiet-text-field>
-    <quiet-button type="submit" variant="primary" icon-label="Add"><quiet-icon name="plus"></quiet-icon></quiet-button>
+    <quiet-text-field placeholder="New item" appearance="filled" pill></quiet-text-field>
+    <quiet-button type="submit" variant="primary" icon-label="Add to list" pill><quiet-icon name="plus"></quiet-icon></quiet-button>
     <quiet-divider orientation="vertical"></quiet-divider>
-    <quiet-button data-action="shuffle">Shuffle</quiet-button>
+    <quiet-button pill data-action="shuffle">Shuffle</quiet-button>
   </form>
 </div>
 
@@ -36,10 +164,7 @@ Wrap your elements in a transition group, then use normal DOM APIs to add, remov
   const transitionGroup = container.querySelector('quiet-transition-group');
   const template = container.querySelector('template');
   const addForm = container.querySelector('form');
-
-  const shuffleButton = document.getElementById('transition-group__list-shuffle');
-  const prependButton = document.getElementById('transition-group__list-prepend');
-  const appendButton = document.getElementById('transition-group__list-append');
+  const shuffleButton = container.querySelector('[data-action="shuffle"]');
   let count = transitionGroup.children.length;
 
   function createListItem(label = '') {
@@ -50,15 +175,15 @@ Wrap your elements in a transition group, then use normal DOM APIs to add, remov
 
   // Create the initial list
   if (transitionGroup.children.length === 0) {
-    ['Cats', 'Dogs', 'Birds', 'Fish'].forEach(label => {
+    ['Feed the cats', 'Change the litter box', 'Buy catnip', 'Playtime'].forEach(label => {
       const listItem = createListItem(label);
       transitionGroup.append(listItem);
       updateListItems();
     });
   }
 
-  // Update the list when the transition starts (the DOM has already been updated at this point)
-  transitionGroup.addEventListener('quiet-transition-start', updateListItems);
+  // Update the list now that the content has changed
+  transitionGroup.addEventListener('quiet-content-changed', updateListItems);
 
   // Add an item
   addForm.addEventListener('submit', event => {
@@ -71,7 +196,14 @@ Wrap your elements in a transition group, then use normal DOM APIs to add, remov
     event.preventDefault();
   });
 
-  // Handle actions
+  // Shuffle items
+  shuffleButton.addEventListener('quiet-click', () => {
+    const items = [...transitionGroup.children];
+    items.sort(() => Math.random() - 0.5);
+    items.forEach(item => transitionGroup.append(item));
+  });
+
+  // Handle item actions
   container.addEventListener('quiet-click', event => {
     const button = event.target.closest('[data-action]');
     if (!button) return;
@@ -85,22 +217,16 @@ Wrap your elements in a transition group, then use normal DOM APIs to add, remov
 
     // Move an item up
     if (action === 'up' && listItem.previousElementSibling) {
-      transitionGroup.insertBefore(listItem, listItem.previousElementSibling);
+    listItem.previousElementSibling.before(listItem);
     }
 
-    // Move an item down
+    // Move an item down 
     if (action === 'down' && listItem.nextElementSibling) {
-      transitionGroup.insertBefore(listItem.nextElementSibling, listItem);
-    }
-
-    // Shuffle items
-    if (action === 'shuffle') {
-      const items = [...transitionGroup.children];
-      items.sort(() => Math.random() - 0.5);
-      items.forEach(item => transitionGroup.append(item));
+    listItem.nextElementSibling.after(listItem);
     }
   });
 
+  // Make sure the first/last items have the up/down buttons disabled
   function updateListItems() {
     const listItems = transitionGroup.querySelectorAll('.list-item');
 
@@ -163,85 +289,156 @@ Wrap your elements in a transition group, then use normal DOM APIs to add, remov
       quiet-button {
         flex: 0 0 auto;
       }
+
+      quiet-button[data-action="delete"] quiet-icon {
+        color: var(--quiet-destructive-text-colorful);
+      }
     }      
   }
 </style>
 ```
 
-:::info
-This component honors the user's [`prefers-reduced-motion`](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion) setting, so animations won't occur when enabled. To override this behavior, use the `ignore-reduced-motion` attribute.
+### Changing the layout
+
+Transition groups use a columnar flex layout, by default. To change the layout, apply `flex-direction: row` to the transition group. You can add spacing between items by setting the `gap` property.
+
+```css
+quiet-transition-group {
+  flex-direction: row;
+  gap: 2rem;
+}
+```
+
+:::warn
+Support for non-flex layouts, including CSS Grid, is considered experimental.
 :::
 
-## Examples
+### Changing duration and easing
+
+To change the animation speed and easing, set the `--duration` and `--easing` custom properties on the transition group.
 
 ```html {.example}
-<div id="tg__boxes">
-  <quiet-transition-group style="display: flex; flex-wrap: wrap; gap: 1rem; margin-block-end: 1rem;" id="tg__boxes">
-    <div class="box">1</div>
-    <div class="box">2</div>
-    <div class="box">3</div>
-    <div class="box">4</div>
-  </quiet-transition-group>
-
-  <quiet-button data-action="prepend">Prepend</quiet-button>
-  <quiet-button data-action="append">Append</quiet-button>
-  <quiet-button data-action="shuffle">Shuffle</quiet-button>
-</div>
+<quiet-transition-group 
+  id="transition-group__duration"
+  style="
+    --duration: 1000ms;
+    --easing: cubic-bezier(0.68, -0.6, 0.32, 1.6);
+  "
+>
+  <div class="box" style="background-color: deeppink;"></div>
+  <div class="box" style="background-color: dodgerblue;"></div>
+  <div class="box" style="background-color: rebeccapurple;"></div>
+  <div class="box" style="background-color: tomato;"></div>
+</quiet-transition-group>
 
 <script>
-  const container = document.getElementById('tg__boxes');
-  const transitionGroup = container.querySelector('quiet-transition-group');
-  const shuffleButton = container.querySelector('quiet-button[data-action="shuffle"]');
-  const prependButton = container.querySelector('quiet-button[data-action="prepend"]');
-  const appendButton = container.querySelector('quiet-button[data-action="append"]');
-  let count = transitionGroup.children.length;
+  const transitionGroup = document.getElementById('transition-group__duration');
 
-  // shuffle boxes
-  shuffleButton.addEventListener('quiet-click', () => {
-    const boxes = [...transitionGroup.children];
-    boxes.sort(() => Math.random() - 0.5);
-    boxes.forEach(box => transitionGroup.append(box));
+  function moveTheBox() {
+    const lastChild = transitionGroup.lastElementChild;
+    if (lastChild) {
+      transitionGroup.prepend(lastChild);
+    }
+  }
+
+  // Move the box again after the transition ends
+  transitionGroup.addEventListener('quiet-transition-end', () => {
+    setTimeout(moveTheBox, 1000);
   });
 
-  // Prepend a box
-  prependButton.addEventListener('quiet-click', () => {
-    const box = document.createElement('div');
-    box.classList.add('box');
-    box.textContent = String(++count);
-    transitionGroup.prepend(box);
-  });
-
-  // Append a box
-  appendButton.addEventListener('quiet-click', () => {
-    const box = document.createElement('div');
-    box.classList.add('box');
-    box.textContent = String(++count);
-    transitionGroup.append(box);
-  });
-
-  // Remove a box when clicking on it
-  transitionGroup.addEventListener('click', event => {
-    const box = event.target.closest('.box');
-    if (box) box.remove();
-  });
+  // Ensure the element is registered
+  Promise.all([
+    customElements.whenDefined('quiet-transition-group'),
+    transitionGroup.updateComplete
+  ])
+  .then(moveTheBox);
 </script>
 
 <style>
-  #tg__boxes {
-    quiet-transition-group {
-      flex-direction: row;
-    }
+  #transition-group__duration {
+    flex-direction: row;
+    gap: 1rem;
 
     .box {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100px;
-      height: 100px;
-      background: var(--quiet-primary-fill-mid);
-      border-radius: var(--quiet-border-radius);
-      color: var(--quiet-primary-text-on-mid);
-      cursor: pointer;
+      width: 60px;
+      height: 60px;
+      border-radius: 3px;
+    }
+  }
+</style>
+```
+
+### Disabling transitions
+
+Add the `disable-transitions` attribute to disable transition animations. Note that the DOM will still be modified when this option is enabled.
+
+```html {.example}
+<div id="transition-group__disabling">
+  <quiet-transition-group>
+    <div class="circle" style="background-color: deeppink;"></div>
+    <div class="circle" style="background-color: dodgerblue;"></div>
+    <div class="circle" style="background-color: rebeccapurple;"></div>
+  </quiet-transition-group>
+
+  <quiet-switch label="Disable transitions"></quiet-switch>
+</div>
+
+<script>
+  const container = document.getElementById('transition-group__disabling');
+  const transitionGroup = container.querySelector('quiet-transition-group');
+  const disableSwitch = container.querySelector('quiet-switch');
+
+  // Toggle transitions
+  disableSwitch.addEventListener('quiet-change', () => {
+    transitionGroup.disableTransitions = !transitionGroup.disableTransitions;
+  });
+
+  // Rotate the circles every second
+  setInterval(() => {
+    const firstChild = transitionGroup.firstElementChild;
+    if (firstChild) {
+      transitionGroup.append(firstChild);
+    }
+  }, 1000);
+</script>
+
+<style>
+  #transition-group__disabling {
+    text-align: center;
+
+    quiet-transition-group {
+      --duration: 500ms;
+      --easing: ease-in-out;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 50px;
+      height: 180px;
+      margin-block-end: 2rem;
+    }
+
+    .circle {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+
+      &:nth-child(1) {
+        grid-column: 1 / -1;
+        grid-row: 1;
+        justify-self: center;
+      }
+
+      &:nth-child(2) {
+        grid-column: 1;
+        grid-row: 2;
+        justify-self: end;
+      }
+
+      &:nth-child(3) {
+        grid-column: 2;
+        grid-row: 2;
+        justify-self: start;  
+      }      
     }
   }
 </style>

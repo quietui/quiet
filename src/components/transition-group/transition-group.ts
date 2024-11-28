@@ -44,6 +44,9 @@ export class QuietTransitionGroup extends QuietElement {
   /** The easing to use when transitioning. */
   @property() easing = 'linear';
 
+  /** The effect to use when items are added and removed. */
+  @property() effect: 'fade' | 'scale' | 'flip-x' | 'flip-y' | 'slide-x' | 'slide-y' | 'rotate-x' | 'rotate-y' = 'fade';
+
   /**
    * Disables transition animations. However, the `quiet-content-changed` and `quiet-transition-end` events will still
    * be dispatched.
@@ -69,6 +72,55 @@ export class QuietTransitionGroup extends QuietElement {
   firstUpdated() {
     // Cache the initial coordinates
     this.updateElementPositions();
+  }
+
+  private getAddKeyframes() {
+    switch (this.effect) {
+      case 'slide-x':
+        return [
+          { opacity: 0, translate: '-12.5% 0' },
+          { opacity: 1, translate: '0 0' }
+        ];
+      case 'slide-y':
+        return [
+          { opacity: 0, translate: '0 -12.5%' },
+          { opacity: 1, translate: '0 0' }
+        ];
+      case 'flip-x':
+        return [
+          { opacity: 0, scale: 0.98, transform: 'scaleX(0.7)' },
+          { opacity: 1, scale: 1, transform: 'scaleX(1)' }
+        ];
+      case 'flip-y':
+        return [
+          { opacity: 0, scale: 0.98, transform: 'scaleY(.7)' },
+          { opacity: 1, scale: 1, transform: 'scaleY(1)' }
+        ];
+      case 'rotate-x':
+        return [
+          { opacity: 0, rotate: '-12deg', translate: '-25% 0' },
+          { opacity: 1, rotate: '0', translate: '0 0' }
+        ];
+      case 'rotate-y':
+        return [
+          { opacity: 0, rotate: '-12deg', translate: '0 -25%' },
+          { opacity: 1, rotate: '0', translate: '0 0' }
+        ];
+      case 'scale':
+        return [
+          { opacity: 0, scale: 0.5 },
+          { opacity: 1, scale: 1 }
+        ];
+      default: // 'fade'
+        return [
+          { opacity: 0, scale: 0.98 },
+          { opacity: 1, scale: 1 }
+        ];
+    }
+  }
+
+  private getRemoveKeyframes() {
+    return this.getAddKeyframes().reverse();
   }
 
   private handleMutations = async (mutations: MutationRecord[]) => {
@@ -174,7 +226,7 @@ export class QuietTransitionGroup extends QuietElement {
       }
 
       removeAnimations.push(
-        el.animate([{ opacity: 0 }], { duration: duration / 2, easing }).finished.finally(() => el.remove())
+        el.animate(this.getRemoveKeyframes(), { duration: duration, easing }).finished.finally(() => el.remove())
       );
     });
 
@@ -210,11 +262,11 @@ export class QuietTransitionGroup extends QuietElement {
     }
 
     // Animate moved elements
-    for await (const el of this.children) {
+    for (const el of this.children) {
       const oldCoordinates = this.cachedElementPositions.get(el as HTMLElement);
       const newCoordinates = el.getBoundingClientRect();
 
-      if (oldCoordinates) {
+      if (oldCoordinates && this.hasPositionChanged(oldCoordinates, newCoordinates)) {
         const translateX = oldCoordinates.left - newCoordinates.left - (window.scrollX - this.cachedScrollPosition.x);
         const translateY = oldCoordinates.top - newCoordinates.top - (window.scrollY - this.cachedScrollPosition.y);
 
@@ -247,7 +299,7 @@ export class QuietTransitionGroup extends QuietElement {
         el.style.removeProperty('opacity');
       }
 
-      addAnimations.push(el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: duration / 2, easing }).finished);
+      addAnimations.push(el.animate(this.getAddKeyframes(), { duration: duration, easing }).finished);
     });
 
     await Promise.allSettled(addAnimations);
@@ -276,6 +328,10 @@ export class QuietTransitionGroup extends QuietElement {
   private handleVisibilityChange = () => {
     this.updateElementPositions();
   };
+
+  private hasPositionChanged(oldRect: DOMRect, newRect: DOMRect, threshold = 0.1): boolean {
+    return Math.abs(oldRect.left - newRect.left) > threshold || Math.abs(oldRect.top - newRect.top) > threshold;
+  }
 
   private startObservers() {
     if (!this.mutationObserver) {

@@ -216,7 +216,7 @@
   --quiet-text-muted: var(--quiet-neutral-text-colorful);
   --quiet-focus-color: var(--quiet-primary-fill-mid);
   --quiet-focus-ring: var(--quiet-border-style) var(--quiet-focus-width) var(--quiet-focus-color);
-  --quiet-backdrop-color: rgb(0 0 0 / 0.25);
+  --quiet-backdrop-color: rgb(0 0 0 / 0.5);
   --quiet-selection-background-color: var(--quiet-primary-700);
   --quiet-selection-color: var(--quiet-text-body);
   --quiet-shadow-color: black;

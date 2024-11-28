@@ -1,6 +1,6 @@
 ---
-title: Sponsor
-description: Sponsor the project to unlock support and sponsor-only benefits.
+title: Sponsoring this project
+description: Unlock support and sponsor-only benefits.
 layout: page
 isWide: true
 section: sponsor

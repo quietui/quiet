@@ -7,6 +7,7 @@ export default css`
 
     display: flex;
     flex-direction: column;
+    width: 100%;
   }
 
   /* Don't allow clicks while the transition is running to prevent animation blips */

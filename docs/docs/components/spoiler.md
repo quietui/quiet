@@ -108,7 +108,7 @@ To persist the spoiler once shown, add the `persist` attribute. This will remove
   </quiet-spoiler>
 
   <p style="margin-block-start: 2rem;">
-    If you really want to know, just ask <quiet-spoiler persist inline label="?">the gray cat</quiet-spoiler>!
+    If you really want to know, just ask <quiet-spoiler persist inline label="?">the gray cat!</quiet-spoiler>
   </p>
 
   <quiet-button>Reset demos</quiet-button>

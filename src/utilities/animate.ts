@@ -26,3 +26,30 @@ export function animateWithClass(el: Element, className: string): Promise<void> 
     });
   });
 }
+
+/** Parses a CSS duration string and returns the corresponding number of milliseconds. */
+export function parseCssDuration(duration: string): number {
+  // Handle empty or invalid input
+  if (!duration || typeof duration !== 'string') {
+    return 0;
+  }
+
+  // Match number and unit
+  const match = duration.match(/^([0-9]*\.?[0-9]+)(ms|s)$/);
+  if (!match) {
+    return 0;
+  }
+
+  const value = parseFloat(match[1]);
+  const unit = match[2];
+
+  // Convert to milliseconds based on unit
+  switch (unit) {
+    case 'ms':
+      return value;
+    case 's':
+      return value * 1000;
+    default:
+      return 0;
+  }
+}

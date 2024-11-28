@@ -11,7 +11,6 @@
     },
     "./quiet.js": "./dist/quiet.js",
     "./quiet.loader.js": "./dist/quiet.loader.js",
-    "./animate.js": "./dist/animate.js",
     "./components/*": "./dist/components/*",
     "./custom-elements.json": "./dist/custom-elements.json"
   },

@@ -772,6 +772,16 @@ figure.float-end {
 .docs-aside li {
   color: var(--quiet-text-muted);
   list-style: none;
+
+  quiet-icon {
+    font-size: 1rem;
+    stroke-width: 1.75px;
+    vertical-align: middle;
+
+    &[name='seeding'] {
+      color: #7db664;
+    }
+  }
 }
 
 .docs-aside li:not(:last-of-type) {
@@ -791,9 +801,15 @@ figure.float-end {
   }
 }
 
-.docs-aside .current {
-  color: var(--quiet-primary-text-colorful);
-  font-weight: var(--quiet-font-weight-semibold);
+.docs-aside {
+  .current {
+    color: var(--quiet-primary-text-colorful);
+    font-weight: var(--quiet-font-weight-semibold);
+  }
+
+  li:has(.current) quiet-icon {
+    stroke-width: 2px;
+  }
 }
 
 /* Callouts */

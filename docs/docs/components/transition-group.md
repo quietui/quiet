@@ -37,8 +37,7 @@ Just wrap a collection of elements in a transition group and use normal DOM APIs
   const disableButton = container.querySelector('quiet-button[data-action="disable"]');
   let count = transitionGroup.children.length;
 
-  // Add a box
-  addButton.addEventListener('quiet-click', () => {
+  function addRandomBox() {
     const children = [...transitionGroup.children];
     const randomSibling = children[Math.floor(Math.random() * children.length)];
     const box = document.createElement('div');
@@ -50,27 +49,27 @@ Just wrap a collection of elements in a transition group and use normal DOM APIs
     } else {
       transitionGroup.append(box)
     }
-  });   
+  }
 
-  // Remove a box
-  removeButton.addEventListener('quiet-click', () => {
+  function removeRandomBox() {
     const boxes = [...transitionGroup.children];
     if (boxes.length > 0) {
       const randomIndex = Math.floor(Math.random() * boxes.length);
       boxes[randomIndex].remove();
     }
-  });  
+  }
 
-  // Shuffle boxes
-  shuffleButton.addEventListener('quiet-click', () => {
+  function shuffleBoxes() {
     const boxes = [...transitionGroup.children];
     boxes.sort(() => Math.random() - 0.5);
     boxes.forEach(box => transitionGroup.append(box));
-  });
+  }
 
-  // Disable
+  // Handle button clicks
+  addButton.addEventListener('quiet-click', addRandomBox);
+  removeButton.addEventListener('quiet-click', removeRandomBox);
+  shuffleButton.addEventListener('quiet-click', shuffleBoxes);
   disableButton.addEventListener('quiet-click', () => {
-    console.log(transitionGroup.disableTransitions);
     transitionGroup.disableTransitions = disableButton.toggle === 'off';
   });
 </script>

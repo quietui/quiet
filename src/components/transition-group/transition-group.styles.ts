@@ -7,6 +7,7 @@ export default css`
 
     display: flex;
     flex-direction: column;
+    align-content: start;
     width: 100%;
   }
 

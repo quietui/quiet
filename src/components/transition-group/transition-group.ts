@@ -219,19 +219,51 @@ export class QuietTransitionGroup extends QuietElement {
       case 'drift':
         return {
           addKeyframes: [
-            { opacity: 0, transform: 'translate(-100px, 50px) rotate(-15deg) scale(0.9)', filter: 'blur(10px)' },
-            { opacity: 0.3, transform: 'translate(-50px, 25px) rotate(-8deg) scale(0.95)', filter: 'blur(6px)' },
-            { opacity: 0.6, transform: 'translate(-25px, 12px) rotate(-4deg) scale(0.97)', filter: 'blur(4px)' },
-            { opacity: 0.8, transform: 'translate(-10px, 5px) rotate(-2deg) scale(0.99)', filter: 'blur(2px)' },
+            {
+              opacity: 0,
+              transform: `translate(${isRtl ? 100 : -100}px, 50px) rotate(${isRtl ? 15 : -15}deg) scale(0.9)`,
+              filter: 'blur(10px)'
+            },
+            {
+              opacity: 0.3,
+              transform: `translate(${isRtl ? 50 : -50}px, 25px) rotate(${isRtl ? 8 : -8}deg) scale(0.95)`,
+              filter: 'blur(6px)'
+            },
+            {
+              opacity: 0.6,
+              transform: `translate(${isRtl ? 25 : -25}px, 12px) rotate(${isRtl ? 4 : -4}deg) scale(0.97)`,
+              filter: 'blur(4px)'
+            },
+            {
+              opacity: 0.8,
+              transform: `translate(${isRtl ? 10 : -10}px, 5px) rotate(${isRtl ? 2 : -2}deg) scale(0.99)`,
+              filter: 'blur(2px)'
+            },
             { opacity: 1, transform: 'translate(0, 0) rotate(0) scale(1)', filter: 'blur(0)' }
           ],
           addEasing: 'cubic-bezier(0.4, 0.1, 0.3, 1)',
           removeKeyframes: [
             { opacity: 1, transform: 'translate(0, 0) rotate(0) scale(1)', filter: 'blur(0)' },
-            { opacity: 0.8, transform: 'translate(10px, -5px) rotate(2deg) scale(1.01)', filter: 'blur(2px)' },
-            { opacity: 0.6, transform: 'translate(25px, -12px) rotate(4deg) scale(1.02)', filter: 'blur(4px)' },
-            { opacity: 0.3, transform: 'translate(50px, -25px) rotate(8deg) scale(1.05)', filter: 'blur(6px)' },
-            { opacity: 0, transform: 'translate(100px, -50px) rotate(15deg) scale(1.1)', filter: 'blur(10px)' }
+            {
+              opacity: 0.8,
+              transform: `translate(${isRtl ? -10 : 10}px, -5px) rotate(${isRtl ? -2 : 2}deg) scale(1.01)`,
+              filter: 'blur(2px)'
+            },
+            {
+              opacity: 0.6,
+              transform: `translate(${isRtl ? -25 : 25}px, -12px) rotate(${isRtl ? -4 : 4}deg) scale(1.02)`,
+              filter: 'blur(4px)'
+            },
+            {
+              opacity: 0.3,
+              transform: `translate(${isRtl ? -50 : 50}px, -25px) rotate(${isRtl ? -8 : 8}deg) scale(1.05)`,
+              filter: 'blur(6px)'
+            },
+            {
+              opacity: 0,
+              transform: `translate(${isRtl ? -100 : 100}px, -50px) rotate(${isRtl ? -15 : 15}deg) scale(1.1)`,
+              filter: 'blur(10px)'
+            }
           ],
           removeEasing: 'cubic-bezier(0.4, 0.1, 0.3, 1)'
         };
@@ -239,20 +271,20 @@ export class QuietTransitionGroup extends QuietElement {
       case 'earthquake':
         return {
           addKeyframes: [
-            { opacity: 0, transform: 'translate(-8px, -8px) rotate(-5deg)' },
-            { opacity: 0.2, transform: 'translate(8px, 8px) rotate(5deg)' },
-            { opacity: 0.4, transform: 'translate(-6px, 6px) rotate(-4deg)' },
-            { opacity: 0.6, transform: 'translate(6px, -6px) rotate(4deg)' },
-            { opacity: 0.8, transform: 'translate(-4px, 4px) rotate(-2deg)' },
+            { opacity: 0, transform: `translate(${isRtl ? 8 : -8}px, -8px) rotate(${isRtl ? 5 : -5}deg)` },
+            { opacity: 0.2, transform: `translate(${isRtl ? -8 : 8}px, 8px) rotate(${isRtl ? -5 : 5}deg)` },
+            { opacity: 0.4, transform: `translate(${isRtl ? 6 : -6}px, 6px) rotate(${isRtl ? 4 : -4}deg)` },
+            { opacity: 0.6, transform: `translate(${isRtl ? -6 : 6}px, -6px) rotate(${isRtl ? -4 : 4}deg)` },
+            { opacity: 0.8, transform: `translate(${isRtl ? 4 : -4}px, 4px) rotate(${isRtl ? 2 : -2}deg)` },
             { opacity: 1, transform: 'translate(0, 0) rotate(0)' }
           ],
           addEasing: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
           removeKeyframes: [
             { opacity: 1, transform: 'translate(0, 0) rotate(0)' },
-            { opacity: 0.8, transform: 'translate(4px, 4px) rotate(2deg)' },
-            { opacity: 0.6, transform: 'translate(-6px, -6px) rotate(-3deg)' },
-            { opacity: 0.4, transform: 'translate(8px, 8px) rotate(4deg)' },
-            { opacity: 0, transform: 'translate(-10px, -10px) rotate(-5deg)' }
+            { opacity: 0.8, transform: `translate(${isRtl ? -4 : 4}px, 4px) rotate(${isRtl ? -2 : 2}deg)` },
+            { opacity: 0.6, transform: `translate(${isRtl ? 6 : -6}px, -6px) rotate(${isRtl ? 3 : -3}deg)` },
+            { opacity: 0.4, transform: `translate(${isRtl ? -8 : 8}px, 8px) rotate(${isRtl ? -4 : 4}deg)` },
+            { opacity: 0, transform: `translate(${isRtl ? 10 : -10}px, -10px) rotate(${isRtl ? 5 : -5}deg)` }
           ],
           removeEasing: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)'
         };
@@ -300,26 +332,30 @@ export class QuietTransitionGroup extends QuietElement {
           addKeyframes: [
             {
               opacity: 0,
-              transform: 'perspective(1400px) rotateX(90deg) translateY(-20px)',
-              transformOrigin: 'top'
+              transform: 'perspective(2000px) rotateX(90deg) translateY(-20px)',
+              transformOrigin: 'top',
+              perspectiveOrigin: '50% 0%'
             },
             {
               opacity: 1,
-              transform: 'perspective(1400px) rotateX(0) translateY(0)',
-              transformOrigin: 'top'
+              transform: 'perspective(2000px) rotateX(0) translateY(0)',
+              transformOrigin: 'top',
+              perspectiveOrigin: '50% 0%'
             }
           ],
           addEasing: 'cubic-bezier(0.33, 1, 0.68, 1)',
           removeKeyframes: [
             {
               opacity: 1,
-              transform: 'perspective(1400px) rotateX(0) translateY(0)',
-              transformOrigin: 'bottom'
+              transform: 'perspective(2000px) rotateX(0) translateY(0)',
+              transformOrigin: 'bottom',
+              perspectiveOrigin: '50% 100%'
             },
             {
               opacity: 0,
-              transform: 'perspective(1400px) rotateX(90deg) translateY(20px)',
-              transformOrigin: 'bottom'
+              transform: 'perspective(2000px) rotateX(-90deg) translateY(20px)',
+              transformOrigin: 'bottom',
+              perspectiveOrigin: '50% 100%'
             }
           ],
           removeEasing: 'cubic-bezier(0.32, 0, 0.67, 0)'
@@ -453,17 +489,17 @@ export class QuietTransitionGroup extends QuietElement {
           addKeyframes: [
             {
               opacity: 0,
-              transform: 'translateX(-100%) rotateY(90deg) scaleX(2) scaleY(0.5)',
+              transform: `translateX(${isRtl ? '100%' : '-100%'}) rotateY(${isRtl ? -90 : 90}deg) scaleX(2) scaleY(0.5)`,
               filter: 'brightness(1.2)'
             },
             {
               opacity: 0.4,
-              transform: 'translateX(-50%) rotateY(45deg) scaleX(1.5) scaleY(0.7)',
+              transform: `translateX(${isRtl ? '50%' : '-50%'}) rotateY(${isRtl ? -45 : 45}deg) scaleX(1.5) scaleY(0.7)`,
               filter: 'brightness(1.1)'
             },
             {
               opacity: 0.7,
-              transform: 'translateX(-25%) rotateY(20deg) scaleX(1.2) scaleY(0.9)',
+              transform: `translateX(${isRtl ? '25%' : '-25%'}) rotateY(${isRtl ? -20 : 20}deg) scaleX(1.2) scaleY(0.9)`,
               filter: 'brightness(1.05)'
             },
             { opacity: 1, transform: 'translateX(0) rotateY(0) scale(1)', filter: 'brightness(1)' }
@@ -473,17 +509,17 @@ export class QuietTransitionGroup extends QuietElement {
             { opacity: 1, transform: 'translateX(0) rotateY(0) scale(1)', filter: 'brightness(1)' },
             {
               opacity: 0.7,
-              transform: 'translateX(25%) rotateY(-20deg) scaleX(1.2) scaleY(0.9)',
+              transform: `translateX(${isRtl ? '-25%' : '25%'}) rotateY(${isRtl ? 20 : -20}deg) scaleX(1.2) scaleY(0.9)`,
               filter: 'brightness(1.05)'
             },
             {
               opacity: 0.4,
-              transform: 'translateX(50%) rotateY(-45deg) scaleX(1.5) scaleY(0.7)',
+              transform: `translateX(${isRtl ? '-50%' : '50%'}) rotateY(${isRtl ? 45 : -45}deg) scaleX(1.5) scaleY(0.7)`,
               filter: 'brightness(1.1)'
             },
             {
               opacity: 0,
-              transform: 'translateX(100%) rotateY(-90deg) scaleX(2) scaleY(0.5)',
+              transform: `translateX(${isRtl ? '-100%' : '100%'}) rotateY(${isRtl ? 90 : -90}deg) scaleX(2) scaleY(0.5)`,
               filter: 'brightness(1.2)'
             }
           ],
@@ -581,17 +617,47 @@ export class QuietTransitionGroup extends QuietElement {
       case 'tornado':
         return {
           addKeyframes: [
-            { opacity: 0, rotate: '-180deg', scale: 0.2, translate: '-100% 100%' },
-            { opacity: 0.4, rotate: '-90deg', scale: 0.6, translate: '-50% 50%' },
-            { opacity: 0.8, rotate: '-45deg', scale: 0.8, translate: '-25% 25%' },
+            {
+              opacity: 0,
+              rotate: `${isRtl ? '180deg' : '-180deg'}`,
+              scale: 0.2,
+              translate: `${isRtl ? '100%' : '-100%'} 100%`
+            },
+            {
+              opacity: 0.4,
+              rotate: `${isRtl ? '90deg' : '-90deg'}`,
+              scale: 0.6,
+              translate: `${isRtl ? '50%' : '-50%'} 50%`
+            },
+            {
+              opacity: 0.8,
+              rotate: `${isRtl ? '45deg' : '-45deg'}`,
+              scale: 0.8,
+              translate: `${isRtl ? '25%' : '-25%'} 25%`
+            },
             { opacity: 1, rotate: '0deg', scale: 1, translate: '0 0' }
           ],
           addEasing: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
           removeKeyframes: [
             { opacity: 1, rotate: '0deg', scale: 1, translate: '0 0' },
-            { opacity: 0.8, rotate: '45deg', scale: 0.8, translate: '25% -25%' },
-            { opacity: 0.4, rotate: '90deg', scale: 0.6, translate: '50% -50%' },
-            { opacity: 0, rotate: '180deg', scale: 0.2, translate: '100% -100%' }
+            {
+              opacity: 0.8,
+              rotate: `${isRtl ? '-45deg' : '45deg'}`,
+              scale: 0.8,
+              translate: `${isRtl ? '-25%' : '25%'} -25%`
+            },
+            {
+              opacity: 0.4,
+              rotate: `${isRtl ? '-90deg' : '90deg'}`,
+              scale: 0.6,
+              translate: `${isRtl ? '-50%' : '50%'} -50%`
+            },
+            {
+              opacity: 0,
+              rotate: `${isRtl ? '-180deg' : '180deg'}`,
+              scale: 0.2,
+              translate: `${isRtl ? '-100%' : '100%'} -100%`
+            }
           ],
           removeEasing: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
         };

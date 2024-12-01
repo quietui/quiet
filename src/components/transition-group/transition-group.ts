@@ -38,7 +38,31 @@ export class QuietTransitionGroup extends QuietElement {
   private resizeObserver: ResizeObserver;
 
   /** The effect to use when items are added and removed. */
-  @property() effect: 'fade' | 'scale' | 'flip-x' | 'flip-y' | 'slide-x' | 'slide-y' | 'rotate-x' | 'rotate-y' = 'fade';
+  @property() effect:
+    | 'fade'
+    | 'scale'
+    | 'flip-x'
+    | 'flip-y'
+    | 'rotate-x'
+    | 'rotate-y'
+    | 'slide-x'
+    | 'slide-y'
+    | 'drift'
+    | 'earthquake'
+    | 'elevator'
+    | 'explode'
+    | 'fold'
+    | 'glitch'
+    | 'gravity'
+    | 'kaleidoscope'
+    | 'orbit'
+    | 'portal'
+    | 'ribbon'
+    | 'rubber'
+    | 'spring'
+    | 'telescope'
+    | 'tornado'
+    | 'vortex' = 'fade';
 
   /**
    * Disables transition animations. However, the `quiet-content-changed` and `quiet-transition-end` events will still
@@ -271,6 +295,36 @@ export class QuietTransitionGroup extends QuietElement {
           removeEasing: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
         };
 
+      case 'fold':
+        return {
+          addKeyframes: [
+            {
+              opacity: 0,
+              transform: 'perspective(1400px) rotateX(90deg) translateY(-20px)',
+              transformOrigin: 'top'
+            },
+            {
+              opacity: 1,
+              transform: 'perspective(1400px) rotateX(0) translateY(0)',
+              transformOrigin: 'top'
+            }
+          ],
+          addEasing: 'cubic-bezier(0.33, 1, 0.68, 1)',
+          removeKeyframes: [
+            {
+              opacity: 1,
+              transform: 'perspective(1400px) rotateX(0) translateY(0)',
+              transformOrigin: 'bottom'
+            },
+            {
+              opacity: 0,
+              transform: 'perspective(1400px) rotateX(90deg) translateY(20px)',
+              transformOrigin: 'bottom'
+            }
+          ],
+          removeEasing: 'cubic-bezier(0.32, 0, 0.67, 0)'
+        };
+
       case 'glitch':
         return {
           addKeyframes: [
@@ -458,6 +512,25 @@ export class QuietTransitionGroup extends QuietElement {
           removeEasing: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)'
         };
 
+      case 'spring':
+        return {
+          addKeyframes: [
+            { opacity: 0, scale: 0.93, translate: '0 10px' },
+            { opacity: 0.6, scale: 1.04, translate: '0 -5px' },
+            { opacity: 0.8, scale: 0.98, translate: '0 3px' },
+            { opacity: 0.9, scale: 1.02, translate: '0 -1px' },
+            { opacity: 1, scale: 1, translate: '0 0' }
+          ],
+          addEasing: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+          removeKeyframes: [
+            { opacity: 1, scale: 1, translate: '0 0' },
+            { opacity: 0.8, scale: 1.02, translate: '0 3px' },
+            { opacity: 0.6, scale: 0.98, translate: '0 6px' },
+            { opacity: 0, scale: 0.93, translate: '0 10px' }
+          ],
+          removeEasing: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
+        };
+
       case 'telescope':
         return {
           addKeyframes: [
@@ -519,6 +592,56 @@ export class QuietTransitionGroup extends QuietElement {
             { opacity: 0.8, rotate: '45deg', scale: 0.8, translate: '25% -25%' },
             { opacity: 0.4, rotate: '90deg', scale: 0.6, translate: '50% -50%' },
             { opacity: 0, rotate: '180deg', scale: 0.2, translate: '100% -100%' }
+          ],
+          removeEasing: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
+        };
+
+      case 'vortex':
+        return {
+          addKeyframes: [
+            {
+              opacity: 0,
+              transform: 'perspective(1000px) rotateX(60deg) rotateY(60deg) scale(2)',
+              filter: 'blur(30px) brightness(2)'
+            },
+            {
+              opacity: 0.3,
+              transform: 'perspective(1000px) rotateX(45deg) rotateY(45deg) scale(1.5)',
+              filter: 'blur(20px) brightness(1.7)'
+            },
+            {
+              opacity: 0.6,
+              transform: 'perspective(1000px) rotateX(30deg) rotateY(30deg) scale(1.2)',
+              filter: 'blur(10px) brightness(1.4)'
+            },
+            {
+              opacity: 1,
+              transform: 'perspective(1000px) rotateX(0) rotateY(0) scale(1)',
+              filter: 'blur(0) brightness(1)'
+            }
+          ],
+          addEasing: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+          removeKeyframes: [
+            {
+              opacity: 1,
+              transform: 'perspective(1000px) rotateX(0) rotateY(0) scale(1)',
+              filter: 'blur(0) brightness(1)'
+            },
+            {
+              opacity: 0.6,
+              transform: 'perspective(1000px) rotateX(-30deg) rotateY(-30deg) scale(0.8)',
+              filter: 'blur(10px) brightness(0.8)'
+            },
+            {
+              opacity: 0.3,
+              transform: 'perspective(1000px) rotateX(-45deg) rotateY(-45deg) scale(0.5)',
+              filter: 'blur(20px) brightness(0.6)'
+            },
+            {
+              opacity: 0,
+              transform: 'perspective(1000px) rotateX(-60deg) rotateY(-60deg) scale(0.1)',
+              filter: 'blur(30px) brightness(0.4)'
+            }
           ],
           removeEasing: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
         };

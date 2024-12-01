@@ -341,6 +341,7 @@ Use the `effect` attribute to change the animation used when adding and removing
         <option value="earthquake">earthquake</option>
         <option value="elevator">elevator</option>
         <option value="explode">explode</option>
+        <option value="fold">fold</option>
         <option value="glitch">glitch</option>
         <option value="gravity">gravity</option>
         <option value="kaleidoscope">kaleidoscope</option>
@@ -348,8 +349,10 @@ Use the `effect` attribute to change the animation used when adding and removing
         <option value="portal">portal</option>
         <option value="ribbon">ribbon</option>
         <option value="rubber">rubber</option>
+        <option value="spring">spring</option>
         <option value="telescope">telescope</option>
         <option value="tornado">tornado</option>
+        <option value="vortex">vortex</option>
       </optgroup>
     </quiet-select>
     <quiet-button icon-label="Replay"><quiet-icon name="reload"></quiet-icon></quiet-button>

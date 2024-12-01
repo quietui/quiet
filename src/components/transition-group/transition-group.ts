@@ -458,24 +458,6 @@ export class QuietTransitionGroup extends QuietElement {
           removeEasing: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)'
         };
 
-      case 'supernova':
-        return {
-          addKeyframes: [
-            { opacity: 0, transform: 'scale(2) rotate(180deg)', filter: 'blur(20px) brightness(2)' },
-            { opacity: 0.4, transform: 'scale(1.5) rotate(90deg)', filter: 'blur(10px) brightness(1.5)' },
-            { opacity: 0.7, transform: 'scale(1.2) rotate(45deg)', filter: 'blur(5px) brightness(1.2)' },
-            { opacity: 1, transform: 'scale(1) rotate(0deg)', filter: 'blur(0) brightness(1)' }
-          ],
-          addEasing: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
-          removeKeyframes: [
-            { opacity: 1, transform: 'scale(1) rotate(0deg)', filter: 'blur(0) brightness(1)' },
-            { opacity: 0.7, transform: 'scale(1.2) rotate(-45deg)', filter: 'blur(5px) brightness(1.2)' },
-            { opacity: 0.4, transform: 'scale(1.5) rotate(-90deg)', filter: 'blur(10px) brightness(1.5)' },
-            { opacity: 0, transform: 'scale(2) rotate(-180deg)', filter: 'blur(20px) brightness(2)' }
-          ],
-          removeEasing: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
-        };
-
       case 'telescope':
         return {
           addKeyframes: [

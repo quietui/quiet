@@ -348,7 +348,6 @@ Use the `effect` attribute to change the animation used when adding and removing
         <option value="portal">portal</option>
         <option value="ribbon">ribbon</option>
         <option value="rubber">rubber</option>
-        <option value="supernova">supernova</option>      
         <option value="telescope">telescope</option>
         <option value="tornado">tornado</option>
       </optgroup>

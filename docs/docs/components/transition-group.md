@@ -312,18 +312,116 @@ quiet-transition-group {
 Support for non-flex layouts, including CSS Grid, is considered experimental.
 :::
 
-### Changing duration and easing
+### Changing the effect
 
-To change the animation speed and easing, set the `--duration` and `--easing` custom properties on the transition group.
+Use the `effect` attribute to change the animation used when adding and removing elements. The default is `fade`.
 
 ```html {.example}
-<quiet-transition-group 
-  id="transition-group__duration"
-  style="
-    --duration: 1000ms;
-    --easing: cubic-bezier(0.68, -0.6, 0.32, 1.6);
-  "
->
+<div id="transition-group__effect">
+  <!-- Add your elements here -->
+  <quiet-transition-group effect="fade">
+    <div class="box" style="background-color: dodgerblue;"></div>
+    <div class="box" style="background-color: rebeccapurple;"></div>
+  </quiet-transition-group>
+
+  <div class="controls">
+    <quiet-select label="Effect">
+      <optgroup label="Simple">
+        <option value="fade">fade (default)</option>
+        <option value="scale">scale</option>
+        <option value="flip-x">flip-x</option>
+        <option value="flip-y">flip-y</option>
+        <option value="rotate-x">rotate-x</option>
+        <option value="rotate-y">rotate-y</option>
+        <option value="slide-x">slide-x</option>
+        <option value="slide-y">slide-y</option>
+      </optgroup>
+      <optgroup label="Complex">
+        <option value="drift">drift</option>      
+        <option value="earthquake">earthquake</option>
+        <option value="elevator">elevator</option>
+        <option value="explode">explode</option>
+        <option value="glitch">glitch</option>
+        <option value="gravity">gravity</option>
+        <option value="kaleidoscope">kaleidoscope</option>
+        <option value="orbit">orbit</option>
+        <option value="portal">portal</option>
+        <option value="ribbon">ribbon</option>
+        <option value="rubber">rubber</option>
+        <option value="supernova">supernova</option>      
+        <option value="telescope">telescope</option>
+        <option value="tornado">tornado</option>
+      </optgroup>
+    </quiet-select>
+    <quiet-button icon-label="Replay"><quiet-icon name="reload"></quiet-icon></quiet-button>
+  </div>
+</div>
+
+<!-- Everything below is for the demo -->
+<script>
+  const container = document.getElementById('transition-group__effect');
+  const transitionGroup = container.querySelector('quiet-transition-group');
+  const select = container.querySelector('quiet-select');
+  const playButton = container.querySelector('quiet-button');
+  let lastRemoved;
+
+  const pinkBox = document.createElement('div');
+  pinkBox.classList.add('box');
+  pinkBox.style.backgroundColor = 'deeppink';
+  
+  function play() {
+    playButton.disabled = true;
+    transitionGroup.querySelector('.box').after(pinkBox);
+    setTimeout(() => {
+      transitionGroup.addEventListener('quiet-transition-end', () => playButton.disabled = false, { once: true });
+      pinkBox.remove();
+    }, 1000);
+  }
+
+  // Change the effect
+  select.addEventListener('quiet-input', () => {
+    transitionGroup.effect = select.value;
+    play();
+  });
+
+  // Play
+  playButton.addEventListener('quiet-click', play);
+</script>
+
+<style>
+  #transition-group__effect {
+    quiet-transition-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      flex-direction: row;
+      margin-block-end: 2rem;
+    }
+
+    .box {
+      display: flex;
+      width: 80px;
+      height: 80px;
+      border-radius: var(--quiet-border-radius);
+      color: var(--quiet-primary-text-on-mid);
+    }
+
+    .controls {
+      display: flex;
+      width: 100%;
+      align-items: end;
+      gap: 1rem;
+    }
+  }
+</style>
+```
+
+### Changing duration
+
+To change the animation speed, set the `--duration` custom property on the transition group. This is the duration for an individual event, not the entire transition.
+
+```html {.example}
+<quiet-transition-group style="--duration: 1250ms;" id="transition-group__duration">
   <div class="box" style="background-color: deeppink;"></div>
   <div class="box" style="background-color: dodgerblue;"></div>
   <div class="box" style="background-color: rebeccapurple;"></div>
@@ -359,9 +457,9 @@ To change the animation speed and easing, set the `--duration` and `--easing` cu
     gap: 1rem;
 
     .box {
-      width: 60px;
-      height: 60px;
-      border-radius: 3px;
+      width: 80px;
+      height: 80px;
+      border-radius: var(--quiet-border-radius);
     }
   }
 </style>
@@ -411,14 +509,14 @@ Add the `disable-transitions` attribute to disable transition animations. Note t
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-template-rows: 1fr 1fr;
-      gap: 50px;
-      height: 180px;
+      gap: 60px;
+      height: 220px;
       margin-block-end: 2rem;
     }
 
     .circle {
-      width: 60px;
-      height: 60px;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
 
       &:nth-child(1) {

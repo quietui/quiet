@@ -122,6 +122,8 @@ This example includes logic and styles for the demo, but the minimal markup you 
 </quiet-transition-group>
 ```
 
+For best results, avoid applying transitions, animations, and inline styles to transition group items, as they may interfere with the component's animations. Also avoid modifying the DOM _during_ a transition to prevent janky results.
+
 :::info
 Transition groups honor the user's [`prefers-reduced-motion`](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion) setting. If you're not seeing animations, this might be why. To override this behavior, which is generally not recommended, use the `ignore-reduced-motion` attribute.
 :::
@@ -420,7 +422,7 @@ Use the `effect` attribute to change the animation used when adding and removing
 
 ### Changing duration
 
-To change the animation speed, set the `--duration` custom property on the transition group. This is the duration for an individual event, not the entire transition.
+To change the animation speed, set the `--duration` custom property on the transition group. Each transition is made up of one or more steps (e.g. add, remove, reposition) and the duration applies to each individual step, not the total transition time.
 
 ```html {.example}
 <quiet-transition-group style="--duration: 1250ms;" id="transition-group__duration">

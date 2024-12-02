@@ -23,6 +23,7 @@ body {
   line-height: var(--quiet-line-height);
   font-family: var(--quiet-font-family);
   text-rendering: optimizeLegibility;
+  tab-size: 4;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

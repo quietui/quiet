@@ -79,7 +79,7 @@ export class QuietFileInput extends QuietElement {
   @state() wasChanged = false;
   @state() wasSubmitted = false;
 
-  /** An array of files that are currently selected. (Property only)*/
+  /** An array of files that are currently selected. (Property only) */
   @state() files: File[] = [];
 
   /**

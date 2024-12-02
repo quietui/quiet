@@ -25,7 +25,7 @@ export default function (eleventyConfig) {
   // Template filters - {{ content | filter }}
   eleventyConfig.addFilter('inlineMarkdown', content => {
     // Prevents the <void> type from making it's way into Prettier
-    content = content.replace(/<void>/g, '&lt;void&gt;');
+    content = (content || '').replace(/<void>/g, '&lt;void&gt;');
     return markdown.renderInline(content || '');
   });
   eleventyConfig.addFilter('majorVersion', string => string.split('.')[0]);

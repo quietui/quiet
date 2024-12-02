@@ -474,13 +474,19 @@ Use the `effect` attribute to change the animation used when adding and removing
   pinkBox.classList.add('box');
   pinkBox.style.backgroundColor = 'deeppink';
   
-  function play() {
+  async function play() {
+    // Disable the button and insert the pink box
     swapButton.disabled = true;
     transitionGroup.querySelector('.box').after(pinkBox);
+
+    // Wait for the transition to complete
+    await transitionGroup.transitionComplete;
+    swapButton.disabled = false;
+
+    // Remove the box after a moment
     setTimeout(() => {
-      transitionGroup.addEventListener('quiet-transition-end', () => swapButton.disabled = false, { once: true });
       pinkBox.remove();
-    }, 1000);
+    }, 500);
   }
 
   // Change the effect

@@ -36,6 +36,10 @@ export class QuietTransitionGroup extends QuietElement {
   private isTransitioning = false;
   private mutationObserver: MutationObserver;
   private resizeObserver: ResizeObserver;
+  private transitionCompleteResolve: (() => void) | null = null;
+
+  /** Resolves when the current or next transition ends. (Property only) */
+  public transitionComplete: Promise<void> = Promise.resolve();
 
   /** The effect to use when items are added and removed. */
   @property() effect:
@@ -76,6 +80,11 @@ export class QuietTransitionGroup extends QuietElement {
    */
   @property({ attribute: 'ignore-reduced-motion', type: Boolean, reflect: true }) ignoreReducedMotion = false;
 
+  constructor() {
+    super();
+    this.createNewTransitionPromise();
+  }
+
   connectedCallback() {
     super.connectedCallback();
     this.startObservers();
@@ -89,6 +98,22 @@ export class QuietTransitionGroup extends QuietElement {
   firstUpdated() {
     // Cache the initial coordinates
     this.updateElementPositions();
+  }
+
+  /** Creates a new promise held in `this.transitionComplete` */
+  private createNewTransitionPromise() {
+    this.transitionComplete = new Promise(resolve => {
+      this.transitionCompleteResolve = resolve;
+    });
+  }
+
+  /** Resolves the promise held in `this.transitionComplete` */
+  private resolveTransitionPromise() {
+    if (this.transitionCompleteResolve) {
+      this.transitionCompleteResolve();
+      this.transitionCompleteResolve = null;
+      this.createNewTransitionPromise();
+    }
   }
 
   private getAnimation(effect: string): {
@@ -749,6 +774,7 @@ export class QuietTransitionGroup extends QuietElement {
     if (prefersReducedMotion || this.disableTransitions) {
       this.isTransitioning = false;
       this.updateElementPositions();
+      this.resolveTransitionPromise();
       return;
     }
 
@@ -781,8 +807,7 @@ export class QuietTransitionGroup extends QuietElement {
       });
     });
 
-    // Determine which elements were moved within the transition group. We can tell if they were moved by comparing the
-    // parent elements.Moved elements will be removed from the add/remove lists so we can animate them differently.
+    // Determine which elements were moved
     addedElements.forEach((info, el) => {
       const removedElementInfo = removedElements.get(el);
       if (removedElementInfo && info.parent === removedElementInfo.parent) {
@@ -879,8 +904,9 @@ export class QuietTransitionGroup extends QuietElement {
       characterData: false
     });
 
-    // Dispatch the quiet-transition-end event unless disabled
+    // Dispatch the quiet-transition-end event
     this.dispatchEvent(new QuietTransitionEndEvent());
+    this.resolveTransitionPromise();
   };
 
   private handleResizes = () => {

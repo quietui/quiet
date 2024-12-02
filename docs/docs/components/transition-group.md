@@ -3,7 +3,7 @@ title: Transition Group
 layout: component
 ---
 
-Just wrap a collection of elements in a transition group and use normal DOM APIs to add, remove, and reorder them. The transition group will automatically apply the appropriate animations as elements enter and exit the group.
+Wrap a collection of elements in a transition group and use normal DOM APIs to add, remove, and reorder them. The transition group will automatically apply the appropriate animations as elements enter and exit the group.
 
 ```html {.example}
 <div id="transition-group__boxes">
@@ -314,6 +314,71 @@ quiet-transition-group {
 Support for non-flex layouts, including CSS Grid, is considered experimental.
 :::
 
+### Awaiting transitions
+
+Avoid making DOM changes while a transition is running. The `transitionComplete` property holds a promise that resolves when the current or next transition ends. You can await it to be sure all animations are complete before proceeding with further DOM changes.
+
+```ts
+const transitionGroup = document.querySelector('quiet-transition-group');
+
+// Append a new element
+transitionGroup.append(document.createElement('div'));
+
+// Wait for the transition
+await transitionGroup.transitionComplete;
+
+// The transition is done
+```
+
+### Changing duration
+
+To change the animation speed, set the `--duration` custom property on the transition group. Each transition is made up of one or more steps (e.g. add, remove, reposition) and the duration applies to each individual step, not the total transition time.
+
+```html {.example}
+<quiet-transition-group style="--duration: 1250ms;" id="transition-group__duration">
+  <div class="box" style="background-color: deeppink;"></div>
+  <div class="box" style="background-color: dodgerblue;"></div>
+  <div class="box" style="background-color: rebeccapurple;"></div>
+  <div class="box" style="background-color: tomato;"></div>
+</quiet-transition-group>
+
+<script>
+  const transitionGroup = document.getElementById('transition-group__duration');
+
+  function moveTheBox() {
+    const lastChild = transitionGroup.lastElementChild;
+    if (lastChild) {
+      transitionGroup.prepend(lastChild);
+    }
+  }
+
+  // Move the box again after the transition ends
+  transitionGroup.addEventListener('quiet-transition-end', () => {
+    setTimeout(moveTheBox, 1000);
+  });
+
+  // Ensure the element is registered
+  Promise.all([
+    customElements.whenDefined('quiet-transition-group'),
+    transitionGroup.updateComplete
+  ])
+  .then(moveTheBox);
+</script>
+
+<style>
+  #transition-group__duration {
+    flex-direction: row;
+    gap: 1rem;
+
+    .box {
+      width: 80px;
+      height: 80px;
+      border-radius: var(--quiet-border-radius);
+    }
+  }
+</style>
+```
+
 ### Changing the effect
 
 Use the `effect` attribute to change the animation used when adding and removing elements. The default is `fade`.
@@ -415,55 +480,6 @@ Use the `effect` attribute to change the animation used when adding and removing
       width: 100%;
       align-items: end;
       gap: 1rem;
-    }
-  }
-</style>
-```
-
-### Changing duration
-
-To change the animation speed, set the `--duration` custom property on the transition group. Each transition is made up of one or more steps (e.g. add, remove, reposition) and the duration applies to each individual step, not the total transition time.
-
-```html {.example}
-<quiet-transition-group style="--duration: 1250ms;" id="transition-group__duration">
-  <div class="box" style="background-color: deeppink;"></div>
-  <div class="box" style="background-color: dodgerblue;"></div>
-  <div class="box" style="background-color: rebeccapurple;"></div>
-  <div class="box" style="background-color: tomato;"></div>
-</quiet-transition-group>
-
-<script>
-  const transitionGroup = document.getElementById('transition-group__duration');
-
-  function moveTheBox() {
-    const lastChild = transitionGroup.lastElementChild;
-    if (lastChild) {
-      transitionGroup.prepend(lastChild);
-    }
-  }
-
-  // Move the box again after the transition ends
-  transitionGroup.addEventListener('quiet-transition-end', () => {
-    setTimeout(moveTheBox, 1000);
-  });
-
-  // Ensure the element is registered
-  Promise.all([
-    customElements.whenDefined('quiet-transition-group'),
-    transitionGroup.updateComplete
-  ])
-  .then(moveTheBox);
-</script>
-
-<style>
-  #transition-group__duration {
-    flex-direction: row;
-    gap: 1rem;
-
-    .box {
-      width: 80px;
-      height: 80px;
-      border-radius: var(--quiet-border-radius);
     }
   }
 </style>

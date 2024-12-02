@@ -719,19 +719,19 @@ export class QuietTransitionGroup extends QuietElement {
               filter: 'blur(0) brightness(1)'
             },
             {
-              opacity: 0.6,
-              transform: 'perspective(1000px) rotateX(-30deg) rotateY(-30deg) scale(0.8)',
-              filter: 'blur(10px) brightness(0.8)'
+              opacity: 0.7,
+              transform: 'perspective(1000px) rotateX(30deg) rotateY(30deg) scale(1.2)',
+              filter: 'blur(10px) brightness(1.2)'
             },
             {
-              opacity: 0.3,
-              transform: 'perspective(1000px) rotateX(-45deg) rotateY(-45deg) scale(0.5)',
-              filter: 'blur(20px) brightness(0.6)'
+              opacity: 0.4,
+              transform: 'perspective(1000px) rotateX(60deg) rotateY(60deg) scale(1.5)',
+              filter: 'blur(20px) brightness(1.5)'
             },
             {
               opacity: 0,
-              transform: 'perspective(1000px) rotateX(-60deg) rotateY(-60deg) scale(0.1)',
-              filter: 'blur(30px) brightness(0.4)'
+              transform: 'perspective(1000px) rotateX(90deg) rotateY(90deg) scale(2)',
+              filter: 'blur(30px) brightness(2)'
             }
           ],
           removeEasing: 'cubic-bezier(0.34, 1.56, 0.64, 1)'

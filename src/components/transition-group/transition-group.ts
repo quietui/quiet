@@ -24,7 +24,7 @@ import styles from './transition-group.styles.js';
  *
  * @cssstate transitioning - Applied when a transition is active.
  *
- * @cssproperty [--duration=0.25s] - The base duration of transition animations.
+ * @cssproperty [--duration=0.25s] - The duration of each individual step (not the total transition time).
  */
 @customElement('quiet-transition-group')
 export class QuietTransitionGroup extends QuietElement {

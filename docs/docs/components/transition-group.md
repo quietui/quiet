@@ -299,6 +299,60 @@ Use standard DOM APIs to add, remove, and reorder elements and the transition gr
 </style>
 ```
 
+### Awaiting transitions
+
+Avoid making DOM changes while a transition is running. The `transitionComplete` property holds a promise that resolves when the current or next transition ends. You can await it to be sure all animations are complete before proceeding with further DOM changes.
+
+```html {.example}
+<div id="transition-group__awaiting">
+  <quiet-transition-group style="--duration: 1000ms;">
+    <div class="box" style="background-color: deeppink;"></div>
+    <div class="box" style="background-color: dodgerblue;"></div>
+  </quiet-transition-group>
+
+  <div class="controls">
+    <quiet-button>Swap</quiet-button>
+  </div>
+</div>
+
+<script>
+  const container = document.getElementById('transition-group__awaiting');
+  const transitionGroup = container.querySelector('quiet-transition-group');
+  const swapButton = container.querySelector('quiet-button');
+
+  swapButton.addEventListener('quiet-click', async () => {
+    const box = transitionGroup.querySelector('.box');
+
+    // Disable the button and swap the elements
+    swapButton.disabled = true;
+    transitionGroup.append(box);
+
+    // Wait for the transition to complete and enable the button
+    await transitionGroup.transitionComplete;
+    swapButton.disabled = false;
+  });
+</script>
+
+<style>
+  #transition-group__awaiting {
+    quiet-transition-group {
+      flex-direction: row;
+      gap: 1rem;
+    }
+
+    .box {
+      width: 80px;
+      height: 80px;
+      border-radius: var(--quiet-border-radius);
+    }
+
+    .controls {
+      margin-block-start: 2rem;
+    }
+  }
+</style>
+```
+
 ### Changing the layout
 
 Transition groups use a columnar flex layout, by default. To change the layout, apply `flex-direction: row` to the transition group. You can add spacing between items by setting the `gap` property.
@@ -310,25 +364,7 @@ quiet-transition-group {
 }
 ```
 
-:::warn
-Support for non-flex layouts, including CSS Grid, is considered experimental.
-:::
-
-### Awaiting transitions
-
-Avoid making DOM changes while a transition is running. The `transitionComplete` property holds a promise that resolves when the current or next transition ends. You can await it to be sure all animations are complete before proceeding with further DOM changes.
-
-```ts
-const transitionGroup = document.querySelector('quiet-transition-group');
-
-// Append a new element
-transitionGroup.append(document.createElement('div'));
-
-// Wait for the transition
-await transitionGroup.transitionComplete;
-
-// The transition is done
-```
+For best results, avoid using complex layouts within transition groups.
 
 ### Changing duration
 
@@ -431,7 +467,7 @@ Use the `effect` attribute to change the animation used when adding and removing
   const container = document.getElementById('transition-group__effect');
   const transitionGroup = container.querySelector('quiet-transition-group');
   const select = container.querySelector('quiet-select');
-  const playButton = container.querySelector('quiet-button');
+  const swapButton = container.querySelector('quiet-button');
   let lastRemoved;
 
   const pinkBox = document.createElement('div');
@@ -439,10 +475,10 @@ Use the `effect` attribute to change the animation used when adding and removing
   pinkBox.style.backgroundColor = 'deeppink';
   
   function play() {
-    playButton.disabled = true;
+    swapButton.disabled = true;
     transitionGroup.querySelector('.box').after(pinkBox);
     setTimeout(() => {
-      transitionGroup.addEventListener('quiet-transition-end', () => playButton.disabled = false, { once: true });
+      transitionGroup.addEventListener('quiet-transition-end', () => swapButton.disabled = false, { once: true });
       pinkBox.remove();
     }, 1000);
   }
@@ -454,7 +490,7 @@ Use the `effect` attribute to change the animation used when adding and removing
   });
 
   // Play
-  playButton.addEventListener('quiet-click', play);
+  swapButton.addEventListener('quiet-click', play);
 </script>
 
 <style>

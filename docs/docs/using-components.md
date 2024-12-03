@@ -232,7 +232,7 @@ You can, however, select non-structural pseudo elements such as `::before` and `
 </style>
 ```
 
-Another caveat of parts involves animation. When you target an element with `::part()`, you're changing styles inside the shadow DOM. However, animations require keyframes to exist in the same document, and it's not currently possible to define keyframes from outside the shadow DOM. You can, however, apply animations to the component itself.
+Another caveat of parts involves animation. When you target an element with `::part()`, you're changing styles inside the shadow DOM. However, animations require keyframes to exist in the same document, and it's not currently possible to define keyframes from outside the shadow DOM. You can, however, apply animations to the host element itself.
 
 Not all components expose parts. Refer to the documentation to see which parts a component has.
 

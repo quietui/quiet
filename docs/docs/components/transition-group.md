@@ -122,7 +122,7 @@ This example includes logic and styles for the demo, but the minimal markup you 
 </quiet-transition-group>
 ```
 
-For best results, avoid applying transitions, animations, and inline styles to transition group items, as they may interfere with the component's animations. Also avoid modifying the DOM _during_ a transition to prevent janky results.
+For best results, avoid applying transitions, animations, and inline styles to transition group items, as they may interfere with the component's animations. Also avoid modifying the DOM _during_ a transition to prevent interruptions.
 
 :::info
 Transition groups honor the user's [`prefers-reduced-motion`](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion) setting. If you're not seeing animations, this might be why. To override this behavior, which is generally not recommended, use the `ignore-reduced-motion` attribute.
@@ -422,7 +422,7 @@ Use the `effect` attribute to change the animation used when adding and removing
 ```html {.example}
 <div id="transition-group__effect">
   <!-- Add your elements here -->
-  <quiet-transition-group effect="fade">
+  <quiet-transition-group>
     <div class="box" style="background-color: dodgerblue;"></div>
     <div class="box" style="background-color: rebeccapurple;"></div>
   </quiet-transition-group>

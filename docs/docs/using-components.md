@@ -204,7 +204,7 @@ Not all components expose custom properties. Refer to the documentation to see w
 
 ### CSS parts
 
-Many components expose parts inside the shadow DOM that you can target with CSS. Unlike custom properties, which only affect individual styles, a part gives you complete control over the exposed element's styles.
+Many components expose parts inside the shadow DOM that you can target with CSS. Unlike custom properties, which only modify individual properties, a part gives you complete control over the exposed element's styles.
 
 Use the [`::part()`](https://developer.mozilla.org/en-US/docs/Web/CSS/::part) selector to target a specific part in your CSS. This example applies a striped background image to the progress bar's indicator.
 

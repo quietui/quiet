@@ -168,7 +168,7 @@ Not all components have methods. Those that do will be listed in the respective 
 
 Custom elements commonly use a platform feature called [shadow DOM](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_shadow_DOM) to encapsulate behaviors and styles. Their internals are rendered in a separate document fragment, which prevents most styles from leaking in from and out to the main document.
 
-Speaking of internals…it's important to look at the documentation for each component to understand its anatomy before applying any CSS. The host element often requires styles to target a specific part inside of it rather than the element itself.
+Speaking of internals…it's important to look at the documentation for each component to understand its anatomy before applying any CSS. A component often requires styles to target a specific part inside of it rather than the element itself.
 
 By design, some styles, such as font size and family, will inherit _through_ the shadow DOM. However, the majority of them do not. Thus, you cannot  use standard CSS selectors to target a custom element's internals. Instead, you need to use one of the following APIs.
 

@@ -1150,7 +1150,6 @@ td.table-reflects {
     background: var(--quiet-neutral-fill-softer);
     box-shadow: var(--quiet-shadow-softer);
     color: var(--quiet-text-muted);
-    font-size: 1.125rem;
     line-height: 1.6;
     list-style: none;
     text-align: center;

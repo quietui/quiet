@@ -73,7 +73,7 @@ Quiet can be used for free under the MIT license. Unfortunately, I can't offer f
 <div style="display: flex; gap: 1rem; justify-content: center; margin-block-start: var(--quiet-content-spacing);">
   <quiet-button variant="primary" size="lg" appearance="outline" pill href="https://github.com/sponsors/quietui" target="_blank">
     <quiet-icon slot="start" family="filled" name="heart" style="color: deeppink;"></quiet-icon>
-    Start sponsoring today!
+    Become a sponsor
   </quiet-button>
 </div>
 

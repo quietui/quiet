@@ -81,7 +81,7 @@ Icons are sized relative to the current font size. This allows you to place them
 
 ### Changing the stroke
 
-You can change the thickness of the default icon library's icons by setting the `stroke-width` property on the icon. For best results, use a value between 1px and 2px at 0.25px intervals.
+You can change the thickness of the default icon library's icons by setting the `stroke-width` property on the icon. For best results, use a value between 1px and 2px at 0.25px intervals. If icons look too thick or thin at various sizes, try adjusting their stroke width!
 
 ```html {.example}
 <div style="font-size: 1.5rem;">

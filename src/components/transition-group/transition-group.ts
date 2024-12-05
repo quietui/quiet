@@ -40,9 +40,10 @@ export class QuietTransitionGroup extends QuietElement {
   private transitionCompleteResolve: (() => void) | null = null;
 
   /**
-   * A custom animation to use for enter/exit transitions,  Works well with animations from @quietui/scurry.
-   * (Property only) */
-  public animation?: QuietAnimation;
+   * A custom animation to use for enter/exit transitions,  Works well with animations from `@quietui/scurry`.
+   * (Property only)
+   */
+  public presenceAnimation?: QuietAnimation;
 
   /** Resolves when the current or next transition ends. (Property only) */
   public transitionComplete: Promise<void> = Promise.resolve();
@@ -100,8 +101,8 @@ export class QuietTransitionGroup extends QuietElement {
    */
   private getAnimation(): QuietAnimation {
     // Return a custom animation
-    if (this.animation) {
-      return this.animation;
+    if (this.presenceAnimation) {
+      return this.presenceAnimation;
     }
 
     // Return the default fade animation

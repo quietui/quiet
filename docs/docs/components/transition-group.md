@@ -366,7 +366,7 @@ quiet-transition-group {
 
 For best results, avoid using complex layouts within transition groups.
 
-### Changing duration
+### Changing the duration
 
 To change the animation speed, set the `--duration` custom property on the transition group. Each transition is made up of one or more steps (e.g. add, remove, reposition) and the duration applies to each individual step, not the total transition time.
 
@@ -415,142 +415,105 @@ To change the animation speed, set the `--duration` custom property on the trans
 </style>
 ```
 
-### Changing the effect
+### Changing the animation
 
-Use the `effect` attribute to change the animation used when adding and removing elements. The default is `fade`.
+To change the enter and exit animations, pass a `QuietAnimation` object to the transition group's `presenceAnimation` property. A `QuietAnimation` includes [keyframes](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API/Keyframe_Formats) and [easings](https://developer.mozilla.org/en-US/docs/Web/CSS/easing-function) for entering and exiting animations. The interface looks like this:
 
-```html {.example}
-<div id="transition-group__effect">
-  <!-- Add your elements here -->
+```ts
+interface QuietAnimation {
+  enter: {
+    keyframes: Keyframe[];
+    easing: string;
+  };
+
+  exit: {
+    keyframes: Keyframe[];
+    easing: string;
+  };
+}
+```
+
+Here's an example of a custom animation that scales and fades elements in and out and they enter and leave.
+
+```js
+const transitionGroup = document.querySelector('quiet-transition-group');
+
+transitionGroup.presenceAnimation = {
+  enter: {
+    keyframes: [
+      { opacity: 0, scale: 0.75 },
+      { opacity: 1, scale: 1 }
+    ],
+    easing: 'cubic-bezier(0.33, 1.2, 0.66, 1)'
+  },
+  exit: {
+    keyframes: [
+      { opacity: 1, scale: 1 },
+      { opacity: 0, scale: 0.75 }
+    ],
+    easing: 'cubic-bezier(0.33, 0, 0.67, 0.2)'
+  }
+};
+```
+### Using Scurry animations
+
+Quiet's [Scurry](https://github.com/quietui/scurry) module provides a number of ready-to-use, RTL-friendly animations that work great with transition groups. You can install Scurry locally using npm or import animations directly from the CDN.
+
+Here you can preview the animations that are available in Scurry.
+
+<quiet-card id="transition-group__animation">
   <quiet-transition-group>
     <div class="box" style="background-color: dodgerblue;"></div>
     <div class="box" style="background-color: rebeccapurple;"></div>
   </quiet-transition-group>
 
   <div class="controls">
-    <quiet-select label="Effect">
-      <optgroup label="Simple">
-        <option value="fade">fade (default)</option>
-        <option value="scale">scale</option>
-        <option value="flip-x">flip-x</option>
-        <option value="flip-y">flip-y</option>
-        <option value="rotate-x">rotate-x</option>
-        <option value="rotate-y">rotate-y</option>
-        <option value="slide-x">slide-x</option>
-        <option value="slide-y">slide-y</option>
-      </optgroup>
-      <optgroup label="Complex">
-        <option value="drift">drift</option>      
-        <option value="earthquake">earthquake</option>
-        <option value="elevator">elevator</option>
-        <option value="explode">explode</option>
-        <option value="fold">fold</option>
-        <option value="glitch">glitch</option>
-        <option value="gravity">gravity</option>
-        <option value="kaleidoscope">kaleidoscope</option>
-        <option value="orbit">orbit</option>
-        <option value="portal">portal</option>
-        <option value="ribbon">ribbon</option>
-        <option value="rubber">rubber</option>
-        <option value="spring">spring</option>
-        <option value="telescope">telescope</option>
-        <option value="tornado">tornado</option>
-        <option value="vortex">vortex</option>
-      </optgroup>
-    </quiet-select>
-    <quiet-button icon-label="Replay"><quiet-icon name="reload"></quiet-icon></quiet-button>
+    <quiet-select label="Animation"></quiet-select>
+    <quiet-button icon-label="Play"><quiet-icon family="filled" name="player-play"></quiet-icon></quiet-button>
+    <quiet-copy id="copy-animation-from-cdn-button" data="https://quietui.org/">
+      <quiet-button>Copy CDN import</quiet-button>
+    </quiet-copy>
+    <quiet-copy id="copy-animation-from-npm-button" data="https://quietui.org/">
+      <quiet-button>Copy npm import</quiet-button>
+    </quiet-copy>
   </div>
-</div>
 
-<!-- Everything below is for the demo -->
-<script>
-  const container = document.getElementById('transition-group__effect');
+  <div class="description"></div>
+</quiet-card>
+
+<script type="module">
+  import { animations as manifest } from 'https://cdn.jsdelivr.net/npm/@quietui/scurry@4/dist/manifest.js';
+  import * as animations from 'https://cdn.jsdelivr.net/npm/@quietui/scurry@4/dist/index.js';
+
+  const container = document.getElementById('transition-group__animation');
   const transitionGroup = container.querySelector('quiet-transition-group');
   const select = container.querySelector('quiet-select');
+  const description = container.querySelector('.description');
   const swapButton = container.querySelector('quiet-button');
+  const copyAnimationFromCdnButton = document.getElementById('copy-animation-from-cdn-button');
+  const copyAnimationFromNpmButton = document.getElementById('copy-animation-from-npm-button');
   let lastRemoved;
 
-  //
-  // TODO - update this to show how to import and use the animations from scurry
-  //
-  transitionGroup.animation = {
-    enter: {
-      keyframes: [
-        {
-          opacity: 0,
-          transform: 'translateY(100px) scaleY(0.5) scaleX(1.2)',
-          filter: 'brightness(0.8)'
-        },
-        {
-          opacity: 0.2,
-          transform: 'translateY(50px) scaleY(0.8) scaleX(1.1)',
-          filter: 'brightness(0.9)'
-        },
-        {
-          opacity: 0.4,
-          transform: 'translateY(-20px) scaleY(1.2) scaleX(0.8)',
-          filter: 'brightness(1.1)'
-        },
-        {
-          opacity: 0.6,
-          transform: 'translateY(-30px) scaleY(1.3) scaleX(0.7)',
-          filter: 'brightness(1.2)'
-        },
-        {
-          opacity: 0.8,
-          transform: 'translateY(-15px) scaleY(1.1) scaleX(0.9)',
-          filter: 'brightness(1.1)'
-        },
-        {
-          opacity: 0.9,
-          transform: 'translateY(-5px) scaleY(1.05) scaleX(0.95)',
-          filter: 'brightness(1.05)'
-        },
-        {
-          opacity: 1,
-          transform: 'translateY(0) scale(1)',
-          filter: 'brightness(1)'
-        }
-      ],
-      easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
-    },
-    exit: {
-      keyframes: [
-        {
-          opacity: 1,
-          transform: 'translateY(0) scale(1)',
-          filter: 'brightness(1)'
-        },
-        {
-          opacity: 0.9,
-          transform: 'translateY(-5px) scaleY(1.05) scaleX(0.95)',
-          filter: 'brightness(1.05)'
-        },
-        {
-          opacity: 0.7,
-          transform: 'translateY(-25px) scaleY(1.2) scaleX(0.8)',
-          filter: 'brightness(1.1)'
-        },
-        {
-          opacity: 0.5,
-          transform: 'translateY(-35px) scaleY(1.3) scaleX(0.7)',
-          filter: 'brightness(1.2)'
-        },
-        {
-          opacity: 0.2,
-          transform: 'translateY(50px) scaleY(0.8) scaleX(1.1)',
-          filter: 'brightness(0.9)'
-        },
-        {
-          opacity: 0,
-          transform: 'translateY(100px) scaleY(0.5) scaleX(1.2)',
-          filter: 'brightness(0.8)'
-        }
-      ],
-      easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
-    }
-  };
+  function updateSelectedAnimation(name) {
+    if (!manifest[name]) return;
+    transitionGroup.presenceAnimation = animations[name]({ dir: 'ltr' });
+    copyAnimationFromCdnButton.data = `import { ${name} } from 'https://cdn.jsdelivr.net/npm/@quietui/scurry@4/${manifest[name].path}';`;
+    copyAnimationFromNpmButton.data = `import { ${name} } from '@quietui/scurry';`;
+    description.textContent = manifest[name].description;;
+  }
 
+  // Add options
+  Object.keys(animations).forEach((name, index) => {
+    const option = document.createElement('option');
+    option.value = name;
+    option.textContent = name;
+    select.append(option);
+
+    // Apply 
+    if (index === 0) {
+      updateSelectedAnimation(name);
+    }
+  });
 
   const pinkBox = document.createElement('div');
   pinkBox.classList.add('box');
@@ -563,32 +526,35 @@ Use the `effect` attribute to change the animation used when adding and removing
 
     // Wait for the transition to complete
     await transitionGroup.transitionComplete;
-    swapButton.disabled = false;
 
     // Remove the box after a moment
-    setTimeout(() => {
+    setTimeout(async () => {
       pinkBox.remove();
+      await transitionGroup.transitionComplete;
+      swapButton.disabled = false;
     }, 500);
   }
 
   // Change the effect
   select.addEventListener('quiet-input', () => {
-    transitionGroup.effect = select.value;
+    updateSelectedAnimation(select.value);
     play();
   });
-
+  
   // Play
   swapButton.addEventListener('quiet-click', play);
 </script>
 
 <style>
-  #transition-group__effect {
+  #transition-group__animation {
+    margin-block-end: var(--quiet-content-spacing);
+
     quiet-transition-group {
       display: flex;
       gap: 1rem;
       flex-wrap: wrap;
       flex-direction: row;
-      margin-block-end: 2rem;
+      margin-block-end: var(--quiet-content-spacing);
     }
 
     .box {
@@ -601,12 +567,37 @@ Use the `effect` attribute to change the animation used when adding and removing
 
     .controls {
       display: flex;
+      flex-wrap: wrap;
       width: 100%;
       align-items: end;
       gap: 1rem;
     }
+
+    .description {
+      font-size: .875rem;
+      color: var(--quiet-text-muted);
+      margin-block-start: 1rem;
+    }
   }
 </style>
+
+If you're using npm, install Scurry using the following command.
+
+```sh
+npm i @quietui/scurry
+```
+
+Import any of the animation functions as shown below. Animations are RTL-aware, so make sure to call each function with the `dir` parameter to get a `QuietAnimation` object with proper directionality. Then, apply it to the appropriate transition group's `presenceAnimation` property.
+
+```js
+// Import an animation
+import { tornado } from '@quietui/scurry';
+
+// Get a reference to the transition group
+const transitionGroup = document.querySelector('quiet-transition-group');
+
+// Change the animation
+transitionGroup.presenceAnimation = tornado({ dir: 'ltr' });
 ```
 
 ### Disabling transitions

@@ -417,7 +417,7 @@ To change the animation speed, set the `--duration` custom property on the trans
 
 ### Changing the animation
 
-To change the enter and exit animations, pass a `QuietAnimation` object to the transition group's `presenceAnimation` property. A `QuietAnimation` includes [keyframes](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API/Keyframe_Formats) and [easings](https://developer.mozilla.org/en-US/docs/Web/CSS/easing-function) for entering and exiting animations. The interface looks like this:
+Transition groups use the [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API) to move elements around. To customize the enter and exit animations, pass a `QuietAnimation` object to the transition group's `presenceAnimation` property. A `QuietAnimation` includes [keyframes](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API/Keyframe_Formats) and [easings](https://developer.mozilla.org/en-US/docs/Web/CSS/easing-function) for entering and exiting animations. The interface looks like this:
 
 ```ts
 interface QuietAnimation {

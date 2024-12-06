@@ -218,12 +218,12 @@ Use standard DOM APIs to add, remove, and reorder elements and the transition gr
 
     // Move an item up
     if (action === 'up' && listItem.previousElementSibling) {
-    listItem.previousElementSibling.before(listItem);
+      listItem.previousElementSibling.before(listItem);
     }
 
     // Move an item down 
     if (action === 'down' && listItem.nextElementSibling) {
-    listItem.nextElementSibling.after(listItem);
+      listItem.nextElementSibling.after(listItem);
     }
   });
 
@@ -298,6 +298,10 @@ Use standard DOM APIs to add, remove, and reorder elements and the transition gr
   }
 </style>
 ```
+
+:::info
+As elements are added, removed, and reordered, their positions in the DOM change instantly. The elements are then animated from their old positions to their new positions, meaning CSS selectors such as `:first-child`, `:last-child`, `:nth-child()`, et al will apply as soon as the transition starts, which may not always be desirable. To avoid this, use ids and classes in lieu of position-based selectors.
+:::
 
 ### Awaiting transitions
 

@@ -27,6 +27,17 @@ export function animateWithClass(el: Element, className: string): Promise<void> 
   });
 }
 
+/** Determines if two DOMRect objects have different positions. */
+export function hasDomRectMoved(oldPosition: DOMRect, newPosition: DOMRect) {
+  if (!oldPosition) return true;
+  return (
+    oldPosition.top !== newPosition.top ||
+    oldPosition.left !== newPosition.left ||
+    oldPosition.width !== newPosition.width ||
+    oldPosition.height !== newPosition.height
+  );
+}
+
 /** Parses a CSS duration string and returns the corresponding number of milliseconds. */
 export function parseCssDuration(duration: string): number {
   // Handle empty or invalid input

@@ -5,7 +5,7 @@ import { customElement, property } from 'lit/decorators.js';
 import { QuietContentChangedEvent } from '../../events/content.js';
 import { QuietTransitionEndEvent } from '../../events/transition.js';
 import hostStyles from '../../styles/host.styles.js';
-import { parseCssDuration } from '../../utilities/animate.js';
+import { hasDomRectMoved, parseCssDuration } from '../../utilities/animate.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import styles from './transition-group.styles.js';
 
@@ -240,9 +240,17 @@ export class QuietTransitionGroup extends QuietElement {
     [...this.children].forEach((el: HTMLElement) => {
       const oldPosition = this.cachedElementPositions.get(el);
       const newPosition = el.getBoundingClientRect();
-      if (addedElements.has(el)) return;
-      if (removedElements.has(el)) return;
-      if (!oldPosition) return;
+
+      // Don't animate elements that haven't moved or were just now added/removed
+      if (
+        !oldPosition ||
+        !hasDomRectMoved(oldPosition, newPosition) ||
+        addedElements.has(el) ||
+        removedElements.has(el)
+      ) {
+        return;
+      }
+
       const translateX = oldPosition.left - newPosition.left - (window.scrollX - this.cachedScrollPosition.x);
       const translateY = oldPosition.top - newPosition.top - (window.scrollY - this.cachedScrollPosition.y);
 

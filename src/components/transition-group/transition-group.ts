@@ -1,4 +1,4 @@
-import type { QuietAnimation } from '@quietui/scurry';
+import type { QuietTransitionAnimation } from '@quietui/scurry';
 import type { CSSResultGroup } from 'lit';
 import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
@@ -15,7 +15,7 @@ import styles from './transition-group.styles.js';
  * @summary Transition groups improve the user's experience by adding subtle animations as items are added, removed, and
  *  reordered in the group.
  * @documentation https://quietui.org/docs/components/transition-group
- * @status experimental
+ * @status stable
  * @since 1.0
  *
  * @slot - One or more elements to transition when adding, removing, and reordering the DOM.
@@ -34,16 +34,18 @@ export class QuietTransitionGroup extends QuietElement {
   private cachedContainerPosition: DOMRect;
   private cachedElementPositions = new WeakMap<HTMLElement, DOMRect>();
   private cachedScrollPosition: { x: number; y: number } = { x: window.scrollX, y: window.scrollY };
-  private isTransitioning = false;
   private mutationObserver: MutationObserver;
   private resizeObserver: ResizeObserver;
   private transitionCompleteResolve: (() => void) | null = null;
+
+  /** Determines if the transition group is currently animating. (Property only) */
+  public isTransitioning = false;
 
   /**
    * A custom animation to use for enter/exit transitions,  Works well with animations from `@quietui/scurry`.
    * (Property only)
    */
-  public presenceAnimation?: QuietAnimation;
+  public transitionAnimation?: QuietTransitionAnimation;
 
   /** Resolves when the current or next transition ends. (Property only) */
   public transitionComplete: Promise<void> = Promise.resolve();
@@ -99,10 +101,10 @@ export class QuietTransitionGroup extends QuietElement {
   /**
    * Gets a custom animation based on the users preference. If a custom animation isn't found, the default is returned.
    */
-  private getAnimation(): QuietAnimation {
+  private getAnimation(): QuietTransitionAnimation {
     // Return a custom animation
-    if (this.presenceAnimation) {
-      return this.presenceAnimation;
+    if (this.transitionAnimation) {
+      return this.transitionAnimation;
     }
 
     // Return the default fade animation

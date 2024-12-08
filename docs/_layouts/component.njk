@@ -10,9 +10,9 @@
   <h1 class="title">{{ title }}</h1>
   <div class="component-info">
     <code class="component-tag">&lt;{{ component.tagName }}&gt;</code>
-    <quiet-badge>since {{ component.since }}</quiet-badge>
     {% if component.status == 'experimental' %}[experimental]{% endif %}
     {% if component.status == 'stable' %}[stable]{% endif %}
+    <quiet-badge>since {{ component.since }}</quiet-badge>
   </div>
   <p class="component-summary">
     {{ component.summary }}

@@ -3,7 +3,7 @@ title: Badge
 layout: component
 ---
 
-```html {.example}
+```html {.example .flex-row}
 <quiet-badge>12 items</quiet-badge>
 ```
 
@@ -13,7 +13,7 @@ layout: component
 
 Badges have four variants. Primary badges are intended to be more obvious. Secondary badges are the default variant and are useful when you want to tag something with less importance. Constructive badges are indicative of success, whereas destructive badges are indicative of danger.
 
-```html {.example}
+```html {.example .flex-row}
 <quiet-badge variant="primary">Primary</quiet-badge>
 <quiet-badge variant="secondary">Secondary</quiet-badge>
 <quiet-badge variant="constructive">Constructive</quiet-badge>
@@ -24,7 +24,7 @@ Badges have four variants. Primary badges are intended to be more obvious. Secon
 
 Badges are sized relative to the current font size. This allows you to place them into many contexts without having to explicitly size them. To change the size, set the `font-size` property on the badge or an ancestor element.
 
-```html {.example}
+```html {.example .flex-row}
 <quiet-badge>Normal</quiet-badge>
 <quiet-badge style="font-size: 1rem;">Big</quiet-badge>
 <quiet-badge style="font-size: 1.25rem;">Bigger</quiet-badge>
@@ -34,21 +34,36 @@ Badges are sized relative to the current font size. This allows you to place the
 
 Use the `color` and `background-color` properties to change badge colors. You can also apply borders with `border` and gradients with the `background-image` property.
 
-```html {.example}
+```html {.example .flex-row}
 <quiet-badge style="background-color: royalblue; color: white; border: none;">Royal Blue</quiet-badge>
 <quiet-badge style="background-color: deeppink; color: white; border: none;">Deep Pink</quiet-badge>
 <quiet-badge style="background-color: forestgreen; color: white; border: none;">Forest Green</quiet-badge>
-<quiet-badge style="background-image: linear-gradient(45.8deg, #af68fe 9.3%, #65dfff 75.1%); color: black; border: none;">Gradient</quiet-badge>
+```
+
+### Using icons
+
+Icons can be added before or after the badge's text.
+
+```html {.example .flex-row}
+<quiet-badge style="background-color: firebrick; color: white;"><quiet-icon name="bug"></quiet-icon> Bug</quiet-badge>
+<quiet-badge style="background-color: #2563eb; color: white;"><quiet-icon name="book-2"></quiet-icon> Documentation</quiet-badge>
+<quiet-badge style="background-color: #d97706; color: white;"><quiet-icon name="copy"></quiet-icon> Duplicate</quiet-badge>
+```
+
+Badges can also be icon-only.
+
+```html {.example .flex-row}
+<quiet-badge style="background-color: #ea580c; color: white;"><quiet-icon label="Cat" name="cat"></quiet-icon></quiet-badge>
+<quiet-badge style="background-color: #059669; color: white;"><quiet-icon label="Dog" name="dog"></quiet-icon></quiet-badge>
+<quiet-badge style="background-color: #4f46e5; color: white;"><quiet-icon label="Mouse" name="mouse"></quiet-icon></quiet-badge>
 ```
 
 ### Drawing attention
 
-Use the `attention` attribute to draw attention to a badge with an animation. Valid options include `pulse`, `shake`, and `wobble`.
+Use the `attention` attribute to draw attention to a badge with an animation. Remove the attribute to stop the animation. Users with a preference for reduced motion will see a more subtle pulse instead of the default bounce.
 
-```html {.example}
-<quiet-badge attention="pulse" variant="primary">Pulse</quiet-badge>
-<quiet-badge attention="shake" variant="primary">Shake</quiet-badge>
-<quiet-badge attention="wobble" variant="primary">Wobble</quiet-badge>
+```html {.example .flex-row}
+<quiet-badge attention style="background-color: #2563eb; color: white;">4 new messages</quiet-badge>
 ```
 
 :::info

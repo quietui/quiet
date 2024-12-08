@@ -38,9 +38,11 @@ Wrap a collection of elements in a transition group and use normal DOM APIs to a
   let count = transitionGroup.children.length;
 
   function addRandomBox() {
+    if (transitionGroup.isTransitioning) return;
     const children = [...transitionGroup.children];
     const randomSibling = children[Math.floor(Math.random() * children.length)];
     const box = document.createElement('div');
+
     box.classList.add('box');
     box.textContent = String(++count);
 
@@ -52,6 +54,7 @@ Wrap a collection of elements in a transition group and use normal DOM APIs to a
   }
 
   function removeRandomBox() {
+    if (transitionGroup.isTransitioning) return;
     const boxes = [...transitionGroup.children];
     if (boxes.length > 0) {
       const randomIndex = Math.floor(Math.random() * boxes.length);
@@ -60,6 +63,7 @@ Wrap a collection of elements in a transition group and use normal DOM APIs to a
   }
 
   function shuffleBoxes() {
+    if (transitionGroup.isTransitioning) return;
     const boxes = [...transitionGroup.children];
     boxes.sort(() => Math.random() - 0.5);
     boxes.forEach(box => transitionGroup.append(box));
@@ -421,10 +425,10 @@ To change the animation speed, set the `--duration` custom property on the trans
 
 ### Changing the animation
 
-Transition groups use the [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API) to move elements around. To customize the enter and exit animations, pass a `QuietAnimation` object to the transition group's `presenceAnimation` property. A `QuietAnimation` includes [keyframes](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API/Keyframe_Formats) and [easings](https://developer.mozilla.org/en-US/docs/Web/CSS/easing-function) for entering and exiting animations. The interface looks like this:
+Transition groups use the [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API) to move elements around. To customize the enter and exit animations, pass a `QuietTransitionAnimation` object to the transition group's `transitionAnimation` property. A `QuietTransitionAnimation` includes [keyframes](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API/Keyframe_Formats) and [easings](https://developer.mozilla.org/en-US/docs/Web/CSS/easing-function) for entering and exiting animations. The interface looks like this:
 
 ```ts
-interface QuietAnimation {
+interface QuietTransitionAnimation {
   enter: {
     keyframes: Keyframe[];
     easing: string;
@@ -437,12 +441,12 @@ interface QuietAnimation {
 }
 ```
 
-Here's an example of a custom animation that scales and fades elements in and out and they enter and leave.
+Here's an example of a custom animation that scales and fades elements in and out as they enter and leave.
 
 ```js
 const transitionGroup = document.querySelector('quiet-transition-group');
 
-transitionGroup.presenceAnimation = {
+transitionGroup.transitionAnimation = {
   enter: {
     keyframes: [
       { opacity: 0, scale: 0.75 },
@@ -462,6 +466,12 @@ transitionGroup.presenceAnimation = {
 ### Using Scurry animations
 
 Quiet's [Scurry](https://github.com/quietui/scurry) module provides a number of ready-to-use, RTL-friendly animations that work great with transition groups. You can install Scurry locally using npm or import animations directly from the CDN.
+
+If you're using npm, install Scurry using the following command.
+
+```sh
+npm i @quietui/scurry
+```
 
 Here you can preview the animations that are available in Scurry.
 
@@ -486,8 +496,8 @@ Here you can preview the animations that are available in Scurry.
 </quiet-card>
 
 <script type="module">
-  import { animations as manifest } from 'https://cdn.jsdelivr.net/npm/@quietui/scurry@4/dist/manifest.js';
-  import * as animations from 'https://cdn.jsdelivr.net/npm/@quietui/scurry@4/dist/index.js';
+  import { animations as manifest } from 'https://cdn.jsdelivr.net/npm/@quietui/scurry@5/dist/manifest.js';
+  import * as animations from 'https://cdn.jsdelivr.net/npm/@quietui/scurry@5/dist/index.js';
 
   const container = document.getElementById('transition-group__animation');
   const transitionGroup = container.querySelector('quiet-transition-group');
@@ -499,23 +509,24 @@ Here you can preview the animations that are available in Scurry.
   let lastRemoved;
 
   function updateSelectedAnimation(name) {
-    if (!manifest[name]) return;
-    transitionGroup.presenceAnimation = animations[name]({ dir: 'ltr' });
-    copyAnimationFromCdnButton.data = `import { ${name} } from 'https://cdn.jsdelivr.net/npm/@quietui/scurry@4/${manifest[name].path}';`;
+    const animation = manifest.find(a => a.name === name);
+    if (!animation) return;
+    transitionGroup.transitionAnimation = animations[name]({ dir: 'ltr' });
+    copyAnimationFromCdnButton.data = `import { ${name} } from 'https://cdn.jsdelivr.net/npm/@quietui/scurry@5/${animation.path}';`;
     copyAnimationFromNpmButton.data = `import { ${name} } from '@quietui/scurry';`;
-    description.textContent = manifest[name].description;;
+    description.textContent = animation.description;
   }
 
   // Add options
-  Object.keys(animations).forEach((name, index) => {
+  manifest.filter(a => a.type === 'transition').forEach((animation, index) => {
     const option = document.createElement('option');
-    option.value = name;
-    option.textContent = name;
+    option.value = animation.name;
+    option.textContent = animation.name;
     select.append(option);
 
     // Apply 
     if (index === 0) {
-      updateSelectedAnimation(name);
+      updateSelectedAnimation(animation.name);
     }
   });
 
@@ -585,13 +596,7 @@ Here you can preview the animations that are available in Scurry.
   }
 </style>
 
-If you're using npm, install Scurry using the following command.
-
-```sh
-npm i @quietui/scurry
-```
-
-Import any of the animation functions as shown below. Animations are RTL-aware, so make sure to call each function with the `dir` parameter to get a `QuietAnimation` object with proper directionality. Then, apply it to the appropriate transition group's `presenceAnimation` property.
+Import any of the transition animation functions as shown below. Animations are RTL-aware, so make sure to call each function with the `dir` parameter to get a `QuietTransitionAnimation` object with proper directionality. Then, apply it to the appropriate transition group's `transitionAnimation` property.
 
 ```js
 // Import an animation
@@ -601,7 +606,7 @@ import { tornado } from '@quietui/scurry';
 const transitionGroup = document.querySelector('quiet-transition-group');
 
 // Change the animation
-transitionGroup.presenceAnimation = tornado({ dir: 'ltr' });
+transitionGroup.transitionAnimation = tornado({ dir: 'ltr' });
 ```
 
 ### Disabling transitions

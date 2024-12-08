@@ -6,10 +6,33 @@ export default css`
     --attention-easing: ease;
 
     display: inline-flex;
-    padding: 0.1em 0.7em;
+    align-items: center;
+    align-self: center;
+    justify-content: center;
+    min-width: 2em;
+    height: 2em;
+    padding: 0 0.75em;
+    gap: 0.33em;
     border-radius: 9999px;
     font-weight: var(--quiet-font-weight-semibold);
     font-size: 0.75em;
+  }
+
+  /* Attention */
+  :host([attention]) {
+    animation: var(--attention-duration) tap infinite var(--attention-easing);
+    /* Reduced motion */
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :host([attention]) {
+      animation-name: pulse;
+    }
+  }
+
+  /* Icons */
+  ::slotted(quiet-icon) {
+    scale: 1.25 !important;
   }
 
   /* Primary */
@@ -36,69 +59,36 @@ export default css`
     color: var(--quiet-destructive-text-on-mid);
   }
 
-  /* Pulse */
-  :host([attention='pulse']) {
-    animation: var(--attention-duration) infinite pulse var(--attention-easing);
-  }
-
   @keyframes pulse {
     0% {
       transform: scale(1);
     }
     25% {
-      transform: scale(1.1);
+      transform: scale(1.05);
     }
     75% {
       transform: scale(1);
     }
   }
 
-  /* Shake */
-  :host([attention='shake']) {
-    animation: var(--attention-duration) infinite shake var(--attention-easing);
-  }
-
-  @keyframes shake {
+  @keyframes tap {
     0% {
-      -webkit-transform: translateX(0);
+      transform: translateY(0);
     }
-    10% {
-      -webkit-transform: translateX(2%);
-    }
-    20% {
-      -webkit-transform: translateX(-2%);
+    15% {
+      transform: translateY(-12px);
     }
     30% {
-      -webkit-transform: translateX(2%);
+      transform: translateY(0);
     }
-    40% {
-      -webkit-transform: translateX(-2%);
-    }
-    50% {
-      -webkit-transform: translateX(2%);
+    45% {
+      transform: translateY(-6px);
     }
     60% {
-      -webkit-transform: translateX(0);
+      transform: translateY(0);
     }
-  }
-
-  /* Wobble */
-  :host([attention='wobble']) {
-    animation: var(--attention-duration) infinite wobble var(--attention-easing);
-  }
-
-  @keyframes wobble {
-    0% {
-      -webkit-transform: rotate(0deg);
-    }
-    25% {
-      -webkit-transform: rotate(4deg);
-    }
-    50% {
-      -webkit-transform: rotate(-4deg);
-    }
-    75% {
-      -webkit-transform: rotate(0deg);
+    100% {
+      transform: translateY(0);
     }
   }
 `;

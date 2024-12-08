@@ -9,7 +9,7 @@ export default css`
   #label {
     display: inline-flex;
     align-items: center;
-    gap: 0.75em;
+    gap: 0.5em;
     cursor: pointer;
 
     &:has(.xs) {

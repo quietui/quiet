@@ -60,7 +60,7 @@ Badges can also be icon-only.
 
 ### Drawing attention
 
-Use the `attention` attribute to draw attention to a badge with an animation. Remove the attribute to stop the animation.
+Use the `attention` attribute to draw attention to a badge with an animation. Remove the attribute to stop the animation. Users with a preference for reduced motion will see a more subtle pulse instead of the default bounce.
 
 ```html {.example .flex-row}
 <quiet-badge attention style="background-color: #2563eb; color: white;">4 new messages</quiet-badge>

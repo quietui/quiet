@@ -441,7 +441,7 @@ interface QuietTransitionAnimation {
 }
 ```
 
-Here's an example of a custom animation that scales and fades elements in and out and they enter and leave.
+Here's an example of a custom animation that scales and fades elements in and out as they enter and leave.
 
 ```js
 const transitionGroup = document.querySelector('quiet-transition-group');

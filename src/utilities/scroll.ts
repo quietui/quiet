@@ -1,10 +1,7 @@
 const locks = new Set();
 const stylesheet = new CSSStyleSheet();
-stylesheet.replaceSync(`
-  body {
-    border: solid 20px tomato;
-  }
 
+stylesheet.replaceSync(`
   .quiet-scroll-lock {
     scrollbar-gutter: stable !important;
     overflow: hidden !important;

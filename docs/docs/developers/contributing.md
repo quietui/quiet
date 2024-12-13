@@ -153,7 +153,7 @@ Attribute reflection in custom elements is [an interesting challenge](https://ww
 
 - All `with-` attributes must reflect.
 - In form controls, the `name` and `required` attributes must always reflect, like the platform.
-- States such as `disabled`, `checked`, `active`, etc. must not reflect.
+- Form control states such as `disabled`, `checked`, `active`, etc. must not reflect.
 
 ### Styling elements with borders
 

@@ -10,9 +10,13 @@ You can think of Restyle as a smarter, prettier user agent stylesheet.
 
 ## Usage
 
-To add Restyle to your app, first [include a theme](/docs/theming) and add the following markup to the `<head>` of your document.
+To add Restyle to your app, add the following markup to the `<head>` of your document. If you haven't included a theme yet, make sure to add the default theme as well.
 
 ```html
+<!-- Default theme (if not already installed) -->
+<link rel="stylesheet" href="{% cdnUrl '/dist/themes/quiet.css' %}">
+
+<!-- Quiet Restyle -->
 <link rel="stylesheet" href="{% cdnUrl '/dist/themes/restyle.css' %}">
 ```
 
@@ -255,8 +259,9 @@ For consistency, native form controls are styled to look similar to Quiet form c
     <label><input type="checkbox"> Feature C</label>
   </div>
   <div style="display: flex; gap: 0.5rem;">
-    <button type="button" class="primary">Primary</button>
     <button type="button">Default</button>
+    <button type="button" class="primary">Primary</button>
+    <button type="button" class="destructive">Destructive</button>
   </div>
 </div>
 

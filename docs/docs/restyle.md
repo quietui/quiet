@@ -255,8 +255,9 @@ For consistency, native form controls are styled to look similar to Quiet form c
     <label><input type="checkbox"> Feature C</label>
   </div>
   <div style="display: flex; gap: 0.5rem;">
-    <button type="button" class="primary">Primary</button>
     <button type="button">Default</button>
+    <button type="button" class="primary">Primary</button>
+    <button type="button" class="destructive">Destructive</button>
   </div>
 </div>
 

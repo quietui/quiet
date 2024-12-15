@@ -3,6 +3,11 @@ import { property } from 'lit/decorators.js';
 
 /** The base class for all Quiet components */
 export class QuietElement extends LitElement {
+  static shadowRootOptions: ShadowRootInit = {
+    ...LitElement.shadowRootOptions,
+    serializable: true
+  };
+
   private hasRecordedInitialProperties = false;
   private initialReflectedProperties: Map<string, unknown> = new Map();
   protected internals: ElementInternals;

@@ -24,7 +24,7 @@ Since you're using npm instead of the autoloader, you only need to copy `dist/as
 
 Some frameworks require configuration for them to recognize custom elements. Look for your framework below for more details.
 
-### Angular
+## Angular
 
 Import Quiet components into the root app module and enable the custom elements schema as shown below.
 
@@ -46,7 +46,7 @@ export class AppModule {
 
 Now you can use Quiet components in your Angular app like regular HTML elements.
 
-### Vue
+## Vue
 
 Configure Vue's compiler options to recognize Quiet components.
 
@@ -79,7 +79,7 @@ export default {
 </script>
 ```
 
-### Preact
+## Preact
 
 SolidJS plays nicely with custom elements without additional configuration. Just import the component and use it like a regular HTML element.
 
@@ -95,7 +95,7 @@ export function Component() {
 }
 ```
 
-### SolidJS
+## SolidJS
 
 SolidJS plays nicely with custom elements without additional configuration. Just import the component and use it like a regular HTML element.
 
@@ -113,7 +113,7 @@ function App() {
 export default App;
 ```
 
-### Svelte
+## Svelte
 
 Svelte plays nicely with custom elements without additional configuration. Just import the component and use it like a regular HTML element.
 
@@ -127,7 +127,7 @@ Svelte plays nicely with custom elements without additional configuration. Just 
 </quiet-button>
 ```
 
-### React
+## React
 
 React 18 and below is [harder to work](https://custom-elements-everywhere.com/#react) with because:
 

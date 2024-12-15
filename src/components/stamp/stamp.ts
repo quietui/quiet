@@ -1,29 +1,46 @@
-import type { CSSResultGroup, PropertyValues } from 'lit';
+import type { CSSResultGroup } from 'lit';
 import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import hostStyles from '../../styles/host.styles.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import styles from './stamp.styles.js';
 
+/** Determines if a value is truthy. */
+function isTruthy(value: string) {
+  const isFalse = [
+    'false',
+    'null',
+    'undefined',
+    '', // empty string
+    'NaN', // Not a number
+    '0', // zero
+    '-0', // negative zero
+    '0n' // BigInt zero
+  ];
+  return isFalse.includes(`${value}`) ? false : true;
+}
+
 //
 // TODO
 //
-//  - listen for data- attributes to change and re-render
-//  - other re-renders
-//  - boolean attributes should probably be ?attr="true|false"
-//  - conditional rendering based on truthy values:
-//      <div :if="truthy-thing">
-//      <div :unless="truthy-thing">
-//      <
+//  - set attributes
+//    - how do we handle boolean attributes? e.g. `disabled="true"`
+//  - set values in text nodes
+//  - set HTML values in text nodes
+//  - handle + document `if` attributes
+//  - handle + document `unless` attributes
+//  - escape placeholders, e.g. `\{escaped}`
+//
+//  - should the stamp replace itself with the resulting HTML?
 //
 
 /**
  * <quiet-stamp>
  *
- * @summary TODO
+ * @summary Stamps let you create a template and "stamp out" multiple copies of it using custom data.
  * @documentation https://quietui.org/docs/components/stamp
  * @status experimental
- * @since TODO
+ * @since 1.0
  *
  * @slot - The default slot.
  * @slot named - A named slot.
@@ -37,104 +54,95 @@ export class QuietStamp extends QuietElement {
 
   firstUpdated() {
     // Look for the template
-    this.renderTemplate();
+    this.stampFromTemplate();
   }
 
-  updated(changedProperties: PropertyValues<this>) {
-    if (changedProperties.has('template')) {
-      this.renderTemplate();
-    }
-  }
-
-  private handleDefaultSlotChange() {
-    // Parse slotted elements for slot names
-    //
-  }
-
-  private renderTemplate() {
+  private stampFromTemplate() {
     const root = this.getRootNode() as Document | ShadowRoot;
     const templateEl = root.getElementById(this.template) as HTMLTemplateElement;
 
     // Did we find the <template>?
     if (!templateEl) {
-      console.warn(`A template with an id of "${this.template}" could not be found in this document.`);
+      console.warn(`A template with an id of "${this.template}" could not be found in this document.`, this);
       return;
     }
 
     // Clone it
-    let doc = templateEl.content.cloneNode(true) as HTMLElement;
+    const doc = templateEl.content.cloneNode(true) as HTMLElement;
 
-    // Loop through all elements in the cloned template and replace :attr with attr="this.dataset.attr"
-    doc.querySelectorAll('*').forEach(el => {
+    // Loop through all elements
+    doc.querySelectorAll('*').forEach((el: Element) => {
       for (const attr of el.attributes) {
-        //
-        // TODO - decide what syntax to use
-        //
-        // Text/HTML inserts: <meta name="key">
-        // String attributes: .attr="key"
-        // Boolean attributes: ?attr="truthy-key"
-        // Directives: :if="truthy-key", :unless="truthy-key"
-        //
-        //
-        //
-        //
-        //
-        //
-        //
-        //
+        let content = '';
 
-        // Check for value attributes, e.g. `@attr="key"`
-        if (attr.name.startsWith('.')) {
-          el.setAttribute(attr.name.slice(1), this.getAttribute(`data-${attr.value}`) || '');
-          el.removeAttribute(attr.name);
+        //
+        // Step 1 - replace `attr="{key}"` attributes with corresponding values
+        //
+        if (typeof attr.value === 'string') {
+          const trimmedValue = attr.value.trim();
+          if (trimmedValue.startsWith('{') && trimmedValue.endsWith('}')) {
+            const key = trimmedValue.slice(1, -1);
+            content = this.dataset[key] || '';
+            el.setAttribute(attr.name, content);
+          }
         }
 
-        // TODO - Check for boolean attributes, e.g. `:disabled="truthy"`
-
-        // TODO - Check for directives, e.g. `:if` and `:unless`
-        if (attr.name.startsWith(':')) {
-          //
+        //
+        // Step 2 - handle if/unless attributes
+        //
+        if (attr.name === 'if') {
+          if (isTruthy(content)) {
+            el.removeAttribute('if');
+          } else {
+            el.remove();
+          }
+        } else if (attr.name === 'unless') {
+          if (isTruthy(content)) {
+            el.remove();
+          } else {
+            el.removeAttribute('unless');
+          }
         }
       }
-    });
 
-    // Replace `<meta name="foo" with the user-provided HTML found in `*[slot="foo"]`. If no content is found, fall back
-    // to `this.dataset[name]`.
-    const userHtmlMap = new Map(Object.entries(this.dataset));
+      //
+      // Step 2 - replace text nodes with corresponding values
+      //
+      //  - Loop through every text node in the document
+      //  - If it has an unescaped placeholder with :html, break the node into three: text + HTML + text
+      //  - If it has an unescaped placeholder, swap it out with its text value
+      //
+      // TODO - this works but is too eager and breaks if/unless
+      //
+      // if (el.textContent?.includes('{')) {
+      //   const htmlRegex = /\{([^}]+?):html\}/g;
+      //   const textRegex = /\{([^}]+?)(?<!:html)\}/g;
+      //   let content = el.innerHTML;
 
-    // ..then look for content slotted in by the user, convert it to HTML, and add it to the map
-    this.querySelectorAll<HTMLElement>('[slot]').forEach(el => {
-      const name = el.slot;
-      if (name) {
-        const clone = el.cloneNode(true) as HTMLElement;
-        clone.removeAttribute('slot');
-        userHtmlMap.set(name, clone.outerHTML);
-      }
-    });
+      //   // Handle HTML placeholders first
+      //   content = content.replace(htmlRegex, (_match, key) => {
+      //     return this.dataset[key] || '';
+      //   });
 
-    // Replace <meta> tags in the template with the user-provided HTML based on slot="name", falling back to `data-name`
-    const metaTags = doc.querySelectorAll<HTMLMetaElement>('meta');
-    metaTags.forEach(meta => {
-      if (userHtmlMap.has(meta.name)) {
-        meta.outerHTML = userHtmlMap.get(meta.name)!;
-      } else {
-        meta.replaceWith(this.getAttribute(`data-${meta.name}`) || '');
-      }
-    });
+      //   // Then handle text placeholders
+      //   content = content.replace(textRegex, (_match, key) => {
+      //     return escapeHtml(this.dataset[key] || '');
+      //   });
 
-    // Remove anything that doesn't have slot="..."
-    [...this.children].forEach(el => {
-      if (!el.slot) el.remove();
+      //   el.innerHTML = content;
+      // }
+
+      //
+      // TODO - handle if/unless conditionals by showing/removing and stripping the attributes
+      //
     });
 
     // Append the cloned template children
-    [...doc.children].forEach(el => {
-      this.append(el);
-    });
+    this.append(doc);
   }
 
   render() {
-    return html` <slot @slotchange=${this.handleDefaultSlotChange}></slot> `;
+    return html` <slot></slot> `;
   }
 }
 

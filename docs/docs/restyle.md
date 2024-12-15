@@ -10,9 +10,13 @@ You can think of Restyle as a smarter, prettier user agent stylesheet.
 
 ## Usage
 
-To add Restyle to your app, first [include a theme](/docs/theming) and add the following markup to the `<head>` of your document.
+To add Restyle to your app, add the following markup to the `<head>` of your document. If you haven't included a theme yet, make sure to add the default theme as well.
 
 ```html
+<!-- Default theme (if not already installed) -->
+<link rel="stylesheet" href="{% cdnUrl '/dist/themes/quiet.css' %}">
+
+<!-- Quiet Restyle -->
 <link rel="stylesheet" href="{% cdnUrl '/dist/themes/restyle.css' %}">
 ```
 

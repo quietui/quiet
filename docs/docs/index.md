@@ -26,7 +26,7 @@ Quiet is an open source library for building modern user interfaces on the Web. 
     </a>
   </li>
   <li>
-    <a class="stretch" href="/docs/animation">
+    <a class="stretch" href="/docs/localization">
       <quiet-icon name="language" style="color: #58acf2;"></quiet-icon><br>
       Localized components with translations in multiple languages
     </a>

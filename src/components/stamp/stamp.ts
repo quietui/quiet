@@ -1,38 +1,9 @@
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import hostStyles from '../../styles/host.styles.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import styles from './stamp.styles.js';
-
-/** Determines if a value is truthy. */
-function isTruthy(value: string) {
-  const isFalse = [
-    'false',
-    'null',
-    'undefined',
-    '', // empty string
-    'NaN', // Not a number
-    '0', // zero
-    '-0', // negative zero
-    '0n' // BigInt zero
-  ];
-  return isFalse.includes(`${value}`) ? false : true;
-}
-
-//
-// TODO
-//
-//  - set attributes
-//    - how do we handle boolean attributes? e.g. `disabled="true"`
-//  - set values in text nodes
-//  - set HTML values in text nodes
-//  - handle + document `if` attributes
-//  - handle + document `unless` attributes
-//  - escape placeholders, e.g. `\{escaped}`
-//
-//  - should the stamp replace itself with the resulting HTML?
-//
 
 /**
  * <quiet-stamp>
@@ -52,92 +23,165 @@ export class QuietStamp extends QuietElement {
   /** The id of the `<template>` element to use as a stamp. */
   @property() template = '';
 
-  firstUpdated() {
-    // Look for the template
-    this.stampFromTemplate();
+  updated(changedProperties: PropertyValues<this>) {
+    // Handle template changes
+    if (changedProperties.has('template')) {
+      this.stampFromTemplate();
+    }
+
+    //
+    // TODO - re-render template when data- attributes change
+    //
   }
 
+  /** A helper to determine if a placeholder has HTML content */
+  private isHtmlExpression(text: string): { key: string; isHtml: boolean } {
+    const htmlSuffix = ':html';
+    const endsWithHtml = text.endsWith(htmlSuffix);
+    return {
+      key: endsWithHtml ? text.slice(0, -htmlSuffix.length) : text,
+      isHtml: endsWithHtml
+    };
+  }
+
+  /** Determines if a value is truthy by our own definition. */
+  private isTruthy(value: string) {
+    const isFalse = [
+      'false',
+      'null',
+      'undefined',
+      '', // empty string
+      'NaN', // Not a number
+      '0', // zero
+      '-0', // negative zero
+      '0n' // BigInt zero
+    ];
+    return isFalse.includes(`${value}`) ? false : true;
+  }
+
+  /** Given an `{expression}`, returns the key and associated value from the element's dataset. */
+  private parseExpression(value: string): { key: string; content: string } {
+    const trimmedValue = value.trim();
+    if (trimmedValue.startsWith('{') && trimmedValue.endsWith('}')) {
+      const key = trimmedValue.slice(1, -1);
+      return {
+        key,
+        content: this.dataset[key] || ''
+      };
+    }
+    return { key: '', content: value };
+  }
+
+  /** Finds the associated template, stamps it out, and appends it to the host element. */
   private stampFromTemplate() {
     const root = this.getRootNode() as Document | ShadowRoot;
     const templateEl = root.getElementById(this.template) as HTMLTemplateElement;
 
-    // Did we find the <template>?
     if (!templateEl) {
       console.warn(`A template with an id of "${this.template}" could not be found in this document.`, this);
       return;
     }
 
-    // Clone it
     const doc = templateEl.content.cloneNode(true) as HTMLElement;
 
-    // Loop through all elements
     doc.querySelectorAll('*').forEach((el: Element) => {
       for (const attr of el.attributes) {
-        let content = '';
+        // Handle boolean attributes starting with ?
+        if (attr.name.startsWith('?')) {
+          const { content } = this.parseExpression(attr.value);
+          const attributeName = attr.name.slice(1);
+          el.removeAttribute(attr.name);
 
-        //
-        // Step 1 - replace `attr="{key}"` attributes with corresponding values
-        //
-        if (typeof attr.value === 'string') {
-          const trimmedValue = attr.value.trim();
-          if (trimmedValue.startsWith('{') && trimmedValue.endsWith('}')) {
-            const key = trimmedValue.slice(1, -1);
-            content = this.dataset[key] || '';
-            el.setAttribute(attr.name, content);
+          if (this.isTruthy(content)) {
+            el.setAttribute(attributeName, '');
           }
+          return;
         }
 
-        //
-        // Step 2 - handle if/unless attributes
-        //
+        // Handle regular attribute replacements
+        const { key, content } = this.parseExpression(attr.value);
+        if (key) {
+          el.setAttribute(attr.name, content);
+        }
+
+        // Handle conditional attributes
         if (attr.name === 'if') {
-          if (isTruthy(content)) {
+          if (this.isTruthy(content)) {
             el.removeAttribute('if');
           } else {
             el.remove();
           }
         } else if (attr.name === 'unless') {
-          if (isTruthy(content)) {
+          if (this.isTruthy(content)) {
             el.remove();
           } else {
             el.removeAttribute('unless');
           }
         }
       }
-
-      //
-      // Step 2 - replace text nodes with corresponding values
-      //
-      //  - Loop through every text node in the document
-      //  - If it has an unescaped placeholder with :html, break the node into three: text + HTML + text
-      //  - If it has an unescaped placeholder, swap it out with its text value
-      //
-      // TODO - this works but is too eager and breaks if/unless
-      //
-      // if (el.textContent?.includes('{')) {
-      //   const htmlRegex = /\{([^}]+?):html\}/g;
-      //   const textRegex = /\{([^}]+?)(?<!:html)\}/g;
-      //   let content = el.innerHTML;
-
-      //   // Handle HTML placeholders first
-      //   content = content.replace(htmlRegex, (_match, key) => {
-      //     return this.dataset[key] || '';
-      //   });
-
-      //   // Then handle text placeholders
-      //   content = content.replace(textRegex, (_match, key) => {
-      //     return escapeHtml(this.dataset[key] || '');
-      //   });
-
-      //   el.innerHTML = content;
-      // }
-
-      //
-      // TODO - handle if/unless conditionals by showing/removing and stripping the attributes
-      //
     });
 
-    // Append the cloned template children
+    // Process text nodes
+    const walker = document.createTreeWalker(doc, NodeFilter.SHOW_TEXT, null);
+    const textNodes: Text[] = [];
+    let node: Text | null;
+    while ((node = walker.nextNode() as Text)) {
+      textNodes.push(node);
+    }
+
+    textNodes.reverse().forEach(node => {
+      const text = node.textContent || '';
+      let result = text;
+      let lastIndex = 0;
+      const regex = /(?<!\\)\{([^}]+)\}/g;
+      let match: RegExpExecArray | null;
+
+      // Check if we have any unescaped expressions
+      while ((match = regex.exec(text)) !== null) {
+        const [fullMatch, placeholder] = match;
+        const { key, isHtml } = this.isHtmlExpression(placeholder);
+        const value = this.dataset[key] || '';
+
+        if (isHtml) {
+          // Handle HTML content by splitting into separate nodes
+          const beforeText = text.slice(lastIndex, match.index);
+          const tempDiv = document.createElement('div');
+          tempDiv.innerHTML = value;
+
+          // Insert text before the expression
+          if (beforeText) {
+            node.parentNode?.insertBefore(document.createTextNode(beforeText), node);
+          }
+
+          // Insert HTML content
+          while (tempDiv.firstChild) {
+            node.parentNode?.insertBefore(tempDiv.firstChild, node);
+          }
+
+          lastIndex = match.index + fullMatch.length;
+        } else {
+          // Simple text replacement
+          result = result.replace(fullMatch, value);
+        }
+      }
+
+      // Handle remaining text for non-HTML replacements or if no replacements were made
+      if (!lastIndex) {
+        // Remove the backslash from escaped expressions
+        result = result.replace(/\\\{/g, '{');
+        node.textContent = result;
+      } else if (lastIndex < text.length) {
+        // Add remaining text after last HTML replacement
+        const remainingText = text.slice(lastIndex);
+        node.parentNode?.insertBefore(document.createTextNode(remainingText), node);
+      }
+
+      // Remove original node if we did HTML replacements
+      if (lastIndex > 0) {
+        node.remove();
+      }
+    });
+
     this.append(doc);
   }
 

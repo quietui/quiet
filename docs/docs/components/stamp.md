@@ -23,6 +23,11 @@ The `<quiet-stamp>` element uses `display: contents` and appends the stamped tem
       No actions available
     </div>
 
+    <button ?disabled="{isDisabled}">
+      <span if="{isDisabled}">Disabled</span>
+      <span unless="{isDisabled}">Not disabled</span>
+    </button>
+
     \{test}
   </div>
 </template>
@@ -34,6 +39,7 @@ The `<quiet-stamp>` element uses `display: contents` and appends the stamped tem
   data-bio="Hi, I'm Bob and <em>I like to party!</em> Employee of the month every Nevervember."
   data-has-actions="false"
   data-test="you shouldn't see me"
+  data-is-disabled="true"
 ></quiet-stamp>
 
 <quiet-stamp 
@@ -43,6 +49,7 @@ The `<quiet-stamp>` element uses `display: contents` and appends the stamped tem
   data-bio="Hi, I'm Gary and <strong>I do not like to party!</strong>"
   data-has-actions="true"
   data-test="you shouldn't see me either"
+  data-is-disabled="false"
 ></quiet-stamp>
 ```
 

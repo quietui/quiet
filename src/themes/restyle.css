@@ -725,6 +725,11 @@ button {
     outline: var(--quiet-focus-ring);
     outline-offset: var(--quiet-focus-offset);
   }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
 }
 
 /* Checkboxes + radios */
@@ -780,6 +785,11 @@ input[type='radio'] {
   &:focus-visible {
     outline: var(--quiet-focus-ring);
     outline-offset: var(--quiet-focus-offset);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
   }
 }
 

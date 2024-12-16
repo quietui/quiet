@@ -21,7 +21,7 @@ Quiet is an open source library for building modern user interfaces on the Web. 
   </li>
   <li>
     <a class="stretch" href="/docs/restyle">
-      <quiet-icon name="seeding" style="color: #7db664;"></quiet-icon><br>
+      <quiet-icon name="seedling" style="color: #7db664;"></quiet-icon><br>
       Optional CSS reset for jump-starting new apps with consistent styles
     </a>
   </li>

@@ -23,15 +23,18 @@ export class QuietStamp extends QuietElement {
   /** The id of the `<template>` element to use as a stamp. */
   @property() template = '';
 
+  /**
+   * When true, the stamped content will replace the `<quiet-stamp>` element instead of being appended to it. This can
+   * be useful for controlling exactly what appears in the DOM, but it can also be confusing for developers who may not
+   * understand how the stamped content was generated.
+   */
+  @property({ type: Boolean }) replace = false;
+
   updated(changedProperties: PropertyValues<this>) {
     // Handle template changes
-    if (changedProperties.has('template')) {
-      this.stampFromTemplate();
+    if (changedProperties.has('template') || changedProperties.has('replace')) {
+      this.renderTemplate();
     }
-
-    //
-    // TODO - re-render template when data- attributes change
-    //
   }
 
   /** A helper to determine if a placeholder has HTML content */
@@ -59,7 +62,7 @@ export class QuietStamp extends QuietElement {
     return isFalse.includes(`${value}`) ? false : true;
   }
 
-  /** Given an `{expression}`, returns the key and associated value from the element's dataset. */
+  /** Given an `{expression}`, returns the key and associated content from the element's dataset. */
   private parseExpression(value: string): { key: string; content: string } {
     const trimmedValue = value.trim();
     if (trimmedValue.startsWith('{') && trimmedValue.endsWith('}')) {
@@ -72,11 +75,15 @@ export class QuietStamp extends QuietElement {
     return { key: '', content: value };
   }
 
-  /** Finds the associated template, stamps it out, and appends it to the host element. */
-  private stampFromTemplate() {
+  /** Processes the associated template and renders it to the DOM. */
+  public renderTemplate() {
     const root = this.getRootNode() as Document | ShadowRoot;
     const templateEl = root.getElementById(this.template) as HTMLTemplateElement;
 
+    // No template was specified, so do nothing
+    if (!this.template) return;
+
+    // The specified template wasn't found
     if (!templateEl) {
       console.warn(`A template with an id of "${this.template}" could not be found in this document.`, this);
       return;
@@ -84,6 +91,7 @@ export class QuietStamp extends QuietElement {
 
     const doc = templateEl.content.cloneNode(true) as HTMLElement;
 
+    // Loop through every element
     doc.querySelectorAll('*').forEach((el: Element) => {
       for (const attr of el.attributes) {
         // Handle boolean attributes starting with ?
@@ -182,7 +190,13 @@ export class QuietStamp extends QuietElement {
       }
     });
 
-    this.append(doc);
+    // Inject the template
+    if (this.replace) {
+      this.replaceWith(doc);
+      this.remove();
+    } else {
+      this.append(doc);
+    }
   }
 
   render() {

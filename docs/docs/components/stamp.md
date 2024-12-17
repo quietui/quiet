@@ -19,15 +19,17 @@ The `<quiet-stamp>` element uses `display: contents` and appends the stamped tem
       <button type="button">Delete</button>
     </div>
 
-    <div unless="{hasActions}">
+    <div unless="{hasActions}" style="margin-top: 1rem;">
       No actions available
     </div>
 
+    <br>
     <button ?disabled="{isDisabled}">
       <span if="{isDisabled}">Disabled</span>
       <span unless="{isDisabled}">Not disabled</span>
     </button>
-
+    <br>
+    <br>
     \{test}
   </div>
 </template>

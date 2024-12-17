@@ -70,12 +70,19 @@ Quiet can be used for free under the MIT license. Unfortunately, I can't offer f
   <li><quiet-icon name="school" style="color: #7db664;"></quiet-icon><br>Learn once, use forever</li>
 </ul>
 
-<div style="display: flex; gap: 1rem; justify-content: center; margin-block-start: var(--quiet-content-spacing);">
+<div style="display: flex; gap: 1rem; justify-content: center; margin-block: var(--quiet-content-spacing);">
   <quiet-button variant="primary" size="lg" appearance="outline" pill href="https://github.com/sponsors/quietui" target="_blank">
     <quiet-icon slot="start" family="filled" name="heart" style="color: deeppink;"></quiet-icon>
     Become a sponsor
   </quiet-button>
 </div>
+
+<p style="text-align: center;">
+  <small>
+    Not sure how to start the conversation with your organization? 
+    <a href="/sponsor/letter-to-the-boss">This free template might help.</a>
+  </small>
+</p>
 
 ---
 

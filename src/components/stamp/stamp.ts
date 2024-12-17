@@ -37,7 +37,7 @@ export class QuietStamp extends QuietElement {
     }
   }
 
-  /** A helper to determine if a placeholder has HTML content */
+  /** A helper to determine if an expression has HTML content */
   private isHtmlExpression(text: string): { key: string; isHtml: boolean } {
     const htmlSuffix = ':html';
     const endsWithHtml = text.endsWith(htmlSuffix);
@@ -146,8 +146,8 @@ export class QuietStamp extends QuietElement {
 
       // Check if we have any unescaped expressions
       while ((match = regex.exec(text)) !== null) {
-        const [fullMatch, placeholder] = match;
-        const { key, isHtml } = this.isHtmlExpression(placeholder);
+        const [fullMatch, expression] = match;
+        const { key, isHtml } = this.isHtmlExpression(expression);
         const value = this.dataset[key] || '';
 
         if (isHtml) {

@@ -8,13 +8,10 @@ import styles from './stamp.styles.js';
 /**
  * <quiet-stamp>
  *
- * @summary Stamps let you create a template and "stamp out" multiple copies of it using custom data.
+ * @summary Stamps render templates with simple expressions, logic, and custom data.
  * @documentation https://quietui.org/docs/components/stamp
  * @status experimental
  * @since 1.0
- *
- * @slot - The default slot.
- * @slot named - A named slot.
  */
 @customElement('quiet-stamp')
 export class QuietStamp extends QuietElement {

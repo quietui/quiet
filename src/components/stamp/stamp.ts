@@ -59,17 +59,11 @@ export class QuietStamp extends QuietElement {
     return isFalse.includes(`${value}`) ? false : true;
   }
 
-  /** Given an `{expression}`, returns the key and associated content from the element's dataset. */
-  private parseExpression(value: string): { key: string; content: string } {
-    const trimmedValue = value.trim();
-    if (trimmedValue.startsWith('{') && trimmedValue.endsWith('}')) {
-      const key = trimmedValue.slice(1, -1);
-      return {
-        key,
-        content: this.dataset[key] || ''
-      };
-    }
-    return { key: '', content: value };
+  /** Process expressions within a text string */
+  private processExpressions(text: string): string {
+    return text.replace(/(?<!\\)\{([^}]+)\}/g, (_, expression) => {
+      return this.dataset[expression] || '';
+    });
   }
 
   /** Processes the associated template and renders it to the DOM. */
@@ -93,35 +87,39 @@ export class QuietStamp extends QuietElement {
       for (const attr of el.attributes) {
         // Handle boolean attributes starting with ?
         if (attr.name.startsWith('?')) {
-          const { content } = this.parseExpression(attr.value);
+          const processedValue = this.processExpressions(attr.value);
           const attributeName = attr.name.slice(1);
           el.removeAttribute(attr.name);
 
-          if (this.isTruthy(content)) {
+          if (this.isTruthy(processedValue)) {
             el.setAttribute(attributeName, '');
           }
-          return;
-        }
-
-        // Handle regular attribute replacements
-        const { key, content } = this.parseExpression(attr.value);
-        if (key) {
-          el.setAttribute(attr.name, content);
+          continue;
         }
 
         // Handle conditional attributes
         if (attr.name === 'if') {
-          if (this.isTruthy(content)) {
+          const processedValue = this.processExpressions(attr.value);
+          if (this.isTruthy(processedValue)) {
             el.removeAttribute('if');
           } else {
             el.remove();
           }
+          continue;
         } else if (attr.name === 'unless') {
-          if (this.isTruthy(content)) {
+          const processedValue = this.processExpressions(attr.value);
+          if (this.isTruthy(processedValue)) {
             el.remove();
           } else {
             el.removeAttribute('unless');
           }
+          continue;
+        }
+
+        // Process any expressions in the attribute value
+        const processedValue = this.processExpressions(attr.value);
+        if (processedValue !== attr.value) {
+          el.setAttribute(attr.name, processedValue);
         }
       }
     });

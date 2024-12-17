@@ -11,19 +11,15 @@ For most organizations, a sponsorship is just a drop in the bucket. For open sou
 
 Dear =={Boss}==,
 
-I'm excited to share something that can make a real difference for our team. I've been looking into Quiet&nbsp;UI, an open source component library that will really streamline our development work and save us significant time and effort.
+I want to introduce Quiet&nbsp;UI, an open source component library that can significantly improve our development workflow.
+
+Quiet&nbsp;UI offers thoroughly tested, accessible components that work across frameworks. This means we won't need to rebuild components when switching frameworks in the future. Quiet's comprehensive documentation and commitment to accessibility will let us focus on building features rather than maintaining our own components.
+
+While comparable solutions cost $10,000+ yearly, Quiet runs on a sponsorship model ($12-$100/month). I think the $100 tier would be perfect for us – it's a fraction of what we currently spend maintaining our own components and it gives us support from the maintainer and priority bug fixes.
 
 The project's website is: <a href="https://quietui.org/" data-no-external-icon>quietui.org</a>
 
-What makes Quiet&nbsp;UI special is how it solves several of our current challenges. Instead of spending hours building and maintaining our own components, we can use its thoroughly tested, accessible components that work right out of the box. Since it's framework-agnostic, we won't need to rebuild everything if we switch frameworks down the road – it'll just work.
-
-One thing I particularly love about Quiet&nbsp;UI is how it handles accessibility. Their components are built with accessible in mind, which means we can focus on building features rather than worrying about compliance issues. The library is also incredibly well-documented, making it easy for anyone on the team to jump in and start using it.
-
-**Here's what makes this especially compelling:** while similar tools can cost upwards of $10,000 per year, Quiet&nbsp;UI runs on a sponsorship model ranging from just $12 to $100 monthly. For that, we get access to a private support forum, priority bug fixes, and support directly from the maintainer.
-
-I think the $100 tier would be perfect for us – it's a fraction of what we currently spend on maintaining our own components and gives us all the support we might need.
-
-I'd love to chat more about this with you. Do you have some time this week to discuss how we can kick off a sponsorship and put Quiet&nbsp;UI to work for our team?
+Do you have time this week to discuss implementing Quiet&nbsp;UI and starting a sponsorship?
 
 Thanks!
 

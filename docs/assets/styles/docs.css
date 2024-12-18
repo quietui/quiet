@@ -1069,18 +1069,17 @@ td.table-reflects {
 
 .whiskers-email {
   position: relative;
-  width: 240px;
+  width: 280px;
   margin-inline: auto;
   margin-block: calc(var(--quiet-content-spacing) * 1.5);
-  line-height: 1.2;
   text-align: center;
 
   .whiskers-email-controls {
     display: flex;
     position: absolute;
-    top: 78px;
-    left: 16px;
-    width: 210px;
+    top: 95px;
+    left: 7.5%;
+    width: 85%;
     gap: 8px;
   }
 

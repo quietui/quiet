@@ -1,12 +1,12 @@
 const locks = new Set();
-const lockStyles = document.createElement('style');
+const stylesheet = new CSSStyleSheet();
 
-lockStyles.textContent = `
+stylesheet.replaceSync(`
   .quiet-scroll-lock {
     scrollbar-gutter: stable !important;
     overflow: hidden !important;
   }
-`;
+`);
 
 /**
  * Prevents scrolling on the document while a modal component is active. If more than one element locks scrolling, it
@@ -14,10 +14,11 @@ lockStyles.textContent = `
  */
 export function lockScrolling(el: Element) {
   locks.add(el);
+  document.documentElement.classList.add('quiet-scroll-lock');
 
-  if (!lockStyles.isConnected) {
-    document.body.append(lockStyles);
-    document.documentElement.classList.add('quiet-scroll-lock');
+  // Add the stylesheet to the document
+  if (!document.adoptedStyleSheets.includes(stylesheet)) {
+    document.adoptedStyleSheets = [...document.adoptedStyleSheets, stylesheet];
   }
 }
 
@@ -27,6 +28,11 @@ export function unlockScrolling(el: Element) {
 
   if (locks.size === 0) {
     document.documentElement.classList.remove('quiet-scroll-lock');
-    lockStyles.remove();
+
+    // Remove the stylesheet from the document
+    const index = document.adoptedStyleSheets.indexOf(stylesheet);
+    if (index > -1) {
+      document.adoptedStyleSheets = [...document.adoptedStyleSheets].filter((_sheet, i) => i !== index);
+    }
   }
 }

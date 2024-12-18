@@ -121,7 +121,7 @@ export default function (eleventyConfig) {
       // Replace [breaking] with a badge
       {
         replace: /\[breaking\]/gs,
-        replaceWith: '<quiet-badge variant="destructive">breaking</quiet-badge>'
+        replaceWith: '<quiet-badge variant="destructive"><quiet-icon name="urgent"></quiet-icon> breaking</quiet-badge>'
       },
       // Replace [experimental] with a badge
       {
@@ -132,7 +132,7 @@ export default function (eleventyConfig) {
       // Replace [stable] with a badge
       {
         replace: /\[stable\]/gs,
-        replaceWith: '<quiet-badge variant="primary"><quiet-icon name="check"></quiet-icon> stable</quiet-badge>'
+        replaceWith: '<quiet-badge variant="primary"><quiet-icon name="checks"></quiet-icon> stable</quiet-badge>'
       }
     ])
   );

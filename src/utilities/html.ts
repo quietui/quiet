@@ -1,3 +1,10 @@
+/** Escapes HTML special characters in a string using the browser's built-in HTML escaping via textContent. */
+export function escapeHtml(html: string) {
+  const div = document.createElement('div');
+  div.textContent = html;
+  return div.innerHTML;
+}
+
 /** Returns the "inner HTML" of a slot element. */
 export function getSlotHtml(slot: HTMLSlotElement): string {
   const nodes = slot.assignedNodes({ flatten: true });

@@ -102,7 +102,7 @@ In most cases, templates aren't very useful without data. To pass data to a stam
 
 Avoid using `<script>` and `<style>` tags in your template because they'll be duplicate each time the template is rendered.
 
-```html {.example .no-buttons .open}
+```html {.example .open .no-buttons}
 <!-- Create a template -->
 <template id="user-template">
   <h3 class="name">{name}</h3>
@@ -127,9 +127,11 @@ The template element must be in the DOM when the stamp is connected, otherwise t
 
 ### Boolean attributes
 
-Boolean attributes, such as `<button disabled>`, are true when the attribute is present and false when the attribute is absent. Boolean attributes can be denoted in templates using a `?` prefix, e.g. `?disabled`. A truthy comparison is done to determine if the attribute should be applied. All values aside from `false`, `null`, `undefined`, `""`, `NaN`, `0`, `-0`, and `0n` are considered truthy.
+Boolean attributes, such as `<button disabled>`, are true when the attribute is present and false when the attribute is absent. Boolean attributes can be denoted in templates using a `?` prefix, e.g. `?disabled`.
 
-```html {.example .no-buttons .open .flex-row}
+A truthy comparison is done to determine if the attribute should be applied. All values aside from `false`, `null`, `undefined`, `""`, `NaN`, `0`, `-0`, and `0n` are considered truthy.
+
+```html {.example .flex-row}
 <template id="button-template">
   <button ?disabled="{isDisabled}">Click me</button>
 </template>
@@ -165,13 +167,17 @@ Escaped expressions will not be evaluated and will be rendered as-is without the
 To show an element based on a truthy value, use the special `if={expression}` attribute. The element will only be shown when the expression is truthy.
 
 ```html
-<div if="{someValue}">I will only be shown when someValue is truthy</div>
+<div if="{someValue}">
+  I will only be shown when someValue is truthy
+</div>
 ```
 
 The inverse of this is the `unless` method, which shows an element when the value is _not_ truthy.
 
 ```html
-<div unless="{someValue}">I will only be shown when someValue is falsy</div>
+<div unless="{someValue}">
+  I will only be shown when someValue is falsy
+</div>
 ```
 
 :::info
@@ -184,7 +190,7 @@ If you don't want the `<quiet-stamp>` element to remain in the DOM after renderi
 
 This can be useful for controlling exactly what appears in the DOM, but it can also be confusing for developers who may not understand how the stamped content was generated.
 
-```html {.example .no-buttons .open}
+```html {.example}
 <template id="replaceable-template">
   <h3 style="margin-block: 0;">Where did it go?</h3>
   <p>

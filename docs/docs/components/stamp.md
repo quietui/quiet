@@ -26,28 +26,28 @@ When you need to make changes to repetitive content, stamps make it easy by lett
   <!-- First stamp -->
   <quiet-stamp 
     template="user-card"
-    data-name="Bobby McGee"
+    data-name="Meowy McGee"
     data-tagline="Freedom's just another word for nothing left to lose."
     data-label="Profile pic"
     data-can-edit="true"
-    data-image="https://images.unsplash.com/photo-1574158622682-e40e69881006?q=80&w=256&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    data-image="https://images.unsplash.com/photo-1672487209629-4d52e0c043d0?q=80&w=256&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   ></quiet-stamp>
 
   <!-- Second stamp -->
   <quiet-stamp 
     template="user-card"
-    data-name="Saucy McGee"
-    data-tagline="Just saucing it up every chance that I can."
+    data-name="Lady Pawington"
+    data-tagline="Professional sunbeam chaser and nap enthusiast."
     data-label="Profile pic"
     data-can-edit="true"
-    data-image="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=256&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    data-image="https://images.unsplash.com/photo-1516310789627-2ff305829fbb?q=80&w=256&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   ></quiet-stamp>
 
   <!-- Third stamp -->
   <quiet-stamp 
     template="user-card"
-    data-name="Jimmy Buffet"
-    data-tagline="Cheeseburger in paradise wasn't just a song."
+    data-name="Sir Whiskertons III"
+    data-tagline="Living all nine lives to the fullest, one treat at a time."
     data-label="Profile pic"
     data-can-edit="false"
     data-image="https://images.unsplash.com/photo-1569591159212-b02ea8a9f239?q=80&w=256&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -112,7 +112,7 @@ Avoid using `<script>` and `<style>` tags in your template because they'll be du
 <!-- Stamp it out -->
 <quiet-stamp 
   template="user-template"
-  data-name="Bobby McGee"
+  data-name="Meowy McGee"
   data-tagline="Freedom's just another word for nothing left to lose."
 ></quiet-stamp>
 ```

@@ -8,7 +8,7 @@ This page describes the changes that happen throughout the library from version 
 
 Components marked [stable] are well-tested, ready for production, and less likely to see breaking changes. Components marked [experimental] are offered as explorations to gather feedback. Experimental components are less stable and may receive breaking changes or be removed from the library without a major version bump.
 
-## Versions
+## Releases
 
 ### 1.0.0
 

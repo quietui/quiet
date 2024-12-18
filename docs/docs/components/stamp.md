@@ -125,7 +125,7 @@ Expressions can be used in attributes and content, but will not be processed whe
 The template element must be in the DOM when the stamp is connected, otherwise the template won't be rendered and a warning will be shown in the console.
 :::
 
-#### Boolean attributes
+### Boolean attributes
 
 Boolean attributes, such as `<button disabled>`, are true when the attribute is present and false when the attribute is absent. Boolean attributes can be denoted in templates using a `?` prefix, e.g. `?disabled`. A truthy comparison is done to determine if the attribute should be applied. All values aside from `false`, `null`, `undefined`, `""`, `NaN`, `0`, `-0`, and `0n` are considered truthy.
 
@@ -138,7 +138,7 @@ Boolean attributes, such as `<button disabled>`, are true when the attribute is 
 <quiet-stamp template="button-template" data-is-disabled="true"></quiet-stamp>
 ```
 
-#### HTML expressions
+### HTML expressions
 
 Expressions are HTML-escaped by default, but you can add `:html` to any content expression to render the raw, unescaped HTML.
 
@@ -150,7 +150,7 @@ Expressions are HTML-escaped by default, but you can add `:html` to any content 
 Using this option can be dangerous! Make sure you trust the included content, otherwise your app may become vulnerable to XSS exploits!
 :::
 
-#### Escaping expressions
+### Escaping expressions
 
 To escape an expressions add a [[\\]] character immediately before the opening curly bracket.
 
@@ -160,7 +160,7 @@ To escape an expressions add a [[\\]] character immediately before the opening c
 
 Escaped expressions will not be evaluated and will be rendered as-is without the backslash.
 
-#### Conditionals
+### Conditionals
 
 To show an element based on a truthy value, use the special `if={expression}` attribute. The element will only be shown when the expression is truthy.
 
@@ -186,7 +186,7 @@ This can be useful for controlling exactly what appears in the DOM, but it can a
 
 ```html {.example .no-buttons .open}
 <template id="replaceable-template">
-  <h3 style="margin-block: 0;">Where'd it go?</h3>
+  <h3 style="margin-block: 0;">Where did it go?</h3>
   <p>
     Go ahead and inspect the DOM. The stamp has been 
     replaced by this content.

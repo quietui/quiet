@@ -5,39 +5,21 @@ export default css`
     --flip-duration: 0.5s;
     --spacing: 1.5em;
 
-    display: flex;
-    width: 100%;
-  }
-
-  #card {
     display: grid;
     position: relative;
-    flex: 1 1 auto;
+    width: 100%;
     transform-origin: center;
     transform-style: preserve-3d;
     border-radius: var(--quiet-border-radius);
     transition: var(--flip-duration) transform ease-in-out;
+  }
 
-    &:focus {
-      outline: none;
-    }
+  :host([direction='horizontal'][flipped]) {
+    transform: rotateY(-180deg);
+  }
 
-    &:focus-visible {
-      outline: var(--quiet-focus-ring);
-      outline-offset: var(--quiet-focus-offset);
-    }
-
-    &.horizontal.flipped {
-      transform: rotateY(-180deg);
-    }
-
-    &.vertical.flipped {
-      transform: rotateX(180deg);
-    }
-
-    &.vertical #back {
-      transform: rotateX(-180deg);
-    }
+  :host([direction='vertical'][flipped]) {
+    transform: rotateX(180deg);
   }
 
   #front,
@@ -50,7 +32,6 @@ export default css`
     backface-visibility: hidden;
     background-color: var(--quiet-paper-color);
     box-shadow: var(--quiet-shadow-softer);
-    cursor: pointer;
   }
 
   #front {
@@ -61,12 +42,11 @@ export default css`
     transform: rotateY(-180deg);
   }
 
-  ::slotted(*) {
-    margin: var(--spacing);
+  :host([direction='vertical']) #back {
+    transform: rotateX(-180deg);
   }
 
-  /* We need a nested element to apply padding because both faces are grid items */
-  .body {
-    padding: var(--spacing);
+  ::slotted(*) {
+    margin: var(--spacing);
   }
 `;

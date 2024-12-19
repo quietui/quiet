@@ -6,17 +6,64 @@ layout: component
 Flip cards span the full width of their container, by default. The height is determined by the content you slot in. The card will grow to fit the content of the front or back side, whichever is greater.
 
 ```html {.example}
-<quiet-flip-card style="max-width: 300px;">
+<quiet-flip-card id="flip-card__overview" style="max-width: 300px;">
   <div slot="front">
     What did the cat say when it lost its toys?
+    <button type="button" data-flip-card="toggle">flip</button>
   </div>
   <div slot="back">
     You've cat to be kitten me right meow!
+    <button type="button" data-flip-card="toggle">flip again</button>
   </div>
 </quiet-flip-card>
+
+<button type="button" data-flip-card="front flip-card__overview">Front</button>
+<button type="button" data-flip-card="back flip-card__overview">Back</button>
+<button type="button" data-flip-card="toggle flip-card__overview">Toggle</button>
 ```
 
 ## Examples
+
+### Flipping cards
+
+You can flip a flip card programmatically by obtaining a reference to it and setting the `flipped` property to `true` or `false`.
+
+```js
+const flipCard = document.querySelector('quiet-flip-card');
+
+// Flip it over
+flipCard.flipped = true;
+
+// Flip it back
+flipCard.flipped = false;
+```
+
+However, it's often more convenient for a button to control the flip card _without_ additional scripting. In this case, you can add the `data-flip-card="toggle *"` attribute to any button in the document, where `*` is the target flip card's `id`. To ensure the button always flips to a certain side, use `data-flip-card="front *"` or `data-flip-card="back *"`. If the button is _inside_ a flip card, the ID can be omitted.
+
+```html {.example}
+<quiet-flip-card id="flip-card__flipping" style="max-width: 300px;">
+  <quiet-card with-media with-footer slot="front">
+    <img slot="media" src="https://images.unsplash.com/photo-1515073883629-5e2924e3e106?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="A tabby kitten sleeps next to a toy mouse.">
+    There's nothing more delightful than watching a curious kitten explore the world with big, innocent eyes and tiny, playful paws.
+    <quiet-button slot="footer" variant="primary">I agree</quiet-button>
+    <quiet-button slot="footer">Learn more</quiet-button>
+  </quiet-card>
+  <div slot="back">Uh oh</div>
+</quiet-flip-card>
+
+<style>
+  #flip-card__flipping div[slot] {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
+
+<button type="button" data-flip-card="front flip-card__flipping">Front</button>
+<button type="button" data-flip-card="back flip-card__flipping">Back</button>
+<button type="button" data-flip-card="toggle flip-card__flipping">Toggle</button>
+```
 
 ### Flipping vertically
 

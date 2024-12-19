@@ -1,5 +1,5 @@
 ---
-title: Letter to the boss
+title: Letter to your org
 description: Use this template to write a letter asking your organization to sponsor this project.
 layout: page
 section: 
@@ -9,7 +9,7 @@ For most organizations, a sponsorship is just a drop in the bucket. For open sou
 
 <quiet-card style="padding-inline: 1rem; padding-block-start: var(--quiet-content-spacing);">
 
-Dear =={Boss}==,
+Dear =={Manager}==,
 
 I want to introduce Quiet&nbsp;UI, an open source component library that can significantly improve our development workflow.
 

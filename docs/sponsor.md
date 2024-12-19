@@ -80,7 +80,7 @@ Quiet can be used for free under the MIT license. Unfortunately, I can't offer f
 <p style="text-align: center;">
   <small>
     Not sure how to start the conversation with your organization? 
-    <a href="/sponsor/letter-to-the-boss">This free template might help.</a>
+    <a href="/sponsor/letter-to-your-org">This free template might help.</a>
   </small>
 </p>
 

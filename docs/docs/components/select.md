@@ -57,7 +57,7 @@ Use the `value` attribute to provide an initial value for the select.
 </quiet-select>
 ```
 
-:::warn
+:::info
 This behavior is different from native selects that use the option's `selected` attribute to set the value. With `<quiet-select>`, always use the `value` attribute to set the value.
 :::
 

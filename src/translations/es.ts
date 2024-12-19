@@ -23,7 +23,6 @@ const translation: Translation = {
   opacity: 'Opacidad',
   percentLuminosity: (percentage: string) => `${percentage} luminosidad`,
   percentSaturation: (percentage: string) => `${percentage} de saturación`,
-  pressSpaceToFlipTheCard: 'Presione la barra espaciadora para voltear la tarjeta',
   remove: 'Remover',
   selectAColorFromTheScreen: 'Seleccione un color de la pantalla',
   showPassword: 'Mostrar contraseña',

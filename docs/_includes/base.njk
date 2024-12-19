@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-version="{{ package.version }}">
+<html lang="en" data-version="{{ package.version }}" class="loading">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,13 +28,13 @@
     {# Twitter card #}
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:creator" content="quiet_ui" />
-    <meta name="twitter:image" content="{{ shareImage | default("https://quietui.com/assets/images/og-image.png") }}" />
+    <meta name="twitter:image" content="{{ shareImage | default("https://quietui.org/assets/images/og-image.png") }}" />
 
     {# OpenGraph #}
-    <meta property="og:url" content="https://quietui.com{{page.url}}" />
+    <meta property="og:url" content="https://quietui.org{{page.url}}" />
     <meta property="og:title" content="{{ title }}{% if page.url != '/' %} &middot; Quiet UI{% endif %}" />
     <meta property="og:description" content="{{ description }}" />
-    <meta property="og:image" content="{{ shareImage | default("https://quietui.com/assets/images/og-image.png") }}" />
+    <meta property="og:image" content="{{ shareImage | default("https://quietui.org/assets/images/og-image.png") }}" />
 
     {# Scripts #}
     <script type="module" src="/assets/scripts/theme.js"></script>
@@ -59,15 +59,7 @@
       <div id="navbar">
         {% if hasSidebar %}
           <button id="open-sidebar" class="docs-icon-button" type="button" aria-label="Menu" aria-controls="sidebar">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-            >
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-            </svg>
+            <quiet-icon name="menu-2"></quiet-icon>
           </button>
         {% endif %}
 
@@ -91,8 +83,8 @@
               <span class="not-mobile">Documentation</span>
               <span class="only-mobile">Docs</span>
             </a>
-            <a href="/license"{% if section == 'license' %} class="current"{% endif %} data-with-heart>
-              License
+            <a href="/sponsor" class="with-heart {% if section == 'sponsor' %}current{% endif %}">
+              Sponsor
               <span>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
                   <path d="M2 6.342a3.375 3.375 0 0 1 6-2.088 3.375 3.375 0 0 1 5.997 2.26c-.063 2.134-1.618 3.76-2.955 4.784a14.437 14.437 0 0 1-2.676 1.61c-.02.01-.038.017-.05.022l-.014.006-.004.002h-.002a.75.75 0 0 1-.592.001h-.002l-.004-.003-.015-.006a5.528 5.528 0 0 1-.232-.107 14.395 14.395 0 0 1-2.535-1.557C3.564 10.22 1.999 8.558 1.999 6.38L2 6.342Z" />
@@ -127,6 +119,16 @@
             data-no-external-icon
           >
             <quiet-icon name="brand-github"></quiet-icon>
+          </a>
+
+          {# Bluesky #}
+          <a
+            id="header-bluesky-button"
+            class="not-mobile"
+            href="https://bsky.app/profile/quietui.org"
+            data-no-external-icon
+          >
+            <quiet-icon name="brand-bluesky"></quiet-icon>
           </a>
 
           {# Twitter #}
@@ -236,7 +238,8 @@
 
     <quiet-tooltip for="header-search-button">Search this website (⌘+K)</quiet-tooltip>
     <quiet-tooltip for="header-theme-button">Toggle dark mode (backslash)</quiet-tooltip>
-    <quiet-tooltip for="header-github-button">View the code on GitHub</quiet-tooltip>
+    <quiet-tooltip for="header-github-button">Get the code on GitHub</quiet-tooltip>
+    <quiet-tooltip for="header-bluesky-button">Follow @quietui.org on Bluesky</quiet-tooltip>
     <quiet-tooltip for="header-twitter-button">Follow @quiet_ui on X</quiet-tooltip>
 
     {% include 'search.njk' %}

@@ -158,9 +158,9 @@ You can use [tab lists](/docs/components/tab-list) in popovers to categorize con
 ```html {.example}
 <quiet-popover for="popover__tabs" id="popover__tablist">
   <quiet-tab-list label="Select a tab">
-    <quiet-tab slot="tab" panel="first">First</quiet-tab>
-    <quiet-tab slot="tab" panel="second">Second</quiet-tab>
-    <quiet-tab slot="tab" panel="third">Third</quiet-tab>
+    <quiet-tab panel="first">First</quiet-tab>
+    <quiet-tab panel="second">Second</quiet-tab>
+    <quiet-tab panel="third">Third</quiet-tab>
 
     <quiet-tab-panel name="first">Cats have a unique way of communicating — they can make over 100 vocal sounds, each meaning something different.</quiet-tab-panel>
     <quiet-tab-panel name="second">A cat's sense of smell is much stronger than that of humans, making their noses one of their most important tools.</quiet-tab-panel>

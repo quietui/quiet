@@ -4,7 +4,7 @@ description: Theme concepts, color palettes, and design tokens.
 layout: docs
 ---
 
-The default theme provides simple, elegant styles with support for light and dark modes. A number of [CSS custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) are exposed, giving you an easy way to make high-level changes to the library.
+The default theme provides simple, elegant styles with support for light and dark modes and 21 built-in color presets. A number of [CSS custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) are exposed, giving you an easy way to make high-level changes to the library.
 
 ## Using the default theme
 
@@ -31,6 +31,8 @@ If you're using [Quiet Restyle](/docs/restyle), the entire page will enter dark 
 ### Using light and dark on the same page
 
 Sometimes, it's desirable to have a contrasting theme for certain sections of the page. For example, a light-themed page might have a dark-themed sidebar or footer. You can achieve this by applying the `quiet-light` or `quiet-dark` class to any element on the page. Everything _inside_ that element will use the specified theme.
+
+This works for light and dark mode, but not for [built-in presets](#built-in-presets). To keep the stylesheet small, built-in presets only redefine the primary seed color, not the entire theme.
 
 ## Theme concepts
 
@@ -59,7 +61,7 @@ For best results, use midtone colors to seed palettes. Any of the 500-level colo
 
 ### Built-in presets
 
-For convenience, Quiet's default theme ships with 21 color presets. The theme picker at the top of the page allows you to preview them.
+For convenience, Quiet's default theme ships with 21 color presets to alter the library's primary color. The theme picker at the top of the page allows you to preview them.
 
 To use a preset in your app, add the `quiet-{preset}` class to the `<html>` element, where `{preset}` is one of the following values: red, orange, amber, yellow, lime, green, emerald, teal, cyan, sky, blue, indigo, violet, purple, fuschia, pink, rose, slate, zinc, stone, or sand.
 
@@ -570,6 +572,12 @@ Always scope design tokens overrides to the `:root` node (i.e. `<html>` element)
 | `--quiet-button-active-offset` | The amount of vertical shift to apply to buttons when they're pressed. |
 
 </div>
+
+## Creating a new theme
+
+If you want to create an entirely new theme, the most efficient way is to fork ("copy") the [default theme's CSS](https://github.com/quietui/quiet/blob/main/src/themes/quiet.css) and modify it instead of writing everything from scratch. This method is faster, easier, and less prone to mistakes.
+
+If you just want to change a few things here and there, it's usually better to leave the default theme intact and extend it by adding your own stylesheet with the specific rules you want.
 
 <style>
   .palette {

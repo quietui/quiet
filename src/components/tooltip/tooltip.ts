@@ -1,5 +1,5 @@
 import { arrow, autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { QuietClosedEvent, QuietCloseEvent, QuietOpenedEvent, QuietOpenEvent } from '../../events/open-close.js';
@@ -15,7 +15,7 @@ const openTooltips = new Set<QuietTooltip>();
  * <quiet-tooltip>
  *
  * @summary Tooltips provides additional information when users hover or focus on an element.
- * @documentation https://quietui.com/docs/components/tooltip
+ * @documentation https://quietui.org/docs/components/tooltip
  * @status stable
  * @since 1.0
  *
@@ -105,9 +105,9 @@ export class QuietTooltip extends QuietElement {
     }
   }
 
-  updated(changedProps: Map<string, unknown>) {
+  updated(changedProperties: PropertyValues<this>) {
     // Handle open
-    if (changedProps.has('open')) {
+    if (changedProperties.has('open')) {
       if (this.open && !this.tooltip.classList.contains('visible')) {
         this.show();
       } else {
@@ -116,7 +116,7 @@ export class QuietTooltip extends QuietElement {
     }
 
     // Handle anchor changes
-    if (changedProps.has('for') || changedProps.has('activation')) {
+    if (changedProperties.has('for') || changedProperties.has('activation')) {
       const root = this.getRootNode() as Document | ShadowRoot;
 
       // Tear down the old anchor

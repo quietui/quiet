@@ -25,8 +25,9 @@ export function getLibraryPath(subpath = '') {
     const quietEl = document.querySelector('[data-quiet]');
 
     if (quietEl?.hasAttribute('data-quiet')) {
-      // Use data-quiet
-      setLibraryPath(String(quietEl.getAttribute('data-quiet')));
+      // Use data-quiet to get the root-relative URL
+      const rootRelativeUrl = new URL(quietEl.getAttribute('data-quiet') ?? '', window.location.href).pathname;
+      setLibraryPath(rootRelativeUrl);
     } else {
       // Use the path to quiet.js or quiet.loader.js
       const scripts = [...document.getElementsByTagName('script')] as HTMLScriptElement[];

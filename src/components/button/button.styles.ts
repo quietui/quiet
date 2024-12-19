@@ -226,7 +226,7 @@ export default css`
       bottom: 0.25em;
       left: calc(50% - 0.375em);
       width: 0.75em;
-      height: 0.2em;
+      height: 0.25em;
       border-radius: 9999px;
       background-color: currentColor;
       opacity: 0.15;
@@ -278,22 +278,22 @@ export default css`
     border-radius: 0;
   }
 
-  :host([data-button-group-horizontal][data-button-group-first]) #button {
+  :host([data-button-group-horizontal][data-button-group-first]:not([data-button-group-last])) #button {
     border-start-end-radius: 0;
     border-end-end-radius: 0;
   }
 
-  :host([data-button-group-horizontal][data-button-group-last]) #button {
+  :host([data-button-group-horizontal][data-button-group-last]:not([data-button-group-first])) #button {
     border-start-start-radius: 0;
     border-end-start-radius: 0;
   }
 
-  :host([data-button-group-vertical][data-button-group-first]) #button {
+  :host([data-button-group-vertical][data-button-group-first]:not([data-button-group-last])) #button {
     border-end-start-radius: 0;
     border-end-end-radius: 0;
   }
 
-  :host([data-button-group-vertical][data-button-group-last]) #button {
+  :host([data-button-group-vertical][data-button-group-last]:not([data-button-group-first])) #button {
     border-start-start-radius: 0;
     border-start-end-radius: 0;
   }

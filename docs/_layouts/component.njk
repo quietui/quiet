@@ -10,9 +10,9 @@
   <h1 class="title">{{ title }}</h1>
   <div class="component-info">
     <code class="component-tag">&lt;{{ component.tagName }}&gt;</code>
-    <quiet-badge>since {{ component.since }}</quiet-badge>
     {% if component.status == 'experimental' %}[experimental]{% endif %}
     {% if component.status == 'stable' %}[stable]{% endif %}
+    <quiet-badge>since {{ component.since }}</quiet-badge>
   </div>
   <p class="component-summary">
     {{ component.summary }}
@@ -33,9 +33,9 @@
   <p>
     The <a href="/docs/#autoloading">autoloader</a> is the recommended way to import components but, if you prefer to do it manually, the following code snippets will be helpful.
   </p>
-  <quiet-tab-list id="import-tabs" label="How would you like to import this component?">
-    <quiet-tab slot="tab" panel="cdn">CDN</quiet-tab>
-    <quiet-tab slot="tab" panel="node">Node.js</quiet-tab>
+  <quiet-tab-list class="import-tabs" label="How would you like to import this component?">
+    <quiet-tab panel="cdn">CDN</quiet-tab>
+    <quiet-tab panel="node">Node.js</quiet-tab>
     <quiet-tab-panel name="cdn">
       <p>
         To manually import <code>&lt;{{ component.tagName }}&gt;</code> from the CDN, use the following code.

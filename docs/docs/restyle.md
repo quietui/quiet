@@ -4,15 +4,19 @@ description: An opinionated CSS reset you can use with or without Quiet's compon
 layout: docs
 ---
 
-Quiet Restyle™ is an opinionated, minimal CSS reset you can use with or without Quiet's components. It lets you kick off a new website or app that looks great without worrying about styling native HTML elements right away. Just include it and start writing HTML!
+Quiet Restyle™ is an opinionated CSS reset that provides consistent styles to HTML documents by making use of Quiet's [design token API](/docs/theming/#theme-concepts). Restyle is entirely optional, but it's a great way to kick off new websites and apps without worrying about initial styles. As you [customize your theme](/docs/theming) with CSS, Restyle will adapt accordingly.
 
 You can think of Restyle as a smarter, prettier user agent stylesheet.
 
 ## Usage
 
-To add Restyle to your app, first [include a theme](/docs/theming) and add the following markup to the `<head>` of your document.
+To add Restyle to your app, add the following markup to the `<head>` of your document. If you haven't included a theme yet, make sure to add the default theme as well.
 
 ```html
+<!-- Default theme (if not already installed) -->
+<link rel="stylesheet" href="{% cdnUrl '/dist/themes/quiet.css' %}">
+
+<!-- Quiet Restyle -->
 <link rel="stylesheet" href="{% cdnUrl '/dist/themes/restyle.css' %}">
 ```
 
@@ -27,6 +31,8 @@ Restyle is just a starting point. Feel free to customize any of its styles in yo
 The following content shows how Restyle affects native HTML elements using the current theme. Feel free to inspect the source to view the markup.
 
 ---
+
+<h3 class="visually-hidden">Headings</h3>
 
 <div data-no-outline>
 
@@ -54,7 +60,7 @@ Ultrices dui sapien eget mi proin sed libero enim sed. Adipiscing bibendum est u
 
 Amet nisl purus in mollis nunc sed id semper risus. Risus viverra adipiscing at in tellus integer feugiat scelerisque. Blandit volutpat maecenas volutpat blandit aliquam etiam erat. Consectetur lorem donec massa sapien.
 
----
+</div>
 
 ### Paragraphs
 
@@ -178,20 +184,17 @@ export function thing(arg) {
 
 <details name="example">
   <summary>Amet nisl purus</summary>
-  <p>Scelerisque varius morbi enim nunc faucibus a pellentesque sit. Volutpat blandit aliquam etiam erat velit scelerisque. Non sodales neque sodales ut etiam sit amet.</p>
-  <p>Cras tincidunt lobortis feugiat vivamus at augue eget arcu. Risus pretium quam vulputate dignissim suspendisse.</p>
+  <p>Scelerisque varius morbi enim nunc faucibus a pellentesque sit. Volutpat blandit aliquam etiam erat velit scelerisque. Non sodales neque sodales ut etiam sit amet. Cras tincidunt lobortis feugiat vivamus at augue eget arcu.</p>
 </details>
 
 <details name="example">
   <summary>Scelerisque varius</summary>
-  <p>Pretium vulputate sapien nec sagittis. Pretium fusce id velit ut. Justo eget magna fermentum iaculis eu non diam phasellus. Purus in mollis nunc sed.</p>
-  <p>Turpis egestas pretium aenean pharetra magna ac placerat vestibulum. Lacus vestibulum sed arcu non odio euismod lacinia.</p>
+  <p>Pretium vulputate sapien nec sagittis. Pretium fusce id velit ut. Justo eget magna fermentum iaculis eu non diam phasellus. Purus in mollis nunc sed. Turpis egestas pretium aenean pharetra magna ac placerat vestibulum.</p>
 </details>
 
 <details name="example">
   <summary>A diam sollicitudin</summary>
-  <p>Enim diam vulputate ut pharetra sit amet aliquam id diam. Suscipit tellus mauris a diam maecenas sed enim ut sem. Sit amet mattis vulputate enim nulla.</p>
-  <p>Tristique et egestas quis ipsum. Volutpat lacus laoreet non curabitur gravida arcu. Fermentum posuere urna nec tincidunt. Mattis enim ut tellus elementum.</p>
+  <p>Enim diam vulputate ut pharetra sit amet aliquam id diam. Suscipit tellus mauris a diam maecenas sed enim ut sem. Sit amet mattis vulputate enim nulla. Tristique et egestas quis ipsum. Volutpat lacus laoreet non curabitur gravida arcu.</p>
 </details>
 
 ### Definition Lists
@@ -204,13 +207,6 @@ export function thing(arg) {
   <dt>Third definition</dt>
   <dd>Odio facilisis mauris sit amet massa vitae. Venenatis lectus magna fringilla urna porttitor rhoncus dolor. Eu ultrices vitae auctor eu augue ut.</dd>
 </dl>
-
-### Fieldsets
-
-<fieldset>
-  <legend>Legend</legend>
-  Nunc mi ipsum faucibus vitae aliquet nec ullamcorper. Tincidunt id aliquet risus feugiat in ante. Ac turpis egestas integer eget aliquet nibh praesent tristique magna.
-</fieldset>
 
 ### Figures
 
@@ -227,8 +223,72 @@ export function thing(arg) {
 
 <iframe src="https://www.youtube.com/embed/ALGG6ptfLdc?si=03a9K9QigWi2A9Wt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
+### Fieldsets
+
+<fieldset>
+  <legend>Legend</legend>
+  Nunc mi ipsum faucibus vitae aliquet nec ullamcorper. Tincidunt id aliquet risus feugiat in ante. Ac turpis egestas integer eget aliquet nibh praesent tristique magna.
+</fieldset>
+
+### Form controls
+
+For consistency, native form controls are styled to look similar to Quiet form controls.
+
+<div style="display: flex; flex-direction: column; gap: 1rem;">
+  <input type="text" placeholder="Text">
+  <input type="color" placeholder="Color" value="#787acf">
+  <input type="date" placeholder="Date" value="1989-03-12">
+  <input type="time" placeholder="Time" value="12:00:00">
+  <input type="number" placeholder="Number" value="42" inputmode="numeric">
+  <input type="password" placeholder="Password" value="hunter2">
+  <select name="size" label="Select a size">
+    <option value="sm">Small</option>
+    <option value="md" selected>Medium</option>
+    <option value="lg">Large</option>
+  </select>
+  <textarea placeholder="Tell us something about yourself" rows="3"></textarea>
+  <input type="range">
+  <div>
+    <label><input type="radio" name="a" value="1" checked> Option 1</label>
+    <label><input type="radio" name="a" value="2"> Option 2</label>
+    <label><input type="radio" name="a" value="3"> Option 3</label>
+  </div>
+  <div>
+    <label><input type="checkbox" checked> Feature A</label>
+    <label><input type="checkbox"> Feature B</label>
+    <label><input type="checkbox"> Feature C</label>
+  </div>
+  <div style="display: flex; gap: 0.5rem;">
+    <button type="button">Default</button>
+    <button type="button" class="primary">Primary</button>
+    <button type="button" class="destructive">Destructive</button>
+  </div>
 </div>
 
+### Dialogs
+
+<dialog id="restyle-dialog">
+  <p>This is a native dialog.</p>
+  <footer>
+    <button type="button">Close</button>
+  </footer>
+</dialog>
+
+<button type="button" id="open-restyle-dialog">Open dialog</button>
+
+<script type="module">
+  const dialog = document.getElementById('restyle-dialog');
+  const openButton = document.getElementById('open-restyle-dialog');
+  const closeButton = dialog.querySelector('button');
+  
+  openButton.addEventListener('click', () => {
+    dialog.showModal();
+  });
+
+  closeButton.addEventListener('click', () => {
+    dialog.close();
+  });
+</script>
 ---
 
 ## Utility classes

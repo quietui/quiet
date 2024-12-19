@@ -3,13 +3,13 @@ title: Tab List
 layout: component
 ---
 
-Tab lists follow the [ARIA APG tooltip pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/) for accessibility. They are comprised of three different components. A single tab list surrounds one or more [tabs](/docs/components/tab) and their corresponding [tab panels](/docs/components/tab-panel). Each panel must have a unique `name`, and each tab must have `slot="tab"` and a `panel` attribute that maps to a panel.
+Tab lists follow the [ARIA APG tooltip pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/) for accessibility. They are comprised of three different components. A single tab list surrounds one or more [tabs](/docs/components/tab) and their corresponding [tab panels](/docs/components/tab-panel). Each panel must have a unique `name`, and each tab must have a `panel` attribute that maps to a panel.
 
 ```html {.example}
 <quiet-tab-list label="Select a tab">
-	<quiet-tab slot="tab" panel="first">First</quiet-tab>
-	<quiet-tab slot="tab" panel="second">Second</quiet-tab>
-	<quiet-tab slot="tab" panel="third">Third</quiet-tab>
+	<quiet-tab panel="first">First</quiet-tab>
+	<quiet-tab panel="second">Second</quiet-tab>
+	<quiet-tab panel="third">Third</quiet-tab>
 
 	<quiet-tab-panel name="first">Lobortis mattis aliquam faucibus purus in massa tempor. Eu lobortis elementum nibh tellus molestie nunc non blandit. Ultrices sagittis orci a scelerisque purus.</quiet-tab-panel>
 	<quiet-tab-panel name="second">Vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum. Aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices.</quiet-tab-panel>
@@ -29,9 +29,9 @@ To make a specific tab show initially, or to programmatically activate a tab, se
 
 ```html {.example}
 <quiet-tab-list label="Select a tab" tab="second">
-	<quiet-tab slot="tab" panel="first">First</quiet-tab>
-	<quiet-tab slot="tab" panel="second">Second</quiet-tab>
-	<quiet-tab slot="tab" panel="third">Third</quiet-tab>
+	<quiet-tab panel="first">First</quiet-tab>
+	<quiet-tab panel="second">Second</quiet-tab>
+	<quiet-tab panel="third">Third</quiet-tab>
 
 	<quiet-tab-panel name="first">Lobortis mattis aliquam faucibus purus in massa tempor. Eu lobortis elementum nibh tellus molestie nunc non blandit. Ultrices sagittis orci a scelerisque purus.</quiet-tab-panel>
 	<quiet-tab-panel name="second">Vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum. Aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices.</quiet-tab-panel>
@@ -45,9 +45,9 @@ Set the `placement` attribute to `bottom` to show tabs at the bottom.
 
 ```html {.example}
 <quiet-tab-list label="Select a tab" placement="bottom">
-	<quiet-tab slot="tab" panel="first">First</quiet-tab>
-	<quiet-tab slot="tab" panel="second">Second</quiet-tab>
-	<quiet-tab slot="tab" panel="third">Third</quiet-tab>
+	<quiet-tab panel="first">First</quiet-tab>
+	<quiet-tab panel="second">Second</quiet-tab>
+	<quiet-tab panel="third">Third</quiet-tab>
 
 	<quiet-tab-panel name="first">Lobortis mattis aliquam faucibus purus in massa tempor. Eu lobortis elementum nibh tellus molestie nunc non blandit. Ultrices sagittis orci a scelerisque purus.</quiet-tab-panel>
 	<quiet-tab-panel name="second">Vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum. Aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices.</quiet-tab-panel>
@@ -61,9 +61,9 @@ Set the `placement` attribute to `start` to show tabs at the start. The tabs wil
 
 ```html {.example}
 <quiet-tab-list label="Select a tab" placement="start">
-	<quiet-tab slot="tab" panel="first">First</quiet-tab>
-	<quiet-tab slot="tab" panel="second">Second</quiet-tab>
-	<quiet-tab slot="tab" panel="third">Third</quiet-tab>
+	<quiet-tab panel="first">First</quiet-tab>
+	<quiet-tab panel="second">Second</quiet-tab>
+	<quiet-tab panel="third">Third</quiet-tab>
 
 	<quiet-tab-panel name="first">Lobortis mattis aliquam faucibus purus in massa tempor. Eu lobortis elementum nibh tellus molestie nunc non blandit. Ultrices sagittis orci a scelerisque purus.</quiet-tab-panel>
 	<quiet-tab-panel name="second">Vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum. Aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices.</quiet-tab-panel>
@@ -77,9 +77,9 @@ Set the `placement` attribute to `end` to show tabs at the end. The tabs will au
 
 ```html {.example}
 <quiet-tab-list label="Select a tab" placement="end">
-	<quiet-tab slot="tab" panel="first">First</quiet-tab>
-	<quiet-tab slot="tab" panel="second">Second</quiet-tab>
-	<quiet-tab slot="tab" panel="third">Third</quiet-tab>
+	<quiet-tab panel="first">First</quiet-tab>
+	<quiet-tab panel="second">Second</quiet-tab>
+	<quiet-tab panel="third">Third</quiet-tab>
 
 	<quiet-tab-panel name="first">Lobortis mattis aliquam faucibus purus in massa tempor. Eu lobortis elementum nibh tellus molestie nunc non blandit. Ultrices sagittis orci a scelerisque purus.</quiet-tab-panel>
 	<quiet-tab-panel name="second">Vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum. Aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices.</quiet-tab-panel>
@@ -93,16 +93,16 @@ When the number of tabs exceeds the available space in a top or bottom placement
 
 ```html {.example}
 <quiet-tab-list label="Select a tab">
-	<quiet-tab slot="tab" panel="first">First</quiet-tab>
-	<quiet-tab slot="tab" panel="second">Second</quiet-tab>
-	<quiet-tab slot="tab" panel="third">Third</quiet-tab>
-	<quiet-tab slot="tab" panel="fourth">Fourth</quiet-tab>
-	<quiet-tab slot="tab" panel="fifth">Fifth</quiet-tab>
-	<quiet-tab slot="tab" panel="sixth">Sixth</quiet-tab>
-	<quiet-tab slot="tab" panel="seventh">Seventh</quiet-tab>
-	<quiet-tab slot="tab" panel="eight">Eight</quiet-tab>
-	<quiet-tab slot="tab" panel="ninth">Ninth</quiet-tab>
-	<quiet-tab slot="tab" panel="tenth">Tenth</quiet-tab>
+	<quiet-tab panel="first">First</quiet-tab>
+	<quiet-tab panel="second">Second</quiet-tab>
+	<quiet-tab panel="third">Third</quiet-tab>
+	<quiet-tab panel="fourth">Fourth</quiet-tab>
+	<quiet-tab panel="fifth">Fifth</quiet-tab>
+	<quiet-tab panel="sixth">Sixth</quiet-tab>
+	<quiet-tab panel="seventh">Seventh</quiet-tab>
+	<quiet-tab panel="eight">Eight</quiet-tab>
+	<quiet-tab panel="ninth">Ninth</quiet-tab>
+	<quiet-tab panel="tenth">Tenth</quiet-tab>
 
 	<quiet-tab-panel name="first">Lobortis mattis aliquam faucibus purus in massa tempor. Eu lobortis elementum nibh tellus molestie nunc non blandit. Ultrices sagittis orci a scelerisque purus.</quiet-tab-panel>
 	<quiet-tab-panel name="second">Vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum. Aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices.</quiet-tab-panel>
@@ -127,9 +127,9 @@ To disable a tab, add the `disabled` attribute to it. Since tabs use [automatic 
 
 ```html {.example}
 <quiet-tab-list label="Select a tab">
-	<quiet-tab slot="tab" panel="first">First</quiet-tab>
-	<quiet-tab slot="tab" panel="second" disabled>Second (disabled)</quiet-tab>
-	<quiet-tab slot="tab" panel="third">Third</quiet-tab>
+	<quiet-tab panel="first">First</quiet-tab>
+	<quiet-tab panel="second" disabled>Second (disabled)</quiet-tab>
+	<quiet-tab panel="third">Third</quiet-tab>
 
 	<quiet-tab-panel name="first">Lobortis mattis aliquam faucibus purus in massa tempor. Eu lobortis elementum nibh tellus molestie nunc non blandit. Ultrices sagittis orci a scelerisque purus.</quiet-tab-panel>
 	<quiet-tab-panel name="second">Vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum. Aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices.</quiet-tab-panel>
@@ -143,8 +143,8 @@ Quiet considers lazy loading tab content to be an anti-pattern but, when necessa
 
 ```html {.example}
 <quiet-tab-list label="Select a tab" id="tab-list__lazy">
-	<quiet-tab slot="tab" panel="regular">Regular</quiet-tab>
-	<quiet-tab slot="tab" panel="lazy">Lazy</quiet-tab>
+	<quiet-tab panel="regular">Regular</quiet-tab>
+	<quiet-tab panel="lazy">Lazy</quiet-tab>
 
 	<quiet-tab-panel name="regular">Vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum. Aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices.</quiet-tab-panel>
 	<quiet-tab-panel name="lazy">
@@ -172,18 +172,18 @@ Quiet considers lazy loading tab content to be an anti-pattern but, when necessa
 
 ### Making tabs closable
 
-Avoid nesting buttons and other interactive elements inside of a tab, as it will cause assistive devices to work incorrectly. Instead, you can add buttons adjacent to tabs using `slot="tab"`. When tabs are removable, you should also listen for the [[Delete]] key.
+Avoid nesting buttons and other interactive elements inside of a tab, as it will cause assistive devices to work incorrectly. Instead, you can add buttons adjacent to tabs using `. When tabs are removable, you should also listen for the [[Delete]] key.
 
 Note that we use `tabindex="-1"` on the close button to prevent it from interfering with normal tabbing. The button, however, is still accessible to virtual cursors.
 
 ```html {.example}
 <quiet-tab-list label="Select a tab" id="tab-list__closable">
-	<quiet-tab slot="tab" panel="first">First</quiet-tab>
-	<quiet-tab slot="tab" panel="second">Second</quiet-tab>
-  <quiet-button slot="tab" appearance="text" size="xs" icon-label="Close second tab" tabindex="-1">
+	<quiet-tab panel="first">First</quiet-tab>
+	<quiet-tab panel="second">Second</quiet-tab>
+  <quiet-button appearance="text" size="xs" icon-label="Close second tab" tabindex="-1">
     <quiet-icon name="x"></quiet-icon>
   </quiet-button>
-	<quiet-tab slot="tab" panel="third">Third</quiet-tab>
+	<quiet-tab panel="third">Third</quiet-tab>
 
 	<quiet-tab-panel name="first">Lobortis mattis aliquam faucibus purus in massa tempor. Eu lobortis elementum nibh tellus molestie nunc non blandit. Ultrices sagittis orci a scelerisque purus.</quiet-tab-panel>
 	<quiet-tab-panel name="second">Vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum. Aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices.</quiet-tab-panel>
@@ -255,9 +255,9 @@ Tab lists come with a simple, minimal appearance. Feel free to customize them wi
 
 ```html {.example}
 <quiet-tab-list label="Select a tab" class="tab-list__cards">
-	<quiet-tab slot="tab" panel="first">First</quiet-tab>
-	<quiet-tab slot="tab" panel="second">Second</quiet-tab>
-	<quiet-tab slot="tab" panel="third">Third</quiet-tab>
+	<quiet-tab panel="first">First</quiet-tab>
+	<quiet-tab panel="second">Second</quiet-tab>
+	<quiet-tab panel="third">Third</quiet-tab>
 
 	<quiet-tab-panel name="first">Lobortis mattis aliquam faucibus purus in massa tempor. Eu lobortis elementum nibh tellus molestie nunc non blandit. Ultrices sagittis orci a scelerisque purus.</quiet-tab-panel>
 	<quiet-tab-panel name="second">Vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum. Aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices.</quiet-tab-panel>
@@ -294,9 +294,9 @@ Tab lists come with a simple, minimal appearance. Feel free to customize them wi
 
 ```html {.example}
 <quiet-tab-list label="Select a tab" class="tab-list__segments">
-	<quiet-tab slot="tab" panel="first">First</quiet-tab>
-	<quiet-tab slot="tab" panel="second">Second</quiet-tab>
-	<quiet-tab slot="tab" panel="third">Third</quiet-tab>
+	<quiet-tab panel="first">First</quiet-tab>
+	<quiet-tab panel="second">Second</quiet-tab>
+	<quiet-tab panel="third">Third</quiet-tab>
 
 	<quiet-tab-panel name="first">Lobortis mattis aliquam faucibus purus in massa tempor. Eu lobortis elementum nibh tellus molestie nunc non blandit. Ultrices sagittis orci a scelerisque purus.</quiet-tab-panel>
 	<quiet-tab-panel name="second">Vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum. Aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices.</quiet-tab-panel>

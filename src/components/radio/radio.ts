@@ -1,4 +1,4 @@
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { QuietChangeEvent, QuietInputEvent } from '../../events/form.js';
@@ -24,7 +24,7 @@ const VALIDATION_MESSAGE = nativeRadio.validationMessage;
  * <quiet-radio>
  *
  * @summary Radios let the user select one option from a group of choices.
- * @documentation https://quietui.com/docs/components/radio
+ * @documentation https://quietui.org/docs/components/radio
  * @status stable
  * @since 1.0
  *
@@ -55,9 +55,9 @@ export class QuietRadio extends QuietElement {
 
   @query('#group') group: HTMLElement;
 
-  @state() private isInvalid = false;
-  @state() private wasChanged = false;
-  @state() private wasSubmitted = false;
+  @state() isInvalid = false;
+  @state() wasChanged = false;
+  @state() wasSubmitted = false;
 
   /**
    * The radio's label. If you need to provide HTML in the label, use the `label` slot instead.
@@ -112,12 +112,12 @@ export class QuietRadio extends QuietElement {
     }
   }
 
-  updated(changedProps: Map<string, unknown>) {
+  updated(changedProperties: PropertyValues<this>) {
     // Always be updating
     this.updateValidity();
 
     // Handle value changes
-    if (changedProps.has('value')) {
+    if (changedProperties.has('value')) {
       this.internals.setFormValue(this.value);
     }
 

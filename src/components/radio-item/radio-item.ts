@@ -1,4 +1,4 @@
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
@@ -12,7 +12,7 @@ import styles from './radio-item.styles.js';
  * <quiet-radio-item>
  *
  * @summary Radio items represent individual choices within a radio.
- * @documentation https://quietui.com/docs/components/radio-item
+ * @documentation https://quietui.org/docs/components/radio-item
  * @status stable
  * @since 1.0
  *
@@ -77,15 +77,15 @@ export class QuietRadioItem extends QuietElement {
     this.setAttribute('role', 'radio');
   }
 
-  updated(changedProps: Map<string, unknown>) {
+  updated(changedProperties: PropertyValues<this>) {
     // Handle checked
-    if (changedProps.has('checked')) {
+    if (changedProperties.has('checked')) {
       this.setAttribute('aria-checked', this.checked ? 'true' : 'false');
       this.customStates.set('checked', this.checked);
     }
 
     // Handle disabled
-    if (changedProps.has('disabled')) {
+    if (changedProperties.has('disabled')) {
       this.setAttribute('aria-disabled', this.disabled ? 'true' : 'false');
       this.customStates.set('disabled', this.disabled);
 

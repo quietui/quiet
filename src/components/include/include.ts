@@ -1,4 +1,4 @@
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { QuietIncludedEvent, QuietIncludeErrorEvent } from '../../events/include.js';
@@ -16,7 +16,7 @@ const requests = new Map<string, Promise<Response>>();
  * <quiet-include>
  *
  * @summary Includes let you pull content from another file into your page.
- * @documentation https://quietui.com/docs/components/include
+ * @documentation https://quietui.org/docs/components/include
  * @status stable
  * @since 1.0
  *
@@ -42,8 +42,8 @@ export class QuietInclude extends QuietElement {
    */
   @property({ attribute: 'allow-scripts', type: Boolean }) allowScripts = false;
 
-  updated(changedProps: Map<string, unknown>) {
-    if (changedProps.has('src')) {
+  updated(changedProperties: PropertyValues<this>) {
+    if (changedProperties.has('src')) {
       if (this.src) {
         this.fetchInclude();
       } else {

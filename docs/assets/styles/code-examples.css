@@ -2,7 +2,6 @@
   margin-block-end: var(--quiet-content-spacing);
   border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
   border-radius: var(--quiet-border-radius);
-  color: var(--quiet-text-body);
 }
 
 .code-example-preview {

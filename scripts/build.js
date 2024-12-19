@@ -1,9 +1,8 @@
 import browserSync from 'browser-sync';
 import chalk from 'chalk';
 import { execSync } from 'child_process';
-import { deleteAsync } from 'del';
 import esbuild from 'esbuild';
-import { mkdir, readFile } from 'fs/promises';
+import { mkdir, readFile, rm } from 'fs/promises';
 import getPort, { portNumbers } from 'get-port';
 import { globby } from 'globby';
 import ora from 'ora';
@@ -50,7 +49,7 @@ async function buildAll() {
 async function cleanup() {
   spinner.start('Cleaning up dist');
 
-  await deleteAsync(distDir);
+  await rm(distDir, { recursive: true, force: true });
   await mkdir(distDir, { recursive: true });
 
   spinner.succeed();
@@ -82,7 +81,7 @@ async function generateIcons() {
 
   spinner.start('Packaging icons');
 
-  await deleteAsync(iconDir);
+  await rm(iconDir, { recursive: true, force: true });
   await mkdir(iconDir, { recursive: true });
   await copy(dirToCopy, iconDir);
   await copy(licenseToCopy, join(iconDir, 'LICENSE'));
@@ -258,9 +257,13 @@ if (isDeveloping) {
               // Make sure SVGs error out in dev instead of serve the 404 page
               res.writeHead(404);
             } else {
-              const notFoundTemplate = await readFile(join(siteDir, '404.html'), 'utf-8');
-              res.writeHead(404);
-              res.write(notFoundTemplate || 'Page Not Found');
+              try {
+                const notFoundTemplate = await readFile(join(siteDir, '404.html'), 'utf-8');
+                res.writeHead(404);
+                res.write(notFoundTemplate || 'Page Not Found');
+              } catch {
+                // We're probably disconnected for some reason, so fail gracefully
+              }
             }
 
             res.end();

@@ -167,12 +167,13 @@ async function updateResults(query = '') {
       if (page.url === '/') icon = 'home';
       if (page.url.startsWith('/about')) icon = 'info-circle';
       if (page.url.startsWith('/docs/components')) icon = 'box';
-      if (page.url.startsWith('/license')) icon = 'heart';
+      if (page.url.startsWith('/sponsor')) icon = 'heart';
       if (page.url.startsWith('/docs/theme') || page.url.startsWith('/docs/restyle')) icon = 'color-swatch';
       if (page.url.includes('github.com')) icon = 'brand-github';
       if (page.url.includes('github.com') && page.url.endsWith('/issues')) icon = 'bug';
       if (page.url.includes('github.com') && page.url.endsWith('/discussions')) icon = 'help';
       if (page.url.includes('github.com') && page.url.endsWith('/stargazers')) icon = 'star';
+      if (page.url.includes('bsky.app')) icon = 'brand-bluesky';
       if (page.url.includes('x.com')) icon = 'brand-x';
 
       a.href = page.url;

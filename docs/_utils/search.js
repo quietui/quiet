@@ -47,14 +47,19 @@ export function searchPlugin(options = {}) {
         url: 'https://github.com/quietui/quiet/stargazers'
       },
       {
+        title: 'Quiet UI on Bluesky',
+        description: 'Follow the project on Bluesky social media platform.',
+        url: 'https://bsky.app/profile/quietui.org'
+      },
+      {
         title: 'Quiet UI on X (Twitter)',
-        description: 'Follow the project on the platform formerly known as Twitter.',
+        description: 'Follow the project on the social media platform formerly known as Twitter.',
         url: 'https://x.com/quiet_ui'
       },
       {
         title: 'Cory LaViska on X (Twitter)',
-        description: 'Follow the author on the platform formerly known as Twitter.',
-        url: 'https://x.com/claviska'
+        description: 'Follow the creator on the social media platform formerly known as Twitter.',
+        url: 'https://x.com/cory_laviska'
       }
     ];
 

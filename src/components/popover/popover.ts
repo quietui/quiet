@@ -1,5 +1,5 @@
 import { arrow, autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { QuietClosedEvent, QuietCloseEvent, QuietOpenedEvent, QuietOpenEvent } from '../../events/open-close.js';
@@ -16,7 +16,7 @@ const openPopovers = new Set<QuietPopover>();
  * <quiet-popover>
  *
  * @summary Popovers provide additional information or functionality without interrupting the flow of content.
- * @documentation https://quietui.com/docs/components/popover
+ * @documentation https://quietui.org/docs/components/popover
  * @status stable
  * @since 1.0
  *
@@ -90,9 +90,9 @@ export class QuietPopover extends QuietElement {
     }
   }
 
-  updated(changedProps: Map<string, unknown>) {
+  updated(changedProperties: PropertyValues<this>) {
     // Handle open
-    if (changedProps.has('open')) {
+    if (changedProperties.has('open')) {
       if (this.open && !this.dialog.classList.contains('visible')) {
         this.show();
       } else {
@@ -101,7 +101,7 @@ export class QuietPopover extends QuietElement {
     }
 
     // Handle anchor changes
-    if (changedProps.has('for')) {
+    if (changedProperties.has('for')) {
       const root = this.getRootNode() as Document | ShadowRoot;
       // Tear down the old anchor
       if (this.anchor) {

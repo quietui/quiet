@@ -9,7 +9,7 @@ import styles from './badge.styles.js';
  * <quiet-badge>
  *
  * @summary Badges display useful information or notifications such as a new feature or an unread message count.
- * @documentation https://quietui.com/docs/components/badge
+ * @documentation https://quietui.org/docs/components/badge
  * @status stable
  * @since 1.0
  *
@@ -25,8 +25,8 @@ export class QuietBadge extends QuietElement {
   /** The type of badge to draw. */
   @property({ reflect: true }) variant: 'primary' | 'secondary' | 'constructive' | 'destructive' = 'secondary';
 
-  /** Makes the badge draw attention using one of the signal presets. */
-  @property({ reflect: true }) attention?: 'pulse' | 'shake' | 'wobble';
+  /** Draws attention to the badge using an animation. */
+  @property({ type: Boolean, reflect: true }) attention = false;
 
   render() {
     return html` <slot></slot> `;

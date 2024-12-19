@@ -6,7 +6,7 @@ layout: docs
 
 Quiet includes a collection of [Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components), or custom HTML elements. They have attributes, properties, events, and methods, all of which are described in the documentation for each component.
 
-Once installed, simply add the components you want to your HTML.
+To use the components, install them using the instructions found on the [installation page](/docs/). Once installed, simply add the components you want to your HTML.
 
 ```html
 <quiet-button>
@@ -18,6 +18,14 @@ You can obtain references using `document.querySelector()` and `document.getElem
 
 ```js
 const button = document.querySelector('quiet-button');
+```
+
+Before accessing any properties or methods on an element, make sure it has a chance to register first. You can use [`customElements.whenDefined()`](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/whenDefined) which returns a promise.
+
+```js
+await customElements.whenDefined('quiet-button');
+
+// <quiet-button> is defined and ready to use!
 ```
 
 :::info
@@ -136,7 +144,7 @@ Event bubbling is a common pitfall. In the same way native HTML elements all dis
 Some custom events contain a `detail` property with additional information. You can access this information through the `detail` property of the event.
 
 ```js
-window.addEventListener('quiet-discovery-complete', event => {
+document.addEventListener('quiet-discovery-complete', event => {
   console.log(event.detail);
   // result { registered: [], unknown: [] }
 });
@@ -160,7 +168,7 @@ Not all components have methods. Those that do will be listed in the respective 
 
 Custom elements commonly use a platform feature called [shadow DOM](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_shadow_DOM) to encapsulate behaviors and styles. Their internals are rendered in a separate document fragment, which prevents most styles from leaking in from and out to the main document.
 
-Speaking of internals…it's important to look at the documentation for each component to understand its anatomy before applying any CSS. The host element often requires styles to target a specific part inside of it rather than the element itself.
+Speaking of internals…it's important to look at the documentation for each component to understand its anatomy before applying any CSS. A component often requires styles to target a specific part inside of it rather than the element itself.
 
 By design, some styles, such as font size and family, will inherit _through_ the shadow DOM. However, the majority of them do not. Thus, you cannot  use standard CSS selectors to target a custom element's internals. Instead, you need to use one of the following APIs.
 
@@ -196,9 +204,9 @@ Not all components expose custom properties. Refer to the documentation to see w
 
 ### CSS parts
 
-Many components expose parts inside the shadow DOM that you can target with CSS. Unlike custom properties, which only affect individual styles, a part gives you complete control over the exposed element's styles.
+Many components expose parts inside the shadow DOM that you can target with CSS. Unlike custom properties, which only modify individual properties, a part gives you complete control over the exposed element's styles.
 
-Use the [`::part()`](https://developer.mozilla.org/en-US/docs/Web/CSS/::part) selector to target a part in your CSS. This example applies a striped background image to the progress bar's indicator.
+Use the [`::part()`](https://developer.mozilla.org/en-US/docs/Web/CSS/::part) selector to target a specific part in your CSS. This example applies a striped background image to the progress bar's indicator.
 
 ```html {.example .no-buttons}
 <quiet-progress id="custom-progress-bg" label="Progress" value="50"></quiet-progress>
@@ -224,7 +232,7 @@ You can, however, select non-structural pseudo elements such as `::before` and `
 </style>
 ```
 
-Another caveat of parts involves animation. When you target an element with `::part()`, you're changing styles inside the shadow DOM. However, animations require keyframes to exist in the same document, and it's not currently possible to define keyframes from outside the shadow DOM. You can, however, apply animations to the component itself.
+Another caveat of parts involves animation. When you target an element with `::part()`, you're changing styles inside the shadow DOM. However, animations require keyframes to exist in the same document, and it's not currently possible to define keyframes from outside the shadow DOM. You can, however, apply animations to the host element itself.
 
 Not all components expose parts. Refer to the documentation to see which parts a component has.
 

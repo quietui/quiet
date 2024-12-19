@@ -1,4 +1,4 @@
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import hostStyles from '../../styles/host.styles.js';
@@ -9,7 +9,7 @@ import styles from './{{ removePrefix tag }}.styles.js';
  * <{{ tag }}>
  *
  * @summary TODO
- * @documentation https://quietui.com/docs/components/{{ removePrefix tag }}
+ * @documentation https://quietui.org/docs/components/{{ removePrefix tag }}
  * @status experimental
  * @since TODO
  *
@@ -22,6 +22,12 @@ export class {{ tagToClassName tag }} extends QuietElement {
 
   /** Description of the property. */
   @property() example = '';
+
+  updated(changedProperties: PropertyValues<this>) {
+    if (changedProperties.has('example')) {
+      // this.example has changed
+    }
+  }
 
   render() {
     return html` <slot></slot> `;

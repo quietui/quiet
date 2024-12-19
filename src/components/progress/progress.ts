@@ -1,4 +1,4 @@
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import hostStyles from '../../styles/host.styles.js';
@@ -10,7 +10,7 @@ import styles from './progress.styles.js';
  * <quiet-progress>
  *
  * @summary Progress bars represent the completion status of a request or task.
- * @documentation https://quietui.com/docs/components/progress
+ * @documentation https://quietui.org/docs/components/progress
  * @status stable
  * @since 1.0
  *
@@ -34,7 +34,7 @@ export class QuietProgress extends QuietElement {
   @property() label: string;
 
   /** The type of progress bar to render. */
-  @property({ reflect: true }) type: 'bar' | 'ring' = 'bar';
+  @property({ reflect: true }) appearance: 'bar' | 'ring' = 'bar';
 
   /** The progress bar's minimum value. */
   @property({ type: Number }) min = 0;
@@ -60,18 +60,18 @@ export class QuietProgress extends QuietElement {
     this.setAttribute('role', 'progressbar');
   }
 
-  updated(changedProps: Map<string, unknown>) {
+  updated(changedProperties: PropertyValues<this>) {
     // Set the label
-    if (changedProps.has('label')) {
+    if (changedProperties.has('label')) {
       this.setAttribute('aria-label', this.label);
     }
 
     // Update values
     if (
-      changedProps.has('min') ||
-      changedProps.has('max') ||
-      changedProps.has('value') ||
-      changedProps.has('indeterminate')
+      changedProperties.has('min') ||
+      changedProperties.has('max') ||
+      changedProperties.has('value') ||
+      changedProperties.has('indeterminate')
     ) {
       this.style.setProperty('--percentage', `${clamp(this.percentage, 0, 100)}`);
       this.setAttribute('aria-valuemin', String(this.min));
@@ -86,7 +86,7 @@ export class QuietProgress extends QuietElement {
 
   render() {
     // Progress ring
-    if (this.type === 'ring') {
+    if (this.appearance === 'ring') {
       return html`
         <svg>
           <circle id="track" part="track"></circle>

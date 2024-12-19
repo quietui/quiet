@@ -1,4 +1,4 @@
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
@@ -13,8 +13,8 @@ import styles from './text-area.styles.js';
 /**
  * <quiet-text-area>
  *
- * @summary Text area let users edit multi-line, plain text content.
- * @documentation https://quietui.com/docs/components/text-area
+ * @summary Text areas let users edit multi-line, plain text content.
+ * @documentation https://quietui.org/docs/components/text-area
  * @status stable
  * @since 1.0
  *
@@ -50,9 +50,9 @@ export class QuietTextArea extends QuietElement {
 
   @query('textarea') private textBox: HTMLInputElement;
 
-  @state() private isInvalid = false;
-  @state() private wasChanged = false;
-  @state() private wasSubmitted = false;
+  @state() isInvalid = false;
+  @state() wasChanged = false;
+  @state() wasSubmitted = false;
 
   /**
    * The text area's label. If you need to provide HTML in the label, use the `label` slot instead.
@@ -169,23 +169,23 @@ export class QuietTextArea extends QuietElement {
     }
   }
 
-  updated(changedProps: Map<string, unknown>) {
+  updated(changedProperties: PropertyValues<this>) {
     // Always be updating
     this.updateValidity();
 
     // Handle value
-    if (changedProps.has('value')) {
+    if (changedProperties.has('value')) {
       this.customStates.set('empty', this.value === '');
       this.internals.setFormValue(this.value);
     }
 
     // Handle disabled
-    if (changedProps.has('disabled')) {
+    if (changedProperties.has('disabled')) {
       this.customStates.set('disabled', this.disabled);
     }
 
     // Handle auto-size
-    if (changedProps.has('value') || changedProps.has('rows')) {
+    if (changedProperties.has('value') || changedProperties.has('rows')) {
       this.updateHeight();
     }
 
@@ -280,8 +280,7 @@ export class QuietTextArea extends QuietElement {
       this.textAreaAutoSizer.remove();
       this.textAreaAutoSizer.id = '';
     } else {
-      // @ts-expect-error - we're unsetting this value
-      this.textBox.style.height = undefined;
+      this.textBox.style.height = '';
     }
   }
 

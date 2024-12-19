@@ -1,4 +1,4 @@
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
@@ -14,7 +14,7 @@ import styles from './checkbox.styles.js';
  * <quiet-checkbox>
  *
  * @summary Checkboxes let users select one or more options from a list or toggle single options on and off.
- * @documentation https://quietui.com/docs/components/checkbox
+ * @documentation https://quietui.org/docs/components/checkbox
  * @status stable
  * @since 1.0
  *
@@ -50,9 +50,9 @@ export class QuietCheckbox extends QuietElement {
 
   @query('input[type="checkbox"]') private checkbox: HTMLInputElement;
 
-  @state() private isInvalid = false;
-  @state() private wasChanged = false;
-  @state() private wasSubmitted = false;
+  @state() isInvalid = false;
+  @state() wasChanged = false;
+  @state() wasSubmitted = false;
 
   /**
    * The checkbox's label. If you need to provide HTML in the label, use the `label` slot instead.
@@ -112,22 +112,22 @@ export class QuietCheckbox extends QuietElement {
     this.removeEventListener('invalid', this.handleHostInvalid);
   }
 
-  updated(changedProps: Map<string, unknown>) {
+  updated(changedProperties: PropertyValues<this>) {
     // Always be updating
     this.updateValidity();
 
     // Handle value
-    if (changedProps.has('checked') || changedProps.has('value')) {
+    if (changedProperties.has('checked') || changedProperties.has('value')) {
       this.internals.setFormValue(this.checked ? this.value : null);
     }
 
     // Handle checked
-    if (changedProps.has('checked')) {
+    if (changedProperties.has('checked')) {
       this.customStates.set('checked', this.checked);
     }
 
     // Handle disabled
-    if (changedProps.has('disabled')) {
+    if (changedProperties.has('disabled')) {
       this.customStates.set('disabled', this.disabled);
     }
 

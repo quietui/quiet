@@ -85,7 +85,7 @@ export default {
       referencesTemplate: (_, tag) => [
         {
           name: 'Documentation',
-          url: `https://quietui.com/components/${tag.replace('quiet-', '')}`
+          url: `https://quietui.org/components/${tag.replace('quiet-', '')}`
         }
       ]
     })

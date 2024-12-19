@@ -1,4 +1,4 @@
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import hostStyles from '../../styles/host.styles.js';
@@ -9,7 +9,7 @@ import styles from './tab.styles.js';
  * <quiet-tab>
  *
  * @summary Tabs describe and select a tab panel within a tab list.
- * @documentation https://quietui.com/docs/components/tab
+ * @documentation https://quietui.org/docs/components/tab
  * @status stable
  * @since 1.0
  *
@@ -21,6 +21,9 @@ import styles from './tab.styles.js';
 @customElement('quiet-tab')
 export class QuietTab extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
+
+  // Automatically slot tabs into the "tab" slot of the tab list
+  public slot = 'tab';
 
   /** @internal The controller will set this property to true when the tab is active. */
   @property({ type: Boolean }) active = false;
@@ -46,14 +49,14 @@ export class QuietTab extends QuietElement {
     this.active = false;
   }
 
-  updated(changedProps: Map<string, unknown>) {
-    if (changedProps.has('active')) {
+  updated(changedProperties: PropertyValues<this>) {
+    if (changedProperties.has('active')) {
       this.setAttribute('aria-selected', this.active ? 'true' : 'false');
       this.setAttribute('tabindex', this.active ? '0' : '-1');
       this.customStates.set('active', this.active);
     }
 
-    if (changedProps.has('disabled')) {
+    if (changedProperties.has('disabled')) {
       this.setAttribute('aria-disabled', this.disabled ? 'true' : 'false');
       this.customStates.set('disabled', this.disabled);
 

@@ -23,7 +23,11 @@ export default function (eleventyConfig) {
   eleventyConfig.addGlobalData('package', packageData);
 
   // Template filters - {{ content | filter }}
-  eleventyConfig.addFilter('inlineMarkdown', content => markdown.renderInline(content || ''));
+  eleventyConfig.addFilter('inlineMarkdown', content => {
+    // Prevents the <void> type from making it's way into Prettier
+    content = (content || '').replace(/<void>/g, '&lt;void&gt;');
+    return markdown.renderInline(content || '');
+  });
   eleventyConfig.addFilter('majorVersion', string => string.split('.')[0]);
   eleventyConfig.addFilter('markdown', content => markdown.render(content || ''));
   eleventyConfig.addFilter('stripExtension', string => parse(string).name);
@@ -117,17 +121,18 @@ export default function (eleventyConfig) {
       // Replace [breaking] with a badge
       {
         replace: /\[breaking\]/gs,
-        replaceWith: '<quiet-badge variant="destructive">breaking</quiet-badge>'
+        replaceWith: '<quiet-badge variant="destructive"><quiet-icon name="urgent"></quiet-icon> breaking</quiet-badge>'
       },
       // Replace [experimental] with a badge
       {
         replace: /\[experimental\]/gs,
-        replaceWith: '<quiet-badge class="experimental">experimental</quiet-badge>'
+        replaceWith:
+          '<quiet-badge class="experimental"><quiet-icon name="bulb"></quiet-icon> experimental</quiet-badge>'
       },
       // Replace [stable] with a badge
       {
         replace: /\[stable\]/gs,
-        replaceWith: '<quiet-badge variant="primary">stable</quiet-badge>'
+        replaceWith: '<quiet-badge variant="primary"><quiet-icon name="checks"></quiet-icon> stable</quiet-badge>'
       }
     ])
   );
@@ -147,7 +152,7 @@ export default function (eleventyConfig) {
     eleventyConfig.addPlugin(formatCodePlugin());
 
     // Add privacy-friendly analytics
-    eleventyConfig.addPlugin(analyticsPlugin({ domain: 'quietui.com' }));
+    eleventyConfig.addPlugin(analyticsPlugin({ domain: 'quietui.org' }));
   }
 
   return {

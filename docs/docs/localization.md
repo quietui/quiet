@@ -70,7 +70,7 @@ For performance reasons, the attributes must be set directly on the components. 
 
 New translations and improvements can be [submitted through GitHub](https://github.com/quietui/quiet/tree/main/src/translations). Note that translations are authored in TypeScript, not XLIFF. However, you might be pleasantly surprised at how simple the syntax is.
 
-If you're not comfortable making a pull request, feel free to [ask for help](https://github.com/quietui/quiet/discussions).
+If you're not comfortable making a pull request, feel free to ask for help.
 
 ## Creating a custom translation
 
@@ -79,8 +79,8 @@ You can register your own translation by creating a new JavaScript or TypeScript
 Refer to the [default translation](https://github.com/quietui/quiet/tree/main/src/translations/en.ts) to see all terms that need to be translated.
 
 <quiet-tab-list label="Select your flavor">
-<quiet-tab slot="tab" panel="ts">TypeScript</quiet-tab>
-<quiet-tab slot="tab" panel="js">JavaScript</quiet-tab>
+<quiet-tab panel="ts">TypeScript</quiet-tab>
+<quiet-tab panel="js">JavaScript</quiet-tab>
 <quiet-tab-panel name="ts">
 
 ```ts

@@ -1,4 +1,4 @@
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
@@ -6,6 +6,7 @@ import { html, literal } from 'lit/static-html.js';
 import { QuietBlurEvent, QuietFocusEvent } from '../../events/form.js';
 import { QuietClickEvent } from '../../events/pointer.js';
 import hostStyles from '../../styles/host.styles.js';
+import { LongPress } from '../../utilities/long-press.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import '../icon/icon.js';
 import '../spinner/spinner.js';
@@ -15,7 +16,7 @@ import styles from './button.styles.js';
  * <quiet-button>
  *
  * @summary Buttons allow users to navigate, submit forms, and perform other actions.
- * @documentation https://quietui.com/docs/components/button
+ * @documentation https://quietui.org/docs/components/button
  * @status stable
  * @since 1.0
  *
@@ -28,6 +29,8 @@ import styles from './button.styles.js';
  *
  * @event quiet-blur - Emitted when the button loses focus. This event does not bubble.
  * @event quiet-click - Emitted when the button is clicked. Will not be emitted when the button is disabled or loading.
+ * @event quiet-long-press - Emitted when the button is pressed and held by tapping or with the mouse. You can look at
+ *  `event.detail.originalEvent.type` to see the type of event that initiated the long press.
  * @event quiet-focus - Emitted when the button receives focus. This event does not bubble.
  *
  * @csspart button - The internal `<button>` element. Other than `width`, this is where most custom styles should be
@@ -49,6 +52,7 @@ export class QuietButton extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
   protected internals: ElementInternals;
+  private longPress: LongPress;
 
   /** Determines the button's appearance. */
   @property({ reflect: true }) appearance: 'normal' | 'outline' | 'text' | 'image' = 'normal';
@@ -102,10 +106,10 @@ export class QuietButton extends QuietElement {
   @property() target: '_blank' | '_parent' | '_self' | '_top' | undefined;
 
   /**
-   *  Sets the link's `rel` attribute. Only works with link buttons. Note that the default value is
-   * `noreferrer noopener`, meaning you might need to set it to an empty string if you're also using `target`.
+   * Sets the link's `rel` attribute. Only works with link buttons. When linking to an external domain, you should
+   * probably set this to `noreferrer noopener`.
    */
-  @property() rel = 'noreferrer noopener';
+  @property() rel?: string;
 
   /** Sets the link's `download` attribute, causing the linked file to be downloaded. Only works with link buttons. */
   @property() download?: string;
@@ -135,12 +139,18 @@ export class QuietButton extends QuietElement {
   /** Overrides the containing form's `target` attribute. */
   @property({ attribute: 'formtarget' }) formTarget: '_self' | '_blank' | '_parent' | '_top' | string | undefined;
 
-  updated(changedProps: Map<string, unknown>) {
-    if (changedProps.has('disabled')) {
+  firstUpdated() {
+    const button = this.shadowRoot.getElementById('button')!;
+    this.longPress = new LongPress(button, { eventName: 'quiet-long-press' });
+    this.longPress.start();
+  }
+
+  updated(changedProperties: PropertyValues<this>) {
+    if (changedProperties.has('disabled')) {
       this.customStates.set('disabled', this.disabled);
     }
 
-    if (changedProps.has('loading')) {
+    if (changedProperties.has('loading')) {
       this.customStates.set('loading', this.loading);
     }
   }
@@ -208,7 +218,7 @@ export class QuietButton extends QuietElement {
 
   render() {
     const isLink = typeof this.href === 'string';
-    const isDisabled = this.disabled || this.loading;
+    const isDisabled = this.disabled || (!isLink && this.loading);
     const isLoading = !isLink && this.loading;
     const isSubmit = this.type === 'submit';
     const isToggle = this.toggle !== undefined && !isLink && !isSubmit;
@@ -247,7 +257,7 @@ export class QuietButton extends QuietElement {
         href=${ifDefined(isLink && !this.disabled ? this.href : undefined)}
         target=${ifDefined(isLink ? this.target : undefined)}
         download=${ifDefined(isLink ? this.download : undefined)}
-        rel=${ifDefined(isLink ? this.rel : undefined)}
+        rel=${ifDefined(isLink && this.rel ? this.rel : undefined)}
         aria-label=${ifDefined(this.iconLabel ? this.iconLabel : undefined)}
         aria-pressed=${ifDefined(isToggle ? (this.toggle === 'on' ? 'true' : 'false') : undefined)}
         @blur=${this.handleBlur}

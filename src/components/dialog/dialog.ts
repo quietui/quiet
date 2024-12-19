@@ -1,4 +1,4 @@
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { QuietClosedEvent, QuietCloseEvent, QuietOpenedEvent, QuietOpenEvent } from '../../events/open-close.js';
@@ -15,7 +15,7 @@ import styles from './dialog.styles.js';
  *
  * @summary Dialogs display modal content for alerts, confirmations, configurations, and other important interactions
  *  that require immediate attention.
- * @documentation https://quietui.com/docs/components/dialog
+ * @documentation https://quietui.org/docs/components/dialog
  * @status stable
  * @since 1.0
  *
@@ -77,9 +77,9 @@ export class QuietDialog extends QuietElement {
   /** For dialogs that scroll, this will reset the scroll position when the dialog closes. */
   @property({ attribute: 'reset-scroll', type: Boolean }) resetScroll = false;
 
-  updated(changedProps: Map<string, unknown>) {
+  updated(changedProperties: PropertyValues<this>) {
     // Open or close the dialog
-    if (changedProps.has('open')) {
+    if (changedProperties.has('open')) {
       if (this.open && !this.dialog.open) {
         this.show();
       } else if (this.dialog.open) {
@@ -224,13 +224,13 @@ export class QuietDialog extends QuietElement {
 // Watch for data-dialog="open *" clicks
 //
 document.addEventListener('click', (event: MouseEvent) => {
-  const target = event.target;
+  const dialogAttrEl = (event.target as Element).closest('[data-dialog]');
 
-  if (target instanceof HTMLElement && target.hasAttribute('data-dialog')) {
-    const [command, id] = parseSpaceDelimitedTokens(target.getAttribute('data-dialog') || '');
+  if (dialogAttrEl instanceof Element) {
+    const [command, id] = parseSpaceDelimitedTokens(dialogAttrEl.getAttribute('data-dialog') || '');
 
     if (command === 'open' && id?.length) {
-      const doc = target.getRootNode() as Document | ShadowRoot;
+      const doc = dialogAttrEl.getRootNode() as Document | ShadowRoot;
       const dialog = doc.getElementById(id) as QuietDialog;
 
       if (dialog?.localName === 'quiet-dialog') {

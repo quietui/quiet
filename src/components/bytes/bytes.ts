@@ -9,7 +9,7 @@ import styles from './bytes.styles.js';
  * <quiet-bytes>
  *
  * @summary Formats an arbitrary number of bytes or bits into a human-readable size.
- * @documentation https://quietui.com/docs/components/bytes
+ * @documentation https://quietui.org/docs/components/bytes
  * @status stable
  * @since 1.0
  */

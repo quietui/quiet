@@ -1,4 +1,4 @@
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
@@ -22,7 +22,7 @@ import styles from './passcode.styles.js';
  *
  * @summary Passcodes let users enter fixed-length passcodes, verification tokens, one-time codes, and similar data in a
  *  user-friendly way.
- * @documentation https://quietui.com/docs/components/passcode
+ * @documentation https://quietui.org/docs/components/passcode
  * @status stable
  * @since 1.0
  *
@@ -60,9 +60,9 @@ export class QuietPasscode extends QuietElement {
 
   @query('input') private textBox: HTMLInputElement;
 
-  @state() private isInvalid = false;
-  @state() private wasChanged = false;
-  @state() private wasSubmitted = false;
+  @state() isInvalid = false;
+  @state() wasChanged = false;
+  @state() wasSubmitted = false;
 
   /**
    * The passcode's label. If you need to provide HTML in the label, use the `label` slot instead.
@@ -147,12 +147,12 @@ export class QuietPasscode extends QuietElement {
     this.removeEventListener('invalid', this.handleHostInvalid);
   }
 
-  updated(changedProps: Map<string, unknown>) {
+  updated(changedProperties: PropertyValues<this>) {
     // Always be updating
     this.updateValidity();
 
     // Handle value
-    if (changedProps.has('value')) {
+    if (changedProperties.has('value')) {
       // Enforce allowed characters
       this.value = this.value
         .split('')
@@ -175,7 +175,7 @@ export class QuietPasscode extends QuietElement {
     }
 
     // Handle disabled
-    if (changedProps.has('disabled')) {
+    if (changedProperties.has('disabled')) {
       this.customStates.set('disabled', this.disabled);
     }
 

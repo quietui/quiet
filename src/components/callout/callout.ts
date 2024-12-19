@@ -9,7 +9,7 @@ import styles from './callout.styles.js';
  * <quiet-callout>
  *
  * @summary Callouts draw attention to important information, provide context, or prompt users to take action.
- * @documentation https://quietui.com/docs/components/callout
+ * @documentation https://quietui.org/docs/components/callout
  * @status stable
  * @since 1.0
  *

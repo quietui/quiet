@@ -10,7 +10,7 @@ import styles from './fit-text.styles.js';
  * <quiet-fit-text>
  *
  * @summary Scales a line of text to fit within its container.
- * @documentation https://quietui.com/docs/components/fit-text
+ * @documentation https://quietui.org/docs/components/fit-text
  * @status experimental
  * @since 1.0
  *
@@ -31,8 +31,8 @@ export class QuietFitText extends QuietElement {
   @query('#measure') measure: HTMLSpanElement;
   @query('slot') defaultSlot: HTMLSlotElement;
 
-  @state() private containerWidth = 0;
-  @state() private text = '';
+  @state() containerWidth = 0;
+  @state() text = '';
 
   /**
    * The minimum font size to use when scaling, in pixels. The text will never be smaller than this value, which may

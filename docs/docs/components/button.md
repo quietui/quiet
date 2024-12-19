@@ -55,10 +55,10 @@ Use the `start` and `end` slots to add icons. For best results, use a [`<quiet-i
 
 ### Link buttons
 
-Any button can be rendered as a link by setting the `href` attribute. This is useful to allow buttons to act as navigation. When `href` is present, other link options such as `download` and `target` also become available.
+Any button can be rendered as a link by setting the `href` attribute. This is useful to allow buttons to act as navigation. When `href` is present, other link options such as `download`, `rel`, and `target` also become available.
 
 ```html {.example .flex-row}
-<quiet-button loading href="https://example.com/" target="_blank">
+<quiet-button href="https://example.com/" target="_blank" rel="noreferrer noopener">
   I'm secretly a link
 </quiet-button>
 
@@ -226,4 +226,37 @@ A caret can be shown to indicate the button opens a dropdown menu by adding the 
 
 ```html {.example}
 <quiet-button with-caret>Dropdown</quiet-button>
+```
+
+### Listening for long press
+
+You can detect long presses by listening to the `quiet-long-press` event. The event is dispatched when the button is clicked or tapped and held for 500 milliseconds.
+
+You can determine if the initiating event was a click (`pointer`) or tap (`touch`) by looking at `event.detail.type`. You can also look at `event.detail.originalEvent` to get the coordinates and other details.
+
+```html {.example}
+<quiet-button id="button__long-press">Press and hold</quiet-button>
+
+<script>
+  const button = document.getElementById('button__long-press');
+
+  button.addEventListener('quiet-long-press', async event => {
+    // Log the coordinates and the type of event that initiated the 
+    // long press, i.e. pointer (mouse) or touch (tap)
+    const type = event.detail.type;
+    const { clientX, clientY } = event.detail.originalEvent;
+    
+    console.log(`${type} at ${parseInt(clientX)}×${parseInt(clientY)}`);
+    
+    // Animate the button
+    button.animate([
+      { scale: 1, offset: 0 },
+      { scale: 1.2, offset: 0.1 },
+      { scale: 1, offset: 1 }
+    ], {
+      duration: 500,
+      easing: 'linear'
+    });
+  });
+</script>
 ```

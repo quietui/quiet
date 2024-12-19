@@ -87,5 +87,9 @@ export async function discoverElements(root: Element | ShadowRoot) {
   // Emit the 'quiet-discovery-complete' event for this batch of elements. The detail payload will include an object
   // with two arrays, one that tells which elements were registered and one that tells which were unknown (not found).
   //
-  window.dispatchEvent(new CustomEvent('quiet-discovery-complete', { detail: { registered, unknown } }));
+  // The event is wrapped in requestAnimationFrame() to ensure registered components have time to run the first update.
+  //
+  requestAnimationFrame(() => {
+    document.dispatchEvent(new CustomEvent('quiet-discovery-complete', { detail: { registered, unknown } }));
+  });
 }

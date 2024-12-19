@@ -116,7 +116,7 @@
 
 /*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-//  Light mode colors
+//  Light theme colors
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
@@ -136,7 +136,7 @@
   --quiet-selection-background-color: var(--quiet-primary-300);
   --quiet-selection-color: var(--quiet-text-body);
   --quiet-shadow-color: black;
-  --quiet-shadow-softer: 0 1px 2px color-mix(in oklab, transparent, var(--quiet-shadow-color) 4%);
+  --quiet-shadow-softer: 0 1px 1px color-mix(in oklab, transparent, var(--quiet-shadow-color) 2.5%);
   --quiet-shadow-soft: 0 2px 4px color-mix(in oklab, transparent, var(--quiet-shadow-color) 5%);
   --quiet-shadow-mid: 0 4px 8px color-mix(in oklab, transparent, var(--quiet-shadow-color) 6%);
   --quiet-shadow-loud: 0 8px 16px color-mix(in oklab, transparent, var(--quiet-shadow-color) 7%);
@@ -201,7 +201,7 @@
 
 /*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-//  Dark mode colors
+//  Dark theme colors
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
@@ -210,13 +210,13 @@
 
   --quiet-silent: black;
   --quiet-strident: white;
-  --quiet-background-color: color-mix(in oklab, var(--quiet-neutral-950), white 3%);
+  --quiet-background-color: color-mix(in oklab, var(--quiet-neutral-950), black 2.5%);
   --quiet-paper-color: color-mix(in oklab, var(--quiet-background-color), white 1.5%);
   --quiet-text-body: var(--quiet-neutral-100);
   --quiet-text-muted: var(--quiet-neutral-text-colorful);
   --quiet-focus-color: var(--quiet-primary-fill-mid);
   --quiet-focus-ring: var(--quiet-border-style) var(--quiet-focus-width) var(--quiet-focus-color);
-  --quiet-backdrop-color: rgb(0 0 0 / 0.25);
+  --quiet-backdrop-color: rgb(0 0 0 / 0.5);
   --quiet-selection-background-color: var(--quiet-primary-700);
   --quiet-selection-color: var(--quiet-text-body);
   --quiet-shadow-color: black;
@@ -236,7 +236,7 @@
   --quiet-primary-text-on-mid: white;
   --quiet-primary-text-on-loud: black;
   --quiet-primary-text-colorful: var(--quiet-primary-500);
-  --quiet-primary-stroke-softer: color-mix(in oklab, var(--quiet-primary-900), white 6%);
+  --quiet-primary-stroke-softer: color-mix(in oklab, var(--quiet-primary-900), white 7.5%);
   --quiet-primary-stroke-soft: var(--quiet-primary-800);
   --quiet-primary-stroke-mid: var(--quiet-primary-600);
 
@@ -250,7 +250,7 @@
   --quiet-neutral-text-on-mid: white;
   --quiet-neutral-text-on-loud: black;
   --quiet-neutral-text-colorful: var(--quiet-neutral-500);
-  --quiet-neutral-stroke-softer: color-mix(in oklab, var(--quiet-neutral-900), white 6%);
+  --quiet-neutral-stroke-softer: color-mix(in oklab, var(--quiet-neutral-900), white 7.5%);
   --quiet-neutral-stroke-soft: var(--quiet-neutral-800);
   --quiet-neutral-stroke-mid: var(--quiet-neutral-600);
 
@@ -264,7 +264,7 @@
   --quiet-constructive-text-on-mid: white;
   --quiet-constructive-text-on-loud: black;
   --quiet-constructive-text-colorful: var(--quiet-constructive-500);
-  --quiet-constructive-stroke-softer: color-mix(in oklab, var(--quiet-constructive-900), white 6%);
+  --quiet-constructive-stroke-softer: color-mix(in oklab, var(--quiet-constructive-900), white 7.5%);
   --quiet-constructive-stroke-soft: var(--quiet-constructive-800);
   --quiet-constructive-stroke-mid: var(--quiet-constructive-600);
 
@@ -278,7 +278,7 @@
   --quiet-destructive-text-on-mid: white;
   --quiet-destructive-text-on-loud: black;
   --quiet-destructive-text-colorful: var(--quiet-destructive-500);
-  --quiet-destructive-stroke-softer: color-mix(in oklab, var(--quiet-destructive-900), white 6%);
+  --quiet-destructive-stroke-softer: color-mix(in oklab, var(--quiet-destructive-900), white 7.5%);
   --quiet-destructive-stroke-soft: var(--quiet-destructive-800);
   --quiet-destructive-stroke-mid: var(--quiet-destructive-600);
 }

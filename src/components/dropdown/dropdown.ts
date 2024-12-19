@@ -1,6 +1,6 @@
 import type { VirtualElement } from '@floating-ui/dom';
 import { autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { QuietClosedEvent, QuietCloseEvent, QuietOpenedEvent, QuietOpenEvent } from '../../events/open-close.js';
@@ -22,7 +22,7 @@ const openDropdowns = new Set<QuietDropdown>();
  * <quiet-dropdown>
  *
  * @summary Dropdowns provide a menu of options that appear when the corresponding trigger is activated.
- * @documentation https://quietui.com/docs/components/dropdown
+ * @documentation https://quietui.org/docs/components/dropdown
  * @status stable
  * @since 1.0
  *
@@ -91,8 +91,8 @@ export class QuietDropdown extends QuietElement {
     this.syncAriaAttributes();
   }
 
-  updated(changedProps: Map<string, unknown>) {
-    if (changedProps.has('open')) {
+  updated(changedProperties: PropertyValues) {
+    if (changedProperties.has('open')) {
       this.customStates.set('open', this.open);
 
       if (this.open) {
@@ -103,24 +103,27 @@ export class QuietDropdown extends QuietElement {
     }
 
     // Handle context element changes
-    if (changedProps.has('contextMenu')) {
+    if (changedProperties.has('contextMenu')) {
       const root = this.getRootNode() as Document | ShadowRoot;
 
       // Tear down the old context element
       if (this.contextMenuElement) {
         this.contextMenuLongPress?.stop();
         this.contextMenuElement.removeEventListener('contextmenu', this.handleContextMenu);
-        this.contextMenuElement.removeEventListener('quiet-longpress', this.handleContextMenu);
+        this.contextMenuElement.removeEventListener('quiet-long-press', this.handleContextMenu);
       }
 
       // Setup the new context element
       this.contextMenuElement = this.contextMenu ? root.querySelector(`#${this.contextMenu}`) : null;
 
       if (this.contextMenuElement) {
-        this.contextMenuLongPress = new LongPress(this.contextMenuElement, { eventName: 'quiet-longpress' });
+        this.contextMenuLongPress = new LongPress(this.contextMenuElement, {
+          eventName: 'quiet-long-press',
+          ignorePointerEvents: true
+        });
         this.contextMenuLongPress.start();
         this.contextMenuElement.addEventListener('contextmenu', this.handleContextMenu);
-        this.contextMenuElement.addEventListener('quiet-longpress', this.handleContextMenu);
+        this.contextMenuElement.addEventListener('quiet-long-press', this.handleContextMenu);
       } else if (this.contextMenu) {
         // If `context` is provided and the element isn't found, show a warning
         console.warn(

@@ -1,4 +1,4 @@
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { QuietLoadedEvent, QuietLoadErrorEvent } from '../../events/load.js';
 import hostStyles from '../../styles/host.styles.js';
@@ -16,7 +16,7 @@ const requests = new Map<string, Promise<string>>();
  * <quiet-icon>
  *
  * @summary Icons provide a visual representation of an object, action, or idea.
- * @documentation https://quietui.com/docs/components/icon
+ * @documentation https://quietui.org/docs/components/icon
  * @status stable
  * @since 1.0
  *
@@ -29,7 +29,7 @@ const requests = new Map<string, Promise<string>>();
 export class QuietIcon extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
-  @state() private svg?: SVGSVGElement;
+  @state() svg?: SVGSVGElement;
 
   /** The name of the icon library to use. */
   @property() library = 'default';
@@ -58,9 +58,9 @@ export class QuietIcon extends QuietElement {
     this.setAttribute('aria-hidden', 'true');
   }
 
-  async updated(changedProps: Map<string, unknown>) {
+  async updated(changedProperties: PropertyValues<this>) {
     // Update the icon's role when a label is added or removed
-    if (changedProps.has('label')) {
+    if (changedProperties.has('label')) {
       if (this.label) {
         this.setAttribute('aria-label', this.label);
         this.removeAttribute('aria-hidden');
@@ -71,7 +71,7 @@ export class QuietIcon extends QuietElement {
     }
 
     // Set the icon
-    if (changedProps.has('library') || changedProps.has('family') || changedProps.has('name')) {
+    if (changedProperties.has('library') || changedProperties.has('family') || changedProperties.has('name')) {
       await this.load();
     }
   }

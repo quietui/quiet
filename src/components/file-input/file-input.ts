@@ -1,4 +1,4 @@
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
@@ -23,7 +23,7 @@ const VALIDATION_MESSAGE = nativeFileInput.validationMessage;
  * <quiet-file-input>
  *
  * @summary File inputs let the user select files to upload to the server.
- * @documentation https://quietui.com/docs/components/file
+ * @documentation https://quietui.org/docs/components/file
  * @status stable
  * @since 1.0
  *
@@ -74,13 +74,13 @@ export class QuietFileInput extends QuietElement {
   @query('#dropzone') dropzone: HTMLLabelElement;
   @query('#file-input') fileInput: HTMLInputElement;
 
-  @state() private isDragging = false;
-  @state() private isInvalid = false;
-  @state() private wasChanged = false;
-  @state() private wasSubmitted = false;
+  @state() isDragging = false;
+  @state() isInvalid = false;
+  @state() wasChanged = false;
+  @state() wasSubmitted = false;
 
-  /** An array of files that are currently selected. (Property only)*/
-  @state() public files: File[] = [];
+  /** An array of files that are currently selected. (Property only) */
+  @state() files: File[] = [];
 
   /**
    * The text field's label. If you need to provide HTML in the label, use the `label` slot instead.
@@ -137,12 +137,12 @@ export class QuietFileInput extends QuietElement {
     this.removeEventListener('invalid', this.handleHostInvalid);
   }
 
-  updated(changedProps: Map<string, unknown>) {
+  updated(changedProperties: PropertyValues<this>) {
     // Always be updating
     this.updateValidity();
 
     // Handle value
-    if (changedProps.has('files')) {
+    if (changedProperties.has('files')) {
       this.customStates.set('empty', this.files.length === 0);
       // Update the file list so assistive devices read the correct number of files
       this.fileInput.files = this.getFileList();
@@ -156,7 +156,7 @@ export class QuietFileInput extends QuietElement {
     }
 
     // Handle disabled
-    if (changedProps.has('disabled')) {
+    if (changedProperties.has('disabled')) {
       this.customStates.set('disabled', this.disabled);
     }
 

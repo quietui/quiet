@@ -14,7 +14,7 @@ export default css`
   }
 
   /* Bar */
-  :host([type='bar']) #track {
+  :host([appearance='bar']) #track {
     display: flex;
     align-items: center;
     width: 100%;
@@ -25,7 +25,7 @@ export default css`
     font-size: 0.875em;
   }
 
-  :host([type='bar']) #indicator {
+  :host([appearance='bar']) #indicator {
     display: grid;
     place-content: center;
     width: calc(var(--percentage) * 1%);
@@ -39,7 +39,7 @@ export default css`
     transition: 0.3s width ease;
   }
 
-  :host([type='bar']) #content {
+  :host([appearance='bar']) #content {
     display: block;
     margin-inline: 1em;
     overflow: hidden;
@@ -49,7 +49,7 @@ export default css`
   }
 
   /* Indeterminate */
-  :host([type='bar'][indeterminate]) #indicator {
+  :host([appearance='bar'][indeterminate]) #indicator {
     width: 50%;
     border-radius: inherit;
     animation: 2.5s bar-indeterminate infinite cubic-bezier(0.45, 0, 0.55, 1);
@@ -86,7 +86,7 @@ export default css`
   }
 
   /* Ring */
-  :host([type='ring']) {
+  :host([appearance='ring']) {
     --track-size: 1em;
 
     /* Private */
@@ -100,12 +100,12 @@ export default css`
     font-size: 0.875em;
   }
 
-  :host([type='ring']) svg {
+  :host([appearance='ring']) svg {
     flex: 1 1 auto;
   }
 
-  :host([type='ring']) #track,
-  :host([type='ring']) #indicator {
+  :host([appearance='ring']) #track,
+  :host([appearance='ring']) #indicator {
     fill: none;
     r: var(--radius);
     cx: calc(var(--diameter) / 2);
@@ -114,12 +114,12 @@ export default css`
     rotate: -90deg;
   }
 
-  :host([type='ring']) #track {
+  :host([appearance='ring']) #track {
     stroke: var(--track-color);
     stroke-width: var(--track-size);
   }
 
-  :host([type='ring']) #indicator {
+  :host([appearance='ring']) #indicator {
     stroke: var(--indicator-color);
     stroke-width: var(--track-size);
     stroke-linecap: round;
@@ -127,22 +127,22 @@ export default css`
     stroke-dasharray: calc((var(--circumference) * var(--percentage)) / 100) var(--circumference);
   }
 
-  :host([type='ring']:dir(rtl)) #indicator {
+  :host([appearance='ring']:dir(rtl)) #indicator {
     --circumference-rtl: calc(var(--circumference) * -1);
     --percentage-rtl: calc(var(--percentage) * -1);
     stroke-dasharray: 0 calc((var(--circumference) * (100 - var(--percentage))) / 100) var(--circumference);
   }
 
-  :host([type='ring'][indeterminate]) #indicator {
+  :host([appearance='ring'][indeterminate]) #indicator {
     animation: 2.5s ring-indeterminate infinite linear;
     stroke-dasharray: calc((var(--circumference) * 50) / 100) var(--circumference);
   }
 
-  :host([type='ring'][indeterminate]:dir(rtl)) #indicator {
+  :host([appearance='ring'][indeterminate]:dir(rtl)) #indicator {
     animation-name: ring-indeterminate-rtl;
   }
 
-  :host([type='ring']) #content {
+  :host([appearance='ring']) #content {
     display: flex;
     position: absolute;
     align-items: center;

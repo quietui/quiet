@@ -49,7 +49,7 @@ export class QuietPopover extends QuietElement {
   @query('#dialog') private dialog: HTMLDialogElement;
 
   /**
-   * The id of of popover's anchor element. This must be an interactive/focusable element such as a button and it must
+   * The ID of of popover's anchor element. This must be an interactive/focusable element such as a button and it must
    * be in the same document as the popover.
    */
   @property({ reflect: true }) for: string;
@@ -128,7 +128,7 @@ export class QuietPopover extends QuietElement {
       } else if (this.for) {
         // If `for` is provided and the element isn't found, show a warning
         console.warn(
-          `A popover was assigned to an element with an id of "${this.for}" but the element could not be found.`,
+          `A popover was assigned to an element with an ID of "${this.for}" but the element could not be found.`,
           this
         );
       }

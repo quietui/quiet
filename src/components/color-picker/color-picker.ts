@@ -134,7 +134,7 @@ export class QuietColorPicker extends QuietElement {
 
   /**
    * The form to associate this control with. If omitted, the closest containing `<form>` will be used. The value of
-   * this attribute must be an id of a form in the same document or shadow root.
+   * this attribute must be an ID of a form in the same document or shadow root.
    */
   @property() form: string;
 

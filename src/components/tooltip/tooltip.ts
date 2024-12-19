@@ -52,7 +52,7 @@ export class QuietTooltip extends QuietElement {
   @query('#tooltip') private tooltip: HTMLElement;
 
   /**
-   * The id of of tooltip's anchor element. This must be an interactive/focusable element such as a button and it must
+   * The ID of the tooltip's anchor element. This must be an interactive/focusable element such as a button and it must
    * be in the same document as the tooltip.
    */
   @property({ reflect: true }) for: string;
@@ -166,7 +166,7 @@ export class QuietTooltip extends QuietElement {
       } else if (this.for) {
         // If `for` is provided and the element isn't found, show a warning
         console.warn(
-          `A tooltip was assigned to an element with an id of "${this.for}" but the element could not be found.`,
+          `A tooltip was assigned to an element with an ID of "${this.for}" but the element could not be found.`,
           this
         );
       }

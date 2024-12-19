@@ -60,7 +60,7 @@ export class QuietDropdown extends QuietElement {
   /** Opens or closes the dropdown. */
   @property({ type: Boolean, reflect: true }) open = false;
 
-  /** The id of an element to apply the dropdown as a context menu. */
+  /** The ID of an element to apply the dropdown as a context menu. */
   @property({ attribute: 'context-menu' }) contextMenu = '';
 
   /**
@@ -127,7 +127,7 @@ export class QuietDropdown extends QuietElement {
       } else if (this.contextMenu) {
         // If `context` is provided and the element isn't found, show a warning
         console.warn(
-          `A dropdown was assigned as a context menu to an element with an id of "${this.contextMenu}" but the element could not be found.`,
+          `A dropdown was assigned as a context menu to an element with an ID of "${this.contextMenu}" but the element could not be found.`,
           this
         );
       }
@@ -438,7 +438,7 @@ export class QuietDropdown extends QuietElement {
       nativeButton = trigger as HTMLButtonElement;
     }
 
-    // Set an id on the trigger if one doesn't already exist
+    // Set an ID on the trigger if one doesn't already exist
     if (!nativeButton.hasAttribute('id')) {
       nativeButton.setAttribute('id', createId('quiet-dropdown-trigger-'));
     }

@@ -30,7 +30,6 @@ export interface Translation extends DefaultTranslation {
   opacity: string;
   percentLuminosity: (percentage: string) => string;
   percentSaturation: (percentage: string) => string;
-  pressSpaceToFlipTheCard: string;
   loading: string;
   remove: string;
   selectAColorFromTheScreen: string;

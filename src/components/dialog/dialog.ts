@@ -236,7 +236,7 @@ document.addEventListener('click', (event: MouseEvent) => {
       if (dialog?.localName === 'quiet-dialog') {
         dialog.open = true;
       } else {
-        console.warn(`A dialog with an id of "${id}" could not be found in this document.`);
+        console.warn(`A dialog with an ID of "${id}" could not be found in this document.`);
       }
     }
   }

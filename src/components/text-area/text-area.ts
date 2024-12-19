@@ -93,7 +93,7 @@ export class QuietTextArea extends QuietElement {
 
   /**
    * The form to associate this control with. If omitted, the closest containing `<form>` will be used. The value of
-   * this attribute must be an id of a form in the same document or shadow root.
+   * this attribute must be an ID of a form in the same document or shadow root.
    */
   @property() form: string;
 
@@ -265,7 +265,7 @@ export class QuietTextArea extends QuietElement {
       //
       // NOTE: We'll soon be able to use `field-sizing: content` for this: https://caniuse.com/?search=field-sizing)
       //
-      this.textAreaAutoSizer.id = this.textBox.id; // briefly use the same id to match styles
+      this.textAreaAutoSizer.id = this.textBox.id; // briefly use the same ID to match styles
       this.textAreaAutoSizer.inert = true;
       this.textAreaAutoSizer.value = this.value;
       this.textAreaAutoSizer.style.position = 'absolute';

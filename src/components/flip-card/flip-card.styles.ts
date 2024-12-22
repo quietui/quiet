@@ -2,7 +2,7 @@ import { css } from 'lit';
 
 export default css`
   :host {
-    --flip-duration: 0.5s;
+    --flip-duration: 0.6s;
     --flip-easing: cubic-bezier(0.4, 0, 0.2, 1);
 
     display: grid;

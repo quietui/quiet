@@ -1,6 +1,7 @@
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, query } from 'lit/decorators.js';
+import { QuietFlipEvent, QuietFlippedEvent } from '../../events/flip.js';
 import hostStyles from '../../styles/host.styles.js';
 import { parseSpaceDelimitedTokens } from '../../utilities/parse.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
@@ -9,33 +10,80 @@ import styles from './flip-card.styles.js';
 /**
  * <quiet-flip-card>
  *
- * @summary Flip cards display information on two sides, allowing users to flip between the front and back.
+ * @summary Flip cards display information on two sides, allowing users to flip between the front and back with the
+ *  click of a button.
  * @documentation https://quietui.com/docs/components/flip-card
  * @status stable
  * @since 1.0
  *
- * @slot front - Content to show on the front of the card.
- * @slot back - Content to show on the back of the card.
+ * @slot - The content to show on the front of the card.
+ * @slot back - The content to show on the back of the card.
  *
- * @cssproperty [--flip-duration=0.5s] - The duration of the card flip animation.
- * @cssproperty [--spacing=1.5em] - The spacing to use throughout the flip card.
+ * @event quiet-flip - Emitted when the flip card is instructed to flip but before it actually flips. Calling
+ *  `event.preventDefault()` will prevent the flip card from flipping.
+ * @event quiet-flipped - Emitted after the flip card has been flipped and the animation has completed.
+ *
+ * @cssproperty [--flip-duration=0.6s] - The duration of the card flip animation.
+ * @cssproperty [--flip-easing=cubic-bezier(0.4, 0.0, 0.2, 1)] - The easing to use for the flip animation.
  */
 @customElement('quiet-flip-card')
 export class QuietFlipCard extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
+  private isFirstUpdate = true;
+  private preventNextUpdate = false;
+
+  @query('slot:not([name])') defaultSlot: HTMLSlotElement;
+  @query('slot[name="back"]') backSlot: HTMLSlotElement;
+
   /** Flips the card. */
   @property({ type: Boolean, reflect: true }) flipped = false;
 
   /** Determines the flip direction. */
-  @property({ reflect: true }) direction: 'horizontal' | 'vertical' = 'horizontal';
+  @property({ reflect: true }) orientation: 'horizontal' | 'vertical' = 'horizontal';
+
+  async updated(changedProperties: PropertyValues<this>) {
+    if (this.preventNextUpdate) {
+      this.preventNextUpdate = false;
+      return;
+    }
+
+    if (!this.isFirstUpdate && changedProperties.has('flipped')) {
+      const flipEvent = new QuietFlipEvent();
+      this.dispatchEvent(flipEvent);
+
+      if (flipEvent.defaultPrevented) {
+        this.preventNextUpdate = true;
+        this.flipped = !this.flipped;
+        return;
+      }
+
+      // If an autofocus element exists in the current side, focus it
+      const currentSlot = this.flipped ? this.backSlot : this.defaultSlot;
+      const elementsWithAutofocus = this.querySelectorAll<HTMLElement>('[autofocus]');
+      const assignedElements = currentSlot.assignedElements({ flatten: true });
+      const elementToFocus = Array.from(elementsWithAutofocus).find(el =>
+        assignedElements.some(assigned => assigned === el || assigned.contains(el))
+      );
+
+      // Focus the element if found
+      if (elementToFocus) {
+        elementToFocus.focus();
+      }
+
+      // Dispatch `quiet-flipped` when the transition is done
+      this.addEventListener('transitionend', () => this.dispatchEvent(new QuietFlippedEvent()), { once: true });
+    }
+
+    this.isFirstUpdate = false;
+  }
 
   render() {
     return html`
-      <div id="front" part="front" ?inert=${this.flipped} aria-hidden=${this.flipped ? 'true' : 'false'}>
-        <slot name="front"></slot>
+      <div id="front" part="front" ?inert=${this.flipped}>
+        <slot></slot>
       </div>
-      <div id="back" part="back" ?inert=${!this.flipped} aria-hidden=${this.flipped ? 'false' : 'true'}>
+      <div id="back" part="back" ?inert=${!this.flipped}>
         <slot name="back"></slot>
       </div>
     `;
@@ -73,7 +121,7 @@ document.addEventListener('click', (event: MouseEvent) => {
           break;
       }
     } else {
-      console.warn(`A flip card with an ID of "${id}" could not be found in this document.`);
+      console.warn(`A flip card with an ID of "${id}" could not be found in this document.`, this);
     }
   }
 });

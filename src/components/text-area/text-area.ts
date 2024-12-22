@@ -279,8 +279,6 @@ export class QuietTextArea extends QuietElement {
       this.textBox.style.height = `${this.textAreaAutoSizer.scrollHeight}px`;
       this.textAreaAutoSizer.remove();
       this.textAreaAutoSizer.id = '';
-    } else {
-      this.textBox.style.height = '';
     }
   }
 

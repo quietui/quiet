@@ -186,9 +186,10 @@ Use the `orientation` attribute to set the flip animation to `horizontal` (defau
   <quiet-card slot="back">
     <h3>Features</h3>
     <ul>
+      <li><quiet-icon name="check"></quiet-icon> Stylish design</li>
+      <li><quiet-icon name="check"></quiet-icon> Durable ceramic</li>
       <li><quiet-icon name="check"></quiet-icon> Easy to clean</li>
       <li><quiet-icon name="check"></quiet-icon> Dishwasher safe</li>
-      <li><quiet-icon name="check"></quiet-icon> Stylish design</li>
       <li><quiet-icon name="check"></quiet-icon> Perfect for treats</li>
       <li><quiet-icon name="check"></quiet-icon> Made in the USA</li>
     </ul>

@@ -26,7 +26,7 @@ You can use the `label` and `description` attributes to provide plain text label
 Use the `value` attribute to provide an initial value for the text field.
 
 ```html {.example}
-<quiet-text-field name="name" label="Name" value="Bobby McGee"></quiet-text-field>
+<quiet-text-field name="name" label="Name" value="Meowy McGee"></quiet-text-field>
 ```
 
 ### Changing the type
@@ -61,7 +61,7 @@ To add a clear button to the text field, use the `clearable` attribute. The `qui
 <quiet-text-field 
   name="name" 
   label="Name" 
-  value="Bobby McGee"
+  value="Meowy McGee"
   clearable
 ></quiet-text-field>
 ```

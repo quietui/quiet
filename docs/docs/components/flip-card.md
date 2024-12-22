@@ -19,7 +19,7 @@ layout: component
 
   <quiet-card slot="back">
     <form>
-      <quiet-text-field label="Name" name="name" value="Bobby McGee" autofocus></quiet-text-field>
+      <quiet-text-field label="Name" name="name" value="Meowy McGee" autofocus></quiet-text-field>
       <quiet-text-area label="Tagline" name="tagline" value="Freedom's just another word for nothing left to lose."></quiet-text-area>
       <div class="buttons">
         <quiet-button type="submit" variant="primary">

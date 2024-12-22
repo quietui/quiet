@@ -484,12 +484,14 @@ Here you can preview the animations that are available in Scurry.
   <div class="controls">
     <quiet-select label="Animation"></quiet-select>
     <quiet-button icon-label="Play"><quiet-icon family="filled" name="player-play"></quiet-icon></quiet-button>
-    <quiet-copy id="copy-animation-from-cdn-button" data="https://quietui.org/">
-      <quiet-button>Copy CDN import</quiet-button>
-    </quiet-copy>
-    <quiet-copy id="copy-animation-from-npm-button" data="https://quietui.org/">
-      <quiet-button>Copy npm import</quiet-button>
-    </quiet-copy>
+    <quiet-button-group>
+      <quiet-copy id="copy-animation-from-cdn-button" data="https://quietui.org/">
+        <quiet-button>Copy CDN import</quiet-button>
+      </quiet-copy>
+      <quiet-copy id="copy-animation-from-npm-button" data="https://quietui.org/">
+        <quiet-button>Copy npm import</quiet-button>
+      </quiet-copy>
+    </quiet-button-group>
   </div>
 
   <div class="description"></div>

@@ -284,6 +284,7 @@ Add the `flipped` attribute to show the back of the flip card initially.
       justify-content: center;
       font-size: 4rem;
       background-color: white;
+      border: solid 1px lightgray;
       color: #b91c1c;
       line-height: 1;
 

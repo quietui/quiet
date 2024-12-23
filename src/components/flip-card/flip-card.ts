@@ -43,6 +43,14 @@ export class QuietFlipCard extends QuietElement {
   @property({ reflect: true }) orientation: 'horizontal' | 'vertical' = 'horizontal';
 
   async updated(changedProperties: PropertyValues<this>) {
+    // To prevent the card from animating when `flipped` is true initially, we'll wait for the first update and set
+    // data-can-transition to enable transitions on subsequent updates.
+    if (this.isFirstUpdate) {
+      requestAnimationFrame(() => {
+        this.setAttribute('data-can-transition', '');
+      });
+    }
+
     if (this.preventNextUpdate) {
       this.preventNextUpdate = false;
       return;
@@ -52,6 +60,7 @@ export class QuietFlipCard extends QuietElement {
       const flipEvent = new QuietFlipEvent();
       this.dispatchEvent(flipEvent);
 
+      // The event was canceled, revert and skip the next update
       if (flipEvent.defaultPrevented) {
         this.preventNextUpdate = true;
         this.flipped = !this.flipped;

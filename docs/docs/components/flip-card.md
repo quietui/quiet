@@ -244,6 +244,78 @@ Use the `orientation` attribute to set the flip animation to `horizontal` (defau
 </style>
 ```
 
+### Showing the backside initially
+
+Add the `flipped` attribute to show the back of the flip card initially.
+
+```html {.example}
+<quiet-flip-card id="flip-card__back" orientation="vertical" flipped>
+  <div class="front" aria-label="Ace of hearts">
+    <span class="corner" aria-hidden="true">A<br><quiet-icon name="heart" family="filled"></quiet-icon></span>
+    <span class="corner" aria-hidden="true">A<br><quiet-icon name="heart" family="filled"></quiet-icon></span>
+    <quiet-icon name="heart" family="filled" aria-hidden="true"></quiet-icon>
+  </div>
+  <div slot="back" class="back" aria-label="Flip the card to reveal what it is"></div>
+</quiet-flip-card>
+
+<quiet-button data-flip-card="toggle flip-card__back">
+  Flip
+</quiet-button>
+
+<style>
+  #flip-card__back {
+    width: 150px;
+    height: 230px;
+    margin-block-end: 1rem;
+
+    .front,
+    .back {
+      border-radius: 1rem;
+    }
+
+    .back {
+      background-color: #366BE8;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='82' height='82' viewBox='0 0 120 120'%3E%3Cpolygon fill='%233B82F6' points='120 120 60 120 90 90 120 60 120 0 120 0 60 60 0 0 0 60 30 90 60 120 120 120 '/%3E%3C/svg%3E");
+    }
+
+    .front {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      background-color: white;
+      color: #b91c1c;
+      line-height: 1;
+
+      .corner {
+        display: flex;
+        flex-direction: column;
+        font-size: 1.5rem;
+        justify-content: center;
+        align-items: center;
+
+        &:nth-child(1) {
+          position: absolute;
+          top: 0.75rem;
+          left: 0.75rem;
+        }
+
+        &:nth-child(2) {
+          position: absolute;
+          bottom: 0.75rem;
+          right: 0.75rem;
+          scale: 1 -1;
+        }
+
+        quiet-icon {
+          font-size: 1.25rem;
+        }
+      }      
+    }
+  }
+</style>
+```
+
 ### Setting focus on flip
 
 Use the `autofocus` attribute to assign focus to a specific element when the flip card turns over.

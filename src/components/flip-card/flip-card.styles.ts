@@ -8,6 +8,10 @@ export default css`
     display: grid;
     position: relative;
     width: 100%;
+  }
+
+  /* Normal motion */
+  :host([data-can-transition]) {
     transform-origin: center;
     transform-style: preserve-3d;
     perspective: 1000px;
@@ -20,6 +24,14 @@ export default css`
 
   :host([orientation='vertical'][flipped]) {
     transform: rotateX(180deg);
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    :host {
+      --flip-duration: 0.125s !important;
+      --flip-easing: linear !important;
+    }
   }
 
   #front,

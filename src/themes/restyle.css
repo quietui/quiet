@@ -853,6 +853,11 @@ dialog {
   }
 }
 
+/* FOUCE styles */
+html.quiet-reduce-fouce {
+  opacity: 0;
+}
+
 /* Utilities */
 .visually-hidden,
 .visually-hidden-focusable:where(:not(:focus-within)) {

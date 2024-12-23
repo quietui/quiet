@@ -64,8 +64,6 @@ Now you can use any component in your HTML!
 
 ### Autoloader events
 
-Custom elements are registered with JavaScript, so you might experience <abbr title="Flash of undefined custom elements">FOUCE</abbr> when the page first loads. You can [learn more about FOUCE](https://www.abeautifulsite.net/posts/flash-of-undefined-custom-elements/) and various ways to deal with it on my blog.
-
 As a convenience, Quiet's autoloader emits an event called `quiet-discovery-complete` when all elements on the page have been "discovered" and registered. This is useful if you want to show, for example, a loading indicator until all components are registered.
 
 ```js
@@ -75,6 +73,28 @@ document.addEventListener('quiet-discovery-complete', event => {
 ```
 
 You can inspect `event.detail.registered` to see an array of tag names that were found and registered. Similarly, `event.detail.unknown` will be an array of `<quiet-*>` tags that were found in the document but couldn't be registered. This can happen if you use the wrong tag name, if the files are missing, or if you're trying to use new components with an older version of the library.
+
+### Reducing FOUCE
+
+Custom elements are registered with JavaScript, so you might experience [FOUCE](https://www.abeautifulsite.net/posts/flash-of-undefined-custom-elements/) on page load as the autoloader fetches components.
+
+To reduce FOUCE, add the `quiet-reduce-fouce` class to the `<html>` element as shown below. Avoid adding the class with JavaScript — it needs to be present when the browser first renders the page to work properly.
+
+```html
+<html class="quiet-reduce-fouce">
+  ...
+</html>
+```
+
+If you're using [Quiet Restyle](/docs/restyle), that's all you need to do! If you're not using Restyle, add the following rule to your stylesheet.
+
+```css
+html.quiet-reduce-fouce {
+  opacity: 0;
+}
+```
+
+The autoloader will remove the class after initial discovery _or_ two seconds, whichever comes first, eliminating most FOUCE.
 
 ---
 

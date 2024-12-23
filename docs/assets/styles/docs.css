@@ -17,11 +17,6 @@
   --docs-wordmark-accent-color: var(--quiet-primary-fill-mid);
 }
 
-/* Removed on discovery to reduce FOUCE */
-html.loading {
-  opacity: 0;
-}
-
 html.quiet-dark {
   --docs-wordmark-accent-color: color-mix(in oklab, var(--quiet-primary-fill-mid), white 9.5%);
 }

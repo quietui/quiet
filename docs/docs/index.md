@@ -33,7 +33,7 @@ Quiet is an open source library for building modern user interfaces on the Web. 
   </li>  
 </ul>
 
-**There are two ways to install Quiet.** [Autoloading](#autoloading) is the fastest way to get started — just copy, paste, and start coding. Or you can [import components manually](#manually-importing) from npm or the CDN.
+**There are two ways to install Quiet components.** [Autoloading](#autoloading) is the fastest way to get started — just copy, paste, and start coding. Or you can [import components manually](#manually-importing) from npm or the CDN.
 
 :::info
 Quiet uses a handful of modern Web APIs that were recently added to some browsers. The most notable are [CSS nesting](https://caniuse.com/css-nesting), the [`color-mix()`](https://caniuse.com/?search=color-mix) function, the [`:has()`](https://caniuse.com/css-has) selector, and the [Popover API](https://caniuse.com/mdn-api_htmlelement_showpopover).
@@ -78,7 +78,7 @@ You can inspect `event.detail.registered` to see an array of tag names that were
 
 Custom elements are registered with JavaScript, so you might experience [FOUCE](https://www.abeautifulsite.net/posts/flash-of-undefined-custom-elements/) on page load as the autoloader fetches components.
 
-To reduce FOUCE, add the `quiet-reduce-fouce` class to the `<html>` element as shown below. Avoid adding the class with JavaScript — it needs to be present when the browser first renders the page to work properly.
+To reduce FOUCE, add the `quiet-reduce-fouce` class to the `<html>` element as shown below. Avoid adding the `quiet-reduce-fouce` class with JavaScript — it needs to be present when the browser first renders the page to work properly.
 
 ```html
 <html class="quiet-reduce-fouce">
@@ -86,7 +86,7 @@ To reduce FOUCE, add the `quiet-reduce-fouce` class to the `<html>` element as s
 </html>
 ```
 
-If you're using [Quiet Restyle](/docs/restyle), that's all you need to do! If you're not using Restyle, add the following rule to your stylesheet.
+If you're using [Quiet Restyle](/docs/restyle), that's all you need to do! If you're not using Restyle, add the following rule to a stylesheet that's immediately available to your page when it loads.
 
 ```css
 html.quiet-reduce-fouce {
@@ -94,7 +94,7 @@ html.quiet-reduce-fouce {
 }
 ```
 
-The autoloader will remove the class after initial discovery _or_ two seconds, whichever comes first, eliminating most FOUCE.
+After initial discovery or two seconds, whichever comes first, the autoloader will remove the class for you, eliminating most FOUCE. The two second timeout ensures users don't see a blank page even when networks are slow or have problems.
 
 ---
 

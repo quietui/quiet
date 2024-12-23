@@ -110,25 +110,25 @@ First, add the [default theme](/docs/theming) and the [optional CSS reset](/docs
 
 ```html
 <!-- Quiet styles -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@quietui/quiet@1.0.0/dist/themes/quiet.css">
+<link rel="stylesheet" href="@quietui/quiet/dist/themes/quiet.css">
 
 <!-- Optional CSS reset -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@quietui/quiet@1.0.0/dist/themes/restyle.css">
+<link rel="stylesheet" href="@quietui/quiet/dist/themes/restyle.css">
 ```
 
 Quiet ships standard ES modules, so you can use [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) or [`import()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import) to pull in exactly the components and utilities you need.
 
 ```js
 // Static imports are the most common
-import '/dist/components/badge/badge.js';
-import '/dist/components/button/button.js';
-import '/dist/components/card/card.js';
+import '@quietui/quiet/dist/components/badge/badge.js';
+import '@quietui/quiet/dist/components/button/button.js';
+import '@quietui/quiet/dist/components/card/card.js';
 
 // ...but you can also import components dynamically
 await Promise.all([
-  import '/dist/components/badge/badge.js',
-  import '/dist/components/button/button.js',
-  import '/dist/components/card/card.js'
+  import '@quietui/quiet/dist/components/badge/badge.js',
+  import '@quietui/quiet/dist/components/button/button.js',
+  import '@quietui/quiet/dist/components/card/card.js'
 ]);
 ```
 

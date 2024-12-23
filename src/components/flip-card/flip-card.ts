@@ -71,7 +71,7 @@ export class QuietFlipCard extends QuietElement {
       const currentSlot = this.flipped ? this.backSlot : this.defaultSlot;
       const elementsWithAutofocus = this.querySelectorAll<HTMLElement>('[autofocus]');
       const assignedElements = currentSlot.assignedElements({ flatten: true });
-      const elementToFocus = Array.from(elementsWithAutofocus).find(el =>
+      const elementToFocus = [...elementsWithAutofocus].find(el =>
         assignedElements.some(assigned => assigned === el || assigned.contains(el))
       );
 

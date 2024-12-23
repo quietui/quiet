@@ -19,7 +19,7 @@ layout: component
 
   <quiet-card slot="back">
     <form>
-      <quiet-text-field label="Name" name="name" value="Meowy McGee" autofocus></quiet-text-field>
+      <quiet-text-field label="Name" name="name" value="Meowy McGee"></quiet-text-field>
       <quiet-text-area label="Tagline" name="tagline" value="Freedom's just another word for nothing left to lose."></quiet-text-area>
       <div class="buttons">
         <quiet-button type="submit" variant="primary">
@@ -114,7 +114,7 @@ Flip cards work with any content, but they work exceptionally well with [cards](
 
 ### Flipping the card
 
-You can flip a flip card programmatically by obtaining a reference to it and setting the `flipped` property to `true` or `false`.
+You can flip a card programmatically by obtaining a reference to it and setting the `flipped` property to `true` or `false`.
 
 ```js
 const flipCard = document.querySelector('quiet-flip-card');
@@ -146,7 +146,7 @@ However, it's often more convenient for a button to control the flip card _witho
 </style>
 ```
 
-To flip card to a specific side, use `data-flip-card="front *"` or `data-flip-card="back *"`. Again, the ID can be omitted if the button is inside the flip card.
+To flip the card to a specific side, use `data-flip-card="front *"` or `data-flip-card="back *"`. Again, the ID can be omitted if the button is inside the flip card.
 
 ```html {.example}
 <quiet-flip-card id="flip-card__sides">

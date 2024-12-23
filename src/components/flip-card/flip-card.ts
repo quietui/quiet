@@ -25,6 +25,8 @@ import styles from './flip-card.styles.js';
  *
  * @cssproperty [--flip-duration=0.6s] - The duration of the card flip animation.
  * @cssproperty [--flip-easing=cubic-bezier(0.4, 0.0, 0.2, 1)] - The easing to use for the flip animation.
+ *
+ * @cssstate flipped - Applied when the card is flipped over.
  */
 @customElement('quiet-flip-card')
 export class QuietFlipCard extends QuietElement {
@@ -56,6 +58,12 @@ export class QuietFlipCard extends QuietElement {
       return;
     }
 
+    // Handle flipped custom state
+    if (changedProperties.has('flipped')) {
+      this.customStates.set('flipped', this.flipped);
+    }
+
+    // Handle flips
     if (!this.isFirstUpdate && changedProperties.has('flipped')) {
       const flipEvent = new QuietFlipEvent();
       this.dispatchEvent(flipEvent);

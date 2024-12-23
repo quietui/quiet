@@ -345,7 +345,7 @@ Use the `autofocus` attribute to assign focus to a specific element when the fli
 
 ### Centering content vertically
 
-If you're using [cards](/docs/components/card), you can vertically center the shorter side with a few lines of CSS applied to the card's `body` part.
+The height of a flip card is the height of its tallest side. If you're using [cards](/docs/components/card), you can vertically center the shorter side with a few lines of CSS applied to the card's `body` part.
 
 ```html {.example}
 <quiet-flip-card id="flip-card__centering">

@@ -176,8 +176,8 @@ Use the `orientation` attribute to set the flip animation to `horizontal` (defau
 
 ```html {.example}
 <quiet-flip-card orientation="vertical" style="max-width: 300px;" id="flip-card__vertical">
-  <quiet-card>
-    <img src="https://images.unsplash.com/photo-1734654901149-02a9a5f7993b?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="A beautiful food dish surrounded by kibbles">
+  <quiet-card with-media>
+    <img slot="media" src="https://images.unsplash.com/photo-1734654901149-02a9a5f7993b?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="A beautiful food dish surrounded by kibbles">
     <h3>Kitty Bowl</h3>
     <p>Our signature dinner plate.</p>
     <p><strong>$9.99</strong></p>
@@ -202,8 +202,11 @@ Use the `orientation` attribute to set the flip animation to `horizontal` (defau
 <style>
   #flip-card__vertical {
     quiet-card  {
-      padding: 1.5rem;
       text-align: center;
+
+      h3 {
+        margin-block-start: 0;
+      }
 
       p {
         margin-block-end: 1rem;

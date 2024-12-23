@@ -35,16 +35,16 @@
   </p>
   <quiet-tab-list class="import-tabs" label="How would you like to import this component?">
     <quiet-tab panel="cdn">CDN</quiet-tab>
-    <quiet-tab panel="node">Node.js</quiet-tab>
+    <quiet-tab panel="npm">npm</quiet-tab>
     <quiet-tab-panel name="cdn">
       <p>
         To manually import <code>&lt;{{ component.tagName }}&gt;</code> from the CDN, use the following code.
       </p>
       <pre><code class="language-js">import '{% cdnUrl component.path %}';</code></pre>
     </quiet-tab-panel>
-    <quiet-tab-panel name="node">
+    <quiet-tab-panel name="npm">
       <p>
-        To manually import <code>&lt;{{ component.tagName }}&gt;</code> in Node.js, use the following code.
+        To manually import <code>&lt;{{ component.tagName }}&gt;</code> from npm, use the following code.
       </p>
       <pre><code class="language-js">import '@quietui/quiet/{{ component.path }}';</code></pre>
     </quiet-tab-panel>

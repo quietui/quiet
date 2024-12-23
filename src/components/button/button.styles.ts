@@ -298,6 +298,11 @@ export default css`
     border-start-end-radius: 0;
   }
 
+  :host([appearance='outline'][data-button-group-middle]),
+  :host([appearance='outline'][data-button-group-last]) {
+    margin-inline-start: calc(var(--quiet-border-width) * -2);
+  }
+
   /* Icons */
   ::slotted(quiet-icon) {
     font-size: 1.25em;

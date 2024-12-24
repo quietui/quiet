@@ -1,23 +1,10 @@
 a.external {
-  /* Keep the last word + icon together */
-  &:has(> svg) {
-    > svg {
-      display: inline-block;
-      width: 0.875em;
-      height: 0.875em;
-      margin-inline-start: 0.15em;
-      vertical-align: -0.15em;
-      white-space: nowrap;
-    }
-
-    /*
-      Creates a boundary that prevents wrapping between the last word and the icon while still allowing the rest of the
-      link text to wrap normally.
-    */
-    &::after {
-      display: inline-block;
-      content: '';
-      white-space: nowrap;
-    }
+  svg {
+    display: inline-block;
+    width: 0.875em;
+    height: 0.875em;
+    margin-inline-start: 0.15em;
+    vertical-align: -0.15em;
+    white-space: nowrap;
   }
 }

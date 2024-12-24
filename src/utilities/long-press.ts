@@ -1,3 +1,5 @@
+const isTouchEnabled = 'TouchEvent' in window;
+
 /**
  * Adds a configurable long press event to the target element.
  *
@@ -53,7 +55,7 @@ export class LongPress {
     const y = event instanceof PointerEvent ? event.clientY : event.touches[0].clientY;
 
     // Only listen for one finger touches
-    if (event instanceof TouchEvent && event.touches.length > 1) {
+    if (isTouchEnabled && event instanceof TouchEvent && event.touches.length > 1) {
       return;
     }
 
@@ -86,7 +88,10 @@ export class LongPress {
     const deltaRoot = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 
     // Cancel the long press if the delta is too big or 2+ finger touches
-    if (deltaRoot > this.options.maxDelta || (event instanceof TouchEvent && event.touches.length > 1)) {
+    if (
+      deltaRoot > this.options.maxDelta ||
+      (isTouchEnabled && event instanceof TouchEvent && event.touches.length > 1)
+    ) {
       clearTimeout(this.timeout);
     }
   };

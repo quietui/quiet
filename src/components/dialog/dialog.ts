@@ -142,9 +142,9 @@ export class QuietDialog extends QuietElement {
     // Autofocus in <dialog> seems to work inconsistently across browsers, so we look for the first element with the
     // attribute and set focus as soon as the dialog is visible.
     requestAnimationFrame(() => {
-      const autofocusEl = this.querySelector<HTMLButtonElement>('[autofocus]');
-      if (autofocusEl && typeof autofocusEl.focus === 'function') {
-        autofocusEl.focus();
+      const elementToFocus = this.querySelector<HTMLButtonElement>('[autofocus]');
+      if (elementToFocus && typeof elementToFocus.focus === 'function') {
+        elementToFocus.focus();
       }
     });
 
@@ -236,7 +236,7 @@ document.addEventListener('click', (event: MouseEvent) => {
       if (dialog?.localName === 'quiet-dialog') {
         dialog.open = true;
       } else {
-        console.warn(`A dialog with an id of "${id}" could not be found in this document.`);
+        console.warn(`A dialog with an ID of "${id}" could not be found in this document.`);
       }
     }
   }

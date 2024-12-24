@@ -7,7 +7,7 @@ export function clamp(value: number, min: number, max: number) {
   return value;
 }
 
-/** Creates a unique id with an optional prefix. */
+/** Creates a unique ID with an optional prefix. */
 export function createId(prefix = '') {
   return prefix + nanoid();
 }

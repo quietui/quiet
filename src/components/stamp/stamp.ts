@@ -17,7 +17,7 @@ import styles from './stamp.styles.js';
 export class QuietStamp extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
-  /** The id of the `<template>` element to use as a stamp. */
+  /** The ID of the `<template>` element to use as a stamp. */
   @property() template = '';
 
   /**
@@ -76,7 +76,7 @@ export class QuietStamp extends QuietElement {
 
     // The specified template wasn't found
     if (!templateEl) {
-      console.warn(`A template with an id of "${this.template}" could not be found in this document.`, this);
+      console.warn(`A template with an ID of "${this.template}" could not be found in this document.`, this);
       return;
     }
 

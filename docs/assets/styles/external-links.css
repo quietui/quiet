@@ -1,10 +1,10 @@
 a.external {
-  white-space: nowrap;
-
-  > svg {
+  svg {
+    display: inline-block;
     width: 0.875em;
     height: 0.875em;
     margin-inline-start: 0.15em;
     vertical-align: -0.15em;
+    white-space: nowrap;
   }
 }

@@ -49,7 +49,7 @@ export class QuietPopover extends QuietElement {
   @query('#dialog') private dialog: HTMLDialogElement;
 
   /**
-   * The id of of popover's anchor element. This must be an interactive/focusable element such as a button and it must
+   * The ID of of popover's anchor element. This must be an interactive/focusable element such as a button and it must
    * be in the same document as the popover.
    */
   @property({ reflect: true }) for: string;
@@ -128,7 +128,7 @@ export class QuietPopover extends QuietElement {
       } else if (this.for) {
         // If `for` is provided and the element isn't found, show a warning
         console.warn(
-          `A popover was assigned to an element with an id of "${this.for}" but the element could not be found.`,
+          `A popover was assigned to an element with an ID of "${this.for}" but the element could not be found.`,
           this
         );
       }
@@ -203,9 +203,9 @@ export class QuietPopover extends QuietElement {
     // Autofocus in <dialog> seems to work inconsistently across browsers, so we look for the first element with the
     // attribute and set focus as soon as the dialog is visible.
     requestAnimationFrame(() => {
-      const autofocusEl = this.querySelector<HTMLButtonElement>('[autofocus]');
-      if (autofocusEl && typeof autofocusEl.focus === 'function') {
-        autofocusEl.focus();
+      const elementToFocus = this.querySelector<HTMLButtonElement>('[autofocus]');
+      if (elementToFocus && typeof elementToFocus.focus === 'function') {
+        elementToFocus.focus();
       } else {
         // Fall back to setting focus on the dialog
         this.dialog.focus();

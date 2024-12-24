@@ -271,7 +271,7 @@ You can set the preferred placement of the dropdown menu with the `placement` at
 
 ### Context menus
 
-To turn a dropdown menu into a context menu, omit the trigger and set the `context-menu` attribute to the id of an element in the same document. When you right-click or long press (touch only) the target element, the context menu will be shown.
+To turn a dropdown menu into a context menu, omit the trigger and set the `context-menu` attribute to the ID of an element in the same document. When you right-click or long press (touch only) the target element, the context menu will be shown.
 
 ```html {.example}
 <div id="dropdown__actions" tabindex="0">

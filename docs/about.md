@@ -48,7 +48,7 @@ I'd like to thank the following projects and people for making Quiet UI possible
 - [The Custom Elements Manifest project](https://custom-elements-manifest.open-wc.org/) for making API documentation easy
 - [Floating UI](https://floating-ui.com/) for positioning all the things
 - [Tabler Icons](https://tabler.io/icons) for thousands of beautiful, open source icons
-- [James Duncan](https://x.com/JamesDuncanArt) for drawing a super cool mascot
+- [James Duncan](https://bsky.app/profile/jamesduncanart.bsky.social) for drawing a super cool mascot
 
 ## Getting in touch
 

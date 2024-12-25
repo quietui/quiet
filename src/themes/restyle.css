@@ -54,7 +54,6 @@ fieldset,
 figure,
 iframe,
 ol,
-p,
 pre,
 table,
 ul,
@@ -112,12 +111,9 @@ h6 {
 }
 
 p {
+  margin-block: 0 1lh;
   text-wrap: pretty;
   overflow-wrap: break-word;
-
-  &:where(+ p) {
-    margin-block-end: calc(var(--quiet-content-spacing) / 2);
-  }
 }
 
 /* Block quotes */

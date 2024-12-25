@@ -19,7 +19,7 @@ layout: splash
 Get started
 </quiet-button>
 
-<quiet-button href="/about" appearance="text" size="xl" pill>
+<quiet-button href="/about" size="xl" pill>
 About this project
 </quiet-button>
 

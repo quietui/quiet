@@ -7,7 +7,7 @@ layout: docs
 If you're using a framework, you shouldn't use the autoloader. Instead, install Quiet via npm and manually [import each component](/docs/#manually-importing) as shown in the examples below.
 
 ```sh
-npm install @quietui/quie
+npm install @quietui/quiet
 ```
 
 You will need to copy Quiet's `dist/assets` folder into your app and [configure the library path](/docs/#setting-the-library-path) for icons and other assets to work.

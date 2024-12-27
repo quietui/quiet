@@ -81,7 +81,7 @@ export default {
 
 ## Preact
 
-SolidJS plays nicely with custom elements without additional configuration. Just import the component and use it like a regular HTML element.
+Preact plays nicely with custom elements without additional configuration. Just import the component and use it like a regular HTML element.
 
 ```tsx
 import { h } from 'preact';

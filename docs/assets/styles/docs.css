@@ -321,6 +321,7 @@ html:not(.quiet-dark) .only-dark {
 
     &.current {
       background-color: var(--quiet-primary-fill-soft);
+      font-weight: var(--quiet-font-weight-semibold);
     }
   }
 }

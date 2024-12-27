@@ -289,6 +289,10 @@
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
+.quiet-default {
+  --quiet-primary-seed: #989cff;
+}
+
 .quiet-red {
   --quiet-primary-seed: #ef5655;
   --quiet-destructive-seed: #e89a26; /* to differentiate better */

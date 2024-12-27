@@ -896,8 +896,8 @@ quiet-callout {
   background-position:
     100%,
     100%,
-    0px 0px,
-    calc(var(--grid-half-size)) calc(var(--grid-half-size)),
+    0.5px 0.5px,
+    0.5px 0.5px,
     0px 0px,
     0px 0px;
   background-size:
@@ -907,7 +907,6 @@ quiet-callout {
     var(--grid-size) var(--grid-size),
     var(--grid-half-size) var(--grid-half-size),
     var(--grid-half-size) var(--grid-half-size);
-
   background-repeat: repeat;
   background-attachment: fixed;
   text-wrap: balance;

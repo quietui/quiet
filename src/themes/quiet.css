@@ -292,8 +292,8 @@
 .quiet-red {
   --quiet-primary-seed: #ee6766;
 
-  /* To differentiate destructive from primary, let's make red's destructive color zinc */
-  --quiet-destructive-seed: #a5a6ab;
+  /* To differentiate destructive from primary, let's make red's destructive color amber */
+  --quiet-destructive-seed: #db9640;
 }
 
 .quiet-orange {

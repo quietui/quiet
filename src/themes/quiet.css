@@ -290,88 +290,83 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
 .quiet-red {
-  --quiet-primary-seed: #ee6766;
-
-  /* To differentiate destructive from primary, let's make red's destructive color amber */
-  --quiet-destructive-seed: #db9640;
+  --quiet-primary-seed: #ef5655;
+  --quiet-destructive-seed: #e89a26; /* to differentiate better */
 }
 
 .quiet-orange {
-  --quiet-primary-seed: #e68d5b;
+  --quiet-primary-seed: #f08039;
 }
 
 .quiet-amber {
-  --quiet-primary-seed: #db9640;
+  --quiet-primary-seed: #e89a26;
 }
 
 .quiet-yellow {
-  --quiet-primary-seed: #ceb333;
+  --quiet-primary-seed: #dcb31e;
 }
 
 .quiet-lime {
-  --quiet-primary-seed: #b0aa39;
+  --quiet-primary-seed: #9abb28;
 }
 
 .quiet-green {
-  --quiet-primary-seed: #97b14c;
+  --quiet-primary-seed: #5dbb55;
 }
 
 .quiet-emerald {
-  --quiet-primary-seed: #7db664;
+  --quiet-primary-seed: #47b873;
 }
 
 .quiet-teal {
-  --quiet-primary-seed: #5ab983;
+  --quiet-primary-seed: #37b995;
 }
 
 .quiet-cyan {
-  --quiet-primary-seed: #39baa4;
+  --quiet-primary-seed: #20b8bc;
 }
 
 .quiet-sky {
-  --quiet-primary-seed: #2ab6d1;
+  --quiet-primary-seed: #1caedd;
 }
 
 .quiet-blue {
-  --quiet-primary-seed: #58acf2;
+  --quiet-primary-seed: #4a97f4;
 }
 
 .quiet-indigo {
-  --quiet-primary-seed: #79a4fe;
+  --quiet-primary-seed: #6e85f8;
 }
 
 .quiet-violet {
-  --quiet-primary-seed: #989cff;
+  --quiet-primary-seed: #927cfb;
 }
 
 .quiet-purple {
-  --quiet-primary-seed: #b394f4;
+  --quiet-primary-seed: #ae75f6;
 }
 
 .quiet-fuchsia {
-  --quiet-primary-seed: #ca8de1;
+  --quiet-primary-seed: #d26ae8;
 }
 
 .quiet-pink {
-  --quiet-primary-seed: #dc88c7;
+  --quiet-primary-seed: #e468b0;
 }
 
 .quiet-rose {
-  --quiet-primary-seed: #e886a7;
+  --quiet-primary-seed: #ee6383;
+  --quiet-destructive-seed: #e89a26; /* to differentiate better */
 }
 
 .quiet-slate {
-  --quiet-primary-seed: #a3a6b5;
+  --quiet-primary-seed: #848da0;
 }
 
 .quiet-zinc {
-  --quiet-primary-seed: #a5a6ab;
+  --quiet-primary-seed: #8b8c93;
 }
 
 .quiet-stone {
-  --quiet-primary-seed: #a9a6a2;
-}
-
-.quiet-sand {
-  --quiet-primary-seed: #aaa69f;
+  --quiet-primary-seed: #918c87;
 }

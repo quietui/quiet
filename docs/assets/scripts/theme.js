@@ -60,10 +60,13 @@ function setThemeColor(newColor, skipTransition = false) {
   const dropdown = document.getElementById('header-color-picker');
   const items = [...dropdown.querySelectorAll('quiet-dropdown-item')];
   const colorNames = items.map(item => item.textContent.trim());
-  const color = newColor || 'violet';
+  const color = newColor || 'default';
   const updateSeedColor = () => {
     colorNames.forEach(color => document.documentElement.classList.remove(`quiet-${color}`));
-    document.documentElement.classList.add(`quiet-${color}`);
+
+    if (color !== 'default') {
+      document.documentElement.classList.add(`quiet-${color}`);
+    }
 
     // Update the theme color
     const hex = getComputedStyle(document.documentElement).getPropertyValue('--quiet-primary-seed');

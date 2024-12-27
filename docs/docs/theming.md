@@ -63,7 +63,7 @@ For best results, use midtone colors to seed palettes. Any of the 500-level colo
 
 For convenience, Quiet's default theme ships with 21 color presets to alter the library's primary color. The theme picker at the top of the page allows you to preview them.
 
-To use a preset in your app, add the `quiet-{preset}` class to the `<html>` element, where `{preset}` is one of the following values: red, orange, amber, yellow, lime, green, emerald, teal, cyan, sky, blue, indigo, violet, purple, fuchsia, pink, rose, slate, zinc, stone, or sand.
+To use a preset in your app, add the `quiet-{preset}` class to the `<html>` element, where `{preset}` is one of the following values: default, red, orange, amber, yellow, lime, green, emerald, teal, cyan, sky, blue, indigo, violet, purple, fuchsia, pink, rose, slate, zinc, or stone.
 
 ```html
 <html class="quiet-blue">

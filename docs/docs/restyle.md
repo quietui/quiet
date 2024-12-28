@@ -235,12 +235,25 @@ export function thing(arg) {
 For consistency, native form controls are styled to look similar to Quiet form controls.
 
 <div style="display: flex; flex-direction: column; gap: 1rem;">
-  <input type="text" placeholder="Text">
+  <h4>Sizes</h4>
+  <input class="xs" type="text" placeholder="Extra small">
+  <input class="sm" type="text" placeholder="Small">
+  <input class="md" type="text" placeholder="Medium">
+  <input class="lg" type="text" placeholder="Large">
+  <input class="xl" type="text" placeholder="Extra large">
+
+  <h4>Appearances</h4>
+  <input type="text" placeholder="Normal">
+  <input class="filled" type="text" placeholder="Filled">
+
+  <h4>Types</h4>
   <input type="color" placeholder="Color" value="#787acf">
   <input type="date" placeholder="Date" value="1989-03-12">
   <input type="time" placeholder="Time" value="12:00:00">
   <input type="number" placeholder="Number" value="42" inputmode="numeric">
   <input type="password" placeholder="Password" value="hunter2">
+
+  <h4>Other controls</h4>
   <select name="size" label="Select a size">
     <option value="sm">Small</option>
     <option value="md" selected>Medium</option>

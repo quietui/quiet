@@ -444,6 +444,43 @@ textarea {
   color: var(--quiet-text-body);
   font-size: var(--quiet-form-control-font-size-md);
 
+  &.xs {
+    min-height: var(--quiet-form-control-height-xs);
+    font-size: var(--quiet-form-control-font-size-xs);
+  }
+
+  &.sm {
+    min-height: var(--quiet-form-control-height-sm);
+    font-size: var(--quiet-form-control-font-size-sm);
+  }
+
+  &.md {
+    min-height: var(--quiet-form-control-height-md);
+    font-size: var(--quiet-form-control-font-size-md);
+  }
+
+  &.lg {
+    min-height: var(--quiet-form-control-height-lg);
+    font-size: var(--quiet-form-control-font-size-lg);
+  }
+
+  &.xl {
+    min-height: var(--quiet-form-control-height-xl);
+    font-size: var(--quiet-form-control-font-size-xl);
+  }
+
+  &.filled {
+    padding: 0 0.75em;
+    border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-fill-softer);
+    border-radius: calc(var(--quiet-border-radius) / 1.5);
+    background-color: var(--quiet-neutral-fill-softer);
+
+    &:has(#text-box:focus-visible) {
+      outline: var(--quiet-border-style) calc(var(--quiet-border-width) + 1px) var(--quiet-focus-color);
+      outline-offset: calc(-1 * var(--quiet-border-width));
+    }
+  }
+
   &:focus {
     outline: none;
   }

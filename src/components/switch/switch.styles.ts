@@ -38,7 +38,7 @@ export default css`
   }
 
   #visual-box {
-    --height: 1.6em;
+    --height: 1.5em;
     --width: calc(var(--height) * 2);
     --thumb-size: calc(var(--height) - 4px);
     --thumb-padding: calc((var(--height) - var(--thumb-size)) / 2);

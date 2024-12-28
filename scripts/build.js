@@ -34,7 +34,7 @@ async function buildAll() {
     await generateIcons();
     await generateTypes();
     await generateStyles();
-    await generateBundle();
+    await generateBuild();
     await generateDocs();
 
     const time = (Date.now() - start) / 1000 + 's';
@@ -123,7 +123,7 @@ function generateTypes() {
 /**
  * Runs esbuild to generate the final dist.
  */
-async function generateBundle() {
+async function generateBuild() {
   spinner.start('Bundling with esbuild');
 
   const config = {
@@ -172,9 +172,9 @@ async function generateBundle() {
 }
 
 /**
- * Incrementally rebuilds the source files. Must be called only after `generateBundle()` has been called.
+ * Incrementally rebuilds the source files. Must be called only after `generateBuild()` has been called.
  */
-async function regenerateBundle() {
+async function regenerateBuild() {
   try {
     spinner.start('Re-bundling with esbuild');
     await buildContext.rebuild();
@@ -294,7 +294,7 @@ if (isDeveloping) {
 
       // Re-bundle when relevant files change
       if (!isTestFile && !isCssStylesheet) {
-        await regenerateBundle();
+        await regenerateBuild();
       }
 
       // Copy stylesheets when CSS files change

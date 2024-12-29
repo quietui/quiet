@@ -509,7 +509,7 @@ The following design tokens are used to set the overall appearance of the defaul
 ```
 
 :::warn
-Always scope design tokens overrides to the `:root` node (i.e. `<html>` element), otherwise calculated values may not propagate as expected.
+Always scope design token overrides to the `:root` node (i.e. `<html>` element), otherwise calculated values may not propagate as expected.
 :::
 
 #### Application tokens

@@ -162,7 +162,7 @@ To escape an expression, add a [[\\]] character immediately before the opening c
 <div>\{name}</div>
 ```
 
-Escaped expressions will not be evaluated and will be rendered as-is without the backslash.
+Escaped expressions will not be evaluated and will be rendered as-is minus the backslash.
 
 ### Conditionals
 
@@ -174,7 +174,7 @@ To show an element based on a truthy value, use the special `if={expression}` at
 </div>
 ```
 
-The inverse of this is the `unless` method, which shows an element when the value is _not_ truthy.
+The inverse of this is the `unless` attribute, which shows an element when the value is _not_ truthy.
 
 ```html
 <div unless="{someValue}">

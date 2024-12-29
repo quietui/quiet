@@ -31,6 +31,7 @@ interface GetTabsOptions {
  * @slot - One or more `<quiet-tab-panel>` elements, each with a `name` attribute unique to the tab list.
  * @slot tab - One or more `<quiet-tab>` elements, each with a `panel` attribute linked to the `name` of a tab panel.
  *  Note that tabs will automatically apply this slot to themselves, so you can safely omit `slot="tab"` in your markup.
+ *  Also useful for adding close buttons to tabs.
  *
  * @event quiet-tab-shown - Emitted after a tab is shown. The event will include a `detail` object with `tab` and
  *  `panel`properties that reference the respective tab and panel elements.

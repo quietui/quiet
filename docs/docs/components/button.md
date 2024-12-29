@@ -28,7 +28,7 @@ Buttons have four built-in variants. Set the `variant` attribute to `primary`, `
 ```
 
 :::info
-There is no `constructive` variant by design. Use the `primary` variant for constructive actions.
+There is no `constructive` button by design. Use the `primary` variant for constructive actions.
 :::
 
 ### Start & end icons

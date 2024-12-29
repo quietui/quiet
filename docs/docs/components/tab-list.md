@@ -219,7 +219,7 @@ Note that we use `tabindex="-1"` on the close button to prevent it from interfer
   }
 
   // Remove the tab when the close button is clicked
-  closeButton.addEventListener('quiet-click', closeTab);
+  closeButton.addEventListener('click', closeTab);
 
   // Remove the tab when delete is pressed
   secondTab.addEventListener('keydown', event => {
@@ -229,7 +229,7 @@ Note that we use `tabindex="-1"` on the close button to prevent it from interfer
   });
   
   // Restore the tab
-  restoreButton.addEventListener('quiet-click', restoreTab);
+  restoreButton.addEventListener('click', restoreTab);
 </script>
 
 <style>

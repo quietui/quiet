@@ -70,10 +70,10 @@ Wrap a collection of elements in a transition group and use normal DOM APIs to a
   }
 
   // Handle button clicks
-  addButton.addEventListener('quiet-click', addRandomBox);
-  removeButton.addEventListener('quiet-click', removeRandomBox);
-  shuffleButton.addEventListener('quiet-click', shuffleBoxes);
-  disableButton.addEventListener('quiet-click', () => {
+  addButton.addEventListener('click', addRandomBox);
+  removeButton.addEventListener('click', removeRandomBox);
+  shuffleButton.addEventListener('click', shuffleBoxes);
+  disableButton.addEventListener('click', () => {
     transitionGroup.disableTransitions = disableButton.toggle === 'off';
   });
 </script>
@@ -202,14 +202,14 @@ Use standard DOM APIs to add, remove, and reorder elements and the transition gr
   });
 
   // Shuffle items
-  shuffleButton.addEventListener('quiet-click', () => {
+  shuffleButton.addEventListener('click', () => {
     const items = [...transitionGroup.children];
     items.sort(() => Math.random() - 0.5);
     items.forEach(item => transitionGroup.append(item));
   });
 
   // Handle item actions
-  container.addEventListener('quiet-click', event => {
+  container.addEventListener('click', event => {
     const button = event.target.closest('[data-action]');
     if (!button) return;
     const action = button.getAttribute('data-action');
@@ -328,7 +328,7 @@ Avoid making DOM changes while a transition is running. The `transitionComplete`
   const transitionGroup = container.querySelector('quiet-transition-group');
   const swapButton = container.querySelector('quiet-button');
 
-  swapButton.addEventListener('quiet-click', async () => {
+  swapButton.addEventListener('click', async () => {
     const box = transitionGroup.querySelector('.box');
 
     // Disable the button and swap the elements
@@ -559,7 +559,7 @@ Here you can preview the animations that are available in Scurry.
   });
   
   // Play
-  swapButton.addEventListener('quiet-click', play);
+  swapButton.addEventListener('click', play);
 </script>
 
 <style>

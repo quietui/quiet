@@ -168,7 +168,7 @@ By default, dialogs appear in the center of the screen. To make the dialog slide
   const dialog = document.getElementById('dialog__placement');
   const container = dialog.nextElementSibling;
 
-  container.addEventListener('quiet-click', event => {
+  container.addEventListener('click', event => {
     dialog.placement = event.target.getAttribute('data-placement');
     dialog.open = true;
   });

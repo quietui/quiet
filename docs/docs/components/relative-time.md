@@ -54,7 +54,7 @@ Add the `live` attribute to automatically update the time as it passes.
 
   relativeTime.date = new Date(Date.now());
 
-  button.addEventListener('quiet-click', () => {
+  button.addEventListener('click', () => {
     relativeTime.date = new Date();
   });
 </script>

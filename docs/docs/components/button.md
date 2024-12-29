@@ -4,7 +4,11 @@ layout: component
 ---
 
 ```html {.example}
-<quiet-button>Click me</quiet-button>
+<quiet-button id="byah" disabled>Click me</quiet-button>
+
+<script>
+  byah.addEventListener('click', console.log);
+</script>
 ```
 
 ## Examples
@@ -203,7 +207,7 @@ Toggle buttons cannot be used with link buttons or submit buttons.
 
 ### Loading buttons
 
-To show the button in a loading state, add the `loading` attribute. When a button is loading, it is effectively disabled and the `quiet-click` event will not be emitted.
+To show the button in a loading state, add the `loading` attribute. When a button is loading, it is effectively disabled and `click` events will not be emitted.
 
 ```html {.example}
 <quiet-button loading>
@@ -213,7 +217,7 @@ To show the button in a loading state, add the `loading` attribute. When a butto
 
 ### Disabling
 
-To disable a button, add the `disabled` attribute. When a button is disabled, the `quiet-click` event will not be emitted.
+To disable a button, add the `disabled` attribute. When a button is disabled, the `click` event will not be emitted.
 
 ```html {.example .flex-row}
 <quiet-button disabled>Regular button</quiet-button>

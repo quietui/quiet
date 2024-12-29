@@ -83,12 +83,12 @@ Try selecting a few files and then clicking each button.
   const clearButton = reverseButton.nextElementSibling;
 
   // Reverse
-  reverseButton.addEventListener('quiet-click', event => {
+  reverseButton.addEventListener('click', event => {
     fileInput.files = fileInput.files.toReversed();
   });
 
   // Clear
-  clearButton.addEventListener('quiet-click', event => {
+  clearButton.addEventListener('click', event => {
     fileInput.files = [];
   });
 </script>

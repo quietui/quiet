@@ -120,22 +120,22 @@ You can insert more than one item into a named slot. For example, this card has 
 
 ## Events
 
-Many components emit custom events when certain things happen. For example, a [`<quiet-button>`](/docs/components/button) emits an event called `quiet-click` when the button is activated. You can listen for custom events the same way you listen for native events.
+Many components emit custom events when certain things happen. For example, a [`<quiet-tab-list>`](/docs/components/tab-list) emits an event called `quiet-tab-shown` when a tab is shown. You can listen for custom events the same way you listen for native events.
 
 ```html {.example .no-buttons}
-<quiet-button id="click-me">Click me</quiet-button>
+<quiet-text-field></quiet-text-field>
 
 <script>
-  const button = document.getElementById('click-me');
+  const textField = document.getElementById('quiet-text-field');
 
-  button.addEventListener('quiet-click', event => {
-    // The button has been clicked
+  textField.addEventListener('quiet-input', event => {
+    // The text field has received input
     console.log(event);
   });
 </script>
 ```
 
-You can also listen to native events on custom elements. However, it's important to understand that native events occur _inside_ the component's shadow DOM and are [retargeted to the host](https://javascript.info/shadow-dom-events), so they might not work the exact way you expect. When available, it's always better to use a custom event instead of a native one.
+You can also listen to native events on custom elements. However, it's important to understand that native events occur _inside_ the component's shadow DOM and are [retargeted to the host](https://javascript.info/shadow-dom-events), so they may not always work the way you expect — particularly in complex components. If a custom event is available, it's always better to use it over a native one.
 
 :::warn
 Event bubbling is a common pitfall. In the same way native HTML elements all dispatch a `click` event, Quiet components may dispatch custom events that aren't unique to the component. [Learn more about custom event bubbling.](https://www.abeautifulsite.net/posts/custom-event-names-and-the-bubbling-problem/)

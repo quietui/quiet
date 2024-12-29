@@ -118,7 +118,7 @@ To persist the spoiler once shown, add the `persist` attribute. This will remove
   const container = document.getElementById('spoiler__persist');
   const resetButton = container.querySelector('quiet-button');
 
-  resetButton.addEventListener('quiet-click', () => {
+  resetButton.addEventListener('click', () => {
     container.querySelectorAll('quiet-spoiler').forEach(spoiler => spoiler.visible = false);
   });
 </script>

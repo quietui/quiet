@@ -4,7 +4,6 @@ import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { html, literal } from 'lit/static-html.js';
 import { QuietBlurEvent, QuietFocusEvent } from '../../events/form.js';
-import { QuietClickEvent } from '../../events/pointer.js';
 import hostStyles from '../../styles/host.styles.js';
 import { LongPress } from '../../utilities/long-press.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
@@ -28,7 +27,6 @@ import styles from './button.styles.js';
  * @slot end - An icon or similar element to place after the label. Works great with `<quiet-icon>`.
  *
  * @event quiet-blur - Emitted when the button loses focus. This event does not bubble.
- * @event quiet-click - Emitted when the button is clicked. Will not be emitted when the button is disabled or loading.
  * @event quiet-long-press - Emitted when the button is pressed and held by tapping or with the mouse. You can look at
  *  `event.detail.originalEvent.type` to see the type of event that initiated the long press.
  * @event quiet-focus - Emitted when the button receives focus. This event does not bubble.
@@ -165,16 +163,11 @@ export class QuietButton extends QuietElement {
     this.dispatchEvent(new QuietFocusEvent());
   }
 
-  private handleClick() {
-    // Don't do anything when the button is busy
+  private handleClick(event: PointerEvent) {
+    // Ignore clicks when the button is disabled or busy
     if (this.disabled || this.loading) {
-      return;
-    }
-
-    // Emit quiet-click and stop if it gets canceled
-    const clickEvent = new QuietClickEvent();
-    this.dispatchEvent(clickEvent);
-    if (clickEvent.defaultPrevented) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
       return;
     }
 

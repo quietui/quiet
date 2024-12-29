@@ -8,6 +8,9 @@ export default css`
     display: grid;
     position: relative;
     width: 100%;
+
+    /* Make the transition smoother in Chrome when the card's height changes and then gets flipped */
+    will-change: contents;
   }
 
   /* Normal motion */

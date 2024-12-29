@@ -79,7 +79,7 @@ However, that will only work well if your brand color happens to be a midtone, o
 
 _"But my buttons don't match my brand color exactly…"_
 
-Components should absolutely be _on brand_, but that doesn't mean they have to be the exact hex color as your brand! However, if you insist on such a style, the correct way to achieve it is by overriding component styles using CSS and ensuring proper contrast manually — not by setting the seed color to an inappropriate value.
+Components should absolutely be _on brand_, but that doesn't mean buttons have to be the exact hex color as your logo! However, if you insist on such a style, the correct way to achieve it is by overriding the generated palettes and/or component styles with CSS and ensuring proper contrast manually.
 
 ### Color primitives
 

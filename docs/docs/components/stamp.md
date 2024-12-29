@@ -156,7 +156,7 @@ Using this option can be dangerous! Make sure you trust the included content, ot
 
 ### Escaping expressions
 
-To escape a expressions, add a [[\\]] character immediately before the opening curly bracket.
+To escape an expression, add a [[\\]] character immediately before the opening curly bracket.
 
 ```html
 <div>\{name}</div>

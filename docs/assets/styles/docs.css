@@ -869,7 +869,7 @@ quiet-callout {
     linear-gradient(to top, transparent 0, color-mix(in oklab, var(--quiet-background-color), transparent 25%) 100%),
     linear-gradient(
       to bottom,
-      transparent 50%,
+      transparent 33%,
       color-mix(in oklab, var(--quiet-primary-fill-softer), transparent 25%) 100%
     ),
     radial-gradient(

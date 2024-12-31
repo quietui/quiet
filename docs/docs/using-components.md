@@ -20,7 +20,13 @@ You can obtain references using `document.querySelector()` and `document.getElem
 const button = document.querySelector('quiet-button');
 ```
 
-Before accessing any properties or methods on an element, make sure it has a chance to register first. You can use [`customElements.whenDefined()`](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/whenDefined) which returns a promise.
+:::info
+Some HTML elements, such as `<img>`, are [void elements](https://developer.mozilla.org/en-US/docs/Glossary/Void_element), meaning you can omit their closing tag. Custom elements cannot be void elements, so make sure you always close their tags!
+:::
+
+## Awaiting registration
+
+Since custom elements are indifferent to frameworks, there's no initialization phase to ensure components have been registered before using them. Thus, before accessing properties or methods on custom elements, you need to ensure they're defined first. You can use [`customElements.whenDefined()`](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/whenDefined) for this.
 
 ```js
 await customElements.whenDefined('quiet-button');
@@ -28,10 +34,60 @@ await customElements.whenDefined('quiet-button');
 // <quiet-button> is defined and ready to use!
 ```
 
-:::info
-Some HTML elements, such as `<img>`, are [void elements](https://developer.mozilla.org/en-US/docs/Glossary/Void_element), meaning you can omit their closing tag. Custom elements cannot be void elements, so make sure you always close their tags!
+However, this can be cumbersome when you have a lot of components on the page. For convenience, Quiet provides an `allDefined()` function that waits for all Quiet components that are currently on the page to finish registering.
+
+<quiet-tab-list class="import-tabs" label="How would you like to import this function?">
+<quiet-tab panel="cdn">CDN</quiet-tab>
+<quiet-tab panel="npm">npm</quiet-tab>
+
+<quiet-tab-panel name="cdn">
+
+```ts
+import { allDefined } from '{% cdnUrl '/dist/quiet.js' %}';
+
+await allDefined();
+
+// All `<quiet-*>` elements defined and are ready to use!
+```
+
+</quiet-tab-panel>
+
+<quiet-tab-panel name="npm">
+
+```ts
+import { allDefined } from '@quietui/quiet';
+
+await allDefined();
+
+// All `<quiet-*>` elements defined and are ready to use!
+```
+
+</quiet-tab-panel>
+</quiet-tab-list>
+
+You can use this function in the beginning of your app to wait for components to load up front, or you can use it on demand whenever you need to access a component's properties or methods with JavaScript.
+
+:::details Advanced usage
+
+You can provide options to change how this function works, allowing you to listen for other custom elements and/or custom elements that may not be on the page when the function is called. All available options are shown below.
+
+```ts
+await allDefined({
+  // Wait for all `<quiet-*>` elements on the page
+  match: tagName => tagName.startsWith('quiet-'),
+
+  // Also wait for `<foo-element>` and `<bar-element>`
+  additionalElements: ['foo-element', 'bar-element'],
+
+  // Look in the current document (can also be a shadow root)
+  root: document
+});
+```
 :::
 
+:::info
+This function will throw if a registration fails for any reason, so you'll probably want to wrap it in a [`try...catch`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/try...catch) block!
+:::
 
 ## Attributes & properties
 

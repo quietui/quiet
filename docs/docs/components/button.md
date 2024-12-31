@@ -3,14 +3,6 @@ title: Button
 layout: component
 ---
 
-```html {.example}
-<quiet-button id="byah" disabled>Click me</quiet-button>
-
-<script>
-  byah.addEventListener('click', console.log);
-</script>
-```
-
 ## Examples
 
 ### Variants

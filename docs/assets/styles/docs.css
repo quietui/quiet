@@ -866,9 +866,9 @@ quiet-callout {
   --opacity-base: 0.15;
   /* prettier-ignore */
   background-image:
-    linear-gradient(to top, transparent 0, color-mix(in oklab, var(--quiet-background-color), transparent 25%) 100%),
+    linear-gradient(to top left, transparent 0, color-mix(in oklab, var(--quiet-background-color), transparent 25%) 100%),
     linear-gradient(
-      to bottom,
+      to bottom right,
       transparent 33%,
       color-mix(in oklab, var(--quiet-primary-fill-softer), transparent 25%) 100%
     ),

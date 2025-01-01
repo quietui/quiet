@@ -8,6 +8,7 @@ export default css`
     flex-direction: column;
     border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
     border-radius: var(--quiet-border-radius);
+    background-color: var(--quiet-paper-color);
     box-shadow: var(--quiet-shadow-softer);
   }
 

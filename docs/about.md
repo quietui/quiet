@@ -28,7 +28,7 @@ With Quiet, you no longer need to learn a new UI library when you switch framewo
   >
 </a>
 
-Quiet was built by Cory LaViska ([BlueSky](https://bsky.app/profile/cory.laviska.com) / [X](https://x.com/cory_laviska)), the creator of [Shoelace](https://shoelace.style/). With the success of Shoelace, many of you are probably wondering why I'd choose to build another UI library, and that's a reasonable question.
+Quiet was built by Cory LaViska ([BlueSky](https://bsky.app/profile/cory.laviska.com) / [X](https://x.com/cory_laviska)), the creator of the popular [Shoelace](https://shoelace.style/) library. With the success of Shoelace, many of you are probably wondering why I'd choose to build another UI library, and that's a reasonable question.
 
 The truth is, Shoelace has matured a lot over the years. While that's a great thing for its users, as an artist, I've lost my canvas for creativity. I'm still committed to Shoelace and it has a very promising future — it has a full team now and we're building an amazing product out of it. But it's not my personal playground anymore.
 

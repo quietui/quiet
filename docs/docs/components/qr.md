@@ -9,6 +9,10 @@ layout: component
 <quiet-qr data="https://quietui.org/" label="QR code to visit Quiet UI on the Web"></quiet-qr>
 ```
 
+:::info
+In the same way that images require `alt` text, you should add a label to every QR code. The label won't be displayed, but it will be announced by assistive devices.
+:::
+
 ## Examples
 
 ### Setting data

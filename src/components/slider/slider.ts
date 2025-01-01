@@ -109,7 +109,7 @@ export class QuietSlider extends QuietElement {
   @property({ reflect: true }) size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' = 'md';
 
   /** The starting value from which to draw the slider's fill, which is based on its current value. */
-  @property({ attribute: 'fill-offset', type: Number }) fillOffset: number;
+  @property({ attribute: 'indicator-offset', type: Number }) indicatorOffset: number;
 
   /**
    * The form to associate this control with. If omitted, the closest containing `<form>` will be used. The value of
@@ -481,8 +481,8 @@ export class QuietSlider extends QuietElement {
 
   render() {
     const thumbPosition = clamp(this.getPercentageFromValue(this.value), 0, 100);
-    const fillOffsetPosition = clamp(
-      this.getPercentageFromValue(typeof this.fillOffset === 'number' ? this.fillOffset : this.min),
+    const indicatorOffsetPosition = clamp(
+      this.getPercentageFromValue(typeof this.indicatorOffset === 'number' ? this.indicatorOffset : this.min),
       0,
       100
     );
@@ -538,7 +538,11 @@ export class QuietSlider extends QuietElement {
         @keydown=${this.handleKeyDown}
       >
         <div id="track" part="track">
-          <div id="indicator" part="indicator" style="--start: ${fillOffsetPosition}%; --end: ${thumbPosition}%"></div>
+          <div
+            id="indicator"
+            part="indicator"
+            style="--start: ${indicatorOffsetPosition}%; --end: ${thumbPosition}%"
+          ></div>
 
           ${this.withMarkers
             ? html`

@@ -227,9 +227,9 @@ Use the `size` attribute to change the slider's size.
 <quiet-slider size="xl" value="50" label="Extra large"></quiet-slider>
 ```
 
-### Changing the fill's offset
+### Changing the indicator's offset
 
-To make the selection more obvious, a filled area representing the current value is drawn from the minimum value of the slider. To change the offset from which the fill is drawn, set the `fill-offset` attribute to another value on the slider.
+To make the selection more obvious, a filled indicator representing the current value is drawn from the minimum value of the slider. To change the offset from which the indicator is drawn, set the `indicator-offset` attribute to another value along the slider.
 
 ```html {.example}
 <quiet-slider
@@ -239,7 +239,7 @@ To make the selection more obvious, a filled area representing the current value
   value="0"
   min="-5"
   max="5"
-  fill-offset="0"
+  indicator-offset="0"
   with-markers
   with-tooltip
 >

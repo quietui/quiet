@@ -227,6 +227,27 @@ Use the `size` attribute to change the slider's size.
 <quiet-slider size="xl" value="50" label="Extra large"></quiet-slider>
 ```
 
+### Changing the fill's offset
+
+To make the selection more obvious, a filled area representing the current value is drawn from the minimum value of the slider. To change the offset from which the fill is drawn, set the `fill-offset` attribute to another value on the slider.
+
+```html {.example}
+<quiet-slider
+  label="Cat playfulness"
+  description="Energy level during playtime"
+  name="value" 
+  value="0"
+  min="-5"
+  max="5"
+  fill-offset="0"
+  with-markers
+  with-tooltip
+>
+  <span slot="reference">Lazy</span>
+  <span slot="reference">Zoomies</span>
+</quiet-slider>
+```
+
 ### Disabling
 
 Use the `disabled` attribute to disable the slider.

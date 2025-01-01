@@ -108,6 +108,9 @@ export class QuietSlider extends QuietElement {
   /** The slider's size. */
   @property({ reflect: true }) size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' = 'md';
 
+  /** The starting value from which to draw the slider's fill, which is based on its current value. */
+  @property({ attribute: 'fill-offset', type: Number }) fillOffset: number;
+
   /**
    * The form to associate this control with. If omitted, the closest containing `<form>` will be used. The value of
    * this attribute must be an ID of a form in the same document or shadow root.
@@ -478,6 +481,11 @@ export class QuietSlider extends QuietElement {
 
   render() {
     const thumbPosition = clamp(this.getPercentageFromValue(this.value), 0, 100);
+    const fillOffsetPosition = clamp(
+      this.getPercentageFromValue(typeof this.fillOffset === 'number' ? this.fillOffset : this.min),
+      0,
+      100
+    );
     const markers: number[] = [];
 
     // Determine marker positions
@@ -530,7 +538,7 @@ export class QuietSlider extends QuietElement {
         @keydown=${this.handleKeyDown}
       >
         <div id="track" part="track">
-          <div id="indicator" part="indicator" style="--start: 0; --end: ${thumbPosition}%"></div>
+          <div id="indicator" part="indicator" style="--start: ${fillOffsetPosition}%; --end: ${thumbPosition}%"></div>
 
           ${this.withMarkers
             ? html`

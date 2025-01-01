@@ -72,13 +72,13 @@ export default css`
     background-color: var(--quiet-primary-fill-mid);
 
     &:dir(ltr) {
-      right: calc(100% - var(--end));
-      left: var(--start);
+      right: calc(100% - max(var(--start), var(--end)));
+      left: min(var(--start), var(--end));
     }
 
     &:dir(rtl) {
-      right: var(--start);
-      left: calc(100% - var(--end));
+      right: min(var(--start), var(--end));
+      left: calc(100% - max(var(--start), var(--end)));
     }
   }
 

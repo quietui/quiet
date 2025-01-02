@@ -1,6 +1,7 @@
 import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
 import hostStyles from '../../styles/host.styles.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import '../icon/icon.js';
@@ -8,14 +9,19 @@ import styles from './slide-action.styles.js';
 
 /**
  * TODO
- *
- * - Localize built-in labels
+ * - Implement disabled state
+ *    - add custom state
+ *    - add styles
+ *    - disable dragging
+ *    - add example
+ * - Should the control automatically go back or should it remain at 100%? Should auto-reset be an attribute?
+ * - Localize built-in labels, if any
  * - RTL
  * - Add keyboard support (space or arrow right should move it while pressed and revert when released)
- * - Add mouse/touch support. The thumb should follow the pointer and animate back naturally when released; if the thumb
- *   reaches 100% then pause the thumb's position, show a brief pulse animation, and then animate it back afterwards.
- * - Dispatch the `quiet-action` event when the
- * - Dispatch a `quiet-progress` event? This would let the user hook into progress to update styles and such.
+ * - Dispatch the `quiet-action` event when completed
+ * - Dispatch a `quiet-progress` event while dragging. This will let the user hook into progress to update styles, etc.
+ * - Add custom properties for easier track/thumb config?
+ * - Document slots and custom properties
  */
 
 /**
@@ -33,12 +39,23 @@ import styles from './slide-action.styles.js';
  *
  * @csspart thumb - The slide action's thumb.
  * @csspart label - The slide action's label.
+ *
+ * @cssstate complete - Applied when the slide action is complete.
+ * @cssstate dragging - Applied when the slide action is dragging.
+ * @cssstate disabled - Applied when the slide action is disabled.
  */
 @customElement('quiet-slide-action')
 export class QuietSlideAction extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
-  @state() progress = 0;
+  private dragStartX = 0;
+  private trackWidth = 0;
+
+  @query('#thumb') thumb: HTMLElement;
+
+  @state() private thumbPosition = 0;
+  @state() private progress = 0;
+  @state() private isDragging = false;
 
   /**
    * The label to show in the slide action's track. If you need to provide HTML in the label, use the `label` slot
@@ -46,9 +63,66 @@ export class QuietSlideAction extends QuietElement {
    */
   @property() label = '';
 
+  /** Disables the slide action. */
+  @property({ type: Boolean }) disabled = false;
+
+  handleDragStart = (event: MouseEvent | TouchEvent) => {
+    this.isDragging = true;
+    this.dragStartX = 'touches' in event ? event.touches[0].clientX : event.clientX;
+    this.trackWidth = this.offsetWidth - this.thumb.offsetWidth;
+
+    event.preventDefault();
+
+    document.addEventListener('mousemove', this.handleDrag);
+    document.addEventListener('touchmove', this.handleDrag);
+    document.addEventListener('mouseup', this.handleDragEnd);
+    document.addEventListener('touchend', this.handleDragEnd);
+  };
+
+  private handleDrag = (event: MouseEvent | TouchEvent) => {
+    if (!this.isDragging) return;
+
+    const currentX = 'touches' in event ? event.touches[0].clientX : event.clientX;
+    const deltaX = currentX - this.dragStartX;
+
+    // Constrain thumb position within track bounds
+    this.thumbPosition = Math.max(0, Math.min(deltaX, this.trackWidth));
+    this.progress = (this.thumbPosition / this.trackWidth) * 100;
+  };
+
+  private handleDragEnd = () => {
+    this.isDragging = false;
+
+    document.removeEventListener('mousemove', this.handleDrag);
+    document.removeEventListener('touchmove', this.handleDrag);
+    document.removeEventListener('mouseup', this.handleDragEnd);
+    document.removeEventListener('touchend', this.handleDragEnd);
+
+    if (this.progress >= 99) {
+      this.customStates.set('complete', true);
+      this.thumbPosition = this.trackWidth;
+
+      //
+      // TODO - rename and create a Quiet event for this
+      //
+      this.dispatchEvent(new CustomEvent('quiet-action'));
+
+      this.addEventListener('animationend', () => {
+        this.customStates.set('complete', false);
+        this.thumbPosition = 0;
+        this.progress = 0;
+      });
+    } else {
+      // Animate back to start
+      this.thumbPosition = 0;
+      this.progress = 0;
+    }
+  };
+
   updated(changedProperties: PropertyValues<this>) {
-    if (changedProperties.has('label')) {
-      // this.example has changed
+    // Handle disabled change
+    if (changedProperties.has('disabled')) {
+      this.customStates.set('disabled', this.disabled);
     }
   }
 
@@ -67,7 +141,13 @@ export class QuietSlideAction extends QuietElement {
         aria-valuemin="0"
         aria-valuemax="100"
         aria-valuenow="${Math.round(this.progress)}"
-        aria-valuetext=${`${Math.round(this.progress)}%`}
+        aria-valuetext="${Math.round(this.progress)}%"
+        style="transform: translateX(${this.thumbPosition}px)"
+        class=${classMap({
+          dragging: this.isDragging
+        })}
+        @mousedown=${this.handleDragStart}
+        @touchstart=${this.handleDragStart}
       >
         <slot name="thumb">
           <quiet-icon library="system" name="chevrons-right"></quiet-icon>

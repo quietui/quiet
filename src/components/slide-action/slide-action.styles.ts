@@ -7,7 +7,7 @@ export default css`
     grid-template-areas: 'overlap';
     flex: 1 1 auto;
     width: 100%;
-    height: 2.5em;
+    height: 3em;
     padding: 0.125em;
     overflow: hidden;
     border-radius: 9999px;
@@ -15,6 +15,10 @@ export default css`
     isolation: isolate;
     color: var(--quiet-neutral-text-on-soft);
     user-select: none;
+  }
+
+  :host(:state(complete)) {
+    animation: complete 0.3s ease-out;
   }
 
   #thumb,
@@ -27,12 +31,22 @@ export default css`
     z-index: 3;
     align-items: center;
     justify-content: center;
-    width: 3.5em;
+    width: 4em;
     height: 100%;
+    transform: translateX(0);
     border-radius: inherit;
     background-color: var(--quiet-primary-text-on-mid); /* always white, same as checkbox icons */
     color: black;
-    cursor: pointer;
+    cursor: grab;
+    transition: transform 0.3s ease-out;
+
+    &:active {
+      cursor: grabbing;
+    }
+
+    &.dragging {
+      transition: none;
+    }
 
     &:focus {
       outline: none;
@@ -79,6 +93,21 @@ export default css`
   @keyframes shimmer {
     100% {
       transform: translateX(100%);
+    }
+  }
+
+  @keyframes complete {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(0.98);
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
     }
   }
 `;

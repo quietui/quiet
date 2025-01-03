@@ -4,7 +4,7 @@ layout: component
 ---
 
 ```html {.example}
-<quiet-slide-action label="Slide to activate" attention="shimmer" style="max-width: 300px;"></quiet-slide-action>
+<quiet-slide-action label="Slide to activate" attention="shimmer" style="max-width: 340px;"></quiet-slide-action>
 ```
 
 ## Examples

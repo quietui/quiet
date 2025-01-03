@@ -36,6 +36,7 @@ export class QuietSlideAction extends QuietElement {
   private readonly holdDuration = 500;
   private dragStartX = 0;
   private isCompleting = false;
+  private isKeyPressed = false;
   private isWaitingForKeyUp = false; // New flag to track if we're waiting for key release
   private keyboardAnimationFrame: number | null = null;
   private keyboardAnimationStart: number | null = null;
@@ -92,7 +93,6 @@ export class QuietSlideAction extends QuietElement {
     this.setProgress((this.thumbPosition / this.trackWidth) * 100);
   }
 
-  // Action completion handling
   private async tryCompleteAction(): Promise<boolean> {
     if (this.progress < 99) return false;
 
@@ -124,7 +124,6 @@ export class QuietSlideAction extends QuietElement {
     this.isCompleting = false;
   }
 
-  // Drag event handlers
   private handleDragStart = (event: MouseEvent | TouchEvent): void => {
     if (this.disabled) return;
 
@@ -148,7 +147,7 @@ export class QuietSlideAction extends QuietElement {
     this.updateThumbPosition(deltaX);
   };
 
-  private handleDragEnd = (): void => {
+  private handleDragEnd = async (): Promise<void> => {
     this.isDragging = false;
 
     document.removeEventListener('mousemove', this.handleDrag);
@@ -156,7 +155,11 @@ export class QuietSlideAction extends QuietElement {
     document.removeEventListener('mouseup', this.handleDragEnd);
     document.removeEventListener('touchend', this.handleDragEnd);
 
-    this.tryCompleteAction();
+    const wasCompleted = await this.tryCompleteAction();
+
+    if (!wasCompleted) {
+      this.resetState();
+    }
   };
 
   // Keyboard event handlers
@@ -164,6 +167,7 @@ export class QuietSlideAction extends QuietElement {
     // Prevent scrolling
     if (event.key === ' ' || event.key === 'ArrowRight') {
       event.preventDefault();
+      this.isKeyPressed = true;
     }
 
     if (this.disabled || this.isCompleting || this.isDragging || this.keyboardTimeout || this.isWaitingForKeyUp) {
@@ -208,6 +212,7 @@ export class QuietSlideAction extends QuietElement {
       event.preventDefault();
       this.resetKeyboardState();
       this.isCompleting = false;
+      this.isKeyPressed = false;
 
       // Only reset isWaitingForKeyUp when both space and arrow right have been released
       if (!event.getModifierState('Space') && !event.getModifierState('ArrowRight')) {
@@ -251,12 +256,10 @@ export class QuietSlideAction extends QuietElement {
         id="thumb"
         part="thumb"
         tabindex=${this.disabled ? '-1' : '0'}
-        role="slider"
+        role="button"
+        aria-pressed=${this.isDragging || this.isKeyPressed ? 'true' : 'false'}
         aria-labelledby="label"
-        aria-valuemin="0"
-        aria-valuemax="100"
-        aria-valuenow="${Math.round(this.progress)}"
-        aria-valuetext="${Math.round(this.progress)}%"
+        aria-description="Press space bar for one second to activate"
         style="transform: translateX(${this.thumbPosition}px)"
         class=${classMap({
           dragging: this.isDragging

@@ -16,6 +16,17 @@ export default css`
     user-select: none;
   }
 
+  /* Disabled */
+  :host(:state(disabled)) {
+    cursor: not-allowed;
+    opacity: 0.5;
+
+    #thumb {
+      cursor: inherit;
+    }
+  }
+
+  /* Complete */
   :host(:state(complete)) {
     animation: complete 0.3s ease-out;
   }
@@ -76,22 +87,24 @@ export default css`
   }
 
   /* Shimmer */
-  #label::before {
-    z-index: 2;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    transform: translateX(-100%);
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      color-mix(in oklab, var(--quiet-strident) 12.5%, transparent) 50%,
-      transparent 100%
-    );
-    content: '';
-    animation: shimmer 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  :host([attention='shimmer']:not(:state(disabled))) {
+    #label::before {
+      z-index: 2;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      transform: translateX(-100%);
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        color-mix(in oklab, var(--quiet-strident) 12.5%, transparent) 50%,
+        transparent 100%
+      );
+      content: '';
+      animation: shimmer 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
   }
 
   @keyframes shimmer {

@@ -2,27 +2,11 @@ import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
+import { QuietSlideActionCompleteEvent, QuietSlideActionProgressEvent } from '../../events/slide-action.js';
 import hostStyles from '../../styles/host.styles.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import '../icon/icon.js';
 import styles from './slide-action.styles.js';
-
-/**
- * TODO
- * - Implement disabled state
- *    - add custom state
- *    - add styles
- *    - disable dragging
- *    - add example
- * - Should the control automatically go back or should it remain at 100%? Should auto-reset be an attribute?
- * - Localize built-in labels, if any
- * - RTL
- * - Add keyboard support (space or arrow right should move it while pressed and revert when released)
- * - Dispatch the `quiet-action` event when completed
- * - Dispatch a `quiet-progress` event while dragging. This will let the user hook into progress to update styles, etc.
- * - Add custom properties for easier track/thumb config?
- * - Document slots and custom properties
- */
 
 /**
  * <quiet-slide-action>
@@ -66,7 +50,23 @@ export class QuietSlideAction extends QuietElement {
   /** Disables the slide action. */
   @property({ type: Boolean }) disabled = false;
 
+  /** Draws attention to the track by adding a subtle animation. */
+  @property({ reflect: true }) attention: 'shimmer';
+
+  updated(changedProperties: PropertyValues<this>) {
+    // Handle disabled change
+    if (changedProperties.has('disabled')) {
+      this.customStates.set('disabled', this.disabled);
+
+      if (this.disabled) {
+        this.thumbPosition = 0;
+        this.setProgress(0);
+      }
+    }
+  }
+
   handleDragStart = (event: MouseEvent | TouchEvent) => {
+    if (this.disabled) return;
     this.isDragging = true;
     this.dragStartX = 'touches' in event ? event.touches[0].clientX : event.clientX;
 
@@ -87,14 +87,14 @@ export class QuietSlideAction extends QuietElement {
   };
 
   private handleDrag = (event: MouseEvent | TouchEvent) => {
-    if (!this.isDragging) return;
+    if (!this.isDragging || this.disabled) return;
 
     const currentX = 'touches' in event ? event.touches[0].clientX : event.clientX;
     const deltaX = currentX - this.dragStartX;
 
     // Constrain thumb position within track bounds
     this.thumbPosition = Math.max(0, Math.min(deltaX, this.trackWidth));
-    this.progress = (this.thumbPosition / this.trackWidth) * 100;
+    this.setProgress((this.thumbPosition / this.trackWidth) * 100);
   };
 
   private handleDragEnd = () => {
@@ -108,44 +108,54 @@ export class QuietSlideAction extends QuietElement {
     if (this.progress >= 99) {
       this.customStates.set('complete', true);
 
-      //
-      // TODO - rename and create a Quiet event for this
-      //
-      this.dispatchEvent(new CustomEvent('quiet-action'));
+      const slideActionCompleteEvent = new QuietSlideActionCompleteEvent();
+      this.dispatchEvent(slideActionCompleteEvent);
+      if (slideActionCompleteEvent.defaultPrevented) {
+        this.thumbPosition = 0;
+        this.setProgress(0);
+        return;
+      }
+
+      this.dispatchEvent(new CustomEvent('quiet-slide-action'));
 
       this.addEventListener(
         'animationend',
         () => {
           this.customStates.set('complete', false);
           this.thumbPosition = 0;
-          this.progress = 0;
+          this.setProgress(0);
         },
         { once: true }
       );
     } else {
       // Animate back to start
       this.thumbPosition = 0;
-      this.progress = 0;
+      this.setProgress(0);
     }
   };
 
-  updated(changedProperties: PropertyValues<this>) {
-    // Handle disabled change
-    if (changedProperties.has('disabled')) {
-      this.customStates.set('disabled', this.disabled);
-    }
+  private setProgress(value: number) {
+    this.progress = value;
+    const slideActionProgressEvent = new QuietSlideActionProgressEvent({ progress: value });
+    this.dispatchEvent(slideActionProgressEvent);
   }
 
   render() {
     return html`
-      <div id="label" part="label">
+      <div
+        id="label"
+        part="label"
+        class=${classMap({
+          shimmer: this.attention === 'shimmer'
+        })}
+      >
         <slot name="label">${this.label}</slot>
       </div>
 
       <div
         id="thumb"
         part="thumb"
-        tabindex="0"
+        tabindex=${this.disabled ? '-1' : '0'}
         role="slider"
         aria-labelledby="label"
         aria-valuemin="0"

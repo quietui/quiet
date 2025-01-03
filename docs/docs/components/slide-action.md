@@ -4,7 +4,7 @@ layout: component
 ---
 
 ```html {.example}
-<quiet-slide-action id="slide-action" label="Slide to activate" style="max-width: 300px;"></quiet-slide-action>
+<quiet-slide-action label="Slide to activate" style="max-width: 300px;"></quiet-slide-action>
 ```
 
 ## Examples
@@ -16,3 +16,20 @@ TODO
 - follow mouse/touch but animate back when released
 - pulse and delay for 500ms when reaching the end
 - keyboard support
+
+
+### Showing an animation
+
+Set the `attention` attribute to `shimmer` to draw attention to the control with a subtle animation.
+
+```html {.example}
+<quiet-slide-action label="Slide to activate" attention="shimmer" style="max-width: 300px;"></quiet-slide-action>
+```
+
+### Disabling
+
+Use the `disabled` attribute to disable the slide action.
+
+```html {.example}
+<quiet-slide-action label="Slide to activate" disabled style="max-width: 300px;"></quiet-slide-action>
+```

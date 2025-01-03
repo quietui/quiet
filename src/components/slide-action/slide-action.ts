@@ -19,7 +19,7 @@ import styles from './slide-action.styles.js';
  * @dependency quiet-icon
  *
  * @slot label - The slide actions label. For plain-text labels, you can use the `label` attribute instead.
- * @slot thumb - The
+ * @slot thumb - The thumb element that users drag. Defaults to a double chevron icon if not provided.
  *
  * @csspart thumb - The slide action's thumb.
  * @csspart label - The slide action's label.
@@ -32,10 +32,13 @@ import styles from './slide-action.styles.js';
 export class QuietSlideAction extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
+  // Animation and timing constants
   private readonly completionDelay = 300; // 300ms pause before completion animation
-  private isCompleting = false; // Track if we're in the completion phase
-  private dragStartX = 0;
   private readonly holdDuration = 500;
+
+  // State tracking
+  private isCompleting = false;
+  private dragStartX = 0;
   private keyboardTimeout: number | null = null;
   private keyboardAnimationStart: number | null = null;
   private keyboardAnimationFrame: number | null = null;
@@ -43,6 +46,7 @@ export class QuietSlideAction extends QuietElement {
 
   @query('#thumb') thumb: HTMLElement;
 
+  // Component state
   @state() private thumbPosition = 0;
   @state() private progress = 0;
   @state() private isDragging = false;
@@ -60,30 +64,75 @@ export class QuietSlideAction extends QuietElement {
   @property({ reflect: true }) attention: 'shimmer';
 
   updated(changedProperties: PropertyValues<this>) {
-    // Handle disabled change
     if (changedProperties.has('disabled')) {
       this.customStates.set('disabled', this.disabled);
 
       if (this.disabled) {
-        this.thumbPosition = 0;
-        this.setProgress(0);
-        this.resetKeyboardState();
+        this.resetState();
       }
     }
   }
 
-  handleDragStart = (event: MouseEvent | TouchEvent) => {
-    if (this.disabled) return;
-    this.isDragging = true;
-    this.dragStartX = 'touches' in event ? event.touches[0].clientX : event.clientX;
-
-    // Get the computed styles to account for padding
+  // Track and progress calculations
+  private getTrackWidth(): void {
     const computedStyles = window.getComputedStyle(this);
     const paddingLeft = parseFloat(computedStyles.paddingLeft);
     const paddingRight = parseFloat(computedStyles.paddingRight);
-
-    // Calculate the available track width accounting for padding and thumb width
+    // Track width is the total width minus thumb width and padding
     this.trackWidth = this.offsetWidth - this.thumb.offsetWidth - paddingLeft - paddingRight;
+  }
+
+  private setProgress(value: number): void {
+    this.progress = value;
+    const slideActionProgressEvent = new QuietSlideActionProgressEvent({ progress: value });
+    this.dispatchEvent(slideActionProgressEvent);
+  }
+
+  private updateThumbPosition(position: number): void {
+    // Clamp position between 0 and track width
+    this.thumbPosition = Math.max(0, Math.min(position, this.trackWidth));
+    this.setProgress((this.thumbPosition / this.trackWidth) * 100);
+  }
+
+  // Action completion handling
+  private async tryCompleteAction(): Promise<boolean> {
+    if (this.progress < 99) return false;
+
+    this.customStates.set('complete', true);
+
+    const slideActionCompleteEvent = new QuietSlideActionCompleteEvent();
+    this.dispatchEvent(slideActionCompleteEvent);
+    if (slideActionCompleteEvent.defaultPrevented) {
+      this.resetState();
+      return false;
+    }
+
+    this.dispatchEvent(new CustomEvent('quiet-slide-action'));
+
+    // Wait for animation to complete
+    await new Promise(resolve => {
+      this.addEventListener('animationend', resolve, { once: true });
+    });
+
+    this.customStates.set('complete', false);
+    this.resetState();
+    return true;
+  }
+
+  private resetState(): void {
+    this.thumbPosition = 0;
+    this.setProgress(0);
+    this.resetKeyboardState();
+    this.isCompleting = false;
+  }
+
+  // Drag event handlers
+  private handleDragStart = (event: MouseEvent | TouchEvent): void => {
+    if (this.disabled) return;
+
+    this.isDragging = true;
+    this.dragStartX = 'touches' in event ? event.touches[0].clientX : event.clientX;
+    this.getTrackWidth();
 
     event.preventDefault();
 
@@ -93,18 +142,15 @@ export class QuietSlideAction extends QuietElement {
     document.addEventListener('touchend', this.handleDragEnd);
   };
 
-  private handleDrag = (event: MouseEvent | TouchEvent) => {
+  private handleDrag = (event: MouseEvent | TouchEvent): void => {
     if (!this.isDragging || this.disabled) return;
 
     const currentX = 'touches' in event ? event.touches[0].clientX : event.clientX;
     const deltaX = currentX - this.dragStartX;
-
-    // Constrain thumb position within track bounds
-    this.thumbPosition = Math.max(0, Math.min(deltaX, this.trackWidth));
-    this.setProgress((this.thumbPosition / this.trackWidth) * 100);
+    this.updateThumbPosition(deltaX);
   };
 
-  private handleDragEnd = () => {
+  private handleDragEnd = (): void => {
     this.isDragging = false;
 
     document.removeEventListener('mousemove', this.handleDrag);
@@ -112,37 +158,11 @@ export class QuietSlideAction extends QuietElement {
     document.removeEventListener('mouseup', this.handleDragEnd);
     document.removeEventListener('touchend', this.handleDragEnd);
 
-    if (this.progress >= 99) {
-      this.customStates.set('complete', true);
-
-      const slideActionCompleteEvent = new QuietSlideActionCompleteEvent();
-      this.dispatchEvent(slideActionCompleteEvent);
-      if (slideActionCompleteEvent.defaultPrevented) {
-        this.thumbPosition = 0;
-        this.setProgress(0);
-        return;
-      }
-
-      this.dispatchEvent(new CustomEvent('quiet-slide-action'));
-
-      this.addEventListener(
-        'animationend',
-        () => {
-          this.customStates.set('complete', false);
-          this.thumbPosition = 0;
-          this.setProgress(0);
-        },
-        { once: true }
-      );
-    } else {
-      // Animate back to start
-      this.thumbPosition = 0;
-      this.setProgress(0);
-    }
+    this.tryCompleteAction();
   };
 
-  private handleKeyDown = (event: KeyboardEvent) => {
-    // Prevent space from scrolling
+  // Keyboard event handlers
+  private handleKeyDown = (event: KeyboardEvent): void => {
     if (event.key === ' ' || event.key === 'ArrowRight') {
       event.preventDefault();
     }
@@ -150,58 +170,46 @@ export class QuietSlideAction extends QuietElement {
     if (this.disabled || this.isDragging || this.isCompleting || this.keyboardTimeout) return;
 
     if (event.key === ' ' || event.key === 'ArrowRight') {
-      // Calculate the available track width accounting for padding and thumb width
-      const computedStyles = window.getComputedStyle(this);
-      const paddingLeft = parseFloat(computedStyles.paddingLeft);
-      const paddingRight = parseFloat(computedStyles.paddingRight);
-      this.trackWidth = this.offsetWidth - this.thumb.offsetWidth - paddingLeft - paddingRight;
-
-      const startTime = performance.now();
-      this.keyboardAnimationStart = startTime;
-
-      // Start the animation
-      const animate = (currentTime: number) => {
-        if (!this.keyboardAnimationStart) return;
-
-        const progress = Math.min((currentTime - this.keyboardAnimationStart) / this.holdDuration, 1);
-        this.thumbPosition = this.trackWidth * progress;
-        this.setProgress(progress * 100);
-
-        if (progress < 1) {
-          this.keyboardAnimationFrame = requestAnimationFrame(animate);
-        } else {
-          // When reaching 100%, wait before triggering completion
-          this.isCompleting = true;
-          setTimeout(() => {
-            if (this.progress >= 99) {
-              this.completeAction();
-            }
-          }, this.completionDelay);
-        }
-      };
-
-      this.keyboardAnimationFrame = requestAnimationFrame(animate);
-
-      // Set timeout for the entire duration (hold + delay)
-      this.keyboardTimeout = window.setTimeout(() => {
-        // This is now just a safeguard, actual completion is handled in the animation
-      }, this.holdDuration + this.completionDelay);
+      this.startKeyboardAnimation();
     }
   };
 
-  private handleKeyUp = (event: KeyboardEvent) => {
+  private startKeyboardAnimation(): void {
+    this.getTrackWidth();
+    const startTime = performance.now();
+    this.keyboardAnimationStart = startTime;
+
+    const animate = (currentTime: number): void => {
+      if (!this.keyboardAnimationStart) return;
+
+      const progress = Math.min((currentTime - this.keyboardAnimationStart) / this.holdDuration, 1);
+      this.updateThumbPosition(this.trackWidth * progress);
+
+      if (progress < 1) {
+        this.keyboardAnimationFrame = requestAnimationFrame(animate);
+      } else {
+        this.isCompleting = true;
+        setTimeout(() => {
+          if (this.progress >= 99) {
+            this.tryCompleteAction();
+          }
+        }, this.completionDelay);
+      }
+    };
+
+    this.keyboardAnimationFrame = requestAnimationFrame(animate);
+    this.keyboardTimeout = window.setTimeout(() => {}, this.holdDuration + this.completionDelay);
+  }
+
+  private handleKeyUp = (event: KeyboardEvent): void => {
     if (event.key === ' ' || event.key === 'ArrowRight') {
       event.preventDefault();
-
-      // Always reset keyboard state - whether completing or not
       this.resetKeyboardState();
-
-      // Reset isCompleting flag to allow new interactions
       this.isCompleting = false;
     }
   };
 
-  private resetKeyboardState = () => {
+  private resetKeyboardState = (): void => {
     if (this.keyboardTimeout) {
       clearTimeout(this.keyboardTimeout);
       this.keyboardTimeout = null;
@@ -214,46 +222,11 @@ export class QuietSlideAction extends QuietElement {
 
     this.keyboardAnimationStart = null;
 
-    // Only reset position immediately if we're not in completion state
     if (!this.isCompleting) {
       this.thumbPosition = 0;
       this.setProgress(0);
     }
   };
-
-  private completeAction() {
-    if (this.progress >= 99) {
-      this.customStates.set('complete', true);
-
-      const slideActionCompleteEvent = new QuietSlideActionCompleteEvent();
-      this.dispatchEvent(slideActionCompleteEvent);
-
-      if (slideActionCompleteEvent.defaultPrevented) {
-        this.resetKeyboardState();
-        return;
-      }
-
-      this.dispatchEvent(new CustomEvent('quiet-slide-action'));
-
-      // Add ompletion animation logic
-      this.addEventListener(
-        'animationend',
-        () => {
-          this.customStates.set('complete', false);
-          this.thumbPosition = 0;
-          this.setProgress(0);
-          this.isCompleting = false; // Reset completing state after animation
-        },
-        { once: true }
-      );
-    }
-  }
-
-  private setProgress(value: number) {
-    this.progress = value;
-    const slideActionProgressEvent = new QuietSlideActionProgressEvent({ progress: value });
-    this.dispatchEvent(slideActionProgressEvent);
-  }
 
   render() {
     return html`

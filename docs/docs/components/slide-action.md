@@ -33,3 +33,15 @@ Use the `disabled` attribute to disable the slide action.
 ```html {.example}
 <quiet-slide-action label="Slide to activate" disabled style="max-width: 300px;"></quiet-slide-action>
 ```
+
+### Setting a label
+
+TODO
+
+### Customizing the thumb
+
+TODO - custom icon
+
+### Styling slide actions
+
+TODO

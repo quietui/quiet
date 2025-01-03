@@ -31,6 +31,12 @@ export default css`
     animation: complete 0.3s ease-out;
   }
 
+  /* Focus */
+  :host:has(:focus-visible) {
+    outline: var(--quiet-border-style) calc(var(--quiet-border-width) + 1px) var(--quiet-focus-color);
+    outline-offset: var(--quiet-border-width);
+  }
+
   #thumb,
   #label {
     grid-area: overlap;
@@ -60,11 +66,6 @@ export default css`
 
     &:focus {
       outline: none;
-    }
-
-    &:focus-visible {
-      outline: var(--quiet-border-style) calc(var(--quiet-border-width) + 1px) var(--quiet-focus-color);
-      outline-offset: var(--quiet-border-width);
     }
 
     quiet-icon,

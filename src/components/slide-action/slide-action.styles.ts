@@ -9,7 +9,6 @@ export default css`
     width: 100%;
     height: 3em;
     padding: 0.125em;
-    overflow: hidden;
     border-radius: 9999px;
     background: var(--quiet-neutral-fill-soft);
     isolation: isolate;
@@ -66,8 +65,13 @@ export default css`
   #label {
     display: flex;
     z-index: 1;
+    position: relative;
     align-items: center;
     justify-content: center;
+    width: calc(100% + 0.25em);
+    height: calc(100% + 0.25em);
+    margin: -0.125em;
+    overflow: hidden;
     border-radius: inherit;
   }
 

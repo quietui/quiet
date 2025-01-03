@@ -69,7 +69,14 @@ export class QuietSlideAction extends QuietElement {
   handleDragStart = (event: MouseEvent | TouchEvent) => {
     this.isDragging = true;
     this.dragStartX = 'touches' in event ? event.touches[0].clientX : event.clientX;
-    this.trackWidth = this.offsetWidth - this.thumb.offsetWidth;
+
+    // Get the computed styles to account for padding
+    const computedStyles = window.getComputedStyle(this);
+    const paddingLeft = parseFloat(computedStyles.paddingLeft);
+    const paddingRight = parseFloat(computedStyles.paddingRight);
+
+    // Calculate the available track width accounting for padding and thumb width
+    this.trackWidth = this.offsetWidth - this.thumb.offsetWidth - paddingLeft - paddingRight;
 
     event.preventDefault();
 
@@ -100,18 +107,21 @@ export class QuietSlideAction extends QuietElement {
 
     if (this.progress >= 99) {
       this.customStates.set('complete', true);
-      this.thumbPosition = this.trackWidth;
 
       //
       // TODO - rename and create a Quiet event for this
       //
       this.dispatchEvent(new CustomEvent('quiet-action'));
 
-      this.addEventListener('animationend', () => {
-        this.customStates.set('complete', false);
-        this.thumbPosition = 0;
-        this.progress = 0;
-      });
+      this.addEventListener(
+        'animationend',
+        () => {
+          this.customStates.set('complete', false);
+          this.thumbPosition = 0;
+          this.progress = 0;
+        },
+        { once: true }
+      );
     } else {
       // Animate back to start
       this.thumbPosition = 0;
@@ -150,7 +160,7 @@ export class QuietSlideAction extends QuietElement {
         @touchstart=${this.handleDragStart}
       >
         <slot name="thumb">
-          <quiet-icon library="system" name="chevrons-right"></quiet-icon>
+          <quiet-icon library="default" name="chevrons-right"></quiet-icon>
         </slot>
       </div>
     `;

@@ -32,16 +32,14 @@ import styles from './slide-action.styles.js';
 export class QuietSlideAction extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
-  // Animation and timing constants
   private readonly completionDelay = 300; // 300ms pause before completion animation
   private readonly holdDuration = 500;
-
-  // State tracking
-  private isCompleting = false;
   private dragStartX = 0;
-  private keyboardTimeout: number | null = null;
-  private keyboardAnimationStart: number | null = null;
+  private isCompleting = false;
+  private isWaitingForKeyUp = false; // New flag to track if we're waiting for key release
   private keyboardAnimationFrame: number | null = null;
+  private keyboardAnimationStart: number | null = null;
+  private keyboardTimeout: number | null = null;
   private trackWidth = 0;
 
   @query('#thumb') thumb: HTMLElement;
@@ -163,11 +161,14 @@ export class QuietSlideAction extends QuietElement {
 
   // Keyboard event handlers
   private handleKeyDown = (event: KeyboardEvent): void => {
+    // Prevent scrolling
     if (event.key === ' ' || event.key === 'ArrowRight') {
       event.preventDefault();
     }
 
-    if (this.disabled || this.isDragging || this.isCompleting || this.keyboardTimeout) return;
+    if (this.disabled || this.isCompleting || this.isDragging || this.keyboardTimeout || this.isWaitingForKeyUp) {
+      return;
+    }
 
     if (event.key === ' ' || event.key === 'ArrowRight') {
       this.startKeyboardAnimation();
@@ -189,6 +190,7 @@ export class QuietSlideAction extends QuietElement {
         this.keyboardAnimationFrame = requestAnimationFrame(animate);
       } else {
         this.isCompleting = true;
+        this.isWaitingForKeyUp = true;
         setTimeout(() => {
           if (this.progress >= 99) {
             this.tryCompleteAction();
@@ -206,6 +208,11 @@ export class QuietSlideAction extends QuietElement {
       event.preventDefault();
       this.resetKeyboardState();
       this.isCompleting = false;
+
+      // Only reset isWaitingForKeyUp when both space and arrow right have been released
+      if (!event.getModifierState('Space') && !event.getModifierState('ArrowRight')) {
+        this.isWaitingForKeyUp = false;
+      }
     }
   };
 

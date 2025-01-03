@@ -17,6 +17,9 @@ TODO
 - pulse and delay for 500ms when reaching the end
 - keyboard support
 
+### Listening for completion
+
+TODO - show how to listen and play a sound/vibrate on completion
 
 ### Showing an animation
 

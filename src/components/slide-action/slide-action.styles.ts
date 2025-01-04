@@ -2,17 +2,22 @@ import { css } from 'lit';
 
 export default css`
   :host {
-    display: grid;
+    --border-radius: 9999px;
+    --thumb-width: 4em;
+    --thumb-inset: 0.125em;
+    --shimmer-color: color-mix(in oklab, var(--quiet-strident) 12.5%, transparent) 50%;
+
+    display: flex;
     position: relative;
-    grid-template-areas: 'overlap';
-    flex: 1 1 auto;
     width: 100%;
+    min-width: calc(var(--thumb-width) * 3); /* three thumb widths to ensure space for a small label */
     height: 3em;
-    padding: 0.125em;
-    border-radius: 9999px;
+    border-radius: var(--border-radius);
     background: var(--quiet-neutral-fill-soft);
-    isolation: isolate;
     color: var(--quiet-neutral-text-on-soft);
+    transition:
+      250ms background-color,
+      250ms color;
     user-select: none;
   }
 
@@ -26,9 +31,11 @@ export default css`
     }
   }
 
-  /* Complete */
-  :host(:state(complete)) {
-    animation: complete 0.3s ease-out;
+  /* Activated */
+  :host(:state(activated)) {
+    background-color: var(--quiet-constructive-fill-mid);
+    color: var(--quiet-constructive-text-on-mid);
+    animation: activated 0.3s ease-out;
   }
 
   /* Focus */
@@ -37,73 +44,130 @@ export default css`
     outline-offset: var(--quiet-border-width);
   }
 
-  #thumb,
+  /* Label */
   #label {
-    grid-area: overlap;
-  }
-
-  #thumb {
     display: flex;
-    z-index: 3;
+    position: relative;
+    position: relative;
+    flex: 1 1 auto;
     align-items: center;
     justify-content: center;
-    width: 4em;
-    height: 100%;
-    transform: translateX(0);
+    padding: 0;
+    overflow: hidden;
     border-radius: inherit;
+
+    quiet-icon,
+    ::slotted(quiet-icon) {
+      font-size: 1.25em;
+    }
+  }
+
+  /* Shimmer */
+  :host(:not(:state(disabled), :state(activated))) #label.shimmer::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    flex: 1 1 auto;
+    width: 100%;
+    height: 100%;
+    transform: translateX(-100%);
+    background: linear-gradient(90deg, transparent 0%, var(--shimmer-color), transparent 100%);
+    content: '';
+    animation: shimmer 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+
+  :host(:not(:state(disabled))) #label.shimmer.rtl::before {
+    animation-direction: reverse;
+  }
+
+  /* Thumb */
+  #thumb {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    width: var(--thumb-width);
+    height: calc(100% - var(--thumb-inset) * 2);
+    inset: var(--thumb-inset);
+    left: calc(
+      clamp(
+        var(--thumb-inset),
+        calc((100% - var(--thumb-width)) * var(--thumb-position) + var(--thumb-inset)),
+        calc(100% - var(--thumb-width) - var(--thumb-inset))
+      )
+    );
+    border-radius: calc(var(--border-radius) - var(--thumb-inset));
     background-color: var(--quiet-primary-text-on-mid); /* always white, same as checkbox icons */
     color: black;
     cursor: grab;
-    transition: transform 0.3s ease-out;
+    transition: left 0.3s ease-out;
+
+    &.rtl {
+      right: calc(
+        clamp(
+          var(--thumb-inset),
+          calc((100% - var(--thumb-width)) * var(--thumb-position) + var(--thumb-inset)),
+          calc(100% - var(--thumb-width) - var(--thumb-inset))
+        )
+      );
+      left: auto;
+      transition: right 0.3s ease-out;
+    }
 
     &:active {
       cursor: grabbing;
-    }
-
-    &.dragging {
-      transition: none;
     }
 
     &:focus {
       outline: none;
     }
 
+    &.activated {
+      cursor: not-allowed;
+    }
+
+    &.dragging {
+      transition: none;
+    }
+
+    &.pressing:not(.is-press-stale) {
+      left: calc(
+        clamp(
+          var(--thumb-inset),
+          calc((100% - var(--thumb-width)) * 1 + var(--thumb-inset)),
+          calc(100% - var(--thumb-width) - var(--thumb-inset))
+        )
+      );
+      transition-duration: 1s;
+      transition-timing-function: linear;
+
+      &.rtl {
+        right: calc(
+          clamp(
+            var(--thumb-inset),
+            calc((100% - var(--thumb-width)) * 1 + var(--thumb-inset)),
+            calc(100% - var(--thumb-width) - var(--thumb-inset))
+          )
+        );
+      }
+    }
+
     quiet-icon,
-    &::slotted(quiet-icon) {
+    ::slotted(quiet-icon) {
       font-size: 1.25em;
     }
-  }
 
-  #label {
-    display: flex;
-    z-index: 1;
-    position: relative;
-    align-items: center;
-    justify-content: center;
-    width: calc(100% + 0.25em);
-    height: calc(100% + 0.25em);
-    margin: -0.125em;
-    overflow: hidden;
-    border-radius: inherit;
-  }
+    &.activated quiet-icon[name='chevrons-right'] {
+      display: none;
+    }
 
-  /* Shimmer */
-  :host([attention='shimmer']:not(:state(disabled))) #label::before {
-    z-index: 2;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    transform: translateX(-100%);
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      color-mix(in oklab, var(--quiet-strident) 12.5%, transparent) 50%,
-      transparent 100%
-    );
-    content: '';
-    animation: shimmer 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    &:not(.activated) quiet-icon[name='check'] {
+      display: none;
+    }
+
+    &.rtl quiet-icon[name='chevrons-right'] {
+      scale: -1;
+    }
   }
 
   @keyframes shimmer {
@@ -112,17 +176,25 @@ export default css`
     }
   }
 
-  @keyframes complete {
+  @keyframes activated {
     0% {
-      transform: scale(1);
+      scale: 1;
       opacity: 1;
     }
+    25% {
+      scale: 1.015;
+      opacity: 0.9;
+    }
     50% {
-      transform: scale(0.98);
+      scale: 1.02;
       opacity: 0.8;
     }
+    75% {
+      scale: 1.015;
+      opacity: 0.9;
+    }
     100% {
-      transform: scale(1);
+      scale: 1;
       opacity: 1;
     }
   }

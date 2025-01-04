@@ -23,6 +23,7 @@ const translation: Translation = {
   opacity: 'Opazität',
   percentLuminosity: (percentage: string) => `${percentage} Leuchtkraft`,
   percentSaturation: (percentage: string) => `${percentage} Sättigung`,
+  pressSpaceForOneSecondToActivate: 'Zum Aktivieren eine Sekunde lang die Leertaste drücken',
   remove: 'Entfernen',
   selectAColorFromTheScreen: 'Farbe vom Bildschirm auswählen',
   showPassword: 'Passwort anzeigen',

@@ -22,6 +22,7 @@ const translation: Translation = {
   opacity: 'Opacity',
   percentLuminosity: (percentage: string) => `${percentage} luminosity`,
   percentSaturation: (percentage: string) => `${percentage} saturation`,
+  pressSpaceForOneSecondToActivate: 'Press space bar for one second to activate',
   remove: 'Remove',
   selectAColorFromTheScreen: 'Select a color from the screen',
   showPassword: 'Show password',

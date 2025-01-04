@@ -64,7 +64,7 @@ export default function (plop) {
         type: 'modify',
         path: '../../docs/_includes/sidebar.njk',
         pattern: /\{# PLOP_NEW_COMPONENT_PLACEHOLDER #\}/,
-        template: `<li>\n    <a href="/docs/components/{{ removePrefix tag }}">{{ tagToTitleCase tag }}</a>\n    <quiet-badge class="experimental"><quiet-icon label="Experimental" name="bulb"></quiet-icon></quiet-badge>\n  </li>\n  {# PLOP_NEW_COMPONENT_PLACEHOLDER #}`
+        template: `<li><a href="/docs/components/{{ removePrefix tag }}">{{ tagToTitleCase tag }}</a></li>\n  {# PLOP_NEW_COMPONENT_PLACEHOLDER #}`
       }
     ]
   });

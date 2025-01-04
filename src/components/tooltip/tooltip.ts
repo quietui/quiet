@@ -98,6 +98,12 @@ export class QuietTooltip extends QuietElement {
    */
   @property() activation: 'auto' | 'manual' = 'auto';
 
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    clearInterval(this.hoverInTimeout);
+    clearInterval(this.hoverOutTimeout);
+  }
+
   firstUpdated() {
     // Make sure the host element has an id
     if (!this.id) {

@@ -87,6 +87,11 @@ export class QuietDropdown extends QuietElement {
   /** The offset of the dropdown menu along its trigger. */
   @property({ type: Number }) offset = 0;
 
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    clearInterval(this.userTypedTimeout);
+  }
+
   firstUpdated() {
     this.syncAriaAttributes();
   }

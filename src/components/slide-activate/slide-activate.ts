@@ -31,6 +31,13 @@ import styles from './slide-activate.styles.js';
  * @slot label - The slide activate's label. For plain-text labels, you can use the `label` attribute instead.
  * @slot thumb - The thumb element that users drag. Defaults to a double chevron icon if not provided.
  *
+ * @event quiet-activate - Emitted when the control will activate. Calling `event.preventDefault()` will prevent the
+ *  activation from occurring.
+ * @event quiet-activated - Emitted immediately after the control is activated.
+ * @event quiet-deactivate - Emitted when the control will deactivate. Calling `event.preventDefault()` will prevent the
+ *  deactivation from occurring.
+ * @event quiet-deactivated - Emitted immediately after the control is deactivated.
+ *
  * @csspart thumb - The slide activate's thumb.
  * @csspart label - The slide activate's label.
  *

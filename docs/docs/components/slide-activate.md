@@ -18,7 +18,7 @@ Slide activates are unidirectional. Once activated by the user, they can only be
   const originalLabel = slideActivate.getAttribute('label');
 
   // When the component is activated
-  slideActivate.addEventListener('quiet-activate', () => {
+  slideActivate.addEventListener('quiet-activated', () => {
     // Update the label
     slideActivate.label = 'Activated';
 
@@ -39,7 +39,9 @@ For demonstration purposes, most of the examples on this page reset themselves s
 
 ### Handling activation
 
-When the user activates the slide activate, a `quiet-activate` event will be emitted. If the programmatically deactivate the slide activate, a `quiet-deactivate` event will be emitted.
+When the control is activated, a `quiet-activate` event will be emitted. You can call `event.preventDefault()` to prevent the activation if needed. Upon activation, a subsequent `quiet-activated` event will be emitted.
+
+If you deactivate the control programmatically, a corresponding `quiet-deactivate` and `quiet-deactivated` event will be emitted.
 
 You can use these events to update labels and execute code to run on activation and deactivation.
 
@@ -61,13 +63,13 @@ button.addEventListener('click', () => {
 });
 
 // Update the label and button state when activated
-slideActivate.addEventListener('quiet-activate', () => {
+slideActivate.addEventListener('quiet-activated', () => {
   button.disabled = false;
   slideActivate.label = 'Activated';
 });
 
 // Update the label and button state when deactivated
-slideActivate.addEventListener('quiet-deactivate', () => {
+slideActivate.addEventListener('quiet-deactivated', () => {
   button.disabled = true;
   slideActivate.label = originalLabel;
 });
@@ -106,7 +108,7 @@ Additionally, a `quiet-progress` event will be emitted while the user slides the
   });
 
   // Update the label and reset the demo when component is activated
-  slideActivate.addEventListener('quiet-activate', () => {
+  slideActivate.addEventListener('quiet-activated', () => {
     // Update the label
     slideActivate.label = 'Order received!';
 
@@ -159,7 +161,7 @@ Use the `thumb` slot to provide your own icon(s) for the thumb. If you want to c
   const originalLabel = slideActivate.getAttribute('label');
 
   // When the component is activated
-  slideActivate.addEventListener('quiet-activate', () => {
+  slideActivate.addEventListener('quiet-activated', () => {
     // Update the label
     slideActivate.label = 'Unlocked';
 
@@ -201,7 +203,7 @@ Set the `attention` attribute to `shimmer` to provide a subtle visual hint via a
   const originalLabel = slideActivate.getAttribute('label');
 
   // When the component is activated
-  slideActivate.addEventListener('quiet-activate', () => {
+  slideActivate.addEventListener('quiet-activated', () => {
     // Update the label
     slideActivate.label = 'Releasing cats…';
 
@@ -255,7 +257,7 @@ Slide activates come with a simple, minimal appearance. Feel free to customize t
   const originalLabel = slideActivate.getAttribute('label');
 
   // When the component is activated
-  slideActivate.addEventListener('quiet-activate', () => {
+  slideActivate.addEventListener('quiet-activated', () => {
     // Update the label
     slideActivate.label = 'Emptying…';
 

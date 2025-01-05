@@ -11,36 +11,36 @@ import { Localize } from '../../utilities/localize.js';
 import { clamp } from '../../utilities/math.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import '../icon/icon.js';
-import styles from './slide-action.styles.js';
+import styles from './slide-activate.styles.js';
 
 /**
- * <quiet-slide-action>
+ * <quiet-slide-activate>
  *
- * @summary Slide actions give users a draggable thumb that must be moved to the end of its track to trigger an action.
- * @documentation https://quietui.org/docs/components/slide-action
+ * @summary Slide activate gives users a draggable thumb that must be moved to the end of its track to trigger an action.
+ * @documentation https://quietui.org/docs/components/slide-activate
  * @status stable
  * @since 1.0
  *
  * @dependency quiet-icon
  *
- * @slot label - The slide actions label. For plain-text labels, you can use the `label` attribute instead.
+ * @slot label - The slide activate's label. For plain-text labels, you can use the `label` attribute instead.
  * @slot thumb - The thumb element that users drag. Defaults to a double chevron icon if not provided.
  *
- * @csspart thumb - The slide action's thumb.
- * @csspart label - The slide action's label.
+ * @csspart thumb - The slide activate's thumb.
+ * @csspart label - The slide activate's label.
  *
  * @cssproperty [--border-radius=9999px] - The control's border radius. We use a CSS custom property so we can properly
  *  calculate the inset border radius for the thumb.
  * @cssproperty [--thumb-width=4em] - The thumb's width.
  * @cssproperty [--thumb-inset=0.125em] - The thumb's inset from the host element.
  *
- * @cssstate activated - Applied briefly when the slide action has been activated.
- * @cssstate dragging - Applied when the slide action is dragging.
- * @cssstate pressing - Applied when the user is pressing a key to activate the slide action.
- * @cssstate disabled - Applied when the slide action is disabled.
+ * @cssstate activated - Applied briefly when the slide activate has been activated.
+ * @cssstate dragging - Applied when the slide activate is dragging.
+ * @cssstate pressing - Applied when the user is pressing a key to activate the slide activate.
+ * @cssstate disabled - Applied when the slide activate is disabled.
  */
-@customElement('quiet-slide-action')
-export class QuietSlideAction extends QuietElement {
+@customElement('quiet-slide-activate')
+export class QuietSlideActivate extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
   private draggableThumb: DraggableElement;
@@ -59,7 +59,7 @@ export class QuietSlideAction extends QuietElement {
   @state() thumbPosition = 0;
 
   /**
-   * The label to show in the slide action's track. If you need to provide HTML in the label, use the `label` slot
+   * The label to show in the slide activate's track. If you need to provide HTML in the label, use the `label` slot
    * instead.
    */
   @property() label = '';
@@ -305,6 +305,6 @@ export class QuietSlideAction extends QuietElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'quiet-slide-action': QuietSlideAction;
+    'quiet-slide-activate': QuietSlideActivate;
   }
 }

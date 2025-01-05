@@ -3,7 +3,12 @@ import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { QuietActivateEvent, QuietDeactivateEvent } from '../../events/activate.js';
+import {
+  QuietActivateEvent,
+  QuietActivatedEvent,
+  QuietDeactivateEvent,
+  QuietDeactivatedEvent
+} from '../../events/activate.js';
 import { QuietProgressEvent } from '../../events/progress.js';
 import hostStyles from '../../styles/host.styles.js';
 import { DraggableElement } from '../../utilities/drag.js';
@@ -158,6 +163,11 @@ export class QuietSlideActivate extends QuietElement {
     this.setThumbPosition(1);
     this.activated = true;
     this.customStates.set('activated', true);
+
+    // Dispatch the `quiet-activated` event
+    requestAnimationFrame(() => {
+      this.dispatchEvent(new QuietActivatedEvent());
+    });
   }
 
   /** Restores the control to its original deactivated state. */
@@ -175,6 +185,11 @@ export class QuietSlideActivate extends QuietElement {
     this.customStates.set('activated', false);
     this.isKeyPressStale = false;
     this.isPressing = false;
+
+    // Dispatch the `quiet-deactivated` event
+    requestAnimationFrame(() => {
+      this.dispatchEvent(new QuietDeactivatedEvent());
+    });
   }
 
   // Centralized cleanup method

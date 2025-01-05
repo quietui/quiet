@@ -4,7 +4,7 @@ import type { {{ tagToClassName tag }} } from './{{ removePrefix tag }}.js';
 
 describe('<{{ tag }}>', () => {
   it('does something', async () => {
-    const el = await fixture<{{ tagToClassName tag }}>(html` <{{ tag }}>Click me</{{ tag }}> `);
+    const el = await fixture<{{ tagToClassName tag }}>(html` <{{ tag }}></{{ tag }}> `);
     await expect(el).to.be.accessible();
   });
 });

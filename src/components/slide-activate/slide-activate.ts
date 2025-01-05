@@ -38,6 +38,9 @@ import styles from './slide-activate.styles.js';
  *  calculate the inset border radius for the thumb.
  * @cssproperty [--thumb-width=4em] - The thumb's width.
  * @cssproperty [--thumb-inset=0.125em] - The thumb's inset from the host element.
+ * @cssproperty [--shimmer-color] - The color to use as a base for the shimmer animation.
+ * @cssproperty [--thumb-position] - A read-only property that moves from 0 to 1 as the user slides the thumb to
+ *  activate the control. Useful as a hook to transition background styles based on the thumb's position.
  *
  * @cssstate activated - Applied briefly when the slide activate has been activated.
  * @cssstate dragging - Applied when the slide activate is dragging.
@@ -141,6 +144,7 @@ export class QuietSlideActivate extends QuietElement {
 
     // Handle thumb position
     if (changedProperties.has('thumbPosition')) {
+      this.style.setProperty('--thumb-position', `${this.thumbPosition}`);
       if (this.thumbPosition >= 1) {
         this.activated = true;
       }
@@ -305,7 +309,6 @@ export class QuietSlideActivate extends QuietElement {
           pressing: this.isPressing,
           rtl: isRtl
         })}
-        style="--thumb-position: ${this.thumbPosition}"
         @keydown=${this.handleKeyDown}
         @keyup=${this.handleKeyUp}
       >

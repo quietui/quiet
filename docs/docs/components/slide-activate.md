@@ -82,9 +82,11 @@ slideActivate.addEventListener('quiet-deactivate', () => {
 </style>
 ```
 
-### Listening for progress
+### Tracking slide progress
 
-You can also listen to `quiet-progress`, which will be emitted as the user slides the thumb. This event is dispatched with an `event.detail.percentage` payload which is a number between 0 and 1, indicating the percentage of distance the user has slide the thumb towards activation. This can be useful if you want to apply custom styles or transitions at various thresholds.
+The readonly `--thumb-position` custom property will be set to a value between 0 and 1 on the host element, representing how far the user has slid the thumb toward activation. You can use this to transition styles at different thresholds.
+
+Additionally, a `quiet-progress` event will be emitted while the user slides the thumb. This event contains an `event.detail.percentage` payload with a corresponding number between 0 and 1.
 
 ```html {.example}
 <div id="slide-activate__progress">
@@ -119,7 +121,20 @@ You can also listen to `quiet-progress`, which will be emitted as the user slide
 <style>
   #slide-activate__progress {
     quiet-slide-activate {
-      margin-bottom: 1rem; 
+      margin-bottom: 1rem;
+
+      /* Change the background color as the user slides the thumb */
+      background-color: 
+        color-mix(
+          in oklab, 
+          var(--quiet-neutral-fill-soft) calc((1 - var(--thumb-position)) * 100%), 
+          var(--quiet-primary-fill-mid) calc(var(--thumb-position) * 100%)
+        );
+
+      /* Change the text color when activated */
+      &:state(activated) {
+        color: var(--quiet-primary-text-on-mid);
+      }
     }
   }
 </style>
@@ -250,11 +265,6 @@ Slide activates come with a simple, minimal appearance. Feel free to customize t
       slideActivate.label = originalLabel;
     }, 2000);
   });
-
-  // Set a custom property to mirror the progress
-  slideActivate.addEventListener('quiet-progress', event => {
-    slideActivate.style.setProperty('--progress', `${event.detail.percentage * 100}%`);
-  });
 </script>
 
 <style>
@@ -263,7 +273,12 @@ Slide activates come with a simple, minimal appearance. Feel free to customize t
     --thumb-width: 4rem;
     --thumb-inset: 0.25rem;
     --shimmer-color: #fff2;
-    --current-color: color-mix(in oklab, firebrick var(--progress, 0%), dodgerblue calc(100% - var(--progress, 0%)));
+    --current-color: 
+      color-mix(
+        in oklab, 
+        firebrick calc(var(--thumb-position) * 100%), 
+        dodgerblue calc((1 - var(--thumb-position)) * 100%)
+      );
     height: 4rem;
     background-color: var(--current-color);
     font-weight: var(--quiet-font-weight-semibold);

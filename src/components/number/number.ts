@@ -115,12 +115,7 @@ export class QuietNumber extends QuietElement {
   @property() grouping: 'always' | 'never' | 'auto' | 'min2' = 'auto';
 
   /** When to display the sign for the number. */
-  @property({ attribute: 'sign-display', type: Boolean }) signDisplay:
-    | 'auto'
-    | 'always'
-    | 'exceptZero'
-    | 'negative'
-    | 'never';
+  @property({ attribute: 'sign-display' }) signDisplay: 'auto' | 'always' | 'exceptZero' | 'negative' | 'never';
 
   render() {
     if (isNaN(this.number)) {

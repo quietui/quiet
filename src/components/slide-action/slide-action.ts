@@ -18,7 +18,7 @@ import styles from './slide-action.styles.js';
  *
  * @summary Slide actions give users a draggable thumb that must be moved to the end of its track to trigger an action.
  * @documentation https://quietui.org/docs/components/slide-action
- * @status experimental
+ * @status stable
  * @since 1.0
  *
  * @dependency quiet-icon

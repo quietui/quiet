@@ -46,7 +46,7 @@ import styles from './slide-activate.styles.js';
  * @cssproperty [--thumb-width=4em] - The thumb's width.
  * @cssproperty [--thumb-inset=0.125em] - The thumb's inset from the host element.
  * @cssproperty [--shimmer-color] - The color to use as a base for the shimmer animation.
- * @cssproperty [--thumb-position] - A read-only property that moves from 0 to 1 as the user slides the thumb to
+ * @cssproperty [--thumb-position=(read-only)] - A read-only property that moves from 0 to 1 as the user slides the thumb to
  *  activate the control. Useful as a hook to transition background styles based on the thumb's position.
  *
  * @cssstate activated - Applied briefly when the slide activate has been activated.

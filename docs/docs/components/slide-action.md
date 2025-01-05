@@ -167,7 +167,7 @@ Use the `thumb` slot to provide your own icon(s) for the thumb. If you want to c
 </style>
 ```
 
-### Adding attention
+### Drawing attention
 
 Set the `attention` attribute to `shimmer` to provide a subtle visual hint via animation. The animation pauses when the slide action is activated.
 

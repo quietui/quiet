@@ -16,19 +16,20 @@ import { Localize } from '../../utilities/localize.js';
 import { clamp } from '../../utilities/math.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import '../icon/icon.js';
-import styles from './slide-activate.styles.js';
+import styles from './slide-activator.styles.js';
 
 /**
- * <quiet-slide-activate>
+ * <quiet-slide-activator>
  *
- * @summary Slide activate gives users a draggable thumb that must be moved to the end of its track to trigger an action.
- * @documentation https://quietui.org/docs/components/slide-activate
+ * @summary Slide activators give users a draggable thumb that must be moved to the end of its track to trigger an
+ *  action.
+ * @documentation https://quietui.org/docs/components/slide-activator
  * @status stable
  * @since 1.0
  *
  * @dependency quiet-icon
  *
- * @slot label - The slide activate's label. For plain-text labels, you can use the `label` attribute instead.
+ * @slot label - The slide activator's label. For plain-text labels, you can use the `label` attribute instead.
  * @slot thumb - The thumb element that users drag. Defaults to a double chevron icon if not provided.
  *
  * @event quiet-activate - Emitted when the control will activate. Calling `event.preventDefault()` will prevent the
@@ -38,8 +39,8 @@ import styles from './slide-activate.styles.js';
  *  deactivation from occurring.
  * @event quiet-deactivated - Emitted immediately after the control is deactivated.
  *
- * @csspart thumb - The slide activate's thumb.
- * @csspart label - The slide activate's label.
+ * @csspart thumb - The slide activator's thumb.
+ * @csspart label - The slide activator's label.
  *
  * @cssproperty [--border-radius=9999px] - The control's border radius. We use a CSS custom property so we can properly
  *  calculate the inset border radius for the thumb.
@@ -49,13 +50,13 @@ import styles from './slide-activate.styles.js';
  * @cssproperty [--thumb-position=(read-only)] - A read-only property that moves from 0 to 1 as the user slides the thumb to
  *  activate the control. Useful as a hook to transition background styles based on the thumb's position.
  *
- * @cssstate activated - Applied briefly when the slide activate has been activated.
- * @cssstate dragging - Applied when the slide activate is dragging.
- * @cssstate pressing - Applied when the user is pressing a key to activate the slide activate.
- * @cssstate disabled - Applied when the slide activate is disabled.
+ * @cssstate activated - Applied briefly when the slide activator has been activated.
+ * @cssstate dragging - Applied when the slide activator is dragging.
+ * @cssstate pressing - Applied when the user is pressing a key to activate the slide activator.
+ * @cssstate disabled - Applied when the slide activator is disabled.
  */
-@customElement('quiet-slide-activate')
-export class QuietSlideActivate extends QuietElement {
+@customElement('quiet-slide-activator')
+export class QuietSlideActivator extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
   private draggableThumb: DraggableElement;
@@ -74,7 +75,7 @@ export class QuietSlideActivate extends QuietElement {
   @state() thumbPosition = 0;
 
   /**
-   * The label to show in the slide activate's track. If you need to provide HTML in the label, use the `label` slot
+   * The label to show in the slide activator's track. If you need to provide HTML in the label, use the `label` slot
    * instead.
    */
   @property() label = '';
@@ -330,6 +331,6 @@ export class QuietSlideActivate extends QuietElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'quiet-slide-activate': QuietSlideActivate;
+    'quiet-slide-activator': QuietSlideActivator;
   }
 }

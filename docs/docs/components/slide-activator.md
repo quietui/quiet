@@ -1,31 +1,31 @@
 ---
-title: Slide Activate
+title: Slide Activator
 layout: component
 ---
 
-Slide activates are unidirectional. Once activated by the user, they can only be reset programmatically. The deliberate friction in activation, followed by a locked state, helps prevent accidental triggering while ensuring intentional actions are committed.
+Slide activators are unidirectional. Once activated by the user, they can only be reset programmatically. The deliberate friction in activation, followed by a locked state, helps prevent accidental triggering and ensures intentional actions are committed.
 
 ```html {.example}
-<quiet-slide-activate 
+<quiet-slide-activator 
   label="Slide to activate" 
   attention="shimmer" 
-  id="slide-activate__overview" 
+  id="slide-activator__overview" 
   style="max-width: 340px;"
-></quiet-slide-activate>
+></quiet-slide-activator>
 
 <script>
-  const slideActivate = document.getElementById('slide-activate__overview');
-  const originalLabel = slideActivate.getAttribute('label');
+  const slideActivator = document.getElementById('slide-activator__overview');
+  const originalLabel = slideActivator.getAttribute('label');
 
   // When the component is activated
-  slideActivate.addEventListener('quiet-activated', () => {
+  slideActivator.addEventListener('quiet-activated', () => {
     // Update the label
-    slideActivate.label = 'Activated';
+    slideActivator.label = 'Activated';
 
     // Deactivate it for the demo after two seconds
     setTimeout(() => {
-      slideActivate.activated = false;
-      slideActivate.label = originalLabel;
+      slideActivator.activated = false;
+      slideActivator.label = originalLabel;
     }, 2000);
   });
 </script>
@@ -46,38 +46,38 @@ If you deactivate the control programmatically, a corresponding `quiet-deactivat
 You can use these events to update labels and execute code to run on activation and deactivation.
 
 ```html {.example}
-<div id="slide-activate__activation">
-  <quiet-slide-activate label="Slide to activate" style="max-width: 340px;"></quiet-slide-activate>
+<div id="slide-activator__activation">
+  <quiet-slide-activator label="Slide to activate" style="max-width: 340px;"></quiet-slide-activator>
   <quiet-button disabled>Deactivate</quiet-button>
 </div>
 
 <script>
-const container = document.getElementById('slide-activate__activation');
-const slideActivate = container.querySelector('quiet-slide-activate');
+const container = document.getElementById('slide-activator__activation');
+const slideActivator = container.querySelector('quiet-slide-activator');
 const button = container.querySelector('quiet-button');
-const originalLabel = slideActivate.getAttribute('label');
+const originalLabel = slideActivator.getAttribute('label');
 
 // Deactivate it
 button.addEventListener('click', () => {
-  slideActivate.activated = false;
+  slideActivator.activated = false;
 });
 
 // Update the label and button state when activated
-slideActivate.addEventListener('quiet-activated', () => {
+slideActivator.addEventListener('quiet-activated', () => {
   button.disabled = false;
-  slideActivate.label = 'Activated';
+  slideActivator.label = 'Activated';
 });
 
 // Update the label and button state when deactivated
-slideActivate.addEventListener('quiet-deactivated', () => {
+slideActivator.addEventListener('quiet-deactivated', () => {
   button.disabled = true;
-  slideActivate.label = originalLabel;
+  slideActivator.label = originalLabel;
 });
 </script>
 
 <style>
-  #slide-activate__activation {
-    quiet-slide-activate {
+  #slide-activator__activation {
+    quiet-slide-activator {
       margin-bottom: 1rem; 
     }
   }
@@ -91,38 +91,38 @@ The readonly `--thumb-position` custom property will be set to a value between 0
 Additionally, a `quiet-progress` event will be emitted while the user slides the thumb. This event contains an `event.detail.percentage` payload with a corresponding number between 0 and 1.
 
 ```html {.example}
-<div id="slide-activate__progress">
-  <quiet-slide-activate label="Slide to place order" style="max-width: 340px;"></quiet-slide-activate>
+<div id="slide-activator__progress">
+  <quiet-slide-activator label="Slide to place order" style="max-width: 340px;"></quiet-slide-activator>
   Progress: <quiet-number number="0" type="percent"></quiet-number>
 </div>
 
 <script>
-  const container = document.getElementById('slide-activate__progress');
-  const slideActivate = container.querySelector('quiet-slide-activate');
-  const originalLabel = slideActivate.getAttribute('label');
+  const container = document.getElementById('slide-activator__progress');
+  const slideActivator = container.querySelector('quiet-slide-activator');
+  const originalLabel = slideActivator.getAttribute('label');
   const progress = container.querySelector('quiet-number');
 
   // Update progress as the user drags
-  slideActivate.addEventListener('quiet-progress', event => {
+  slideActivator.addEventListener('quiet-progress', event => {
     progress.number = event.detail.percentage;
   });
 
   // Update the label and reset the demo when component is activated
-  slideActivate.addEventListener('quiet-activated', () => {
+  slideActivator.addEventListener('quiet-activated', () => {
     // Update the label
-    slideActivate.label = 'Order received!';
+    slideActivator.label = 'Order received!';
 
     // Deactivate it for the demo after two seconds
     setTimeout(() => {
-      slideActivate.activated = false;
-      slideActivate.label = originalLabel;
+      slideActivator.activated = false;
+      slideActivator.label = originalLabel;
     }, 2000);
   });
 </script>
 
 <style>
-  #slide-activate__progress {
-    quiet-slide-activate {
+  #slide-activator__progress {
+    quiet-slide-activator {
       margin-bottom: 1rem;
 
       /* Change the background color as the user slides the thumb */
@@ -147,34 +147,34 @@ Additionally, a `quiet-progress` event will be emitted while the user slides the
 Use the `thumb` slot to provide your own icon(s) for the thumb. If you want to change the icon depending on the activation state, use the `:state(activated)` selector to show/hide the respective icons with CSS.
 
 ```html {.example}
-<quiet-slide-activate 
+<quiet-slide-activator 
   label="Slide to unlock" 
-  id="slide-activate__icons"
+  id="slide-activator__icons"
   style="max-width: 340px;"
 >
   <quiet-icon slot="thumb" name="lock"></quiet-icon>
   <quiet-icon slot="thumb" name="lock-open-2"></quiet-icon>
-</quiet-slide-activate>
+</quiet-slide-activator>
 
 <script>
-  const slideActivate = document.getElementById('slide-activate__icons');
-  const originalLabel = slideActivate.getAttribute('label');
+  const slideActivator = document.getElementById('slide-activator__icons');
+  const originalLabel = slideActivator.getAttribute('label');
 
   // When the component is activated
-  slideActivate.addEventListener('quiet-activated', () => {
+  slideActivator.addEventListener('quiet-activated', () => {
     // Update the label
-    slideActivate.label = 'Unlocked';
+    slideActivator.label = 'Unlocked';
 
     // Deactivate it for the demo after two seconds
     setTimeout(() => {
-      slideActivate.activated = false;
-      slideActivate.label = originalLabel;
+      slideActivator.activated = false;
+      slideActivator.label = originalLabel;
     }, 2000);
   });
 </script>
 
 <style>
-  quiet-slide-activate#slide-activate__icons {
+  quiet-slide-activator#slide-activator__icons {
     /* Show locked until activated, then show unlocked */
     &:state(activated) quiet-icon[name="lock"],
     &:not(:state(activated)) quiet-icon[name="lock-open-2"] {
@@ -186,37 +186,37 @@ Use the `thumb` slot to provide your own icon(s) for the thumb. If you want to c
 
 ### Drawing attention
 
-Set the `attention` attribute to `shimmer` to provide a subtle visual hint via animation. The animation pauses when the slide activate is activated.
+Set the `attention` attribute to `shimmer` to provide a subtle visual hint via animation. The animation pauses when the slide activator is activated.
 
 ```html {.example}
-<quiet-slide-activate 
+<quiet-slide-activator 
   label="Slide to release cats" 
   attention="shimmer" 
-  id="slide-activate__attention" 
+  id="slide-activator__attention" 
   style="max-width: 340px;"
 >
   <quiet-icon slot="thumb" name="cat"></quiet-icon>
-</quiet-slide-activate>
+</quiet-slide-activator>
 
 <script>
-  const slideActivate = document.getElementById('slide-activate__attention');
-  const originalLabel = slideActivate.getAttribute('label');
+  const slideActivator = document.getElementById('slide-activator__attention');
+  const originalLabel = slideActivator.getAttribute('label');
 
   // When the component is activated
-  slideActivate.addEventListener('quiet-activated', () => {
+  slideActivator.addEventListener('quiet-activated', () => {
     // Update the label
-    slideActivate.label = 'Releasing cats…';
+    slideActivator.label = 'Releasing cats…';
 
     // Deactivate it for the demo after two seconds
     setTimeout(() => {
-      slideActivate.activated = false;
-      slideActivate.label = originalLabel;
+      slideActivator.activated = false;
+      slideActivator.label = originalLabel;
     }, 2000);
   });
 </script>
 
 <style>
-  quiet-slide-activate#slide-activate__attention {
+  quiet-slide-activator#slide-activator__attention {
     /* Head tilt*/
     quiet-icon {
       transition: 300ms rotate ease-out;
@@ -231,46 +231,46 @@ Set the `attention` attribute to `shimmer` to provide a subtle visual hint via a
 
 ### Disabling
 
-Use the `disabled` attribute to disable the slide activate. The control cannot be activated or focused while disabled.
+Use the `disabled` attribute to disable the slide activator. The control cannot be activated or focused while disabled.
 
 ```html {.example}
-<quiet-slide-activate label="Slide to activate" disabled style="max-width: 300px;"></quiet-slide-activate>
+<quiet-slide-activator label="Slide to activate" disabled style="max-width: 300px;"></quiet-slide-activator>
 ```
 
-### Styling slide activates
+### Styling slide activators
 
-Slide activates come with a simple, minimal appearance. Feel free to customize them with your own styles, icons, and animations.
+Slide activators come with a simple, minimal appearance. Feel free to customize them with your own styles, icons, and animations.
 
 ```html {.example}
-<quiet-slide-activate 
+<quiet-slide-activator 
   label="Empty the litter box" 
   attention="shimmer" 
-  id="slide-activate__styling"
+  id="slide-activator__styling"
   style="max-width: 340px;"
 >
   <quiet-icon slot="thumb" name="arrow-right"></quiet-icon>
   <quiet-spinner slot="thumb"></quiet-spinner>
-</quiet-slide-activate>
+</quiet-slide-activator>
 
 <script>
-  const slideActivate = document.getElementById('slide-activate__styling');
-  const originalLabel = slideActivate.getAttribute('label');
+  const slideActivator = document.getElementById('slide-activator__styling');
+  const originalLabel = slideActivator.getAttribute('label');
 
   // When the component is activated
-  slideActivate.addEventListener('quiet-activated', () => {
+  slideActivator.addEventListener('quiet-activated', () => {
     // Update the label
-    slideActivate.label = 'Emptying…';
+    slideActivator.label = 'Emptying…';
 
     // Deactivate it for the demo after two seconds
     setTimeout(() => {
-      slideActivate.activated = false;
-      slideActivate.label = originalLabel;
+      slideActivator.activated = false;
+      slideActivator.label = originalLabel;
     }, 2000);
   });
 </script>
 
 <style>
-  quiet-slide-activate#slide-activate__styling {
+  quiet-slide-activator#slide-activator__styling {
     --border-radius: 0.5rem;
     --thumb-width: 4rem;
     --thumb-inset: 0.25rem;

@@ -1040,6 +1040,20 @@ td.table-reflects {
   background: none;
 }
 
+/* Copy buttons in tables */
+.component-table quiet-copy quiet-button {
+  &::part(button) {
+    padding: 0;
+    gap: 0.1rem;
+    background: transparent;
+    font-size: inherit;
+  }
+
+  quiet-icon {
+    font-size: 1rem;
+  }
+}
+
 .table-description {
   min-width: 30ch;
 }

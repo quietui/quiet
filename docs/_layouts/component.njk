@@ -261,7 +261,14 @@
             <tr>
               <td class="table-name"><code>{{ cssPart.name }}</code></td>
               <td class="table-description">{{ cssPart.description | inlineMarkdown | safe }}</td>
-              <td class="table-selector"><code>::part({{ cssPart.name }})</code></td>
+              <td class="table-selector">
+                <quiet-copy data="::part({{ cssPart.name }})">
+                  <quiet-button size="sm" class="unstyled">
+                    <code>::part({{ cssPart.name }})</code>
+                    <quiet-icon name="copy"></quiet-icon>
+                  </quiet-button>
+                </quiet-copy>
+              </td>
             </tr>
           {% endfor %}
         </tbody>
@@ -290,7 +297,14 @@
             <tr>
               <td class="table-name"><code>{{ state.name }}</code></td>
               <td class="table-description">{{ state.description | inlineMarkdown | safe }}</td>
-              <td class="table-selector"><code>:state({{ state.name }})</code></td>
+              <td class="table-selector">
+                <quiet-copy data=":state({{ state.name }})">
+                  <quiet-button size="sm" class="unstyled">
+                    <code>:state({{ state.name }})</code>
+                    <quiet-icon name="copy"></quiet-icon>
+                  </quiet-button>
+                </quiet-copy>
+              </td>
             </tr>
           {% endfor %}
         </tbody>

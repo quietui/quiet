@@ -23,8 +23,8 @@ You can use any of the following keywords to show platform-specific keys.
 | `$shift`     | ⇧   | SHIFT     |
 | `$escape`    | ⎋   | ESC       |
 | `$enter`     | ↩   | ↩         |
-| `$backspace` | ⌫   | BACKSPACE |
-| `$delete`    | ⌦   | DEL       |
+| `$backspace` | ⌫   | ⌫         |
+| `$delete`    | ⌦   | ⌦         |
 | `$tab`       | ⇥   | ⇥         |
 | `$up`        | ↑   | ↑         |
 | `$down`      | ↓   | ↓         |

@@ -1049,6 +1049,10 @@ td.table-reflects {
     font-size: inherit;
   }
 
+  &::part(button):active {
+    translate: 0;
+  }
+
   quiet-icon {
     font-size: 1rem;
   }

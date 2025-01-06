@@ -7,7 +7,7 @@ import { detectPlatform } from '../../utilities/platform.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import styles from './keyboard-shortcut.styles.js';
 
-const symbolMap = {
+const keywordMap = {
   command: { mac: '⌘', other: 'CTRL' },
   control: { mac: '⌃', other: 'CTRL' },
   option: { mac: '⌥', other: 'ALT' },
@@ -31,7 +31,8 @@ const symbolMap = {
  * @status stable
  * @since 1.0
  *
- * @csspart keys - The internal `<kbd>` element that wraps the shortcuts.
+ * @csspart key - The internal `<kbd>` elements that wrap keys.
+ * @csspart keyword - The internal `<kbd>` elements that wrap keywords.
  */
 @customElement('quiet-keyboard-shortcut')
 export class QuietKeyboardShortcut extends QuietElement {
@@ -74,13 +75,16 @@ export class QuietKeyboardShortcut extends QuietElement {
     }
   }
 
-  private replaceSymbols(text: string, platform: Platform): string {
-    let result = text;
-    for (const [key, value] of Object.entries(symbolMap)) {
-      const replacement = typeof value === 'string' ? value : platform === 'mac' ? value.mac : value.other;
-      result = result.replace(new RegExp(`\\$${key}`, 'g'), replacement);
-    }
-    return result;
+  private replaceSymbols(text: string, platform: Platform) {
+    return text.split(' ').map(segment => {
+      if (segment.startsWith('$')) {
+        const keyword = segment.slice(1);
+        const value = keywordMap[keyword as keyof typeof keywordMap];
+        const replacement = typeof value === 'string' ? value : platform === 'mac' ? value.mac : value.other;
+        return { text: replacement, isKeyword: true };
+      }
+      return { text: segment, isKeyword: false };
+    });
   }
 
   render() {
@@ -93,13 +97,18 @@ export class QuietKeyboardShortcut extends QuietElement {
       linux: this.linux || this.keys,
       other: this.keys
     };
-    const value = this.replaceSymbols(props[platform as keyof typeof props] || '', platform as Platform);
 
-    // Split the value by space and wrap each chunk in `<kbd>`
-    const keyElements = value.split(' ').map(key => html`<kbd part="key">${key.trim()}</kbd>`);
+    // Process the text, replacing keywords with their symbols
+    const segments = this.replaceSymbols(props[platform as keyof typeof props] || '', platform as Platform);
 
-    // Return the delimited keys
-    return html`${keyElements.map((el, i) => (i === 0 ? el : html`${delimiter}${el}`))}`;
+    // Render the keyboard shortcut
+    return html`${segments.map((segment, i) => {
+      // Create a `<kbd>` element for each segment
+      const keyElement = html`<kbd part=${segment.isKeyword ? 'keyword' : 'key'}>${segment.text.trim()}</kbd>`;
+
+      // Add a delimiter for all elements except the first
+      return i === 0 ? keyElement : html`<span aria-hidden="true">${delimiter}</span>${keyElement}`;
+    })}`;
   }
 }
 

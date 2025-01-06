@@ -13,6 +13,7 @@ export default css`
 
   kbd {
     margin-inline: 0.0625em;
+    font: inherit;
 
     &:first-of-type {
       margin-inline-start: 0;

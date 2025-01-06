@@ -108,7 +108,7 @@ By default, the delimiter is automatically determined by the platform (no charac
 
 ### Changing the appearance
 
-By default, the keyboard shortcut is styled with `<kbd>` styles. Set the `appearance` attribute to `unstyled` to make it look like plain text.
+By default, the keyboard shortcut is styled with `<kbd>` styles. Set the `appearance` attribute to `unstyled` to make it look like plain text. To target individual keys, use the `key` and `symbol` parts.
 
 ```html {.example}
 Press 
@@ -117,4 +117,29 @@ Press
   appearance="unstyled"
 ></quiet-keyboard-shortcut>
 to search.
+```
+
+### Styling keys and keywords
+
+Use the `key` and `keyword` parts to change the styles of individual characters.
+
+```html {.example}
+Press 
+<quiet-keyboard-shortcut 
+  keys="$command K"
+  id="keyboard-shortcut__styling"
+></quiet-keyboard-shortcut>
+to search.
+
+<style>
+  quiet-keyboard-shortcut#keyboard-shortcut__styling {
+    &::part(keyword) {
+      color: dodgerblue;
+    }
+
+    &::part(key) {
+      color: deeppink;
+    }
+  }
+</style>
 ```

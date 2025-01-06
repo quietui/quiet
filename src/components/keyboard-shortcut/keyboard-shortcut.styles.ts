@@ -22,5 +22,10 @@ export default css`
     &:last-of-type {
       margin-inline-end: 0;
     }
+
+    &::selection {
+      background-color: var(--quiet-selection-background-color);
+      color: var(--quiet-selection-color);
+    }
   }
 `;

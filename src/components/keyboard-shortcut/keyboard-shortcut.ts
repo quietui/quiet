@@ -9,10 +9,14 @@ import styles from './keyboard-shortcut.styles.js';
 
 const symbolMap = {
   command: { mac: '⌘', other: 'CTRL' },
+  control: { mac: '⌃', other: 'CTRL' },
   option: { mac: '⌥', other: 'ALT' },
   shift: { mac: '⇧', other: 'SHIFT' },
-  control: { mac: '⌃', other: 'CTRL' },
-  delete: { mac: '⌫', other: 'DELETE' },
+  escape: { mac: '⎋', other: 'ESC' },
+  enter: '↩',
+  backspace: '⌫',
+  delete: '⌦',
+  tab: '⇥',
   up: '↑',
   down: '↓',
   left: '←',
@@ -33,23 +37,23 @@ const symbolMap = {
 export class QuietKeyboardShortcut extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
-  /** The primary keyboard shortcut. */
+  /** The primary keys to display in the shortcut, separated by a space. */
   @property() keys = '';
 
-  /** The shortcut to output on Linux devices. */
+  /** The keys to display on Linux devices, separated by a space. */
   @property() linux = '';
 
-  /** The shortcut to output on Mac devices. */
+  /** The keys to display on Mac devices, separated by a space. */
   @property() mac = '';
 
-  /** The shortcut to output on Windows devices. */
+  /** The keys to display on Windows devices, separated by a space. */
   @property() windows = '';
 
   /** Optional label for screen readers. If not provided, the shortcut text will be used. */
   @property() label: string;
 
   /**
-   * The delimiter to use between each key. When set to `auto`, the delimiter will be determined by the platform (no
+   * The delimiter to show between each key. When set to `auto`, the delimiter will be determined by the platform (no
    * character for Mac and "+" for others).
    */
   @property() delimiter: 'auto' | string = 'auto';

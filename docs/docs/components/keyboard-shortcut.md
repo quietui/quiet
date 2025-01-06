@@ -4,32 +4,40 @@ layout: component
 ---
 
 ```html {.example}
-<quiet-keyboard-shortcut keys="$command K" delimiter="auto"></quiet-keyboard-shortcut>
+<quiet-keyboard-shortcut keys="$command K"></quiet-keyboard-shortcut>
 ```
 
 ## Examples
 
 ### Basic usage
 
-Set the `key` attribute to a string containing the keyboard shortcut you want to display. The string you enter will be interpolated as-is in the resulting shortcut.
+Set the `key` attribute to a string containing the space-separated keys you want to display in the shortcut. Do not include [delimiters](#customizing-the-delimiter), as they will be added automatically.
 
-You can use any of the following keywords to output platform-specific symbols. Note that `$cmd` and `$option` map to "CTRL" and "ALT" on non-Mac platforms, respectively.
+You can use any of the following keywords to show platform-specific keys.
 
-| Keyword    | Mac | Others |
-|------------|-----|--------|
-| `$command` | ⌘   | CTRL   |
-| `$option`  | ⌥   | ALT    |
-| `$shift`   | ⇧   | SHIFT  |
-| `$control` | ⌃   | CTRL   |
-| `$delete`  | ⌫   | DELETE |
-| `$up`      | ↑   | ↑      |
-| `$down`    | ↓   | ↓      |
-| `$left`    | ←   | ←      |
-| `$right`   | →   | →      |
+| Keyword      | Mac | Others    |
+|--------------|-----|-----------|
+| `$command`   | ⌘   | CTRL      |
+| `$control`   | ⌃   | CTRL      |
+| `$option`    | ⌥   | ALT       |
+| `$shift`     | ⇧   | SHIFT     |
+| `$escape`    | ⎋   | ESC       |
+| `$enter`     | ↩   | ↩         |
+| `$backspace` | ⌫   | BACKSPACE |
+| `$delete`    | ⌦   | DEL       |
+| `$tab`       | ⇥   | ⇥         |
+| `$up`        | ↑   | ↑         |
+| `$down`      | ↓   | ↓         |
+| `$left`      | ←   | ←         |
+| `$right`     | →   | →         |
 
 ```html {.example}
 <quiet-keyboard-shortcut keys="$option $command B"></quiet-keyboard-shortcut>
 ```
+
+:::info
+Note that `$cmd` and `$option` map to "CTRL" and "ALT" on non-Mac platforms. This is a common practice, but not guaranteed for all shortcuts.
+:::
 
 ### Platform-specific shortcuts
 
@@ -92,7 +100,10 @@ Use the `platform` attribute to show shortcuts for a specific platform, regardle
 By default, the delimiter is automatically determined by the platform (no character for Mac and "+" for others). To change it, set the `delimiter` attribute to the character you want to insert between each key.
 
 ```html {.example}
-<quiet-keyboard-shortcut keys="$command K" delimiter=""></quiet-keyboard-shortcut>
+<quiet-keyboard-shortcut 
+  keys="$command $shift A" 
+  delimiter="·"
+></quiet-keyboard-shortcut>
 ```
 
 ### Changing the appearance
@@ -100,8 +111,10 @@ By default, the delimiter is automatically determined by the platform (no charac
 By default, the keyboard shortcut is styled with `<kbd>` styles. Set the `appearance` attribute to `unstyled` to make it look like plain text.
 
 ```html {.example}
+Press 
 <quiet-keyboard-shortcut 
   keys="$command K"
   appearance="unstyled"
 ></quiet-keyboard-shortcut>
+to search.
 ```

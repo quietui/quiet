@@ -85,7 +85,8 @@ export class QuietKeyboardShortcut extends QuietElement {
 
   render() {
     const platform = this.platform === 'auto' ? detectPlatform() : this.platform;
-    const delimiter = this.delimiter === 'auto' ? (platform === 'mac' ? '' : '+') : this.delimiter.slice(0, 1);
+    const platformDelimiter = platform === 'mac' ? '' : '+';
+    const delimiter = this.delimiter === 'auto' ? platformDelimiter : this.delimiter.slice(0, 1);
     const props = {
       mac: this.mac || this.keys,
       windows: this.windows || this.keys,

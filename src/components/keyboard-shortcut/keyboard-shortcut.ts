@@ -75,7 +75,8 @@ export class QuietKeyboardShortcut extends QuietElement {
     }
   }
 
-  private replaceSymbols(text: string, platform: Platform) {
+  /** Replaces keywords with their platform-specific symbol or text. */
+  private replaceKeywords(text: string, platform: Platform) {
     return text.split(' ').map(segment => {
       if (segment.startsWith('$')) {
         const keyword = segment.slice(1);
@@ -99,7 +100,7 @@ export class QuietKeyboardShortcut extends QuietElement {
     };
 
     // Process the text, replacing keywords with their symbols
-    const segments = this.replaceSymbols(props[platform as keyof typeof props] || '', platform as Platform);
+    const segments = this.replaceKeywords(props[platform as keyof typeof props] || '', platform as Platform);
 
     // Render the keyboard shortcut
     return html`${segments.map((segment, i) => {

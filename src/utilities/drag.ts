@@ -15,6 +15,9 @@
  *   stop: (clientX, clientY) => { ... }
  * });
  */
+
+const supportsTouch = typeof window !== 'undefined' && 'ontouchstart' in window;
+
 export class DraggableElement {
   private element: Element;
   private isActive = false;
@@ -34,18 +37,18 @@ export class DraggableElement {
   }
 
   private handleDragStart = (event: PointerEvent | TouchEvent) => {
-    const clientX = event instanceof PointerEvent ? event.clientX : event.touches[0].clientX;
-    const clientY = event instanceof PointerEvent ? event.clientY : event.touches[0].clientY;
+    const clientX = supportsTouch && 'touches' in event ? event.touches[0].clientX : (event as PointerEvent).clientX;
+    const clientY = supportsTouch && 'touches' in event ? event.touches[0].clientY : (event as PointerEvent).clientY;
 
     // Prevent touch devices from scrolling while dragging
-    if (event instanceof TouchEvent) {
+    if (supportsTouch && 'touches' in event) {
       event.preventDefault();
     }
 
     if (
       this.isDragging ||
       // Prevent right-clicks from triggering drags
-      (event instanceof PointerEvent && event.buttons > 1)
+      (!supportsTouch && (event as PointerEvent).buttons > 1)
     ) {
       return;
     }
@@ -60,8 +63,8 @@ export class DraggableElement {
   };
 
   private handleDragStop = (event: PointerEvent | TouchEvent) => {
-    const clientX = event instanceof PointerEvent ? event.clientX : event.touches[0].clientX;
-    const clientY = event instanceof PointerEvent ? event.clientY : event.touches[0].clientY;
+    const clientX = supportsTouch && 'touches' in event ? event.touches[0].clientX : (event as PointerEvent).clientX;
+    const clientY = supportsTouch && 'touches' in event ? event.touches[0].clientY : (event as PointerEvent).clientY;
 
     this.isDragging = false;
     document.removeEventListener('pointerup', this.handleDragStop);
@@ -72,8 +75,8 @@ export class DraggableElement {
   };
 
   private handleDragMove = (event: PointerEvent | TouchEvent) => {
-    const clientX = event instanceof PointerEvent ? event.clientX : event.touches[0].clientX;
-    const clientY = event instanceof PointerEvent ? event.clientY : event.touches[0].clientY;
+    const clientX = supportsTouch && 'touches' in event ? event.touches[0].clientX : (event as PointerEvent).clientX;
+    const clientY = supportsTouch && 'touches' in event ? event.touches[0].clientY : (event as PointerEvent).clientY;
 
     // Prevent text selection while dragging
     window.getSelection()?.removeAllRanges();
@@ -85,7 +88,9 @@ export class DraggableElement {
   public start() {
     if (!this.isActive) {
       this.element.addEventListener('pointerdown', this.handleDragStart);
-      this.element.addEventListener('touchstart', this.handleDragStart);
+      if (supportsTouch) {
+        this.element.addEventListener('touchstart', this.handleDragStart);
+      }
       this.isActive = true;
     }
   }
@@ -97,7 +102,9 @@ export class DraggableElement {
     document.removeEventListener('touchend', this.handleDragStop);
     document.removeEventListener('touchmove', this.handleDragMove);
     this.element.removeEventListener('pointerdown', this.handleDragStart);
-    this.element.removeEventListener('touchstart', this.handleDragStart);
+    if (supportsTouch) {
+      this.element.removeEventListener('touchstart', this.handleDragStart);
+    }
     this.isActive = false;
     this.isDragging = false;
   }

@@ -237,8 +237,14 @@
       <div id="backdrop" hidden></div>
     {% endif %}
 
-    <quiet-tooltip for="header-search-button">Search this website (⌘+K)</quiet-tooltip>
-    <quiet-tooltip for="header-theme-button">Toggle dark mode (backslash)</quiet-tooltip>
+    <quiet-tooltip for="header-search-button">
+      Search this website
+      <quiet-keyboard-shortcut keys="$command K"></quiet-keyboard-shortcut>
+    </quiet-tooltip>
+    <quiet-tooltip for="header-theme-button">
+      Toggle dark mode
+      <quiet-keyboard-shortcut keys="\"></quiet-keyboard-shortcut>
+    </quiet-tooltip>
     <quiet-tooltip for="header-github-button">Get the code on GitHub</quiet-tooltip>
     <quiet-tooltip for="header-bluesky-button">Follow @quietui.org on Bluesky</quiet-tooltip>
     <quiet-tooltip for="header-twitter-button">Follow @quiet_ui on X</quiet-tooltip>

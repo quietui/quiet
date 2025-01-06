@@ -195,11 +195,12 @@ ins {
 }
 
 kbd {
-  padding: 0.125em 0.33em;
+  padding: 0.2125em 0.33em;
   border: solid max(1px, 0.0715em) var(--quiet-neutral-fill-soft);
   border-radius: calc(var(--quiet-border-radius) / 2);
   box-shadow: 0 max(1px, 0.0715em) 0 0 var(--quiet-neutral-fill-soft);
-  font-size: 0.875em;
+  letter-spacing: 1.5px;
+  vertical-align: baseline;
 }
 
 mark {

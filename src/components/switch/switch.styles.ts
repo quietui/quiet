@@ -40,7 +40,7 @@ export default css`
   #visual-box {
     --height: 1.5em;
     --width: calc(var(--height) * 2);
-    --thumb-size: calc(var(--height) - 4px);
+    --thumb-size: calc(var(--height) - 0.25em);
     --thumb-padding: calc((var(--height) - var(--thumb-size)) / 2);
     display: flex;
     position: relative;

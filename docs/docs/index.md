@@ -110,10 +110,10 @@ First, add the [default theme](/docs/theming) and the [optional CSS reset](/docs
 
 ```html
 <!-- Quiet styles -->
-<link rel="stylesheet" href="@quietui/quiet/dist/themes/quiet.css">
+<link rel="stylesheet" href="/path/to/dist/themes/quiet.css">
 
 <!-- Optional CSS reset -->
-<link rel="stylesheet" href="@quietui/quiet/dist/themes/restyle.css">
+<link rel="stylesheet" href="/path/to/dist/themes/restyle.css">
 ```
 
 Quiet ships standard ES modules, so you can use [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) or [`import()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import) to pull in exactly the components and utilities you need.

@@ -483,6 +483,10 @@ html:not(.quiet-dark) .only-dark {
   }
 }
 
+#content details pre:has(code) {
+  background-color: color-mix(in oklab, var(--quiet-neutral-900), white 5%);
+}
+
 h1,
 h2,
 h3,

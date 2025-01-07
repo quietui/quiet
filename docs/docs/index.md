@@ -106,7 +106,7 @@ If you don't want to use the autoloader, you can import components manually from
 npm install @quietui/quiet
 ```
 
-First, add the [default theme](/docs/theming) and the [optional CSS reset](/docs/restyle).
+First, add the [default theme](/docs/theming) and the [optional CSS reset](/docs/restyle). You may need to configure your app to serve the `dist` folder from a path of your choice.
 
 ```html
 <!-- Quiet styles -->

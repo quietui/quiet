@@ -1,6 +1,6 @@
 import type { CSSResultGroup } from 'lit';
 import { html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement } from 'lit/decorators.js';
 import hostStyles from '../../styles/host.styles.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import styles from './card.styles.js';
@@ -30,20 +30,12 @@ import styles from './card.styles.js';
 @customElement('quiet-card')
 export class QuietCard extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
-
-  /** Renders the card with the `header` slot. */
-  @property({ attribute: 'with-header', type: Boolean, reflect: true }) withHeader = false;
-
-  /** Renders the card with the `footer` slot. */
-  @property({ attribute: 'with-footer', type: Boolean, reflect: true }) withFooter = false;
-
-  /** Renders the card with the `media` slot. */
-  @property({ attribute: 'with-media', type: Boolean, reflect: true }) withMedia = false;
+  static detectSlots = true;
 
   render() {
     return html`
-      ${this.withMedia ? html` <div id="media" part="media"><slot name="media"></slot></div> ` : ''}
-      ${this.withHeader
+      ${this.slots.has('media') ? html` <div id="media" part="media"><slot name="media"></slot></div> ` : ''}
+      ${this.slots.has('header')
         ? html`
             <header id="header" part="header">
               <slot name="header"></slot>
@@ -56,7 +48,7 @@ export class QuietCard extends QuietElement {
         <slot></slot>
       </div>
 
-      ${this.withFooter ? html` <footer id="footer" part="footer"><slot name="footer"></slot></footer> ` : ''}
+      ${this.slots.has('footer') ? html` <footer id="footer" part="footer"><slot name="footer"></slot></footer> ` : ''}
     `;
   }
 }

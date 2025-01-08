@@ -28,7 +28,7 @@ markdown.use(markdownItMark);
       const icon = type === 'warn' ? 'hand-stop' : 'note';
       if (tokens[idx].nesting === 1) {
         return `
-          <quiet-callout variant="${variant}" with-icon>
+          <quiet-callout variant="${variant}">
             <quiet-icon slot="icon" name="${icon}"></quiet-icon>
         `;
       }

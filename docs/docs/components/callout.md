@@ -4,7 +4,7 @@ layout: component
 ---
 
 ```html {.example}
-<quiet-callout variant="primary" with-icon>
+<quiet-callout variant="primary">
   <quiet-icon slot="icon" name="book"></quiet-icon>
   A playful cat's antics can brighten any day with their boundless energy and curiosity. Watching a cat pounce and chase after toys is an endless source of entertainment.
 </quiet-callout>
@@ -39,22 +39,22 @@ Callouts have four built-in variants. Set the `variant` attribute to `primary`, 
 Add an icon to a callout using the `icon` slot. Works best with `<quiet-icon>` and `<svg>` elements.
 
 ```html {.example}
-<quiet-callout variant="primary" with-icon>
+<quiet-callout variant="primary">
   <quiet-icon slot="icon" name="info-circle"></quiet-icon>
   A cat's soft, gentle gaze can melt even the coldest of hearts.
 </quiet-callout>
 
-<quiet-callout variant="secondary" with-icon>
+<quiet-callout variant="secondary">
   <quiet-icon slot="icon" name="settings"></quiet-icon>
   Sleep mode has been enabled. You can disable it in settings.
 </quiet-callout>
 
-<quiet-callout variant="constructive" with-icon>
+<quiet-callout variant="constructive">
   <quiet-icon slot="icon" name="circle-check"></quiet-icon>
   Great job! The litter box has been successfully cleaned.
 </quiet-callout>
 
-<quiet-callout variant="destructive" with-icon>
+<quiet-callout variant="destructive">
   <quiet-icon slot="icon" name="alert-triangle"></quiet-icon>
   Doing this will anger the cats. Are you sure you want to continue?
 </quiet-callout>
@@ -65,12 +65,12 @@ Add an icon to a callout using the `icon` slot. Works best with `<quiet-icon>` a
 Callouts are sized relative to the current font size. To change their size, apply `font-size` to the callout or an ancestor element.
 
 ```html {.example}
-<quiet-callout variant="primary" with-icon style="font-size: 1.25rem;">
+<quiet-callout variant="primary" style="font-size: 1.25rem;">
   <quiet-icon slot="icon" name="rocket"></quiet-icon>
   It's a magical world, ol' buddy…let's go exploring!
 </quiet-callout>
 
-<quiet-callout variant="constructive" with-icon style="font-size: 1.25rem;">
+<quiet-callout variant="constructive" style="font-size: 1.25rem;">
   <quiet-icon slot="icon" name="bulb"></quiet-icon>
   You know what's weird? Day by day nothing seems to change, but pretty soon…everything is different.
 </quiet-callout>

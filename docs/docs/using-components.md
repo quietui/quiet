@@ -166,7 +166,7 @@ However, some components also have _named slots_. To insert content into a named
 You can insert more than one item into a named slot. For example, this card has a `footer` slot that houses two buttons. The text node remains in the default slot.
 
 ```html {.example .no-buttons}
-<quiet-card with-footer style="max-width: 340px;">
+<quiet-card style="max-width: 340px;">
   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 
   <quiet-button slot="footer" variant="primary">Primary</quiet-button>

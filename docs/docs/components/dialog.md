@@ -4,7 +4,7 @@ layout: component
 ---
 
 ```html {.example}
-<quiet-dialog with-header with-footer id="dialog__overview">
+<quiet-dialog id="dialog__overview">
   <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">
     Lorem ipsum
   </h3>
@@ -40,7 +40,7 @@ However, it's often more convenient for a button to control the dialog _without_
 Similarly, you can add `data-dialog="close"` to any button inside a dialog to close it.
 
 ```html {.example}
-<quiet-dialog with-header with-footer id="dialog__opening">
+<quiet-dialog id="dialog__opening">
   <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">
     Opening and closing
   </h3>
@@ -58,10 +58,10 @@ Similarly, you can add `data-dialog="close"` to any button inside a dialog to cl
 
 ### With header
 
-Add the `with-header` attribute and place elements into the `header` slot to add content at the start of the dialog.
+Place elements into the `header` slot to add content at the start of the dialog.
 
 ```html {.example}
-<quiet-dialog with-header id="dialog__header">
+<quiet-dialog id="dialog__header">
   <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">
     Lorem ipsum
   </h3>
@@ -74,10 +74,10 @@ Add the `with-header` attribute and place elements into the `header` slot to add
 
 ### With footer
 
-Add the `with-footer` attribute and place elements into the `footer` slot to add actions or other supplemental information at the end of the dialog.
+Place elements into the `footer` slot to add actions or other supplemental information at the end of the dialog.
 
 ```html {.example}
-<quiet-dialog with-footer id="dialog__footer">
+<quiet-dialog id="dialog__footer">
   <p>Lorem dolor sed viverra ipsum. Nisl rhoncus mattis rhoncus urna neque viverra justo nec.</p>
 
   <quiet-button slot="footer" data-dialog="close" variant="primary">
@@ -93,7 +93,7 @@ Add the `with-footer` attribute and place elements into the `footer` slot to add
 When clicking outside of a dialog, it will normally pulse briefly to draw the user's attention. If you want these clicks to dismiss the dialog instead, use the `light-dismiss` attribute.
 
 ```html {.example}
-<quiet-dialog light-dismiss with-header with-footer id="dialog__light">
+<quiet-dialog light-dismiss id="dialog__light">
   <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">
     Lorem ipsum
   </h3>
@@ -113,7 +113,7 @@ When clicking outside of a dialog, it will normally pulse briefly to draw the us
 By default, a close button is provided as a single action in the dialog's header. You can add your own header actions by slotting text buttons into the `actions` slot. Note that adding your own actions will remove the default close button.
 
 ```html {.example}
-<quiet-dialog with-header with-footer id="dialog__customizing">
+<quiet-dialog id="dialog__customizing">
   <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">
     Lorem ipsum
   </h3>
@@ -137,7 +137,7 @@ By default, a close button is provided as a single action in the dialog's header
 ```
 
 :::info
-The `actions` slot is only available when the header is enabled using the `with-header` attribute.
+The `actions` slot is only available when the header is enabled.
 :::
 
 ### Changing the placement
@@ -145,7 +145,7 @@ The `actions` slot is only available when the header is enabled using the `with-
 By default, dialogs appear in the center of the screen. To make the dialog slide in from the side of the screen like a drawer, set the `placement` attribute to `start`, `end`, `top`, or `bottom`.
 
 ```html {.example}
-<quiet-dialog with-header with-footer id="dialog__placement">
+<quiet-dialog id="dialog__placement">
   <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">
     Lorem ipsum
   </h3>
@@ -184,7 +184,7 @@ The `--width` custom property has no effect on dialogs with `top` and `bottom` p
 The `--width` and `--height` custom properties control the default width and height of the dialog, respectively. On smaller screens, the dialog will shrink to fit the viewport.
 
 ```html {.example}
-<quiet-dialog id="dialog__width" with-header with-footer style="--width: 800px;">
+<quiet-dialog id="dialog__width" style="--width: 800px;">
   <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">
     Lorem ipsum
   </h3>
@@ -205,7 +205,7 @@ The `--width` and `--height` custom properties control the default width and hei
 Dialogs with overflowing content will expand as the viewport allows before scrolling. By design, the header and footer will remain visible so users don't get confused and have an easy way to exit the dialog.
 
 ```html {.example}
-<quiet-dialog id="dialog__scrolling" with-header with-footer reset-scroll>
+<quiet-dialog id="dialog__scrolling" reset-scroll>
   <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">
     Lorem ipsum
   </h3>
@@ -235,7 +235,7 @@ By default, dialogs will maintain their scroll position when closed. Use the `re
 To move focus to a specific form control when the dialog opens, add the [`autofocus`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/autofocus) attribute to it.
 
 ```html {.example}
-<quiet-dialog id="dialog__focus" with-header with-footer>
+<quiet-dialog id="dialog__focus">
   <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">
     Lorem ipsum
   </h3>
@@ -255,7 +255,7 @@ You can stop the dialog from closing by preventing the `quiet-close` event. The 
 You can check `event.detail.source` to see which element triggered the dialog to close, such as a button. If the source is the dialog itself, you can assume that the user has pressed [[Escape]] or the dialog has been closed programmatically.
 
 ```html {.example}
-<quiet-dialog with-header with-footer id="dialog__prevent">
+<quiet-dialog id="dialog__prevent">
   <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">
     Try closing me
   </h3>

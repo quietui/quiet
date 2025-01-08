@@ -1,5 +1,5 @@
 import { LitElement } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property, state } from 'lit/decorators.js';
 
 /** The base class for all Quiet components */
 export class QuietElement extends LitElement {
@@ -8,19 +8,43 @@ export class QuietElement extends LitElement {
     serializable: true
   };
 
+  /**
+   * Enables slot detection for a component. When enabled, named slots that have content will be automatically detected
+   * and their names will be added to a Set in the reactive `this.slots` property.
+   */
+  static detectSlots = false;
+
   private hasRecordedInitialProperties = false;
   private initialReflectedProperties: Map<string, unknown> = new Map();
   protected internals: ElementInternals;
   public shadowRoot: ShadowRoot;
+
+  /**
+   * A Set of all named slots that are currently populated with content. This will be set for components that have the
+   * `detectSlots` static property enabled.
+   */
+  @state() slots: Set<string> = new Set();
+
+  // Make localization attributes reactive
+  @property() dir: string;
+  @property() lang: string;
 
   constructor() {
     super();
     this.internals = this.attachInternals();
   }
 
-  // Make localization attributes reactive
-  @property() dir: string;
-  @property() lang: string;
+  connectedCallback() {
+    super.connectedCallback();
+    const constructor = this.constructor as typeof QuietElement;
+
+    // Automatically detect slots when enabled
+    if (constructor.detectSlots) {
+      this.shadowRoot.addEventListener('slotchange', () => {
+        this.slots = new Set([...this.querySelectorAll(`:scope > [slot]`)].map(el => el.slot));
+      });
+    }
+  }
 
   /**
    * Browser support for `ElementInternals.states` isn't great at the time of this writing. By using these utilities,

@@ -1,6 +1,7 @@
 import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
 import { QuietClosedEvent, QuietCloseEvent, QuietOpenedEvent, QuietOpenEvent } from '../../events/open-close.js';
 import hostStyles from '../../styles/host.styles.js';
 import { animateWithClass } from '../../utilities/animate.js';
@@ -50,6 +51,7 @@ import styles from './dialog.styles.js';
 @customElement('quiet-dialog')
 export class QuietDialog extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
+  static detectSlots = true;
 
   private localize = new Localize(this);
 
@@ -64,12 +66,6 @@ export class QuietDialog extends QuietElement {
    * slide in from the side of the screen like a drawer.
    */
   @property({ reflect: true }) placement: 'center' | 'top' | 'bottom' | 'start' | 'end' = 'center';
-
-  /** Renders the dialog with the `header` slot. */
-  @property({ attribute: 'with-header', type: Boolean, reflect: true }) withHeader = false;
-
-  /** Renders the dialog with the `footer` slot. */
-  @property({ attribute: 'with-footer', type: Boolean, reflect: true }) withFooter = false;
 
   /** Allows the dialog to be closed when clicking outside of it. */
   @property({ attribute: 'light-dismiss', type: Boolean }) lightDismiss = false;
@@ -187,12 +183,16 @@ export class QuietDialog extends QuietElement {
       <dialog
         id="dialog"
         part="dialog"
+        class=${classMap({
+          'has-header': this.slots.has('header'),
+          'has-footer': this.slots.has('footer')
+        })}
         data-placement=${this.placement}
         @click=${this.handleDialogClick}
         @pointerdown=${this.handleDialogPointerDown}
         @cancel=${this.handleDialogCancel}
       >
-        ${this.withHeader
+        ${this.slots.has('header')
           ? html`
               <header id="header" part="header">
                 <slot name="header"></slot>
@@ -214,7 +214,9 @@ export class QuietDialog extends QuietElement {
           <slot></slot>
         </div>
 
-        ${this.withFooter ? html` <footer id="footer" part="footer"><slot name="footer"></slot></footer> ` : ''}
+        ${this.slots.has('footer')
+          ? html` <footer id="footer" part="footer"><slot name="footer"></slot></footer> `
+          : ''}
       </dialog>
     `;
   }

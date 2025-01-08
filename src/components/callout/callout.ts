@@ -22,6 +22,7 @@ import styles from './callout.styles.js';
 @customElement('quiet-callout')
 export class QuietCallout extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
+  static detectSlots = true;
 
   firstUpdated() {
     this.setAttribute('role', 'note');
@@ -30,12 +31,9 @@ export class QuietCallout extends QuietElement {
   /** The type of callout to render. */
   @property({ reflect: true }) variant: 'primary' | 'secondary' | 'constructive' | 'destructive' = 'secondary';
 
-  /** Renders the callout with the `icon` slot. */
-  @property({ attribute: 'with-icon', type: Boolean, reflect: true }) withIcon = false;
-
   render() {
     return html`
-      ${this.withIcon
+      ${this.slots.has('icon')
         ? html`
             <div id="icon" part="icon">
               <slot name="icon"></slot>

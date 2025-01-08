@@ -236,11 +236,11 @@ export default css`
   }
 
   /* Normalize spacing when the header and footer are absent */
-  :host(:not([with-header])) #body {
+  #dialog:not(.has-header) #body {
     padding-block-start: var(--spacing);
   }
 
-  :host(:not([with-footer])) #body {
+  #dialog:not(.has-footer) #body {
     padding-block-end: var(--spacing);
   }
 

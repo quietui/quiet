@@ -56,17 +56,24 @@ export function stopLoader() {
 export async function discoverElements(root: Element | ShadowRoot) {
   const rootTagName = root instanceof Element ? root.tagName.toLowerCase() : '';
   const rootIsQuietElement = rootTagName?.startsWith('quiet-');
-  const tags = [...root.querySelectorAll(':not(:defined)')]
+
+  // Get a list of elements to preload from all `data-quiet-preload` attributes on the page
+  const tagsToPreload = [...document.querySelectorAll('[data-quiet-preload]')]
+    .map(el => el.getAttribute('data-quiet-preload') || '')
+    .flatMap(attr => attr.split(' '))
+    .filter(tag => tag.length > 0);
+
+  const tagsOnPage = [...root.querySelectorAll(':not(:defined)')]
     .map(el => el.tagName.toLowerCase())
     .filter(tag => tag.startsWith('quiet-'));
 
   // If the root element is an undefined Quiet element, add it to the list
   if (rootIsQuietElement && !customElements.get(rootTagName)) {
-    tags.push(rootTagName);
+    tagsOnPage.push(rootTagName);
   }
 
-  // Make the list unique
-  const tagsToRegister = [...new Set(tags)];
+  // Get a unique list of all tags to register
+  const tagsToRegister = [...new Set(tagsOnPage.concat(tagsToPreload))];
   const registered: string[] = [];
   const unknown: string[] = [];
 

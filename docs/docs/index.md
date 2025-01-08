@@ -62,6 +62,20 @@ Now you can use any component in your HTML!
 </quiet-button>
 ```
 
+### Preloading components
+
+You can tell the autoloader to preload components that aren't on the page by adding the `data-quiet-preload` attribute anywhere in the document. Tags must be separated by a space, as shown below. A good practice is to add it to the `<html>` element.
+
+```html
+<!-- 
+  This will load <quiet-button> and <quiet-tooltip> even
+  if they're not on the page when the autoloader runs
+-->
+<html data-quiet-preload="quiet-button quiet-tooltip">
+  ...
+</html>
+```
+
 ### Autoloader events
 
 As a convenience, Quiet's autoloader emits an event called `quiet-discovery-complete` when all elements on the page have been "discovered" and registered. This is useful if you want to show, for example, a loading indicator until all components are registered.

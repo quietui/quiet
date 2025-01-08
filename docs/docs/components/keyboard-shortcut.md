@@ -41,7 +41,7 @@ Note that `$cmd` and `$option` map to "CTRL" and "ALT" on non-Mac platforms. Thi
 
 ### Platform-specific shortcuts
 
-To show platform-specific shortcuts, use the `windows`, `mac`, and `linux` attributes. These will override the `key` attribute, but only on the respective platforms.
+To show platform-specific shortcuts, use the `windows`, `mac`, and `linux` attributes. These will override the `keys` attribute, but only on the respective platforms.
 
 ```html {.example}
 <quiet-keyboard-shortcut
@@ -108,7 +108,7 @@ By default, the delimiter is automatically determined by the platform (no charac
 
 ### Changing the appearance
 
-By default, the keyboard shortcut is styled with `<kbd>` styles. Set the `appearance` attribute to `unstyled` to make it look like plain text. To target individual keys, use the `key` and `symbol` parts.
+By default, the keyboard shortcut is styled with `<kbd>` styles. Set the `appearance` attribute to `unstyled` to make it look like plain text. To target individual keys, use the `key` and `keyword` parts.
 
 ```html {.example}
 Press 

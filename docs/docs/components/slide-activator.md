@@ -47,7 +47,7 @@ You can use these events to update labels and execute code to run on activation 
 
 ```html {.example}
 <div id="slide-activator__activation">
-  <quiet-slide-activator label="Slide to activate" style="max-width: 340px;"></quiet-slide-activator>
+  <quiet-slide-activator label="Slide to activate"></quiet-slide-activator>
   <quiet-button disabled>Deactivate</quiet-button>
 </div>
 
@@ -78,6 +78,7 @@ slideActivator.addEventListener('quiet-deactivated', () => {
 <style>
   #slide-activator__activation {
     quiet-slide-activator {
+      max-width: 340px;
       margin-bottom: 1rem; 
     }
   }
@@ -92,7 +93,7 @@ Additionally, a `quiet-progress` event will be emitted while the user slides the
 
 ```html {.example}
 <div id="slide-activator__progress">
-  <quiet-slide-activator label="Slide to place order" style="max-width: 340px;"></quiet-slide-activator>
+  <quiet-slide-activator label="Slide to place order"></quiet-slide-activator>
   Progress: <quiet-number number="0" type="percent"></quiet-number>
 </div>
 
@@ -123,6 +124,7 @@ Additionally, a `quiet-progress` event will be emitted while the user slides the
 <style>
   #slide-activator__progress {
     quiet-slide-activator {
+      max-width: 340px;
       margin-bottom: 1rem;
 
       /* Change the background color as the user slides the thumb */
@@ -150,7 +152,6 @@ Use the `thumb` slot to provide your own icon(s) for the thumb. If you want to c
 <quiet-slide-activator 
   label="Slide to unlock" 
   id="slide-activator__icons"
-  style="max-width: 340px;"
 >
   <quiet-icon slot="thumb" name="lock"></quiet-icon>
   <quiet-icon slot="thumb" name="lock-open-2"></quiet-icon>
@@ -175,6 +176,8 @@ Use the `thumb` slot to provide your own icon(s) for the thumb. If you want to c
 
 <style>
   quiet-slide-activator#slide-activator__icons {
+    max-width: 340px;
+
     /* Show locked until activated, then show unlocked */
     &:state(activated) quiet-icon[name="lock"],
     &:not(:state(activated)) quiet-icon[name="lock-open-2"] {
@@ -193,7 +196,6 @@ Set the `attention` attribute to `shimmer` to provide a subtle visual hint via a
   label="Slide to release cats" 
   attention="shimmer" 
   id="slide-activator__attention" 
-  style="max-width: 340px;"
 >
   <quiet-icon slot="thumb" name="cat"></quiet-icon>
 </quiet-slide-activator>
@@ -217,6 +219,8 @@ Set the `attention` attribute to `shimmer` to provide a subtle visual hint via a
 
 <style>
   quiet-slide-activator#slide-activator__attention {
+    max-width: 340px;
+
     /* Head tilt*/
     quiet-icon {
       transition: 300ms rotate ease-out;
@@ -234,7 +238,45 @@ Set the `attention` attribute to `shimmer` to provide a subtle visual hint via a
 Use the `disabled` attribute to disable the slide activator. The control cannot be activated or focused while disabled.
 
 ```html {.example}
-<quiet-slide-activator label="Slide to activate" disabled style="max-width: 300px;"></quiet-slide-activator>
+<quiet-slide-activator 
+  label="Slide to activate" 
+  disabled 
+  style="max-width: 340px;"
+></quiet-slide-activator>
+```
+
+### Submitting forms
+
+While not a form control itself, the slide activator is often used to trigger form submission. You can hook into the `quiet-activated` event and use [`requestSubmit()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/requestSubmit) to achieve this.
+
+```html {.example}
+<form action="about:blank" target="_blank" id="slide-activator__form">
+  <quiet-text-field label="Name" name="name" value="Meowy McGee"></quiet-text-field>
+  <quiet-slide-activator label="Slide to submit" attention="shimmer"></quiet-slide-activator>
+</form>
+
+<script>
+  const form = document.getElementById('slide-activator__form');
+  const slideActivator = form.querySelector('quiet-slide-activator');
+
+  slideActivator.addEventListener('quiet-activated', () => {
+    form.requestSubmit();
+
+    // Deactivate it for the demo after two seconds
+    setTimeout(() => {
+      slideActivator.activated = false;
+    }, 2000);
+  });
+</script>
+
+<style>
+  #slide-activator__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 340px;
+  }
+</style>
 ```
 
 ### Styling slide activators
@@ -246,7 +288,6 @@ Slide activators come with a simple, minimal appearance. Feel free to customize 
   label="Empty the litter box" 
   attention="shimmer" 
   id="slide-activator__styling"
-  style="max-width: 340px;"
 >
   <quiet-icon slot="thumb" name="arrow-right"></quiet-icon>
   <quiet-spinner slot="thumb"></quiet-spinner>
@@ -282,6 +323,7 @@ Slide activators come with a simple, minimal appearance. Feel free to customize 
         dodgerblue calc((1 - var(--thumb-position)) * 100%)
       );
     height: 4rem;
+    max-width: 340px;
     background-color: var(--current-color);
     font-weight: var(--quiet-font-weight-semibold);
     color: white;

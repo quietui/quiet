@@ -31,8 +31,9 @@ const keywordMap = {
  * @status stable
  * @since 1.0
  *
- * @csspart key - The internal `<kbd>` elements that wrap keys.
- * @csspart keyword - The internal `<kbd>` elements that wrap keywords.
+ * @csspart key - The `<kbd>` elements that wrap keys.
+ * @csspart keyword - The `<kbd>` elements that wrap keywords.
+ * @csspart delimiter - The `<span>` elements that wrap delimiters.
  */
 @customElement('quiet-keyboard-shortcut')
 export class QuietKeyboardShortcut extends QuietElement {
@@ -108,7 +109,7 @@ export class QuietKeyboardShortcut extends QuietElement {
       const keyElement = html`<kbd part=${segment.isKeyword ? 'keyword' : 'key'}>${segment.text.trim()}</kbd>`;
 
       // Add a delimiter for all elements except the first
-      return i === 0 ? keyElement : html`<span aria-hidden="true">${delimiter}</span>${keyElement}`;
+      return i === 0 ? keyElement : html`<span part="delimiter" aria-hidden="true">${delimiter}</span>${keyElement}`;
     })}`;
   }
 }

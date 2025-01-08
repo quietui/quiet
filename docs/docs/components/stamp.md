@@ -100,7 +100,7 @@ Before using a stamp, you must create a `<template>` with an ID of your choice. 
 
 In most cases, templates aren't very useful without data. To pass data to a stamp, add one or more [data attributes](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes) to it. You can reference the data in the template using _expressions_ that look like `{propertyName}`, where _propertyName_ is a [dataset](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset) property name that corresponds to a data attribute you've supplied, e.g. `data-first-name` can be referenced in a template using `{firstName}`.
 
-Once a template is rendered, changes to data attributes _will not_ trigger a rerender. To force a rerender, you can call the `renderTemplate()` method which will replace the content.
+Once a template is rendered, changes to data attributes _will not_ trigger a rerender. To force a rerender, you can call the `renderTemplate()` method which will replace the content, breaking any references to existing elements.
 
 Avoid using `<script>` and `<style>` tags in your template because they'll be duplicated each time the template is rendered.
 

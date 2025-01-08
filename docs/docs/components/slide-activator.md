@@ -320,7 +320,7 @@ Slide activators come with a simple, minimal appearance. Feel free to customize 
       color-mix(
         in oklab, 
         firebrick calc(var(--thumb-position) * 100%), 
-        dodgerblue calc((1 - var(--thumb-position)) * 100%)
+        #0284c7 calc((1 - var(--thumb-position)) * 100%)
       );
     height: 4rem;
     max-width: 340px;

@@ -51,7 +51,7 @@ import styles from './dialog.styles.js';
 @customElement('quiet-dialog')
 export class QuietDialog extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
-  static detectSlots = true;
+  static observeSlots = true;
 
   private localize = new Localize(this);
 
@@ -184,39 +184,38 @@ export class QuietDialog extends QuietElement {
         id="dialog"
         part="dialog"
         class=${classMap({
-          'has-header': this.slots.has('header'),
-          'has-footer': this.slots.has('footer')
+          'has-header': this.slotsWithContent.has('header'),
+          'has-footer': this.slotsWithContent.has('footer')
         })}
         data-placement=${this.placement}
         @click=${this.handleDialogClick}
         @pointerdown=${this.handleDialogPointerDown}
         @cancel=${this.handleDialogCancel}
       >
-        ${this.slots.has('header')
-          ? html`
-              <header id="header" part="header">
-                <slot name="header"></slot>
-                <slot id="actions" name="actions">
-                  <quiet-button
-                    slot="header"
-                    appearance="text"
-                    icon-label=${this.localize.term('close')}
-                    data-dialog="close"
-                  >
-                    <quiet-icon library="system" name="x"></quiet-icon>
-                  </quiet-button>
-                </slot>
-              </header>
-            `
-          : ''}
+        ${this.whenSlotted(
+          'header',
+          html`
+            <header id="header" part="header">
+              <slot name="header"></slot>
+              <slot id="actions" name="actions">
+                <quiet-button
+                  slot="header"
+                  appearance="text"
+                  icon-label=${this.localize.term('close')}
+                  data-dialog="close"
+                >
+                  <quiet-icon library="system" name="x"></quiet-icon>
+                </quiet-button>
+              </slot>
+            </header>
+          `
+        )}
 
         <div id="body" part="body">
           <slot></slot>
         </div>
 
-        ${this.slots.has('footer')
-          ? html` <footer id="footer" part="footer"><slot name="footer"></slot></footer> `
-          : ''}
+        ${this.whenSlotted('footer', html` <footer id="footer" part="footer"><slot name="footer"></slot></footer> `)}
       </dialog>
     `;
   }

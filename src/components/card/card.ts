@@ -30,25 +30,26 @@ import styles from './card.styles.js';
 @customElement('quiet-card')
 export class QuietCard extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
-  static detectSlots = true;
+  static observeSlots = true;
 
   render() {
     return html`
-      ${this.slots.has('media') ? html` <div id="media" part="media"><slot name="media"></slot></div> ` : ''}
-      ${this.slots.has('header')
-        ? html`
-            <header id="header" part="header">
-              <slot name="header"></slot>
-              <slot id="actions" name="actions"></slot>
-            </header>
-          `
-        : ''}
+      ${this.whenSlotted('media', html` <div id="media" part="media"><slot name="media"></slot></div> `)}
+      ${this.whenSlotted(
+        'header',
+        html`
+          <header id="header" part="header">
+            <slot name="header"></slot>
+            <slot id="actions" name="actions"></slot>
+          </header>
+        `
+      )}
 
       <div id="body" part="body">
         <slot></slot>
       </div>
 
-      ${this.slots.has('footer') ? html` <footer id="footer" part="footer"><slot name="footer"></slot></footer> ` : ''}
+      ${this.whenSlotted('footer', html` <footer id="footer" part="footer"><slot name="footer"></slot></footer> `)}
     `;
   }
 }

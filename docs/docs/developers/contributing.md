@@ -193,6 +193,47 @@ Events must extend the `Event` object and start with `quiet-`. You can dispatch 
 
 Events should always be composed. Events should only be cancelable if they're actually cancelable by the end user. Events should bubble to support delegation unless there's a specific reason not to or if it makes sense to align with the platform, e.g. `quiet-focus` and `quiet-blur`.
 
+### Observing slots
+
+The platform doesn't currently provide an easy way to detect if slots have content, so the `QuietElement` base class offers a utility to facilitate this. With it, you can show/hide sections of the template and/or toggle classes based on a named slot's status.
+
+Because it requires additional processing, this feature requires an opt-in via the `observeSlots` static property.
+
+```ts
+@customElement('quiet-card')
+export class QuietCard extends QuietElement {
+  static observeSlots = true;
+  // ...
+}
+```
+
+Once enabled, you can access a `Set()` of named slots that have content through the `slotsWithContent` property.
+
+```ts
+if (this.slotsWithContent.has('header')) {
+  //
+  // The card has content in the `header` slot
+  //
+}
+```
+
+To conditionally render a slot when it has content, use the `whenSlotted()` method. This will render the slot as defined if content is slotted in, otherwise it will render a hidden slot of the same name in order to listen to `slotchange` events.
+
+```ts
+render() {
+  return html`
+    ${this.whenSlotted(
+      'header',
+      html`
+        <header id="header" part="header">
+          <slot name="header"></slot>
+        </header>
+      `
+    )}
+  `;
+}
+```
+
 ### Console logging
 
 When necessary, make use of `console.warn()` to inform users of warnings and `console.error()` of errors. Use `console.error()` more sparingly. The first argument should always be a human-readable message explaining what happened and how to fix it. Be verbose, but concise. If necessary, the second argument should be a reference to the dispatching element.

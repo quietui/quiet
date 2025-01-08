@@ -1,4 +1,5 @@
-import { LitElement } from 'lit';
+import type { TemplateResult } from 'lit';
+import { LitElement, html } from 'lit';
 import { property, state } from 'lit/decorators.js';
 
 /** The base class for all Quiet components */
@@ -12,7 +13,7 @@ export class QuietElement extends LitElement {
    * Enables slot detection for a component. When enabled, named slots that have content will be automatically detected
    * and their names will be added to a Set in the reactive `this.slots` property.
    */
-  static detectSlots = false;
+  static observeSlots = false;
 
   private hasRecordedInitialProperties = false;
   private initialReflectedProperties: Map<string, unknown> = new Map();
@@ -20,10 +21,10 @@ export class QuietElement extends LitElement {
   public shadowRoot: ShadowRoot;
 
   /**
-   * A Set of all named slots that are currently populated with content. This will be set for components that have the
-   * `detectSlots` static property enabled.
+   * A Set containing all named slots that are currently populated with content. For performance reasons, this will only
+   * be set when the static `observeSlots` property is enabled on the component.
    */
-  @state() slots: Set<string> = new Set();
+  @state() protected slotsWithContent: Set<string> = new Set();
 
   // Make localization attributes reactive
   @property() dir: string;
@@ -38,11 +39,47 @@ export class QuietElement extends LitElement {
     super.connectedCallback();
     const constructor = this.constructor as typeof QuietElement;
 
-    // Automatically detect slots when enabled
-    if (constructor.detectSlots) {
+    // If enabled, observe slots up front to prevent extra renders
+    if (constructor.observeSlots) {
+      this.updateSlotsWithContent();
+
+      // Observe slot changes
       this.shadowRoot.addEventListener('slotchange', () => {
-        this.slots = new Set([...this.querySelectorAll(`:scope > [slot]`)].map(el => el.slot));
+        this.updateSlotsWithContent();
       });
+    }
+  }
+
+  /**
+   * Hook into the attributeChangedCallback to enable durable attributes. This prevents DOM morphing libraries from
+   * breaking reflected attributes + default values. Adapted from:
+   *
+   * https://www.konnorrogers.com/posts/2024/making-lit-components-morphable
+   */
+  attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null) {
+    // Only run the first time attributeChangedCallback is called
+    if (!this.hasRecordedInitialProperties) {
+      (this.constructor as typeof LitElement).elementProperties.forEach((obj, prop: keyof typeof this & string) => {
+        if (obj.reflect && this[prop] != null) {
+          this.initialReflectedProperties.set(prop, this[prop]);
+        }
+      });
+
+      this.hasRecordedInitialProperties = true;
+    }
+
+    super.attributeChangedCallback(name, oldValue, newValue);
+  }
+
+  /**
+   * Updates the slotsWithContent Set with currently populated slots
+   */
+  private updateSlotsWithContent() {
+    const newSlots = new Set([...this.querySelectorAll(':scope > [slot]')].map(el => el.slot));
+
+    // Only trigger an update if the slots have actually changed
+    if (JSON.stringify([...newSlots].sort()) !== JSON.stringify([...this.slotsWithContent].sort())) {
+      this.slotsWithContent = newSlots;
     }
   }
 
@@ -93,24 +130,11 @@ export class QuietElement extends LitElement {
   }
 
   /**
-   * Hook into the attributeChangedCallback to enable durable attributes. This prevents DOM morphing libraries from
-   * breaking reflected attributes + default values. Adapted from:
-   *
-   * https://www.konnorrogers.com/posts/2024/making-lit-components-morphable
+   * Used in templates to conditionally render a slot when it has content. When it doesn't have content, a hidden slot
+   * of the same name is rendered instead to ensure the `slotchange` event continues to fire.
    */
-  attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null) {
-    // Only run the first time attributeChangedCallback is called
-    if (!this.hasRecordedInitialProperties) {
-      (this.constructor as typeof LitElement).elementProperties.forEach((obj, prop: keyof typeof this & string) => {
-        if (obj.reflect && this[prop] != null) {
-          this.initialReflectedProperties.set(prop, this[prop]);
-        }
-      });
-
-      this.hasRecordedInitialProperties = true;
-    }
-
-    super.attributeChangedCallback(name, oldValue, newValue);
+  protected whenSlotted(name: string, content: TemplateResult) {
+    return this.slotsWithContent.has(name) ? content : html`<slot name="${name}" hidden></slot>`;
   }
 
   /**

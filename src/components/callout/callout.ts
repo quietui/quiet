@@ -22,7 +22,7 @@ import styles from './callout.styles.js';
 @customElement('quiet-callout')
 export class QuietCallout extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
-  static detectSlots = true;
+  static observeSlots = true;
 
   firstUpdated() {
     this.setAttribute('role', 'note');
@@ -33,13 +33,14 @@ export class QuietCallout extends QuietElement {
 
   render() {
     return html`
-      ${this.slots.has('icon')
-        ? html`
-            <div id="icon" part="icon">
-              <slot name="icon"></slot>
-            </div>
-          `
-        : ''}
+      ${this.whenSlotted(
+        'icon',
+        html`
+          <div id="icon" part="icon">
+            <slot name="icon"></slot>
+          </div>
+        `
+      )}
 
       <div id="body" part="body">
         <slot></slot>

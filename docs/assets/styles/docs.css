@@ -860,15 +860,17 @@ quiet-callout {
 
 /* Splash */
 .layout-splash {
+  position: relative;
+
   --grid-size: 100px;
   --grid-half-size: calc(var(--grid-size) / 2);
   --dot-size: 3px;
   --opacity-base: 0.15;
   /* prettier-ignore */
   background-image:
-    linear-gradient(to top left, transparent 0, color-mix(in oklab, var(--quiet-background-color), transparent 25%) 100%),
+    linear-gradient(to top, transparent 0, color-mix(in oklab, var(--quiet-background-color), transparent 25%) 100%),
     linear-gradient(
-      to bottom right,
+      to bottom,
       transparent 33%,
       color-mix(in oklab, var(--quiet-primary-fill-softer), transparent 25%) 100%
     ),

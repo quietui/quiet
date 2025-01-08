@@ -1,17 +1,17 @@
 ---
-title: Sponsoring this project
-description: Unlock support and sponsor-only benefits.
+title: Help & Support
+description: Unlock personal support and sponsor-only benefits with a sponsorship!
 layout: page
 isWide: true
-section: sponsor
+section: support
 ---
 
-Quiet can be used for free under the MIT license. Unfortunately, I can't offer free support for every user, but if you want personal support and priority bug fixes, [you can sponsor the project](https://github.com/sponsors/quietui) to unlock all of the sponsor-only benefits shown below.
+Quiet can be used for free under the MIT license. Unfortunately, I can't offer support for every user, but if you need help [you can sponsor the project](https://github.com/sponsors/quietui) to unlock all of the benefits shown below.
 
 <div class="sponsor-tiers" style="margin-block-start: 2.5rem;">
   <div class="sponsor-tier">
     <quiet-icon class="sponsor-tier-icon" name="code" style="color: #7db664;"></quiet-icon>
-    <h3 data-no-anchor>Developer</h3><br>
+    <h3 data-no-anchor>Developers</h3><br>
     <ul>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> MIT license</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Community support</li>
@@ -28,7 +28,7 @@ Quiet can be used for free under the MIT license. Unfortunately, I can't offer f
 
   <div class="sponsor-tier">
     <quiet-icon class="sponsor-tier-icon" name="heart-handshake" style="color: #7577c5;"></quiet-icon>
-    <h3 data-no-anchor>Sponsor</h3><br>
+    <h3 data-no-anchor>Sponsors</h3><br>
     <ul>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> MIT license</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Maintainer support</li>
@@ -45,7 +45,7 @@ Quiet can be used for free under the MIT license. Unfortunately, I can't offer f
 
   <div class="sponsor-tier">
     <quiet-icon class="sponsor-tier-icon" name="comet" style="color: #c5a231;"></quiet-icon>
-    <h3 data-no-anchor>Stargazer</h3><br>
+    <h3 data-no-anchor>Stargazers</h3><br>
     <ul>
       <li><quiet-icon name="coins" style="color: #c5a231;"></quiet-icon> Completely free</li>
       <li><quiet-icon name="pointer" style="color: #e886a7;"></quiet-icon> Only takes a click</li>
@@ -80,7 +80,7 @@ Quiet can be used for free under the MIT license. Unfortunately, I can't offer f
 <p style="text-align: center;">
   <small>
     Not sure how to start the conversation with your organization? 
-    <a href="/sponsor/letter-to-your-org">This free template might help.</a>
+    <a href="/support/letter-to-your-org">This free template might help.</a>
   </small>
 </p>
 

@@ -167,7 +167,7 @@ async function updateResults(query = '') {
       if (page.url === '/') icon = 'home';
       if (page.url.startsWith('/about')) icon = 'info-circle';
       if (page.url.startsWith('/docs/components')) icon = 'box';
-      if (page.url.startsWith('/sponsor')) icon = 'heart';
+      if (page.url.startsWith('/support')) icon = 'heart';
       if (page.url.startsWith('/docs/theme') || page.url.startsWith('/docs/restyle')) icon = 'color-swatch';
       if (page.url.includes('github.com')) icon = 'brand-github';
       if (page.url.includes('github.com') && page.url.endsWith('/issues')) icon = 'bug';

@@ -1267,6 +1267,7 @@ td.table-reflects {
 
 .sponsor-tier {
   padding: 1.5rem 1rem 2rem 1rem;
+  overflow: hidden;
   border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
   border-radius: 1rem;
   background-color: var(--quiet-paper-color);
@@ -1282,14 +1283,18 @@ td.table-reflects {
     margin: 0 0 2rem 0;
     margin-inline: auto;
     padding: 0;
+    color: var(--quiet-text-muted);
+    font-size: 0.9375rem;
     text-align: start;
+  }
+
+  &:nth-child(2) ul {
+    color: var(--quiet-text-body);
   }
 
   li {
     margin: 0;
     padding: 0;
-    color: var(--quiet-text-muted);
-    font-size: 0.9375rem;
     list-style: none;
   }
 

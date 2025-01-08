@@ -28,8 +28,8 @@ Thanks!
 </quiet-card>
 
 <div style="display: flex; gap: 1rem; justify-content: center; margin-block: var(--quiet-content-spacing);">
-  <quiet-button variant="primary" size="lg" appearance="outline" pill href="/sponsor">
+  <quiet-button variant="primary" size="lg" appearance="outline" pill href="/support">
     <quiet-icon slot="start" name="arrow-left"></quiet-icon>
-    Back to the sponsors page
+    Back to the support page
   </quiet-button>
 </div>

@@ -1,6 +1,6 @@
 ---
 title: Help & Support
-description: Unlock personal support and sponsor-only benefits with a sponsorship!
+description: Unlock personal support, priority bug fixes, and other sponsor-only benefits with a sponsorship!
 layout: page
 isWide: true
 section: support
@@ -8,7 +8,7 @@ section: support
 
 Quiet can be used for free under the MIT license. Unfortunately, I can't offer support for every user, but if you need help [you can sponsor the project](https://github.com/sponsors/quietui) to unlock all of the benefits shown below.
 
-<div class="sponsor-tiers" style="margin-block-start: 2.5rem;">
+<div class="sponsor-tiers">
   <div class="sponsor-tier">
     <quiet-icon class="sponsor-tier-icon" name="code" style="color: #7db664;"></quiet-icon>
     <h3 data-no-anchor>Developers</h3><br>
@@ -70,7 +70,14 @@ Quiet can be used for free under the MIT license. Unfortunately, I can't offer s
   <li><quiet-icon name="school" style="color: #7db664;"></quiet-icon><br>Learn once, use forever</li>
 </ul>
 
-<div style="display: flex; gap: 1rem; justify-content: center; margin-block: var(--quiet-content-spacing);">
+<div 
+  style="
+    display: flex; 
+    gap: 1rem; 
+    justify-content: center; 
+    margin-block: calc(var(--quiet-content-spacing) * 1.33) var(--quiet-content-spacing);
+  "
+>
   <quiet-button variant="primary" size="lg" appearance="outline" pill href="https://github.com/sponsors/quietui" target="_blank">
     <quiet-icon slot="start" family="filled" name="heart" style="color: deeppink;"></quiet-icon>
     Become a sponsor

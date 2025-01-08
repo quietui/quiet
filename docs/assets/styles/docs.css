@@ -1225,7 +1225,6 @@ td.table-reflects {
 .sponsor-tiers {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  margin-block-end: var(--quiet-content-spacing);
   gap: 0.5rem;
   text-align: center;
 
@@ -1235,8 +1234,7 @@ td.table-reflects {
   }
 
   @media screen and (min-width: 768px) {
-    margin-block-start: 1rem;
-    margin-block-end: calc(var(--quiet-content-spacing) + 1rem);
+    margin-block: calc(var(--quiet-content-spacing) * 1.5);
 
     .sponsor-tier:nth-child(1) {
       border-top-right-radius: 0;
@@ -1257,6 +1255,7 @@ td.table-reflects {
     grid-template-columns: 1fr;
     max-width: 320px;
     margin-inline: auto;
+    margin-block: var(--quiet-content-spacing);
     gap: 0.5rem;
 
     .sponsor-tier:nth-child(2) {

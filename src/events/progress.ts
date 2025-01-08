@@ -10,7 +10,7 @@ export class QuietProgressEvent extends Event {
 
 interface QuietProgressDetail {
   /* The percentage of completion from 0 to 1. */
-  percentage: number;
+  percent: number;
 }
 
 declare global {

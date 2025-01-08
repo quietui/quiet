@@ -89,7 +89,7 @@ slideActivator.addEventListener('quiet-deactivated', () => {
 
 The readonly `--thumb-position` custom property will be set to a value between 0 and 1 on the host element, representing how far the user has slid the thumb toward activation. You can use this to transition styles at different thresholds.
 
-Additionally, a `quiet-progress` event will be emitted while the user slides the thumb. This event contains an `event.detail.percentage` payload with a corresponding number between 0 and 1.
+Additionally, a `quiet-progress` event will be emitted while the user slides the thumb. This event contains an `event.detail.percent` payload with a corresponding number between 0 and 1.
 
 ```html {.example}
 <div id="slide-activator__progress">
@@ -105,7 +105,7 @@ Additionally, a `quiet-progress` event will be emitted while the user slides the
 
   // Update progress as the user drags
   slideActivator.addEventListener('quiet-progress', event => {
-    progress.number = event.detail.percentage;
+    progress.number = event.detail.percent;
   });
 
   // Update the label and reset the demo when component is activated

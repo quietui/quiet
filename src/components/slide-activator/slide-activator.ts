@@ -47,8 +47,8 @@ import styles from './slide-activator.styles.js';
  * @cssproperty [--thumb-width=4em] - The thumb's width.
  * @cssproperty [--thumb-inset=0.125em] - The thumb's inset from the host element.
  * @cssproperty [--shimmer-color] - The color to use as a base for the shimmer animation.
- * @cssproperty [--thumb-position=(read-only)] - A read-only property that moves from 0 to 1 as the user slides the thumb to
- *  activate the control. Useful as a hook to transition background styles based on the thumb's position.
+ * @cssproperty [--thumb-position=(read-only)] - A read-only property that moves from 0 to 1 as the user slides the
+ *  thumb to activate the control. Useful as a hook to transition background styles based on the thumb's position.
  *
  * @cssstate activated - Applied briefly when the slide activator has been activated.
  * @cssstate dragging - Applied when the slide activator is dragging.
@@ -279,7 +279,7 @@ export class QuietSlideActivator extends QuietElement {
       this.thumbPosition = value;
       const percentage = Number(value.toFixed(2));
       if (percentage !== this.lastDispatchedPercentage) {
-        this.dispatchEvent(new QuietProgressEvent({ percentage: percentage }));
+        this.dispatchEvent(new QuietProgressEvent({ percent: percentage }));
       }
     }
   }

@@ -95,60 +95,49 @@ Quiet can be used for free under the MIT license. Unfortunately, I can't offer s
 
 ## Frequently asked questions
 
-<details name="faq">
-  <summary>Do you offer support?</summary>
-  Yes. You can <a href="https://github.com/sponsors/quietui">sponsor Quiet on GitHub</a> to unlock access to a <a href="https://github.com/quietui/sponsors/discussions">sponsors-only discussion forum</a> where you can get help directly from me, the maintainer, as well as other members of the community. I typically respond within 24 hours.
-</details>
+:::details Do you offer support? {.faq}
+Yes. You can [sponsor Quiet on GitHub](https://github.com/sponsors/quietui) to unlock access to a [sponsors-only discussion forum](https://github.com/quietui/sponsors/discussions) where you can get help directly from me, the maintainer, as well as other members of the community. I typically respond within 24 hours.
+:::
 
-<details name="faq">
-  <summary>Is support guaranteed?</summary>
-  I will always do my best to help you and I typically reply within 24 hours. However, a sponsorship doesn't guarantee that I'll be able to fix your problem every time.
-</details>
+:::details Is support guaranteed? {.faq}
+I will always do my best to help you and I typically reply within 24 hours. However, a sponsorship doesn't guarantee that I'll be able to fix your problem every time.
+:::
 
-<details name="faq">
-  <summary>When will my bug be fixed?</summary>
-  I prioritize bug fixes that affect sponsors first. I try to submit fixes quickly, but some bugs are tricky and require more time, research, etc. I will communicate my progress with you so you're always aware of what's happening.
-</details>
+:::details When will my bug be fixed? {.faq}
+I prioritize bug fixes that affect sponsors first. I try to submit fixes quickly, but some bugs are tricky and require more time, research, etc. I will communicate my progress with you so you're always aware of what's happening.
+:::
 
-<details name="faq">
-  <summary>Where are the sponsors-only forums?</summary>
-  <a href="https://github.com/quietui/sponsors">The forums are located here.</a> Note that the link will not be available until you're an active sponsor.
-</details>
+:::details Where are the sponsors-only forums? {.faq}
+[The forums are located here.](https://github.com/quietui/sponsors) Please note that the page will appear as a 404 error unless you're an active sponsor!
+:::
 
-<details name="faq">
-  <summary>Can I cancel my sponsorship?</summary>
-  Yes. You can cancel your sponsorship any time, but you will lose access to the sponsors-only benefits when the sponsorship period expires.
-</details>
+:::details Can I cancel my sponsorship? {.faq}
+Yes. You can cancel your sponsorship any time, but you will lose access to the sponsors-only benefits when the sponsorship period expires.
+:::
 
-<details name="faq">
-  <summary>How can I report a bug?</summary>
-  Bugs should be <a href="https://github.com/quietui/quiet/issues">reported on GitHub</a>. You do not need to be a sponsor to report a bug, but priority is given to sponsors. For best results, please include a minimal reproduction with your report.
-</details>
+:::details How can I report a bug? {.faq}
+Bugs should be [reported on GitHub](https://github.com/quietui/quiet/issues). You do not need to be a sponsor to report a bug, but priority is given to sponsors. For best results, please include a minimal reproduction with your report.
+:::
 
-<details name="faq">
-  <summary>How can I request a feature?</summary>
-  Features can be <a href="https://github.com/quietui/quiet/discussions/categories/feature-requests">requested on GitHub</a>. You do not need to be a sponsor to request a feature. Please search before posting to prevent duplicate requests and use the 👍 reaction to vote.
-</details>
+:::details How can I request a feature? {.faq}
+Features can be [requested on GitHub](https://github.com/quietui/quiet/discussions/categories/feature-requests). You do not need to be a sponsor to request a feature. Please search before posting to prevent duplicate requests and use the 👍 reaction to vote.
+:::
 
-<details name="faq">
-  <summary>Can I sponsor/prioritize a feature?</summary>
-  I generally don't accept sponsorships for specific features. This lets me focus on what's best for the library.
-</details>
+:::details Can I sponsor/prioritize a feature? {.faq}
+I generally don't accept sponsorships for specific features. This lets me focus on what's best for the library.
+:::
 
-<details name="faq">
-  <summary>Can I change the tag names?</summary>
-  Component tag names, e.g. <code>&lt;quiet-button&gt;</code>, cannot be changed without modifying the source code due to the way tags are referenced in code and styles. Attempting to change tag names, e.g. by extending the associated classes, will cause unexpected breakages and isn't a supported feature of the library.
-</details>
+:::details Can I change the tag names? {.faq}
+Component tag names, e.g. `<quiet-button>`, cannot be changed without modifying the source code due to the way tags are referenced in code and styles. Attempting to change tag names, e.g. by extending the associated classes, will cause unexpected breakages and isn't a supported feature of the library.
+:::
 
-<details name="faq">
-  <summary>Can I subclass the components?</summary>
-  While components are written as classes, they aren't designed to be subclassed. This is not supported and isn't an objective of the library. Instead, use composition when possible.
-</details>
+:::details Can I subclass the components? {.faq}
+While components are written as classes, they aren't designed to be subclassed. This is not supported and isn't an objective of the library. Instead, use composition when possible.
+:::
 
-<details name="faq">
-  <summary>Can I use this library with a micro frontend?</summary>
-  Because custom elements are registered globally, I don't recommend using Quiet in a micro frontend architecture <em>unless</em> you move it to the top of the stack. Avoid loading the library multiple times, as this will cause version conflicts and load more code than is necessary.
-</details>
+:::details Can I use this library with a micro frontend? {.faq}
+Because custom elements are registered globally, I don't recommend using Quiet in a micro frontend architecture _unless_ you move it to the top of the stack. Avoid loading the library multiple times, as this will cause version conflicts and load more code than is necessary.
+:::
 
 <img class="whiskers-center whiskers-center only-light" src="/assets/images/whiskers/whiskers-neutral-light.svg" alt="Whiskers the mouse standing with a neutral expression">
 <img class="whiskers-center whiskers-center only-dark" src="/assets/images/whiskers/whiskers-neutral-dark.svg" alt="Whiskers the mouse standing with a neutral expression">

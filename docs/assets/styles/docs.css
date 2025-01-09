@@ -1028,14 +1028,27 @@ quiet-callout {
 
   .features-grid {
     margin-block: 1rem 2rem;
+
+    li {
+      background-color: var(--quiet-silent);
+    }
+  }
+
+  pre:has(code),
+  .features-grid li {
+    box-shadow: var(--quiet-shadow-soft);
   }
 }
 
 /* Dark mode */
 .quiet-dark #content .below-splash {
+  pre:has(code) {
+    background-color: var(--quiet-silent);
+  }
+
   pre:has(code),
   .features-grid li {
-    background-color: #141418;
+    box-shadow: 0 8px 16px color-mix(in oklab, transparent, var(--quiet-primary-fill-soft) 15%);
   }
 }
 

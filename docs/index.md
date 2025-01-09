@@ -92,7 +92,7 @@ Copy and paste the following code into the `<head>` section of any HTML document
 <img class="whiskers-center only-dark" src="/assets/images/whiskers/whiskers-whistling-dark.svg" alt="Whiskers the mouse walking and whistling">
 
 <small class="copyright">
-  Quiet UI is a project of A Beautiful Site, LLC
+  Quiet UI is a project of A&nbsp;Beautiful&nbsp;Site,&nbsp;LLC
   &copy;<quiet-date year="numeric"></quiet-date>
 </small>
 

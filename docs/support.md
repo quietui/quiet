@@ -143,6 +143,6 @@ Because custom elements are registered globally, I don't recommend using Quiet i
 <img class="whiskers-center whiskers-center only-dark" src="/assets/images/whiskers/whiskers-neutral-dark.svg" alt="Whiskers the mouse standing with a neutral expression">
 
 <small class="copyright">
-  Quiet UI is a project of A Beautiful Site, LLC
+  Quiet UI is a project of A&nbsp;Beautiful&nbsp;Site,&nbsp;LLC
   &copy;<quiet-date year="numeric"></quiet-date>
 </small>

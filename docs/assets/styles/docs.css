@@ -869,7 +869,7 @@ quiet-callout {
   --grid-size: 100px;
   --grid-half-size: calc(var(--grid-size) / 2);
   --dot-size: 3px;
-  --opacity-base: 0.15;
+  --opacity-base: 0.18;
   /* prettier-ignore */
   background-image:
     linear-gradient(to top, transparent 0, color-mix(in oklab, var(--quiet-background-color), transparent 25%) 100%),

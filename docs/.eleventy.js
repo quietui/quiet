@@ -21,6 +21,7 @@ const isDeveloping = process.argv.includes('--develop');
 export default function (eleventyConfig) {
   // Add template data
   eleventyConfig.addGlobalData('package', packageData);
+  eleventyConfig.addGlobalData('componentCount', getComponents().length);
 
   // Template filters - {{ content | filter }}
   eleventyConfig.addFilter('inlineMarkdown', content => {

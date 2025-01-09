@@ -146,12 +146,3 @@ Because custom elements are registered globally, I don't recommend using Quiet i
   Quiet UI is a project of A Beautiful Site, LLC
   &copy;<quiet-date year="numeric"></quiet-date>
 </small>
-
-<style>
-  .copyright {
-    display: block;
-    color: var(--quiet-text-muted);
-    text-align: center;
-    margin-block-end: 2rem;
-  }
-</style>

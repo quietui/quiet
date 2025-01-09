@@ -4,34 +4,7 @@ description: Start using Quiet with just a couple lines of code.
 layout: docs
 ---
 
-Quiet is an open source library for building modern user interfaces on the Web. Here's what's in the box and how you can start using it.
-
-<ul class="features-grid">
-  <li>
-    <a class="stretch" href="/docs/using-components">
-      <quiet-icon name="packages" style="color: #b394f4;"></quiet-icon><br>
-      Dozens of high-quality, accessible, interoperable UI components
-    </a>
-  </li>
-  <li>
-    <a class="stretch" href="/docs/theming">
-      <quiet-icon name="palette" style="color: #e98d61;"></quiet-icon><br>
-      Modern theme with light and dark mode and 21 color presets
-    </a>
-  </li>
-  <li>
-    <a class="stretch" href="/docs/restyle">
-      <quiet-icon name="seedling" style="color: #7db664;"></quiet-icon><br>
-      Optional CSS reset for jump-starting new apps with consistent styles
-    </a>
-  </li>
-  <li>
-    <a class="stretch" href="/docs/localization">
-      <quiet-icon name="language" style="color: #58acf2;"></quiet-icon><br>
-      Localized components with translations in multiple languages
-    </a>
-  </li>  
-</ul>
+Quiet is an open source library for building modern user interfaces on the Web. It features dozens of high-quality, accessible, interoperable components, a modern theme with light and darks modes that can adapt to any brand, an optional CSS reset, and more!
 
 **There are two ways to install Quiet components.** [Autoloading](#autoloading) is the fastest way to get started — just copy, paste, and start coding. Or you can [import components manually](#manually-importing) from npm or the CDN.
 
@@ -43,10 +16,10 @@ All of these features are part of [Baseline 2023–2024](https://web.dev/baselin
 
 ## Autoloading <quiet-badge variant="constructive" data-no-outline data-no-anchor>Recommended</quiet-badge>
 
-Copy and paste the following code into the `<head>` section of any HTML document. The autoloader will automatically load components from the CDN as you add them to the DOM.
+Copy and paste the following code into the `<head>` section of any HTML document. The autoloader will fetch components from the CDN as you add them to the DOM.
 
 ```html
-<!-- Quiet theme + components -->
+<!-- Quiet theme + autoloader -->
 <link rel="stylesheet" href="{% cdnUrl '/dist/themes/quiet.css' %}">
 <script type="module" src="{% cdnUrl '/dist/quiet.loader.js' %}"></script>
 

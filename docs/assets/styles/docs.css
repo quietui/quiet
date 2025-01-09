@@ -929,21 +929,18 @@ quiet-callout {
 }
 
 .layout-splash #page {
-  height: 100dvh;
-
   /* Don't overflow in landscape + mobile */
   @media screen and (max-height: 600px) {
     height: auto;
   }
 }
 
-.layout-splash #content {
-  display: flex;
-  align-items: center;
-  height: calc(100% - var(--docs-header-height));
-}
-
 .splash {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: calc(100svh - var(--docs-header-height));
   margin-inline: auto;
   padding-inline: 2rem;
   font-weight: var(--quiet-font-weight-bold);
@@ -963,12 +960,13 @@ quiet-callout {
     /* Smaller logo on mobile */
     @media screen and (max-width: 959px) {
       max-width: 320px;
-      margin-block: -2.5rem;
+      height: auto;
     }
   }
 }
 
 .splash .subtitle {
+  margin-block: 1rem;
   font-size: 2.25rem;
 }
 
@@ -977,13 +975,16 @@ quiet-callout {
   justify-content: center;
   margin-block-start: 4rem;
   gap: 1rem;
+
+  quiet-button[variant='secondary']::part(button) {
+    background-color: color-mix(in oklab, var(--quiet-silent), var(--quiet-strident) 5%);
+  }
 }
 
 @media screen and (max-width: 600px) {
   .splash-actions {
     flex-direction: column;
     align-items: center;
-    margin-block-start: 4rem;
     margin-block-end: 0;
 
     quiet-button {
@@ -1005,6 +1006,36 @@ quiet-callout {
 
   #body.has-sidebar #page {
     padding-inline: 1rem;
+  }
+}
+
+#content .below-splash {
+  max-width: calc(70ch + 4rem);
+  margin-inline: auto;
+  padding-inline: 2rem;
+
+  h2,
+  h3,
+  h4,
+  p,
+  div {
+    text-align: center;
+  }
+
+  h2 {
+    margin-block-start: 1.5rem;
+  }
+
+  .features-grid {
+    margin-block: 1rem 2rem;
+  }
+}
+
+/* Dark mode */
+.quiet-dark #content .below-splash {
+  pre:has(code),
+  .features-grid li {
+    background-color: #141418;
   }
 }
 
@@ -1305,4 +1336,12 @@ td.table-reflects {
 /* FAQ */
 h2 + details {
   margin-block-start: var(--quiet-content-spacing);
+}
+
+/* Copyrights */
+.copyright {
+  display: block;
+  margin-block-end: 2rem;
+  color: var(--quiet-text-muted);
+  text-align: center;
 }

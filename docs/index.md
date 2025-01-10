@@ -24,9 +24,40 @@ About this project
 </quiet-button>
 
 </div>
+
+<quiet-icon id="more-hint" label="Scroll down" name="chevron-down"></quiet-icon>
 </div>
 
-<div class="below-splash">
+<div id="below-the-fold" class="below-splash">
+
+<h2 data-no-anchor>What's in the box?</h2>
+
+<ul class="features-grid">
+  <li>
+    <a class="stretch" href="/docs/using-components">
+      <quiet-icon name="packages" style="color: #b394f4;"></quiet-icon><br>
+      {{ componentCount }} high-quality, accessible, interoperable UI components
+    </a>
+  </li>
+  <li>
+    <a class="stretch" href="/docs/theming">
+      <quiet-icon name="palette" style="color: #e98d61;"></quiet-icon><br>
+      Modern theme with light and dark mode that can adapt to any brand
+    </a>
+  </li>
+  <li>
+    <a class="stretch" href="/docs/restyle">
+      <quiet-icon name="seedling" style="color: #7db664;"></quiet-icon><br>
+      Optional CSS reset for jump-starting new apps with consistent styles
+    </a>
+  </li>
+  <li>
+    <a class="stretch" href="/docs/localization">
+      <quiet-icon name="language" style="color: #58acf2;"></quiet-icon><br>
+      Localized components with translations in multiple languages
+    </a>
+  </li>  
+</ul>
 
 <h2 data-no-anchor>Quick start</h2>
 
@@ -58,35 +89,6 @@ Copy and paste the following code into the `<head>` section of any HTML document
     Using components
   </quiet-button>
 </div>
-
-<h2 data-no-anchor>What's in the box?</h2>
-
-<ul class="features-grid">
-  <li>
-    <a class="stretch" href="/docs/using-components">
-      <quiet-icon name="packages" style="color: #b394f4;"></quiet-icon><br>
-      {{ componentCount }} high-quality, accessible, interoperable UI components
-    </a>
-  </li>
-  <li>
-    <a class="stretch" href="/docs/theming">
-      <quiet-icon name="palette" style="color: #e98d61;"></quiet-icon><br>
-      Modern theme with light and dark mode that can adapt to any brand
-    </a>
-  </li>
-  <li>
-    <a class="stretch" href="/docs/restyle">
-      <quiet-icon name="seedling" style="color: #7db664;"></quiet-icon><br>
-      Optional CSS reset for jump-starting new apps with consistent styles
-    </a>
-  </li>
-  <li>
-    <a class="stretch" href="/docs/localization">
-      <quiet-icon name="language" style="color: #58acf2;"></quiet-icon><br>
-      Localized components with translations in multiple languages
-    </a>
-  </li>  
-</ul>
 
 <img class="whiskers-center only-light" src="/assets/images/whiskers/whiskers-whistling-light.svg" alt="Whiskers the mouse walking and whistling">
 <img class="whiskers-center only-dark" src="/assets/images/whiskers/whiskers-whistling-dark.svg" alt="Whiskers the mouse walking and whistling">

@@ -937,6 +937,7 @@ quiet-callout {
 
 .splash {
   display: flex;
+  position: relative;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -1049,6 +1050,47 @@ quiet-callout {
   pre:has(code),
   .features-grid li {
     box-shadow: 0 8px 16px color-mix(in oklab, transparent, var(--quiet-primary-fill-soft) 15%);
+  }
+}
+
+#more-hint {
+  display: flex;
+  position: absolute;
+  bottom: 1rem;
+  left: calc(50% - 1.5rem);
+  color: color-mix(in hsl, var(--quiet-neutral-fill-louder), transparent 75%);
+  font-size: 3rem;
+  animation: hint-bounce 2s infinite;
+  transition:
+    0.75s ease scale,
+    0.75s ease opacity;
+
+  @media screen and (max-width: 767px) {
+    bottom: 2rem;
+  }
+}
+
+body.scrolled-down #more-hint {
+  scale: 0.75;
+  animation: none;
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes hint-bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  70%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-6px);
+  }
+  60% {
+    transform: translateY(-3px);
   }
 }
 

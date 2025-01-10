@@ -1046,11 +1046,6 @@ quiet-callout {
   pre:has(code) {
     background-color: var(--quiet-silent);
   }
-
-  pre:has(code),
-  .features-grid li {
-    box-shadow: 0 8px 16px color-mix(in oklab, transparent, var(--quiet-primary-fill-soft) 15%);
-  }
 }
 
 #more-hint {

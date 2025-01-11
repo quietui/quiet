@@ -5,7 +5,7 @@ import hostStyles from '../../styles/host.styles.js';
 import type { Platform } from '../../utilities/platform.js';
 import { detectPlatform } from '../../utilities/platform.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
-import styles from './keyboard-shortcut.styles.js';
+import styles from './hotkey.styles.js';
 
 const keywordMap = {
   command: { mac: '⌘', other: 'CTRL' },
@@ -24,10 +24,10 @@ const keywordMap = {
 };
 
 /**
- * <quiet-keyboard-shortcut>
+ * <quiet-hotkey>
  *
- * @summary Keyboard shortcuts show key combinations and special characters based on the user's operating system.
- * @documentation https://quietui.org/docs/components/keyboard-shortcut
+ * @summary Hotkeys show keyboard shortcut combinations based on the user's operating system.
+ * @documentation https://quietui.org/docs/components/hotkey
  * @status stable
  * @since 1.0
  *
@@ -35,11 +35,11 @@ const keywordMap = {
  * @csspart keyword - The `<kbd>` elements that wrap keywords.
  * @csspart delimiter - The `<span>` elements that wrap delimiters.
  */
-@customElement('quiet-keyboard-shortcut')
-export class QuietKeyboardShortcut extends QuietElement {
+@customElement('quiet-hotkey')
+export class QuietHotkey extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
-  /** The primary keys to display in the shortcut, separated by a space. */
+  /** The primary keys to display in the hotkey, separated by a space. */
   @property() keys = '';
 
   /** The keys to display on Linux devices, separated by a space. */
@@ -51,7 +51,7 @@ export class QuietKeyboardShortcut extends QuietElement {
   /** The keys to display on Windows devices, separated by a space. */
   @property() windows = '';
 
-  /** Optional label for screen readers. If not provided, the shortcut text will be used. */
+  /** Optional label for screen readers. If not provided, the hotkey text will be used. */
   @property() label: string;
 
   /**
@@ -66,7 +66,7 @@ export class QuietKeyboardShortcut extends QuietElement {
    */
   @property() platform: 'auto' | 'linux' | 'mac' | 'windows' = 'auto';
 
-  /** The shortcut's appearance. */
+  /** The hotkey's appearance. */
   @property({ reflect: true }) appearance: 'normal' | 'unstyled' = 'normal';
 
   updated(changedProperties: PropertyValues<this>) {
@@ -103,7 +103,7 @@ export class QuietKeyboardShortcut extends QuietElement {
     // Process the text, replacing keywords with their symbols
     const segments = this.replaceKeywords(props[platform as keyof typeof props] || '', platform as Platform);
 
-    // Render the keyboard shortcut
+    // Render the hotkey
     return html`${segments.map((segment, i) => {
       // Create a `<kbd>` element for each segment
       const keyElement = html`<kbd part=${segment.isKeyword ? 'keyword' : 'key'}>${segment.text.trim()}</kbd>`;
@@ -116,6 +116,6 @@ export class QuietKeyboardShortcut extends QuietElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'quiet-keyboard-shortcut': QuietKeyboardShortcut;
+    'quiet-hotkey': QuietHotkey;
   }
 }

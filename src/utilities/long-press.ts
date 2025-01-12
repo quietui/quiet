@@ -40,7 +40,7 @@ export class LongPress {
         cancelable: true,
         composed: true
       },
-      duration: 500,
+      duration: 700,
       ignorePointerEvents: false,
       maxDelta: 10,
       overrideStyles: true,

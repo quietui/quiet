@@ -7,6 +7,9 @@ layout: docs
   <quiet-icon slot="start" name="search"></quiet-icon>
 </quiet-text-field>
 
+<!-- Screen reader announcements -->
+<div id="search-status" aria-live="polite" class="visually-hidden"></div>
+
 <div id="component-index">
   {%- for component in components -%}
     <a 
@@ -34,6 +37,7 @@ layout: docs
   import Fuse from 'https://cdn.jsdelivr.net/npm/fuse.js@6.6.2/dist/fuse.esm.min.js';
 
   const searchBox = document.getElementById('component-search');
+  const searchStatus = document.getElementById('search-status');
   const componentIndex = document.getElementById('component-index');
   const components = Array.from(componentIndex.querySelectorAll('.component'));
   const emptyState = componentIndex.querySelector('.empty');
@@ -64,6 +68,7 @@ layout: docs
     if (!query) {
       components.forEach(component => component.hidden = false);
       emptyState.hidden = true;
+      searchStatus.textContent = `Showing all ${components.length} components`;
       return;
     }
 
@@ -71,15 +76,21 @@ layout: docs
     const results = fuse.search(query);
     const matchedIndexes = new Set(results.map(result => result.item.index));
     
-    // Update visibility of components
-    let isEmpty = true;
+    // Update visibility and count matches
+    let visibleCount = 0;
     components.forEach((component, index) => {
       const isMatch = matchedIndexes.has(index);
-      if (isMatch) isEmpty = false;
+      if (isMatch) visibleCount++;
       component.hidden = !isMatch;
     });
 
-    emptyState.hidden = !isEmpty;
+    emptyState.hidden = visibleCount !== 0;
+    
+    // Announce results
+    const status = visibleCount === 0 
+      ? 'No components found' 
+      : `Found ${visibleCount} matching components`;
+    searchStatus.textContent = status;
   }
 
   // Update when the search query changes

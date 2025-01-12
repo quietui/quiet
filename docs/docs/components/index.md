@@ -173,7 +173,7 @@ layout: docs
       grid-column: 1 / -1;
       padding: 3rem 2rem;
       color: var(--quiet-text-muted);
-      font-size: 0.875rem;
+      font-size: 1.125rem;
       text-align: center;
 
       quiet-icon {

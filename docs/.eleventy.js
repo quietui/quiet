@@ -17,11 +17,12 @@ import { searchPlugin } from './_utils/search.js';
 
 const packageData = JSON.parse(await readFile('./package.json', 'utf-8'));
 const isDeveloping = process.argv.includes('--develop');
+const components = getComponents();
 
 export default function (eleventyConfig) {
   // Add template data
   eleventyConfig.addGlobalData('package', packageData);
-  eleventyConfig.addGlobalData('componentCount', getComponents().length);
+  eleventyConfig.addGlobalData('components', components);
 
   // Template filters - {{ content | filter }}
   eleventyConfig.addFilter('inlineMarkdown', content => {
@@ -31,6 +32,18 @@ export default function (eleventyConfig) {
   });
   eleventyConfig.addFilter('majorVersion', string => string.split('.')[0]);
   eleventyConfig.addFilter('markdown', content => markdown.render(content || ''));
+  eleventyConfig.addFilter('tagNameToDisplayName', tagName => {
+    let displayName = tagName
+      .split('-')
+      .slice(1)
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+
+    if (displayName === 'Qr') return 'QR';
+
+    return displayName;
+  });
+
   eleventyConfig.addFilter('stripExtension', string => parse(string).name);
   eleventyConfig.addFilter('stripQuietPrefix', content => content.replace(/^quiet-/, ''));
   eleventyConfig.addFilter('splitPipes', content => {
@@ -58,7 +71,7 @@ export default function (eleventyConfig) {
 
   // Helpers
   eleventyConfig.addNunjucksGlobal('getComponent', tagName => {
-    const component = getComponents().find(c => c.tagName === tagName);
+    const component = components.find(c => c.tagName === tagName);
 
     if (!component) {
       throw new Error(

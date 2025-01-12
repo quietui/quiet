@@ -1,5 +1,5 @@
 ---
-title: Editor setup
+title: Editor Setup
 description: Configure your editor for a better DX when using the library.
 layout: docs
 ---

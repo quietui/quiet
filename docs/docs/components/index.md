@@ -116,7 +116,7 @@ isWide: true
 
   #component-index {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
     align-items: start;
     gap: 1rem;
     width: 100%;
@@ -158,6 +158,7 @@ isWide: true
         color: var(--quiet-text-muted);
         background: transparent;
         font-size: 1.125rem;
+        white-space: normal;
         padding: 0;
       }
 

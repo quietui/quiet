@@ -11,7 +11,7 @@ import styles from './fit-text.styles.js';
  *
  * @summary Scales a line of text to fit within its container.
  * @documentation https://quietui.org/docs/components/fit-text
- * @status experimental
+ * @status stable
  * @since 1.0
  *
  * @slot - One or more text nodes to display. Non-text nodes will be ignored.

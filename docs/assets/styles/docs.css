@@ -916,6 +916,10 @@ quiet-callout {
   background-repeat: repeat;
   background-attachment: fixed;
   text-wrap: balance;
+
+  quiet-button[variant='secondary']::part(button) {
+    background-color: color-mix(in oklab, var(--quiet-silent), var(--quiet-strident) 5%);
+  }
 }
 
 .layout-splash:not(.scrolled-down) #header {
@@ -976,10 +980,6 @@ quiet-callout {
   justify-content: center;
   margin-block-start: 4rem;
   gap: 1rem;
-
-  quiet-button[variant='secondary']::part(button) {
-    background-color: color-mix(in oklab, var(--quiet-silent), var(--quiet-strident) 5%);
-  }
 }
 
 @media screen and (max-width: 600px) {

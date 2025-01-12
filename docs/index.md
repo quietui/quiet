@@ -81,12 +81,12 @@ Copy and paste the following code into the `<head>` section of any HTML document
     margin-block: 2rem 4rem;
   "
 >
-  <quiet-button variant="primary" size="lg" appearance="outline" pill href="/docs">
+  <quiet-button size="lg" pill href="/docs">
     Installation guide
   </quiet-button>
 
-  <quiet-button variant="primary" size="lg" appearance="outline" pill href="/docs/using-components">
-    Using components
+  <quiet-button size="lg" pill href="/docs/components">
+    Browse components
   </quiet-button>
 </div>
 

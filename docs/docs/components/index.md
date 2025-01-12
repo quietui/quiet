@@ -41,29 +41,27 @@ layout: docs
   // Create searchable items from components
   const searchableItems = components.map((component, index) => ({
     name: component.querySelector('.name').textContent,
-    summary: component.querySelector('p').textContent,
+    summary: component.querySelector('.summary').textContent,
     index
   }));
 
-  // Configure Fuse with appropriate options
-  const fuseOptions = {
+  // Configure fuzzy search
+  const fuse = new Fuse(searchableItems, {
     keys: ['name', 'summary'],
     threshold: 0.3,
     distance: 100,
-    minMatchCharLength: 2,
+    minMatchCharLength: 1,
     shouldSort: true,
     includeScore: true,
     useExtendedSearch: true,
     ignoreLocation: true
-  };
-
-  const fuse = new Fuse(searchableItems, fuseOptions);
+  });
 
   function updateSearchResults(query = '') {
     query = query.trim();
     
+    // Show all components when the query is empty
     if (!query) {
-      // Show all components when no query
       components.forEach(component => component.hidden = false);
       emptyState.hidden = true;
       return;
@@ -84,27 +82,12 @@ layout: docs
     emptyState.hidden = !isEmpty;
   }
 
-  // Debounce function to limit the rate of search updates
-  function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-      const later = () => {
-        clearTimeout(timeout);
-        func(...args);
-      };
-      clearTimeout(timeout);
-      timeout = setTimeout(later, wait);
-    };
-  }
-
-  // Add event listener with debouncing
-  const debouncedSearch = debounce((event) => {
+  // Update when the search query changes
+  searchBox.addEventListener('quiet-input', (event) => {
     updateSearchResults(event.target.value);
-  }, 150);
+  });
 
-  searchBox.addEventListener('quiet-input', debouncedSearch);
-
-  // Initialize search results
+  // Initialize results
   updateSearchResults(searchBox.value);
 </script>
 

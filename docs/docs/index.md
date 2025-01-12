@@ -27,7 +27,7 @@ Copy and paste the following code into the `<head>` section of any HTML document
 <link rel="stylesheet" href="{% cdnUrl '/dist/themes/restyle.css' %}">
 ```
 
-Now you can use any component in your HTML!
+Now you can [use Quiet components](/docs/components) in your HTML!
 
 ```html {.example .no-buttons .flex-row}
 <quiet-button variant="primary">

@@ -1,10 +1,9 @@
 ---
 title: Browse Components
-layout: page
-isWide: true
+layout: docs
 ---
 
-<quiet-text-field id="component-search" label="Searching {{ components.length }} components" pill autofocus clearable>
+<quiet-text-field id="component-search" label="Searching {{ components.length }} custom elements" pill autofocus clearable>
   <quiet-icon slot="start" name="search"></quiet-icon>
 </quiet-text-field>
 

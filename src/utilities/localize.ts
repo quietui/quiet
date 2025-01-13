@@ -34,6 +34,7 @@ export interface Translation extends DefaultTranslation {
   loading: string;
   remove: string;
   selectAColorFromTheScreen: string;
+  share: string;
   showPassword: string;
   show: string;
   spoiler: string;

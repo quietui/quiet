@@ -1,5 +1,6 @@
 import { css } from 'lit';
 
+/** NOTE: these styles are also used by <quiet-share> */
 export default css`
   :host {
     display: inline-block;

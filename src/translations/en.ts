@@ -25,6 +25,7 @@ const translation: Translation = {
   pressSpaceForOneSecondToActivate: 'Press space bar for one second to activate',
   remove: 'Remove',
   selectAColorFromTheScreen: 'Select a color from the screen',
+  share: 'Share',
   showPassword: 'Show password',
   show: 'Show',
   spoiler: 'Spoiler'

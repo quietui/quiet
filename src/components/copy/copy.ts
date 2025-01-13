@@ -41,7 +41,7 @@ export class QuietCopy extends QuietElement {
 
   private localize = new Localize(this);
 
-  @query('#feedback') private feedback: HTMLSlotElement;
+  @query('#feedback') private feedback: HTMLElement;
 
   /** The text content that will be copied to the clipboard. */
   @property() data: string | ClipboardItem[] = '';
@@ -82,8 +82,8 @@ export class QuietCopy extends QuietElement {
 
       this.dispatchEvent(new QuietCopiedEvent({ data: this.data }));
       this.showFeedback(this.localize.term('copied'));
-    } catch (error) {
-      this.dispatchEvent(new QuietCopyErrorEvent({ error: error as Error }));
+    } catch (err) {
+      this.dispatchEvent(new QuietCopyErrorEvent({ error: err as Error }));
       this.showFeedback(this.localize.term('error'));
     }
   }

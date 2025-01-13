@@ -21,30 +21,25 @@ export class QuietButtonGroup extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
   /**
-   * An accessible label for the tab list. This won't be shown, but it will be read to assistive devices so you should
-   * always include one.
+   * An accessible label for the tab list. This won't be shown, but it will be read to assistive devices so it's
+   * usually a good idea to include one.
    */
-  @property() label: string;
+  @property() label = '';
 
   /** The button group's orientation. */
   @property({ reflect: true }) orientation: 'horizontal' | 'vertical' = 'horizontal';
 
   firstUpdated() {
     this.setAttribute('role', 'group');
-    this.setAttribute('aria-label', 'Button group');
-
-    // If label isn't set initially, show an accessibility warning
-    if (this.label === undefined) {
-      console.warn(
-        `A <quiet-button-group> was created without a label. This adversely affects the element's If this was intentional, please add label="" to suppress this message.`,
-        this
-      );
-    }
   }
 
   updated(changedProperties: PropertyValues<this>) {
     if (changedProperties.has('label')) {
-      this.setAttribute('aria-label', this.label);
+      if (this.label) {
+        this.setAttribute('aria-label', this.label);
+      } else {
+        this.removeAttribute('aria-label');
+      }
       this.updateClassNames();
     }
 

@@ -27,7 +27,7 @@ Use a custom button by simply slotting it in. Both [Quiet buttons](/docs/compone
 
 ```html {.example}
 <quiet-copy data="Copied with a Quiet button" style="margin-inline-end: 0.5rem;">
-  <quiet-button variant="primary">
+  <quiet-button>
     <quiet-icon slot="start" name="clipboard"></quiet-icon>
     Copy
   </quiet-button>

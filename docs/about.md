@@ -34,20 +34,21 @@ The truth is, Shoelace has matured a lot over the years. While that's a great th
 
 **Enter Quiet, my creative outlet.**
 
-A passion project. Something I'm building from scratch to explore new ideas and have fun with. A place where I can satisfy my component addiction, improve my design skills, and let my curiosity run wild.
+A passion project. Something I'm building from scratch to explore new ideas and have fun with. A place where I can satisfy my component addiction, improve my design skills, explore new Web APIs, and let my curiosity run wild.
 
 As a result, you'll find that Quiet is rather opinionated. I carefully curate everything from the project's scope down to every individual line of code. Oftentimes, saying "no" is key to maintaining the quality of the library and my ability to steward it effectively.
 
 ## Tell me about the mouse
 
-As mighty mammoths, fearsome saber-toothed cats, and giant cave bears vanished into the mists of time, the humble mouse lives on, reminding us that survival belongs not to the strongest or the most spectacular, but to those who can bend without breaking; who can find opportunity in adversity; who can thrive in the spaces between.
+Why did I choose a mouse for Quiet's mascot? Because mice are quiet. Because the computer mouse was an incredible boon to UX. Because I've [raised and rescued](https://x.com/cory_laviska/status/1508128840937316360) numerous mice. It seemed like a good fit. But then something much deeper clicked…
+
+As some of the world's most impressive creatures — from mighty [woolly mammoths](https://en.wikipedia.org/wiki/Woolly_mammoth) to fearsome [saber-toothed tigers](https://en.wikipedia.org/wiki/Smilodon) — vanished into the mists of time, the humble mouse continued to live on. Their resilience reminds us that survival belongs not to the strongest or the most spectacular, but to those who can bend without breaking; who can find opportunity in adversity; who can thrive in the spaces between.
 
 This library's power lies not in keeping up with the latest trends, but in speaking the timeless language of Web browsers. When the next framework extinction event comes, Quiet will live on, scurrying through the foundations of the Web, making homes in every project that values simplicity over spectacle.
 
 ## What's with all the cats?
 
-I'm not really sure. They keep sneaking into the docs. I think they like the logo. <quiet-icon name="paw" style="rotate: -10deg; translate: 0 2px;"></quiet-icon> <quiet-icon name="paw" style="rotate: 15deg; translate: 0 -4px;"></quiet-icon>
-
+The cats? Oh, uh, I'm not really sure. They keep sneaking into the docs. I think they like the logo.
 ## Special thanks
 
 I'd like to thank the following projects and people for making Quiet UI possible.

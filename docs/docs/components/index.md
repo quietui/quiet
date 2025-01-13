@@ -34,35 +34,60 @@ layout: docs
 </div>
 
 <script type="module">
-  import Fuse from 'https://cdn.jsdelivr.net/npm/fuse.js@6.6.2/dist/fuse.esm.min.js';
+  import lunr from 'https://cdn.jsdelivr.net/npm/lunr/+esm';
 
   const searchBox = document.getElementById('component-search');
   const searchStatus = document.getElementById('search-status');
   const componentIndex = document.getElementById('component-index');
   const components = Array.from(componentIndex.querySelectorAll('.component'));
   const emptyState = componentIndex.querySelector('.empty');
+  const documents = components.map((component, index) => {
+    const getName = () => {
+      const nameEl = component.querySelector('.name');
+      return nameEl ? nameEl.textContent || '' : '';
+    };
 
-  // Create searchable items from components
-  const searchableItems = components.map((component, index) => ({
-    name: component.querySelector('.name').textContent,
-    summary: component.querySelector('.summary').textContent,
-    index
-  }));
+    const getTagName = () => {
+      const tagEl = component.querySelector('.tag-name');
+      return tagEl ? tagEl.textContent || '' : '';
+    };
 
-  // Configure fuzzy search
-  const fuse = new Fuse(searchableItems, {
-    keys: ['name', 'summary'],
-    threshold: 0.3,
-    distance: 100,
-    minMatchCharLength: 1,
-    shouldSort: true,
-    includeScore: true,
-    useExtendedSearch: true,
-    ignoreLocation: true
+    const getSummary = () => {
+      const summaryEl = component.querySelector('.summary');
+      return summaryEl ? summaryEl.textContent || '' : '';
+    };
+
+    return {
+      id: index.toString(),
+      name: getName().toLowerCase(),
+      tagName: getTagName().toLowerCase(),
+      summary: getSummary().toLowerCase()
+    };
+  });
+
+  // Build Lunr index
+  const idx = lunr(function() {
+    // Define the fields first
+    this.ref('id');
+    this.field('name');
+    this.field('tagName');
+    this.field('summary');
+    
+    // Then add the documents
+    documents.forEach(doc => {
+      // Ensure all fields exist before adding
+      const safeDoc = {
+        id: doc.id,
+        name: doc.name || '',
+        tagName: doc.tagName || '',
+        summary: doc.summary || ''
+      };
+      this.add(safeDoc);
+    });
   });
 
   function updateSearchResults(query = '') {
-    query = query.trim();
+    query = query.trim().toLowerCase();
     
     // Show all components when the query is empty
     if (!query) {
@@ -72,25 +97,34 @@ layout: docs
       return;
     }
 
-    // Perform fuzzy search
-    const results = fuse.search(query);
-    const matchedIndexes = new Set(results.map(result => result.item.index));
-    
-    // Update visibility and count matches
-    let visibleCount = 0;
-    components.forEach((component, index) => {
-      const isMatch = matchedIndexes.has(index);
-      if (isMatch) visibleCount++;
-      component.hidden = !isMatch;
-    });
+    try {
+      // Perform a Lunr search with wildcard + fuzzy matching
+      const searchTerms = query.split(/\s+/).map(term => `${term}~1 ${term}*`).join(' ');
+      const results = idx.search(searchTerms);
+      const matchedIndexes = new Set(results.map(result => parseInt(result.ref)));
+      
+      // Update visibility and count matches
+      let visibleCount = 0;
+      components.forEach((component, index) => {
+        const isMatch = matchedIndexes.has(index);
+        if (isMatch) visibleCount++;
+        component.hidden = !isMatch;
+      });
 
-    emptyState.hidden = visibleCount !== 0;
-    
-    // Announce results
-    const status = visibleCount === 0 
-      ? 'No components found' 
-      : `Found ${visibleCount} matching components`;
-    searchStatus.textContent = status;
+      emptyState.hidden = visibleCount !== 0;
+      
+      // Announce results
+      const status = visibleCount === 0 
+        ? 'No components found' 
+        : `Found ${visibleCount} matching component${visibleCount === 1 ? '' : 's'}`;
+      searchStatus.textContent = status;
+    } catch (error) {
+      console.warn('Search error:', error);
+      // On error, show all components
+      components.forEach(component => component.hidden = false);
+      emptyState.hidden = true;
+      searchStatus.textContent = `Showing all ${components.length} components`;
+    }
   }
 
   // Update when the search query changes

@@ -1,5 +1,5 @@
 import { computePosition, flip } from '@floating-ui/dom';
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import hostStyles from '../../styles/host.styles.js';
@@ -50,7 +50,10 @@ export class QuietShare extends QuietElement {
    */
   @property({ type: Array }) files: File[];
 
-  /** The placement of the feedback animation. */
+  /** Disables the button. */
+  @property({ type: Boolean, reflect: true }) disabled = false;
+
+  /** The placement of the feedback animation when falling back to copying. */
   @property({ attribute: 'feedback-placement', reflect: true }) feedbackPlacement:
     | 'top'
     | 'right'
@@ -58,9 +61,24 @@ export class QuietShare extends QuietElement {
     | 'left'
     | 'hidden' = 'top';
 
+  updated(changedProperties: PropertyValues<this>) {
+    // Handle disabled
+    if (changedProperties.has('disabled')) {
+      // If the user has slotted in a button, sync its disabled state
+      const button = this.querySelector('quiet-button, button');
+      if (button) {
+        (button as HTMLButtonElement).disabled = this.disabled;
+      }
+    }
+  }
+
   private async handleClick(event: MouseEvent) {
     event.preventDefault();
     event.stopPropagation();
+
+    if (this.disabled) {
+      return;
+    }
 
     try {
       // Normal sharing
@@ -129,6 +147,7 @@ export class QuietShare extends QuietElement {
           exportparts="button:share-button__button"
           appearance="text"
           icon-label=${this.localize.term('share')}
+          ?disabled=${this.disabled}
         >
           <quiet-icon part="share-icon" exportparts="svg:share-icon__svg" library="system" name="share"></quiet-icon>
         </quiet-button>

@@ -1,5 +1,5 @@
 import { computePosition, flip } from '@floating-ui/dom';
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { QuietCopiedEvent, QuietCopyErrorEvent } from '../../events/copy.js';
@@ -46,6 +46,9 @@ export class QuietCopy extends QuietElement {
   /** The text content that will be copied to the clipboard. */
   @property() data: string | ClipboardItem[] = '';
 
+  /** Disables the button. */
+  @property({ type: Boolean, reflect: true }) disabled = false;
+
   /** The placement of the feedback animation. */
   @property({ attribute: 'feedback-placement', reflect: true }) feedbackPlacement:
     | 'top'
@@ -54,9 +57,24 @@ export class QuietCopy extends QuietElement {
     | 'left'
     | 'hidden' = 'top';
 
+  updated(changedProperties: PropertyValues<this>) {
+    // Handle disabled
+    if (changedProperties.has('disabled')) {
+      // If the user has slotted in a button, sync its disabled state
+      const button = this.querySelector('quiet-button, button');
+      if (button) {
+        (button as HTMLButtonElement).disabled = this.disabled;
+      }
+    }
+  }
+
   private async handleClick(event: MouseEvent) {
     event.preventDefault();
     event.stopPropagation();
+
+    if (this.disabled) {
+      return;
+    }
 
     try {
       if (typeof this.data === 'string') {
@@ -122,6 +140,7 @@ export class QuietCopy extends QuietElement {
           exportparts="button:copy-button__button"
           appearance="text"
           icon-label=${this.localize.term('copyToClipboard')}
+          ?disabled=${this.disabled}
         >
           <quiet-icon part="copy-icon" exportparts="svg:copy-icon__svg" library="system" name="copy"></quiet-icon>
         </quiet-button>

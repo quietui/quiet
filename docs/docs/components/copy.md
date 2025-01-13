@@ -38,10 +38,6 @@ Use a custom button by simply slotting it in. Both [Quiet buttons](/docs/compone
 </quiet-copy>
 ```
 
-:::info
-If your button only has an icon, be sure to add an accessible label with `aria-label`.
-:::
-
 ### Feedback placement
 
 Copy feedback shows above the button by default. Use the `feedback-placement` attribute to change where it gets shown. The actual placement may vary if there's insufficient room to display it in the viewport. To hide the feedback, set it to `hidden`.
@@ -158,4 +154,12 @@ For now, the most effective way to copy a non-PNG image is to render it in a `<c
     alert(`Sorry, but your browser doesn't support this API yet.`);
   });
 </script>
+```
+
+### Disabling
+
+Add the `disabled` attribute to disable the button and prevent copying.
+
+```html {.example}
+<quiet-copy data="https://quietui.org/" disabled></quiet-copy>
 ```

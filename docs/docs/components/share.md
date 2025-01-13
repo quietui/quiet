@@ -102,6 +102,15 @@ Use a custom button by simply slotting it in. Both [Quiet buttons](/docs/compone
 </quiet-share>
 ```
 
-:::info
-If your button only has an icon, be sure to add an accessible label with `aria-label`.
-:::
+### Disabling
+
+Add the `disabled` attribute to disable the button and prevent sharing.
+
+```html {.example}
+<quiet-share 
+  label="Quiet UI" 
+  text="An awesome library for building on the Web." 
+  url="https://quietui.org/" 
+  disabled
+></quiet-share>
+```

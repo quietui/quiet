@@ -47,7 +47,10 @@ export class QuietTransitionGroup extends QuietElement {
    */
   public transitionAnimation?: QuietTransitionAnimation;
 
-  /** Resolves when the current or next transition ends. (Property only) */
+  /**
+   * A promise that resolves when the current or next transition ends. This is a great way to ensure transitions have
+   * stopped before doing something else. (Property only)
+   */
   public transitionComplete: Promise<void> = Promise.resolve();
 
   /**

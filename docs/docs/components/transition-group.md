@@ -74,7 +74,7 @@ Wrap a collection of elements in a transition group and use normal DOM APIs to a
   removeButton.addEventListener('click', removeRandomBox);
   shuffleButton.addEventListener('click', shuffleBoxes);
   disableButton.addEventListener('click', () => {
-    transitionGroup.disableTransitions = disableButton.toggle === 'off';
+    transitionGroup.disableTransitions = disableButton.toggle !== 'off';
   });
 </script>
 

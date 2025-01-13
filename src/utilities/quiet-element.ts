@@ -48,6 +48,11 @@ export class QuietElement extends LitElement {
         this.updateSlotsWithContent();
       });
     }
+
+    // Represent with a link to the docs for curious devs
+    this.shadowRoot.prepend(
+      document.createComment(` Quiet UI · https://quietui.org/docs/components/${this.localName.replace('quiet-', '')} `)
+    );
   }
 
   /**

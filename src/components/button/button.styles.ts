@@ -136,7 +136,7 @@ export default css`
       color: var(--quiet-primary-text-colorful);
 
       @media (hover: hover) {
-        &:hover {
+        &:hover:not(.disabled, [aria-pressed='true']) {
           background: color-mix(in oklab, transparent, var(--quiet-primary-fill-mid) 7.5%);
         }
       }
@@ -148,7 +148,7 @@ export default css`
       color: var(--quiet-neutral-text-colorful);
 
       @media (hover: hover) {
-        &:hover {
+        &:hover:not(.disabled, [aria-pressed='true']) {
           background: color-mix(in oklab, transparent, var(--quiet-neutral-fill-mid) 7.5%);
         }
       }
@@ -160,7 +160,7 @@ export default css`
       color: var(--quiet-destructive-text-colorful);
 
       @media (hover: hover) {
-        &:hover {
+        &:hover:not(.disabled, [aria-pressed='true']) {
           background: color-mix(in oklab, transparent, var(--quiet-destructive-fill-mid) 7.5%);
         }
       }
@@ -172,7 +172,7 @@ export default css`
       color: var(--quiet-neutral-text-on-soft);
 
       @media (hover: hover) {
-        &:hover {
+        &:hover:not(.disabled, [aria-pressed='true']) {
           background-color: color-mix(in oklab, transparent, var(--quiet-text-body) 5%);
         }
       }

@@ -1063,6 +1063,10 @@ quiet-callout {
   @media screen and (max-width: 767px) {
     bottom: 2rem;
   }
+
+  @media screen and (max-height: 660px) {
+    opacity: 0;
+  }
 }
 
 body.scrolled-down #more-hint {

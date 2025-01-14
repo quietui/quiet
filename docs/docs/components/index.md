@@ -126,9 +126,10 @@ layout: docs
     }
   }
 
-  // Update when the search query changes
+  let searchTimeout;
   searchBox.addEventListener('quiet-input', (event) => {
-    updateSearchResults(event.target.value);
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(() => updateSearchResults(event.target.value), 300);
   });
 
   // Initialize results

@@ -4,14 +4,14 @@ const lunr = res[0].default;
 const searchData = await res[1].json();
 const searchIndex = lunr.Index.load(searchData.searchIndex);
 const map = searchData.map;
-const searchDebounce = 100;
+const searchDebounce = 200;
 let searchTimeout;
 
 // We're using Turbo, so references to these elements aren't guaranteed to remain intact
 function getElements() {
   return {
     dialog: document.getElementById('site-search'),
-    textField: document.getElementById('site-search-text-field'),
+    searchBox: document.getElementById('site-search-text-field'),
     results: document.getElementById('site-search-listbox')
   };
 }
@@ -36,9 +36,9 @@ document.addEventListener('click', event => {
 });
 
 function show() {
-  const { dialog, textField, results } = getElements();
+  const { dialog, searchBox, results } = getElements();
 
-  textField.addEventListener('quiet-input', handleInput);
+  searchBox.addEventListener('quiet-input', handleInput);
   results.addEventListener('click', handleSelection);
   dialog.addEventListener('keydown', handleKeyDown);
   dialog.addEventListener('quiet-closed', handleClosed);
@@ -46,9 +46,9 @@ function show() {
 }
 
 function hide() {
-  const { dialog, textField, results } = getElements();
+  const { dialog, searchBox, results } = getElements();
 
-  textField.removeEventListener('quiet-input', handleInput);
+  searchBox.removeEventListener('quiet-input', handleInput);
   results.removeEventListener('click', handleSelection);
   dialog.removeEventListener('keydown', handleKeyDown);
   dialog.removeEventListener('quiet-closed', handleClosed);
@@ -56,21 +56,21 @@ function hide() {
 }
 
 function handleClosed() {
-  const { textField } = getElements();
+  const { searchBox } = getElements();
 
-  textField.value = '';
+  searchBox.value = '';
   updateSearchResults();
 }
 
 function handleInput() {
-  const { textField } = getElements();
+  const { searchBox } = getElements();
 
   clearTimeout(searchTimeout);
-  searchTimeout = setTimeout(() => updateSearchResults(textField.value), searchDebounce);
+  searchTimeout = setTimeout(() => updateSearchResults(searchBox.value), searchDebounce);
 }
 
 function handleKeyDown(event) {
-  const { textField, results } = getElements();
+  const { searchBox, results } = getElements();
 
   // Handle keyboard selections
   if (['ArrowDown', 'ArrowUp', 'Home', 'End', 'Enter'].includes(event.key)) {
@@ -106,7 +106,7 @@ function handleKeyDown(event) {
     // Update the selected item
     items.forEach(item => {
       if (item === nextEl) {
-        textField.setAttribute('aria-activedescendant', item.id);
+        searchBox.setAttribute('aria-activedescendant', item.id);
         item.setAttribute('data-selected', 'true');
         nextEl.scrollIntoView({ block: 'nearest' });
       } else {
@@ -133,7 +133,7 @@ function handleSelection(event) {
 
 // Queries the search index and updates the results
 async function updateSearchResults(query = '') {
-  const { dialog, textField, results } = getElements();
+  const { dialog, searchBox, results } = getElements();
 
   try {
     const hasQuery = query.length > 0;
@@ -147,7 +147,7 @@ async function updateSearchResults(query = '') {
     dialog.classList.toggle('has-results', hasQuery && hasResults);
     dialog.classList.toggle('no-results', hasQuery && !hasResults);
 
-    textField.setAttribute('aria-activedescendant', '');
+    searchBox.setAttribute('aria-activedescendant', '');
     results.innerHTML = '';
 
     matches.forEach((match, index) => {

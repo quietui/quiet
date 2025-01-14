@@ -38,9 +38,12 @@ layout: docs
 
   const searchBox = document.getElementById('component-search');
   const searchStatus = document.getElementById('search-status');
+  const searchDebounce = 200;
   const componentIndex = document.getElementById('component-index');
   const components = Array.from(componentIndex.querySelectorAll('.component'));
   const emptyState = componentIndex.querySelector('.empty');
+  let searchTimeout;
+
   const documents = components.map((component, index) => {
     const getName = () => {
       const nameEl = component.querySelector('.name');
@@ -126,10 +129,9 @@ layout: docs
     }
   }
 
-  let searchTimeout;
   searchBox.addEventListener('quiet-input', (event) => {
     clearTimeout(searchTimeout);
-    searchTimeout = setTimeout(() => updateSearchResults(event.target.value), 300);
+    searchTimeout = setTimeout(() => updateSearchResults(searchBox.value), searchDebounce);
   });
 
   // Initialize results

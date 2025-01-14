@@ -65,17 +65,14 @@ layout: docs
     };
   });
 
-  // Build Lunr index
-  const idx = lunr(function() {
-    // Define the fields first
+  // Build the search index
+  const searchIndex = lunr(function() {
     this.ref('id');
     this.field('name');
     this.field('tagName');
     this.field('summary');
     
-    // Then add the documents
     documents.forEach(doc => {
-      // Ensure all fields exist before adding
       const safeDoc = {
         id: doc.id,
         name: doc.name || '',
@@ -100,7 +97,7 @@ layout: docs
     try {
       // Perform a Lunr search with wildcard + fuzzy matching
       const searchTerms = query.split(/\s+/).map(term => `${term}~1 ${term}*`).join(' ');
-      const results = idx.search(searchTerms);
+      const results = searchIndex.search(searchTerms);
       const matchedIndexes = new Set(results.map(result => parseInt(result.ref)));
       
       // Update visibility and count matches
@@ -118,8 +115,7 @@ layout: docs
         ? 'No components found' 
         : `Found ${visibleCount} matching component${visibleCount === 1 ? '' : 's'}`;
       searchStatus.textContent = status;
-    } catch (error) {
-      console.warn('Search error:', error);
+    } catch (err) {
       // On error, show all components
       components.forEach(component => component.hidden = false);
       emptyState.hidden = true;

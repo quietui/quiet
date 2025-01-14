@@ -149,7 +149,7 @@ export class QuietShare extends QuietElement {
           icon-label=${this.localize.term('share')}
           ?disabled=${this.disabled}
         >
-          <quiet-icon part="share-icon" exportparts="svg:share-icon__svg" library="system" name="share"></quiet-icon>
+          <quiet-icon part="share-icon" exportparts="svg:share-icon__svg" library="system" name="share-2"></quiet-icon>
         </quiet-button>
       </slot>
 

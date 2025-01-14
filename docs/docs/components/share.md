@@ -19,6 +19,35 @@ This component uses the Web Share API's [`share()`](https://developer.mozilla.or
 
 ## Examples
 
+### Using custom buttons
+
+Use a custom button by simply slotting it in. Both [Quiet buttons](/docs/components/button) and [native buttons](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) are supported.
+
+```html {.example}
+<quiet-share
+  label="Quiet UI" 
+  text="An awesome library for building on the Web." 
+  url="https://quietui.org/"
+  style="margin-inline-end: 0.5rem;"
+>
+  <quiet-button>
+    <quiet-icon slot="start" name="share"></quiet-icon>
+    Share
+  </quiet-button>
+</quiet-share>
+
+<quiet-share 
+  label="Quiet UI" 
+  text="An awesome library for building on the Web." 
+  url="https://quietui.org/"
+>
+  <quiet-button>
+    <quiet-icon slot="start" name="share-3"></quiet-icon>
+    Share
+  </quiet-button>
+</quiet-share>
+```
+
 ### Sharing a link
 
 Set the `url` attribute to the URL you'd like to share. Although optional, it's usually a good idea to also provide a `label`.
@@ -51,7 +80,7 @@ Set the `files` property to an array of `File` objects you'd like to share. Alth
   <br>
   <quiet-share label="Share image">
     <quiet-button>
-      <quiet-icon slot="start" name="upload"></quiet-icon>
+      <quiet-icon slot="start" name="share-2"></quiet-icon>
       Share selected image
     </quiet-button>    
   </quiet-share>
@@ -74,32 +103,6 @@ Set the `files` property to an array of `File` objects you'd like to share. Alth
     }
   });
 </script>
-```
-
-### Using custom buttons
-
-Use a custom button by simply slotting it in. Both [Quiet buttons](/docs/components/button) and [native buttons](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) are supported.
-
-```html {.example}
-<quiet-share
-  label="Quiet UI" 
-  text="An awesome library for building on the Web." 
-  url="https://quietui.org/"
-  style="margin-inline-end: 0.5rem;"
->
-  <quiet-button>
-    <quiet-icon slot="start" name="upload"></quiet-icon>
-    Share
-  </quiet-button>
-</quiet-share>
-
-<quiet-share 
-  label="Quiet UI" 
-  text="An awesome library for building on the Web." 
-  url="https://quietui.org/"
->
-  <button>Share</button>
-</quiet-share>
 ```
 
 ### Disabling

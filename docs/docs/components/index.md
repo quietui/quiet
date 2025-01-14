@@ -95,9 +95,12 @@ layout: docs
     }
 
     try {
-      // Perform a Lunr search with wildcard + fuzzy matching
-      const searchTerms = query.split(/\s+/).map(term => `${term}~1 ${term}*`).join(' ');
-      const results = searchIndex.search(searchTerms);
+      // Perform a Lunr search
+      const searchTerms = query
+        .split(' ')
+        .map((term, index, arr) => `${term}${index === arr.length - 1 ? `* ${term}~1` : '~1'}`)
+        .join(' ');
+      const results = searchIndex.search(`${query} ${searchTerms}`);
       const matchedIndexes = new Set(results.map(result => parseInt(result.ref)));
       
       // Update visibility and count matches

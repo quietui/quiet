@@ -133,6 +133,10 @@ A component should import and mark another component as a dependency when a) the
 
 If a component needs to set attributes on itself, such as `role`, `aria-*`, or `id`, it should do so in the `firstUpdated()` lifecycle hook, not in `connectedCallback()`.
 
+### Boolean attributes
+
+Boolean attributes should always default to `false`.
+
 ### Attribute reflection
 
 Attribute reflection in custom elements is [an interesting challenge](https://www.abeautifulsite.net/posts/reflection-and-custom-states-in-web-components/) because the platform hasn't established a clear pattern for it. This section defines such a pattern to enable consistency throughout the library.

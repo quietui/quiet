@@ -435,13 +435,13 @@ Stroke colors are used to draw borders and outlines around elements and UI chrom
   <h5>Neutral stroke colors</h5>
   <p class="description">Used for outlining secondary elements.</p>
   <div class="swatches swatches-text-on">
-    <quiet-copy data="var(--quiet-secondary-stroke-softer)">
+    <quiet-copy data="var(--quiet-neutral-stroke-softer)">
       <button aria-label="Neutral stroke softer" style="background-color: var(--quiet-neutral-fill-softer); border: solid 1px var(--quiet-neutral-stroke-softer);"></button> softer
     </quiet-copy>
-    <quiet-copy data="var(--quiet-secondary-stroke-soft)">
+    <quiet-copy data="var(--quiet-neutral-stroke-soft)">
       <button aria-label="Neutral stroke soft" style="background-color: var(--quiet-neutral-fill-softer); border: solid 1px var(--quiet-neutral-stroke-soft);"></button> soft
     </quiet-copy>
-    <quiet-copy data="var(--quiet-secondary-stroke-mid)">
+    <quiet-copy data="var(--quiet-neutral-stroke-mid)">
       <button aria-label="Neutral stroke mid" style="background-color: var(--quiet-neutral-fill-softer); border: solid 1px var(--quiet-neutral-stroke-mid);"></button> mid
     </quiet-copy>
   </div>

@@ -14,15 +14,15 @@ layout: component
 
 ### Variants
 
-Callouts have four built-in variants. Set the `variant` attribute to `primary`, `secondary`, `constructive`, or `destructive` to change the callout's appearance.
+Callouts have four built-in variants. Set the `variant` attribute to `default`, `primary`, `constructive`, or `destructive` to change the callout's appearance.
 
 ```html {.example}
-<quiet-callout variant="primary">
-  This is a primary callout. Use me for informative content that stands out.
+<quiet-callout variant="default">
+  This is a default callout. Use me for informative content.
 </quiet-callout>
 
-<quiet-callout variant="secondary">
-  This is a secondary callout. Use me for informative content.
+<quiet-callout variant="primary">
+  This is a primary callout. Use me for informative content that stands out.  
 </quiet-callout>
 
 <quiet-callout variant="constructive">
@@ -39,14 +39,14 @@ Callouts have four built-in variants. Set the `variant` attribute to `primary`, 
 Add an icon to a callout using the `icon` slot. Works best with `<quiet-icon>` and `<svg>` elements.
 
 ```html {.example}
-<quiet-callout variant="primary">
-  <quiet-icon slot="icon" name="info-circle"></quiet-icon>
-  A cat's soft, gentle gaze can melt even the coldest of hearts.
-</quiet-callout>
-
-<quiet-callout variant="secondary">
+<quiet-callout variant="default">
   <quiet-icon slot="icon" name="settings"></quiet-icon>
   Sleep mode has been enabled. You can disable it in settings.
+</quiet-callout>
+
+<quiet-callout variant="primary">
+  <quiet-icon slot="icon" name="info-circle"></quiet-icon>  
+  A cat's soft, gentle gaze can melt even the coldest of hearts.
 </quiet-callout>
 
 <quiet-callout variant="constructive">

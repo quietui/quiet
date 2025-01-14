@@ -13,6 +13,16 @@ export default css`
     border-radius: var(--quiet-border-radius);
   }
 
+  /* Default */
+  :host([variant='default']) {
+    border-color: var(--quiet-neutral-stroke-softer);
+    background-color: var(--quiet-neutral-fill-softer);
+  }
+
+  :host([variant='default']) #icon {
+    color: var(--quiet-neutral-text-colorful);
+  }
+
   /* Primary */
   :host([variant='primary']) {
     border-color: var(--quiet-primary-stroke-softer);
@@ -21,16 +31,6 @@ export default css`
 
   :host([variant='primary']) #icon {
     color: var(--quiet-primary-text-colorful);
-  }
-
-  /* Secondary */
-  :host([variant='secondary']) {
-    border-color: var(--quiet-neutral-stroke-softer);
-    background-color: var(--quiet-neutral-fill-softer);
-  }
-
-  :host([variant='secondary']) #icon {
-    color: var(--quiet-neutral-text-colorful);
   }
 
   /* Constructive */

@@ -170,7 +170,7 @@ You can insert more than one item into a named slot. For example, this card has 
   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 
   <quiet-button slot="footer" variant="primary">Primary</quiet-button>
-  <quiet-button slot="footer">Secondary</quiet-button>
+  <quiet-button slot="footer">Default</quiet-button>
 </quiet-card>
 ```
 

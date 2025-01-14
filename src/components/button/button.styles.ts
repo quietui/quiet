@@ -80,6 +80,22 @@ export default css`
 
     /* Normal buttons */
     &.normal {
+      /* Default */
+      &.default {
+        background-color: var(--quiet-neutral-fill-softer);
+        color: var(--quiet-neutral-text-on-soft);
+
+        @media (hover: hover) {
+          &:hover:not(.disabled, [aria-pressed='true']) {
+            background-color: color-mix(in oklab, var(--quiet-neutral-fill-softer), black 5%);
+          }
+        }
+
+        &[aria-pressed='true'] {
+          background-color: color-mix(in oklab, var(--quiet-neutral-fill-softer), var(--quiet-strident) 7.5%);
+        }
+      }
+
       /* Primary */
       &.primary {
         background-color: var(--quiet-primary-fill-mid);
@@ -93,22 +109,6 @@ export default css`
 
         &[aria-pressed='true'] {
           background-color: color-mix(in oklab, var(--quiet-primary-fill-mid), var(--quiet-strident) 7.5%);
-        }
-      }
-
-      /* Secondary */
-      &.secondary {
-        background-color: var(--quiet-neutral-fill-softer);
-        color: var(--quiet-neutral-text-on-soft);
-
-        @media (hover: hover) {
-          &:hover:not(.disabled, [aria-pressed='true']) {
-            background-color: color-mix(in oklab, var(--quiet-neutral-fill-softer), black 5%);
-          }
-        }
-
-        &[aria-pressed='true'] {
-          background-color: color-mix(in oklab, var(--quiet-neutral-fill-softer), var(--quiet-strident) 7.5%);
         }
       }
 
@@ -130,6 +130,18 @@ export default css`
     }
 
     /* Outline buttons */
+    &.outline.default {
+      border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-fill-mid);
+      background: transparent;
+      color: var(--quiet-neutral-text-colorful);
+
+      @media (hover: hover) {
+        &:hover:not(.disabled, [aria-pressed='true']) {
+          background: color-mix(in oklab, transparent, var(--quiet-neutral-fill-mid) 7.5%);
+        }
+      }
+    }
+
     &.outline.primary {
       border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-primary-fill-mid);
       background: transparent;
@@ -138,18 +150,6 @@ export default css`
       @media (hover: hover) {
         &:hover:not(.disabled, [aria-pressed='true']) {
           background: color-mix(in oklab, transparent, var(--quiet-primary-fill-mid) 7.5%);
-        }
-      }
-    }
-
-    &.outline.secondary {
-      border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-fill-mid);
-      background: transparent;
-      color: var(--quiet-neutral-text-colorful);
-
-      @media (hover: hover) {
-        &:hover:not(.disabled, [aria-pressed='true']) {
-          background: color-mix(in oklab, transparent, var(--quiet-neutral-fill-mid) 7.5%);
         }
       }
     }

@@ -54,7 +54,7 @@ export class QuietDropdownItem extends QuietElement {
   @property({ reflect: true }) type: 'normal' | 'checkbox' = 'normal';
 
   /** The type of menu item to render. */
-  @property({ reflect: true }) variant: 'destructive' | 'secondary' = 'secondary';
+  @property({ reflect: true }) variant: 'destructive' | 'default' = 'default';
 
   /** Set to true to check the dropdown item. Only valid when `type` is `checkbox`. */
   @property({ type: Boolean }) checked = false;

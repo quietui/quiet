@@ -11,11 +11,11 @@ layout: component
 
 ### Variants
 
-Badges have four variants. Primary badges are intended to be more obvious. Secondary badges are the default variant and are useful when you want to tag something with less importance. Constructive badges are indicative of success, whereas destructive badges are indicative of danger.
+Badges have four variants. Default badges are useful when you want to tag something with less importance. Primary badges are intended to be more obvious. Constructive badges are indicative of success, whereas destructive badges are indicative of danger.
 
 ```html {.example .flex-row}
+<quiet-badge variant="default">Default</quiet-badge>
 <quiet-badge variant="primary">Primary</quiet-badge>
-<quiet-badge variant="secondary">Secondary</quiet-badge>
 <quiet-badge variant="constructive">Constructive</quiet-badge>
 <quiet-badge variant="destructive">Destructive</quiet-badge>
 ```

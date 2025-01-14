@@ -156,7 +156,7 @@
   --quiet-primary-stroke-soft: var(--quiet-primary-300);
   --quiet-primary-stroke-mid: var(--quiet-primary-500);
 
-  /* Secondary */
+  /* Neutral */
   --quiet-neutral-fill-softer: var(--quiet-neutral-100);
   --quiet-neutral-fill-soft: var(--quiet-neutral-200);
   --quiet-neutral-fill-mid: color-mix(in oklab, var(--quiet-neutral-600), black 2.5%);
@@ -240,7 +240,7 @@
   --quiet-primary-stroke-soft: var(--quiet-primary-800);
   --quiet-primary-stroke-mid: var(--quiet-primary-600);
 
-  /* Secondary */
+  /* Neutral */
   --quiet-neutral-fill-softer: var(--quiet-neutral-900);
   --quiet-neutral-fill-soft: var(--quiet-neutral-800);
   --quiet-neutral-fill-mid: color-mix(in oklab, var(--quiet-neutral-600), black 7.5%);

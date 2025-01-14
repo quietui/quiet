@@ -35,16 +35,17 @@ export default css`
     scale: 1.25 !important;
   }
 
+  /* Default */
+  :host(:not([variant])),
+  :host([variant='default']) {
+    background-color: var(--quiet-neutral-fill-softer);
+    color: var(--quiet-primary-text-on-soft);
+  }
+
   /* Primary */
   :host([variant='primary']) {
     background-color: var(--quiet-primary-fill-mid);
     color: var(--quiet-primary-text-on-mid);
-  }
-
-  /* Secondary */
-  :host([variant='secondary']) {
-    background-color: var(--quiet-neutral-fill-softer);
-    color: var(--quiet-primary-text-on-soft);
   }
 
   /* Constructive */

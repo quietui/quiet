@@ -7,15 +7,15 @@ layout: component
 
 ### Variants
 
-Buttons have four built-in variants. Set the `variant` attribute to `primary`, `secondary`, or `destructive` to change the button's appearance.
+Buttons have four built-in variants. Set the `variant` attribute to `default`, `primary`, or `destructive` to change the button's appearance.
 
 ```html {.example .flex-row}
-<quiet-button variant="primary">
-  Primary
+<quiet-button variant="default">
+  Default
 </quiet-button>
 
-<quiet-button variant="secondary">
-  Secondary
+<quiet-button variant="primary">
+  Primary  
 </quiet-button>
 
 <quiet-button variant="destructive">
@@ -94,12 +94,12 @@ Use the `size` attribute to change the button's size. Available sizes include `x
 Set the `appearance` attribute to `outline` to draw outlined buttons.
 
 ```html {.example .flex-row}
-<quiet-button appearance="outline" variant="primary">
+<quiet-button appearance="outline" variant="default">
   I'm outline
 </quiet-button>
 
-<quiet-button appearance="outline" variant="secondary">
-  I'm outline
+<quiet-button appearance="outline" variant="primary">
+  I'm outline  
 </quiet-button>
 
 <quiet-button appearance="outline" variant="destructive">
@@ -136,12 +136,12 @@ Don't forget to include `alt` text on images for assistive devices.
 Buttons can be rendered with pill-shaped edges by adding the `pill` attribute.
 
 ```html {.example .flex-row}
-<quiet-button pill variant="primary">
+<quiet-button pill variant="default">
   I'm a pill button
 </quiet-button>
 
-<quiet-button pill variant="secondary">
-  I'm a pill button
+<quiet-button pill variant="primary">
+  I'm a pill button  
 </quiet-button>
 
 <quiet-button pill variant="destructive">
@@ -176,12 +176,12 @@ To create an icon button, place an icon into the button's default slot and set t
 Create a toggle button by adding the `toggle="off"` attribute. To make it active by default, use `toggle="on"` instead. An indicator is shown to make it obvious when the toggle is selected.
 
 ```html {.example .flex-row}
-<quiet-button variant="primary" toggle="off" icon-label="Alarm">
-  <quiet-icon name="bell"></quiet-icon>
+<quiet-button variant="default" toggle="off" icon-label="Filter">
+  <quiet-icon name="filter"></quiet-icon>
 </quiet-button>
 
-<quiet-button variant="secondary" toggle="off" icon-label="Filter">
-  <quiet-icon name="filter"></quiet-icon>
+<quiet-button variant="primary" toggle="off" icon-label="Alarm">
+  <quiet-icon name="bell"></quiet-icon>  
 </quiet-button>
 
 <quiet-button variant="destructive" toggle="off" icon-label="Record">

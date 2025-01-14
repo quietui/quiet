@@ -817,6 +817,17 @@ quiet-callout {
     white-space: nowrap;
   }
 
+  &[variant='default'] {
+    code {
+      background-color: color-mix(in oklab, var(--quiet-neutral-fill-soft), transparent 25%);
+    }
+
+    kbd {
+      border-color: var(--quiet-neutral-fill-soft);
+      box-shadow: 0 max(1px, 0.0715em) 0 0 var(--quiet-neutral-fill-soft);
+    }
+  }
+
   &[variant='primary'] {
     code {
       background-color: color-mix(in oklab, var(--quiet-primary-fill-soft), transparent 25%);
@@ -825,17 +836,6 @@ quiet-callout {
     kbd {
       border-color: var(--quiet-primary-fill-soft);
       box-shadow: 0 max(1px, 0.0715em) 0 0 var(--quiet-primary-fill-soft);
-    }
-  }
-
-  &[variant='secondary'] {
-    code {
-      background-color: color-mix(in oklab, var(--quiet-neutral-fill-soft), transparent 25%);
-    }
-
-    kbd {
-      border-color: var(--quiet-neutral-fill-soft);
-      box-shadow: 0 max(1px, 0.0715em) 0 0 var(--quiet-neutral-fill-soft);
     }
   }
 
@@ -917,7 +917,7 @@ quiet-callout {
   background-attachment: fixed;
   text-wrap: balance;
 
-  quiet-button[variant='secondary']::part(button) {
+  quiet-button[variant='default']::part(button) {
     background-color: color-mix(in oklab, var(--quiet-silent), var(--quiet-strident) 5%);
   }
 }

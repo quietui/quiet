@@ -59,14 +59,14 @@ function handleClosed() {
   const { textField } = getElements();
 
   textField.value = '';
-  updateResults();
+  updateSearchResults();
 }
 
 function handleInput() {
   const { textField } = getElements();
 
   clearTimeout(searchTimeout);
-  searchTimeout = setTimeout(() => updateResults(textField.value), searchDebounce);
+  searchTimeout = setTimeout(() => updateSearchResults(textField.value), searchDebounce);
 }
 
 function handleKeyDown(event) {
@@ -132,7 +132,7 @@ function handleSelection(event) {
 }
 
 // Queries the search index and updates the results
-async function updateResults(query = '') {
+async function updateSearchResults(query = '') {
   const { dialog, textField, results } = getElements();
 
   try {

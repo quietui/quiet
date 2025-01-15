@@ -3,7 +3,7 @@ const isTouchEnabled = 'TouchEvent' in window;
 /**
  * Adds a configurable long press event to the target element.
  *
- * By default, a `long press` event will be dispatched 500ms after `touchstart` if the user hasn't moved the pointer far
+ * By default, a `long press` event will be dispatched 700ms after `touchstart` if the user hasn't moved the pointer far
  * from the original position. You can listen for this event with `el.addEventListener('long-press')` like any other
  * event. By design, this utility works with both touch and pointer events. To disable pointer events and only listen to
  * touch, set `ignorePointerEvents` to `true`.

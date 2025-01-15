@@ -1,4 +1,4 @@
-import 'https://cdn.jsdelivr.net/npm/@hotwired/turbo@7.3.0/+esm';
+import 'https://cdn.jsdelivr.net/npm/@hotwired/turbo@8.0.11/+esm';
 
 if (!window.___turboScrollPositions___) {
   window.___turboScrollPositions___ = {};

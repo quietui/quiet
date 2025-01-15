@@ -89,7 +89,7 @@ The QR code's color is determined by the current text color. To change it, set t
 
 ### Styling QR codes
 
-The element's background is transparent by default, but you can style it with CSS if you want a solid color, gradient, padding, etc. Use the `corners` property to make the corners sharp or rounded.
+The element's background is transparent by default, but you can style it with CSS if you want a solid color, gradient, padding, etc. Set the `corners` attribute to a value between 0 and 0.5 to make the inside corners of the QR code's bits sharp or round.
 
 ```html {.example .flex-row}
 <quiet-qr 

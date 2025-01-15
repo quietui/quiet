@@ -94,21 +94,29 @@ export class QuietElement extends LitElement {
    * controls as if they were native ones.
    */
   protected relayNativeEvent(event: Event) {
-    let newEvent: typeof event;
-
     event.stopImmediatePropagation();
 
     if (event instanceof InputEvent) {
-      newEvent = new InputEvent(event.type, { ...event });
-    } else if (event instanceof MouseEvent) {
-      newEvent = new MouseEvent(event.type, { ...event });
-    } else if (event instanceof PointerEvent) {
-      newEvent = new PointerEvent(event.type, { ...event });
+      // Handle the input event
+      const newEvent = new InputEvent(event.type, {
+        bubbles: true,
+        composed: true,
+        cancelable: event.cancelable,
+        data: event.data,
+        inputType: event.inputType,
+        isComposing: event.isComposing,
+        detail: event.detail
+      });
+      this.dispatchEvent(newEvent);
     } else {
-      newEvent = new Event(event.type, { ...event });
+      // Handle other event types
+      const newEvent = new Event(event.type, {
+        bubbles: true,
+        composed: true,
+        cancelable: event.cancelable
+      });
+      this.dispatchEvent(newEvent);
     }
-
-    this.dispatchEvent(newEvent);
   }
 
   /**

@@ -44,7 +44,7 @@ export class AppModule {
 }
 ```
 
-Now you can use Quiet components in your Angular app like regular HTML elements.
+Now you can import Quiet components and use them in your Angular app like regular HTML elements.
 
 ## Vue
 

@@ -916,10 +916,6 @@ quiet-callout {
   background-repeat: repeat;
   background-attachment: fixed;
   text-wrap: balance;
-
-  quiet-button[variant='default']::part(button) {
-    background-color: color-mix(in oklab, var(--quiet-silent), var(--quiet-strident) 5%);
-  }
 }
 
 .layout-splash:not(.scrolled-down) #header {
@@ -1027,17 +1023,17 @@ quiet-callout {
     margin-block-start: 1.5rem;
   }
 
-  .features-grid {
-    margin-block: 1rem 2rem;
-
-    li {
-      background-color: var(--quiet-silent);
-    }
+  pre:has(code) {
+    box-shadow: var(--quiet-shadow-soft);
   }
 
-  pre:has(code),
-  .features-grid li {
-    box-shadow: var(--quiet-shadow-soft);
+  .features-grid {
+    margin-block-start: 1rem;
+    margin-block-end: 6rem;
+  }
+
+  .whiskers-center {
+    margin-block-start: 6rem;
   }
 }
 

@@ -226,7 +226,7 @@ A caret can be shown to indicate the button opens a dropdown menu by adding the 
 
 ### Listening for long press
 
-You can detect long presses by listening to the `quiet-long-press` event. The event is dispatched when the button is clicked or tapped and held for 500 milliseconds.
+You can detect long presses by listening to the `quiet-long-press` event. The event is dispatched when the button is clicked or tapped and held for 700 milliseconds.
 
 You can determine if the initiating event was a click (`pointer`) or tap (`touch`) by looking at `event.detail.type`. You can also look at `event.detail.originalEvent` to get the coordinates and other details.
 

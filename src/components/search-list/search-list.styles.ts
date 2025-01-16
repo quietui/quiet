@@ -10,7 +10,7 @@ export default css`
     flex-direction: column;
     flex-wrap: wrap;
     width: 100%;
-    margin-block-start: 1rem;
+    margin-block-start: 1em;
     gap: 1em;
   }
 `;

@@ -489,7 +489,7 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
   #slider__color,
   #slider__opacity {
     --track-size: 1.25em;
-    --thumb-width: 0.875em;
+    --thumb-width: 1.5em;
     --thumb-height: 1.5em;
 
     &::part(track) {
@@ -499,7 +499,7 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
 
     &::part(thumb) {
       border: solid 0.0625em rgb(0 0 0 / 33%);
-      border-radius: 9999px;
+      border-radius: 50%;
       transition: 100ms scale ease;
     }
 

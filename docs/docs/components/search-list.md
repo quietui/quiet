@@ -11,6 +11,7 @@ layout: component
     label="Search animals"
     type="search" 
     clearable
+    pill
   >
     <quiet-icon slot="start" name="search"></quiet-icon>
   </quiet-text-field>
@@ -85,6 +86,7 @@ Add `data-keywords="..."` to any child element to include additional keywords th
     label="Search by habitat, size, or status"
     type="search" 
     clearable
+    pill
   >
     <quiet-icon slot="start" name="cat"></quiet-icon>
   </quiet-text-field>

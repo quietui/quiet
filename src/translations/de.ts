@@ -29,6 +29,14 @@ const translation: Translation = {
   share: 'Aktie',
   showPassword: 'Passwort anzeigen',
   show: 'Anzeigen',
+  showingNumberOfTotalItems: (number: number, total: number) => {
+    if (number === 1) return `Zeige ${number} von ${total} ${total === 1 ? 'artikel' : 'artikeln'}`;
+    return `Zeige ${number} von ${total} artikeln`;
+  },
+  showingAllNumberItems: (number: number) => {
+    if (number === 1) return `Zeige ${number} artikel`;
+    return `Zeige alle ${number} artikel`;
+  },
   spoiler: 'Spoiler'
   /* cSpell:enable */
 };

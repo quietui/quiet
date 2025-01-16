@@ -37,5 +37,7 @@ export interface Translation extends DefaultTranslation {
   share: string;
   showPassword: string;
   show: string;
+  showingNumberOfTotalItems: (number: number, total: number) => string;
+  showingAllNumberItems: (number: number) => string;
   spoiler: string;
 }

@@ -29,6 +29,14 @@ const translation: Translation = {
   share: 'Compartir',
   showPassword: 'Mostrar contraseña',
   show: 'Mostrar',
+  showingNumberOfTotalItems: (number: number, total: number) => {
+    if (number === 1) return `Mostrando ${number} de ${total} ${total === 1 ? 'elemento' : 'elementos'}`;
+    return `Mostrando ${number} de ${total} elementos`;
+  },
+  showingAllNumberItems: (number: number) => {
+    if (number === 1) return `Mostrando ${number} elemento`;
+    return `Mostrando todos los ${number} elementos`;
+  },
   spoiler: 'Spoiler'
   /* cSpell:enable */
 };

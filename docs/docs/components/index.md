@@ -3,14 +3,17 @@ title: Browse Components
 layout: docs
 ---
 
-<quiet-text-field id="component-search" label="Searching {{ components.length }} custom elements" pill autofocus clearable>
-  <quiet-icon slot="start" name="search"></quiet-icon>
-</quiet-text-field>
+<quiet-search-list id="component-index" match="fuzzy">
+  <quiet-text-field 
+    slot="search-box" 
+    label="Searching {{ components.length }} custom elements" 
+    pill 
+    autofocus 
+    clearable
+  >
+    <quiet-icon slot="start" name="search"></quiet-icon>
+  </quiet-text-field>
 
-<!-- Screen reader announcements -->
-<div id="search-status" aria-live="polite" class="visually-hidden"></div>
-
-<div id="component-index">
   {%- for component in components -%}
     <a 
       class="component" 
@@ -27,129 +30,22 @@ layout: docs
     </a>
   {%- endfor -%}
 
-  <div class="empty" hidden>
+  <div slot="empty">
     <quiet-icon name="cheese"></quiet-icon>
     No components found
   </div>
-</div>
-
-<script type="module">
-  import lunr from 'https://cdn.jsdelivr.net/npm/lunr/+esm';
-
-  const searchBox = document.getElementById('component-search');
-  const searchStatus = document.getElementById('search-status');
-  const searchDebounce = 200;
-  const componentIndex = document.getElementById('component-index');
-  const components = Array.from(componentIndex.querySelectorAll('.component'));
-  const emptyState = componentIndex.querySelector('.empty');
-  let searchTimeout;
-
-  const documents = components.map((component, index) => {
-    const getName = () => {
-      const nameEl = component.querySelector('.name');
-      return nameEl ? nameEl.textContent || '' : '';
-    };
-
-    const getTagName = () => {
-      const tagEl = component.querySelector('.tag-name');
-      return tagEl ? tagEl.textContent || '' : '';
-    };
-
-    const getSummary = () => {
-      const summaryEl = component.querySelector('.summary');
-      return summaryEl ? summaryEl.textContent || '' : '';
-    };
-
-    return {
-      id: index.toString(),
-      name: getName().toLowerCase(),
-      tagName: getTagName().toLowerCase(),
-      summary: getSummary().toLowerCase()
-    };
-  });
-
-  // Build the search index
-  const searchIndex = lunr(function() {
-    this.ref('id');
-    this.field('name');
-    this.field('tagName');
-    this.field('summary');
-    
-    documents.forEach(doc => {
-      const safeDoc = {
-        id: doc.id,
-        name: doc.name || '',
-        tagName: doc.tagName || '',
-        summary: doc.summary || ''
-      };
-      this.add(safeDoc);
-    });
-  });
-
-  function updateSearchResults(query = '') {
-    query = query.trim().toLowerCase();
-    
-    // Show all components when the query is empty
-    if (!query) {
-      components.forEach(component => component.hidden = false);
-      emptyState.hidden = true;
-      searchStatus.textContent = `Showing all ${components.length} components`;
-      return;
-    }
-
-    try {
-      // Perform a Lunr search
-      const searchTerms = query
-        .split(' ')
-        .map((term, index, arr) => `${term}${index === arr.length - 1 ? `* ${term}~1` : '~1'}`)
-        .join(' ');
-      const results = searchIndex.search(`${query} ${searchTerms}`);
-      const matchedIndexes = new Set(results.map(result => parseInt(result.ref)));
-      
-      // Update visibility and count matches
-      let visibleCount = 0;
-      components.forEach((component, index) => {
-        const isMatch = matchedIndexes.has(index);
-        if (isMatch) visibleCount++;
-        component.hidden = !isMatch;
-      });
-
-      emptyState.hidden = visibleCount !== 0;
-      
-      // Announce results
-      const status = visibleCount === 0 
-        ? 'No components found' 
-        : `Found ${visibleCount} matching component${visibleCount === 1 ? '' : 's'}`;
-      searchStatus.textContent = status;
-    } catch (err) {
-      // On error, show all components
-      components.forEach(component => component.hidden = false);
-      emptyState.hidden = true;
-      searchStatus.textContent = `Showing all ${components.length} components`;
-    }
-  }
-
-  searchBox.addEventListener('quiet-input', (event) => {
-    clearTimeout(searchTimeout);
-    searchTimeout = setTimeout(() => updateSearchResults(searchBox.value), searchDebounce);
-  });
-
-  // Initialize results
-  updateSearchResults(searchBox.value);
-</script>
+</quiet-search-list>
 
 <style>
-  #component-search {
-    margin-block-end: var(--quiet-content-spacing);
-  }
-
   #component-index {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
-    align-items: start;
-    gap: 1rem;
-    width: 100%;
-    margin-block-end: var(--quiet-content-spacing);
+    &::part(items) {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+      align-items: start;
+      gap: 1rem;
+      width: 100%;
+      margin-block-end: var(--quiet-content-spacing);
+    }
 
     .component {
       display: flex;

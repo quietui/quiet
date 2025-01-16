@@ -28,6 +28,14 @@ const translation: Translation = {
   share: 'Share',
   showPassword: 'Show password',
   show: 'Show',
+  showingNumberOfTotalItems: (number: number, total: number) => {
+    if (number === 1) return `Showing ${number} of ${total} ${total === 1 ? 'item' : 'items'}`;
+    return `Showing ${number} of ${total} items`;
+  },
+  showingAllNumberItems: (number: number) => {
+    if (number === 1) return `Showing ${number} item`;
+    return `Showing all ${number} items`;
+  },
   spoiler: 'Spoiler'
 };
 

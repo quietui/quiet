@@ -29,6 +29,14 @@ const translation: Translation = {
   share: 'Делиться',
   showPassword: 'Показать пароль',
   show: 'Показать',
+  showingNumberOfTotalItems: (number: number, total: number) => {
+    if (number === 1) return `Показано ${number} из ${total} ${total === 1 ? 'элемента' : 'элементов'}`;
+    return `Показано ${number} из ${total} элементов`;
+  },
+  showingAllNumberItems: (number: number) => {
+    if (number === 1) return `Показано ${number} элемент`;
+    return `Показано все ${number} элемента`;
+  },
   spoiler: 'Спойлер'
   /* cSpell:enable */
 };

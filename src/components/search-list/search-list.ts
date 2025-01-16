@@ -23,12 +23,21 @@ export class QuietSearchList extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
   private items: Element[] = [];
+  private debounceTimer: number | undefined;
 
   @state() query = '';
   @state() isEmpty = false;
 
   /** Description of the property. */
   @property() type: 'exact' | 'fuzzy' = 'exact';
+
+  /** Debounce timeout in milliseconds */
+  @property({ type: Number }) debounce = 300;
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    window.clearTimeout(this.debounceTimer);
+  }
 
   firstUpdated() {
     this.updateResults();
@@ -52,11 +61,13 @@ export class QuietSearchList extends QuietElement {
   private handleInput = (event: InputEvent) => {
     const target = event.target as HTMLInputElement;
 
-    // Update the query
-    this.query = target.value;
+    clearTimeout(this.debounceTimer);
 
-    // Update results
-    this.updateResults();
+    // Set new timer
+    this.debounceTimer = setTimeout(() => {
+      this.query = target.value;
+      this.updateResults();
+    }, this.debounce);
   };
 
   private updateResults() {

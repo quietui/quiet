@@ -22,6 +22,7 @@ export function searchPlugin(options = {}) {
   };
 
   return function (eleventyConfig) {
+    const pagesToSkip = ['/404.html'];
     const pagesToIndex = [
       //
       // Let's add some some useful pages into the search
@@ -73,6 +74,11 @@ export function searchPlugin(options = {}) {
           code: false
         }
       });
+
+      // Ignore skipped pages
+      if (pagesToSkip.includes(this.page.url)) {
+        return content;
+      }
 
       // Remove content that shouldn't be searchable to reduce the index size
       options.selectorsToIgnore.forEach(selector => {

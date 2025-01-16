@@ -91,24 +91,26 @@ export class QuietSearchList extends QuietElement {
 
     this.items.forEach((item: HTMLElement) => {
       const content = item.textContent || '';
+      const keywords = item.dataset.keywords || '';
+      const searchableContent = `${content} ${keywords}`;
 
       if (this.query) {
         let isMatch = false;
 
         // Exact search
         if (this.match === 'exact') {
-          isMatch = exactSearch(this.query, content);
+          isMatch = exactSearch(this.query, searchableContent);
         }
 
         // Fuzzy search
         if (this.match === 'fuzzy') {
-          isMatch = fuzzySearch(this.query, content);
+          isMatch = fuzzySearch(this.query, searchableContent);
         }
 
         // Custom search
         if (this.match === 'custom') {
           if (typeof this.searchFunction === 'function') {
-            isMatch = this.searchFunction(this.query, content, item);
+            isMatch = this.searchFunction(this.query, searchableContent, item);
           } else {
             // If no search function was provided, warn and fallback to an exact match
             if (!wasWarned) {
@@ -116,7 +118,7 @@ export class QuietSearchList extends QuietElement {
               wasWarned = true;
             }
 
-            isMatch = exactSearch(this.query, content);
+            isMatch = exactSearch(this.query, searchableContent);
           }
         }
 

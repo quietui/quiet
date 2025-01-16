@@ -16,19 +16,20 @@ layout: component
   </quiet-text-field>
 
   <!-- Items to search -->
-  <div class="item">Alexander</div>
-  <div class="item">Ava</div>
-  <div class="item">Benjamin</div>
-  <div class="item">Charlotte</div>
-  <div class="item">Daniel</div>
-  <div class="item">Emma</div>
-  <div class="item">Isabella</div>
-  <div class="item">James</div>
-  <div class="item">Michael</div>
-  <div class="item">Olivia</div>
-  <div class="item">Sophia</div>
-  <div class="item">William</div>
+  <div class="item">Antelope</div>
+  <div class="item">Bear</div>
+  <div class="item">Cheetah</div>
+  <div class="item">Dolphin</div>
+  <div class="item">Eagle</div>
+  <div class="item">Fox</div>
+  <div class="item">Giraffe</div>
+  <div class="item">Hippo</div>
+  <div class="item">Lion</div>
+  <div class="item">Octopus</div>
+  <div class="item">Penguin</div>
+  <div class="item">Wolf</div>
 
+  <!-- Optional empty state -->
   <div slot="empty">
     <quiet-icon name="file-search"></quiet-icon><br>
     No results

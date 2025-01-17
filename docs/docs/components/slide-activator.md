@@ -245,40 +245,6 @@ Use the `disabled` attribute to disable the slide activator. The control cannot 
 ></quiet-slide-activator>
 ```
 
-### Submitting forms
-
-While not a form control itself, the slide activator is often used to trigger form submission. You can hook into the `quiet-activated` event and use [`requestSubmit()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/requestSubmit) to achieve this.
-
-```html {.example}
-<form action="about:blank" target="_blank" id="slide-activator__form">
-  <quiet-text-field label="Name" name="name" value="Meowy McGee"></quiet-text-field>
-  <quiet-slide-activator label="Slide to submit" attention="shimmer"></quiet-slide-activator>
-</form>
-
-<script>
-  const form = document.getElementById('slide-activator__form');
-  const slideActivator = form.querySelector('quiet-slide-activator');
-
-  slideActivator.addEventListener('quiet-activated', () => {
-    form.requestSubmit();
-
-    // Deactivate it for the demo after two seconds
-    setTimeout(() => {
-      slideActivator.activated = false;
-    }, 2000);
-  });
-</script>
-
-<style>
-  #slide-activator__form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    max-width: 340px;
-  }
-</style>
-```
-
 ### Styling slide activators
 
 Slide activators come with a simple, minimal appearance. Feel free to customize them with your own styles, icons, and animations.

@@ -64,10 +64,6 @@ export class QuietSearchList extends QuietElement {
     window.clearTimeout(this.debounceTimer);
   }
 
-  firstUpdated() {
-    this.updateResults();
-  }
-
   updated(changedProperties: PropertyValues<this>) {
     // Handle search type changes
     if (changedProperties.has('match')) {

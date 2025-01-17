@@ -14,13 +14,29 @@ document.addEventListener('click', event => {
 
     if (target) {
       event.preventDefault();
+      const scrollTop = target.offsetTop - headerHeight;
+
+      // Save the current scroll position before navigating
+      history.replaceState({ scrollTop: window.scrollY }, '');
+
+      // Push the new state with the target scroll position
+      history.pushState({ scrollTop }, '', `#${id}`);
+
       window.scroll({
-        top: target.offsetTop - headerHeight,
+        top: scrollTop,
         behavior: 'smooth'
       });
-      history.pushState(undefined, undefined, `#${id}`);
     }
   }
+});
+
+// Handle back/forward navigation
+window.addEventListener('popstate', event => {
+  const scrollTop = event.state?.scrollTop ?? 0;
+  window.scroll({
+    top: scrollTop,
+    behavior: 'smooth'
+  });
 });
 
 // Scroll classes

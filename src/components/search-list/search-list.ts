@@ -13,7 +13,7 @@ import styles from './search-list.styles.js';
  *
  * @summary Search lists let you filter a group of items based on their content and keywords.
  * @documentation https://quietui.org/docs/components/search-list
- * @status stable
+ * @status experimental
  * @since 1.0
  *
  * @slot - One or more elements to be searched. Each element must be a direct descendent of the host, i.e. do not wrap

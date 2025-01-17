@@ -895,7 +895,9 @@ html.quiet-reduce-fouce {
 
 /* Utilities */
 .visually-hidden,
-.visually-hidden-focusable:where(:not(:focus-within)) {
+.visually-hidden-focusable:where(:not(:focus-within)),
+.visually-hidden-label::part(label),
+.visually-hidden-description::part(description) {
   position: absolute;
   width: 1px;
   height: 1px;

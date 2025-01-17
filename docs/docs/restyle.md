@@ -310,3 +310,5 @@ Restyle ships with a handful of helpful utility classes. Use `class="..."` to ap
 
 - `visually-hidden` - Use when an element must be accessible to assistive technologies like screen readers but should remain hidden in other circumstances.
 - `visually-hidden-focusable` - The same as `visually-hidden`, but it will show when the element or any of its children receive focus. Useful for things like "skip to content" links.
+- `visually-hidden-label` - Apply this to any Quiet form control that has a `label` part to visually hide the label.
+- `visually-hidden-description` -  - Apply this to any Quiet form control that has a `description` part to visually hide the description.

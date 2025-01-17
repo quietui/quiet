@@ -431,4 +431,129 @@ For more control over the matching algorithm, set the `match` attribute to `cust
 
 The callback receives three arguments: `query` (the current search term), `content` (the element's searchable content, including its `textContent` and `data-keywords`), and `el` (a reference to the element being searched).
 
-TODO
+```html {.example}
+<quiet-search-list match="custom" id="search-list__custom">
+  <!-- The search box -->
+  <quiet-text-field 
+    slot="search-box" 
+    label="Search cats"
+    description="Add @indoor or @outdoor to filter by environment"
+    type="search" 
+    clearable
+    pill
+  >
+    <quiet-icon slot="start" name="search"></quiet-icon>
+  </quiet-text-field>
+
+  <!-- Items to search -->
+  <div class="item" data-environment="indoor">
+    <h4>Luna</h4>
+    <p>Sweet and friendly, loves window watching</p>
+  </div>
+
+  <div class="item" data-environment="outdoor">
+    <h4>Oliver</h4>
+    <p>Adventurous explorer, loves the garden</p>
+  </div>
+
+  <div class="item" data-environment="indoor">
+    <h4>Milo</h4>
+    <p>Gentle soul who loves napping in sunbeams</p>
+  </div>
+
+  <div class="item" data-environment="outdoor">
+    <h4>Bella</h4>
+    <p>Free spirit, enjoys climbing trees</p>
+  </div>
+
+  <div class="item" data-environment="indoor">
+    <h4>Charlie</h4>
+    <p>Playful cat who chases laser pointers</p>
+  </div>
+
+  <div class="item" data-environment="outdoor">
+    <h4>Lucy</h4>
+    <p>Independent nature lover, great hunter</p>
+  </div>
+
+  <!-- Empty state -->
+  <div slot="empty">
+    <quiet-icon name="cat"></quiet-icon><br>
+    No cats match your search<br>
+    <small>Try searching by name or using the @indoor or @outdoor tags</small>
+  </div>
+</quiet-search-list>
+
+<script>
+  const searchList = document.getElementById('search-list__custom');
+
+  // Custom match function
+  searchList.isMatch = (query, content, el) => {
+    query = query.toLowerCase().trim();
+
+    // If no query, show all items
+    if (!query) return true;
+
+    const environment = el.getAttribute('data-environment');
+    const envMatch = query.match(/@(indoor|outdoor)/);
+
+    // Look for @indoor or @outdoor in the query
+    if (envMatch) {
+      // Remove the environment tag from the query for text search
+      const searchEnvironment = envMatch[1];
+      const textQuery = query.replace(/@(indoor|outdoor)/, '').trim();
+
+      // Must match both environment and text (if any text remains)
+      return environment === searchEnvironment && (!textQuery || content.toLowerCase().includes(textQuery));
+    }
+
+    // If no environment tag was found, fall back to text search
+    return content.toLowerCase().includes(query);
+  };
+</script>
+
+<style>
+  #search-list__custom {
+    &::part(items) {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr));
+      gap: 1rem;
+    }
+
+    .item {
+      border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
+      border-radius: var(--quiet-border-radius);
+      padding: 1rem;
+      background: var(--quiet-paper-color);
+
+      h4 {
+        margin: 0;
+        font-size: 1.125rem;
+      }
+
+      p {
+        color: var(--quiet-text-muted);
+        margin: 0.5rem 0;
+        font-size: 0.875rem;
+        margin-block-end: 0;
+      }
+    }
+
+    div[slot="empty"] {
+      text-align: center;
+      color: var(--quiet-text-muted);
+      margin-block-start: 2rem;
+
+      quiet-icon {
+        font-size: 2.5rem;
+        stroke-width: 1px;
+      }
+
+      small {
+        display: block;
+        margin-top: 0.5rem;
+      }
+    }
+  }
+</style>
+```

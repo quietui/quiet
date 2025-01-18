@@ -140,7 +140,7 @@ Every search list must have a search box, or _controller_, that maintains the qu
 
 Searchable items can be just about any element, but they _must_ be direct descendants of the `<quiet-search-list>` element. By default, an item's [text content](https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent) will be used to determine a match, but you can also [specify keywords](#adding-keywords). A case-insensitive search is performed by default, but basic [fuzzy matching](#fuzzy-matching) and [custom matching](#using-a-custom-match-function) are also available.
 
-As the user types in the controller, the search list will update and show the matching results. When no query is entered, all items are shown. An optional [empty state](#providing-an-empty-state) can be provided to show a custom message when query is entered and no matches are found.
+As the user types in the controller, the search list will update and show the matching results. When no query is entered, all items are shown. An optional [empty state](#providing-an-empty-state) can be provided to show a custom message when a query is entered and no matches are found.
 
 A minimal implementation looks something like this. Note the use of `label` and `description`, which are important for accessibility.
 

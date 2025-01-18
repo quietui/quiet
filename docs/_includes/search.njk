@@ -43,23 +43,20 @@
     {# Footer #}
     <footer>
       <small>
-        <kbd aria-label="Up">
-          <quiet-icon name="arrow-up"></quiet-icon>
-        </kbd>
-        <kbd aria-label="Down">
-          <quiet-icon name="arrow-down"></quiet-icon>
-        </kbd>
+        <quiet-hotkey label="Up" keys="$up"></quiet-hotkey>
+        <quiet-hotkey label="Down" keys="$down"></quiet-hotkey>
         Navigate
       </small>
 
       <small>
-        <kbd aria-label="Enter">
-          <quiet-icon name="corner-down-left"></quiet-icon>
-        </kbd>
+        <quiet-hotkey label="Enter" keys="$enter"></quiet-hotkey>
         Select
       </small>
 
-      <small><kbd>esc</kbd> Close</small>
+      <small>
+        <quiet-hotkey label="Escape" keys="$escape"></quiet-hotkey>
+        Close
+      </small>
     </footer>
   </div>
 </quiet-dialog>

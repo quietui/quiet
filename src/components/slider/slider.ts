@@ -62,6 +62,7 @@ import styles from './slider.styles.js';
 @customElement('quiet-slider')
 export class QuietSlider extends QuietElement {
   static formAssociated = true;
+  static observeSlots = true;
   static styles: CSSResultGroup = [hostStyles, formControlStyles, styles];
 
   /** A reference to the `<form>` associated with the form control, or `null` if no form is associated. */
@@ -480,6 +481,8 @@ export class QuietSlider extends QuietElement {
   }
 
   render() {
+    const hasLabel = this.label || this.slotsWithContent.has('label');
+    const hasDescription = this.description || this.slotsWithContent.has('description');
     const thumbPosition = clamp(this.getPercentageFromValue(this.value), 0, 100);
     const indicatorOffsetPosition = clamp(
       this.getPercentageFromValue(typeof this.indicatorOffset === 'number' ? this.indicatorOffset : this.min),
@@ -496,11 +499,17 @@ export class QuietSlider extends QuietElement {
     }
 
     return html`
-      <label id="label" part="label" for="text-box" @pointerdown=${this.handleLabelPointerDown}>
+      <label
+        id="label"
+        part="label"
+        for="text-box"
+        class=${classMap({ 'visually-hidden': !hasLabel })}
+        @pointerdown=${this.handleLabelPointerDown}
+      >
         <slot name="label">${this.label}</slot>
       </label>
 
-      <div id="description" part="description">
+      <div id="description" part="description" class=${classMap({ 'visually-hidden': !hasDescription })}>
         <slot name="description">${this.description}</slot>
       </div>
 

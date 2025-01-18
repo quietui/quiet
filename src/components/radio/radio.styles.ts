@@ -1,10 +1,6 @@
 import { css } from 'lit';
 
 export default css`
-  :host {
-    display: block;
-  }
-
   #group {
     display: flex;
     margin-block: 0.5rem;

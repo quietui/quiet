@@ -51,6 +51,7 @@ import styles from './passcode.styles.js';
 @customElement('quiet-passcode')
 export class QuietPasscode extends QuietElement {
   static formAssociated = true;
+  static observeSlots = true;
   static styles: CSSResultGroup = [hostStyles, formControlStyles, styles];
 
   private localize = new Localize(this);
@@ -365,17 +366,19 @@ export class QuietPasscode extends QuietElement {
   }
 
   render() {
+    const hasLabel = this.label || this.slotsWithContent.has('label');
+    const hasDescription = this.description || this.slotsWithContent.has('description');
     const totalCharacters = this.getTotalCharacters();
     const isFull = this.value.length === totalCharacters;
     const boxes = this.format.split('').map(format => (format === '#' ? 'character' : 'delimiter'));
     let charPosition = 0;
 
     return html`
-      <label id="label" part="label" for="text-box">
+      <label id="label" part="label" for="text-box" class=${classMap({ 'visually-hidden': !hasLabel })}>
         <slot name="label">${this.label}</slot>
       </label>
 
-      <div id="description" part="description">
+      <div id="description" part="description" class=${classMap({ 'visually-hidden': !hasDescription })}>
         <slot name="description">${this.description}</slot>
       </div>
 

@@ -49,6 +49,7 @@ const VALIDATION_MESSAGE = nativeFileInput.validationMessage;
 @customElement('quiet-rating')
 export class QuietRating extends QuietElement {
   static formAssociated = true;
+  static observeSlots = true;
   static styles: CSSResultGroup = [hostStyles, formControlStyles, styles];
 
   /** A reference to the `<form>` associated with the form control, or `null` if no form is associated. */
@@ -429,17 +430,26 @@ export class QuietRating extends QuietElement {
   }
 
   render() {
+    const hasLabel = this.label || this.slotsWithContent.has('label');
+    const hasDescription = this.description || this.slotsWithContent.has('description');
     const symbols = [];
+
     for (let i = 1; i <= this.max; i += 1) {
       symbols.push([this.getSymbol(i, true), this.getSymbol(i, false)]);
     }
 
     return html`
-      <label id="label" part="label" for="rating" @pointerdown=${this.handleLabelPointerDown}>
+      <label
+        id="label"
+        part="label"
+        class=${classMap({ 'visually-hidden': !hasLabel })}
+        for="rating"
+        @pointerdown=${this.handleLabelPointerDown}
+      >
         <slot name="label">${this.label}</slot>
       </label>
 
-      <div id="description" part="description">
+      <div id="description" part="description" class=${classMap({ 'visually-hidden': !hasDescription })}>
         <slot name="description">${this.description}</slot>
       </div>
 

@@ -1,6 +1,7 @@
 import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
 import { QuietChangeEvent, QuietInputEvent } from '../../events/form.js';
 import formControlStyles from '../../styles/form-control.styles.js';
 import hostStyles from '../../styles/host.styles.js';
@@ -48,6 +49,7 @@ const VALIDATION_MESSAGE = nativeRadio.validationMessage;
 @customElement('quiet-radio')
 export class QuietRadio extends QuietElement {
   static formAssociated = true;
+  static observeSlots = true;
   static styles: CSSResultGroup = [hostStyles, formControlStyles, styles];
 
   /** A reference to the `<form>` associated with the form control, or `null` if no form is associated. */
@@ -311,12 +313,21 @@ export class QuietRadio extends QuietElement {
   }
 
   render() {
+    const hasLabel = this.label || this.slotsWithContent.has('label');
+    const hasDescription = this.description || this.slotsWithContent.has('description');
+
     return html`
-      <label id="label" part="label" for="text-box" @click=${this.focus}>
+      <label
+        id="label"
+        part="label"
+        for="text-box"
+        class=${classMap({ 'visually-hidden': !hasLabel })}
+        @click=${this.focus}
+      >
         <slot name="label">${this.label}</slot>
       </label>
 
-      <div id="description" part="description">
+      <div id="description" part="description" class=${classMap({ 'visually-hidden': !hasDescription })}>
         <slot name="description">${this.description}</slot>
       </div>
 

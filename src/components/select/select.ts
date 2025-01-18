@@ -48,6 +48,7 @@ import styles from './select.styles.js';
 @customElement('quiet-select')
 export class QuietSelect extends QuietElement {
   static formAssociated = true;
+  static observeSlots = true;
   static styles: CSSResultGroup = [hostStyles, formControlStyles, styles];
 
   /** A reference to the `<form>` associated with the form control, or `null` if no form is associated. */
@@ -289,12 +290,15 @@ export class QuietSelect extends QuietElement {
   }
 
   render() {
+    const hasLabel = this.label || this.slotsWithContent.has('label');
+    const hasDescription = this.description || this.slotsWithContent.has('description');
+
     return html`
-      <label id="label" part="label" for="text-box">
+      <label id="label" part="label" for="text-box" class=${classMap({ 'visually-hidden': !hasLabel })}>
         <slot name="label">${this.label}</slot>
       </label>
 
-      <div id="description" part="description">
+      <div id="description" part="description" class=${classMap({ 'visually-hidden': !hasDescription })}>
         <slot name="description">${this.description}</slot>
       </div>
 

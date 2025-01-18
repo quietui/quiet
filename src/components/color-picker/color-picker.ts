@@ -73,6 +73,7 @@ const hasEyeDropper = 'EyeDropper' in window;
 @customElement('quiet-color-picker')
 export class QuietColorPicker extends QuietElement {
   static formAssociated = true;
+  static observeSlots = true;
   static styles: CSSResultGroup = [hostStyles, formControlStyles, styles];
 
   /** A reference to the `<form>` associated with the form control, or `null` if no form is associated. */
@@ -578,6 +579,8 @@ export class QuietColorPicker extends QuietElement {
   }
 
   render() {
+    const hasLabel = this.label || this.slotsWithContent.has('label');
+    const hasDescription = this.description || this.slotsWithContent.has('description');
     const isRtl = this.localize.dir() === 'rtl';
     const currentColor = new TinyColor({ h: this.h, s: this.s, v: this.v, a: this.a });
     const colorWithoutOpacity = new TinyColor({ h: this.h, s: this.s, v: this.v, a: 1 });
@@ -600,11 +603,17 @@ export class QuietColorPicker extends QuietElement {
     }
 
     return html`
-      <label id="label" part="label" for="color-slider-thumb" @click=${this.handleLabelClick}>
+      <label
+        id="label"
+        part="label"
+        class=${classMap({ 'visually-hidden': !hasLabel })}
+        for="color-slider-thumb"
+        @click=${this.handleLabelClick}
+      >
         <slot name="label">${this.label}</slot>
       </label>
 
-      <div id="description" part="description">
+      <div id="description" part="description" class=${classMap({ 'visually-hidden': !hasDescription })}>
         <slot name="description">${this.description}</slot>
       </div>
 

@@ -1,6 +1,7 @@
 import type { CSSResultGroup } from 'lit';
 import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
 import formControlStyles from '../../styles/form-control.styles.js';
 import hostStyles from '../../styles/host.styles.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
@@ -25,6 +26,7 @@ import styles from './checkbox-group.styles.js';
  */
 @customElement('quiet-checkbox-group')
 export class QuietCheckboxGroup extends QuietElement {
+  static observeSlots = true;
   static styles: CSSResultGroup = [hostStyles, formControlStyles, styles];
 
   /**
@@ -47,12 +49,15 @@ export class QuietCheckboxGroup extends QuietElement {
   @property({ type: Boolean, reflect: true }) required = false;
 
   render() {
+    const hasLabel = this.label || this.slotsWithContent.has('label');
+    const hasDescription = this.description || this.slotsWithContent.has('description');
+
     return html`
-      <label id="label" part="label" for="text-box">
+      <label id="label" part="label" for="text-box" class=${classMap({ 'visually-hidden': !hasLabel })}>
         <slot name="label">${this.label}</slot>
       </label>
 
-      <div id="description" part="description">
+      <div id="description" part="description" class=${classMap({ 'visually-hidden': !hasDescription })}>
         <slot name="description">${this.description}</slot>
       </div>
 

@@ -23,7 +23,7 @@ This component uses the Web Share API's [`share()`](https://developer.mozilla.or
 
 Use a custom button by simply slotting it in. Both [Quiet buttons](/docs/components/button) and [native buttons](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) are supported.
 
-```html {.example}
+```html {.example .flex-row}
 <quiet-share 
   label="Quiet UI" 
   text="An awesome library for building on the Web." 

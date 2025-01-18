@@ -11,20 +11,20 @@ import styles from './search-list.styles.js';
 /**
  * <quiet-search-list>
  *
- * @summary Search lists let you filter a group of items based on their content and keywords.
+ * @summary Search lists let you query a collection of items based on their content and keywords.
  * @documentation https://quietui.org/docs/components/search-list
- * @status experimental
+ * @status stable
  * @since 1.0
  *
  * @slot - One or more elements to be searched. Each element must be a direct descendent of the host, i.e. do not wrap
  *  items in other containers. If desired, you can apply flex and grid styles to the `items` part to control how items
  *  appear in the list. By default, items will be displayed in a flex column.
- * @slot search-box - A `<quiet-text-field>` or a native `<input>` that will be used as the search box. Make sure to
- *  provide a label. You must provide a search element or the search list won't function.
+ * @slot controller - A `<quiet-text-field>` or `<input>` element that will control the search list.
  * @slot empty - Optional content to display when the search yields no results.
  *
- * @csspart items - A container that wraps all child elements in the search list. A flex container by default, but you
- *  can also style it using CSS grid for more complex lists.
+ * @csspart items - The container that wraps the slotted items. Displays as a flex column by default.
+ *
+ * @cssstate empty - Applied when a query is entered and no matching results are found.
  */
 @customElement('quiet-search-list')
 export class QuietSearchList extends QuietElement {
@@ -40,6 +40,13 @@ export class QuietSearchList extends QuietElement {
   @state() query = '';
   @state() isEmpty = false;
   @state() resultsMessage = '';
+
+  /**
+   * In most cases, you should slot the controller into the `controller` slot. However, when the controller must exist
+   * outside the search list, you can set this property to the ID of an external `<input>` or `<quiet-text-field>`
+   * element instead.
+   */
+  @property({ reflect: true }) controller: string;
 
   /**
    * The search behavior to use when finding a matching item. The `exact` search is case-insensitive but requires an
@@ -59,21 +66,49 @@ export class QuietSearchList extends QuietElement {
    */
   @property({ attribute: false }) isMatch: (query: string, content: string, el: Element) => boolean;
 
+  connectedCallback() {
+    super.connectedCallback();
+    document.addEventListener('input', this.handleDocumentInput);
+  }
+
   disconnectedCallback() {
     super.disconnectedCallback();
+    document.removeEventListener('input', this.handleDocumentInput);
     window.clearTimeout(this.debounceTimer);
   }
 
   updated(changedProperties: PropertyValues<this>) {
-    // Handle search type changes
+    // Update the search list based on the controller element's current value
+    if (changedProperties.has('controller')) {
+      const controller = this.getController();
+      if (controller) {
+        this.query = controller.value || '';
+        this.updateResults();
+      }
+    }
+
+    // Handle match (search type) changes
     if (changedProperties.has('match')) {
       this.updateResults();
     }
+
+    // Handle empty changes
+    if (changedProperties.has('isEmpty')) {
+      this.customStates.set('empty', this.isEmpty);
+    }
   }
 
-  /** Gets the first  */
-  private getSearchBox() {
-    return this.querySelector<HTMLInputElement | QuietTextField>('[slot="search-box"]');
+  /** Gets the controller or returns `null` if one can't be found. */
+  private getController() {
+    const root = this.getRootNode() as Document | ShadowRoot;
+
+    if (this.controller) {
+      // Return the linked controller
+      return root.getElementById(this.controller) as HTMLInputElement | QuietTextField;
+    } else {
+      // Return the slotted controller
+      return this.querySelector<HTMLInputElement | QuietTextField>('[slot="controller"]');
+    }
   }
 
   private handleDefaultSlotChange() {
@@ -84,22 +119,23 @@ export class QuietSearchList extends QuietElement {
     this.updateResults();
   }
 
-  private async handleSearchBoxSlotChange() {
-    const searchBox = this.getSearchBox();
+  private async handleControllerSlotChange() {
+    const controller = this.getController();
 
     // If it's a Quiet text field, make sure it's registered before getting the value
-    if (searchBox?.localName === 'quiet-text-field') {
+    if (controller?.localName === 'quiet-text-field') {
       await customElements.whenDefined('quiet-text-field');
     }
 
-    // Set the initial value when the search box is slotted in
-    if (searchBox && searchBox.value !== this.query) {
-      this.query = searchBox.value;
+    // Set the initial value when the controller is slotted in
+    if (controller && controller.value !== this.query) {
+      this.query = controller.value;
       this.updateResults();
     }
   }
 
-  private handleInput = (event: InputEvent) => {
+  /** Updates results when the controller's value changes. */
+  private handleControllerInput = (event: InputEvent) => {
     const target = event.target as HTMLInputElement;
 
     clearTimeout(this.debounceTimer);
@@ -109,6 +145,16 @@ export class QuietSearchList extends QuietElement {
       this.query = target.value;
       this.updateResults();
     }, this.debounce);
+  };
+
+  /** Listens to all `input` events on the document and responds only to controller events. */
+  private handleDocumentInput = (event: InputEvent) => {
+    const target = event.target as HTMLInputElement | QuietTextField;
+
+    // Did this event come from the linked controller?
+    if (target.id === this.controller) {
+      this.handleControllerInput(event);
+    }
   };
 
   private updateResults() {
@@ -175,21 +221,25 @@ export class QuietSearchList extends QuietElement {
     this.query = query;
     this.updateResults();
 
-    // Update the search box
-    const searchBox = this.getSearchBox();
-    if (searchBox && 'value' in searchBox) {
-      searchBox.value = this.query;
+    // Update the controller
+    const controller = this.getController();
+    if (controller && 'value' in controller) {
+      controller.value = this.query;
     }
   }
 
   render() {
     return html`
-      <slot name="search-box" @input=${this.handleInput} @slotchange=${this.handleSearchBoxSlotChange}></slot>
+      <slot
+        name="controller"
+        @input=${this.handleControllerInput}
+        @slotchange=${this.handleControllerSlotChange}
+      ></slot>
 
       <div id="results" class="visually-hidden" role="region" aria-live="polite">${this.resultsMessage}</div>
 
-      <div id="items" part="items" ?hidden=${!this.isEmpty}>
-        <slot @slotchange=${this.handleDefaultSlotChange}></slot>
+      <div id="items" part="items">
+        <slot @slotchange=${this.handleDefaultSlotChange} ?hidden=${!this.isEmpty}></slot>
       </div>
 
       <slot name="empty" ?hidden=${this.isEmpty}></slot>

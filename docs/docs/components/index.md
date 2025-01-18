@@ -5,11 +5,13 @@ layout: docs
 
 <quiet-search-list id="component-index" match="fuzzy">
   <quiet-text-field 
-    slot="search-box" 
+    slot="controller" 
     label="Searching {{ components.length }} custom elements" 
+    description="Results will automatically update as you type"
     pill 
     autofocus 
     clearable
+    class="visually-hidden-description"
   >
     <quiet-icon slot="start" name="search"></quiet-icon>
   </quiet-text-field>

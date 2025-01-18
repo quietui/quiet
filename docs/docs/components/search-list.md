@@ -3,14 +3,15 @@ title: Search List
 layout: component
 ---
 
-The search list requires a search box and a collection of items. Each item must be an HTML element and a direct descendant of the search list. An optional `empty` slot can be used to show an empty state when no results are found.
+Search Lists provide real-time filtering of content as the user types, supporting exact or fuzzy matching, custom keywords, and customizable empty states. The component works with just about any type of content and can be customized with different layouts and styling.
 
 ```html {.example}
 <quiet-search-list match="fuzzy" id="search-list__overview">
-  <!-- The search box -->
+  <!-- Controller -->
   <quiet-text-field 
-    slot="search-box" 
+    slot="controller" 
     label="Search cats"
+    description="Results will update as you type"
     type="search" 
     clearable
     pill
@@ -18,7 +19,7 @@ The search list requires a search box and a collection of items. Each item must 
     <quiet-icon slot="start" name="search"></quiet-icon>
   </quiet-text-field>
 
-  <!-- Items to search -->
+  <!-- Items -->
   <quiet-card>
     <quiet-avatar image="https://images.unsplash.com/photo-1672487209629-4d52e0c043d0?q=80&w=256&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"></quiet-avatar>
     <div>
@@ -120,7 +121,7 @@ The search list requires a search box and a collection of items. Each item must 
     div[slot="empty"] {
       text-align: center;
       color: var(--quiet-text-muted);
-      margin-block-start: 2rem;
+      margin-block-start: 1rem;
 
       quiet-icon {
         font-size: 2.5rem;
@@ -133,92 +134,86 @@ The search list requires a search box and a collection of items. Each item must 
 
 ## Examples
 
-### Providing a search box and items
+### Providing a controller and items
 
-You must provide a search box using the `search-box` slot. Both [`<quiet-text-field>`](/docs/docs/components/text-field) and native `<input>` elements work well here. Make sure to add a label to ensure proper accessibility. You do not need to wire up any events for it, as the component handles it automatically.
+Every search list must have a search box, or _controller_, that maintains the query. Controllers can be [`<quiet-text-field>`](/docs/components/text-field) or native `<input>` elements. To link a controller, place it in the search list's `controller` slot or [assign an external one](#using-an-external-controller). Make sure to add a label and description to ensure it's accessible.
 
-Items can be just about any element, but each one _must_ be a direct descendant of the `<quiet-search-list>` element. By default, each item's text content will be used to determine a match, but you can also [specify keywords](#adding-keywords). A case-insensitive search is performed by default, but basic [fuzzy matching](#fuzzy-matching) is also available.
+Items can be just about any element, but they _must_ be direct descendants of the `<quiet-search-list>` element. By default, an item's [text content](https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent) will be used to determine a match, but you can also [specify keywords](#adding-keywords). A case-insensitive search is performed by default, but basic [fuzzy matching](#fuzzy-matching) and [custom matching](#using-a-custom-match-function) are also available.
 
-Items aren't given any styles by default, but they'll appear in a flex column container. To change the layout, target the internal container using the `items` part in your CSS. Flex and grid layouts work really well here.
+As the user types in the controller, the search list will update and show the matching results. When no query is entered, all items are shown. An optional [empty state](#providing-an-empty-state) can be provided to show a custom message when query is entered and no matches are found.
+
+A minimal implementation looks something like this. Note the use of `label` and `description`, which are important for accessibility.
+
+```html
+<quiet-search-list>
+  <!-- Controller -->
+  <quiet-text-field 
+    slot="controller"
+    label="Search" 
+    description="Results will update as you type"
+  ></quiet-text-field>
+
+  <!-- Items -->
+  <div>Item 1</div>
+  <div>Item 2</div>
+  <div>Item 3</div>
+</quiet-search-list>
+```
+
+Here's an example using a native `<input>` element.
+
+```html
+<quiet-search-list>
+  <!-- Controller -->
+  <label slot="controller" for="search">Search</label>
+  <input slot="controller" id="search" aria-description="Results will update as you type">
+
+  <!-- Items -->
+  <div>Item 1</div>
+  <div>Item 2</div>
+  <div>Item 3</div>
+</quiet-search-list>
+```
+
+Items aren't given any styles by the component — that part is up to you! The item's container, however, is styled as a flex column container by default. To change the layout, apply the desired CSS using the `::part(items)` selector. Both flex and grid layouts work really well here.
+
+Here is the example from above, modified with example styles.
 
 ```html {.example}
 <quiet-search-list id="search-list__search">
-  <!-- The search box -->
   <quiet-text-field 
-    slot="search-box" 
-    label="Search breeds"
-    type="search" 
-    clearable
-    pill
-  >
-    <quiet-icon slot="start" name="search"></quiet-icon>
-  </quiet-text-field>
+    slot="controller"
+    label="Search" 
+    description="Results will update as you type"
+  ></quiet-text-field>
 
-  <!-- Items to search -->
-  <a class="item" href="https://en.wikipedia.org/wiki/Siamese_cat" target="_blank">
-    <h4>Siamese</h4>
-    <p>Known for their striking blue eyes and color-point coats. Vocal and highly intelligent.</p>  
-  </a>
-  <a class="item" href="https://en.wikipedia.org/wiki/Maine_Coon" target="_blank">
-    <h4>Maine Coon</h4>
-    <p>One of the largest domestic breeds. Known for their luxurious coat and gentle personality.</p>  
-  </a>
-  <a class="item" href="https://en.wikipedia.org/wiki/Persian_cat" target="_blank">
-    <h4>Persian</h4>
-    <p>Recognizable by their long fur and flat faces. Calm and sweet-natured.</p>  
-  </a>
-  <a class="item" href="https://en.wikipedia.org/wiki/Bengal_cat" target="_blank">
-    <h4>Bengal</h4>
-    <p>Wild-looking spotted cats with high energy and playful personalities.</p>  
-  </a>
-  <a class="item" href="https://en.wikipedia.org/wiki/Ragdoll" target="_blank">
-    <h4>Ragdoll</h4>
-    <p>Large, laid-back cats known for going limp when held. Excellent family companions.</p>  
-  </a>
-  <a class="item" href="https://en.wikipedia.org/wiki/Scottish_Fold" target="_blank">
-    <h4>Scottish Fold</h4>
-    <p>Distinguished by their folded ears and round faces. Affectionate and adaptable.</p>  
-  </a>
+  <div>Item 1</div>
+  <div>Item 2</div>
+  <div>Item 3</div>
 </quiet-search-list>
 
 <style>
   #search-list__search {
     &::part(items) {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(min(180px, 100%), 1fr));
     }
 
-    .item {
-      align-items: center;
-      justify-content: center;
-      background-color: var(--quiet-neutral-fill-softer);
+    > div {
+      border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
       border-radius: var(--quiet-border-radius);
-      text-decoration: none;
-      color: inherit;
-      padding: 1rem;
-
-      h4 {
-        font-size: 1.125rem;
-      }
-
-      p {
-        margin-block-end: 0;
-      }
-    }
-
-    div[slot="empty"] {
+      background-color: var(--quiet-paper-color);
+      box-shadow: var(--quiet-shadow-softer);
       text-align: center;
-      color: var(--quiet-text-muted);
-      margin-block-start: 2rem;
-
-      quiet-icon {
-        font-size: 2.5rem;
-        stroke-width: 1px;
-      }
+      padding: 1rem;
     }
   }
 </style>
 ```
+
+:::info
+Search lists are designed to listen for user input dispatched by their controllers. As such, canceling the controller's `input` event or programmatically modifying its value will cause the search list to get out of sync. In that case, you can use the `setQuery()` method to programmatically update the search list.
+:::
 
 ### Fuzzy matching
 
@@ -226,9 +221,9 @@ By default, the search list shows results based on case-insensitive, exact match
 
 ```html {.example}
 <quiet-search-list match="fuzzy" id="search-list__fuzzy">
-  <!-- The search box -->
+  <!-- Controller -->
   <quiet-text-field 
-    slot="search-box" 
+    slot="controller" 
     label="Search for names"
     type="search" 
     clearable
@@ -237,7 +232,7 @@ By default, the search list shows results based on case-insensitive, exact match
     <quiet-icon slot="start" name="search"></quiet-icon>
   </quiet-text-field>
 
-  <!-- Items to search -->
+  <!-- Items -->
   <div class="item">Luna</div>
   <div class="item">Oliver</div>
   <div class="item">Bella</div>
@@ -280,13 +275,13 @@ For even more control over the matching algorithm, you can specific a [custom ma
 
 ### Adding keywords
 
-Add the `data-keywords` attribute to any child element to include additional keywords the search list should match by. This is useful for adding terms you'd like the item to match on even when the term doesn't appear in regular content.
+Add the `data-keywords` attribute to any item to include additional keywords the search list should match by. This is useful for adding terms you'd like the item to match on even when the term doesn't appear in regular content.
 
 ```html {.example}
 <quiet-search-list id="search-list__keywords">
-  <!-- The search box -->
+  <!-- Controller -->
   <quiet-text-field 
-    slot="search-box" 
+    slot="controller" 
     label="Search by color"
     description="e.g. brown, orange, white, gray, black"
     type="search" 
@@ -296,7 +291,7 @@ Add the `data-keywords` attribute to any child element to include additional key
     <quiet-icon slot="start" name="search"></quiet-icon>
   </quiet-text-field>
 
-  <!-- Items to search -->
+  <!-- Items -->
   <img 
     data-keywords="orange" 
     src="https://images.unsplash.com/photo-1628612380382-e6204e135307?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
@@ -360,9 +355,9 @@ An optional empty state will be shown when no results are found. Use the `empty`
 
 ```html {.example}
 <quiet-search-list id="search-list__empty">
-  <!-- The search box -->
+  <!-- Controller -->
   <quiet-text-field 
-    slot="search-box" 
+    slot="controller" 
     label="Search"
     type="search" 
     value="foo"
@@ -372,7 +367,7 @@ An optional empty state will be shown when no results are found. Use the `empty`
     <quiet-icon slot="start" name="search"></quiet-icon>
   </quiet-text-field>
 
-  <!-- Items to search -->
+  <!-- Items -->
   <div class="item">Luna</div>
   <div class="item">Oliver</div>
   <div class="item">Bella</div>
@@ -402,18 +397,6 @@ An optional empty state will be shown when no results are found. Use the `empty`
       gap: 0.5rem;
     }
 
-    /* Empty state styles */
-    div[slot="empty"] {
-      text-align: center;
-      color: var(--quiet-text-muted);
-      margin-block-start: 2rem;
-
-      quiet-icon {
-        font-size: 2.5rem;
-        stroke-width: 1px;
-      }
-    }
-
     .item {
       border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
       border-radius: var(--quiet-border-radius);
@@ -421,6 +404,19 @@ An optional empty state will be shown when no results are found. Use the `empty`
       box-shadow: var(--quiet-shadow-softer);
       padding: 0.5rem 1rem; 
     }
+
+    /* Empty state styles */
+    div[slot="empty"] {
+      width: 100%;
+      text-align: center;
+      color: var(--quiet-text-muted);
+      margin-block-start: 1rem;
+
+      quiet-icon {
+        font-size: 2.5rem;
+        stroke-width: 1px;
+      }
+    }    
   }
 </style>
 ```
@@ -433,9 +429,9 @@ The callback receives three arguments: `query` (the current search term), `conte
 
 ```html {.example}
 <quiet-search-list match="custom" id="search-list__custom">
-  <!-- The search box -->
+  <!-- Controller -->
   <quiet-text-field 
-    slot="search-box" 
+    slot="controller" 
     label="Search cats"
     description="Add @indoor or @outdoor to filter by environment"
     type="search" 
@@ -445,7 +441,7 @@ The callback receives three arguments: `query` (the current search term), `conte
     <quiet-icon slot="start" name="search"></quiet-icon>
   </quiet-text-field>
 
-  <!-- Items to search -->
+  <!-- Items -->
   <div class="item" data-environment="indoor">
     <h4>Luna</h4>
     <p>Sweet and friendly, loves window watching</p>
@@ -487,7 +483,7 @@ The callback receives three arguments: `query` (the current search term), `conte
 <script>
   const searchList = document.getElementById('search-list__custom');
 
-  // Custom match function
+  // A very contrived custom match function
   searchList.isMatch = (query, content, el) => {
     query = query.toLowerCase().trim();
 
@@ -542,8 +538,8 @@ The callback receives three arguments: `query` (the current search term), `conte
     div[slot="empty"] {
       text-align: center;
       color: var(--quiet-text-muted);
-      margin-block-start: 2rem;
-
+      margin-block-start: 1rem;
+      
       quiet-icon {
         font-size: 2.5rem;
         stroke-width: 1px;
@@ -557,3 +553,45 @@ The callback receives three arguments: `query` (the current search term), `conte
   }
 </style>
 ```
+
+### Using an external controller
+
+In some cases, the controller might need to exist outside of the component. In this case, give the controller an ID and set the search list's `controller` attribute to match.
+
+```html {.example}
+<quiet-text-field 
+  id="external-controller"
+  label="Search" 
+  description="Results will update as you type"
+></quiet-text-field>
+
+<quiet-search-list controller="external-controller" id="search-list__external">
+  <div>Item 1</div>
+  <div>Item 2</div>
+  <div>Item 3</div>
+</quiet-search-list>
+
+<style>
+  #search-list__external {
+    margin-block-start: 1rem;
+
+    &::part(items) {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(180px, 100%), 1fr));
+    }
+
+    > div {
+      border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
+      border-radius: var(--quiet-border-radius);
+      background-color: var(--quiet-paper-color);
+      box-shadow: var(--quiet-shadow-softer);
+      text-align: center;
+      padding: 1rem;
+    }
+  }
+</style>
+```
+
+:::info
+When using an external controller, make sure the position of it makes sense in reference to the search list. It should usually come immediately before the search list to ensure all users can interact with it properly.
+:::

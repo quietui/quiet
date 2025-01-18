@@ -27,7 +27,7 @@ Search Lists provide real-time filtering of content as the user types, supportin
       <div class="tagline">Freedom's just another word for nothing left to lose.</div>
     </div>
     <div class="buttons">
-      <quiet-button data-flip-card="toggle" icon-label="Settings" appearance="text" pill>
+      <quiet-button icon-label="Settings" appearance="text" pill>
         <quiet-icon name="dots"></quiet-icon>
       </quiet-button>
     </div>
@@ -40,7 +40,7 @@ Search Lists provide real-time filtering of content as the user types, supportin
       <div class="tagline">Living my best nine lives, one nap at a time.</div>
     </div>
     <div class="buttons">
-      <quiet-button data-flip-card="toggle" icon-label="Settings" appearance="text" pill>
+      <quiet-button icon-label="Settings" appearance="text" pill>
         <quiet-icon name="dots"></quiet-icon>
       </quiet-button>
     </div>
@@ -53,7 +53,7 @@ Search Lists provide real-time filtering of content as the user types, supportin
       <div class="tagline">Big fluff, bigger personality.</div>
     </div>
     <div class="buttons">
-      <quiet-button data-flip-card="toggle" icon-label="Settings" appearance="text" pill>
+      <quiet-button icon-label="Settings" appearance="text" pill>
         <quiet-icon name="dots"></quiet-icon>
       </quiet-button>
     </div>
@@ -66,7 +66,7 @@ Search Lists provide real-time filtering of content as the user types, supportin
       <div class="tagline">Professional sunbeam chaser and nap enthusiast.</div>
     </div>
     <div class="buttons">
-      <quiet-button data-flip-card="toggle" icon-label="Settings" appearance="text" pill>
+      <quiet-button icon-label="Settings" appearance="text" pill>
         <quiet-icon name="dots"></quiet-icon>
       </quiet-button>
     </div>
@@ -138,7 +138,7 @@ Search Lists provide real-time filtering of content as the user types, supportin
 
 Every search list must have a search box, or _controller_, that maintains the query. Controllers can be [`<quiet-text-field>`](/docs/components/text-field) or native `<input>` elements. To link a controller, place it in the search list's `controller` slot or [assign an external one](#using-an-external-controller). Make sure to add a label and description to ensure it's accessible.
 
-Items can be just about any element, but they _must_ be direct descendants of the `<quiet-search-list>` element. By default, an item's [text content](https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent) will be used to determine a match, but you can also [specify keywords](#adding-keywords). A case-insensitive search is performed by default, but basic [fuzzy matching](#fuzzy-matching) and [custom matching](#using-a-custom-match-function) are also available.
+Searchable items can be just about any element, but they _must_ be direct descendants of the `<quiet-search-list>` element. By default, an item's [text content](https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent) will be used to determine a match, but you can also [specify keywords](#adding-keywords). A case-insensitive search is performed by default, but basic [fuzzy matching](#fuzzy-matching) and [custom matching](#using-a-custom-match-function) are also available.
 
 As the user types in the controller, the search list will update and show the matching results. When no query is entered, all items are shown. An optional [empty state](#providing-an-empty-state) can be provided to show a custom message when query is entered and no matches are found.
 
@@ -343,7 +343,12 @@ Add the `data-keywords` attribute to any item to include additional keywords the
   #search-list__keywords {
     &::part(items) {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(min(180px, 100%), 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(min(145px, 100%), 1fr));
+    }
+
+    img {
+      height: 100%;
+      object-fit: cover;
     }
   }
 </style>
@@ -519,8 +524,9 @@ The callback receives three arguments: `query` (the current search term), `conte
     .item {
       border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
       border-radius: var(--quiet-border-radius);
+      background-color: var(--quiet-paper-color);
+      box-shadow: var(--quiet-shadow-softer);
       padding: 1rem;
-      background: var(--quiet-paper-color);
 
       h4 {
         margin: 0;

@@ -33,7 +33,7 @@ import styles from './text-area.styles.js';
  * @csspart text-box - The internal text box, a `<textarea>` element.
  *
  * @cssstate disabled - Applied when the text area is disabled.
- * @cssstate empty - Applied when the text area is empty.
+ * @cssstate blank - Applied when the text area has a blank value.
  * @cssstate focused - Applied when the text area has focus.
  * @cssstate user-valid - Applied when the text area is valid and the user has sufficiently interacted with it.
  * @cssstate user-invalid - Applied when the text area is invalid and the user has sufficiently interacted with it.
@@ -70,7 +70,7 @@ export class QuietTextArea extends QuietElement {
   /** The text area's value. */
   @property() value = '';
 
-  /** A placeholder to show in the text area when it's empty. */
+  /** A placeholder to show in the text area when it's blank. */
   @property() placeholder: string;
 
   /** Disables the text area. */
@@ -98,7 +98,7 @@ export class QuietTextArea extends QuietElement {
   @property() form: string;
 
   /**
-   * Makes the text area required. Form submission will not be allowed when this is set and the text area is empty.
+   * Makes the text area required. Form submission will not be allowed when this is set and the text area is blank.
    */
   @property({ type: Boolean, reflect: true }) required = false;
 
@@ -175,7 +175,7 @@ export class QuietTextArea extends QuietElement {
 
     // Handle value
     if (changedProperties.has('value')) {
-      this.customStates.set('empty', this.value === '');
+      this.customStates.set('blank', this.value === '');
       this.internals.setFormValue(this.value);
     }
 

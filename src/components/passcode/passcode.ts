@@ -43,7 +43,7 @@ import styles from './passcode.styles.js';
  * @csspart delimiter - Each individual delimiter.
  *
  * @cssstate disabled - Applied when the passcode is disabled.
- * @cssstate empty - Applied when the passcode is empty.
+ * @cssstate blank - Applied when the passcode has a blank value.
  * @cssstate focused - Applied when the passcode has focus.
  * @cssstate user-valid - Applied when the passcode is valid and the user has sufficiently interacted with it.
  * @cssstate user-invalid - Applied when the passcode is invalid and the user has sufficiently interacted with it.
@@ -112,7 +112,7 @@ export class QuietPasscode extends QuietElement {
   @property() form: string;
 
   /**
-   * Makes the passcode required. Form submission will not be allowed when this is set and the passcode is empty.
+   * Makes the passcode required. Form submission will not be allowed when this is set and the passcode is blank.
    */
   @property({ type: Boolean, reflect: true }) required = false;
 
@@ -170,7 +170,7 @@ export class QuietPasscode extends QuietElement {
         })
         .join('');
 
-      this.customStates.set('empty', this.value === '');
+      this.customStates.set('blank', this.value === '');
       this.internals.setFormValue(this.value);
     }
 
@@ -404,7 +404,7 @@ export class QuietPasscode extends QuietElement {
           const isCharacter = box === 'character';
           const isCurrent =
             isCharacter && (charPosition === this.value.length + 1 || (isFull && charPosition === totalCharacters));
-          const isEmpty = this.value.charAt(charPosition - 1) === '';
+          const isBlank = this.value.charAt(charPosition - 1) === '';
           const isLast = charPosition === totalCharacters;
 
           // Character boxes
@@ -413,9 +413,9 @@ export class QuietPasscode extends QuietElement {
               <div
                 part="character-box"
                 class=${classMap({
+                  blank: isBlank,
                   character: true,
                   current: isCurrent,
-                  empty: isEmpty,
                   last: isLast
                 })}
                 aria-hidden="true"

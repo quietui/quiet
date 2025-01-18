@@ -41,7 +41,7 @@ import styles from './text-field.styles.js';
  * @csspart password-toggle-button - The password toggle button, a `<button>` element.
  *
  * @cssstate disabled - Applied when the text field is disabled.
- * @cssstate empty - Applied when the text field is empty.
+ * @cssstate blank - Applied when the text field has a blank value.
  * @cssstate focused - Applied when the text field has focus.
  * @cssstate user-valid - Applied when the text field is valid and the user has sufficiently interacted with it.
  * @cssstate user-invalid - Applied when the text field is invalid and the user has sufficiently interacted with it.
@@ -78,7 +78,7 @@ export class QuietTextField extends QuietElement {
   /** The text field's value. */
   @property() value = '';
 
-  /** A placeholder to show in the text field when it's empty. */
+  /** A placeholder to show in the text field when it's blank. */
   @property() placeholder: string;
 
   /** Disables the text field. */
@@ -87,7 +87,7 @@ export class QuietTextField extends QuietElement {
   /** Makes the text field a read-only field. */
   @property({ type: Boolean }) readonly = false;
 
-  /** Adds a clear button to the text field when it's not empty. */
+  /** Adds a clear button to the text field when it's not blank. */
   @property({ type: Boolean }) clearable = false;
 
   /** The type of text field to render. */
@@ -122,7 +122,7 @@ export class QuietTextField extends QuietElement {
   @property() form: string;
 
   /**
-   * Makes the text field required. Form submission will not be allowed when this is set and the text field is empty.
+   * Makes the text field required. Form submission will not be allowed when this is set and the text field is blank.
    */
   @property({ type: Boolean, reflect: true }) required = false;
 
@@ -200,7 +200,7 @@ export class QuietTextField extends QuietElement {
 
     // Handle value
     if (changedProperties.has('value')) {
-      this.customStates.set('empty', this.value === '');
+      this.customStates.set('blank', this.value === '');
       this.internals.setFormValue(this.value);
     }
 
@@ -455,7 +455,7 @@ export class QuietTextField extends QuietElement {
           maxlength=${ifDefined(this.maxLength)}
           min=${ifDefined(this.min)}
           max=${ifDefined(this.max)}
-          step=${ifDefined(this.step)}
+          step=${ifDefined(this.step as number)}
           .value=${live(this.value) /* live() is required for proper validation */}
           autocapitalize=${ifDefined(this.autocapitalize)}
           autocomplete=${ifDefined(this.autocomplete)}

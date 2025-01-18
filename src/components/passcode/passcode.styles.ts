@@ -53,7 +53,7 @@ export default css`
 
     /* Masked */
     &.masked .character {
-      &:not(.empty)::before {
+      &:not(.blank)::before {
         position: absolute;
         top: calc(50% - 0.125em);
         left: calc(50% - 0.125em);
@@ -132,11 +132,11 @@ export default css`
       animation: 1s cursor infinite;
     }
 
-    &.last:not(.empty)::after {
+    &.last:not(.blank)::after {
       left: calc(100% - 0.25em);
     }
 
-    &.last:not(.empty):dir(rtl)::after {
+    &.last:not(.blank):dir(rtl)::after {
       left: 0.25em;
     }
   }

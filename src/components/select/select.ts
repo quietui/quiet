@@ -40,7 +40,7 @@ import styles from './select.styles.js';
  * @csspart chevron__svg - The chevron icon's `<svg>` part.
  *
  * @cssstate disabled - Applied when the select is disabled.
- * @cssstate empty - Applied when the selected option has an empty value.
+ * @cssstate blank - Applied when the select has no selected option.
  * @cssstate focused - Applied when the select has focus.
  * @cssstate user-valid - Applied when the select is valid and the user has sufficiently interacted with it.
  * @cssstate user-invalid - Applied when the select is invalid and the user has sufficiently interacted with it.
@@ -99,7 +99,7 @@ export class QuietSelect extends QuietElement {
   @property() form: string;
 
   /**
-   * Makes the select required. Form submission will not be allowed when this is set and the select is empty.
+   * Makes the select required. Form submission will not be allowed when this is set and the select is blank.
    */
   @property({ type: Boolean, reflect: true }) required = false;
 
@@ -143,7 +143,7 @@ export class QuietSelect extends QuietElement {
 
     // Handle value
     if (changedProperties.has('value')) {
-      this.customStates.set('empty', this.value === '');
+      this.customStates.set('blank', this.value === '');
       this.internals.setFormValue(this.value);
     }
 

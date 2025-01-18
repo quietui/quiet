@@ -57,7 +57,7 @@ const VALIDATION_MESSAGE = nativeFileInput.validationMessage;
  * @csspart file-remove-button__button - The `button` part of the file's remove button.
  *
  * @cssstate disabled - Applied when the file input is disabled.
- * @cssstate empty - Applied when the file input is empty.
+ * @cssstate blank - Applied when the file input has a blank value.
  * @cssstate focused - Applied when the file input has focus.
  * @cssstate user-valid - Applied when the file input is valid and the user has sufficiently interacted with it.
  * @cssstate user-invalid - Applied when the file input is invalid and the user has sufficiently interacted with it.
@@ -102,7 +102,7 @@ export class QuietFileInput extends QuietElement {
    * A list of acceptable file types. Must be a comma-separated list of [unique file type
    * specifiers](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#unique_file_type_specifiers).
    */
-  @property() accept = false;
+  @property({ type: Boolean }) accept = false;
 
   /** Allows more than one file to be selected. */
   @property({ type: Boolean }) multiple = false;
@@ -143,7 +143,7 @@ export class QuietFileInput extends QuietElement {
 
     // Handle value
     if (changedProperties.has('files')) {
-      this.customStates.set('empty', this.files.length === 0);
+      this.customStates.set('blank', this.files.length === 0);
       // Update the file list so assistive devices read the correct number of files
       this.fileInput.files = this.getFileList();
 
@@ -383,8 +383,8 @@ export class QuietFileInput extends QuietElement {
           id="file-input"
           type="file"
           accept=${ifDefined(this.accept)}
-          ?multiple=${ifDefined(this.multiple)}
-          ?required=${ifDefined(this.required)}
+          ?multiple=${this.multiple}
+          ?required=${this.required}
           aria-describedby="description"
           @input=${this.handleFileInput}
         />

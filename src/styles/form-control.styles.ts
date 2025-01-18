@@ -11,6 +11,7 @@ export default css`
     display: flex;
     flex-direction: column;
     gap: 0.25em;
+    line-height: 1.25;
   }
 
   /* Sizes */
@@ -38,7 +39,6 @@ export default css`
     display: inline-block;
     max-width: fit-content;
     font-weight: var(--quiet-font-weight-semibold);
-    line-height: calc(var(--quiet-line-height) * 0.75);
 
     &:has(~ .disabled) {
       cursor: not-allowed;
@@ -52,6 +52,7 @@ export default css`
   }
 
   #description {
+    margin-block-end: 0.25em;
     color: var(--quiet-text-muted);
     font-size: 0.8375rem;
   }

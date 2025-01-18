@@ -24,6 +24,17 @@ This component uses the Web Share API's [`share()`](https://developer.mozilla.or
 Use a custom button by simply slotting it in. Both [Quiet buttons](/docs/components/button) and [native buttons](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) are supported.
 
 ```html {.example}
+<quiet-share 
+  label="Quiet UI" 
+  text="An awesome library for building on the Web." 
+  url="https://quietui.org/"
+>
+  <quiet-button>
+    <quiet-icon slot="start" name="share-2"></quiet-icon>
+    Share
+  </quiet-button>
+</quiet-share>
+
 <quiet-share
   label="Quiet UI" 
   text="An awesome library for building on the Web." 
@@ -32,17 +43,6 @@ Use a custom button by simply slotting it in. Both [Quiet buttons](/docs/compone
 >
   <quiet-button>
     <quiet-icon slot="start" name="share"></quiet-icon>
-    Share
-  </quiet-button>
-</quiet-share>
-
-<quiet-share 
-  label="Quiet UI" 
-  text="An awesome library for building on the Web." 
-  url="https://quietui.org/"
->
-  <quiet-button>
-    <quiet-icon slot="start" name="share-3"></quiet-icon>
     Share
   </quiet-button>
 </quiet-share>

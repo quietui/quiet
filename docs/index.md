@@ -34,7 +34,7 @@ About this project
 
 <ul class="features-grid">
   <li>
-    <a class="stretch" href="/docs/using-components">
+    <a class="stretch" href="/docs/components">
       <quiet-icon name="packages" style="color: #b394f4;"></quiet-icon><br>
       {{ components.length }} high-quality, accessible, interoperable UI components
     </a>

@@ -17,11 +17,11 @@ You can use any of the following keywords to show platform-specific keys.
 
 | Keyword      | Mac | Others    |
 |--------------|-----|-----------|
-| `$command`   | ⌘   | CTRL      |
-| `$control`   | ⌃   | CTRL      |
-| `$option`    | ⌥   | ALT       |
-| `$shift`     | ⇧   | SHIFT     |
-| `$escape`    | ⎋   | ESC       |
+| `$command`   | ⌘   | Ctrl      |
+| `$control`   | ⌃   | Ctrl      |
+| `$option`    | ⌥   | Alt       |
+| `$shift`     | ⇧   | Shift     |
+| `$escape`    | Esc | Esc       |
 | `$enter`     | ↩   | ↩         |
 | `$backspace` | ⌫   | ⌫         |
 | `$delete`    | ⌦   | ⌦         |

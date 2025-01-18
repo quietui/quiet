@@ -123,7 +123,20 @@ export class QuietElement extends LitElement {
    * Used in templates to conditionally render a slot when it has content. When it doesn't have content, a hidden slot
    * of the same name is rendered instead to ensure the `slotchange` event continues to fire.
    */
-  protected whenSlotted(name: string, content: TemplateResult) {
-    return this.slotsWithContent.has(name) ? content : html`<slot name="${name}" hidden></slot>`;
+  protected whenSlotted(name: string, content: TemplateResult, options?: Partial<WhenSlottedOptions>) {
+    const opts: WhenSlottedOptions = {
+      force: false,
+      ...options
+    };
+
+    return this.slotsWithContent.has(name) || opts.force ? content : html`<slot name="${name}" hidden></slot>`;
   }
+}
+
+interface WhenSlottedOptions {
+  /**
+   * When true, the slot will be rendered even if nothing is slotted in. Useful for showing the slot when, for example,
+   * nothing is slotted in but a corresponding value is provided through a property.
+   */
+  force: boolean;
 }

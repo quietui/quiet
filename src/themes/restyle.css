@@ -418,8 +418,31 @@ select {
 }
 
 label {
+  display: inline-block;
+  max-width: fit-content;
+  margin-block-end: 0.25em;
   font-weight: var(--quiet-font-weight-semibold);
-  line-height: calc(var(--quiet-line-height) * 0.75);
+  line-height: 1.2;
+
+  &.xs {
+    font-size: var(--quiet-form-control-font-size-xs);
+  }
+
+  &.sm {
+    font-size: var(--quiet-form-control-font-size-sm);
+  }
+
+  &.md {
+    font-size: var(--quiet-form-control-font-size-md);
+  }
+
+  &.lg {
+    font-size: var(--quiet-form-control-font-size-lg);
+  }
+
+  &.xl {
+    font-size: var(--quiet-form-control-font-size-xl);
+  }
 }
 
 fieldset {

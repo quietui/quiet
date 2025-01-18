@@ -236,11 +236,26 @@ For consistency, native form controls are styled to look similar to Quiet form c
 
 <div style="display: flex; flex-direction: column; gap: 1rem;">
   <h4>Sizes</h4>
-  <input class="xs" type="text" placeholder="Extra small">
-  <input class="sm" type="text" placeholder="Small">
-  <input class="md" type="text" placeholder="Medium">
-  <input class="lg" type="text" placeholder="Large">
-  <input class="xl" type="text" placeholder="Extra large">
+  <div>
+    <label class="xs" for="xs-input">Extra small</label>
+    <input class="xs" id="xs-input" type="text" placeholder="xs">
+  </div>
+  <div>
+    <label class="sm" for="sm-input">Small</label>
+    <input class="sm" id="sm-input" type="text" placeholder="sm">
+  </div>
+  <div>
+    <label class="md" for="md-input">Medium</label>
+    <input class="md" id="md-input" type="text" placeholder="md">
+  </div>
+  <div>
+    <label class="lg" for="lg-input">Large</label>
+    <input class="lg" id="lg-input" type="text" placeholder="lg">
+  </div>
+  <div>
+    <label class="xl" for="xl-input">Extra large</label>
+    <input class="xl" id="xl-input" type="text" placeholder="xl">
+  </div>
 
   <h4>Appearances</h4>
   <input type="text" placeholder="Normal">
@@ -302,6 +317,7 @@ For consistency, native form controls are styled to look similar to Quiet form c
     dialog.close();
   });
 </script>
+
 ---
 
 ## Utility classes

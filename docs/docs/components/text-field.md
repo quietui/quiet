@@ -156,6 +156,7 @@ With a bit of custom CSS, you can show labels on the side instead of on top of t
     quiet-text-field::part(description) {
       grid-column-start: 2;
       order: 3;
+      margin-block: 0;
     }
   }
 </style>

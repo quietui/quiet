@@ -59,16 +59,6 @@ export class QuietCheckbox extends QuietElement {
    */
   @property() label: string;
 
-  /**
-   * The text field's description. If you need to provide HTML in the description, use the `description` slot instead.
-   */
-  @property() description: string;
-
-  /**
-   * The checkbox's description. If you need to provide HTML in the description, use the `description` slot instead.
-   */
-  @property() description: string;
-
   /** The name of the checkbox. This will be submitted with the form as a name/value pair. */
   @property({ reflect: true }) name: string;
 

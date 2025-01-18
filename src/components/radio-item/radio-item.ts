@@ -18,7 +18,7 @@ import styles from './radio-item.styles.js';
  *
  * @dependency quiet-icon
  *
- * @slot - The radio item's label.
+ * @slot - The radio item's label. For plain-text labels, you can use the `label` attribute instead.
  *
  * @event quiet-blur - Emitted when the radio item loses focus. This event does not bubble.
  * @event quiet-focus - Emitted when the radio item receives focus. This event does not bubble.

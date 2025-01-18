@@ -20,7 +20,7 @@ import styles from './checkbox.styles.js';
  *
  * @dependency quiet-icon
  *
- * @slot - The checkbox's label.
+ * @slot - The checkbox's label. For plain-text labels, you can use the `label` attribute instead.
  *
  * @event quiet-blur - Emitted when the checkbox loses focus. This event does not bubble.
  * @event quiet-change - Emitted when the user commits changes to the checkbox's value.
@@ -58,6 +58,11 @@ export class QuietCheckbox extends QuietElement {
    * The checkbox's label. If you need to provide HTML in the label, use the `label` slot instead.
    */
   @property() label: string;
+
+  /**
+   * The text field's description. If you need to provide HTML in the description, use the `description` slot instead.
+   */
+  @property() description: string;
 
   /**
    * The checkbox's description. If you need to provide HTML in the description, use the `description` slot instead.

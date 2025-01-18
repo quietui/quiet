@@ -20,7 +20,7 @@ import styles from './switch.styles.js';
  *
  * @dependency quiet-icon
  *
- * @slot - The switch's label.
+ * @slot - The switch's label. For plain-text labels, you can use the `label` attribute instead.
  * @slot off-label - The label to show when the switch is off.
  * @slot on-label - The label to show when the switch is on.
  *

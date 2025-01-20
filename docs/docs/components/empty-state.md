@@ -34,12 +34,19 @@ You can adjust the size of the empty state using `width`, `height`, and similar 
 ### Adding illustrations
 
 To show an illustration, slot an image or an [icon](/docs/components/icon) into the `illustration` slot.
-
 ```html {.example}
 <quiet-empty-state style="min-height: 400px;">
   <img slot="illustration" src="/assets/images/undraw-cat.svg" alt="A cartoon cat sitting and staring at the camera"></quiet-icon>
   <h4>No food found</h4>
   <p>The cats are not thrilled. Please add good food soon.</p>
+</quiet-empty-state>
+```
+
+```html {.example}
+<quiet-empty-state style="min-height: 400px;">
+  <quiet-icon slot="illustration" name="calendar"></quiet-icon>
+  <h4>No upcoming events</h4>
+  <p>Your calendar is clear. Schedule meetings or events to see them here.</p>
 </quiet-empty-state>
 ```
 

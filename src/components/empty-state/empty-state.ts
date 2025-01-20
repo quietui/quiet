@@ -21,7 +21,7 @@ import styles from './empty-state.styles.js';
  * @cssproperty [--content-width=40ch] - The maximum width of the empty state's content. When space is limited, the
  *  content will wrap automatically.
  * @cssproperty --illustration-width - The maximum width of the illustration. By default, this will be half of
- *  `--content-width`.
+ *  `--content-width`. This property does not affect the size of icons.
  *
  * @csspart content - The container that wraps the content.
  * @csspart illustration - The container that wraps the illustration.

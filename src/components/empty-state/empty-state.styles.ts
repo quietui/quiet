@@ -45,7 +45,7 @@ export default css`
     }
 
     ::slotted(p) {
-      text-wrap: pretty;
+      text-wrap: balance !important;
     }
 
     ::slotted(:last-child) {

@@ -9,7 +9,6 @@ layout: component
   <h4>My Podcasts</h4>
   <p>You haven't added any podcasts yet. Once you do, you'll be able to listen to them here.</p>
   <quiet-button variant="primary" pill>Add podcasts</quiet-button>
-  <quiet-button pill>Learn more</quiet-button>
 </quiet-empty-state>
 ```
 

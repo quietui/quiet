@@ -73,10 +73,10 @@ Search Lists provide real-time filtering of content as the user types, supportin
   </quiet-card>  
 
   <!-- Empty state -->
-  <div slot="empty">
-    <quiet-icon name="cat"></quiet-icon><br>
-    No results
-  </div>
+  <quiet-empty-state slot="empty">
+    <quiet-icon slot="illustration" name="cat"></quiet-icon>
+    <p>No matching results</p>
+  </quiet-empty-state>
 </quiet-search-list>
 
 <style>
@@ -389,10 +389,10 @@ An optional empty state will be shown when no results are found. Use the `empty`
   <div class="item">Ziggy</div>
 
   <!-- The empty state -->
-  <div slot="empty">
-    <quiet-icon name="cat"></quiet-icon><br>
-    No cats found
-  </div>
+  <quiet-empty-state slot="empty">
+    <quiet-icon slot="illustration" name="cat"></quiet-icon>
+    No matching results
+  </quiet-empty-state>
 </quiet-search-list>
 
 <style>
@@ -478,11 +478,11 @@ The callback receives three arguments: `query` (the current search term), `conte
   </div>
 
   <!-- Empty state -->
-  <div slot="empty">
-    <quiet-icon name="cat"></quiet-icon><br>
-    No cats match your search<br>
-    <small>Try searching by name or using the @indoor or @outdoor tags</small>
-  </div>
+  <quiet-empty-state slot="empty">
+    <quiet-icon slot="illustration" name="cat"></quiet-icon>
+    <h4>No cats match your search</h4>
+    <p><small>Try searching by name or using the @indoor or @outdoor tags</small></p>
+  </quiet-empty-state>
 </quiet-search-list>
 
 <script>

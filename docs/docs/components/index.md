@@ -32,10 +32,10 @@ layout: docs
     </a>
   {%- endfor -%}
 
-  <div slot="empty">
-    <quiet-icon name="cheese"></quiet-icon>
-    No components found
-  </div>
+  <quiet-empty-state slot="empty">
+    <quiet-icon slot="illustration" name="cheese"></quiet-icon>
+    <h4>No matching results</h4>
+  </quiet-empty-state>
 </quiet-search-list>
 
 <style>

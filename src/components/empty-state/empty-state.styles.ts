@@ -45,6 +45,7 @@ export default css`
     }
 
     ::slotted(p) {
+      margin-block-end: 1em !important;
       text-wrap: balance !important;
     }
 

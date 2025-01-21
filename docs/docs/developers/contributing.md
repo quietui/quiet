@@ -191,6 +191,30 @@ Modal elements that feature a visible backdrop, such as dialogs, should not have
 
 Open, close, and similar events should be named present tense, e.g. `quiet-open` and `quiet-close`. When it makes sense, they should be cancelable which will prevent the component from opening or closing. After opening or closing, and after all animations are complete, a past tense version of the event should be emitted, e.g. `quiet-opened` and `quiet-closed`.
 
+### Data attribute invokers
+
+Some components make use of [data attributes](https://developer.mozilla.org/en-US/docs/Learn_web_development/Howto/Solve_HTML_problems/Use_data_attributes) to invoke certain behaviors, such as `data-dialog="close"` to close a dialog. The syntax of an invoker must follow this pattern.
+
+```html
+<button data-component="action id">
+  ...
+</button>
+```
+
+In this case, `component` is replaced with the component's tag name minus its `quiet-` prefix. Thus, `data-dialog` is unambiguously an invoker that controls a dialog. The `action` argument is not optional and must be a short, one-word or kebab-case name that describes what the invoker does. Lastly, an optional target ID can be provided, separated by a space.
+
+```html
+<quiet-dialog id="my-dialog">
+  ...
+</quiet-dialog>
+
+<button data-dialog="open my-dialog">
+  Open dialog
+</button>
+```
+
+If the invoker is positioned within the controlling component, such as a `<button data-dialog="close">` inside of a `<quiet-dialog>`, the ID should be optional.
+
 ### Dispatching events
 
 Events must extend the `Event` object and start with `quiet-`. You can dispatch events using `this.dispatchEvent()`. Although the `CustomEvent` type is unused, event details must be made available to the user in `event.detail`. Take a look at existing events to see how to extend and provide details. Event declarations do include some boilerplate, but they enable strong typing and help keep usage consistent.

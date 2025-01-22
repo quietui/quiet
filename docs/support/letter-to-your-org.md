@@ -15,7 +15,7 @@ I want to introduce Quiet&nbsp;UI, an open source component library that can sig
 
 Quiet&nbsp;UI offers thoroughly tested, accessible components that work across frameworks. This means we won't need to rebuild components when switching frameworks in the future. Quiet's comprehensive documentation and commitment to accessibility will let us focus on building features rather than maintaining our own components.
 
-While comparable solutions cost $10,000+ yearly, Quiet runs on a sponsorship model ($12-$100/month). I think the $100 tier would be perfect for us – it's a fraction of what we currently spend maintaining our own components and it gives us support from the maintainer and priority bug fixes.
+While comparable solutions cost $10,000+ yearly, Quiet runs on a sponsorship model ($12-$100/month). I think the ==$100 tier== would be perfect for us – it's a fraction of what we currently spend maintaining our own components and it gives us support from the maintainer and priority bug fixes.
 
 The project's website is: <a href="https://quietui.org/" data-no-external-icon>quietui.org</a>
 

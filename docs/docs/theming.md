@@ -581,7 +581,7 @@ If you just want to change a few things here and there, it's usually better to l
 
 <style>
   .palette {
-    margin-block-end: var(--quiet-content-spacing);
+    margin-block-end: 2rem;
 
     h5 {
       font-size: 1rem;

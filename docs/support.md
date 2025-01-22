@@ -75,7 +75,7 @@ Quiet can be used for free under the MIT license. Unfortunately, I can't offer s
     display: flex; 
     gap: 1rem; 
     justify-content: center; 
-    margin-block: calc(var(--quiet-content-spacing) * 1.33) var(--quiet-content-spacing);
+    margin-block: 2.5rem 2rem;
   "
 >
   <quiet-button variant="primary" size="lg" appearance="outline" pill href="https://github.com/sponsors/quietui" target="_blank">

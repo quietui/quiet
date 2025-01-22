@@ -564,14 +564,14 @@ Here you can preview the animations that are available in Scurry.
 
 <style>
   #transition-group__animation {
-    margin-block-end: var(--quiet-content-spacing);
+    margin-block-end: 2rem;
 
     quiet-transition-group {
       display: flex;
       gap: 1rem;
       flex-wrap: wrap;
       flex-direction: row;
-      margin-block-end: var(--quiet-content-spacing);
+      margin-block-end: 2rem;
     }
 
     .box {

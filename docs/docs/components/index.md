@@ -46,7 +46,7 @@ layout: docs
       align-items: start;
       gap: 1rem;
       width: 100%;
-      margin-block-end: var(--quiet-content-spacing);
+      margin-block-end: 2rem;
     }
 
     .component {

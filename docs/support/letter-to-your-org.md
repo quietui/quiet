@@ -7,7 +7,7 @@ section:
 
 For most organizations, a sponsorship is just a drop in the bucket. For open source authors, it provides the means to exist. If you're not sure how to start the conversation, use this template to talk to your boss about adopting and sponsoring Quiet&nbsp;UI in your place of business.
 
-<quiet-card style="padding-inline: 1rem; padding-block-start: var(--quiet-content-spacing);">
+<quiet-card style="padding-inline: 1rem; padding-block-start: 2rem;">
 
 Dear =={Manager}==,
 
@@ -27,7 +27,7 @@ Thanks!
 
 </quiet-card>
 
-<div style="display: flex; gap: 1rem; justify-content: center; margin-block: var(--quiet-content-spacing);">
+<div style="display: flex; gap: 1rem; justify-content: center; margin-block: 2rem;">
   <quiet-button variant="primary" size="lg" appearance="outline" pill href="/support">
     <quiet-icon slot="start" name="arrow-left"></quiet-icon>
     Back to the support page

@@ -34,7 +34,7 @@ layout: docs
 
   <quiet-empty-state slot="empty">
     <quiet-icon slot="illustration" name="cheese"></quiet-icon>
-    <h4>No matching results</h4>
+    <p>No matching results</p>
   </quiet-empty-state>
 </quiet-search-list>
 
@@ -62,9 +62,17 @@ layout: docs
       padding: 1.25rem;
       text-decoration: none;
       color: inherit;
+      transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
       
       &:focus-visible {
         outline-offset: calc(-1 * var(--quiet-border-width));
+      }
+
+      @media (hover: hover) {
+        &:hover {
+          transform: translateY(-3px) scale(1.02);
+          box-shadow: var(--quiet-shadow-mid);
+        }
       }
 
       .name {

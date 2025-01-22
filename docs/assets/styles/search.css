@@ -157,24 +157,8 @@
 }
 
 /* Empty state */
-#site-search-empty {
+#site-search:not(.no-results) #site-search-empty {
   display: none;
-  padding: 3rem 2rem;
-  color: var(--quiet-text-muted);
-  font-size: 1.125rem;
-  text-align: center;
-
-  quiet-icon {
-    display: block;
-    width: 2rem;
-    height: 2rem;
-    margin-inline: auto;
-    margin-block-end: 0.5rem;
-  }
-}
-
-#site-search.no-results #site-search-empty {
-  display: block;
 }
 
 /* Footer */

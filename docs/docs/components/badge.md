@@ -18,6 +18,7 @@ Badges have four variants. Default badges are useful when you want to tag someth
 <quiet-badge variant="primary">Primary</quiet-badge>
 <quiet-badge variant="constructive">Constructive</quiet-badge>
 <quiet-badge variant="destructive">Destructive</quiet-badge>
+<quiet-badge variant="inverted">Inverted</quiet-badge>
 ```
 
 ### Changing the size

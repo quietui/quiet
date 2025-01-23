@@ -23,7 +23,7 @@ export class QuietBadge extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
   /** The type of badge to draw. */
-  @property({ reflect: true }) variant: 'default' | 'primary' | 'constructive' | 'destructive' = 'default';
+  @property({ reflect: true }) variant: 'default' | 'primary' | 'constructive' | 'destructive' | 'inverted' = 'default';
 
   /** Draws attention to the badge using an animation. */
   @property({ type: Boolean, reflect: true }) attention = false;

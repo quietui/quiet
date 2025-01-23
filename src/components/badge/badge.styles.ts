@@ -60,6 +60,12 @@ export default css`
     color: var(--quiet-destructive-text-on-mid);
   }
 
+  /* Inverted */
+  :host([variant='inverted']) {
+    background-color: var(--quiet-neutral-fill-loud);
+    color: var(--quiet-neutral-text-on-loud);
+  }
+
   @keyframes pulse {
     0% {
       transform: scale(1);

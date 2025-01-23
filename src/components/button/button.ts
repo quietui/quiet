@@ -56,7 +56,7 @@ export class QuietButton extends QuietElement {
   @property({ reflect: true }) appearance: 'normal' | 'outline' | 'text' | 'image' = 'normal';
 
   /** The type of button to render. This attribute has no effect on text or image buttons. */
-  @property({ reflect: true }) variant: 'default' | 'primary' | 'destructive' = 'default';
+  @property({ reflect: true }) variant: 'default' | 'primary' | 'destructive' | 'inverted' = 'default';
 
   /** Disables the button. */
   @property({ type: Boolean, reflect: true }) disabled = false;
@@ -226,6 +226,7 @@ export class QuietButton extends QuietElement {
           default: this.variant === 'default',
           primary: this.variant === 'primary',
           destructive: this.variant === 'destructive',
+          inverted: this.variant === 'inverted',
           // Appearances
           normal: this.appearance === 'normal',
           outline: this.appearance === 'outline',

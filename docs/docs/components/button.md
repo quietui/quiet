@@ -21,6 +21,10 @@ Buttons have four built-in variants. Set the `variant` attribute to `default`, `
 <quiet-button variant="destructive">
   Destructive
 </quiet-button>
+
+<quiet-button variant="inverted">
+  Inverted
+</quiet-button>
 ```
 
 :::info
@@ -95,15 +99,19 @@ Set the `appearance` attribute to `outline` to draw outlined buttons.
 
 ```html {.example .flex-row}
 <quiet-button appearance="outline" variant="default">
-  I'm outline
+  Default
 </quiet-button>
 
 <quiet-button appearance="outline" variant="primary">
-  I'm outline  
+  Primary
 </quiet-button>
 
 <quiet-button appearance="outline" variant="destructive">
-  I'm outline
+  Destructive
+</quiet-button>
+
+<quiet-button appearance="outline" variant="inverted">
+  Inverted
 </quiet-button>
 ```
 
@@ -137,15 +145,19 @@ Buttons can be rendered with pill-shaped edges by adding the `pill` attribute.
 
 ```html {.example .flex-row}
 <quiet-button pill variant="default">
-  I'm a pill button
+  Default
 </quiet-button>
 
 <quiet-button pill variant="primary">
-  I'm a pill button  
+  Primary
 </quiet-button>
 
 <quiet-button pill variant="destructive">
-  I'm a pill button
+  Destructive
+</quiet-button>
+
+<quiet-button pill variant="inverted">
+  Inverted
 </quiet-button>
 ```
 
@@ -164,6 +176,10 @@ To create an icon button, place an icon into the button's default slot and set t
 
 <quiet-button icon-label="Delete" variant="destructive">
   <quiet-icon name="trash"></quiet-icon>
+</quiet-button>
+
+<quiet-button icon-label="Settings" variant="inverted">
+  <quiet-icon name="settings"></quiet-icon>
 </quiet-button>
 
 <quiet-button icon-label="Close" appearance="text">
@@ -185,6 +201,10 @@ Create a toggle button by adding the `toggle="off"` attribute. To make it active
 </quiet-button>
 
 <quiet-button variant="destructive" toggle="off" icon-label="Record">
+  <quiet-icon name="microphone"></quiet-icon>
+</quiet-button>
+
+<quiet-button variant="inverted" toggle="off" icon-label="Microphone">
   <quiet-icon name="camera"></quiet-icon>
 </quiet-button>
 

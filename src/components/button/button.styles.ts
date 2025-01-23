@@ -127,6 +127,22 @@ export default css`
           background-color: color-mix(in oklab, var(--quiet-destructive-fill-mid), var(--quiet-strident) 7.5%);
         }
       }
+
+      /* Inverted */
+      &.inverted {
+        background-color: var(--quiet-neutral-fill-loud);
+        color: var(--quiet-destructive-text-on-loud);
+
+        @media (hover: hover) {
+          &:hover:not(.disabled, [aria-pressed='true']) {
+            background-color: color-mix(in oklab, var(--quiet-neutral-fill-loud), black 5%);
+          }
+        }
+
+        &[aria-pressed='true'] {
+          background-color: color-mix(in oklab, var(--quiet-neutral-fill-loud), var(--quiet-strident) 7.5%);
+        }
+      }
     }
 
     /* Outline buttons */
@@ -162,6 +178,18 @@ export default css`
       @media (hover: hover) {
         &:hover:not(.disabled, [aria-pressed='true']) {
           background: color-mix(in oklab, transparent, var(--quiet-destructive-fill-mid) 7.5%);
+        }
+      }
+    }
+
+    &.outline.inverted {
+      border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-destructive-fill-louder);
+      background: transparent;
+      color: var(--quiet-neutral-text-on-soft);
+
+      @media (hover: hover) {
+        &:hover:not(.disabled, [aria-pressed='true']) {
+          background: color-mix(in oklab, transparent, var(--quiet-destructive-fill-louder) 7.5%);
         }
       }
     }

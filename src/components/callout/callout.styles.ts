@@ -53,6 +53,17 @@ export default css`
     color: var(--quiet-destructive-text-colorful);
   }
 
+  /* Inverted */
+  :host([variant='inverted']) {
+    border-color: var(--quiet-neutral-stroke-loud);
+    background-color: var(--quiet-neutral-fill-loud);
+    color: var(--quiet-neutral-text-on-loud);
+  }
+
+  :host([variant='inverted']) #icon {
+    color: var(--quiet-neutral-text-on-loud);
+  }
+
   #icon {
     display: flex;
     flex: 0 0 auto;

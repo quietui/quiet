@@ -29,7 +29,7 @@ export class QuietCallout extends QuietElement {
   }
 
   /** The type of callout to render. */
-  @property({ reflect: true }) variant: 'default' | 'primary' | 'constructive' | 'destructive' = 'default';
+  @property({ reflect: true }) variant: 'default' | 'primary' | 'constructive' | 'destructive' | 'inverted' = 'default';
 
   render() {
     return html`

@@ -32,6 +32,10 @@ Callouts have four built-in variants. Set the `variant` attribute to `default`, 
 <quiet-callout variant="destructive">
   This is a destructive callout. Use me when danger lies ahead.
 </quiet-callout>
+
+<quiet-callout variant="inverted">
+  This is an inverted callout. Use me when you need extra contrast.
+</quiet-callout>
 ```
 
 ### Adding icons
@@ -57,6 +61,11 @@ Add an icon to a callout using the `icon` slot. Works best with `<quiet-icon>` a
 <quiet-callout variant="destructive">
   <quiet-icon slot="icon" name="alert-triangle"></quiet-icon>
   Doing this will anger the cats. Are you sure you want to continue?
+</quiet-callout>
+
+<quiet-callout variant="inverted">
+  <quiet-icon slot="icon" name="moon"></quiet-icon>
+  The cats are most active during their midnight zoomies.
 </quiet-callout>
 ```
 

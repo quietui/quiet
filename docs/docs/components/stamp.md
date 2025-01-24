@@ -107,7 +107,7 @@ Avoid using `<script>` and `<style>` tags in your template because they'll be du
 ```html {.example .open .no-buttons}
 <!-- Create a template -->
 <template id="user-template">
-  <h3 class="name">{name}</h3>
+  <h4 class="name">{name}</h4>
   <div class="tagline">{tagline}</div>
 </template>
 
@@ -116,6 +116,14 @@ Avoid using `<script>` and `<style>` tags in your template because they'll be du
   template="user-template"
   data-name="Meowy McGee"
   data-tagline="Freedom's just another word for nothing left to lose."
+></quiet-stamp>
+
+<br>
+
+<quiet-stamp 
+  template="user-template"
+  data-name="Lady Pawington"
+  data-tagline="Sophistication in a silk scarf and sassy whiskers."
 ></quiet-stamp>
 ```
 

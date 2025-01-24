@@ -33,6 +33,7 @@ export interface Translation extends DefaultTranslation {
   pressSpaceForOneSecondToActivate: string;
   loading: string;
   remove: string;
+  scrollableRegion: string;
   selectAColorFromTheScreen: string;
   share: string;
   showPassword: string;

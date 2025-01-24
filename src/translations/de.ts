@@ -26,6 +26,7 @@ const translation: Translation = {
   pressSpaceForOneSecondToActivate: 'Zum Aktivieren eine Sekunde lang die Leertaste drücken',
   remove: 'Entfernen',
   selectAColorFromTheScreen: 'Farbe vom Bildschirm auswählen',
+  scrollableRegion: 'Scrollbarer Bereich',
   share: 'Aktie',
   showPassword: 'Passwort anzeigen',
   show: 'Anzeigen',

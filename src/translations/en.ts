@@ -24,6 +24,7 @@ const translation: Translation = {
   percentSaturation: (percentage: string) => `${percentage} saturation`,
   pressSpaceForOneSecondToActivate: 'Press space bar for one second to activate',
   remove: 'Remove',
+  scrollableRegion: 'Scrollable region',
   selectAColorFromTheScreen: 'Select a color from the screen',
   share: 'Share',
   showPassword: 'Show password',

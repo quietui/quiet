@@ -26,6 +26,7 @@ const translation: Translation = {
   pressSpaceForOneSecondToActivate: 'Нажмите пробел и удерживайте одну секунду, чтобы активировать',
   remove: 'Удалять',
   selectAColorFromTheScreen: 'Выберите цвет на экране',
+  scrollableRegion: 'Прокручиваемая область',
   share: 'Делиться',
   showPassword: 'Показать пароль',
   show: 'Показать',

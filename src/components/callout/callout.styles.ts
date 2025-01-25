@@ -55,7 +55,7 @@ export default css`
 
   /* Inverted */
   :host([variant='inverted']) {
-    border-color: var(--quiet-neutral-stroke-loud);
+    border-color: var(--quiet-neutral-fill-loud); /* same as background */
     background-color: var(--quiet-neutral-fill-loud);
     color: var(--quiet-neutral-text-on-loud);
   }

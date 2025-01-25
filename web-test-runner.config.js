@@ -45,8 +45,8 @@ export default {
   </body>
 </html>
   `.trim(),
-  // Create a named group for every test file to enable running single tests. If a test file is `split-panel.test.ts`
-  // then you can run `npm run test -- --group split-panel` to run only that component's tests.
+  // Create a named group for every test file to enable running single tests. If a test file is `text-field.test.ts`
+  // then you can run `npm run test -- --group text-field` to run only the text field tests.
   groups: globbySync('src/**/*.test.ts').map(path => {
     const groupName = path.match(/^.*\/(?<fileName>.*)\.test\.ts/).groups.fileName;
     return {

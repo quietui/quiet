@@ -14,7 +14,7 @@ layout: component
 
 ### Variants
 
-Callouts have four built-in variants. Set the `variant` attribute to `default`, `primary`, `constructive`, or `destructive` to change the callout's appearance.
+Callouts have five built-in variants. Set the `variant` attribute to `default`, `primary`, `constructive`, `destructive`, or `inverted` to change the callout's appearance.
 
 ```html {.example}
 <quiet-callout variant="default">

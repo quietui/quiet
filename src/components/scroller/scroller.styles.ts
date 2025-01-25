@@ -18,6 +18,9 @@ export default css`
     border-radius: inherit;
     scroll-behavior: smooth;
 
+    /* Prevent text in mobile Safari from being larger when the container width larger than the viewport */
+    -webkit-text-size-adjust: 100%;
+
     &:focus {
       outline: none;
     }

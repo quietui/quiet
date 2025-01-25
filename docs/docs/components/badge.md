@@ -11,7 +11,7 @@ layout: component
 
 ### Variants
 
-Badges have four variants. Default badges are useful when you want to tag something with less importance. Primary badges are intended to be more obvious. Constructive badges are indicative of success, whereas destructive badges are indicative of danger.
+Badges have five built-in variants. Set the `variant` attribute to `default`, `primary`, `constructive`, `destructive`, or `inverted` to change the badges's appearance.
 
 ```html {.example .flex-row}
 <quiet-badge variant="default">Default</quiet-badge>

@@ -254,7 +254,7 @@ export class QuietTextField extends QuietElement {
     this.value = '';
     this.textBox.focus();
     this.dispatchEvent(new QuietInputEvent());
-    this.dispatchEvent(new Event('input', { bubbles: true, composed: true, cancelable: false }));
+    this.dispatchEvent(new InputEvent('input', { bubbles: true, composed: true, cancelable: false }));
   }
 
   private handleFocus() {

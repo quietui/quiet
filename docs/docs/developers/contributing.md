@@ -221,6 +221,8 @@ Events must extend the `Event` object and start with `quiet-`. You can dispatch 
 
 Events should always be composed. Events should only be cancelable if they're actually cancelable by the end user. Events should bubble to support delegation unless there's a specific reason not to or if it makes sense to align with the platform, e.g. `quiet-focus` and `quiet-blur`.
 
+For compatibility with frameworks, form controls must dispatch `input` and `change` events along with `quiet-input` and `quiet-change`.
+
 ### Observing slots
 
 The platform doesn't currently provide an easy way to detect if slots have content, so the `QuietElement` base class offers a utility to facilitate this. With it, you can show/hide sections of the template and/or toggle classes based on a named slot's status.

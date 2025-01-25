@@ -1,10 +1,51 @@
 import { expect, fixture, html } from '@open-wc/testing';
+import { spy } from 'sinon';
 import '../../../dist/quiet.loader.js';
+import { clickOnElement } from '../../utilities/testing.js';
 import type { QuietSwitch } from './switch.js';
 
 describe('<quiet-switch>', () => {
-  it('does something', async () => {
-    const el = await fixture<QuietSwitch>(html` <quiet-switch>Click me</quiet-switch> `);
-    await expect(el).to.be.accessible();
+  it('should dispatch the `quiet-input` and `input` events when the switch is toggled', async () => {
+    const el = await fixture<QuietSwitch>(html`<quiet-switch label="Test"></quiet-switch>`);
+
+    const inputSpy = spy();
+    const quietInputSpy = spy();
+
+    el.addEventListener('input', inputSpy);
+    el.addEventListener('quiet-input', quietInputSpy);
+
+    await clickOnElement(el);
+
+    // Custom event
+    expect(quietInputSpy).to.have.been.calledOnce;
+    expect(quietInputSpy.firstCall.args[0].bubbles).to.be.true;
+    expect(quietInputSpy.firstCall.args[0].composed).to.be.true;
+
+    // Native event
+    expect(inputSpy).to.have.been.calledOnce;
+    expect(inputSpy.firstCall.args[0].bubbles).to.be.true;
+    expect(inputSpy.firstCall.args[0].composed).to.be.true;
+  });
+
+  it('should dispatch the `quiet-change` and `change` events when the switch is toggled', async () => {
+    const el = await fixture<QuietSwitch>(html`<quiet-switch label="Test"></quiet-switch>`);
+
+    const changeSpy = spy();
+    const quietChangeSpy = spy();
+
+    el.addEventListener('change', changeSpy);
+    el.addEventListener('quiet-change', quietChangeSpy);
+
+    await clickOnElement(el);
+
+    // Custom change event
+    expect(quietChangeSpy).to.have.been.calledOnce;
+    expect(quietChangeSpy.firstCall.args[0].bubbles).to.be.true;
+    expect(quietChangeSpy.firstCall.args[0].composed).to.be.true;
+
+    // Native change vent
+    expect(changeSpy).to.have.been.calledOnce;
+    expect(changeSpy.firstCall.args[0].bubbles).to.be.true;
+    expect(changeSpy.firstCall.args[0].composed).to.be.true;
   });
 });

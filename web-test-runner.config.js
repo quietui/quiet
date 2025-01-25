@@ -8,7 +8,7 @@ import { getComponents } from './docs/_utils/manifest.js';
 const cores = os.availableParallelism?.() ?? os.cpus.length;
 const browsers = ['chromium', 'firefox', 'webkit'];
 const concurrentBrowsers = Math.min(browsers.length, cores);
-const concurrency = 1;
+const concurrency = Math.max(Math.floor(cores / 3), 1);
 
 // Import all components up front so we don't have to wait for the autoloader in every test
 const componentImports = getComponents()

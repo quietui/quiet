@@ -113,7 +113,7 @@ Icons that are rendered in a component's shadow root _must_ use the `system` ico
 
 Form controls must be form-associated custom elements and should follow patterns of existing form controls, for familiarity. Use `value` for value, `disable` to disable, `require` to require, etc.
 
-Form controls must prevent and relay all `change` and `input` events using `this.relayNativeEvent()`. Doing so will allow frameworks to bind to Quiet form controls just like native ones.
+Form controls must dispatch native `change` and `input` events. This improves DX and allows frameworks to bind to Quiet form controls just like native ones. (Note that the native `change` event isn't composed, so it won't be retargeted like `input` and other events.)
 
 ### Component sizing and scaling
 
@@ -220,8 +220,6 @@ If the invoker is positioned within the controlling component, such as a `<butto
 Events must extend the `Event` object and start with `quiet-`. You can dispatch events using `this.dispatchEvent()`. Although the `CustomEvent` type is unused, event details must be made available to the user in `event.detail`. Take a look at existing events to see how to extend and provide details. Event declarations do include some boilerplate, but they enable strong typing and help keep usage consistent.
 
 Events should always be composed. Events should only be cancelable if they're actually cancelable by the end user. Events should bubble to support delegation unless there's a specific reason not to or if it makes sense to align with the platform, e.g. `quiet-focus` and `quiet-blur`.
-
-For compatibility with frameworks, form controls must dispatch `input` and `change` events along with `quiet-input` and `quiet-change`.
 
 ### Observing slots
 

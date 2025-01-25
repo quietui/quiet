@@ -89,37 +89,6 @@ export class QuietElement extends LitElement {
   };
 
   /**
-   * Prevents retargeting and relays an event emitted from within the shadow DOM to a new event emitted from the host
-   * element. This can be useful for dispatching `change` and `input` events, which will allow frameworks to bind form
-   * controls as if they were native ones.
-   */
-  protected relayNativeEvent(event: Event) {
-    event.stopImmediatePropagation();
-
-    if (event instanceof InputEvent) {
-      // Handle the input event
-      const newEvent = new InputEvent(event.type, {
-        bubbles: true,
-        composed: true,
-        cancelable: event.cancelable,
-        data: event.data,
-        inputType: event.inputType,
-        isComposing: event.isComposing,
-        detail: event.detail
-      });
-      this.dispatchEvent(newEvent);
-    } else {
-      // Handle other event types
-      const newEvent = new Event(event.type, {
-        bubbles: true,
-        composed: true,
-        cancelable: event.cancelable
-      });
-      this.dispatchEvent(newEvent);
-    }
-  }
-
-  /**
    * Used in templates to conditionally render a slot when it has content. When it doesn't have content, a hidden slot
    * of the same name is rendered instead to ensure the `slotchange` event continues to fire.
    */

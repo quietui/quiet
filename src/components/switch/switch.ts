@@ -159,15 +159,16 @@ export class QuietSwitch extends QuietElement {
     this.dispatchEvent(new QuietBlurEvent());
   }
 
-  private handleChange(event: Event) {
+  private handleChange() {
     this.wasChanged = true;
     this.dispatchEvent(new QuietChangeEvent());
-    this.relayNativeEvent(event);
+
+    // The native change event isn't composed, so we need to dispatch it ourselves
+    this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
   }
 
-  private handleInput(event: InputEvent) {
+  private handleInput() {
     this.dispatchEvent(new QuietInputEvent());
-    this.relayNativeEvent(event);
   }
 
   private handleKeyUp(event: KeyboardEvent) {

@@ -348,7 +348,7 @@ export class QuietColorPicker extends QuietElement {
     if (this.value !== oldValue) {
       this.wasChanged = true;
       this.dispatchEvent(new QuietInputEvent());
-      this.dispatchEvent(new Event('input'));
+      this.dispatchEvent(new InputEvent('input'));
       this.dispatchEvent(new QuietChangeEvent());
       this.dispatchEvent(new Event('change'));
     }
@@ -368,7 +368,7 @@ export class QuietColorPicker extends QuietElement {
 
         if (this.value !== oldValue) {
           this.dispatchEvent(new QuietInputEvent());
-          this.dispatchEvent(new Event('input'));
+          this.dispatchEvent(new InputEvent('input'));
           this.dispatchEvent(new QuietChangeEvent());
           this.dispatchEvent(new Event('change'));
         }
@@ -414,7 +414,7 @@ export class QuietColorPicker extends QuietElement {
     // This handler listens for quiet-change and quiet-input and re-dispatches them when the value changes
     if (event.type === 'quiet-input') {
       this.dispatchEvent(new QuietInputEvent());
-      this.dispatchEvent(new Event('input'));
+      this.dispatchEvent(new InputEvent('input'));
     } else if (event.type === 'quiet-change') {
       this.wasChanged = true;
       this.dispatchEvent(new QuietChangeEvent());
@@ -435,7 +435,7 @@ export class QuietColorPicker extends QuietElement {
     // This handler listens for quiet-change and quiet-input and re-dispatches them when the value changes
     if (event.type === 'quiet-input') {
       this.dispatchEvent(new QuietInputEvent());
-      this.dispatchEvent(new Event('input'));
+      this.dispatchEvent(new InputEvent('input'));
     } else if (event.type === 'quiet-change') {
       this.wasChanged = true;
       this.dispatchEvent(new QuietChangeEvent());
@@ -456,7 +456,7 @@ export class QuietColorPicker extends QuietElement {
 
     if (this.value !== oldValue) {
       this.dispatchEvent(new QuietInputEvent());
-      this.dispatchEvent(new Event('input'));
+      this.dispatchEvent(new InputEvent('input'));
       this.dispatchEvent(new QuietChangeEvent());
       this.dispatchEvent(new Event('change'));
     }

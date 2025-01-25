@@ -199,10 +199,12 @@ export class QuietSelect extends QuietElement {
     }
   }
 
-  private handleChange(event: Event) {
+  private handleChange() {
     this.wasChanged = true;
     this.dispatchEvent(new QuietChangeEvent());
-    this.relayNativeEvent(event);
+
+    // The native change event isn't composed, so we need to dispatch it ourselves
+    this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
   }
 
   private handleFocus() {
@@ -220,11 +222,10 @@ export class QuietSelect extends QuietElement {
     this.wasSubmitted = true;
   }
 
-  private async handleInput(event: InputEvent) {
+  private async handleInput() {
     this.value = this.textBox.value;
     await this.updateComplete;
     this.dispatchEvent(new QuietInputEvent());
-    this.relayNativeEvent(event);
   }
 
   private syncOptions() {

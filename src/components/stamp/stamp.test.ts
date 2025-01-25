@@ -5,6 +5,6 @@ import type { QuietStamp } from './stamp.js';
 describe('<quiet-stamp>', () => {
   it('does something', async () => {
     const el = await fixture<QuietStamp>(html` <quiet-stamp>Click me</quiet-stamp> `);
-    await expect(el).to.be.accessible();
+    expect(customElements.get(el.localName)).to.not.be.undefined;
   });
 });

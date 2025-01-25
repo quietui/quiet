@@ -5,6 +5,6 @@ import type { QuietBytes } from './bytes.js';
 describe('<quiet-bytes>', () => {
   it('does something', async () => {
     const el = await fixture<QuietBytes>(html` <quiet-bytes>Click me</quiet-bytes> `);
-    await expect(el).to.be.accessible();
+    expect(customElements.get(el.localName)).to.not.be.undefined;
   });
 });

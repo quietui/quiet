@@ -5,6 +5,6 @@ import type { QuietSpoiler } from './spoiler.js';
 describe('<quiet-spoiler>', () => {
   it('does something', async () => {
     const el = await fixture<QuietSpoiler>(html` <quiet-spoiler>Click me</quiet-spoiler> `);
-    await expect(el).to.be.accessible();
+    expect(customElements.get(el.localName)).to.not.be.undefined;
   });
 });

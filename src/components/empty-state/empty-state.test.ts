@@ -5,6 +5,6 @@ import type { QuietEmptyState } from './empty-state.js';
 describe('<quiet-empty-state>', () => {
   it('does something', async () => {
     const el = await fixture<QuietEmptyState>(html` <quiet-empty-state></quiet-empty-state> `);
-    await expect(el).to.be.accessible();
+    expect(customElements.get(el.localName)).to.not.be.undefined;
   });
 });

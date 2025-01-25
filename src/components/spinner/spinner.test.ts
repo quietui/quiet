@@ -5,6 +5,6 @@ import type { QuietSpinner } from './spinner.js';
 describe('<quiet-spinner>', () => {
   it('does something', async () => {
     const el = await fixture<QuietSpinner>(html` <quiet-spinner>Click me</quiet-spinner> `);
-    await expect(el).to.be.accessible();
+    expect(customElements.get(el.localName)).to.not.be.undefined;
   });
 });

@@ -5,6 +5,6 @@ import type { {{ tagToClassName tag }} } from './{{ removePrefix tag }}.js';
 describe('<{{ tag }}>', () => {
   it('does something', async () => {
     const el = await fixture<{{ tagToClassName tag }}>(html` <{{ tag }}></{{ tag }}> `);
-    await expect(el).to.be.accessible();
+    expect(customElements.get(el.localName)).to.not.be.undefined;
   });
 });

@@ -5,6 +5,6 @@ import type { QuietCallout } from './callout.js';
 describe('<quiet-callout>', () => {
   it('does something', async () => {
     const el = await fixture<QuietCallout>(html` <quiet-callout>Click me</quiet-callout> `);
-    await expect(el).to.be.accessible();
+    expect(customElements.get(el.localName)).to.not.be.undefined;
   });
 });

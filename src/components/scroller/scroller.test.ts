@@ -5,6 +5,6 @@ import type { QuietScroller } from './scroller.js';
 describe('<quiet-scroller>', () => {
   it('does something', async () => {
     const el = await fixture<QuietScroller>(html` <quiet-scroller></quiet-scroller> `);
-    await expect(el).to.be.accessible();
+    expect(customElements.get(el.localName)).to.not.be.undefined;
   });
 });

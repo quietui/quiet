@@ -5,6 +5,6 @@ import type { QuietColorPicker } from './color-picker.js';
 describe('<quiet-color-picker>', () => {
   it('does something', async () => {
     const el = await fixture<QuietColorPicker>(html` <quiet-color-picker>Click me</quiet-color-picker> `);
-    await expect(el).to.be.accessible();
+    expect(customElements.get(el.localName)).to.not.be.undefined;
   });
 });

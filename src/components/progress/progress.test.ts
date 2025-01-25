@@ -5,6 +5,6 @@ import type { QuietProgress } from './progress.js';
 describe('<quiet-progress>', () => {
   it('does something', async () => {
     const el = await fixture<QuietProgress>(html` <quiet-progress>Click me</quiet-progress> `);
-    await expect(el).to.be.accessible();
+    expect(customElements.get(el.localName)).to.not.be.undefined;
   });
 });

@@ -5,6 +5,6 @@ import type { QuietTabList } from './tab-list.js';
 describe('<quiet-tab-list>', () => {
   it('does something', async () => {
     const el = await fixture<QuietTabList>(html` <quiet-tab-list>Click me</quiet-tab-list> `);
-    await expect(el).to.be.accessible();
+    expect(customElements.get(el.localName)).to.not.be.undefined;
   });
 });

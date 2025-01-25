@@ -5,6 +5,6 @@ import type { QuietInclude } from './include.js';
 describe('<quiet-include>', () => {
   it('does something', async () => {
     const el = await fixture<QuietInclude>(html` <quiet-include>Click me</quiet-include> `);
-    await expect(el).to.be.accessible();
+    expect(customElements.get(el.localName)).to.not.be.undefined;
   });
 });

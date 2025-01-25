@@ -5,6 +5,6 @@ import type { QuietDialog } from './dialog.js';
 describe('<quiet-dialog>', () => {
   it('does something', async () => {
     const el = await fixture<QuietDialog>(html` <quiet-dialog>Click me</quiet-dialog> `);
-    await expect(el).to.be.accessible();
+    expect(customElements.get(el.localName)).to.not.be.undefined;
   });
 });

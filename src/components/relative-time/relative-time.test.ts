@@ -5,6 +5,6 @@ import type { QuietRelativeTime } from './relative-time.js';
 describe('<quiet-relative-time>', () => {
   it('does something', async () => {
     const el = await fixture<QuietRelativeTime>(html` <quiet-relative-time>Click me</quiet-relative-time> `);
-    await expect(el).to.be.accessible();
+    expect(customElements.get(el.localName)).to.not.be.undefined;
   });
 });

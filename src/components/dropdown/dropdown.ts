@@ -53,7 +53,7 @@ export class QuietDropdown extends QuietElement {
   private contextMenuLongPress: LongPress;
   private contextMenuVirtualElement: VirtualElement | undefined;
   private userTypedQuery = '';
-  private userTypedTimeout: number;
+  private userTypedTimeout: ReturnType<typeof setTimeout>;
 
   @query('#menu') private menu: HTMLDivElement;
 

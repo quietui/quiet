@@ -16,7 +16,7 @@ const UNITS: { max: number; value: number; unit: Intl.RelativeTimeFormatUnit }[]
   { max: 28512000000, value: 2592000000, unit: 'month' }, // 11 months max
   { max: Infinity, value: 31536000000, unit: 'year' }
 ];
-let liveInterval: number | undefined;
+let liveInterval: ReturnType<typeof setTimeout> | undefined;
 
 /**
  * <quiet-relative-time>

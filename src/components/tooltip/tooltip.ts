@@ -43,8 +43,8 @@ export class QuietTooltip extends QuietElement {
 
   private anchor: Element | null;
   private cleanup: ReturnType<typeof autoUpdate> | undefined;
-  private hoverInTimeout: number | undefined;
-  private hoverOutTimeout: number | undefined;
+  private hoverInTimeout: ReturnType<typeof setTimeout> | undefined;
+  private hoverOutTimeout: ReturnType<typeof setTimeout> | undefined;
   private isAnchorFocused = false;
 
   @query('#arrow') private arrow: HTMLElement;

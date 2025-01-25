@@ -65,8 +65,8 @@ export class QuietSlideActivator extends QuietElement {
   private lastDispatchedPercentage: number;
   private localize = new Localize(this);
   private isKeyPressStale = false;
-  private keyPressInterval: number | undefined;
-  private keyPressTimeout: number | undefined;
+  private keyPressInterval: ReturnType<typeof setInterval> | undefined;
+  private keyPressTimeout: ReturnType<typeof setTimeout> | undefined;
 
   @query('#thumb') thumb: HTMLElement;
 

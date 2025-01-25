@@ -31,9 +31,9 @@ export class QuietSearchList extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
   private items: Element[] = [];
-  private debounceTimer: number | undefined;
+  private debounceTimeout: ReturnType<typeof setTimeout> | undefined;
   private localize = new Localize(this);
-  private resultsTimeout: number;
+  private resultsTimeout: ReturnType<typeof setTimeout>;
 
   @query('#results') results: HTMLElement;
 
@@ -74,7 +74,7 @@ export class QuietSearchList extends QuietElement {
   disconnectedCallback() {
     super.disconnectedCallback();
     document.removeEventListener('input', this.handleDocumentInput);
-    window.clearTimeout(this.debounceTimer);
+    window.clearTimeout(this.debounceTimeout);
   }
 
   updated(changedProperties: PropertyValues<this>) {
@@ -138,10 +138,10 @@ export class QuietSearchList extends QuietElement {
   private handleControllerInput = (event: InputEvent) => {
     const target = event.target as HTMLInputElement;
 
-    clearTimeout(this.debounceTimer);
+    clearTimeout(this.debounceTimeout);
 
     // Set new timer
-    this.debounceTimer = setTimeout(() => {
+    this.debounceTimeout = setTimeout(() => {
       this.query = target.value;
       this.updateResults();
     }, this.debounce);

@@ -27,7 +27,7 @@ const isTouchEnabled = 'TouchEvent' in window;
 export class LongPress {
   private options: LongPressOptions;
   private target: Element;
-  private timeout: number;
+  private timeout: ReturnType<typeof setTimeout>;
   private startCoords: { x: number; y: number };
   private wasStarted = false;
 

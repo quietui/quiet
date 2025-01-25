@@ -9,6 +9,10 @@ export default css`
     --marker-height: 0.1875em;
   }
 
+  :host([orientation='vertical']) {
+    width: auto;
+  }
+
   #label:has(~ .vertical) {
     display: block;
     order: 2;

@@ -188,7 +188,7 @@ You can format the value that gets shown in tooltips and/or announced by screen 
 To make a vertical slider, set the `orientation` attribute to `vertical`. Vertical sliders are centered and will span 100% of the available space by default.
 
 ```html {.example}
-<div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+<div style="display: flex; gap: 1rem;">
   <quiet-slider
     orientation="vertical" 
     label="Volume" 

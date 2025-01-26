@@ -186,7 +186,7 @@ export class QuietSlider extends QuietElement {
         // Dispatch change events when dragging stops
         if (this.value !== this.valueWhenDraggingStarted) {
           this.dispatchEvent(new QuietChangeEvent());
-          this.dispatchEvent(new Event('change', { composed: true, bubbles: true }));
+          this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
           this.wasChanged = true;
         }
 

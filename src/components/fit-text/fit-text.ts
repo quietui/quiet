@@ -77,7 +77,7 @@ export class QuietFitText extends QuietElement {
       changedProperties.has('maxFontSize') ||
       changedProperties.has('precision')
     ) {
-      this.resize();
+      requestAnimationFrame(() => this.resize());
     }
   }
 
@@ -90,7 +90,7 @@ export class QuietFitText extends QuietElement {
    * dynamically and need to resize the text after it loads.
    */
   public resize() {
-    if (this.containerWidth === 0) return;
+    if (this.containerWidth <= 0) return;
 
     let minSize = this.minFontSize;
     let maxSize = this.maxFontSize;

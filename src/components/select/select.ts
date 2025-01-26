@@ -192,10 +192,11 @@ export class QuietSelect extends QuietElement {
     const isBox = target?.id === 'visual-box';
     const isSlot = target.hasAttribute('slot');
 
+    // Allows clicking on the non-<select> portion of the control to focus it
     if (isBox || isSlot) {
       event.preventDefault();
       this.textBox.focus();
-      this.textBox.showPicker();
+      this.textBox?.showPicker();
     }
   }
 

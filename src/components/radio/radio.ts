@@ -188,7 +188,9 @@ export class QuietRadio extends QuietElement {
       if (radioItem !== selectedItem) {
         await this.updateComplete;
         this.dispatchEvent(new QuietInputEvent());
+        this.dispatchEvent(new InputEvent('input'));
         this.dispatchEvent(new QuietChangeEvent());
+        this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
       }
     }
   }
@@ -234,7 +236,9 @@ export class QuietRadio extends QuietElement {
 
       await this.updateComplete;
       this.dispatchEvent(new QuietInputEvent());
+      this.dispatchEvent(new InputEvent('input'));
       this.dispatchEvent(new QuietChangeEvent());
+      this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
     }
   }
 

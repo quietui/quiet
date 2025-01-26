@@ -281,7 +281,7 @@ export class QuietPasscode extends QuietElement {
         this.dispatchEvent(new QuietInputEvent());
         this.dispatchEvent(new InputEvent('input'));
         this.dispatchEvent(new QuietChangeEvent());
-        this.dispatchEvent(new InputEvent('change'));
+        this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
       }
     }
 
@@ -298,7 +298,7 @@ export class QuietPasscode extends QuietElement {
         this.dispatchEvent(new QuietInputEvent());
         this.dispatchEvent(new InputEvent('input'));
         this.dispatchEvent(new QuietChangeEvent());
-        this.dispatchEvent(new InputEvent('change'));
+        this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
       }
     }
   }

@@ -1,5 +1,4 @@
 import { expect, fixture, html } from '@open-wc/testing';
-import '../../../dist/quiet.loader.js';
 import type { QuietSelect } from './select.js';
 
 describe('<quiet-select>', () => {

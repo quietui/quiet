@@ -186,7 +186,7 @@ export class QuietSlider extends QuietElement {
         // Dispatch change events when dragging stops
         if (this.value !== this.valueWhenDraggingStarted) {
           this.dispatchEvent(new QuietChangeEvent());
-          this.dispatchEvent(new Event('change'));
+          this.dispatchEvent(new Event('change', { composed: true, bubbles: true }));
           this.wasChanged = true;
         }
 
@@ -352,8 +352,8 @@ export class QuietSlider extends QuietElement {
       this.dispatchEvent(new QuietChangeEvent());
 
       // Dispatch native change/input events for better framework binding support
-      this.dispatchEvent(new InputEvent('input'));
-      this.dispatchEvent(new Event('change'));
+      this.dispatchEvent(new InputEvent('input', { bubbles: true, composed: true }));
+      this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
       this.wasChanged = true;
     }
 
@@ -373,7 +373,7 @@ export class QuietSlider extends QuietElement {
     event.preventDefault();
 
     if (!this.disabled) {
-      this.thumb.focus();
+      this.slider.focus();
     }
   }
 
@@ -437,12 +437,12 @@ export class QuietSlider extends QuietElement {
 
   /** Sets focus to the slider. */
   public focus() {
-    this.thumb.focus();
+    this.slider.focus();
   }
 
   /** Removes focus from the slider. */
   public blur() {
-    this.thumb.blur();
+    this.slider.blur();
   }
 
   /**

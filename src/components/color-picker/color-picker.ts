@@ -188,7 +188,7 @@ export class QuietColorPicker extends QuietElement {
         if (this.value !== this.valueWhenDraggingStarted) {
           this.wasChanged = true;
           this.dispatchEvent(new QuietChangeEvent());
-          this.dispatchEvent(new Event('change'));
+          this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
         }
 
         this.isDragging = false;
@@ -350,7 +350,7 @@ export class QuietColorPicker extends QuietElement {
       this.dispatchEvent(new QuietInputEvent());
       this.dispatchEvent(new InputEvent('input'));
       this.dispatchEvent(new QuietChangeEvent());
-      this.dispatchEvent(new Event('change'));
+      this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
     }
   }
 
@@ -370,7 +370,7 @@ export class QuietColorPicker extends QuietElement {
           this.dispatchEvent(new QuietInputEvent());
           this.dispatchEvent(new InputEvent('input'));
           this.dispatchEvent(new QuietChangeEvent());
-          this.dispatchEvent(new Event('change'));
+          this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
         }
       })
       .catch(() => {
@@ -418,7 +418,7 @@ export class QuietColorPicker extends QuietElement {
     } else if (event.type === 'quiet-change') {
       this.wasChanged = true;
       this.dispatchEvent(new QuietChangeEvent());
-      this.dispatchEvent(new Event('change'));
+      this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
     }
   }
 
@@ -439,7 +439,7 @@ export class QuietColorPicker extends QuietElement {
     } else if (event.type === 'quiet-change') {
       this.wasChanged = true;
       this.dispatchEvent(new QuietChangeEvent());
-      this.dispatchEvent(new Event('change'));
+      this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
     }
   }
 
@@ -458,7 +458,7 @@ export class QuietColorPicker extends QuietElement {
       this.dispatchEvent(new QuietInputEvent());
       this.dispatchEvent(new InputEvent('input'));
       this.dispatchEvent(new QuietChangeEvent());
-      this.dispatchEvent(new Event('change'));
+      this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
     }
   }
 

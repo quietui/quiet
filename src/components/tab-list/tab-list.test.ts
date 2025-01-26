@@ -1,5 +1,4 @@
 import { expect, fixture, html } from '@open-wc/testing';
-import '../../../dist/quiet.loader.js';
 import type { QuietTabList } from './tab-list.js';
 
 describe('<quiet-tab-list>', () => {

@@ -1,18 +1,19 @@
 import { sendMouse } from '@web/test-runner-commands';
 
 /**
- * Simulates clicking on an HTML element at a specified position with optional offsets. Used for programmatically
- * triggering actual clicks in the testing environment.
+ * Simulates clicking on an HTML element at a specified position with optional offsets.
+ * Used for programmatically triggering actual clicks in the testing environment.
  *
  * @param el - The DOM element to click
  * @param position - Where on the element to click ('top', 'right', 'bottom', 'left', 'center', 'top-right', 'top-left', 'bottom-right', 'bottom-left')
- * @param offsetX - Horizontal pixel offset from the click position
- * @param offsetY - Vertical pixel offset from the click position
+ * @param options - Object containing offset configurations
+ * @param options.offsetX - Horizontal pixel offset from the click position
+ * @param options.offsetY - Vertical pixel offset from the click position
  *
  * @example
  * await clickOnElement(button, 'center'); // Click center of button
- * await clickOnElement(menu, 'top', 0, 5); // Click 5px below top of menu
- * await clickOnElement(menu, 'top-right'); // Click top right corner
+ * await clickOnElement(menu, 'top', { offsetY: 5 }); // Click 5px below top of menu
+ * await clickOnElement(menu, 'top-right', { offsetX: -2 }); // Click slightly left of top right corner
  */
 export async function clickOnElement(
   el: Element,
@@ -26,9 +27,13 @@ export async function clickOnElement(
     | 'top-left'
     | 'bottom-right'
     | 'bottom-left' = 'center',
-  offsetX = 0,
-  offsetY = 0
+  options: {
+    offsetX?: number;
+    offsetY?: number;
+  } = {}
 ) {
+  const { offsetX = 0, offsetY = 0 } = options;
+
   // Get element's position and dimensions relative to viewport
   const { x, y, width, height } = el.getBoundingClientRect();
   const centerX = Math.floor(x + window.scrollX + width / 2);
@@ -50,5 +55,8 @@ export async function clickOnElement(
     clickX = x;
   }
 
-  await sendMouse({ type: 'click', position: [Math.round(clickX + offsetX), Math.round(clickY + offsetY)] });
+  await sendMouse({
+    type: 'click',
+    position: [Math.round(clickX + offsetX), Math.round(clickY + offsetY)]
+  });
 }

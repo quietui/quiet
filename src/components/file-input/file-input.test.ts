@@ -1,5 +1,4 @@
 import { expect, fixture, html } from '@open-wc/testing';
-import '../../../dist/quiet.loader.js';
 import type { QuietFileInput } from './file-input.js';
 
 describe('<quiet-file-input>', () => {

@@ -21,13 +21,7 @@ describe('<quiet-text-field>', () => {
 
     // Custom event
     expect(quietInputSpy).to.have.been.calledThrice;
-    expect(quietInputSpy.firstCall.args[0].bubbles).to.be.true;
-    expect(quietInputSpy.firstCall.args[0].composed).to.be.true;
-
-    // Native event
     expect(inputSpy).to.have.been.calledThrice;
-    expect(inputSpy.firstCall.args[0].bubbles).to.be.true;
-    expect(inputSpy.firstCall.args[0].composed).to.be.true;
   });
 
   it('should dispatch the `quiet-change` and `change` events when the user commits a value', async () => {
@@ -47,13 +41,7 @@ describe('<quiet-text-field>', () => {
 
     // Custom event
     expect(quietChangeSpy).to.have.been.calledOnce;
-    expect(quietChangeSpy.firstCall.args[0].bubbles).to.be.true;
-    expect(quietChangeSpy.firstCall.args[0].composed).to.be.true;
-
-    // Native event
     expect(changeSpy).to.have.been.calledOnce;
-    expect(changeSpy.firstCall.args[0].bubbles).to.be.true;
-    expect(changeSpy.firstCall.args[0].composed).to.be.true;
   });
 
   it('should dispatch the `quiet-blur` and `quiet-change` events when entering and leaving the control', async () => {

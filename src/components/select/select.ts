@@ -196,10 +196,7 @@ export class QuietSelect extends QuietElement {
     if (isBox || isSlot) {
       event.preventDefault();
       this.textBox.focus();
-
-      if ('showPicker' in this.textBox) {
-        this.textBox.showPicker();
-      }
+      this.showPicker();
     }
   }
 
@@ -292,6 +289,13 @@ export class QuietSelect extends QuietElement {
    */
   public reportValidity() {
     return this.internals.reportValidity();
+  }
+
+  /** Shows the picker in supportive browsers. */
+  public showPicker() {
+    if ('showPicker' in this.textBox) {
+      this.textBox.showPicker();
+    }
   }
 
   render() {

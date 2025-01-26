@@ -196,7 +196,10 @@ export class QuietSelect extends QuietElement {
     if (isBox || isSlot) {
       event.preventDefault();
       this.textBox.focus();
-      this.textBox?.showPicker();
+
+      if ('showPicker' in this.textBox) {
+        this.textBox.showPicker();
+      }
     }
   }
 

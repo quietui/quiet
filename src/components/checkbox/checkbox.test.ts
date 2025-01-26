@@ -33,4 +33,20 @@ describe('<quiet-checkbox>', () => {
     expect(quietChangeSpy).to.have.been.calledOnce;
     expect(changeSpy).to.have.been.calledOnce;
   });
+
+  it('should dispatch the `quiet-blur` and `quiet-change` events when entering and leaving the control', async () => {
+    const el = await fixture<QuietCheckbox>(html`<quiet-checkbox label="Test"></quiet-checkbox>`);
+
+    const focusSpy = spy();
+    const blurSpy = spy();
+
+    el.addEventListener('quiet-focus', focusSpy);
+    el.addEventListener('quiet-blur', blurSpy);
+
+    el.focus();
+    el.blur();
+
+    expect(focusSpy).to.have.been.calledOnce;
+    expect(blurSpy).to.have.been.calledOnce;
+  });
 });

@@ -40,7 +40,7 @@ describe('<quiet-slider>', () => {
   });
 
   it('should dispatch the `quiet-blur` and `quiet-change` events when entering and leaving the control', async () => {
-    const el = await fixture<QuietSlider>(html`<quiet-passcode label="Test"></quiet-passcode>`);
+    const el = await fixture<QuietSlider>(html`<quiet-slider label="Test"></quiet-slider>`);
 
     const focusSpy = spy();
     const blurSpy = spy();

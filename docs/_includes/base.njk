@@ -77,8 +77,8 @@
           </a>
         </div>
 
-        <div id="header-group-links" class="header-group header-group-scrollable" data-remember-scroll>
-          <div class="header-group-scrollable-interior">
+        <div id="header-group-links" class="header-group header-group-scrollable">
+          <quiet-scroller>
             <a href="/docs"{% if section == 'docs' %} class="current"{% endif %}>
               <span class="not-mobile">Documentation</span>
               <span class="only-mobile">Docs</span>
@@ -92,7 +92,7 @@
               </span>
             </a>
             <a href="/about"{% if section == 'about' %} class="current"{% endif %}>About</a>
-          </div>
+          </quiet-scroller>
         </div>
 
         <div id="header-group-buttons" class="header-group">

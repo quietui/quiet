@@ -139,11 +139,11 @@ html:not(.quiet-dark) .only-dark {
   overflow-x: auto;
   overflow-y: hidden;
   scrollbar-width: thin;
-}
 
-.header-group-scrollable-interior {
-  display: flex;
-  flex-wrap: nowrap;
+  quiet-scroller::part(content) {
+    display: flex;
+    flex-wrap: nowrap;
+  }
 }
 
 /* Header logo */

@@ -53,6 +53,12 @@ export class QuietElement extends LitElement {
     );
   }
 
+  /** For form-associated elements, this returns the current validity state of the control. */
+  public get validity() {
+    const constructor = this.constructor as typeof HTMLElement & { formAssociated?: boolean };
+    return constructor.formAssociated ? this.internals.validity : undefined;
+  }
+
   /**
    * Updates the slotsWithContent Set with currently populated slots
    */

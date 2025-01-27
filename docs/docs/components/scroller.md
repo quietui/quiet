@@ -121,7 +121,7 @@ Use the `--shadow-color`, `--shadow-opacity`, and `--shadow-width` custom proper
 
 <style>
   #scroller__shadow {
-    --edge-color: var(--quiet-primary-fill-mid);
+    --edge-color: var(--quiet-primary-fill-soft);
     --edge-width: 1px;
     --shadow-color: var(--quiet-primary-fill-mid);
     --shadow-opacity: 15%;

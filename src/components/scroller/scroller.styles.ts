@@ -15,6 +15,7 @@ export default css`
 
   #content {
     overflow-x: auto;
+    overflow-y: hidden;
     border-radius: inherit;
     scroll-behavior: smooth;
 

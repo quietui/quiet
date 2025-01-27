@@ -340,6 +340,23 @@ export class QuietFileInput extends QuietElement {
     this.internals.setValidity(flags, validationMessage, this.fileInput);
   }
 
+  /**
+   * Checks if the form control has any restraints and whether it satisfies them. If invalid, `false` will be returned
+   * and the `invalid` event will be dispatched. If valid, `true` will be returned.
+   */
+  public checkValidity() {
+    return this.internals.checkValidity();
+  }
+
+  /**
+   * Checks if the form control has any restraints and whether it satisfies them. If invalid, `false` will be returned
+   * and the `invalid` event will be dispatched. In addition, the problem will be reported to the user. If valid, `true`
+   * will be returned.
+   */
+  public reportValidity() {
+    return this.internals.reportValidity();
+  }
+
   render() {
     const hasLabel = this.label || this.slotsWithContent.has('label');
     const hasDescription = this.description || this.slotsWithContent.has('description');

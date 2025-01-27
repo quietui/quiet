@@ -109,7 +109,7 @@
   gap: 0.5rem;
 }
 
-.code-example-flex-column {
+.code-example-flex-col {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;

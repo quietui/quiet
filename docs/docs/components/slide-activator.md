@@ -7,26 +7,21 @@ Slide activators are unidirectional. Once activated by the user, they can only b
 
 ```html {.example}
 <quiet-slide-activator 
-  label="Slide to activate" 
+  label="Slide to activate"
+  activated-label="Activated"
   attention="shimmer" 
   id="slide-activator__overview" 
   style="max-width: 340px;"
-></quiet-slide-activator>
+>
+</quiet-slide-activator>
 
 <script>
   const slideActivator = document.getElementById('slide-activator__overview');
-  const originalLabel = slideActivator.getAttribute('label');
 
   // When the component is activated
   slideActivator.addEventListener('quiet-activated', () => {
-    // Update the label
-    slideActivator.label = 'Activated';
-
     // Deactivate it for the demo after two seconds
-    setTimeout(() => {
-      slideActivator.activated = false;
-      slideActivator.label = originalLabel;
-    }, 2000);
+    setTimeout(() => slideActivator.activated = false, 2000);
   });
 </script>
 ```
@@ -39,40 +34,40 @@ For demonstration purposes, most of the examples on this page reset themselves s
 
 ### Handling activation
 
-When the control is activated, a `quiet-activate` event will be emitted. You can call `event.preventDefault()` to prevent the activation if needed. Upon activation, a subsequent `quiet-activated` event will be emitted.
+You should always provide a label using the `label` attribute to describe the control to users. In most cases, you'll also want to show a separate label when the control is activated. Use the `activated-label` attribute to do this. For labels that require HTML, use the respective slots instead.
 
-If you deactivate the control programmatically, a corresponding `quiet-deactivate` and `quiet-deactivated` event will be emitted.
+When the control is activated, a `quiet-activate` event will be emitted. You can call `event.preventDefault()` to prevent the activation if needed. Once the control is finally activated, a subsequent `quiet-activated` event will be emitted. If you deactivate the control programmatically, the corresponding `quiet-deactivate` and `quiet-deactivated` events will be emitted.
 
-You can use these events to update labels and execute code to run on activation and deactivation.
+You can use these events to execute code to run on activation and deactivation.
 
 ```html {.example}
 <div id="slide-activator__activation">
-  <quiet-slide-activator label="Slide to activate"></quiet-slide-activator>
+  <quiet-slide-activator 
+    label="Slide to activate"
+    activated-label="Activated"
+  ></quiet-slide-activator>
   <quiet-button disabled>Deactivate</quiet-button>
 </div>
 
 <script>
-const container = document.getElementById('slide-activator__activation');
-const slideActivator = container.querySelector('quiet-slide-activator');
-const button = container.querySelector('quiet-button');
-const originalLabel = slideActivator.getAttribute('label');
+  const container = document.getElementById('slide-activator__activation');
+  const slideActivator = container.querySelector('quiet-slide-activator');
+  const button = container.querySelector('quiet-button');
 
-// Deactivate it
-button.addEventListener('click', () => {
-  slideActivator.activated = false;
-});
+  // Deactivate it
+  button.addEventListener('click', () => {
+    slideActivator.activated = false;
+  });
 
-// Update the label and button state when activated
-slideActivator.addEventListener('quiet-activated', () => {
-  button.disabled = false;
-  slideActivator.label = 'Activated';
-});
+  // Update the button state when activated
+  slideActivator.addEventListener('quiet-activated', () => {
+    button.disabled = false;
+  });
 
-// Update the label and button state when deactivated
-slideActivator.addEventListener('quiet-deactivated', () => {
-  button.disabled = true;
-  slideActivator.label = originalLabel;
-});
+  // Update the button state when deactivated
+  slideActivator.addEventListener('quiet-deactivated', () => {
+    button.disabled = true;
+  });
 </script>
 
 <style>
@@ -93,14 +88,16 @@ Additionally, a `quiet-progress` event will be emitted while the user slides the
 
 ```html {.example}
 <div id="slide-activator__progress">
-  <quiet-slide-activator label="Slide to place order"></quiet-slide-activator>
+  <quiet-slide-activator 
+    label="Slide to place order"
+    activated-label="Order received"
+  ></quiet-slide-activator>
   Progress: <quiet-number number="0" type="percent"></quiet-number>
 </div>
 
 <script>
   const container = document.getElementById('slide-activator__progress');
   const slideActivator = container.querySelector('quiet-slide-activator');
-  const originalLabel = slideActivator.getAttribute('label');
   const progress = container.querySelector('quiet-number');
 
   // Update progress as the user drags
@@ -110,14 +107,8 @@ Additionally, a `quiet-progress` event will be emitted while the user slides the
 
   // Update the label and reset the demo when component is activated
   slideActivator.addEventListener('quiet-activated', () => {
-    // Update the label
-    slideActivator.label = 'Order received!';
-
     // Deactivate it for the demo after two seconds
-    setTimeout(() => {
-      slideActivator.activated = false;
-      slideActivator.label = originalLabel;
-    }, 2000);
+    setTimeout(() => slideActivator.activated = false, 2000);
   });
 </script>
 
@@ -126,6 +117,7 @@ Additionally, a `quiet-progress` event will be emitted while the user slides the
     quiet-slide-activator {
       max-width: 340px;
       margin-bottom: 1rem;
+      transition: none;
 
       /* Change the background color as the user slides the thumb */
       background-color: 
@@ -151,6 +143,7 @@ Use the `thumb` slot to provide your own icon(s) for the thumb. If you want to c
 ```html {.example}
 <quiet-slide-activator 
   label="Slide to unlock" 
+  activated-label="Unlocked"
   id="slide-activator__icons"
 >
   <quiet-icon slot="thumb" name="lock"></quiet-icon>
@@ -159,18 +152,11 @@ Use the `thumb` slot to provide your own icon(s) for the thumb. If you want to c
 
 <script>
   const slideActivator = document.getElementById('slide-activator__icons');
-  const originalLabel = slideActivator.getAttribute('label');
 
   // When the component is activated
   slideActivator.addEventListener('quiet-activated', () => {
-    // Update the label
-    slideActivator.label = 'Unlocked';
-
     // Deactivate it for the demo after two seconds
-    setTimeout(() => {
-      slideActivator.activated = false;
-      slideActivator.label = originalLabel;
-    }, 2000);
+    setTimeout(() => slideActivator.activated = false, 2000);
   });
 </script>
 
@@ -193,7 +179,8 @@ Set the `attention` attribute to `shimmer` to provide a subtle visual hint via a
 
 ```html {.example}
 <quiet-slide-activator 
-  label="Slide to release cats" 
+  label="Slide to release cats"
+  activated-label="Releasing cats…"
   attention="shimmer" 
   id="slide-activator__attention" 
 >
@@ -202,18 +189,11 @@ Set the `attention` attribute to `shimmer` to provide a subtle visual hint via a
 
 <script>
   const slideActivator = document.getElementById('slide-activator__attention');
-  const originalLabel = slideActivator.getAttribute('label');
 
   // When the component is activated
   slideActivator.addEventListener('quiet-activated', () => {
-    // Update the label
-    slideActivator.label = 'Releasing cats…';
-
     // Deactivate it for the demo after two seconds
-    setTimeout(() => {
-      slideActivator.activated = false;
-      slideActivator.label = originalLabel;
-    }, 2000);
+    setTimeout(() => slideActivator.activated = false, 2000);
   });
 </script>
 
@@ -252,6 +232,7 @@ Slide activators come with a simple, minimal appearance. Feel free to customize 
 ```html {.example}
 <quiet-slide-activator 
   label="Empty the litter box" 
+  activated-label="Emptying…"
   attention="shimmer" 
   id="slide-activator__styling"
 >
@@ -261,18 +242,11 @@ Slide activators come with a simple, minimal appearance. Feel free to customize 
 
 <script>
   const slideActivator = document.getElementById('slide-activator__styling');
-  const originalLabel = slideActivator.getAttribute('label');
 
   // When the component is activated
   slideActivator.addEventListener('quiet-activated', () => {
-    // Update the label
-    slideActivator.label = 'Emptying…';
-
     // Deactivate it for the demo after two seconds
-    setTimeout(() => {
-      slideActivator.activated = false;
-      slideActivator.label = originalLabel;
-    }, 2000);
+    setTimeout(() => slideActivator.activated = false, 2000);
   });
 </script>
 

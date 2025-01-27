@@ -30,6 +30,8 @@ import styles from './slide-activator.styles.js';
  * @dependency quiet-icon
  *
  * @slot label - The slide activator's label. For plain-text labels, you can use the `label` attribute instead.
+ * @slot activated-label - The label to show when activated. For plain-text labels, you can use the `activated-label`
+ *  attribute instead.
  * @slot thumb - The thumb element that users drag. Defaults to a double chevron icon if not provided.
  *
  * @event quiet-activate - Emitted when the control will activate. Calling `event.preventDefault()` will prevent the
@@ -57,6 +59,7 @@ import styles from './slide-activator.styles.js';
  */
 @customElement('quiet-slide-activator')
 export class QuietSlideActivator extends QuietElement {
+  static observeSlots = true;
   static styles: CSSResultGroup = [hostStyles, styles];
 
   private draggableThumb: DraggableElement;
@@ -79,6 +82,12 @@ export class QuietSlideActivator extends QuietElement {
    * instead.
    */
   @property() label = '';
+
+  /**
+   * The label to show when the control is activated. If omitted, the regular label will be shown. If you need to
+   * provide HTML in the label, use the `label` slot instead.
+   */
+  @property({ attribute: 'activated-label' }) activatedLabel = '';
 
   /** Reflects when the control is activated. Remove this attribute to deactivate it. */
   @property({ type: Boolean, reflect: true }) activated = false;
@@ -296,7 +305,9 @@ export class QuietSlideActivator extends QuietElement {
           shimmer: this.attention === 'shimmer'
         })}
       >
-        <slot name="label">${this.label}</slot>
+        ${this.activated && (this.activatedLabel || this.slotsWithContent.has('activated-label'))
+          ? html`<slot name="activated-label">${this.activatedLabel}</slot>`
+          : html`<slot name="label">${this.label}</slot>`}
       </div>
 
       <div

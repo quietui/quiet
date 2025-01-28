@@ -106,6 +106,7 @@ export default css`
     &:-webkit-autofill:hover,
     &:-webkit-autofill:focus,
     &:-webkit-autofill:active {
+      box-shadow: 0 0 0 2em var(--quiet-background-color) inset !important;
       -webkit-text-fill-color: var(--quiet-primary-text-colorful);
     }
 

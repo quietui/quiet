@@ -56,5 +56,9 @@ export async function allDefined(options?: Partial<AllDefinedOptions>) {
 
   const tagsToAwait = [...undefinedElements, ...additionalElements];
 
+  // Wait for all to be registered
   await Promise.all(tagsToAwait.map(tag => customElements.whenDefined(tag)));
+
+  // Wait a cycle for the first update
+  await new Promise(requestAnimationFrame);
 }

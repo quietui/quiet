@@ -4,8 +4,6 @@ description: Learn how to develop and build the project locally.
 layout: docs
 ---
 
-## Cloning the repo
-
 To set up a local development environment, [fork the repo on GitHub](https://github.com/quietui/quiet/fork), clone it locally, and install its dependencies.
 
 ```sh

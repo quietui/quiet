@@ -5,7 +5,7 @@ import { classMap } from 'lit/directives/class-map.js';
 import { QuietChangeEvent, QuietInputEvent } from '../../events/form.js';
 import formControlStyles from '../../styles/form-control.styles.js';
 import hostStyles from '../../styles/host.styles.js';
-import { QuietElement } from '../../utilities/quiet-element.js';
+import { QuietFormControlElement } from '../../utilities/quiet-element.js';
 import '../radio-item/radio-item.js';
 import type { QuietRadioItem } from '../radio-item/radio-item.js';
 import styles from './radio.styles.js';
@@ -47,13 +47,14 @@ const VALIDATION_MESSAGE = nativeRadio.validationMessage;
  * @cssstate user-invalid - Applied when the radio is invalid and the user has sufficiently interacted with it.
  */
 @customElement('quiet-radio')
-export class QuietRadio extends QuietElement {
+export class QuietRadio extends QuietFormControlElement {
   static formAssociated = true;
   static observeSlots = true;
   static styles: CSSResultGroup = [hostStyles, formControlStyles, styles];
 
-  /** A reference to the `<form>` associated with the form control, or `null` if no form is associated. */
-  public associatedForm: HTMLFormElement | null = null;
+  protected get focusableAnchor() {
+    return this.getItems()[0];
+  }
 
   @query('#group') group: HTMLElement;
 
@@ -88,12 +89,6 @@ export class QuietRadio extends QuietElement {
 
   /** Indicates at least one option in the radio is required. */
   @property({ type: Boolean, reflect: true }) required = false;
-
-  /**
-   * You can provide a custom error message to force the radio to be invalid. To clear the error, set this to an empty
-   * string.
-   */
-  @property({ attribute: 'custom-validity' }) customValidity = '';
 
   connectedCallback() {
     super.connectedCallback();
@@ -132,11 +127,6 @@ export class QuietRadio extends QuietElement {
       this.customStates.set('user-invalid', false);
       this.customStates.set('user-valid', false);
     }
-  }
-
-  /** @internal Called when the associated form element changes. */
-  formAssociatedCallback(form: HTMLFormElement | null) {
-    this.associatedForm = form;
   }
 
   /** @internal Called when a containing fieldset is disabled. */
@@ -294,16 +284,15 @@ export class QuietRadio extends QuietElement {
   /** Sets the form control's validity */
   private async updateValidity() {
     await this.updateComplete;
-    const firstItem = this.getItems()[0];
-    const hasCustomValidity = this.customValidity?.length > 0;
+    const hasCustomValidity = this.getCustomValidity().length > 0;
     const hasMissingValue = this.required && !this.value;
-    const validationMessage = hasCustomValidity ? this.customValidity : VALIDATION_MESSAGE;
+    const validationMessage = hasCustomValidity ? this.getCustomValidity() : VALIDATION_MESSAGE;
     const flags: ValidityStateFlags = {
       customError: hasCustomValidity,
       valueMissing: hasMissingValue
     };
     this.isInvalid = hasCustomValidity ? true : hasMissingValue;
-    this.internals.setValidity(flags, validationMessage, firstItem);
+    this.internals.setValidity(flags, validationMessage, this.focusableAnchor);
   }
 
   /** Sets focus to the selected item or the first item if none are selected. */
@@ -314,23 +303,6 @@ export class QuietRadio extends QuietElement {
     if (itemToFocus) {
       itemToFocus.focus(options);
     }
-  }
-
-  /**
-   * Checks if the form control has any restraints and whether it satisfies them. If invalid, `false` will be returned
-   * and the `invalid` event will be dispatched. If valid, `true` will be returned.
-   */
-  public checkValidity() {
-    return this.internals.checkValidity();
-  }
-
-  /**
-   * Checks if the form control has any restraints and whether it satisfies them. If invalid, `false` will be returned
-   * and the `invalid` event will be dispatched. In addition, the problem will be reported to the user. If valid, `true`
-   * will be returned.
-   */
-  public reportValidity() {
-    return this.internals.reportValidity();
   }
 
   render() {

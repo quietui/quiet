@@ -6,7 +6,7 @@ import { html, literal } from 'lit/static-html.js';
 import { QuietBlurEvent, QuietFocusEvent } from '../../events/form.js';
 import hostStyles from '../../styles/host.styles.js';
 import { LongPress } from '../../utilities/long-press.js';
-import { QuietElement } from '../../utilities/quiet-element.js';
+import { QuietFormControlElement } from '../../utilities/quiet-element.js';
 import '../icon/icon.js';
 import '../spinner/spinner.js';
 import styles from './button.styles.js';
@@ -44,13 +44,16 @@ import styles from './button.styles.js';
  * @cssstate toggled - Applied when a toggle button is activated.
  */
 @customElement('quiet-button')
-export class QuietButton extends QuietElement {
+export class QuietButton extends QuietFormControlElement {
   static formAssociated = true;
-  static shadowRootOptions = { ...QuietElement.shadowRootOptions, delegatesFocus: true };
+  static shadowRootOptions = { ...QuietFormControlElement.shadowRootOptions, delegatesFocus: true };
   static styles: CSSResultGroup = [hostStyles, styles];
 
   protected internals: ElementInternals;
   private longPress: LongPress;
+  protected get focusableAnchor() {
+    return this.shadowRoot.querySelector('button')!;
+  }
 
   /** Determines the button's appearance. */
   @property({ reflect: true }) appearance: 'normal' | 'outline' | 'text' | 'image' = 'normal';
@@ -204,8 +207,10 @@ export class QuietButton extends QuietElement {
       });
 
       this.internals.form.append(submitter);
-      submitter.click();
-      submitter.remove();
+      requestAnimationFrame(() => {
+        submitter.click();
+        submitter.remove();
+      });
     }
   }
 

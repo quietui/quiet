@@ -4,6 +4,7 @@ import { property, state } from 'lit/decorators.js';
 
 /** The base class for all Quiet components */
 export class QuietElement extends LitElement {
+  static formAssociated = false;
   static shadowRootOptions: ShadowRootInit = {
     ...LitElement.shadowRootOptions,
     serializable: true
@@ -51,12 +52,6 @@ export class QuietElement extends LitElement {
     this.shadowRoot.prepend(
       document.createComment(` Quiet UI · https://quietui.org/docs/components/${this.localName.replace('quiet-', '')} `)
     );
-  }
-
-  /** For form-associated elements, this returns the current validity state of the control. */
-  public get validity() {
-    const constructor = this.constructor as typeof HTMLElement & { formAssociated?: boolean };
-    return constructor.formAssociated ? this.internals.validity : undefined;
   }
 
   /**
@@ -114,4 +109,66 @@ interface WhenSlottedOptions {
    * nothing is slotted in but a corresponding value is provided through a property.
    */
   force: boolean;
+}
+
+/** The base class for all Quiet form controls. */
+export abstract class QuietFormControlElement extends QuietElement {
+  static formAssociated = true;
+
+  /**
+   * For form controls, components must implement this and set it to the element that should receive focus when
+   * reporting validation errors.
+   */
+  protected abstract get focusableAnchor(): HTMLElement;
+
+  /** For form-associated elements, this returns the current validity state of the control. */
+  public get validity() {
+    const constructor = this.constructor as typeof QuietElement;
+    return constructor.formAssociated ? this.internals.validity : undefined;
+  }
+
+  /**
+   * Checks if the form control has any restraints and whether it satisfies them. If invalid, `false` will be returned
+   * and the `invalid` event will be dispatched. If valid, `true` will be returned.
+   */
+  public checkValidity() {
+    return this.internals.checkValidity();
+  }
+
+  /**
+   * Sets a custom validation message for the form control. If this message is not an empty string, then the form
+   * control is considered invalid and the specified message will be displayed to the user when reporting validity.
+   * Setting an empty string clears the custom validity state.
+   */
+  public setCustomValidity(message: string) {
+    // If the user calls this immediately after `customElements.whenDefined()`, the template won't have rendered. In
+    // that case, we'll set it as soon as the first update completes.
+    if (!this.hasUpdated) {
+      this.updateComplete.then(() => this.setCustomValidity(message));
+      return;
+    }
+
+    if (this.focusableAnchor) {
+      this.internals.setValidity({ customError: message !== '' }, message, this.focusableAnchor);
+    } else {
+      console.error(
+        `No "focusableAnchor" getter is set on ${this.tagName}. This will prevent validation from working properly.`,
+        this
+      );
+    }
+  }
+
+  /** Returns the current custom validation message or an empty string if no custom error is set. */
+  protected getCustomValidity(): string {
+    return this.internals.validity.customError ? this.internals.validationMessage : '';
+  }
+
+  /**
+   * Checks if the form control has any restraints and whether it satisfies them. If invalid, `false` will be returned
+   * and the `invalid` event will be dispatched. In addition, the problem will be reported to the user. If valid, `true`
+   * will be returned.
+   */
+  public reportValidity() {
+    return this.internals.reportValidity();
+  }
 }

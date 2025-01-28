@@ -14,7 +14,7 @@ import {
 import formControlStyles from '../../styles/form-control.styles.js';
 import hostStyles from '../../styles/host.styles.js';
 import { Localize } from '../../utilities/localize.js';
-import { QuietElement } from '../../utilities/quiet-element.js';
+import { QuietFormControlElement } from '../../utilities/quiet-element.js';
 import styles from './passcode.styles.js';
 
 /**
@@ -49,15 +49,16 @@ import styles from './passcode.styles.js';
  * @cssstate user-invalid - Applied when the passcode is invalid and the user has sufficiently interacted with it.
  */
 @customElement('quiet-passcode')
-export class QuietPasscode extends QuietElement {
+export class QuietPasscode extends QuietFormControlElement {
   static formAssociated = true;
   static observeSlots = true;
   static styles: CSSResultGroup = [hostStyles, formControlStyles, styles];
 
-  private localize = new Localize(this);
-
   /** A reference to the `<form>` associated with the form control, or `null` if no form is associated. */
-  public associatedForm: HTMLFormElement | null = null;
+  private localize = new Localize(this);
+  protected get focusableAnchor() {
+    return this.textBox;
+  }
 
   @query('input') private textBox: HTMLInputElement;
 
@@ -119,12 +120,6 @@ export class QuietPasscode extends QuietElement {
 
   /** A regular expression the value should match to be considered valid. */
   @property() pattern: string;
-
-  /**
-   * You can provide a custom error message to force the passcode to be invalid. To clear the error, set this to an
-   * empty string.
-   */
-  @property({ attribute: 'custom-validity' }) customValidity = '';
 
   /**
    * Tells the browser how to autocomplete the passcode. See [this page](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete)
@@ -191,11 +186,6 @@ export class QuietPasscode extends QuietElement {
     }
   }
 
-  /** @internal Called when the associated form element changes. */
-  formAssociatedCallback(form: HTMLFormElement | null) {
-    this.associatedForm = form;
-  }
-
   /** @internal Called when a containing fieldset is disabled. */
   formDisabledCallback(isDisabled: boolean) {
     this.disabled = isDisabled;
@@ -259,14 +249,14 @@ export class QuietPasscode extends QuietElement {
     const oldValue = this.value;
 
     // When enter is pressed in a passcode, the associated form should submit
-    if (event.key === 'Enter' && this.associatedForm) {
-      const submitter = [...this.associatedForm.elements].find((el: HTMLInputElement | HTMLButtonElement) => {
+    if (event.key === 'Enter' && this.internals.form) {
+      const submitter = [...this.internals.form.elements].find((el: HTMLInputElement | HTMLButtonElement) => {
         // The first submit button associated with the form will be the submitter. At this time, only native buttons
         // can be submitters (see https://github.com/WICG/webcomponents/issues/814)
         return ['button', 'input'].includes(el.localName) && el.type === 'submit';
       }) as HTMLElement;
 
-      this.associatedForm.requestSubmit(submitter);
+      this.internals.form.requestSubmit(submitter);
     }
 
     if (event.key === 'Escape') {
@@ -320,8 +310,8 @@ export class QuietPasscode extends QuietElement {
   /** Sets the form control's validity */
   private async updateValidity() {
     await this.updateComplete;
-    const hasCustomValidity = this.customValidity?.length > 0;
-    const validationMessage = hasCustomValidity ? this.customValidity : this.textBox.validationMessage;
+    const hasCustomValidity = this.getCustomValidity().length > 0;
+    const validationMessage = hasCustomValidity ? this.getCustomValidity() : this.textBox.validationMessage;
     const flags: ValidityStateFlags = {
       badInput: this.textBox.validity.tooShort,
       customError: hasCustomValidity,
@@ -336,7 +326,7 @@ export class QuietPasscode extends QuietElement {
     };
 
     this.isInvalid = hasCustomValidity ? true : !this.textBox.validity.valid;
-    this.internals.setValidity(flags, validationMessage, this.textBox);
+    this.internals.setValidity(flags, validationMessage, this.focusableAnchor);
   }
 
   /** Sets focus to the passcode. */
@@ -347,23 +337,6 @@ export class QuietPasscode extends QuietElement {
   /** Removes focus from the passcode. */
   public blur() {
     this.textBox.blur();
-  }
-
-  /**
-   * Checks if the form control has any restraints and whether it satisfies them. If invalid, `false` will be returned
-   * and the `invalid` event will be dispatched. If valid, `true` will be returned.
-   */
-  public checkValidity() {
-    return this.internals.checkValidity();
-  }
-
-  /**
-   * Checks if the form control has any restraints and whether it satisfies them. If invalid, `false` will be returned
-   * and the `invalid` event will be dispatched. In addition, the problem will be reported to the user. If valid, `true`
-   * will be returned.
-   */
-  public reportValidity() {
-    return this.internals.reportValidity();
   }
 
   render() {

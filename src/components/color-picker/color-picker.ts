@@ -9,7 +9,7 @@ import hostStyles from '../../styles/host.styles.js';
 import { DraggableElement } from '../../utilities/drag.js';
 import { Localize } from '../../utilities/localize.js';
 import { clamp } from '../../utilities/math.js';
-import { QuietElement } from '../../utilities/quiet-element.js';
+import { QuietFormControlElement } from '../../utilities/quiet-element.js';
 import '../button/button.js';
 import '../copy/copy.js';
 import '../slider/slider.js';
@@ -71,13 +71,11 @@ const hasEyeDropper = 'EyeDropper' in window;
  * @cssstate user-invalid - Applied when the color picker is invalid and the user has sufficiently interacted with it.
  */
 @customElement('quiet-color-picker')
-export class QuietColorPicker extends QuietElement {
+export class QuietColorPicker extends QuietFormControlElement {
   static formAssociated = true;
   static observeSlots = true;
   static styles: CSSResultGroup = [hostStyles, formControlStyles, styles];
 
-  /** A reference to the `<form>` associated with the form control, or `null` if no form is associated. */
-  public associatedForm: HTMLFormElement | null = null;
   private colorSliderBoundingClientRect: DOMRect;
 
   private draggableThumb: DraggableElement;
@@ -85,6 +83,10 @@ export class QuietColorPicker extends QuietElement {
   private localize = new Localize(this);
   private valueWhenDraggingStarted: string | undefined;
   private wasValueSetInternally = false;
+
+  protected get focusableAnchor() {
+    return this.colorSliderThumb;
+  }
 
   @query('#color-slider') private colorSlider: HTMLElement;
   @query('#color-slider-thumb') private colorSliderThumb: HTMLElement;
@@ -138,12 +140,6 @@ export class QuietColorPicker extends QuietElement {
    * this attribute must be an ID of a form in the same document or shadow root.
    */
   @property() form: string;
-
-  /**
-   * You can provide a custom error message to force the color picker to be invalid. To clear the error, set this to an
-   * empty string.
-   */
-  @property({ attribute: 'custom-validity' }) customValidity = '';
 
   /** Enables the opacity slider. */
   @property({ attribute: 'with-opacity', type: Boolean, reflect: true }) withOpacity = false;
@@ -274,11 +270,6 @@ export class QuietColorPicker extends QuietElement {
 
       this.updateComplete.then(() => (this.wasValueSetInternally = false));
     }
-  }
-
-  /** @internal Called when the associated form element changes. */
-  formAssociatedCallback(form: HTMLFormElement | null) {
-    this.associatedForm = form;
   }
 
   /** @internal Called when a containing fieldset is disabled. */
@@ -510,8 +501,8 @@ export class QuietColorPicker extends QuietElement {
   /** Sets the form control's validity */
   private async updateValidity() {
     await this.updateComplete;
-    const hasCustomValidity = this.customValidity?.length > 0;
-    const validationMessage = hasCustomValidity ? this.customValidity : '';
+    const hasCustomValidity = this.getCustomValidity().length > 0;
+    const validationMessage = hasCustomValidity ? this.getCustomValidity() : '';
     const flags: ValidityStateFlags = {
       badInput: false,
       customError: hasCustomValidity,
@@ -526,7 +517,7 @@ export class QuietColorPicker extends QuietElement {
     };
 
     this.isInvalid = hasCustomValidity;
-    this.internals.setValidity(flags, validationMessage, this.colorSliderThumb);
+    this.internals.setValidity(flags, validationMessage, this.focusableAnchor);
   }
 
   /** Sets focus to the color picker. */
@@ -559,23 +550,6 @@ export class QuietColorPicker extends QuietElement {
       default:
         return color.toRgb();
     }
-  }
-
-  /**
-   * Checks if the form control has any restraints and whether it satisfies them. If invalid, `false` will be returned
-   * and the `invalid` event will be dispatched. If valid, `true` will be returned.
-   */
-  public checkValidity() {
-    return this.internals.checkValidity();
-  }
-
-  /**
-   * Checks if the form control has any restraints and whether it satisfies them. If invalid, `false` will be returned
-   * and the `invalid` event will be dispatched. In addition, the problem will be reported to the user. If valid, `true`
-   * will be returned.
-   */
-  public reportValidity() {
-    return this.internals.reportValidity();
   }
 
   render() {

@@ -173,6 +173,42 @@
               </td>
             </tr>
           {% endfor %}
+
+          {# Show shared form control methods that come from QuietFormControlElement #}
+          {% if component.superclass.name == 'QuietFormControlElement' %}
+            <tr>
+              <td class="table-name"><code>checkValidity()</code></td>
+              <td class="table-description">
+                {{ '
+                  Checks if the form control has any restraints and whether it satisfies them. If invalid, `false`
+                  will be returned and the `invalid` event will be dispatched. If valid, `true` will be returned.
+                ' | inlineMarkdown | safe }}
+              </td>
+              <td class="table-arguments"></td>
+            </tr>
+            <tr>
+              <td class="table-name"><code>reportValidity()</code></td>
+              <td class="table-description">
+                {{ '
+                  Checks if the form control has any restraints and whether it satisfies them. If invalid, `false` will
+                  be returned and the `invalid` event will be dispatched. In addition, the problem will be reported to
+                  the user. If valid, `true` will be returned.
+                ' | inlineMarkdown | safe }}
+              </td>
+              <td class="table-arguments"></td>
+            </tr>
+            <tr>
+            <td class="table-name"><code>setCustomValidity()</code></td>
+              <td class="table-description">
+                {{ '
+                  Sets a custom validation message for the form control. If this message is not an empty string, then
+                  the form control is considered invalid and the specified message will be displayed to the user when
+                  reporting validity. Setting an empty string clears the custom validity state.
+                ' | inlineMarkdown | safe }}
+              </td>
+              <td class="table-arguments"><code>message: string</code></td>
+            </tr>
+          {% endif %}
         </tbody>
       </table>
     </quiet-scroller>

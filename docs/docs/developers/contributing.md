@@ -111,9 +111,21 @@ Icons that are rendered in a component's shadow root _must_ use the `system` ico
 
 ### Creating form controls
 
-Form controls must be form-associated custom elements and should follow patterns of existing form controls, for familiarity. Use `value` for value, `disable` to disable, `require` to require, etc.
+Form controls must extend the `QuietFormControlElement` abstract class. By doing so, they will automatically become form-associated. Form controls must follow patterns of existing form controls, for familiarity. Use `value` for value, `disable` to disable, `require` to require, etc.
 
-Form controls must dispatch native `change` and `input` events. This improves DX and allows frameworks to bind to Quiet form controls just like native ones. (Note that the native `change` event isn't composed, so it won't be retargeted like `input` and other events.)
+Form controls must dispatch native `change` and `input` events along with `quiet-change` and `quiet-input`. This improves DX and allows frameworks to bind to Quiet form controls just like native ones. (Note that the native `change` event isn't composed, so it won't be retargeted like `input` and other events.)
+
+Form controls must also implement the `focusableAnchor` getter as shown below. The function must return a reference to the internal element that will receive focus when a validation error occurs.
+
+```ts
+export class QuietTextField extends QuietFormControlElement {
+  // ...
+  protected get focusableAnchor() { 
+    return this.someAnchorElement;
+  }
+  // ...
+}
+```
 
 ### Component sizing and scaling
 

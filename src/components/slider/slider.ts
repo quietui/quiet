@@ -8,7 +8,7 @@ import hostStyles from '../../styles/host.styles.js';
 import { DraggableElement } from '../../utilities/drag.js';
 import { Localize } from '../../utilities/localize.js';
 import { clamp } from '../../utilities/math.js';
-import { QuietElement } from '../../utilities/quiet-element.js';
+import { QuietFormControlElement } from '../../utilities/quiet-element.js';
 import '../tooltip/tooltip.js';
 import type { QuietTooltip } from '../tooltip/tooltip.js';
 import styles from './slider.styles.js';
@@ -60,17 +60,18 @@ import styles from './slider.styles.js';
  * @cssproperty [--thumb-height=1.25em] - The height of the thumb.
  */
 @customElement('quiet-slider')
-export class QuietSlider extends QuietElement {
+export class QuietSlider extends QuietFormControlElement {
   static formAssociated = true;
   static observeSlots = true;
   static styles: CSSResultGroup = [hostStyles, formControlStyles, styles];
 
-  /** A reference to the `<form>` associated with the form control, or `null` if no form is associated. */
-  public associatedForm: HTMLFormElement | null = null;
   private draggableTrack: DraggableElement;
   private localize = new Localize(this);
   private trackBoundingClientRect: DOMRect;
   private valueWhenDraggingStarted: number | undefined;
+  protected get focusableAnchor() {
+    return this.slider;
+  }
 
   @query('#slider') slider: HTMLElement;
   @query('#thumb') thumb: HTMLElement;
@@ -126,12 +127,6 @@ export class QuietSlider extends QuietElement {
 
   /** The granularity the value must adhere to when incrementing and decrementing. */
   @property({ type: Number }) step: number = 1;
-
-  /**
-   * You can provide a custom error message to force the slider to be invalid. To clear the error, set this to an empty
-   * string.
-   */
-  @property({ attribute: 'custom-validity' }) customValidity = '';
 
   /** Tells the browser to focus the slider when the page loads or a dialog is shown. */
   @property({ type: Boolean }) autofocus: boolean;
@@ -231,11 +226,6 @@ export class QuietSlider extends QuietElement {
       this.customStates.set('user-invalid', false);
       this.customStates.set('user-valid', false);
     }
-  }
-
-  /** @internal Called when the associated form element changes. */
-  formAssociatedCallback(form: HTMLFormElement | null) {
-    this.associatedForm = form;
   }
 
   /** @internal Called when a containing fieldset is disabled. */
@@ -358,14 +348,14 @@ export class QuietSlider extends QuietElement {
     }
 
     // When enter is pressed in a slider, the associated form should submit
-    if (event.key === 'Enter' && this.associatedForm) {
-      const submitter = [...this.associatedForm.elements].find((el: HTMLInputElement | HTMLButtonElement) => {
+    if (event.key === 'Enter' && this.internals.form) {
+      const submitter = [...this.internals.form.elements].find((el: HTMLInputElement | HTMLButtonElement) => {
         // The first submit button associated with the form will be the submitter. At this time, only native buttons
         // can be submitters (see https://github.com/WICG/webcomponents/issues/814)
         return ['button', 'input'].includes(el.localName) && el.type === 'submit';
       }) as HTMLElement;
 
-      this.associatedForm.requestSubmit(submitter);
+      this.internals.form.requestSubmit(submitter);
     }
   }
 
@@ -416,8 +406,8 @@ export class QuietSlider extends QuietElement {
   /** Sets the form control's validity */
   private async updateValidity() {
     await this.updateComplete;
-    const hasCustomValidity = this.customValidity?.length > 0;
-    const validationMessage = this.customValidity;
+    const hasCustomValidity = this.getCustomValidity().length > 0;
+    const validationMessage = this.getCustomValidity();
     const flags: ValidityStateFlags = {
       badInput: false,
       customError: hasCustomValidity,
@@ -432,7 +422,7 @@ export class QuietSlider extends QuietElement {
     };
 
     this.isInvalid = hasCustomValidity;
-    this.internals.setValidity(flags, validationMessage, this.slider);
+    this.internals.setValidity(flags, validationMessage, this.focusableAnchor);
   }
 
   /** Sets focus to the slider. */
@@ -443,23 +433,6 @@ export class QuietSlider extends QuietElement {
   /** Removes focus from the slider. */
   public blur() {
     this.slider.blur();
-  }
-
-  /**
-   * Checks if the form control has any restraints and whether it satisfies them. If invalid, `false` will be returned
-   * and the `invalid` event will be dispatched. If valid, `true` will be returned.
-   */
-  public checkValidity() {
-    return this.internals.checkValidity();
-  }
-
-  /**
-   * Checks if the form control has any restraints and whether it satisfies them. If invalid, `false` will be returned
-   * and the `invalid` event will be dispatched. In addition, the problem will be reported to the user. If valid, `true`
-   * will be returned.
-   */
-  public reportValidity() {
-    return this.internals.reportValidity();
   }
 
   /**

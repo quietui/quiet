@@ -8,7 +8,7 @@ import { QuietBlurEvent, QuietChangeEvent, QuietFocusEvent, QuietInputEvent } fr
 import formControlStyles from '../../styles/form-control.styles.js';
 import hostStyles from '../../styles/host.styles.js';
 import { Localize } from '../../utilities/localize.js';
-import { QuietElement } from '../../utilities/quiet-element.js';
+import { QuietFormControlElement } from '../../utilities/quiet-element.js';
 import '../icon/icon.js';
 import styles from './text-field.styles.js';
 
@@ -47,14 +47,15 @@ import styles from './text-field.styles.js';
  * @cssstate user-invalid - Applied when the text field is invalid and the user has sufficiently interacted with it.
  */
 @customElement('quiet-text-field')
-export class QuietTextField extends QuietElement {
+export class QuietTextField extends QuietFormControlElement {
   static formAssociated = true;
   static observeSlots = true;
   static styles: CSSResultGroup = [hostStyles, formControlStyles, styles];
 
-  /** A reference to the `<form>` associated with the form control, or `null` if no form is associated. */
-  public associatedForm: HTMLFormElement | null = null;
   private localize = new Localize(this);
+  protected get focusableAnchor() {
+    return this.textBox;
+  }
 
   @query('input') private textBox: HTMLInputElement;
 
@@ -145,12 +146,6 @@ export class QuietTextField extends QuietElement {
   /** The granularity the value must adhere to when incrementing and decrementing. */
   @property() step: number | 'any';
 
-  /**
-   * You can provide a custom error message to force the text field to be invalid. To clear the error, set this to an
-   * empty string.
-   */
-  @property({ attribute: 'custom-validity' }) customValidity = '';
-
   /** Turns autocapitalize on or off in supported browsers. */
   @property() autocapitalize: 'off' | 'none' | 'on' | 'sentences' | 'words' | 'characters';
 
@@ -221,11 +216,6 @@ export class QuietTextField extends QuietElement {
     }
   }
 
-  /** @internal Called when the associated form element changes. */
-  formAssociatedCallback(form: HTMLFormElement | null) {
-    this.associatedForm = form;
-  }
-
   /** @internal Called when a containing fieldset is disabled. */
   formDisabledCallback(isDisabled: boolean) {
     this.disabled = isDisabled;
@@ -281,14 +271,14 @@ export class QuietTextField extends QuietElement {
 
   private handleKeyDown(event: KeyboardEvent) {
     // When enter is pressed in a text field, the associated form should submit
-    if (event.key === 'Enter' && this.associatedForm) {
-      const submitter = [...this.associatedForm.elements].find((el: HTMLInputElement | HTMLButtonElement) => {
+    if (event.key === 'Enter' && this.internals.form) {
+      const submitter = [...this.internals.form.elements].find((el: HTMLInputElement | HTMLButtonElement) => {
         // The first submit button associated with the form will be the submitter. At this time, only native buttons
         // can be submitters (see https://github.com/WICG/webcomponents/issues/814)
         return ['button', 'input'].includes(el.localName) && el.type === 'submit';
       }) as HTMLElement;
 
-      this.associatedForm.requestSubmit(submitter);
+      this.internals.form.requestSubmit(submitter);
     }
   }
 
@@ -316,8 +306,8 @@ export class QuietTextField extends QuietElement {
   /** Sets the form control's validity */
   private async updateValidity() {
     await this.updateComplete;
-    const hasCustomValidity = this.customValidity?.length > 0;
-    const validationMessage = hasCustomValidity ? this.customValidity : this.textBox.validationMessage;
+    const hasCustomValidity = this.getCustomValidity().length > 0;
+    const validationMessage = hasCustomValidity ? this.getCustomValidity() : this.textBox.validationMessage;
     const flags: ValidityStateFlags = {
       badInput: this.textBox.validity.tooShort,
       customError: hasCustomValidity,
@@ -332,7 +322,7 @@ export class QuietTextField extends QuietElement {
     };
 
     this.isInvalid = hasCustomValidity ? true : !this.textBox.validity.valid;
-    this.internals.setValidity(flags, validationMessage, this.textBox);
+    this.internals.setValidity(flags, validationMessage, this.focusableAnchor);
   }
 
   /** Sets focus to the text field. */
@@ -343,23 +333,6 @@ export class QuietTextField extends QuietElement {
   /** Removes focus from the text field. */
   public blur() {
     this.textBox.blur();
-  }
-
-  /**
-   * Checks if the form control has any restraints and whether it satisfies them. If invalid, `false` will be returned
-   * and the `invalid` event will be dispatched. If valid, `true` will be returned.
-   */
-  public checkValidity() {
-    return this.internals.checkValidity();
-  }
-
-  /**
-   * Checks if the form control has any restraints and whether it satisfies them. If invalid, `false` will be returned
-   * and the `invalid` event will be dispatched. In addition, the problem will be reported to the user. If valid, `true`
-   * will be returned.
-   */
-  public reportValidity() {
-    return this.internals.reportValidity();
   }
 
   /** Selects all text in the text field. */

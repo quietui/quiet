@@ -6,7 +6,7 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
 import { QuietBlurEvent, QuietChangeEvent, QuietFocusEvent, QuietInputEvent } from '../../events/form.js';
 import hostStyles from '../../styles/host.styles.js';
-import { QuietElement } from '../../utilities/quiet-element.js';
+import { QuietFormControlElement } from '../../utilities/quiet-element.js';
 import '../icon/icon.js';
 import styles from './switch.styles.js';
 
@@ -42,12 +42,13 @@ import styles from './switch.styles.js';
  * @cssstate user-invalid - Applied when the switch is invalid and the user has sufficiently interacted with it.
  */
 @customElement('quiet-switch')
-export class QuietSwitch extends QuietElement {
+export class QuietSwitch extends QuietFormControlElement {
   static formAssociated = true;
   static styles: CSSResultGroup = [hostStyles, styles];
 
-  /** A reference to the `<form>` associated with the form control, or `null` if no form is associated. */
-  public associatedForm: HTMLFormElement | null = null;
+  protected get focusableAnchor() {
+    return this.switch;
+  }
 
   @query('input[type="checkbox"]') private switch: HTMLInputElement;
 
@@ -91,12 +92,6 @@ export class QuietSwitch extends QuietElement {
    */
   @property({ type: Boolean, reflect: true }) required = false;
 
-  /**
-   * You can provide a custom error message to force the switch to be invalid. To clear the error, set this to an
-   * empty string.
-   */
-  @property({ attribute: 'custom-validity' }) customValidity = '';
-
   connectedCallback() {
     super.connectedCallback();
     this.addEventListener('invalid', this.handleHostInvalid);
@@ -130,11 +125,6 @@ export class QuietSwitch extends QuietElement {
       this.customStates.set('user-invalid', false);
       this.customStates.set('user-valid', false);
     }
-  }
-
-  /** @internal Called when the associated form element changes. */
-  formAssociatedCallback(form: HTMLFormElement | null) {
-    this.associatedForm = form;
   }
 
   /** @internal Called when a containing fieldset is disabled. */
@@ -195,14 +185,14 @@ export class QuietSwitch extends QuietElement {
   /** Sets the form control's validity */
   private async updateValidity() {
     await this.updateComplete;
-    const hasCustomValidity = this.customValidity?.length > 0;
-    const validationMessage = hasCustomValidity ? this.customValidity : this.switch.validationMessage;
+    const hasCustomValidity = this.getCustomValidity().length > 0;
+    const validationMessage = hasCustomValidity ? this.getCustomValidity() : this.switch.validationMessage;
     const flags: ValidityStateFlags = {
       customError: hasCustomValidity,
       valueMissing: this.switch.validity.valueMissing
     };
     this.isInvalid = hasCustomValidity ? true : !this.switch.validity.valid;
-    this.internals.setValidity(flags, validationMessage, this.switch);
+    this.internals.setValidity(flags, validationMessage, this.focusableAnchor);
   }
 
   /** Sets focus to the switch. */
@@ -213,23 +203,6 @@ export class QuietSwitch extends QuietElement {
   /** Removes focus from the switch. */
   public blur() {
     this.switch.blur();
-  }
-
-  /**
-   * Checks if the form control has any restraints and whether it satisfies them. If invalid, `false` will be returned
-   * and the `invalid` event will be dispatched. If valid, `true` will be returned.
-   */
-  public checkValidity() {
-    return this.internals.checkValidity();
-  }
-
-  /**
-   * Checks if the form control has any restraints and whether it satisfies them. If invalid, `false` will be returned
-   * and the `invalid` event will be dispatched. In addition, the problem will be reported to the user. If valid, `true`
-   * will be returned.
-   */
-  public reportValidity() {
-    return this.internals.reportValidity();
   }
 
   render() {

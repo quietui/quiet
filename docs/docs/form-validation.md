@@ -98,23 +98,35 @@ Validation states are updated automatically as the user interacts with the form 
 
 Quiet form controls expose custom states you can target with CSS. These states make it easy to style controls based on their current state.
 
-```html
-<quiet-text-field
-  name="email"
-  label="Email"
-  type="email"
-  required
-></quiet-text-field>
+```html {.example .no-buttons}
+<form action="about:blank" target="_blank" id="example__styling">
+  <quiet-text-field
+    name="email"
+    label="Email"
+    type="email"
+    placeholder="Enter a value and blur the field"
+    required
+    id="example__styling"
+  ></quiet-text-field>
+  <quiet-button type="submit">Submit</quiet-button>
+  <quiet-button type="reset">Reset</quiet-button>
+</form>
 
 <style>
-  quiet-text-field:state(user-valid) {
-    outline: solid 2px var(--quiet-constructive-stroke-mid);
-    outline-offset: .5rem;
-  }
+  #example__styling {
+    quiet-text-field:state(user-valid) {
+      outline: solid 2px var(--quiet-constructive-stroke-mid);
+      outline-offset: .5rem;
+    }
 
-  quiet-text-field:state(user-invalid) {
-    outline: solid 2px var(--quiet-destructive-stroke-mid);
-    outline-offset: .5rem;
+    quiet-text-field:state(user-invalid) {
+      outline: solid 2px var(--quiet-destructive-stroke-mid);
+      outline-offset: .5rem;
+    }
+
+    quiet-text-field {
+      margin-block-end: 1rem;
+    }
   }
 </style>
 ```
@@ -136,12 +148,12 @@ You can also use various custom states, which must be wrapped in the [`:state()`
 The `user-valid` and `user-invalid` states are only applied after user interaction to prevent premature validation feedback.
 :::
 
-## Form validation
+## Validating entire forms
 
 To validate an entire form, you can use the form's `checkValidity()` method. This will trigger validation on all form controls within the form, including Quiet and native elements.
 
 ```html {.example .no-buttons}
-<form id="signup-form">
+<form action="about:blank" target="_blank" id="signup-form">
   <quiet-text-field
     name="username"
     label="Username"
@@ -157,7 +169,7 @@ To validate an entire form, you can use the form's `checkValidity()` method. Thi
     style="margin-block-end: 1rem;"
   ></quiet-text-field>
 
-  <quiet-button type="submit" style="margin-block-end: 1rem;">
+  <quiet-button type="submit">
     Sign up
   </quiet-button>
 </form>
@@ -172,38 +184,3 @@ To validate an entire form, you can use the form's `checkValidity()` method. Thi
   });
 </script>
 ```
-
-## Real-time validation
-
-Sometimes you might want to validate as the user types instead of waiting for form submission. You can do this by listening to the `input` event.
-
-```html {.example .no-buttons}
-<quiet-text-field
-  id="username"
-  name="username"
-  label="Username"
-  required
-  pattern="[a-zA-Z0-9]+"
-></quiet-text-field>
-
-<script>
-  const username = document.querySelector('#username');
-
-  username.addEventListener('input', () => {
-    // Clear any existing custom validity message
-    username.setCustomValidity('');
-    
-    // If the pattern doesn't match, set a custom message
-    if (username.validity.patternMismatch) {
-      username.setCustomValidity('Username can only contain letters and numbers');
-    }
-    
-    username.reportValidity();
-  });
-</script>
-```
-
-:::warn
-Be careful with real-time validation as it can be very annoying for users. Consider using the `change` event instead, which fires when the user has finished making their changes. Alternatively, consider only enabling real-time validation after the user has interacted with the form control.
-:::
-

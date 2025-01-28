@@ -92,7 +92,7 @@ export default css`
     }
 
     &::placeholder {
-      color: var(--quiet-text-muted);
+      color: var(--quiet-form-control-placeholder-color);
       user-select: none;
       -webkit-user-select: none;
     }

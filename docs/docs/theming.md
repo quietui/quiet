@@ -569,6 +569,7 @@ Always scope design token overrides to the `:root` node (i.e. `<html>` element),
 | `--quiet-form-control-font-size-lg` | The font size of large form controls. |
 | `--quiet-form-control-font-size-xl` | The font size of extra large form controls. |
 | `--quiet-form-control-required-content` | The content to show next to the label when the form control is required. |
+| `--quiet-form-control-placeholder-color` | The color of placeholder text |
 | `--quiet-button-active-offset` | The amount of vertical shift to apply to buttons when they're pressed. |
 
 </div>

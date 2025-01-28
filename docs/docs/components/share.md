@@ -41,10 +41,10 @@ Use a custom button by simply slotting it in. Both [Quiet buttons](/docs/compone
   url="https://quietui.org/"
   style="margin-inline-end: 0.5rem;"
 >
-  <quiet-button>
-    <quiet-icon slot="start" name="share"></quiet-icon>
+  <button>
+    <quiet-icon name="share"></quiet-icon>
     Share
-  </quiet-button>
+  </button>
 </quiet-share>
 ```
 

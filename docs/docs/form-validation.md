@@ -100,7 +100,6 @@ Quiet form controls expose custom states you can target with CSS. These states m
 
 ```html
 <quiet-text-field
-  id="email"
   name="email"
   label="Email"
   type="email"
@@ -108,12 +107,14 @@ Quiet form controls expose custom states you can target with CSS. These states m
 ></quiet-text-field>
 
 <style>
-  #email:state(user-invalid) {
-    --indicator-color: var(--quiet-destructive-fill-loud);
+  quiet-text-field:state(user-valid) {
+    outline: solid 2px var(--quiet-constructive-stroke-mid);
+    outline-offset: .5rem;
   }
 
-  #email:state(focused) {
-    outline: var(--quiet-focus-ring);
+  quiet-text-field:state(user-invalid) {
+    outline: solid 2px var(--quiet-destructive-stroke-mid);
+    outline-offset: .5rem;
   }
 </style>
 ```
@@ -140,7 +141,7 @@ The `user-valid` and `user-invalid` states are only applied after user interacti
 To validate an entire form, you can use the form's `checkValidity()` method. This will trigger validation on all form controls within the form, including Quiet and native elements.
 
 ```html {.example .no-buttons}
-<form id="signup">
+<form id="signup-form">
   <quiet-text-field
     name="username"
     label="Username"
@@ -162,7 +163,7 @@ To validate an entire form, you can use the form's `checkValidity()` method. Thi
 </form>
 
 <script>
-  const form = document.querySelector('#signup');
+  const form = document.querySelector('#signup-form');
 
   form.addEventListener('submit', event => {
     if (!form.checkValidity()) {

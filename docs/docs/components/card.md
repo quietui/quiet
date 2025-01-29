@@ -77,7 +77,7 @@ Place an image or video into the `media` slot to add media at the beginning of t
 
 ### Horizontal cards
 
-Set the `orientation` attribute to `horizontal` to create a card with a horizontal, side-by-side layout. Unlike vertical cards, horizontal cards do not draw borders to separate the header and footer slots.
+Set the `orientation` attribute to `horizontal` to create a card with a horizontal, side-by-side layout. When using the `media` slot, be sure to set a width or maximum width on the image.
 
 ```html {.example}
 <quiet-card orientation="horizontal">
@@ -90,6 +90,10 @@ Set the `orientation` attribute to `horizontal` to create a card with a horizont
   </quiet-button>
 </quiet-card>
 ```
+
+:::info
+Unlike vertical cards, horizontal cards do not draw borders to separate the header and footer slots.
+:::
 
 ### Wrapping with links
 

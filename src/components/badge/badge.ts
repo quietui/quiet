@@ -25,8 +25,11 @@ export class QuietBadge extends QuietElement {
   /** The type of badge to draw. */
   @property({ reflect: true }) variant: 'default' | 'primary' | 'constructive' | 'destructive' | 'inverted' = 'default';
 
+  /** Determines the badges's appearance. */
+  @property({ reflect: true }) appearance: 'normal' | 'outline' = 'normal';
+
   /** Draws attention to the badge using an animation. */
-  @property({ type: Boolean, reflect: true }) attention = false;
+  @property({ type: Boolean, reflect: true }) attention: 'tap' | 'shake' | 'sparkle';
 
   render() {
     return html` <slot></slot> `;

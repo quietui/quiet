@@ -6,7 +6,7 @@ layout: docs
 
 Quiet Restyle™ is an opinionated CSS reset that provides consistent styles to HTML documents by making use of Quiet's [design token API](/docs/theming/#theme-concepts). Restyle is entirely optional, but it's a great way to kick off new websites and apps without worrying about initial styles. As you [customize your theme](/docs/theming) with CSS, Restyle will adapt accordingly.
 
-You can think of Restyle as a smarter, prettier user agent stylesheet.
+You can think of Restyle as a smarter, prettier user agent stylesheet. And you can use it along with everything else Quiet has to offer or entirely on its own!
 
 ## Usage
 

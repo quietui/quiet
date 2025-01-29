@@ -65,6 +65,12 @@
     text-align: center;
     cursor: pointer;
 
+    &:hover {
+      @media (hover: hover) {
+        background: none !important;
+      }
+    }
+
     &:first-of-type {
       border-inline-start: none;
       border-end-start-radius: var(--quiet-border-radius);
@@ -92,7 +98,6 @@
   quiet-icon {
     width: 1em;
     height: 1em;
-    vertical-align: -2px;
   }
 }
 

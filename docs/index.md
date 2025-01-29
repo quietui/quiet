@@ -36,7 +36,7 @@ About this project
   <li>
     <a class="stretch" href="/docs/components">
       <quiet-icon name="packages" style="color: #b394f4;"></quiet-icon><br>
-      {{ components.length }} high-quality, accessible, interoperable UI components
+      {{ components.length }} high-quality, accessible, and interoperable UI components
     </a>
   </li>
   <li>

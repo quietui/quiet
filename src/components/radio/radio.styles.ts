@@ -8,12 +8,12 @@ export default css`
 
   :host([orientation='horizontal']) #group {
     flex-wrap: wrap;
-    gap: 1.5rem;
+    gap: 1.25rem;
   }
 
   :host([orientation='vertical']) #group {
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 0.5rem;
   }
 
   :host(:state(disabled)) #label,

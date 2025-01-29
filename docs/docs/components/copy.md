@@ -34,7 +34,10 @@ Use a custom button by simply slotting it in. Both [Quiet buttons](/docs/compone
 </quiet-copy>
 
 <quiet-copy data="Copied with a native button">
-  <button>Copy</button>
+  <button>
+    <quiet-icon name="clipboard"></quiet-icon>
+    Copy
+  </button>
 </quiet-copy>
 ```
 

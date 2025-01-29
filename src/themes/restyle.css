@@ -516,7 +516,7 @@ textarea {
   }
 
   &::placeholder {
-    color: var(--quiet-text-muted);
+    color: var(--quiet-form-control-placeholder-color);
     user-select: none;
     -webkit-user-select: none;
   }
@@ -897,6 +897,13 @@ button {
   &:disabled {
     cursor: not-allowed;
     opacity: 0.5;
+  }
+
+  > quiet-icon {
+    font-size: 1.25em;
+    stroke-width: 1.75px;
+    margin-inline: 0.025em;
+    vertical-align: -0.2em;
   }
 }
 

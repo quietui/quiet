@@ -80,8 +80,10 @@ Place an image or video into the `media` slot to add media at the beginning of t
 Set the `orientation` attribute to `horizontal` to create a card with a horizontal, side-by-side layout. When using the `media` slot, be sure to set a width or maximum width on the image.
 
 ```html {.example}
-<quiet-card orientation="horizontal">
-  <img slot="media" style="max-width: 180px;" src="https://plus.unsplash.com/premium_photo-1661676191997-0c0cece2a683?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Two white kittens laying in a cozy basket">
+<quiet-card orientation="horizontal" id="card__orientation">
+  <img slot="media" 
+       src="https://plus.unsplash.com/premium_photo-1661676191997-0c0cece2a683?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+       alt="Two white kittens laying in a cozy basket">
 
   When kittens sleep, they enter a world of peaceful dreams filled with playful adventures and soft purrs.
 
@@ -89,6 +91,22 @@ Set the `orientation` attribute to `horizontal` to create a card with a horizont
     <quiet-icon name="dots"></quiet-icon>
   </quiet-button>
 </quiet-card>
+
+<style>
+  quiet-card#card__orientation {
+    container-type: inline-size;
+  }
+
+  img[slot="media"] {
+    max-width: 180px;
+  }
+
+  @container (max-width: 500px) {
+    img[slot="media"] {
+      max-width: 100px;
+    }
+  }
+</style>
 ```
 
 :::info

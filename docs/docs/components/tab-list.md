@@ -266,17 +266,38 @@ Tab lists come with a simple, minimal appearance. Feel free to customize them wi
 
 <style>
   .tab-list__cards {
+    border: solid 1px var(--quiet-neutral-stroke-softer);
+    border-radius: var(--quiet-border-radius);
+    box-shadow: var(--quiet-shadow-softer);
+
+    &::part(tabs) {
+      padding-top: 0.5rem;
+    }
+
+    &::part(panels) {
+      padding: 1.5rem 1rem;
+    }
+
     quiet-tab {
+      background-color: var(--quiet-paper-color);
       border: solid 1px var(--quiet-neutral-stroke-softer);
       border-start-start-radius: var(--quiet-border-radius);
       border-start-end-radius: var(--quiet-border-radius);
       color: var(--quiet-text-muted);
-      padding-block: .75rem;
-      margin-inline: 2px;
+      padding-block: 0.75rem;
+      margin-inline: 0.25rem;
+
+      &:state(active) {
+        background-color: var(--quiet-background-color);
+      }
     }
 
-    quiet-tab:first-child {
-      margin-inline-start: 0;
+    quiet-tab:first-of-type {
+      margin-inline-start: 0.5rem;
+    }
+
+    quiet-tab:last-of-type {
+      margin-inline-end: 0.5rem;
     }
 
     quiet-tab:state(active) {

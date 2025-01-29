@@ -856,8 +856,10 @@ button {
     background-color: var(--quiet-neutral-fill-softer);
     color: var(--quiet-neutral-text-on-soft);
 
-    &[aria-pressed='true'] {
-      background-color: color-mix(in oklab, var(--quiet-neutral-fill-softer), var(--quiet-strident) 7.5%);
+    @media (hover: hover) {
+      &:hover:not(.disabled, [aria-pressed='true']) {
+        background-color: color-mix(in oklab, var(--quiet-neutral-fill-softer), black 5%);
+      }
     }
   }
 
@@ -866,18 +868,23 @@ button {
     background-color: var(--quiet-primary-fill-mid);
     color: var(--quiet-primary-text-on-mid);
 
-    &[aria-pressed='true'] {
-      background-color: color-mix(in oklab, var(--quiet-primary-fill-mid), var(--quiet-strident) 7.5%);
+    @media (hover: hover) {
+      &:hover:not(.disabled, [aria-pressed='true']) {
+        background-color: color-mix(in oklab, var(--quiet-primary-fill-mid), black 5%);
+      }
     }
   }
 
   /* Destructive buttons */
   &.destructive {
     background-color: var(--quiet-destructive-fill-mid);
+
     color: var(--quiet-destructive-text-on-mid);
 
-    &[aria-pressed='true'] {
-      background-color: color-mix(in oklab, var(--quiet-destructive-fill-mid), var(--quiet-strident) 7.5%);
+    @media (hover: hover) {
+      &:hover:not(.disabled, [aria-pressed='true']) {
+        background-color: color-mix(in oklab, var(--quiet-destructive-fill-mid), black 5%);
+      }
     }
   }
 

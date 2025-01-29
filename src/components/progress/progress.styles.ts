@@ -22,6 +22,7 @@ export default css`
     overflow: hidden;
     border-radius: 9999px;
     background-color: var(--track-color);
+    box-shadow: var(--quiet-inset-shadow-soft);
     font-size: 0.875em;
   }
 

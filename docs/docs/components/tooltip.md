@@ -39,6 +39,18 @@ Tooltip anchors must be interactive/focusable elements such as buttons, links, e
 The anchor element must be in the DOM when the tooltip is connected, otherwise the tooltip won't be attached and a warning will be shown in the console.
 :::
 
+### Variants
+
+Tooltips have two built-in styles. Set the `variant` attribute to `default` or `inverted` to change the tooltip's variant.
+
+```html {.example}
+<quiet-button id="tooltip__default">Default</quiet-button>
+<quiet-tooltip for="tooltip__default">I'm a default tooltip</quiet-tooltip>
+
+<quiet-button id="tooltip__inverted">Inverted</quiet-button>
+<quiet-tooltip for="tooltip__inverted" variant="inverted">I'm an inverted tooltip</quiet-tooltip>
+```
+
 ### Placement
 
 Use the `placement` attribute to change the preferred location of the tooltip in reference to its anchor. The tooltip will shift to a more optimal location if the preferred placement doesn't have enough room. The default placement is `top`.

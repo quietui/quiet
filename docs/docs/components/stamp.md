@@ -11,13 +11,13 @@ When you need to make changes to repetitive content, stamps make it easy by lett
 <div id="stamp__overview">
   <!-- Template -->
   <template id="user-card">
-    <quiet-card class="user">
-      <quiet-avatar label="{label}" image="{image}"></quiet-avatar>        
+    <quiet-card class="user" orientation="horizontal">
+      <quiet-avatar slot="header" label="{label}" image="{image}"></quiet-avatar>        
       <div class="info">
         <h3>{name}</h3>
         <p>{tagline}</p>
       </div>
-      <quiet-button if="{canEdit}" icon-label="Edit">
+      <quiet-button slot="footer" if="{canEdit}" icon-label="Edit" pill>
         <quiet-icon name="edit"></quiet-icon>
       </quiet-button>
     </quiet-card>
@@ -61,16 +61,8 @@ When you need to make changes to repetitive content, stamps make it easy by lett
     gap: .5rem;
 
     .user {
-      &::part(body) {
-        display: flex;
-        gap: 1rem;
-        align-items: center;
-      }
-
-      quiet-avatar {
-        flex: 0 0 auto;
-      }
-
+      --spacing: 1rem;
+      
       .info {
         flex: 1 1 auto;
         display: flex;

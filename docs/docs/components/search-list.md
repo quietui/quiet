@@ -20,56 +20,48 @@ Search Lists provide real-time filtering of content as the user types, supportin
   </quiet-text-field>
 
   <!-- Items -->
-  <quiet-card>
-    <quiet-avatar image="https://images.unsplash.com/photo-1672487209629-4d52e0c043d0?q=80&w=256&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"></quiet-avatar>
+  <quiet-card orientation="horizontal">
+    <quiet-avatar slot="header" image="https://images.unsplash.com/photo-1672487209629-4d52e0c043d0?q=80&w=256&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"></quiet-avatar>
     <div>
       <h4 class="name">Meowy McGee</h4>
       <div class="tagline">Freedom's just another word for nothing left to lose.</div>
     </div>
-    <div class="buttons">
-      <quiet-button icon-label="Settings" appearance="text" pill>
-        <quiet-icon name="dots"></quiet-icon>
-      </quiet-button>
-    </div>
+    <quiet-button slot="footer" icon-label="Settings" appearance="text" pill>
+      <quiet-icon name="dots"></quiet-icon>
+    </quiet-button>
   </quiet-card>
     
-  <quiet-card>
-    <quiet-avatar image="https://images.unsplash.com/photo-1529778873920-4da4926a72c2?q=80&w=256&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"></quiet-avatar>
+  <quiet-card orientation="horizontal">
+    <quiet-avatar slot="header" image="https://images.unsplash.com/photo-1529778873920-4da4926a72c2?q=80&w=256&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"></quiet-avatar>
     <div>
       <h4 class="name">Wonder Whiskers</h4>
       <div class="tagline">Living my best nine lives, one nap at a time.</div>
     </div>
-    <div class="buttons">
-      <quiet-button icon-label="Settings" appearance="text" pill>
-        <quiet-icon name="dots"></quiet-icon>
-      </quiet-button>
-    </div>
+    <quiet-button slot="footer" icon-label="Settings" appearance="text" pill>
+      <quiet-icon name="dots"></quiet-icon>
+    </quiet-button>
   </quiet-card>
 
-  <quiet-card>
-    <quiet-avatar image="https://images.unsplash.com/photo-1569591159212-b02ea8a9f239?q=80&w=256&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"></quiet-avatar>
+  <quiet-card orientation="horizontal">
+    <quiet-avatar slot="header" image="https://images.unsplash.com/photo-1569591159212-b02ea8a9f239?q=80&w=256&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"></quiet-avatar>
     <div>
       <h4 class="name">Maine Attraction</h4>
       <div class="tagline">Big fluff, bigger personality.</div>
     </div>
-    <div class="buttons">
-      <quiet-button icon-label="Settings" appearance="text" pill>
-        <quiet-icon name="dots"></quiet-icon>
-      </quiet-button>
-    </div>
+    <quiet-button slot="footer" icon-label="Settings" appearance="text" pill>
+      <quiet-icon name="dots"></quiet-icon>
+    </quiet-button>
   </quiet-card>
 
-  <quiet-card>
-    <quiet-avatar image="https://images.unsplash.com/photo-1735820474275-dd0ff4f28d71?q=80&w=256&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"></quiet-avatar>
+  <quiet-card orientation="horizontal">
+    <quiet-avatar slot="header" image="https://images.unsplash.com/photo-1735820474275-dd0ff4f28d71?q=80&w=256&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"></quiet-avatar>
     <div>
       <h4 class="name">Sir Pounce-a-lot</h4>
       <div class="tagline">Professional sunbeam chaser and nap enthusiast.</div>
     </div>
-    <div class="buttons">
-      <quiet-button icon-label="Settings" appearance="text" pill>
-        <quiet-icon name="dots"></quiet-icon>
-      </quiet-button>
-    </div>
+    <quiet-button slot="footer" icon-label="Settings" appearance="text" pill>
+      <quiet-icon name="dots"></quiet-icon>
+    </quiet-button>
   </quiet-card>  
 
   <!-- Empty state -->
@@ -82,17 +74,10 @@ Search Lists provide real-time filtering of content as the user types, supportin
 <style>
   #search-list__overview {
     quiet-card {
-      &::part(body) {
-        display: grid;
-        grid-template-columns: auto 1fr auto;
-        align-items: center;
-        gap: 1rem;
-        padding: 0.75rem;
-        min-height: 0;
-      }
+      --spacing: 1rem;
 
       quiet-avatar {
-        --size: 2.5rem;
+        --size: 3rem;
       }
 
       .name,
@@ -105,16 +90,11 @@ Search Lists provide real-time filtering of content as the user types, supportin
       .name {
         display: block;
         font-size: 1.125rem;
-        margin-right: 0.5rem;
       }
 
       .tagline {
         color: var(--quiet-text-muted);
         font-size: 0.875rem;
-      }
-
-      .buttons {
-        margin: 0;
       }
     }
 

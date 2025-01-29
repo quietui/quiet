@@ -75,7 +75,7 @@ Place an image or video into the `media` slot to add media at the beginning of t
 </div>
 ```
 
-### Changing the orientation
+### Horizontal cards
 
 Set the `orientation` attribute to `horizontal` to create a card with a horizontal, side-by-side layout. Unlike vertical cards, horizontal cards do not draw borders to separate the header and footer slots.
 
@@ -91,7 +91,7 @@ Set the `orientation` attribute to `horizontal` to create a card with a horizont
 </quiet-card>
 ```
 
-### Wrapping with a link
+### Wrapping with links
 
 You can wrap links around cards to make the entire card clickable. You might need to add custom styles to prevent unwanted colors, underlines, and transitions from leaking into the card. Consider using styles that make it obvious to users that the card is clickable.
 

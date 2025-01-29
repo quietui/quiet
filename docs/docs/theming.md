@@ -492,7 +492,7 @@ These tokens represent pure black and white, but their values invert in dark mod
 
 ### Design tokens
 
-The following design tokens are used to set the overall appearance of the default theme. You can customize tokens by reassigning them as shown below. More granular customizations can be made to components with [CSS parts](/docs/using-components/#css-parts).
+The following design tokens are used to set the overall appearance of the default theme. You can customize tokens by reassigning them as shown below.
 
 ```css
 /* Design token overrides */
@@ -513,6 +513,8 @@ Always scope design token overrides to the `:root` node (i.e. `<html>` element),
 :::
 
 #### Application tokens
+
+The following design tokens are used to style themes and components consistently.
 
 <div class="table-scroll table-theme" tabindex="0">
 
@@ -543,16 +545,22 @@ Always scope design token overrides to the `:root` node (i.e. `<html>` element),
 | `--quiet-focus-width` | The width of the focus ring's border. |
 | `--quiet-focus-offset` | The outline offset of the focus ring. |
 | `--quiet-shadow-color` | The base color used in all shadows. |
-| `--quiet-shadow-softer` | The softest shadow, a box-shadow-friendly property. |
-| `--quiet-shadow-soft` | A soft shadow, a box-shadow-friendly property. |
-| `--quiet-shadow-mid` | A mid-level shadow, a box-shadow-friendly property. |
-| `--quiet-shadow-loud` | A loud shadow, a box-shadow-friendly property. |
-| `--quiet-shadow-louder` | The loudest shadow, a box-shadow-friendly property. |
-
+| `--quiet-shadow-softer` | The softest shadow, for subtle elevation effects. |
+| `--quiet-shadow-soft` | A gentle shadow, for light elevation effects. |
+| `--quiet-shadow-mid` | A moderate shadow, for clear elevation effects. |
+| `--quiet-shadow-loud` | A strong shadow, for prominent elevation effects. |
+| `--quiet-shadow-louder` | The strongest shadow, for maximum elevation effects. |
+| `--quiet-inset-shadow-softer` | The softest inset shadow, for subtle depression effects. |
+| `--quiet-inset-shadow-soft` | A gentle inset shadow, for light depression effects. |
+| `--quiet-inset-shadow-mid` | A moderate inset shadow, for clear depression effects. |
+| `--quiet-inset-shadow-loud` | A strong inset shadow, for prominent depression effects. |
+| `--quiet-inset-shadow-louder` | The strongest inset shadow, for maximum depression effects. |
 
 </div>
 
 #### Form control tokens
+
+The following design tokens are used to style form controls consistently.
 
 <div class="table-scroll table-theme" tabindex="0">
 

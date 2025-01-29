@@ -12,21 +12,37 @@ export default css`
     box-shadow: var(--quiet-shadow-softer);
   }
 
+  /* Vertical cards */
+  :host([orientation='horizontal']) {
+    flex-direction: row;
+  }
+
   /* Media */
   #media {
     position: relative;
     margin: calc(-1 * var(--quiet-border-width));
+  }
 
-    ::slotted(*) {
-      display: block !important;
-      width: 100% !important;
-      margin: 0 !important;
-      object-fit: cover !important;
-      border-top-right-radius: var(--quiet-border-radius) !important;
-      border-top-left-radius: var(--quiet-border-radius) !important;
-      border-bottom-right-radius: 0 !important;
-      border-bottom-left-radius: 0 !important;
-    }
+  :host([orientation='vertical']) #media ::slotted(*) {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+    object-fit: cover !important;
+    border-top-right-radius: var(--quiet-border-radius) !important;
+    border-top-left-radius: var(--quiet-border-radius) !important;
+    border-bottom-right-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+  }
+
+  :host([orientation='horizontal']) #media ::slotted(*) {
+    display: block !important;
+    height: 100%;
+    margin: 0 !important;
+    object-fit: cover !important;
+    border-top-right-radius: 0 !important;
+    border-top-left-radius: var(--quiet-border-radius) !important;
+    border-bottom-right-radius: 0 !important;
+    border-bottom-left-radius: var(--quiet-border-radius) !important;
   }
 
   /* Header */
@@ -38,7 +54,6 @@ export default css`
     padding-inline-end: calc(var(--spacing) / 2); /* less spacing to better align buttons as actions */
     padding-block: calc(var(--spacing) * 0.875);
     gap: calc(var(--spacing) / 4);
-    border-bottom: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
 
     /*
       Set negative margins on slotted buttons to prevent the header from growing too tall due to padding. We only do
@@ -50,6 +65,11 @@ export default css`
     }
   }
 
+  /* Show a border for vertical cards only */
+  :host([orientation='vertical']) #header {
+    border-bottom: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
+  }
+
   #actions {
     display: flex;
     flex-wrap: wrap;
@@ -58,6 +78,7 @@ export default css`
 
   /* Body */
   #body {
+    flex: 1;
     padding: var(--spacing);
   }
 
@@ -68,6 +89,10 @@ export default css`
     align-items: center;
     padding: var(--spacing);
     gap: calc(var(--spacing) / 4);
+  }
+
+  /* Show a border for vertical cards only */
+  :host([orientation='vertical']) #footer {
     border-top: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
   }
 `;

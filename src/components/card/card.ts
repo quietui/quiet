@@ -1,6 +1,6 @@
 import type { CSSResultGroup } from 'lit';
 import { html } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 import hostStyles from '../../styles/host.styles.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import styles from './card.styles.js';
@@ -31,6 +31,9 @@ import styles from './card.styles.js';
 export class QuietCard extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
   static observeSlots = true;
+
+  /** The card's orientation. */
+  @property({ reflect: true }) orientation: 'horizontal' | 'vertical' = 'vertical';
 
   render() {
     return html`

@@ -11,7 +11,7 @@ layout: component
 
 ### Variants
 
-Badges have five built-in variants. Set the `variant` attribute to `default`, `primary`, `constructive`, `destructive`, or `inverted` to change the badges's appearance.
+Badges have five built-in variants. Set the `variant` attribute to `default`, `primary`, `constructive`, `destructive`, or `inverted` to change the badges's variant.
 
 ```html {.example .flex-row}
 <quiet-badge variant="default">Default</quiet-badge>

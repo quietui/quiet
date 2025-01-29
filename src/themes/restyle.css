@@ -693,6 +693,116 @@ input[type='range']::-moz-range-progress {
   background-color: var(--quiet-primary-fill-mid);
 }
 
+/* Meter */
+meter,
+meter::-webkit-meter-bar {
+  display: block;
+  appearance: none;
+  width: 100%;
+  height: 1.25em;
+  overflow: hidden;
+  border-radius: 9999px;
+  background: var(--quiet-neutral-fill-softer);
+  box-shadow: inset 0 0.25em 0.25em -0.25em color-mix(in oklab, black, transparent 95%);
+  transition: all 0.3s linear;
+}
+
+meter::-webkit-meter-optimum-value {
+  background: none;
+  background-color: #5dbb54;
+  transition: inherit;
+}
+
+:-moz-meter-optimum::-moz-meter-bar {
+  background: none;
+  background-color: #5dbb54;
+  transition: inherit;
+}
+
+meter::-webkit-meter-suboptimum-value {
+  background: none;
+  background-color: #e89a26;
+  transition: inherit;
+}
+
+:-moz-meter-sub-optimum::-moz-meter-bar {
+  background: none;
+  background-color: #e89a26;
+  transition: inherit;
+}
+
+meter::-webkit-meter-even-less-good-value {
+  background: none;
+  background-color: #ee5655;
+  transition: inherit;
+}
+
+:-moz-meter-sub-sub-optimum::-moz-meter-bar {
+  background: none;
+  background-color: #ee5655;
+  transition: inherit;
+}
+
+/* Progress */
+progress,
+progress::-webkit-progress-bar {
+  display: block;
+  appearance: none;
+  width: 100%;
+  height: 1.25em;
+  overflow: hidden;
+  border: none;
+  border-radius: 9999px;
+  background: var(--quiet-neutral-fill-softer);
+  box-shadow: var(--quiet-inset-shadow-softer);
+}
+
+/* Determinate state */
+progress[value]::-webkit-progress-value {
+  background: none;
+  background-color: var(--quiet-primary-fill-mid);
+  transition: 0.3s width ease;
+}
+
+progress[value]::-moz-progress-bar {
+  background: none;
+  background-color: var(--quiet-primary-fill-mid);
+  transition: 0.3s width ease;
+}
+
+/* Indeterminate state */
+progress:indeterminate {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: linear-gradient(to right, var(--quiet-primary-fill-mid) 30%, var(--quiet-neutral-fill-softer) 30%);
+  background-position: top left;
+  background-size: 150% 150%;
+  background-repeat: no-repeat;
+  background-color: var(--quiet-neutral-fill-softer);
+}
+
+progress:indeterminate::-webkit-progress-bar {
+  background-color: transparent;
+}
+
+progress:indeterminate::-moz-progress-bar {
+  background-color: transparent;
+}
+
+@keyframes quiet-progress-indeterminate {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+progress:indeterminate {
+  animation: quiet-progress-indeterminate 1.5s linear infinite;
+}
+
 /* Text areas */
 textarea {
   resize: vertical;

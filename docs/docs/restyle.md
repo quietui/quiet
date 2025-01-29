@@ -223,6 +223,26 @@ export function thing(arg) {
 
 <iframe src="https://www.youtube.com/embed/ALGG6ptfLdc?si=03a9K9QigWi2A9Wt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
+### Meters
+
+<meter value="15" min="0" max="100" low="20" high="80" optimum="100">
+  15% battery remaining
+</meter>
+<br>
+<meter value="50" min="0" max="100" low="20" high="80" optimum="100">
+  50% battery remaining
+</meter>
+<br>
+<meter value="85" min="0" max="100" low="20" high="80" optimum="100">
+  85% battery remaining
+</meter>
+
+### Progress
+
+<progress min="0" max="100" value="50">50%</progress>
+<br>
+<progress>Loading…</progress>
+
 ### Fieldsets
 
 <fieldset>

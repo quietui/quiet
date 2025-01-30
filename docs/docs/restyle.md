@@ -32,7 +32,7 @@ The following section shows the native HTML elements that are supported in Resty
 
 ### Headings
 
-Use `<h1>` through `<h6>` to create headings. Headings use `text-wrap: balance`.
+Use `<h1>` through `<h6>` to create headings. Headings use `text-wrap: balance` so they look great on all devices.
 
 <quiet-card data-no-outline class="preview">
 
@@ -52,7 +52,7 @@ Use `<h1>` through `<h6>` to create headings. Headings use `text-wrap: balance`.
 
 ### Paragraphs
 
-Paragraphs have the spacing you would expect and come with `text-wrap: pretty`.
+Paragraphs have the spacing you would expect and come with `text-wrap: pretty` to prevent orphans.
 
 <quiet-card class="preview">
 
@@ -102,16 +102,9 @@ superscript<sup>sup</sup>
 
 ### Lists
 
-Use `<ul>` and `<ol>` to make lists.
+Use `<ol>` and `<ul>` to make ordered and unordered lists.
 
 <quiet-card class="two-columns preview">
-
-- First item
-- Second item
-   - Nested item
-   - Another nested item
-- Third item
-- Fourth item
 
 1. First item
 2. Second item
@@ -120,11 +113,18 @@ Use `<ul>` and `<ol>` to make lists.
 3. Third item
 4. Fourth item
 
+- First item
+- Second item
+   - Nested item
+   - Another nested item
+- Third item
+- Fourth item
+
 </quiet-card>
 
 ### Block quotes
 
-Use `<blockquote>` to show a quote.
+Use `<blockquote>` to show quotes that stand out.
 
 <quiet-card class="preview">
 
@@ -134,7 +134,7 @@ Use `<blockquote>` to show a quote.
 
 ### Code blocks
 
-Use `<pre>` to show code and preformatted content.
+Use `<pre>` for code and other preformatted content.
 
 <quiet-card class="preview">
 
@@ -151,7 +151,7 @@ export function thing(arg) {
 
 ### Tables
 
-Use `<table>` to create tables.
+Use `<table>` to display tabular data.
 
 <quiet-card class="preview">
   <table>
@@ -194,9 +194,56 @@ Use `<table>` to create tables.
   </table>
 </quiet-card>
 
+Add `class="striped"` to add stripes to alternating rows.
+
+<quiet-card class="preview">
+  <table class="striped">
+    <thead>
+      <tr>
+        <th>First column</th>
+        <th>Second column</th>
+        <th>Third column</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Proin sed libero</td>
+        <td>Amet nisl</td>
+        <td>Blandit volutpat</td>
+      </tr>
+      <tr>
+        <td>Viverra nam</td>
+        <td>Nunc aliquet</td>
+        <td>Condimentum vitae</td>
+      </tr>
+      <tr>
+        <td>Placerat duis</td>
+        <td>Eu volutpat</td>
+        <td>Morbi enim</td>
+      </tr>
+      <tr>
+        <td>Pellentesque primis</td>
+        <td>Aliquam etiam</td>
+        <td>Fusce pharetra</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td>4,567</td>
+        <td>3,210</td>
+        <td>7,654</td>
+      </tr>
+    </tfoot>  
+  </table>
+</quiet-card>
+
+:::info
+Wrap large tables in [`<quiet-scroller>`](/docs/components/scroller) to ensure they work great on mobile devices.
+:::
+
 ### Details
 
-Use `<details>` and `<summary>` for expandable content.
+Use `<details>` and `<summary>` to show expandable content. Use the optional [`name`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details#name) attribute to group them, ensuring only one is open at a time.
 
 <quiet-card class="preview">
   <details name="example">
@@ -215,9 +262,9 @@ Use `<details>` and `<summary>` for expandable content.
   </details>
 </quiet-card>
 
-### Definition Lists
+### Description Lists
 
-Use `<dl>`, `<dt>`, and `<dd>` to create definition lists.
+Use `<dl>`, `<dt>`, and `<dd>` to create description lists.
 
 <quiet-card class="preview">
   <dl>
@@ -245,7 +292,7 @@ Use `<figure>` and `<figcaption>` to show self-contained content.
 
 ### Media
 
-Use `<img>` and `<iframe>` to show images and embedded media.
+Use `<img>` and `<iframe>` to show images and embedded media. The default aspect ratio of `<iframe>` elements is `9/6`, but feel free to adjust this value using the [`aspect-ratio`](https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio) property.
 
 <quiet-card class="preview">
   <img src="https://images.unsplash.com/photo-1513977055326-8ae6272d90a7?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="A kitten lays on the bed with her head upside down">
@@ -305,7 +352,7 @@ Use the `<button>` element to create a button. Add the `primary`, `destructive`,
   </div>
 </quiet-card>
 
-Use the `xs`, `sm`, `md`, `lg`, or `xl` class to change the input's size.
+Use the `xs`, `sm`, `md`, `lg`, or `xl` class to change the button's size.
 
 <quiet-card class="preview">
   <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
@@ -317,7 +364,7 @@ Use the `xs`, `sm`, `md`, `lg`, or `xl` class to change the input's size.
   </div>
 </quiet-card>
 
-Slot in an icon before or after the label, as desired.
+Add an icon before or after the label, if desired.
 
 <quiet-card class="preview">
   <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
@@ -329,7 +376,7 @@ Slot in an icon before or after the label, as desired.
 
 ### Form controls
 
-For consistency, native form controls are styled to look similar to Quiet form controls. Add the `xs`, `sm`, `md`, `lg`, or `xl` class to `<input>`, `<select>`, and `<textarea>` elements to change their size.
+For consistency, most native form controls are styled to look similar to Quiet form controls. Add the `xs`, `sm`, `md`, `lg`, or `xl` class to `<input>`, `<select>`, and `<textarea>` elements to change their size.
 
 <quiet-card class="preview preview-col">
   <div>
@@ -361,7 +408,7 @@ Use `class="filled"` to make them appear filled.
   <input class="filled" type="text" placeholder="Filled">
 </quiet-card>
 
-Numerous input types are supported via `<input type="...">`.
+Various input types are supported via `<input type="...">`, `<select>`, and `<textarea>`.
 
 <quiet-card class="preview preview-col">
   <input type="color" placeholder="Color" value="#787acf">
@@ -369,18 +416,13 @@ Numerous input types are supported via `<input type="...">`.
   <input type="time" placeholder="Time" value="12:00:00">
   <input type="number" placeholder="Number" value="42" inputmode="numeric">
   <input type="password" placeholder="Password" value="hunter2">
-</quiet-card>
-
-Create other types of form controls using `<select>`, `<textarea>`, `<input type="range">`, `<input type="radio">`, `<input type="checkbox">`, and `<button>` elements.
-
-<quiet-card class="preview preview-col">
+  <input type="range">
   <select name="size" label="Select a size">
     <option value="sm">Small</option>
     <option value="md" selected>Medium</option>
     <option value="lg">Large</option>
   </select>
   <textarea placeholder="Tell us something about yourself" rows="3"></textarea>
-  <input type="range">
   <div>
     <label><input type="radio" name="a" value="1" checked> Option 1</label>
     <label><input type="radio" name="a" value="2"> Option 2</label>
@@ -390,7 +432,7 @@ Create other types of form controls using `<select>`, `<textarea>`, `<input type
     <label><input type="checkbox" checked> Feature A</label>
     <label><input type="checkbox"> Feature B</label>
     <label><input type="checkbox"> Feature C</label>
-  </div>
+  </div>  
 </quiet-card>
 
 ### Dialogs

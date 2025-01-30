@@ -16,8 +16,8 @@ import styles from './card.styles.js';
  *
  * @slot - Content to place in the dialog's body.
  * @slot header - Content to place in the dialog's header.
- * @slot actions - Slot in one or more text buttons to add actions to the card's header. Only available when the header
- *  is enabled.
+ * @slot actions - Slot in one or more text buttons to add actions to the card's header (vertical) or footer
+ *  (horizontal). Only available when the respective header/footer is enabled.
  * @slot footer - Content to place in the dialog's footer.
  *
  * @cssproperty [--spacing=1.5rem] - The spacing to use throughout the card.
@@ -43,7 +43,9 @@ export class QuietCard extends QuietElement {
         html`
           <header id="header" part="header">
             <slot name="header"></slot>
-            <slot id="actions" name="actions"></slot>
+            ${this.orientation === 'vertical'
+              ? html` <div id="actions" part="actions"><slot name="actions"></slot></div> `
+              : ''}
           </header>
         `
       )}
@@ -52,7 +54,17 @@ export class QuietCard extends QuietElement {
         <slot></slot>
       </div>
 
-      ${this.whenSlotted('footer', html` <footer id="footer" part="footer"><slot name="footer"></slot></footer> `)}
+      ${this.whenSlotted(
+        'footer',
+        html`
+          <footer id="footer" part="footer">
+            <slot name="footer"></slot>
+          </footer>
+        `
+      )}
+      ${this.orientation === 'horizontal'
+        ? this.whenSlotted('actions', html` <div id="actions" part="actions"><slot name="actions"></slot></div> `)
+        : ''}
     `;
   }
 }

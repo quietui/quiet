@@ -30,7 +30,7 @@ Cards are really just styled containers. You can put almost anything in them.
 
 ### With header
 
-Place elements into the `header` slot to add content at the start of the card. Enabling the header also enables the `actions` slot, which is a good place to put relevant icon buttons.
+Place elements into the `header` slot to add content at the start of the card. Enabling the header in vertical cards also enables the `actions` slot, which is a good place to put relevant icon buttons.
 
 ```html {.example}
 <quiet-card style="max-width: 340px;">
@@ -77,17 +77,18 @@ Place an image or video into the `media` slot to add media at the beginning of t
 
 ### Horizontal cards
 
-Set the `orientation` attribute to `horizontal` to create a card with a horizontal, side-by-side layout. When using the `media` slot, be sure to set a width or maximum width on the image.
+Set the `orientation` attribute to `horizontal` to create a card with a horizontal, side-by-side layout. When using the `media` slot, be sure to set a width or maximum width on the image. Unlike vertical cards, horizontal cards can make use of the `actions` slot without the header enabled.
 
 ```html {.example}
 <quiet-card orientation="horizontal" id="card__orientation">
-  <img slot="media" 
-       src="https://plus.unsplash.com/premium_photo-1661676191997-0c0cece2a683?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-       alt="Two white kittens laying in a cozy basket">
+  <img
+    slot="media" 
+    src="https://plus.unsplash.com/premium_photo-1661676191997-0c0cece2a683?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    alt="Two white kittens laying in a cozy basket">
 
   When kittens sleep, they enter a world of peaceful dreams filled with playful adventures and soft purrs.
 
-  <quiet-button slot="footer" icon-label="Options" pill>
+  <quiet-button slot="actions" appearance="text" icon-label="More info" pill>
     <quiet-icon name="dots"></quiet-icon>
   </quiet-button>
 </quiet-card>

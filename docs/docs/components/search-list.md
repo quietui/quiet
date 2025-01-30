@@ -26,7 +26,7 @@ Search Lists provide real-time filtering of content as the user types, supportin
       <h4 class="name">Meowy McGee</h4>
       <div class="tagline">Freedom's just another word for nothing left to lose.</div>
     </div>
-    <quiet-button slot="footer" icon-label="Settings" appearance="text" pill>
+    <quiet-button slot="actions" icon-label="Settings" appearance="text" pill>
       <quiet-icon name="dots"></quiet-icon>
     </quiet-button>
   </quiet-card>
@@ -37,7 +37,7 @@ Search Lists provide real-time filtering of content as the user types, supportin
       <h4 class="name">Wonder Whiskers</h4>
       <div class="tagline">Living my best nine lives, one nap at a time.</div>
     </div>
-    <quiet-button slot="footer" icon-label="Settings" appearance="text" pill>
+    <quiet-button slot="actions" icon-label="Settings" appearance="text" pill>
       <quiet-icon name="dots"></quiet-icon>
     </quiet-button>
   </quiet-card>
@@ -48,7 +48,7 @@ Search Lists provide real-time filtering of content as the user types, supportin
       <h4 class="name">Maine Attraction</h4>
       <div class="tagline">Big fluff, bigger personality.</div>
     </div>
-    <quiet-button slot="footer" icon-label="Settings" appearance="text" pill>
+    <quiet-button slot="actions" icon-label="Settings" appearance="text" pill>
       <quiet-icon name="dots"></quiet-icon>
     </quiet-button>
   </quiet-card>
@@ -59,7 +59,7 @@ Search Lists provide real-time filtering of content as the user types, supportin
       <h4 class="name">Sir Pounce-a-lot</h4>
       <div class="tagline">Professional sunbeam chaser and nap enthusiast.</div>
     </div>
-    <quiet-button slot="footer" icon-label="Settings" appearance="text" pill>
+    <quiet-button slot="actions" icon-label="Settings" appearance="text" pill>
       <quiet-icon name="dots"></quiet-icon>
     </quiet-button>
   </quiet-card>  

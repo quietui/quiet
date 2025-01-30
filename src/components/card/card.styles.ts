@@ -73,7 +73,15 @@ export default css`
   #actions {
     display: flex;
     flex-wrap: wrap;
+  }
+
+  :host([orientation='vertical']) #actions {
     margin-inline-start: auto;
+  }
+
+  :host([orientation='horizontal']) #actions {
+    align-items: center;
+    padding: var(--spacing);
   }
 
   /* Body */

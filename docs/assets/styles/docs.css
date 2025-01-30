@@ -371,6 +371,7 @@ html:not(.quiet-dark) .only-dark {
   top: var(--docs-header-height);
   align-self: start;
   height: calc(100dvh - var(--docs-header-height));
+  -webkit-text-size-adjust: 100%; /* prevent mobile Safari from showing larger text sometimes*/
 
   /* Bump the padding so focus rings and dots don't get clipped, then transform is back so it's visually aligned */
   padding-inline-start: calc(var(--quiet-focus-width) + var(--quiet-focus-offset) + 0.25rem);

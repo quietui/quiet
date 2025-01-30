@@ -421,6 +421,10 @@
     text-align: start;
   }
 
+  table.striped tbody tr:nth-child(2n) {
+    background-color: color-mix(in oklab, var(--quiet-neutral-fill-softer), transparent 50%);
+  }
+
   /* Form controls */
   input,
   button,

@@ -67,7 +67,7 @@
 
     &:hover {
       @media (hover: hover) {
-        background: none !important;
+        background: none;
       }
     }
 

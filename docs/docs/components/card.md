@@ -95,15 +95,15 @@ Set the `orientation` attribute to `horizontal` to create a card with a horizont
 <style>
   quiet-card#card__orientation {
     container-type: inline-size;
-  }
 
-  img[slot="media"] {
-    max-width: 180px;
-  }
-
-  @container (max-width: 500px) {
     img[slot="media"] {
-      max-width: 100px;
+      max-width: 180px;
+    }
+
+    @container (max-width: 500px) {
+      img[slot="media"] {
+        max-width: 100px;
+      }
     }
   }
 </style>

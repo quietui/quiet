@@ -308,7 +308,7 @@ Use the `<button>` element to create a button. Add the `primary`, `destructive`,
 Use the `xs`, `sm`, `md`, `lg`, or `xl` class to change the input's size.
 
 <quiet-card class="preview">
-  <div style="display: flex; gap: 0.5rem; align-items: center;">
+  <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
     <button type="button" class="xs">xs</button>
     <button type="button" class="sm">sm</button>
     <button type="button" class="md">md</button>
@@ -320,7 +320,7 @@ Use the `xs`, `sm`, `md`, `lg`, or `xl` class to change the input's size.
 Slot in an icon before or after the label, as desired.
 
 <quiet-card class="preview">
-  <div style="display: flex; gap: 0.5rem; align-items: center;">
+  <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
     <button type="button"><quiet-icon name="settings"></quiet-icon> Settings</button>
     <button type="button"><quiet-icon name="heart"></quiet-icon> Favorite</button>
     <button type="button"><quiet-icon name="link"></quiet-icon> Open <quiet-icon name="external-link"></quiet-icon></button>
@@ -428,7 +428,7 @@ Restyle ships with a handful of helpful utility classes. Use `class="..."` to ap
 - `visually-hidden` - Use when an element must be accessible to assistive technologies like screen readers but should remain hidden in other circumstances.
 - `visually-hidden-focusable` - The same as `visually-hidden`, but it will show when the element or any of its children receive focus. Useful for things like "skip to content" links.
 - `visually-hidden-label` - Apply this to any Quiet form control that has a `label` part to visually hide the label.
-- `visually-hidden-description` -  - Apply this to any Quiet form control that has a `description` part to visually hide the description.
+- `visually-hidden-description` - Apply this to any Quiet form control that has a `description` part to visually hide the description.
 
 <style>
   .preview {

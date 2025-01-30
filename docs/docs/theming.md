@@ -516,7 +516,7 @@ Always scope design token overrides to the `:root` node (i.e. `<html>` element),
 
 The following design tokens are used to style themes and components consistently.
 
-<div class="table-scroll table-theme" tabindex="0">
+<quiet-scroller>
 
 | Custom property | Description |
 | --------------- | ----------- |
@@ -556,13 +556,13 @@ The following design tokens are used to style themes and components consistently
 | `--quiet-inset-shadow-loud` | A strong inset shadow, for prominent depression effects. |
 | `--quiet-inset-shadow-louder` | The strongest inset shadow, for maximum depression effects. |
 
-</div>
+</quiet-scroller>
 
 #### Form control tokens
 
 The following design tokens are used to style form controls consistently.
 
-<div class="table-scroll table-theme" tabindex="0">
+<quiet-scroller>
 
 | Custom property | Description |
 | --------------- | ----------- |
@@ -580,7 +580,7 @@ The following design tokens are used to style form controls consistently.
 | `--quiet-form-control-placeholder-color` | The color of placeholder text |
 | `--quiet-button-active-offset` | The amount of vertical shift to apply to buttons when they're pressed. |
 
-</div>
+</quiet-scroller>
 
 ## Creating a new theme
 
@@ -662,7 +662,11 @@ If you just want to change a few things here and there, it's usually better to l
     }
   }
 
-  .table-scroll td:nth-child(2) {
+  quiet-scroller td:nth-child(1) {
+    white-space: nowrap;
+  }
+
+  quiet-scroller td:nth-child(2) {
     min-width: 40ch;
   }
 </style>

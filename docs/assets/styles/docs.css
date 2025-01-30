@@ -1091,16 +1091,6 @@ td.table-reflects {
   }
 }
 
-.table-scroll {
-  max-width: 100%;
-  overflow-x: auto;
-}
-
-.table-theme tr > th:first-child code,
-.table-theme tr > td:first-child code {
-  white-space: nowrap;
-}
-
 /* Component pages */
 .component-summary {
   font-size: 1.25rem;

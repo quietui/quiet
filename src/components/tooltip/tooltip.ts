@@ -2,6 +2,7 @@ import { arrow, autoUpdate, computePosition, flip, offset, shift } from '@floati
 import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
 import { QuietClosedEvent, QuietCloseEvent, QuietOpenedEvent, QuietOpenEvent } from '../../events/open-close.js';
 import hostStyles from '../../styles/host.styles.js';
 import { animateWithClass } from '../../utilities/animate.js';
@@ -57,10 +58,11 @@ export class QuietTooltip extends QuietElement {
    */
   @property({ reflect: true }) for: string;
 
-  /**
-   * Shows or hides the tooltip.
-   */
+  /** Shows or hides the tooltip. */
   @property({ type: Boolean, reflect: true }) open = false;
+
+  /** The type of tooltip to render. */
+  @property({ reflect: true }) variant: 'default' | 'inverted' = 'default';
 
   /**
    * The placement of the tooltip in reference to the anchor. The menu will shift to a more optimal location if the
@@ -400,7 +402,12 @@ export class QuietTooltip extends QuietElement {
 
   render() {
     return html`
-      <div id="tooltip" part="tooltip" popover="manual">
+      <div
+        id="tooltip"
+        part="tooltip"
+        class=${classMap({ default: this.variant === 'default', inverted: this.variant === 'inverted' })}
+        popover="manual"
+      >
         <div id="content" part="content">
           <slot></slot>
         </div>

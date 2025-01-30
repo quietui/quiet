@@ -3,7 +3,7 @@ title: Icon
 layout: component
 ---
 
-Quiet includes thousands of beautifully designed SVG icons from the popular [Tabler Icons](https://tabler.io/icons) library. In addition, it's flexible enough that you can [replace](#the-default-icon-library) or [supplement](#registering-icon-libraries) the default icon set.
+Quiet includes thousands of beautifully designed SVG icons from the popular [Tabler Icons](https://tabler.io/icons) library. In addition, it's flexible enough that you can [replace](#changing-the-default-icon-library) or [supplement](#registering-icon-libraries) the default icon set.
 
 ```html {.example}
 <div style="font-size: 1.5rem;">
@@ -34,7 +34,7 @@ Quiet includes the popular [Tabler Icons](https://tabler.io/icons) icon library 
 ```
 
 :::info
-For a list of all available icons, please refer to the [Tabler Icons](https://tabler.io/icons). Be careful to copy the _name_ of the icon, e.g. `arrow-up`, and not the SVG code!
+For a list of all available icons, please refer to the [Tabler Icons](https://tabler.io/icons) website. Be careful to copy the _name_ of the icon, e.g. `arrow-up`, and not the SVG code!
 :::
 
 ### Setting the icon family

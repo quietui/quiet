@@ -112,7 +112,7 @@ I prioritize bug fixes that affect sponsors first. I try to submit fixes quickly
 :::
 
 :::details Can I cancel my sponsorship? {.faq}
-Yes. You can cancel your sponsorship any time, but you will lose access to the sponsors-only benefits when the sponsorship period expires.
+Yes. You can cancel your sponsorship any time, but you will lose access to all sponsors-only benefits when the sponsorship period expires.
 :::
 
 :::details How can I report a bug? {.faq}

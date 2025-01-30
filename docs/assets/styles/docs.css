@@ -803,7 +803,7 @@ quiet-callout {
 
   &[variant='default'] {
     code {
-      background-color: color-mix(in oklab, var(--quiet-neutral-fill-soft), transparent 25%);
+      background-color: color-mix(in oklab, var(--quiet-neutral-fill-soft), transparent 50%);
     }
 
     kbd {
@@ -814,7 +814,7 @@ quiet-callout {
 
   &[variant='primary'] {
     code {
-      background-color: color-mix(in oklab, var(--quiet-primary-fill-soft), transparent 25%);
+      background-color: color-mix(in oklab, var(--quiet-primary-fill-soft), transparent 50%);
     }
 
     kbd {
@@ -825,7 +825,7 @@ quiet-callout {
 
   &[variant='constructive'] {
     code {
-      background-color: color-mix(in oklab, var(--quiet-constructive-fill-soft), transparent 25%);
+      background-color: color-mix(in oklab, var(--quiet-constructive-fill-soft), transparent 50%);
     }
 
     kbd {
@@ -836,7 +836,7 @@ quiet-callout {
 
   &[variant='destructive'] {
     code {
-      background-color: color-mix(in oklab, var(--quiet-destructive-fill-soft), transparent 25%);
+      background-color: color-mix(in oklab, var(--quiet-destructive-fill-soft), transparent 50%);
     }
 
     kbd {

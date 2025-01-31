@@ -58,7 +58,7 @@ Keep it short! The content within inline spoilers won't wrap.
 
 The default spoiler effect is `blur`, which blurs the content but still leaves a visual hint. To completely cover the spoiler, use the `solid` effect. To add noise, use the `noise` effect.
 
-```html {.example .flex-column}
+```html {.example .flex-col}
 <quiet-spoiler effect="solid">
   Spoiling a good book, even one about something as universally beloved as kittens, robs you of the journey the author 
   intended. Imagine unfolding a mystery only to have the solution handed to you at the start; the delight of discovery, 
@@ -128,7 +128,7 @@ To persist the spoiler once shown, add the `persist` attribute. This will remove
 
 Set the `name` attribute to the same value to group spoilers. Only one spoiler in a group will be shown at a time.
 
-```html {.example .flex-column}
+```html {.example .flex-col}
 <quiet-spoiler name="lorem" label="Section 1">
   Kittens, with their boundless energy, are the epitome of play. They chase after anything that moves, honing their hunting skills through endless games. Their playful tumbles not only entertain but also strengthen bonds with their human families.
 </quiet-spoiler>

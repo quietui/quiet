@@ -41,7 +41,7 @@ Only slotted text nodes will be shown. All other [nodes types](https://developer
 
 By default, fit text has `block` styling so it stretches to fit its containing element. You can set a width or max-width on the component (or a parent element) if you need to constrain it.
 
-```html {.example .flex-column}
+```html {.example .flex-col}
 <quiet-fit-text style="max-width: 200px; border: dashed 2px var(--quiet-neutral-stroke-soft);">
   Be Quiet
 </quiet-fit-text>
@@ -51,7 +51,7 @@ By default, fit text has `block` styling so it stretches to fit its containing e
 
 Text styles are inherited, so you can set text-related properties on the component itself or an ancestor element.
 
-```html {.example .flex-column}
+```html {.example .flex-col}
 <div style="border: dashed 2px var(--quiet-neutral-stroke-soft);">
   <quiet-fit-text style="font-family: Georgia, serif;">
     The cute gray kitten jumped into the flower pot

@@ -21,7 +21,7 @@ Add the `checked` attribute to check the switch initially.
 
 Use the `on` and `off` slots to show inner labels or icons that align with the switch's checked state. Space is very limited, so make sure the labels are short enough to fit.
 
-```html {.example .flex-column}
+```html {.example .flex-col}
 <quiet-switch name="mode" value="kitten">
   Kitten mode
   <span slot="on-label">on</span>
@@ -39,7 +39,7 @@ Use the `on` and `off` slots to show inner labels or icons that align with the s
 
 Use the `size` attribute to change the text field's size.
 
-```html {.example .flex-column}
+```html {.example .flex-col}
 <quiet-switch size="xs">Extra small</quiet-switch>
 <quiet-switch size="sm">Small</quiet-switch>
 <quiet-switch size="md">Medium</quiet-switch>
@@ -51,7 +51,7 @@ Use the `size` attribute to change the text field's size.
 
 Use the `disabled` attribute to disable the switch.
 
-```html {.example .flex-column}
+```html {.example .flex-col}
 <quiet-switch disabled>Unchecked and disabled</quiet-switch><br>
 <quiet-switch checked disabled>Checked and disabled</quiet-switch>
 ```

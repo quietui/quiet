@@ -4,7 +4,7 @@ export default css`
   :host {
     display: inline-block;
     stroke-width: 1.5px;
-    width: auto;
+    width: 1em;
     height: 1em;
   }
 

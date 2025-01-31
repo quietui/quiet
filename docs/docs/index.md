@@ -83,6 +83,24 @@ html.quiet-reduce-fouce {
 
 After initial discovery or two seconds, whichever comes first, the autoloader will remove the class for you, eliminating most FOUCE. The two second timeout ensures users don't see a blank page even when networks are slow or have problems.
 
+:::details Hotwire: Turbo users
+
+Many multi-page applications (MPAs) use [Hotwire: Turbo](https://turbo.hotwired.dev/) to provide a SPA-like experience for users. When visiting links, Turbo intercepts the click, fetches the new page, and updates metadata and content without redirecting, resulting in a buttery smooth transition when going from one page to another.
+
+However, when you use Turbo with Quiet's autoloader, you may see FOUCE when visiting new pages for the first time. This is because Turbo renders the new page and _then_ the autoloader fetches unregistered components.
+
+To solve that, call the `preventTurboFouce()` function in your app. The function adds a listener that hooks into Turbo's `turbo:before-render` event and registers all components before the new page is rendered, effectively eliminating FOUCE for page-to-page navigation.
+
+The function comes with a configurable timeout to prevent issues with errors or slow networks. For most use cases, the default value of 2000ms is optimal.
+
+```js
+import { preventTurboFouce } from '/dist/quiet.js';
+
+preventTurboFouce();
+```
+
+:::
+
 ---
 
 ## Manually importing <quiet-badge variant="destructive" data-no-outline data-no-anchor>Advanced</quiet-badge>

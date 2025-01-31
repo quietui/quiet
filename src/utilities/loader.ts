@@ -99,3 +99,32 @@ export async function discoverElements(root: Element | ShadowRoot) {
   //
   document.dispatchEvent(new CustomEvent('quiet-discovery-complete', { detail: { registered, unknown } }));
 }
+
+/**
+ * Many multi-page applications (MPAs) use Hotwire: Turbo to provide a SPA-like experience for users. When visiting
+ * links, Turbo intercepts the click, fetches the new page, and updates metadata and content without redirecting,
+ * resulting in a buttery smooth transition when going from one page to another.
+ *
+ * However, when you use Turbo with Quiet's autoloader, you may see FOUCE when visiting new pages for the first time.
+ * This is because Turbo renders the new page and _then_ the autoloader fetches unregistered components.
+ *
+ * To solve that, this function adds a listener that hooks into Turbo's `turbo:before-render` event and registers all
+ * components before the new page is rendered, effectively eliminating FOUCE for page-to-page navigation.
+ *
+ * The function comes with a configurable timeout to prevent issues with errors or slow networks. For most use cases,
+ * the default value of 2000ms is optimal.
+ */
+export function preventTurboFouce(timeout = 2000) {
+  document.addEventListener('turbo:before-render', async (event: CustomEvent) => {
+    const newBody = event.detail.newBody;
+
+    event.preventDefault();
+
+    try {
+      // Wait until all elements are registered or two seconds, whichever comes first
+      await Promise.race([discoverElements(newBody), new Promise(resolve => setTimeout(resolve, timeout))]);
+    } finally {
+      event.detail.resume();
+    }
+  });
+}

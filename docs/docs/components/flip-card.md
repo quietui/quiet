@@ -234,7 +234,10 @@ Use the `orientation` attribute to set the flip animation to `horizontal` (defau
 
     quiet-card[slot="back"] {
       &::part(body) {
-        margin: auto 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
       }
 
       quiet-button {
@@ -374,7 +377,6 @@ The height of a flip card is the height of its tallest side. If you're using [ca
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 100%;
     }
   }
 </style>

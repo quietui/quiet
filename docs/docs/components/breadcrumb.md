@@ -195,13 +195,13 @@ Use the `start` and `end` slots to add icons and other presentational elements t
 
 ### Icon-only items
 
-To create icon-only breadcrumb item, slot in an icon and a visually hidden label for assistive devices. If you're using [Quiet Restyle](/docs/restyle), you can use the `visually-hidden` utility class to hide the label.
+To create icon-only breadcrumb item, slot in an icon and a visually hidden label for assistive devices. If you're using [Quiet Restyle](/docs/restyle), you can use the `quiet-vh` utility class to visually hide the label.
 
 ```html {.example}
 <quiet-breadcrumb>
   <quiet-breadcrumb-item href="https://example.com/">
     <quiet-icon slot="start" name="home"></quiet-icon>
-    <span class="visually-hidden">Home</span>
+    <span class="quiet-vh">Home</span>
   </quiet-breadcrumb-item>
 
   <quiet-breadcrumb-item href="https://example.com/products/">

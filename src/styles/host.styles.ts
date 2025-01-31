@@ -16,7 +16,7 @@ export default css`
     display: none !important;
   }
 
-  .visually-hidden {
+  .vh {
     position: absolute;
     width: 1px;
     height: 1px;

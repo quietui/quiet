@@ -348,11 +348,11 @@ export class QuietPasscode extends QuietFormControlElement {
     let charPosition = 0;
 
     return html`
-      <label id="label" part="label" for="text-box" class=${classMap({ 'visually-hidden': !hasLabel })}>
+      <label id="label" part="label" for="text-box" class=${classMap({ vh: !hasLabel })}>
         <slot name="label">${this.label}</slot>
       </label>
 
-      <div id="description" part="description" class=${classMap({ 'visually-hidden': !hasDescription })}>
+      <div id="description" part="description" class=${classMap({ vh: !hasDescription })}>
         <slot name="description">${this.description}</slot>
       </div>
 

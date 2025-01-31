@@ -150,11 +150,11 @@ Use the `dropzone` slot to customize what appears inside the dropzone.
 
 ### Button-only file inputs
 
-Button-only file inputs aren't supported, but you can achieve this pattern with a button, a native `<input type="file">`, and a bit of JavaScript. If you're using [Quiet Restyle](/docs/restyle), you can use the `visually-hidden` utility class to hide the input.
+Button-only file inputs aren't supported, but you can achieve this pattern with a button, a native `<input type="file">`, and a bit of JavaScript. If you're using [Quiet Restyle](/docs/restyle), you can use the `quiet-vh` utility class to hide the input.
 
 ```html {.example}
 <quiet-button id="file-input__button-only">Select files</quiet-button>
-<input class="visually-hidden" type="file" name="file">
+<input class="quiet-vh" type="file" name="file">
 
 <script>
   const button = document.getElementById('file-input__button-only');

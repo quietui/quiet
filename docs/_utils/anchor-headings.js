@@ -66,11 +66,11 @@ export function anchorHeadingsPlugin(options = {}) {
         // Create the anchor
         const anchor = parse(`
           <a href="#${encodeURIComponent(id)}">
-            <span class="visually-hidden"></span>
+            <span class="quiet-vh"></span>
             <span aria-hidden="true">#</span>
           </a>
         `);
-        anchor.querySelector('.visually-hidden').textContent = options.anchorLabel;
+        anchor.querySelector('.quiet-vh').textContent = options.anchorLabel;
 
         // Update the heading
         heading.setAttribute('id', id);

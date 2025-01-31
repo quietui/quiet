@@ -236,7 +236,7 @@ export class QuietSearchList extends QuietElement {
         @slotchange=${this.handleControllerSlotChange}
       ></slot>
 
-      <div id="results" class="visually-hidden" role="region" aria-live="polite">${this.resultsMessage}</div>
+      <div id="results" class="vh" role="region" aria-live="polite">${this.resultsMessage}</div>
 
       <div id="items" part="items">
         <slot @slotchange=${this.handleDefaultSlotChange} ?hidden=${!this.isEmpty}></slot>

@@ -476,13 +476,13 @@ export class QuietSlider extends QuietFormControlElement {
         id="label"
         part="label"
         for="text-box"
-        class=${classMap({ 'visually-hidden': !hasLabel })}
+        class=${classMap({ vh: !hasLabel })}
         @pointerdown=${this.handleLabelPointerDown}
       >
         <slot name="label">${this.label}</slot>
       </label>
 
-      <div id="description" part="description" class=${classMap({ 'visually-hidden': !hasDescription })}>
+      <div id="description" part="description" class=${classMap({ vh: !hasDescription })}>
         <slot name="description">${this.description}</slot>
       </div>
 

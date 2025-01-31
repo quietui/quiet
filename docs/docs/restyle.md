@@ -194,10 +194,10 @@ Use `<table>` to display tabular data.
   </table>
 </quiet-card>
 
-Add `class="striped"` to add stripes to alternating rows.
+Add `class="quiet-striped"` to add stripes to alternating rows.
 
 <quiet-card class="preview">
-  <table class="striped">
+  <table class="quiet-striped">
     <thead>
       <tr>
         <th>First column</th>
@@ -341,26 +341,26 @@ Use `<fieldset>` and `<legend>` to group and label form controls.
 
 ### Buttons
 
-Use the `<button>` element to create a button. Add the `primary`, `destructive`, or `inverted` class to change its variant. 
+Use the `<button>` element to create a button. Add the `quiet-primary`, `quiet-destructive`, or `quiet-inverted` class to change its variant. 
 
 <quiet-card class="preview">
   <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
     <button type="button">Default</button>
-    <button type="button" class="primary">Primary</button>
-    <button type="button" class="destructive">Destructive</button>
-    <button type="button" class="inverted">Inverted</button>
+    <button type="button" class="quiet-primary">Primary</button>
+    <button type="button" class="quiet-destructive">Destructive</button>
+    <button type="button" class="quiet-inverted">Inverted</button>
   </div>
 </quiet-card>
 
-Use the `xs`, `sm`, `md`, `lg`, or `xl` class to change the button's size.
+Use the `quiet-xs`, `quiet-sm`, `quiet-md`, `quiet-lg`, and `quiet-xl` classes to change the button's size.
 
 <quiet-card class="preview">
   <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
-    <button type="button" class="xs">xs</button>
-    <button type="button" class="sm">sm</button>
-    <button type="button" class="md">md</button>
-    <button type="button" class="lg">lg</button>
-    <button type="button" class="xl">xl</button>
+    <button type="button" class="quiet-xs">xs</button>
+    <button type="button" class="quiet-sm">sm</button>
+    <button type="button" class="quiet-md">md</button>
+    <button type="button" class="quiet-lg">lg</button>
+    <button type="button" class="quiet-xl">xl</button>
   </div>
 </quiet-card>
 
@@ -376,36 +376,36 @@ Add an icon before or after the label, if desired.
 
 ### Form controls
 
-For consistency, most native form controls are styled to look similar to Quiet form controls. Add the `xs`, `sm`, `md`, `lg`, or `xl` class to `<input>`, `<select>`, and `<textarea>` elements to change their size.
+For consistency, most native form controls are styled to look similar to Quiet form controls. Add the `quiet-xs`, `quiet-sm`, `quiet-md`, `quiet-lg`, and `quiet-xl` classes to `<input>`, `<select>`, and `<textarea>` elements to change their size.
 
 <quiet-card class="preview preview-col">
   <div>
-    <label class="xs" for="xs-input">Extra small</label>
-    <input class="xs" id="xs-input" type="text" placeholder="xs">
+    <label class="quiet-xs" for="xs-input">Extra small</label>
+    <input class="quiet-xs" id="xs-input" type="text" placeholder="xs">
   </div>
   <div>
-    <label class="sm" for="sm-input">Small</label>
-    <input class="sm" id="sm-input" type="text" placeholder="sm">
+    <label class="quiet-sm" for="sm-input">Small</label>
+    <input class="quiet-sm" id="sm-input" type="text" placeholder="sm">
   </div>
   <div>
-    <label class="md" for="md-input">Medium</label>
-    <input class="md" id="md-input" type="text" placeholder="md">
+    <label class="quiet-md" for="md-input">Medium</label>
+    <input class="quiet-md" id="md-input" type="text" placeholder="md">
   </div>
   <div>
-    <label class="lg" for="lg-input">Large</label>
-    <input class="lg" id="lg-input" type="text" placeholder="lg">
+    <label class="quiet-lg" for="lg-input">Large</label>
+    <input class="quiet-lg" id="lg-input" type="text" placeholder="lg">
   </div>
   <div>
-    <label class="xl" for="xl-input">Extra large</label>
-    <input class="xl" id="xl-input" type="text" placeholder="xl">
+    <label class="quiet-xl" for="xl-input">Extra large</label>
+    <input class="quiet-xl" id="xl-input" type="text" placeholder="xl">
   </div>
 </quiet-card>
 
-Use `class="filled"` to make them appear filled.
+Use `class="quiet-filled"` to make them appear filled.
 
 <quiet-card class="preview preview-col">
   <input type="text" placeholder="Normal">
-  <input class="filled" type="text" placeholder="Filled">
+  <input class="quiet-filled" type="text" placeholder="Filled">
 </quiet-card>
 
 Various input types are supported via `<input type="...">`, `<select>`, and `<textarea>`.
@@ -467,10 +467,10 @@ Use the native `<dialog>` to show a dialog.
 
 Restyle ships with a handful of helpful utility classes. Use `class="..."` to apply them to any HTML element.
 
-- `visually-hidden` - Use when an element must be accessible to assistive technologies like screen readers but should remain hidden in other circumstances.
-- `visually-hidden-focusable` - The same as `visually-hidden`, but it will show when the element or any of its children receive focus. Useful for things like "skip to content" links.
-- `visually-hidden-label` - Apply this to any Quiet form control that has a `label` part to visually hide the label.
-- `visually-hidden-description` - Apply this to any Quiet form control that has a `description` part to visually hide the description.
+- `quiet-vh` (visually hidden) - Use when an element must be accessible to assistive technologies like screen readers but should remain hidden in other circumstances.
+- `quiet-vh-focusable` - The same as `quiet-vh`, but it will show when the element or any of its children receive focus. Useful for things like "skip to content" links.
+- `quiet-vh-label` - Apply this to any Quiet form control that has a `label` part to visually hide the label.
+- `quiet-vh-description` - Apply this to any Quiet form control that has a `description` part to visually hide the description.
 
 <style>
   .preview {

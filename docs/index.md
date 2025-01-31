@@ -5,7 +5,7 @@ layout: splash
 ---
 
 <div class="splash">
-<h1 class="visually-hidden">Quiet UI</h1>
+<h1 class="quiet-vh">Quiet UI</h1>
 
 {% include 'splash-image.njk' %}
 

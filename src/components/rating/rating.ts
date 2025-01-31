@@ -415,14 +415,14 @@ export class QuietRating extends QuietFormControlElement {
       <label
         id="label"
         part="label"
-        class=${classMap({ 'visually-hidden': !hasLabel })}
+        class=${classMap({ vh: !hasLabel })}
         for="rating"
         @pointerdown=${this.handleLabelPointerDown}
       >
         <slot name="label">${this.label}</slot>
       </label>
 
-      <div id="description" part="description" class=${classMap({ 'visually-hidden': !hasDescription })}>
+      <div id="description" part="description" class=${classMap({ vh: !hasDescription })}>
         <slot name="description">${this.description}</slot>
       </div>
 

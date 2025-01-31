@@ -194,7 +194,12 @@ export class QuietButton extends QuietFormControlElement {
       // More info: https://github.com/WICG/webcomponents/issues/814
       //
       const submitter = document.createElement('button');
-      submitter.classList.add('visually-hidden');
+      submitter.style.position = 'absolute';
+      submitter.style.width = '1px';
+      submitter.style.height = '1px';
+      submitter.style.overflow = 'hidden';
+      submitter.style.whiteSpace = 'nowrap';
+      submitter.style.clipPath = 'inset(50%)';
       submitter.type = 'submit';
       if (this.name) submitter.name = this.name;
       if (this.value) submitter.value = this.value;

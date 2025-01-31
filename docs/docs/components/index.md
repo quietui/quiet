@@ -11,7 +11,7 @@ layout: docs
     pill 
     autofocus 
     clearable
-    class="visually-hidden-description"
+    class="quiet-vh-description"
   >
     <quiet-icon slot="start" name="search"></quiet-icon>
   </quiet-text-field>

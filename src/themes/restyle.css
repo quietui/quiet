@@ -928,6 +928,10 @@
       font-size: var(--quiet-form-control-font-size-xl);
     }
 
+    &.quiet-pill {
+      border-radius: 9999px;
+    }
+
     /* Default buttons */
     &:not(.quiet-primary, .quiet-destructive, .quiet-inverted) {
       background-color: var(--quiet-neutral-fill-softer);

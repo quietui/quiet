@@ -397,6 +397,17 @@ Add an icon before or after the label, if desired.
   </div>
 </quiet-card>
 
+Use the `quiet-pill` class to make the button pill appear like pills.
+
+<quiet-card class="preview">
+  <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
+    <button type="button" class="quiet-pill">Default</button>
+    <button type="button" class="quiet-pill quiet-primary">Primary</button>
+    <button type="button" class="quiet-pill quiet-destructive">Destructive</button>
+    <button type="button" class="quiet-pill quiet-inverted">Inverted</button>
+  </div>
+</quiet-card>
+
 ### Form controls
 
 For consistency, most native form controls are styled to look similar to Quiet form controls. Add the `quiet-xs`, `quiet-sm`, `quiet-md`, `quiet-lg`, and `quiet-xl` classes to `<input>`, `<select>`, and `<textarea>` elements to change their size.
@@ -424,37 +435,6 @@ For consistency, most native form controls are styled to look similar to Quiet f
   </div>
 </quiet-card>
 
-Use `class="quiet-filled"` to make them appear filled.
-
-<quiet-card class="preview preview-col">
-  <input class="quiet-filled" type="text" placeholder="Filled">
-  <select class="quiet-filled" name="pet" label="Pick one">
-    <option value="cats" selected>Cats</option>
-    <option value="cats">More cats</option>
-    <option value="cats">Even more cats</option>
-  </select>
-  <textarea class="quiet-filled" type="text" placeholder="Filled" rows="3"></textarea>
-  <div>
-    <label><input class="quiet-filled" type="checkbox" checked> Fill it up</label>
-    <label><input class="quiet-filled" type="checkbox"> Top it off</label>
-  </div>
-  <div>
-    <label><input class="quiet-filled" type="radio" name="b" checked> Fill it up</label>
-    <label><input class="quiet-filled" type="radio" name="b"> Top it off</label>
-  </div>
-</quiet-card>
-
-Use `class="quiet-pill"` to make inputs and select's appear rounded.
-
-<quiet-card class="preview preview-col">
-  <input class="quiet-pill" type="text" placeholder="Filled">
-  <select class="quiet-pill" name="pet" label="Pick one">
-    <option value="cats" selected>Cats</option>
-    <option value="cats">More cats</option>
-    <option value="cats">Even more cats</option>
-  </select>
-</quiet-card>
-
 Various input types are supported via `<input type="...">`, `<select>`, and `<textarea>`.
 
 <quiet-card class="preview preview-col">
@@ -480,6 +460,38 @@ Various input types are supported via `<input type="...">`, `<select>`, and `<te
     <label><input type="checkbox"> Feature B</label>
     <label><input type="checkbox"> Feature C</label>
   </div>  
+</quiet-card>
+
+
+Use `class="quiet-filled"` to make the following form controls appear filled.
+
+<quiet-card class="preview preview-col">
+  <input class="quiet-filled" type="text" placeholder="Filled">
+  <select class="quiet-filled" name="pet" label="Pick one">
+    <option value="cats" selected>Cats</option>
+    <option value="cats">More cats</option>
+    <option value="cats">Even more cats</option>
+  </select>
+  <textarea class="quiet-filled" type="text" placeholder="Filled" rows="3"></textarea>
+  <div>
+    <label><input class="quiet-filled" type="checkbox" checked> Fill it up</label>
+    <label><input class="quiet-filled" type="checkbox"> Top it off</label>
+  </div>
+  <div>
+    <label><input class="quiet-filled" type="radio" name="b" checked> Fill it up</label>
+    <label><input class="quiet-filled" type="radio" name="b"> Top it off</label>
+  </div>
+</quiet-card>
+
+Use `class="quiet-pill"` to make `<input>` and `<select>` appear pill-shaped.
+
+<quiet-card class="preview preview-col">
+  <input class="quiet-pill" type="text" placeholder="Filled">
+  <select class="quiet-pill" name="pet" label="Pick one">
+    <option value="cats" selected>Cats</option>
+    <option value="cats">More cats</option>
+    <option value="cats">Even more cats</option>
+  </select>
 </quiet-card>
 
 ### Fieldsets

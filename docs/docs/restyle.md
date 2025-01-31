@@ -22,13 +22,13 @@ To add Restyle to your app, add the following markup to the `<head>` of your doc
 
 Restyle uses [CSS layers](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer) to manage specificity. This means your custom styles will automatically take precedence over the library's styles without needing to use `!important` or increase selector specificity.
 
+The following sections show the native HTML elements that are supported in Restyle. Feel free to inspect the source to view the markup.
+
 :::info
 Restyle is just a starting point. Feel free to customize any of its styles in your own CSS by overriding the properties you want to change!
 :::
 
-## Supported elements
-
-The following section shows the native HTML elements that are supported in Restyle. Feel free to inspect the source to view the markup.
+## Typography & text flow
 
 ### Headings
 
@@ -149,6 +149,46 @@ export function thing(arg) {
 
 </quiet-card>
 
+### Description Lists
+
+Use `<dl>`, `<dt>`, and `<dd>` to create description lists.
+
+<quiet-card class="preview">
+  <dl>
+    <dt>First definition</dt>
+    <dd>Morbi tempus iaculis urna id volutpat lacus. Tincidunt eget nullam non nisi. Viverra mauris in aliquam sem fringilla ut.</dd>
+    <dt>Second definition</dt>
+    <dd>Vel quam elementum pulvinar etiam non quam lacus suspendisse. Nisl nisi scelerisque eu ultrices vitae auctor eu.</dd>
+    <dt>Third definition</dt>
+    <dd>Odio facilisis mauris sit amet massa vitae. Venenatis lectus magna fringilla urna porttitor rhoncus dolor. Eu ultrices vitae auctor eu augue ut.</dd>
+  </dl>
+</quiet-card>
+
+## Content containers & media
+
+### Figures
+
+Use `<figure>` and `<figcaption>` to show self-contained content.
+
+<quiet-card class="preview">
+  <figure>
+    <img src="https://images.unsplash.com/photo-1570018144715-43110363d70a?q=80&w=512&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Three gray kittens on a wood floor">
+    <figcaption>
+      Non curabitur gravida arcu ac tortor dignissim convallis. Aliquet lectus proin nibh nisl condimentum id. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed.
+    </figcaption>
+  </figure>
+</quiet-card>
+
+### Media
+
+Use `<img>` and `<iframe>` to show images and embedded media. Media uses `display: block` and spans the full width of its container, but you can override the width as needed. The default aspect ratio of `<iframe>` elements is `9/6`, but feel free to adjust this value using the [`aspect-ratio`](https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio) property.
+
+<quiet-card class="preview">
+  <img src="https://images.unsplash.com/photo-1513977055326-8ae6272d90a7?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="A kitten lays on the bed with her head upside down">
+  <br>
+  <iframe src="https://www.youtube.com/embed/ALGG6ptfLdc?si=03a9K9QigWi2A9Wt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</quiet-card>
+
 ### Tables
 
 Use `<table>` to display tabular data.
@@ -262,43 +302,35 @@ Use `<details>` and `<summary>` to show expandable content. Use the optional [`n
   </details>
 </quiet-card>
 
-### Description Lists
+### Dialogs
 
-Use `<dl>`, `<dt>`, and `<dd>` to create description lists.
-
-<quiet-card class="preview">
-  <dl>
-    <dt>First definition</dt>
-    <dd>Morbi tempus iaculis urna id volutpat lacus. Tincidunt eget nullam non nisi. Viverra mauris in aliquam sem fringilla ut.</dd>
-    <dt>Second definition</dt>
-    <dd>Vel quam elementum pulvinar etiam non quam lacus suspendisse. Nisl nisi scelerisque eu ultrices vitae auctor eu.</dd>
-    <dt>Third definition</dt>
-    <dd>Odio facilisis mauris sit amet massa vitae. Venenatis lectus magna fringilla urna porttitor rhoncus dolor. Eu ultrices vitae auctor eu augue ut.</dd>
-  </dl>
-</quiet-card>
-
-### Figures
-
-Use `<figure>` and `<figcaption>` to show self-contained content.
+Use the native `<dialog>` to show a dialog.
 
 <quiet-card class="preview">
-  <figure>
-    <img src="https://images.unsplash.com/photo-1570018144715-43110363d70a?q=80&w=512&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Three gray kittens on a wood floor">
-    <figcaption>
-      Non curabitur gravida arcu ac tortor dignissim convallis. Aliquet lectus proin nibh nisl condimentum id. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed.
-    </figcaption>
-  </figure>
+  <dialog id="restyle-dialog">
+    <p>This is a native dialog.</p>
+    <footer>
+      <button type="button">Close</button>
+    </footer>
+  </dialog>
+  <button type="button" id="open-restyle-dialog">Open dialog</button>
 </quiet-card>
 
-### Media
+<script type="module">
+  const dialog = document.getElementById('restyle-dialog');
+  const openButton = document.getElementById('open-restyle-dialog');
+  const closeButton = dialog.querySelector('button');
+  
+  openButton.addEventListener('click', () => {
+    dialog.showModal();
+  });
 
-Use `<img>` and `<iframe>` to show images and embedded media. The default aspect ratio of `<iframe>` elements is `9/6`, but feel free to adjust this value using the [`aspect-ratio`](https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio) property.
+  closeButton.addEventListener('click', () => {
+    dialog.close();
+  });
+</script>
 
-<quiet-card class="preview">
-  <img src="https://images.unsplash.com/photo-1513977055326-8ae6272d90a7?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="A kitten lays on the bed with her head upside down">
-  <br>
-  <iframe src="https://www.youtube.com/embed/ALGG6ptfLdc?si=03a9K9QigWi2A9Wt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-</quiet-card>
+## Measurement & progress
 
 ### Meters
 
@@ -328,16 +360,7 @@ Use the `<progress>` element to indicate progress. When no `value` attribute is 
   <progress>Loading…</progress>
 </quiet-card>
 
-### Fieldsets
-
-Use `<fieldset>` and `<legend>` to group and label form controls.
-
-<quiet-card class="preview">
-  <fieldset>
-    <legend>Legend</legend>
-    Nunc mi ipsum faucibus vitae aliquet nec ullamcorper. Tincidunt id aliquet risus feugiat in ante. Ac turpis egestas integer eget aliquet nibh praesent tristique magna.
-  </fieldset>
-</quiet-card>
+## Forms
 
 ### Buttons
 
@@ -417,10 +440,10 @@ Various input types are supported via `<input type="...">`, `<select>`, and `<te
   <input type="number" placeholder="Number" value="42" inputmode="numeric">
   <input type="password" placeholder="Password" value="hunter2">
   <input type="range">
-  <select name="size" label="Select a size">
-    <option value="sm">Small</option>
-    <option value="md" selected>Medium</option>
-    <option value="lg">Large</option>
+  <select name="size" label="Pick one">
+    <option value="cats" selected>Cats</option>
+    <option value="cats">More cats</option>
+    <option value="cats">Even more cats</option>
   </select>
   <textarea placeholder="Tell us something about yourself" rows="3"></textarea>
   <div>
@@ -435,33 +458,16 @@ Various input types are supported via `<input type="...">`, `<select>`, and `<te
   </div>  
 </quiet-card>
 
-### Dialogs
+### Fieldsets
 
-Use the native `<dialog>` to show a dialog.
+Use `<fieldset>` and `<legend>` to group and label form controls.
 
 <quiet-card class="preview">
-  <dialog id="restyle-dialog">
-    <p>This is a native dialog.</p>
-    <footer>
-      <button type="button">Close</button>
-    </footer>
-  </dialog>
-  <button type="button" id="open-restyle-dialog">Open dialog</button>
+  <fieldset>
+    <legend>Legend</legend>
+    Nunc mi ipsum faucibus vitae aliquet nec ullamcorper. Tincidunt id aliquet risus feugiat in ante. Ac turpis egestas integer eget aliquet nibh praesent tristique magna.
+  </fieldset>
 </quiet-card>
-
-<script type="module">
-  const dialog = document.getElementById('restyle-dialog');
-  const openButton = document.getElementById('open-restyle-dialog');
-  const closeButton = dialog.querySelector('button');
-  
-  openButton.addEventListener('click', () => {
-    dialog.showModal();
-  });
-
-  closeButton.addEventListener('click', () => {
-    dialog.close();
-  });
-</script>
 
 ## Utility classes
 

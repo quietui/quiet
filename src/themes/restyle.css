@@ -468,6 +468,11 @@
     }
   }
 
+  legend {
+    font-weight: var(--quiet-font-weight-semibold);
+    font-size: 0.9375em;
+  }
+
   /* Text fields + text areas + selects */
   input:not([type='checkbox'], [type='radio'], [type='range'], [type='file']),
   select,

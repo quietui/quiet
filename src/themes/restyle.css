@@ -514,15 +514,18 @@
     }
 
     &.quiet-filled {
-      padding: 0 0.75em;
       border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-fill-softer);
       border-radius: calc(var(--quiet-border-radius) / 1.5);
       background-color: var(--quiet-neutral-fill-softer);
 
-      &:has(#text-box:focus-visible) {
-        outline: var(--quiet-border-style) calc(var(--quiet-border-width) + 1px) var(--quiet-focus-color);
-        outline-offset: calc(-1 * var(--quiet-border-width));
+      &:not(textarea) {
+        padding: 0 0.75em;
       }
+    }
+
+    &.quiet-pill:not(textarea) {
+      padding-inline: 1em;
+      border-radius: 9999px;
     }
 
     &:focus {
@@ -828,7 +831,28 @@
 
   /* Text areas */
   textarea {
+    padding-block: 0.7em;
     resize: vertical;
+
+    &.quiet-xs {
+      padding-block: 0.2em;
+    }
+
+    &.quiet-sm {
+      padding-block: 0.35em;
+    }
+
+    &.quiet-md {
+      padding-block: 0.7em;
+    }
+
+    &.quiet-lg {
+      padding-block: 0.5em;
+    }
+
+    &.quiet-xl {
+      padding-block: 0.55em;
+    }
   }
 
   /* Selects */
@@ -984,6 +1008,7 @@
     appearance: none;
     width: 1.25em;
     height: 1.25em;
+    margin-inline: 0;
     border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
     border-radius: calc(var(--quiet-border-radius) / 2);
     background-position: center;
@@ -1022,6 +1047,12 @@
     &[type='radio']:checked {
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='white'%3E%3Cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M7 3.34a10 10 0 1 1 -4.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 4.995 -8.336z' /%3E%3C/svg%3E");
       background-size: 62%;
+    }
+
+    /* Filled */
+    &.quiet-filled {
+      border-color: var(--quiet-neutral-fill-softer);
+      background-color: var(--quiet-neutral-fill-softer);
     }
 
     &:focus {

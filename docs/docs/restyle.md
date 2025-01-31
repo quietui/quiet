@@ -427,8 +427,32 @@ For consistency, most native form controls are styled to look similar to Quiet f
 Use `class="quiet-filled"` to make them appear filled.
 
 <quiet-card class="preview preview-col">
-  <input type="text" placeholder="Normal">
   <input class="quiet-filled" type="text" placeholder="Filled">
+  <select class="quiet-filled" name="pet" label="Pick one">
+    <option value="cats" selected>Cats</option>
+    <option value="cats">More cats</option>
+    <option value="cats">Even more cats</option>
+  </select>
+  <textarea class="quiet-filled" type="text" placeholder="Filled" rows="3"></textarea>
+  <div>
+    <label><input class="quiet-filled" type="checkbox" checked> Fill it up</label>
+    <label><input class="quiet-filled" type="checkbox"> Top it off</label>
+  </div>
+  <div>
+    <label><input class="quiet-filled" type="radio" name="b" checked> Fill it up</label>
+    <label><input class="quiet-filled" type="radio" name="b"> Top it off</label>
+  </div>
+</quiet-card>
+
+Use `class="quiet-pill"` to make inputs and select's appear rounded.
+
+<quiet-card class="preview preview-col">
+  <input class="quiet-pill" type="text" placeholder="Filled">
+  <select class="quiet-pill" name="pet" label="Pick one">
+    <option value="cats" selected>Cats</option>
+    <option value="cats">More cats</option>
+    <option value="cats">Even more cats</option>
+  </select>
 </quiet-card>
 
 Various input types are supported via `<input type="...">`, `<select>`, and `<textarea>`.
@@ -440,7 +464,7 @@ Various input types are supported via `<input type="...">`, `<select>`, and `<te
   <input type="number" placeholder="Number" value="42" inputmode="numeric">
   <input type="password" placeholder="Password" value="hunter2">
   <input type="range">
-  <select name="size" label="Pick one">
+  <select name="pet" label="Pick one">
     <option value="cats" selected>Cats</option>
     <option value="cats">More cats</option>
     <option value="cats">Even more cats</option>

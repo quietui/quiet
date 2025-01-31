@@ -10,11 +10,6 @@
     box-sizing: inherit;
   }
 
-  /* Hide custom elements until they're upgraded to prevent FOUCE */
-  :not(:defined) {
-    visibility: hidden;
-  }
-
   html,
   body {
     margin: 0;
@@ -1137,6 +1132,11 @@
   /* FOUCE styles */
   html.quiet-reduce-fouce {
     opacity: 0;
+  }
+
+  /* Hide custom elements until they're upgraded to reduce FOUCE */
+  :not(:defined) {
+    visibility: hidden;
   }
 
   /* Utilities */

@@ -193,8 +193,7 @@ export class QuietTransitionGroup extends QuietElement {
       }
     });
 
-    // Wait for the paint to dry, then determine the container's new size
-    await new Promise(requestAnimationFrame);
+    // Determine the container's new size
     const newContainerPosition = this.getBoundingClientRect();
 
     // Hide added elements while we remove

@@ -423,6 +423,16 @@ html:not(.quiet-dark) .only-dark {
   }
 }
 
+/*
+  Hide the sidebar on desktop when the page doesn't have it. This allows us to show the toggle button consistently on
+  mobile devices.
+*/
+@media screen and (min-width: 959px) {
+  #body:not(.has-sidebar) #sidebar {
+    display: none;
+  }
+}
+
 #page.has-outline {
   grid-template-columns: auto var(--docs-outline-width);
 }
@@ -568,11 +578,6 @@ quiet-badge.experimental {
 #outline h2 > a {
   color: inherit;
   font-weight: inherit;
-}
-
-#outline > nav {
-  position: sticky;
-  top: calc(var(--docs-header-height) + 3.5rem);
 }
 
 #outline-expandable {

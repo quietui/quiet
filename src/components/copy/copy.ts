@@ -30,7 +30,7 @@ import styles from './copy.styles.js';
  *  bubble. You can inspect `event.detail.error` to see the error that occurred.
  *
  * @csspart copy-button - The default copy button, a `<quiet-button>` element.
- * @csspart copy-button__button - The default copy button's exported `button` part.
+ * @csspart copy-button__button - The default copy button's `button` part.
  * @csspart copy-icon - The default copy icon, a `<quiet-icon>` element.
  * @csspart copy-icon__svg - The copy icon's `svg` part.
  * @csspart feedback - The feedback that shows when copying.

@@ -117,9 +117,39 @@ When the number of tabs exceeds the available space in a top or bottom placement
 </quiet-tab-list>
 ```
 
-:::info
-If you don't want the tabs to scroll, you can apply `flex-wrap: wrap` to the `tabs` part to force them to wrap instead.
-:::
+If you don't want the tabs to scroll, you can apply `flex-wrap: wrap` to the `tabs-content` part to allow them to wrap instead.
+
+```html {.example}
+<quiet-tab-list label="Select a tab" id="tabs-list__no-scroll">
+	<quiet-tab panel="first">First</quiet-tab>
+	<quiet-tab panel="second">Second</quiet-tab>
+	<quiet-tab panel="third">Third</quiet-tab>
+	<quiet-tab panel="fourth">Fourth</quiet-tab>
+	<quiet-tab panel="fifth">Fifth</quiet-tab>
+	<quiet-tab panel="sixth">Sixth</quiet-tab>
+	<quiet-tab panel="seventh">Seventh</quiet-tab>
+	<quiet-tab panel="eight">Eight</quiet-tab>
+	<quiet-tab panel="ninth">Ninth</quiet-tab>
+	<quiet-tab panel="tenth">Tenth</quiet-tab>
+
+	<quiet-tab-panel name="first">Lobortis mattis aliquam faucibus purus in massa tempor. Eu lobortis elementum nibh tellus molestie nunc non blandit. Ultrices sagittis orci a scelerisque purus.</quiet-tab-panel>
+	<quiet-tab-panel name="second">Vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum. Aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices.</quiet-tab-panel>
+	<quiet-tab-panel name="third">Pretium vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae. Mattis enim ut tellus elementum. Ultrices dui sapien eget mi proin sed libero.</quiet-tab-panel>
+	<quiet-tab-panel name="fourth">Lobortis mattis aliquam faucibus purus in massa tempor. Eu lobortis elementum nibh tellus molestie nunc non blandit. Ultrices sagittis orci a scelerisque purus.</quiet-tab-panel>
+	<quiet-tab-panel name="fifth">Vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum. Aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices.</quiet-tab-panel>
+	<quiet-tab-panel name="sixth">Pretium vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae. Mattis enim ut tellus elementum. Ultrices dui sapien eget mi proin sed libero.</quiet-tab-panel>
+	<quiet-tab-panel name="seventh">Lobortis mattis aliquam faucibus purus in massa tempor. Eu lobortis elementum nibh tellus molestie nunc non blandit. Ultrices sagittis orci a scelerisque purus.</quiet-tab-panel>
+	<quiet-tab-panel name="eight">Vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum. Aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices.</quiet-tab-panel>
+	<quiet-tab-panel name="ninth">Pretium vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae. Mattis enim ut tellus elementum. Ultrices dui sapien eget mi proin sed libero.</quiet-tab-panel>
+	<quiet-tab-panel name="tenth">Lobortis mattis aliquam faucibus purus in massa tempor. Eu lobortis elementum nibh tellus molestie nunc non blandit. Ultrices sagittis orci a scelerisque purus.</quiet-tab-panel>
+</quiet-tab-list>
+
+<style>
+  quiet-tab-list#tabs-list__no-scroll::part(tabs-content) {
+    flex-wrap: wrap;
+  }
+</style>
+```
 
 ### Disabling
 

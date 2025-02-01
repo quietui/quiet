@@ -18,6 +18,7 @@ export default css`
     overflow-y: hidden;
     border-radius: inherit;
     scroll-behavior: smooth;
+    scrollbar-width: thin;
 
     /* Prevent text in mobile Safari from being larger when the container width larger than the viewport */
     -webkit-text-size-adjust: 100%;
@@ -46,10 +47,12 @@ export default css`
 
   #start-shadow,
   #end-shadow {
+    z-index: 1;
     position: absolute;
     top: 0;
     bottom: 0;
     width: var(--shadow-width);
+    isolation: isolate;
 
     /* Add mask for top/bottom fade */
     mask-image: linear-gradient(

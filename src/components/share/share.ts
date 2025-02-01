@@ -20,7 +20,7 @@ import styles from './share.styles.js';
  * @slot - A custom button to use instead of the default.
  *
  * @csspart share-button - The default share button, a `<quiet-button>` element.
- * @csspart share-button__button - The default share button's exported `button` part.
+ * @csspart share-button__button - The default share button's `button` part.
  * @csspart share-icon - The default share icon, a `<quiet-icon>` element.
  * @csspart share-icon__svg - The share icon's `svg` part.
  * @csspart feedback - The feedback that shows when copying (e.g. when the Web Share API is unsupported).

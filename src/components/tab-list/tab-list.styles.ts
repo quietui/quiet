@@ -5,7 +5,7 @@ export default css`
     display: flex;
   }
 
-  #tabs {
+  #tabs::part(content) {
     display: flex;
     position: relative;
   }
@@ -15,11 +15,8 @@ export default css`
     flex-direction: column;
   }
 
-  :host([placement='top']) #tabs {
+  :host([placement='top']) #tabs::part(content) {
     align-items: center;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    scrollbar-width: thin;
   }
 
   :host([placement='top']) #panels {
@@ -41,7 +38,7 @@ export default css`
     flex-direction: column;
   }
 
-  :host([placement='bottom']) #tabs {
+  :host([placement='bottom']) #tabs::part(content) {
     align-items: center;
     order: 2;
     overflow-x: auto;
@@ -68,7 +65,7 @@ export default css`
     flex-direction: row;
   }
 
-  :host([placement='start']) #tabs {
+  :host([placement='start']) #tabs::part(content) {
     flex: 0 0 auto;
     flex-direction: column;
   }
@@ -103,7 +100,7 @@ export default css`
     flex-direction: row;
   }
 
-  :host([placement='end']) #tabs {
+  :host([placement='end']) #tabs::part(content) {
     flex: 0 0 auto;
     flex-direction: column;
     order: 2;

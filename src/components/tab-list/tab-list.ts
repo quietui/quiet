@@ -6,6 +6,7 @@ import hostStyles from '../../styles/host.styles.js';
 import { Localize } from '../../utilities/localize.js';
 import { createId } from '../../utilities/math.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
+import '../scroller/scroller.js';
 import '../tab-panel/tab-panel.js';
 import type { QuietTabPanel } from '../tab-panel/tab-panel.js';
 import '../tab/tab.js';
@@ -25,6 +26,7 @@ interface GetTabsOptions {
  * @status stable
  * @since 1.0
  *
+ * @dependency quiet-scroller
  * @dependency quiet-tab
  * @dependency quiet-tab-panel
  *
@@ -38,7 +40,8 @@ interface GetTabsOptions {
  * @event quiet-tab-hidden - Emitted after a tab is hidden. The event will include a `detail` object with `tab` and
  *  `panel` properties that reference the respective tab and panel elements.
  *
- * @csspart tabs - The container that holds all of the tabs.
+ * @csspart tabs - The container that holds all of the tabs, a `<quiet-scroller>` element.
+ * @csspart tabs-content - The scroller's `content` part.
  * @csspart panels - The container that holds all of the tab panels.
  */
 @customElement('quiet-tab-list')
@@ -214,9 +217,16 @@ export class QuietTabList extends QuietElement {
 
   render() {
     return html`
-      <div id="tabs" part="tabs" role="tablist" @click=${this.handleTabsClick} @keydown=${this.handleTabsKeyDown}>
+      <quiet-scroller
+        id="tabs"
+        part="tabs"
+        exportparts="content:tabs-content"
+        role="tablist"
+        @click=${this.handleTabsClick}
+        @keydown=${this.handleTabsKeyDown}
+      >
         <slot name="tab" @slotchange=${this.handleSlotChange}></slot>
-      </div>
+      </quiet-scroller>
 
       <div id="panels" part="panels">
         <slot @slotchange=${this.handleSlotChange}></slot>

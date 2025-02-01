@@ -454,6 +454,7 @@ html:not(.quiet-dark) .only-dark {
 #content {
   order: 1;
   min-width: 0; /* prevent overflowing content from stretching the column */
+  margin-block-end: 2rem;
 
   .title {
     margin-block-start: 3rem;

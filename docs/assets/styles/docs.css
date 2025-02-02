@@ -1358,6 +1358,10 @@ td.table-reflects {
     margin: 0;
     padding: 0;
     list-style: none;
+
+    quiet-icon {
+      vertical-align: -2px;
+    }
   }
 
   quiet-button {

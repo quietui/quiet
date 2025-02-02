@@ -540,7 +540,8 @@ quiet-badge.experimental {
 
 @media not (hover: hover) {
   .anchor-heading a {
-    display: none;
+    color: var(--quiet-text-muted);
+    text-decoration: none;
   }
 }
 

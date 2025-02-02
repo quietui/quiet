@@ -21,7 +21,7 @@
 #site-search-container {
   display: flex;
   flex-direction: column;
-  max-height: calc(100vh - 20rem);
+  max-height: max(16rem, calc(100vh - 20rem));
 }
 
 @media screen and (max-width: 900px) {
@@ -31,7 +31,7 @@
   }
 
   #site-search-container {
-    max-height: calc(100dvh - 2rem);
+    max-height: max(16rem, calc(100dvh - 2rem));
   }
 }
 

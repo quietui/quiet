@@ -84,7 +84,7 @@ Icons are sized relative to the current font size. This allows you to place them
 Icons can be flipped horizontally or vertically using the `flip-x` and `flip-y` attributes. You can combine both attributes to flip an icon in both directions.
 
 ```html {.example}
-<div style="font-size: 1.5rem;">
+<div style="font-size: 2rem;">
   <quiet-icon name="horse-toy"></quiet-icon>
   <quiet-icon name="horse-toy" flip-x></quiet-icon>
   <quiet-icon name="horse-toy" flip-y></quiet-icon>
@@ -97,7 +97,7 @@ Icons can be flipped horizontally or vertically using the `flip-x` and `flip-y` 
 Icons can be rotated to any angle using the `rotate` attribute. The value represents the rotation in degrees.
 
 ```html {.example}
-<div style="font-size: 1.5rem;">
+<div style="font-size: 2rem;">
   <quiet-icon name="horse-toy"></quiet-icon>
   <quiet-icon name="horse-toy" rotate="45"></quiet-icon>
   <quiet-icon name="horse-toy" rotate="90"></quiet-icon>

@@ -61,6 +61,13 @@ Quiet can be used for free under the MIT license. Unfortunately, I can't offer s
   </div>  
 </div>
 
+<p style="text-align: center;">
+  <small>
+    Already a sponsor? 
+    <a href="https://github.com/quietui/sponsors">Sign in to access the sponsors-only forums!</a>
+  </small>
+</p>
+
 <ul class="features-grid" aria-label="Features">
   <li><quiet-icon name="send" style="color: #58acf2;"></quiet-icon><br>Support from the maintainer</li>
   <li><quiet-icon name="bug" style="color: #e98d61;"></quiet-icon><br>Priority bug fixes</li>

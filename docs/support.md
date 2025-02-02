@@ -61,10 +61,10 @@ Quiet can be used for free under the MIT license. Unfortunately, I can't offer s
   </div>  
 </div>
 
-<p style="text-align: center;">
+<p style="text-align: center; margin-block: 2.5rem 2rem;">
   <small>
     Already a sponsor? 
-    <a href="https://github.com/quietui/sponsors">Sign in to access the sponsors-only forums!</a>
+    <a href="https://github.com/quietui/sponsors/discussions">Sign in to access the sponsors-only forums!</a>
   </small>
 </p>
 

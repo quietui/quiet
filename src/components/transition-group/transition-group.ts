@@ -34,6 +34,7 @@ export class QuietTransitionGroup extends QuietElement {
   private cachedContainerPosition: DOMRect;
   private cachedElementPositions = new WeakMap<HTMLElement, DOMRect>();
   private cachedScrollPosition: { x: number; y: number } = { x: window.scrollX, y: window.scrollY };
+  private isObserving = false;
   private mutationObserver: MutationObserver;
   private resizeObserver: ResizeObserver;
   private transitionCompleteResolve: (() => void) | null = null;
@@ -141,7 +142,15 @@ export class QuietTransitionGroup extends QuietElement {
     const moveAnimations: Promise<Animation>[] = [];
     const computedStyle = getComputedStyle(this);
     const { enter, exit } = this.getAnimation();
-    const duration = parseCssDuration(computedStyle.getPropertyValue('--duration'));
+    const duration = parseCssDuration(computedStyle.getPropertyValue('--duration')) || '0.25s';
+
+    // If we're already transitioning, skip this one
+    if (this.isTransitioning) {
+      return;
+    }
+
+    // Turn off the observers while we work with the DOM
+    this.stopObservers();
 
     // Dispatch the quiet-content-changed event
     this.dispatchEvent(new QuietContentChangedEvent({ mutations }));
@@ -149,16 +158,15 @@ export class QuietTransitionGroup extends QuietElement {
     // Stop here if transitions are disabled
     if (prefersReducedMotion || this.disableTransitions) {
       this.isTransitioning = false;
+      this.customStates.set('transitioning', false);
       this.updateElementPositions();
       this.resolveTransitionPromise();
+      this.startObservers();
       return;
     }
 
-    // Turn off the mutation observer while we work with the DOM
-    if (this.isTransitioning) return;
     this.isTransitioning = true;
     this.customStates.set('transitioning', true);
-    this.stopObservers();
 
     // Find elements that were added and removed in this mutation
     mutations.forEach(mutation => {
@@ -182,9 +190,6 @@ export class QuietTransitionGroup extends QuietElement {
         }
       });
     });
-
-    // Determine the container's new size
-    const newContainerPosition = this.getBoundingClientRect();
 
     // Determine which elements were moved
     addedElements.forEach((info, el) => {
@@ -216,9 +221,17 @@ export class QuietTransitionGroup extends QuietElement {
       );
     });
 
+    // Run remove animations
     await Promise.allSettled(removeAnimations);
 
+    // Add back added elements but keep them invisible for now
+    addedElements.forEach((_opts, el) => {
+      el.hidden = false;
+      el.style.opacity = '0';
+    });
+
     // Resize the container
+    const newContainerPosition = this.getBoundingClientRect();
     if (
       newContainerPosition.width !== this.cachedContainerPosition.width ||
       newContainerPosition.height !== this.cachedContainerPosition.height
@@ -229,16 +242,10 @@ export class QuietTransitionGroup extends QuietElement {
             { width: `${this.cachedContainerPosition.width}px`, height: `${this.cachedContainerPosition.height}px` },
             { width: `${newContainerPosition.width}px`, height: `${newContainerPosition.height}px` }
           ],
-          { duration, easing: 'cubic-bezier(0.45, 0, 0.55, 1)' }
+          { duration, easing: 'ease' }
         ).finished
       );
     }
-
-    // Add back added elements but keep them invisible for now
-    addedElements.forEach((_opts, el) => {
-      el.hidden = false;
-      el.style.opacity = '0';
-    });
 
     // Animate moved elements
     [...this.children].forEach((el: HTMLElement) => {
@@ -266,6 +273,7 @@ export class QuietTransitionGroup extends QuietElement {
       );
     });
 
+    // Run move animations
     await Promise.allSettled(moveAnimations);
 
     // Animate added elements
@@ -274,6 +282,7 @@ export class QuietTransitionGroup extends QuietElement {
       addAnimations.push(el.animate(enter.keyframes, { easing: enter.easing, duration }).finished);
     });
 
+    // Run add and container animations concurrently
     await Promise.allSettled([...addAnimations, ...containerAnimations]);
 
     // Cache new positions
@@ -298,6 +307,9 @@ export class QuietTransitionGroup extends QuietElement {
   };
 
   private startObservers() {
+    if (this.isObserving) return;
+    this.isObserving = true;
+
     if (!this.mutationObserver) {
       this.mutationObserver = new MutationObserver(this.handleMutations);
     }
@@ -319,6 +331,7 @@ export class QuietTransitionGroup extends QuietElement {
   }
 
   private stopObservers() {
+    this.isObserving = false;
     this.mutationObserver.disconnect();
     this.resizeObserver.disconnect();
     document.removeEventListener('visibilitychange', this.handleVisibilityChange);

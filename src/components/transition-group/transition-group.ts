@@ -158,7 +158,7 @@ export class QuietTransitionGroup extends QuietElement {
     if (this.isTransitioning) return;
     this.isTransitioning = true;
     this.customStates.set('transitioning', true);
-    this.mutationObserver.disconnect();
+    this.stopObservers();
 
     // Find elements that were added and removed in this mutation
     mutations.forEach(mutation => {
@@ -183,6 +183,9 @@ export class QuietTransitionGroup extends QuietElement {
       });
     });
 
+    // Determine the container's new size
+    const newContainerPosition = this.getBoundingClientRect();
+
     // Determine which elements were moved
     addedElements.forEach((info, el) => {
       const removedElementInfo = removedElements.get(el);
@@ -192,9 +195,6 @@ export class QuietTransitionGroup extends QuietElement {
         removedElements.delete(el);
       }
     });
-
-    // Determine the container's new size
-    const newContainerPosition = this.getBoundingClientRect();
 
     // Hide added elements while we remove
     addedElements.forEach((_opts, el) => (el.hidden = true));
@@ -282,10 +282,7 @@ export class QuietTransitionGroup extends QuietElement {
     this.customStates.set('transitioning', false);
 
     // Restart the mutation observer now that we're done
-    this.mutationObserver.observe(this, {
-      childList: true,
-      characterData: false
-    });
+    this.startObservers();
 
     // Dispatch the quiet-transition-end event
     this.dispatchEvent(new QuietTransitionEndEvent());

@@ -498,8 +498,8 @@ Here you can preview the animations that are available in Scurry.
 </quiet-card>
 
 <script type="module">
-  import { animations as manifest } from 'https://cdn.jsdelivr.net/npm/@quietui/scurry@5/dist/manifest.js';
-  import * as animations from 'https://cdn.jsdelivr.net/npm/@quietui/scurry@5/dist/index.js';
+  import { animations as manifest } from 'https://cdn.jsdelivr.net/npm/@quietui/scurry@latest/dist/manifest.js';
+  import * as animations from 'https://cdn.jsdelivr.net/npm/@quietui/scurry@latest/dist/index.js';
 
   const container = document.getElementById('transition-group__animation');
   const transitionGroup = container.querySelector('quiet-transition-group');
@@ -514,6 +514,7 @@ Here you can preview the animations that are available in Scurry.
     const animation = manifest.find(a => a.name === name);
     if (!animation) return;
     transitionGroup.transitionAnimation = animations[name]({ dir: 'ltr' });
+    console.log(animations[name]({ dir: 'ltr' }).enter)
     copyAnimationFromCdnButton.data = `import { ${name} } from 'https://cdn.jsdelivr.net/npm/@quietui/scurry@5/${animation.path}';`;
     copyAnimationFromNpmButton.data = `import { ${name} } from '@quietui/scurry';`;
     description.textContent = animation.description;

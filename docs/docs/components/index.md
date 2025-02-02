@@ -57,12 +57,12 @@ layout: docs
       border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
       border-radius: var(--quiet-border-radius);
       background-color: var(--quiet-paper-color);
-      box-shadow: var(--quiet-shadow-soft);
+      box-shadow: var(--quiet-shadow-softer);
       font-weight: inherit;
       padding: 1.25rem;
       text-decoration: none;
       color: inherit;
-      transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+      transition: all 0.2s ease-in-out;
       
       &:focus-visible {
         outline-offset: calc(-1 * var(--quiet-border-width));
@@ -70,8 +70,8 @@ layout: docs
 
       @media (hover: hover) {
         &:hover {
-          transform: translateY(-3px) scale(1.02);
-          box-shadow: var(--quiet-shadow-mid);
+          transform: translateY(-2px) scale(1.01);
+          box-shadow: var(--quiet-shadow-soft);
         }
       }
 

@@ -55,7 +55,7 @@ export default css`
   #description {
     margin-block-end: 0.25em;
     color: var(--quiet-text-muted);
-    font-size: 0.8375rem;
+    font-size: 0.875em;
   }
 
   #visual-box {

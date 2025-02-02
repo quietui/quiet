@@ -53,13 +53,15 @@ A minimal test case is critical to getting your bug fixed! It demonstrates that 
 
 ## Pull requests
 
-To keep the project on track, please consider the following guidelines before submitting a PR.
+To keep the project on track, please read the following guidelines before submitting a PR.
 
-- Please **do** open an issue before submitting a PR unless the changes are trivial (e.g. fixing typos or outdated docs). This will prevent you from doing work that won't be accepted for various reasons (e.g. someone is already working on it, it's not a good fit for the project's roadmap, it needs additional exploration, etc.)
+- ==Please **do** open an issue before submitting a PR== unless the changes are trivial (e.g. fixing typos or outdated docs). This will prevent you from doing work that won't be accepted for various reasons (e.g. someone is already working on it, it's not a good fit for the project's roadmap, it needs additional exploration, etc.)
 - Please **do** make sure your PR clearly defines what you're changing. Even if you feel your changes are obvious, please explain them so other contributors can more easily review your work.
 - Please **do not** edit anything in `dist/`, as those files are generated at build time.
 
-The maintainer reserves the right to reject any PR that's outside the scope of the project or doesn't meet code quality standards.
+The maintainer reserves the right to reject any contribution that doesn't align with the project's mission or for any other reason.
+
+Remember, Quiet is very opinionated. Oftentimes, saying "no" is key to maintaining the quality of the library and the maintainer's ability to steward it effectively.
 
 ## Documentation
 

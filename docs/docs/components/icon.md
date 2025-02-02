@@ -79,6 +79,35 @@ Icons are sized relative to the current font size. This allows you to place them
 <quiet-icon name="thumb-up" style="font-size: 2.5em;"></quiet-icon>
 ```
 
+### Flipping icons
+
+Icons can be flipped horizontally or vertically using the `flip-x` and `flip-y` attributes. You can combine both attributes to flip an icon in both directions.
+
+```html {.example}
+<div style="font-size: 1.5rem;">
+  <quiet-icon name="horse-toy"></quiet-icon>
+  <quiet-icon name="horse-toy" flip-x></quiet-icon>
+  <quiet-icon name="horse-toy" flip-y></quiet-icon>
+  <quiet-icon name="horse-toy" flip-x flip-y></quiet-icon>
+</div>
+```
+
+### Rotating icons
+
+Icons can be rotated to any angle using the `rotate` attribute. The value represents the rotation in degrees.
+
+```html {.example}
+<div style="font-size: 1.5rem;">
+  <quiet-icon name="horse-toy"></quiet-icon>
+  <quiet-icon name="horse-toy" rotate="45"></quiet-icon>
+  <quiet-icon name="horse-toy" rotate="90"></quiet-icon>
+  <quiet-icon name="horse-toy" rotate="135"></quiet-icon>
+  <quiet-icon name="horse-toy" rotate="225"></quiet-icon>
+  <quiet-icon name="horse-toy" rotate="270"></quiet-icon>
+  <quiet-icon name="horse-toy" rotate="315"></quiet-icon>
+</div>
+```
+
 ### Changing the stroke
 
 You can change the thickness of the default icon library's icons by setting the `stroke-width` property on the icon. For best results, use a value between 1px and 2px at 0.25px intervals. If icons look too thick or thin at various sizes, try adjusting their stroke width!

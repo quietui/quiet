@@ -43,6 +43,15 @@ export class QuietIcon extends QuietElement {
   /** A label to use for assistive devices. If omitted, the icon will be considered presentational. */
   @property() label: string;
 
+  /** Flips the icon horizontally. */
+  @property({ attribute: 'flip-x', type: Boolean, reflect: true }) flipX = false;
+
+  /** Flips the icon vertically. */
+  @property({ attribute: 'flip-y', type: Boolean, reflect: true }) flipY = false;
+
+  /** Rotates the icon the specified number of degrees. */
+  @property({ type: Number }) rotate = 0;
+
   connectedCallback() {
     super.connectedCallback();
     connectIcon(this);
@@ -73,6 +82,11 @@ export class QuietIcon extends QuietElement {
     // Set the icon
     if (changedProperties.has('library') || changedProperties.has('family') || changedProperties.has('name')) {
       await this.load();
+    }
+
+    // Handle rotation
+    if (changedProperties.has('rotate')) {
+      this.style.rotate = `${this.rotate}deg`;
     }
   }
 

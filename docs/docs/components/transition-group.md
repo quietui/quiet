@@ -304,7 +304,7 @@ Use standard DOM APIs to add, remove, and reorder elements and the transition gr
 ```
 
 :::info
-As elements are added, removed, and reordered, their positions in the DOM change instantly. The elements are then animated from their old positions to their new positions, meaning CSS selectors such as `:first-child`, `:last-child`, `:nth-child()`, et al will apply as soon as the transition starts, which may not always be desirable. To avoid this, use ids and classes in lieu of position-based selectors.
+As elements are added, removed, and reordered, their positions in the DOM change instantly. The elements are then animated from their old positions to their new positions, meaning CSS selectors such as `:first-child`, `:last-child`, `:nth-child()`, et al will apply as soon as the transition starts, which may not always be desirable. To avoid this, use IDs and classes in lieu of position-based selectors.
 :::
 
 ### Awaiting transitions

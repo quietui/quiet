@@ -157,7 +157,7 @@ export class QuietTabList extends QuietElement {
     const tabs = this.getTabs();
     const panels = this.getPanels();
 
-    // Ensure tabs and panels have ids
+    // Ensure tabs and panels have IDs
     tabs.forEach(tab => (tab.id = tab.id || createId('quiet-tab-')));
     panels.forEach(panel => (panel.id = panel.id || createId('quiet-tab-panel-')));
 

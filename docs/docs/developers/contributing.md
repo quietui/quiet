@@ -91,15 +91,15 @@ This project uses [Prettier](https://prettier.io/) to format code consistently. 
 
 A simple structure is preferred. Avoid adding unnecessary elements or wrapping whenever possible. Do what users expect and ensure the structure is reasonably customizable using the appropriate parts.
 
-### Using ids and classes
+### Using IDs and classes
 
-The `id` attribute should be used to reference unique elements within each component. Remember that ids only need to be unique in the shadow DOM they exist in. Simpler is better, so don't prefix or namespace them. 
+The `id` attribute should be used to reference unique elements within each component. Remember that IDs only need to be unique in the shadow DOM they exist in. Simpler is better, so don't prefix or namespace them. 
 
 Classes should be used to apply modifiers and reusable styles to elements. Avoid using classes to reference individual elements. 
 
-### Using ids and classes in examples
+### Using IDs and classes in examples
 
-When creating examples, use the `tag-name__id` or `tag-name__class` convention to assign ids or classes within the example. This is an easy way to scope examples and it prevents styles and behaviors from affecting other examples.
+When creating examples, use the `tag-name__id` or `tag-name__class` convention to assign IDs or classes within the example. This is an easy way to scope examples and it prevents styles and behaviors from affecting other examples.
 
 ### Using parts
 
@@ -281,6 +281,10 @@ render() {
 When necessary, make use of `console.warn()` to inform users of warnings and `console.error()` of errors. Use `console.error()` more sparingly. The first argument should always be a human-readable message explaining what happened and how to fix it. Be verbose, but concise. If necessary, the second argument should be a reference to the dispatching element.
 
 Components should never use `console.log()`.
+
+### The word "ID"
+
+For consistency, the `id` attribute should be displayed in lowercase when referring to an attribute or property. Everywhere else, it should be spelled "ID" and the plural form "IDs."
 
 ### Whiskers
 

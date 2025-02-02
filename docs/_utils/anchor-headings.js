@@ -8,7 +8,7 @@ function createId(text) {
     lower: true
   });
 
-  // ids must start with a letter
+  // IDs must start with a letter
   if (!/^[a-z]/i.test(slug)) {
     slug = `quiet_${slug}`;
   }

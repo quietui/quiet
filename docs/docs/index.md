@@ -4,7 +4,7 @@ description: Start using Quiet with just a couple lines of code.
 layout: docs
 ---
 
-Quiet is an open source library for building modern user interfaces on the Web. It features dozens of high-quality, accessible, interoperable components, a modern theme with light and darks modes that can adapt to any brand, an optional CSS reset, and more!
+Quiet is an open source library for building modern user interfaces on the Web. It features dozens of high-quality, accessible,  interoperable [components](/docs/components), a [modern theme](/docs/theming) with light and darks modes that can adapt to any brand, an optional [CSS reset](/docs/restyle), and more!
 
 **There are two ways to install Quiet components.** [Autoloading](#autoloading) is the fastest way to get started — just copy, paste, and start coding. Or you can [import components manually](#manually-importing) from npm or the CDN.
 
@@ -37,7 +37,7 @@ Now you can use [any component](/docs/components) in your HTML!
 
 ### Preloading components
 
-You can tell the autoloader to preload components that aren't on the page by adding the `data-quiet-preload` attribute anywhere in the document. Tags must be separated by a space, as shown below. A good practice is to add it to the `<html>` element.
+You can tell the autoloader to preload components that aren't initially on the page by adding the `data-quiet-preload` attribute anywhere in the document. Tags must be separated by a space, as shown below. A good practice is to add it to the `<html>` element.
 
 ```html
 <!-- 
@@ -91,7 +91,7 @@ However, when you use Turbo with Quiet's autoloader, you may see FOUCE when visi
 
 To solve that, call the `preventTurboFouce()` function in your app. The function adds a listener that hooks into Turbo's `turbo:before-render` event and registers all components before the new page is rendered, effectively eliminating FOUCE for page-to-page navigation.
 
-The function comes with a configurable timeout to prevent issues with errors or slow networks. For most use cases, the default value of 2000ms is optimal.
+The function accepts one argument: an optional timeout in milliseconds to prevent issues with errors or slow networks. For most use cases, the default value of `2000` is optimal.
 
 ```js
 import { preventTurboFouce } from '/dist/quiet.js';

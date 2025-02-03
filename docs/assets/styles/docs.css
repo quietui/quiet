@@ -575,6 +575,7 @@ quiet-badge.experimental {
 /* Outline */
 #outline {
   order: 2;
+  margin-block: 3rem;
 }
 
 #outline h2 > a {

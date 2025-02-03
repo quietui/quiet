@@ -26,9 +26,9 @@ By default, sparklines are styled with a `1em` height to fit properly within hea
   This week's website traffic
   <quiet-sparkline 
     label="Daily cat nap duration showing varying patterns throughout the week"
-    data="10 20 40 25 35 25 60 50 70"
+    data="20 15 35 45"
   ></quiet-sparkline>  
-  has increased.
+  has slightly increased.
 </p>
 ```
 

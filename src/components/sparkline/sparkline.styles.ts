@@ -7,6 +7,7 @@ export default css`
     --line-width: 1.5px;
 
     display: inline-block;
+    aspect-ratio: 4 / 1;
     width: auto;
     height: 1em;
     vertical-align: middle;

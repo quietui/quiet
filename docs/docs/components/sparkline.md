@@ -25,20 +25,20 @@ By default, sparklines are styled with a `1em` height to fit properly within hea
 <p>
   This week's website traffic
   <quiet-sparkline 
-    label="Daily cat nap duration showing varying patterns throughout the week"
+    label="Website traffic showing a slightly positive trend"
     data="20 15 35 45"
   ></quiet-sparkline>  
   has slightly increased.
 </p>
 ```
 
-To set a specific size, use the `width` and `height` CSS properties.
+To set a specific size, adjust the `width`, `height`, or `aspect-ratio` CSS properties.
 
 ```html {.example}
 <quiet-sparkline 
   label="Monthly cat toy purchases showing increased spending over time"
   data="10 20 40 25 35 25 60 50 70" 
-  style="width: 100%; height: 120px;"
+  style="width: 100%; height: auto;"
 ></quiet-sparkline>
 ```
 

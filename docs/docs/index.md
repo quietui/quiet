@@ -65,10 +65,10 @@ You can inspect `event.detail.registered` to see an array of tag names that were
 
 Custom elements are registered with JavaScript, so you might experience [FOUCE](https://www.abeautifulsite.net/posts/flash-of-undefined-custom-elements/) on page load as the autoloader fetches components.
 
-To reduce FOUCE, add the `quiet-reduce-fouce` class to the `<html>` element as shown below. Avoid adding the `quiet-reduce-fouce` class with JavaScript — it needs to be present when the browser first renders the page to work properly.
+To reduce FOUCE, add the `quiet-cloak` class to the `<html>` element as shown below. Avoid adding the class with JavaScript — it needs to be present when the browser first renders the page to work properly.
 
 ```html
-<html class="quiet-reduce-fouce">
+<html class="quiet-cloak">
   ...
 </html>
 ```
@@ -76,7 +76,7 @@ To reduce FOUCE, add the `quiet-reduce-fouce` class to the `<html>` element as s
 If you're using [Quiet Restyle](/docs/restyle), that's all you need to do! If you're not using Restyle, add the following rule to a stylesheet that's immediately available to your page when it loads.
 
 ```css
-html.quiet-reduce-fouce {
+html.quiet-cloak {
   opacity: 0;
 }
 ```

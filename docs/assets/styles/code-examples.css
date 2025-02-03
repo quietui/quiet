@@ -19,6 +19,24 @@
   > :last-child {
     margin-block-end: 0;
   }
+
+  &.code-example-checkered {
+    --checker-size: 8px;
+
+    /* prettier-ignore */
+    background-image:
+      linear-gradient(45deg, var(--quiet-neutral-fill-softer) 25%, transparent 25%),
+      linear-gradient(-45deg, var(--quiet-neutral-fill-softer) 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, var(--quiet-neutral-fill-softer) 75%),
+      linear-gradient(-45deg, transparent 75%, var(--quiet-neutral-fill-softer) 75%);
+    background-position:
+      0 0,
+      0 var(--checker-size),
+      var(--checker-size) calc(-1 * var(--checker-size)),
+      calc(-1 * var(--checker-size)) 0px;
+    background-size: calc(var(--checker-size) * 2) calc(var(--checker-size) * 2);
+    background-repeat: repeat;
+  }
 }
 
 .code-example-source {

@@ -36,5 +36,9 @@ export default css`
     display: block;
     width: 100%;
     height: 100%;
+
+    &:dir(rtl) {
+      transform: scaleX(-1);
+    }
   }
 `;

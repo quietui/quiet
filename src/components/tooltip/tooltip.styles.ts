@@ -26,18 +26,6 @@ export default css`
     border: none;
     background: none;
 
-    &.default {
-      --border-color: var(--quiet-neutral-stroke-soft);
-      --background-color: var(--quiet-paper-color);
-      --color: var(--quiet-neutral-text-on-soft);
-    }
-
-    &.inverted {
-      --border-color: var(--quiet-neutral-fill-loud);
-      --background-color: var(--quiet-neutral-fill-loud);
-      --color: var(--quiet-neutral-text-on-loud);
-    }
-
     &.visible {
       display: flex;
     }
@@ -56,10 +44,10 @@ export default css`
     padding: 0.5em 0.75em;
     border: var(--quiet-border-style) var(--quiet-border-width);
     border-radius: var(--quiet-border-radius);
-    border-color: var(--border-color);
-    background-color: var(--background-color);
+    border-color: var(--quiet-neutral-stroke-soft);
+    background-color: var(--quiet-paper-color);
     box-shadow: var(--quiet-shadow-soft);
-    color: var(--color);
+    color: var(--quiet-neutral-text-on-soft);
     font-size: 0.875em;
     user-select: none;
     -webkit-user-select: none;
@@ -70,9 +58,9 @@ export default css`
     position: absolute;
     width: calc(var(--arrow-diagonal-size) * 2);
     height: calc(var(--arrow-diagonal-size) * 2);
-    border-right: var(--quiet-border-style) var(--quiet-border-width) var(--border-color);
-    border-bottom: var(--quiet-border-style) var(--quiet-border-width) var(--border-color);
-    background-color: var(--background-color);
+    border-right: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
+    border-bottom: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
+    background-color: var(--quiet-paper-color);
   }
 
   /* Rotate border position based on placement */

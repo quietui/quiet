@@ -26,9 +26,7 @@
 
   /* Adjust text colors for the main page and any nested themes */
   html,
-  body,
-  .quiet-light,
-  .quiet-dark {
+  body {
     background-color: var(--quiet-background-color);
     color: var(--quiet-text-body);
   }
@@ -928,7 +926,7 @@
     }
 
     /* Default buttons */
-    &:not(.quiet-primary, .quiet-destructive, .quiet-inverted) {
+    &:not(.quiet-primary, .quiet-destructive) {
       background-color: var(--quiet-neutral-fill-softer);
       color: var(--quiet-neutral-text-on-soft);
 
@@ -959,18 +957,6 @@
       @media (hover: hover) {
         &:hover:not(:disabled) {
           background-color: color-mix(in oklab, var(--quiet-destructive-fill-mid), black 5%);
-        }
-      }
-    }
-
-    /* Inverted buttons */
-    &.quiet-inverted {
-      background-color: var(--quiet-neutral-fill-loud);
-      color: var(--quiet-destructive-text-on-loud);
-
-      @media (hover: hover) {
-        &:hover:not(:disabled) {
-          background-color: color-mix(in oklab, var(--quiet-neutral-fill-loud), black 5%);
         }
       }
     }

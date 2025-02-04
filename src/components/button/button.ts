@@ -59,7 +59,7 @@ export class QuietButton extends QuietFormControlElement {
   @property({ reflect: true }) appearance: 'normal' | 'outline' | 'text' | 'image' = 'normal';
 
   /** The type of button to render. This attribute has no effect on text or image buttons. */
-  @property({ reflect: true }) variant: 'default' | 'primary' | 'destructive' | 'inverted' = 'default';
+  @property({ reflect: true }) variant: 'default' | 'primary' | 'destructive' = 'default';
 
   /** Disables the button. */
   @property({ type: Boolean, reflect: true }) disabled = false;
@@ -166,7 +166,7 @@ export class QuietButton extends QuietFormControlElement {
     this.dispatchEvent(new QuietFocusEvent());
   }
 
-  private handleClick(event: PointerEvent) {
+  private handleClick(event: MouseEvent) {
     // Ignore clicks when the button is disabled or busy
     if (this.disabled || this.loading) {
       event.preventDefault();
@@ -236,7 +236,6 @@ export class QuietButton extends QuietFormControlElement {
           default: this.variant === 'default',
           primary: this.variant === 'primary',
           destructive: this.variant === 'destructive',
-          inverted: this.variant === 'inverted',
           // Appearances
           normal: this.appearance === 'normal',
           outline: this.appearance === 'outline',

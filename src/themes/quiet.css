@@ -1,4 +1,6 @@
-:root {
+:root,
+.quiet-light,
+.quiet-dark {
   /*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //
   //  These base tokens are used to seed the color palettes. For best results, always use a midtone color such as any of

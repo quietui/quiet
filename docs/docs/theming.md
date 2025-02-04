@@ -32,15 +32,19 @@ If you're using [Quiet Restyle](/docs/restyle), the entire page will enter dark 
 
 Sometimes, it's desirable to have a contrasting theme for certain sections of the page. For example, a light-themed page might have a dark-themed sidebar or footer. You can achieve this by applying the `quiet-light` or `quiet-dark` class to any element on the page.
 
-```html {.example .no-buttons}
-<quiet-button id="inverted-popover">Show popover</quiet-button>
+```html {.example .no-buttons .flex-row}
+<quiet-button class="quiet-light">
+  Default
+</quiet-button>
 
-<quiet-popover for="inverted-popover" class="quiet-dark">
-  I'm a dark mode popover in a light mode world.
-</quiet-popover>
+<quiet-button class="quiet-dark">
+  Default
+</quiet-button>
 ```
 
-This works for light and dark mode, but not for [built-in presets](#built-in-presets). To keep the stylesheet small, built-in presets only redefine the primary seed color, not the entire theme.
+:::info
+When using `quiet-light` and `quiet-dark`, you may want to set the background color to an appropriate value. You can use `--quiet-background-color` for an adaptive background. [Learn more about design tokens](#design-tokens)
+:::
 
 ## Theme concepts
 

@@ -166,7 +166,7 @@ export class QuietButton extends QuietFormControlElement {
     this.dispatchEvent(new QuietFocusEvent());
   }
 
-  private handleClick(event: PointerEvent) {
+  private handleClick(event: MouseEvent) {
     // Ignore clicks when the button is disabled or busy
     if (this.disabled || this.loading) {
       event.preventDefault();

@@ -45,11 +45,6 @@ export default css`
     color: var(--quiet-destructive-text-on-mid);
   }
 
-  :host([appearance='normal'][variant='inverted']) {
-    background-color: var(--quiet-neutral-fill-loud);
-    color: var(--quiet-neutral-text-on-loud);
-  }
-
   /* Outline badges */
   :host([appearance='outline']) {
     border: 1px solid;
@@ -74,11 +69,6 @@ export default css`
   :host([appearance='outline'][variant='destructive']) {
     border-color: var(--quiet-destructive-stroke-loud);
     color: var(--quiet-destructive-text-colorful);
-  }
-
-  :host([appearance='outline'][variant='inverted']) {
-    border-color: var(--quiet-neutral-stroke-loud);
-    color: var(--quiet-neutral-text-loud);
   }
 
   /* Attention */

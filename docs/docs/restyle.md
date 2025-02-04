@@ -364,14 +364,13 @@ Use the `<progress>` element to indicate progress. When no `value` attribute is 
 
 ### Buttons
 
-Use the `<button>` element to create a button. Add the `quiet-primary`, `quiet-destructive`, or `quiet-inverted` class to change its variant. 
+Use the `<button>` element to create a button. Add the `quiet-primary` or `quiet-destructive` class to change its variant. 
 
 <quiet-card class="preview">
   <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
     <button type="button">Default</button>
     <button type="button" class="quiet-primary">Primary</button>
     <button type="button" class="quiet-destructive">Destructive</button>
-    <button type="button" class="quiet-inverted">Inverted</button>
   </div>
 </quiet-card>
 
@@ -404,7 +403,6 @@ Use the `quiet-pill` class to make the button pill appear like pills.
     <button type="button" class="quiet-pill">Default</button>
     <button type="button" class="quiet-pill quiet-primary">Primary</button>
     <button type="button" class="quiet-pill quiet-destructive">Destructive</button>
-    <button type="button" class="quiet-pill quiet-inverted">Inverted</button>
   </div>
 </quiet-card>
 

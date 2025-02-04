@@ -7,7 +7,7 @@ layout: component
 
 ### Variants
 
-Set the `variant` attribute to `default`, `primary`, `destructive`, or `inverted` to change the button's variant.
+Set the `variant` attribute to `default`, `primary`, or `destructive` to change the button's variant.
 
 ```html {.example .flex-row}
 <quiet-button variant="default">
@@ -20,10 +20,6 @@ Set the `variant` attribute to `default`, `primary`, `destructive`, or `inverted
 
 <quiet-button variant="destructive">
   Destructive
-</quiet-button>
-
-<quiet-button variant="inverted">
-  Inverted
 </quiet-button>
 ```
 
@@ -109,10 +105,6 @@ Set the `appearance` attribute to `outline` to draw outlined buttons.
 <quiet-button appearance="outline" variant="destructive">
   Destructive
 </quiet-button>
-
-<quiet-button appearance="outline" variant="inverted">
-  Inverted
-</quiet-button>
 ```
 
 ### Text buttons
@@ -155,10 +147,6 @@ Buttons can be rendered with pill-shaped edges by adding the `pill` attribute.
 <quiet-button pill variant="destructive">
   Destructive
 </quiet-button>
-
-<quiet-button pill variant="inverted">
-  Inverted
-</quiet-button>
 ```
 
 ### Icon buttons
@@ -176,10 +164,6 @@ To create an icon button, place an icon into the button's default slot and set t
 
 <quiet-button icon-label="Delete" variant="destructive">
   <quiet-icon name="trash"></quiet-icon>
-</quiet-button>
-
-<quiet-button icon-label="Settings" variant="inverted">
-  <quiet-icon name="settings"></quiet-icon>
 </quiet-button>
 
 <quiet-button icon-label="Close" appearance="text">
@@ -202,10 +186,6 @@ Create a toggle button by adding the `toggle="off"` attribute. To make it active
 
 <quiet-button variant="destructive" toggle="off" icon-label="Record">
   <quiet-icon name="microphone"></quiet-icon>
-</quiet-button>
-
-<quiet-button variant="inverted" toggle="off" icon-label="Microphone">
-  <quiet-icon name="camera"></quiet-icon>
 </quiet-button>
 
 <quiet-button appearance="text" toggle="off" icon-label="Mute">

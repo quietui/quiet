@@ -11,14 +11,13 @@ layout: component
 
 ### Variants
 
-Set the `variant` attribute to `default`, `primary`, `constructive`, `destructive`, or `inverted` to change the badges's variant.
+Set the `variant` attribute to `default`, `primary`, `constructive`, or `destructive` to change the badges's variant.
 
 ```html {.example .flex-row}
 <quiet-badge variant="default">Default</quiet-badge>
 <quiet-badge variant="primary">Primary</quiet-badge>
 <quiet-badge variant="constructive">Constructive</quiet-badge>
 <quiet-badge variant="destructive">Destructive</quiet-badge>
-<quiet-badge variant="inverted">Inverted</quiet-badge>
 ```
 
 ### Outline badges
@@ -30,7 +29,6 @@ Set the `appearance` attribute to `outline` to draw outlined badges.
 <quiet-badge appearance="outline" variant="primary">Primary</quiet-badge>
 <quiet-badge appearance="outline" variant="constructive">Constructive</quiet-badge>
 <quiet-badge appearance="outline" variant="destructive">Destructive</quiet-badge>
-<quiet-badge appearance="outline" variant="inverted">Inverted</quiet-badge>
 ```
 
 ### Changing the size
@@ -48,9 +46,9 @@ Badges are sized relative to the current font size. This allows you to place the
 Set the `attention` attribute to `tap`, `shake`, or `sparkle` to draw attention to a badge with an animation. Remove the attribute to stop the animation. Users with a preference for reduced motion will see a more subtle pulse animation.
 
 ```html {.example .flex-row}
-<quiet-badge attention="tap" variant="inverted">Primary</quiet-badge>
-<quiet-badge attention="shake" variant="inverted">Shake</quiet-badge>
-<quiet-badge attention="sparkle" variant="inverted">Sparkle</quiet-badge>
+<quiet-badge attention="tap" variant="primary">Primary</quiet-badge>
+<quiet-badge attention="shake" variant="primary">Shake</quiet-badge>
+<quiet-badge attention="sparkle" variant="primary">Sparkle</quiet-badge>
 ```
 
 :::info

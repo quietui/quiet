@@ -14,7 +14,7 @@ layout: component
 
 ### Variants
 
-Set the `variant` attribute to `default`, `primary`, `constructive`, `destructive`, or `inverted` to change the callout's variant.
+Set the `variant` attribute to `default`, `primary`, `constructive`, or `destructive` to change the callout's variant.
 
 ```html {.example}
 <quiet-callout variant="default">
@@ -31,10 +31,6 @@ Set the `variant` attribute to `default`, `primary`, `constructive`, `destructiv
 
 <quiet-callout variant="destructive">
   This is a destructive callout. Use me when danger lies ahead.
-</quiet-callout>
-
-<quiet-callout variant="inverted">
-  This is an inverted callout. Use me when you need extra contrast.
 </quiet-callout>
 ```
 
@@ -61,11 +57,6 @@ Add an icon to a callout using the `icon` slot. Works best with `<quiet-icon>` a
 <quiet-callout variant="destructive">
   <quiet-icon slot="icon" name="alert-triangle"></quiet-icon>
   Doing this will anger the cats. Are you sure you want to continue?
-</quiet-callout>
-
-<quiet-callout variant="inverted">
-  <quiet-icon slot="icon" name="moon"></quiet-icon>
-  The cats are most active during their midnight zoomies.
 </quiet-callout>
 ```
 

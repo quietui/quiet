@@ -37,7 +37,7 @@ export default css`
       padding: 0.25rem 1rem !important;
       color: var(--quiet-text-muted) !important;
       font-weight: var(--quiet-font-weight-semibold) !important;
-      font-size: 0.75rem !important;
+      font-size: 0.75em !important;
     }
 
     ::slotted(quiet-divider) {

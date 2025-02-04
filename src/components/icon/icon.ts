@@ -86,7 +86,11 @@ export class QuietIcon extends QuietElement {
 
     // Handle rotation
     if (changedProperties.has('rotate')) {
-      this.style.rotate = `${this.rotate}deg`;
+      if (this.rotate === 0) {
+        this.style.removeProperty('rotate');
+      } else {
+        this.style.rotate = `${this.rotate}deg`;
+      }
     }
   }
 

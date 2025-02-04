@@ -1,8 +1,8 @@
 import { startLoader } from './quiet.js';
 
-startLoader();
-
 export * from './quiet.js';
+
+startLoader();
 
 // Remove the `quiet-cloak` class after initial discovery or after two seconds, whichever comes first. This
 // technique coupled with the styles in Quiet Restyle offer an easy way to eliminate FOUCE.

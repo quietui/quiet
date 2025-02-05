@@ -34,11 +34,11 @@ Sometimes, it's desirable to have a contrasting theme for certain sections of th
 
 ```html {.example .no-buttons .flex-row}
 <quiet-button class="quiet-light">
-  Default
+  Light button
 </quiet-button>
 
 <quiet-button class="quiet-dark">
-  Default
+  Dark button
 </quiet-button>
 ```
 

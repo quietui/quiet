@@ -9,9 +9,17 @@ import hostStyles from '../../styles/host.styles.js';
 import { Localize } from '../../utilities/localize.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import '../icon/icon.js';
+import '../progress/progress.js';
 import '../transition-group/transition-group.js';
 import type { QuietTransitionGroup } from '../transition-group/transition-group.js';
 import styles from './toast.styles.js';
+
+interface NotificationTimer {
+  timeoutId: number;
+  progressIntervalId: number;
+  startTime: number;
+  duration: number;
+}
 
 export interface NotifyOptions {
   /**
@@ -31,7 +39,7 @@ export interface NotifyOptions {
   variant: 'primary' | 'constructive' | 'destructive' | 'default';
 
   /** When true, draws a close button at the end of the notification. */
-  closable: boolean;
+  closeButton: boolean;
 
   /**
    * * The length of time to show the notification before removing it. Omit this option to show the notification until
@@ -56,6 +64,7 @@ export interface NotifyOptions {
  * @since 1.0.0
  *
  * @dependency quiet-icon
+ * @dependency quiet-progress
  * @dependency quiet-transition-group
  *
  * @csspart stack - The toast stack, a `<quiet-transition-group>` element.
@@ -67,6 +76,7 @@ export interface NotifyOptions {
 export class QuietToast extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
+  private activeTimers = new Map<HTMLElement, NotificationTimer>();
   private isStackShowing = false;
   private localize = new Localize(this);
 
@@ -100,6 +110,7 @@ export class QuietToast extends QuietElement {
 
     // A close button was clicked
     if (notification && target.closest('[data-toast="close"]')) {
+      this.clearDurationTimer(notification as HTMLElement);
       this.transitionGroup.transitionComplete().then(() => {
         notification?.remove();
       });
@@ -115,13 +126,47 @@ export class QuietToast extends QuietElement {
     if (event.key === 'Escape' && this.stack.children.length > 0 && !event.defaultPrevented) {
       event.preventDefault();
       await this.stack.transitionComplete();
-      this.stack.children[0].remove();
+      const notification = this.stack.children[0];
+      this.clearDurationTimer(notification as HTMLElement);
+      notification.remove();
     }
   };
 
   /** Update the positions when scrolling */
   private handleDocumentScroll = () => {
     this.stack.updateElementPositions();
+  };
+
+  /** When the notification  */
+  private handleNotificationHover = (event: MouseEvent) => {
+    const notification = event.currentTarget as HTMLElement;
+    const timer = this.activeTimers.get(notification);
+
+    if (!timer) return;
+
+    if (event.type === 'mouseenter') {
+      // Clear existing timers
+      clearTimeout(timer.timeoutId);
+      clearInterval(timer.progressIntervalId);
+
+      // Set progress to 100% while hovering
+      const progressRing = notification.querySelector('quiet-progress');
+      if (progressRing) progressRing.value = 100;
+    } else if (event.type === 'mouseleave') {
+      // Restart the timer with original duration
+      timer.startTime = Date.now();
+      timer.timeoutId = window.setTimeout(() => {
+        this.removeNotification(notification);
+      }, timer.duration);
+
+      // Restart progress updates
+      timer.progressIntervalId = window.setInterval(() => {
+        this.updateProgress(notification, timer);
+      }, 100);
+
+      // Update progress immediately
+      this.updateProgress(notification, timer);
+    }
   };
 
   /** Hides the stack when the last notification has transitioned out */
@@ -150,15 +195,58 @@ export class QuietToast extends QuietElement {
     document.addEventListener('scroll', this.handleDocumentScroll, { passive: true });
   }
 
+  private startDurationTimer(notification: HTMLElement, duration: number) {
+    this.clearDurationTimer(notification);
+
+    const timer: NotificationTimer = {
+      startTime: Date.now(),
+      duration: duration,
+      timeoutId: window.setTimeout(() => {
+        this.removeNotification(notification);
+      }, duration),
+      progressIntervalId: window.setInterval(() => {
+        this.updateProgress(notification, timer);
+      }, 100)
+    };
+
+    this.activeTimers.set(notification, timer);
+    this.updateProgress(notification, timer);
+  }
+
+  private clearDurationTimer(notification: HTMLElement) {
+    const timer = this.activeTimers.get(notification);
+    if (timer) {
+      clearTimeout(timer.timeoutId);
+      clearInterval(timer.progressIntervalId);
+      this.activeTimers.delete(notification);
+    }
+  }
+
+  private updateProgress(notification: HTMLElement, timer: NotificationTimer) {
+    const elapsed = Date.now() - timer.startTime;
+    const remaining = Math.max(0, timer.duration - elapsed);
+    const progress = remaining / timer.duration;
+    const progressRing = notification.querySelector('quiet-progress');
+    if (progressRing) progressRing.value = progress * 100;
+  }
+
+  private async removeNotification(notification: HTMLElement) {
+    await new Promise(requestAnimationFrame); // let the animation complete first
+    this.clearDurationTimer(notification);
+    this.transitionGroup.transitionComplete().then(() => {
+      notification.remove();
+    });
+  }
+
   /** Creates a toast notification and adds it to the stack. */
   public async notify(options?: Partial<NotifyOptions>) {
     const opts: NotifyOptions = {
       content: '',
       visual: '',
       variant: 'default',
-      closable: true,
+      closeButton: true,
       duration: 5000,
-      showDuration: false,
+      showDuration: true,
       ...options
     };
 
@@ -172,10 +260,14 @@ export class QuietToast extends QuietElement {
           destructive: opts.variant === 'destructive',
           default: opts.variant === 'default'
         })}
+        @mouseenter=${this.handleNotificationHover}
+        @mouseleave=${this.handleNotificationHover}
       >
         ${opts.visual ? html`<div class="visual">${opts.visual}</div>` : ''}
+
         <div class="content">${opts.content}</div>
-        ${opts.closable
+
+        ${opts.closeButton
           ? html`
               <button
                 part="close-button"
@@ -184,7 +276,18 @@ export class QuietToast extends QuietElement {
                 data-toast="close"
                 aria-label=${this.localize.term('close')}
               >
-                <quiet-icon library="system" name="x"></quiet-icon>
+                <quiet-progress
+                  part="progress"
+                  exportparts="
+                  track:progress__track,
+                  indicator:progress__indicator,
+                  content:progress__content
+                "
+                  appearance="ring"
+                  value="50"
+                >
+                  <quiet-icon library="system" name="x"></quiet-icon>
+                </quiet-progress>
               </button>
             `
           : ''}
@@ -204,6 +307,11 @@ export class QuietToast extends QuietElement {
 
     // Add the notification based on placement
     this.stack.prepend(notificationElement);
+
+    // Start the duration timer if specified
+    if (opts.duration && opts.duration > 0) {
+      this.startDurationTimer(notificationElement as HTMLElement, opts.duration);
+    }
   }
 
   /**

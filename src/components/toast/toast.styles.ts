@@ -78,7 +78,6 @@ export default css`
     flex-wrap: nowrap;
     padding-inline-start: calc(1.5em + var(--accent-line-width));
     padding-inline-end: 1em;
-    gap: 1em;
     border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
     border-radius: var(--quiet-border-radius);
     background-color: var(--quiet-paper-color);
@@ -122,6 +121,17 @@ export default css`
       padding-inline-end: 0;
     }
 
+    quiet-progress {
+      --diameter: 2.25em;
+      --track-size: 0.125em;
+      --indicator-color: var(--accent-color);
+      font-size: inherit;
+
+      quiet-icon {
+        font-size: 1.25em;
+      }
+    }
+
     .visual {
       display: flex;
       flex: 0 0 auto;
@@ -134,13 +144,17 @@ export default css`
 
     .content {
       flex: 1 1 auto;
+      padding-inline: 1em;
       padding-block: 1.5em;
+
+      &:has(+ .close-button) {
+        padding-inline-end: 0;
+      }
     }
 
     .close-button {
       display: flex;
       appearance: none;
-      flex: 0 0 auto;
       align-items: center;
       align-self: stretch;
       justify-content: center;
@@ -151,7 +165,6 @@ export default css`
       background: none;
       color: inherit;
       font: inherit;
-      font-size: 1.25em;
       cursor: pointer;
 
       &:active {

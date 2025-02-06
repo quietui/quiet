@@ -16,6 +16,7 @@ layout: component
 <script>
   const container = document.getElementById('toast__overview');
   const toast = container.querySelector('quiet-toast');
+    let showD = true;
 
   // Listen for button clicks
   container.addEventListener('click', event => {
@@ -26,10 +27,12 @@ layout: component
       content: toast.html(`Your changes <em>have</em> been saved!`),
       visual: toast.html(`<quiet-icon name="${button.dataset.icon}"></quiet-icon>`),
       variant: button.dataset.variant,
-      closable: true,
+      closeButton: true,
       duration: 5000,
-      showDuration: true,
+      showDuration: showD
     });
+    console.log(showD);
+    showD = !showD;
   });
 
 </script>

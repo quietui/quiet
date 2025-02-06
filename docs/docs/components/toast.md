@@ -16,7 +16,6 @@ layout: component
 <script>
   const container = document.getElementById('toast__overview');
   const toast = container.querySelector('quiet-toast');
-    let showD = true;
 
   // Listen for button clicks
   container.addEventListener('click', event => {
@@ -29,10 +28,7 @@ layout: component
       variant: button.dataset.variant,
       closeButton: true,
       duration: 5000,
-      showDuration: showD
     });
-    console.log(showD);
-    showD = !showD;
   });
 
 </script>

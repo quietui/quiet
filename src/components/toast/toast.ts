@@ -238,6 +238,11 @@ export class QuietToast extends QuietElement {
     });
   }
 
+  /** Immediately removes all elements from the toast stack. */
+  public empty() {
+    this.stack.innerHTML = '';
+  }
+
   /** Creates a toast notification and adds it to the stack. */
   public async notify(options?: Partial<NotifyOptions>) {
     const opts: NotifyOptions = {

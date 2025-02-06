@@ -142,13 +142,16 @@ export default css`
       color: var(--accent-color);
     }
 
+    .visual + .content {
+      padding-inline-start: 1em;
+    }
+
     .content {
       flex: 1 1 auto;
-      padding-inline: 1em;
       padding-block: 1.5em;
 
       &:has(+ .close-button) {
-        padding-inline-end: 0;
+        padding-inline-end: 1rem;
       }
     }
 
@@ -160,7 +163,7 @@ export default css`
       justify-content: center;
       margin: 0;
       padding: 0;
-      padding-inline: 1em;
+      padding-inline: 1.25em;
       border: none;
       background: none;
       color: inherit;

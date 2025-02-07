@@ -23,17 +23,11 @@ interface NotificationTimer {
 
 export interface NotifyOptions {
   /**
-   * The content to display in the notification. To provide HTML content, wrap the HTML string in the toast's `html()`
-   * method. All user-provided content must be properly sanitized to prevent XSS vulnerabilities.
+   * Optional content to show at the start of the notification. Usually an icon, image, avatar, or similar content.
+   * Avoid placing interactive content in the icon. To provide HTML content, wrap the HTML string in the toast's
+   * `html()` method. All user-provided content must be properly sanitized to prevent XSS vulnerabilities.
    */
-  content: string;
-
-  /**
-   * Optional content to show as a visual at the start of the notification. Usually an icon, image, avatar, or similar
-   * content. Avoid placing interactive content in the visual. To provide HTML content, wrap the HTML string in the
-   * toast's `html()` method. All user-provided content must be properly sanitized to prevent XSS vulnerabilities.
-   */
-  visual: string | DirectiveResult<typeof UnsafeHTMLDirective>;
+  icon: string | DirectiveResult<typeof UnsafeHTMLDirective>;
 
   /** The type of notification to render. */
   variant: 'primary' | 'constructive' | 'destructive' | 'default';
@@ -42,16 +36,10 @@ export interface NotifyOptions {
   closeButton: boolean;
 
   /**
-   * * The length of time to show the notification before removing it. Omit this option to show the notification until
-   * the user dismisses it.
+   * The length of time to show the notification before removing it. Set this to `0` to show the notification until the
+   * user dismisses it.
    */
   duration: number;
-
-  /**
-   * When `duration` is set, this option will show a progress ring that indicates when the notification will be
-   * automatically removed.
-   */
-  showDuration: boolean;
 }
 
 /**
@@ -67,8 +55,14 @@ export interface NotifyOptions {
  * @dependency quiet-progress
  * @dependency quiet-transition-group
  *
- * @csspart stack - The toast stack, a `<quiet-transition-group>` element.
+ * @csspart stack - The toast stack, a `<quiet-transition-group>` element that's fixed by default and rendered in the
+ *  top layer.
  * @csspart notification - The notification's primary container.
+ * @csspart progress - The progress ring that shows when a duration is set, a `<quiet-progress>`.
+ * @csspart progress__track - The progress ring's exported `track` part.
+ * @csspart progress__indicator - The progress ring's exported `indicator` part.
+ * @csspart progress__content - The progress ring's exported `content` part.
+ * @csspart close-button - The notification's close button, a `<button>` element.
  *
  * @cssstate visible - Applied when the toast stack is visible.
  */
@@ -181,6 +175,7 @@ export class QuietToast extends QuietElement {
     this.hidePopover();
     this.stack.hidden = true;
     this.isStackShowing = false;
+    this.customStates.set('visible', false);
     document.removeEventListener('keydown', this.handleDocumentKeyDown);
     document.removeEventListener('scroll', this.handleDocumentScroll);
   }
@@ -190,6 +185,7 @@ export class QuietToast extends QuietElement {
     if (this.isStackShowing) return;
     this.isStackShowing = true;
     this.stack.hidden = false;
+    this.customStates.set('visible', true);
     this.showPopover();
     document.addEventListener('keydown', this.handleDocumentKeyDown);
     document.addEventListener('scroll', this.handleDocumentScroll, { passive: true });
@@ -244,14 +240,12 @@ export class QuietToast extends QuietElement {
   }
 
   /** Creates a toast notification and adds it to the stack. */
-  public async notify(options?: Partial<NotifyOptions>) {
+  public async notify(content: string | DirectiveResult<typeof UnsafeHTMLDirective>, options?: Partial<NotifyOptions>) {
     const opts: NotifyOptions = {
-      content: '',
-      visual: '',
+      icon: '',
       variant: 'default',
       closeButton: true,
       duration: 5000,
-      showDuration: true,
       ...options
     };
 
@@ -268,9 +262,9 @@ export class QuietToast extends QuietElement {
         @mouseenter=${this.handleNotificationHover}
         @mouseleave=${this.handleNotificationHover}
       >
-        ${opts.visual ? html`<div class="visual">${opts.visual}</div>` : ''}
+        ${opts.icon ? html`<div class="icon">${opts.icon}</div>` : ''}
 
-        <div class="content">${opts.content}</div>
+        <div class="content">${content}</div>
 
         ${opts.closeButton
           ? html`
@@ -281,18 +275,22 @@ export class QuietToast extends QuietElement {
                 data-toast="close"
                 aria-label=${this.localize.term('close')}
               >
-                <quiet-progress
-                  part="progress"
-                  exportparts="
-                  track:progress__track,
-                  indicator:progress__indicator,
-                  content:progress__content
-                "
-                  appearance="ring"
-                  value="50"
-                >
-                  <quiet-icon library="system" name="x"></quiet-icon>
-                </quiet-progress>
+                ${opts.duration > 0 && Number.isFinite(opts.duration)
+                  ? html`
+                      <quiet-progress
+                        part="progress"
+                        exportparts="
+                          track:progress__track,
+                          indicator:progress__indicator,
+                          content:progress__content
+                        "
+                        appearance="ring"
+                        value="50"
+                      >
+                        <quiet-icon library="system" name="x"></quiet-icon>
+                      </quiet-progress>
+                    `
+                  : html` <quiet-icon library="system" name="x"></quiet-icon> `}
               </button>
             `
           : ''}
@@ -314,13 +312,13 @@ export class QuietToast extends QuietElement {
     this.stack.prepend(notificationElement);
 
     // Start the duration timer if specified
-    if (opts.duration && opts.duration > 0) {
+    if (opts.duration > 0 && Number.isFinite(opts.duration)) {
       this.startDurationTimer(notificationElement as HTMLElement, opts.duration);
     }
   }
 
   /**
-   * When creating a notification, you can pass HTML to `content` and `visual` by wrapping it in this method. Remember
+   * When creating a notification, you can pass HTML to `content` and `icon` by wrapping it in this method. Remember
    * to sanitize untrusted input to prevent XSS attacks!
    */
   public html(html: string) {

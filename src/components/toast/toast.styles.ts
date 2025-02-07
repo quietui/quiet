@@ -3,7 +3,7 @@ import { css } from 'lit';
 export default css`
   :host {
     position: fixed;
-    width: 450px;
+    width: 460px;
     height: 100dvh;
     max-height: 100dvh;
     margin: 0;
@@ -14,9 +14,15 @@ export default css`
     background: transparent;
     pointer-events: none;
     scrollbar-width: thin;
+  }
 
-    @media screen and (max-width: 499px) {
-      max-width: none;
+  :host(:not(:state(visible))) {
+    display: none;
+  }
+
+  @media screen and (max-width: 499px) {
+    :host {
+      width: 100%;
     }
   }
 
@@ -76,6 +82,7 @@ export default css`
     display: flex;
     position: relative;
     flex-wrap: nowrap;
+    width: 100%;
     padding-inline-start: calc(1.5em + var(--accent-line-width));
     padding-inline-end: 1em;
     border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
@@ -121,38 +128,26 @@ export default css`
       padding-inline-end: 0;
     }
 
-    quiet-progress {
-      --diameter: 2.25em;
-      --track-size: 0.125em;
-      --indicator-color: var(--accent-color);
-      font-size: inherit;
-
-      quiet-icon {
-        font-size: 1.25em;
-      }
-    }
-
-    .visual {
+    .icon {
       display: flex;
       flex: 0 0 auto;
       align-items: center;
       justify-content: center;
-      font-size: 1.5em;
-      stroke-width: 1.25px;
       color: var(--accent-color);
+
+      quiet-icon {
+        stroke-width: 1.25px;
+        font-size: 2em;
+      }
     }
 
-    .visual + .content {
+    .icon + .content {
       padding-inline-start: 1em;
     }
 
     .content {
       flex: 1 1 auto;
       padding-block: 1.5em;
-
-      &:has(+ .close-button) {
-        padding-inline-end: 1rem;
-      }
     }
 
     .close-button {
@@ -181,6 +176,17 @@ export default css`
       &:focus-visible {
         outline: var(--quiet-focus-ring);
         outline-offset: var(--quiet-focus-offset);
+      }
+
+      quiet-progress {
+        --diameter: 2.25em;
+        --track-size: 0.125em;
+        --indicator-color: var(--accent-color);
+        font-size: inherit;
+      }
+
+      quiet-icon {
+        font-size: 1.25em;
       }
     }
   }

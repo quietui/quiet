@@ -64,15 +64,15 @@ export class QuietToastItem extends QuietElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.addEventListener('mouseenter', this.handleMouseEnter);
-    this.addEventListener('mouseleave', this.handleMouseLeave);
+    this.addEventListener('pointerenter', this.handlePointerEnter);
+    this.addEventListener('pointerleave', this.handlePointerLeave);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     this.stopTimer();
-    this.removeEventListener('mouseenter', this.handleMouseEnter);
-    this.removeEventListener('mouseleave', this.handleMouseLeave);
+    this.removeEventListener('pointerenter', this.handlePointerEnter);
+    this.removeEventListener('pointerleave', this.handlePointerLeave);
   }
 
   /**
@@ -120,14 +120,17 @@ export class QuietToastItem extends QuietElement {
   }
 
   /** Pause the timer on hover in */
-  private handleMouseEnter = () => {
-    this.isPaused = true;
-    this.timeLeft = 100;
-    this.stopTimer();
+  private handlePointerEnter = (event: PointerEvent) => {
+    // Don't pause for touch, since that will pause the timer indefinitely
+    if (event.pointerType === 'mouse' || event.pointerType === 'pen') {
+      this.isPaused = true;
+      this.timeLeft = 100;
+      this.stopTimer();
+    }
   };
 
   /** Resume the timer on hover out */
-  private handleMouseLeave = () => {
+  private handlePointerLeave = () => {
     this.isPaused = false;
     this.startTimer();
   };

@@ -43,7 +43,7 @@ export class QuietTransitionGroup extends QuietElement {
   public isTransitioning = false;
 
   /**
-   * A custom animation to use for enter/exit transitions,  Works well with animations from `@quietui/scurry`.
+   * A custom animation to use for enter/exit transitions. Works well with animations from `@quietui/scurry`.
    * (Property only)
    */
   public transitionAnimation?: QuietTransitionAnimation;

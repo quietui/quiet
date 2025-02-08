@@ -1,7 +1,7 @@
 import type { QuietTransitionAnimation } from '@quietui/scurry';
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 import { QuietContentChangedEvent } from '../../events/content.js';
 import { QuietTransitionEndEvent } from '../../events/transition.js';
 import hostStyles from '../../styles/host.styles.js';
@@ -34,25 +34,31 @@ export class QuietTransitionGroup extends QuietElement {
   private cachedContainerPosition: DOMRect;
   private cachedElementPositions = new WeakMap<HTMLElement, DOMRect>();
   private cachedScrollPosition: { x: number; y: number } = { x: window.scrollX, y: window.scrollY };
+  private currentTransition = Promise.resolve();
   private isObserving = false;
   private mutationObserver: MutationObserver;
   private resizeObserver: ResizeObserver;
-  private transitionCompleteResolve: (() => void) | null = null;
 
   /** Determines if the transition group is currently animating. (Property only) */
   public isTransitioning = false;
 
   /**
-   * A custom animation to use for enter/exit transitions,  Works well with animations from `@quietui/scurry`.
+   * A custom animation to use for enter/exit transitions. Works well with animations from `@quietui/scurry`.
    * (Property only)
    */
   public transitionAnimation?: QuietTransitionAnimation;
 
   /**
-   * A promise that resolves when the current or next transition ends. This is a great way to ensure transitions have
-   * stopped before doing something else. (Property only)
+   * By default, the transition group observes and animates its own children. In some cases, you may want it to control
+   * another element's children. This is useful in cases where you can't directly wrap child elements with the
+   * `<quiet-transition-group>` element.
+   *
+   * For example, if you embed a transition group in a component's shadow root but need it to control slotted (light
+   * DOM) elements, you can't simply wrap the slot because the mutation observer can't see projected (slotted) elements.
+   * In this case, point this property to the target element and the transition group will hide itself and observe the
+   * target container's children instead. (Property only)
    */
-  public transitionComplete: Promise<void> = Promise.resolve();
+  @state() public transitionContainer: HTMLElement = this;
 
   /**
    * Disables transition animations. However, the `quiet-content-changed` and `quiet-transition-end` events will still
@@ -65,11 +71,6 @@ export class QuietTransitionGroup extends QuietElement {
    * override this behavior when necessary.
    */
   @property({ attribute: 'ignore-reduced-motion', type: Boolean, reflect: true }) ignoreReducedMotion = false;
-
-  constructor() {
-    super();
-    this.createNewTransitionPromise();
-  }
 
   connectedCallback() {
     super.connectedCallback();
@@ -86,19 +87,21 @@ export class QuietTransitionGroup extends QuietElement {
     this.updateElementPositions();
   }
 
-  /** Creates a new promise held in `this.transitionComplete` */
-  private createNewTransitionPromise() {
-    this.transitionComplete = new Promise(resolve => {
-      this.transitionCompleteResolve = resolve;
-    });
-  }
+  updated(changedProperties: PropertyValues<this>) {
+    // Handle container changes
+    if (changedProperties.has('transitionContainer')) {
+      const oldContainer = changedProperties.get('transitionContainer');
 
-  /** Resolves the promise held in `this.transitionComplete` */
-  private resolveTransitionPromise() {
-    if (this.transitionCompleteResolve) {
-      this.transitionCompleteResolve();
-      this.transitionCompleteResolve = null;
-      this.createNewTransitionPromise();
+      // Hide the transition group when it's controlling another container
+      this.hidden = this.transitionContainer !== this;
+
+      // Skip the first update, since we're starting the observers in connectedCallback
+      if (oldContainer !== undefined) {
+        // Restart the observes and update positions to reflect the new container
+        this.stopObservers();
+        this.updateElementPositions();
+        this.startObservers();
+      }
     }
   }
 
@@ -159,8 +162,9 @@ export class QuietTransitionGroup extends QuietElement {
     if (prefersReducedMotion || this.disableTransitions) {
       this.isTransitioning = false;
       this.customStates.set('transitioning', false);
+      // We dispatch this even when no transition occurs so users can hook into it reliably
+      this.dispatchEvent(new QuietTransitionEndEvent());
       this.updateElementPositions();
-      this.resolveTransitionPromise();
       this.startObservers();
       return;
     }
@@ -168,134 +172,141 @@ export class QuietTransitionGroup extends QuietElement {
     this.isTransitioning = true;
     this.customStates.set('transitioning', true);
 
-    // Find elements that were added and removed in this mutation
-    mutations.forEach(mutation => {
-      // Added
-      mutation.addedNodes.forEach(node => {
-        if (node.nodeType === Node.ELEMENT_NODE) {
-          addedElements.set(node as HTMLElement, {
-            parent: mutation.target as HTMLElement,
-            nextSibling: mutation.nextSibling as HTMLElement | null
-          });
+    // Start a new promise so we can resolve it when the transition ends
+    this.currentTransition = new Promise<void>(async resolveTransition => {
+      // Find elements that were added and removed in this mutation
+      mutations.forEach(mutation => {
+        // Added
+        mutation.addedNodes.forEach(node => {
+          if (node.nodeType === Node.ELEMENT_NODE) {
+            const el = node as HTMLElement;
+            addedElements.set(el, {
+              parent: mutation.target as HTMLElement,
+              nextSibling: mutation.nextSibling as HTMLElement | null
+            });
+          }
+        });
+
+        // Removed
+        mutation.removedNodes.forEach(node => {
+          if (node.nodeType === Node.ELEMENT_NODE) {
+            const el = node as HTMLElement;
+            removedElements.set(el, {
+              parent: mutation.target as HTMLElement,
+              nextSibling: mutation.nextSibling as HTMLElement | null
+            });
+          }
+        });
+      });
+
+      // Determine which elements were moved
+      addedElements.forEach((info, el) => {
+        const removedElementInfo = removedElements.get(el);
+        if (removedElementInfo && info.parent === removedElementInfo.parent) {
+          movedElements.set(el, info);
+          addedElements.delete(el);
+          removedElements.delete(el);
         }
       });
 
-      // Removed
-      mutation.removedNodes.forEach(node => {
-        if (node.nodeType === Node.ELEMENT_NODE) {
-          removedElements.set(node as HTMLElement, {
-            parent: mutation.target as HTMLElement,
-            nextSibling: mutation.nextSibling as HTMLElement | null
-          });
+      // Hide added elements while we remove
+      addedElements.forEach((_opts, el) => (el.hidden = true));
+
+      // Animate removed elements
+      removedElements.forEach((opts, el) => {
+        if (opts.nextSibling) {
+          opts.nextSibling.before(el);
+        } else {
+          this.transitionContainer.append(el);
         }
+
+        removeAnimations.push(
+          new Promise(async resolve => {
+            const promise = await el.animate(exit.keyframes, { duration: duration, easing: exit.easing }).finished;
+            el.remove();
+            resolve(promise);
+          })
+        );
       });
-    });
 
-    // Determine which elements were moved
-    addedElements.forEach((info, el) => {
-      const removedElementInfo = removedElements.get(el);
-      if (removedElementInfo && info.parent === removedElementInfo.parent) {
-        movedElements.set(el, info);
-        addedElements.delete(el);
-        removedElements.delete(el);
-      }
-    });
+      // Run remove animations
+      await Promise.allSettled(removeAnimations);
 
-    // Hide added elements while we remove
-    addedElements.forEach((_opts, el) => (el.hidden = true));
+      // Add back added elements but keep them invisible for now
+      addedElements.forEach((_opts, el) => {
+        el.hidden = false;
+        el.style.opacity = '0';
+      });
 
-    // Animate removed elements
-    removedElements.forEach((opts, el) => {
-      if (opts.nextSibling) {
-        opts.nextSibling.before(el);
-      } else {
-        this.append(el);
-      }
-
-      removeAnimations.push(
-        new Promise(async resolve => {
-          const promise = await el.animate(exit.keyframes, { duration: duration, easing: exit.easing }).finished;
-          el.remove();
-          resolve(promise);
-        })
-      );
-    });
-
-    // Run remove animations
-    await Promise.allSettled(removeAnimations);
-
-    // Add back added elements but keep them invisible for now
-    addedElements.forEach((_opts, el) => {
-      el.hidden = false;
-      el.style.opacity = '0';
-    });
-
-    // Resize the container
-    const newContainerPosition = this.getBoundingClientRect();
-    if (
-      newContainerPosition.width !== this.cachedContainerPosition.width ||
-      newContainerPosition.height !== this.cachedContainerPosition.height
-    ) {
-      containerAnimations.push(
-        this.animate(
-          [
-            { width: `${this.cachedContainerPosition.width}px`, height: `${this.cachedContainerPosition.height}px` },
-            { width: `${newContainerPosition.width}px`, height: `${newContainerPosition.height}px` }
-          ],
-          { duration, easing: 'ease' }
-        ).finished
-      );
-    }
-
-    // Animate moved elements
-    [...this.children].forEach((el: HTMLElement) => {
-      const oldPosition = this.cachedElementPositions.get(el);
-      const newPosition = el.getBoundingClientRect();
-
-      // Don't animate elements that haven't moved or were just now added/removed
+      // Resize the container
+      const newContainerPosition = this.getBoundingClientRect();
       if (
-        !oldPosition ||
-        !hasDomRectMoved(oldPosition, newPosition) ||
-        addedElements.has(el) ||
-        removedElements.has(el)
+        newContainerPosition.width !== this.cachedContainerPosition.width ||
+        newContainerPosition.height !== this.cachedContainerPosition.height
       ) {
-        return;
+        containerAnimations.push(
+          this.animate(
+            [
+              { width: `${this.cachedContainerPosition.width}px`, height: `${this.cachedContainerPosition.height}px` },
+              { width: `${newContainerPosition.width}px`, height: `${newContainerPosition.height}px` }
+            ],
+            { duration, easing: 'ease' }
+          ).finished
+        );
       }
 
-      const translateX = oldPosition.left - newPosition.left - (window.scrollX - this.cachedScrollPosition.x);
-      const translateY = oldPosition.top - newPosition.top - (window.scrollY - this.cachedScrollPosition.y);
+      // Animate moved elements
+      [...this.transitionContainer.children].forEach((el: HTMLElement) => {
+        const oldPosition = this.cachedElementPositions.get(el);
+        const newPosition = el.getBoundingClientRect();
 
-      moveAnimations.push(
-        el.animate([{ translate: `${translateX}px ${translateY}px` }, { translate: `0 0` }], {
-          duration,
-          easing: 'cubic-bezier(0.45, 0, 0.55, 1)'
-        }).finished
-      );
+        // Don't animate elements that haven't moved or were just now added/removed
+        if (
+          !oldPosition ||
+          !hasDomRectMoved(oldPosition, newPosition) ||
+          addedElements.has(el) ||
+          removedElements.has(el)
+        ) {
+          return;
+        }
+
+        const translateX = oldPosition.left - newPosition.left - (window.scrollX - this.cachedScrollPosition.x);
+        const translateY = oldPosition.top - newPosition.top - (window.scrollY - this.cachedScrollPosition.y);
+
+        moveAnimations.push(
+          el.animate([{ translate: `${translateX}px ${translateY}px` }, { translate: `0 0` }], {
+            duration,
+            easing: 'cubic-bezier(0.45, 0, 0.55, 1)'
+          }).finished
+        );
+      });
+
+      // Run move animations
+      await Promise.allSettled(moveAnimations);
+
+      // Animate added elements
+      addedElements.forEach((_opts, el) => {
+        el.style.removeProperty('opacity');
+        addAnimations.push(el.animate(enter.keyframes, { easing: enter.easing, duration }).finished);
+      });
+
+      // Run add and container animations concurrently
+      await Promise.allSettled([...addAnimations, ...containerAnimations]);
+
+      // Cache new positions
+      this.updateElementPositions();
+      this.isTransitioning = false;
+      this.customStates.set('transitioning', false);
+
+      // Restart the mutation observer now that we're done
+      this.startObservers();
+
+      // Dispatch the quiet-transition-end event
+      this.dispatchEvent(new QuietTransitionEndEvent());
+
+      // Resolve the promise
+      resolveTransition();
     });
-
-    // Run move animations
-    await Promise.allSettled(moveAnimations);
-
-    // Animate added elements
-    addedElements.forEach((_opts, el) => {
-      el.style.removeProperty('opacity');
-      addAnimations.push(el.animate(enter.keyframes, { easing: enter.easing, duration }).finished);
-    });
-
-    // Run add and container animations concurrently
-    await Promise.allSettled([...addAnimations, ...containerAnimations]);
-
-    // Cache new positions
-    this.updateElementPositions();
-    this.isTransitioning = false;
-    this.customStates.set('transitioning', false);
-
-    // Restart the mutation observer now that we're done
-    this.startObservers();
-
-    // Dispatch the quiet-transition-end event
-    this.dispatchEvent(new QuietTransitionEndEvent());
-    this.resolveTransitionPromise();
   };
 
   private handleResizes = () => {
@@ -319,7 +330,7 @@ export class QuietTransitionGroup extends QuietElement {
     }
 
     // Start observing mutations
-    this.mutationObserver.observe(this, {
+    this.mutationObserver.observe(this.transitionContainer, {
       childList: true,
       characterData: false
     });
@@ -338,15 +349,29 @@ export class QuietTransitionGroup extends QuietElement {
   }
 
   /**
+   * Returns a promise that resolves when the current transition ends. If no transition is running, it resolves
+   * immediately  This is a great way to ensure transitions have stopped before doing something else, such as adding or
+   * removing new elements to the transition group.
+   */
+  public async transitionComplete() {
+    // Wait a cycle to make sure we don't have mutations since the mutation observer callback is async. If an animation
+    // has starts, a new promise will be set in `this.currentTransition`. Otherwise, we can return the old resolved one.
+    await new Promise(requestAnimationFrame);
+
+    // Wait for the current transition to finish
+    await this.currentTransition;
+  }
+
+  /**
    * Updates the cached coordinates of all child elements in the transition group. In most cases, you shouldn't have to
    * call this method. However, if you're resizing or animating elements imperatively, you may need to call this
    * immediately before appending or removing elements to ensure a smooth transition.
    */
   public updateElementPositions() {
-    this.cachedContainerPosition = this.getBoundingClientRect();
+    this.cachedContainerPosition = this.transitionContainer.getBoundingClientRect();
     this.cachedScrollPosition = { x: window.scrollX, y: window.scrollY };
 
-    [...this.children].forEach((el: HTMLElement) => {
+    [...this.transitionContainer.children].forEach((el: HTMLElement) => {
       this.cachedElementPositions.set(el, el.getBoundingClientRect());
     });
   }

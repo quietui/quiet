@@ -336,7 +336,7 @@ Avoid making DOM changes while a transition is running. The `transitionComplete`
     transitionGroup.append(box);
 
     // Wait for the transition to complete and enable the button
-    await transitionGroup.transitionComplete;
+    await transitionGroup.transitionComplete();
     swapButton.disabled = false;
   });
 </script>
@@ -514,7 +514,6 @@ Here you can preview the animations that are available in Scurry.
     const animation = manifest.find(a => a.name === name);
     if (!animation) return;
     transitionGroup.transitionAnimation = animations[name]({ dir: 'ltr' });
-    console.log(animations[name]({ dir: 'ltr' }).enter)
     copyAnimationFromCdnButton.data = `import { ${name} } from 'https://cdn.jsdelivr.net/npm/@quietui/scurry@5/${animation.path}';`;
     copyAnimationFromNpmButton.data = `import { ${name} } from '@quietui/scurry';`;
     description.textContent = animation.description;
@@ -543,12 +542,12 @@ Here you can preview the animations that are available in Scurry.
     transitionGroup.querySelector('.box').after(pinkBox);
 
     // Wait for the transition to complete
-    await transitionGroup.transitionComplete;
+    await transitionGroup.transitionComplete();
 
     // Remove the box after a moment
     setTimeout(async () => {
       pinkBox.remove();
-      await transitionGroup.transitionComplete;
+      await transitionGroup.transitionComplete();
       swapButton.disabled = false;
     }, 500);
   }

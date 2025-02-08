@@ -815,7 +815,8 @@ quiet-callout {
       background-color: color-mix(in oklab, var(--quiet-neutral-fill-soft), transparent 50%);
     }
 
-    kbd {
+    kbd,
+    quiet-hotkey {
       border-color: var(--quiet-neutral-fill-soft);
       box-shadow: 0 max(1px, 0.0715em) 0 0 var(--quiet-neutral-fill-soft);
     }
@@ -826,7 +827,8 @@ quiet-callout {
       background-color: color-mix(in oklab, var(--quiet-primary-fill-soft), transparent 50%);
     }
 
-    kbd {
+    kbd,
+    quiet-hotkey {
       border-color: var(--quiet-primary-fill-soft);
       box-shadow: 0 max(1px, 0.0715em) 0 0 var(--quiet-primary-fill-soft);
     }
@@ -837,7 +839,8 @@ quiet-callout {
       background-color: color-mix(in oklab, var(--quiet-constructive-fill-soft), transparent 50%);
     }
 
-    kbd {
+    kbd,
+    quiet-hotkey {
       border-color: var(--quiet-constructive-fill-soft);
       box-shadow: 0 max(1px, 0.0715em) 0 0 var(--quiet-constructive-fill-soft);
     }
@@ -848,7 +851,8 @@ quiet-callout {
       background-color: color-mix(in oklab, var(--quiet-destructive-fill-soft), transparent 50%);
     }
 
-    kbd {
+    kbd,
+    quiet-hotkey {
       border-color: var(--quiet-destructive-fill-soft);
       box-shadow: 0 max(1px, 0.0715em) 0 0 var(--quiet-destructive-fill-soft);
     }

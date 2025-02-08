@@ -13,7 +13,7 @@ const keywordMap = {
   option: { mac: '⌥', other: 'Alt' },
   shift: { mac: '⇧', other: 'Shift' },
   escape: { mac: 'Esc', other: 'Esc' },
-  enter: '↩',
+  enter: '⏎',
   backspace: '⌫',
   delete: '⌦',
   tab: '⇥',

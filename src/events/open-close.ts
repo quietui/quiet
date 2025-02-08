@@ -1,7 +1,7 @@
 /** Emitted when the element is opened. Calling `event.preventDefault` will prevent the element from opening. */
 export class QuietOpenEvent extends Event {
-  constructor() {
-    super('quiet-open', { bubbles: true, cancelable: true, composed: true });
+  constructor(options = { cancelable: true }) {
+    super('quiet-open', { bubbles: true, cancelable: options.cancelable, composed: true });
   }
 }
 
@@ -19,15 +19,15 @@ export class QuietOpenedEvent extends Event {
 export class QuietCloseEvent extends Event {
   readonly detail: QuietCloseEventDetails;
 
-  constructor(detail: QuietCloseEventDetails) {
-    super('quiet-close', { bubbles: true, cancelable: true, composed: true });
+  constructor(detail: QuietCloseEventDetails, options = { cancelable: true }) {
+    super('quiet-close', { bubbles: true, cancelable: options.cancelable, composed: true });
     this.detail = detail;
   }
 }
 
 interface QuietCloseEventDetails {
   /** The element that triggered the close action, if available. */
-  source: Element;
+  source: Element | null;
 }
 
 /** Emitted after the element is closed and applicable animations have completed. */

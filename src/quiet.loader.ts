@@ -9,4 +9,6 @@ startLoader();
 Promise.race([
   new Promise(resolve => document.addEventListener('quiet-discovery-complete', resolve)),
   new Promise(resolve => setTimeout(resolve, 2000))
-]).then(() => document.documentElement.classList.remove('quiet-cloak'));
+]).then(() => {
+  document.querySelectorAll('.quiet-cloak').forEach(el => el.classList.remove('quiet-cloak'));
+});

@@ -139,6 +139,12 @@ Components can be sized one of three ways.
 
 By default, components should scale relative to the current font size unless they're a form control or sizing makes more sense to be done with a custom property.
 
+### Naming sizes
+
+Sizes in attributes, utility classes, and similar uses should use shorthand t-shirt sizing: `xs`, `sm`, `md`, `lg`, `xl`
+
+Avoid using the `xxs` and `xxl` pattern. For additional scales, use `2xs` and `2xl` as it's more accessible, especially to visually impaired users.
+
 ### Dependencies
 
 A component should import and mark another component as a dependency when a) the dependency is rendered as part of the host element's shadow root or b) the dependency must be slotted in for the host element to function. For example, `<quiet-dropdown-item>` is a dependency of `<quiet-dropdown>`, even though the user slots it in.

@@ -162,6 +162,8 @@ export class QuietTransitionGroup extends QuietElement {
     if (prefersReducedMotion || this.disableTransitions) {
       this.isTransitioning = false;
       this.customStates.set('transitioning', false);
+      // We dispatch this even when no transition occurs so users can hook into it reliably
+      this.dispatchEvent(new QuietTransitionEndEvent());
       this.updateElementPositions();
       this.startObservers();
       return;

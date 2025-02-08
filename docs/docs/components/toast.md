@@ -3,7 +3,7 @@ title: Toast
 layout: component
 ---
 
-Adding a single `<quiet-toast>` element to the page gives you the power to dispatch one or more notifications at any time. Notifications will appear in the _toast stack_, a container that renders in the [top layer](https://developer.mozilla.org/en-US/docs/Glossary/Top_layer) and shows above everything else on the page.
+Adding a single `<quiet-toast>` element to the page gives you the power to dispatch notifications any time. Notifications will appear in the _toast stack_, which renders in the [top layer](https://developer.mozilla.org/en-US/docs/Glossary/Top_layer) and shows above everything else on the page.
 
 ```html {.example}
 <quiet-toast id="toast__overview"></quiet-toast>
@@ -14,8 +14,12 @@ Adding a single `<quiet-toast>` element to the page gives you the power to dispa
   const button = toast.nextElementSibling;
 
   button.addEventListener('click', () => { 
-    toast.notify('The notification has been sent', {
-      icon: toast.html(`<quiet-icon name="send"></quiet-icon>`),
+    toast.create(`
+      <quiet-avatar slot="icon" label="Meowy McGee's avatar" image="https://images.unsplash.com/photo-1672487209629-4d52e0c043d0?q=80&w=256&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"></quiet-avatar>
+      <strong>Meowy McGee</strong><br>
+      <small style="color: var(--quiet-text-muted);">has sent you a message</small>
+    `, {
+      allowHtml: true,
       variant: 'primary'
     });
   });
@@ -30,64 +34,72 @@ You can put the `<quiet-toast>` element anywhere in the DOM, as long as its some
 
 ### Creating notifications
 
-Start by placing a `<quiet-toast>` somewhere on the page and obtain a reference to it. To dispatch a notification, call the toast's `notify()` method as shown below.
+Start by placing a `<quiet-toast>` somewhere on the page and obtain a reference to it. To dispatch a notification, call the toast's `create()` method as shown below.
 
 ```html
 <quiet-toast></quiet-toast>
-<quiet-button>Show notification</quiet-button>
 
 <script>
   const toast = document.querySelector('quiet-toast');
   const button = document.querySelector('quiet-button');
 
   button.addEventListener('click', () => { 
-    toast.notify('The notification has been sent', {
+    toast.create('The notification has been sent', {
       variant: 'primary',
-      duration: 5000,
-      closeButton: true
+      duration: 5000
     });
   });
 </script>
 ```
 
-The first argument is the content to show in the notification and is required. The second argument is an object containing the following properties, all of which are optional.
+The first argument is the content to show in the notification. The second argument is an object containing any of the following properties, all of which are optional.
 
-- `variant` - The type of notification to render, either `primary`, `constructive`, `destructive`, or `default`.
-- `duration` - The length of time in milliseconds to show the notification before removing it. Set this to `0` to show the notification until the user dismisses it.
-- `icon` - Optional content to show at the start of the notification. Usually an icon, image, avatar, or similar content. Avoid placing interactive content in the icon. To provide HTML content, wrap the HTML string in the toast's `html()` method. All user-provided content must be properly sanitized to prevent XSS vulnerabilities.
-- `closeButton` - Set this to `false` to hide the the close button.
+| Property | Description | Default |
+| -------- | ----------- | ------- |
+| `allowHtml` | Set this to true to allow HTML content. Make sure you trust the included content, otherwise your app may become vulnerable to XSS exploits! | `false` |
+| `duration` | The length of time in milliseconds to show the notification before removing it. Set this to `0` to show the notification until the user dismisses it. | `5000` |
+| `variant` | The type of notification to render, either `primary`, `constructive`, `destructive`, or `default`. | `default` |
 
-### Showing HTML content
+### Creating notifications from templates
 
-Content shown in the notification will be rendered as plain text by default. To show HTML instead, wrap the content in the toast's `html()` method. This works for both content and the `icon` option. For accessibility reasons, it's usually better to avoid placing interactive content inside notifications.
+To create notifications declaratively, place a single [`<quiet-toast-item>`](/docs/components/toast-item) in a [template](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template) and call the toast's `createFromTemplate()` method. The toast item will be cloned and added to the stack.
+
 
 ```html {.example}
-<quiet-toast id="toast__html"></quiet-toast>
-<quiet-button>Show notification</quiet-button>
+<div id="toast__declarative">
+  <!-- Toast stack -->
+  <quiet-toast></quiet-toast>
+
+  <!-- The toast item must be in a <template>! -->
+  <template>
+    <quiet-toast-item variant="primary" duration="3000">
+      <quiet-icon slot="icon" name="click"></quiet-icon>
+      This was generated from a template.
+    </quiet-toast-item>
+  </template>
+
+  <quiet-button>Show notification</quiet-button>
+</div>
 
 <script>
-  const toast = document.getElementById('toast__html');
-  const button = toast.nextElementSibling;
+  const container = document.getElementById('toast__declarative');
+  const toast = container.querySelector('quiet-toast');
+  const template = container.querySelector('template');
+  const button = container.querySelector('quiet-button');
 
   button.addEventListener('click', () => { 
-    toast.notify(toast.html(`The <s>mice</s> <em>cats</em> have discovered how to use HTML`), {
-      icon: toast.html(`<quiet-icon name="cat"></quiet-icon>`)
-    });
+    toast.createFromTemplate(template);
   });
 </script>
 ```
 
-:::warn
-Using this option can be dangerous! Make sure you trust the included content, otherwise your app may become vulnerable to XSS exploits!
-:::
-
 :::info
-Notifications are rendered in the toast's shadow root, so HTML content may not appear with the same styles as the rest of your page. If necessary, you can add a `<style>` block to the HTML with any styles you'd like to pass to the notification.
+Refer to the [toast item](/docs/components/toast-item) docs to see more examples of creating notifications declaratively.
 :::
 
 ### Variants
 
-When calling `notify()`, set the `variant` option to `primary`, `constructive`, `destructive`, or `default` to change the type of notification.
+When calling `create()`, set the `variant` option to `primary`, `constructive`, `destructive`, or `default` to change the type of notification.
 
 ```html {.example}
 <div id="toast__variant">
@@ -111,8 +123,11 @@ When calling `notify()`, set the `variant` option to `primary`, `constructive`, 
     const variant = button?.getAttribute('data-variant');
     if (!button) return;
 
-    toast.notify(`This is a ${variant} notification`, {
-      icon: toast.html(`<quiet-icon name="click"></quiet-icon>`),
+    toast.create(`
+      <quiet-icon slot="icon" name="click"></quiet-icon>
+      This is a ${variant} notification
+    `, {
+      allowHtml: true,
       variant
     });
   });
@@ -121,7 +136,7 @@ When calling `notify()`, set the `variant` option to `primary`, `constructive`, 
 
 ### Setting a duration
 
-When calling `notify()`, set the `duration` option to change how long notifications show before disappearing. The value is in milliseconds. A value of `0` will keep the notification open until the user dismisses it.
+When calling `create()`, set the `duration` option to change how long notifications show before disappearing. The value is in milliseconds. A value of `0` will keep the notification open until the user dismisses it.
 
 ```html {.example}
 <quiet-toast id="toast__duration"></quiet-toast>
@@ -132,33 +147,112 @@ When calling `notify()`, set the `duration` option to change how long notificati
   const button = toast.nextElementSibling;
 
   button.addEventListener('click', () => { 
-    toast.notify('You have 10 seconds to feed the cats', {
+    toast.create('You have 10 seconds to feed the cats', {
       duration: 10000
     });
   });
 </script>
 ```
 
-### Custom content
+### Removing the close button
 
-TODO - this doesn't work because the toast is rendered in the shadow root
+### Hiding the close button
+
+Use the `no-close-button` attribute to hide the close button and the progress ring. This is only recommended when a duration is set or when you're using custom buttons to dismiss the notification.
 
 ```html {.example}
-<quiet-toast id="toast__custom"></quiet-toast>
+<quiet-toast id="toast__no-close"></quiet-toast>
 <quiet-button>Show notification</quiet-button>
 
 <script>
-  const toast = document.getElementById('toast__custom');
+  const toast = document.getElementById('toast__no-close');
   const button = toast.nextElementSibling;
 
   button.addEventListener('click', () => { 
-    toast.notify(toast.html(`
-      <strong>Meowy McGee</strong><br>
-      has sent you a message
-    `), {
-      icon: toast.html(`
-        <quiet-avatar label="Chill kitty" image="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=256&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"></quiet-avatar>      
-      `)
+    toast.create('This notification has no close button', {
+      noCloseButton: true
+    });
+  });
+</script>
+```
+
+:::warn
+Do not use this as a way to force the notification to stay open. You should provide a custom close button when you use this option. Remember that users can also press <quiet-hotkey keys="$escape"></quiet-hotkey> to close a notification.
+:::
+
+### Responding to events
+
+The `create()` and `createFromTemplate()` methods return a reference to the generated toast item. You can use this to add a listener to respond when users click on the notification or dismiss it.
+
+```html {.example}
+<quiet-toast id="toast__click"></quiet-toast>
+<quiet-button>Show notification</quiet-button>
+
+<script>
+  const toast = document.getElementById('toast__click');
+  const button = toast.nextElementSibling;
+
+  button.addEventListener('click', async () => { 
+    const toastItem = await toast.create('Click this and check the console');
+
+    // Log to the console and remove the notification when clicked
+    toastItem.addEventListener('click', () => {
+      console.log('The cats appreciate your click');
+      toastItem.remove();
+    });
+
+    // Log when the notification is dismissed
+    toastItem.addEventListener('quiet-closed', () => {
+      console.log('Closed');
+    });
+  });
+</script>
+```
+
+### Responding to custom buttons
+
+To respond to custom buttons inside a toast item, obtain a reference to the notification and attach event listeners directly to the buttons you're interested in.
+
+```html {.example}
+<quiet-toast id="toast__buttons"></quiet-toast>
+<quiet-button>Show notification</quiet-button>
+
+<script>
+  const toast = document.getElementById('toast__buttons');
+  const button = toast.nextElementSibling;
+
+  button.addEventListener('click', async () => { 
+    const toastItem = await toast.create(`
+      <quiet-icon slot="icon" name="cat"></quiet-icon>
+      <p>The cats really want you to feed them now</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 0.5em;">
+        <quiet-button class="complete" size="sm">Complete</quiet-button>
+        <quiet-button class="later" size="sm">Remind me later</quiet-button>
+      </div>
+    `, {
+      allowHtml: true,
+      duration: 0,
+      noCloseButton: true,
+      variant: 'primary'
+    });
+
+    const complete = toastItem.querySelector('.complete');
+    const later = toastItem.querySelector('.later');
+
+    complete.addEventListener('click', async () => {
+      toastItem.remove();
+      toast.create('OK, the cats are happy now!', { 
+        variant: 'constructive',
+        duration: 3000
+      });
+    });
+
+    later.addEventListener('click', async () => {
+      toastItem.remove();
+      toast.create('The cats do not want to wait…', { 
+        variant: 'destructive',
+        duration: 3000
+      });
     });
   });
 </script>
@@ -200,16 +294,47 @@ Use the placement `attribute` to set the position of the toast stack. The most r
   button.addEventListener('click', event => {
     const numTimes = ++count === 1 ? '1 time' : `${count} times`;
 
-    toast.notify(`Notified the cats ${numTimes}`, {
-      icon: toast.html(`<quiet-icon name="cat"></quiet-icon>`),
+    toast.create(`
+      <quiet-icon slot="icon" name="cat"></quiet-icon>
+      Notified the cats ${numTimes}
+    `, {
+      allowHtml: true,
       variant: 'primary',
-      duration: 3000
+      duration: 0
     });
   });
 </script>
 ```
 
 :::info
-It's possible, although not usually recommended, to have more than one `<quiet-toast>` element on the page at a time.
+It's possible, although not typically recommended, to have more than one `<quiet-toast>` element on the page at a time. If you need to do this, use a different placement for each and ensure they respond as expected on mobile devices.
 :::
 
+### Changing the animation
+
+Toast uses a [transition group](/docs/components/transition-group) internally to handle enter and exit animations. To customize the animation, set the `transitionAnimation` property using JavaScript. This value will be passed through to the transition group's property of the same name.
+
+See [changing the transition group's animation](/docs/components/transition-group#changing-the-animation) for more animations and examples.
+
+```html {.example}
+<quiet-toast id="toast__animation"></quiet-toast>
+<quiet-button>Show notification</quiet-button>
+
+<script type="module">
+  import { elevator } from 'https://cdn.jsdelivr.net/npm/@quietui/scurry@latest/dist/transition/elevator.js';  
+  const toast = document.getElementById('toast__animation');
+  const button = toast.nextElementSibling;
+
+  toast.transitionAnimation = elevator();
+
+  button.addEventListener('click', () => { 
+    toast.create(`
+      <quiet-icon slot="icon" name="keyframes"></quiet-icon>
+      This notification has a custom animation!
+    `, {
+      allowHtml: true,
+      variant: 'primary'
+    });
+  });
+</script>
+```

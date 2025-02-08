@@ -1,0 +1,187 @@
+import type { CSSResultGroup } from 'lit';
+import { html } from 'lit';
+import { customElement, property, state } from 'lit/decorators.js';
+import hostStyles from '../../styles/host.styles.js';
+import { Localize } from '../../utilities/localize.js';
+import { QuietElement } from '../../utilities/quiet-element.js';
+import '../progress/progress.js';
+import styles from './toast-item.styles.js';
+
+/**
+ * <quiet-toast-item>
+ *
+ * @summary Toast items are the notifications displayed by the toast component.
+ * @documentation https://quietui.org/docs/components/toast-item
+ * @status stable
+ * @since 1.0
+ *
+ * @dependency quiet-progress
+ *
+ * @slot - Content to show in the toast item.
+ * @slot icon - Content to show as a visual. Usually an icon, image, avatar, etc.
+ *
+ * @event quiet-close - Emitted when the toast item is dismissed.
+ * @event quiet-closed - Emitted after the toast has been dismissed and the hide animation has completed.
+ *
+ * @csspart icon
+ * @csspart content
+ * @csspart close-button - The close button, a `<button>` element.
+ * @csspart progress - The progress ring, a `<quiet-progress>` element.
+ * @csspart progress__track - The progress ring's exported `track` part.
+ * @csspart progress__indicator - The progress ring's exported `indicator` part.
+ * @csspart progress__content - The progress ring's exported `content` part.
+ * @csspart close-icon - The close icon, a `<quiet-icon>` element.
+ * @csspart close-icon__svg - The close icons exported `svg` part.
+ *
+ * @cssproperty [--accent-line-width=0.33em] - The width of the notification's accent line.
+ * @cssproperty --progress - A readonly value between 0-1 that represents the progress remaining until the
+ *  notification closes. Useful for creating custom content with visual indicators of the notification's progress.
+ */
+@customElement('quiet-toast-item')
+export class QuietToastItem extends QuietElement {
+  static styles: CSSResultGroup = [hostStyles, styles];
+  static observeSlots = true;
+
+  private animationFrame: number | null = null;
+  private isPaused = false;
+  private localize = new Localize(this);
+  private startTime: number | null = null;
+
+  /** The amount of time left before the notification is removed. */
+  @state() private timeLeft = 100;
+
+  /** The type of notification to render. */
+  @property({ reflect: true }) variant: 'primary' | 'constructive' | 'destructive' | 'default' = 'default';
+
+  /**
+   * The length of time to show the notification before removing it. Set this to `0` to show the notification until the
+   * user dismisses it.
+   */
+  @property({ type: Number }) duration = 5000;
+
+  /** When set, the close button will be omitted. */
+  @property({ attribute: 'no-close-button', type: Boolean }) noCloseButton = false;
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.addEventListener('mouseenter', this.handleMouseEnter);
+    this.addEventListener('mouseleave', this.handleMouseLeave);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.stopTimer();
+    this.removeEventListener('mouseenter', this.handleMouseEnter);
+    this.removeEventListener('mouseleave', this.handleMouseLeave);
+  }
+
+  /**
+   * @internal Starts the auto-dismiss timer. If no duration is specified, this method has no effect.
+   */
+  public startTimer() {
+    if (this.duration > 0 && Number.isFinite(this.duration)) {
+      this.startTime = performance.now();
+      this.timeLeft = 100;
+      this.tick();
+    }
+  }
+
+  /**
+   * @internal Stops the auto-dismiss timer.
+   */
+  public stopTimer() {
+    if (this.animationFrame !== null) {
+      cancelAnimationFrame(this.animationFrame);
+      this.animationFrame = null;
+    }
+  }
+
+  private tick = () => {
+    if (!this.startTime || this.isPaused) {
+      return;
+    }
+
+    const elapsed = performance.now() - this.startTime;
+    const progress = Math.min(elapsed / this.duration, 1);
+    this.timeLeft = 100 * (1 - progress);
+    this.style.setProperty('--progress', (1 - progress).toFixed(2));
+
+    if (progress < 1) {
+      this.animationFrame = requestAnimationFrame(this.tick);
+    } else {
+      this.remove();
+    }
+  };
+
+  /** Close it! */
+  private handleCloseClick() {
+    this.stopTimer();
+    this.remove();
+  }
+
+  /** Pause the timer on hover in */
+  private handleMouseEnter = () => {
+    this.isPaused = true;
+    this.timeLeft = 100;
+    this.stopTimer();
+  };
+
+  /** Resume the timer on hover out */
+  private handleMouseLeave = () => {
+    this.isPaused = false;
+    this.startTimer();
+  };
+
+  render() {
+    return html`
+      ${this.whenSlotted('icon', html` <div id="icon" part="icon"><slot name="icon"></slot></div> `)}
+
+      <div id="content" part="content"><slot></slot></div>
+
+      ${!this.noCloseButton
+        ? html` <button
+            id="close-button"
+            part="close-button"
+            type="button"
+            aria-label=${this.localize.term('close')}
+            @click=${this.handleCloseClick}
+          >
+            ${this.duration > 0 && Number.isFinite(this.duration)
+              ? html`
+                  <quiet-progress
+                    part="progress"
+                    exportparts="
+                    track:progress__track,
+                    indicator:progress__indicator,
+                    content:progress__content
+                  "
+                    appearance="ring"
+                    value="${this.timeLeft}"
+                  >
+                    <quiet-icon
+                      part="close-icon"
+                      exportparts="svg:close-icon__svg"
+                      library="system"
+                      name="x"
+                    ></quiet-icon>
+                  </quiet-progress>
+                `
+              : html`
+                  <quiet-icon
+                    part="close-icon"
+                    exportparts="svg:close-icon__svg"
+                    library="system"
+                    name="x"
+                  ></quiet-icon>
+                `}
+          </button>`
+        : ''}
+    `;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'quiet-toast-item': QuietToastItem;
+  }
+}

@@ -60,7 +60,7 @@ export class QuietToastItem extends QuietElement {
   @property({ type: Number }) duration = 5000;
 
   /** When set, the close button will be omitted. */
-  @property({ attribute: 'no-close-button', type: Boolean }) noCloseButton = false;
+  @property({ attribute: 'no-close-button', type: Boolean, reflect: true }) noCloseButton = false;
 
   connectedCallback() {
     super.connectedCallback();

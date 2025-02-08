@@ -1,384 +1,386 @@
-:root,
-.quiet-light,
-.quiet-dark {
+@layer quiet {
+  :root,
+  .quiet-light,
+  .quiet-dark {
+    /*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //
+    //  These base tokens are used to seed the color palettes. For best results, always use a midtone color such as any
+    //  of the 500-level colors from:
+    //
+    //  https://color.surf/
+    //
+    //  For best results, avoid using seed colors in your own stylesheets!
+    //
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+    --quiet-primary-seed: #989cff;
+    --quiet-neutral-seed: #8b8c93;
+    --quiet-constructive-seed: #5dbb55;
+    --quiet-destructive-seed: #ef5655;
+
+    /*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //
+    //  The following design tokens are shared by both the light and dark theme. Color tokens are specific to light and
+    //  dark mode, so they appear later on.
+    //
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+    --quiet-border-style: solid;
+    --quiet-border-width: 1px;
+    --quiet-border-radius: 0.375rem;
+    --quiet-content-spacing: 2rem;
+    --quiet-font-family: system-ui, sans-serif;
+    --quiet-font-family-heading: var(--quiet-font-family);
+    --quiet-font-family-code: SFMono-Regular, Consolas, Menlo, Monaco, 'liberation mono', 'courier new', monospace;
+    --quiet-font-size: 16px;
+    --quiet-font-weight-normal: 400;
+    --quiet-font-weight-semibold: 500;
+    --quiet-font-weight-bold: 600;
+    --quiet-line-height: 1.6;
+    --quiet-focus-width: 3px;
+    --quiet-focus-offset: 1px;
+    --quiet-backdrop-filter: blur(6px);
+
+    /* Form control tokens */
+    --quiet-form-control-height-xs: 1.75rem;
+    --quiet-form-control-height-sm: 2.25rem;
+    --quiet-form-control-height-md: 2.75rem;
+    --quiet-form-control-height-lg: 3.25rem;
+    --quiet-form-control-height-xl: 3.75rem;
+    --quiet-form-control-font-size-xs: 0.75rem;
+    --quiet-form-control-font-size-sm: 0.875rem;
+    --quiet-form-control-font-size-md: 1rem;
+    --quiet-form-control-font-size-lg: 1.25rem;
+    --quiet-form-control-font-size-xl: 1.6rem;
+    --quiet-form-control-required-content: '*';
+    --quiet-form-control-placeholder-color: color-mix(in oklab, var(--quiet-text-muted), transparent 25%);
+    --quiet-button-active-offset: 1px;
+
+    /*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //
+    //  The color palettes below are generated from the seed colors. The palettes remain static in both light and dark
+    //  mode, so 100 is always light and 900 is always dark. If you plan on supporting dark mode, you should avoid using
+    //  these primitives and use the color tokens shown in the docs instead.
+    //
+    //  You probably shouldn't think about changing these but, but if you do venture into such territory, it will
+    //  probably be helpful to use the palettes from:
+    //
+    //  https://color.surf/
+    //
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+    --quiet-primary-50: color-mix(in oklab, var(--quiet-primary-seed), white 95%);
+    --quiet-primary-100: color-mix(in oklab, var(--quiet-primary-seed), white 87%);
+    --quiet-primary-200: color-mix(in oklab, var(--quiet-primary-seed), white 70%);
+    --quiet-primary-300: color-mix(in oklab, var(--quiet-primary-seed), white 47%);
+    --quiet-primary-400: color-mix(in oklab, var(--quiet-primary-seed), white 23%);
+    --quiet-primary-500: var(--quiet-primary-seed);
+    --quiet-primary-600: color-mix(in oklab, var(--quiet-primary-seed), black 15.5%);
+    --quiet-primary-700: color-mix(in oklab, var(--quiet-primary-seed), black 28.25%);
+    --quiet-primary-800: color-mix(in oklab, var(--quiet-primary-seed), black 43.5%);
+    --quiet-primary-900: color-mix(in oklab, var(--quiet-primary-seed), black 58.5%);
+    --quiet-primary-950: color-mix(in oklab, var(--quiet-primary-seed), black 73.75%);
+
+    --quiet-neutral-50: color-mix(in oklab, var(--quiet-neutral-seed), white 95%);
+    --quiet-neutral-100: color-mix(in oklab, var(--quiet-neutral-seed), white 87%);
+    --quiet-neutral-200: color-mix(in oklab, var(--quiet-neutral-seed), white 70%);
+    --quiet-neutral-300: color-mix(in oklab, var(--quiet-neutral-seed), white 47%);
+    --quiet-neutral-400: color-mix(in oklab, var(--quiet-neutral-seed), white 23%);
+    --quiet-neutral-500: var(--quiet-neutral-seed);
+    --quiet-neutral-600: color-mix(in oklab, var(--quiet-neutral-seed), black 15.5%);
+    --quiet-neutral-700: color-mix(in oklab, var(--quiet-neutral-seed), black 28.25%);
+    --quiet-neutral-800: color-mix(in oklab, var(--quiet-neutral-seed), black 43.5%);
+    --quiet-neutral-900: color-mix(in oklab, var(--quiet-neutral-seed), black 58.5%);
+    --quiet-neutral-950: color-mix(in oklab, var(--quiet-neutral-seed), black 73.75%);
+
+    --quiet-constructive-50: color-mix(in oklab, var(--quiet-constructive-seed), white 95%);
+    --quiet-constructive-100: color-mix(in oklab, var(--quiet-constructive-seed), white 87%);
+    --quiet-constructive-200: color-mix(in oklab, var(--quiet-constructive-seed), white 70%);
+    --quiet-constructive-300: color-mix(in oklab, var(--quiet-constructive-seed), white 47%);
+    --quiet-constructive-400: color-mix(in oklab, var(--quiet-constructive-seed), white 23%);
+    --quiet-constructive-500: var(--quiet-constructive-seed);
+    --quiet-constructive-600: color-mix(in oklab, var(--quiet-constructive-seed), black 15.5%);
+    --quiet-constructive-700: color-mix(in oklab, var(--quiet-constructive-seed), black 28.25%);
+    --quiet-constructive-800: color-mix(in oklab, var(--quiet-constructive-seed), black 43.5%);
+    --quiet-constructive-900: color-mix(in oklab, var(--quiet-constructive-seed), black 58.5%);
+    --quiet-constructive-950: color-mix(in oklab, var(--quiet-constructive-seed), black 73.75%);
+
+    --quiet-destructive-50: color-mix(in oklab, var(--quiet-destructive-seed), white 95%);
+    --quiet-destructive-100: color-mix(in oklab, var(--quiet-destructive-seed), white 87%);
+    --quiet-destructive-200: color-mix(in oklab, var(--quiet-destructive-seed), white 70%);
+    --quiet-destructive-300: color-mix(in oklab, var(--quiet-destructive-seed), white 47%);
+    --quiet-destructive-400: color-mix(in oklab, var(--quiet-destructive-seed), white 23%);
+    --quiet-destructive-500: var(--quiet-destructive-seed);
+    --quiet-destructive-600: color-mix(in oklab, var(--quiet-destructive-seed), black 15.5%);
+    --quiet-destructive-700: color-mix(in oklab, var(--quiet-destructive-seed), black 28.25%);
+    --quiet-destructive-800: color-mix(in oklab, var(--quiet-destructive-seed), black 43.5%);
+    --quiet-destructive-900: color-mix(in oklab, var(--quiet-destructive-seed), black 58.5%);
+    --quiet-destructive-950: color-mix(in oklab, var(--quiet-destructive-seed), black 73.75%);
+  }
+
   /*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //
-  //  These base tokens are used to seed the color palettes. For best results, always use a midtone color such as any of
-  //  the 500-level colors from:
-  //
-  //  https://color.surf/
-  //
-  //  For best results, avoid using seed colors in your own stylesheets!
+  //  Light theme colors
   //
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
-  --quiet-primary-seed: #989cff;
-  --quiet-neutral-seed: #8b8c93;
-  --quiet-constructive-seed: #5dbb55;
-  --quiet-destructive-seed: #ef5655;
+  :root,
+  .quiet-light {
+    color-scheme: light;
+
+    --quiet-silent: white;
+    --quiet-strident: black;
+    --quiet-background-color: white;
+    --quiet-paper-color: white;
+    --quiet-text-body: var(--quiet-neutral-900);
+    --quiet-text-muted: var(--quiet-neutral-600);
+    --quiet-focus-color: var(--quiet-primary-fill-mid);
+    --quiet-focus-ring: var(--quiet-border-style) var(--quiet-focus-width) var(--quiet-focus-color);
+    --quiet-backdrop-color: rgb(0 0 0 / 0.25);
+    --quiet-selection-background-color: var(--quiet-primary-300);
+    --quiet-selection-color: var(--quiet-text-body);
+    --quiet-shadow-color: black;
+    --quiet-shadow-softer: 0 1px 1px color-mix(in oklab, transparent, var(--quiet-shadow-color) 2.5%);
+    --quiet-shadow-soft: 0 2px 4px color-mix(in oklab, transparent, var(--quiet-shadow-color) 5%);
+    --quiet-shadow-mid: 0 4px 8px color-mix(in oklab, transparent, var(--quiet-shadow-color) 6%);
+    --quiet-shadow-loud: 0 8px 16px color-mix(in oklab, transparent, var(--quiet-shadow-color) 7%);
+    --quiet-shadow-louder: 0 12px 20px color-mix(in oklab, transparent, var(--quiet-shadow-color) 8%);
+    --quiet-inset-shadow-softer: inset 0 0.125em 0.125em -0.125em color-mix(in oklab, black, transparent 97.5%);
+    --quiet-inset-shadow-soft: inset 0 0.25em 0.25em -0.25em color-mix(in oklab, black, transparent 95%);
+    --quiet-inset-shadow-mid: inset 0 0.5em 0.5em -0.5em color-mix(in oklab, black, transparent 94%);
+    --quiet-inset-shadow-loud: inset 0 1em 1em -1em color-mix(in oklab, black, transparent 93%);
+    --quiet-inset-shadow-louder: inset 0 1.5em 1.5em -1.5em color-mix(in oklab, black, transparent 92%);
+
+    /* Primary */
+    --quiet-primary-fill-softer: var(--quiet-primary-100);
+    --quiet-primary-fill-soft: var(--quiet-primary-200);
+    --quiet-primary-fill-mid: color-mix(in oklab, var(--quiet-primary-600), black 2.5%);
+    --quiet-primary-fill-loud: var(--quiet-primary-800);
+    --quiet-primary-fill-louder: var(--quiet-primary-900);
+    --quiet-primary-text-on-soft: var(--quiet-primary-900);
+    --quiet-primary-text-on-mid: white;
+    --quiet-primary-text-on-loud: white;
+    --quiet-primary-text-colorful: color-mix(in oklab, var(--quiet-primary-600), black 12.5%);
+    --quiet-primary-stroke-softer: color-mix(in oklab, var(--quiet-primary-100), black 3%);
+    --quiet-primary-stroke-soft: var(--quiet-primary-300);
+    --quiet-primary-stroke-mid: var(--quiet-primary-500);
+
+    /* Neutral */
+    --quiet-neutral-fill-softer: var(--quiet-neutral-100);
+    --quiet-neutral-fill-soft: var(--quiet-neutral-200);
+    --quiet-neutral-fill-mid: color-mix(in oklab, var(--quiet-neutral-600), black 2.5%);
+    --quiet-neutral-fill-loud: var(--quiet-neutral-800);
+    --quiet-neutral-fill-louder: var(--quiet-neutral-900);
+    --quiet-neutral-text-on-soft: var(--quiet-neutral-900);
+    --quiet-neutral-text-on-mid: white;
+    --quiet-neutral-text-on-loud: white;
+    --quiet-neutral-text-colorful: color-mix(in oklab, var(--quiet-neutral-600), black 12.5%);
+    --quiet-neutral-stroke-softer: color-mix(in oklab, var(--quiet-neutral-100), black 3%);
+    --quiet-neutral-stroke-soft: var(--quiet-neutral-300);
+    --quiet-neutral-stroke-mid: var(--quiet-neutral-500);
+
+    /* Constructive */
+    --quiet-constructive-fill-softer: var(--quiet-constructive-100);
+    --quiet-constructive-fill-soft: var(--quiet-constructive-200);
+    --quiet-constructive-fill-mid: color-mix(in oklab, var(--quiet-constructive-600), black 2.5%);
+    --quiet-constructive-fill-loud: var(--quiet-constructive-800);
+    --quiet-constructive-fill-louder: var(--quiet-constructive-900);
+    --quiet-constructive-text-on-soft: var(--quiet-constructive-900);
+    --quiet-constructive-text-on-mid: white;
+    --quiet-constructive-text-on-loud: white;
+    --quiet-constructive-text-colorful: color-mix(in oklab, var(--quiet-constructive-600), black 12.5%);
+    --quiet-constructive-stroke-softer: color-mix(in oklab, var(--quiet-constructive-100), black 3%);
+    --quiet-constructive-stroke-soft: var(--quiet-constructive-300);
+    --quiet-constructive-stroke-mid: var(--quiet-constructive-500);
+
+    /* Destructive */
+    --quiet-destructive-fill-softer: var(--quiet-destructive-100);
+    --quiet-destructive-fill-soft: var(--quiet-destructive-200);
+    --quiet-destructive-fill-mid: color-mix(in oklab, var(--quiet-destructive-600), black 2.5%);
+    --quiet-destructive-fill-loud: var(--quiet-destructive-800);
+    --quiet-destructive-fill-louder: var(--quiet-destructive-900);
+    --quiet-destructive-text-on-soft: var(--quiet-destructive-900);
+    --quiet-destructive-text-on-mid: white;
+    --quiet-destructive-text-on-loud: white;
+    --quiet-destructive-text-colorful: color-mix(in oklab, var(--quiet-destructive-600), black 12.5%);
+    --quiet-destructive-stroke-softer: color-mix(in oklab, var(--quiet-destructive-100), black 3%);
+    --quiet-destructive-stroke-soft: var(--quiet-destructive-300);
+    --quiet-destructive-stroke-mid: var(--quiet-destructive-500);
+  }
 
   /*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //
-  //  The following design tokens are shared by both the light and dark theme. Color tokens are specific to light and
-  //  dark mode, so they appear later on.
+  //  Dark theme colors
   //
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
-  --quiet-border-style: solid;
-  --quiet-border-width: 1px;
-  --quiet-border-radius: 0.375rem;
-  --quiet-content-spacing: 2rem;
-  --quiet-font-family: system-ui, sans-serif;
-  --quiet-font-family-heading: var(--quiet-font-family);
-  --quiet-font-family-code: SFMono-Regular, Consolas, Menlo, Monaco, 'liberation mono', 'courier new', monospace;
-  --quiet-font-size: 16px;
-  --quiet-font-weight-normal: 400;
-  --quiet-font-weight-semibold: 500;
-  --quiet-font-weight-bold: 600;
-  --quiet-line-height: 1.6;
-  --quiet-focus-width: 3px;
-  --quiet-focus-offset: 1px;
-  --quiet-backdrop-filter: blur(6px);
+  .quiet-dark {
+    color-scheme: dark;
 
-  /* Form control tokens */
-  --quiet-form-control-height-xs: 1.75rem;
-  --quiet-form-control-height-sm: 2.25rem;
-  --quiet-form-control-height-md: 2.75rem;
-  --quiet-form-control-height-lg: 3.25rem;
-  --quiet-form-control-height-xl: 3.75rem;
-  --quiet-form-control-font-size-xs: 0.75rem;
-  --quiet-form-control-font-size-sm: 0.875rem;
-  --quiet-form-control-font-size-md: 1rem;
-  --quiet-form-control-font-size-lg: 1.25rem;
-  --quiet-form-control-font-size-xl: 1.6rem;
-  --quiet-form-control-required-content: '*';
-  --quiet-form-control-placeholder-color: color-mix(in oklab, var(--quiet-text-muted), transparent 25%);
-  --quiet-button-active-offset: 1px;
+    --quiet-silent: black;
+    --quiet-strident: white;
+    --quiet-background-color: color-mix(in oklab, var(--quiet-neutral-950), black 2.5%);
+    --quiet-paper-color: color-mix(in oklab, var(--quiet-background-color), white 4%);
+    --quiet-text-body: var(--quiet-neutral-100);
+    --quiet-text-muted: var(--quiet-neutral-500);
+    --quiet-focus-color: var(--quiet-primary-fill-mid);
+    --quiet-focus-ring: var(--quiet-border-style) var(--quiet-focus-width) var(--quiet-focus-color);
+    --quiet-backdrop-color: rgb(0 0 0 / 0.5);
+    --quiet-selection-background-color: var(--quiet-primary-700);
+    --quiet-selection-color: var(--quiet-text-body);
+    --quiet-shadow-color: black;
+    --quiet-shadow-softer: 0 1px 2px color-mix(in oklab, transparent, var(--quiet-shadow-color) 8%);
+    --quiet-shadow-soft: 0 2px 4px color-mix(in oklab, transparent, var(--quiet-shadow-color) 12%);
+    --quiet-shadow-mid: 0 4px 8px color-mix(in oklab, transparent, var(--quiet-shadow-color) 16%);
+    --quiet-shadow-loud: 0 8px 16px color-mix(in oklab, transparent, var(--quiet-shadow-color) 20%);
+    --quiet-shadow-louder: 0 12px 20px color-mix(in oklab, transparent, var(--quiet-shadow-color) 24%);
+
+    /* Primary */
+    --quiet-primary-fill-softer: var(--quiet-primary-900);
+    --quiet-primary-fill-soft: var(--quiet-primary-800);
+    --quiet-primary-fill-mid: color-mix(in oklab, var(--quiet-primary-600), black 7.5%);
+    --quiet-primary-fill-loud: var(--quiet-primary-200);
+    --quiet-primary-fill-louder: var(--quiet-primary-100);
+    --quiet-primary-text-on-soft: var(--quiet-primary-100);
+    --quiet-primary-text-on-mid: white;
+    --quiet-primary-text-on-loud: black;
+    --quiet-primary-text-colorful: var(--quiet-primary-500);
+    --quiet-primary-stroke-softer: color-mix(in oklab, var(--quiet-primary-900), white 7.5%);
+    --quiet-primary-stroke-soft: var(--quiet-primary-800);
+    --quiet-primary-stroke-mid: var(--quiet-primary-600);
+
+    /* Neutral */
+    --quiet-neutral-fill-softer: var(--quiet-neutral-900);
+    --quiet-neutral-fill-soft: var(--quiet-neutral-800);
+    --quiet-neutral-fill-mid: color-mix(in oklab, var(--quiet-neutral-600), black 7.5%);
+    --quiet-neutral-fill-loud: var(--quiet-neutral-200);
+    --quiet-neutral-fill-louder: var(--quiet-neutral-100);
+    --quiet-neutral-text-on-soft: var(--quiet-neutral-100);
+    --quiet-neutral-text-on-mid: white;
+    --quiet-neutral-text-on-loud: black;
+    --quiet-neutral-text-colorful: var(--quiet-neutral-500);
+    --quiet-neutral-stroke-softer: color-mix(in oklab, var(--quiet-neutral-900), white 7.5%);
+    --quiet-neutral-stroke-soft: var(--quiet-neutral-800);
+    --quiet-neutral-stroke-mid: var(--quiet-neutral-600);
+
+    /* Constructive */
+    --quiet-constructive-fill-softer: var(--quiet-constructive-900);
+    --quiet-constructive-fill-soft: var(--quiet-constructive-800);
+    --quiet-constructive-fill-mid: color-mix(in oklab, var(--quiet-constructive-600), black 8%);
+    --quiet-constructive-fill-loud: var(--quiet-constructive-200);
+    --quiet-constructive-fill-louder: var(--quiet-constructive-100);
+    --quiet-constructive-text-on-soft: var(--quiet-constructive-100);
+    --quiet-constructive-text-on-mid: white;
+    --quiet-constructive-text-on-loud: black;
+    --quiet-constructive-text-colorful: var(--quiet-constructive-500);
+    --quiet-constructive-stroke-softer: color-mix(in oklab, var(--quiet-constructive-900), white 7.5%);
+    --quiet-constructive-stroke-soft: var(--quiet-constructive-800);
+    --quiet-constructive-stroke-mid: var(--quiet-constructive-600);
+
+    /* Destructive */
+    --quiet-destructive-fill-softer: var(--quiet-destructive-900);
+    --quiet-destructive-fill-soft: var(--quiet-destructive-800);
+    --quiet-destructive-fill-mid: color-mix(in oklab, var(--quiet-destructive-600), black 7.5%);
+    --quiet-destructive-fill-loud: var(--quiet-destructive-200);
+    --quiet-destructive-fill-louder: var(--quiet-destructive-100);
+    --quiet-destructive-text-on-soft: var(--quiet-destructive-100);
+    --quiet-destructive-text-on-mid: white;
+    --quiet-destructive-text-on-loud: black;
+    --quiet-destructive-text-colorful: var(--quiet-destructive-500);
+    --quiet-destructive-stroke-softer: color-mix(in oklab, var(--quiet-destructive-900), white 7.5%);
+    --quiet-destructive-stroke-soft: var(--quiet-destructive-800);
+    --quiet-destructive-stroke-mid: var(--quiet-destructive-600);
+  }
 
   /*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //
-  //  The color palettes below are generated from the seed colors. The palettes remain static in both light and dark
-  //  mode, so 100 is always light and 900 is always dark. If you plan on supporting dark mode, you should avoid using
-  //  these primitives and use the color tokens shown in the docs instead.
-  //
-  //  You probably shouldn't think about changing these but, but if you do venture into such territory, it will probably
-  //  be helpful to use the palettes from:
-  //
-  //  https://color.surf/
+  //  Built-in presets
   //
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
-  --quiet-primary-50: color-mix(in oklab, var(--quiet-primary-seed), white 95%);
-  --quiet-primary-100: color-mix(in oklab, var(--quiet-primary-seed), white 87%);
-  --quiet-primary-200: color-mix(in oklab, var(--quiet-primary-seed), white 70%);
-  --quiet-primary-300: color-mix(in oklab, var(--quiet-primary-seed), white 47%);
-  --quiet-primary-400: color-mix(in oklab, var(--quiet-primary-seed), white 23%);
-  --quiet-primary-500: var(--quiet-primary-seed);
-  --quiet-primary-600: color-mix(in oklab, var(--quiet-primary-seed), black 15.5%);
-  --quiet-primary-700: color-mix(in oklab, var(--quiet-primary-seed), black 28.25%);
-  --quiet-primary-800: color-mix(in oklab, var(--quiet-primary-seed), black 43.5%);
-  --quiet-primary-900: color-mix(in oklab, var(--quiet-primary-seed), black 58.5%);
-  --quiet-primary-950: color-mix(in oklab, var(--quiet-primary-seed), black 73.75%);
+  .quiet-default {
+    --quiet-primary-seed: #989cff;
+  }
 
-  --quiet-neutral-50: color-mix(in oklab, var(--quiet-neutral-seed), white 95%);
-  --quiet-neutral-100: color-mix(in oklab, var(--quiet-neutral-seed), white 87%);
-  --quiet-neutral-200: color-mix(in oklab, var(--quiet-neutral-seed), white 70%);
-  --quiet-neutral-300: color-mix(in oklab, var(--quiet-neutral-seed), white 47%);
-  --quiet-neutral-400: color-mix(in oklab, var(--quiet-neutral-seed), white 23%);
-  --quiet-neutral-500: var(--quiet-neutral-seed);
-  --quiet-neutral-600: color-mix(in oklab, var(--quiet-neutral-seed), black 15.5%);
-  --quiet-neutral-700: color-mix(in oklab, var(--quiet-neutral-seed), black 28.25%);
-  --quiet-neutral-800: color-mix(in oklab, var(--quiet-neutral-seed), black 43.5%);
-  --quiet-neutral-900: color-mix(in oklab, var(--quiet-neutral-seed), black 58.5%);
-  --quiet-neutral-950: color-mix(in oklab, var(--quiet-neutral-seed), black 73.75%);
+  .quiet-red {
+    --quiet-primary-seed: #ef5655;
+    --quiet-destructive-seed: #e89a26; /* to differentiate better */
+  }
 
-  --quiet-constructive-50: color-mix(in oklab, var(--quiet-constructive-seed), white 95%);
-  --quiet-constructive-100: color-mix(in oklab, var(--quiet-constructive-seed), white 87%);
-  --quiet-constructive-200: color-mix(in oklab, var(--quiet-constructive-seed), white 70%);
-  --quiet-constructive-300: color-mix(in oklab, var(--quiet-constructive-seed), white 47%);
-  --quiet-constructive-400: color-mix(in oklab, var(--quiet-constructive-seed), white 23%);
-  --quiet-constructive-500: var(--quiet-constructive-seed);
-  --quiet-constructive-600: color-mix(in oklab, var(--quiet-constructive-seed), black 15.5%);
-  --quiet-constructive-700: color-mix(in oklab, var(--quiet-constructive-seed), black 28.25%);
-  --quiet-constructive-800: color-mix(in oklab, var(--quiet-constructive-seed), black 43.5%);
-  --quiet-constructive-900: color-mix(in oklab, var(--quiet-constructive-seed), black 58.5%);
-  --quiet-constructive-950: color-mix(in oklab, var(--quiet-constructive-seed), black 73.75%);
+  .quiet-orange {
+    --quiet-primary-seed: #f08039;
+  }
 
-  --quiet-destructive-50: color-mix(in oklab, var(--quiet-destructive-seed), white 95%);
-  --quiet-destructive-100: color-mix(in oklab, var(--quiet-destructive-seed), white 87%);
-  --quiet-destructive-200: color-mix(in oklab, var(--quiet-destructive-seed), white 70%);
-  --quiet-destructive-300: color-mix(in oklab, var(--quiet-destructive-seed), white 47%);
-  --quiet-destructive-400: color-mix(in oklab, var(--quiet-destructive-seed), white 23%);
-  --quiet-destructive-500: var(--quiet-destructive-seed);
-  --quiet-destructive-600: color-mix(in oklab, var(--quiet-destructive-seed), black 15.5%);
-  --quiet-destructive-700: color-mix(in oklab, var(--quiet-destructive-seed), black 28.25%);
-  --quiet-destructive-800: color-mix(in oklab, var(--quiet-destructive-seed), black 43.5%);
-  --quiet-destructive-900: color-mix(in oklab, var(--quiet-destructive-seed), black 58.5%);
-  --quiet-destructive-950: color-mix(in oklab, var(--quiet-destructive-seed), black 73.75%);
-}
+  .quiet-amber {
+    --quiet-primary-seed: #e89a26;
+  }
 
-/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//
-//  Light theme colors
-//
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+  .quiet-yellow {
+    --quiet-primary-seed: #dcb31e;
+  }
 
-:root,
-.quiet-light {
-  color-scheme: light;
+  .quiet-lime {
+    --quiet-primary-seed: #9abb28;
+  }
 
-  --quiet-silent: white;
-  --quiet-strident: black;
-  --quiet-background-color: white;
-  --quiet-paper-color: white;
-  --quiet-text-body: var(--quiet-neutral-900);
-  --quiet-text-muted: var(--quiet-neutral-600);
-  --quiet-focus-color: var(--quiet-primary-fill-mid);
-  --quiet-focus-ring: var(--quiet-border-style) var(--quiet-focus-width) var(--quiet-focus-color);
-  --quiet-backdrop-color: rgb(0 0 0 / 0.25);
-  --quiet-selection-background-color: var(--quiet-primary-300);
-  --quiet-selection-color: var(--quiet-text-body);
-  --quiet-shadow-color: black;
-  --quiet-shadow-softer: 0 1px 1px color-mix(in oklab, transparent, var(--quiet-shadow-color) 2.5%);
-  --quiet-shadow-soft: 0 2px 4px color-mix(in oklab, transparent, var(--quiet-shadow-color) 5%);
-  --quiet-shadow-mid: 0 4px 8px color-mix(in oklab, transparent, var(--quiet-shadow-color) 6%);
-  --quiet-shadow-loud: 0 8px 16px color-mix(in oklab, transparent, var(--quiet-shadow-color) 7%);
-  --quiet-shadow-louder: 0 12px 20px color-mix(in oklab, transparent, var(--quiet-shadow-color) 8%);
-  --quiet-inset-shadow-softer: inset 0 0.125em 0.125em -0.125em color-mix(in oklab, black, transparent 97.5%);
-  --quiet-inset-shadow-soft: inset 0 0.25em 0.25em -0.25em color-mix(in oklab, black, transparent 95%);
-  --quiet-inset-shadow-mid: inset 0 0.5em 0.5em -0.5em color-mix(in oklab, black, transparent 94%);
-  --quiet-inset-shadow-loud: inset 0 1em 1em -1em color-mix(in oklab, black, transparent 93%);
-  --quiet-inset-shadow-louder: inset 0 1.5em 1.5em -1.5em color-mix(in oklab, black, transparent 92%);
+  .quiet-green {
+    --quiet-primary-seed: #5dbb55;
+  }
 
-  /* Primary */
-  --quiet-primary-fill-softer: var(--quiet-primary-100);
-  --quiet-primary-fill-soft: var(--quiet-primary-200);
-  --quiet-primary-fill-mid: color-mix(in oklab, var(--quiet-primary-600), black 2.5%);
-  --quiet-primary-fill-loud: var(--quiet-primary-800);
-  --quiet-primary-fill-louder: var(--quiet-primary-900);
-  --quiet-primary-text-on-soft: var(--quiet-primary-900);
-  --quiet-primary-text-on-mid: white;
-  --quiet-primary-text-on-loud: white;
-  --quiet-primary-text-colorful: color-mix(in oklab, var(--quiet-primary-600), black 12.5%);
-  --quiet-primary-stroke-softer: color-mix(in oklab, var(--quiet-primary-100), black 3%);
-  --quiet-primary-stroke-soft: var(--quiet-primary-300);
-  --quiet-primary-stroke-mid: var(--quiet-primary-500);
+  .quiet-emerald {
+    --quiet-primary-seed: #47b873;
+  }
 
-  /* Neutral */
-  --quiet-neutral-fill-softer: var(--quiet-neutral-100);
-  --quiet-neutral-fill-soft: var(--quiet-neutral-200);
-  --quiet-neutral-fill-mid: color-mix(in oklab, var(--quiet-neutral-600), black 2.5%);
-  --quiet-neutral-fill-loud: var(--quiet-neutral-800);
-  --quiet-neutral-fill-louder: var(--quiet-neutral-900);
-  --quiet-neutral-text-on-soft: var(--quiet-neutral-900);
-  --quiet-neutral-text-on-mid: white;
-  --quiet-neutral-text-on-loud: white;
-  --quiet-neutral-text-colorful: color-mix(in oklab, var(--quiet-neutral-600), black 12.5%);
-  --quiet-neutral-stroke-softer: color-mix(in oklab, var(--quiet-neutral-100), black 3%);
-  --quiet-neutral-stroke-soft: var(--quiet-neutral-300);
-  --quiet-neutral-stroke-mid: var(--quiet-neutral-500);
+  .quiet-teal {
+    --quiet-primary-seed: #37b995;
+  }
 
-  /* Constructive */
-  --quiet-constructive-fill-softer: var(--quiet-constructive-100);
-  --quiet-constructive-fill-soft: var(--quiet-constructive-200);
-  --quiet-constructive-fill-mid: color-mix(in oklab, var(--quiet-constructive-600), black 2.5%);
-  --quiet-constructive-fill-loud: var(--quiet-constructive-800);
-  --quiet-constructive-fill-louder: var(--quiet-constructive-900);
-  --quiet-constructive-text-on-soft: var(--quiet-constructive-900);
-  --quiet-constructive-text-on-mid: white;
-  --quiet-constructive-text-on-loud: white;
-  --quiet-constructive-text-colorful: color-mix(in oklab, var(--quiet-constructive-600), black 12.5%);
-  --quiet-constructive-stroke-softer: color-mix(in oklab, var(--quiet-constructive-100), black 3%);
-  --quiet-constructive-stroke-soft: var(--quiet-constructive-300);
-  --quiet-constructive-stroke-mid: var(--quiet-constructive-500);
+  .quiet-cyan {
+    --quiet-primary-seed: #20b8bc;
+  }
 
-  /* Destructive */
-  --quiet-destructive-fill-softer: var(--quiet-destructive-100);
-  --quiet-destructive-fill-soft: var(--quiet-destructive-200);
-  --quiet-destructive-fill-mid: color-mix(in oklab, var(--quiet-destructive-600), black 2.5%);
-  --quiet-destructive-fill-loud: var(--quiet-destructive-800);
-  --quiet-destructive-fill-louder: var(--quiet-destructive-900);
-  --quiet-destructive-text-on-soft: var(--quiet-destructive-900);
-  --quiet-destructive-text-on-mid: white;
-  --quiet-destructive-text-on-loud: white;
-  --quiet-destructive-text-colorful: color-mix(in oklab, var(--quiet-destructive-600), black 12.5%);
-  --quiet-destructive-stroke-softer: color-mix(in oklab, var(--quiet-destructive-100), black 3%);
-  --quiet-destructive-stroke-soft: var(--quiet-destructive-300);
-  --quiet-destructive-stroke-mid: var(--quiet-destructive-500);
-}
+  .quiet-sky {
+    --quiet-primary-seed: #1caedd;
+  }
 
-/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//
-//  Dark theme colors
-//
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+  .quiet-blue {
+    --quiet-primary-seed: #4a97f4;
+  }
 
-.quiet-dark {
-  color-scheme: dark;
+  .quiet-indigo {
+    --quiet-primary-seed: #6e85f8;
+  }
 
-  --quiet-silent: black;
-  --quiet-strident: white;
-  --quiet-background-color: color-mix(in oklab, var(--quiet-neutral-950), black 2.5%);
-  --quiet-paper-color: color-mix(in oklab, var(--quiet-background-color), white 4%);
-  --quiet-text-body: var(--quiet-neutral-100);
-  --quiet-text-muted: var(--quiet-neutral-500);
-  --quiet-focus-color: var(--quiet-primary-fill-mid);
-  --quiet-focus-ring: var(--quiet-border-style) var(--quiet-focus-width) var(--quiet-focus-color);
-  --quiet-backdrop-color: rgb(0 0 0 / 0.5);
-  --quiet-selection-background-color: var(--quiet-primary-700);
-  --quiet-selection-color: var(--quiet-text-body);
-  --quiet-shadow-color: black;
-  --quiet-shadow-softer: 0 1px 2px color-mix(in oklab, transparent, var(--quiet-shadow-color) 8%);
-  --quiet-shadow-soft: 0 2px 4px color-mix(in oklab, transparent, var(--quiet-shadow-color) 12%);
-  --quiet-shadow-mid: 0 4px 8px color-mix(in oklab, transparent, var(--quiet-shadow-color) 16%);
-  --quiet-shadow-loud: 0 8px 16px color-mix(in oklab, transparent, var(--quiet-shadow-color) 20%);
-  --quiet-shadow-louder: 0 12px 20px color-mix(in oklab, transparent, var(--quiet-shadow-color) 24%);
+  .quiet-violet {
+    --quiet-primary-seed: #927cfb;
+  }
 
-  /* Primary */
-  --quiet-primary-fill-softer: var(--quiet-primary-900);
-  --quiet-primary-fill-soft: var(--quiet-primary-800);
-  --quiet-primary-fill-mid: color-mix(in oklab, var(--quiet-primary-600), black 7.5%);
-  --quiet-primary-fill-loud: var(--quiet-primary-200);
-  --quiet-primary-fill-louder: var(--quiet-primary-100);
-  --quiet-primary-text-on-soft: var(--quiet-primary-100);
-  --quiet-primary-text-on-mid: white;
-  --quiet-primary-text-on-loud: black;
-  --quiet-primary-text-colorful: var(--quiet-primary-500);
-  --quiet-primary-stroke-softer: color-mix(in oklab, var(--quiet-primary-900), white 7.5%);
-  --quiet-primary-stroke-soft: var(--quiet-primary-800);
-  --quiet-primary-stroke-mid: var(--quiet-primary-600);
+  .quiet-purple {
+    --quiet-primary-seed: #ae75f6;
+  }
 
-  /* Neutral */
-  --quiet-neutral-fill-softer: var(--quiet-neutral-900);
-  --quiet-neutral-fill-soft: var(--quiet-neutral-800);
-  --quiet-neutral-fill-mid: color-mix(in oklab, var(--quiet-neutral-600), black 7.5%);
-  --quiet-neutral-fill-loud: var(--quiet-neutral-200);
-  --quiet-neutral-fill-louder: var(--quiet-neutral-100);
-  --quiet-neutral-text-on-soft: var(--quiet-neutral-100);
-  --quiet-neutral-text-on-mid: white;
-  --quiet-neutral-text-on-loud: black;
-  --quiet-neutral-text-colorful: var(--quiet-neutral-500);
-  --quiet-neutral-stroke-softer: color-mix(in oklab, var(--quiet-neutral-900), white 7.5%);
-  --quiet-neutral-stroke-soft: var(--quiet-neutral-800);
-  --quiet-neutral-stroke-mid: var(--quiet-neutral-600);
+  .quiet-fuchsia {
+    --quiet-primary-seed: #d26ae8;
+  }
 
-  /* Constructive */
-  --quiet-constructive-fill-softer: var(--quiet-constructive-900);
-  --quiet-constructive-fill-soft: var(--quiet-constructive-800);
-  --quiet-constructive-fill-mid: color-mix(in oklab, var(--quiet-constructive-600), black 8%);
-  --quiet-constructive-fill-loud: var(--quiet-constructive-200);
-  --quiet-constructive-fill-louder: var(--quiet-constructive-100);
-  --quiet-constructive-text-on-soft: var(--quiet-constructive-100);
-  --quiet-constructive-text-on-mid: white;
-  --quiet-constructive-text-on-loud: black;
-  --quiet-constructive-text-colorful: var(--quiet-constructive-500);
-  --quiet-constructive-stroke-softer: color-mix(in oklab, var(--quiet-constructive-900), white 7.5%);
-  --quiet-constructive-stroke-soft: var(--quiet-constructive-800);
-  --quiet-constructive-stroke-mid: var(--quiet-constructive-600);
+  .quiet-pink {
+    --quiet-primary-seed: #e468b0;
+  }
 
-  /* Destructive */
-  --quiet-destructive-fill-softer: var(--quiet-destructive-900);
-  --quiet-destructive-fill-soft: var(--quiet-destructive-800);
-  --quiet-destructive-fill-mid: color-mix(in oklab, var(--quiet-destructive-600), black 7.5%);
-  --quiet-destructive-fill-loud: var(--quiet-destructive-200);
-  --quiet-destructive-fill-louder: var(--quiet-destructive-100);
-  --quiet-destructive-text-on-soft: var(--quiet-destructive-100);
-  --quiet-destructive-text-on-mid: white;
-  --quiet-destructive-text-on-loud: black;
-  --quiet-destructive-text-colorful: var(--quiet-destructive-500);
-  --quiet-destructive-stroke-softer: color-mix(in oklab, var(--quiet-destructive-900), white 7.5%);
-  --quiet-destructive-stroke-soft: var(--quiet-destructive-800);
-  --quiet-destructive-stroke-mid: var(--quiet-destructive-600);
-}
+  .quiet-rose {
+    --quiet-primary-seed: #ee6383;
+    --quiet-destructive-seed: #e89a26; /* to differentiate better */
+  }
 
-/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//
-//  Built-in presets
-//
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+  .quiet-slate {
+    --quiet-primary-seed: #848da0;
+  }
 
-.quiet-default {
-  --quiet-primary-seed: #989cff;
-}
+  .quiet-zinc {
+    --quiet-primary-seed: #8b8c93;
+  }
 
-.quiet-red {
-  --quiet-primary-seed: #ef5655;
-  --quiet-destructive-seed: #e89a26; /* to differentiate better */
-}
-
-.quiet-orange {
-  --quiet-primary-seed: #f08039;
-}
-
-.quiet-amber {
-  --quiet-primary-seed: #e89a26;
-}
-
-.quiet-yellow {
-  --quiet-primary-seed: #dcb31e;
-}
-
-.quiet-lime {
-  --quiet-primary-seed: #9abb28;
-}
-
-.quiet-green {
-  --quiet-primary-seed: #5dbb55;
-}
-
-.quiet-emerald {
-  --quiet-primary-seed: #47b873;
-}
-
-.quiet-teal {
-  --quiet-primary-seed: #37b995;
-}
-
-.quiet-cyan {
-  --quiet-primary-seed: #20b8bc;
-}
-
-.quiet-sky {
-  --quiet-primary-seed: #1caedd;
-}
-
-.quiet-blue {
-  --quiet-primary-seed: #4a97f4;
-}
-
-.quiet-indigo {
-  --quiet-primary-seed: #6e85f8;
-}
-
-.quiet-violet {
-  --quiet-primary-seed: #927cfb;
-}
-
-.quiet-purple {
-  --quiet-primary-seed: #ae75f6;
-}
-
-.quiet-fuchsia {
-  --quiet-primary-seed: #d26ae8;
-}
-
-.quiet-pink {
-  --quiet-primary-seed: #e468b0;
-}
-
-.quiet-rose {
-  --quiet-primary-seed: #ee6383;
-  --quiet-destructive-seed: #e89a26; /* to differentiate better */
-}
-
-.quiet-slate {
-  --quiet-primary-seed: #848da0;
-}
-
-.quiet-zinc {
-  --quiet-primary-seed: #8b8c93;
-}
-
-.quiet-stone {
-  --quiet-primary-seed: #918c87;
+  .quiet-stone {
+    --quiet-primary-seed: #918c87;
+  }
 }

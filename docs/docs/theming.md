@@ -256,7 +256,7 @@ You should only use color primitives when you want a color that doesn't change i
 </div>
 
 :::info
-While not recommended, it is possible to override primitives for even more control over your application's color palettes. Refer to [`quiet.css`](https://github.com/quietui/quiet/blob/main/src/themes/quiet.css) to see how colors are generated.
+You can tap on any swatch on this page to copy the corresponding custom property.
 :::
 
 ### Adaptive colors
@@ -502,13 +502,16 @@ These tokens represent pure black and white, but their values invert in dark mod
   </quiet-copy>
 </div>
 
-### Design tokens
+## Design tokens
 
-The following design tokens are used to set the overall appearance of the default theme. You can customize tokens by reassigning them as shown below.
+Quiet uses a relatively small set of design tokens in the form of CSS custom properties. These tokens are used by many components to create a consistent look and feel throughout the library. While Quiet has no interest in being a proper design system, you can use and customize any of these tokens to best suit your needs.
+
+You can customize tokens by reassigning them as shown below.
 
 ```css
-/* Design token overrides */
-:root {
+/* Light theme Design token overrides */
+:root,
+.quiet-light {
   --quiet-background-color: white;
   --quiet-text-body: black;
 }
@@ -524,9 +527,9 @@ The following design tokens are used to set the overall appearance of the defaul
 Always scope design token overrides to the `:root` node (i.e. `<html>` element), otherwise calculated values may not propagate as expected.
 :::
 
-#### Application tokens
+### Surface tokens
 
-The following design tokens are used to style themes and components consistently.
+These tokens control various types of backgrounds, or "surfaces."
 
 <quiet-scroller>
 
@@ -534,6 +537,17 @@ The following design tokens are used to style themes and components consistently
 | --------------- | ----------- |
 | `--quiet-background-color` | The application's background color. |
 | `--quiet-paper-color` | An alternative background color for slightly lifted surfaces such as a card. |
+
+</quiet-scroller>
+
+### Typography tokens
+
+These tokens control text and content.
+
+<quiet-scroller>
+
+| Custom property | Description |
+| --------------- | ----------- |
 | `--quiet-text-body` | The default text color of the app. |
 | `--quiet-text-muted` | The color to use for muted text such as form control descriptions. |
 | `--quiet-font-family` | The default font. |
@@ -547,15 +561,35 @@ The following design tokens are used to style themes and components consistently
 | `--quiet-content-spacing` | The spacing between blocks of content. Used primarily in Restyle to space content consistently. |
 | `--quiet-focus-color` | The color of the focus ring. |
 | `--quiet-focus-ring` | The outline-friendly property used to show focus rings. |
+| `--quiet-focus-width` | The width of the focus ring's border. |
+| `--quiet-focus-offset` | The outline offset of the focus ring. |
 | `--quiet-selection-background-color` | The background color of selected text. |
 | `--quiet-selection-color` | The color of selected text. |
-| `--quiet-backdrop-color` | The color of backdrops for modal components such as dialog.  |
-| `--quiet-backdrop-filter` | The filter to apply to dialog backdrops and similar overlays. |
+
+</quiet-scroller>
+
+### Border tokens
+
+These tokens control borders and edges.
+
+<quiet-scroller>
+
+| Custom property | Description |
+| --------------- | ----------- |
 | `--quiet-border-style` | The default border style for most elements. |
 | `--quiet-border-width` | The default border width for most elements. |
 | `--quiet-border-radius` | The base border radius for elements. Often used with `calc()` to scale to smaller and larger elements. |
-| `--quiet-focus-width` | The width of the focus ring's border. |
-| `--quiet-focus-offset` | The outline offset of the focus ring. |
+
+</quiet-scroller>
+
+### Shadow tokens
+
+These tokens controls shadows and can be used with the `box-shadow` property.
+
+<quiet-scroller>
+
+| Custom property | Description |
+| --------------- | ----------- |
 | `--quiet-shadow-color` | The base color used in all shadows. |
 | `--quiet-shadow-softer` | The softest shadow, for subtle elevation effects. |
 | `--quiet-shadow-soft` | A gentle shadow, for light elevation effects. |
@@ -567,6 +601,17 @@ The following design tokens are used to style themes and components consistently
 | `--quiet-inset-shadow-mid` | A moderate inset shadow, for clear depression effects. |
 | `--quiet-inset-shadow-loud` | A strong inset shadow, for prominent depression effects. |
 | `--quiet-inset-shadow-louder` | The strongest inset shadow, for maximum depression effects. |
+
+</quiet-scroller>
+
+### Spacing tokens
+
+These tokens control spacing primarily in [CSS utilities](/docs/css-utilities).
+
+<quiet-scroller>
+
+| Custom property | Description |
+| --------------- | ----------- |
 | `--quiet-space-xs` | Extra small spacing, used for minimal separation between tightly coupled elements. |
 | `--quiet-space-sm` | Small spacing, used for close but distinct element spacing. |
 | `--quiet-space-md` | Medium spacing, the default spacing unit for general element separation. |
@@ -575,9 +620,9 @@ The following design tokens are used to style themes and components consistently
 
 </quiet-scroller>
 
-#### Form control tokens
+### Form controls
 
-The following design tokens are used to style form controls consistently.
+These tokens control form control styles.
 
 <quiet-scroller>
 
@@ -599,12 +644,26 @@ The following design tokens are used to style form controls consistently.
 
 </quiet-scroller>
 
+### Miscellaneous tokens
+
+Here are some additional tokens you can use and customize for various purposes.
+
+<quiet-scroller>
+
+| Custom property | Description |
+| --------------- | ----------- |
+| `--quiet-backdrop-color` | The color of backdrops for modal components such as dialog.  |
+| `--quiet-backdrop-filter` | The filter to apply to dialog backdrops and similar overlays. |
+
+</quiet-scroller>
+
 ## Creating a new theme
 
 If you want to create an entirely new theme, the most efficient way is to fork ("copy") the [default theme's CSS](https://github.com/quietui/quiet/blob/main/src/themes/quiet.css) and modify it instead of writing everything from scratch. This method is faster, easier, and less prone to mistakes.
 
 If you just want to change a few things here and there, it's usually better to leave the default theme intact and extend it by adding your own stylesheet with the specific rules you want.
 
+<!-- Page styles -->
 <style>
   .palette {
     margin-block-end: 2rem;

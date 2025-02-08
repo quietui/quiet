@@ -1,7 +1,7 @@
 import type { QuietTransitionAnimation } from '@quietui/scurry';
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 import { QuietContentChangedEvent } from '../../events/content.js';
 import { QuietTransitionEndEvent } from '../../events/transition.js';
 import hostStyles from '../../styles/host.styles.js';
@@ -49,6 +49,18 @@ export class QuietTransitionGroup extends QuietElement {
   public transitionAnimation?: QuietTransitionAnimation;
 
   /**
+   * By default, the transition group observes and animates its own children. In some cases, you may want it to control
+   * another element's children. This is useful in cases where you can't directly wrap child elements with the
+   * `<quiet-transition-group>` element.
+   *
+   * For example, if you embed a transition group in a component's shadow root but need it to control slotted (light
+   * DOM) elements, you can't simply wrap the slot because the mutation observer can't see projected (slotted) elements.
+   * In this case, point this property to the target element and the transition group will hide itself and observe the
+   * target container's children instead. (Property only)
+   */
+  @state() public transitionContainer: HTMLElement = this;
+
+  /**
    * Disables transition animations. However, the `quiet-content-changed` and `quiet-transition-end` events will still
    * be dispatched.
    */
@@ -73,6 +85,24 @@ export class QuietTransitionGroup extends QuietElement {
   firstUpdated() {
     // Cache the initial coordinates
     this.updateElementPositions();
+  }
+
+  updated(changedProperties: PropertyValues<this>) {
+    // Handle container changes
+    if (changedProperties.has('transitionContainer')) {
+      const oldContainer = changedProperties.get('transitionContainer');
+
+      // Hide the transition group when it's controlling another container
+      this.hidden = this.transitionContainer !== this;
+
+      // Skip the first update, since we're starting the observers in connectedCallback
+      if (oldContainer !== undefined) {
+        // Restart the observes and update positions to reflect the new container
+        this.stopObservers();
+        this.updateElementPositions();
+        this.startObservers();
+      }
+    }
   }
 
   /**
@@ -147,7 +177,8 @@ export class QuietTransitionGroup extends QuietElement {
         // Added
         mutation.addedNodes.forEach(node => {
           if (node.nodeType === Node.ELEMENT_NODE) {
-            addedElements.set(node as HTMLElement, {
+            const el = node as HTMLElement;
+            addedElements.set(el, {
               parent: mutation.target as HTMLElement,
               nextSibling: mutation.nextSibling as HTMLElement | null
             });
@@ -157,7 +188,8 @@ export class QuietTransitionGroup extends QuietElement {
         // Removed
         mutation.removedNodes.forEach(node => {
           if (node.nodeType === Node.ELEMENT_NODE) {
-            removedElements.set(node as HTMLElement, {
+            const el = node as HTMLElement;
+            removedElements.set(el, {
               parent: mutation.target as HTMLElement,
               nextSibling: mutation.nextSibling as HTMLElement | null
             });
@@ -183,7 +215,7 @@ export class QuietTransitionGroup extends QuietElement {
         if (opts.nextSibling) {
           opts.nextSibling.before(el);
         } else {
-          this.append(el);
+          this.transitionContainer.append(el);
         }
 
         removeAnimations.push(
@@ -222,7 +254,7 @@ export class QuietTransitionGroup extends QuietElement {
       }
 
       // Animate moved elements
-      [...this.children].forEach((el: HTMLElement) => {
+      [...this.transitionContainer.children].forEach((el: HTMLElement) => {
         const oldPosition = this.cachedElementPositions.get(el);
         const newPosition = el.getBoundingClientRect();
 
@@ -296,7 +328,7 @@ export class QuietTransitionGroup extends QuietElement {
     }
 
     // Start observing mutations
-    this.mutationObserver.observe(this, {
+    this.mutationObserver.observe(this.transitionContainer, {
       childList: true,
       characterData: false
     });
@@ -334,10 +366,10 @@ export class QuietTransitionGroup extends QuietElement {
    * immediately before appending or removing elements to ensure a smooth transition.
    */
   public updateElementPositions() {
-    this.cachedContainerPosition = this.getBoundingClientRect();
+    this.cachedContainerPosition = this.transitionContainer.getBoundingClientRect();
     this.cachedScrollPosition = { x: window.scrollX, y: window.scrollY };
 
-    [...this.children].forEach((el: HTMLElement) => {
+    [...this.transitionContainer.children].forEach((el: HTMLElement) => {
       this.cachedElementPositions.set(el, el.getBoundingClientRect());
     });
   }

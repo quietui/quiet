@@ -1,0 +1,427 @@
+@layer quiet {
+  /*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  //  Utilities
+  //
+  //  NOTE: This isn't Tailwind. We're not trying to be comprehensive. This is about reducing boilerplate for some of
+  //  the the most common use cases with sensible and easy to remember utilities.
+  //
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+  /*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  //  Flex utilities
+  //
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+  /* Flex stack */
+  [class*='quiet-stack'] {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .quiet-stack-0 {
+    gap: 0;
+  }
+
+  .quiet-stack-xs {
+    gap: var(--quiet-space-xs);
+  }
+
+  .quiet-stack-sm {
+    gap: var(--quiet-space-sm);
+  }
+
+  .quiet-stack-md {
+    gap: var(--quiet-space-md);
+  }
+
+  .quiet-stack-lg {
+    gap: var(--quiet-space-lg);
+  }
+
+  .quiet-stack-xl {
+    gap: var(--quiet-space-xl);
+  }
+
+  /* Flex inline */
+  [class*='quiet-inline'] {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+
+  .quiet-inline-0 {
+    gap: 0;
+  }
+
+  .quiet-inline-xs {
+    gap: var(--quiet-space-xs);
+  }
+
+  .quiet-inline-sm {
+    gap: var(--quiet-space-sm);
+  }
+
+  .quiet-inline-md {
+    gap: var(--quiet-space-md);
+  }
+
+  .quiet-inline-lg {
+    gap: var(--quiet-space-lg);
+  }
+
+  .quiet-inline-xl {
+    gap: var(--quiet-space-xl);
+  }
+
+  /*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  //  Padding + margin
+  //
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+  /* padding-inline-start */
+  .quiet-pis-0 {
+    padding-inline-start: 0;
+  }
+
+  .quiet-pis-xs {
+    padding-inline-start: var(--quiet-space-xs);
+  }
+
+  .quiet-pis-sm {
+    padding-inline-start: var(--quiet-space-sm);
+  }
+
+  .quiet-pis-md {
+    padding-inline-start: var(--quiet-space-md);
+  }
+
+  .quiet-pis-lg {
+    padding-inline-start: var(--quiet-space-lg);
+  }
+
+  .quiet-pis-xl {
+    padding-inline-start: var(--quiet-space-xl);
+  }
+
+  /* padding-inline-end */
+  .quiet-pie-0 {
+    padding-inline-end: 0;
+  }
+
+  .quiet-pie-xs {
+    padding-inline-end: var(--quiet-space-xs);
+  }
+
+  .quiet-pie-sm {
+    padding-inline-end: var(--quiet-space-sm);
+  }
+
+  .quiet-pie-md {
+    padding-inline-end: var(--quiet-space-md);
+  }
+
+  .quiet-pie-lg {
+    padding-inline-end: var(--quiet-space-lg);
+  }
+
+  .quiet-pie-xl {
+    padding-inline-end: var(--quiet-space-xl);
+  }
+
+  /* padding-block-start */
+  .quiet-pbs-0 {
+    padding-block-start: 0;
+  }
+
+  .quiet-pbs-xs {
+    padding-block-start: var(--quiet-space-xs);
+  }
+
+  .quiet-pbs-sm {
+    padding-block-start: var(--quiet-space-sm);
+  }
+
+  .quiet-pbs-md {
+    padding-block-start: var(--quiet-space-md);
+  }
+
+  .quiet-pbs-lg {
+    padding-block-start: var(--quiet-space-lg);
+  }
+
+  .quiet-pbs-xl {
+    padding-block-start: var(--quiet-space-xl);
+  }
+
+  /* padding-block-end */
+  .quiet-pbe-0 {
+    padding-block-end: 0;
+  }
+
+  .quiet-pbe-xs {
+    padding-block-end: var(--quiet-space-xs);
+  }
+
+  .quiet-pbe-sm {
+    padding-block-end: var(--quiet-space-sm);
+  }
+
+  .quiet-pbe-md {
+    padding-block-end: var(--quiet-space-md);
+  }
+
+  .quiet-pbe-lg {
+    padding-block-end: var(--quiet-space-lg);
+  }
+
+  .quiet-pbe-xl {
+    padding-block-end: var(--quiet-space-xl);
+  }
+
+  /* padding-block (shorthand) */
+  .quiet-pb-0 {
+    padding-block: 0;
+  }
+
+  .quiet-pb-xs {
+    padding-block: var(--quiet-space-xs);
+  }
+
+  .quiet-pb-sm {
+    padding-block: var(--quiet-space-sm);
+  }
+
+  .quiet-pb-md {
+    padding-block: var(--quiet-space-md);
+  }
+
+  .quiet-pb-lg {
+    padding-block: var(--quiet-space-lg);
+  }
+
+  .quiet-pb-xl {
+    padding-block: var(--quiet-space-xl);
+  }
+
+  /* padding-inline (shorthand) */
+  .quiet-pi-0 {
+    padding-inline: 0;
+  }
+
+  .quiet-pi-xs {
+    padding-inline: var(--quiet-space-xs);
+  }
+
+  .quiet-pi-sm {
+    padding-inline: var(--quiet-space-sm);
+  }
+
+  .quiet-pi-md {
+    padding-inline: var(--quiet-space-md);
+  }
+
+  .quiet-pi-lg {
+    padding-inline: var(--quiet-space-lg);
+  }
+
+  .quiet-pi-xl {
+    padding-inline: var(--quiet-space-xl);
+  }
+
+  /* margin-inline-start */
+  .quiet-mis-auto {
+    margin-inline-start: auto;
+  }
+
+  .quiet-mis-0 {
+    margin-inline-start: 0;
+  }
+
+  .quiet-mis-xs {
+    margin-inline-start: var(--quiet-space-xs);
+  }
+
+  .quiet-mis-sm {
+    margin-inline-start: var(--quiet-space-sm);
+  }
+
+  .quiet-mis-md {
+    margin-inline-start: var(--quiet-space-md);
+  }
+
+  .quiet-mis-lg {
+    margin-inline-start: var(--quiet-space-lg);
+  }
+
+  .quiet-mis-xl {
+    margin-inline-start: var(--quiet-space-xl);
+  }
+
+  /* margin-inline-end */
+  .quiet-mie-auto {
+    margin-inline-end: auto;
+  }
+
+  .quiet-mie-0 {
+    margin-inline-end: 0;
+  }
+
+  .quiet-mie-xs {
+    margin-inline-end: var(--quiet-space-xs);
+  }
+
+  .quiet-mie-sm {
+    margin-inline-end: var(--quiet-space-sm);
+  }
+
+  .quiet-mie-md {
+    margin-inline-end: var(--quiet-space-md);
+  }
+
+  .quiet-mie-lg {
+    margin-inline-end: var(--quiet-space-lg);
+  }
+
+  .quiet-mie-xl {
+    margin-inline-end: var(--quiet-space-xl);
+  }
+
+  /* margin-block-start */
+  .quiet-mbs-auto {
+    margin-block-start: auto;
+  }
+
+  .quiet-mbs-0 {
+    margin-block-start: 0;
+  }
+
+  .quiet-mbs-xs {
+    margin-block-start: var(--quiet-space-xs);
+  }
+
+  .quiet-mbs-sm {
+    margin-block-start: var(--quiet-space-sm);
+  }
+
+  .quiet-mbs-md {
+    margin-block-start: var(--quiet-space-md);
+  }
+
+  .quiet-mbs-lg {
+    margin-block-start: var(--quiet-space-lg);
+  }
+
+  .quiet-mbs-xl {
+    margin-block-start: var(--quiet-space-xl);
+  }
+
+  /* margin-block-end */
+  .quiet-mbe-auto {
+    margin-block-end: auto;
+  }
+
+  .quiet-mbe-0 {
+    margin-block-end: 0;
+  }
+
+  .quiet-mbe-xs {
+    margin-block-end: var(--quiet-space-xs);
+  }
+
+  .quiet-mbe-sm {
+    margin-block-end: var(--quiet-space-sm);
+  }
+
+  .quiet-mbe-md {
+    margin-block-end: var(--quiet-space-md);
+  }
+
+  .quiet-mbe-lg {
+    margin-block-end: var(--quiet-space-lg);
+  }
+
+  .quiet-mbe-xl {
+    margin-block-end: var(--quiet-space-xl);
+  }
+
+  /* margin-block (shorthand) */
+  .quiet-mb-auto {
+    margin-block: auto;
+  }
+
+  .quiet-mb-0 {
+    margin-block: 0;
+  }
+
+  .quiet-mb-xs {
+    margin-block: var(--quiet-space-xs);
+  }
+
+  .quiet-mb-sm {
+    margin-block: var(--quiet-space-sm);
+  }
+
+  .quiet-mb-md {
+    margin-block: var(--quiet-space-md);
+  }
+
+  .quiet-mb-lg {
+    margin-block: var(--quiet-space-lg);
+  }
+
+  .quiet-mb-xl {
+    margin-block: var(--quiet-space-xl);
+  }
+
+  /* margin-inline (shorthand) */
+  .quiet-mi-auto {
+    margin-inline: auto;
+  }
+
+  .quiet-mi-0 {
+    margin-inline: 0;
+  }
+
+  .quiet-mi-xs {
+    margin-inline: var(--quiet-space-xs);
+  }
+
+  .quiet-mi-sm {
+    margin-inline: var(--quiet-space-sm);
+  }
+
+  .quiet-mi-md {
+    margin-inline: var(--quiet-space-md);
+  }
+
+  .quiet-mi-lg {
+    margin-inline: var(--quiet-space-lg);
+  }
+
+  .quiet-mi-xl {
+    margin-inline: var(--quiet-space-xl);
+  }
+
+  /*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  //  Visually hidden utilities
+  //
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+  .quiet-vh,
+  .quiet-vh-focusable:not(:focus-within),
+  .quiet-vh-label::part(label),
+  .quiet-vh-description::part(description) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    white-space: nowrap;
+    clip-path: inset(50%);
+  }
+}

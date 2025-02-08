@@ -1115,29 +1115,17 @@
     }
   }
 
-  /* FOUCE styles */
-  html.quiet-cloak {
-    opacity: 0;
+  /* Cloak to reduce FOUCE when using the autoloader */
+  .quiet-cloak {
+    opacity: 0 !important;
   }
 
-  /* Hide custom elements until they're upgraded to reduce FOUCE */
+  /* Hide undefined elements to reduce FOUCE */
   :not(:defined) {
     visibility: hidden;
   }
 
-  /* Utilities */
-  .quiet-vh,
-  .quiet-vh-focusable:not(:focus-within),
-  .quiet-vh-label::part(label),
-  .quiet-vh-description::part(description) {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    white-space: nowrap;
-    clip-path: inset(50%);
-  }
-
+  /* Normalize the hidden attribute's display */
   [hidden] {
     display: none !important;
   }

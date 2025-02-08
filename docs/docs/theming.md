@@ -567,6 +567,11 @@ The following design tokens are used to style themes and components consistently
 | `--quiet-inset-shadow-mid` | A moderate inset shadow, for clear depression effects. |
 | `--quiet-inset-shadow-loud` | A strong inset shadow, for prominent depression effects. |
 | `--quiet-inset-shadow-louder` | The strongest inset shadow, for maximum depression effects. |
+| `--quiet-space-xs` | Extra small spacing, used for minimal separation between tightly coupled elements. |
+| `--quiet-space-sm` | Small spacing, used for close but distinct element spacing. |
+| `--quiet-space-md` | Medium spacing, the default spacing unit for general element separation. |
+| `--quiet-space-lg` | Large spacing, used for creating more pronounced separation between sections. |
+| `--quiet-space-xl` | Extra large spacing, used for major section breaks and substantial white space. |
 
 </quiet-scroller>
 

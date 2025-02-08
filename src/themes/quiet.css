@@ -56,6 +56,13 @@
     --quiet-form-control-placeholder-color: color-mix(in oklab, var(--quiet-text-muted), transparent 25%);
     --quiet-button-active-offset: 1px;
 
+    /* Essential spacing tokens */
+    --quiet-space-xs: 0.25rem;
+    --quiet-space-sm: 0.5rem;
+    --quiet-space-md: 1rem;
+    --quiet-space-lg: 1.5rem;
+    --quiet-space-xl: 2rem;
+
     /*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //
     //  The color palettes below are generated from the seed colors. The palettes remain static in both light and dark

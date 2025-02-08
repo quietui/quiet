@@ -34,6 +34,7 @@ export function outlinePlugin(options = {}) {
         const level = heading.tagName.slice(1);
         const clone = parse(heading.outerHTML);
 
+        // Skip headings with data-no-outline
         if (heading.closest('[data-no-outline]')) {
           return;
         }
@@ -47,6 +48,7 @@ export function outlinePlugin(options = {}) {
         const a = li.querySelector('a');
         a.setAttribute('href', `#${encodeURIComponent(id)}`);
         a.textContent = clone.textContent.trim().replace(/#$/, '');
+        a.textContent = a.textContent.replace(/\[(stable|experimental|breaking)\]/g, '');
 
         // Add it to the list
         ul.firstChild.appendChild(li);

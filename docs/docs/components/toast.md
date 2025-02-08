@@ -105,7 +105,7 @@ When calling `create()`, set the `variant` option to `primary`, `constructive`, 
 <div id="toast__variant">
   <quiet-toast></quiet-toast>
 
-  <div class="flex-row" style="gap: .25rem;">
+  <div style="display: flex; flex-wrap: wrap; gap: .5rem;">
     <quiet-button data-variant="default">Default</quiet-button>
     <quiet-button data-variant="primary">Primary</quiet-button>
     <quiet-button data-variant="constructive">Constructive</quiet-button>
@@ -134,7 +134,7 @@ When calling `create()`, set the `variant` option to `primary`, `constructive`, 
 </script>
 ```
 
-### Setting a duration
+### Changing the duration
 
 When calling `create()`, set the `duration` option to change how long notifications show before disappearing. The value is in milliseconds. A value of `0` will keep the notification open until the user dismisses it.
 
@@ -155,8 +155,6 @@ When calling `create()`, set the `duration` option to change how long notificati
 ```
 
 ### Removing the close button
-
-### Hiding the close button
 
 Use the `no-close-button` attribute to hide the close button and the progress ring. This is only recommended when a duration is set or when you're using custom buttons to dismiss the notification.
 

@@ -229,7 +229,6 @@ To respond to custom buttons inside a toast item, obtain a reference to the noti
       </div>
     `, {
       allowHtml: true,
-      duration: 0,
       noCloseButton: true,
       variant: 'primary'
     });
@@ -254,6 +253,65 @@ To respond to custom buttons inside a toast item, obtain a reference to the noti
     });
   });
 </script>
+```
+
+### Custom progress bars
+
+You can add custom progress indicators using the readonly `--progress` custom property, which updates as the timer counts down.
+
+```html {.example}
+<quiet-toast id="toast__progress"></quiet-toast>
+<quiet-button>Show notification</quiet-button>
+
+<script>
+  const toast = document.getElementById('toast__progress');
+  const button = toast.nextElementSibling;
+
+  button.addEventListener('click', async () => { 
+    const toastItem = await toast.create(`
+      <quiet-icon slot="icon" name="balloon"></quiet-icon>
+      <p>This is fun, but the cats like the ring better.</p>
+      <div class="custom-timer"></div>
+    `, {
+      allowHtml: true,
+      variant: 'primary'
+    });
+  });
+</script>
+
+<style>
+  #toast__progress {
+    /** Hide the standard progress ring */
+    quiet-toast-item::part(progress__track),
+    quiet-toast-item::part(progress__indicator) {
+      display: none;
+    }
+
+    .custom-timer {
+      position: relative;
+      height: 0.25em; 
+      width: 100%; 
+      border-radius: 9999px; 
+      background-color: var(--quiet-neutral-fill-softer);
+      box-shadow: var(--quiet-inset-shadow-soft);
+      margin-block-start: -.5rem;
+      margin-block-end: -.5rem;
+
+      /** Custom progress bar */
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: var(--progress);
+        background-color: var(--quiet-primary-fill-mid);
+        border-radius: inherit;
+        transition: 100ms width;
+      }    
+    }
+  }
+</style>
 ```
 
 ### Changing the placement

@@ -574,8 +574,12 @@ quiet-badge.experimental {
 
 /* Outline */
 #outline {
+  position: sticky;
+  top: var(--docs-header-height);
   order: 2;
-  margin-block: 3rem 2rem;
+  height: calc(100dvh - var(--docs-header-height));
+  padding-block: 3rem 2rem;
+  overflow: auto;
 }
 
 #outline h2 > a {
@@ -616,8 +620,10 @@ quiet-badge.experimental {
   }
 
   #outline {
-    margin-block-start: 1.5rem;
-    margin-block-end: -1rem;
+    position: static;
+    height: auto;
+    margin-block: 1.5rem -1rem;
+    padding-block: 0;
   }
 
   #outline-standard {

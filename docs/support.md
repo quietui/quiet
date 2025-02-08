@@ -138,6 +138,16 @@ I generally don't accept sponsorships for specific features. This lets me focus 
 Quiet is the result of many years of experience and my commitment to painstakingly curate the project. I want people to sponsor it because they see the vision, not because they want to change it.
 :::
 
+:::details What about server-side rendering (SSR)?
+Server-Side Rendering (SSR) was created to solve problems introduced by client-side frameworks. When we moved to rendering everything with JavaScript, we broke SEO, social media previews, and page load performance. While SSR can be helpful for specific use cases, it's often misused to justify shipping massive JavaScript bundles that leave pages looking ready but completely unresponsive until hydration completes.
+
+The idea behind SSR is that fetching and hydrating can be done in the background before the user has a chance to interact with the page. Alas, bundles just keep getting bigger and oftentimes the user is left with a "fully painted" page they can't actually do anything with. In many apps, even on high-speed connections, it can take 5+ seconds until [TTI](https://developer.chrome.com/docs/lighthouse/performance/interactive), leaving users confused and frustrated.
+
+Quiet doesn't subscribe to this legacy burden. Being part of the web platform, web components can be server-side rendered just like any other HTML. Just output the appropriate tags and make sure to include the appropriate scripts/imports and you're good to go.
+
+If you're using Quiet's autoloader, only the components you're actually using will be loaded. [A handful of tools](/docs/#reducing-fouce) are provided to eliminate [FOUCE](https://www.abeautifulsite.net/posts/flash-of-undefined-custom-elements), removing the need for SSR in the majority of use cases.
+:::
+
 :::details Can I change the tag names? {.faq}
 Component tag names, e.g. `<quiet-button>`, cannot be changed without modifying the source code due to the way tags are referenced in code and styles. Attempting to change tag names, e.g. by extending the associated classes, will cause unexpected breakages and isn't a supported feature of the library.
 :::

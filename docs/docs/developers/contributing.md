@@ -149,7 +149,9 @@ If a component needs to set attributes on itself, such as `role`, `aria-*`, or `
 
 ### Boolean attributes
 
-Boolean attributes should always default to `false`.
+Boolean attributes should always default to `false`, since HTML users can't remove them declaratively otherwise.
+
+Use `with-*` attributes for features that enable optional content. Use `no-*` attributes for features that disable optional content.
 
 ### Attribute reflection
 
@@ -169,7 +171,7 @@ Attribute reflection in custom elements is [an interesting challenge](https://ww
 
 #### Special cases
 
-- All `with-` attributes must reflect.
+- All `with-*` and `no-*` attributes must reflect.
 - In form controls, the `name` and `required` attributes must always reflect, like the platform.
 - Form control states such as `disabled`, `checked`, `active`, etc. must not reflect.
 

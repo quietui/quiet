@@ -1,4 +1,4 @@
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import hostStyles from '../../styles/host.styles.js';
@@ -34,7 +34,7 @@ import styles from './toast-item.styles.js';
  * @csspart close-icon__svg - The close icons exported `svg` part.
  *
  * @cssproperty [--accent-line-width=0.33em] - The width of the notification's accent line.
- * @cssproperty --progress - A readonly value between 0-1 that represents the progress remaining until the
+ * @cssproperty --progress - A readonly value that goes from 100% to 0%, representing the progress remaining until the
  *  notification closes. Useful for creating custom content with visual indicators of the notification's progress.
  */
 @customElement('quiet-toast-item')
@@ -47,8 +47,11 @@ export class QuietToastItem extends QuietElement {
   private localize = new Localize(this);
   private startTime: number | null = null;
 
-  /** The amount of time left before the notification is removed. */
-  @state() private timeLeft = 100;
+  /**
+   * @internal The amount of time left before the notification is removed. Moves from 100 (full time left) to zero (no
+   *  time left).
+   */
+  @state() timeLeft = 100;
 
   /** The type of notification to render. */
   @property({ reflect: true }) variant: 'primary' | 'constructive' | 'destructive' | 'default' = 'default';
@@ -73,6 +76,12 @@ export class QuietToastItem extends QuietElement {
     this.stopTimer();
     this.removeEventListener('pointerenter', this.handlePointerEnter);
     this.removeEventListener('pointerleave', this.handlePointerLeave);
+  }
+
+  updated(changedProperties: PropertyValues<this>) {
+    if (changedProperties.has('timeLeft')) {
+      this.style.setProperty('--progress', `${this.timeLeft.toFixed(2)}%`);
+    }
   }
 
   /**
@@ -104,7 +113,6 @@ export class QuietToastItem extends QuietElement {
     const elapsed = performance.now() - this.startTime;
     const progress = Math.min(elapsed / this.duration, 1);
     this.timeLeft = 100 * (1 - progress);
-    this.style.setProperty('--progress', (1 - progress).toFixed(2));
 
     if (progress < 1) {
       this.animationFrame = requestAnimationFrame(this.tick);

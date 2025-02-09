@@ -138,14 +138,16 @@ I generally don't accept sponsorships for specific features. This lets me focus 
 Quiet is the result of many years of experience and my commitment to painstakingly curate the project. I want people to sponsor it because they see the vision, not because they want to change it.
 :::
 
-:::details What about server-side rendering (SSR)?
-Server-Side Rendering (SSR) was created to solve problems introduced by client-side frameworks. When we moved to rendering everything with JavaScript, we broke SEO, social media previews, and page load performance. While SSR can be helpful for specific use cases, it's often misused to justify shipping massive JavaScript bundles that leave pages looking ready but completely unresponsive until hydration completes.
+:::details What about server-side rendering (SSR)? {.faq}
+_Framework SSR_ was created to solve problems introduced by client-side frameworks. When we moved to rendering everything with JavaScript, we broke SEO, social media previews, and page load performance. While framework SSR can be helpful in some scenarios, it's often misused to justify shipping massive JavaScript bundles that leave pages looking ready but completely unresponsive until everything loads and hydration completes.
 
-The idea behind SSR is that fetching and hydrating can be done in the background before the user has a chance to interact with the page. Alas, bundles just keep getting bigger and oftentimes the user is left with a "fully painted" page they can't actually do anything with. In many apps, even on high-speed connections, it can take 5+ seconds until [TTI](https://developer.chrome.com/docs/lighthouse/performance/interactive), leaving users confused and frustrated.
+The idea behind framework SSR is that fetching and hydrating can be done in the background before the user is likely to interact with the page. As such, it first sends the user a "fully painted" picture they can't actually do anything with while waiting for the browser to download and process a multi-megabyte bundle. However, it's become common to see 5+ seconds until [TTI](https://developer.chrome.com/docs/lighthouse/performance/interactive) in the wild, leaving many users confused and frustrated.
 
-Quiet doesn't subscribe to this legacy burden. Being part of the web platform, web components can be server-side rendered just like any other HTML. Just output the appropriate tags and make sure to include the appropriate scripts/imports and you're good to go.
+Quiet isn't interested in supporting the framework SSR fallacy. As part of the platform, web components can be server-side rendered traditionally like all other HTML elements have since the early days of the Web. Just generate the appropriate HTML tags, import the components, and you're good to go.
 
-If you're using Quiet's autoloader, only the components you're actually using will be loaded. [A handful of tools](/docs/#reducing-fouce) are provided to eliminate [FOUCE](https://www.abeautifulsite.net/posts/flash-of-undefined-custom-elements), removing the need for SSR in the majority of use cases.
+If you're using Quiet's autoloader, it will only fetch the components you're actually using on the page. And to eliminate [FOUCE](https://www.abeautifulsite.net/posts/flash-of-undefined-custom-elements), the most common reason people reach for SSR when using web components, Quiet provides [some simple tools](/docs/#reducing-fouce) to eliminate it.
+
+The key to a great experience on the web isn't SSR, it's less JavaScript. If you're of the belief that you need framework SSR and all the needless complexity it brings to a project, this library isn't for you.
 :::
 
 :::details Can I change the tag names? {.faq}

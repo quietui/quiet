@@ -145,7 +145,7 @@ The idea behind framework SSR is that fetching and hydrating can be done in the 
 
 Quiet isn't interested in supporting the framework SSR fallacy. As part of the platform, web components can be server-side rendered traditionally like all other HTML elements have since the early days of the Web. Just generate the appropriate HTML tags, import the components, and you're good to go.
 
-If you're using Quiet's autoloader, it will only fetch the components you're actually using on the page. And to eliminate [FOUCE](https://www.abeautifulsite.net/posts/flash-of-undefined-custom-elements), the most common reason people reach for SSR when using web components, Quiet provides [some simple tools](/docs/#reducing-fouce) to eliminate it.
+If you're using Quiet's autoloader, it will only fetch the components you're actually using on the page. And to eliminate [FOUCE](https://www.abeautifulsite.net/posts/flash-of-undefined-custom-elements), the most common reason people reach for SSR when using web components, Quiet provides some [simple and effective tools](/docs/#reducing-fouce).
 
 The key to a great experience on the web isn't SSR, it's less JavaScript. If you're of the belief that you need framework SSR and all the needless complexity it brings to a project, this library isn't for you.
 :::

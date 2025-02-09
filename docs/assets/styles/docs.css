@@ -1060,7 +1060,12 @@ quiet-callout {
 /* Dark mode */
 .quiet-dark #content .below-splash {
   pre:has(code) {
-    background-color: var(--quiet-silent);
+    backdrop-filter: blur(6px);
+    background-color: color-mix(in oklab, var(--quiet-silent), transparent 50%);
+
+    code {
+      background: transparent;
+    }
   }
 }
 

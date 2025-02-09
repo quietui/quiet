@@ -3,7 +3,7 @@ title: Toast
 layout: component
 ---
 
-Adding a single `<quiet-toast>` element to the page gives you the power to dispatch notifications any time. Notifications will appear in the _toast stack_, which renders in the [top layer](https://developer.mozilla.org/en-US/docs/Glossary/Top_layer) and shows above everything else on the page.
+Adding a single `<quiet-toast>` element to the page gives you the power to dispatch notifications any time. Notifications appear in the _toast stack_, which renders in the [top layer](https://developer.mozilla.org/en-US/docs/Glossary/Top_layer) and shows above everything else on the page.
 
 ```html {.example}
 <quiet-toast id="toast__overview"></quiet-toast>

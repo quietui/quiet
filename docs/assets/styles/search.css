@@ -6,6 +6,8 @@
     padding: 0;
     overflow: hidden;
     border-radius: calc(var(--quiet-border-radius) * 2);
+    backdrop-filter: blur(6px);
+    background-color: color-mix(in oklab, var(--quiet-paper-color), transparent 15%);
   }
 
   &::part(body) {

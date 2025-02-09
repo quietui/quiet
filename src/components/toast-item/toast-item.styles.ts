@@ -12,6 +12,7 @@ export default css`
     border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
     border-radius: var(--quiet-border-radius);
     backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: var(--quiet-backdrop-filter);
     background-color: color-mix(in oklab, var(--quiet-paper-color), transparent 15%);
     box-shadow: var(--quiet-shadow-loud);
     color: var(--quiet-text-body);

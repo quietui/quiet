@@ -106,10 +106,10 @@ When calling `create()`, set the `variant` option to `primary`, `constructive`, 
   <quiet-toast></quiet-toast>
 
   <div style="display: flex; flex-wrap: wrap; gap: .5rem;">
-    <quiet-button data-variant="default">Default</quiet-button>
-    <quiet-button data-variant="primary">Primary</quiet-button>
-    <quiet-button data-variant="constructive">Constructive</quiet-button>
-    <quiet-button data-variant="destructive">Destructive</quiet-button>
+    <quiet-button data-variant="default" data-icon="settings">Default</quiet-button>
+    <quiet-button data-variant="primary" data-icon="info-circle">Primary</quiet-button>
+    <quiet-button data-variant="constructive" data-icon="check">Constructive</quiet-button>
+    <quiet-button data-variant="destructive" data-icon="alert-triangle">Destructive</quiet-button>
   </div>
 </div>
 
@@ -121,10 +121,11 @@ When calling `create()`, set the `variant` option to `primary`, `constructive`, 
   container.addEventListener('click', event => {
     const button = event.target.closest('[data-variant]');
     const variant = button?.getAttribute('data-variant');
+    const icon = button?.getAttribute('data-icon');
     if (!button) return;
 
     toast.create(`
-      <quiet-icon slot="icon" name="click"></quiet-icon>
+      <quiet-icon slot="icon" name="${icon}"></quiet-icon>
       This is a ${variant} notification
     `, {
       allowHtml: true,
@@ -230,7 +231,8 @@ To respond to custom buttons inside a toast item, obtain a reference to the noti
     `, {
       allowHtml: true,
       noCloseButton: true,
-      variant: 'primary'
+      variant: 'primary',
+      duration: 0
     });
 
     const complete = toastItem.querySelector('.complete');

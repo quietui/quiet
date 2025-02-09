@@ -72,19 +72,11 @@ Copy and paste the following code into the `<head>` section of any HTML document
 <link rel="stylesheet" href="{% cdnUrl '/dist/themes/restyle.css' %}">
 ```
 
-<div 
-  style="
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem; 
-    justify-content: center; 
-    margin-block: 2rem 4rem;
-  "
->
+<div class="quick-start">
   <quiet-button size="lg" appearance="outline" pill href="/docs">
     Installation guide
   </quiet-button>
-
+  
   <quiet-button size="lg" appearance="outline" pill href="/docs/components">
     Browse components
   </quiet-button>

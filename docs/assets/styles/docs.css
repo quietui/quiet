@@ -979,6 +979,23 @@ quiet-callout {
   justify-content: center;
   margin-block-start: 4rem;
   gap: 1rem;
+
+  quiet-button[variant='default']::part(button) {
+    background-color: color-mix(in oklab, var(--quiet-neutral-fill-softer), transparent 15%);
+  }
+}
+
+.quick-start {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-block: 2rem 4rem;
+  gap: 1rem;
+
+  quiet-button::part(button) {
+    border-color: var(--quiet-neutral-fill-loud);
+    color: var(--quiet-neutral-fill-loud);
+  }
 }
 
 @media screen and (max-width: 600px) {

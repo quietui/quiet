@@ -26,7 +26,7 @@ By default, sparklines are styled with a `1em` height to fit properly within hea
   This week's website traffic
   <quiet-sparkline 
     label="Website traffic showing a slightly positive trend"
-    data="20 15 35 45"
+    data="10 16 12 18 30"
   ></quiet-sparkline>  
   has slightly increased.
 </p>

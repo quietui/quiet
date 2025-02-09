@@ -34,7 +34,7 @@ The truth is, Shoelace has matured a lot over the years. While that's a great th
 
 **Enter Quiet, my creative outlet.**
 
-A passion project. Something I'm building from scratch to explore new ideas and have fun. A place where I can satisfy my component addiction, improve my design skills, explore new Web APIs, and let my curiosity run wild. A place to do things _my way_.
+A passion project. Something I'm building from scratch to explore new ideas and have fun. A place where I can satisfy my component addiction, improve my design skills, explore new Web APIs, and let my curiosity run wild. ==A place to do things my way.==
 
 As a result, you'll find that Quiet is rather opinionated. I carefully curate everything from the project's scope down to every individual line of code. Oftentimes, saying "no" is key to maintaining the quality of the library and my ability to steward it effectively.
 

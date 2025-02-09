@@ -34,7 +34,7 @@ Restyle is just a starting point. Feel free to customize any of its styles in yo
 
 Use `<h1>` through `<h6>` to create headings. Headings use `text-wrap: balance` so they look great on all devices.
 
-<quiet-card data-no-outline class="preview">
+<quiet-card data-no-outline>
 
 # Heading level one
 
@@ -54,7 +54,7 @@ Use `<h1>` through `<h6>` to create headings. Headings use `text-wrap: balance` 
 
 Paragraphs have the spacing you would expect and come with `text-wrap: pretty` to prevent orphans.
 
-<quiet-card class="preview">
+<quiet-card>
 
 Pellentesque id nibh tortor id aliquet lectus proin nibh nisl. Viverra nam libero justo laoreet. Pellentesque habitant morbi tristique senectus et. Euismod in pellentesque massa placerat duis ultricies lacus sed turpis. Scelerisque varius morbi enim nunc faucibus a pellentesque sit.
 
@@ -126,7 +126,7 @@ Use `<ol>` and `<ul>` to make ordered and unordered lists.
 
 Use `<blockquote>` to show quotes that stand out.
 
-<quiet-card class="preview">
+<quiet-card>
 
 > Neither the mouse nor the boy was the least bit surprised that each could understand the other. Two creatures who shared a love for web design naturally spoke the same language.
 
@@ -136,7 +136,7 @@ Use `<blockquote>` to show quotes that stand out.
 
 Use `<pre>` for code and other preformatted content.
 
-<quiet-card class="preview">
+<quiet-card>
 
 <pre>// do a thing
 export function thing(arg) {
@@ -153,7 +153,7 @@ export function thing(arg) {
 
 Use `<dl>`, `<dt>`, and `<dd>` to create description lists.
 
-<quiet-card class="preview">
+<quiet-card>
   <dl>
     <dt>First definition</dt>
     <dd>Morbi tempus iaculis urna id volutpat lacus. Tincidunt eget nullam non nisi. Viverra mauris in aliquam sem fringilla ut.</dd>
@@ -170,7 +170,7 @@ Use `<dl>`, `<dt>`, and `<dd>` to create description lists.
 
 Use `<figure>` and `<figcaption>` to show self-contained content.
 
-<quiet-card class="preview">
+<quiet-card>
   <figure>
     <img src="https://images.unsplash.com/photo-1570018144715-43110363d70a?q=80&w=512&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Three gray kittens on a wood floor">
     <figcaption>
@@ -183,7 +183,7 @@ Use `<figure>` and `<figcaption>` to show self-contained content.
 
 Use `<img>` and `<iframe>` to show images and embedded media. Media uses `display: block` and spans the full width of its container, but you can override the width as needed. The default aspect ratio of `<iframe>` elements is `9/6`, but feel free to adjust this value using the [`aspect-ratio`](https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio) property.
 
-<quiet-card class="preview">
+<quiet-card>
   <img src="https://images.unsplash.com/photo-1513977055326-8ae6272d90a7?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="A kitten lays on the bed with her head upside down">
   <br>
   <iframe src="https://www.youtube.com/embed/ALGG6ptfLdc?si=03a9K9QigWi2A9Wt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -193,7 +193,7 @@ Use `<img>` and `<iframe>` to show images and embedded media. Media uses `displa
 
 Use `<table>` to display tabular data.
 
-<quiet-card class="preview">
+<quiet-card>
   <table>
     <thead>
       <tr>
@@ -236,7 +236,7 @@ Use `<table>` to display tabular data.
 
 Add `class="quiet-striped"` to add stripes to alternating rows.
 
-<quiet-card class="preview">
+<quiet-card>
   <table class="quiet-striped">
     <thead>
       <tr>
@@ -285,7 +285,7 @@ Wrap large tables in [`<quiet-scroller>`](/docs/components/scroller) to ensure t
 
 Use `<details>` and `<summary>` to show expandable content. Use the optional [`name`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details#name) attribute to group them, ensuring only one is open at a time.
 
-<quiet-card class="preview">
+<quiet-card>
   <details name="example">
     <summary>Amet nisl purus</summary>
     <p>Scelerisque varius morbi enim nunc faucibus a pellentesque sit. Volutpat blandit aliquam etiam erat velit scelerisque. Non sodales neque sodales ut etiam sit amet. Cras tincidunt lobortis feugiat vivamus at augue eget arcu.</p>
@@ -306,7 +306,7 @@ Use `<details>` and `<summary>` to show expandable content. Use the optional [`n
 
 Use the native `<dialog>` to show a dialog.
 
-<quiet-card class="preview">
+<quiet-card>
   <dialog id="restyle-dialog">
     <p>This is a native dialog.</p>
     <footer>
@@ -336,7 +336,7 @@ Use the native `<dialog>` to show a dialog.
 
 Use the `<meter>` element to show a value with a known range.
 
-<quiet-card class="preview">
+<quiet-card>
   <meter value="15" min="0" max="100" low="20" high="80" optimum="100">
     15% battery remaining
   </meter>
@@ -354,7 +354,7 @@ Use the `<meter>` element to show a value with a known range.
 
 Use the `<progress>` element to indicate progress. When no `value` attribute is present, the element becomes indeterminate.
 
-<quiet-card class="preview">
+<quiet-card>
   <progress min="0" max="100" value="50">50%</progress>
   <br>
   <progress>Loading…</progress>
@@ -366,7 +366,7 @@ Use the `<progress>` element to indicate progress. When no `value` attribute is 
 
 Use the `<button>` element to create a button. Add the `quiet-primary` or `quiet-destructive` class to change its variant. 
 
-<quiet-card class="preview">
+<quiet-card>
   <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
     <button type="button">Default</button>
     <button type="button" class="quiet-primary">Primary</button>
@@ -376,7 +376,7 @@ Use the `<button>` element to create a button. Add the `quiet-primary` or `quiet
 
 Use the `quiet-xs`, `quiet-sm`, `quiet-md`, `quiet-lg`, and `quiet-xl` classes to change the button's size.
 
-<quiet-card class="preview">
+<quiet-card>
   <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
     <button type="button" class="quiet-xs">xs</button>
     <button type="button" class="quiet-sm">sm</button>
@@ -388,7 +388,7 @@ Use the `quiet-xs`, `quiet-sm`, `quiet-md`, `quiet-lg`, and `quiet-xl` classes t
 
 Add an icon before or after the label, if desired.
 
-<quiet-card class="preview">
+<quiet-card>
   <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
     <button type="button"><quiet-icon name="settings"></quiet-icon> Settings</button>
     <button type="button"><quiet-icon name="heart"></quiet-icon> Favorite</button>
@@ -398,7 +398,7 @@ Add an icon before or after the label, if desired.
 
 Use the `quiet-pill` class to make the button pill appear like pills.
 
-<quiet-card class="preview">
+<quiet-card>
   <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
     <button type="button" class="quiet-pill">Default</button>
     <button type="button" class="quiet-pill quiet-primary">Primary</button>
@@ -410,7 +410,7 @@ Use the `quiet-pill` class to make the button pill appear like pills.
 
 For consistency, most native form controls are styled to look similar to Quiet form controls. Add the `quiet-xs`, `quiet-sm`, `quiet-md`, `quiet-lg`, and `quiet-xl` classes to `<input>`, `<select>`, and `<textarea>` elements to change their size.
 
-<quiet-card class="preview preview-col">
+<quiet-card class="preview-col">
   <div>
     <label class="quiet-xs" for="xs-input">Extra small</label>
     <input class="quiet-xs" id="xs-input" type="text" placeholder="xs">
@@ -435,7 +435,7 @@ For consistency, most native form controls are styled to look similar to Quiet f
 
 Various input types are supported via `<input type="...">`, `<select>`, and `<textarea>`.
 
-<quiet-card class="preview preview-col">
+<quiet-card class="preview-col">
   <input type="color" placeholder="Color" value="#787acf">
   <input type="date" placeholder="Date" value="1989-03-12">
   <input type="time" placeholder="Time" value="12:00:00">
@@ -463,7 +463,7 @@ Various input types are supported via `<input type="...">`, `<select>`, and `<te
 
 Use `class="quiet-filled"` to make the following form controls appear filled.
 
-<quiet-card class="preview preview-col">
+<quiet-card class="preview-col">
   <input class="quiet-filled" type="text" placeholder="Filled">
   <select class="quiet-filled" name="pet" label="Pick one">
     <option value="cats" selected>Cats</option>
@@ -483,7 +483,7 @@ Use `class="quiet-filled"` to make the following form controls appear filled.
 
 Use `class="quiet-pill"` to make `<input>` and `<select>` appear pill-shaped.
 
-<quiet-card class="preview preview-col">
+<quiet-card class="preview-col">
   <input class="quiet-pill" type="text" placeholder="Filled">
   <select class="quiet-pill" name="pet" label="Pick one">
     <option value="cats" selected>Cats</option>
@@ -496,9 +496,18 @@ Use `class="quiet-pill"` to make `<input>` and `<select>` appear pill-shaped.
 
 Use `<fieldset>` and `<legend>` to group and label form controls.
 
-<quiet-card class="preview">
+<quiet-card>
   <fieldset>
     <legend>Legend</legend>
     Nunc mi ipsum faucibus vitae aliquet nec ullamcorper. Tincidunt id aliquet risus feugiat in ante. Ac turpis egestas integer eget aliquet nibh praesent tristique magna.
   </fieldset>
 </quiet-card>
+
+
+<style>
+  .preview-col::part(body) {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
+</style>

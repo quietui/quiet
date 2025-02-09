@@ -476,6 +476,10 @@ html:not(.quiet-dark) .only-dark {
     color: var(--quiet-text-muted);
     font-size: 1.2rem;
   }
+
+  quiet-card {
+    margin-block-end: var(--quiet-content-spacing);
+  }
 }
 
 #content pre:has(code) {

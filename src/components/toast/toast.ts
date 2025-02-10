@@ -7,7 +7,6 @@ import type { QuietContentChangedEvent } from '../../events/content.js';
 import { QuietCloseEvent, QuietClosedEvent } from '../../events/open-close.js';
 import hostStyles from '../../styles/host.styles.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
-import '../icon/icon.js';
 import '../toast-item/toast-item.js';
 import type { QuietToastItem } from '../toast-item/toast-item.js';
 import '../transition-group/transition-group.js';
@@ -43,7 +42,6 @@ export interface CreateOptions {
  * @status stable
  * @since 1.0.0
  *
- * @dependency quiet-icon
  * @dependency quiet-toast-item
  * @dependency quiet-transition-group
  *

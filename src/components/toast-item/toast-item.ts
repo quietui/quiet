@@ -4,6 +4,7 @@ import { customElement, property, state } from 'lit/decorators.js';
 import hostStyles from '../../styles/host.styles.js';
 import { Localize } from '../../utilities/localize.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
+import '../icon/icon.js';
 import '../progress/progress.js';
 import styles from './toast-item.styles.js';
 
@@ -15,6 +16,7 @@ import styles from './toast-item.styles.js';
  * @status stable
  * @since 1.0
  *
+ * @dependency quiet-icon
  * @dependency quiet-progress
  *
  * @slot - Content to show in the toast item.

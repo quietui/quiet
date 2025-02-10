@@ -604,22 +604,6 @@ These tokens controls shadows and can be used with the `box-shadow` property.
 
 </quiet-scroller>
 
-### Spacing tokens
-
-These tokens control spacing primarily in [CSS utilities](/docs/css-utilities).
-
-<quiet-scroller>
-
-| Custom property | Description |
-| --------------- | ----------- |
-| `--quiet-space-xs` | Extra small spacing, used for minimal separation between tightly coupled elements. |
-| `--quiet-space-sm` | Small spacing, used for close but distinct element spacing. |
-| `--quiet-space-md` | Medium spacing, the default spacing unit for general element separation. |
-| `--quiet-space-lg` | Large spacing, used for creating more pronounced separation between sections. |
-| `--quiet-space-xl` | Extra large spacing, used for major section breaks and substantial white space. |
-
-</quiet-scroller>
-
 ### Form controls
 
 These tokens control form control styles.

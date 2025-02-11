@@ -334,6 +334,139 @@ Add the `data-keywords` attribute to any item to include additional keywords the
 </style>
 ```
 
+### Providing an initial state
+
+To change what users see before they enter a query, use the `initial` slot. When provided, this content will appear instead of the items when no query is entered. Once the user starts typing, the matching items or the empty state will be shown.
+
+```html {.example}
+<quiet-search-list id="search-list__initial">
+  <!-- Controller -->
+  <quiet-text-field 
+    slot="controller" 
+    label="Search cats"
+    description="Find your perfect feline friend"
+    type="search" 
+    clearable
+    pill
+  >
+    <quiet-icon slot="start" name="search"></quiet-icon>
+  </quiet-text-field>
+
+  <!-- Initial state -->
+  <quiet-empty-state slot="initial">
+    <quiet-icon slot="illustration" name="hearts"></quiet-icon>
+    <h4>Ready to Meet Some Cats?</h4>
+    <p><small>Start typing to discover our adorable cats</small></p>
+  </quiet-empty-state>
+
+  <!-- Items -->
+  <quiet-card orientation="horizontal">
+    <quiet-avatar slot="header" image="https://images.unsplash.com/photo-1672487209629-4d52e0c043d0?q=80&w=256&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"></quiet-avatar>
+    <div>
+      <h4 class="name">Meowy McGee</h4>
+      <div class="tagline">Freedom's just another word for nothing left to lose.</div>
+    </div>
+    <quiet-button slot="actions" icon-label="Settings" appearance="text" pill>
+      <quiet-icon name="dots"></quiet-icon>
+    </quiet-button>
+  </quiet-card>
+    
+  <quiet-card orientation="horizontal">
+    <quiet-avatar slot="header" image="https://images.unsplash.com/photo-1529778873920-4da4926a72c2?q=80&w=256&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"></quiet-avatar>
+    <div>
+      <h4 class="name">Wonder Whiskers</h4>
+      <div class="tagline">Living my best nine lives, one nap at a time.</div>
+    </div>
+    <quiet-button slot="actions" icon-label="Settings" appearance="text" pill>
+      <quiet-icon name="dots"></quiet-icon>
+    </quiet-button>
+  </quiet-card>
+
+  <quiet-card orientation="horizontal">
+    <quiet-avatar slot="header" image="https://images.unsplash.com/photo-1569591159212-b02ea8a9f239?q=80&w=256&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"></quiet-avatar>
+    <div>
+      <h4 class="name">Maine Attraction</h4>
+      <div class="tagline">Big fluff, bigger personality.</div>
+    </div>
+    <quiet-button slot="actions" icon-label="Settings" appearance="text" pill>
+      <quiet-icon name="dots"></quiet-icon>
+    </quiet-button>
+  </quiet-card>
+
+  <quiet-card orientation="horizontal">
+    <quiet-avatar slot="header" image="https://images.unsplash.com/photo-1735820474275-dd0ff4f28d71?q=80&w=256&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"></quiet-avatar>
+    <div>
+      <h4 class="name">Sir Pounce-a-lot</h4>
+      <div class="tagline">Professional sunbeam chaser and nap enthusiast.</div>
+    </div>
+    <quiet-button slot="actions" icon-label="Settings" appearance="text" pill>
+      <quiet-icon name="dots"></quiet-icon>
+    </quiet-button>
+  </quiet-card>  
+
+  <!-- Empty state -->
+  <quiet-empty-state slot="empty">
+    <quiet-icon slot="illustration" name="cat"></quiet-icon>
+    <h4>No Cats Found</h4>
+    <p><small>Try different search terms to find your match</small></p>
+  </quiet-empty-state>
+</quiet-search-list>
+
+<style>
+  #search-list__initial {
+    quiet-card {
+      --spacing: 1rem;
+
+      quiet-avatar {
+        --size: 3rem;
+      }
+
+      .name,
+      .tagline {
+        margin: 0;
+        line-height: 1.2;
+        display: inline;
+      }
+
+      .name {
+        display: block;
+        font-size: 1.125rem;
+      }
+
+      .tagline {
+        color: var(--quiet-text-muted);
+        font-size: 0.875rem;
+      }
+    }
+
+    div[slot="initial"],
+    div[slot="empty"] {
+      text-align: center;
+      color: var(--quiet-text-muted);
+      margin-block-start: 1rem;
+
+      quiet-icon {
+        font-size: 2.5rem;
+        stroke-width: 1px;
+      }
+
+      h4 {
+        margin: 0.5rem 0 0 0;
+      }
+
+      small {
+        display: block;
+        margin-top: 0.5rem;
+      }
+    }
+  }
+</style>
+```
+
+:::info
+The initial state will only be shown when the `initial` slot is provided and no query has been entered.
+:::
+
 ### Providing an empty state
 
 An optional empty state will be shown when no results are found. Use the `empty` slot to add text, icons, or illustrations to it. Empty state content is not styled by the component, so feel free to bring your own look to it.

@@ -20,6 +20,7 @@ import styles from './search-list.styles.js';
  *  items in other containers. If desired, you can apply flex and grid styles to the `items` part to control how items
  *  appear in the list. By default, items will be displayed in a flex column.
  * @slot controller - A `<quiet-text-field>` or `<input>` element that will control the search list.
+ * @slot initial - Optional content to display when no search query has been entered.
  * @slot empty - Optional content to display when the search yields no results.
  *
  * @csspart items - The container that wraps the slotted items. Displays as a flex column by default.
@@ -160,56 +161,61 @@ export class QuietSearchList extends QuietElement {
 
   private updateResults() {
     const hasQuery = this.query.length > 0;
+    const showingInitial = !hasQuery && this.slotsWithContent.has('initial');
     let numResults = 0;
     let wasWarned = false;
 
-    this.items.forEach((item: HTMLElement) => {
-      const content = item.textContent || '';
-      const keywords = item.dataset.keywords || '';
-      const searchableContent = `${content} ${keywords}`;
+    if (!showingInitial) {
+      this.items.forEach((item: HTMLElement) => {
+        const content = item.textContent || '';
+        const keywords = item.dataset.keywords || '';
+        const searchableContent = `${content} ${keywords}`;
 
-      if (hasQuery) {
-        let isMatch = false;
+        if (hasQuery) {
+          let isMatch = false;
 
-        // Exact search
-        if (this.match === 'exact') {
-          isMatch = exactSearch(this.query, searchableContent);
-        }
-
-        // Fuzzy search
-        if (this.match === 'fuzzy') {
-          isMatch = fuzzySearch(this.query, searchableContent);
-        }
-
-        // Custom search
-        if (this.match === 'custom') {
-          if (typeof this.isMatch === 'function') {
-            isMatch = this.isMatch(this.query, searchableContent, item);
-          } else {
-            // If no search function was provided, warn and fallback to an exact match
-            if (!wasWarned) {
-              console.warn(`A custom search type was specified but no isMatch function was provided.`, this);
-              wasWarned = true;
-            }
-
+          // Exact search
+          if (this.match === 'exact') {
             isMatch = exactSearch(this.query, searchableContent);
           }
-        }
 
-        item.hidden = !isMatch;
-        if (isMatch) numResults++;
-      } else {
-        item.hidden = false;
-      }
-    });
+          // Fuzzy search
+          if (this.match === 'fuzzy') {
+            isMatch = fuzzySearch(this.query, searchableContent);
+          }
+
+          // Custom search
+          if (this.match === 'custom') {
+            if (typeof this.isMatch === 'function') {
+              isMatch = this.isMatch(this.query, searchableContent, item);
+            } else {
+              // If no search function was provided, warn and fallback to an exact match
+              if (!wasWarned) {
+                console.warn(`A custom search type was specified but no isMatch function was provided.`, this);
+                wasWarned = true;
+              }
+
+              isMatch = exactSearch(this.query, searchableContent);
+            }
+          }
+
+          item.hidden = !isMatch;
+          if (isMatch) numResults++;
+        } else {
+          item.hidden = false;
+        }
+      });
+    }
 
     // Toggle empty state
-    this.isEmpty = this.items.some((item: HTMLElement) => item.hidden !== true);
+    this.isEmpty = showingInitial ? true : this.items.some((item: HTMLElement) => item.hidden !== true);
 
     // Update results for screen readers after a brief delay
     clearTimeout(this.resultsTimeout);
     this.resultsTimeout = setTimeout(() => {
-      if (hasQuery) {
+      if (showingInitial) {
+        this.resultsMessage = '';
+      } else if (hasQuery) {
         this.resultsMessage = this.localize.term('showingNumberOfTotalItems', numResults, this.items.length);
       } else {
         this.resultsMessage = this.localize.term('showingAllNumberItems', this.items.length);
@@ -230,6 +236,8 @@ export class QuietSearchList extends QuietElement {
   }
 
   render() {
+    const showInitial = this.query === '' && this.slotsWithContent.has('initial');
+
     return html`
       <slot
         name="controller"
@@ -239,11 +247,12 @@ export class QuietSearchList extends QuietElement {
 
       <div id="results" class="vh" role="region" aria-live="polite">${this.resultsMessage}</div>
 
-      <div id="items" part="items">
+      <div id="items" part="items" ?hidden=${showInitial}>
         <slot @slotchange=${this.handleDefaultSlotChange} ?hidden=${!this.isEmpty}></slot>
       </div>
 
-      <slot name="empty" ?hidden=${this.isEmpty}></slot>
+      <slot name="empty" ?hidden=${this.isEmpty || showInitial}></slot>
+      <slot name="initial" ?hidden=${!showInitial}></slot>
     `;
   }
 }

@@ -3,7 +3,7 @@ import { css } from 'lit';
 export default css`
   #dropzone {
     position: relative;
-    padding: 2em;
+    padding: 3em 2em;
     border: dashed var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
     border-radius: var(--quiet-border-radius);
     background-color: var(--quiet-paper-color);
@@ -33,6 +33,7 @@ export default css`
     }
 
     quiet-icon {
+      color: var(--quiet-primary-text-colorful);
       font-size: 2em;
     }
 

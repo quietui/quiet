@@ -26,6 +26,7 @@ import styles from './search-list.styles.js';
  * @csspart items - The container that wraps the slotted items. Displays as a flex column by default.
  *
  * @cssstate empty - Applied when a query is entered and no matching results are found.
+ * @cssstate initial - Applied when the query is empty and the `initial` slot is showing.
  */
 @customElement('quiet-search-list')
 export class QuietSearchList extends QuietElement {
@@ -41,6 +42,7 @@ export class QuietSearchList extends QuietElement {
 
   @state() query = '';
   @state() isEmpty = false;
+  @state() isInitial = false;
   @state() resultsMessage = '';
 
   /**
@@ -97,6 +99,11 @@ export class QuietSearchList extends QuietElement {
     // Handle empty changes
     if (changedProperties.has('isEmpty')) {
       this.customStates.set('empty', this.isEmpty);
+    }
+
+    // Handle initial changes
+    if (changedProperties.has('isInitial')) {
+      this.customStates.set('initial', this.isInitial);
     }
   }
 
@@ -161,11 +168,12 @@ export class QuietSearchList extends QuietElement {
 
   private updateResults() {
     const hasQuery = this.query.length > 0;
-    const showingInitial = !hasQuery && this.slotsWithContent.has('initial');
     let numResults = 0;
     let wasWarned = false;
 
-    if (!showingInitial) {
+    this.isInitial = !hasQuery && this.slotsWithContent.has('initial');
+
+    if (!this.isInitial) {
       this.items.forEach((item: HTMLElement) => {
         const content = item.textContent || '';
         const keywords = item.dataset.keywords || '';
@@ -208,12 +216,12 @@ export class QuietSearchList extends QuietElement {
     }
 
     // Toggle empty state
-    this.isEmpty = showingInitial ? true : this.items.some((item: HTMLElement) => item.hidden !== true);
+    this.isEmpty = this.isInitial ? true : this.items.some((item: HTMLElement) => item.hidden !== true);
 
     // Update results for screen readers after a brief delay
     clearTimeout(this.resultsTimeout);
     this.resultsTimeout = setTimeout(() => {
-      if (showingInitial) {
+      if (this.isInitial) {
         this.resultsMessage = '';
       } else if (hasQuery) {
         this.resultsMessage = this.localize.term('showingNumberOfTotalItems', numResults, this.items.length);

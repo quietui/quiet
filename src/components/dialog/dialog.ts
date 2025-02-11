@@ -50,8 +50,8 @@ import styles from './dialog.styles.js';
  */
 @customElement('quiet-dialog')
 export class QuietDialog extends QuietElement {
-  static styles: CSSResultGroup = [hostStyles, styles];
   static observeSlots = true;
+  static styles: CSSResultGroup = [hostStyles, styles];
 
   private localize = new Localize(this);
 

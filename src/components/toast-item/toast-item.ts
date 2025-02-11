@@ -41,8 +41,8 @@ import styles from './toast-item.styles.js';
  */
 @customElement('quiet-toast-item')
 export class QuietToastItem extends QuietElement {
-  static styles: CSSResultGroup = [hostStyles, styles];
   static observeSlots = true;
+  static styles: CSSResultGroup = [hostStyles, styles];
 
   private animationFrame: number | null = null;
   private isPaused = false;

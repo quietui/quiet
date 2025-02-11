@@ -21,8 +21,8 @@ import styles from './callout.styles.js';
  */
 @customElement('quiet-callout')
 export class QuietCallout extends QuietElement {
-  static styles: CSSResultGroup = [hostStyles, styles];
   static observeSlots = true;
+  static styles: CSSResultGroup = [hostStyles, styles];
 
   firstUpdated() {
     this.setAttribute('role', 'note');

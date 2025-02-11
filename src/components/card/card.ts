@@ -29,8 +29,8 @@ import styles from './card.styles.js';
  */
 @customElement('quiet-card')
 export class QuietCard extends QuietElement {
-  static styles: CSSResultGroup = [hostStyles, styles];
   static observeSlots = true;
+  static styles: CSSResultGroup = [hostStyles, styles];
 
   /** The card's orientation. */
   @property({ reflect: true }) orientation: 'horizontal' | 'vertical' = 'vertical';

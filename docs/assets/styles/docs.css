@@ -816,6 +816,10 @@ quiet-callout {
     white-space: nowrap;
   }
 
+  a {
+    color: inherit;
+  }
+
   &[variant='default'] {
     code {
       background-color: color-mix(in oklab, var(--quiet-neutral-fill-soft), transparent 50%);

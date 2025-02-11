@@ -503,11 +503,15 @@ Use `<fieldset>` and `<legend>` to group and label form controls.
   </fieldset>
 </quiet-card>
 
-
+<!-- Page styles -->
 <style>
   .preview-col::part(body) {
     display: flex;
     flex-direction: column;
     gap: 1em;
+  }
+
+  quiet-card {
+      margin-block-end: var(--quiet-content-spacing);
   }
 </style>

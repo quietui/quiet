@@ -120,7 +120,7 @@ export class QuietToast extends QuietElement {
     if (event.key === 'Escape' && this.children.length > 0 && !event.defaultPrevented) {
       event.preventDefault();
       await this.stack.transitionComplete();
-      const notification = this.children[0];
+      const notification = this.children[this.children.length - 1];
       notification?.remove();
     }
   };

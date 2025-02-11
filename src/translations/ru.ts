@@ -10,6 +10,7 @@ const translation: Translation = {
   breadcrumbs: 'Панировочные сухари',
   clearEntry: 'Очистить запись',
   close: 'Закрыть',
+  colorValue: 'Значение цвета',
   copied: 'Скопировано',
   copyToClipboard: 'Скопировать в буфер обмена',
   dragFileHereOrChooseFromFolder: 'Перетащите файл сюда или выберите из папки',

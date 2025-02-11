@@ -14,6 +14,7 @@ import '../button/button.js';
 import '../copy/copy.js';
 import '../slider/slider.js';
 import type { QuietSlider } from '../slider/slider.js';
+import '../text-field/text-field.js';
 import styles from './color-picker.styles.js';
 
 const hasEyeDropper = 'EyeDropper' in window;
@@ -21,8 +22,8 @@ const hasEyeDropper = 'EyeDropper' in window;
 /**
  * <quiet-color-picker>
  *
- * @summary Color pickers provide an interface for selecting a color using a two-dimension slider for luminosity and
- *  saturation and regular sliders for hue and opacity.
+ * @summary Color picker provides a customizable interface for selecting a color using a two-dimensional slider for
+ *  luminosity and saturation and standard sliders for hue and opacity.
  * @documentation https://quietui.org/docs/components/color-picker
  * @status stable
  * @since 1.0
@@ -30,6 +31,7 @@ const hasEyeDropper = 'EyeDropper' in window;
  * @dependency quiet-button
  * @dependency quiet-copy
  * @dependency quiet-slider
+ * @dependency quiet-text-field
  *
  * @event quiet-change - Emitted when the user commits changes to the color picker's value.
  * @event quiet-input - Emitted when the color picker receives input. This can fire very frequently during dragging, so
@@ -56,6 +58,10 @@ const hasEyeDropper = 'EyeDropper' in window;
  * @csspart opacity-slider__thumb - The opacity slider's `thumb` part.
  * @csspart eye-dropper-button - The eye dropper button, a `<quiet-button>` element.
  * @csspart preview-button - The button that shows a preview of the current color, a `<quiet-button>` element.
+ * @csspart color-input - The color input text field, a `<quiet-text-field>` element.
+ * @csspart color-input__visual-box - The element that wraps the internal text box.
+ * @csspart color-input__text-box - The internal text box, an `<input>` element.
+ *
  * @csspart swatches - The element that contains swatches.
  * @csspart swatch - Each individual swatch.
  *
@@ -91,6 +97,8 @@ export class QuietColorPicker extends QuietElement {
   @state() hasFocus = false;
   @state() isChangingV = false;
   @state() isChangingS = false;
+  @state() inputIsFocused = false;
+  @state() displayValue = '';
   @state() wasChanged = false;
 
   /**
@@ -125,6 +133,9 @@ export class QuietColorPicker extends QuietElement {
    * [supportive browsers](https://caniuse.com/?search=eyedropper%20API).
    */
   @property({ attribute: 'with-eye-dropper', type: Boolean, reflect: true }) withEyeDropper = false;
+
+  /** Enables the color value text field. */
+  @property({ attribute: 'with-input', type: Boolean, reflect: true }) withInput = false;
 
   connectedCallback() {
     super.connectedCallback();
@@ -172,6 +183,10 @@ export class QuietColorPicker extends QuietElement {
     if (changedProperties.has('value')) {
       if (!this.isDragging && !this.wasValueSetInternally) {
         this.setColorFromString(this.value);
+      }
+
+      if (!this.inputIsFocused) {
+        this.displayValue = this.value;
       }
     }
 
@@ -237,6 +252,50 @@ export class QuietColorPicker extends QuietElement {
 
   private formatOpacity(value: number) {
     return this.localize.number(value, { style: 'percent' });
+  }
+
+  private async handleColorInputBlur(event: Event) {
+    const input = event.target as HTMLInputElement;
+
+    this.inputIsFocused = false;
+    const color = new TinyColor(input.value);
+    if (color.isValid) {
+      this.setColorFromString(input.value);
+      await this.updateComplete;
+      this.displayValue = this.value;
+    } else {
+      this.displayValue = this.value;
+    }
+  }
+
+  private async handleColorInputFocus(event: Event) {
+    if (event.type === 'quiet-focus') {
+      this.inputIsFocused = true;
+      return;
+    }
+  }
+
+  private async handleColorInputInput(event: Event) {
+    event.stopImmediatePropagation();
+    const oldValue = this.value;
+    const input = event.target as HTMLInputElement;
+
+    // While typing, update displayValue and preview if valid
+    this.displayValue = input.value;
+    const color = new TinyColor(input.value);
+    if (color.isValid) {
+      this.setColorFromString(input.value);
+    }
+
+    await this.updateComplete;
+
+    if (this.value !== oldValue) {
+      this.wasChanged = true;
+      this.dispatchEvent(new QuietInputEvent());
+      this.dispatchEvent(new InputEvent('input'));
+      this.dispatchEvent(new QuietChangeEvent());
+      this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
+    }
   }
 
   private handleColorSliderBlur() {
@@ -526,7 +585,7 @@ export class QuietColorPicker extends QuietElement {
         </div>
 
         <div id="controls" part="controls">
-          <quiet-copy id="copy-button" data=${this.value}>
+          <quiet-copy id="copy-button" data=${this.value} ?disabled=${this.disabled}>
             <quiet-button
               id="preview-button"
               part="preview-button"
@@ -607,6 +666,25 @@ export class QuietColorPicker extends QuietElement {
           </div>
         </div>
 
+        ${this.withInput
+          ? html`
+              <quiet-text-field
+                id="color-input"
+                part="color-input"
+                exportparts="
+                  visual-box:color-input__visual-box,
+                  text-box:color-input__text-box
+                "
+                label=${this.localize.term('colorValue')}
+                value=${this.displayValue}
+                ?disabled=${this.disabled}
+                size=${this.size}
+                @quiet-input=${this.handleColorInputInput}
+                @quiet-blur=${this.handleColorInputBlur}
+                @quiet-focus=${this.handleColorInputFocus}
+              ></quiet-text-field>
+            `
+          : ''}
         ${swatches.length > 0
           ? html`
               <div id="swatches" part="swatches">

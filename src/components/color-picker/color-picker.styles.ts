@@ -301,6 +301,16 @@ export default css`
     }
   }
 
+  /* Color input */
+  #color-input::part(label) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    white-space: nowrap;
+    clip-path: inset(50%);
+  }
+
   /* Swatches */
   #swatches {
     display: grid;

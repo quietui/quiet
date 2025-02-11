@@ -9,6 +9,7 @@ const translation: Translation = {
   breadcrumbs: 'Breadcrumbs',
   clearEntry: 'Clear entry',
   close: 'Close',
+  colorValue: 'Color value',
   copied: 'Copied',
   copyToClipboard: 'Copy to clipboard',
   dragFileHereOrChooseFromFolder: 'Drag file here or choose from folder',

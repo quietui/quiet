@@ -6,8 +6,8 @@ layout: component
 ```html {.example}
 <quiet-color-picker 
   label="Select a color"
-  name="color"
   value="#7578c5" 
+  with-input
   with-opacity
   with-eye-dropper
   swatches="
@@ -19,18 +19,18 @@ layout: component
 ></quiet-color-picker>
 ```
 
+:::info
+This component is a primitive for enabling color selection. It will not submit its value with a form on its own. See [color input](/docs/components/color-input) for a color picker suitable for using with forms.
+:::
+
 ## Examples
 
-### Labels and descriptions
+### Labels
 
-You can use the `label` and `description` attributes to provide plain text labels and descriptions for the color picker. If you want to provide HTML, use the `label` and `description` slots instead.
+Use the `label` attribute to provide an accessible label for the color picker. This won't be shown, but it will be read to assistive devices.
 
 ```html {.example}
-<quiet-color-picker name="color" label="Select a color">
-  <span slot="description">
-    For more information, <a href="https://example.com/" target="_blank">visit our website</a>.
-  </span>
-</quiet-color-picker>
+<quiet-color-picker label="Select a color"></quiet-color-picker>
 ```
 
 ### Setting an initial value
@@ -40,7 +40,6 @@ Use the `value` attribute to provide an initial value for the color picker. You 
 ```html {.example}
 <quiet-color-picker 
   label="Select a color"
-  name="color" 
   value="#71e0f3"
 >
 </quiet-color-picker>
@@ -53,9 +52,8 @@ Add the `with-opacity` attribute to allow the user to adjust transparency.
 ```html {.example}
 <quiet-color-picker 
   label="Select a color"
-  name="color"
   value="#ce2380cc" 
-  with-opacity 
+  with-opacity
 ></quiet-color-picker>
 ```
 
@@ -66,14 +64,25 @@ Add the `with-eye-dropper` attribute to show the eye dropper button, which allow
 ```html {.example}
 <quiet-color-picker 
   label="Select a color"
-  name="color"
   with-eye-dropper
 ></quiet-color-picker>
 ```
 
 :::warn
-The EyeDropper API is only available in [supportive browsers](https://caniuse.com/?search=eyedropper%20API).
+The [EyeDropper API](https://developer.mozilla.org/en-US/docs/Web/API/EyeDropper) is only available in [supportive browsers](https://caniuse.com/?search=eyedropper%20API).
 :::
+
+### Enabling the color input
+
+Add the `with-input` attribute to show the color input, a text field the user can type into.
+
+```html {.example}
+<quiet-color-picker 
+  label="Select a color"
+  value="#4716ce" 
+  with-input
+></quiet-color-picker>
+```
 
 ### Showing swatches
 
@@ -82,7 +91,6 @@ Set the `swatches` attribute to one or more space-delimited hex colors or CSS co
 ```html {.example}
 <quiet-color-picker
   label="Select a color"
-  name="color"
   swatches="
     #09090b #71717a #ef4444 #f97316 
     #f59e0b #eab308 #84cc16 #22c55e 
@@ -99,9 +107,9 @@ Use the `format` attribute to set the format of the value. Valid options include
 ```html {.example}
 <quiet-color-picker 
   label="Select a color"
-  name="color"
   value="#ffcc00"
   format="rgb"
+  with-input
   id="color-picker__format"
 ></quiet-color-picker>
 
@@ -128,7 +136,6 @@ For `rgb`, an object with `{ r, g, b, a }` properties will be returned where `r`
 ```html {.example}
 <quiet-color-picker 
   label="Select a color"
-  name="color"
   value="tomato"
   format="rgb"
   id="color-picker__object"
@@ -170,7 +177,8 @@ Use the `size` attribute to change the color pickers's size.
     #f59e0b #eab308 #84cc16 #22c55e 
     #10b981 #14b8a6 #06b6d4 #3b82f6 
     #6366f1 #a855f7 #d946ef #ec4899
-  "  
+  "
+  with-input
   with-opacity
   with-eye-dropper
   id="color-picker__size"
@@ -194,9 +202,10 @@ To disable a color picker, add the `disabled` attribute.
 <quiet-color-picker 
   label="Select a color"
   disabled
-  name="color"
   value="#6366f1"
   with-opacity 
+  with-input
+  with-eye-dropper
   swatches="
     #09090b #71717a #ef4444 #f97316 
     #f59e0b #eab308 #84cc16 #22c55e 
@@ -204,115 +213,4 @@ To disable a color picker, add the `disabled` attribute.
     #6366f1 #a855f7 #d946ef #ec4899  
   "
 ></quiet-color-picker>
-```
-
-### Using custom validation
-
-Color pickers don't have built-in validation attributes like many other form controls. However, you can use the `custom-validity` attribute to make the color picker invalid and show a custom error message on submit. To clear the error, remove the attribute or set it to an empty string.
-
-```html {.example}
-<form action="about:blank" method="get" target="_blank">
-  <quiet-color-picker
-    label="Select a color"
-    name="color"
-    custom-validity="Not so fast, bubba!"
-  ></quiet-color-picker>
-  <br>
-  <quiet-button type="submit" variant="primary">Submit</quiet-button>
-</form>
-```
-
-:::info
-Most validation attributes work exactly like their native counterparts. However, the `custom-validity` attribute is offered in lieu of the `setCustomValidity()` method. This allows you to declaratively set custom errors instead of having to call a method with JavaScript.
-:::
-
-
-### Styling validation
-
-You can style valid and invalid sliders using the `:valid` and `:invalid` pseudo classes.
-
-```html {.example}
-<form action="about:blank" method="get" target="_blank" class="color-picker__validation-pseudo">
-  <quiet-color-picker
-    label="Select a color"
-    name="color"
-    value="#ff0000"
-    custom-validity="The selected color must be white or black"
-  ></quiet-color-picker>
-  <br>
-  <quiet-button type="submit" variant="primary">Submit</quiet-button>
-  <quiet-button type="reset">Reset</quiet-button>
-</form>
-
-<style>
-  .color-picker__validation-pseudo {
-    quiet-color-picker:valid {
-      outline: solid 2px var(--quiet-constructive-stroke-mid);
-      outline-offset: 1rem;
-    }
-
-    quiet-color-picker:invalid {
-      outline: solid 2px var(--quiet-destructive-stroke-mid);
-      outline-offset: 1rem;
-    }
-  }
-</style>
-
-<script>
-  const form = document.querySelector('.color-picker__validation-pseudo');
-  const colorPicker = form.querySelector('quiet-color-picker');
-
-  async function updateValidity() {
-    await colorPicker.updateComplete;
-    const isValid = ['#ffffff', '#000000'].includes(colorPicker.value);
-    colorPicker.customValidity = isValid ? '' : 'Select white or black only';
-  }
-
-  colorPicker.addEventListener('quiet-input', () => updateValidity());
-  form.addEventListener('reset', () => updateValidity());
-</script>
-```
-
-However, these selectors will match even before the user has had a chance to fill out the form. More often than not, you'll want to use the `user-valid` and `user-invalid` [custom states](#custom-states) instead. This way, validation styles are only shown _after_ the user interacts with the form control or when the form is submitted.
-
-```html {.example}
-<form action="about:blank" method="get" target="_blank" class="color-picker__validation-custom">
-  <quiet-color-picker
-    label="Select a color"
-    name="color"
-    value="#ff0000"
-    custom-validity="The selected color must be white or black"
-  ></quiet-color-picker>
-  <br>
-  <quiet-button type="submit" variant="primary">Submit</quiet-button>
-  <quiet-button type="reset">Reset</quiet-button>
-</form>
-
-<style>
-  .color-picker__validation-custom {
-    quiet-color-picker:state(user-valid) {
-      outline: solid 2px var(--quiet-constructive-stroke-mid);
-      outline-offset: 1rem;
-    }
-
-    quiet-color-picker:state(user-invalid) {
-      outline: solid 2px var(--quiet-destructive-stroke-mid);
-      outline-offset: 1rem;
-    }
-  }
-</style>
-
-<script>
-  const form = document.querySelector('.color-picker__validation-custom');
-  const colorPicker = form.querySelector('quiet-color-picker');
-
-  async function updateValidity() {
-    await colorPicker.updateComplete;
-    const isValid = ['#ffffff', '#000000'].includes(colorPicker.value);
-    colorPicker.customValidity = isValid ? '' : 'Select white or black only';
-  }
-
-  colorPicker.addEventListener('quiet-input', () => updateValidity());
-  form.addEventListener('reset', () => updateValidity());
-</script>
 ```

@@ -10,6 +10,7 @@ const translation: Translation = {
   breadcrumbs: 'Brotkrumens',
   clearEntry: 'Eingabe löschen',
   close: 'Schließen',
+  colorValue: 'Farbwert',
   copied: 'Kopiert',
   copyToClipboard: 'In die Zwischenablage kopieren',
   dragFileHereOrChooseFromFolder: 'Ziehen Sie die Datei hierher oder wählen Sie einen Ordner aus',

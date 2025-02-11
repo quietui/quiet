@@ -18,6 +18,7 @@ export interface Translation extends DefaultTranslation {
   breadcrumbs: string;
   clearEntry: string;
   close: string;
+  colorValue: string;
   copied: string;
   copyToClipboard: string;
   dragFileHereOrChooseFromFolder: string;

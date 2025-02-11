@@ -9,7 +9,7 @@ import hostStyles from '../../styles/host.styles.js';
 import { DraggableElement } from '../../utilities/drag.js';
 import { Localize } from '../../utilities/localize.js';
 import { clamp } from '../../utilities/math.js';
-import { QuietFormControlElement } from '../../utilities/quiet-element.js';
+import { QuietElement } from '../../utilities/quiet-element.js';
 import '../button/button.js';
 import '../copy/copy.js';
 import '../slider/slider.js';
@@ -31,16 +31,10 @@ const hasEyeDropper = 'EyeDropper' in window;
  * @dependency quiet-copy
  * @dependency quiet-slider
  *
- * @slot label - The color picker's label. For plain-text labels, you can use the `label` attribute instead.
- * @slot description - The color picker's description. For plain-text descriptions, you can use the `description`
- *  attribute instead.
- *
  * @event quiet-change - Emitted when the user commits changes to the color picker's value.
  * @event quiet-input - Emitted when the color picker receives input. This can fire very frequently during dragging, so
  *  avoid doing expensive operations in the handler. If you don't live feedback, use the `quiet-change` event instead.
  *
- * @csspart label - The element that contains the color picker's label.
- * @csspart description - The element that contains the color picker's description.
  * @csspart picker - The element the wraps the color picker (excluding the label and description).
  * @csspart color-slider - The 2d color slider.
  * @csspart color-slider-thumb - The color slider's thumb.
@@ -67,12 +61,9 @@ const hasEyeDropper = 'EyeDropper' in window;
  *
  * @cssstate disabled - Applied when the color picker is disabled.
  * @cssstate focused - Applied when the color picker has focus.
- * @cssstate user-valid - Applied when the color picker is valid and the user has sufficiently interacted with it.
- * @cssstate user-invalid - Applied when the color picker is invalid and the user has sufficiently interacted with it.
  */
 @customElement('quiet-color-picker')
-export class QuietColorPicker extends QuietFormControlElement {
-  static formAssociated = true;
+export class QuietColorPicker extends QuietElement {
   static observeSlots = true;
   static styles: CSSResultGroup = [hostStyles, formControlStyles, styles];
 
@@ -100,22 +91,13 @@ export class QuietColorPicker extends QuietFormControlElement {
   @state() hasFocus = false;
   @state() isChangingV = false;
   @state() isChangingS = false;
-  @state() isInvalid = false;
   @state() wasChanged = false;
-  @state() wasSubmitted = false;
 
   /**
-   * The color picker's label. If you need to provide HTML in the label, use the `label` slot instead.
+   * The color picker's label. This won't be shown, but it will be read to assistive devices so you should always
+   * include one.
    */
   @property() label: string;
-
-  /**
-   * The color picker's description. If you need to provide HTML in the description, use the `description` slot instead.
-   */
-  @property() description: string;
-
-  /** The name of the color picker. This will be submitted with the form as a name/value pair. */
-  @property({ reflect: true }) name: string;
 
   /** The color picker's value. */
   @property() value = '';
@@ -135,12 +117,6 @@ export class QuietColorPicker extends QuietFormControlElement {
    */
   @property() swatches = '';
 
-  /**
-   * The form to associate this control with. If omitted, the closest containing `<form>` will be used. The value of
-   * this attribute must be an ID of a form in the same document or shadow root.
-   */
-  @property() form: string;
-
   /** Enables the opacity slider. */
   @property({ attribute: 'with-opacity', type: Boolean, reflect: true }) withOpacity = false;
 
@@ -152,14 +128,12 @@ export class QuietColorPicker extends QuietFormControlElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.addEventListener('invalid', this.handleHostInvalid);
     this.addEventListener('focusin', this.handleFocusIn);
     this.addEventListener('focusout', this.handleFocusOut);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    this.removeEventListener('invalid', this.handleHostInvalid);
     this.removeEventListener('focusin', this.handleFocusIn);
     this.removeEventListener('focusout', this.handleFocusOut);
   }
@@ -194,13 +168,8 @@ export class QuietColorPicker extends QuietFormControlElement {
   }
 
   updated(changedProperties: PropertyValues<this>) {
-    // Always be updating
-    this.updateValidity();
-
     // Handle value
     if (changedProperties.has('value')) {
-      this.internals.setFormValue(this.value);
-
       if (!this.isDragging && !this.wasValueSetInternally) {
         this.setColorFromString(this.value);
       }
@@ -225,16 +194,6 @@ export class QuietColorPicker extends QuietFormControlElement {
     // Handle opacity
     if (changedProperties.has('withOpacity') && !this.withOpacity) {
       this.a = 1;
-    }
-
-    // Handle user interactions. When the form control's value has changed and lost focus (e.g. change event), we can
-    // show user-valid and user-invalid states. We also show it if the form has been submitted.
-    if (this.wasChanged || this.wasSubmitted) {
-      this.customStates.set('user-invalid', this.isInvalid);
-      this.customStates.set('user-valid', !this.isInvalid);
-    } else {
-      this.customStates.set('user-invalid', false);
-      this.customStates.set('user-valid', false);
     }
 
     // Update the formatted value when HSVA, format, or value changes. This ensures the value is always in sync with
@@ -270,19 +229,6 @@ export class QuietColorPicker extends QuietFormControlElement {
 
       this.updateComplete.then(() => (this.wasValueSetInternally = false));
     }
-  }
-
-  /** @internal Called when a containing fieldset is disabled. */
-  formDisabledCallback(isDisabled: boolean) {
-    this.disabled = isDisabled;
-  }
-
-  /** @internal Called when the form is reset. */
-  formResetCallback() {
-    this.isInvalid = false;
-    this.wasChanged = false;
-    this.wasSubmitted = false;
-    this.value = this.getAttribute('value') ?? '';
   }
 
   private formatHue(value: number) {
@@ -386,16 +332,6 @@ export class QuietColorPicker extends QuietFormControlElement {
     this.dispatchEvent(new QuietBlurEvent());
   };
 
-  private handleHostInvalid() {
-    //
-    // We need to simulate the :user-invalid state when the form is submitted. Alas, there's no way to listen to form
-    // submit because validation occurs before the `formdata` and `submit` events. The only way I've found to hook into
-    // it is by listening to the `invalid` event on the host element, which is dispatched by the browser when the form
-    // is submitted and the form-associated custom element is invalid.
-    //
-    this.wasSubmitted = true;
-  }
-
   private async handleHueSliderInput(event: QuietInputEvent) {
     event.stopImmediatePropagation();
     this.h = (event.target as QuietSlider).value;
@@ -411,10 +347,6 @@ export class QuietColorPicker extends QuietFormControlElement {
       this.dispatchEvent(new QuietChangeEvent());
       this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
     }
-  }
-
-  private handleLabelClick() {
-    this.colorSliderThumb.focus();
   }
 
   private async handleOpacitySliderInput(event: QuietInputEvent) {
@@ -498,28 +430,6 @@ export class QuietColorPicker extends QuietFormControlElement {
     this.colorSliderThumbY = (1 - this.v) * 100;
   }
 
-  /** Sets the form control's validity */
-  private async updateValidity() {
-    await this.updateComplete;
-    const hasCustomValidity = this.getCustomValidity().length > 0;
-    const validationMessage = hasCustomValidity ? this.getCustomValidity() : '';
-    const flags: ValidityStateFlags = {
-      badInput: false,
-      customError: hasCustomValidity,
-      patternMismatch: false,
-      rangeOverflow: false,
-      rangeUnderflow: false,
-      stepMismatch: false,
-      tooLong: false,
-      tooShort: false,
-      typeMismatch: false,
-      valueMissing: false
-    };
-
-    this.isInvalid = hasCustomValidity;
-    this.internals.setValidity(flags, validationMessage, this.focusableAnchor);
-  }
-
   /** Sets focus to the color picker. */
   public focus() {
     this.colorSliderThumb.focus();
@@ -553,8 +463,6 @@ export class QuietColorPicker extends QuietFormControlElement {
   }
 
   render() {
-    const hasLabel = this.label || this.slotsWithContent.has('label');
-    const hasDescription = this.description || this.slotsWithContent.has('description');
     const isRtl = this.localize.dir() === 'rtl';
     const currentColor = new TinyColor({ h: this.h, s: this.s, v: this.v, a: this.a });
     const colorWithoutOpacity = new TinyColor({ h: this.h, s: this.s, v: this.v, a: 1 });
@@ -577,20 +485,6 @@ export class QuietColorPicker extends QuietFormControlElement {
     }
 
     return html`
-      <label
-        id="label"
-        part="label"
-        class=${classMap({ vh: !hasLabel })}
-        for="color-slider-thumb"
-        @click=${this.handleLabelClick}
-      >
-        <slot name="label">${this.label}</slot>
-      </label>
-
-      <div id="description" part="description" class=${classMap({ vh: !hasDescription })}>
-        <slot name="description">${this.description}</slot>
-      </div>
-
       <div
         id="picker"
         part="picker"
@@ -623,8 +517,7 @@ export class QuietColorPicker extends QuietFormControlElement {
             tabindex="${this.disabled ? '-1' : '0'}"
             role="slider"
             aria-roledescription="2d slider"
-            aria-labelledby="label"
-            aria-describedby="description"
+            aria-label=${this.label}
             aria-valuenow="0"
             aria-valuetext="${valueText}"
             @blur=${this.handleColorSliderBlur}

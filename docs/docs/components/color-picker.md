@@ -6,7 +6,6 @@ layout: component
 ```html {.example}
 <quiet-color-picker 
   label="Select a color"
-  description="Your preferences will be saved."
   name="color"
   value="#7578c5" 
   with-opacity
@@ -216,7 +215,6 @@ Color pickers don't have built-in validation attributes like many other form con
   <quiet-color-picker
     label="Select a color"
     name="color"
-    description="This field will be invalid until the custom-validity attribute is removed"
     custom-validity="Not so fast, bubba!"
   ></quiet-color-picker>
   <br>

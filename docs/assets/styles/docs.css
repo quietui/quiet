@@ -27,6 +27,10 @@ html:not(.quiet-dark) .only-dark {
   display: none !important;
 }
 
+.turbo-progress-bar {
+  background-color: var(--quiet-primary-fill-mid);
+}
+
 .unstyled-list {
   margin-inline: 0;
   padding-inline: 0;

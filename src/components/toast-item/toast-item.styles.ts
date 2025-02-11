@@ -11,9 +11,7 @@ export default css`
     padding-inline-start: calc(1.5em + var(--accent-line-width));
     border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
     border-radius: var(--quiet-border-radius);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: var(--quiet-backdrop-filter);
-    background-color: color-mix(in oklab, var(--quiet-paper-color), transparent 15%);
+    background-color: var(--quiet-paper-color);
     box-shadow: var(--quiet-shadow-loud);
     color: var(--quiet-text-body);
     line-height: 1.25;

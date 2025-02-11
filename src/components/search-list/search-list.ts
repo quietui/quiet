@@ -28,6 +28,7 @@ import styles from './search-list.styles.js';
  */
 @customElement('quiet-search-list')
 export class QuietSearchList extends QuietElement {
+  static observeSlots = true;
   static styles: CSSResultGroup = [hostStyles, styles];
 
   private items: Element[] = [];

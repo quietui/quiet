@@ -66,12 +66,10 @@ export class QuietColorInput extends QuietFormControlElement {
   @query('#preview') private preview: HTMLElement;
   @query('#visual-box') private visualBox: HTMLElement;
 
+  @state() isOpen = false;
   @state() isInvalid = false;
   @state() wasChanged = false;
   @state() wasSubmitted = false;
-
-  /** Opens or closes the color picker. */
-  @property({ type: Boolean, reflect: true }) open = false;
 
   /**
    * The color input's label. If you need to provide HTML in the label, use the `label` slot instead.
@@ -192,11 +190,11 @@ export class QuietColorInput extends QuietFormControlElement {
     // Always be updating
     this.updateValidity();
 
-    if (changedProperties.has('open')) {
-      if (this.disabled) this.open = false;
-      this.customStates.set('open', this.open);
+    if (changedProperties.has('isOpen')) {
+      if (this.disabled) this.isOpen = false;
+      this.customStates.set('open', this.isOpen);
 
-      if (this.open) {
+      if (this.isOpen) {
         this.showPicker();
       } else {
         this.hidePicker();
@@ -212,7 +210,7 @@ export class QuietColorInput extends QuietFormControlElement {
 
     // Handle disabled
     if (changedProperties.has('disabled')) {
-      if (this.disabled) this.open = false;
+      if (this.disabled) this.isOpen = false;
       this.customStates.set('disabled', this.disabled);
     }
 
@@ -296,7 +294,7 @@ export class QuietColorInput extends QuietFormControlElement {
     const path = event.composedPath();
 
     if (!path.includes(this) && !path.includes(this.colorPicker)) {
-      this.open = false;
+      this.isOpen = false;
     }
   };
 
@@ -342,9 +340,9 @@ export class QuietColorInput extends QuietFormControlElement {
       event.preventDefault();
     }
 
-    if (!this.open && !event.composedPath().includes(this.colorPicker)) {
+    if (!this.isOpen && !event.composedPath().includes(this.colorPicker)) {
       this.textBox.focus();
-      this.open = true;
+      this.isOpen = true;
     }
   }
 
@@ -430,10 +428,10 @@ export class QuietColorInput extends QuietFormControlElement {
     if (this.disabled) return;
 
     // Close other color pickers that are open
-    openColorPickers.forEach(picker => (picker.open = false));
+    openColorPickers.forEach(picker => (picker.isOpen = false));
 
     this.colorPicker.showPopover();
-    this.open = true;
+    this.isOpen = true;
 
     this.reposition();
     openColorPickers.add(this);
@@ -450,7 +448,7 @@ export class QuietColorInput extends QuietFormControlElement {
   public async hidePicker() {
     if (this.disabled) return;
 
-    this.open = false;
+    this.isOpen = false;
     openColorPickers.delete(this);
     document.removeEventListener('keydown', this.handleDocumentKeyDown);
     document.removeEventListener('pointerdown', this.handleDocumentPointerDown);
@@ -520,7 +518,7 @@ export class QuietColorInput extends QuietFormControlElement {
           aria-describedby="description"
           aria-invalid=${this.isInvalid ? 'true' : 'false'}
           aria-haspopup="dialog"
-          aria-expanded=${this.open ? 'true' : 'false'}
+          aria-expanded=${this.isOpen ? 'true' : 'false'}
           aria-controls="color-picker"
           role="combobox"
           @change=${this.handleChange}

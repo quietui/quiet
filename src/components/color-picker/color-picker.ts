@@ -110,7 +110,7 @@ export class QuietColorPicker extends QuietElement {
   /** The color picker's value. */
   @property() value = '';
 
-  /** The format to use for the value. */
+  /** The format to use for the color's value. */
   @property() format: 'hex' | 'rgb' | 'hsl' = 'hex';
 
   /** Disables the color picker. */

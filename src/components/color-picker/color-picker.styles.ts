@@ -149,7 +149,7 @@ export default css`
     }
 
     &::part(track) {
-      border-radius: calc(var(--quiet-border-radius) / 2);
+      border-radius: calc(var(--quiet-border-radius) / 1.5);
       box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--quiet-strident), transparent 90%);
       font-size: inherit;
     }

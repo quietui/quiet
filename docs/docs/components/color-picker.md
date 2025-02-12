@@ -20,7 +20,7 @@ layout: component
 ```
 
 :::info
-This component is a primitive for enabling color selection. It will not submit its value with a form on its own. See [color input](/docs/components/color-input) for a color picker suitable for using with forms.
+This component is a primitive for enabling color selection. It is not a form control, so it will not submit a value to a form. See [color input](/docs/components/color-input) for a color picker suitable for using with forms.
 :::
 
 ## Examples

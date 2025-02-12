@@ -40,6 +40,10 @@ const openColorPickers = new Set<QuietColorInput>();
  * @csspart description - The element that contains the color input's description.
  * @csspart visual-box - The element that wraps the internal text box.
  * @csspart text-box - The internal text box, an `<input>` element.
+ * @csspart clear-button - The clear button, a `<button>` element.
+ *
+ * @cssproperty [--show-duration=50ms] - The duration of the show/hide animation.
+ * @cssproperty [--preview-size=1.6em] - The size of the color preview.
  *
  * @cssstate disabled - Applied when the color input is disabled.
  * @cssstate blank - Applied when the color input has a blank value.
@@ -287,6 +291,8 @@ export class QuietColorInput extends QuietFormControlElement {
 
   private handleColorPickerInput() {
     this.value = this.colorPicker.value;
+    this.dispatchEvent(new QuietInputEvent());
+    this.dispatchEvent(new InputEvent('input', { bubbles: true, composed: true, cancelable: false }));
   }
 
   /** If focus is set outside of the component, close the menu. */
@@ -548,10 +554,10 @@ export class QuietColorInput extends QuietFormControlElement {
       <quiet-color-picker
         id="color-picker"
         popover="manual"
-        swatches=${ifDefined(this.swatches)}
         value=${this.value}
         size=${this.size}
         format=${this.format}
+        swatches=${ifDefined(this.swatches)}
         ?with-opacity=${this.withOpacity}
         ?with-eye-dropper=${this.withEyeDropper}
         hidden

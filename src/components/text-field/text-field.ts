@@ -435,7 +435,7 @@ export class QuietTextField extends QuietFormControlElement {
           step=${ifDefined(this.step as number)}
           .value=${live(this.value) /* live() is required for proper validation */}
           autocapitalize=${ifDefined(this.autocapitalize)}
-          autocomplete=${ifDefined(this.autocomplete)}
+          autocomplete=${ifDefined(this.autocomplete) as any}
           autocorrect=${ifDefined(this.autocorrect)}
           spellcheck=${ifDefined(this.spellcheck)}
           enterkeyhint=${ifDefined(this.enterkeyhint)}

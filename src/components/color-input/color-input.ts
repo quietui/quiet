@@ -496,10 +496,6 @@ export class QuietColorInput extends QuietFormControlElement {
           md: this.size === 'md',
           lg: this.size === 'lg',
           xl: this.size === 'xl',
-          // Modifiers
-          'resize-vertical': this.resize === 'vertical',
-          'resize-auto': this.resize === 'auto',
-          'resize-none': this.resize === 'none',
           // States
           disabled: this.disabled
         })}
@@ -517,7 +513,7 @@ export class QuietColorInput extends QuietFormControlElement {
           placeholder=${ifDefined(this.placeholder)}
           .value=${live(this.value) /* live() is required for proper validation */}
           autocapitalize="off"
-          autocomplete=${ifDefined(this.autocomplete)}
+          autocomplete=${ifDefined(this.autocomplete) as any}
           autocorrect="off"
           enterkeyhint=${ifDefined(this.enterkeyhint)}
           inputmode=${ifDefined(this.inputmode)}

@@ -315,7 +315,7 @@ export class QuietSelect extends QuietFormControlElement {
           ?readonly=${this.readonly}
           ?required=${this.required}
           .value=${live(this.value) /* live() is required for proper validation */}
-          autocomplete=${ifDefined(this.autocomplete)}
+          autocomplete=${ifDefined(this.autocomplete) as any}
           enterkeyhint=${ifDefined(this.enterkeyhint)}
           aria-describedby="description"
           aria-invalid=${this.isInvalid ? 'true' : 'false'}

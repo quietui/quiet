@@ -379,7 +379,7 @@ export class QuietTextArea extends QuietFormControlElement {
           .value=${live(this.value) /* live() is required for proper validation */}
           rows=${this.rows}
           autocapitalize=${ifDefined(this.autocapitalize)}
-          autocomplete=${ifDefined(this.autocomplete)}
+          autocomplete=${ifDefined(this.autocomplete) as any}
           autocorrect=${ifDefined(this.autocorrect)}
           spellcheck=${ifDefined(this.spellcheck)}
           enterkeyhint=${ifDefined(this.enterkeyhint)}

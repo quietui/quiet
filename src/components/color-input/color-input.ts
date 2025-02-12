@@ -20,7 +20,7 @@ const openColorPickers = new Set<QuietColorInput>();
 /**
  * <quiet-color-input>
  *
- * @summary Color inputs let users enter or select a color.
+ * @summary Color inputs let users enter or select a color and submit it with a form.
  * @documentation https://quietui.org/docs/components/color-input
  * @status stable
  * @since 1.0
@@ -311,8 +311,8 @@ export class QuietColorInput extends QuietFormControlElement {
     if (event.key === 'Escape') {
       event.preventDefault();
       event.stopPropagation();
-      this.hidePicker();
       this.focus();
+      this.hidePicker();
     }
   };
 
@@ -334,6 +334,15 @@ export class QuietColorInput extends QuietFormControlElement {
   private handleTextBoxButtonPointerDown(event: PointerEvent) {
     // Prevent the number field from losing focus when text box buttons are activated
     event.preventDefault();
+  }
+
+  private handleTextBoxKeyDown(event: KeyboardEvent) {
+    // Open when pressing down or up
+    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+      event.preventDefault();
+      event.stopPropagation();
+      this.isOpen = true;
+    }
   }
 
   private handleVisualBoxPointerDown(event: PointerEvent) {
@@ -399,6 +408,8 @@ export class QuietColorInput extends QuietFormControlElement {
   /** Sets focus to the color input. */
   public focus() {
     this.textBox.focus();
+
+    this.isOpen = true;
   }
 
   /** Removes focus from the color input. */
@@ -536,6 +547,7 @@ export class QuietColorInput extends QuietFormControlElement {
           @input=${this.handleInput}
           @focus=${this.handleFocus}
           @blur=${this.handleBlur}
+          @keydown=${this.handleTextBoxKeyDown}
         />
 
         ${this.clearable && this.value?.length > 0 && !this.disabled && !this.readonly

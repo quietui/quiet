@@ -131,6 +131,10 @@
     }
   }
 
+  .site-search-result-description {
+    text-wrap: pretty;
+  }
+
   .site-search-result-title,
   .site-search-result-description,
   .site-search-result-url {

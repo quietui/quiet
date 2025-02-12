@@ -3,6 +3,7 @@ import { css } from 'lit';
 export default css`
   :host {
     --show-duration: 50ms;
+    --preview-size: 1.6em;
   }
 
   /* Pills */
@@ -11,7 +12,7 @@ export default css`
     border-radius: 9999px;
   }
 
-  :host(:state(open)) #visual-box {
+  :host(:state(open):not(:state(disabled))) #visual-box {
     outline: var(--quiet-border-style) calc(var(--quiet-border-width) + 1px) var(--quiet-focus-color);
     outline-offset: calc(-1 * var(--quiet-border-width));
   }
@@ -19,8 +20,8 @@ export default css`
   #preview {
     position: relative;
     aspect-ratio: 1;
-    width: 1.5em;
-    height: 1.5em;
+    width: var(--preview-size);
+    height: var(--preview-size);
     border-radius: 50%;
     background-image: linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%),
       linear-gradient(45deg, transparent 75%, var(--quiet-neutral-fill-soft) 75%),
@@ -42,8 +43,8 @@ export default css`
       right: 0;
       bottom: 0;
       left: 0;
-      width: 1.5em;
-      height: 1.5em;
+      width: var(--preview-size);
+      height: var(--preview-size);
       border-radius: inherit;
       background-color: var(--current-color);
       box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--quiet-strident), transparent 90%);

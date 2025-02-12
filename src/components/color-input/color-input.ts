@@ -44,6 +44,7 @@ const openColorPickers = new Set<QuietColorInput>();
  * @cssstate disabled - Applied when the color input is disabled.
  * @cssstate blank - Applied when the color input has a blank value.
  * @cssstate focused - Applied when the color input has focus.
+ * @cssstate open - Applied when the color picker is open.
  * @cssstate user-valid - Applied when the color input is valid and the user has sufficiently interacted with it.
  * @cssstate user-invalid - Applied when the color input is invalid and the user has sufficiently interacted with it.
  */
@@ -192,6 +193,7 @@ export class QuietColorInput extends QuietFormControlElement {
     this.updateValidity();
 
     if (changedProperties.has('open')) {
+      if (this.disabled) this.open = false;
       this.customStates.set('open', this.open);
 
       if (this.open) {
@@ -210,10 +212,8 @@ export class QuietColorInput extends QuietFormControlElement {
 
     // Handle disabled
     if (changedProperties.has('disabled')) {
+      if (this.disabled) this.open = false;
       this.customStates.set('disabled', this.disabled);
-      if (this.open) {
-        this.hidePicker();
-      }
     }
 
     // Handle format
@@ -333,6 +333,10 @@ export class QuietColorInput extends QuietFormControlElement {
     const target = event.target as HTMLElement;
     const isBox = target?.id === 'visual-box';
     const isSlot = target.hasAttribute('slot');
+
+    if (this.disabled) {
+      return;
+    }
 
     if (isBox || isSlot) {
       event.preventDefault();

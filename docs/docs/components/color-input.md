@@ -6,6 +6,7 @@ layout: component
 ```html {.example}
 <quiet-color-input 
   label="Select a color"
+  description="It doesn't have to be your favorite"
   name="color"
   value="#7578c5" 
   with-input

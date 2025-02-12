@@ -18,7 +18,7 @@ layout: component
 
 ## Examples
 
-### Labels and Descriptions
+### Labels and descriptions
 
 Use the `label` attribute to provide an accessible label, and `description` to add additional context. Both support HTML content via slots.
 
@@ -36,7 +36,31 @@ Use the `label` attribute to provide an accessible label, and `description` to a
 </quiet-color-input>
 ```
 
-### Appearances
+### Enabling opacity
+
+Add the `with-opacity` attribute to allow users to adjust color transparency. Hex colors will become the eight-value syntax, e.g. `#rrggbbaa`, and other formats will include alpha as well.
+
+```html {.example}
+<quiet-color-input 
+  label="Select a color"
+  value="#ce2380cc" 
+  with-opacity
+></quiet-color-input>
+```
+
+### Setting the format
+
+Use the `format` attribute to set the format of the value. Valid options include `hex` (default), `rgb,` and `hsl`.
+
+```html {.example}
+<quiet-color-input 
+  label="RGB color input"
+  value="#ffcc00"
+  format="rgb"
+></quiet-color-input>
+```
+
+### Filled and unstyled color inputs
 
 Color inputs support multiple visual styles through the `appearance` attribute.
 
@@ -64,44 +88,12 @@ Color inputs support multiple visual styles through the `appearance` attribute.
 ></quiet-color-input>
 ```
 
-### Enabling Opacity
+### Pill-shaped text fields
 
-Add the `with-opacity` attribute to allow users to adjust color transparency. Hex colors will become the eight-value syntax, e.g. `#rrggbbaa`, and other formats will include alpha as well.
-
-```html {.example}
-<quiet-color-input 
-  label="Select a color"
-  value="#ce2380cc" 
-  with-opacity
-></quiet-color-input>
-```
-
-### Setting the Format
-
-Use the `format` attribute to set the color value format. Valid options include `hex` (default), `rgb`, and `hsl`.
+Color inputs can be rendered with pill-shaped edges by adding the `pill` attribute.
 
 ```html {.example}
-<quiet-color-input 
-  label="RGB color input"
-  value="#ffcc00"
-  format="rgb"
-></quiet-color-input>
-```
-
-### Using Swatches
-
-Set the `swatches` attribute to display preset color options. Specify colors as space-delimited hex values or CSS color names.
-
-```html {.example}
-<quiet-color-input
-  label="Select a color"
-  swatches="
-    #09090b #71717a #ef4444 #f97316 
-    #f59e0b #eab308 #84cc16 #22c55e 
-    #10b981 #14b8a6 #06b6d4 #3b82f6 
-    #6366f1 #a855f7 #d946ef #ec4899
-  "
-></quiet-color-input>
+<quiet-color-input pill label="Pill-shaped"></quiet-color-input>
 ```
 
 ### Sizes
@@ -125,6 +117,22 @@ Add the `disabled` attribute to prevent user interaction.
   label="Disabled color input"
   disabled
   value="#6366f1"
+></quiet-color-input>
+```
+
+### Showing swatches
+
+Set the `swatches` attribute to one or more space-delimited hex colors or CSS color names, e.g. `lightblue`, to show as preset swatches below the color picker. This is useful for providing users with access to recent colors or a predefined color palette.
+
+```html {.example}
+<quiet-color-input
+  label="Select a color"
+  swatches="
+    #09090b #71717a #ef4444 #f97316 
+    #f59e0b #eab308 #84cc16 #22c55e 
+    #10b981 #14b8a6 #06b6d4 #3b82f6 
+    #6366f1 #a855f7 #d946ef #ec4899
+  "
 ></quiet-color-input>
 ```
 

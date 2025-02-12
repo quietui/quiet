@@ -109,6 +109,9 @@ export class QuietColorInput extends QuietFormControlElement {
   /** The color input's size. */
   @property({ reflect: true }) size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' = 'md';
 
+  /** Draws the text field in a pill shape. */
+  @property({ type: Boolean, reflect: true }) pill = false;
+
   /** The format to use for the color's value. */
   @property() format: 'hex' | 'rgb' | 'hsl' = 'hex';
 
@@ -500,6 +503,8 @@ export class QuietColorInput extends QuietFormControlElement {
           md: this.size === 'md',
           lg: this.size === 'lg',
           xl: this.size === 'xl',
+          // Modifiers
+          pill: this.pill,
           // States
           disabled: this.disabled
         })}

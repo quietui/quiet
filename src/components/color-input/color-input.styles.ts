@@ -8,7 +8,7 @@ export default css`
 
   /* Pills */
   #visual-box.pill {
-    padding: 0 1.25em;
+    padding: 0 0.5em;
     border-radius: 9999px;
   }
 

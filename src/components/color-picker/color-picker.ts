@@ -61,7 +61,6 @@ const hasEyeDropper = 'EyeDropper' in window;
  * @csspart color-input - The color input text field, a `<quiet-text-field>` element.
  * @csspart color-input__visual-box - The element that wraps the internal text box.
  * @csspart color-input__text-box - The internal text box, an `<input>` element.
- *
  * @csspart swatches - The element that contains swatches.
  * @csspart swatch - Each individual swatch.
  *

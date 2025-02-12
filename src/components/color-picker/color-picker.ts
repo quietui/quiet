@@ -37,7 +37,7 @@ const hasEyeDropper = 'EyeDropper' in window;
  * @event quiet-input - Emitted when the color picker receives input. This can fire very frequently during dragging, so
  *  avoid doing expensive operations in the handler. If you don't live feedback, use the `quiet-change` event instead.
  *
- * @csspart picker - The element the wraps the color picker (excluding the label and description).
+ * @csspart picker - The element the wraps the color picker.
  * @csspart color-slider - The 2d color slider.
  * @csspart color-slider-thumb - The color slider's thumb.
  * @csspart controls - The container that wraps the sliders and preview.

@@ -66,7 +66,7 @@ Color inputs support multiple visual styles through the `appearance` attribute.
 
 ### Enabling Opacity
 
-Add the `with-opacity` attribute to allow users to adjust color transparency.
+Add the `with-opacity` attribute to allow users to adjust color transparency. Hex colors will become the eight-value syntax, e.g. `#rrggbbaa`, and other formats will include alpha as well.
 
 ```html {.example}
 <quiet-color-input 

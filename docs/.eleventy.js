@@ -147,6 +147,11 @@ export default function (eleventyConfig) {
       {
         replace: /\[stable\]/gs,
         replaceWith: '<quiet-badge variant="primary"><quiet-icon name="checks"></quiet-icon> stable</quiet-badge>'
+      },
+      // Replace [form] with a badge
+      {
+        replace: /\[form\]/gs,
+        replaceWith: '<quiet-badge title="Form associated"><quiet-icon name="forms"></quiet-icon></quiet-badge>'
       }
     ])
   );

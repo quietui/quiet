@@ -13,6 +13,7 @@
     {% if component.status == 'experimental' %}[experimental]{% endif %}
     {% if component.status == 'stable' %}[stable]{% endif %}
     <quiet-badge>since {{ component.since }}</quiet-badge>
+    {% if component.superclass.name == 'QuietFormControlElement' %}[form]{% endif %}
   </div>
   <p class="component-summary">
     {{ component.summary }}

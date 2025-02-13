@@ -480,6 +480,13 @@ html:not(.quiet-dark) .only-dark {
     color: var(--quiet-text-muted);
     font-size: 1.2rem;
   }
+
+  @media screen and (max-width: 959px) {
+    .component-tag {
+      display: block;
+      width: 100%;
+    }
+  }
 }
 
 #content pre:has(code) {
@@ -510,8 +517,8 @@ h4,
 h5,
 h6 {
   quiet-badge {
-    font-size: 0.875rem;
-    vertical-align: 0.3em;
+    font-size: 0.875em;
+    vertical-align: -2px;
   }
 }
 
@@ -1168,8 +1175,9 @@ td.table-reflects {
   }
 }
 
-.table-description {
-  min-width: 30ch;
+.table-description,
+.table-arguments {
+  min-width: 35ch;
 }
 
 .table-name code,

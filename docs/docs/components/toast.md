@@ -220,7 +220,8 @@ To respond to custom buttons inside a toast item, obtain a reference to the noti
   const toast = document.getElementById('toast__buttons');
   const button = toast.nextElementSibling;
 
-  button.addEventListener('click', async () => { 
+  button.addEventListener('click', async () => {
+    // Create the notification
     const toastItem = await toast.create(`
       <quiet-icon slot="icon" name="cat"></quiet-icon>
       <p>The cats really want you to feed them now</p>
@@ -235,9 +236,11 @@ To respond to custom buttons inside a toast item, obtain a reference to the noti
       duration: 0
     });
 
+    // Obtain a reference to each button
     const complete = toastItem.querySelector('.complete');
     const later = toastItem.querySelector('.later');
 
+    // When complete is clicked...
     complete.addEventListener('click', async () => {
       toastItem.remove();
       toast.create('OK, the cats are happy now!', { 
@@ -246,6 +249,7 @@ To respond to custom buttons inside a toast item, obtain a reference to the noti
       });
     });
 
+    // When later is clicked...
     later.addEventListener('click', async () => {
       toastItem.remove();
       toast.create('The cats do not want to wait…', { 
@@ -379,10 +383,15 @@ See [changing the transition group's animation](/docs/components/transition-grou
 <quiet-button>Show notification</quiet-button>
 
 <script type="module">
+  import { allDefined } from '/dist/quiet.js';
   import { elevator } from 'https://cdn.jsdelivr.net/npm/@quietui/scurry@latest/dist/transition/elevator.js';  
+
+  await allDefined();
+
   const toast = document.getElementById('toast__animation');
   const button = toast.nextElementSibling;
 
+  // Set the new animation
   toast.transitionAnimation = elevator();
 
   button.addEventListener('click', () => { 

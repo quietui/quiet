@@ -510,15 +510,17 @@ html:not(.quiet-dark) .only-dark {
   background-color: color-mix(in oklab, var(--quiet-neutral-900), white 5%);
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  quiet-badge {
-    font-size: 0.875em;
-    vertical-align: -2px;
+#content {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    quiet-badge {
+      font-size: 0.875rem;
+      vertical-align: middle;
+    }
   }
 }
 

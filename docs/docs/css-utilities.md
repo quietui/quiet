@@ -32,6 +32,16 @@ Add `class="quiet-side-label"` to any Quiet form control that has a label, descr
 
 <br>
 
+<quiet-color-input
+  class="quiet-side-label"
+  style="--label-width: 8ch;"
+  name="color" 
+  label="Color" 
+  description="Make it pop"
+></quiet-color-input>
+
+<br>
+
 <quiet-slider
   class="quiet-side-label"
   style="--label-width: 8ch;"

@@ -6,10 +6,10 @@ layout: component
 ```html {.example}
 <quiet-dialog id="dialog__overview">
   <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">
-    Lorem ipsum
+    Dialog
   </h3>
 
-  <p>Lorem dolor sed viverra ipsum. Nisl rhoncus mattis rhoncus urna neque viverra justo nec.</p>
+  <p>Curious cats explore every corner of their domain, gracefully leaping from windowsills to countertops, always seeking new adventures.</p>
   
   <quiet-button slot="footer" data-dialog="close" variant="primary">
     Close
@@ -63,10 +63,10 @@ Place elements into the `header` slot to add content at the start of the dialog.
 ```html {.example}
 <quiet-dialog id="dialog__header">
   <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">
-    Lorem ipsum
+    With header
   </h3>
 
-  <p>Lorem dolor sed viverra ipsum. Nisl rhoncus mattis rhoncus urna neque viverra justo nec.</p>
+  <p>A playful kitten chases a red laser dot across the room, pouncing with determination while its tail twitches with excitement.</p>
 </quiet-dialog>
 
 <quiet-button data-dialog="open dialog__header">Show dialog</quiet-button>
@@ -78,7 +78,7 @@ Place elements into the `footer` slot to add actions or other supplemental infor
 
 ```html {.example}
 <quiet-dialog id="dialog__footer">
-  <p>Lorem dolor sed viverra ipsum. Nisl rhoncus mattis rhoncus urna neque viverra justo nec.</p>
+  <p>Gentle purrs fill the room as a content cat naps in a warm sunbeam, dreaming of chasing butterflies in the garden.</p>
 
   <quiet-button slot="footer" data-dialog="close" variant="primary">
     Close
@@ -95,7 +95,7 @@ When clicking outside of a dialog, it will normally pulse briefly to draw the us
 ```html {.example}
 <quiet-dialog light-dismiss id="dialog__light">
   <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">
-    Lorem ipsum
+    Light dismissal
   </h3>
 
   <p>Clicking outside the dialog will cause it to close.</p>
@@ -115,7 +115,7 @@ By default, a close button is provided as a single action in the dialog's header
 ```html {.example}
 <quiet-dialog id="dialog__customizing">
   <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">
-    Lorem ipsum
+    Actions
   </h3>
 
   <quiet-button slot="actions" appearance="text" icon-label="Settings">
@@ -147,10 +147,10 @@ By default, dialogs appear in the center of the screen. To make the dialog slide
 ```html {.example}
 <quiet-dialog id="dialog__placement">
   <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">
-    Lorem ipsum
+    Placement
   </h3>
 
-  <p>Nec nam aliquam sem et tortor consequat id porta nibh. Amet risus nullam eget felis eget nunc.</p>
+  <p>Two mischievous cats prowl the kitchen countertops at midnight. Their glowing eyes search for forgotten treats and adventures.</p>
 
   <quiet-button slot="footer" data-dialog="close" variant="primary">
     Close
@@ -186,7 +186,7 @@ The `--width` and `--height` custom properties control the default width and hei
 ```html {.example}
 <quiet-dialog id="dialog__width" style="--width: 800px;">
   <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">
-    Lorem ipsum
+    Size
   </h3>
 
   <p>Lobortis feugiat vivamus at augue eget arcu dictum. Nulla at volutpat diam ut venenatis tellus in metus vulputate. Venenatis tellus in metus vulputate eu scelerisque felis.</p>
@@ -207,17 +207,17 @@ Dialogs with overflowing content will expand as the viewport allows before scrol
 ```html {.example}
 <quiet-dialog id="dialog__scrolling" reset-scroll>
   <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">
-    Lorem ipsum
+    The Chronicles of Cats
   </h3>
 
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Augue ut lectus arcu bibendum at varius. Mattis molestie a iaculis at erat pellentesque. At in tellus integer feugiat scelerisque varius. Donec pretium vulputate sapien nec sagittis aliquam. Non consectetur a erat nam at lectus urna duis convallis. Molestie at elementum eu facilisis sed odio morbi quis. Libero id faucibus nisl tincidunt eget nullam non nisi. Sed velit dignissim sodales ut eu sem integer vitae. Suspendisse sed nisi lacus sed viverra.</p>
-  <p>Nec nam aliquam sem et tortor consequat id porta nibh. Amet risus nullam eget felis eget nunc. At urna condimentum mattis pellentesque id nibh tortor. Adipiscing elit pellentesque habitant morbi tristique senectus et netus et. Ipsum faucibus vitae aliquet nec ullamcorper. Felis eget velit aliquet sagittis id consectetur purus. Ac turpis egestas maecenas pharetra convallis posuere morbi. Suspendisse interdum consectetur libero id faucibus nisl tincidunt eget nullam. Nullam eget felis eget nunc lobortis mattis aliquam faucibus. Lacus laoreet non curabitur gravida arcu ac tortor dignissim. Posuere sollicitudin aliquam ultrices sagittis orci. Tincidunt augue interdum velit euismod. Aliquet enim tortor at auctor urna nunc. Sed egestas egestas fringilla phasellus faucibus scelerisque eleifend donec pretium. Massa enim nec dui nunc mattis enim ut. At urna condimentum mattis pellentesque id. Feugiat in ante metus dictum at tempor commodo. Ac turpis egestas integer eget aliquet nibh. Odio euismod lacinia at quis risus. Ut sem viverra aliquet eget.</p>
-  <p>Fermentum iaculis eu non diam phasellus vestibulum lorem sed risus. Pharetra magna ac placerat vestibulum lectus mauris ultrices eros in. Ac felis donec et odio. Tempus imperdiet nulla malesuada pellentesque elit eget gravida cum sociis. Gravida quis blandit turpis cursus. Vulputate ut pharetra sit amet aliquam id diam maecenas. Augue ut lectus arcu bibendum at varius. Posuere morbi leo urna molestie at. Ut porttitor leo a diam. Id aliquet lectus proin nibh nisl condimentum id. Nunc mattis enim ut tellus. Fermentum leo vel orci porta. Sit amet nisl purus in mollis nunc. Quis eleifend quam adipiscing vitae.</p>
-  <p>Faucibus pulvinar elementum integer enim. Bibendum at varius vel pharetra vel turpis nunc eget. Amet est placerat in egestas erat imperdiet sed. Eu non diam phasellus vestibulum lorem sed risus ultricies tristique. Ut tellus elementum sagittis vitae et leo duis. Amet mattis vulputate enim nulla aliquet porttitor lacus. Vitae et leo duis ut diam quam. Volutpat ac tincidunt vitae semper quis lectus nulla at volutpat. Et malesuada fames ac turpis egestas maecenas pharetra. In hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit.</p>
-  <p>Sapien et ligula ullamcorper malesuada proin. Nulla facilisi cras fermentum odio eu. Lacus suspendisse faucibus interdum posuere lorem. Ac turpis egestas integer eget aliquet. Id nibh tortor id aliquet. Non quam lacus suspendisse faucibus interdum posuere. Ac turpis egestas maecenas pharetra convallis posuere morbi leo. Tellus elementum sagittis vitae et leo duis ut diam quam. Lobortis scelerisque fermentum dui faucibus in ornare quam. Et malesuada fames ac turpis egestas maecenas pharetra convallis posuere. Pellentesque massa placerat duis ultricies lacus sed turpis tincidunt.</p>
-  <p>In ante metus dictum at. Eget sit amet tellus cras adipiscing. Hendrerit gravida rutrum quisque non. Mattis pellentesque id nibh tortor id aliquet lectus. Velit ut tortor pretium viverra. Ut tortor pretium viverra suspendisse potenti. Urna molestie at elementum eu. Vel risus commodo viverra maecenas accumsan lacus vel. Eget dolor morbi non arcu risus quis varius quam quisque. Orci porta non pulvinar neque laoreet suspendisse. Eros donec ac odio tempor orci. Auctor neque vitae tempus quam pellentesque nec nam aliquam sem. Eget gravida cum sociis natoque penatibus et magnis. Non blandit massa enim nec dui nunc mattis enim.</p>
-  <p>In nibh mauris cursus mattis molestie. Semper feugiat nibh sed pulvinar proin gravida hendrerit lectus. Lorem ipsum dolor sit amet consectetur adipiscing elit ut aliquam. Maecenas pharetra convallis posuere morbi leo urna molestie at. Nunc aliquet bibendum enim facilisis gravida neque convallis. In nulla posuere sollicitudin aliquam ultrices. At lectus urna duis convallis convallis tellus. Sapien nec sagittis aliquam malesuada bibendum. In massa tempor nec feugiat nisl pretium fusce. Enim sit amet venenatis urna cursus eget nunc scelerisque viverra. Venenatis cras sed felis eget velit aliquet sagittis. Ultrices neque ornare aenean euismod. Malesuada nunc vel risus commodo viverra maecenas accumsan. Donec pretium vulputate sapien nec. Massa ultricies mi quis hendrerit dolor magna eget est.</p>
-
+  <p>In the cozy corner of a sunlit room, a mysterious tabby cat named Shadow prowls with silent grace. Her whiskers twitch as she surveys her domain, a master of stealth and elegance. The morning light catches her fur, creating a mesmerizing dance of golden highlights across her perfectly groomed coat.</p>
+  <p>Nearby, a mischievous kitten named Pixel bounces from cushion to cushion, defying gravity with each leap. His tiny paws barely touch one surface before he's airborne again, a blur of energy and enthusiasm. The curtains flutter in his wake, marking his path of playful destruction.</p>
+  <p>In the kitchen windowsill, wise old Mr. Whiskers observes the garden with half-closed eyes. Birds flit past, catching his attention, but he merely twitches an ear – he's long past his bird-chasing days. Instead, he focuses on the important task of soaking up the warm sunshine, occasionally stretching out one paw in perfect contentment.</p>
+  <p>Luna, the elegant Siamese, practices her opera on the highest shelf of the bookcase. Her melodious complaints about dinner being four hours away echo through the house. She's convinced that her humans simply don't understand the concept of proper feeding schedules – clearly, anytime is dinner time.</p>
+  <p>Under the dining room table, partners in crime Socks and Mittens plot their next kitchen raid. Their synchronized tail swishes betray their excitement as they plan the optimal route to the treats stored in the highest cabinet. Their previous attempts may have failed, but cats are nothing if not persistent.</p>
+  <p>Out in the garden, adventurous explorer Captain Whiskers maps uncharted territory behind the rose bushes. Each rustle of leaves could hide a potential adversary – or worse, a cucumber. He approaches each step with military precision, his battle-scarred ear twitching at every sound.</p>
+  <p>Back inside, the newest family member, a tiny rescue named Pixel, discovers the joy of cardboard boxes. The expensive cat bed lies ignored as she claims a simple shipping box as her castle. Her purrs of contentment vibrate through the cardboard walls of her newfound kingdom.</p>
+  
   <quiet-button slot="footer" data-dialog="close" variant="primary">
     Close
   </quiet-button>
@@ -237,7 +237,7 @@ To move focus to a specific form control when the dialog opens, add the [`autofo
 ```html {.example}
 <quiet-dialog id="dialog__focus">
   <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">
-    Lorem ipsum
+    Autofocus
   </h3>
 
   <quiet-text-field autofocus placeholder="Enter something"></quiet-text-field>

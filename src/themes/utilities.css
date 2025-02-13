@@ -28,7 +28,7 @@
 
   /*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //
-  //  Visual hidden
+  //  Visually hidden
   //
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
@@ -51,63 +51,16 @@
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
   /* Flex stack */
-  [class*='quiet-stack'] {
+  .quiet-stack {
     display: flex;
     flex-direction: column;
-  }
-
-  .quiet-stack-0 {
-    gap: 0;
-  }
-
-  .quiet-stack-xs {
-    gap: 0.25rem;
-  }
-
-  .quiet-stack-sm {
-    gap: 0.5rem;
-  }
-
-  .quiet-stack-md {
     gap: 1rem;
   }
 
-  .quiet-stack-lg {
-    gap: 1.5rem;
-  }
-
-  .quiet-stack-xl {
-    gap: 2rem;
-  }
-
-  /* Flex inline */
-  [class*='quiet-inline'] {
+  .quiet-inline {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-  }
-
-  .quiet-inline-0 {
-    gap: 0;
-  }
-
-  .quiet-inline-xs {
-    gap: 0.25rem;
-  }
-
-  .quiet-inline-sm {
-    gap: 0.5rem;
-  }
-
-  .quiet-inline-md {
     gap: 1rem;
-  }
-
-  .quiet-inline-lg {
-    gap: 1.5rem;
-  }
-
-  .quiet-inline-xl {
-    gap: 2rem;
   }
 }

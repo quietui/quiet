@@ -1,0 +1,33 @@
+/* Side label utility */
+.quiet-side-label {
+  --label-width: 10ch;
+
+  display: grid;
+  grid: auto / var(--label-width) 1fr;
+  align-items: center;
+  gap: 0.25em 1em;
+
+  &::part(label) {
+    max-width: none;
+    text-align: end;
+  }
+
+  &::part(description) {
+    grid-column-start: 2;
+    order: 3;
+    margin-block: 0;
+  }
+}
+
+/* Visual hidden utilities */
+.quiet-vh,
+.quiet-vh-focusable:not(:focus-within),
+.quiet-vh-label::part(label),
+.quiet-vh-description::part(description) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+  clip-path: inset(50%);
+}

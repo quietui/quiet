@@ -183,7 +183,8 @@ Use `<optgroup>` elements to add option groups. Set the `label` attribute to an 
     <option value="cheetah">Cheetah</option>
     <option value="lion">Lion</option>
     <option value="tiger">Tiger</option>
-  </optgroup></quiet-select>
+  </optgroup>
+</quiet-select>
 ```
 
 ### Adding dividers
@@ -252,46 +253,34 @@ Use the `disabled` attribute to disable the select.
 
 ### Showing labels on the side
 
-With a bit of custom CSS, you can show labels on the side instead of on top of the select.
+With the [`quiet-side-label`](/docs/css-utilities/#side-labels) utility, you can show labels on the side instead of on top of the select. You can control the width of the label by setting the `--label-width` custom property.
 
 ```html {.example}
-<div class="select__side-labels">
-  <quiet-select name="quantity" label="Quantity" description="How many do you need?">
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-  </quiet-select>
-  <br>
-  <quiet-select type="delivery" name="delivery" label="Delivery" description="How soon do you need it?">
-    <option value="next">Next-day</option>
-    <option value="priority">Priority</option>
-    <option value="ground">Ground</option>
-  </quiet-select>
-</div>
-
-<style>
-  .select__side-labels {
-    quiet-select {
-      --label-width: 4.5rem; /* Change this to make more room for the label */
-
-      display: grid;
-      grid: auto / var(--label-width) 1fr;
-      gap: .25em;
-      align-items: center;    
-    }
-
-    quiet-select::part(label) {
-      text-align: end;
-    }
-
-    quiet-select::part(description) {
-      grid-column-start: 2;
-      order: 3;
-    }
-  }
-</style>
+<quiet-select 
+  class="quiet-side-label" 
+  style="--label-width: 8ch;"
+  name="quantity" 
+  label="Quantity" 
+  description="How many do you need?"
+>
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option value="4">4</option>
+  <option value="5">5</option>
+</quiet-select>
+<br>
+<quiet-select 
+  class="quiet-side-label" 
+  style="--label-width: 8ch;"
+  name="delivery" 
+  label="Delivery" 
+  description="How soon do you need it?"
+>
+  <option value="next">Next-day</option>
+  <option value="priority">Priority</option>
+  <option value="ground">Ground</option>
+</quiet-select>
 ```
 
 ### Validation

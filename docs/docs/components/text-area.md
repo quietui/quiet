@@ -90,34 +90,16 @@ Use the `disabled` attribute to disable the text area.
 
 ### Showing labels on the side
 
-With a bit of custom CSS, you can show labels on the side instead of on top of the text area.
+With the [`quiet-side-label`](/docs/css-utilities/#side-labels) utility, you can show labels on the side instead of on top of the text area. You can control the width of the label by setting the `--label-width` custom property.
 
 ```html {.example}
-<div class="text-area__side-labels">
-  <quiet-text-area name="name" label="Feedback" description="Let us know what you think"></quiet-text-area>
-</div>
-
-<style>
-  .text-area__side-labels {
-    quiet-text-area {
-      --label-width: 6rem; /* Change this to make more room for the label */
-
-      display: grid;
-      grid: auto / var(--label-width) 1fr;
-      gap: .25em;
-      align-items: center;    
-    }
-
-    quiet-text-area::part(label) {
-      text-align: end;
-    }
-
-    quiet-text-area::part(description) {
-      grid-column-start: 2;
-      order: 3;
-    }
-  }
-</style>
+<quiet-text-area 
+  class="quiet-side-label"
+  style="--label-width: 8ch;"
+  name="name" 
+  label="Feedback" 
+  description="Let us know what you think"
+></quiet-text-area>
 ```
 
 ### Validation

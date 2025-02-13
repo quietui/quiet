@@ -128,37 +128,25 @@ Use the `disabled` attribute to disable the text field.
 
 ### Showing labels on the side
 
-With a bit of custom CSS, you can show labels on the side instead of on top of the text field.
+With the [`quiet-side-label`](/docs/css-utilities/#side-labels) utility, you can show labels on the side instead of on top of the text field. You can control the width of the label by setting the `--label-width` custom property.
 
 ```html {.example}
-<div class="text-field__side-labels">
-  <quiet-text-field name="name" label="Name" description="What do people call you?"></quiet-text-field>
-  <br>
-  <quiet-text-field type="email" name="email" label="Email" description="How can we get in touch?"></quiet-text-field>
-</div>
-
-<style>
-  .text-field__side-labels {
-    quiet-text-field {
-      --label-width: 4.5rem; /* Change this to make more room for the label */
-
-      display: grid;
-      grid: auto / var(--label-width) 1fr;
-      gap: .25em;
-      align-items: center;    
-    }
-
-    quiet-text-field::part(label) {
-      text-align: end;
-    }
-
-    quiet-text-field::part(description) {
-      grid-column-start: 2;
-      order: 3;
-      margin-block: 0;
-    }
-  }
-</style>
+<quiet-text-field
+  class="quiet-side-label"
+  style="--label-width: 8ch;"
+  name="name" 
+  label="Name" 
+  description="What do people call you?"
+></quiet-text-field>
+<br>
+<quiet-text-field
+  class="quiet-side-label"
+  style="--label-width: 8ch;"
+  type="email" 
+  name="email" 
+  label="Email" 
+  description="How can we get in touch?"
+></quiet-text-field>
 ```
 
 ### Validation

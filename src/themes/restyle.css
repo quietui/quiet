@@ -1130,16 +1130,3 @@
     display: none !important;
   }
 }
-
-/* Utilities */
-.quiet-vh,
-.quiet-vh-focusable:not(:focus-within),
-.quiet-vh-label::part(label),
-.quiet-vh-description::part(description) {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  white-space: nowrap;
-  clip-path: inset(50%);
-}

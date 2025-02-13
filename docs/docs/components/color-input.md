@@ -146,45 +146,24 @@ Set the `swatches` attribute to one or more space-delimited hex colors or CSS co
 
 ### Showing labels on the side
 
-With a bit of custom CSS, you can show labels on the side instead of on top of the color input.
+With the [`quiet-side-label`](/docs/css-utilities/#side-labels) utility, you can show labels on the side instead of on top of the color input. You can control the width of the label by setting the `--label-width` custom property.
 
 ```html {.example}
-<div class="color-input__side-labels">
-  <quiet-color-input 
-    name="color" 
-    label="Brand color" 
-    description="Make it pop"
-  ></quiet-color-input>
-  <br>
-  <quiet-color-input 
-    name="color" 
-    label="Accent color" 
-    description="Complementary colors work well here"
-  ></quiet-color-input>
-</div>
-
-<style>
-  .color-input__side-labels {
-    quiet-color-input {
-      --label-width: 6rem; /* Change this to make more room for the label */
-
-      display: grid;
-      grid: auto / var(--label-width) 1fr;
-      gap: .25em;
-      align-items: center;    
-    }
-
-    quiet-color-input::part(label) {
-      text-align: end;
-    }
-
-    quiet-color-input::part(description) {
-      grid-column-start: 2;
-      order: 3;
-      margin-block: 0;
-    }
-  }
-</style>
+<quiet-color-input
+  class="quiet-side-label"
+  style="--label-width: 10ch;"
+  name="color" 
+  label="Brand color" 
+  description="Make it pop"
+></quiet-color-input>
+<br>
+<quiet-color-input 
+  class="quiet-side-label"
+  style="--label-width: 10ch;"
+  name="color" 
+  label="Accent color" 
+  description="Complementary colors work well here"
+></quiet-color-input>
 ```
 
 ### Validation

@@ -360,7 +360,7 @@ The height of a flip card is the height of its tallest side. If you're using [ca
     Front content, nicely centered
   </quiet-card>
   <quiet-card slot="back">
-    Lorem iaculis aenean venenatis conubia vivamus eros himenaeos egestas. Facilisi suspendisse ultrices natoque aliquet et nibh venenatis fames. Facilisi tempor pellentesque auctor ligula fusce.
+  Playful kittens chase sunbeams dancing across wooden floors while their mother watches contentedly. Determined hunters stalk imaginary prey through tall grass and behind rustling leaves. Silent paws explore moonlit windowsills at midnight.
   </quiet-card>
 </quiet-flip-card>
 

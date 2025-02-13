@@ -4,7 +4,7 @@ description: It's dangerous to go alone. Take these optional CSS utilities!
 layout: docs
 ---
 
-A handful of optional CSS utilities are provided to make common things a little easier.
+A handful of optional CSS utilities are provided to make common things a little easier. The goal isn't to be comprehensive, but to reduce boilerplate in your stylesheet.
 
 ## Usage
 

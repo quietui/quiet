@@ -405,6 +405,11 @@ export class QuietColorInput extends QuietFormControlElement {
     this.internals.setValidity(flags, validationMessage, this.focusableAnchor);
   }
 
+  /** Removes focus from the color input. */
+  public blur() {
+    this.textBox.blur();
+  }
+
   /** Sets focus to the color input. */
   public focus() {
     this.textBox.focus();
@@ -412,9 +417,13 @@ export class QuietColorInput extends QuietFormControlElement {
     this.isOpen = true;
   }
 
-  /** Removes focus from the color input. */
-  public blur() {
-    this.textBox.blur();
+  /**
+   * Gets the current value as a hex string, a hex8 string, an RGB object, or an HSL object. RBG objects have `r`, `g`,
+   * and `b` properties ranging from 0–255 and an `a` property (representing opacity) that ranges from 0-1. HSL objects
+   * have an `h` property ranging from `0-359` and `s`, `l`, and `a` properties ranging from 0–1.
+   */
+  public getValueAs(format: 'hex' | 'hex8' | 'hsl' | 'rgb' = 'rgb') {
+    return this.colorPicker.getValueAs(format);
   }
 
   /** Selects all text in the color input. */

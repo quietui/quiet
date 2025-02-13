@@ -11,7 +11,7 @@ For most organizations, a sponsorship is just a drop in the bucket. For open sou
 
 Dear =={Manager}==,
 
-I want to introduce Quiet&nbsp;UI, an open source component library that can significantly improve our development workflow.
+I want to introduce Quiet&nbsp;UI, an open source user interface library that can significantly improve our development workflow.
 
 Quiet&nbsp;UI offers thoroughly tested, accessible components that work across frameworks. This means we won't need to rebuild components when switching frameworks in the future. Quiet's comprehensive documentation and commitment to accessibility will let us focus on building features rather than maintaining our own components.
 

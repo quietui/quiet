@@ -3,7 +3,7 @@ import { css } from 'lit';
 export default css`
   :host {
     --show-duration: 50ms;
-    --preview-size: 1.6em;
+    --preview-size: 1.5em;
   }
 
   /* Pills */
@@ -12,7 +12,7 @@ export default css`
     border-radius: 9999px;
   }
 
-  :host(:state(open):not(:state(disabled))) #visual-box {
+  :host(:state(open):not(:state(disabled)) #visual-box:is(.normal, .filled)) {
     outline: var(--quiet-border-style) calc(var(--quiet-border-width) + 1px) var(--quiet-focus-color);
     outline-offset: calc(-1 * var(--quiet-border-width));
   }

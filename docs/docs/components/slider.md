@@ -258,25 +258,30 @@ Use the `disabled` attribute to disable the slider.
 
 ### Using custom validation
 
-Sliders don't have built-in validation attributes like many other form controls. However, you can use the `custom-validity` attribute to make the slider invalid and show a custom error message on submit. To clear the error, remove the attribute or set it to an empty string.
+Sliders don't have built-in validation attributes like many other form controls. However, you can Use the `setCustomValidity()` method to make the slider invalid and show a custom error message on submit. To clear the error, remove the attribute or set it to an empty string.
 
 ```html {.example}
-<form action="about:blank" method="get" target="_blank">
+<form action="about:blank" method="get" target="_blank" id="slider__custom-validation">
   <quiet-slider
     name="value"
     label="Select a value"
-    description="This field will be invalid until the custom-validity attribute is removed"
-    custom-validity="Not so fast, bubba!"
+    description="This field will be invalid until custom validation is removed"
   ></quiet-slider>
   <br>
   <quiet-button type="submit" variant="primary">Submit</quiet-button>
 </form>
+
+<script type="module">
+  import { allDefined } from '/dist/quiet.js';
+
+  await allDefined();
+
+  const form = document.getElementById('slider__custom-validation');
+  const slider = form.querySelector('quiet-slider');
+
+  slider.setCustomValidity('Not so fast, bubba!');
+</script>
 ```
-
-:::info
-Most validation attributes work exactly like their native counterparts. However, the `custom-validity` attribute is offered in lieu of the `setCustomValidity()` method. This allows you to declaratively set custom errors instead of having to call a method with JavaScript.
-:::
-
 
 ### Styling validation
 
@@ -287,7 +292,6 @@ You can style valid and invalid sliders using the `:valid` and `:invalid` pseudo
   <quiet-slider
     name="value"
     label="Select a value"
-    custom-validity="Select a number greater than zero"
     min="0"
     max="5"
     value="0"
@@ -313,17 +317,24 @@ You can style valid and invalid sliders using the `:valid` and `:invalid` pseudo
   }
 </style>
 
-<script>
+<script type="module">
+  import { allDefined } from '/dist/quiet.js';
+
+  await allDefined();
+
   const form = document.querySelector('.slider__validation-pseudo');
   const slider = form.querySelector('quiet-slider');
+  const validationMessage = 'Select a number greater than zero';
+
+  slider.setCustomValidity(validationMessage);
 
   async function updateValidity() {
     await slider.updateComplete;
-    slider.customValidity = slider.value > 0 ? '' : 'Select a number greater than zero';
+    slider.setCustomValidity(slider.value > 0 ? '' : validationMessage);
   }
 
-  slider.addEventListener('quiet-input', () => updateValidity());
-  form.addEventListener('reset', () => updateValidity());
+  slider.addEventListener('quiet-input', updateValidity);
+  form.addEventListener('reset', updateValidity);
 </script>
 ```
 
@@ -334,7 +345,6 @@ However, these selectors will match even before the user has had a chance to fil
   <quiet-slider
     name="value"
     label="Select a value"
-    custom-validity="Select a number greater than zero"
     min="0"
     max="5"
     value="0"
@@ -360,17 +370,24 @@ However, these selectors will match even before the user has had a chance to fil
   }
 </style>
 
-<script>
+<script type="module">
+  import { allDefined } from '/dist/quiet.js';
+
+  await allDefined();
+
   const form = document.querySelector('.slider__validation-custom');
   const slider = form.querySelector('quiet-slider');
+  const validationMessage = 'Select a number greater than zero';
+
+  slider.setCustomValidity(validationMessage);
 
   async function updateValidity() {
     await slider.updateComplete;
-    slider.customValidity = slider.value > 0 ? '' : 'Select a number greater than zero';
+    slider.setCustomValidity(slider.value > 0 ? '' : validationMessage);
   }
 
-  slider.addEventListener('quiet-input', () => updateValidity());
-  form.addEventListener('reset', () => updateValidity());
+  slider.addEventListener('quiet-input', updateValidity);
+  form.addEventListener('reset', updateValidity);
 </script>
 ```
 

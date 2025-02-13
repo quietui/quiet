@@ -68,7 +68,7 @@ Volutpat blandit aliquam etiam erat velit scelerisque. Non sodales neque sodales
 
 Many inline elements are styled consistently based on theme tokens.
 
-<quiet-card class="preview preview-two-cols">
+<quiet-card class="preview-two-columns">
 
 **bold**
 
@@ -104,7 +104,7 @@ superscript<sup>sup</sup>
 
 Use `<ol>` and `<ul>` to make ordered and unordered lists.
 
-<quiet-card class="two-columns preview">
+<quiet-card class="preview-two-columns">
 
 1. First item
 2. Second item
@@ -410,7 +410,7 @@ Use the `quiet-pill` class to make the button pill appear like pills.
 
 For consistency, most native form controls are styled to look similar to Quiet form controls. Add the `quiet-xs`, `quiet-sm`, `quiet-md`, `quiet-lg`, and `quiet-xl` classes to `<input>`, `<select>`, and `<textarea>` elements to change their size.
 
-<quiet-card class="preview-col">
+<quiet-card class="preview-column">
   <div>
     <label class="quiet-xs" for="xs-input">Extra small</label>
     <input class="quiet-xs" id="xs-input" type="text" placeholder="xs">
@@ -435,7 +435,7 @@ For consistency, most native form controls are styled to look similar to Quiet f
 
 Various input types are supported via `<input type="...">`, `<select>`, and `<textarea>`.
 
-<quiet-card class="preview-col">
+<quiet-card class="preview-column">
   <input type="color" placeholder="Color" value="#787acf">
   <input type="date" placeholder="Date" value="1989-03-12">
   <input type="time" placeholder="Time" value="12:00:00">
@@ -463,7 +463,7 @@ Various input types are supported via `<input type="...">`, `<select>`, and `<te
 
 Use `class="quiet-filled"` to make the following form controls appear filled.
 
-<quiet-card class="preview-col">
+<quiet-card class="preview-column">
   <input class="quiet-filled" type="text" placeholder="Filled">
   <select class="quiet-filled" name="pet" label="Pick one">
     <option value="cats" selected>Cats</option>
@@ -483,7 +483,7 @@ Use `class="quiet-filled"` to make the following form controls appear filled.
 
 Use `class="quiet-pill"` to make `<input>` and `<select>` appear pill-shaped.
 
-<quiet-card class="preview-col">
+<quiet-card class="preview-column">
   <input class="quiet-pill" type="text" placeholder="Filled">
   <select class="quiet-pill" name="pet" label="Pick one">
     <option value="cats" selected>Cats</option>
@@ -505,13 +505,18 @@ Use `<fieldset>` and `<legend>` to group and label form controls.
 
 <!-- Page styles -->
 <style>
-  .preview-col::part(body) {
+  #content quiet-card {
+    margin-block-end: var(--quiet-content-spacing);
+  }
+
+  .preview-column::part(body) {
     display: flex;
     flex-direction: column;
     gap: 1em;
   }
 
-  quiet-card {
-      margin-block-end: var(--quiet-content-spacing);
+  .preview-two-columns::part(body) {
+    columns: 2;
+    gap: 1em;
   }
 </style>

@@ -255,7 +255,6 @@ Use the `disabled` attribute to disable the select.
 With a bit of custom CSS, you can show labels on the side instead of on top of the select.
 
 ```html {.example}
-
 <div class="select__side-labels">
   <quiet-select name="quantity" label="Quantity" description="How many do you need?">
     <option value="1">1</option>
@@ -317,15 +316,14 @@ The `required` attribute can be applied to enable validation using the [Constrai
 
 ### Using custom validation
 
-Use the `custom-validity` attribute to make the select invalid and show a custom error message on submit. This will override all other validation parameters. To clear the error, remove the attribute or set it to an empty string.
+Use the `setCustomValidity()` method to make the select invalid and show a custom error message on submit. This will override all other validation parameters. To clear the error, remove the attribute or set it to an empty string.
 
 ```html {.example}
-<form action="about:blank" method="get" target="_blank">
+<form action="about:blank" method="get" target="_blank" id="select__custom-validation">
   <quiet-select 
     name="animal"
     label="Animal"
-    description="This field will be invalid until the custom-validity attribute is removed"
-    custom-validity="Not so fast, bubba!"
+    description="This field will be invalid until custom validation is removed"
   >
     <option value="bird">Bird</option>
     <option value="cat">Cat</option>
@@ -335,11 +333,18 @@ Use the `custom-validity` attribute to make the select invalid and show a custom
   <br>
   <quiet-button type="submit" variant="primary">Submit</quiet-button>
 </form>
-```
 
-:::info
-Most validation attributes work exactly like their native counterparts. However, the `custom-validity` attribute is offered in lieu of the `setCustomValidity()` method. This allows you to declaratively set custom errors instead of having to call a method with JavaScript.
-:::
+<script type="module">
+  import { allDefined } from '/dist/quiet.js';
+
+  await allDefined();
+
+  const form = document.getElementById('select__custom-validation');
+  const select = form.querySelector('quiet-select');
+
+  select.setCustomValidity('Not so fast, bubba!');
+</script>
+```
 
 ### Styling validation
 

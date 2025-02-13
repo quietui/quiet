@@ -124,11 +124,11 @@ The `required` attribute can be applied to enable validation using the [Constrai
 
 ### Using custom validation
 
-Use the `custom-validity` attribute to make the radio invalid and show a custom error message on submit. This will override all other validation parameters. To clear the error, remove the attribute or set it to an empty string.
+Use the `setCustomValidity()` method to make the radio invalid and show a custom error message on submit. This will override all other validation parameters. To clear the error, remove the attribute or set it to an empty string.
 
 ```html {.example}
-<form action="about:blank" method="get" target="_blank">
-  <quiet-radio label="Select one" name="animal" custom-validity="Not so fast, bubba!">
+<form action="about:blank" method="get" target="_blank" id="radio__custom-validation">
+  <quiet-radio label="Select one" name="animal">
     <quiet-radio-item value="cats">Cats</quiet-radio-item>
     <quiet-radio-item value="dogs">Dogs</quiet-radio-item>
   </quiet-radio>
@@ -136,12 +136,18 @@ Use the `custom-validity` attribute to make the radio invalid and show a custom 
   <quiet-button type="submit" variant="primary">Submit</quiet-button>
   <quiet-button type="reset">Reset</quiet-button>
 </form>
+
+<script type="module">
+  import { allDefined } from '/dist/quiet.js';
+
+  await allDefined();
+
+  const form = document.getElementById('radio__custom-validation');
+  const radio = form.querySelector('quiet-radio');
+
+  radio.setCustomValidity('Not so fast, bubba!');
+</script>
 ```
-
-:::info
-Most validation attributes work exactly like their native counterparts. However, the `custom-validity` attribute is offered in lieu of the `setCustomValidity()` method. This allows you to declaratively set custom errors instead of having to call a method with JavaScript.
-:::
-
 
 ### Styling validation
 

@@ -44,7 +44,7 @@ export class QuietCheckboxGroup extends QuietElement {
 
   /**
    * Indicates at least one option in the checkbox group is required. This just adds a visual indicator. To perform
-   * validation, use the checkbox's `required` and/or `custom-validity` attributes.
+   * validation, use the checkbox's `required` attribute and/or `setCustomValidity()` method.
    */
   @property({ type: Boolean, reflect: true }) required = false;
 

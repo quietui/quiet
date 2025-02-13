@@ -70,20 +70,27 @@ The `required` attribute can be applied to enable validation using the [Constrai
 
 ### Using custom validation
 
-Use the `custom-validity` attribute to make the checkbox invalid and show a custom error message on submit. This will override all other validation parameters. To clear the error, remove the attribute or set it to an empty string.
+Use the `setCustomValidity()` method to make the checkbox invalid and show a custom error message on submit. This will override all other validation parameters. To clear the error, remove the attribute or set it to an empty string.
 
 ```html {.example}
-<form action="about:blank" method="get" target="_blank">
-  <quiet-checkbox name="feed" value="yes" required custom-validity="Not so fast, bubba!">I will feed the cats</quiet-checkbox>
+<form action="about:blank" method="get" target="_blank" id="checkbox__custom-validation">
+  <quiet-checkbox name="feed" value="yes" required>I will feed the cats</quiet-checkbox>
   <br><br>
   <quiet-button type="submit" variant="primary">Submit</quiet-button>
   <quiet-button type="reset">Reset</quiet-button>
 </form>
-```
 
-:::info
-Most validation attributes work exactly like their native counterparts. However, the `custom-validity` attribute is offered in lieu of the `setCustomValidity()` method. This allows you to declaratively set custom errors instead of having to call a method with JavaScript.
-:::
+<script type="module">
+  import { allDefined } from '/dist/quiet.js';
+
+  await allDefined();
+
+  const form = document.getElementById('checkbox__custom-validation');
+  const checkbox = form.querySelector('quiet-checkbox');
+
+  checkbox.setCustomValidity('Not so fast, bubba!');
+</script>
+```
 
 ### Styling validation
 

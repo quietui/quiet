@@ -28,6 +28,7 @@ layout: docs
         {%- if component.status == 'experimental' %}[experimental]{% endif %}
         {%- if component.status == 'stable' %}[stable]{% endif %}
         <quiet-badge>since {{ component.since }}</quiet-badge>
+        {%- if component.superclass.name == 'QuietFormControlElement' %}[form]{% endif %}
       </div>
     </a>
   {%- endfor -%}
@@ -62,7 +63,7 @@ layout: docs
       padding: 1.25rem;
       text-decoration: none;
       color: inherit;
-      transition: all 0.2s ease-in-out;
+      transition: all 0.1s ease-in-out;
       
       &:focus-visible {
         outline-offset: calc(-1 * var(--quiet-border-width));

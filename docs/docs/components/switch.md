@@ -71,20 +71,27 @@ The `required` attribute can be applied to enable validation using the [Constrai
 
 ### Using custom validation
 
-Use the `custom-validity` attribute to make the switch invalid and show a custom error message on submit. This will override all other validation parameters. To clear the error, remove the attribute or set it to an empty string.
+Use the `setCustomValidity()` method to make the switch invalid and show a custom error message on submit. This will override all other validation parameters. To clear the error, remove the attribute or set it to an empty string.
 
 ```html {.example}
-<form action="about:blank" method="get" target="_blank">
-  <quiet-switch name="sleep" value="zzz" required custom-validity="Have you taken a nap first?">Sleep mode</quiet-switch>
+<form action="about:blank" method="get" target="_blank" id="switch__custom-validation">
+  <quiet-switch name="sleep" value="zzz" required>Sleep mode</quiet-switch>
   <br><br>
   <quiet-button type="submit" variant="primary">Submit</quiet-button>
   <quiet-button type="reset">Reset</quiet-button>
 </form>
-```
 
-:::info
-Most validation attributes work exactly like their native counterparts. However, the `custom-validity` attribute is offered in lieu of the `setCustomValidity()` method. This allows you to declaratively set custom errors instead of having to call a method with JavaScript.
-:::
+<script type="module">
+  import { allDefined } from '/dist/quiet.js';
+
+  await allDefined();
+
+  const form = document.getElementById('switch__custom-validation');
+  const toggle = form.querySelector('quiet-switch');
+
+  toggle.setCustomValidity('Have you taken a nap first?');
+</script>
+```
 
 ### Styling validation
 

@@ -93,7 +93,6 @@ Use the `disabled` attribute to disable the text area.
 With a bit of custom CSS, you can show labels on the side instead of on top of the text area.
 
 ```html {.example}
-
 <div class="text-area__side-labels">
   <quiet-text-area name="name" label="Feedback" description="Let us know what you think"></quiet-text-area>
 </div>
@@ -137,24 +136,30 @@ A number of attributes can be used to enable validation using the [Constraint Va
 
 ### Using custom validation
 
-Use the `custom-validity` attribute to make the text area invalid and show a custom error message on submit. This will override all other validation parameters. To clear the error, remove the attribute or set it to an empty string.
+Use the `setCustomValidity()` method to make the text area invalid and show a custom error message on submit. This will override all other validation parameters. To clear the error, remove the attribute or set it to an empty string.
 
 ```html {.example}
-<form action="about:blank" method="get" target="_blank">
+<form action="about:blank" method="get" target="_blank" id="text-area__custom-validation">
   <quiet-text-area 
     name="feedback"
     label="Feedback"
-    description="This field will be invalid until the custom-validity attribute is removed"
-    custom-validity="Not so fast, bubba!"
+    description="This field will be invalid until custom validation is removed"
   ></quiet-text-area>
   <br>
   <quiet-button type="submit" variant="primary">Submit</quiet-button>
 </form>
-```
 
-:::info
-Most validation attributes work exactly like their native counterparts. However, the `custom-validity` attribute is offered in lieu of the `setCustomValidity()` method. This allows you to declaratively set custom errors instead of having to call a method with JavaScript.
-:::
+<script type="module">
+  import { allDefined } from '/dist/quiet.js';
+
+  await allDefined();
+
+  const form = document.getElementById('text-area__custom-validation');
+  const textArea = form.querySelector('quiet-text-area');
+
+  textArea.setCustomValidity('Not so fast, bubba!');
+</script>
+```
 
 ### Styling validation
 

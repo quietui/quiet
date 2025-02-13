@@ -191,20 +191,30 @@ The `required` attribute can be applied to enable validation using the [Constrai
 
 ### Using custom validation
 
-Use the `custom-validity` attribute to make the file input invalid and show a custom error message on submit. This will override all other validation parameters. To clear the error, remove the attribute or set it to an empty string.
+Use the `setCustomValidity()` method to make the file input invalid and show a custom error message on submit. This will override all other validation parameters. To clear the error, remove the attribute or set it to an empty string.
 
 ```html {.example}
-<form action="about:blank" method="get" target="_blank">
+<form action="about:blank" method="get" target="_blank" id="file-input__custom-validation">
   <quiet-file-input 
     name="file" 
     label="Select a file" 
-    custom-validity="Not so fast, bubba!" 
     required
   ></quiet-file-input>
   <br>
   <quiet-button type="submit" variant="primary">Submit</quiet-button>
   <quiet-button type="reset">Reset</quiet-button>
 </form>
+
+<script type="module">
+  import { allDefined } from '/dist/quiet.js';
+
+  await allDefined();
+
+  const form = document.getElementById('file-input__custom-validation');
+  const fileInput = form.querySelector('quiet-file-input');
+
+  fileInput.setCustomValidity('Not so fast, bubba!');
+</script>
 ```
 
 ### Styling validation

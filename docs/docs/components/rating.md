@@ -175,24 +175,30 @@ The `required` attribute can be applied to enable validation using the [Constrai
 
 ### Using custom validation
 
-Use the `custom-validity` attribute to make the rating invalid and show a custom error message on submit. This will override all other validation parameters. To clear the error, remove the attribute or set it to an empty string.
+Use the `setCustomValidity()` method to make the rating invalid and show a custom error message on submit. This will override all other validation parameters. To clear the error, remove the attribute or set it to an empty string.
 
 ```html {.example}
-<form action="about:blank" method="get" target="_blank">
+<form action="about:blank" method="get" target="_blank" id="rating__custom-validation">
   <quiet-rating 
     name="food" 
     label="Food quality" 
     value="3"
-    custom-validity="Not so fast, bubba!"
   ></quiet-rating>
   <br>
   <quiet-button type="submit" variant="primary">Submit</quiet-button>
 </form>
-```
 
-:::info
-Most validation attributes work exactly like their native counterparts. However, the `custom-validity` attribute is offered in lieu of the `setCustomValidity()` method. This allows you to declaratively set custom errors instead of having to call a method with JavaScript.
-:::
+<script type="module">
+  import { allDefined } from '/dist/quiet.js';
+
+  await allDefined();
+
+  const form = document.getElementById('rating__custom-validation');
+  const rating = form.querySelector('quiet-rating');
+
+  rating.setCustomValidity('Not so fast, bubba!');
+</script>
+```
 
 ### Styling validation
 

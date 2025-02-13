@@ -136,24 +136,30 @@ passcodes are fixed-length, so setting `required` will ensure that the field is 
 
 ### Using custom validation
 
-Use the `custom-validity` attribute to make the passcode invalid and show a custom error message on submit. This will override all other validation parameters. To clear the error, remove the attribute or set it to an empty string.
+Use the `setCustomValidity()` method to make the passcode invalid and show a custom error message on submit. This will override all other validation parameters. To clear the error, remove the attribute or set it to an empty string.
 
 ```html {.example}
-<form action="about:blank" method="get" target="_blank">
+<form action="about:blank" method="get" target="_blank" id="passcode__custom-validation">
   <quiet-passcode
     name="code"
     label="Authorization code"
-    description="This field will be invalid until the custom-validity attribute is removed"
-    custom-validity="Not so fast, bubba!"
+    description="This field will be invalid until custom validation is removed"
   ></quiet-passcode>
   <br>
   <quiet-button type="submit" variant="primary">Submit</quiet-button>
 </form>
-```
 
-:::info
-Most validation attributes work exactly like their native counterparts. However, the `custom-validity` attribute is offered in lieu of the `setCustomValidity()` method. This allows you to declaratively set custom errors instead of having to call a method with JavaScript.
-:::
+<script type="module">
+  import { allDefined } from '/dist/quiet.js';
+
+  await allDefined();
+
+  const form = document.getElementById('passcode__custom-validation');
+  const passcode = form.querySelector('quiet-passcode');
+
+  passcode.setCustomValidity('Not so fast, bubba!');
+</script>
+```
 
 ### Styling validation
 

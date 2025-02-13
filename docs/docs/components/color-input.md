@@ -6,9 +6,9 @@ layout: component
 ```html {.example}
 <quiet-color-input 
   label="Select a color"
-  description="It doesn't have to be your favorite"
+  description="The cats like violet, but any color works"
   name="color"
-  value="#7578c5" 
+  value="#f0803a" 
   with-input
   with-opacity
   with-eye-dropper
@@ -20,20 +20,28 @@ layout: component
 
 ### Labels and descriptions
 
-Use the `label` attribute to provide an accessible label, and `description` to add additional context. Both support HTML content via slots.
+You can use the `label` and `description` attributes to provide plain text labels and descriptions for the color input. If you want to provide HTML, use the `label` and `description` slots instead.
 
 ```html {.example}
 <quiet-color-input 
-  label="Brand color" 
-  description="Choose your primary brand color"
-></quiet-color-input>
-
-<br>
-
-<quiet-color-input>
-  <span slot="label">Custom label <em>with markup</em></span>
-  <span slot="description">And a <strong>rich text</strong> description</span>
+  label="Select a color" 
+  name="color"
+>
+  <span slot="description">
+    For our cafe branding guidelines, <a href="https://example.com/" target="_blank">visit our style guide</a>.
+  </span>
 </quiet-color-input>
+```
+
+### Providing an initial value 
+
+Use the `value` attribute to provide an initial value for the color input.
+
+```html {.example}
+<quiet-color-input 
+  label="Select a color"
+  value="#7578c5" 
+></quiet-color-input>
 ```
 
 ### Enabling opacity
@@ -43,7 +51,7 @@ Add the `with-opacity` attribute to allow users to adjust color transparency. He
 ```html {.example}
 <quiet-color-input 
   label="Select a color"
-  value="#ce2380cc" 
+  value="#ce238088" 
   with-opacity
 ></quiet-color-input>
 ```
@@ -54,8 +62,8 @@ Use the `format` attribute to set the format of the value. Valid options include
 
 ```html {.example}
 <quiet-color-input 
-  label="RGB color input"
-  value="#ffcc00"
+  label="Select a color (RGB)"
+  value="rgb(255, 204, 0)"
   format="rgb"
 ></quiet-color-input>
 ```
@@ -66,7 +74,7 @@ Color inputs support multiple visual styles through the `appearance` attribute.
 
 ```html {.example}
 <quiet-color-input 
-  label="Normal appearance" 
+  label="Normal" 
   appearance="normal"
   value="#6366f1"
 ></quiet-color-input>
@@ -74,7 +82,7 @@ Color inputs support multiple visual styles through the `appearance` attribute.
 <br>
 
 <quiet-color-input 
-  label="Filled appearance" 
+  label="Filled" 
   appearance="filled"
   value="#6366f1"
 ></quiet-color-input>
@@ -82,7 +90,7 @@ Color inputs support multiple visual styles through the `appearance` attribute.
 <br>
 
 <quiet-color-input 
-  label="Unstyled appearance" 
+  label="Unstyled" 
   appearance="unstyled"
   value="#6366f1"
 ></quiet-color-input>
@@ -98,7 +106,7 @@ Color inputs can be rendered with pill-shaped edges by adding the `pill` attribu
 
 ### Sizes
 
-Use the `size` attribute to change the input's size.
+Use the `size` attribute to change the color input's size.
 
 ```html {.example}
 <quiet-color-input size="xs" label="Extra small"></quiet-color-input><br>
@@ -110,7 +118,7 @@ Use the `size` attribute to change the input's size.
 
 ### Disabling
 
-Add the `disabled` attribute to prevent user interaction.
+Use the `disabled` attribute to disable the color input.
 
 ```html {.example}
 <quiet-color-input 
@@ -134,6 +142,49 @@ Set the `swatches` attribute to one or more space-delimited hex colors or CSS co
     #6366f1 #a855f7 #d946ef #ec4899
   "
 ></quiet-color-input>
+```
+
+### Showing labels on the side
+
+With a bit of custom CSS, you can show labels on the side instead of on top of the color input.
+
+```html {.example}
+<div class="color-input__side-labels">
+  <quiet-color-input 
+    name="color" 
+    label="Brand color" 
+    description="Make it pop"
+  ></quiet-color-input>
+  <br>
+  <quiet-color-input 
+    name="color" 
+    label="Accent color" 
+    description="Complementary colors work well here"
+  ></quiet-color-input>
+</div>
+
+<style>
+  .color-input__side-labels {
+    quiet-color-input {
+      --label-width: 6rem; /* Change this to make more room for the label */
+
+      display: grid;
+      grid: auto / var(--label-width) 1fr;
+      gap: .25em;
+      align-items: center;    
+    }
+
+    quiet-color-input::part(label) {
+      text-align: end;
+    }
+
+    quiet-color-input::part(description) {
+      grid-column-start: 2;
+      order: 3;
+      margin-block: 0;
+    }
+  }
+</style>
 ```
 
 ### Validation
@@ -161,7 +212,7 @@ Use the `setCustomValidity()` method to make the color input invalid and show a 
   <quiet-color-input 
     name="color"
     label="Select a color"
-    description="This field will be invalid until the custom-validity attribute is removed"
+    description="This field will be invalid until custom validation is removed"
   ></quiet-color-input>
   <br>
   <quiet-button type="submit" variant="primary">Submit</quiet-button>

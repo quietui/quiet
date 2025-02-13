@@ -63,7 +63,7 @@ You can also group [switches](/docs/components/switch) in a checkbox group. For 
 
 ### Adding a required indicator
 
-Use the `required` attribute to show a required indicator in the checkbox group's label. This just adds a visual indicator. To perform validation, use the checkbox's `required` and/or `custom-validity` attributes.
+Use the `required` attribute to show a required indicator in the checkbox group's label. This just adds a visual indicator. To perform validation, use the checkbox's `required` attribute and/or `setCustomValidity()` method.
 
 ```html {.example}
 <form action="about:blank" method="get" target="_blank" id="checkbox-group__required">
@@ -72,7 +72,7 @@ Use the `required` attribute to show a required indicator in the checkbox group'
     description="Please select at least two items."
     required 
   >
-    <quiet-checkbox name="catnip" custom-validity="Select at least two items before continuing.">Catnip</quiet-checkbox>
+    <quiet-checkbox name="catnip">Catnip</quiet-checkbox>
     <quiet-checkbox name="food">Food</quiet-checkbox>
     <quiet-checkbox name="litter">Litter</quiet-checkbox>
     <quiet-checkbox name="treats">Treats</quiet-checkbox>
@@ -81,11 +81,17 @@ Use the `required` attribute to show a required indicator in the checkbox group'
   <quiet-button type="submit" variant="primary">Submit</quiet-button>
 </form>
 
-<script>
+<script type="module">
+  import { allDefined } from '/dist/quiet.js';
+
+  await allDefined();
+
   const form = document.getElementById('checkbox-group__required');
   const checkboxes = form.querySelectorAll('quiet-checkbox');
   const firstCheckbox = checkboxes[0];
-  const validationMessage = firstCheckbox.getAttribute('custom-validity');
+  const validationMessage = 'Select at least two items before continuing.';
+
+  firstCheckbox.setCustomValidity(validationMessage);
 
   // Listen for checkboxes to be checked
   form.addEventListener('quiet-input', () => {
@@ -93,9 +99,9 @@ Use the `required` attribute to show a required indicator in the checkbox group'
 
     // If less than two are checked, set the custom validation message. Otherwise, remove it.
     if (numChecked < 2) {
-      firstCheckbox.customValidity = validationMessage;
+      firstCheckbox.setCustomValidity(validationMessage);
     } else {
-      firstCheckbox.customValidity = '';
+      firstCheckbox.setCustomValidity('');
     }    
   });
 </script>

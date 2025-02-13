@@ -131,7 +131,6 @@ Use the `disabled` attribute to disable the text field.
 With a bit of custom CSS, you can show labels on the side instead of on top of the text field.
 
 ```html {.example}
-
 <div class="text-field__side-labels">
   <quiet-text-field name="name" label="Name" description="What do people call you?"></quiet-text-field>
   <br>
@@ -179,24 +178,30 @@ A number of attributes can be used to enable validation using the [Constraint Va
 
 ### Using custom validation
 
-Use the `custom-validity` attribute to make the text field invalid and show a custom error message on submit. This will override all other validation parameters. To clear the error, remove the attribute or set it to an empty string.
+Use the `setCustomValidity()` method to make the text field invalid and show a custom error message on submit. This will override all other validation parameters. To clear the error, remove the attribute or set it to an empty string.
 
 ```html {.example}
-<form action="about:blank" method="get" target="_blank">
+<form action="about:blank" method="get" target="_blank" id="text-field__custom-validation">
   <quiet-text-field 
     name="name"
     label="Name"
-    description="This field will be invalid until the custom-validity attribute is removed"
-    custom-validity="Not so fast, bubba!"
+    description="This field will be invalid until custom validation is removed"
   ></quiet-text-field>
   <br>
   <quiet-button type="submit" variant="primary">Submit</quiet-button>
 </form>
-```
 
-:::info
-Most validation attributes work exactly like their native counterparts. However, the `custom-validity` attribute is offered in lieu of the `setCustomValidity()` method. This allows you to declaratively set custom errors instead of having to call a method with JavaScript.
-:::
+<script type="module">
+  import { allDefined } from '/dist/quiet.js';
+
+  await allDefined();
+
+  const form = document.getElementById('text-field__custom-validation');
+  const textField = form.querySelector('quiet-text-field');
+
+  textField.setCustomValidity('Not so fast, bubba!');
+</script>
+```
 
 ### Styling validation
 

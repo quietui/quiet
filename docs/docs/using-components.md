@@ -167,7 +167,7 @@ You can insert more than one item into a named slot. For example, this card has 
 
 ```html {.example .no-buttons}
 <quiet-card style="max-width: 340px;">
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  The sleepy tabby cat stretched languidly in the sunbeam, her whiskers twitching as she dreamed of chasing mice and climbing curtains with boundless energy.
 
   <quiet-button slot="footer" variant="primary">Primary</quiet-button>
   <quiet-button slot="footer">Default</quiet-button>

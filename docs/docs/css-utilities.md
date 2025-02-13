@@ -18,95 +18,27 @@ To add the CSS utilities to your app, add the following markup to the `<head>` o
 <link rel="stylesheet" href="{% cdnUrl '/dist/themes/utilities.css' %}">
 ```
 
-## Flex utilities [experimental]
+## Flex utilities
 
-Flex utilities let you create rows and columns with consistent spacing and without extra styles.
-
-### Inline
-
-To create a horizontal flex container that wraps, use the `quiet-inline-{size}` class where `{size}` is `0`, `xs`, `sm`, `md`, `lg`, or `xl`.
+The `quiet-inline` class creates a flex row that wraps when necessary. Use the `gap` property to adjust the spacing between items.
 
 ```html {.example}
-<div class="quiet-inline-0" style="margin-block-end: .5rem;">
-  <div class="box">0</div>
-  <div class="box">0</div>
-  <div class="box">0</div>
-  <div class="box">0</div>
-</div>
-<div class="quiet-inline-xs" style="margin-block-end: .5rem;">
-  <div class="box">xs</div>
-  <div class="box">xs</div>
-  <div class="box">xs</div>
-  <div class="box">xs</div>
-</div>
-<div class="quiet-inline-sm" style="margin-block-end: .5rem;">
-  <div class="box">sm</div>
-  <div class="box">sm</div>
-  <div class="box">sm</div>
-  <div class="box">sm</div>
-</div>
-<div class="quiet-inline-md" style="margin-block-end: .5rem;">
-  <div class="box">md</div>
-  <div class="box">md</div>
-  <div class="box">md</div>
-  <div class="box">md</div>
-</div>
-<div class="quiet-inline-lg" style="margin-block-end: .5rem;">
-  <div class="box">lg</div>
-  <div class="box">lg</div>
-  <div class="box">lg</div>
-  <div class="box">lg</div>
-</div>
-<div class="quiet-inline-xl">
-  <div class="box">xl</div>
-  <div class="box">xl</div>
-  <div class="box">xl</div>
-  <div class="box">xl</div>
+<div class="quiet-inline">
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
 </div>
 ```
 
-### Stack
-
-To create a vertical flex container, use the `quiet-stack-{size}` class where `{size}` is `0`, `xs`, `sm`, `md`, `lg`, or `xl`.
+Similarly, the `quiet-stack` class creates a flex column. Use the `gap` property to adjust the spacing between items.
 
 ```html {.example}
-<div class="quiet-inline-sm">
-  <div class="quiet-stack-0">
-    <div class="box">0</div>
-    <div class="box">0</div>
-    <div class="box">0</div>
-    <div class="box">0</div>
-  </div>
-  <div class="quiet-stack-xs">
-    <div class="box">xs</div>
-    <div class="box">xs</div>
-    <div class="box">xs</div>
-    <div class="box">xs</div>
-  </div>
-  <div class="quiet-stack-sm">
-    <div class="box">sm</div>
-    <div class="box">sm</div>
-    <div class="box">sm</div>
-    <div class="box">sm</div>
-  </div>
-  <div class="quiet-stack-md">
-    <div class="box">md</div>
-    <div class="box">md</div>
-    <div class="box">md</div>
-    <div class="box">md</div>
-  </div>
-  <div class="quiet-stack-lg">
-    <div class="box">lg</div>
-    <div class="box">lg</div>
-    <div class="box">lg</div>
-    <div class="box">lg</div>
-  </div>
-  <div class="quiet-stack-xl">
-    <div class="box">xl</div>
-    <div class="box">xl</div>
-    <div class="box">xl</div>
-    <div class="box">xl</div>
-  </div>
+<div class="quiet-stack">
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
 </div>
 ```
 

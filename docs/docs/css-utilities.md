@@ -18,7 +18,7 @@ To add the CSS utilities to your app, add the following markup to the `<head>` o
 <link rel="stylesheet" href="{% cdnUrl '/dist/themes/utilities.css' %}">
 ```
 
-### Side labels
+## Side labels
 
 Add `class="quiet-side-label"` to any Quiet form control that has a label, description, and text box to move the label to the side. To change the width of the label, set the `--label-width` custom property on the respective elements.
 
@@ -68,7 +68,7 @@ Add `class="quiet-side-label"` to any Quiet form control that has a label, descr
 The `quiet-side-label` class doesn't work on native form controls.
 :::
 
-### Visually hidden
+## Visually hidden
 
 Visually hidden classes provide ways to hide content from the screen while maintaining accessibility for assistive technologies.
 

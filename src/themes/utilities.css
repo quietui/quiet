@@ -1,33 +1,113 @@
-/* Side label utility */
-.quiet-side-label {
-  --label-width: 10ch;
+@layer quiet {
+  /*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  //  Side label
+  //
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
-  display: grid;
-  grid: auto / var(--label-width) 1fr;
-  align-items: center;
-  gap: 0.25em 1em;
+  /* Side label utility */
+  .quiet-side-label {
+    --label-width: 10ch;
 
-  &::part(label) {
-    max-width: none;
-    text-align: end;
+    display: grid;
+    grid: auto / var(--label-width) 1fr;
+    align-items: center;
+    gap: 0.25em 1em;
+
+    &::part(label) {
+      max-width: none;
+      text-align: end;
+    }
+
+    &::part(description) {
+      grid-column-start: 2;
+      order: 3;
+      margin-block: 0;
+    }
   }
 
-  &::part(description) {
-    grid-column-start: 2;
-    order: 3;
-    margin-block: 0;
-  }
-}
+  /*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  //  Visual hidden
+  //
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
-/* Visual hidden utilities */
-.quiet-vh,
-.quiet-vh-focusable:not(:focus-within),
-.quiet-vh-label::part(label),
-.quiet-vh-description::part(description) {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  white-space: nowrap;
-  clip-path: inset(50%);
+  .quiet-vh,
+  .quiet-vh-focusable:not(:focus-within),
+  .quiet-vh-label::part(label),
+  .quiet-vh-description::part(description) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    white-space: nowrap;
+    clip-path: inset(50%);
+  }
+
+  /*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  //  Flex utilities
+  //
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+  /* Flex stack */
+  [class*='quiet-stack'] {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .quiet-stack-0 {
+    gap: 0;
+  }
+
+  .quiet-stack-xs {
+    gap: 0.25rem;
+  }
+
+  .quiet-stack-sm {
+    gap: 0.5rem;
+  }
+
+  .quiet-stack-md {
+    gap: 1rem;
+  }
+
+  .quiet-stack-lg {
+    gap: 1.5rem;
+  }
+
+  .quiet-stack-xl {
+    gap: 2rem;
+  }
+
+  /* Flex inline */
+  [class*='quiet-inline'] {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .quiet-inline-0 {
+    gap: 0;
+  }
+
+  .quiet-inline-xs {
+    gap: 0.25rem;
+  }
+
+  .quiet-inline-sm {
+    gap: 0.5rem;
+  }
+
+  .quiet-inline-md {
+    gap: 1rem;
+  }
+
+  .quiet-inline-lg {
+    gap: 1.5rem;
+  }
+
+  .quiet-inline-xl {
+    gap: 2rem;
+  }
 }

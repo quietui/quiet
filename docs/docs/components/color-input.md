@@ -56,6 +56,19 @@ Add the `with-opacity` attribute to allow users to adjust color transparency. He
 ></quiet-color-input>
 ```
 
+### Adding a clear button
+
+To add a clear button to the color input, use the `clearable` attribute. The `quiet-input` event will be emitted when the clear button is activated.
+
+```html {.example}
+<quiet-color-input 
+  label="Select a color"
+  name="color"
+  value="#21b8bc" 
+  clearable
+></quiet-color-input>
+```
+
 ### Setting the format
 
 Use the `format` attribute to set the format of the value. Valid options include `hex` (default), `rgb,` and `hsl`.

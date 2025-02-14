@@ -1,7 +1,7 @@
 import type { QuietTransitionAnimation } from '@quietui/scurry';
 import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html, render } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import type { QuietContentChangedEvent } from '../../events/content.js';
 import { QuietCloseEvent, QuietClosedEvent } from '../../events/open-close.js';
@@ -53,14 +53,14 @@ export class QuietToast extends QuietElement {
 
   private isStackShowing = false;
 
+  @query('#stack') stack: QuietTransitionGroup;
+  @query('quiet-transition-group') transitionGroup: QuietTransitionGroup;
+
   /**
    * A custom animation to use for enter/exit transitions. This gets passed through to the internal transition group.
    * Works well with animations from `@quietui/scurry`. (Property only)
    */
-  public transitionAnimation?: QuietTransitionAnimation;
-
-  @query('#stack') stack: QuietTransitionGroup;
-  @query('quiet-transition-group') transitionGroup: QuietTransitionGroup;
+  @state() public transitionAnimation?: QuietTransitionAnimation;
 
   /** The placement of the toast stack on the screen. */
   @property({ reflect: true }) placement:

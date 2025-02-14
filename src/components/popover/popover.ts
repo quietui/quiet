@@ -2,7 +2,12 @@ import { arrow, autoUpdate, computePosition, flip, offset, shift } from '@floati
 import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
-import { QuietClosedEvent, QuietCloseEvent, QuietOpenedEvent, QuietOpenEvent } from '../../events/open-close.js';
+import {
+  QuietBeforeCloseEvent,
+  QuietBeforeOpenEvent,
+  QuietCloseEvent,
+  QuietOpenEvent
+} from '../../events/open-close.js';
 import hostStyles from '../../styles/host.styles.js';
 import { animateWithClass } from '../../utilities/animate.js';
 import { createId } from '../../utilities/math.js';
@@ -23,10 +28,10 @@ const openPopovers = new Set<QuietPopover>();
  * @slot - The popover's content. Do not include interactive elements such as button, links, etc. as they won't be
  *  accessible to users inside the popover.
  *
- * @event quiet-open - Emitted when the popover is instructed to open but before it is shown.
- * @event quiet-opened - Emitted when the popover has opened and the animation has completed.
- * @event quiet-close - Emitted when the popover is dismissed but before it is hidden.
- * @event quiet-closed - Emitted when the popover has closed. and the animation has completed.
+ * @event quiet-before-open - Emitted when the popover is instructed to open but before it is shown.
+ * @event quiet-open - Emitted when the popover has opened and the animation has completed.
+ * @event quiet-before-close - Emitted when the popover is dismissed but before it is hidden.
+ * @event quiet-close - Emitted when the popover has closed. and the animation has completed.
  *
  * @cssproperty [--arrow-size=0.3125rem] - The size of the arrow. Set this to `0` to hide the arrow.
  * @cssproperty [--max-width=25rem] - The maximum width the popover be before wrapping.
@@ -181,7 +186,7 @@ export class QuietPopover extends QuietElement {
       return;
     }
 
-    const openEvent = new QuietOpenEvent();
+    const openEvent = new QuietBeforeOpenEvent();
     this.dispatchEvent(openEvent);
     if (openEvent.defaultPrevented) {
       this.open = false;
@@ -213,12 +218,12 @@ export class QuietPopover extends QuietElement {
     });
 
     await animateWithClass(this.dialog, 'show');
-    this.dispatchEvent(new QuietOpenedEvent());
+    this.dispatchEvent(new QuietOpenEvent());
   }
 
   /** Hides the popover. This should only be called from within updated(). */
   private async hide() {
-    const closeEvent = new QuietCloseEvent({ source: this });
+    const closeEvent = new QuietBeforeCloseEvent({ source: this });
     this.dispatchEvent(closeEvent);
     if (closeEvent.defaultPrevented) {
       this.open = true;
@@ -235,7 +240,7 @@ export class QuietPopover extends QuietElement {
       await animateWithClass(this.dialog, 'hide');
       this.dialog.classList.remove('visible');
       this.dialog.hidePopover();
-      this.dispatchEvent(new QuietClosedEvent());
+      this.dispatchEvent(new QuietCloseEvent());
     }
 
     if (this.cleanup) {

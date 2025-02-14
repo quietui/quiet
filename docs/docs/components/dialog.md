@@ -250,7 +250,7 @@ To move focus to a specific form control when the dialog opens, add the [`autofo
 
 ### Preventing the dialog from closing
 
-You can stop the dialog from closing by preventing the `quiet-close` event. The dialog will briefly animate to draw the user's attention.
+You can stop the dialog from closing by preventing the `quiet-before-close` event. The dialog will briefly animate to draw the user's attention.
 
 You can check `event.detail.source` to see which element triggered the dialog to close, such as a button. If the source is the dialog itself, you can assume that the user has pressed [[Escape]] or the dialog has been closed programmatically.
 
@@ -277,7 +277,7 @@ You can check `event.detail.source` to see which element triggered the dialog to
   const dialog = document.getElementById('dialog__prevent');
   const closeButton = dialog.querySelector('quiet-button:last-of-type');
 
-  dialog.addEventListener('quiet-close', event => {
+  dialog.addEventListener('quiet-before-close', event => {
     if (event.detail.source !== closeButton) {
       event.preventDefault();
     }

@@ -22,8 +22,8 @@ import styles from './toast-item.styles.js';
  * @slot - Content to show in the toast item.
  * @slot icon - Content to show as a visual. Usually an icon, image, avatar, etc.
  *
- * @event quiet-close - Emitted when the toast item is dismissed.
- * @event quiet-closed - Emitted after the toast has been dismissed and the hide animation has completed.
+ * @event quiet-before-close - Emitted when the toast item is dismissed.
+ * @event quiet-close - Emitted after the toast has been dismissed and the hide animation has completed.
  *
  * @csspart icon
  * @csspart content

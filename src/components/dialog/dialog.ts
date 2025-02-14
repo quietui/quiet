@@ -2,7 +2,12 @@ import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { QuietClosedEvent, QuietCloseEvent, QuietOpenedEvent, QuietOpenEvent } from '../../events/open-close.js';
+import {
+  QuietBeforeCloseEvent,
+  QuietBeforeOpenEvent,
+  QuietCloseEvent,
+  QuietOpenEvent
+} from '../../events/open-close.js';
 import hostStyles from '../../styles/host.styles.js';
 import { animateWithClass } from '../../utilities/animate.js';
 import { Localize } from '../../utilities/localize.js';
@@ -27,14 +32,14 @@ import styles from './dialog.styles.js';
  *  available when the header is enabled.
  * @slot footer - Content to place in the dialog's footer.
  *
- * @event quiet-open - Emitted when the dialog is instructed to open but before it is shown. Calling
+ * @event quiet-before-open - Emitted when the dialog is instructed to open but before it is shown. Calling
  *  `event.preventDefault()` will prevent the dialog from opening.
- * @event quiet-opened - Emitted after the dialog has been opened and the show animation has completed.
- * @event quiet-close - Emitted when the dialog is dismissed. Calling `event.preventDefault()` will prevent the dialog
- *  from closing and show a brief animation.<br><br>You can check `event.detail.source` to see which element triggered
- *  the dialog to close, such as a button. If the source is the dialog itself, the user has pressed [[Escape]] or the
- *  dialog has been closed programmatically.
- * @event quiet-closed - Emitted after the dialog has been closed and the hide animation has completed.
+ * @event quiet-open - Emitted after the dialog has been opened and the show animation has completed.
+ * @event quiet-before-close - Emitted when the dialog is dismissed. Calling `event.preventDefault()` will prevent the
+ *  dialog from closing and show a brief animation.<br><br>You can check `event.detail.source` to see which element
+ *  triggered the dialog to close, such as a button. If the source is the dialog itself, the user has pressed [[Escape]]
+ *  or the dialog has been closed programmatically.
+ * @event quiet-close - Emitted after the dialog has been closed and the hide animation has completed.
  *
  * @cssproperty [--height=fit-content] - The default height of the dialog. Note that dialogs shrink to fit as necessary.
  * @cssproperty [--show-duration=200ms] - The duration of the show/hide animation.
@@ -124,7 +129,7 @@ export class QuietDialog extends QuietElement {
 
   /** Call this to show the dialog. */
   private async show() {
-    const openEvent = new QuietOpenEvent();
+    const openEvent = new QuietBeforeOpenEvent();
     this.dispatchEvent(openEvent);
     if (openEvent.defaultPrevented) {
       return;
@@ -145,12 +150,12 @@ export class QuietDialog extends QuietElement {
     });
 
     await animateWithClass(this.dialog, 'show');
-    this.dispatchEvent(new QuietOpenedEvent());
+    this.dispatchEvent(new QuietOpenEvent());
   }
 
   /** Call this to ask the dialog to close. */
   private async requestClose(source: Element) {
-    const closeEvent = new QuietCloseEvent({ source });
+    const closeEvent = new QuietBeforeCloseEvent({ source });
     this.dispatchEvent(closeEvent);
 
     if (closeEvent.defaultPrevented) {
@@ -169,7 +174,7 @@ export class QuietDialog extends QuietElement {
       this.dialog.close();
       this.open = false;
       this.customStates.set('open', false);
-      this.dispatchEvent(new QuietClosedEvent());
+      this.dispatchEvent(new QuietCloseEvent());
     }
   }
 

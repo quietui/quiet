@@ -41,7 +41,7 @@ function show() {
   searchBox.addEventListener('quiet-input', handleInput);
   results.addEventListener('click', handleSelection);
   dialog.addEventListener('keydown', handleKeyDown);
-  dialog.addEventListener('quiet-closed', handleClosed);
+  dialog.addEventListener('quiet-close', handleClose);
   dialog.open = true;
 }
 
@@ -51,11 +51,11 @@ function hide() {
   searchBox.removeEventListener('quiet-input', handleInput);
   results.removeEventListener('click', handleSelection);
   dialog.removeEventListener('keydown', handleKeyDown);
-  dialog.removeEventListener('quiet-closed', handleClosed);
+  dialog.removeEventListener('quiet-close', handleClose);
   dialog.open = false;
 }
 
-function handleClosed() {
+function handleClose() {
   const { searchBox } = getElements();
 
   searchBox.value = '';

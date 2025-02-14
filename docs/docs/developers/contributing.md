@@ -211,7 +211,7 @@ Modal elements that feature a visible backdrop, such as dialogs, should not have
 
 ### Naming events
 
-Open, close, and similar events should be named present tense, e.g. `quiet-open` and `quiet-close`. When it makes sense, they should be cancelable which will prevent the component from opening or closing. After opening or closing, and after all animations are complete, a past tense version of the event should be emitted, e.g. `quiet-opened` and `quiet-closed`.
+Open, close, and similar events should be named present tense, e.g. `quiet-open` and `quiet-close`. When animating, a `quiet-before-*` event should be dispatched that, when canceled, will prevent the action from completing.
 
 ### Data attribute invokers
 

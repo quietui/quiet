@@ -1,7 +1,7 @@
 import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
-import { QuietFlipEvent, QuietFlippedEvent } from '../../events/flip.js';
+import { QuietBeforeFlipEvent, QuietFlipEvent } from '../../events/flip.js';
 import hostStyles from '../../styles/host.styles.js';
 import { parseSpaceDelimitedTokens } from '../../utilities/parse.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
@@ -19,9 +19,9 @@ import styles from './flip-card.styles.js';
  * @slot - The content to show on the front of the card.
  * @slot back - The content to show on the back of the card.
  *
- * @event quiet-flip - Emitted when the flip card is instructed to flip but before it actually flips. Calling
+ * @event quiet-before-flip - Emitted when the flip card is instructed to flip but before it actually flips. Calling
  *  `event.preventDefault()` will prevent the flip card from flipping.
- * @event quiet-flipped - Emitted after the flip card has been flipped and the animation has completed.
+ * @event quiet-flip - Emitted after the flip card has been flipped and the animation has completed.
  *
  * @cssproperty [--flip-duration=0.6s] - The duration of the card flip animation.
  * @cssproperty [--flip-easing=cubic-bezier(0.4, 0.0, 0.2, 1)] - The easing to use for the flip animation.
@@ -65,7 +65,7 @@ export class QuietFlipCard extends QuietElement {
 
     // Handle flips
     if (!this.isFirstUpdate && changedProperties.has('flipped')) {
-      const flipEvent = new QuietFlipEvent();
+      const flipEvent = new QuietBeforeFlipEvent();
       this.dispatchEvent(flipEvent);
 
       // The event was canceled, revert and skip the next update
@@ -89,7 +89,7 @@ export class QuietFlipCard extends QuietElement {
       }
 
       // Dispatch `quiet-flipped` when the transition is done
-      this.addEventListener('transitionend', () => this.dispatchEvent(new QuietFlippedEvent()), { once: true });
+      this.addEventListener('transitionend', () => this.dispatchEvent(new QuietFlipEvent()), { once: true });
     }
 
     this.isFirstUpdate = false;

@@ -3,7 +3,12 @@ import { autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/d
 import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
-import { QuietClosedEvent, QuietCloseEvent, QuietOpenedEvent, QuietOpenEvent } from '../../events/open-close.js';
+import {
+  QuietBeforeCloseEvent,
+  QuietBeforeOpenEvent,
+  QuietCloseEvent,
+  QuietOpenEvent
+} from '../../events/open-close.js';
 import { QuietSelectEvent } from '../../events/select.js';
 import hostStyles from '../../styles/host.styles.js';
 import { animateWithClass } from '../../utilities/animate.js';
@@ -31,10 +36,10 @@ const openDropdowns = new Set<QuietDropdown>();
  * @slot - One or more `<dropdown-item>` elements to show in the dropdown. You can also use `<quiet-divider>` here.
  * @slot trigger - The dropdown's trigger. Must be a `<quiet-button>` or `<button>` element.
  *
- * @event quiet-open - Emitted when the dropdown is instructed to open but before it is shown.
- * @event quiet-opened - Emitted when the dropdown menu has opened and the animation has completed.
- * @event quiet-close - Emitted when the dropdown is dismissed but before it is hidden.
- * @event quiet-closed - Emitted when the dropdown menu has closed and the animation has completed.
+ * @event quiet-before-open - Emitted when the dropdown is instructed to open but before it is shown.
+ * @event quiet-open - Emitted when the dropdown menu has opened and the animation has completed.
+ * @event quiet-before-close - Emitted when the dropdown is dismissed but before it is hidden.
+ * @event quiet-close - Emitted when the dropdown menu has closed and the animation has completed.
  * @event quiet-select - Emitted when a dropdown item has been selected. You can inspect `event.detail.item` to see the
  *  `<quiet-dropdown-item>` that was selected. Calling `event.preventDefault()` will keep the dropdown open.
  *
@@ -154,7 +159,7 @@ export class QuietDropdown extends QuietElement {
     const anchor = this.contextMenu ? this.contextMenuVirtualElement : this.getTrigger();
     if (!anchor) return;
 
-    const openEvent = new QuietOpenEvent();
+    const openEvent = new QuietBeforeOpenEvent();
     this.dispatchEvent(openEvent);
     if (openEvent.defaultPrevented) {
       this.open = false;
@@ -176,12 +181,12 @@ export class QuietDropdown extends QuietElement {
     this.menu.hidden = false;
     this.cleanup = autoUpdate(anchor, this.menu, () => this.reposition());
     await animateWithClass(this.menu, 'show');
-    this.dispatchEvent(new QuietOpenedEvent());
+    this.dispatchEvent(new QuietOpenEvent());
   }
 
   /** Hides the dropdown menu. This should only be called from within updated(). */
   private async hideMenu() {
-    const closeEvent = new QuietCloseEvent({ source: this });
+    const closeEvent = new QuietBeforeCloseEvent({ source: this });
     this.dispatchEvent(closeEvent);
     if (closeEvent.defaultPrevented) {
       this.open = true;
@@ -200,7 +205,7 @@ export class QuietDropdown extends QuietElement {
       await animateWithClass(this.menu, 'hide');
       this.menu.hidden = true;
       this.menu.hidePopover();
-      this.dispatchEvent(new QuietClosedEvent());
+      this.dispatchEvent(new QuietCloseEvent());
     }
 
     if (this.cleanup) {

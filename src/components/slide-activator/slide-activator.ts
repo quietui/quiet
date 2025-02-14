@@ -5,9 +5,9 @@ import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import {
   QuietActivateEvent,
-  QuietActivatedEvent,
-  QuietDeactivateEvent,
-  QuietDeactivatedEvent
+  QuietBeforeActivateEvent,
+  QuietBeforeDeactivateEvent,
+  QuietDeactivateEvent
 } from '../../events/activate.js';
 import { QuietProgressEvent } from '../../events/progress.js';
 import hostStyles from '../../styles/host.styles.js';
@@ -34,12 +34,12 @@ import styles from './slide-activator.styles.js';
  *  attribute instead.
  * @slot thumb - The thumb element that users drag. Defaults to a double chevron icon if not provided.
  *
- * @event quiet-activate - Emitted when the control will activate. Calling `event.preventDefault()` will prevent the
- *  activation from occurring.
- * @event quiet-activated - Emitted immediately after the control is activated.
- * @event quiet-deactivate - Emitted when the control will deactivate. Calling `event.preventDefault()` will prevent the
- *  deactivation from occurring.
- * @event quiet-deactivated - Emitted immediately after the control is deactivated.
+ * @event quiet-before-activate - Emitted when the control will activate. Calling `event.preventDefault()` will prevent
+ *  the activation from occurring.
+ * @event quiet-activate - Emitted immediately after the control is activated.
+ * @event quiet-before-deactivate - Emitted when the control will deactivate. Calling `event.preventDefault()` will
+ *  prevent the deactivation from occurring.
+ * @event quiet-deactivate - Emitted immediately after the control is deactivated.
  *
  * @csspart thumb - The slide activator's thumb.
  * @csspart label - The slide activator's label.
@@ -170,10 +170,10 @@ export class QuietSlideActivator extends QuietElement {
 
   /** Attempts to activate the component. */
   private activate() {
-    // Dispatch the cancelable `quiet-activate` event
-    const activateEvent = new QuietActivateEvent();
-    this.dispatchEvent(activateEvent);
-    if (activateEvent.defaultPrevented) {
+    // Dispatch the cancelable `quiet-before-activate` event
+    const beforeActivateEvent = new QuietBeforeActivateEvent();
+    this.dispatchEvent(beforeActivateEvent);
+    if (beforeActivateEvent.defaultPrevented) {
       this.activated = false;
       return;
     }
@@ -185,18 +185,18 @@ export class QuietSlideActivator extends QuietElement {
     this.activated = true;
     this.customStates.set('activated', true);
 
-    // Dispatch the `quiet-activated` event
+    // Dispatch the `quiet-activate` event
     requestAnimationFrame(() => {
-      this.dispatchEvent(new QuietActivatedEvent());
+      this.dispatchEvent(new QuietActivateEvent());
     });
   }
 
   /** Restores the control to its original deactivated state. */
   private deactivate() {
     // Dispatch the cancelable `quiet-activate` event
-    const deactivateEvent = new QuietDeactivateEvent();
-    this.dispatchEvent(deactivateEvent);
-    if (deactivateEvent.defaultPrevented) {
+    const beforeDeactivateEvent = new QuietBeforeDeactivateEvent();
+    this.dispatchEvent(beforeDeactivateEvent);
+    if (beforeDeactivateEvent.defaultPrevented) {
       this.activated = true;
       return;
     }
@@ -209,7 +209,7 @@ export class QuietSlideActivator extends QuietElement {
 
     // Dispatch the `quiet-deactivated` event
     requestAnimationFrame(() => {
-      this.dispatchEvent(new QuietDeactivatedEvent());
+      this.dispatchEvent(new QuietDeactivateEvent());
     });
   }
 

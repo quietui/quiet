@@ -4,7 +4,7 @@ import { html, render } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import type { QuietContentChangedEvent } from '../../events/content.js';
-import { QuietCloseEvent, QuietClosedEvent } from '../../events/open-close.js';
+import { QuietBeforeCloseEvent, QuietCloseEvent } from '../../events/open-close.js';
 import hostStyles from '../../styles/host.styles.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import '../toast-item/toast-item.js';
@@ -103,9 +103,9 @@ export class QuietToast extends QuietElement {
     mutations.forEach(mutation => {
       mutation.removedNodes.forEach(async node => {
         if (node instanceof Element && node.localName === 'quiet-toast-item') {
-          node.dispatchEvent(new QuietCloseEvent({ source: null }, { cancelable: false }));
+          node.dispatchEvent(new QuietBeforeCloseEvent({ source: null }, { cancelable: false }));
           await this.stack.transitionComplete();
-          node.dispatchEvent(new QuietClosedEvent());
+          node.dispatchEvent(new QuietCloseEvent());
         }
       });
     });

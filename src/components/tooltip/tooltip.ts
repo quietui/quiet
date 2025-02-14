@@ -2,7 +2,12 @@ import { arrow, autoUpdate, computePosition, flip, offset, shift } from '@floati
 import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
-import { QuietClosedEvent, QuietCloseEvent, QuietOpenedEvent, QuietOpenEvent } from '../../events/open-close.js';
+import {
+  QuietBeforeCloseEvent,
+  QuietBeforeOpenEvent,
+  QuietCloseEvent,
+  QuietOpenEvent
+} from '../../events/open-close.js';
 import hostStyles from '../../styles/host.styles.js';
 import { animateWithClass } from '../../utilities/animate.js';
 import { createId } from '../../utilities/math.js';
@@ -22,10 +27,10 @@ const openTooltips = new Set<QuietTooltip>();
  * @slot - The tooltip's content. Do not include interactive elements such as button, links, etc. as they won't be
  *  accessible to users inside the tooltip.
  *
- * @event quiet-open - Emitted when the tooltip is instructed to open but before it is shown.
- * @event quiet-opened - Emitted when the tooltip has opened and the animation has completed.
- * @event quiet-close - Emitted when the tooltip is dismissed but before it is hidden.
- * @event quiet-closed - Emitted when the tooltip has closed. and the animation has completed.
+ * @event quiet-before-open - Emitted when the tooltip is instructed to open but before it is shown.
+ * @event quiet-open - Emitted when the tooltip has opened and the animation has completed.
+ * @event quiet-before-close - Emitted when the tooltip is dismissed but before it is hidden.
+ * @event quiet-close - Emitted when the tooltip has closed. and the animation has completed.
  *
  * @cssproperty [--arrow-size=0.3125rem] - The size of the arrow. Set this to `0` to hide the arrow.
  * @cssproperty [--max-width=20rem] - The maximum width the tooltip can be before wrapping.
@@ -183,7 +188,7 @@ export class QuietTooltip extends QuietElement {
       return;
     }
 
-    const openEvent = new QuietOpenEvent();
+    const openEvent = new QuietBeforeOpenEvent();
     this.dispatchEvent(openEvent);
     if (openEvent.defaultPrevented) {
       this.open = false;
@@ -212,12 +217,12 @@ export class QuietTooltip extends QuietElement {
     this.tooltip.classList.add('visible');
     this.cleanup = autoUpdate(this.anchor, this.tooltip, () => this.reposition());
     await animateWithClass(this.tooltip, 'show');
-    this.dispatchEvent(new QuietOpenedEvent());
+    this.dispatchEvent(new QuietOpenEvent());
   }
 
   /** Hides the tooltip. This should only be called from within updated(). */
   private async hide() {
-    const closeEvent = new QuietCloseEvent({ source: this });
+    const closeEvent = new QuietBeforeCloseEvent({ source: this });
     this.dispatchEvent(closeEvent);
     if (closeEvent.defaultPrevented) {
       this.open = true;
@@ -240,7 +245,7 @@ export class QuietTooltip extends QuietElement {
       await animateWithClass(this.tooltip, 'hide');
       this.tooltip.classList.remove('visible');
       this.tooltip.hidePopover();
-      this.dispatchEvent(new QuietClosedEvent());
+      this.dispatchEvent(new QuietCloseEvent());
     }
 
     if (this.cleanup) {

@@ -22,9 +22,6 @@ import styles from './tab.styles.js';
 export class QuietTab extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
-  // Automatically slot tabs into the "tab" slot of the tab list
-  public slot = 'tab';
-
   /** @internal The controller will set this property to true when the tab is active. */
   @property({ type: Boolean }) active = false;
 
@@ -42,6 +39,7 @@ export class QuietTab extends QuietElement {
     this.setAttribute('aria-selected', 'false');
     this.setAttribute('aria-disabled', 'false');
     this.setAttribute('tabindex', '-1');
+    this.setAttribute('slot', 'tab'); // automatically slot it into the tab list's `tab` slot
   }
 
   disconnectedCallback() {

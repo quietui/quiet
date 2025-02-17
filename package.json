@@ -14,6 +14,9 @@
     "./components/*": "./dist/components/*",
     "./custom-elements.json": "./dist/custom-elements.json"
   },
+  "files": [
+    "dist"
+  ],
   "keywords": [
     "components",
     "custom elements",
@@ -36,9 +39,9 @@
     "url": "https://github.com/sponsors/quietui"
   },
   "scripts": {
-    "start": "node scripts/build.js --develop --bundle",
+    "start": "node scripts/build.js --develop --browser",
     "build": "node scripts/build.js",
-    "build:browser": "node scripts/build.js --bundle",
+    "build:browser": "node scripts/build.js --browser",
     "build:vercel": "npm run build:browser && cp -r dist _site/dist",
     "create": "plop --plopfile src/plop/plopfile.js",
     "prepare": "npx playwright install",

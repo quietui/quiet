@@ -13,6 +13,7 @@ import { fileURLToPath } from 'url';
 import { distDir, docsDir, rootDir, runScript, siteDir } from './utils.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
+const isBundling = process.argv.includes('--bundle');
 const isDeveloping = process.argv.includes('--develop');
 const iconDir = join(distDir, 'assets/icons');
 const spinner = ora({ text: 'Quiet UI', color: 'magenta' }).start();
@@ -148,7 +149,7 @@ async function generateBuild() {
     define: {
       'process.env.NODE_ENV': '"production"' // required by Floating UI
     },
-    bundle: true,
+    bundle: isBundling,
     legalComments: 'none',
     splitting: true
   };

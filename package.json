@@ -36,9 +36,10 @@
     "url": "https://github.com/sponsors/quietui"
   },
   "scripts": {
-    "start": "node scripts/build.js --develop",
+    "start": "node scripts/build.js --develop --bundle",
     "build": "node scripts/build.js",
-    "build:vercel": "npm run build && cp -r dist _site/dist",
+    "build:browser": "node scripts/build.js --bundle",
+    "build:vercel": "npm run build:browser && cp -r dist _site/dist",
     "create": "plop --plopfile src/plop/plopfile.js",
     "prepare": "npx playwright install",
     "test": "wtr --group default",

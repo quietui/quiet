@@ -3,7 +3,7 @@ import { css } from 'lit';
 export default css`
   #group {
     display: flex;
-    margin-block: 0.5rem;
+    margin-block-start: 0.5rem;
   }
 
   :host([orientation='horizontal']) #group {
@@ -13,6 +13,6 @@ export default css`
 
   :host([orientation='vertical']) #group {
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 0.5rem;
   }
 `;

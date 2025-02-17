@@ -41,7 +41,7 @@ const hasEyeDropper = 'EyeDropper' in window;
  * @csspart color-slider - The 2d color slider.
  * @csspart color-slider-thumb - The color slider's thumb.
  * @csspart controls - The container that wraps the sliders and preview.
- * @csspart sliders - The container that wraps the hue and opacity slider.
+ * @csspart sliders - The container that wraps the hue and alpha slider.
  * @csspart hue-slider - The slider that controls the color's hue.
  * @csspart hue-slider__label - The hue slider's `label` part.
  * @csspart hue-slider__description - The hue slider's `description` part.
@@ -49,13 +49,13 @@ const hasEyeDropper = 'EyeDropper' in window;
  * @csspart hue-slider__track - The hue slider's `track` part.
  * @csspart hue-slider__indicator - The hue slider's `indicator` part.
  * @csspart hue-slider__thumb - The hue slider's `thumb` part.
- * @csspart opacity-slider - The slider that controls the color's opacity.
- * @csspart opacity-slider__label - The opacity slider's `label` part.
- * @csspart opacity-slider__description - The opacity slider's `description` part.
- * @csspart opacity-slider__slider - The opacity slider's `slider` part.
- * @csspart opacity-slider__track - The opacity slider's `track` part.
- * @csspart opacity-slider__indicator - The opacity slider's `indicator` part.
- * @csspart opacity-slider__thumb - The opacity slider's `thumb` part.
+ * @csspart alpha-slider - The slider that controls the color's opacity.
+ * @csspart alpha-slider__label - The alpha slider's `label` part.
+ * @csspart alpha-slider__description - The alpha slider's `description` part.
+ * @csspart alpha-slider__slider - The alpha slider's `slider` part.
+ * @csspart alpha-slider__track - The alpha slider's `track` part.
+ * @csspart alpha-slider__indicator - The alpha slider's `indicator` part.
+ * @csspart alpha-slider__thumb - The alpha slider's `thumb` part.
  * @csspart eye-dropper-button - The eye dropper button, a `<quiet-button>` element.
  * @csspart preview-button - The button that shows a preview of the current color, a `<quiet-button>` element.
  * @csspart color-input - The color input text field, a `<quiet-text-field>` element.
@@ -124,8 +124,8 @@ export class QuietColorPicker extends QuietElement {
    */
   @property() swatches = '';
 
-  /** Enables the opacity slider. */
-  @property({ attribute: 'with-opacity', type: Boolean, reflect: true }) withOpacity = false;
+  /** Enables the alpha slider. */
+  @property({ attribute: 'with-alpha', type: Boolean, reflect: true }) withAlpha = false;
 
   /**
    * Enables the eye dropper button. Only available in
@@ -205,8 +205,8 @@ export class QuietColorPicker extends QuietElement {
       this.customStates.set('focused', this.hasFocus);
     }
 
-    // Handle opacity
-    if (changedProperties.has('withOpacity') && !this.withOpacity) {
+    // Handle alpha
+    if (changedProperties.has('withAlpha') && !this.withAlpha) {
       this.a = 1;
     }
 
@@ -237,7 +237,7 @@ export class QuietColorPicker extends QuietElement {
           this.value = color.toHslString();
           break;
         default:
-          this.value = this.withOpacity ? color.toHex8String() : color.toHexString();
+          this.value = this.withAlpha ? color.toHex8String() : color.toHexString();
           break;
       }
 
@@ -249,7 +249,7 @@ export class QuietColorPicker extends QuietElement {
     return this.localize.number(value.toFixed(0), { style: 'unit', unit: 'degree', unitDisplay: 'narrow' });
   }
 
-  private formatOpacity(value: number) {
+  private formatAlpha(value: number) {
     return this.localize.number(value, { style: 'percent' });
   }
 
@@ -407,7 +407,7 @@ export class QuietColorPicker extends QuietElement {
     }
   }
 
-  private async handleOpacitySliderInput(event: QuietInputEvent) {
+  private async handleAlphaSliderInput(event: QuietInputEvent) {
     event.stopImmediatePropagation();
     this.a = (event.target as QuietSlider).value;
 
@@ -523,9 +523,9 @@ export class QuietColorPicker extends QuietElement {
   render() {
     const isRtl = this.localize.dir() === 'rtl';
     const currentColor = new TinyColor({ h: this.h, s: this.s, v: this.v, a: this.a });
-    const colorWithoutOpacity = new TinyColor({ h: this.h, s: this.s, v: this.v, a: 1 });
+    const colorWithoutAlpha = new TinyColor({ h: this.h, s: this.s, v: this.v, a: 1 });
     const hueColor = new TinyColor({ h: this.h, s: 1, v: 1, a: 1 });
-    const opacityColor = `color-mix(in oklab, var(--quiet-silent), ${currentColor.toHexString()} ${this.a * 100}%);`;
+    const alphaColor = `color-mix(in oklab, var(--quiet-silent), ${currentColor.toHexString()} ${this.a * 100}%);`;
     const swatches = this.swatches.split(' ').filter(val => val.trim() !== '');
     const luminosityText = this.localize.term('percentLuminosity', this.localize.number(this.v, { style: 'percent' }));
     const saturationText = this.localize.term('percentSaturation', this.localize.number(this.s, { style: 'percent' }));
@@ -558,9 +558,9 @@ export class QuietColorPicker extends QuietElement {
         })}
         style="
           --current-color: ${currentColor.toHex8String()};
-          --current-color-without-opacity: ${colorWithoutOpacity.toHexString()};
+          --current-color-without-alpha: ${colorWithoutAlpha.toHexString()};
           --hue-thumb-color: ${hueColor.toHexString()};
-          --opacity-thumb-color: ${opacityColor};
+          --alpha-thumb-color: ${alphaColor};
         "
       >
         <div id="color-slider" part="color-slider" style="background-color: ${hueColor.toHexString()};">
@@ -570,7 +570,7 @@ export class QuietColorPicker extends QuietElement {
             style="
               top: ${this.colorSliderThumbY}%;
               left: ${this.colorSliderThumbX}%;
-              background-color: ${colorWithoutOpacity.toHexString()};
+              background-color: ${colorWithoutAlpha.toHexString()};
             "
             tabindex="${this.disabled ? '-1' : '0'}"
             role="slider"
@@ -634,18 +634,18 @@ export class QuietColorPicker extends QuietElement {
               @quiet-input=${this.handleHueSliderInput}
             ></quiet-slider>
 
-            ${this.withOpacity
+            ${this.withAlpha
               ? html`
                   <quiet-slider
-                    id="opacity"
-                    part="opacity-slider"
+                    id="alpha"
+                    part="alpha-slider"
                     exportparts="
-                      label:opacity-slider__label,
-                      description:opacity-slider__description,
-                      slider:opacity-slider__slider,
-                      track:opacity-slider__track,
-                      indicator:opacity-slider__indicator,
-                      thumb:opacity-slider__thumb,
+                      label:alpha-slider__label,
+                      description:alpha-slider__description,
+                      slider:alpha-slider__slider,
+                      track:alpha-slider__track,
+                      indicator:alpha-slider__indicator,
+                      thumb:alpha-slider__thumb,
                     "
                     dir=${isRtl ? 'rtl' : ' ltr'}
                     label=${this.localize.term('opacity')}
@@ -653,12 +653,12 @@ export class QuietColorPicker extends QuietElement {
                     max="1"
                     step="0.01"
                     value=${this.a}
-                    .valueFormatter=${this.formatOpacity}
+                    .valueFormatter=${this.formatAlpha}
                     ?disabled=${this.disabled}
                     @quiet-focus=${this.stopPropagation}
                     @quiet-blur=${this.stopPropagation}
-                    @quiet-change=${this.handleOpacitySliderInput}
-                    @quiet-input=${this.handleOpacitySliderInput}
+                    @quiet-change=${this.handleAlphaSliderInput}
+                    @quiet-input=${this.handleAlphaSliderInput}
                   ></quiet-slider>
                 `
               : ''}

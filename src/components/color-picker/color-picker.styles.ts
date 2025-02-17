@@ -127,7 +127,7 @@ export default css`
   }
 
   #hue,
-  #opacity {
+  #alpha {
     --track-size: 1em;
     --thumb-width: 1.25em;
     --thumb-height: 1.25em;
@@ -208,7 +208,7 @@ export default css`
     }
   }
 
-  #opacity {
+  #alpha {
     &::part(track) {
       background-image: linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%),
         linear-gradient(45deg, transparent 75%, var(--quiet-neutral-fill-soft) 75%),
@@ -229,15 +229,15 @@ export default css`
     }
 
     &:dir(ltr)::part(indicator) {
-      background-image: linear-gradient(to right, transparent 0%, var(--current-color-without-opacity) 100%);
+      background-image: linear-gradient(to right, transparent 0%, var(--current-color-without-alpha) 100%);
     }
 
     &:dir(rtl)::part(indicator) {
-      background-image: linear-gradient(to left, transparent 0%, var(--current-color-without-opacity) 100%);
+      background-image: linear-gradient(to left, transparent 0%, var(--current-color-without-alpha) 100%);
     }
 
     &::part(thumb) {
-      background-color: var(--opacity-thumb-color);
+      background-color: var(--alpha-thumb-color);
     }
   }
 

@@ -10,7 +10,7 @@ layout: component
   name="color"
   value="#f0803a" 
   with-input
-  with-opacity
+  with-alpha
   with-eye-dropper
   clearable
 ></quiet-color-input>
@@ -44,15 +44,15 @@ Use the `value` attribute to provide an initial value for the color input.
 ></quiet-color-input>
 ```
 
-### Enabling opacity
+### Enabling alpha
 
-Add the `with-opacity` attribute to allow users to adjust color transparency. Hex colors will become the eight-value syntax, e.g. `#rrggbbaa`, and other formats will include alpha as well.
+Add the `with-alpha` attribute to allow users to adjust opacity. Hex colors will become the eight-value syntax, e.g. `#rrggbbaa`, and other formats will include alpha as well.
 
 ```html {.example}
 <quiet-color-input 
   label="Select a color"
   value="#ce238088" 
-  with-opacity
+  with-alpha
 ></quiet-color-input>
 ```
 

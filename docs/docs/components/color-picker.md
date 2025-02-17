@@ -8,7 +8,7 @@ layout: component
   label="Select a color"
   value="#7578c5" 
   with-input
-  with-opacity
+  with-alpha
   with-eye-dropper
   swatches="
     #09090b #71717a #ef4444 #f97316 
@@ -45,15 +45,15 @@ Use the `value` attribute to provide an initial value for the color picker. You 
 </quiet-color-picker>
 ```
 
-### Enabling opacity
+### Enabling alpha
 
-Add the `with-opacity` attribute to allow the user to adjust transparency.
+Add the `with-alpha` attribute to allow the user to adjust opacity.
 
 ```html {.example}
 <quiet-color-picker 
   label="Select a color"
-  value="#ce2380cc" 
-  with-opacity
+  value="#ce238088" 
+  with-alpha
 ></quiet-color-picker>
 ```
 
@@ -179,7 +179,7 @@ Use the `size` attribute to change the color pickers's size.
     #6366f1 #a855f7 #d946ef #ec4899
   "
   with-input
-  with-opacity
+  with-alpha
   with-eye-dropper
   id="color-picker__size"
 ></quiet-color-picker>
@@ -203,7 +203,7 @@ To disable a color picker, add the `disabled` attribute.
   label="Select a color"
   disabled
   value="#6366f1"
-  with-opacity 
+  with-alpha 
   with-input
   with-eye-dropper
   swatches="

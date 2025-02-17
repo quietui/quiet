@@ -121,8 +121,8 @@ export class QuietColorInput extends QuietFormControlElement {
    */
   @property() swatches = '';
 
-  /** Enables the opacity slider. */
-  @property({ attribute: 'with-opacity', type: Boolean, reflect: true }) withOpacity = false;
+  /** Enables the alpha slider. */
+  @property({ attribute: 'with-alpha', type: Boolean, reflect: true }) withAlpha = false;
 
   /**
    * Enables the eye dropper button. Only available in
@@ -584,7 +584,7 @@ export class QuietColorInput extends QuietFormControlElement {
         size=${this.size}
         format=${this.format}
         swatches=${ifDefined(this.swatches)}
-        ?with-opacity=${this.withOpacity}
+        ?with-alpha=${this.withAlpha}
         ?with-eye-dropper=${this.withEyeDropper}
         hidden
         role="dialog"

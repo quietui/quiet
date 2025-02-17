@@ -66,7 +66,7 @@ export default function (eleventyConfig) {
 
   // Shortcodes - {% shortCode arg1, arg2 %}
   eleventyConfig.addShortcode('cdnUrl', location => {
-    return `https://cdn.jsdelivr.net/npm/@quietui/quiet@${packageData.version}/` + location.replace(/^\//, '');
+    return `https://cdn.jsdelivr.net/npm/@quietui/quiet-browser@${packageData.version}/` + location.replace(/^\//, '');
   });
 
   // Helpers

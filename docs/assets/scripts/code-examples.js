@@ -32,7 +32,7 @@ document.addEventListener('click', event => {
     const code = codeExample.querySelector('code');
     const version = document.documentElement.dataset.version;
     const html =
-      `<script type="module" src="https://cdn.jsdelivr.net/npm/@quietui/quiet@${version}/dist/quiet.loader.js"></script>` +
+      `<script type="module" src="https://cdn.jsdelivr.net/npm/@quietui/quiet-browser@${version}/dist/quiet.loader.js"></script>` +
       `\n\n` +
       `${code.textContent}`;
     const css = 'body {\n  font: 16px sans-serif;\n  padding: 1rem;\n}\n';

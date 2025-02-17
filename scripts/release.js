@@ -4,6 +4,16 @@ import { readFile, writeFile } from 'fs/promises';
 import { join } from 'path';
 import { createInterface } from 'readline/promises';
 
+async function ask(question) {
+  const readline = createInterface({ input: process.stdin, output: process.stdout });
+  try {
+    const answer = await readline.question(`${question} (y/N) `);
+    return answer.toLowerCase().startsWith('y');
+  } finally {
+    readline.close();
+  }
+}
+
 async function release() {
   const isDryRun = process.argv.includes('--dry-run');
   const packageJsonPath = join(process.cwd(), 'package.json');
@@ -13,21 +23,22 @@ async function release() {
     const packageData = JSON.parse(originalPackageJson);
 
     // A quick confirmation before we proceed...
-    const readline = createInterface({ input: process.stdin, output: process.stdout });
-    const typeOfRun = isDryRun ? 'as a dry run' : 'to npm';
-    const answer = await readline.question(
-      chalk.magenta(`🐭 Publish Quiet UI v${packageData.version} ${typeOfRun}? (y/N) `)
-    );
-    readline.close();
-    if (!answer.toLowerCase().startsWith('y')) {
+    const typeOfRun = isDryRun ? '(dry run)' : 'to npm';
+    if (!(await ask(`🐭 Publish Quiet UI v${packageData.version} ${typeOfRun}?`))) {
       console.log(chalk.gray('\nPublishing cancelled.\n'));
+      return;
+    }
+
+    // Ask if the version/changelog has been updated
+    if (!(await ask(`🧀 Have you bumped the version and updated the changelog?`))) {
+      console.log(chalk.gray('\nPlease bump the version and update the changelog before publishing.\n'));
       return;
     }
 
     //
     // 1. Publish @quietui/quiet-browser (bundled for browsers + CDNs)
     //
-    console.log('\nBuilding and publishing the browser package...\n');
+    console.log('\nBuilding and publishing the bundled browser package...\n');
     execSync('node scripts/build.js --browser', { stdio: 'inherit' });
 
     // Run tests on the bundled dist (since WTR isn't setup to bundle)
@@ -52,7 +63,7 @@ async function release() {
       execSync('npm publish --access public', { stdio: 'inherit', env: { ...process.env, QUIET_UI_RELEASE: '1' } });
       console.log(chalk.green('✔ Published the browser package'));
     } else {
-      console.log(chalk.yellow(`✔ Skipped publishing the browser package due to dry run`));
+      console.log(chalk.yellow(`✔ Skipped publishing the browser package (dry run)`));
     }
 
     // Revert package.json
@@ -61,7 +72,7 @@ async function release() {
     //
     // 2. Publish @quietui/quiet (unbundled for npm + bundlers)
     //
-    console.log('\nBuilding and publishing the npm package...\n');
+    console.log('\nBuilding and publishing the unbundled npm package...\n');
     execSync('node scripts/build.js', { stdio: 'inherit' });
 
     // Publish it to npm
@@ -69,12 +80,12 @@ async function release() {
       execSync('npm publish --access public', { stdio: 'inherit', env: { ...process.env, QUIET_UI_RELEASE: '1' } });
       console.log(chalk.green('✔ Published the npm package'));
     } else {
-      console.log(chalk.yellow('✔ Skipped publishing the npm package due to dry run'));
+      console.log(chalk.yellow('✔ Skipped publishing the npm package (dry run)'));
     }
 
     console.log(chalk.magenta('\n🐭 Successfully published both packages to npm:\n'));
-    console.log(`   • @quietui/quiet@${packageData.version}`);
-    console.log(`   • @quietui/quiet-browser@${packageData.version}\n`);
+    console.log(`   • @quietui/quiet-browser@${packageData.version}`);
+    console.log(`   • @quietui/quiet@${packageData.version}\n`);
   } catch (error) {
     console.error(chalk.red(`\n✖ Publishing failed: ${error.message}`));
 

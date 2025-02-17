@@ -30,6 +30,6 @@ Thanks!
 <div style="display: flex; gap: 1rem; justify-content: center; margin-block: 2rem;">
   <quiet-button variant="primary" size="lg" appearance="outline" pill href="/support">
     <quiet-icon slot="start" name="arrow-left"></quiet-icon>
-    Back to the support page
+    Back
   </quiet-button>
 </div>

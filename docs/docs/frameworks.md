@@ -10,7 +10,17 @@ If you're using a framework, you shouldn't use the autoloader. Instead, install 
 npm install @quietui/quiet
 ```
 
-You will need to copy Quiet's `dist/assets` folder into your app and [configure the library path](/docs/#setting-the-library-path) for icons and other assets to work.
+Next, load the default theme and the optional CSS reset. Depending on your framework, you might need to adjust the way these stylesheets are imported.
+
+```html
+<!-- Quiet theme -->
+<link rel="stylesheet" href="@quietui/quiet/dist/themes/quiet.css">
+
+<!-- Optional CSS reset -->
+<link rel="stylesheet" href="@quietui/quiet/dist/themes/restyle.css">
+```
+
+If you're using icons or other assets, you will need to copy Quiet's `dist/assets` folder into your app and [configure the library path](/docs/#setting-the-library-path) for icons and other assets to work.
 
 ```js
 import { setLibraryPath } from '@quietui/quiet';

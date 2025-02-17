@@ -33,7 +33,7 @@ export default css`
     }
 
     quiet-icon {
-      color: var(--quiet-primary-text-colorful);
+      color: var(--quiet-neutral-text-colorful);
       font-size: 2em;
     }
 

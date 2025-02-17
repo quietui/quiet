@@ -50,10 +50,8 @@ async function release() {
 
     // Remove dev fields
     delete browserPackageData.scripts;
-    delete browserPackageData.devDependencies;
     delete browserPackageData.dependencies;
-    delete browserPackageData.types;
-    delete browserPackageData.keywords;
+    delete browserPackageData.devDependencies;
 
     // Write the modified package.json file
     await writeFile(packageJsonPath, JSON.stringify(browserPackageData, null, 2));

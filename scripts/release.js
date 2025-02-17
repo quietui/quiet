@@ -30,6 +30,9 @@ async function release() {
     console.log('\nBuilding and publishing the browser package...\n');
     execSync('node scripts/build.js --browser', { stdio: 'inherit' });
 
+    // Run tests on the bundled dist (since WTR isn't setup to bundle)
+    execSync('npm run test', { stdio: 'inherit' });
+
     // Temporarily modify package.json for the browser build
     const browserPackageData = { ...packageData };
     browserPackageData.name = '@quietui/quiet-browser';

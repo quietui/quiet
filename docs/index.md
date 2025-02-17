@@ -61,7 +61,7 @@ About this project
 
 <h2 data-no-anchor>Quick start</h2>
 
-Copy and paste the following code into the `<head>` section of any HTML document. The autoloader will fetch components from the CDN as you add components to the DOM. 
+Copy and paste the following code into the `<head>` section of any HTML document. The autoloader will fetch components from the CDN as you add them to the DOM.
 
 ```html
 <!-- Quiet theme + autoloader -->

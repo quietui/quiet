@@ -71,15 +71,15 @@ async function release() {
     //
     // 2. Publish @quietui/quiet (unbundled for npm + bundlers)
     //
-    console.log('\nBuilding and publishing the unbundled npm package...\n');
+    console.log('\nBuilding and publishing the standard (unbundled) package...\n');
     execSync('node scripts/build.js', { stdio: 'inherit' });
 
     // Publish it to npm
     if (!isDryRun) {
       execSync('npm publish --access public', { stdio: 'inherit', env: { ...process.env, QUIET_UI_RELEASE: '1' } });
-      console.log(chalk.green('✔ Published the npm package'));
+      console.log(chalk.green('✔ Published the standard package'));
     } else {
-      console.log(chalk.yellow('✔ Skipped publishing the npm package (dry run)'));
+      console.log(chalk.yellow('✔ Skipped publishing the standard package (dry run)'));
     }
 
     console.log(chalk.magenta('\n🐭 Successfully published both packages to npm:\n'));

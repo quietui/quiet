@@ -53,12 +53,14 @@ export default css`
     cursor: crosshair;
 
     &:dir(ltr) {
-      background-image: linear-gradient(rgba(0, 0, 0, 0) 0%, rgb(0, 0, 0) 100%),
+      background-image:
+        linear-gradient(rgba(0, 0, 0, 0) 0%, rgb(0, 0, 0) 100%),
         linear-gradient(to right, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0) 100%);
     }
 
     &:dir(rtl) {
-      background-image: linear-gradient(rgba(0, 0, 0, 0) 0%, rgb(0, 0, 0) 100%),
+      background-image:
+        linear-gradient(rgba(0, 0, 0, 0) 0%, rgb(0, 0, 0) 100%),
         linear-gradient(to left, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0) 100%);
     }
 
@@ -210,7 +212,8 @@ export default css`
 
   #alpha {
     &::part(track) {
-      background-image: linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%),
+      background-image:
+        linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%),
         linear-gradient(45deg, transparent 75%, var(--quiet-neutral-fill-soft) 75%),
         linear-gradient(45deg, transparent 75%, var(--quiet-neutral-fill-soft) 75%),
         linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%);
@@ -261,7 +264,8 @@ export default css`
       min-height: 0;
       border: none;
       border-radius: 50%;
-      background-image: linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%),
+      background-image:
+        linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%),
         linear-gradient(45deg, transparent 75%, var(--quiet-neutral-fill-soft) 75%),
         linear-gradient(45deg, transparent 75%, var(--quiet-neutral-fill-soft) 75%),
         linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%);
@@ -326,7 +330,8 @@ export default css`
       border: none;
       border-radius: calc(var(--quiet-border-radius) / 2);
       background: none;
-      background-image: linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%),
+      background-image:
+        linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%),
         linear-gradient(45deg, transparent 75%, var(--quiet-neutral-fill-soft) 75%),
         linear-gradient(45deg, transparent 75%, var(--quiet-neutral-fill-soft) 75%),
         linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%);

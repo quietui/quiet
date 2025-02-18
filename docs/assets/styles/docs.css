@@ -1102,7 +1102,7 @@ quiet-callout {
     bottom: 1rem;
   }
 
-  @media screen and (max-height: 630px) {
+  @media screen and (max-height: 700px) {
     opacity: 0;
   }
 }

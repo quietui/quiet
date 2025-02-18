@@ -47,6 +47,7 @@ async function release() {
     // Temporarily modify package.json for the browser build
     const browserPackageData = { ...packageData };
     browserPackageData.name = '@quietui/quiet-browser';
+    browserPackageData.description = 'This package contains the bundled version of Quiet for user in browser and CDNs.';
 
     // Remove dev fields
     delete browserPackageData.scripts;

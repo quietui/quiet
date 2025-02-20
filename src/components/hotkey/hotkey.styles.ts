@@ -25,10 +25,4 @@ export default css`
       margin-inline-end: 0;
     }
   }
-
-  kbd::selection,
-  span::selection {
-    background-color: var(--quiet-selection-background-color);
-    color: var(--quiet-selection-color);
-  }
 `;

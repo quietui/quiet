@@ -29,12 +29,6 @@ export default css`
     }
   }
 
-  ::selection {
-    background-color: var(--quiet-selection-background-color);
-    color: var(--quiet-selection-color);
-    text-shadow: none !important;
-  }
-
   /* Placements */
   :host([placement*='top']) {
     top: 0;

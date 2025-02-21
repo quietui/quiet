@@ -145,3 +145,50 @@ Use the `--fill-color`, `--line-color`, and `--line-width` custom properties to 
   "
 ></quiet-sparkline>
 ```
+
+Combine sparklines with [cards](/docs/components/card) for an elegant way to display stats.
+
+```html {.example}
+<quiet-card class="sparkline__stat">
+  <div class="description">
+    <small>Revenue</small><br>
+    $12,345
+  <div>
+  <quiet-sparkline 
+    label="Number of cat treats given per day showing an increasing trend"
+    data="10 20 17 23 27 22 30 38 44"
+    curve="natural"
+    appearance="solid"
+  ></quiet-sparkline>
+</quiet-card>
+
+<style>
+  quiet-card.sparkline__stat {
+    max-width: 280px;
+
+    &::part(body) {
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+    }
+
+    .description {
+      font-size: 2.25rem;
+      font-weight: var(--quiet-font-weight-semibold);
+      line-height: 1.2;
+      padding: .5rem 1.5rem 0 1.5rem;
+    }
+
+    small {
+      font-weight: var(--quiet-font-weight-normal);
+      font-size: 0.9375rem;
+      color: var(--quiet-text-muted);
+    }
+
+    quiet-sparkline {
+      width: 100%;
+      height: auto; 
+    }
+  }
+</style>
+```

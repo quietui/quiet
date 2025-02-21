@@ -97,11 +97,6 @@ export default css`
       -webkit-user-select: none;
     }
 
-    &::selection {
-      background-color: var(--quiet-selection-background-color);
-      color: var(--quiet-selection-color);
-    }
-
     &:-webkit-autofill,
     &:-webkit-autofill:hover,
     &:-webkit-autofill:focus,

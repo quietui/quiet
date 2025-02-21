@@ -12,6 +12,12 @@ export default css`
     box-sizing: border-box !important;
   }
 
+  ::selection {
+    background-color: var(--quiet-selection-background-color);
+    color: var(--quiet-selection-color);
+    text-shadow: none !important;
+  }
+
   [hidden] {
     display: none !important;
   }

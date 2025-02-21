@@ -120,8 +120,8 @@ I prioritize bug fixes that affect sponsors first. I try to submit fixes quickly
 [The forums are located here.](https://github.com/quietui/sponsors) Please note that the page will appear as a 404 error unless you're an active sponsor!
 :::
 
-:::details Can I cancel my sponsorship? {.faq}
-Yes. You can cancel your sponsorship any time, but you will lose access to all sponsors-only benefits when the sponsorship period expires.
+:::details Can I cancel my sponsorship or request a refund? {.faq}
+You can cancel your sponsorship through the [GitHub Sponsors dashboard](https://github.com/quietui/sponsors), but you will lose access to all sponsors-only benefits when your sponsorship period expires. Unfortunately, GitHub Sponsors does not provide a way to issue refunds.
 :::
 
 :::details How can I report a bug? {.faq}

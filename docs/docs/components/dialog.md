@@ -126,6 +126,10 @@ By default, a close button is provided as a single action in the dialog's header
     <quiet-icon name="external-link"></quiet-icon>
   </quiet-button>
 
+  <quiet-button slot="actions" appearance="text" icon-label="Close" data-dialog="close">
+    <quiet-icon name="x"></quiet-icon>
+  </quiet-button>
+
   <p>Graceful cats leap through sunny windows. Their sleek whiskers twitch as they watch birds flutter past their perch.</p>
   
   <quiet-button slot="footer" data-dialog="close" variant="primary">

@@ -23,7 +23,7 @@ To add the CSS utilities to your app, add the following markup to the `<head>` o
 The `quiet-inline` class creates a flex row that wraps when necessary. Use the `gap` property to adjust the spacing between items.
 
 ```html {.example}
-<div class="quiet-inline">
+<div class="quiet-inline" style="gap: 0.5rem;">
   <div class="box"></div>
   <div class="box"></div>
   <div class="box"></div>
@@ -34,7 +34,7 @@ The `quiet-inline` class creates a flex row that wraps when necessary. Use the `
 Similarly, the `quiet-stack` class creates a flex column. Use the `gap` property to adjust the spacing between items.
 
 ```html {.example}
-<div class="quiet-stack">
+<div class="quiet-stack" style="gap: 0.5rem;">
   <div class="box"></div>
   <div class="box"></div>
   <div class="box"></div>

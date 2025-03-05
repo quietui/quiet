@@ -59,7 +59,7 @@ Quiet's default theme is designed to be highly customizable with minimal effort.
 }
 ```
 
-This means you can customize an entire palette by setting a single custom property in your stylesheet. For example, this will change the primary color palette from violet to orange.
+This means you can customize an entire palette by setting a single custom property in your stylesheet. For example, this will change the primary color palette to orange.
 
 ```css
 :root {

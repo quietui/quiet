@@ -33,6 +33,11 @@ import styles from './joystick.styles.js';
  *
  * @cssproperty [--size=7rem] - The overall width and height of the joystick.
  * @cssproperty [--thumb-size=2.5rem] - The width and height of the movable thumb.
+ *
+ * @cssstate active - Indicates the joystick is currently being moved.
+ * @cssproperty [--distance=0] - A readonly custom property that represents the normalized distance (0-1) of the thumb
+ *  from the center, updated dynamically during movement. You can use this to change the joystick's appearance as the
+ *  user moves the thumb.
  */
 @customElement('quiet-joystick')
 export class QuietJoystick extends QuietElement {
@@ -45,9 +50,6 @@ export class QuietJoystick extends QuietElement {
    * always include one.
    */
   @property() label = '';
-
-  /** The shape of the joystick boundary. Can be either 'round' or 'square'. */
-  @property({ type: String, reflect: true }) shape: 'round' | 'square' = 'round';
 
   /** Indicates whether the joystick is disabled. When `true`, the joystick does not respond to mouse or touch input. */
   @property({ type: Boolean, reflect: true }) disabled = false;
@@ -68,6 +70,7 @@ export class QuietJoystick extends QuietElement {
   private isActive = false;
   private centerX = 0;
   private centerY = 0;
+  private lastPosData: ReturnType<typeof this.calculatePosition> | null = null;
   private maxDistance = 0;
   private resizeObserver: ResizeObserver;
 
@@ -94,6 +97,7 @@ export class QuietJoystick extends QuietElement {
     this.setAttribute('aria-label', this.label);
     this.setAttribute('aria-roledescription', 'joystick');
     this.setAttribute('tabindex', '-1'); // not tabbable since it's touch/mouse-only
+    this.style.setProperty('--distance', '0');
     this.updateDimensions();
   }
 
@@ -102,10 +106,6 @@ export class QuietJoystick extends QuietElement {
 
     if (changedProperties.has('label')) {
       this.setAttribute('aria-label', this.label);
-    }
-
-    if (changedProperties.has('shape')) {
-      this.updateDimensions();
     }
   }
 
@@ -128,42 +128,23 @@ export class QuietJoystick extends QuietElement {
     let normalizedDistance: number;
     let angle: number;
 
-    if (this.shape === 'round') {
-      const rawDistance = Math.sqrt(dx * dx + dy * dy);
-      // Adjust angle: 0° at top, clockwise
-      angle = Math.atan2(dx, -dy) * (180 / Math.PI); // Swap dy to -dy and dx order to rotate 90° clockwise
-      if (angle < 0) angle += 360; // Convert -180° to 180° range to 0° to 359°
-      normalizedDistance = Math.min(1, rawDistance / this.maxDistance);
+    const rawDistance = Math.sqrt(dx * dx + dy * dy);
+    // Adjust angle: 0° at top, clockwise
+    angle = Math.atan2(dx, -dy) * (180 / Math.PI); // Swap dy to -dy and dx order to rotate 90° clockwise
+    if (angle < 0) angle += 360; // Convert -180° to 180° range to 0° to 359°
+    normalizedDistance = Math.min(1, rawDistance / this.maxDistance);
 
-      // Apply dead zone
-      if (normalizedDistance < this.deadZone) {
-        return { angle: 0, distance: 0, translateX: 0, translateY: 0, x: 0, y: 0 };
-      }
+    // Apply dead zone
+    if (normalizedDistance < this.deadZone) {
+      return { angle: 0, distance: 0, translateX: 0, translateY: 0, x: 0, y: 0 };
+    }
 
-      // Constrain to circular boundary
-      if (rawDistance > this.maxDistance) {
-        const directionX = dx / rawDistance;
-        const directionY = dy / rawDistance;
-        translateX = directionX * this.maxDistance;
-        translateY = directionY * this.maxDistance;
-      }
-    } else {
-      // square
-      const max = this.maxDistance;
-      translateX = Math.max(-max, Math.min(max, dx));
-      translateY = Math.max(-max, Math.min(max, dy));
-
-      // Adjust angle: 0° at top, clockwise
-      angle = Math.atan2(translateX, -translateY) * (180 / Math.PI); // Same adjustment for square
-      if (angle < 0) angle += 360; // Convert to 0° to 359°
-      const maxDiagonal = Math.sqrt(max * max + max * max);
-      const currentDistance = Math.sqrt(translateX * translateX + translateY * translateY);
-      normalizedDistance = currentDistance / maxDiagonal;
-
-      // Apply dead zone
-      if (normalizedDistance < this.deadZone) {
-        return { angle: 0, distance: 0, translateX: 0, translateY: 0, x: 0, y: 0 };
-      }
+    // Constrain to circular boundary
+    if (rawDistance > this.maxDistance) {
+      const directionX = dx / rawDistance;
+      const directionY = dy / rawDistance;
+      translateX = directionX * this.maxDistance;
+      translateY = directionY * this.maxDistance;
     }
 
     return {
@@ -212,6 +193,8 @@ export class QuietJoystick extends QuietElement {
 
     this.isActive = true;
     this.updateThumbPosition(posData);
+    this.customStates.set('active', true);
+    this.style.setProperty('--distance', posData.distance.toString());
     this.dispatchJoystickEvent(QuietJoystickStartEvent, posData);
     this.setupListeners();
   }
@@ -222,26 +205,27 @@ export class QuietJoystick extends QuietElement {
     event.preventDefault();
     const position = this.getPositionFromEvent(event);
     const posData = this.calculatePosition(position.x, position.y);
+    this.style.setProperty('--distance', posData.distance.toString());
     this.updateThumbPosition(posData);
+    this.lastPosData = posData; // Add this line to store the last position
     this.dispatchJoystickEvent(QuietJoystickMoveEvent, posData);
   }
 
   private handleEnd() {
     if (!this.isActive || this.disabled) return;
 
-    const posData =
-      this.mode === 'normal'
-        ? this.resetThumbPosition()
-        : this.calculatePosition(this.centerX + this.thumbEl.offsetLeft, this.centerY + this.thumbEl.offsetTop);
-
-    // Dispatch before-stop event and allow cancellation
+    // Use last position in sticky mode, fallback to reset
+    const posData = this.mode === 'normal' ? this.resetThumbPosition() : this.lastPosData || this.resetThumbPosition();
     const beforeStopEvent = new QuietJoystickBeforeStopEvent(posData);
+
     this.dispatchEvent(beforeStopEvent);
     if (beforeStopEvent.defaultPrevented) {
       return;
     }
 
     this.isActive = false;
+    this.customStates.set('active', false);
+    this.style.setProperty('--distance', posData.distance.toString());
     this.dispatchJoystickEvent(QuietJoystickStopEvent, posData);
     this.cleanupListeners();
   }
@@ -269,6 +253,8 @@ export class QuietJoystick extends QuietElement {
       y: 0
     };
     this.updateThumbPosition(posData);
+    this.customStates.set('active', false);
+    this.style.setProperty('--distance', '0');
     return posData;
   }
 

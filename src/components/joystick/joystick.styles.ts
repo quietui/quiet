@@ -13,6 +13,7 @@ export default css`
     width: var(--size);
     height: var(--size);
     overflow: hidden;
+    border-radius: 50%;
     background: var(--quiet-neutral-fill-softer);
     box-shadow: var(--quiet-inset-shadow-soft);
     cursor: grab;
@@ -21,14 +22,6 @@ export default css`
 
   :host(:active) {
     cursor: grabbing;
-  }
-
-  :host([shape='round']) {
-    border-radius: 50%;
-  }
-
-  :host([shape='square']) {
-    border-radius: 0.5rem;
   }
 
   :host([disabled]) {
@@ -52,17 +45,10 @@ export default css`
     justify-content: center;
     width: var(--thumb-size);
     height: var(--thumb-size);
+    border-radius: 50%;
     background-color: var(--quiet-neutral-fill-mid);
     transition: transform 75ms ease-out;
     will-change: transform;
-  }
-
-  :host([shape='round']) #thumb {
-    border-radius: 50%;
-  }
-
-  :host([shape='square']) #thumb {
-    border-radius: 0.5rem;
   }
 
   @media (prefers-reduced-motion: reduce) {

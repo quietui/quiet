@@ -10,7 +10,7 @@ Joysticks are ideal for directional input in games, simulations, and creative to
 ```
 
 :::info
-The joystick is designed for touch and mouse users. By design, it does not respond to key presses, as keyboard controls will vary depending on your application’s needs. For optimal accessibility, you should add keyboard alternatives to ensure your app works well for all users.
+The joystick is designed to be used by touch and mouse users. It does not respond to key presses, as keyboard controls vary depending on each application’s needs. For optimal accessibility, you should consider adding keyboard alternatives on certain devices to ensure your application works well for all users.
 :::
 
 ## Examples
@@ -91,14 +91,6 @@ If desired, you can use the `pointer: coarse` media query to hide the joystick o
 }
 ```
 
-### Changing the shape
-
-Set the `shape` attribute to `square` to change the joystick's boundary from circular to square. This allows movement fully to the corners rather than being constrained to a circular path.
-
-```html {.example}
-<quiet-joystick shape="square" label="Square joystick control"></quiet-joystick>
-```
-
 ### Dead zone
 
 The `dead-zone` attribute sets a normalized distance (0-1) from the center where joystick movement isn't registered. In this example, the joystick has a 30% dead zone, meaning the thumb must move at least 30% of the way from the center to the edge before events will fire with non-zero values. This can help prevent unintended micro-movements.
@@ -160,7 +152,20 @@ The `dead-zone` attribute sets a normalized distance (0-1) from the center where
 Set the `mode` attribute to `sticky` to make the joystick retain its last position after the user releases it, rather than snapping back to the center. This can be useful for scenarios where you want the joystick to hold a value, such as setting a persistent direction or throttle.
 
 ```html {.example}
-<quiet-joystick mode="sticky" label="Sticky joystick control"></quiet-joystick>
+<div id="joystick__sticky">
+  <quiet-joystick mode="sticky" label="Sticky joystick control"></quiet-joystick><br>
+  <quiet-button>Reset</quiet-button>
+</div>
+
+<script>
+  const container = document.getElementById('joystick__sticky');
+  const joystick = container.querySelector('quiet-joystick');
+  const button = container.querySelector('quiet-button');
+
+  button.addEventListener('click', () => {
+    joystick.reset();
+  });
+</script>
 ```
 
 ### Disabling
@@ -173,7 +178,7 @@ Set the `disabled` attribute to prevent the joystick from responding to touch or
 
 ### Styling joysticks
 
-You can customize the joystick's appearance using CSS custom properties and parts. For best results, the joystick's height should always match its width.
+You can customize the joystick's appearance using CSS custom properties and parts. Use the `--distance` readonly custom property to style the joystick based on the distance the thumb has been pulled from the center (0-1). For best results, the joystick's height should always match its width.
 
 ```html {.example}
 <quiet-joystick id="joystick__styling" label="Styled joystick control"></quiet-joystick>
@@ -183,11 +188,10 @@ You can customize the joystick's appearance using CSS custom properties and part
     --size: 10rem;
     --thumb-size: 3rem;
 
-    border: solid 0.25rem dodgerblue;
-    background: transparent;
+    background-color: color-mix(in oklab, forestgreen, firebrick calc(var(--distance) * 100%));
 
     &::part(thumb) {
-      background-color: deeppink;
+      background-color: white;
     }
   }
 </style>

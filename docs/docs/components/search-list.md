@@ -543,7 +543,7 @@ An optional empty state will be shown when no results are found. Use the `empty`
 
 For more control over the matching algorithm, set the `match` attribute to `custom` and provide a callback using the `isMatch` property. The function runs on each item whenever the search query changes.
 
-The callback receives three arguments: `query` (the current search term), `content` (the element's searchable content, including its `textContent` and `data-keywords`), and `el` (a reference to the element being searched).
+The callback receives three arguments: `query` (the current search term), `content` (the element's searchable content, including its `textContent` and `data-keywords`), and `el` (a reference to the element being searched). Return `true` if the element is a match and `false` otherwise.
 
 ```html {.example}
 <quiet-search-list match="custom" id="search-list__custom">

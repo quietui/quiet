@@ -34,7 +34,8 @@ import styles from './passcode.styles.js';
  * @event quiet-change - Emitted when the user commits changes to the passcode's value.
  * @event quiet-focus - Emitted when the passcode receives focus. This event does not bubble.
  * @event quiet-input - Emitted when the passcode receives input.
- * @event quiet-input-complete - Emitted when the final character in the passcode is entered.
+ * @event quiet-input-complete - Emitted when the final character in the passcode is entered. This is useful as a hook
+ *  to verify the passcode as soon as it's typed in without requiring the user to explicitly submit it.
  *
  * @csspart label - The element that contains the passcode's label.
  * @csspart description - The element that contains the passcode's description.

@@ -1074,6 +1074,7 @@
       flex-direction: column;
       width: 30rem;
       height: fit-content;
+      margin-block: auto;
       inset-block-end: 0;
       inset-block-start: 0;
       padding: 1.5rem;

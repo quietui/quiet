@@ -12,11 +12,11 @@
     padding: 1rem;
   }
 
-  > :first-child {
+  > :first-child:not(:modal) {
     margin-block-start: 0;
   }
 
-  > :last-child {
+  > :last-child:not(:modal) {
     margin-block-end: 0;
   }
 

@@ -78,6 +78,16 @@ The move event fires continuously while dragging, while start and stop events fi
 </style>
 ```
 
+### Adding an icon
+
+Use the `thumb` slot to add an icon to the joystick's thumb.
+
+```html {.example}
+<quiet-joystick label="Joystick control with icon">
+  <quiet-icon slot="thumb" name="arrows-move"></quiet-icon>
+</quiet-joystick>
+```
+
 ### Showing only on touch devices
 
 If desired, you can use the `pointer: coarse` media query to hide the joystick on devices that don't support touch.

@@ -49,6 +49,10 @@ export default css`
     background-color: var(--quiet-neutral-fill-mid);
     transition: transform 75ms ease-out;
     will-change: transform;
+
+    ::slotted(quiet-icon) {
+      font-size: 1.5rem;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {

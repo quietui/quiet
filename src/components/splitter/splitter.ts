@@ -42,8 +42,6 @@ export class QuietSplitter extends QuietElement {
   private dragStartClientY = 0;
 
   @query('#divider') private divider!: HTMLElement;
-  @query('#start') private startPanel!: HTMLElement;
-  @query('#end') private endPanel!: HTMLElement;
 
   /** The orientation of the splitter. */
   @property({ reflect: true }) orientation: 'horizontal' | 'vertical' = 'horizontal';

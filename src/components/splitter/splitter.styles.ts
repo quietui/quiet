@@ -34,6 +34,8 @@ export default css`
     transition:
       50ms background-color ease,
       50ms color ease;
+    user-select: none;
+    -webkit-user-select: none;
   }
 
   #divider::before {
@@ -64,18 +66,13 @@ export default css`
     font-size: 1.25rem;
   }
 
-  #divider.dragging,
-  #divider.dragging #handle {
-    background-color: var(--quiet-neutral-fill-mid);
-    color: var(--quiet-neutral-text-on-mid);
-    user-select: none;
-  }
-
   #divider:focus {
     outline: none;
   }
 
+  #divider.dragging,
   #divider:focus-visible,
+  #divider.dragging #handle,
   #divider:focus-visible #handle {
     outline: none;
     background-color: var(--quiet-primary-fill-mid);

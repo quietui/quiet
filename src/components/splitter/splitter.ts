@@ -43,6 +43,9 @@ export class QuietSplitter extends QuietElement {
   /** The orientation of the splitter. */
   @property({ reflect: true }) orientation: 'horizontal' | 'vertical' = 'horizontal';
 
+  /** Disables the splitter, preventing it from being focused and resized. */
+  @property({ type: Boolean, reflect: true }) disabled = false;
+
   /** A space-separated list of percentage snap points, e.g. "25% 50% 75%". */
   @property({ reflect: true }) snap: string = '';
 
@@ -119,6 +122,8 @@ export class QuietSplitter extends QuietElement {
 
   private setupDragging() {
     this.dragHandler?.stop();
+
+    if (this.disabled) return;
 
     this.dragHandler = new DraggableElement(this.divider, {
       start: (clientX: number, clientY: number) => {
@@ -218,7 +223,7 @@ export class QuietSplitter extends QuietElement {
         id="divider"
         part="divider"
         role="separator"
-        tabindex="0"
+        tabindex=${this.disabled ? '-1' : '0'}
         aria-label=${this.localize.term('resize')}
         aria-valuemin="0"
         aria-valuemax="100"

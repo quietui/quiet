@@ -120,6 +120,30 @@ Set the `snap` attribute to a space-separated list of positions at which to snap
 </style>
 ```
 
+### Disabling
+
+When the `disabled` attribute is set, the divider cannot be dragged or focused and the handle is hidden, though the divider line remains visible.
+
+```html {.example}
+<quiet-splitter disabled style="height: 200px;" id="splitter__disabled">
+  <div slot="start">Start panel</div>
+  <div slot="end">End panel</div>
+</quiet-splitter>
+
+<style>
+  #splitter__disabled {
+    /* Center the text */
+    [slot="start"],
+    [slot="end"] {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+  }
+</style>
+```
+
 ### Nested splitters
 
 Splitters can be nested to create advanced layouts.

@@ -67,15 +67,22 @@ export default css`
     background-color: var(--quiet-primary-fill-mid);
   }
 
+  /* Disabled */
+  :host([disabled]) #divider {
+    cursor: default;
+  }
+
+  :host([disabled]) #divider::after {
+    display: none;
+  }
+
+  /* Orientation */
   :host([orientation='horizontal']) {
     grid-template-areas: 'start divider end';
   }
 
   :host([orientation='vertical']) {
-    grid-template-areas:
-      'start'
-      'divider'
-      'end';
+    grid-template-areas: 'start' 'divider' 'end';
   }
 
   :host([orientation='vertical']) #divider {

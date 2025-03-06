@@ -47,6 +47,7 @@ export default css`
     height: var(--thumb-size);
     border-radius: 50%;
     background-color: var(--quiet-neutral-fill-mid);
+    color: var(--quiet-neutral-text-on-mid);
     transition: transform 75ms ease-out;
     will-change: transform;
 

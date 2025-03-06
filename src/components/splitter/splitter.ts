@@ -1,6 +1,7 @@
 import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
+import { QuietResizeEvent } from '../../events/resize.js';
 import hostStyles from '../../styles/host.styles.js';
 import { DraggableElement } from '../../utilities/drag.js';
 import { Localize } from '../../utilities/localize.js';
@@ -32,6 +33,7 @@ export class QuietSplitter extends QuietElement {
   private dragHandler?: DraggableElement;
   private position = 50; // Percentage position of divider (0-100)
   private isCollapsed = false;
+  private lastDispatchedPosition: number | null = null;
   private previousPosition = 50;
   private dragStartPosition = 0;
   private dragStartClientX = 0;
@@ -120,6 +122,14 @@ export class QuietSplitter extends QuietElement {
     return Math.max(minPosition, Math.min(maxPosition, position));
   }
 
+  private dispatchResizeEvent() {
+    // Only dispatch if the position has changed from the last dispatched value
+    if (this.position !== this.lastDispatchedPosition) {
+      this.dispatchEvent(new QuietResizeEvent());
+      this.lastDispatchedPosition = this.position;
+    }
+  }
+
   private setupDragging() {
     this.dragHandler?.stop();
 
@@ -150,6 +160,7 @@ export class QuietSplitter extends QuietElement {
         requestAnimationFrame(() => {
           this.updateGridTemplate();
           this.updateAriaValue();
+          this.dispatchResizeEvent();
         });
       },
       stop: () => {
@@ -210,6 +221,7 @@ export class QuietSplitter extends QuietElement {
       this.position = this.clampPosition(newPosition);
       this.updateGridTemplate();
       this.updateAriaValue();
+      this.dispatchResizeEvent();
     }
   }
 

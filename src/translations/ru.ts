@@ -26,6 +26,7 @@ const translation: Translation = {
   percentSaturation: (percentage: string) => `${percentage} насыщенность`,
   pressSpaceForOneSecondToActivate: 'Нажмите пробел и удерживайте одну секунду, чтобы активировать',
   remove: 'Удалять',
+  resize: 'Изменить размер',
   selectAColorFromTheScreen: 'Выберите цвет на экране',
   scrollableRegion: 'Прокручиваемая область',
   share: 'Делиться',

@@ -34,6 +34,7 @@ export interface Translation extends DefaultTranslation {
   pressSpaceForOneSecondToActivate: string;
   loading: string;
   remove: string;
+  resize: string;
   scrollableRegion: string;
   selectAColorFromTheScreen: string;
   share: string;

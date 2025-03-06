@@ -26,6 +26,7 @@ const translation: Translation = {
   percentSaturation: (percentage: string) => `${percentage} de saturación`,
   pressSpaceForOneSecondToActivate: 'Presione la barra espaciadora durante un segundo para activar',
   remove: 'Remover',
+  resize: 'Redimensionar',
   scrollableRegion: 'Región desplazable',
   selectAColorFromTheScreen: 'Seleccione un color de la pantalla',
   share: 'Compartir',

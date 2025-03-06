@@ -26,6 +26,7 @@ const translation: Translation = {
   percentSaturation: (percentage: string) => `${percentage} Sättigung`,
   pressSpaceForOneSecondToActivate: 'Zum Aktivieren eine Sekunde lang die Leertaste drücken',
   remove: 'Entfernen',
+  resize: 'Größe ändern',
   selectAColorFromTheScreen: 'Farbe vom Bildschirm auswählen',
   scrollableRegion: 'Scrollbarer Bereich',
   share: 'Aktie',

@@ -4,13 +4,15 @@ layout: component
 ---
 
 ```html {.example}
-<quiet-splitter style="height: 200px;" id="splitter__overview">
+<quiet-splitter id="splitter__overview">
   <div slot="start">Start panel</div>
   <div slot="end">End panel</div>
 </quiet-splitter>
 
 <style>
   #splitter__overview {
+    height: 200px;
+
     /* Center the text */
     [slot="start"],
     [slot="end"] {
@@ -30,13 +32,15 @@ layout: component
 You can set the initial position of the divider using the `position` attribute or update it programmatically via JavaScript. The value is a number from 0 to 100 representing the divider's position as a percentage.
 
 ```html {.example}
-<quiet-splitter position="75" style="height: 200px;" id="splitter__position">
+<quiet-splitter position="75" id="splitter__position">
   <div slot="start">Start panel</div>
   <div slot="end">End panel</div>
 </quiet-splitter>
 
 <style>
   #splitter__position {
+    height: 200px;
+
     /* Center the text */
     [slot="start"],
     [slot="end"] {
@@ -54,13 +58,15 @@ You can set the initial position of the divider using the `position` attribute o
 Set the `--divider-min-position` and `--divider-max-position` custom properties to limit the range of the divider's movement. In this example, the divider is constrained between 25% and 75% of the splitter's size.
 
 ```html {.example}
-<quiet-splitter style="height: 200px; --divider-min-position: 25%; --divider-max-position: 75%;" id="splitter__constraints">
+<quiet-splitter style="--divider-min-position: 25%; --divider-max-position: 75%;" id="splitter__constraints">
   <div slot="start">Start panel</div>
   <div slot="end">End panel</div>
 </quiet-splitter>
 
 <style>
   #splitter__constraints {
+    height: 200px;
+
     /* Center the text */
     [slot="start"],
     [slot="end"] {
@@ -78,13 +84,15 @@ Set the `--divider-min-position` and `--divider-max-position` custom properties 
 Set the `orientation` attribute to `vertical` to change the splitter's orientation.
 
 ```html {.example}
-<quiet-splitter orientation="vertical" style="height: 400px;" id="splitter__orientation">
+<quiet-splitter orientation="vertical" id="splitter__orientation">
   <div slot="start">Start panel</div>
   <div slot="end">End panel</div>
 </quiet-splitter>
 
 <style>
   #splitter__orientation {
+    height: 400px;
+
     /* Center the text */
     [slot="start"],
     [slot="end"] {
@@ -103,7 +111,7 @@ Set the `snap` attribute to a space-separated list of positions at which to snap
 
 ```html {.example}
 <div id="splitter__snap">
-  <quiet-splitter snap="25% 50% 75%" style="height: 200px;">
+  <quiet-splitter snap="25% 50% 75%">
     <div slot="start">Start panel</div>
     <div slot="end">End panel</div>
   </quiet-splitter>
@@ -117,6 +125,10 @@ Set the `snap` attribute to a space-separated list of positions at which to snap
 
 <style>
   #splitter__snap {
+    quiet-splitter {
+      height: 200px;
+    }
+
     /* Center the text */
     [slot="start"],
     [slot="end"] {
@@ -149,13 +161,15 @@ Set the `snap` attribute to a space-separated list of positions at which to snap
 When the `disabled` attribute is set, the divider cannot be dragged or focused and the handle is hidden, though the divider line remains visible.
 
 ```html {.example}
-<quiet-splitter disabled style="height: 200px;" id="splitter__disabled">
+<quiet-splitter disabled id="splitter__disabled">
   <div slot="start">Start panel</div>
   <div slot="end">End panel</div>
 </quiet-splitter>
 
 <style>
   #splitter__disabled {
+    height: 200px;
+
     /* Center the text */
     [slot="start"],
     [slot="end"] {
@@ -211,6 +225,33 @@ Splitters can be nested to create advanced layouts.
       justify-content: center;
       height: 100%;
     }    
+  }
+</style>
+```
+
+### Styling the divider
+
+You can customize the divider by slotting content such as an icon into the `handle` slot. To change the divider's width, set the `--divider-width` custom property.
+
+```html {.example}
+<quiet-splitter style="height: 200px;" id="splitter__custom-divider">
+  <div slot="start">Start panel</div>
+  <quiet-icon slot="handle" name="grip-vertical"></quiet-icon>
+  <div slot="end">End panel</div>
+</quiet-splitter>
+
+<style>
+  #splitter__custom-divider {
+    --divider-width: 1rem;
+
+    /* Center the text in panels */
+    [slot="start"],
+    [slot="end"] {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
   }
 </style>
 ```

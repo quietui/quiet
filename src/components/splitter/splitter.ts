@@ -18,11 +18,17 @@ import styles from './splitter.styles.js';
  *
  * @slot start - The content for the primary (start) panel.
  * @slot end - The content for the secondary (end) panel.
- * @slot divider - The draggable divider that separates the panels (default is a colored line).
+ * @slot handle - The draggable handle that separates the panels.
+ *
+ * @csspart start - The content to show in the first (start) panel.
+ * @csspart end - The content to show in the second (end) panel.
+ * @csspart divider - The draggable divider that separates the panels.
+ * @csspart handle - The visual handle within the divider (only present when not using the `handle` slot).
  *
  * @cssproperty [--divider-min-position=0%] - Minimum position of the divider (as a percentage or pixel value).
  * @cssproperty [--divider-max-position=100%] - Maximum position of the divider (as a percentage or pixel value).
- * @cssproperty [--divider-handle-size=1rem] - The size of the draggable handle area surrounding the divider.
+ * @cssproperty [--divider-draggable-area=1rem] - The size of the divider's draggable area (can be larger than the
+ *  visible area).
  * @cssproperty [--divider-width=0.125rem] - The width of the visual divider.
  */
 @customElement('quiet-splitter')
@@ -249,7 +255,9 @@ export class QuietSplitter extends QuietElement {
         aria-valuenow="50"
         @keydown=${this.handleKeydown}
       >
-        <slot name="divider"></slot>
+        <slot name="handle">
+          <div id="handle" part="handle"></div>
+        </slot>
       </div>
 
       <div id="end" part="end">

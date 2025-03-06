@@ -4,7 +4,7 @@ export default css`
   :host {
     --divider-min-position: 0%;
     --divider-max-position: 100%;
-    --divider-handle-size: 1rem;
+    --divider-draggable-area: 1rem;
     --divider-width: 0.1875rem;
 
     display: grid;
@@ -21,13 +21,19 @@ export default css`
   }
 
   #divider {
+    display: flex; /* Center slotted content */
     z-index: 1; /* Ensure divider stays above content */
     position: relative;
+    align-items: center;
+    justify-content: center;
     width: var(--divider-width);
     height: var(--divider-width);
     outline: none; /* Remove default focus outline */
     background-color: var(--divider-color, var(--quiet-neutral-stroke-softer));
     cursor: ew-resize;
+    transition:
+      50ms background-color ease,
+      50ms color ease;
   }
 
   #divider::before {
@@ -35,14 +41,13 @@ export default css`
     position: absolute;
     top: 0;
     left: 50%;
-    width: var(--divider-handle-size);
+    width: var(--divider-draggable-area);
     height: 100%;
     transform: translateX(-50%);
     content: '';
   }
 
-  /* New handle pseudo-element */
-  #divider::after {
+  #handle {
     z-index: 3; /* Above both divider and drag area */
     position: absolute;
     top: 50%;
@@ -52,19 +57,29 @@ export default css`
     transform: translate(-50%, -50%);
     border-radius: calc(var(--quiet-border-radius) / 4);
     background-color: var(--quiet-neutral-fill-mid);
-    content: '';
+    color: var(--quiet-neutral-text-on-mid);
+  }
+
+  ::slotted(quiet-icon) {
+    font-size: 1.25rem;
   }
 
   #divider.dragging,
-  #divider:focus-visible::after,
-  #divider.dragging::after {
-    background-color: var(--quiet-primary-fill-mid);
+  #divider.dragging #handle {
+    background-color: var(--quiet-neutral-fill-mid);
+    color: var(--quiet-neutral-text-on-mid);
     user-select: none;
   }
 
-  #divider:focus-visible {
-    outline: none; /* Ensure no outline on focus-visible */
+  #divider:focus {
+    outline: none;
+  }
+
+  #divider:focus-visible,
+  #divider:focus-visible #handle {
+    outline: none;
     background-color: var(--quiet-primary-fill-mid);
+    color: var(--quiet-primary-text-on-mid);
   }
 
   /* Disabled */
@@ -72,7 +87,7 @@ export default css`
     cursor: default;
   }
 
-  :host([disabled]) #divider::after {
+  :host([disabled]) #handle {
     display: none;
   }
 
@@ -95,11 +110,11 @@ export default css`
     top: 50%;
     left: 0;
     width: 100%;
-    height: var(--divider-handle-size);
+    height: var(--divider-draggable-area);
     transform: translateY(-50%);
   }
 
-  :host([orientation='vertical']) #divider::after {
+  :host([orientation='vertical']) #handle {
     top: 50%;
     left: 50%;
     width: 1.5rem;

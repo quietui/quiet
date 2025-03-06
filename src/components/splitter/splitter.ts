@@ -40,14 +40,18 @@ export class QuietSplitter extends QuietElement {
   private dragStartPosition = 0;
   private dragStartClientX = 0;
   private dragStartClientY = 0;
+  private snapThreshold = 10; // in pixels
 
   @query('#divider') private divider!: HTMLElement;
 
   /** The orientation of the splitter. */
   @property({ reflect: true }) orientation: 'horizontal' | 'vertical' = 'horizontal';
 
+  /** A space-separated list of percentage snap points, e.g. "25% 50% 75%". */
+  @property({ reflect: true }) snap: string = '';
+
   updated(changedProperties: PropertyValues<this>) {
-    if (changedProperties.has('orientation')) {
+    if (changedProperties.has('orientation') || changedProperties.has('snap')) {
       this.updateGridTemplate();
       this.setupDragging();
     }
@@ -62,6 +66,32 @@ export class QuietSplitter extends QuietElement {
   disconnectedCallback() {
     this.dragHandler?.stop();
     super.disconnectedCallback();
+  }
+
+  private getSnapPoints(): number[] {
+    if (!this.snap) return [];
+    return this.snap
+      .split(' ')
+      .map(point => parseFloat(point.replace('%', '')))
+      .filter(point => !isNaN(point) && point >= 0 && point <= 100);
+  }
+
+  private snapToNearest(position: number): number {
+    const snapPoints = this.getSnapPoints();
+    if (snapPoints.length === 0) return position;
+
+    const rect = this.getBoundingClientRect();
+    const totalSize = this.orientation === 'horizontal' ? rect.width : rect.height;
+    const positionInPixels = (position / 100) * totalSize;
+
+    // Find the closest snap point within the pixel threshold
+    for (const snapPoint of snapPoints) {
+      const snapPointInPixels = (snapPoint / 100) * totalSize;
+      if (Math.abs(positionInPixels - snapPointInPixels) <= this.snapThreshold) {
+        return snapPoint;
+      }
+    }
+    return position; // Return original position if no snap point is within threshold
   }
 
   private setupDragging() {
@@ -86,8 +116,8 @@ export class QuietSplitter extends QuietElement {
           deltaPercentage = (deltaY / rect.height) * 100;
         }
 
-        const newPosition = Math.max(0, Math.min(100, this.dragStartPosition + deltaPercentage));
-        this.position = newPosition;
+        const newPositionRaw = Math.max(0, Math.min(100, this.dragStartPosition + deltaPercentage));
+        this.position = this.snapToNearest(newPositionRaw);
 
         requestAnimationFrame(() => {
           this.updateGridTemplate();

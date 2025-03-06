@@ -49,6 +49,53 @@ Set the `orientation` attribute to `vertical` to change the splitter's orientati
 </style>
 ```
 
+### Snapping
+
+Set the `snap` attribute to a space-separated list of positions at which to snap. Only percentages are supported.
+
+```html {.example}
+<div id="splitter__snap">
+  <quiet-splitter snap="25% 50% 75%" style="height: 200px;">
+    <div slot="start">Start panel</div>
+    <div slot="end">End panel</div>
+  </quiet-splitter>
+
+  <div class="snap-dots">
+    <span class="snap-dot" style="left: 25%;"></span>
+    <span class="snap-dot" style="left: 50%;"></span>
+    <span class="snap-dot" style="left: 75%;"></span>
+  </div>
+</div>
+
+<style>
+  #splitter__snap {
+    /* Center the text */
+    [slot="start"],
+    [slot="end"] {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+
+    .snap-dots {
+      position: relative;
+      width: 100%;
+      margin-top: .5rem;
+    }
+
+    .snap-dot {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background-color: gray;
+      border-radius: 50%;
+      transform: translateX(-50%);
+    }    
+  }
+</style>
+```
+
 ### Nested splitters
 
 Splitters can be nested to create advanced layouts.

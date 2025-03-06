@@ -25,18 +25,18 @@ layout: component
 
 ## Examples
 
-### Changing the orientation
+## Setting the position
 
-Set the `orientation` attribute to `vertical` to change the splitter's orientation.
+You can set the initial position of the divider using the `position` attribute or update it programmatically via JavaScript. The value is a number from 0 to 100 representing the divider's position as a percentage.
 
 ```html {.example}
-<quiet-splitter orientation="vertical" style="height: 400px;" id="splitter__orientation">
+<quiet-splitter position="75" style="height: 200px;" id="splitter__position">
   <div slot="start">Start panel</div>
   <div slot="end">End panel</div>
 </quiet-splitter>
 
 <style>
-  #splitter__orientation {
+  #splitter__position {
     /* Center the text */
     [slot="start"],
     [slot="end"] {
@@ -61,6 +61,30 @@ Set the `--divider-min-position` and `--divider-max-position` custom properties 
 
 <style>
   #splitter__constraints {
+    /* Center the text */
+    [slot="start"],
+    [slot="end"] {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+  }
+</style>
+```
+
+### Changing the orientation
+
+Set the `orientation` attribute to `vertical` to change the splitter's orientation.
+
+```html {.example}
+<quiet-splitter orientation="vertical" style="height: 400px;" id="splitter__orientation">
+  <div slot="start">Start panel</div>
+  <div slot="end">End panel</div>
+</quiet-splitter>
+
+<style>
+  #splitter__orientation {
     /* Center the text */
     [slot="start"],
     [slot="end"] {

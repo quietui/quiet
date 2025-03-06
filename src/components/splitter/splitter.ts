@@ -31,7 +31,6 @@ export class QuietSplitter extends QuietElement {
 
   private localize = new Localize(this);
   private dragHandler?: DraggableElement;
-  private position = 50; // Percentage position of divider (0-100)
   private isCollapsed = false;
   private lastDispatchedPosition: number | null = null;
   private previousPosition = 50;
@@ -41,6 +40,9 @@ export class QuietSplitter extends QuietElement {
   private snapThreshold = 10; // in pixels
 
   @query('#divider') private divider!: HTMLElement;
+
+  /** The current position of the divider as a percentage (0-100). */
+  @property({ type: Number }) position = 50;
 
   /** The orientation of the splitter. */
   @property({ reflect: true }) orientation: 'horizontal' | 'vertical' = 'horizontal';
@@ -55,6 +57,11 @@ export class QuietSplitter extends QuietElement {
     if (changedProperties.has('orientation') || changedProperties.has('snap')) {
       this.updateGridTemplate();
       this.setupDragging();
+    }
+
+    if (changedProperties.has('position')) {
+      this.updateGridTemplate();
+      this.updateAriaValue();
     }
   }
 
@@ -123,8 +130,8 @@ export class QuietSplitter extends QuietElement {
   }
 
   private dispatchResizeEvent() {
-    // Only dispatch if the position has changed from the last dispatched value
-    if (this.position !== this.lastDispatchedPosition) {
+    // Only dispatch if the position has changed from the last dispatched value and it's not a programmatic change
+    if (this.position !== this.lastDispatchedPosition && !this.hasUpdated) {
       this.dispatchEvent(new QuietResizeEvent());
       this.lastDispatchedPosition = this.position;
     }

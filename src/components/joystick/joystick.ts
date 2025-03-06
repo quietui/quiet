@@ -20,7 +20,7 @@ import styles from './joystick.styles.js';
  * @status stable
  * @since 1.0
  *
- * @slot thumb - An optional icon to display in the thumb.
+ * @slot thumb - An optional icon to display inside the thumb.
  *
  * @event quiet-joystick-before-start - Emitted before interaction begins. Calling `event.preventDefault()` will cancel
  *  activation.

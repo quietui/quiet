@@ -19,13 +19,10 @@ import styles from './splitter.styles.js';
  * @slot end - The content for the secondary (end) panel.
  * @slot divider - The draggable divider that separates the panels (default is a colored line).
  *
- * @cssproperty [--divider-width=0.125rem] - The width of the visual divider (horizontal orientation) or height (vertical orientation).
+ * @cssproperty [--divider-min-position=0%] - Minimum position of the divider (as a percentage or pixel value).
+ * @cssproperty [--divider-max-position=100%] - Maximum position of the divider (as a percentage or pixel value).
  * @cssproperty [--divider-handle-size=1rem] - The size of the draggable handle area surrounding the divider.
- * @cssproperty [--divider-color=var(--quiet-neutral-stroke-soft)] - The color of the divider.
- * @cssproperty [--quiet-border-radius] - The border radius of the splitter container.
- * @cssproperty [--quiet-border-style] - The border style of the splitter container.
- * @cssproperty [--quiet-border-width] - The border width of the splitter container.
- * @cssproperty [--quiet-neutral-stroke-soft] - The border color of the splitter container.
+ * @cssproperty [--divider-width=0.125rem] - The width of the visual divider.
  */
 @customElement('quiet-splitter')
 export class QuietSplitter extends QuietElement {
@@ -93,6 +90,33 @@ export class QuietSplitter extends QuietElement {
     return position; // Return original position if no snap point is within threshold
   }
 
+  private getDividerConstraint(value: string, totalSize: number, isMin: boolean): number {
+    if (!value) return isMin ? 0 : 100;
+    if (value.endsWith('%')) {
+      return parseFloat(value.replace('%', ''));
+    } else if (value.endsWith('px')) {
+      const pixels = parseFloat(value.replace('px', ''));
+      return (pixels / totalSize) * 100;
+    }
+    return isMin ? 0 : 100; // Fallback
+  }
+
+  private clampPosition(position: number): number {
+    const rect = this.getBoundingClientRect();
+    const totalSize = this.orientation === 'horizontal' ? rect.width : rect.height;
+    const minPosition = this.getDividerConstraint(
+      getComputedStyle(this).getPropertyValue('--divider-min-position'),
+      totalSize,
+      true
+    );
+    const maxPosition = this.getDividerConstraint(
+      getComputedStyle(this).getPropertyValue('--divider-max-position'),
+      totalSize,
+      false
+    );
+    return Math.max(minPosition, Math.min(maxPosition, position));
+  }
+
   private setupDragging() {
     this.dragHandler?.stop();
 
@@ -115,8 +139,8 @@ export class QuietSplitter extends QuietElement {
           deltaPercentage = (deltaY / rect.height) * 100;
         }
 
-        const newPositionRaw = Math.max(0, Math.min(100, this.dragStartPosition + deltaPercentage));
-        this.position = this.snapToNearest(newPositionRaw);
+        const newPositionRaw = this.dragStartPosition + deltaPercentage;
+        this.position = this.snapToNearest(this.clampPosition(newPositionRaw));
 
         requestAnimationFrame(() => {
           this.updateGridTemplate();
@@ -178,7 +202,7 @@ export class QuietSplitter extends QuietElement {
 
     if (newPosition !== this.position) {
       event.preventDefault();
-      this.position = newPosition;
+      this.position = this.clampPosition(newPosition);
       this.updateGridTemplate();
       this.updateAriaValue();
     }

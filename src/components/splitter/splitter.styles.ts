@@ -2,8 +2,10 @@ import { css } from 'lit';
 
 export default css`
   :host {
-    --divider-width: 0.1875rem;
+    --divider-min-position: 0%;
+    --divider-max-position: 100%;
     --divider-handle-size: 1rem;
+    --divider-width: 0.1875rem;
 
     display: grid;
     width: 100%;

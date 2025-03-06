@@ -49,6 +49,30 @@ Set the `orientation` attribute to `vertical` to change the splitter's orientati
 </style>
 ```
 
+### Constraining the divider
+
+Set the `--divider-min-position` and `--divider-max-position` custom properties to limit the range of the divider's movement. In this example, the divider is constrained between 25% and 75% of the splitter's size.
+
+```html {.example}
+<quiet-splitter style="height: 200px; --divider-min-position: 25%; --divider-max-position: 75%;" id="splitter__constraints">
+  <div slot="start">Start panel</div>
+  <div slot="end">End panel</div>
+</quiet-splitter>
+
+<style>
+  #splitter__constraints {
+    /* Center the text */
+    [slot="start"],
+    [slot="end"] {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+  }
+</style>
+```
+
 ### Snapping
 
 Set the `snap` attribute to a space-separated list of positions at which to snap. Only percentages are supported.

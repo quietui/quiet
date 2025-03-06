@@ -156,12 +156,13 @@ export class QuietSplitter extends QuietElement {
         this.dragStartClientY = clientY;
       },
       move: (clientX: number, clientY: number) => {
+        const isRtl = this.localize.dir() === 'rtl';
         const rect = this.getBoundingClientRect();
         let deltaPercentage: number;
 
         if (this.orientation === 'horizontal') {
           const deltaX = clientX - this.dragStartClientX;
-          deltaPercentage = (deltaX / rect.width) * 100;
+          deltaPercentage = (deltaX / rect.width) * 100 * (isRtl ? -1 : 1);
         } else {
           const deltaY = clientY - this.dragStartClientY;
           deltaPercentage = (deltaY / rect.height) * 100;

@@ -3,6 +3,8 @@ title: Splitter
 layout: component
 ---
 
+Splitters follow the [ARIA APG window splitter](https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter/) pattern for accessibility. They consist of a draggable separator positioned between two resizable panels.
+
 ```html {.example}
 <quiet-splitter id="splitter__overview">
   <div slot="start">Start panel</div>

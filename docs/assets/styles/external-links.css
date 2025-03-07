@@ -5,6 +5,9 @@ a.external {
     height: 0.875em;
     margin-inline-start: 0.15em;
     vertical-align: -0.15em;
+  }
+
+  span {
     white-space: nowrap;
   }
 }

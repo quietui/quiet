@@ -36,7 +36,9 @@ import styles from './joystick.styles.js';
  * @cssproperty [--size=7rem] - The overall width and height of the joystick.
  * @cssproperty [--thumb-size=2.5rem] - The width and height of the movable thumb.
  *
- * @cssstate active - Indicates the joystick is currently being moved.
+ * @cssstate disabled - Applied when the joystick is disabled.
+ * @cssstate dragging - Applied when the joystick is being dragged.
+ *
  * @cssproperty [--distance=0] - A readonly custom property that represents the normalized distance (0-1) of the thumb
  *  from the center, updated dynamically during movement. You can use this to change the joystick's appearance as the
  *  user moves the thumb.
@@ -69,7 +71,7 @@ export class QuietJoystick extends QuietElement {
   }
   private _deadZone = 0;
 
-  private isActive = false;
+  private isDragging = false;
   private centerX = 0;
   private centerY = 0;
   private lastPosData: ReturnType<typeof this.calculatePosition> | null = null;
@@ -108,6 +110,10 @@ export class QuietJoystick extends QuietElement {
 
     if (changedProperties.has('label')) {
       this.setAttribute('aria-label', this.label);
+    }
+
+    if (changedProperties.has('disabled')) {
+      this.customStates.set('disabled', this.disabled);
     }
   }
 
@@ -193,16 +199,16 @@ export class QuietJoystick extends QuietElement {
       return;
     }
 
-    this.isActive = true;
+    this.isDragging = true;
     this.updateThumbPosition(posData);
-    this.customStates.set('active', true);
+    this.customStates.set('dragging', true);
     this.style.setProperty('--distance', posData.distance.toString());
     this.dispatchJoystickEvent(QuietJoystickStartEvent, posData);
     this.setupListeners();
   }
 
   private handleMove(event: MouseEvent | TouchEvent) {
-    if (!this.isActive || this.disabled) return;
+    if (!this.isDragging || this.disabled) return;
 
     event.preventDefault();
     const position = this.getPositionFromEvent(event);
@@ -214,7 +220,7 @@ export class QuietJoystick extends QuietElement {
   }
 
   private handleEnd() {
-    if (!this.isActive || this.disabled) return;
+    if (!this.isDragging || this.disabled) return;
 
     // Use last position in sticky mode, fallback to reset
     const posData = this.mode === 'normal' ? this.resetThumbPosition() : this.lastPosData || this.resetThumbPosition();
@@ -225,8 +231,8 @@ export class QuietJoystick extends QuietElement {
       return;
     }
 
-    this.isActive = false;
-    this.customStates.set('active', false);
+    this.isDragging = false;
+    this.customStates.set('dragging', false);
     this.style.setProperty('--distance', posData.distance.toString());
     this.dispatchJoystickEvent(QuietJoystickStopEvent, posData);
     this.cleanupListeners();

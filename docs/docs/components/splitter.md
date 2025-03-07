@@ -15,7 +15,7 @@ Splitters follow the [ARIA APG window splitter](https://www.w3.org/WAI/ARIA/apg/
   #splitter__overview {
     height: 200px;
 
-    /* Center the text */
+    /* Center the text for the demo */
     [slot="start"],
     [slot="end"] {
       display: flex;
@@ -43,7 +43,7 @@ You can set the initial position of the divider using the `position` attribute o
   #splitter__position {
     height: 200px;
 
-    /* Center the text */
+    /* Center the text for the demo */
     [slot="start"],
     [slot="end"] {
       display: flex;
@@ -69,7 +69,7 @@ Set the `--divider-min-position` and `--divider-max-position` custom properties 
   #splitter__constraints {
     height: 200px;
 
-    /* Center the text */
+    /* Center the text for the demo */
     [slot="start"],
     [slot="end"] {
       display: flex;
@@ -95,7 +95,7 @@ Set the `orientation` attribute to `vertical` to change the splitter's orientati
   #splitter__orientation {
     height: 400px;
 
-    /* Center the text */
+    /* Center the text for the demo */
     [slot="start"],
     [slot="end"] {
       display: flex;
@@ -131,7 +131,7 @@ Set the `snap` attribute to a space-separated list of positions at which to snap
       height: 200px;
     }
 
-    /* Center the text */
+    /* Center the text for the demo */
     [slot="start"],
     [slot="end"] {
       display: flex;
@@ -172,7 +172,7 @@ When the `disabled` attribute is set, the divider cannot be dragged or focused a
   #splitter__disabled {
     height: 200px;
 
-    /* Center the text */
+    /* Center the text for the demo */
     [slot="start"],
     [slot="end"] {
       display: flex;
@@ -219,7 +219,7 @@ Splitters can be nested to create advanced layouts.
       }
     }
 
-    /* Center the text */
+    /* Center the text for the demo */
     [slot="start"],
     [slot="end"] {
       display: flex;
@@ -246,7 +246,7 @@ You can customize the divider by slotting content such as an icon into the `hand
   #splitter__custom-divider {
     --divider-width: 1rem;
 
-    /* Center the text in panels */
+    /* Center the text for the demo */
     [slot="start"],
     [slot="end"] {
       display: flex;

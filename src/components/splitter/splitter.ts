@@ -1,6 +1,7 @@
 import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
 import { QuietResizeEvent } from '../../events/resize.js';
 import hostStyles from '../../styles/host.styles.js';
 import { DraggableElement } from '../../utilities/drag.js';
@@ -25,6 +26,10 @@ import styles from './splitter.styles.js';
  * @csspart divider - The draggable divider that separates the panels.
  * @csspart handle - The visual handle within the divider (only present when not using the `handle` slot).
  *
+ * @cssstate disabled - Applied when the splitter is disabled.
+ * @cssstate dragging - Applied when the splitter is being dragged.
+ * @cssstate focused - Applied when the splitter has focus.
+ *
  * @cssproperty [--divider-min-position=0%] - Minimum position of the divider (as a percentage or pixel value).
  * @cssproperty [--divider-max-position=100%] - Maximum position of the divider (as a percentage or pixel value).
  * @cssproperty [--divider-draggable-area=1rem] - The size of the divider's draggable area (can be larger than the
@@ -46,6 +51,8 @@ export class QuietSplitter extends QuietElement {
   private snapThreshold = 10; // in pixels
 
   @query('#divider') private divider!: HTMLElement;
+
+  @state() isDragging = false;
 
   /** The current position of the divider as a percentage (0-100). */
   @property({ type: Number }) position = 50;
@@ -69,6 +76,14 @@ export class QuietSplitter extends QuietElement {
       this.updateGridTemplate();
       this.updateAriaValue();
     }
+
+    if (changedProperties.has('disabled')) {
+      this.customStates.set('disabled', this.disabled);
+    }
+
+    if (changedProperties.has('isDragging')) {
+      this.customStates.set('dragging', this.isDragging);
+    }
   }
 
   firstUpdated() {
@@ -80,6 +95,14 @@ export class QuietSplitter extends QuietElement {
   disconnectedCallback() {
     this.dragHandler?.stop();
     super.disconnectedCallback();
+  }
+
+  private handleFocus() {
+    this.customStates.set('focused', true);
+  }
+
+  private handleBlur() {
+    this.customStates.set('focused', false);
   }
 
   private getSnapPoints(): number[] {
@@ -154,6 +177,7 @@ export class QuietSplitter extends QuietElement {
         this.dragStartPosition = this.position;
         this.dragStartClientX = clientX;
         this.dragStartClientY = clientY;
+        this.customStates.set('dragging', true);
       },
       move: (clientX: number, clientY: number) => {
         const isRtl = this.localize.dir() === 'rtl';
@@ -179,6 +203,7 @@ export class QuietSplitter extends QuietElement {
       },
       stop: () => {
         this.divider.classList.remove('dragging');
+        this.customStates.set('dragging', false);
       }
     });
   }
@@ -248,6 +273,7 @@ export class QuietSplitter extends QuietElement {
       <div
         id="divider"
         part="divider"
+        class=${classMap({ dragging: this.isDragging })}
         role="separator"
         tabindex=${this.disabled ? '-1' : '0'}
         aria-label=${this.localize.term('resize')}
@@ -255,6 +281,8 @@ export class QuietSplitter extends QuietElement {
         aria-valuemax="100"
         aria-valuenow="50"
         @keydown=${this.handleKeydown}
+        @focus=${this.handleFocus}
+        @blur=${this.handleBlur}
       >
         <slot name="handle">
           <div id="handle" part="handle"></div>

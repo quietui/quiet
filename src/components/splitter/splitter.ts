@@ -42,16 +42,15 @@ export class QuietSplitter extends QuietElement {
 
   private localize = new Localize(this);
   private dragHandler?: DraggableElement;
-  private isCollapsed = false;
   private lastDispatchedPosition: number | null = null;
   private previousPosition = 50;
   private dragStartPosition = 0;
   private dragStartClientX = 0;
   private dragStartClientY = 0;
-  private snapThreshold = 10; // in pixels
 
   @query('#divider') private divider!: HTMLElement;
 
+  @state() isCollapsed = false;
   @state() isDragging = false;
 
   /** The current position of the divider as a percentage (0-100). */
@@ -65,6 +64,9 @@ export class QuietSplitter extends QuietElement {
 
   /** A space-separated list of percentage snap points, e.g. "25% 50% 75%". */
   @property({ reflect: true }) snap: string = '';
+
+  /** The maximum distance (in pixels) within which the divider will snap to a specified snap point. */
+  @property({ attribute: 'snap-threshold', type: Number }) snapThreshold = 10;
 
   updated(changedProperties: PropertyValues<this>) {
     if (changedProperties.has('orientation') || changedProperties.has('snap')) {
@@ -225,23 +227,24 @@ export class QuietSplitter extends QuietElement {
   }
 
   private handleKeydown(event: KeyboardEvent) {
+    const isRtl = this.localize.dir() === 'rtl';
     const step = 5; // 5% movement per key press
     let newPosition = this.position;
 
     switch (event.key) {
       case 'ArrowLeft':
       case 'ArrowUp':
-        newPosition = Math.max(0, this.position - step);
+        newPosition = Math.max(0, isRtl ? this.position + step : this.position - step);
         break;
       case 'ArrowRight':
       case 'ArrowDown':
-        newPosition = Math.min(100, this.position + step);
+        newPosition = Math.min(100, isRtl ? this.position - step : this.position + step);
         break;
       case 'Home':
-        newPosition = 0;
+        newPosition = isRtl ? 100 : 0;
         break;
       case 'End':
-        newPosition = 100;
+        newPosition = isRtl ? 0 : 100;
         break;
       case 'Enter':
         if (!this.isCollapsed) {

@@ -88,7 +88,7 @@ Use the `start-on-view` attribute to begin the animation only when the ticker en
 ```html {.example}
 <p>This ticker will start as soon as it enters the viewport. Refresh the page to watch again.</p>
 
-<quiet-number-ticker end-value="25000" start-on-view></quiet-number-ticker>
+<quiet-number-ticker end-value="25000" start-on-view duration="4000"></quiet-number-ticker>
 ```
 
 ### Grouping numbers
@@ -155,7 +155,7 @@ Listen for the `quiet-animation-complete` event to trigger actions when the anim
 
 ### Setting decimal places
 
-The decimal-places attribute controls how many digits appear after the decimal point.
+The `decimal-places` attribute controls how many digits appear after the decimal point.
 
 ```html {.example}
 <div id="ticker__decimal-places">

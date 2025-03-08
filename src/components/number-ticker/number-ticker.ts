@@ -9,7 +9,7 @@ import styles from './number-ticker.styles.js';
 /**
  * `<quiet-number-ticker>`
  *
- * @summary A component that animates a number counting from start to end with customizable options and easing.
+ * @summary Number tickers animate a number from a starting value to an ending value.
  * @documentation https://quietui.com/docs/components/number-ticker
  * @status experimental
  * @since 1.0

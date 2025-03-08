@@ -3,6 +3,8 @@ title: Number Ticker
 layout: component
 ---
 
+Number tickers are commonly used in dashboards for displaying totals such as sales or users, in websites showcasing milestones such as "1,000+ Customers," and in games highlighting updates such as items sold or points earned.
+
 ```html {.example}
 <div id="ticker__overview">
   <p>
@@ -244,9 +246,9 @@ For advanced formatting, use the `valueFormatter` property to define a custom fu
 </script>
 ```
 
-### Dynamic updates
+### Updating dynamically
 
-You can update the ticker’s value programmatically. To animate it from its current value, increase both the start and end values.
+You can update the ticker’s value programmatically by setting the `startValue` and `endValue` properties. To animate it from its current value instead of the starting value, change the start and end values at the same time.
 
 ```html {.example}
 <div id="ticker__dynamic">

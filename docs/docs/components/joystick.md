@@ -198,7 +198,8 @@ You can customize the joystick's appearance using CSS custom properties and part
     --size: 10rem;
     --thumb-size: 3rem;
 
-    background-color: color-mix(in oklab, forestgreen, firebrick calc(var(--distance) * 100%));
+    /* Stay forestgreen until 75%, then transition to firebrick from 75% to 100% */
+    background-color: color-mix(in oklab, forestgreen, firebrick calc(clamp(0, (var(--distance) - 0.75) / 0.25, 1) * 100%));
 
     &::part(thumb) {
       background-color: white;

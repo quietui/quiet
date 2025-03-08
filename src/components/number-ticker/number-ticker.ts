@@ -119,8 +119,8 @@ export class QuietNumberTicker extends QuietElement {
     }, effectiveDelay);
   }
 
-  private easeOutQuad(t: number): number {
-    return t * (2 - t);
+  private easeOutExpo(t: number): number {
+    return t === 1 ? 1 : 1 - Math.pow(2, -10 * t); // Exponential easing
   }
 
   private tick() {
@@ -129,7 +129,7 @@ export class QuietNumberTicker extends QuietElement {
     const now = performance.now();
     const elapsed = now - this.startTime;
     const progress = Math.min(elapsed / this.duration, 1);
-    const easedProgress = this.easeOutQuad(progress);
+    const easedProgress = this.easeOutExpo(progress);
 
     const range = this.endValue - this.startValue;
     const current = this.startValue + range * easedProgress;

@@ -8,8 +8,9 @@ Number tickers are commonly used in dashboards for displaying totals such as sal
 ```html {.example}
 <div id="ticker__overview">
   <p>
-    <quiet-number-ticker 
+    <quiet-number-ticker
       end-value="1000"
+      duration="4000"
       grouping
       style="font-size: 2.5rem; font-weight: var(--quiet-font-weight-bold);"
     ></quiet-number-ticker>
@@ -60,17 +61,17 @@ The number ticker animates from the starting value to the ending value. By defau
 
 ### Customizing the ticker
 
-You can customize the duration of the ticker using the `--duration` custom property. Add an optional delay before the ticker starts by setting the `delay` attribute to a value in milliseconds.
+You can customize the duration of the ticker in milliseconds using the `duration` attribute. Add an optional delay before the ticker starts by setting the `delay` attribute.
 
 ```html {.example}
 <div id="ticker__customizing">
   <p>
     <quiet-number-ticker 
       start-value="0" 
-      end-value="99999" 
-      delay="1000" 
-      style="--duration: 1.5s;">
-    </quiet-number-ticker>
+      end-value="100" 
+      duration="5000"
+      delay="1000"
+    ></quiet-number-ticker>
   </p>
   <quiet-button>Restart</quiet-button>
 </div>

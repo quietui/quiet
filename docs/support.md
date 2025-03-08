@@ -104,7 +104,11 @@ Quiet can be used for free under the MIT license. Unfortunately, I can't offer s
 
 ## Frequently asked questions
 
-:::details Do you offer support? {.faq}
+:::details What if my company can't sponsor open source software?
+I understand that some companies can't sponsor open source software for various reasons and require a commercial license for invoicing purposes. For those users, I'm happy to offer commercial support licenses in lieu of a sponsorship. Please message me on [X](https://x.com/cory_laviska) or [Bluesky](https://bsky.app/profile/cory.laviska.com) for more information.
+:::
+
+:::details Do you offer technical support? {.faq}
 Yes. You can [sponsor Quiet on GitHub](https://github.com/sponsors/quietui) to unlock access to a [sponsors-only discussion forum](https://github.com/quietui/sponsors/discussions) where you can get help directly from me, the maintainer, as well as other members of the community. I typically respond within 24 hours.
 :::
 

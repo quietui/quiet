@@ -1,7 +1,7 @@
 import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { QuietTypingCompleteEvent } from '../../events/typing.js';
+import { QuietAnimationComplete } from '../../events/animation.js';
 import hostStyles from '../../styles/host.styles.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import styles from './typewriter.styles.js';
@@ -14,7 +14,7 @@ import styles from './typewriter.styles.js';
  * @status stable
  * @since 1.0
  *
- * @event quiet-typing-complete - Emitted when the typing animation has completed.
+ * @event quiet-animation-complete - Emitted when the typing animation has completed.
  *
  * @cssproperty [--cursor-color=currentColor] - The color of the cursor during animation when `with-cursor` is enabled.
  * @cssproperty [--cursor-width=1.5px] - The color of the cursor during animation when `with-cursor` is enabled.
@@ -120,7 +120,7 @@ export class QuietTypewriter extends QuietElement {
     if (prefersReducedMotion && !this.ignoreReducedMotion) {
       this.currentText = this.text;
       this.charIndex = this.text.length;
-      this.dispatchEvent(new QuietTypingCompleteEvent());
+      this.dispatchEvent(new QuietAnimationComplete());
       return;
     }
 
@@ -152,7 +152,7 @@ export class QuietTypewriter extends QuietElement {
       this.animationTimeout = window.setTimeout(() => this.typeNextChar(), currentDuration);
     } else {
       this.isAnimating = false;
-      this.dispatchEvent(new QuietTypingCompleteEvent());
+      this.dispatchEvent(new QuietAnimationComplete());
       if (this.loop && !this.pause) {
         this.startEraseAnimation();
       }

@@ -1,5 +1,6 @@
 import type { CSSResultGroup, PropertyValues } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
+import { QuietAnimationComplete } from '../../events/animation.js';
 import hostStyles from '../../styles/host.styles.js';
 import { Localize } from '../../utilities/localize.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
@@ -13,7 +14,7 @@ import styles from './number-ticker.styles.js';
  * @status experimental
  * @since 1.0
  *
- * @event quiet-ticker-complete - Emitted when the counting animation has completed.
+ * @event quiet-animation-complete - Emitted when the typing animation has completed.
  *
  * @cssproperty [--duration=2s] - The total duration of the counting animation.
  */
@@ -141,7 +142,7 @@ export class QuietNumberTicker extends QuietElement {
     } else {
       this.currentValue = this.endValue;
       this.isAnimating = false;
-      this.dispatchEvent(new Event('quiet-ticker-complete'));
+      this.dispatchEvent(new QuietAnimationComplete());
     }
   }
 

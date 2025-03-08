@@ -144,9 +144,21 @@ Add and remove the `pause` attribute to pause and restart typing at any time. Th
 </script>
 ```
 
+### Starting when in view
+
+Use the `start-on-view` attribute to start the animation when the element scrolls into view.
+
+```html {.example}
+<quiet-typewriter 
+  text="I started as soon as I came into view! Refresh the page to watch again." 
+  start-on-view 
+  with-cursor
+></quiet-typewriter>
+```
+
 ### Listening for completion
 
-Listen for the `quiet-typewriter-complete` event to trigger actions when the animation finishes. When using `loop`, the event will be dispatched each time typing completes.
+Listen for the `quiet-animation-complete` event to trigger actions when the animation finishes. When using `loop`, the event will be dispatched each time typing completes.
 
 ```html {.example}
 <div id="typewriter__complete">
@@ -165,24 +177,14 @@ Listen for the `quiet-typewriter-complete` event to trigger actions when the ani
   const typewriter = container.querySelector('quiet-typewriter');
   const button = container.querySelector('quiet-button');
 
-  typewriter.addEventListener('quiet-typing-complete', console.log);
-
+  typewriter.addEventListener('quiet-animation-complete', () => {
+    console.log('Typewriter animation completed!');
+  });
+  
   button.addEventListener('click', () => {
     typewriter.restart();
   });
 </script>
-```
-
-### Start on view
-
-Use the `start-on-view` attribute to start the animation when the element scrolls into view.
-
-```html {.example}
-<quiet-typewriter 
-  text="I started as soon as I came into view! Refresh the page to watch again." 
-  start-on-view 
-  with-cursor
-></quiet-typewriter>
 ```
 
 ### Styling the typewriter

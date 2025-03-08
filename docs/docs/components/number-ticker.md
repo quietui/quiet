@@ -117,6 +117,40 @@ The `grouping` attribute adds thousand separators to the displayed number, makin
 </script>
 ```
 
+### Listening for completion
+
+Listen for the `quiet-animation-complete` event to trigger actions when the animation finishes.
+
+```html {.example}
+<div id="number-ticker__complete">
+  <p>
+    <quiet-number-ticker 
+      id="ticker" 
+      start-value="0" 
+      end-value="1000" 
+      decimal-places="0" 
+      grouping="true"
+    ></quiet-number-ticker>
+  </p>
+
+  <quiet-button>Restart</quiet-button>
+</div>
+
+<script>
+  const container = document.getElementById('number-ticker__complete');
+  const ticker = container.querySelector('quiet-number-ticker');
+  const button = container.querySelector('quiet-button');
+
+  ticker.addEventListener('quiet-animation-complete', () => {
+    console.log('Number ticker animation completed!');
+  });
+
+  button.addEventListener('click', () => {
+    ticker.startAnimation();
+  });
+</script>
+```
+
 ### Setting decimal places
 
 The decimal-places attribute controls how many digits appear after the decimal point.

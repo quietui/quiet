@@ -1,0 +1,171 @@
+import type { CSSResultGroup, PropertyValues } from 'lit';
+import { customElement, property, state } from 'lit/decorators.js';
+import hostStyles from '../../styles/host.styles.js';
+import { Localize } from '../../utilities/localize.js';
+import { QuietElement } from '../../utilities/quiet-element.js';
+import styles from './number-ticker.styles.js';
+
+/**
+ * `<quiet-number-ticker>`
+ *
+ * @summary A component that animates a number counting from start to end with customizable options and easing.
+ * @documentation https://quietui.com/docs/components/number-ticker
+ * @status experimental
+ * @since 1.0
+ *
+ * @event quiet-ticker-complete - Emitted when the counting animation has completed.
+ *
+ * @cssproperty [--duration=2s] - The total duration of the counting animation.
+ */
+@customElement('quiet-number-ticker')
+export class QuietNumberTicker extends QuietElement {
+  static styles: CSSResultGroup = [hostStyles, styles];
+
+  private animationFrame: number | null = null;
+  private localize = new Localize(this);
+  private observer: IntersectionObserver | null = null;
+  private startTime: number | null = null;
+  private duration: number = 2000; // Default value
+
+  @state() private currentValue: number = 0;
+  @state() private isAnimating = false;
+
+  /** The starting value for the count. */
+  @property({ type: Number, attribute: 'start-value' }) startValue = 0;
+
+  /** The target value to count to. */
+  @property({ type: Number, attribute: 'end-value' }) endValue = 0;
+
+  /** Delay in milliseconds before counting starts. */
+  @property({ type: Number }) delay = 0;
+
+  /** Number of decimal places to display. */
+  @property({ type: Number, attribute: 'decimal-places' }) decimalPlaces = 0;
+
+  /** Whether to group numbers, e.g. with a thousands separator. */
+  @property({ type: Boolean }) grouping = false;
+
+  /** Whether to start the animation when the component comes into view. */
+  @property({ type: Boolean, attribute: 'start-on-view' }) startOnView = false;
+
+  /**
+   * A custom formatting function to apply to the number. When set, `decimal-places` and `grouping` will be ignored.
+   * Property only.
+   */
+  @property({ attribute: false }) valueFormatter: (value: number) => string;
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.currentValue = this.startValue;
+    if (this.startOnView) {
+      this.setupIntersectionObserver();
+    } else {
+      this.startAnimation();
+    }
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.stopAnimation();
+    this.observer?.disconnect();
+  }
+
+  updated(changedProperties: PropertyValues<this>) {
+    if (
+      changedProperties.has('startValue') ||
+      changedProperties.has('endValue') ||
+      changedProperties.has('decimalPlaces')
+    ) {
+      this.stopAnimation();
+      this.currentValue = this.startValue;
+      if (!this.startOnView) {
+        this.startAnimation();
+      }
+    }
+  }
+
+  private setupIntersectionObserver() {
+    this.observer = new IntersectionObserver(
+      entries => {
+        if (entries[0].isIntersecting && !this.isAnimating) {
+          this.startAnimation();
+          this.observer?.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+    this.observer.observe(this);
+  }
+
+  private startAnimation() {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      this.currentValue = this.endValue;
+      this.dispatchEvent(new Event('quiet-ticker-complete'));
+      return;
+    }
+
+    this.stopAnimation(); // Stop any existing animation
+    this.currentValue = this.startValue; // Reset to startValue
+    const effectiveDelay = Math.max(0, Number(this.delay) || 0);
+
+    // Calculate duration once and cache it
+    this.duration = parseFloat(getComputedStyle(this).getPropertyValue('--duration')) * 1000 || 2000;
+
+    setTimeout(() => {
+      this.isAnimating = true;
+      this.startTime = performance.now();
+      this.tick();
+    }, effectiveDelay);
+  }
+
+  private easeOutQuad(t: number): number {
+    return t * (2 - t);
+  }
+
+  private tick() {
+    if (!this.isAnimating || this.startTime === null) return;
+
+    const now = performance.now();
+    const elapsed = now - this.startTime;
+    const progress = Math.min(elapsed / this.duration, 1);
+    const easedProgress = this.easeOutQuad(progress);
+
+    const range = this.endValue - this.startValue;
+    const current = this.startValue + range * easedProgress;
+
+    this.currentValue = current;
+
+    if (progress < 1) {
+      this.animationFrame = requestAnimationFrame(() => this.tick());
+    } else {
+      this.currentValue = this.endValue;
+      this.isAnimating = false;
+      this.dispatchEvent(new Event('quiet-ticker-complete'));
+    }
+  }
+
+  private stopAnimation() {
+    if (this.animationFrame !== null) {
+      cancelAnimationFrame(this.animationFrame);
+      this.animationFrame = null;
+      this.isAnimating = false;
+      this.startTime = null;
+    }
+  }
+
+  render() {
+    return typeof this.valueFormatter === 'function'
+      ? this.valueFormatter(this.currentValue)
+      : this.localize.number(this.currentValue, {
+          maximumFractionDigits: this.decimalPlaces,
+          useGrouping: this.grouping
+        });
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'quiet-number-ticker': QuietNumberTicker;
+  }
+}

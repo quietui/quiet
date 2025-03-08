@@ -22,6 +22,7 @@ export class QuietNumberTicker extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
   private animationFrame: number | null = null;
+  private animationTimeout: number | null = null;
   private localize = new Localize(this);
   private observer: IntersectionObserver | null = null;
   private startTime: number | null = null;
@@ -49,6 +50,12 @@ export class QuietNumberTicker extends QuietElement {
 
   /** Whether to start the animation when the component comes into view. */
   @property({ type: Boolean, attribute: 'start-on-view' }) startOnView = false;
+
+  /**
+   * By default, no animation will occur when the user indicates a preference for reduced motion. Use this attribute to
+   * override this behavior when necessary.
+   */
+  @property({ attribute: 'ignore-reduced-motion', type: Boolean, reflect: true }) ignoreReducedMotion = false;
 
   /**
    * A custom formatting function to apply to the number. When set, `decimal-places` and `grouping` will be ignored.
@@ -106,21 +113,44 @@ export class QuietNumberTicker extends QuietElement {
 
   private startAnimation() {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) {
-      this.currentValue = this.endValue;
-      this.dispatchEvent(new Event('quiet-ticker-complete'));
-      return;
-    }
+    const effectiveDelay = Math.max(0, Number(this.delay) || 0);
 
     this.stopAnimation(); // Stop any existing animation
     this.currentValue = this.startValue; // Reset to startValue
-    const effectiveDelay = Math.max(0, Number(this.delay) || 0);
 
-    setTimeout(() => {
+    if (prefersReducedMotion && !this.ignoreReducedMotion) {
+      // Reduced motion mode: 5 frames
       this.isAnimating = true;
-      this.startTime = performance.now();
-      this.tick();
-    }, effectiveDelay);
+      setTimeout(() => this.startReducedMotionAnimation(), effectiveDelay);
+    } else {
+      // Normal animation
+      setTimeout(() => {
+        this.isAnimating = true;
+        this.startTime = performance.now();
+        this.tick();
+      }, effectiveDelay);
+    }
+  }
+
+  private startReducedMotionAnimation() {
+    const steps = 5;
+    const stepDuration = Math.max(0, Number(this.duration) || 2000) / steps;
+    const valueStep = (this.endValue - this.startValue) / steps;
+    let currentStep = 0;
+
+    const updateStep = () => {
+      if (currentStep <= steps) {
+        this.currentValue = this.startValue + valueStep * currentStep;
+        currentStep++;
+        this.animationTimeout = window.setTimeout(updateStep, stepDuration);
+      } else {
+        this.currentValue = this.endValue; // Ensure exact end value
+        this.isAnimating = false;
+        this.dispatchEvent(new QuietAnimationComplete());
+      }
+    };
+
+    updateStep();
   }
 
   private easeOutExpo(t: number): number {
@@ -153,9 +183,13 @@ export class QuietNumberTicker extends QuietElement {
     if (this.animationFrame !== null) {
       cancelAnimationFrame(this.animationFrame);
       this.animationFrame = null;
-      this.isAnimating = false;
-      this.startTime = null;
     }
+    if (this.animationTimeout !== null) {
+      clearTimeout(this.animationTimeout);
+      this.animationTimeout = null;
+    }
+    this.isAnimating = false;
+    this.startTime = null;
   }
 
   render() {

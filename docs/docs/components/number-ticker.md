@@ -28,6 +28,11 @@ Number tickers are commonly used in dashboards for displaying totals such as sal
 </script>
 ```
 
+:::info
+Number ticker honors the user's [`prefers-reduced-motion`](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion) setting. If you're not seeing animations, this might be why. To override this behavior, which is generally not recommended, use the `ignore-reduced-motion` attribute.
+:::
+
+
 ## Examples
 
 ### Providing start and end values

@@ -205,7 +205,8 @@
     border-radius: calc(var(--quiet-border-radius) / 2);
     box-shadow: 0 max(1px, 0.0715em) 0 0 var(--quiet-neutral-fill-soft);
     font: inherit;
-    letter-spacing: 0.09375em;
+    font-size: 0.9375em;
+    letter-spacing: 0.0625em;
     vertical-align: baseline;
   }
 

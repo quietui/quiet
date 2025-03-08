@@ -49,7 +49,7 @@ Quiet can be used for free under the MIT license. Unfortunately, I can't offer s
     <ul>
       <li><quiet-icon name="coins" style="color: #c5a231;"></quiet-icon> Completely free</li>
       <li><quiet-icon name="pointer" style="color: #e886a7;"></quiet-icon> Only takes a click</li>
-      <li><quiet-icon name="award" style="color: #58acf2;"></quiet-icon> Raises awareness</li>
+      <li><quiet-icon name="speakerphone" style="color: #58acf2;"></quiet-icon> Raises awareness</li>
       <li><quiet-icon name="rosette-discount-check" style="color: #7db664;"></quiet-icon> Legitimizes the project</li>
       <li><quiet-icon name="yin-yang" style="color: #e98d61;"></quiet-icon> Good karma</li>
       <li><quiet-icon name="cat" style="color: #b394f4;"></quiet-icon> Makes the cats happy</li>

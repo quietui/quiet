@@ -1,4 +1,5 @@
 import type { CSSResultGroup, PropertyValues } from 'lit';
+import { html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { QuietAnimationComplete } from '../../events/animation.js';
 import hostStyles from '../../styles/host.styles.js';
@@ -14,9 +15,7 @@ import styles from './number-ticker.styles.js';
  * @status experimental
  * @since 1.0
  *
- * @event quiet-animation-complete - Emitted when the typing animation has completed.
- *
- * @cssproperty [--duration=2s] - The total duration of the counting animation.
+ * @event quiet-animation-complete - Emitted when the counting animation has completed.
  */
 @customElement('quiet-number-ticker')
 export class QuietNumberTicker extends QuietElement {
@@ -26,7 +25,6 @@ export class QuietNumberTicker extends QuietElement {
   private localize = new Localize(this);
   private observer: IntersectionObserver | null = null;
   private startTime: number | null = null;
-  private duration: number = 2000; // Default value
 
   @state() private currentValue: number = 0;
   @state() private isAnimating = false;
@@ -36,6 +34,9 @@ export class QuietNumberTicker extends QuietElement {
 
   /** The target value to count to. */
   @property({ type: Number, attribute: 'end-value' }) endValue = 0;
+
+  /** Duration of the animation in milliseconds. */
+  @property({ type: Number }) duration = 2000;
 
   /** Delay in milliseconds before counting starts. */
   @property({ type: Number }) delay = 0;
@@ -75,13 +76,18 @@ export class QuietNumberTicker extends QuietElement {
     if (
       changedProperties.has('startValue') ||
       changedProperties.has('endValue') ||
-      changedProperties.has('decimalPlaces')
+      changedProperties.has('decimalPlaces') ||
+      changedProperties.has('duration')
     ) {
       this.stopAnimation();
       this.currentValue = this.startValue;
       if (!this.startOnView) {
         this.startAnimation();
       }
+    }
+
+    if (changedProperties.has('endValue')) {
+      this.setAttribute('aria-label', `${this.endValue}`);
     }
   }
 
@@ -110,9 +116,6 @@ export class QuietNumberTicker extends QuietElement {
     this.currentValue = this.startValue; // Reset to startValue
     const effectiveDelay = Math.max(0, Number(this.delay) || 0);
 
-    // Calculate duration once and cache it
-    this.duration = parseFloat(getComputedStyle(this).getPropertyValue('--duration')) * 1000 || 2000;
-
     setTimeout(() => {
       this.isAnimating = true;
       this.startTime = performance.now();
@@ -129,7 +132,7 @@ export class QuietNumberTicker extends QuietElement {
 
     const now = performance.now();
     const elapsed = now - this.startTime;
-    const progress = Math.min(elapsed / this.duration, 1);
+    const progress = Math.min(elapsed / Math.max(0, Number(this.duration) || 2000), 1);
     const easedProgress = this.easeOutExpo(progress);
 
     const range = this.endValue - this.startValue;
@@ -156,12 +159,16 @@ export class QuietNumberTicker extends QuietElement {
   }
 
   render() {
-    return typeof this.valueFormatter === 'function'
-      ? this.valueFormatter(this.currentValue)
-      : this.localize.number(this.currentValue, {
-          maximumFractionDigits: this.decimalPlaces,
-          useGrouping: this.grouping
-        });
+    return html`
+      <span aria-hidden="true">
+        ${typeof this.valueFormatter === 'function'
+          ? this.valueFormatter(this.currentValue)
+          : this.localize.number(this.currentValue, {
+              maximumFractionDigits: this.decimalPlaces,
+              useGrouping: this.grouping
+            })}
+      </span>
+    `;
   }
 }
 

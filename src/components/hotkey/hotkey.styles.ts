@@ -15,7 +15,8 @@ export default css`
 
   kbd {
     font: inherit;
-    letter-spacing: 0.09375em;
+    font-size: 0.9375em;
+    letter-spacing: 0.0625em;
 
     &:first-of-type {
       margin-inline-start: 0;

@@ -12,7 +12,7 @@ import styles from './number-ticker.styles.js';
  *
  * @summary Number tickers animate a number from a starting value to an ending value.
  * @documentation https://quietui.com/docs/components/number-ticker
- * @status experimental
+ * @status stable
  * @since 1.0
  *
  * @event quiet-animation-complete - Emitted when the counting animation has completed.

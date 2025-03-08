@@ -146,13 +146,13 @@ Use the `--fill-color`, `--line-color`, and `--line-width` custom properties to 
 ></quiet-sparkline>
 ```
 
-Combine sparklines with [cards](/docs/components/card) for an elegant way to display stats.
+Combine sparklines with [cards](/docs/components/card) and [number tickers](/docs/components/number-ticker) for an elegant way to display stats.
 
 ```html {.example}
 <quiet-card class="sparkline__stat">
   <div class="description">
     <small>Revenue</small><br>
-    $12,345
+    $<quiet-number-ticker end-value="12345" grouping start-on-view></quiet-number-ticker>
   <div>
   <quiet-sparkline 
     label="Number of cat treats given per day showing an increasing trend"

@@ -121,9 +121,7 @@ export class QuietJoystick extends QuietElement {
     const rect = this.getBoundingClientRect();
     this.centerX = rect.width / 2;
     this.centerY = rect.height / 2;
-    // For square, we can use the full width/height minus thumb size
-    // For round, we use a circular boundary
-    this.maxDistance = (rect.width - this.thumbEl.offsetWidth) / 2;
+    this.maxDistance = rect.width / 2; // Thumb center reaches edge, no need to subtract thumb size
   }
 
   private calculatePosition(x: number, y: number) {

@@ -12,7 +12,6 @@ export default css`
     aspect-ratio: 1;
     width: var(--size);
     height: var(--size);
-    overflow: hidden;
     border-radius: 50%;
     background: var(--quiet-neutral-fill-softer);
     box-shadow: var(--quiet-inset-shadow-soft);

@@ -7,7 +7,7 @@ layout: component
 <div id="ticker__overview">
   <p>
     <quiet-number-ticker 
-      end-value="10000"
+      end-value="1000"
       grouping
       style="font-size: 2.5rem; font-weight: var(--quiet-font-weight-bold);"
     ></quiet-number-ticker>

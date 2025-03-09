@@ -4,7 +4,7 @@ description: Theme concepts, color palettes, and design tokens.
 layout: docs
 ---
 
-The default theme provides simple, elegant styles with support for light and dark modes and 21 built-in color presets. A number of [CSS custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) are exposed, giving you an easy way to make high-level changes to the library.
+The default theme provides simple, elegant styles with support for light and dark modes and 21 built-in color presets. A number of [design tokens](#design-tokens) are exposed, giving you an easy way to make high-level changes to the library.
 
 ## Using the default theme
 
@@ -504,9 +504,9 @@ These tokens represent pure black and white, but their values invert in dark mod
 
 ## Design tokens
 
-Quiet uses a relatively small set of design tokens in the form of CSS custom properties. These tokens are used by many components to create a consistent look and feel throughout the library. While Quiet has no interest in being a proper design system, you can use and customize any of these tokens to best suit your needs.
+Quiet uses a relatively small set of design tokens to create a consistent look and feel throughout the library. Design tokens are provided in the form of [CSS custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_cascading_variables/Using_CSS_custom_properties). The tokens are used internally by many components, and you can customize them to make the library better match your brand.
 
-You can customize tokens by reassigning them as shown below.
+To customize design tokens, reassign them in CSS as shown below.
 
 ```css
 /* Light theme Design token overrides */
@@ -524,7 +524,7 @@ You can customize tokens by reassigning them as shown below.
 ```
 
 :::warn
-Always scope design token overrides to the `:root` node (i.e. `<html>` element), otherwise calculated values may not propagate as expected.
+Always scope design token overrides to the root node (i.e. the `<html>` element), otherwise calculated values may not propagate as expected.
 :::
 
 ### Surface tokens

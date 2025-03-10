@@ -67,8 +67,8 @@ You can customize the duration of the ticker in milliseconds using the `duration
 <div id="ticker__customizing">
   <p>
     <quiet-number-ticker 
-      start-value="0" 
-      end-value="100" 
+      start-value="500" 
+      end-value="0" 
       duration="5000"
       delay="1000"
     ></quiet-number-ticker>

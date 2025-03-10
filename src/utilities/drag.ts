@@ -40,10 +40,8 @@ export class DraggableElement {
     const clientX = supportsTouch && 'touches' in event ? event.touches[0].clientX : (event as PointerEvent).clientX;
     const clientY = supportsTouch && 'touches' in event ? event.touches[0].clientY : (event as PointerEvent).clientY;
 
-    // Prevent touch devices from scrolling while dragging
-    if (supportsTouch && 'touches' in event) {
-      event.preventDefault();
-    }
+    // Prevent scrolling while dragging
+    event.preventDefault();
 
     if (
       this.isDragging ||

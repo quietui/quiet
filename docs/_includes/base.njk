@@ -19,19 +19,6 @@
       }
     </script>
 
-    {# Restore scroll position without flashing #}
-    <script>
-      const scrollY = parseFloat(sessionStorage.getItem('lastScrollY'));
-      if (
-        performance.getEntriesByType('navigation')[0]?.type === 'reload' &&
-        !isNaN(scrollY) &&
-        scrollY >= 0
-      ) {
-        document.documentElement.setAttribute('data-scroll-restoring', '');
-        window.scrollTo(0, scrollY);
-      }
-    </script>
-
     <title>{{ title }}{% if page.url != '/' %} &middot; Quiet UI{% endif %}</title>
     <link rel="icon" href="/assets/images/logo-light.svg" media="(prefers-color-scheme: light)" />
     <link rel="icon" href="/assets/images/logo-dark.svg" media="(prefers-color-scheme: dark)" />

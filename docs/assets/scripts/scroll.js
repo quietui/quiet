@@ -1,3 +1,5 @@
+import { allDefined } from '/dist/quiet.js';
+
 // Smooth links
 document.addEventListener('click', event => {
   const link = event.target.closest('a');
@@ -47,3 +49,53 @@ function updateScrollClass() {
 window.addEventListener('scroll', updateScrollClass);
 window.addEventListener('turbo:render', updateScrollClass);
 updateScrollClass();
+
+//
+// Preserve the scroll position on refresh
+//
+window.addEventListener(
+  'scroll',
+  () => {
+    sessionStorage.setItem('lastScrollY', window.scrollY.toString());
+  },
+  { passive: true }
+);
+
+let hasRestored = false;
+
+async function restoreScrollPosition() {
+  const navEntry = performance.getEntriesByType('navigation')[0];
+  if (navEntry && navEntry.type !== 'reload') return;
+
+  const scrollY = parseFloat(sessionStorage.getItem('lastScrollY'));
+  if (isNaN(scrollY) || scrollY < 0 || hasRestored) return;
+
+  try {
+    await allDefined();
+    await new Promise(r =>
+      document.readyState === 'complete'
+        ? requestAnimationFrame(r)
+        : window.addEventListener('load', () => requestAnimationFrame(r), { once: true })
+    );
+
+    await new Promise(resolve => {
+      let attempts = 0;
+      const verifyAndSet = () => {
+        window.scrollTo({ top: scrollY, behavior: 'auto' });
+        if (Math.abs(window.scrollY - scrollY) <= 2 || attempts++ >= 5) {
+          hasRestored = true;
+          document.documentElement.removeAttribute('data-scroll-restoring');
+          resolve();
+        } else {
+          requestAnimationFrame(verifyAndSet);
+        }
+      };
+      requestAnimationFrame(verifyAndSet);
+    });
+  } catch (error) {
+    hasRestored = false;
+    document.documentElement.removeAttribute('data-scroll-restoring');
+  }
+}
+
+window.addEventListener('load', restoreScrollPosition);

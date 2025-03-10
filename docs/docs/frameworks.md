@@ -149,4 +149,4 @@ React also struggles with native events:
 
 While it's possible to use custom elements in React 18, the experience is less than optimal. The story is improving, however, as [React 19 has added full support for custom elements](https://react.dev/blog/2024/04/25/react-19#support-for-custom-elements).
 
-To improve the experience today, some custom element libraries provide wrappers for React, but supporting legacy frameworks isn't an objective of this project. If you need to use Quiet with React 18 or below, consider using [this utility](https://www.npmjs.com/package/@lit-labs/react) for a more idiomatic experience.
+Some custom element libraries provide wrappers to improve the experience in older versions of React, but supporting legacy frameworks isn't an objective of this project. If you need to use Quiet with React 18 or below, consider trying [this utility](https://www.npmjs.com/package/@lit-labs/react) for a more idiomatic experience.

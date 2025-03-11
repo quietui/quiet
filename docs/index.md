@@ -57,6 +57,18 @@ About this project
       Localized components with translations in multiple languages
     </a>
   </li>  
+  <li>
+    <a class="stretch" href="/docs/css-utilities">
+      <quiet-icon name="tools" style="color: #ee6383;"></quiet-icon><br>
+      A handful of CSS utilities to make common things easier
+    </a>
+  </li>  
+  <li>
+    <a class="stretch" href="/docs/ai">
+      <quiet-icon name="sparkles" style="color: #dbb31d;"></quiet-icon><br>
+      Empower AI assistants with ready-to-use component intelligence
+    </a>
+  </li>  
 </ul>
 
 <h2 data-no-anchor>Quick start</h2>

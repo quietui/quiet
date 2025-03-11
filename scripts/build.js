@@ -34,6 +34,7 @@ async function buildAll() {
     await generateManifest();
     await generateIcons();
     await generateTypes();
+    await generateLlmData();
     await generateStyles();
     await generateBuild();
     await generateDocs();
@@ -117,6 +118,26 @@ function generateTypes() {
     // Report the error, but don't break the build
     spinner.fail(`TypeScript reported problems:\n\n${chalk.red(error.stdout.toString().trim())}\n`);
   }
+
+  spinner.succeed();
+
+  return Promise.resolve();
+}
+
+/**
+ * Runs the script to generate training data for LLMs.
+ */
+function generateLlmData() {
+  spinner.start('Generating training data for LLMs');
+
+  try {
+    execSync(`node ./scripts/llm.js`);
+  } catch (error) {
+    // Report the error, but don't break the build
+    spinner.fail(`Error:\n\n${chalk.red(error.stdout.toString().trim())}\n`);
+  }
+
+  spinner.succeed();
 
   return Promise.resolve();
 }

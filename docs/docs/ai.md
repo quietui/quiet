@@ -4,7 +4,7 @@ description: Leverage Quiet UI's component documentation with AI assistants for 
 layout: docs
 ---
 
-To streamline development with AI and Quiet, a set of detailed _component reference files_ are available for use with many [LLMs](https://en.wikipedia.org/wiki/Large_language_model). These files offer a complete breakdown of Quiet's web components — including properties, methods, slots, events, and more — making it easy to get quick, accurate help when crafting projects.
+To streamline development with AI and Quiet, a set of detailed _component reference files_ are available for use with [LLMs](https://en.wikipedia.org/wiki/Large_language_model). These files offer a complete breakdown of Quiet's web components — including properties, methods, slots, events, and more — making it easy to get quick, accurate help when crafting projects.
 
 ## What are component reference files?
 
@@ -12,15 +12,15 @@ The component reference files are a collection of plain-text documents that desc
 
 Here's what's included in these files:
 
-- **Component name and tag:** The human-readable name (e.g., "Button") and the custom element tag (e.g., `<quiet-button>`).
-- **Description:** A brief overview of the component's purpose.
-- **Slots:** Details about available slots for injecting custom content.
-- **Properties + attributes:** A list of configurable options, their types, defaults, and how they map to HTML attributes.
-- **Methods:** Public methods callable on the component programmatically.
-- **Events:** Custom events the component emits and their meanings.
-- **Custom properties:** CSS custom properties (e.g., `--quiet-color`) for styling.
-- **Css parts:** Named parts for advanced shadow DOM styling.
-- **Custom states:** Pseudo-states (e.g., `:--active`) for dynamic styling.
+- Component name and tag
+- A brief overview of the component's purpose
+- Details about available slots for injecting custom content
+- A list of attributes/properties and their types
+- Public methods callable on the component
+- Custom events the component emits
+- CSS custom properties for styling
+- CSS parts for advanced shadow DOM styling
+- Custom states for dynamic styling
 
 ## Where are the files located?
 

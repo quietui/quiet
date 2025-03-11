@@ -5,6 +5,7 @@ import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const manifest = JSON.parse(readFileSync(resolve(__dirname, '../../dist/custom-elements.json'), 'utf-8'));
+
 /**
  * @returns Fetches components from custom-elements.json and returns them in more sane format.
  */

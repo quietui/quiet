@@ -84,8 +84,6 @@ export class QuietDropdownItem extends QuietElement {
     super.disconnectedCallback();
     this.closeSubmenu();
     this.removeEventListener('mouseenter', this.handleMouseEnter);
-    this.removeEventListener('mouseleave', this.handleMouseLeave);
-    this.removeEventListener('keydown', this.handleKeyDown);
   }
 
   updated(changedProperties: PropertyValues<this>) {
@@ -220,21 +218,6 @@ export class QuietDropdownItem extends QuietElement {
     }
   }
 
-  /** Handles mouse leave to close the submenu */
-  private handleMouseLeave(event: MouseEvent) {
-    // Mouse leave detection is now handled at the dropdown level
-    // We don't close immediately since we need to check if the cursor is in the safe triangle
-  }
-
-  /** Handles key down events - now handled at the parent dropdown level */
-  private handleKeyDown(event: KeyboardEvent) {
-    // Minimal implementation as most keyboard navigation is now handled at the dropdown level
-    // This handles keyboard events specific to this item that don't bubble up
-
-    // Don't handle key events if the item is disabled
-    if (this.disabled) return;
-  }
-
   render() {
     return html`
       ${this.type === 'checkbox'
@@ -295,8 +278,6 @@ export class QuietDropdownItem extends QuietElement {
   connectedCallback() {
     super.connectedCallback();
     this.addEventListener('mouseenter', this.handleMouseEnter.bind(this));
-    this.addEventListener('mouseleave', this.handleMouseLeave.bind(this));
-    this.addEventListener('keydown', this.handleKeyDown.bind(this));
   }
 }
 

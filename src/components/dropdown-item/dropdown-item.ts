@@ -75,15 +75,20 @@ export class QuietDropdownItem extends QuietElement {
   /** @internal Store whether this item has a submenu */
   @state() private hasSubmenu = false;
 
-  firstUpdated() {
-    this.setAttribute('tabindex', '-1');
-    this.hasSubmenu = this.slotsWithContent.has('submenu');
+  connectedCallback() {
+    super.connectedCallback();
+    this.addEventListener('mouseenter', this.handleMouseEnter.bind(this));
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     this.closeSubmenu();
     this.removeEventListener('mouseenter', this.handleMouseEnter);
+  }
+
+  firstUpdated() {
+    this.setAttribute('tabindex', '-1');
+    this.hasSubmenu = this.slotsWithContent.has('submenu');
   }
 
   updated(changedProperties: PropertyValues<this>) {
@@ -251,7 +256,7 @@ export class QuietDropdownItem extends QuietElement {
               part="submenu-icon"
               exportparts="svg:submenu-icon__svg"
               library="system"
-              name="chevron-right"
+              name=${getComputedStyle(this).direction === 'rtl' ? 'chevron-left' : 'chevron-right'}
             ></quiet-icon>
           `
         : ''}
@@ -273,11 +278,6 @@ export class QuietDropdownItem extends QuietElement {
         { force: this.hasSubmenu }
       )}
     `;
-  }
-
-  connectedCallback() {
-    super.connectedCallback();
-    this.addEventListener('mouseenter', this.handleMouseEnter.bind(this));
   }
 }
 

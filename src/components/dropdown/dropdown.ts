@@ -54,6 +54,7 @@ export class QuietDropdown extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
   private cleanup: ReturnType<typeof autoUpdate> | undefined;
+  private submenuCleanups: Map<QuietDropdownItem, ReturnType<typeof autoUpdate>> = new Map();
   private contextMenuElement: HTMLElement | null;
   private contextMenuLongPress: LongPress;
   private contextMenuVirtualElement: VirtualElement | undefined;
@@ -97,6 +98,12 @@ export class QuietDropdown extends QuietElement {
     super.disconnectedCallback();
     clearInterval(this.userTypedTimeout);
     this.closeAllSubmenus();
+
+    // Clean up all submenu positioning
+    this.submenuCleanups.forEach(cleanup => cleanup());
+    this.submenuCleanups.clear();
+
+    document.removeEventListener('mousemove', this.handleGlobalMouseMove);
   }
 
   firstUpdated() {
@@ -252,6 +259,7 @@ export class QuietDropdown extends QuietElement {
     document.addEventListener('keydown', this.handleDocumentKeyDown);
     document.addEventListener('pointerdown', this.handleDocumentPointerDown);
     document.addEventListener('focusin', this.handleDocumentFocusIn);
+    document.addEventListener('mousemove', this.handleGlobalMouseMove);
 
     this.menu.hidden = false;
     this.cleanup = autoUpdate(anchor, this.menu, () => this.reposition());
@@ -283,6 +291,7 @@ export class QuietDropdown extends QuietElement {
     document.removeEventListener('keydown', this.handleDocumentKeyDown);
     document.removeEventListener('pointerdown', this.handleDocumentPointerDown);
     document.removeEventListener('focusin', this.handleDocumentFocusIn);
+    document.removeEventListener('mousemove', this.handleGlobalMouseMove);
 
     if (!this.menu.hidden) {
       await animateWithClass(this.menu, 'hide');
@@ -639,7 +648,114 @@ export class QuietDropdown extends QuietElement {
     const openingItem = event.detail.item as QuietDropdownItem;
     this.closeSiblingSubmenus(openingItem);
     this.addToSubmenuStack(openingItem);
+
+    // Position the submenu
+    this.setupSubmenuPosition(openingItem);
   }
+
+  /** Sets up submenu positioning with autoUpdate */
+  private setupSubmenuPosition(item: QuietDropdownItem) {
+    if (!item.submenuElement) return;
+
+    // Cleanup previous positioning if exists
+    this.cleanupSubmenuPosition(item);
+
+    // Setup new positioning with autoUpdate
+    const cleanup = autoUpdate(item, item.submenuElement, () => {
+      this.positionSubmenu(item);
+      this.updateSafeTriangleCoordinates(item);
+    });
+
+    this.submenuCleanups.set(item, cleanup);
+  }
+
+  /** Cleans up submenu positioning */
+  private cleanupSubmenuPosition(item: QuietDropdownItem) {
+    const cleanup = this.submenuCleanups.get(item);
+    if (cleanup) {
+      cleanup();
+      this.submenuCleanups.delete(item);
+    }
+  }
+
+  /** Positions a submenu relative to its parent item */
+  private positionSubmenu(item: QuietDropdownItem) {
+    if (!item.submenuElement) return;
+
+    computePosition(item, item.submenuElement, {
+      placement: 'right-start',
+      middleware: [offset({ mainAxis: 0, crossAxis: -5 }), flip(), shift()]
+    }).then(({ x, y, placement }) => {
+      // Set placement for transform origin styles
+      item.submenuElement.setAttribute('data-placement', placement);
+
+      // Position it
+      Object.assign(item.submenuElement.style, {
+        left: `${x}px`,
+        top: `${y}px`
+      });
+    });
+  }
+
+  /** Updates the safe triangle coordinates for a submenu */
+  private updateSafeTriangleCoordinates(item: QuietDropdownItem) {
+    if (!item.submenuElement || !item.submenuOpen) return;
+
+    const submenuRect = item.submenuElement.getBoundingClientRect();
+    const isRtl = getComputedStyle(item).direction === 'rtl';
+
+    // Set the start and end points of the submenu side of the triangle
+    item.submenuElement.style.setProperty(
+      '--safe-triangle-submenu-start-x',
+      `${isRtl ? submenuRect.right : submenuRect.left}px`
+    );
+    item.submenuElement.style.setProperty('--safe-triangle-submenu-start-y', `${submenuRect.top}px`);
+    item.submenuElement.style.setProperty(
+      '--safe-triangle-submenu-end-x',
+      `${isRtl ? submenuRect.right : submenuRect.left}px`
+    );
+    item.submenuElement.style.setProperty('--safe-triangle-submenu-end-y', `${submenuRect.bottom}px`);
+  }
+
+  /** Handle global mouse movement for safe triangle logic */
+  private handleGlobalMouseMove = (event: MouseEvent) => {
+    // Find the last open submenu item
+    const currentSubmenuItem = this.getCurrentSubmenuItem();
+    if (!currentSubmenuItem?.submenuOpen || !currentSubmenuItem.submenuElement) return;
+
+    // Get submenu rect for boundary checking
+    const submenuRect = currentSubmenuItem.submenuElement.getBoundingClientRect();
+    const isRtl = getComputedStyle(currentSubmenuItem).direction === 'rtl';
+
+    // Determine the submenu edge x-coordinate
+    const submenuEdgeX = isRtl ? submenuRect.right : submenuRect.left;
+
+    // Calculate the constrained cursor position
+    const constrainedX = isRtl ? Math.max(event.clientX, submenuEdgeX) : Math.min(event.clientX, submenuEdgeX);
+
+    const constrainedY = Math.max(submenuRect.top, Math.min(event.clientY, submenuRect.bottom));
+
+    // Update cursor position
+    currentSubmenuItem.submenuElement.style.setProperty('--safe-triangle-cursor-x', `${constrainedX}px`);
+    currentSubmenuItem.submenuElement.style.setProperty('--safe-triangle-cursor-y', `${constrainedY}px`);
+
+    // Check if mouse is in safe area
+    const isOverItem = currentSubmenuItem.matches(':hover');
+    const isOverSubmenu =
+      currentSubmenuItem.submenuElement?.matches(':hover') ||
+      !!event
+        .composedPath()
+        .find(el => el instanceof HTMLElement && el.closest('[part="submenu"]') === currentSubmenuItem.submenuElement);
+
+    // Close if not in safe area
+    if (!isOverItem && !isOverSubmenu) {
+      setTimeout(() => {
+        if (!currentSubmenuItem.matches(':hover') && !currentSubmenuItem.submenuElement?.matches(':hover')) {
+          currentSubmenuItem.submenuOpen = false;
+        }
+      }, 100);
+    }
+  };
 
   /** Makes a selection, emits the quiet-select event, and closes the dropdown. */
   private makeSelection(item: QuietDropdownItem) {

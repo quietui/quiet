@@ -1,4 +1,3 @@
-import { autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
 import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
@@ -40,8 +39,6 @@ export class QuietDropdownItem extends QuietElement {
 
   // Enable slot observation
   static observeSlots = true;
-
-  private cleanup: ReturnType<typeof autoUpdate> | undefined;
 
   @query('#submenu') submenuElement: HTMLDivElement;
 
@@ -85,7 +82,6 @@ export class QuietDropdownItem extends QuietElement {
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    document.removeEventListener('mousemove', this.handleGlobalMouseMove);
     this.closeSubmenu();
     this.removeEventListener('mouseenter', this.handleMouseEnter);
     this.removeEventListener('mouseleave', this.handleMouseLeave);
@@ -141,7 +137,7 @@ export class QuietDropdownItem extends QuietElement {
   async openSubmenu() {
     if (!this.hasSubmenu || !this.submenuElement) return;
 
-    // Notify parent dropdown to close other submenus
+    // Notify parent dropdown to handle positioning
     this.notifyParentOfOpening();
 
     // Use Popover API to show the submenu
@@ -150,15 +146,6 @@ export class QuietDropdownItem extends QuietElement {
     this.submenuElement.setAttribute('data-visible', '');
     this.submenuOpen = true;
     this.setAttribute('aria-expanded', 'true');
-
-    // Set up auto-updating position
-    this.cleanup = autoUpdate(this, this.submenuElement, () => {
-      this.repositionSubmenu();
-      this.updateSafeTriangleCoordinates();
-    });
-
-    // Set up global mouse move tracking for the safe triangle logic
-    document.addEventListener('mousemove', this.handleGlobalMouseMove);
 
     // Animate the submenu
     await animateWithClass(this.submenuElement, 'show');
@@ -208,59 +195,12 @@ export class QuietDropdownItem extends QuietElement {
     this.submenuOpen = false;
     this.setAttribute('aria-expanded', 'false');
 
-    // Clean up event listeners
-    document.removeEventListener('mousemove', this.handleGlobalMouseMove);
-
-    if (this.cleanup) {
-      this.cleanup();
-      this.cleanup = undefined;
-    }
-
     if (!this.submenuElement.hidden) {
       await animateWithClass(this.submenuElement, 'hide');
       this.submenuElement.hidden = true;
       this.submenuElement.removeAttribute('data-visible');
       this.submenuElement.hidePopover();
     }
-  }
-
-  /** Repositions the submenu. */
-  private repositionSubmenu() {
-    if (!this.submenuElement) return;
-
-    computePosition(this, this.submenuElement, {
-      placement: 'right-start',
-      middleware: [offset({ mainAxis: 0, crossAxis: -5 }), flip(), shift()]
-    }).then(({ x, y, placement }) => {
-      // Set placement for transform origin styles
-      this.submenuElement.setAttribute('data-placement', placement);
-
-      // Position it
-      Object.assign(this.submenuElement.style, {
-        left: `${x}px`,
-        top: `${y}px`
-      });
-    });
-  }
-
-  /** Updates the safe triangle coordinates based on submenu position */
-  private updateSafeTriangleCoordinates() {
-    if (!this.submenuElement || !this.submenuOpen) return;
-
-    const submenuRect = this.submenuElement.getBoundingClientRect();
-    const isRtl = getComputedStyle(this).direction === 'rtl';
-
-    // Set the start and end points of the submenu side of the triangle
-    this.submenuElement.style.setProperty(
-      '--safe-triangle-submenu-start-x',
-      `${isRtl ? submenuRect.right : submenuRect.left}px`
-    );
-    this.submenuElement.style.setProperty('--safe-triangle-submenu-start-y', `${submenuRect.top}px`);
-    this.submenuElement.style.setProperty(
-      '--safe-triangle-submenu-end-x',
-      `${isRtl ? submenuRect.right : submenuRect.left}px`
-    );
-    this.submenuElement.style.setProperty('--safe-triangle-submenu-end-y', `${submenuRect.bottom}px`);
   }
 
   /** Gets all dropdown items in the submenu. */
@@ -282,56 +222,9 @@ export class QuietDropdownItem extends QuietElement {
 
   /** Handles mouse leave to close the submenu */
   private handleMouseLeave(event: MouseEvent) {
-    if (this.submenuOpen && !this.contains(event.relatedTarget as Node)) {
-      // Don't close immediately - we'll check if the mouse is in the safe area
-      // This is handled by the mousemove event listener that's added when a submenu opens
-    }
+    // Mouse leave detection is now handled at the dropdown level
+    // We don't close immediately since we need to check if the cursor is in the safe triangle
   }
-
-  /** Track mouse movement to handle the safe triangle logic */
-  private handleGlobalMouseMove = (event: MouseEvent) => {
-    if (!this.submenuOpen) return;
-
-    // Get submenu rect for boundary checking
-    const submenuRect = this.submenuElement.getBoundingClientRect();
-    const isRtl = getComputedStyle(this).direction === 'rtl';
-
-    // Determine the submenu edge x-coordinate (left or right depending on RTL)
-    const submenuEdgeX = isRtl ? submenuRect.right : submenuRect.left;
-
-    // Calculate the constrained cursor position
-    // For x: never go beyond the submenu edge (left/right depending on RTL mode)
-    // For y: constrain between the top and bottom of the submenu
-    const constrainedX = isRtl
-      ? Math.max(event.clientX, submenuEdgeX) // For RTL: x should never be less than submenu's right edge
-      : Math.min(event.clientX, submenuEdgeX); // For LTR: x should never be greater than submenu's left edge
-
-    const constrainedY = Math.max(submenuRect.top, Math.min(event.clientY, submenuRect.bottom));
-
-    // Update cursor position for the safe triangle with constrained values
-    this.submenuElement.style.setProperty('--safe-triangle-cursor-x', `${constrainedX}px`);
-    this.submenuElement.style.setProperty('--safe-triangle-cursor-y', `${constrainedY}px`);
-
-    // If the mouse is inside the item, the submenu, or the safe triangle, keep the submenu open
-    const isOverItem = this.matches(':hover');
-    const isOverSubmenu =
-      this.submenuElement?.matches(':hover') ||
-      !!event
-        .composedPath()
-        .find(el => el instanceof HTMLElement && el.closest('[part="submenu"]') === this.submenuElement);
-
-    // If we're not in any safe area, close the submenu after a short delay
-    if (!isOverItem && !isOverSubmenu) {
-      // Add a small delay to prevent accidental closures
-      // The triangle is now part of the submenu and will count as "hovering over the submenu"
-      // due to pointer-events: auto on the pseudo-element
-      setTimeout(() => {
-        if (!this.matches(':hover') && !this.submenuElement?.matches(':hover')) {
-          this.submenuOpen = false;
-        }
-      }, 100);
-    }
-  };
 
   /** Handles key down events - now handled at the parent dropdown level */
   private handleKeyDown(event: KeyboardEvent) {
@@ -340,8 +233,6 @@ export class QuietDropdownItem extends QuietElement {
 
     // Don't handle key events if the item is disabled
     if (this.disabled) return;
-
-    // The actual navigation logic is now handled at the dropdown level
   }
 
   render() {

@@ -12,6 +12,7 @@ import {
 import { QuietSelectEvent } from '../../events/select.js';
 import hostStyles from '../../styles/host.styles.js';
 import { animateWithClass } from '../../utilities/animate.js';
+import { Localize } from '../../utilities/localize.js';
 import { LongPress, LongPressEvent } from '../../utilities/long-press.js';
 import { createId } from '../../utilities/math.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
@@ -58,6 +59,7 @@ export class QuietDropdown extends QuietElement {
   private contextMenuElement: HTMLElement | null;
   private contextMenuLongPress: LongPress;
   private contextMenuVirtualElement: VirtualElement | undefined;
+  private localize = new Localize(this);
   private userTypedQuery = '';
   private userTypedTimeout: ReturnType<typeof setTimeout>;
   private openSubmenuStack: QuietDropdownItem[] = [];
@@ -338,6 +340,8 @@ export class QuietDropdown extends QuietElement {
 
   /** Handles key down events when the menu is open */
   private handleDocumentKeyDown = (event: KeyboardEvent) => {
+    const isRtl = this.localize.dir() === 'rtl';
+
     // Escape key should close the entire dropdown hierarchy immediately
     if (event.key === 'Escape') {
       const trigger = this.getTrigger();
@@ -404,7 +408,7 @@ export class QuietDropdown extends QuietElement {
     }
 
     // Handle Arrow Right - open submenu if exists
-    if (event.key === 'ArrowRight' && isFocusedOnItem && activeItem) {
+    if (event.key === (isRtl ? 'ArrowLeft' : 'ArrowRight') && isFocusedOnItem && activeItem) {
       // Only respond if the active item has a submenu
       if (activeItem.slotsWithContent && activeItem.slotsWithContent.has('submenu')) {
         event.preventDefault();
@@ -428,7 +432,7 @@ export class QuietDropdown extends QuietElement {
     }
 
     // Handle Arrow Left - close current submenu if in a submenu
-    if (event.key === 'ArrowLeft' && isInSubmenu) {
+    if (event.key === (isRtl ? 'ArrowRight' : 'ArrowLeft') && isInSubmenu) {
       event.preventDefault();
       event.stopPropagation();
 
@@ -701,8 +705,21 @@ export class QuietDropdown extends QuietElement {
   private updateSafeTriangleCoordinates(item: QuietDropdownItem) {
     if (!item.submenuElement || !item.submenuOpen) return;
 
+    // Detect if we're in keyboard navigation mode by checking focus-visible
+    const isKeyboardNavigation = document.activeElement?.matches(':focus-visible');
+
+    // If using keyboard navigation, don't show the safe triangle
+    if (isKeyboardNavigation) {
+      // Hide the safe triangle for keyboard navigation
+      item.submenuElement.style.setProperty('--safe-triangle-visible', 'none');
+      return;
+    }
+
+    // Enable the safe triangle for mouse navigation
+    item.submenuElement.style.setProperty('--safe-triangle-visible', 'block');
+
     const submenuRect = item.submenuElement.getBoundingClientRect();
-    const isRtl = getComputedStyle(item).direction === 'rtl';
+    const isRtl = this.localize.dir() === 'rtl';
 
     // Set the start and end points of the submenu side of the triangle
     item.submenuElement.style.setProperty(
@@ -725,7 +742,7 @@ export class QuietDropdown extends QuietElement {
 
     // Get submenu rect for boundary checking
     const submenuRect = currentSubmenuItem.submenuElement.getBoundingClientRect();
-    const isRtl = getComputedStyle(currentSubmenuItem).direction === 'rtl';
+    const isRtl = this.localize.dir() === 'rtl';
 
     // Determine the submenu edge x-coordinate
     const submenuEdgeX = isRtl ? submenuRect.right : submenuRect.left;

@@ -271,6 +271,11 @@ export class QuietDropdown extends QuietElement {
       itemToSelect = event.key === 'Home' ? items[0] : items[items.length - 1];
     }
 
+    // Tab key
+    if (event.key === 'Tab') {
+      this.hideMenu();
+    }
+
     // Update the selection as the user types
     if (
       event.key.length === 1 &&

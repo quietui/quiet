@@ -7,17 +7,10 @@ layout: component
 ```html {.example}
 <quiet-dropdown id="dropdown__test">
   <quiet-button slot="trigger" with-caret>Device</quiet-button>
-  <small>Type</small>
   <quiet-dropdown-item value="phone">
     Phone
     <quiet-dropdown-item slot="submenu" value="iphone">iPhone</quiet-dropdown-item>
     <quiet-dropdown-item slot="submenu" value="android">Android</quiet-dropdown-item>
-  </quiet-dropdown-item>
-  <quiet-dropdown-item value="tablet">
-    Tablet
-    <quiet-dropdown-item slot="submenu" value="ipad">iPad</quiet-dropdown-item>
-    <quiet-dropdown-item slot="submenu" value="galaxy">Galaxy</quiet-dropdown-item>
-    <quiet-dropdown-item slot="submenu" value="fire">Fire</quiet-dropdown-item>
   </quiet-dropdown-item>
   <quiet-dropdown-item value="desktop">
     Desktop
@@ -29,6 +22,12 @@ layout: component
     </quiet-dropdown-item>
     <quiet-dropdown-item slot="submenu" value="window">Windows</quiet-dropdown-item>
     <quiet-dropdown-item slot="submenu" value="linux">Linux</quiet-dropdown-item>
+  </quiet-dropdown-item>
+  <quiet-dropdown-item value="tablet">
+    Tablet
+    <quiet-dropdown-item slot="submenu" value="ipad">iPad</quiet-dropdown-item>
+    <quiet-dropdown-item slot="submenu" value="galaxy">Galaxy</quiet-dropdown-item>
+    <quiet-dropdown-item slot="submenu" value="fire">Fire</quiet-dropdown-item>
   </quiet-dropdown-item>
 </quiet-dropdown>
 

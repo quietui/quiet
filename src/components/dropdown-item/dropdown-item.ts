@@ -142,16 +142,7 @@ export class QuietDropdownItem extends QuietElement {
     if (!this.hasSubmenu || !this.submenuElement) return;
 
     // Notify parent dropdown to close other submenus
-    const parentDropdown = this.closest('quiet-dropdown');
-    if (parentDropdown) {
-      // Use a custom event to notify the parent about which item is opening
-      const event = new CustomEvent('submenu-opening', {
-        bubbles: true,
-        composed: true,
-        detail: { item: this }
-      });
-      this.dispatchEvent(event);
-    }
+    this.notifyParentOfOpening();
 
     // Use Popover API to show the submenu
     this.submenuElement.showPopover();
@@ -180,6 +171,34 @@ export class QuietDropdownItem extends QuietElement {
         items[0].focus();
       }
     }, 0);
+  }
+
+  /** Notifies the parent dropdown that this item is opening its submenu */
+  private notifyParentOfOpening() {
+    // First notify the parent that we're about to open
+    const event = new CustomEvent('submenu-opening', {
+      bubbles: true,
+      composed: true,
+      detail: { item: this }
+    });
+    this.dispatchEvent(event);
+
+    // Find sibling items that have open submenus and close them
+    const parent = this.parentElement;
+    if (parent) {
+      const siblings = [...parent.children].filter(
+        el =>
+          el !== this &&
+          el.localName === 'quiet-dropdown-item' &&
+          el.getAttribute('slot') === this.getAttribute('slot') &&
+          (el as QuietDropdownItem).submenuOpen
+      ) as QuietDropdownItem[];
+
+      // Close each sibling submenu with animation
+      siblings.forEach(sibling => {
+        sibling.submenuOpen = false;
+      });
+    }
   }
 
   /** Closes the submenu. */
@@ -246,23 +265,17 @@ export class QuietDropdownItem extends QuietElement {
 
   /** Gets all dropdown items in the submenu. */
   private getSubmenuItems(): QuietDropdownItem[] {
-    return [...this.querySelectorAll('quiet-dropdown-item[slot="submenu"]')].filter(item => !item.disabled);
+    // Only get direct children with slot="submenu", not nested ones
+    return [...this.children].filter(
+      el =>
+        el.localName === 'quiet-dropdown-item' && el.getAttribute('slot') === 'submenu' && !el.hasAttribute('disabled')
+    ) as QuietDropdownItem[];
   }
 
   /** Handles mouse enter to open the submenu */
   private handleMouseEnter() {
     if (this.hasSubmenu && !this.disabled) {
-      // Notify parent dropdown to close other submenus
-      const parentDropdown = this.closest('quiet-dropdown');
-      if (parentDropdown) {
-        const event = new CustomEvent('submenu-opening', {
-          bubbles: true,
-          composed: true,
-          detail: { item: this }
-        });
-        this.dispatchEvent(event);
-      }
-
+      this.notifyParentOfOpening();
       this.submenuOpen = true;
     }
   }
@@ -320,84 +333,15 @@ export class QuietDropdownItem extends QuietElement {
     }
   };
 
-  /** Handles key down events for submenu navigation */
+  /** Handles key down events - now handled at the parent dropdown level */
   private handleKeyDown(event: KeyboardEvent) {
+    // Minimal implementation as most keyboard navigation is now handled at the dropdown level
+    // This handles keyboard events specific to this item that don't bubble up
+
     // Don't handle key events if the item is disabled
     if (this.disabled) return;
 
-    // Check if this is a submenu item
-    const isSubmenuItem = this.getAttribute('slot') === 'submenu';
-
-    // Open submenu on right arrow (for top-level items) or for any item with a submenu
-    if (event.key === 'ArrowRight' && this.hasSubmenu && !this.submenuOpen) {
-      event.preventDefault();
-      event.stopPropagation();
-      this.submenuOpen = true;
-    }
-
-    // Close submenu on left arrow - works for both parent items and submenu items
-    if (event.key === 'ArrowLeft') {
-      if (this.submenuOpen) {
-        // If this item has its own submenu open, close it
-        event.preventDefault();
-        event.stopPropagation();
-        this.submenuOpen = false;
-        this.focus();
-      } else if (isSubmenuItem) {
-        // If this is a submenu item, move focus back to parent
-        event.preventDefault();
-        event.stopPropagation();
-
-        // Find parent dropdown item
-        const parentItem = this.closest('quiet-dropdown-item:not([slot="submenu"])');
-        if (parentItem) {
-          parentItem.focus();
-        }
-      }
-    }
-
-    // Handle ArrowUp and ArrowDown for submenu items specifically
-    if ((event.key === 'ArrowUp' || event.key === 'ArrowDown') && isSubmenuItem) {
-      // Get all siblings in this submenu
-      const submenuItems = [...this.parentElement.querySelectorAll('quiet-dropdown-item[slot="submenu"]')].filter(
-        item => !item.disabled
-      );
-
-      const currentIndex = submenuItems.indexOf(this);
-      let nextIndex;
-
-      if (event.key === 'ArrowUp') {
-        nextIndex = currentIndex === 0 ? submenuItems.length - 1 : currentIndex - 1;
-      } else {
-        nextIndex = currentIndex === submenuItems.length - 1 ? 0 : currentIndex + 1;
-      }
-
-      if (submenuItems[nextIndex]) {
-        event.preventDefault();
-        event.stopPropagation();
-        submenuItems.forEach(item => (item.active = item === submenuItems[nextIndex]));
-        submenuItems[nextIndex].focus();
-      }
-    }
-
-    // Open submenu on Enter or Space if not already open
-    if ((event.key === 'Enter' || event.key === ' ') && this.hasSubmenu && !this.submenuOpen) {
-      event.preventDefault();
-      event.stopPropagation();
-      this.submenuOpen = true;
-    }
-
-    // Escape key handling (for submenu items)
-    if (event.key === 'Escape' && isSubmenuItem) {
-      // Find parent dropdown item and focus it
-      const parentItem = this.closest('quiet-dropdown-item:not([slot="submenu"])');
-      if (parentItem) {
-        event.preventDefault();
-        event.stopPropagation();
-        (parentItem as QuietDropdownItem).submenuOpen = false;
-        parentItem.focus();
-      }
-    }
+    // The actual navigation logic is now handled at the dropdown level
   }
 
   render() {

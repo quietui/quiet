@@ -20,10 +20,10 @@ export class QuietElement extends LitElement {
   public shadowRoot: ShadowRoot;
 
   /**
-   * A Set containing all named slots that are currently populated with content. For performance reasons, this will only
-   * be set when the static `observeSlots` property is enabled on the component.
+   * @internal A Set containing all named slots that are currently populated with content. For performance reasons, this
+   * will only be set when the static `observeSlots` property is enabled on the component.
    */
-  @state() protected slotsWithContent: Set<string> = new Set();
+  @state() slotsWithContent: Set<string> = new Set();
 
   // Make localization attributes reactive
   @property() dir: string;

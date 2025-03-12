@@ -206,7 +206,7 @@ export class QuietDropdown extends QuietElement {
   /** Closes sibling submenus at the same level as the specified item. */
   private closeSiblingSubmenus(item: QuietDropdownItem) {
     // Find direct parent (either another dropdown item or the main dropdown)
-    const parentDropdownItem = item.closest('quiet-dropdown-item:not([slot="submenu"])');
+    const parentDropdownItem = item.closest<QuietDropdownItem>('quiet-dropdown-item:not([slot="submenu"])');
 
     let siblingItems: QuietDropdownItem[];
 

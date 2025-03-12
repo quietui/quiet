@@ -3,6 +3,46 @@ title: Dropdown
 layout: component
 ---
 
+
+```html {.example}
+<quiet-dropdown id="dropdown__test">
+  <quiet-button slot="trigger" with-caret>Device</quiet-button>
+  <small>Type</small>
+  <quiet-dropdown-item value="phone">
+    Phone
+    <quiet-dropdown-item slot="submenu" value="iphone">iPhone</quiet-dropdown-item>
+    <quiet-dropdown-item slot="submenu" value="android">Android</quiet-dropdown-item>
+  </quiet-dropdown-item>
+  <quiet-dropdown-item value="tablet">
+    Tablet
+    <quiet-dropdown-item slot="submenu" value="ipad">iPad</quiet-dropdown-item>
+    <quiet-dropdown-item slot="submenu" value="galaxy">Galaxy</quiet-dropdown-item>
+    <quiet-dropdown-item slot="submenu" value="fire">Fire</quiet-dropdown-item>
+  </quiet-dropdown-item>
+  <quiet-dropdown-item value="desktop">
+    Desktop
+    <quiet-dropdown-item slot="submenu" value="mac">
+      Mac
+      <quiet-dropdown-item slot="submenu" value="cats">Cats</quiet-dropdown-item>
+      <quiet-dropdown-item slot="submenu" value="orcas">Orcas</quiet-dropdown-item>
+      <quiet-dropdown-item slot="submenu" value="tuna">Tuna</quiet-dropdown-item>
+    </quiet-dropdown-item>
+    <quiet-dropdown-item slot="submenu" value="window">Windows</quiet-dropdown-item>
+    <quiet-dropdown-item slot="submenu" value="linux">Linux</quiet-dropdown-item>
+  </quiet-dropdown-item>
+</quiet-dropdown>
+
+<script>
+  const dropdown = document.getElementById('dropdown__test');
+
+  dropdown.addEventListener('quiet-select', event => {
+    console.log(event.detail.selection.value);
+  });
+</script>
+```
+
+---
+
 Dropdown menus appear when their trigger element is clicked. They are not modal, so no overlay is shown when open. Dropdowns will close when the user selects an item, clicks outside of them, or presses [[Escape]]. Only one dropdown can be open at a time.
 
 ```html {.example}

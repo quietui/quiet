@@ -95,6 +95,7 @@ export class QuietDropdown extends QuietElement {
   disconnectedCallback() {
     super.disconnectedCallback();
     clearInterval(this.userTypedTimeout);
+    this.closeAllSubmenus();
   }
 
   firstUpdated() {
@@ -108,6 +109,7 @@ export class QuietDropdown extends QuietElement {
       if (this.open) {
         this.showMenu();
       } else {
+        this.closeAllSubmenus();
         this.hideMenu();
       }
     }
@@ -146,7 +148,27 @@ export class QuietDropdown extends QuietElement {
 
   /** Gets all <quiet-dropdown-item> elements slotted in the menu that aren't disabled. */
   private getItems(): QuietDropdownItem[] {
-    return [...this.querySelectorAll('quiet-dropdown-item')].filter(el => el.localName === 'quiet-dropdown-item');
+    return [...this.querySelectorAll('quiet-dropdown-item:not([slot="submenu"])')].filter(
+      el => el.localName === 'quiet-dropdown-item'
+    );
+  }
+
+  /** Closes all submenus in the dropdown. */
+  private closeAllSubmenus() {
+    const items = this.getItems();
+    items.forEach(item => {
+      item.submenuOpen = false;
+    });
+  }
+
+  /** Closes all submenus except for the specified item. */
+  private closeAllSubmenusExcept(exceptItem: QuietDropdownItem) {
+    const items = this.getItems();
+    items.forEach(item => {
+      if (item !== exceptItem) {
+        item.submenuOpen = false;
+      }
+    });
   }
 
   /** Get the slotted trigger button, a <quiet-button< or <button> element */
@@ -244,8 +266,32 @@ export class QuietDropdown extends QuietElement {
     }
   };
 
-  /** Listen for escape when the menu is open */
+  /** Handles key down events when the menu is open */
   private handleDocumentKeyDown = (event: KeyboardEvent) => {
+    // Escape key should close the entire dropdown hierarchy immediately
+    if (event.key === 'Escape') {
+      const trigger = this.getTrigger();
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      this.open = false;
+      trigger?.focus();
+      return;
+    }
+
+    // Check if we're in a submenu - if so, let the parent item handle it
+    const activeElement = document.activeElement as HTMLElement;
+    const inSubmenu = activeElement?.closest('quiet-dropdown-item[slot="submenu"]');
+
+    if (
+      inSubmenu &&
+      (event.key === 'ArrowLeft' || event.key === 'ArrowRight' || event.key === 'Enter' || event.key === ' ')
+    ) {
+      // Let the parent item handle these keys
+      return;
+    }
+
     const items = this.getItems().filter(item => !item.disabled);
     const activeItem = items.find(item => item.active);
     const activeItemIndex = activeItem ? items.indexOf(activeItem) : 0;
@@ -319,9 +365,46 @@ export class QuietDropdown extends QuietElement {
     if ((event.key === 'Enter' || (event.key === ' ' && this.userTypedQuery === '')) && isFocusedOnItem) {
       event.preventDefault();
       event.stopPropagation();
-      if (activeItem) {
-        this.makeSelection(activeItem);
+
+      const focusedItem = document.activeElement as QuietDropdownItem;
+
+      // Handle submenu items - they should trigger selection just like regular items
+      if (
+        focusedItem &&
+        focusedItem.getAttribute('slot') === 'submenu' &&
+        (!focusedItem.slotsWithContent || !focusedItem.slotsWithContent.has('submenu'))
+      ) {
+        this.makeSelection(focusedItem);
+        return;
       }
+
+      // Handle top-level items
+      if (activeItem) {
+        // If the active item has a submenu, open it instead of making a selection
+        if (activeItem.slotsWithContent.has('submenu') && !activeItem.submenuOpen) {
+          activeItem.submenuOpen = true;
+        } else if (!activeItem.slotsWithContent.has('submenu')) {
+          this.makeSelection(activeItem);
+        }
+      }
+    }
+
+    // Handle arrow right for opening submenus
+    if (
+      event.key === 'ArrowRight' &&
+      isFocusedOnItem &&
+      activeItem &&
+      activeItem.slotsWithContent.has('submenu') &&
+      !activeItem.submenuOpen
+    ) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      // Close all other open submenus before opening this one
+      this.closeAllSubmenusExcept(activeItem);
+
+      // Open this submenu
+      activeItem.submenuOpen = true;
     }
 
     // Close the menu
@@ -340,7 +423,17 @@ export class QuietDropdown extends QuietElement {
   private handleDocumentPointerDown = (event: PointerEvent) => {
     const path = event.composedPath();
 
-    if (!path.includes(this)) {
+    // Check if the click is inside any submenu popover
+    const clickedInSubmenu = path.some(el => {
+      if (el instanceof HTMLElement) {
+        // Check if it's a submenu or inside a submenu
+        return el.id === 'submenu' || el.closest('[part="submenu"]');
+      }
+      return false;
+    });
+
+    // Only close if the click is outside the dropdown and not in any submenu
+    if (!path.includes(this) && !clickedInSubmenu) {
       this.open = false;
     }
   };
@@ -348,7 +441,28 @@ export class QuietDropdown extends QuietElement {
   /** Handles clicks on the menu. */
   private handleMenuClick(event: MouseEvent) {
     const item = (event.target as Element).closest('quiet-dropdown-item');
-    if (item) {
+
+    if (!item) return;
+
+    // Handle top-level item with submenu
+    if (!item.getAttribute('slot') && item.slotsWithContent && item.slotsWithContent.has('submenu')) {
+      // If clicking directly on an item with a submenu, toggle the submenu
+      const willOpen = !item.submenuOpen;
+
+      // If we're about to open a submenu, close all others first
+      if (willOpen) {
+        this.closeAllSubmenusExcept(item);
+      }
+
+      item.submenuOpen = willOpen;
+      return;
+    }
+
+    // Handle both top-level and submenu items that don't have their own submenus
+    if (
+      (item.getAttribute('slot') === 'submenu' || !item.getAttribute('slot')) &&
+      (!item.slotsWithContent || !item.slotsWithContent.has('submenu'))
+    ) {
       this.makeSelection(item);
     }
   }
@@ -410,6 +524,29 @@ export class QuietDropdown extends QuietElement {
       this.open = true;
     }
   };
+
+  private handleSubmenuOpening(event: CustomEvent) {
+    // Get the item that is opening its submenu
+    const openingItem = event.detail.item;
+
+    // Get the parent element of the opening item
+    const parentElement = openingItem.parentElement;
+
+    // Find all sibling dropdown items that are at the same level
+    // (items that share the same parent and have the same slot)
+    const siblingItems = Array.from(parentElement.querySelectorAll('quiet-dropdown-item')).filter(item => {
+      return (
+        item !== openingItem &&
+        item.parentElement === parentElement &&
+        item.getAttribute('slot') === openingItem.getAttribute('slot')
+      );
+    });
+
+    // Close only the sibling items' submenus
+    siblingItems.forEach(item => {
+      item.submenuOpen = false;
+    });
+  }
 
   /** Makes a selection, emits the quiet-select event, and closes the dropdown. */
   private makeSelection(item: QuietDropdownItem) {
@@ -477,6 +614,7 @@ export class QuietDropdown extends QuietElement {
         aria-orientation="vertical"
         hidden
         @click=${this.handleMenuClick}
+        @submenu-opening=${this.handleSubmenuOpening}
       >
         <slot @slotchange=${this.handleMenuSlotChange}></slot>
       </div>

@@ -68,7 +68,7 @@ function generateFiles() {
     if (component.events?.length) {
       component.events.forEach(event => {
         if (event.name) {
-          componentOutput += `    "${event.name}": ${removeNewlines(event.description) || 'No description available.'}\n`;
+          componentOutput += `    ${event.name}: ${removeNewlines(event.description) || 'No description available.'}\n`;
         }
       });
     }

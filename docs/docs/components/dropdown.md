@@ -50,6 +50,19 @@ Dropdown menus appear when their trigger element is clicked. They are not modal,
 
   <quiet-divider></quiet-divider>
 
+   <quiet-dropdown-item>
+    <quiet-icon slot="icon" name="tag"></quiet-icon>
+    Labels
+    <quiet-dropdown-item slot="submenu" value="add-label">
+      <quiet-icon slot="icon" name="plus"></quiet-icon>
+      Add label
+    </quiet-dropdown-item>
+    <quiet-dropdown-item slot="submenu" value="manage-labels">
+      <quiet-icon slot="icon" name="edit"></quiet-icon>
+      Manage labels
+    </quiet-dropdown-item>
+  </quiet-dropdown-item> 
+
   <quiet-dropdown-item value="preferences">
     <quiet-icon slot="icon" name="adjustments-horizontal"></quiet-icon>
     Preferences
@@ -269,10 +282,12 @@ To create submenus, nest [dropdown items](/docs/components/dropdown-item) inside
     <quiet-dropdown-item slot="submenu" value="american">American Breeds</quiet-dropdown-item>
   </quiet-dropdown-item>
 
+  <quiet-divider></quiet-divider>
+
   <quiet-dropdown-item>
-    Size
+    Sizes
     <quiet-dropdown-item slot="submenu" type="checkbox" value="small">Small</quiet-dropdown-item>
-    <quiet-dropdown-item slot="submenu" type="checkbox" value="medium">Medium</quiet-dropdown-item>
+    <quiet-dropdown-item slot="submenu" type="checkbox" checked value="medium">Medium</quiet-dropdown-item>
     <quiet-dropdown-item slot="submenu" type="checkbox" value="large">Large</quiet-dropdown-item>
   </quiet-dropdown-item>
 </quiet-dropdown>

@@ -224,6 +224,9 @@ export class QuietDropdownItem extends QuietElement {
   }
 
   render() {
+    // We don't use localize because we want to inherit it from the dropdown and that's not supported in Squeak yet
+    const isRtl = this.matches(':dir(rtl)');
+
     return html`
       ${this.type === 'checkbox'
         ? html`
@@ -256,7 +259,7 @@ export class QuietDropdownItem extends QuietElement {
               part="submenu-icon"
               exportparts="svg:submenu-icon__svg"
               library="system"
-              name=${getComputedStyle(this).direction === 'rtl' ? 'chevron-left' : 'chevron-right'}
+              name=${isRtl ? 'chevron-left' : 'chevron-right'}
             ></quiet-icon>
           `
         : ''}

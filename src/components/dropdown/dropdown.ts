@@ -680,8 +680,12 @@ export class QuietDropdown extends QuietElement {
   private positionSubmenu(item: QuietDropdownItem) {
     if (!item.submenuElement) return;
 
+    // Determine placement based on text direction
+    const isRtl = this.localize.dir() === 'rtl';
+    const placement = isRtl ? 'left-start' : 'right-start';
+
     computePosition(item, item.submenuElement, {
-      placement: 'right-start',
+      placement: placement,
       middleware: [offset({ mainAxis: 0, crossAxis: -5 }), flip(), shift()]
     }).then(({ x, y, placement }) => {
       // Set placement for transform origin styles
@@ -716,6 +720,7 @@ export class QuietDropdown extends QuietElement {
     const isRtl = this.localize.dir() === 'rtl';
 
     // Set the start and end points of the submenu side of the triangle
+    // In RTL, we use the right edge of the submenu; in LTR, we use the left edge
     item.submenuElement.style.setProperty(
       '--safe-triangle-submenu-start-x',
       `${isRtl ? submenuRect.right : submenuRect.left}px`
@@ -739,11 +744,14 @@ export class QuietDropdown extends QuietElement {
     const isRtl = this.localize.dir() === 'rtl';
 
     // Determine the submenu edge x-coordinate
+    // LTR: we use the left edge.
+    // RTL: use the right edge
     const submenuEdgeX = isRtl ? submenuRect.right : submenuRect.left;
 
     // Calculate the constrained cursor position
+    // LTR: cursor must be to the left of submenu edge (min)
+    // RTL: cursor must be to the right of submenu edge (max)
     const constrainedX = isRtl ? Math.max(event.clientX, submenuEdgeX) : Math.min(event.clientX, submenuEdgeX);
-
     const constrainedY = Math.max(submenuRect.top, Math.min(event.clientY, submenuRect.bottom));
 
     // Update cursor position

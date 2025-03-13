@@ -54,7 +54,7 @@ Use the `min` and `max` attributes to set a minimum and maximum value for the sl
 
 ### Showing markers
 
-Add the `--with-markers` attribute to show visual markers at each step. Markers work best with sliders that have shorter ranges.
+Add the `with-markers` attribute to show visual markers at each step. Markers work best with sliders that have shorter ranges.
 
 ```html {.example}
 <quiet-slider 

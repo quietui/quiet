@@ -33,6 +33,7 @@ import styles from './dropdown-item.styles.js';
  * @cssstate disabled - Applied when the dropdown item is disabled.
  * @cssstate checked - Applied when the dropdown item is checked.
  * @cssstate submenu-open - Applied when the dropdown item's submenu is open.
+ * @cssstate has-submenu - Applied when the dropdown item has a submenu.
  */
 @customElement('quiet-dropdown-item')
 export class QuietDropdownItem extends QuietElement {
@@ -96,6 +97,7 @@ export class QuietDropdownItem extends QuietElement {
   firstUpdated() {
     this.setAttribute('tabindex', '-1');
     this.hasSubmenu = this.slotsWithContent.has('submenu');
+    this.updateHasSubmenuState();
   }
 
   updated(changedProperties: PropertyValues<this>) {
@@ -133,6 +135,8 @@ export class QuietDropdownItem extends QuietElement {
 
     if (changedProperties.has('slotsWithContent')) {
       this.hasSubmenu = this.slotsWithContent.has('submenu');
+      this.updateHasSubmenuState();
+
       if (this.hasSubmenu) {
         this.setAttribute('aria-haspopup', 'menu');
         this.setAttribute('aria-expanded', this.submenuOpen ? 'true' : 'false');
@@ -141,6 +145,11 @@ export class QuietDropdownItem extends QuietElement {
         this.removeAttribute('aria-expanded');
       }
     }
+  }
+
+  /** Update the has-submenu custom state */
+  private updateHasSubmenuState() {
+    this.customStates.set('has-submenu', this.hasSubmenu);
   }
 
   /** Opens the submenu. */

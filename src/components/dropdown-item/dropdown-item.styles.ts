@@ -62,7 +62,12 @@ export default css`
     padding-inline-start: 2em;
   }
 
-  :host([submenu-adjacent]) #details {
+  /* Only add padding when item actually has a submenu */
+  :host([submenu-adjacent]:not(:state(has-submenu))) #details {
+    padding-inline-end: 0;
+  }
+
+  :host(:state(has-submenu)[submenu-adjacent]) #details {
     padding-inline-end: 1.75em;
   }
 
@@ -100,10 +105,10 @@ export default css`
     justify-content: end;
     color: var(--quiet-text-muted);
     font-size: 0.933334em !important;
+  }
 
-    ::slotted(*) {
-      margin-inline-start: 2em !important;
-    }
+  #details ::slotted(*) {
+    margin-inline-start: 2em !important;
   }
 
   /* Submenu indicator icon */

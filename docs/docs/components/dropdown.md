@@ -35,7 +35,7 @@ Dropdown menus appear when their trigger element is clicked. They are not modal,
   <quiet-dropdown-item value="delete" variant="destructive">
     <quiet-icon slot="icon" name="trash"></quiet-icon>
     Delete
-    <span slot="details">Delete</span>
+    <span slot="details">Del</span>
   </quiet-dropdown-item>
 
   <quiet-divider></quiet-divider>

@@ -700,9 +700,13 @@ export class QuietDropdown extends QuietElement {
     // Check if any item has a submenu
     const hasSubmenuItems = items.some(item => item.slotsWithContent && item.slotsWithContent.has('submenu'));
 
-    // Apply submenu-adjacent to all items if needed
+    // Check if any item is a checkbox
+    const hasCheckboxItems = items.some(item => item.type === 'checkbox');
+
+    // Apply submenu-adjacent and checkbox-adjacent to all items if needed
     items.forEach(item => {
       item.submenuAdjacent = hasSubmenuItems;
+      item.checkboxAdjacent = hasCheckboxItems;
     });
   }
 

@@ -587,12 +587,18 @@ export class QuietDropdown extends QuietElement {
   private async handleMenuSlotChange() {
     const items = this.getItems(true);
     await Promise.all(items.map(item => item.updateComplete));
+
+    // Check for checkboxes
     const hasCheckbox = items.some(item => item.type === 'checkbox');
 
-    // Setup the roving tab index
+    // Check for submenus
+    const hasSubmenu = items.some(item => item.hasSubmenu);
+
+    // Setup the roving tab index and apply adjacent classes
     items.forEach((item, index) => {
       item.active = index === 0;
       item.checkboxAdjacent = hasCheckbox;
+      item.submenuAdjacent = hasSubmenu;
     });
   }
 
@@ -649,6 +655,9 @@ export class QuietDropdown extends QuietElement {
 
     // Position the submenu
     this.setupSubmenuPosition(openingItem);
+
+    // Process the submenu items to apply submenuAdjacent
+    this.processSubmenuItems(openingItem);
   }
 
   /** Sets up submenu positioning with autoUpdate */
@@ -665,6 +674,53 @@ export class QuietDropdown extends QuietElement {
     });
 
     this.submenuCleanups.set(item, cleanup);
+
+    // Add a slotchange listener to handle submenu items
+    const submenuSlot = item.submenuElement.querySelector('slot[name="submenu"]');
+    if (submenuSlot) {
+      // Remove any existing listener to prevent duplicates
+      submenuSlot.removeEventListener('slotchange', QuietDropdown.handleSubmenuSlotChange);
+      // Add the listener
+      submenuSlot.addEventListener('slotchange', QuietDropdown.handleSubmenuSlotChange);
+
+      // Process initially assigned items
+      QuietDropdown.handleSubmenuSlotChange({ target: submenuSlot } as unknown as Event);
+    }
+  }
+
+  private static handleSubmenuSlotChange(event: Event) {
+    const slot = event.target as HTMLSlotElement;
+    if (!slot) return;
+
+    // Get all assigned elements to this slot
+    const items = slot.assignedElements().filter(el => el.localName === 'quiet-dropdown-item') as QuietDropdownItem[];
+
+    if (items.length === 0) return;
+
+    // Check if any item has a submenu
+    const hasSubmenuItems = items.some(item => item.slotsWithContent && item.slotsWithContent.has('submenu'));
+
+    // Apply submenu-adjacent to all items if needed
+    items.forEach(item => {
+      item.submenuAdjacent = hasSubmenuItems;
+    });
+  }
+
+  private processSubmenuItems(item: QuietDropdownItem) {
+    if (!item.submenuElement) return;
+
+    // Get all dropdown items in the submenu
+    const submenuItems = this.getSubmenuItems(item, true);
+
+    // Check if any item has a submenu
+    const hasSubmenuItems = submenuItems.some(
+      subItem => subItem.slotsWithContent && subItem.slotsWithContent.has('submenu')
+    );
+
+    // Apply submenu-adjacent to all items if needed
+    submenuItems.forEach(subItem => {
+      subItem.submenuAdjacent = hasSubmenuItems;
+    });
   }
 
   /** Cleans up submenu positioning */

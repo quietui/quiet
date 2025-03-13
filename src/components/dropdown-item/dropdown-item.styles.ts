@@ -62,6 +62,10 @@ export default css`
     padding-inline-start: 2em;
   }
 
+  :host([submenu-adjacent]) #details {
+    padding-inline-end: 1.75em;
+  }
+
   #check {
     visibility: hidden;
     margin-inline-start: -1.25em;
@@ -83,7 +87,10 @@ export default css`
 
   #label {
     flex: 1 1 auto;
-    flex-wrap: wrap;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   #details {
@@ -101,14 +108,15 @@ export default css`
 
   /* Submenu indicator icon */
   #submenu-indicator {
-    margin-inline-start: 0.5em;
+    position: absolute;
+    inset-inline-end: 0.5em;
     color: var(--quiet-text-muted);
-    font-size: 1em;
+    font-size: 1.25em;
   }
 
-  /* Flip separator icons when RTL */
+  /* Flip chevron icon when RTL */
   :host(:dir(rtl)) #submenu-indicator {
-    transform: rotateY(180deg);
+    transform: scaleX(-1);
   }
 
   /* Submenu styles */

@@ -13,7 +13,7 @@ layout: component
     <quiet-dropdown-item slot="submenu" value="android">Android</quiet-dropdown-item>
   </quiet-dropdown-item>
   <quiet-dropdown-item value="desktop">
-    Desktop
+    Desktop Platforms
     <quiet-dropdown-item slot="submenu" value="mac">
       Mac
       <quiet-dropdown-item slot="submenu" value="cats">Cats</quiet-dropdown-item>

@@ -52,6 +52,12 @@ export class QuietDropdownItem extends QuietElement {
   @property({ attribute: 'checkbox-adjacent', type: Boolean, reflect: true }) checkboxAdjacent = false;
 
   /**
+   * @internal The controller will set this property to true when at least one item with a submenu exists in the
+   * dropdown. This allows non-submenu items to draw additional space to align properly with items that have submenus.
+   */
+  @property({ attribute: 'submenu-adjacent', type: Boolean, reflect: true }) submenuAdjacent = false;
+
+  /**
    * An optional value for the menu item. This is useful for determining which item was selected when listening to the
    * dropdown's `quiet-select` event.
    */
@@ -73,7 +79,7 @@ export class QuietDropdownItem extends QuietElement {
   @property({ type: Boolean, reflect: true }) submenuOpen = false;
 
   /** @internal Store whether this item has a submenu */
-  @state() private hasSubmenu = false;
+  @state() hasSubmenu = false;
 
   connectedCallback() {
     super.connectedCallback();

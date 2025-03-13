@@ -15,7 +15,7 @@ export default css`
     flex-direction: column;
     width: max-content;
     margin: 0;
-    padding: 0.25rem;
+    padding: 0.25em;
     border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
     border-radius: var(--quiet-border-radius);
     background-color: var(--quiet-paper-color);
@@ -47,7 +47,7 @@ export default css`
     }
 
     ::slotted(quiet-divider) {
-      --spacing: 0.25rem;
+      --spacing: 0.25em;
     }
   }
 

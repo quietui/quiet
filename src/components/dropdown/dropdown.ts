@@ -747,12 +747,16 @@ export class QuietDropdown extends QuietElement {
     computePosition(item, item.submenuElement, {
       placement: placement,
       middleware: [
-        offset({ mainAxis: 0, crossAxis: -5 }),
+        offset({
+          mainAxis: 0,
+          crossAxis: -5
+        }),
         flip({
-          fallbackPlacements: ['bottom-start', 'top-start'],
           fallbackStrategy: 'bestFit'
         }),
-        shift({ padding: 8 })
+        shift({
+          padding: 8
+        })
       ]
     }).then(({ x, y, placement }) => {
       // Set placement for transform origin styles

@@ -32,9 +32,15 @@ export default css`
       animation: show var(--show-duration) ease reverse;
     }
 
-    ::slotted(small) {
+    ::slotted(h1),
+    ::slotted(h2),
+    ::slotted(h3),
+    ::slotted(h4),
+    ::slotted(h5),
+    ::slotted(h6) {
       display: block !important;
-      padding: 0.25rem 1rem !important;
+      margin: 0.25em 0 !important;
+      padding: 0.25em 1em !important;
       color: var(--quiet-text-muted) !important;
       font-weight: var(--quiet-font-weight-semibold) !important;
       font-size: 0.75em !important;

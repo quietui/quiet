@@ -565,23 +565,17 @@ export class QuietDropdown extends QuietElement {
 
     if (!item || item.disabled) return;
 
-    // Handle item with submenu - toggle the submenu
+    // Handle item with submenu - keep it open when clicked
     if (item.slotsWithContent && item.slotsWithContent.has('submenu')) {
-      const willOpen = !item.submenuOpen;
-
-      if (willOpen) {
-        // Add this item to the submenu stack
+      // Always open the submenu on click, don't toggle it closed
+      if (!item.submenuOpen) {
         this.closeSiblingSubmenus(item);
         this.addToSubmenuStack(item);
-      } else {
-        // Remove this item from the submenu stack
-        const index = this.openSubmenuStack.indexOf(item);
-        if (index !== -1) {
-          this.openSubmenuStack = this.openSubmenuStack.slice(0, index);
-        }
+        item.submenuOpen = true;
       }
 
-      item.submenuOpen = willOpen;
+      // Stop propagation to prevent the dropdown from closing
+      event.stopPropagation();
       return;
     }
 

@@ -124,57 +124,83 @@ export default css`
     color: var(--quiet-neutral-text-on-soft);
     text-align: start;
     user-select: none;
+
+    /* Override default popover styles */
+    &[popover] {
+      margin: 0;
+      inset: auto;
+      padding: 0.25rem;
+      overflow: visible;
+      border-radius: var(--quiet-border-radius);
+    }
+
+    &.show {
+      animation: submenu-show var(--show-duration, 50ms) ease;
+    }
+
+    &.hide {
+      animation: submenu-show var(--show-duration, 50ms) ease reverse;
+    }
+
+    /* Submenu placement transform origins */
+    &[data-placement^='top'] {
+      transform-origin: bottom;
+    }
+
+    &[data-placement^='bottom'] {
+      transform-origin: top;
+    }
+
+    &[data-placement^='left'] {
+      transform-origin: right;
+    }
+
+    &[data-placement^='right'] {
+      transform-origin: left;
+    }
+
+    &[data-placement='left-start'] {
+      transform-origin: right top;
+    }
+
+    &[data-placement='left-end'] {
+      transform-origin: right bottom;
+    }
+
+    &[data-placement='right-start'] {
+      transform-origin: left top;
+    }
+
+    &[data-placement='right-end'] {
+      transform-origin: left bottom;
+    }
+
+    /* Safe triangle styling */
+    &::before {
+      display: none;
+      z-index: 9;
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: rgba(255, 99, 71, 0.2); /* Tomato with transparency for visibility during development */
+      content: '';
+      clip-path: polygon(
+        var(--safe-triangle-cursor-x, 0) var(--safe-triangle-cursor-y, 0),
+        var(--safe-triangle-submenu-start-x, 0) var(--safe-triangle-submenu-start-y, 0),
+        var(--safe-triangle-submenu-end-x, 0) var(--safe-triangle-submenu-end-y, 0)
+      );
+      pointer-events: auto; /* Enable mouse events on the triangle */
+    }
+
+    &[data-visible]::before {
+      display: block;
+    }
   }
 
-  /* Override default popover styles */
-  #submenu[popover] {
-    margin: 0;
-    /* Reset any browser-specific popover styles */
-    inset: auto;
-    padding: 0.25rem;
-    overflow: visible;
-    border-radius: var(--quiet-border-radius);
-  }
-
-  #submenu.show {
-    animation: submenu-show var(--show-duration, 50ms) ease;
-  }
-
-  #submenu.hide {
-    animation: submenu-show var(--show-duration, 50ms) ease reverse;
-  }
-
-  /* Submenu placement transform origins */
-  #submenu[data-placement^='top'] {
-    transform-origin: bottom;
-  }
-
-  #submenu[data-placement^='bottom'] {
-    transform-origin: top;
-  }
-
-  #submenu[data-placement^='left'] {
-    transform-origin: right;
-  }
-
-  #submenu[data-placement^='right'] {
-    transform-origin: left;
-  }
-
-  #submenu[data-placement='left-start'] {
-    transform-origin: right top;
-  }
-
-  #submenu[data-placement='left-end'] {
-    transform-origin: right bottom;
-  }
-
-  #submenu[data-placement='right-start'] {
-    transform-origin: left top;
-  }
-
-  #submenu[data-placement='right-end'] {
-    transform-origin: left bottom;
+  ::slotted(quiet-dropdown-item) {
+    font-size: inherit;
   }
 
   @keyframes submenu-show {
@@ -186,28 +212,5 @@ export default css`
       scale: 1;
       opacity: 1;
     }
-  }
-
-  /* Safe triangle styling */
-  #submenu::before {
-    display: none;
-    z-index: 9;
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: rgba(255, 99, 71, 0.2); /* Tomato with transparency for visibility during development */
-    content: '';
-    clip-path: polygon(
-      var(--safe-triangle-cursor-x, 0) var(--safe-triangle-cursor-y, 0),
-      var(--safe-triangle-submenu-start-x, 0) var(--safe-triangle-submenu-start-y, 0),
-      var(--safe-triangle-submenu-end-x, 0) var(--safe-triangle-submenu-end-y, 0)
-    );
-    pointer-events: auto; /* Enable mouse events on the triangle */
-  }
-
-  #submenu[data-visible]::before {
-    display: block;
   }
 `;

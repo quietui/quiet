@@ -128,7 +128,7 @@ Use the `icon` slot to add icons to [dropdown items](/docs/components/dropdown-i
 
 ### Showing labels & dividers
 
-Use any heading to add labels and the [`<quiet-divider>`](/docs/components/divider) element for separators.
+Use any heading, e.g. `<h1>`–`<h6>` to add labels and the [`<quiet-divider>`](/docs/components/divider) element for separators.
 
 ```html {.example}
 <quiet-dropdown>

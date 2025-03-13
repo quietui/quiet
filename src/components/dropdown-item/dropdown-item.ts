@@ -17,7 +17,8 @@ import styles from './dropdown-item.styles.js';
  * @slot - The item's label or description.
  * @slot icon - An optional icon to show at the start of the item.
  * @slot details - Optional details, such as a keyboard shortcut, to display at the end of the item.
- * @slot submenu - Optional submenu items to display in a nested dropdown.
+ * @slot submenu - Optional submenu items to display in a nested dropdown. For best results, use `<quiet-submenu-item>`
+ *  and `<quiet-divider>` elements.
  *
  * @csspart checkmark - The checkmark icon that's shown when checked, a `<quiet-icon>` element.
  * @csspart checkmark__svg - The checkmark icon's `svg` part.

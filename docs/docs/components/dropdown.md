@@ -3,45 +3,6 @@ title: Dropdown
 layout: component
 ---
 
-
-```html {.example}
-<quiet-dropdown id="dropdown__test">
-  <quiet-button slot="trigger" with-caret>Device</quiet-button>
-  <quiet-dropdown-item value="phone">
-    Phone
-    <quiet-dropdown-item slot="submenu" value="iphone">iPhone</quiet-dropdown-item>
-    <quiet-dropdown-item slot="submenu" value="android">Android</quiet-dropdown-item>
-  </quiet-dropdown-item>
-  <quiet-dropdown-item value="desktop">
-    Desktop Platforms
-    <quiet-dropdown-item slot="submenu" value="mac">
-      Mac
-      <quiet-dropdown-item slot="submenu" value="cats">Cats</quiet-dropdown-item>
-      <quiet-dropdown-item slot="submenu" value="orcas">Orcas</quiet-dropdown-item>
-      <quiet-dropdown-item slot="submenu" value="tuna">Tuna</quiet-dropdown-item>
-    </quiet-dropdown-item>
-    <quiet-dropdown-item slot="submenu" value="window">Windows</quiet-dropdown-item>
-    <quiet-dropdown-item slot="submenu" value="linux">Linux</quiet-dropdown-item>
-  </quiet-dropdown-item>
-  <quiet-dropdown-item value="tablet">
-    Tablet
-    <quiet-dropdown-item slot="submenu" value="ipad">iPad</quiet-dropdown-item>
-    <quiet-dropdown-item slot="submenu" value="galaxy">Galaxy</quiet-dropdown-item>
-    <quiet-dropdown-item slot="submenu" value="fire">Fire</quiet-dropdown-item>
-  </quiet-dropdown-item>
-</quiet-dropdown>
-
-<script>
-  const dropdown = document.getElementById('dropdown__test');
-
-  dropdown.addEventListener('quiet-select', event => {
-    console.log(event.detail.selection.value);
-  });
-</script>
-```
-
----
-
 Dropdown menus appear when their trigger element is clicked. They are not modal, so no overlay is shown when open. Dropdowns will close when the user selects an item, clicks outside of them, or presses [[Escape]]. Only one dropdown can be open at a time.
 
 ```html {.example}
@@ -51,7 +12,7 @@ Dropdown menus appear when their trigger element is clicked. They are not modal,
     Message
   </quiet-button>
 
-  <small>Actions</small>
+  <h3>Actions</h3>
 
   <quiet-dropdown-item value="reply">
     <quiet-icon slot="icon" name="corner-up-left"></quiet-icon>
@@ -154,12 +115,12 @@ Use the `icon` slot to add icons to [dropdown items](/docs/components/dropdown-i
 
 ### Showing labels & dividers
 
-Use the `<small>` element for labels and the [`<quiet-divider>`](/docs/components/divider) element for separators.
+Use any heading to add labels and the [`<quiet-divider>`](/docs/components/divider) element for separators.
 
 ```html {.example}
 <quiet-dropdown>
   <quiet-button slot="trigger" with-caret>Device</quiet-button>
-  <small>Type</small>
+  <h3>Type</h3>
   <quiet-dropdown-item value="phone">Phone</quiet-dropdown-item>
   <quiet-dropdown-item value="tablet">Tablet</quiet-dropdown-item>
   <quiet-dropdown-item value="desktop">Desktop</quiet-dropdown-item>
@@ -261,7 +222,7 @@ Add `variant="destructive"` to any [dropdown item](/docs/components/dropdown-ite
 
   <quiet-divider></quiet-divider>
 
-  <small>Danger zone</small>
+  <h3>Danger zone</h3>
   
   <quiet-dropdown-item value="archive">
     <quiet-icon slot="icon" name="archive"></quiet-icon>
@@ -274,6 +235,60 @@ Add `variant="destructive"` to any [dropdown item](/docs/components/dropdown-ite
   </quiet-dropdown-item>
 </quiet-dropdown>
 ```
+
+### Submenus
+
+To create submenus, nest [dropdown items](/docs/components/dropdown-item) inside of a dropdown item and assign `slot="submenu"` to each one. You can also add [dividers](/docs/components/divider) as needed.
+
+```html {.example}
+<quiet-dropdown id="dropdown__submenus">
+  <quiet-button slot="trigger" with-caret>Cat Type</quiet-button>
+
+  <quiet-dropdown-item>
+    Domestic
+    <quiet-dropdown-item slot="submenu" value="shorthair">Shorthair</quiet-dropdown-item>
+    <quiet-dropdown-item slot="submenu" value="longhair">Longhair</quiet-dropdown-item>
+  </quiet-dropdown-item>
+
+  <quiet-dropdown-item>
+    Pedigree
+    <quiet-dropdown-item slot="submenu">
+      European
+      <quiet-dropdown-item slot="submenu" value="british">British Shorthair</quiet-dropdown-item>
+      <quiet-dropdown-item slot="submenu" value="scottish">Scottish Fold</quiet-dropdown-item>
+      <quiet-dropdown-item slot="submenu" value="chartreux">Chartreux</quiet-dropdown-item>
+    </quiet-dropdown-item>
+
+    <quiet-dropdown-item slot="submenu">
+      Asian
+      <quiet-dropdown-item slot="submenu" value="siamese">Siamese</quiet-dropdown-item>
+      <quiet-dropdown-item slot="submenu" value="bengal">Bengal</quiet-dropdown-item>
+      <quiet-dropdown-item slot="submenu" value="burmese">Burmese</quiet-dropdown-item>
+    </quiet-dropdown-item>
+    
+    <quiet-dropdown-item slot="submenu" value="american">American Breeds</quiet-dropdown-item>
+  </quiet-dropdown-item>
+
+  <quiet-dropdown-item>
+    Size
+    <quiet-dropdown-item slot="submenu" type="checkbox" value="small">Small</quiet-dropdown-item>
+    <quiet-dropdown-item slot="submenu" type="checkbox" value="medium">Medium</quiet-dropdown-item>
+    <quiet-dropdown-item slot="submenu" type="checkbox" value="large">Large</quiet-dropdown-item>
+  </quiet-dropdown-item>
+</quiet-dropdown>
+
+<script>
+  const dropdown = document.getElementById('dropdown__submenus');
+  
+  dropdown.addEventListener('quiet-select', event => {
+    console.log(event.detail.selection.value);
+  });
+</script>
+```
+
+:::info
+Dropdown items that have a submenu will not dispatch the `quiet-select` event. However, items inside the submenu will, unless they also have a submenu.
+:::
 
 ### Disabling items
 
@@ -313,20 +328,42 @@ You can set the preferred placement of the dropdown menu with the `placement` at
 To turn a dropdown menu into a context menu, omit the trigger and set the `context-menu` attribute to the ID of an element in the same document. When you right-click or long press (touch only) the target element, the context menu will be shown.
 
 ```html {.example}
-<div id="dropdown__actions" tabindex="0">
+<div id="dropdown__context" tabindex="0">
   Right-click or long press here to show the context menu
 </div>
 
-<quiet-dropdown id="dropdown__selected" context-menu="dropdown__actions">
-  <quiet-dropdown-item type="checkbox" value="canvas" checked>Show canvas</quiet-dropdown-item>
-  <quiet-dropdown-item type="checkbox" value="grid" checked>Show grid</quiet-dropdown-item>
-  <quiet-dropdown-item type="checkbox" value="source">Show source</quiet-dropdown-item>
-  <quiet-divider></quiet-divider>
-  <quiet-dropdown-item value="preferences">Preferences…</quiet-dropdown-item>
+<quiet-dropdown context-menu="dropdown__context">
+  <quiet-dropdown-item>
+    Adjust
+    <quiet-dropdown-item slot="submenu" value="brightness">Brightness</quiet-dropdown-item>
+    <quiet-dropdown-item slot="submenu" value="contrast">Contrast</quiet-dropdown-item>
+  </quiet-dropdown-item>
+  <quiet-dropdown-item>
+    Filters
+    <quiet-dropdown-item slot="submenu">
+      Artistic
+      <quiet-dropdown-item slot="submenu" value="watercolor">Watercolor</quiet-dropdown-item>
+      <quiet-dropdown-item slot="submenu" value="oil-paint">Oil Paint</quiet-dropdown-item>
+      <quiet-dropdown-item slot="submenu" value="sketch">Sketch</quiet-dropdown-item>
+    </quiet-dropdown-item>
+    <quiet-dropdown-item slot="submenu">
+      Color
+      <quiet-dropdown-item slot="submenu" value="grayscale">Grayscale</quiet-dropdown-item>
+      <quiet-dropdown-item slot="submenu" value="sepia">Sepia</quiet-dropdown-item>
+      <quiet-dropdown-item slot="submenu" value="vibrance">Vibrance</quiet-dropdown-item>
+    </quiet-dropdown-item>
+    <quiet-dropdown-item slot="submenu" value="blur">Blur Effects</quiet-dropdown-item>
+  </quiet-dropdown-item>
+  <quiet-dropdown-item>
+    Transform
+    <quiet-dropdown-item slot="submenu" value="crop">Crop</quiet-dropdown-item>
+    <quiet-dropdown-item slot="submenu" value="rotate">Rotate</quiet-dropdown-item>
+    <quiet-dropdown-item slot="submenu" value="resize">Resize</quiet-dropdown-item>
+  </quiet-dropdown-item>
 </quiet-dropdown>
 
 <style>
-  #dropdown__actions {
+  #dropdown__context {
     display: flex;
     align-items: center;
     justify-content: center;

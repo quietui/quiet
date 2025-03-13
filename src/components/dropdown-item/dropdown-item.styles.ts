@@ -216,6 +216,10 @@ export default css`
     font-size: inherit;
   }
 
+  ::slotted(quiet-divider) {
+    --spacing: 0.25rem;
+  }
+
   @keyframes submenu-show {
     from {
       scale: 0.9;

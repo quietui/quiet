@@ -106,6 +106,11 @@ export default css`
     font-size: 1em;
   }
 
+  /* Flip separator icons when RTL */
+  :host(:dir(rtl)) #submenu-indicator {
+    transform: rotateY(180deg);
+  }
+
   /* Submenu styles */
   #submenu {
     display: flex;

@@ -197,7 +197,7 @@ export default css`
       right: 0;
       bottom: 0;
       left: 0;
-      background-color: rgba(255, 99, 71, 0.2); /* Tomato with transparency for visibility during development */
+      background-color: transparent;
       content: '';
       clip-path: polygon(
         var(--safe-triangle-cursor-x, 0) var(--safe-triangle-cursor-y, 0),

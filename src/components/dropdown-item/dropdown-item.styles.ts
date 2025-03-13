@@ -114,7 +114,7 @@ export default css`
   /* Submenu indicator icon */
   #submenu-indicator {
     position: absolute;
-    inset-inline-end: 0.5em;
+    inset-inline-end: 0.25em;
     color: var(--quiet-text-muted);
     font-size: 1.25em;
   }

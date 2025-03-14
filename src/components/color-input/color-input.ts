@@ -286,10 +286,15 @@ export class QuietColorInput extends QuietFormControlElement {
   }
 
   private handleClearClick() {
+    this.wasChanged = true;
     this.value = '';
     this.textBox.focus();
     this.dispatchEvent(new QuietInputEvent());
     this.dispatchEvent(new InputEvent('input', { bubbles: true, composed: true, cancelable: false }));
+  }
+
+  private handleColorPickerChange() {
+    this.wasChanged = true;
   }
 
   private handleColorPickerInput() {
@@ -588,6 +593,7 @@ export class QuietColorInput extends QuietFormControlElement {
         ?with-eye-dropper=${this.withEyeDropper}
         hidden
         role="dialog"
+        @quiet-change=${this.handleColorPickerChange}
         @quiet-input=${this.handleColorPickerInput}
       ></quiet-color-picker>
     `;

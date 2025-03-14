@@ -156,6 +156,8 @@ export abstract class QuietFormControlElement extends QuietElement {
         this
       );
     }
+
+    this.requestUpdate();
   }
 
   /** Returns the current custom validation message or an empty string if no custom error is set. */

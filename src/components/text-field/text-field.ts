@@ -242,6 +242,7 @@ export class QuietTextField extends QuietFormControlElement {
   }
 
   private handleClearClick() {
+    this.wasChanged = true;
     this.value = '';
     this.textBox.focus();
     this.dispatchEvent(new QuietInputEvent());

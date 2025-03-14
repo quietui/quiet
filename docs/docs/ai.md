@@ -4,23 +4,9 @@ description: Leverage Quiet UI's component documentation with AI assistants for 
 layout: docs
 ---
 
-To streamline development with AI and Quiet, a set of detailed _component reference files_ are available for use with [LLMs](https://en.wikipedia.org/wiki/Large_language_model). These files offer a complete breakdown of Quiet's web components — including properties, methods, slots, events, and more — making it easy to get quick, accurate help when crafting projects.
+To streamline development with AI, a set of _component reference files_ are available for use with [LLMs](https://en.wikipedia.org/wiki/Large_language_model). These files offer a complete breakdown of Quiet's components, making it easy to get quick, accurate help from your AI assistant.
 
-## What are component reference files?
-
-The component reference files are a collection of plain-text documents that describe every Quiet UI component in detail. An `index.txt` file lists all available components while individual `.txt` files (e.g., `quiet-button.txt`, `quiet-card.txt`, etc.) provide an in-depth look at each component's features.
-
-Here's what's included in these files:
-
-- Component name and tag
-- A brief overview of the component's purpose
-- Details about available slots for injecting custom content
-- A list of attributes/properties and their types
-- Public methods callable on the component
-- Custom events the component emits
-- CSS custom properties for styling
-- CSS parts for advanced shadow DOM styling
-- Custom states for dynamic styling
+Component reference files are a collection of plain-text documents that describe every Quiet UI component in detail. An `index.txt` file lists all available components while individual `.txt` files (e.g., `quiet-button.txt`, `quiet-card.txt`, etc.) provide an in-depth look at each component's features.
 
 ## Where are the files located?
 
@@ -32,14 +18,14 @@ node_modules/@quietui/quiet/dist/llm
 
 The structure of the `dist/llm` folder is as follows:
 
-- `dist/llm/index.txt`: A master list of all components, including descriptions.
-- `dist/llm/*.txt`: Individual component reference files.
+- `dist/llm/index.txt`: A list of all available components, including descriptions.
+- `dist/llm/[name].txt`: Individual component reference files with API info, where `[name]` is the component's name, e.g. "avatar", "button", "callout", etc.
 
 ## How do I use the files with AI assistants?
 
 AI-powered coding tools can interpret these reference files to deliver tailored suggestions, code snippets, and answers based on Quiet UI's capabilities. Here's how to make the most of them:
 
-### 1. Provide the files to the LLM
+### Provide the files to the LLM
 
 Depending on the tool, options include:
 
@@ -49,7 +35,7 @@ Depending on the tool, options include:
 
 The `index.txt` file serves as an excellent starting point, offering an overview of all components to help the assistant recommend the best one for the job.
 
-### 2. Ask high-level questions
+### Ask high-level questions
 
 Once the relevant files are loaded, broad questions can be posed, such as:
 
@@ -59,7 +45,7 @@ Once the relevant files are loaded, broad questions can be posed, such as:
 
 The assistant will draw from the reference data to provide accurate responses.
 
-### 3. Get code examples
+### Generate code examples
 
 For quick snippets, try prompts like:
 
@@ -69,7 +55,7 @@ For quick snippets, try prompts like:
 
 The detailed properties, methods, and events in the files ensure responses match Quiet's API.
 
-### 4. Troubleshoot and explore
+### Troubleshoot and explore
 
 If something isn't working, share code and ask:
 

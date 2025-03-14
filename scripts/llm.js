@@ -30,7 +30,8 @@ function generateFiles() {
 
   components.forEach(component => {
     const titleCaseName = toTitleCase(component.name);
-    const fileName = `${component.tagName}.txt`; // e.g., button-group.txt
+    const tagWithoutPrefix = component.tagName.replace(/^quiet-/, '');
+    const fileName = `${tagWithoutPrefix}.txt`; // e.g. button.txt
     const filePath = join(distDir, fileName);
     let componentOutput = `${titleCaseName} <${component.tagName}>\n`;
     componentOutput += `  Description: ${removeNewlines(component.summary) || 'No description available.'}\n`;

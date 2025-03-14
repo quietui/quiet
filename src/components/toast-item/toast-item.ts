@@ -124,7 +124,8 @@ export class QuietToastItem extends QuietElement {
   };
 
   /** Close it! */
-  private handleCloseClick() {
+  private handleCloseClick(event: MouseEvent) {
+    event.stopPropagation();
     this.stopTimer();
     this.remove();
   }

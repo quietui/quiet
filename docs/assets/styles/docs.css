@@ -812,7 +812,7 @@ quiet-badge.experimental {
       position: relative;
       border-radius: var(--quiet-border-radius);
       background: color-mix(in oklab, var(--quiet-primary-fill-soft), transparent 50%);
-      color: var(--quiet-text-body);
+      color: var(--quiet-primary-text-colorful);
     }
   }
 }

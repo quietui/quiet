@@ -42,7 +42,68 @@ Similarly, the `quiet-stack` class creates a flex column. Use the `gap` property
 </div>
 ```
 
-## Side labels
+## Form controls
+
+### Automatic validation styles
+
+If you're using [constraint validation](https://developer.mozilla.org/en-US/docs/Web/HTML/Constraint_validation), add the `quiet-user-valid` and/or `quiet-user-invalid` classes to any form control to automatically show the appropriate validity state _after_ the user interacts with the control. 
+
+```html {.example}
+<quiet-text-field
+  class="quiet-user-valid"
+  label="Enter text, then blur" 
+  description="I automatically show the valid state after user interaction" 
+  required
+  clearable
+></quiet-text-field>
+
+<br>
+
+<quiet-text-field
+  class="quiet-user-invalid"
+  label="Hit the clear button" 
+  description="I automatically show the invalid state after user interaction" 
+  value="Delete this text"
+  required
+  clearable
+></quiet-text-field>
+
+<br>
+
+<quiet-text-field
+  class="quiet-user-valid quiet-user-invalid"
+  label="Enter text, then blur, then clear" 
+  description="I automatically show the valid or invalid state after user interaction" 
+  required
+  clearable
+></quiet-text-field>
+```
+
+### Forcing validation styles
+
+If you need to control validation styles manually, add the `quiet-force-valid` or `quiet-force-invalid` class. This will force the form control to appear as valid or invalid, regardless of its actual validity.
+
+```html {.example}
+<quiet-text-field
+  class="quiet-force-valid"
+  label="I totally am valid" 
+  description="Hints are also valid" 
+></quiet-text-field>
+
+<br>
+
+<quiet-text-field
+  class="quiet-force-invalid"
+  label="I'm totally not valid" 
+  description="Hints are also invalid" 
+></quiet-text-field>
+```
+
+:::warn
+Manual validation styles are primarily used for server-side validation. Avoid using them with [constraint validation](https://developer.mozilla.org/en-US/docs/Web/HTML/Constraint_validation).
+:::
+
+### Side labels
 
 Add `class="quiet-side-label"` to any Quiet form control that has a label, description, and text box to move the label to the side. To change the width of the label, set the `--label-width` custom property on the respective elements.
 

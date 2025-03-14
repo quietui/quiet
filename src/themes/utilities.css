@@ -28,6 +28,46 @@
 
   /*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //
+  //  Form validation
+  //
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+  /* Valid */
+  .quiet-user-valid:state(user-valid),
+  .quiet-force-valid {
+    color: var(--quiet-constructive-text-colorful);
+
+    &::part(label),
+    &::part(description) {
+      color: var(--quiet-constructive-text-colorful);
+    }
+
+    &::part(visual-box),
+    &:focus::part(visual-box) {
+      border-color: var(--quiet-constructive-stroke-mid);
+      outline-color: var(--quiet-constructive-stroke-mid);
+    }
+  }
+
+  /* Invalid */
+  .quiet-user-invalid:state(user-invalid),
+  .quiet-force-invalid {
+    color: var(--quiet-destructive-text-colorful);
+
+    &::part(label),
+    &::part(description) {
+      color: var(--quiet-destructive-text-colorful);
+    }
+
+    &::part(visual-box),
+    &:focus::part(visual-box) {
+      border-color: var(--quiet-destructive-stroke-mid);
+      outline-color: var(--quiet-destructive-stroke-mid);
+    }
+  }
+
+  /*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //
   //  Visually hidden
   //
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/

@@ -133,6 +133,10 @@ Quiet form controls expose custom states you can target with CSS. These states m
 </style>
 ```
 
+:::info
+Check out the [automatic validation utilities](/docs/css-utilities#automatic-validation-styles) for an easier way to style validation!
+:::
+
 The following pseudo-classes are available to style all form controls.
 
 - `:valid` - Applied immediately and always when the control is valid.

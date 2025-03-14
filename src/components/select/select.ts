@@ -238,7 +238,7 @@ export class QuietSelect extends QuietFormControlElement {
     const hasCustomValidity = this.getCustomValidity().length > 0;
     const validationMessage = hasCustomValidity ? this.getCustomValidity() : this.textBox.validationMessage;
     const flags: ValidityStateFlags = {
-      badInput: this.textBox.validity.tooShort,
+      badInput: this.textBox.validity.badInput,
       customError: hasCustomValidity,
       patternMismatch: this.textBox.validity.patternMismatch,
       rangeOverflow: this.textBox.validity.rangeOverflow,

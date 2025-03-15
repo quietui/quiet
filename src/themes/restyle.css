@@ -14,6 +14,8 @@
   body {
     margin: 0;
     padding: 0;
+    background-color: var(--quiet-background-color);
+    color: var(--quiet-text-body);
     font-weight: var(--quiet-font-weight-normal);
     font-size: var(--quiet-font-size);
     line-height: var(--quiet-line-height);
@@ -24,10 +26,9 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Adjust text colors for the main page and any nested themes */
-  html,
-  body {
-    background-color: var(--quiet-background-color);
+  /* Ensure color is correct when applying to specific elements */
+  .quiet-light,
+  .quiet-dark {
     color: var(--quiet-text-body);
   }
 

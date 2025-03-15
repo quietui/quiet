@@ -25,6 +25,14 @@ Sometimes it's useful to conditionally show content based on the current color s
 - `quiet-if-light` - Use when you want to show an element only in light mode.
 - `quiet-if-dark` - Use when you want to show an element only in dark mode.
 
+```html
+<!-- Shown only in light mode -->
+<img class="quiet-if-light" src="..." alt="...">
+
+<!-- Shown only in dark mode -->
+<img class="quiet-if-dark" src="..." alt="...">
+```
+
 :::info
 Because Quiet's [theming API](/docs/theming) allows dark and light themes to coexist on the page, color scheme detection is based on the use of `quiet-light` and `quiet-dark`, not the browser's `prefers-color-scheme` preference.
 :::
@@ -37,6 +45,11 @@ Visually hidden classes provide ways to hide content from the screen while maint
 - `quiet-vh-focusable` - The same as `quiet-vh`, but it will show when the element or any of its children receive focus. Useful for things like "skip to content" links.
 - `quiet-vh-label` - Apply this to any Quiet form control that has a `label` part to visually hide the label.
 - `quiet-vh-description` - Apply this to any Quiet form control that has a `description` part to visually hide the description.
+
+```html
+<!-- Hidden but discoverable by screen readers -->
+<h3 class="quiet-vh">...</h3>
+```
 
 ## Form controls
 

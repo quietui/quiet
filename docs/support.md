@@ -166,8 +166,8 @@ While components are written as classes, they aren't designed to be subclassed. 
 Because custom elements are registered globally, I don't recommend using Quiet in a micro frontend architecture _unless_ you move it to the top of the stack. Avoid loading the library multiple times, as this will cause version conflicts and load more code than is necessary.
 :::
 
-<img class="whiskers-center whiskers-center only-light" src="/assets/images/whiskers/whiskers-neutral-light.svg" alt="Whiskers the mouse standing with a neutral expression">
-<img class="whiskers-center whiskers-center only-dark" src="/assets/images/whiskers/whiskers-neutral-dark.svg" alt="Whiskers the mouse standing with a neutral expression">
+<img class="whiskers-center whiskers-center quiet-if-light" src="/assets/images/whiskers/whiskers-neutral-light.svg" alt="Whiskers the mouse standing with a neutral expression">
+<img class="whiskers-center whiskers-center quiet-if-dark" src="/assets/images/whiskers/whiskers-neutral-dark.svg" alt="Whiskers the mouse standing with a neutral expression">
 
 <small class="copyright">
   Quiet UI is a project of A&nbsp;Beautiful&nbsp;Site,&nbsp;LLC

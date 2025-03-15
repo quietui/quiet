@@ -86,22 +86,14 @@
 
   /*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //
-  //  Layout utilities
+  //  Light/dark utilities
   //
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
-  /* Stack */
-  .quiet-stack {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+  /* Toggle content based on light/dark */
+  html:not(.quiet-dark) .quiet-if-dark,
+  html.quiet-dark .quiet-if-light,
+  .quiet-dark .quiet-if-light,
+  .quiet-light .quiet-if-dark {
+    display: none !important;
   }
-
-  /* Inline */
-  .quiet-inline {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-}

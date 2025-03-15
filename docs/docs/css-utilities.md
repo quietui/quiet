@@ -18,29 +18,25 @@ To add the CSS utilities to your app, add the following markup to the `<head>` o
 <link rel="stylesheet" href="{% cdnUrl '/dist/themes/utilities.css' %}">
 ```
 
-## Flex utilities
+## Color scheme utilities
 
-The `quiet-inline` class creates a flex row that wraps when necessary. Use the `gap` property to adjust the spacing between items.
+Sometimes it's useful to conditionally show content based on the current color scheme. This is especially true for images, where you can't easily change its colors with CSS. Elements with these classes will only be shown when the respective light or dark color scheme is showing.
 
-```html {.example}
-<div class="quiet-inline" style="gap: 0.5rem;">
-  <div class="box"></div>
-  <div class="box"></div>
-  <div class="box"></div>
-  <div class="box"></div>
-</div>
-```
+- `quiet-if-light` - Use when you want to show an element only in light mode.
+- `quiet-if-dark` - Use when you want to show an element only in dark mode.
 
-Similarly, the `quiet-stack` class creates a flex column. Use the `gap` property to adjust the spacing between items.
+:::info
+Because Quiet's [theming API](/docs/theming) allows dark and light themes to coexist on the page, color scheme detection is based on the use of `quiet-light` and `quiet-dark`, not the browser's `prefers-color-scheme` preference.
+:::
 
-```html {.example}
-<div class="quiet-stack" style="gap: 0.5rem;">
-  <div class="box"></div>
-  <div class="box"></div>
-  <div class="box"></div>
-  <div class="box"></div>
-</div>
-```
+## Visually hidden elements
+
+Visually hidden classes provide ways to hide content from the screen while maintaining accessibility for assistive technologies.
+
+- `quiet-vh` (visually hidden) - Use when an element must be accessible to assistive technologies like screen readers but should remain hidden in other circumstances.
+- `quiet-vh-focusable` - The same as `quiet-vh`, but it will show when the element or any of its children receive focus. Useful for things like "skip to content" links.
+- `quiet-vh-label` - Apply this to any Quiet form control that has a `label` part to visually hide the label.
+- `quiet-vh-description` - Apply this to any Quiet form control that has a `description` part to visually hide the description.
 
 ## Form controls
 
@@ -83,7 +79,7 @@ If you're using [constraint validation](https://developer.mozilla.org/en-US/docs
 Due to [a Safari bug](https://bugs.webkit.org/show_bug.cgi?id=261432), `user-valid` styles may not get applied in some cases. This bug has been fixed, but if you're not seeing valid styles in these examples in Safari, this might be why.
 :::
 
-### Forcing validation styles
+### Manual validation styles
 
 If you need to control validation styles manually, add the `quiet-force-valid` or `quiet-force-invalid` class. This will force the form control to appear as valid or invalid, regardless of its actual validity.
 
@@ -107,7 +103,7 @@ If you need to control validation styles manually, add the `quiet-force-valid` o
 Manual validation styles are primarily used for server-side validation. Avoid using them with [constraint validation](https://developer.mozilla.org/en-US/docs/Web/HTML/Constraint_validation).
 :::
 
-### Side labels
+### Showing labels on the side
 
 Add `class="quiet-side-label"` to any Quiet form control that has a label, description, and text box to move the label to the side. To change the width of the label, set the `--label-width` custom property on the respective elements.
 
@@ -156,15 +152,6 @@ Add `class="quiet-side-label"` to any Quiet form control that has a label, descr
 :::info
 The `quiet-side-label` class doesn't work on native form controls.
 :::
-
-## Visually hidden
-
-Visually hidden classes provide ways to hide content from the screen while maintaining accessibility for assistive technologies.
-
-- `quiet-vh` (visually hidden) - Use when an element must be accessible to assistive technologies like screen readers but should remain hidden in other circumstances.
-- `quiet-vh-focusable` - The same as `quiet-vh`, but it will show when the element or any of its children receive focus. Useful for things like "skip to content" links.
-- `quiet-vh-label` - Apply this to any Quiet form control that has a `label` part to visually hide the label.
-- `quiet-vh-description` - Apply this to any Quiet form control that has a `description` part to visually hide the description.
 
 <!-- Demo styles -->
 <style>

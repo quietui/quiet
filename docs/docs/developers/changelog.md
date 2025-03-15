@@ -17,8 +17,8 @@ Components marked [stable] are well-tested, ready for production, and less likel
   method="post" 
   data-id="A61C50BEC994754B1D79C5819EC1255C1B31244D333BF1BA7C7110C86FE7CF7856BEBB1CE5FB5F305E491256458DDB0D84C7F6E7E798917706F78CD30AA744D5"
 >
-  <img class="only-light" src="/assets/images/whiskers/whiskers-banner-light.svg" alt="Whiskers holding a banner in front of himself">
-  <img class="only-dark" src="/assets/images/whiskers/whiskers-banner-dark.svg" alt="Whiskers holding a banner in front of himself">
+  <img class="quiet-if-light" src="/assets/images/whiskers/whiskers-banner-light.svg" alt="Whiskers holding a banner in front of himself">
+  <img class="quiet-if-dark" src="/assets/images/whiskers/whiskers-banner-dark.svg" alt="Whiskers holding a banner in front of himself">
   <div class="whiskers-email-controls">
     <!-- cspell:disable -->
     <quiet-text-field

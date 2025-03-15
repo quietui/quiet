@@ -94,8 +94,8 @@ Copy and paste the following code into the `<head>` section of any HTML document
   </quiet-button>
 </div>
 
-<img class="whiskers-center only-light" src="/assets/images/whiskers/whiskers-whistling-light.svg" alt="Whiskers the mouse walking and whistling">
-<img class="whiskers-center only-dark" src="/assets/images/whiskers/whiskers-whistling-dark.svg" alt="Whiskers the mouse walking and whistling">
+<img class="whiskers-center quiet-if-light" src="/assets/images/whiskers/whiskers-whistling-light.svg" alt="Whiskers the mouse walking and whistling">
+<img class="whiskers-center quiet-if-dark" src="/assets/images/whiskers/whiskers-whistling-dark.svg" alt="Whiskers the mouse walking and whistling">
 
 <small class="copyright">
   Quiet UI is a project of A&nbsp;Beautiful&nbsp;Site,&nbsp;LLC

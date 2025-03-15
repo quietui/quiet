@@ -22,11 +22,6 @@ html.quiet-dark {
 }
 
 /* Utility classes */
-html.quiet-dark .only-light,
-html:not(.quiet-dark) .only-dark {
-  display: none !important;
-}
-
 html[data-scroll-restoring] body {
   visibility: hidden;
 }

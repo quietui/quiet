@@ -5,7 +5,7 @@ export default css`
     --border-color: var(--quiet-neutral-stroke-softer);
     --header-background-color: var(--quiet-neutral-fill-softer);
     --address-background-color: var(--quiet-neutral-fill-soft);
-    --address-text-color: var(--quiet-text-color);
+    --address-color: var(--quiet-neutral-text-on-soft);
     --header-height: 2.5rem;
     --button-size: 0.75rem;
     --button-spacing: 0.5rem;
@@ -68,7 +68,7 @@ export default css`
     overflow: hidden;
     border-radius: 9999px;
     background-color: var(--address-background-color);
-    color: var(--address-text-color);
+    color: var(--address-color);
     font-size: 0.8125rem;
     text-decoration: none;
   }

@@ -25,7 +25,7 @@ import styles from './browser-frame.styles.js';
  * @cssproperty --border-color - Border color for the browser frame.
  * @cssproperty --header-background-color - Background color for the header.
  * @cssproperty --address-background-color - Background color for the address bar.
- * @cssproperty --address-text-color - Text color for the address bar.
+ * @cssproperty --address-color - Text color for the address bar.
  * @cssproperty --header-height - Height of the browser frame header.
  * @cssproperty --button-size - Size of the control buttons.
  * @cssproperty --button-spacing - Spacing between control buttons.

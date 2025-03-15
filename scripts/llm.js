@@ -1,13 +1,16 @@
-import { writeFileSync } from 'fs';
-import { mkdir, rm } from 'fs/promises';
+import { mkdir, readFile, rm, writeFile } from 'fs/promises';
 import { join } from 'path';
 import { getComponents } from '../docs/_utils/manifest.js';
+import { distDir, rootDir } from './utils.js';
 
-const distDir = 'dist/llm';
+const packageData = JSON.parse(await readFile(join(rootDir, 'package.json'), 'utf-8'));
+const version = packageData.version;
+const llmDir = join(distDir, 'llm');
 const preamble = `
 Quiet UI (https://quietui.org/) is a modern UI library containing the following web components (custom elements). All
 components use shadow DOM. The form controls are form-associated elements that follow patterns from the Constraint
-Validation API. Use the documentation below to learn how to use Quiet components in an HTML environment.
+Validation API. The library's version is ${version}. Use the documentation below to learn how to use Quiet components in
+an HTML environment.
 `.trim();
 
 // Helper function to convert PascalCase to Title Case
@@ -24,16 +27,18 @@ function removeNewlines(str) {
 }
 
 // Script to output component details to separate files and generate an index
-function generateFiles() {
+async function generateFiles() {
   const components = getComponents();
   let indexOutput = `${preamble}\n\n`;
+  const writePromises = [];
 
   components.forEach(component => {
     const titleCaseName = toTitleCase(component.name);
     const tagWithoutPrefix = component.tagName.replace(/^quiet-/, '');
     const fileName = `${tagWithoutPrefix}.txt`; // e.g. button.txt
-    const filePath = join(distDir, fileName);
+    const filePath = join(llmDir, fileName);
     let componentOutput = `${titleCaseName} <${component.tagName}>\n`;
+    componentOutput += `  Version: ${version}\n`;
     componentOutput += `  Description: ${removeNewlines(component.summary) || 'No description available.'}\n`;
 
     // Slots
@@ -98,8 +103,8 @@ function generateFiles() {
       });
     }
 
-    // Write individual component file
-    writeFileSync(filePath, componentOutput.trim(), 'utf8');
+    // Add write promise to array instead of writing synchronously
+    writePromises.push(writeFile(filePath, componentOutput.trim(), 'utf8'));
 
     // Add to index with description
     indexOutput += `${titleCaseName} <${component.tagName}>\n`;
@@ -107,14 +112,26 @@ function generateFiles() {
     indexOutput += `  See ${fileName}\n\n`;
   });
 
-  // Write index file
-  const indexPath = join(distDir, 'index.txt');
-  writeFileSync(indexPath, indexOutput.trim(), 'utf8');
+  // Add index file write promise
+  const indexPath = join(llmDir, 'index.txt');
+  writePromises.push(writeFile(indexPath, indexOutput.trim(), 'utf8'));
+
+  // Wait for all file writes to complete
+  await Promise.all(writePromises);
 }
 
-// Cleanup the directory
-await rm(distDir, { recursive: true, force: true });
-await mkdir(distDir, { recursive: true });
+// Main function to run the script
+async function main() {
+  // Cleanup the directory
+  await rm(llmDir, { recursive: true, force: true });
+  await mkdir(llmDir, { recursive: true });
 
-// Generate the files
-generateFiles();
+  // Generate the files
+  await generateFiles();
+}
+
+// Execute the main function
+main().catch(error => {
+  console.error('Error:', error);
+  process.exit(1);
+});

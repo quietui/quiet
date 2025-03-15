@@ -35,10 +35,13 @@ import styles from './browser-frame.styles.js';
 export class QuietBrowserFrame extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
-  /** The label to display in the address bar. */
+  /** The label to display in the address bar. This will override the domain that shows when using `href`. */
   @property() label = '';
 
-  /** When set, the address bar will be wrapped by a link that goes to this URL. */
+  /**
+   * When set, the address bar will be wrapped by a link that goes to this URL. A human-readable domain name will be
+   * shown in the address bar unless `label` is also provided.
+   */
   @property() href = '';
 
   /** Opens the link in the specified target. Only works when `href` is set. */

@@ -127,7 +127,7 @@ You can customize the appearance of the browser frame using CSS custom propertie
     --border-color: #d8d9ff;
     --header-background-color: #989cff;
     --address-background-color: #7a7dff;
-    --address-text-color: white;
+    --address-color: white;
 
     color: #4f51a8;
     background-color: #f5f5ff;

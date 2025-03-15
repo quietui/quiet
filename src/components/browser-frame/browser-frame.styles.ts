@@ -73,6 +73,12 @@ export default css`
     text-decoration: none;
   }
 
+  @media (hover: hover) {
+    a#address-bar:hover {
+      color: var(--quiet-primary-text-colorful);
+    }
+  }
+
   #url-container {
     display: inline-flex;
     align-items: center;

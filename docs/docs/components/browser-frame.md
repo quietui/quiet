@@ -20,7 +20,7 @@ layout: component
 Use the `label` attribute to show text in the address bar.
 
 ```html {.example}
-<quiet-browser-frame label="Sleepy cat facts">
+<quiet-browser-frame label="Sleepy cat facts" style="--body-padding: 4rem 1rem; text-align: center;">
   Cats sleep for around 70% of their lives.
 </quiet-browser-frame>
 ```
@@ -30,7 +30,7 @@ Use the `label` attribute to show text in the address bar.
 To show an icon or favicon in the address bar, use the `icon` slot.
 
 ```html {.example}
-<quiet-browser-frame label="Secure">
+<quiet-browser-frame label="Secure" style="--body-padding: 4rem 1rem; text-align: center;">
   <quiet-icon slot="icon" name="lock"></quiet-icon>
   A group of cats is called a <em>clowder</em>.
 </quiet-browser-frame>
@@ -48,6 +48,7 @@ When `label` is used, it will be shown as-is in the address bar. Otherwise, a si
   label="quietui.org"
   target="_blank"
   rel="noreferrer noopener"
+  style="--body-padding: 4rem 1rem; text-align: center;"
 >
   The browser frame will open the linked URL when clicked.
 </quiet-browser-frame>
@@ -125,21 +126,18 @@ You can customize the appearance of the browser frame using CSS custom propertie
 <style>
   #browser__styling {
     --border-color: #d8d9ff;
+    --body-padding: 4rem 1rem;
     --header-background-color: #989cff;
     --address-background-color: #7a7dff;
     --address-color: white;
 
     color: #4f51a8;
+    text-align: center;
     background-color: #f5f5ff;
     border-width: 0;
 
   &::part(address-bar) {
     font-weight: var(--quiet-font-weight-semibold);
-  }
-
-  &::part(body) {
-    text-align: center;
-    padding: 4rem 1rem;
   }
 } 
 </style>

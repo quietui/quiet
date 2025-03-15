@@ -2,10 +2,11 @@ import { css } from 'lit';
 
 export default css`
   :host {
-    --border-color: var(--quiet-neutral-stroke-softer);
-    --header-background-color: var(--quiet-neutral-fill-softer);
     --address-background-color: var(--quiet-neutral-fill-soft);
     --address-color: var(--quiet-neutral-text-on-soft);
+    --border-color: var(--quiet-neutral-stroke-softer);
+    --body-padding: 1rem;
+    --header-background-color: var(--quiet-neutral-fill-softer);
     --header-height: 2.5rem;
     --button-size: 0.75rem;
     --button-spacing: 0.5rem;
@@ -115,7 +116,7 @@ export default css`
 
   #body {
     flex: 1;
-    padding: 1rem;
+    padding: var(--body-padding);
     overflow: auto;
 
     ::slotted(img),

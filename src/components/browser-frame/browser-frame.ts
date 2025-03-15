@@ -22,10 +22,11 @@ import styles from './browser-frame.styles.js';
  * @csspart address-bar - The browser frame's address bar. Either an `<a>` or a `<span>` depending on `href`.
  * @csspart body - The browser frame's body, where content shows.
  *
- * @cssproperty --border-color - Border color for the browser frame.
- * @cssproperty --header-background-color - Background color for the header.
  * @cssproperty --address-background-color - Background color for the address bar.
  * @cssproperty --address-color - Text color for the address bar.
+ * @cssproperty --border-color - Border color for the browser frame.
+ * @cssproperty --body-padding - Padding to apply to the browser frame's body.
+ * @cssproperty --header-background-color - Background color for the header.
  * @cssproperty --header-height - Height of the browser frame header.
  * @cssproperty --button-size - Size of the control buttons.
  * @cssproperty --button-spacing - Spacing between control buttons.

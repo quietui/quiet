@@ -89,11 +89,19 @@ You can also embed videos.
 Browser frames automatically adapt to light and dark mode. To force a specific color scheme, add `class="quiet-light"` or `class="quiet-dark"`.
 
 ```html {.example .flex-row}
-<quiet-browser-frame class="quiet-light" label="example.com" style="width: 300px;">
+<quiet-browser-frame 
+  class="quiet-light" 
+  label="example.com" 
+  style="--body-padding: 2rem 1rem; width: 300px; text-align: center;"
+>
   This is the light theme
 </quiet-browser-frame>
 
-<quiet-browser-frame class="quiet-dark" label="example.com" style="width: 300px;">
+<quiet-browser-frame 
+  class="quiet-dark" 
+  label="example.com" 
+  style="--body-padding: 2rem 1rem; width: 300px; text-align: center;"
+>
   This is the dark theme
 </quiet-browser-frame>
 ```

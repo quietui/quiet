@@ -26,12 +26,6 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Ensure color is correct when applying to specific elements */
-  .quiet-light,
-  .quiet-dark {
-    color: var(--quiet-text-body);
-  }
-
   ::selection {
     background-color: var(--quiet-selection-background-color);
     color: var(--quiet-selection-color);

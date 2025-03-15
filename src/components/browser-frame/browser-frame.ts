@@ -57,7 +57,8 @@ export class QuietBrowserFrame extends QuietElement {
   @property() download?: string;
 
   /**
-   * When set, removes all padding from the body element. Useful for slotting images and videos that span edge-to-edge.
+   * When set, removes all padding from the body element and removes border radius from slotted media. Useful for
+   * displaying images and videos that span edge-to-edge in the browser frame.
    */
   @property({ type: Boolean, reflect: true }) flush = false;
 

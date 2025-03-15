@@ -9,7 +9,7 @@ import styles from './browser-frame.styles.js';
 /**
  * <quiet-browser-frame>
  *
- * @summary An on-page, visual browser UI that displays content within a browser chrome.
+ * @summary An on-page browser UI that displays arbitrary content.
  * @documentation https://quietui.org/docs/components/browser-frame
  * @status stable
  * @since 1.0
@@ -75,9 +75,9 @@ export class QuietBrowserFrame extends QuietElement {
     return html`
       <header id="header" part="header">
         <div id="controls" part="controls">
-          <span class="dot close"></span>
-          <span class="dot minimize"></span>
-          <span class="dot maximize"></span>
+          <span class="button close"></span>
+          <span class="button minimize"></span>
+          <span class="button maximize"></span>
         </div>
         ${hasLink
           ? html`

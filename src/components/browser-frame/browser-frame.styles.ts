@@ -27,7 +27,7 @@ export default css`
     flex: 0 0 var(--header-height);
     align-items: center;
     padding: 0 1rem;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: var(--quiet-border-style) var(--quiet-border-width) var(--border-color);
     background-color: var(--header-background-color);
   }
 
@@ -38,7 +38,7 @@ export default css`
     gap: var(--button-spacing);
   }
 
-  .dot {
+  .button {
     flex-shrink: 0;
     width: var(--button-size);
     height: var(--button-size);
@@ -63,7 +63,7 @@ export default css`
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 1.5rem;
+    height: 1.6rem;
     padding: 0 0.5rem;
     overflow: hidden;
     border-radius: 9999px;

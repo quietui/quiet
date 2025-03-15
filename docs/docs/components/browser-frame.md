@@ -5,8 +5,7 @@ layout: component
 
 ```html {.example}
 <quiet-browser-frame href="https://quietui.org/" target="_blank">
-  <img slot="icon" src="/assets/images/logo-light.svg" alt="">
-  <img slot="icon" src="/assets/images/logo-dark.svg" alt="">
+  <img slot="icon" src="/assets/images/logo-light.svg" alt="" style="align-self: end;">
   <quiet-empty-state>
     <quiet-icon slot="illustration" name="cheese"></quiet-icon>
     Who moved my cheese?

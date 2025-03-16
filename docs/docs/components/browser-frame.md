@@ -5,7 +5,7 @@ layout: component
 
 ```html {.example}
 <quiet-browser-frame href="https://quietui.org/" target="_blank">
-  <img slot="icon" src="/assets/images/logo-light.svg" alt="" style="align-self: end;">
+  <img slot="icon" src="/assets/images/logo-light.svg" alt="" style="translate: 0 .125em;">
   <quiet-empty-state>
     <quiet-icon slot="illustration" name="cheese"></quiet-icon>
     Who moved my cheese?
@@ -73,6 +73,20 @@ The browser frame will automatically adapt to the user's platform (Windows or Ma
   style="--body-padding: 2rem 1rem; width: 300px; text-align: center;"
 >
   And I'm a PC
+</quiet-browser-frame>
+```
+
+### Changing the size
+
+The browser frame scales based on the current font size.
+
+```html {.example .flex-col}
+<quiet-browser-frame label="Smaller" style="font-size: 12px; --body-padding: 4rem 1rem; text-align: center;">
+  This is much smaller than before.
+</quiet-browser-frame>
+
+<quiet-browser-frame label="Bigger" style="font-size: 20px; --body-padding: 4rem 1rem; text-align: center;">
+  And this is much bigger.
 </quiet-browser-frame>
 ```
 

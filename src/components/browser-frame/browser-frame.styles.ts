@@ -5,9 +5,9 @@ export default css`
     --address-background-color: var(--quiet-neutral-fill-soft);
     --address-color: var(--quiet-neutral-text-on-soft);
     --border-color: var(--quiet-neutral-stroke-softer);
-    --body-padding: 1rem;
+    --body-padding: 1em;
     --header-background-color: var(--quiet-neutral-fill-softer);
-    --header-height: 2.5rem;
+    --header-height: 2.5em;
     --windows-control-color: var(--quiet-neutral-fill-mid);
 
     /* Move container styles to host */
@@ -26,7 +26,7 @@ export default css`
     display: flex;
     flex: 0 0 var(--header-height);
     align-items: center;
-    padding: 0 1rem;
+    padding: 0 1em;
     border-bottom: var(--quiet-border-style) var(--quiet-border-width) var(--border-color);
     background-color: var(--header-background-color);
   }
@@ -35,19 +35,19 @@ export default css`
   #controls {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.5em;
   }
 
   /* Mac-style controls positioning */
   .mac #controls.mac-controls {
     order: 0;
-    margin-inline-end: 1rem;
+    margin-inline-end: 1em;
   }
 
   /* Windows-style controls positioning */
   .windows #controls.windows-controls {
     order: 2;
-    margin-inline-start: 1rem;
+    margin-inline-start: 1em;
   }
 
   /* Base button styles */
@@ -56,14 +56,14 @@ export default css`
     flex-shrink: 0;
     align-items: center;
     justify-content: center;
-    width: 0.75rem;
-    height: 0.75rem;
+    width: 0.75em;
+    height: 0.75em;
   }
 
   /* Mac-specific control styles */
   .mac-controls .control {
-    width: 0.75rem;
-    height: 0.75rem;
+    width: 0.75em;
+    height: 0.75em;
     border-radius: 50%;
   }
 
@@ -82,14 +82,14 @@ export default css`
   /* Windows-specific control styles */
   .windows-controls .control {
     position: relative;
-    width: 1.25rem;
-    height: 2rem;
+    width: 1.25em;
+    height: 2em;
     color: var(--windows-control-color);
   }
 
   .windows-controls .control svg {
-    width: 1.125rem;
-    height: 1.125rem;
+    width: 1.125em;
+    height: 1.125em;
   }
 
   #address-bar {
@@ -99,13 +99,13 @@ export default css`
     justify-content: center;
     order: 1;
     width: 100%;
-    height: 1.6rem;
-    padding: 0 0.5rem;
+    height: 1.6em;
+    padding: 0 0.5em;
     overflow: hidden;
     border-radius: 9999px;
     background-color: var(--address-background-color);
     color: var(--address-color);
-    font-size: 0.8125rem;
+    font-size: 0.8125em;
     text-decoration: none;
   }
 
@@ -119,7 +119,7 @@ export default css`
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding-inline: 0.25rem;
+    padding-inline: 0.25em;
     overflow: hidden;
   }
 
@@ -134,10 +134,10 @@ export default css`
   slot[name='icon']::slotted(quiet-icon),
   slot[name='icon']::slotted(svg) {
     flex: 0;
-    max-width: 1rem;
-    max-height: 1rem;
-    margin-inline-end: 0.25rem;
-    font-size: 1rem;
+    max-width: 1em;
+    max-height: 1em;
+    margin-inline-end: 0.25em;
+    font-size: 1em;
   }
 
   #address-bar:focus {

@@ -6,7 +6,7 @@ layout: docs
 
 To streamline development with AI, a set of _component reference files_ are available for use with [LLMs](https://en.wikipedia.org/wiki/Large_language_model). These files offer a complete breakdown of Quiet's components, making it easy to get quick, accurate help from your AI assistant.
 
-Component reference files are a collection of plain-text documents that describe every Quiet UI component in detail. An `index.txt` file lists all available components while individual `.txt` files (e.g., `quiet-button.txt`, `quiet-card.txt`, etc.) provide an in-depth look at each component's features.
+Component reference files are a collection of plain-text documents that describe every Quiet UI component in detail. An `index.txt` file lists all available components while individual `.txt` files (e.g., `button.txt`, `card.txt`, etc.) provide an in-depth look at each component's features.
 
 ## Where are the files located?
 
@@ -30,7 +30,7 @@ AI-powered coding tools can interpret these reference files to deliver tailored 
 Depending on the tool, options include:
 
 - **Uploading the files:** Many assistants support uploading text files directly. Submit the `index.txt` and any component-specific `.txt` files relevant to the task.
-- **Copying and pasting:** Open a file (e.g., `quiet-button.txt`) and paste its contents into the assistant's input area.
+- **Copying and pasting:** Open a file (e.g., `button.txt`) and paste its contents into the assistant's input area.
 - **Pointing to the directory:** Some tools can scan a folder. Direct these tools to your project's `dist/llm` folder to let it explore.
 
 The `index.txt` file serves as an excellent starting point, offering an overview of all components to help the assistant recommend the best one for the job.

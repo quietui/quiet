@@ -120,11 +120,11 @@ You can also embed videos.
 </quiet-browser-frame>
 ```
 
-And even `<iframe>` elements.
+And even websites.
 
 ```html {.example}
-<quiet-browser-frame label="quietui.org" flush>
-  <iframe src="https://quietui.org/" height="540"></iframe>
+<quiet-browser-frame label="example.com" flush>
+  <iframe src="https://example.com/" height="280"></iframe>
 </quiet-browser-frame>
 ```
 

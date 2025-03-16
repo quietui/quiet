@@ -124,7 +124,7 @@ And even `<iframe>` elements.
 
 ```html {.example}
 <quiet-browser-frame label="quietui.org" flush>
-  <iframe src="https://quietui.org/" height="550"></iframe>
+  <iframe src="https://quietui.org/" height="540"></iframe>
 </quiet-browser-frame>
 ```
 

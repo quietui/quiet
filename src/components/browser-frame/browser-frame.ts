@@ -9,7 +9,7 @@ import styles from './browser-frame.styles.js';
 /**
  * <quiet-browser-frame>
  *
- * @summary An on-page browser UI that displays arbitrary content.
+ * @summary An on-page browser UI that displays arbitrary content inside of it.
  * @documentation https://quietui.org/docs/components/browser-frame
  * @status stable
  * @since 1.0

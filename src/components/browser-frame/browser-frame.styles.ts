@@ -8,8 +8,7 @@ export default css`
     --body-padding: 1rem;
     --header-background-color: var(--quiet-neutral-fill-softer);
     --header-height: 2.5rem;
-    --button-size: 0.75rem;
-    --button-spacing: 0.5rem;
+    --windows-control-color: var(--quiet-neutral-fill-mid);
 
     /* Move container styles to host */
     display: flex;
@@ -32,30 +31,65 @@ export default css`
     background-color: var(--header-background-color);
   }
 
+  /* Base controls styles */
   #controls {
     display: flex;
     align-items: center;
-    margin-inline-end: 1rem;
-    gap: var(--button-spacing);
+    gap: 0.5rem;
   }
 
-  .button {
+  /* Mac-style controls positioning */
+  .mac #controls.mac-controls {
+    order: 0;
+    margin-inline-end: 1rem;
+  }
+
+  /* Windows-style controls positioning */
+  .windows #controls.windows-controls {
+    order: 2;
+    margin-inline-start: 1rem;
+  }
+
+  /* Base button styles */
+  .control {
+    display: flex;
     flex-shrink: 0;
-    width: var(--button-size);
-    height: var(--button-size);
+    align-items: center;
+    justify-content: center;
+    width: 0.75rem;
+    height: 0.75rem;
+  }
+
+  /* Mac-specific control styles */
+  .mac-controls .control {
+    width: 0.75rem;
+    height: 0.75rem;
     border-radius: 50%;
+  }
 
-    &.close {
-      background-color: #ff5f56;
-    }
+  .mac-controls .control.close {
+    background-color: #ff5f56;
+  }
 
-    &.minimize {
-      background-color: #ffbd2e;
-    }
+  .mac-controls .control.minimize {
+    background-color: #ffbd2e;
+  }
 
-    &.maximize {
-      background-color: #27c93f;
-    }
+  .mac-controls .control.maximize {
+    background-color: #27c93f;
+  }
+
+  /* Windows-specific control styles */
+  .windows-controls .control {
+    position: relative;
+    width: 1.25rem;
+    height: 2rem;
+    color: var(--windows-control-color);
+  }
+
+  .windows-controls .control svg {
+    width: 1.125rem;
+    height: 1.125rem;
   }
 
   #address-bar {
@@ -63,6 +97,7 @@ export default css`
     flex: 1 1 auto;
     align-items: center;
     justify-content: center;
+    order: 1;
     width: 100%;
     height: 1.6rem;
     padding: 0 0.5rem;

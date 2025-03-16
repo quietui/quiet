@@ -18,7 +18,7 @@ import styles from './browser-frame.styles.js';
  * @slot icon - An optional icon to display at the start of the address bar.
  *
  * @csspart header - The browser frame's header that contains controls and address bar.
- * @csspart controls - The browser frame's control buttons container (red, yellow, green dots).
+ * @csspart controls - The browser frame's control buttons container (red, yellow, green dots or Windows controls).
  * @csspart address-bar - The browser frame's address bar. Either an `<a>` or a `<span>` depending on `href`.
  * @csspart body - The browser frame's body, where content shows.
  *
@@ -28,8 +28,7 @@ import styles from './browser-frame.styles.js';
  * @cssproperty --body-padding - Padding to apply to the browser frame's body.
  * @cssproperty --header-background-color - Background color for the header.
  * @cssproperty --header-height - Height of the browser frame header.
- * @cssproperty --button-size - Size of the control buttons.
- * @cssproperty --button-spacing - Spacing between control buttons.
+ * @cssproperty --windows-control-color - The color for Windows-style control buttons.
  */
 @customElement('quiet-browser-frame')
 export class QuietBrowserFrame extends QuietElement {
@@ -62,28 +61,80 @@ export class QuietBrowserFrame extends QuietElement {
    */
   @property({ type: Boolean, reflect: true }) flush = false;
 
+  /**
+   * Sets the window control style to use. 'mac' uses the traffic light controls, 'windows' uses Windows 11-style
+   * controls, and 'auto' will use the OS-appropriate style.
+   */
+  @property({ reflect: true }) platform: 'mac' | 'windows' | 'auto' = 'auto';
+
   /** Extracts a clean domain from a URL string */
   private getDomain(url: string): string {
     try {
       const urlObj = new URL(url);
       return urlObj.hostname;
-    } catch (e) {
+    } catch {
       // If parsing fails, return the original URL as fallback
       return url;
     }
   }
 
+  /** Detects the user's platform. Defaults to Mac for non-Windows devices. */
+  private getPlatform() {
+    if (this.platform !== 'auto') {
+      return this.platform;
+    }
+
+    const userAgent = navigator.userAgent.toLowerCase();
+    const isWindows = /windows/i.test(userAgent);
+    return isWindows ? 'windows' : 'mac';
+  }
+
+  private renderMacControls() {
+    return html`
+      <div id="controls" part="controls" class="mac-controls">
+        <span class="control close"></span>
+        <span class="control minimize"></span>
+        <span class="control maximize"></span>
+      </div>
+    `;
+  }
+
+  private renderWindowsControls() {
+    return html`
+      <div id="controls" part="controls" class="windows-controls">
+        <span class="control minimize">
+          <svg viewBox="0 0 12 12" fill="currentColor">
+            <rect x="2" y="5.5" width="8" height="1" rx="0.5"></rect>
+          </svg>
+        </span>
+        <span class="control maximize">
+          <svg viewBox="0 0 12 12" fill="currentColor">
+            <rect x="2.5" y="2.5" width="7" height="7" fill="none" stroke="currentColor" stroke-width="1" rx="1"></rect>
+          </svg>
+        </span>
+        <span class="control close">
+          <svg viewBox="0 0 12 12" fill="currentColor">
+            <path
+              d="M3,3 L9,9 M9,3 L3,9"
+              stroke="currentColor"
+              stroke-width="1.25"
+              stroke-linecap="round"
+              fill="none"
+            ></path>
+          </svg>
+        </span>
+      </div>
+    `;
+  }
+
   render() {
     const hasLink = this.href;
     const label = this.label || (this.href ? this.getDomain(this.href) : '');
+    const platform = this.getPlatform();
 
     return html`
-      <header id="header" part="header">
-        <div id="controls" part="controls">
-          <span class="button close"></span>
-          <span class="button minimize"></span>
-          <span class="button maximize"></span>
-        </div>
+      <header id="header" part="header" class=${platform}>
+        ${platform === 'windows' ? this.renderWindowsControls() : this.renderMacControls()}
         ${hasLink
           ? html`
               <a

@@ -54,6 +54,28 @@ When `label` is used, it will be shown as-is in the address bar. Otherwise, a si
 </quiet-browser-frame>
 ```
 
+### Selecting the platform
+
+The browser frame will automatically adapt to the user's platform (Windows or Mac/*nix). To show a specific one, set the `platform` attribute to `mac` or `windows`.
+
+```html {.example .flex-row}
+<quiet-browser-frame 
+  label="Mac" 
+  platform="mac"
+  style="--body-padding: 2rem 1rem; width: 300px; text-align: center;"
+>
+  I'm a Mac
+</quiet-browser-frame>
+
+<quiet-browser-frame 
+  label="Windows" 
+  platform="windows"
+  style="--body-padding: 2rem 1rem; width: 300px; text-align: center;"
+>
+  And I'm a PC
+</quiet-browser-frame>
+```
+
 ### Embedding content
 
 The browser frame works well for embedding content like iframes, images, and other components to simulate how they would appear in a browser. Use the `flush` attribute to remove padding from within the body, which is useful for embedding edge-to-edge content.
@@ -126,6 +148,7 @@ You can customize the appearance of the browser frame using CSS custom propertie
 <quiet-browser-frame
   id="browser__styling"
   label="example.com"
+  platform="windows"
 >
   <quiet-icon slot="icon" name="sparkles"></quiet-icon>
   This frame has custom styling with a violet theme.
@@ -138,6 +161,7 @@ You can customize the appearance of the browser frame using CSS custom propertie
     --header-background-color: #989cff;
     --address-background-color: #7a7dff;
     --address-color: white;
+    --windows-control-color: white;
 
     color: #4f51a8;
     text-align: center;

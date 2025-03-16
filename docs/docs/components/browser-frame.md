@@ -120,6 +120,14 @@ You can also embed videos.
 </quiet-browser-frame>
 ```
 
+And even `<iframe>` elements.
+
+```html {.example}
+<quiet-browser-frame label="quietui.org" flush>
+  <iframe src="https://quietui.org/" height="550"></iframe>
+</quiet-browser-frame>
+```
+
 ### Theming
 
 Browser frames automatically adapt to light and dark mode. To force a specific color scheme, add `class="quiet-light"` or `class="quiet-dark"`.

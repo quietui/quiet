@@ -168,6 +168,7 @@ export default css`
 
     ::slotted(img),
     ::slotted(iframe) {
+      border: none !important;
       border-radius: 0 !important;
     }
   }

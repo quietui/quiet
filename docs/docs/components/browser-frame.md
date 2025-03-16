@@ -78,7 +78,7 @@ The browser frame will automatically adapt to the user's platform (Windows or Ma
 
 ### Changing the size
 
-The browser frame scales based on the current font size.
+The browser frame scales based on the current font size. To adjust it, set the `font-size` property with CSS.
 
 ```html {.example .flex-col}
 <quiet-browser-frame label="Smaller" style="font-size: 12px; --body-padding: 4rem 1rem; text-align: center;">

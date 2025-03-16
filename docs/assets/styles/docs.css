@@ -552,7 +552,7 @@ quiet-badge.experimental {
 
 @media not (hover: hover) {
   .anchor-heading a {
-    color: var(--quiet-text-muted);
+    color: color-mix(in oklab, var(--quiet-text-muted), transparent 50%);
     text-decoration: none;
   }
 }

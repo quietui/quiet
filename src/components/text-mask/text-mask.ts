@@ -14,6 +14,11 @@ import styles from './text-mask.styles.js';
  * @since 1.0.0
  *
  * @slot - The text to be masked.
+ *
+ * @cssproperty --brightness - Adjusts the brightness of the mask image (0-200%, where 100% is normal)
+ * @cssproperty --contrast - Adjusts the contrast of the mask image (0-200%, where 100% is normal)
+ * @cssproperty --grayscale - Converts the mask to grayscale (0-100%, where 0% is normal and 100% is fully grayscale)
+ * @cssproperty --hue-rotate - Rotates the hue of the mask (0-360deg)
  */
 @customElement('quiet-text-mask')
 export class QuietTextMask extends QuietElement {
@@ -24,18 +29,6 @@ export class QuietTextMask extends QuietElement {
 
   /** Creates a parallax-like effect where the image stays fixed while scrolling */
   @property({ type: Boolean, reflect: true }) fixed = false;
-
-  /** Adjusts the brightness of the mask image (0-200, where 100 is normal) */
-  @property({ type: Number }) brightness = 100;
-
-  /** Adjusts the contrast of the mask image (0-200, where 100 is normal) */
-  @property({ type: Number }) contrast = 100;
-
-  /** Converts the mask to grayscale (0-100, where 0 is normal and 100 is fully grayscale) */
-  @property({ type: Number }) grayscale = 0;
-
-  /** Rotates the hue of the mask (0-360 degrees) */
-  @property({ attribute: 'hue-rotate', type: Number }) hueRotate = 0;
 
   updated(changedProperties: PropertyValues<this>) {
     if (changedProperties.has('fixed')) {
@@ -53,32 +46,10 @@ export class QuietTextMask extends QuietElement {
       }
     }
 
-    if (
-      changedProperties.has('image') ||
-      changedProperties.has('brightness') ||
-      changedProperties.has('contrast') ||
-      changedProperties.has('grayscale') ||
-      changedProperties.has('hueRotate')
-    ) {
-      this.updateBackgroundImage();
-    }
-  }
-
-  private updateBackgroundImage() {
-    if (!this.image) return;
-
     // Set the background image
-    this.style.backgroundImage = `url(${this.image})`;
-
-    // Build filter string directly from properties
-    const filters = [];
-    if (this.brightness !== 100) filters.push(`brightness(${this.brightness}%)`);
-    if (this.contrast !== 100) filters.push(`contrast(${this.contrast}%)`);
-    if (this.grayscale > 0) filters.push(`grayscale(${this.grayscale}%)`);
-    if (this.hueRotate !== 0) filters.push(`hue-rotate(${this.hueRotate}deg)`);
-
-    // Apply filters or clear them
-    this.style.filter = filters.length ? filters.join(' ') : '';
+    if (changedProperties.has('image')) {
+      this.style.backgroundImage = `url(${this.image})`;
+    }
   }
 
   render() {

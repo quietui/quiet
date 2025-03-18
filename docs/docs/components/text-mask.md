@@ -9,14 +9,14 @@ Text masks create eye-catching headlines that capture visitors' attention, makin
 <quiet-text-mask 
   image="https://images.unsplash.com/photo-1529778873920-4da4926a72c2?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   fixed
-  brightness="90"
-  contrast="60"  
   style="
     font-family: 'Fira Sans', sans-serif;
     font-size: 7em; 
     font-weight: 900; 
     line-height: 1; 
     text-align: center;
+    --brightness: 90%;
+    --contrast: 60%;
   "
 >
   <quiet-fit-text>LOVE WHAT</quiet-fit-text>
@@ -61,14 +61,14 @@ Use the [fit text](/docs/components/fit-text) component to draw a text mask that
 ```html {.example}
 <quiet-text-mask 
   image="https://images.unsplash.com/photo-1527416876370-fb74d128c3dc?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-  brightness="90"
-  contrast="60"
   style="
     font-family: 'Fira Sans', sans-serif;
     font-size: 4em; 
     font-weight: 900; 
     line-height: 1; 
     text-align: center;
+    --brightness: 90%;
+    --contrast: 60%;
   "
 >
   <quiet-fit-text>
@@ -107,14 +107,14 @@ Use the `fixed` attribute to create a parallax-like effect where the image stays
 ```html {.example}
 <quiet-text-mask 
   image="https://images.unsplash.com/photo-1527416876370-fb74d128c3dc?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-  brightness="90"
-  contrast="60"
   fixed
   style="
     font-family: 'Fira Sans', sans-serif;
     font-size: 4em; 
     font-weight: 900;
     text-align: center;
+    --brightness: 90%;
+    --contrast: 60%;
   "
 >
   <quiet-fit-text>FIXED BACKGROUND</quiet-fit-text>
@@ -127,18 +127,18 @@ Due to [a very old bug](https://bugzilla.mozilla.org/show_bug.cgi?id=1313757), t
 
 ### Brightness
 
-Adjust the brightness of the masked image using the `brightness` attribute (0-200). Normal brightness is 100. Values below 100 darken the image, and values above 100 brighten it.
+Adjust the brightness of the masked image using the `--brightness` custom property (0-200%). Normal brightness is 100%. Values below 100% darken the image, and values above 100% brighten it.
 
 ```html {.example}
 <div id="mask__brightness">
   <quiet-text-mask
     image="https://images.unsplash.com/photo-1529778873920-4da4926a72c2?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-    brightness="75"
     style="
       font-family: 'Fira Sans', sans-serif;
       font-size: 4em;
       font-weight: 900;
       text-align: center;
+      --brightness: 75%;
     "
   >
     <quiet-fit-text>BRIGHTNESS</quiet-fit-text>
@@ -161,25 +161,25 @@ Adjust the brightness of the masked image using the `brightness` attribute (0-20
   const slider = container.querySelector('quiet-slider');
 
   slider.addEventListener('quiet-input', () => {
-    mask.brightness = slider.value;
+    mask.style.setProperty('--brightness', `${slider.value}%`);
   });
 </script>
 ```
 
 ### Contrast
 
-Control the contrast of the masked image with the contrast attribute (0-200). Normal contrast is 100. Lower values reduce contrast for a more subtle effect, while higher values increase it for more dramatic definition in the text mask.
+Control the contrast of the masked image with the `--contrast` custom property (0-200%). Normal contrast is 100%. Lower values reduce contrast for a more subtle effect, while higher values increase it for more dramatic definition in the text mask.
 
 ```html {.example}
 <div id="mask__contrast">
   <quiet-text-mask
     image="https://images.unsplash.com/photo-1529778873920-4da4926a72c2?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-    contrast="50"
     style="
       font-family: 'Fira Sans', sans-serif;
       font-size: 4em;
       font-weight: 900;
       text-align: center;
+      --contrast: 50%;
     "
   >
     <quiet-fit-text>CONTRAST</quiet-fit-text>
@@ -202,25 +202,25 @@ Control the contrast of the masked image with the contrast attribute (0-200). No
   const slider = container.querySelector('quiet-slider');
 
   slider.addEventListener('quiet-input', () => {
-    mask.contrast = slider.value;
+    mask.style.setProperty('--contrast', `${slider.value}%`);
   });
 </script>
 ```
 
 ### Grayscale
 
-Remove color from the masked image using the `grayscale` attribute (0-100). A value of 100 creates a completely black and white effect, while lower values retain some of the original color.
+Remove color from the masked image using the `--grayscale` custom property (0-100%). A value of 100% creates a completely black and white effect, while lower values retain some of the original color.
 
 ```html {.example}
 <div id="mask__grayscale">
   <quiet-text-mask
     image="https://images.unsplash.com/photo-1529778873920-4da4926a72c2?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-    grayscale="100"
     style="
       font-family: 'Fira Sans', sans-serif;
       font-size: 4em;
       font-weight: 900;
       text-align: center;
+      --grayscale: 100%;
     "
   >
     <quiet-fit-text>GRAYSCALE</quiet-fit-text>
@@ -242,25 +242,25 @@ Remove color from the masked image using the `grayscale` attribute (0-100). A va
   const slider = container.querySelector('quiet-slider');
 
   slider.addEventListener('quiet-input', () => {
-    mask.grayscale = slider.value;
+    mask.style.setProperty('--grayscale', `${slider.value}%`);
   });
 </script>
 ```
 
 ### Hue rotation
 
-Transform the colors of the masked image with the `hue-rotate` attribute (0-360). Values represent degrees of rotation around the color wheel, creating unique color shifts while maintaining the original luminosity.
+Transform the colors of the masked image with the `--hue-rotate` custom property (0-360deg). Values represent degrees of rotation around the color wheel, creating unique color shifts while maintaining the original luminosity.
 
 ```html {.example}
 <div id="mask__hue">
   <quiet-text-mask
     image="https://images.unsplash.com/photo-1529778873920-4da4926a72c2?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-    hue-rotate="180"
     style="
       font-family: 'Fira Sans', sans-serif;
       font-size: 4em;
       font-weight: 900;
       text-align: center;
+      --hue-rotate: 180deg;
     "
   >
     <quiet-fit-text>HUE ROTATE</quiet-fit-text>
@@ -289,7 +289,7 @@ Transform the colors of the masked image with the `hue-rotate` attribute (0-360)
 
   // Change with the slider
   slider.addEventListener('quiet-input', () => {
-    mask.hueRotate = slider.value;
+    mask.style.setProperty('--hue-rotate', `${slider.value}deg`);
   });
 </script>
 

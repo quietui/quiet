@@ -2,7 +2,7 @@ import { css } from 'lit';
 
 export default css`
   :host {
-    --track-size: 0.75em;
+    --track-size: 0.5em;
     --thumb-width: 1.4em;
     --thumb-height: 1.4em;
     --marker-width: 0.1875em;
@@ -41,7 +41,7 @@ export default css`
 
     &:focus-visible:not(.disabled) #thumb {
       outline: var(--quiet-focus-ring);
-      outline-offset: calc(var(--quiet-focus-offset) * 2);
+      /* intentionally no offset due to border */
     }
   }
 
@@ -105,9 +105,9 @@ export default css`
     position: absolute;
     width: var(--thumb-width);
     height: var(--thumb-height);
-    border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-primary-fill-mid);
+    border: solid 0.125em var(--quiet-background-color);
     border-radius: 50%;
-    background-color: white;
+    background-color: var(--quiet-primary-fill-mid);
     cursor: pointer;
   }
 

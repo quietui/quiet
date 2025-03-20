@@ -88,10 +88,6 @@ If you're using [constraint validation](https://developer.mozilla.org/en-US/docs
 ></quiet-text-field>
 ```
 
-:::warn
-Due to [a Safari bug](https://bugs.webkit.org/show_bug.cgi?id=261432), `user-valid` styles may not get applied in some cases. This bug has been fixed, but if you're not seeing valid styles in these examples in Safari, this might be why.
-:::
-
 ### Manual validation styles
 
 If you need to control validation styles manually, add the `quiet-force-valid` or `quiet-force-invalid` class. This will force the form control to appear as valid or invalid, regardless of its actual validity.

@@ -355,7 +355,6 @@ Listboxes are styled like form controls for consistency, but feel free to custom
 ```html {.example}
 <quiet-listbox 
   label="Select a message to view" 
-  multiple
   class="quiet-vh-label" 
   id="listbox__styling"
 >

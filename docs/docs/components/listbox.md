@@ -150,33 +150,6 @@ Use the `multiple` attribute to enable multi-selection mode. Users can select mu
 </quiet-listbox>
 ```
 
-### Filled and unstyled text areas
-
-Set the `appearance` attribute to `normal`, `filled`, or `unstyled` to change the text area's appearance.
-
-```html {.example}
-<quiet-listbox label="Normal listbox">
-  <quiet-listbox-item value="cat-tree">Cat Tree</quiet-listbox-item>
-  <quiet-listbox-item value="food-bowl">Food Bowl</quiet-listbox-item>
-  <quiet-listbox-item value="scratching-post">Scratching Post</quiet-listbox-item>
-  <quiet-listbox-item value="toy-mouse">Toy Mouse</quiet-listbox-item>
-</quiet-listbox>
-<br>
-<quiet-listbox label="Filled listbox" appearance="filled">
-  <quiet-listbox-item value="cat-tree">Cat Tree</quiet-listbox-item>
-  <quiet-listbox-item value="food-bowl">Food Bowl</quiet-listbox-item>
-  <quiet-listbox-item value="scratching-post">Scratching Post</quiet-listbox-item>
-  <quiet-listbox-item value="toy-mouse">Toy Mouse</quiet-listbox-item>
-</quiet-listbox>
-<br>
-<quiet-listbox label="Unstyled listbox" appearance="unstyled">
-  <quiet-listbox-item value="cat-tree">Cat Tree</quiet-listbox-item>
-  <quiet-listbox-item value="food-bowl">Food Bowl</quiet-listbox-item>
-  <quiet-listbox-item value="scratching-post">Scratching Post</quiet-listbox-item>
-  <quiet-listbox-item value="toy-mouse">Toy Mouse</quiet-listbox-item>
-</quiet-listbox>
-```
-
 ### Changing the size
 
 Use the `size` attribute to change the listbox's size.
@@ -265,7 +238,7 @@ The `required` attribute can be used to enable validation using the [Constraint 
 <form action="about:blank" method="get" target="_blank">
   <quiet-listbox name="meow" label="Meow Volume" required>
     <quiet-listbox-item value="1">Barely Audible</quiet-listbox-item>
-    <quiet-listbox-item value="2" selected>Conversational</quiet-listbox-item>
+    <quiet-listbox-item value="2">Conversational</quiet-listbox-item>
     <quiet-listbox-item value="3">Wake the Neighbors</quiet-listbox-item>
   </quiet-listbox>
   <br>

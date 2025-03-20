@@ -1163,6 +1163,7 @@ td.table-reflects {
 .component-table td:not(.table-description) code,
 .dependency-list code {
   background: none;
+  color: inherit;
 }
 
 /* Copy buttons in tables */

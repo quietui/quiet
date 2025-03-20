@@ -153,7 +153,7 @@
   a {
     color: var(--quiet-primary-text-colorful);
     font-weight: var(--quiet-font-weight-semibold);
-    text-decoration-thickness: 0.09375em;
+    text-decoration-thickness: 0.0625em;
     text-underline-offset: 0.125em;
     transition: 150ms color ease;
 
@@ -233,7 +233,8 @@
   tt {
     padding: 0.125em 0.25em;
     border-radius: calc(var(--quiet-border-radius) / 2);
-    background: var(--quiet-neutral-fill-softer);
+    background: var(--quiet-primary-fill-softer);
+    color: var(--quiet-primary-text-colorful);
     font-size: 0.875em;
     font-family: var(--quiet-font-family-code);
   }

@@ -201,6 +201,7 @@ export default css`
     border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
     border-radius: calc(var(--quiet-border-radius) / 1.5);
     background-color: var(--quiet-paper-color);
+    color: var(--quiet-text-body);
 
     &:has(#text-box:focus-visible) {
       outline: var(--quiet-border-style) calc(var(--quiet-border-width) + 1px) var(--quiet-focus-color);

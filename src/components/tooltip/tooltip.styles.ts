@@ -2,7 +2,7 @@ import { css } from 'lit';
 
 export default css`
   :host {
-    --arrow-size: 0.3125rem;
+    --arrow-size: 0.275rem;
     --max-width: 20rem;
     --show-duration: 100ms;
 
@@ -41,13 +41,12 @@ export default css`
 
   #content {
     z-index: 2;
-    padding: 0.5em 0.75em;
-    border: var(--quiet-border-style) var(--quiet-border-width);
+    padding: 0.33em 0.66em;
+    border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-fill-loud);
     border-radius: var(--quiet-border-radius);
-    border-color: var(--quiet-neutral-stroke-soft);
-    background-color: var(--quiet-paper-color);
+    background-color: var(--quiet-neutral-fill-loud);
     box-shadow: var(--quiet-shadow-soft);
-    color: var(--quiet-neutral-text-on-soft);
+    color: var(--quiet-neutral-text-on-loud);
     font-size: 0.875em;
     user-select: none;
     -webkit-user-select: none;
@@ -58,9 +57,9 @@ export default css`
     position: absolute;
     width: calc(var(--arrow-diagonal-size) * 2);
     height: calc(var(--arrow-diagonal-size) * 2);
-    border-right: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
-    border-bottom: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
-    background-color: var(--quiet-paper-color);
+    border-right: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-fill-loud);
+    border-bottom: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-fill-loud);
+    background-color: var(--quiet-neutral-fill-loud);
   }
 
   /* Rotate border position based on placement */

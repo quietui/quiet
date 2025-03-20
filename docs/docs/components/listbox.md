@@ -6,7 +6,7 @@ layout: component
 Listboxes follow the [ARIA APG listbox pattern](https://www.w3.org/WAI/ARIA/apg/patterns/listbox/) for accessibility. The listbox is labeled for assistive devices and listbox items are announced as options. To function more like native listboxes, the alternate selection model is used for keyboard interaction.
 
 ```html {.example}
-<quiet-listbox label="Our kittens" description="Select your new friend." multiple>
+<quiet-listbox label="Our kittens" description="Select your new friends." multiple>
   <quiet-listbox-item value="1">Bella</quiet-listbox-item>
   <quiet-listbox-item value="2">Luna</quiet-listbox-item>
   <quiet-listbox-item value="3">Meowy McGee</quiet-listbox-item>
@@ -133,7 +133,7 @@ Add the `disabled` attribute to individual listbox items to make them non-select
 
 ### Multiple selection
 
-Use the `multiple` attribute to enable multi-selection mode. Users can select multiple items using Ctrl/Cmd+click, Shift+click for ranges, or Ctrl/Cmd+A to select all.
+Use the `multiple` attribute to enable multi-selection mode. Users can select multiple items using <quiet-hotkey keys="$command" platform="mac"></quiet-hotkey> or <quiet-hotkey keys="$command" platform="windows"></quiet-hotkey> + click, <quiet-hotkey keys="$shift"></quiet-hotkey> + click for ranges, or <quiet-hotkey keys="$command A"></quiet-hotkey> to select all. For coarse pointers, such as touch, tapping an item will toggle the selection.
 
 ```html {.example}
 <quiet-listbox label="Kitty Behavior" description="Select your cat's typical antics." multiple>
@@ -242,7 +242,7 @@ The `required` attribute can be used to enable validation using the [Constraint 
     <quiet-listbox-item value="3">Wake the Neighbors</quiet-listbox-item>
   </quiet-listbox>
   <br>
-  <quiet-button type="submit" variant="primary">Save Cat Profile</quiet-button>
+  <quiet-button type="submit" variant="primary">Submit</quiet-button>
   <quiet-button type="reset">Reset</quiet-button>
 </form>
 ```
@@ -263,7 +263,7 @@ Use the `setCustomValidity()` method to make the listbox invalid and show a cust
     <quiet-listbox-item value="3">Thunderous Vibration</quiet-listbox-item>
   </quiet-listbox>
   <br>
-  <quiet-button type="submit" variant="primary">Register</quiet-button>
+  <quiet-button type="submit" variant="primary">Submit</quiet-button>
 </form>
 
 <script type="module">
@@ -347,3 +347,135 @@ However, these selectors will match even before the user has had a chance to int
   }
 </style>
 ```
+
+## Styling listboxes
+
+Listboxes are styled like form controls for consistency, but feel free to customize them to your liking. Here's an example you might see in an email client.
+
+```html {.example}
+<quiet-listbox 
+  label="Select a message to view" 
+  multiple
+  class="quiet-vh-label" 
+  id="listbox__styling"
+>
+  <quiet-listbox-item value="1000">
+    <quiet-avatar image="https://images.unsplash.com/photo-1735820474275-dd0ff4f28d71?q=80&w=256&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"></quiet-avatar>
+    <h4 class="name">Sir Fluffington III</h4>
+    <time class="time" datetime="2025-03-20T14:45">2:45 PM</time>
+    <div class="summary" aria-hidden="true">Just knocked your favorite vase off the shelf. Not sorry.</div>
+    <quiet-icon class="attachment" name="paperclip" label="1 attachment"></quiet-icon>
+  </quiet-listbox-item>
+
+  <quiet-listbox-item value="1001">
+    <quiet-avatar image="https://images.unsplash.com/photo-1529778873920-4da4926a72c2?q=80&w=256&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"></quiet-avatar>
+    <h4 class="name">Captain Whiskers</h4>
+    <time class="time" datetime="2025-03-20T13:37">1:37 PM</time>
+    <div class="summary" aria-hidden="true">Require immediate attention. Food bowl is half empty. This is an emergency.</div>
+    <quiet-icon class="attachment" name="flag" family="filled" label="Urgent!"></quiet-icon>
+  </quiet-listbox-item>
+
+  <quiet-listbox-item value="1002">
+    <quiet-avatar image="https://images.unsplash.com/photo-1569591159212-b02ea8a9f239?q=80&w=256&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"></quiet-avatar>
+    <h4 class="name">Lady Purrlington</h4>
+    <time class="time" datetime="2025-03-20T11:15">11:15 AM</time>
+    <div class="summary" aria-hidden="true">Your lap is required for napping purposes at 3 PM sharp. Clear your schedule.</div>
+  </quiet-listbox-item>
+  
+  <quiet-listbox-item value="1003">
+    <quiet-avatar image="https://images.unsplash.com/photo-1672487209629-4d52e0c043d0?q=80&w=256&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"></quiet-avatar>
+    <h4 class="name">Meowy McGee</h4>
+    <time class="time" datetime="2025-03-20T10:22">10:22 AM</time>
+    <div class="summary" aria-hidden="true">Spotted a bird outside. Making weird chattering noises. Send help.</div>
+    <quiet-icon class="attachment" name="paperclip" label="1 attachment"></quiet-icon>
+  </quiet-listbox-item>
+  
+  <quiet-listbox-item value="1004">
+    <quiet-avatar image="https://images.unsplash.com/photo-1579014868745-23e405c5605d?q=80&w=400&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"></quiet-avatar>
+    <h4 class="name">Chairman Meow</h4>
+    <time class="time" datetime="2025-03-20T09:30">9:30 AM</time>
+    <div class="summary" aria-hidden="true">Have claimed the new cardboard box. All other cats shall bow to my superiority.</div>
+  </quiet-listbox-item>  
+</quiet-listbox>
+
+<style>
+  #listbox__styling {
+    max-width: 600px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+
+    &::part(listbox) {
+      height: auto;
+      padding-block: 0;
+    }
+    
+    quiet-listbox-item {
+      display: grid;
+      grid-template-areas: 
+        "avatar name time"
+        "avatar summary attachment";
+      grid-template-columns: auto 1fr auto;
+      grid-gap: 4px .75em;
+      padding: .75em;
+      border-bottom-color: var(--quiet-neutral-stroke-softer);
+      align-items: center;
+    }
+
+    quiet-listbox-item:has(+ quiet-listbox-item:state(selected)),
+    quiet-listbox-item:state(selected) {
+      border-bottom-color: var(--quiet-neutral-stroke-soft);
+    }
+
+    &:state(focused) {
+      quiet-listbox-item:has(+ quiet-listbox-item:state(selected)),
+      quiet-listbox-item:state(selected) {
+        border-bottom-color: var(--quiet-primary-stroke-soft);
+      }
+    }
+    
+    quiet-avatar {
+      grid-area: avatar;
+      margin-right: 4px;
+    }
+    
+    .name {
+      grid-area: name;
+      margin: 0;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    
+    .time {
+      grid-area: time;
+      font-size: .75em;
+      color: var(--quiet-text-muted, #777);
+      justify-self: end;
+      font-style: normal;
+    }
+    
+    .summary {
+      grid-area: summary;
+      color: #555;
+      font-size: 13px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin: 0;
+    }
+    
+    .attachment {
+      grid-area: attachment;
+      color: var(--quiet-text-muted, #777);
+      justify-self: end;
+      font-size: 14px;
+
+      &[name="flag"] {
+        color: crimson;
+      }
+    }
+  }
+</style>
+```
+
+:::info
+Note the use of `aria-hidden` on summaries, which reduces verbosity when used with screen readers.
+:::

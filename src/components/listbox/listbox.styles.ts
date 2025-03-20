@@ -4,7 +4,7 @@ export default css`
   #listbox {
     display: flex;
     flex-direction: column;
-    max-height: 12.125em;
+    height: 12.125em;
     padding: 0.25em 0;
     overflow: auto;
     border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);

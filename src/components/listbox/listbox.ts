@@ -40,6 +40,10 @@ const VALIDATION_MESSAGE = nativeFileInput.validationMessage;
  * @event quiet-focus - Emitted when the list box receives focus. This event does not bubble.
  * @event quiet-input - Emitted when the list box's selection changes from user input.
  *
+ * @csspart label - The element that contains the text field's label.
+ * @csspart description - The element that contains the text field's description.
+ * @csspart listbox - The internal listbox container that holds listbox items.
+ *
  * @cssstate disabled - Applied when the text field is disabled.
  * @cssstate blank - Applied when the text field has a blank value.
  * @cssstate focused - Applied when the text field has focus.
@@ -416,6 +420,11 @@ export class QuietListbox extends QuietFormControlElement {
     };
     let selectionChanged = false;
 
+    // Detect if this is a touch event (handle both PointerEvent and TouchEvent)
+    const isCoarsePointer =
+      event instanceof PointerEvent &&
+      (event.pointerType === 'touch' || window.matchMedia('(pointer: coarse)').matches);
+
     if (this.multiple && (modifiers.ctrl || modifiers.meta)) {
       // Toggle item
       item.selected = !item.selected;
@@ -438,8 +447,13 @@ export class QuietListbox extends QuietFormControlElement {
           if (i >= start && i <= end) listItem.selected = true;
         });
       }
+    } else if (this.multiple && isCoarsePointer) {
+      // For touch events in multiple mode, toggle the item instead of clearing others
+      item.selected = !item.selected;
+      this.lastSelectedIndex = itemIndex;
+      selectionChanged = true;
     } else if (this.multiple) {
-      // Multiple selection with no modifier: select only the clicked item
+      // Multiple selection with no modifier and not touch: select only the clicked item
       // Check if this would actually change the selection
       const items = this.getItems();
       selectionChanged = items.some((listItem, i) => {
@@ -473,7 +487,7 @@ export class QuietListbox extends QuietFormControlElement {
 
   private handleKeyDown(event: KeyboardEvent) {
     // Handle typeahead for single character keys - only if not readonly
-    if (event.key.length === 1) {
+    if (event.key.length === 1 && !event.metaKey && !event.ctrlKey) {
       if (!this.readonly) {
         this.handleTypeahead(event);
       }
@@ -577,8 +591,7 @@ export class QuietListbox extends QuietFormControlElement {
         // Handle Ctrl+A for "select all" in multiple mode
         if (!this.readonly && (event.ctrlKey || event.metaKey) && this.multiple) {
           event.preventDefault();
-          items.forEach(item => (item.selected = true));
-          this.updateValueFromSelectedItems();
+          this.selectAll();
         }
         break;
     }

@@ -21,11 +21,11 @@ export default css`
     margin: 0;
     padding-inline: 0.5rem;
     padding-block: 0.25rem;
-    border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
+    border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-fill-loud);
     border-radius: var(--quiet-border-radius);
-    background-color: var(--quiet-paper-color);
+    background-color: var(--quiet-neutral-fill-loud);
     box-shadow: var(--quiet-shadow-soft);
-    color: var(--quiet-neutral-text-on-soft);
+    color: var(--quiet-neutral-text-on-loud);
     font-weight: var(--quiet-font-weight-semibold);
     font-size: 0.75rem;
     text-align: center;

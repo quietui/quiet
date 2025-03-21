@@ -69,7 +69,7 @@ export default css`
     }
   }
 
-  :host([disabled]) #color-slider {
+  :host(:state(disabled)) #color-slider {
     cursor: not-allowed;
   }
 
@@ -101,7 +101,7 @@ export default css`
     }
   }
 
-  :host(:not([disabled])) #color-slider:active #color-slider-thumb {
+  :host(:not(:state(disabled))) #color-slider:active #color-slider-thumb {
     scale: 1.4;
 
     &::after {
@@ -372,7 +372,7 @@ export default css`
     }
   }
 
-  :host([disabled]) #swatches button {
+  :host(:state(disabled)) #swatches button {
     cursor: not-allowed;
   }
 `;

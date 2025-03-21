@@ -23,7 +23,7 @@ export default css`
     cursor: grabbing;
   }
 
-  :host([disabled]) {
+  :host(:state(disabled)) {
     cursor: not-allowed;
     opacity: 0.5;
   }

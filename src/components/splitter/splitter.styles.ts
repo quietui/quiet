@@ -80,11 +80,11 @@ export default css`
   }
 
   /* Disabled */
-  :host([disabled]) #divider {
+  :host(:state(disabled)) #divider {
     cursor: default;
   }
 
-  :host([disabled]) #handle {
+  :host(:state(disabled)) #handle {
     display: none;
   }
 

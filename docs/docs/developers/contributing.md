@@ -192,12 +192,23 @@ On-page elements that hold grouped content inside a border, such as cards, shoul
 }
 ```
 
-Above-page elements, such as popovers, tooltips, and the copy button's feedback, should have a more prominent border so they can be seen easily. These elements should use the following border and background styles along with an appropriate shadow.
+Above-page elements, such as popovers, should have a more prominent border so they can be seen easily. These elements should use the following border and background styles along with an appropriate shadow.
+
+```css
+.popover {
+  background-color: var(--quiet-paper-color);
+  border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
+}
+```
+
+Tooltips should be inverted and use the following styles for borders, backgrounds, etc.
 
 ```css
 .tooltip {
-  background-color: var(--quiet-paper-color);
-  border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
+  border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-fill-loud);
+  background-color: var(--quiet-neutral-fill-loud);
+  box-shadow: var(--quiet-shadow-soft);
+  color: var(--quiet-neutral-text-on-loud);
 }
 ```
 

@@ -1108,11 +1108,6 @@
     }
   }
 
-  /* Cloak to reduce FOUCE when using the autoloader */
-  .quiet-cloak {
-    opacity: 0 !important;
-  }
-
   /* Hide undefined elements to reduce FOUCE */
   :not(:defined) {
     visibility: hidden;

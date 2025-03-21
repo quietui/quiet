@@ -73,15 +73,7 @@ To reduce FOUCE, add the `quiet-cloak` class to the `<html>` element as shown be
 </html>
 ```
 
-If you're using [Quiet Restyle](/docs/restyle), that's all you need to do! If you're not using Restyle, add the following rule to a stylesheet that's immediately available to your page when it loads.
-
-```css
-html.quiet-cloak {
-  opacity: 0;
-}
-```
-
-After initial discovery or two seconds, whichever comes first, the autoloader will remove the class for you, eliminating most FOUCE. The two second timeout ensures users don't see a blank page even when networks are slow or have problems.
+As soon as all components are defined or after two seconds elapse, the content will be shown, eliminating most FOUCE. The two second timeout ensures users don't see a blank page even when networks are slow or have problems.
 
 :::details Hotwire: Turbo users
 

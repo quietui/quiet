@@ -60,7 +60,7 @@ export class QuietSplitter extends QuietElement {
   @property({ reflect: true }) orientation: 'horizontal' | 'vertical' = 'horizontal';
 
   /** Disables the splitter, preventing it from being focused and resized. */
-  @property({ type: Boolean, reflect: true }) disabled = false;
+  @property({ type: Boolean }) disabled = false;
 
   /** A space-separated list of percentage snap points, e.g. "25% 50% 75%". */
   @property({ reflect: true }) snap: string = '';

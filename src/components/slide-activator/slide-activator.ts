@@ -93,7 +93,7 @@ export class QuietSlideActivator extends QuietElement {
   @property({ type: Boolean, reflect: true }) activated = false;
 
   /** Disables the control. */
-  @property({ type: Boolean, reflect: true }) disabled = false;
+  @property({ type: Boolean }) disabled = false;
 
   /** Draws attention to the track by adding a subtle animation. */
   @property({ reflect: true }) attention: 'shimmer';

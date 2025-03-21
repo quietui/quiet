@@ -56,7 +56,7 @@ export class QuietJoystick extends QuietElement {
   @property() label = '';
 
   /** Indicates whether the joystick is disabled. When `true`, the joystick does not respond to mouse or touch input. */
-  @property({ type: Boolean, reflect: true }) disabled = false;
+  @property({ type: Boolean }) disabled = false;
 
   /** The operational mode of the joystick. 'normal' snaps back to center on release, 'sticky' retains its last position. */
   @property({ type: String, reflect: true }) mode: 'normal' | 'sticky' = 'normal';

@@ -433,28 +433,28 @@ Listboxes are styled like form controls for consistency, but feel free to custom
     
     quiet-avatar {
       grid-area: avatar;
-      margin-right: 4px;
+      margin-right: 0.25rem;
     }
     
     .name {
       grid-area: name;
       margin: 0;
-      font-size: 14px;
-      font-weight: 600;
+      font-size: 0.9375rem;
+      font-weight: var(--quiet-font-weight-semibold);
     }
     
     .time {
       grid-area: time;
-      font-size: .75em;
-      color: var(--quiet-text-muted, #777);
+      font-size: 0.875em;
+      color: var(--quiet-text-muted);
       justify-self: end;
       font-style: normal;
     }
     
     .summary {
       grid-area: summary;
-      color: #555;
-      font-size: 13px;
+      color: var(--quiet-text-muted);
+      font-size: 0.875rem;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -463,12 +463,21 @@ Listboxes are styled like form controls for consistency, but feel free to custom
     
     .attachment {
       grid-area: attachment;
-      color: var(--quiet-text-muted, #777);
+      color: var(--quiet-text-muted);
       justify-self: end;
-      font-size: 14px;
+      font-size: 0.875rem;
 
       &[name="flag"] {
         color: crimson;
+      }
+    }
+
+    quiet-listbox-item:state(selected) {
+      .name,
+      .time,
+      .summary,
+      .attachment {
+        color: var(--quiet-primary-text-on-soft);
       }
     }
   }

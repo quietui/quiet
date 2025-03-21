@@ -9,6 +9,24 @@ layout: component
 
 ## Examples
 
+### Adding symbols
+
+Add a decorative symbol or icon in the middle of the divider with the `symbol` slot. Symbols are presentational content, meaning they won't be announced by screen readers.
+
+```html {.example .flex-col}
+<quiet-divider>
+  <quiet-icon slot="symbol" name="heart"></quiet-icon>
+</quiet-divider>
+
+<quiet-divider>
+  <span slot="symbol">§</span>
+</quiet-divider>
+
+<quiet-divider>
+  <span slot="symbol" style="font-size: .875rem;">break</span>
+</quiet-divider>
+```
+
 ### Changing the orientation
 
 Set the `orientation` attribute to `vertical` for a vertical orientation. This is best used inside of flex containers.
@@ -23,9 +41,9 @@ Set the `orientation` attribute to `vertical` for a vertical orientation. This i
 </div>
 ```
 
-### Customizing styles
+### Styling dividers
 
-Use the `--color`, `--spacing`, and `--thickness` custom properties to change how the divider looks.
+Use the `--color`, `--spacing`, and `--thickness` CSS properties to change the divider's appearance.
 
 ```html {.example}
 <quiet-divider style="--color: royalblue; --thickness: 4px;"></quiet-divider>

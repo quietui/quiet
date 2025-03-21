@@ -22,33 +22,33 @@ export default css`
   }
 
   /* All selected items when listbox is focused - using the listbox-focused state */
-  :host([data-listbox-focused]:state(selected)) {
+  :host(:state(controller-focused):state(selected)) {
     background-color: var(--quiet-primary-fill-soft);
     color: var(--quiet-primary-text-on-soft);
   }
 
   /* All selected items when listbox is not focused */
-  :host(:state(selected):not([data-listbox-focused])) {
+  :host(:state(selected):not(:state(controller-focused))) {
     background-color: var(--quiet-neutral-fill-soft);
     color: var(--quiet-neutral-text-on-soft);
   }
 
   /* Show the current active item for keyboard users when the listbox is focused and the item isn't selected */
-  :host([aria-current='true'][data-listbox-focused]:not(:state(selected), [data-listbox-readonly])) {
+  :host([aria-current='true']:state(controller-focused):not(:state(selected), :state(controller-readonly))) {
     background-color: var(--quiet-neutral-fill-softer);
     color: var(--quiet-neutral-text-on-softer);
   }
 
   /* Hover state */
   @media (hover: hover) {
-    :host(:not(:state(selected), [data-listbox-disabled], [data-listbox-readonly]):hover) {
+    :host(:not(:state(selected), :state(controller-disabled), :state(controller-readonly)):hover) {
       background-color: var(--quiet-neutral-fill-softer);
       color: var(--quiet-neutral-text-on-soft);
     }
   }
 
   /* Readonly state */
-  :host([data-listbox-readonly]) {
+  :host(:state(controller-readonly)) {
     cursor: default;
   }
 

@@ -67,13 +67,15 @@ export class QuietElement extends LitElement {
   }
 
   /**
+   * @internal
+   *
    * Browser support for `ElementInternals.states` isn't great at the time of this writing. By using these utilities,
    * we can safely support the new API as it becomes available while also supporting the `[data--state]` alternative
    * that users can target in their CSS until `:--state` or `:state(state)` becomes available.
    *
    * Safari 17.4 has added support. Firefox is currently behind a flag.
    */
-  protected customStates = {
+  public customStates = {
     /** Adds or removes the specified custom state. */
     set: (customState: string, active: boolean) => {
       if (active) {

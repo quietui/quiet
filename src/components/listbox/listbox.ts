@@ -634,9 +634,9 @@ export class QuietListbox extends QuietFormControlElement {
 
     // Propagate certain listbox states to each listbox items
     this.getItems(true).forEach(item => {
-      item.toggleAttribute('data-listbox-disabled', this.disabled);
-      item.toggleAttribute('data-listbox-readonly', this.readonly);
-      item.toggleAttribute('data-listbox-focused', isFocused);
+      item.customStates.set('controller-disabled', this.disabled);
+      item.customStates.set('controller-readonly', this.readonly);
+      item.customStates.set('controller-focused', isFocused);
     });
   }
 

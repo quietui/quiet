@@ -20,6 +20,9 @@ import styles from './listbox-item.styles.js';
  *
  * @cssstate selected - Applied when the listbox item is selected.
  * @cssstate disabled - Applied when the listbox item is disabled.
+ * @cssstate controller-disabled - Applied when the listbox controller is disabled.
+ * @cssstate controller-focused - Applied when the listbox controller focused.
+ * @cssstate controller-readonly - Applied when the listbox controller is readonly.
  */
 @customElement('quiet-listbox-item')
 export class QuietListboxItem extends QuietElement {
@@ -43,18 +46,6 @@ export class QuietListboxItem extends QuietElement {
 
   /** Disables the listbox item. */
   @property({ type: Boolean }) disabled = false;
-
-  connectedCallback() {
-    super.connectedCallback();
-
-    // Initialize with listbox-focused state if parent is focused
-    this.updateComplete.then(() => {
-      const listbox = this.closest('quiet-listbox');
-      if (listbox) {
-        this.customStates.set('listbox-focused', listbox.matches(':state(focused)'));
-      }
-    });
-  }
 
   firstUpdated() {
     this.setAttribute('role', 'option');

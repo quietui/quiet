@@ -52,6 +52,52 @@ Create listbox options by adding `<quiet-listbox-item>` elements inside the list
 </quiet-listbox>
 ```
 
+Listbox items can have structured content, too.
+
+```html {.example}
+<quiet-listbox label="Favorite Cat Toys" id="listbox__options">
+  <quiet-listbox-item value="feather">
+    <h4>Feather Wand</h4>
+    <small aria-hidden="true">Interactive toy that mimics bird movements</small>
+  </quiet-listbox-item>
+  <quiet-listbox-item value="laser">
+    <h4>Laser Pointer</h4>
+    <small aria-hidden="true">Creates a moving red dot for cats to chase</small>
+  </quiet-listbox-item>
+  <quiet-listbox-item value="catnip">
+    <h4>Catnip Mouse</h4>
+    <small aria-hidden="true">Soft toy filled with enticing catnip</small>
+  </quiet-listbox-item>
+  <quiet-listbox-item value="tunnel">
+    <h4>Crinkle Tunnel</h4>
+    <small aria-hidden="true">Collapsible tunnel with crinkly material cats love</small>
+  </quiet-listbox-item>
+  <quiet-listbox-item value="box">
+    <h4>Cardboard Box</h4>
+    <small aria-hidden="true">Simple but beloved hiding spot for feline friends</small>
+  </quiet-listbox-item>
+</quiet-listbox>
+
+<style>
+  #listbox__options {
+    &::part(listbox) {
+      height: auto; 
+    }
+
+    h4 {
+      font-size: 1.125rem;
+      font-weight: var(--quiet-font-weight-semibold);
+      line-height: 1.4;
+      margin-block: 0;
+    }
+
+    quiet-listbox-item:state(selected) small {
+      color: var(--quiet-primary-text-on-soft);
+    }
+  }
+</style>
+```
+
 :::warn
 Avoid placing interactive elements such as buttons and links inside the listbox item, as this will hinder accessibility and can lead to unexpected behaviors.
 :::

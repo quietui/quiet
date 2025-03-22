@@ -179,7 +179,8 @@ Attribute reflection in custom elements is [an interesting challenge](https://ww
 
 - All `with-*` and `no-*` attributes must reflect.
 - In form controls, the `name` and `required` attributes must always reflect, like the platform.
-- Form control states, disabled states, and similar including `disabled`, `checked`, `active`, `selected`, etc. must not reflect.
+- The `disabled`, `readonly`, and `clearable` attributes should always reflect.
+- The `checked`, `active`, `selected`, and similar value-related attributes should not reflect.
 
 ### Styling elements with borders
 

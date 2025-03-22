@@ -87,8 +87,8 @@ To customize the symbols shown, use JavaScript to set the `getSymbol` property t
   id="rating__custom-symbols" 
   value="3"
   style="
-    --symbol-selected-color: deeppink;
-    --symbol-unselected-color: gray;
+    --active-color: deeppink;
+    --inactive-color: gray;
   "
 ></quiet-rating>
 
@@ -108,7 +108,7 @@ To customize the symbols shown, use JavaScript to set the `getSymbol` property t
   label="How satisfied are you?" 
   id="rating__numbers" 
   value="3"
-  style="--symbol-selected-color: dodgerblue;"
+  style="--active-color: dodgerblue;"
 ></quiet-rating>
 
 <script>
@@ -126,7 +126,7 @@ To customize the symbols shown, use JavaScript to set the `getSymbol` property t
   label="How satisfied are you?" 
   id="rating__diamonds" 
   value="3"
-  style="--symbol-selected-color: #2bb7d1;"
+  style="--active-color: #2bb7d1;"
 ></quiet-rating>
 
 <script>

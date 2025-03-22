@@ -84,10 +84,10 @@ export class QuietRating extends QuietFormControlElement {
   @property({ type: Number }) value = 0;
 
   /** Disables the rating. */
-  @property({ type: Boolean }) disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Makes the rating a read-only field. */
-  @property({ type: Boolean }) readonly = false;
+  @property({ type: Boolean, reflect: true }) readonly = false;
 
   /** The rating's size. */
   @property({ reflect: true }) size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' = 'md';

@@ -73,7 +73,7 @@ export class QuietCheckbox extends QuietFormControlElement {
   @property({ type: Boolean }) indeterminate = false;
 
   /** Disables the checkbox. */
-  @property({ type: Boolean }) disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** The type of checkbox to render. */
   @property({ reflect: true }) appearance: 'normal' | 'filled' = 'normal';

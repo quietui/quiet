@@ -47,7 +47,7 @@ export class QuietCopy extends QuietElement {
   @property() data: string | ClipboardItem[] = '';
 
   /** Disables the button. */
-  @property({ type: Boolean }) disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** The placement of the feedback animation. */
   @property({ attribute: 'feedback-placement', reflect: true }) feedbackPlacement:

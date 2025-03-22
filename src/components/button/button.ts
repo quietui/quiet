@@ -62,7 +62,7 @@ export class QuietButton extends QuietFormControlElement {
   @property({ reflect: true }) variant: 'default' | 'primary' | 'destructive' = 'default';
 
   /** Disables the button. */
-  @property({ type: Boolean }) disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Draws the button in a loading state. */
   @property({ type: Boolean, reflect: true }) loading = false;

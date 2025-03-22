@@ -99,10 +99,10 @@ export class QuietSlider extends QuietFormControlElement {
   @property({ type: Number }) value = 0;
 
   /** Disables the slider. */
-  @property({ type: Boolean }) disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Makes the slider a read-only field. */
-  @property({ type: Boolean }) readonly = false;
+  @property({ type: Boolean, reflect: true }) readonly = false;
 
   /** The orientation of the slider. */
   @property({ reflect: true }) orientation: 'horizontal' | 'vertical' = 'horizontal';

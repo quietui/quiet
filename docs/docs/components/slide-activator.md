@@ -46,6 +46,7 @@ You can use these events to execute code to run on activation and deactivation.
     label="Slide to activate"
     activated-label="Activated"
   ></quiet-slide-activator>
+
   <quiet-button disabled>Deactivate</quiet-button>
 </div>
 

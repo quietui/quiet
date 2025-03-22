@@ -53,7 +53,7 @@ export class QuietRadioItem extends QuietElement {
   @property({ type: Boolean }) checked = false;
 
   /** Disables the radio item. */
-  @property({ type: Boolean }) disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** The type of radio item to render. */
   @property({ reflect: true }) appearance: 'normal' | 'filled' = 'normal';

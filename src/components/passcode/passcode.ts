@@ -91,7 +91,7 @@ export class QuietPasscode extends QuietFormControlElement {
   @property() format = '####';
 
   /** Disables the passcode. */
-  @property({ type: Boolean }) disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** The type of passcode to render. */
   @property({ reflect: true }) appearance: 'normal' | 'filled' | 'unstyled' = 'normal';

@@ -76,7 +76,7 @@ export class QuietSwitch extends QuietFormControlElement {
   @property({ type: Boolean }) checked = false;
 
   /** Disables the switch. */
-  @property({ type: Boolean }) disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** The switch's size. */
   @property() size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' = 'md';

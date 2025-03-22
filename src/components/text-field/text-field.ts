@@ -84,13 +84,13 @@ export class QuietTextField extends QuietFormControlElement {
   @property() placeholder: string;
 
   /** Disables the text field. */
-  @property({ type: Boolean }) disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Makes the text field a read-only field. */
-  @property({ type: Boolean }) readonly = false;
+  @property({ type: Boolean, reflect: true }) readonly = false;
 
   /** Adds a clear button to the text field when it's not blank. */
-  @property({ type: Boolean }) clearable = false;
+  @property({ type: Boolean, reflect: true }) clearable = false;
 
   /** The type of text field to render. */
   @property({ reflect: true }) appearance: 'normal' | 'filled' | 'unstyled' = 'normal';

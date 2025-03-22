@@ -45,7 +45,7 @@ export class QuietListboxItem extends QuietElement {
   @property({ type: Boolean }) selected = false;
 
   /** Disables the listbox item. */
-  @property({ type: Boolean }) disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   firstUpdated() {
     this.setAttribute('role', 'option');

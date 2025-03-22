@@ -98,7 +98,7 @@ export class QuietFileInput extends QuietFormControlElement {
   @property({ reflect: true }) name: string;
 
   /** Disables the file input. */
-  @property({ type: Boolean }) disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /**
    * A list of acceptable file types. Must be a comma-separated list of [unique file type

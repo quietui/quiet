@@ -113,7 +113,7 @@ export class QuietColorPicker extends QuietElement {
   @property() format: 'hex' | 'rgb' | 'hsl' = 'hex';
 
   /** Disables the color picker. */
-  @property({ type: Boolean }) disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** The color picker's size. */
   @property({ reflect: true }) size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' = 'md';

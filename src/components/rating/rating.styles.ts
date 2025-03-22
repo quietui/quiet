@@ -2,8 +2,8 @@ import { css } from 'lit';
 
 export default css`
   :host {
-    --symbol-selected-color: #f59e0b;
-    --symbol-unselected-color: var(--quiet-neutral-fill-mid);
+    --active-color: #f59e0b;
+    --inactive-color: var(--quiet-neutral-fill-mid);
   }
 
   #rating {
@@ -76,7 +76,7 @@ export default css`
       left: 0;
       width: 100%;
       height: 100%;
-      color: var(--symbol-selected-color);
+      color: var(--active-color);
       clip-path: inset(0 calc(100% - var(--clip-percentage)) 0 0);
 
       &:dir(rtl) {
@@ -86,7 +86,7 @@ export default css`
 
     /* Unselected symbols */
     > :last-child {
-      color: var(--symbol-unselected-color);
+      color: var(--inactive-color);
       clip-path: inset(0 0 0 var(--clip-percentage));
 
       &:dir(rtl) {

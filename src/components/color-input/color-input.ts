@@ -95,13 +95,13 @@ export class QuietColorInput extends QuietFormControlElement {
   @property() placeholder: string;
 
   /** Disables the color input. */
-  @property({ type: Boolean }) disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Makes the color input a read-only area. */
-  @property({ type: Boolean }) readonly = false;
+  @property({ type: Boolean, reflect: true }) readonly = false;
 
   /** Adds a clear button to the color input when it's not blank. */
-  @property({ type: Boolean }) clearable = false;
+  @property({ type: Boolean, reflect: true }) clearable = false;
 
   /** The type of color input to render. */
   @property({ reflect: true }) appearance: 'normal' | 'filled' | 'unstyled' = 'normal';

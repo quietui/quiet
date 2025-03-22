@@ -75,7 +75,7 @@ export class QuietDropdownItem extends QuietElement {
   @property({ type: Boolean }) checked = false;
 
   /** Disables the dropdown item. */
-  @property({ type: Boolean }) disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Whether the submenu is currently open. */
   @property({ type: Boolean, reflect: true }) submenuOpen = false;

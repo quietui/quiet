@@ -80,10 +80,10 @@ export class QuietSelect extends QuietFormControlElement {
   @property() value = '';
 
   /** Disables the select. */
-  @property({ type: Boolean }) disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Makes the select a read-only field. */
-  @property({ type: Boolean }) readonly = false;
+  @property({ type: Boolean, reflect: true }) readonly = false;
 
   /** The type of select to render. */
   @property({ reflect: true }) appearance: 'normal' | 'filled' | 'unstyled' = 'normal';

@@ -83,7 +83,7 @@ export class QuietListbox extends QuietFormControlElement {
   @property({ type: Boolean, reflect: true }) multiple = false;
 
   /** Disables the listbox. */
-  @property({ type: Boolean }) disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Makes the text field a read-only field. */
   @property({ type: Boolean, reflect: true }) readonly = false;

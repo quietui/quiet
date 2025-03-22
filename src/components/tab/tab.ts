@@ -32,7 +32,7 @@ export class QuietTab extends QuietElement {
   @property({ reflect: true }) panel?: string;
 
   /** Disables the tab, preventing it from being activated. */
-  @property({ type: Boolean }) disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   firstUpdated() {
     this.setAttribute('role', 'tab');

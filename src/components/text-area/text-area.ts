@@ -76,10 +76,10 @@ export class QuietTextArea extends QuietFormControlElement {
   @property() placeholder: string;
 
   /** Disables the text area. */
-  @property({ type: Boolean }) disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Makes the text area a read-only area. */
-  @property({ type: Boolean }) readonly = false;
+  @property({ type: Boolean, reflect: true }) readonly = false;
 
   /** Determines how the text area can be resized. */
   @property() resize: 'vertical' | 'auto' | 'none' = 'vertical';

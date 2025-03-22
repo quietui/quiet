@@ -59,7 +59,7 @@ export class QuietRadio extends QuietFormControlElement {
   @query('#group') group: HTMLElement;
 
   @state() isInvalid = false;
-  @state() wasChanged = false;
+  @state() hadUserInteraction = false;
   @state() wasSubmitted = false;
 
   /**
@@ -120,7 +120,7 @@ export class QuietRadio extends QuietFormControlElement {
 
     // Handle user interactions. When the form control's value has changed and lost focus (e.g. change event), we can
     // show user-valid and user-invalid states. We also show it if the form has been submitted.
-    if (this.wasChanged || this.wasSubmitted) {
+    if (this.hadUserInteraction || this.wasSubmitted) {
       this.customStates.set('user-invalid', this.isInvalid);
       this.customStates.set('user-valid', !this.isInvalid);
     } else {
@@ -137,7 +137,7 @@ export class QuietRadio extends QuietFormControlElement {
   /** @internal Called when the form is reset. */
   formResetCallback() {
     this.isInvalid = false;
-    this.wasChanged = false;
+    this.hadUserInteraction = false;
     this.wasSubmitted = false;
 
     const itemToSelect = this.getItems().find(item => item.getAttribute('value') === this.getAttribute('value'));
@@ -173,7 +173,7 @@ export class QuietRadio extends QuietFormControlElement {
 
     if (radioItem && !radioItem.disabled) {
       this.setSelectedItem(radioItem);
-      this.wasChanged = true;
+      this.hadUserInteraction = true;
 
       if (radioItem !== selectedItem) {
         await this.updateComplete;
@@ -222,7 +222,7 @@ export class QuietRadio extends QuietFormControlElement {
       event.preventDefault();
       this.setSelectedItem(itemToSelect);
       itemToSelect.focus();
-      this.wasChanged = true;
+      this.hadUserInteraction = true;
 
       await this.updateComplete;
       this.dispatchEvent(new QuietInputEvent());

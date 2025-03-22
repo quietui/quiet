@@ -78,7 +78,7 @@ export class QuietFileInput extends QuietFormControlElement {
 
   @state() isDragging = false;
   @state() isInvalid = false;
-  @state() wasChanged = false;
+  @state() hadUserInteraction = false;
   @state() wasSubmitted = false;
 
   /** An array of files that are currently selected. (Property only) */
@@ -158,7 +158,7 @@ export class QuietFileInput extends QuietFormControlElement {
 
     // Handle user interactions. When the form control's value has changed and lost focus (e.g. change event), we can
     // show user-valid and user-invalid states. We also show it if the form has been submitted.
-    if (this.wasChanged || this.wasSubmitted) {
+    if (this.hadUserInteraction || this.wasSubmitted) {
       this.customStates.set('user-invalid', this.isInvalid);
       this.customStates.set('user-valid', !this.isInvalid);
     } else {
@@ -175,7 +175,7 @@ export class QuietFileInput extends QuietFormControlElement {
   /** @internal Called when the form is reset. */
   formResetCallback() {
     this.isInvalid = false;
-    this.wasChanged = false;
+    this.hadUserInteraction = false;
     this.wasSubmitted = false;
     this.files = [];
   }
@@ -215,7 +215,7 @@ export class QuietFileInput extends QuietFormControlElement {
   private handleDrop(event: DragEvent) {
     event.preventDefault();
     this.isDragging = false;
-    this.wasChanged = true;
+    this.hadUserInteraction = true;
 
     if (this.multiple) {
       this.files = this.files.concat([...event.dataTransfer!.files]);
@@ -228,7 +228,7 @@ export class QuietFileInput extends QuietFormControlElement {
   }
 
   private handleFileInput() {
-    this.wasChanged = true;
+    this.hadUserInteraction = true;
 
     // Append selected files
     if (this.fileInput.files) {

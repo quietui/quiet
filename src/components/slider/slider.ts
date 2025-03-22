@@ -79,7 +79,7 @@ export class QuietSlider extends QuietFormControlElement {
   @query('#tooltip') tooltip: QuietTooltip;
 
   @state() isInvalid = false;
-  @state() wasChanged = false;
+  @state() hadUserInteraction = false;
   @state() wasSubmitted = false;
 
   /**
@@ -182,7 +182,7 @@ export class QuietSlider extends QuietFormControlElement {
         if (this.value !== this.valueWhenDraggingStarted) {
           this.dispatchEvent(new QuietChangeEvent());
           this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
-          this.wasChanged = true;
+          this.hadUserInteraction = true;
         }
 
         this.hideTooltip();
@@ -219,7 +219,7 @@ export class QuietSlider extends QuietFormControlElement {
 
     // Handle user interactions. When the form control's value has changed and lost focus (e.g. change event), we can
     // show user-valid and user-invalid states. We also show it if the form has been submitted.
-    if (this.wasChanged || this.wasSubmitted) {
+    if (this.hadUserInteraction || this.wasSubmitted) {
       this.customStates.set('user-invalid', this.isInvalid);
       this.customStates.set('user-valid', !this.isInvalid);
     } else {
@@ -237,7 +237,7 @@ export class QuietSlider extends QuietFormControlElement {
   formResetCallback() {
     this.value = parseFloat(this.getAttribute('value') ?? String(this.min));
     this.isInvalid = false;
-    this.wasChanged = false;
+    this.hadUserInteraction = false;
     this.wasSubmitted = false;
   }
 
@@ -344,7 +344,7 @@ export class QuietSlider extends QuietFormControlElement {
       // Dispatch native change/input events for better framework binding support
       this.dispatchEvent(new InputEvent('input', { bubbles: true, composed: true }));
       this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
-      this.wasChanged = true;
+      this.hadUserInteraction = true;
     }
 
     // When enter is pressed in a slider, the associated form should submit

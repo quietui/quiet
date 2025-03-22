@@ -64,7 +64,7 @@ export class QuietPasscode extends QuietFormControlElement {
   @query('input') private textBox: HTMLInputElement;
 
   @state() isInvalid = false;
-  @state() wasChanged = false;
+  @state() hadUserInteraction = false;
   @state() wasSubmitted = false;
 
   /**
@@ -178,7 +178,7 @@ export class QuietPasscode extends QuietFormControlElement {
 
     // Handle user interactions. When the form control's value has changed and lost focus (e.g. change event), we can
     // show user-valid and user-invalid states. We also show it if the form has been submitted.
-    if (this.wasChanged || this.wasSubmitted) {
+    if (this.hadUserInteraction || this.wasSubmitted) {
       this.customStates.set('user-invalid', this.isInvalid);
       this.customStates.set('user-valid', !this.isInvalid);
     } else {
@@ -195,7 +195,7 @@ export class QuietPasscode extends QuietFormControlElement {
   /** @internal Called when the form is reset. */
   formResetCallback() {
     this.isInvalid = false;
-    this.wasChanged = false;
+    this.hadUserInteraction = false;
     this.wasSubmitted = false;
     this.value = this.getAttribute('value') ?? '';
   }
@@ -211,7 +211,7 @@ export class QuietPasscode extends QuietFormControlElement {
   }
 
   private handleChange() {
-    this.wasChanged = true;
+    this.hadUserInteraction = true;
     this.dispatchEvent(new QuietChangeEvent());
 
     // The native change event isn't composed, so we need to dispatch it ourselves

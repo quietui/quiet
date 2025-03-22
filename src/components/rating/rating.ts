@@ -64,7 +64,7 @@ export class QuietRating extends QuietFormControlElement {
   @query('#rating') rating: HTMLElement;
 
   @state() isInvalid = false;
-  @state() wasChanged = false;
+  @state() hadUserInteraction = false;
   @state() wasSubmitted = false;
 
   /**
@@ -153,7 +153,7 @@ export class QuietRating extends QuietFormControlElement {
         if (this.value !== this.valueWhenDraggingStarted) {
           this.dispatchEvent(new QuietChangeEvent());
           this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
-          this.wasChanged = true;
+          this.hadUserInteraction = true;
         }
 
         // Reset the value when clicking on the same one
@@ -194,7 +194,7 @@ export class QuietRating extends QuietFormControlElement {
 
     // Handle user interactions. When the form control's value has changed and lost focus (e.g. change event), we can
     // show user-valid and user-invalid states. We also show it if the form has been submitted.
-    if (this.wasChanged || this.wasSubmitted) {
+    if (this.hadUserInteraction || this.wasSubmitted) {
       this.customStates.set('user-invalid', this.isInvalid);
       this.customStates.set('user-valid', !this.isInvalid);
     } else {
@@ -212,7 +212,7 @@ export class QuietRating extends QuietFormControlElement {
   formResetCallback() {
     this.value = parseFloat(this.getAttribute('value') ?? '0');
     this.isInvalid = false;
-    this.wasChanged = false;
+    this.hadUserInteraction = false;
     this.wasSubmitted = false;
   }
 
@@ -312,7 +312,7 @@ export class QuietRating extends QuietFormControlElement {
       // Dispatch native change/input events for better framework binding support
       this.dispatchEvent(new InputEvent('input'));
       this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
-      this.wasChanged = true;
+      this.hadUserInteraction = true;
     }
 
     // When enter is pressed in a rating, the associated form should submit

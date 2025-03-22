@@ -98,7 +98,7 @@ export class QuietColorPicker extends QuietElement {
   @state() isChangingS = false;
   @state() inputIsFocused = false;
   @state() displayValue = '';
-  @state() wasChanged = false;
+  @state() hadUserInteraction = false;
 
   /**
    * The color picker's label. This won't be shown, but it will be read to assistive devices so you should always
@@ -166,7 +166,7 @@ export class QuietColorPicker extends QuietElement {
       stop: () => {
         // Dispatch change events when dragging stops
         if (this.value !== this.valueWhenDraggingStarted) {
-          this.wasChanged = true;
+          this.hadUserInteraction = true;
           this.dispatchEvent(new QuietChangeEvent());
           this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
         }
@@ -289,7 +289,7 @@ export class QuietColorPicker extends QuietElement {
     await this.updateComplete;
 
     if (this.value !== oldValue) {
-      this.wasChanged = true;
+      this.hadUserInteraction = true;
       this.dispatchEvent(new QuietInputEvent());
       this.dispatchEvent(new InputEvent('input'));
       this.dispatchEvent(new QuietChangeEvent());
@@ -341,7 +341,7 @@ export class QuietColorPicker extends QuietElement {
 
     // Dispatch events
     if (this.value !== oldValue) {
-      this.wasChanged = true;
+      this.hadUserInteraction = true;
       this.dispatchEvent(new QuietInputEvent());
       this.dispatchEvent(new InputEvent('input'));
       this.dispatchEvent(new QuietChangeEvent());
@@ -401,7 +401,7 @@ export class QuietColorPicker extends QuietElement {
       this.dispatchEvent(new QuietInputEvent());
       this.dispatchEvent(new InputEvent('input'));
     } else if (event.type === 'quiet-change') {
-      this.wasChanged = true;
+      this.hadUserInteraction = true;
       this.dispatchEvent(new QuietChangeEvent());
       this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
     }
@@ -418,7 +418,7 @@ export class QuietColorPicker extends QuietElement {
       this.dispatchEvent(new QuietInputEvent());
       this.dispatchEvent(new InputEvent('input'));
     } else if (event.type === 'quiet-change') {
-      this.wasChanged = true;
+      this.hadUserInteraction = true;
       this.dispatchEvent(new QuietChangeEvent());
       this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
     }
@@ -430,7 +430,7 @@ export class QuietColorPicker extends QuietElement {
     if (this.disabled) return;
 
     this.setColorFromString(color);
-    this.wasChanged = true;
+    this.hadUserInteraction = true;
     this.colorSliderThumb.focus();
 
     await this.updateComplete;

@@ -55,7 +55,7 @@ export class QuietToggleIcon extends QuietFormControlElement {
   @query('button') button: HTMLButtonElement;
 
   @state() isInvalid = false;
-  @state() wasChanged = false;
+  @state() hadUserInteraction = false;
   @state() wasSubmitted = false;
 
   /** The toggle icon's label. The label won't be displayed, but it will be announced by assistive devices. */
@@ -119,7 +119,7 @@ export class QuietToggleIcon extends QuietFormControlElement {
 
     // Handle user interactions. When the form control's value has changed and lost focus (e.g. change event), we can
     // show user-valid and user-invalid states. We also show it if the form has been submitted.
-    if (this.wasChanged || this.wasSubmitted) {
+    if (this.hadUserInteraction || this.wasSubmitted) {
       this.customStates.set('user-invalid', this.isInvalid);
       this.customStates.set('user-valid', !this.isInvalid);
     } else {
@@ -136,7 +136,7 @@ export class QuietToggleIcon extends QuietFormControlElement {
   /** @internal Called when the form is reset. */
   formResetCallback() {
     this.isInvalid = false;
-    this.wasChanged = false;
+    this.hadUserInteraction = false;
     this.wasSubmitted = false;
     this.checked = this.hasAttribute('checked');
   }

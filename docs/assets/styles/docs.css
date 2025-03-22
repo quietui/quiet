@@ -759,7 +759,6 @@ quiet-badge.experimental {
 
 /* Aside content */
 .docs-aside {
-  padding-inline-start: 0.4em;
   font-size: 0.875rem;
   line-height: calc(var(--quiet-line-height) * 0.875);
 }
@@ -794,9 +793,6 @@ quiet-badge.experimental {
 }
 
 .docs-aside a {
-  margin-inline: -0.4em;
-  padding-inline: 0.4em;
-  padding-block: 0.3em;
   color: inherit;
   font-weight: var(--quiet-font-weight-normal);
   text-decoration: none;
@@ -806,8 +802,8 @@ quiet-badge.experimental {
     &:not(.current):hover {
       position: relative;
       border-radius: var(--quiet-border-radius);
-      background: color-mix(in oklab, var(--quiet-primary-fill-soft), transparent 50%);
       color: var(--quiet-primary-text-colorful);
+      text-decoration: underline;
     }
   }
 }

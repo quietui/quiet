@@ -51,7 +51,7 @@ export class QuietShare extends QuietElement {
   @property({ type: Array }) files: File[];
 
   /** Disables the button. */
-  @property({ type: Boolean }) disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** The placement of the feedback animation when falling back to copying. */
   @property({ attribute: 'feedback-placement', reflect: true }) feedbackPlacement:

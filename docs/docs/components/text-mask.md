@@ -102,7 +102,7 @@ For a tiled background, use a repeating image and set `background-repeat` and `b
 
 ### Fixed backgrounds
 
-Use the `fixed` attribute to create a parallax-like effect where the image stays fixed while scrolling.
+Use the `fixed` attribute to create a parallax-like effect where the image stays fixed while scrolling. Note that Safari on iOS doesn't 
 
 ```html {.example}
 <quiet-text-mask 
@@ -122,7 +122,7 @@ Use the `fixed` attribute to create a parallax-like effect where the image stays
 ```
 
 :::warn
-Due to [a very old bug](https://bugzilla.mozilla.org/show_bug.cgi?id=1313757), this feature is disabled in Firefox. If you'd like to see this fixed, consider logging and and voting for the bug.
+Due to [a very old bug](https://bugzilla.mozilla.org/show_bug.cgi?id=1313757), this feature is disabled in Firefox. If you'd like to see this fixed, consider logging in and voting for the bug.
 :::
 
 ### Brightness

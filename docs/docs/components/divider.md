@@ -15,7 +15,7 @@ Add a decorative symbol or icon in the middle of the divider with the `symbol` s
 
 ```html {.example .flex-col}
 <quiet-divider>
-  <quiet-icon slot="symbol" name="heart"></quiet-icon>
+  <quiet-icon slot="symbol" name="circle"></quiet-icon>
 </quiet-divider>
 
 <quiet-divider>

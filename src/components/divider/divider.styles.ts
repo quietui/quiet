@@ -59,10 +59,11 @@ export default css`
   /* Symbols */
   .symbol {
     display: inline-flex; /* Ensures the container collapses when empty */
-    padding: 0 0.5rem;
+    padding: 0 1rem;
     color: var(--color);
+    font-weight: var(--quiet-font-weight-normal);
     font-size: 1.25rem;
-    filter: contrast(0.75);
+    filter: contrast(0.875);
     user-select: none;
     -webkit-user-select: none;
   }

@@ -7,7 +7,7 @@ Text masks create eye-catching headlines that capture visitors' attention, makin
 
 ```html {.example}
 <quiet-text-mask 
-  image="https://images.unsplash.com/photo-1529778873920-4da4926a72c2?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  image="/assets/images/purple-tile.webp"
   fixed
   style="
     font-family: 'Fira Sans', sans-serif;
@@ -102,7 +102,7 @@ For a tiled background, use a repeating image and set `background-repeat` and `b
 
 ### Fixed backgrounds
 
-Use the `fixed` attribute to create a parallax-like effect where the image stays fixed while scrolling. Note that Safari on iOS doesn't 
+Use the `fixed` attribute to create a parallax-like effect where the image stays fixed while scrolling. Not supported in iOS Safari.
 
 ```html {.example}
 <quiet-text-mask 

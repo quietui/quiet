@@ -30,6 +30,18 @@ Assistive devices will recognize toggle icons as [toggle buttons](https://www.w3
   <quiet-icon slot="unchecked" name="thumb-up" family="outline"></quiet-icon>
   <quiet-icon slot="checked" name="thumb-up" family="filled"></quiet-icon>
 </quiet-toggle-icon>
+
+<quiet-toggle-icon 
+  label="Play / pause"
+  effect="scale"
+  style="
+    --checked-color: var(--quiet-neutral-fill-mid); 
+    --unchecked-color: var(--quiet-neutral-fill-mid);
+  "
+>
+  <quiet-icon slot="unchecked" name="player-pause" family="filled"></quiet-icon>
+  <quiet-icon slot="checked" name="player-play" family="filled"></quiet-icon>
+</quiet-toggle-icon>
 ```
 
 ## Examples

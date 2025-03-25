@@ -57,6 +57,7 @@ export class QuietTextField extends QuietFormControlElement {
     return this.textBox;
   }
 
+  @query('slot:not([name])') private defaultSlot: HTMLSlotElement;
   @query('input') private textBox: HTMLInputElement;
 
   @state() isInvalid = false;
@@ -188,6 +189,15 @@ export class QuietTextField extends QuietFormControlElement {
   disconnectedCallback() {
     super.disconnectedCallback();
     this.removeEventListener('invalid', this.handleHostInvalid);
+  }
+
+  firstUpdated() {
+    // Re-sync when datalist changes
+    const observer = new MutationObserver(() => this.syncDatalist());
+    observer.observe(this, { subtree: true, childList: true, attributes: true });
+
+    // Initial sync
+    this.syncDatalist();
   }
 
   updated(changedProperties: PropertyValues<this>) {
@@ -324,6 +334,24 @@ export class QuietTextField extends QuietFormControlElement {
 
     this.isInvalid = hasCustomValidity ? true : !this.textBox.validity.valid;
     this.internals.setValidity(flags, validationMessage, this.focusableAnchor);
+  }
+
+  /** Looks for a slotted datalist, clones, and links it to the text field. */
+  private syncDatalist() {
+    // Look for a datalist in the default slot
+    const datalist = this.defaultSlot.assignedElements({ flatten: true }).find(el => el.localName === 'datalist');
+
+    // Reset it
+    this.textBox.removeAttribute('list');
+    this.shadowRoot.querySelector('cloned-list')?.remove();
+
+    // If a list exists, clone it and attach it
+    if (datalist) {
+      const clonedList = datalist.cloneNode(true) as HTMLDataListElement;
+      clonedList.id = 'cloned-list';
+      this.shadowRoot.append(clonedList);
+      this.textBox.setAttribute('list', 'cloned-list');
+    }
   }
 
   /** Sets focus to the text field. */
@@ -484,6 +512,8 @@ export class QuietTextField extends QuietFormControlElement {
           : ''}
 
         <slot name="end"></slot>
+
+        <slot hidden></slot>
       </div>
     `;
   }

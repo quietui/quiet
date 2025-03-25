@@ -88,6 +88,23 @@ Use the `start` and `end` slots to add presentational icons or text. Avoid inter
 </quiet-text-field>
 ```
 
+### Adding a datalist
+
+Slot a [`<datalist>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/datalist) into the text field's default slot to show a list of autocomplete options.
+
+```html {.example}
+<quiet-text-field label="Browser" name="browser">
+  <datalist>
+    <option value="Chrome"></option>
+    <option value="Firefox"></option>
+    <option value="Safari"></option>
+    <option value="Edge"></option>
+    <option value="Opera"></option>
+    <option value="Other"></option>
+  </datalist>
+</quiet-text-field>
+```
+
 ### Filled and unstyled text fields
 
 Set the `appearance` attribute to `normal`, `filled`, or `unstyled` to change the text field's appearance.

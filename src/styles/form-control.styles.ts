@@ -112,6 +112,11 @@ export default css`
       -webkit-appearance: none;
     }
 
+    /* Hide the datalist arrow */
+    &::-webkit-calendar-picker-indicator {
+      display: none !important;
+    }
+
     /* Color inputs */
     &[type='color'] {
       &::-webkit-color-swatch-wrapper {

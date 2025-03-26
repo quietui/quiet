@@ -788,7 +788,6 @@ quiet-badge.experimental {
 }
 
 .docs-aside li {
-  color: var(--quiet-text-muted);
   list-style: none;
 }
 

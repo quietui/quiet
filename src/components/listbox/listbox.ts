@@ -391,7 +391,14 @@ export class QuietListbox extends QuietFormControlElement {
     if (this.disabled) return;
 
     const item = (event.target as HTMLElement).closest('quiet-listbox-item') as QuietListboxItem;
-    if (!item || item.disabled) return;
+    if (item.disabled) return;
+
+    // Clicking in the listbox but not on an item clears the selection
+    if (!item) {
+      this.deselectAll();
+      this.updateValueFromSelectedItems(true);
+      return;
+    }
 
     const clickedIndex = this.getItems().indexOf(item);
     if (clickedIndex === -1) return;

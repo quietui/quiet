@@ -2,7 +2,7 @@ import { computePosition, flip } from '@floating-ui/dom';
 import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
-import { QuietCopiedEvent, QuietCopyErrorEvent } from '../../events/copy.js';
+import { QuietCopyErrorEvent, QuietCopyEvent } from '../../events/copy.js';
 import hostStyles from '../../styles/host.styles.js';
 import { animateWithClass } from '../../utilities/animate.js';
 import { Localize } from '../../utilities/localize.js';
@@ -24,7 +24,7 @@ import styles from './copy.styles.js';
  *
  * @slot - A custom button to use instead of the default.
  *
- * @event quiet-copied - Emitted when the content has been copied. This event does not bubble. You can inspect
+ * @event quiet-copy - Emitted when the content has been copied. This event does not bubble. You can inspect
  *  `event.detail.data` to see the content that was copied.
  * @event quiet-copy-error - Emitted when the browser refuses to allow the content to be copied. This event does not
  *  bubble. You can inspect `event.detail.error` to see the error that occurred.
@@ -98,7 +98,7 @@ export class QuietCopy extends QuietElement {
         await navigator.clipboard.write(clipboardItems);
       }
 
-      this.dispatchEvent(new QuietCopiedEvent({ data: this.data }));
+      this.dispatchEvent(new QuietCopyEvent({ data: this.data }));
       this.showFeedback(this.localize.term('copied'));
     } catch (err) {
       this.dispatchEvent(new QuietCopyErrorEvent({ error: err as Error }));

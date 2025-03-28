@@ -1,14 +1,14 @@
 /** Emitted when copying has completed. */
-export class QuietCopiedEvent extends Event {
-  readonly detail: QuietCopiedEventDetail;
+export class QuietCopyEvent extends Event {
+  readonly detail: QuietCopyEventDetail;
 
-  constructor(detail: QuietCopiedEventDetail) {
-    super('quiet-copied', { bubbles: false, cancelable: false, composed: true });
+  constructor(detail: QuietCopyEventDetail) {
+    super('quiet-copy', { bubbles: false, cancelable: false, composed: true });
     this.detail = detail;
   }
 }
 
-interface QuietCopiedEventDetail {
+interface QuietCopyEventDetail {
   data: string | ClipboardItem[];
 }
 
@@ -29,7 +29,7 @@ interface QuietCopyErrorEventDetail {
 
 declare global {
   interface GlobalEventHandlersEventMap {
-    'quiet-copied': QuietCopiedEvent;
+    'quiet-copy': QuietCopyEvent;
     'quiet-copy-error': QuietCopyErrorEvent;
   }
 }

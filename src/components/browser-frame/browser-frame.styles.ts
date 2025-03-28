@@ -19,7 +19,7 @@ export default css`
     border: var(--quiet-border-style) var(--quiet-border-width) var(--border-color);
     border-radius: calc(1.5 * var(--quiet-border-radius));
     background-color: var(--quiet-background-color);
-    box-shadow: var(--quiet-shadow-soft);
+    box-shadow: var(--quiet-shadow-softer);
   }
 
   #header {

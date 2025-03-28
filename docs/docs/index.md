@@ -73,7 +73,7 @@ To reduce FOUCE, add the `quiet-cloak` class to the `<html>` element as shown be
 </html>
 ```
 
-As soon as all components are defined or after two seconds elapse, the content will be shown, eliminating most FOUCE. The two second timeout ensures users don't see a blank page even when networks are slow or have problems.
+As soon as all components are defined or after two seconds elapse, the content will be shown and the class will be removed, eliminating most FOUCE. The two second timeout ensures users don't see a blank page even when networks are slow or have problems.
 
 :::details Hotwire: Turbo users
 

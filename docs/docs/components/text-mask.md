@@ -7,7 +7,7 @@ Text masks create eye-catching headlines that capture visitors' attention, makin
 
 ```html {.example}
 <quiet-text-mask 
-  image="/assets/images/purple-tile.webp"
+  image="https://images.unsplash.com/photo-1529778873920-4da4926a72c2?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   fixed
   style="
     font-family: 'Fira Sans', sans-serif;

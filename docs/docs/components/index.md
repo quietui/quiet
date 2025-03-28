@@ -35,7 +35,7 @@ layout: docs
 
   <quiet-empty-state slot="empty">
     <quiet-icon slot="illustration" name="cheese"></quiet-icon>
-    <p>No matching results</p>
+    <p>No results found</p>
   </quiet-empty-state>
 </quiet-search-list>
 

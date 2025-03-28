@@ -146,9 +146,9 @@ listbox.value = 'a';
 listbox.selectedValues = ['a', 'b', 'c'];
 
 // Set using DOM elements
-const itemA = document.querySelectorAll('quiet-listbox-item#a');
-const itemB = document.querySelectorAll('quiet-listbox-item#b');
-const itemC = document.querySelectorAll('quiet-listbox-item#c');
+const itemA = document.querySelector('quiet-listbox-item#a');
+const itemB = document.querySelector('quiet-listbox-item#b');
+const itemC = document.querySelector('quiet-listbox-item#c');
 
 listbox.selectedItems = [itemA, itemB, itemC];
 ```

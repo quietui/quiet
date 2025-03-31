@@ -41,7 +41,6 @@ export default css`
   #back {
     grid-row: 1/2;
     grid-column: 1/2;
-    overflow: hidden;
     border-radius: inherit;
     backface-visibility: hidden;
   }

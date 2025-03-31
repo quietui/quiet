@@ -286,6 +286,10 @@ html[data-scroll-restoring] body {
   background: none;
   color: inherit;
   cursor: pointer;
+
+  &:focus-visible {
+    outline-offset: calc(var(--quiet-focus-width) * -1 - var(--quiet-focus-offset));
+  }
 }
 
 #header-group-buttons quiet-icon {
@@ -1004,7 +1008,7 @@ quiet-callout {
   gap: 1rem;
 
   quiet-button[variant='default']::part(button) {
-    background-color: color-mix(in oklab, var(--quiet-neutral-fill-softer), transparent 15%);
+    background-color: var(--quiet-neutral-fill-softer);
   }
 }
 

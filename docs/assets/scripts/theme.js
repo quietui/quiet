@@ -91,7 +91,7 @@ function setThemeColor(newColor, skipTransition = false) {
 // Update when a new color is selected from the theme picker
 document.addEventListener('quiet-select', event => {
   if (event.target.id === 'header-color-picker') {
-    setThemeColor(event.detail.selection.value);
+    setThemeColor(event.detail.item.value);
   }
 });
 

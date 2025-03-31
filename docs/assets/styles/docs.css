@@ -1207,7 +1207,7 @@ td.table-reflects {
 .whiskers-center {
   display: block;
   width: auto;
-  max-height: 10rem;
+  max-height: 12rem;
   margin-inline: auto;
   margin-block-end: 1.5rem;
 
@@ -1219,7 +1219,7 @@ td.table-reflects {
 .whiskers-end {
   display: inline;
   width: auto;
-  max-height: 10rem;
+  max-height: 12rem;
   margin-inline-start: 1.5rem;
   margin-block-end: 1.5rem;
   float: right;
@@ -1231,7 +1231,7 @@ td.table-reflects {
 
 .whiskers-email {
   position: relative;
-  width: 280px;
+  width: 319px;
   margin-inline: auto;
   margin-block: 3rem;
   text-align: center;
@@ -1239,9 +1239,9 @@ td.table-reflects {
   .whiskers-email-controls {
     display: flex;
     position: absolute;
-    top: 95px;
-    left: 7.5%;
-    width: 85%;
+    top: 164px;
+    left: 12%;
+    width: 78.1%;
     gap: 8px;
   }
 

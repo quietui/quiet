@@ -72,7 +72,7 @@ Dropdown menus appear when their trigger element is clicked. They are not modal,
 
 ### Getting the selected item
 
-When an item is selected, the `quiet-select` event will be emitted by the dropdown. You can inspect `event.detail.selection` to get a reference to the selected item. If you've provided a value for each [dropdown item](/docs/components/dropdown-item), it will be available in `event.detail.selection.value`.
+When an item is selected, the `quiet-select` event will be emitted by the dropdown. You can inspect `event.detail.item` to get a reference to the selected item. If you've provided a value for each [dropdown item](/docs/components/dropdown-item), it will be available in `event.detail.item.value`.
 
 ```html {.example}
 <quiet-dropdown id="dropdown__selected">
@@ -87,7 +87,7 @@ When an item is selected, the `quiet-select` event will be emitted by the dropdo
   const dropdown = document.getElementById('dropdown__selected');
 
   dropdown.addEventListener('quiet-select', event => {
-    console.log(event.detail.selection.value);
+    console.log(event.detail.item.value);
   });
 </script>
 ```
@@ -197,15 +197,15 @@ You can turn a [dropdown item](/docs/components/dropdown-item) into a checkable 
   const dropdown = document.getElementById('dropdown__checkboxes');
 
   dropdown.addEventListener('quiet-select', event => {
-    if (event.detail.selection.type === 'checkbox') {
+    if (event.detail.item.type === 'checkbox') {
       // Checkbox
       console.log(
-        event.detail.selection.value,
-        event.detail.selection.checked ? 'checked' : 'unchecked'
+        event.detail.item.value,
+        event.detail.item.checked ? 'checked' : 'unchecked'
       );
     } else {
       // Not a checkbox
-      console.log(event.detail.selection.value);
+      console.log(event.detail.item.value);
     }
   });
 </script>
@@ -296,7 +296,7 @@ To create submenus, nest [dropdown items](/docs/components/dropdown-item) inside
   const dropdown = document.getElementById('dropdown__submenus');
   
   dropdown.addEventListener('quiet-select', event => {
-    console.log(event.detail.selection.value);
+    console.log(event.detail.item.value);
   });
 </script>
 ```

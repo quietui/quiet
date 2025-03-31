@@ -253,7 +253,7 @@ You can create a collapsed breadcrumb item by adding a [dropdown](/docs/componen
   const breadcrumb = document.getElementById('breadcrumb__collapsed');
 
   breadcrumb.addEventListener('quiet-select', event => {
-    location.href = event.detail.selection.value;
+    location.href = event.detail.item.value;
   });
 </script>
 ```

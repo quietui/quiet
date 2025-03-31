@@ -10,7 +10,7 @@ export class QuietSelectEvent extends Event {
 
 interface QuietSelectEventDetail {
   /** An item or array of items that were selected. */
-  selection: Element | Element[];
+  item: Element | Element[];
 }
 
 declare global {

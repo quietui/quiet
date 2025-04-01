@@ -1315,9 +1315,9 @@ td.table-reflects {
     margin: 0;
     padding: 1.5rem;
     border-radius: 1rem;
-    background-color: color-mix(in oklab, var(--quiet-primary-fill-softer), transparent 25%);
+    background-color: color-mix(in oklab, var(--quiet-neutral-fill-softer), transparent 25%);
     box-shadow: var(--quiet-shadow-softer);
-    color: color-mix(in oklab, var(--quiet-neutral-text-on-softer), transparent 25%);
+    color: color-mix(in oklab, var(--quiet-neutral-text-on-soft), transparent 25%);
     line-height: 1.6;
     list-style: none;
     text-align: center;

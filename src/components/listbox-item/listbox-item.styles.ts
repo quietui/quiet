@@ -36,7 +36,7 @@ export default css`
   /* Show the current active item for keyboard users when the listbox is focused and the item isn't selected */
   :host([aria-current='true']:state(controller-focused):not(:state(selected), :state(controller-readonly))) {
     background-color: var(--quiet-neutral-fill-softer);
-    color: var(--quiet-neutral-text-on-softer);
+    color: var(--quiet-neutral-text-on-soft);
   }
 
   /* Hover state */

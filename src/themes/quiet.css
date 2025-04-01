@@ -419,4 +419,20 @@
   .quiet-stone {
     --quiet-primary-seed: #918c87;
   }
+
+  /*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  //  Built-in moods
+  //
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+  .quiet-catapult {
+    --quiet-border-width: 2px;
+    --quiet-border-radius: 0.5rem;
+    --quiet-font-family: 'Trebuchet MS', system-ui, sans-serif;
+    --quiet-font-family-code: Consolas, Menlo, Monaco, 'liberation mono', 'courier new', monospace;
+    --quiet-font-size: 17px;
+    --quiet-line-height: 1.8;
+    --quiet-focus-width: 4px;
+  }
 }

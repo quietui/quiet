@@ -899,6 +899,11 @@ quiet-callout {
 
   --grid-size: 100px;
   --grid-half-size: calc(var(--grid-size) / 2);
+  --grid-color: color-mix(
+    in oklab,
+    var(--quiet-primary-fill-mid),
+    transparent calc(100% - (100% * var(--opacity-base) * 0.5))
+  );
   --dot-size: 3px;
   --opacity-base: 0.18;
   /* prettier-ignore */
@@ -909,11 +914,7 @@ quiet-callout {
       transparent 66%,
       color-mix(in oklab, var(--quiet-primary-fill-softer), transparent 40%) 100%
     ),
-    radial-gradient(
-      color-mix(in oklab, var(--quiet-primary-fill-mid), transparent calc(100% - (100% * var(--opacity-base) * 0.66)))
-        var(--dot-size),
-      transparent var(--dot-size)
-    ),
+    radial-gradient(var(--grid-color) var(--dot-size), transparent var(--dot-size)),
     linear-gradient(
       color-mix(in oklab, var(--quiet-primary-fill-mid), transparent calc(100% - (100% * var(--opacity-base) * 0.5)))
         1px,

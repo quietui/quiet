@@ -43,7 +43,7 @@ Why did I choose a mouse for Quiet's mascot? Because mice are quiet. Because the
 
 As some of the world's [most](https://en.wikipedia.org/wiki/Dinosaur) [impressive](https://en.wikipedia.org/wiki/Woolly_mammoth) [creatures](https://en.wikipedia.org/wiki/Smilodon) vanished into the mists of time, the humble mouse continued to live on. Their resilience reminds us that survival belongs not to the strongest or the most spectacular, but to those who can bend without breaking; who can find opportunity in adversity; who can thrive in the spaces between.
 
-This library's power lies not in keeping up with the latest trends, but in speaking the timeless language of Web browsers. When the next framework extinction event comes, Quiet will live on, scurrying through the foundations of the Web, making homes in every project that values simplicity over spectacle.
+This library's power lies not in keeping up with the latest trends, but in speaking the timeless language of Web browsers. When the next framework extinction event comes, Quiet will live on, scurrying through the foundations of the Web, finding a home in every project that values simplicity over spectacle.
 
 ## What's with all the cats?
 

@@ -75,8 +75,9 @@ export default function (eleventyConfig) {
     inputDir: resolve('./docs'),
     shouldProcess: filename => filename.includes('images/whiskers/'),
     colorMap: {
-      '#7a7bbe': 'var(--quiet-primary-600, #7a7bbe)',
-      '#6969a3': 'var(--quiet-primary-700, #6969a3)'
+      '#7a7bbe': 'var(--quiet-primary-600, #7a7bbe)', // primary
+      '#6969a3': 'var(--quiet-primary-700, #6969a3)', // primary shade
+      '#c9cdd4': 'var(--quiet-neutral-fill-softer)' // shadows
     }
   });
 

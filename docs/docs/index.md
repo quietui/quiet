@@ -4,7 +4,7 @@ description: Start using Quiet with just a couple lines of code.
 layout: docs
 ---
 
-<img class="whiskers-end" src="/assets/images/whiskers/with-blueprints.svg" alt="Whiskers the mouse wearing a hardhat while holding blueprints">
+<img class="whiskers-end" src="/assets/images/whiskers/with-laptop.svg" alt="Whiskers the mouse working on a laptop">
 
 Quiet is an open source library for building modern user interfaces on the Web. It features dozens of high-quality, accessible,  interoperable [components](/docs/components), a [modern theme](/docs/theming) with light and darks modes that can adapt to any brand, an optional [CSS reset](/docs/restyle), and more!
 

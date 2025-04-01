@@ -310,4 +310,4 @@ For consistency, the `id` attribute should be displayed in lowercase when referr
 
 ### Whiskers
 
-In most cases, Whiskers should only appear on a page once. For his own safety, Whiskers may only appear on pages where cats are not present.
+In most cases, Whiskers should only appear once on the same page. If he appears twice, he must be placed in such a way that he will not show more than once in the visible viewport. For his own safety, Whiskers may only appear on pages where cats are not present.

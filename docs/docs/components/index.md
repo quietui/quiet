@@ -36,9 +36,9 @@ layout: docs
   <quiet-empty-state slot="empty">
     <img
       slot="illustration"
-      src="/assets/images/whiskers/playing-with-bricks.svg"
-      alt="Whiskers the mouse playing with bricks"
-      style="max-width: 12rem; height: auto;"
+      src="/assets/images/whiskers/thinking.svg"
+      alt="Whiskers the mouse pondering"
+      style="width: auto; max-height: 12rem;"
     >
     <p>
       Sorry, nothing like that has been built yet!<br>

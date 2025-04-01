@@ -4,7 +4,7 @@ description: Everything as accessible as possible by default.
 layout: docs
 ---
 
-<img class="whiskers-end" src="/assets/images/whiskers/strong.png" alt="Whiskers the mouse flexing his muscle">
+<img class="whiskers-end" src="/assets/images/whiskers/flexing.svg" alt="Whiskers the mouse flexing his muscle">
 
 I recognize the need for all users, regardless of ability or device, to have undeterred access to the websites and applications that are created with my software. This is an important goal of my projects.
 

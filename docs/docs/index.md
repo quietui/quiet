@@ -4,7 +4,7 @@ description: Start using Quiet with just a couple lines of code.
 layout: docs
 ---
 
-<img class="whiskers-end" src="/assets/images/whiskers/arms-out.png" alt="Whiskers the mouse with his arms out">
+<img class="whiskers-end" src="/assets/images/whiskers/with-blueprints.svg" alt="Whiskers the mouse wearing a hardhat while holding blueprints">
 
 Quiet is an open source library for building modern user interfaces on the Web. It features dozens of high-quality, accessible,  interoperable [components](/docs/components), a [modern theme](/docs/theming) with light and darks modes that can adapt to any brand, an optional [CSS reset](/docs/restyle), and more!
 
@@ -95,7 +95,7 @@ preventTurboFouce();
 
 :::
 
----
+<img class="whiskers-center" src="/assets/images/whiskers/with-robot.svg" alt="Whiskers the mouse watches a robot juggle toy bricks">
 
 ## Manually importing <quiet-badge variant="destructive" data-no-outline data-no-anchor>Advanced</quiet-badge>
 

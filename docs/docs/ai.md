@@ -4,6 +4,8 @@ description: Leverage Quiet UI's component documentation with AI assistants for 
 layout: docs
 ---
 
+<img class="whiskers-end" src="/assets/images/whiskers/thinking.svg" alt="Whiskers the mouse pondering">
+
 To streamline development with AI, a set of _component reference files_ are available for use with [LLMs](https://en.wikipedia.org/wiki/Large_language_model). These files offer a complete breakdown of Quiet's components, making it easy to get quick, accurate help from your AI assistant.
 
 Component reference files are a collection of plain-text documents that describe every Quiet UI component in detail. An `index.txt` file lists all available components while individual `.txt` files (e.g., `button.txt`, `card.txt`, etc.) provide an in-depth look at each component's features.

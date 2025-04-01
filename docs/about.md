@@ -5,7 +5,7 @@ layout: page-outline
 section: about
 ---
 
-<img class="whiskers-end" src="/assets/images/whiskers/standing-proud.png" alt="Whiskers the mouse standing proudly">
+<img class="whiskers-end" src="/assets/images/whiskers/standing-proud.svg" alt="Whiskers the mouse standing proudly">
 
 Quiet is an open source, MIT-licensed user interface library for the modern Web. It features dozens of accessible, performant, localized, and interoperable components along with an optional CSS reset to streamline development of websites and apps.
 

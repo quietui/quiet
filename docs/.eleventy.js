@@ -1,5 +1,5 @@
 import { readFile } from 'fs/promises';
-import { parse } from 'path';
+import { parse, resolve } from 'path';
 import process from 'process';
 import { analyticsPlugin } from './_utils/analytics.js';
 import { anchorHeadingsPlugin } from './_utils/anchor-headings.js';
@@ -9,6 +9,7 @@ import { currentLink } from './_utils/current-link.js';
 import { externalLinksPlugin } from './_utils/external-links.js';
 import { formatCodePlugin } from './_utils/format-code.js';
 import { highlightCodePlugin } from './_utils/highlight-code.js';
+import { imgToSvgPlugin } from './_utils/img-to-svg.js';
 import { getComponents } from './_utils/manifest.js';
 import { markdown } from './_utils/markdown.js';
 import { outlinePlugin } from './_utils/outline.js';
@@ -67,6 +68,16 @@ export default function (eleventyConfig) {
   // Shortcodes - {% shortCode arg1, arg2 %}
   eleventyConfig.addShortcode('cdnUrl', location => {
     return `https://cdn.jsdelivr.net/npm/@quietui/quiet-browser@${packageData.version}/` + location.replace(/^\//, '');
+  });
+
+  // SVG colors plugin
+  eleventyConfig.addPlugin(imgToSvgPlugin, {
+    inputDir: resolve('./docs'),
+    shouldProcess: filename => filename.includes('images/whiskers/'),
+    colorMap: {
+      '#7a7bbe': 'var(--quiet-primary-600, #7a7bbe)',
+      '#6969a3': 'var(--quiet-primary-700, #6969a3)'
+    }
   });
 
   // Helpers

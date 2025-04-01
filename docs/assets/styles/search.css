@@ -167,6 +167,13 @@
   display: none;
 }
 
+@media screen and (max-height: 730px) {
+  #site-search-empty img,
+  #site-search-empty svg {
+    display: none;
+  }
+}
+
 /* Footer */
 #site-search footer {
   display: flex;

@@ -986,6 +986,7 @@ quiet-callout {
     display: block;
     width: 100%;
     max-width: 540px;
+    max-height: 300px;
     margin-inline: auto;
 
     /* Smaller logo on mobile */
@@ -1236,12 +1237,19 @@ td.table-reflects {
   margin-block: 3rem;
   text-align: center;
 
+  img,
+  svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
   .whiskers-email-controls {
     display: flex;
     position: absolute;
-    top: 164px;
-    left: 12%;
-    width: 78.1%;
+    top: 174px;
+    left: 5%;
+    width: 87%;
     gap: 8px;
   }
 

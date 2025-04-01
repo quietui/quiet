@@ -17,12 +17,12 @@ Components marked [stable] are well-tested, ready for production, and less likel
   method="post" 
   data-id="A61C50BEC994754B1D79C5819EC1255C1B31244D333BF1BA7C7110C86FE7CF7856BEBB1CE5FB5F305E491256458DDB0D84C7F6E7E798917706F78CD30AA744D5"
 >
-  <img src="/assets/images/whiskers/with-sign.png" alt="Whiskers holding a sign in front of himself">
+  <img src="/assets/images/whiskers/with-sign.svg" alt="Whiskers holding a sign in front of himself">
   <div class="whiskers-email-controls">
     <!-- cspell:disable -->
     <quiet-text-field
       id="fieldEmail"
-      class="js-cm-email-input qa-input-email"
+      class="quiet-light js-cm-email-input qa-input-email"
       name="cm-tydiudd-tydiudd" 
       type="email" 
       label="Email"

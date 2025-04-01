@@ -7,6 +7,8 @@ section:
 
 For most organizations, a sponsorship is just a drop in the bucket. For open source authors, it provides the means to exist. If you're not sure how to start the conversation, use this template to talk to your boss about adopting and sponsoring Quiet&nbsp;UI in your place of business.
 
+<img class="whiskers-center" src="/assets/images/whiskers/with-letter.svg" alt="Whiskers the mouse writing a letter">
+
 <quiet-card style="padding-inline: 1rem; padding-block-start: 2rem;">
 
 Dear =={Manager}==,

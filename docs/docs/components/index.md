@@ -34,8 +34,16 @@ layout: docs
   {%- endfor -%}
 
   <quiet-empty-state slot="empty">
-    <quiet-icon slot="illustration" name="cheese"></quiet-icon>
-    <p>No results found</p>
+    <img
+      slot="illustration"
+      src="/assets/images/whiskers/playing-with-bricks.svg"
+      alt="Whiskers the mouse playing with bricks"
+      style="max-width: 12rem; height: auto;"
+    >
+    <p>
+      Sorry, nothing like that has been built yet!<br>
+      <a href="https://github.com/quietui/quiet/discussions/categories/feature-requests" target="_blank">Ask for it here</a>
+    </p>
   </quiet-empty-state>
 </quiet-search-list>
 

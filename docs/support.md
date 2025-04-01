@@ -79,6 +79,8 @@ Quiet can be used for free under the MIT license. Unfortunately, I can't offer s
   <li><quiet-icon name="tools" style="color: #2ab6d1;"></quiet-icon><br>Actively updated and maintained</li>
 </ul>
 
+<img class="whiskers-center" src="/assets/images/whiskers/with-heart.svg" alt="Whiskers the mouse holding a giant heart">
+
 <div 
   style="
     display: flex; 
@@ -166,7 +168,7 @@ While components are written as classes, they aren't designed to be subclassed. 
 Because custom elements are registered globally, I don't recommend using Quiet in a micro frontend architecture _unless_ you move it to the top of the stack. Avoid loading the library multiple times, as this will cause version conflicts and load more code than is necessary.
 :::
 
-<img class="whiskers-center" src="/assets/images/whiskers/standing.png" alt="Whiskers the mouse standing with a smile">
+<img class="whiskers-center" src="/assets/images/whiskers/with-headset.svg" alt="Whiskers the mouse is talking on a headset">
 
 <small class="copyright">
   Quiet UI is a project of A&nbsp;Beautiful&nbsp;Site,&nbsp;LLC

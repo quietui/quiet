@@ -105,7 +105,7 @@ html[data-scroll-restoring] body {
   right: 0;
   bottom: 0;
   left: 0;
-  border-bottom: solid var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
+  border-bottom: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
   content: '';
   transition: 0.25s border-color ease;
 }
@@ -125,7 +125,7 @@ html[data-scroll-restoring] body {
 
 .header-group:not(:first-of-type) + .header-group {
   padding-inline-start: 1rem;
-  border-left: solid var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
+  border-left: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
 }
 
 /* Splash page divider colors should match the background better */
@@ -387,7 +387,7 @@ html[data-scroll-restoring] body {
   overflow-x: hidden;
   overflow-y: auto;
   translate: calc(-1 * (var(--quiet-focus-width) + var(--quiet-focus-offset)) - 0.25rem);
-  border-right: solid var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
+  border-right: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
 }
 
 #sidebar-meta {

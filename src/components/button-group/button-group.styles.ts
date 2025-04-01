@@ -5,7 +5,7 @@ export default css`
     display: flex;
     position: relative;
     flex-wrap: wrap;
-    gap: var(--quiet-border-width);
+    gap: min(var(--quiet-border-width), 0.125rem);
     isolation: isolate;
   }
 

@@ -972,6 +972,11 @@ quiet-callout {
   font-size: 1.375rem;
   line-height: 1.4;
   text-align: center;
+
+  @media screen and (max-height: 550px) {
+    height: auto;
+    padding-block-start: 2rem;
+  }
 }
 
 .splash-image {
@@ -995,11 +1000,6 @@ quiet-callout {
     @media screen and (max-height: 720px) {
       max-height: 20vh;
     }
-
-    /* No image when too short */
-    @media screen and (max-height: 550px) {
-      display: none;
-    }
   }
 }
 
@@ -1016,6 +1016,10 @@ quiet-callout {
 
   quiet-button[variant='default']::part(button) {
     background-color: var(--quiet-neutral-fill-softer);
+  }
+
+  @media screen and (max-height: 550px) {
+    margin-block-start: 1rem;
   }
 }
 

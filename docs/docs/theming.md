@@ -4,7 +4,7 @@ description: Theme concepts, color palettes, and design tokens.
 layout: docs
 ---
 
-<img class="whiskers-end" src="/assets/images/whiskers/with-palette.svg" alt="Whiskers the mouse holding a palette and a paintbrush">
+<img class="whiskers-end" src="/assets/images/whiskers/painting-fence.svg" alt="Whiskers the mouse painting a wooden fence">
 
 The default theme provides simple, elegant styles with support for light and dark modes and 21 built-in color presets. A number of [design tokens](#design-tokens) are exposed, giving you an easy way to make high-level changes to the library.
 
@@ -652,8 +652,6 @@ If you just want to change a few things here and there, it's usually better to l
 This is the recommended approach. 👆
 
 If you _really_ want to create an entirely new theme, the most efficient way is to fork ("copy") the [default theme's CSS](https://github.com/quietui/quiet/blob/main/src/themes/quiet.css) and modify it instead of writing everything from scratch. This is faster, easier, and less prone to mistakes.
-
-<img class="whiskers-center" src="/assets/images/whiskers/painting-fence.svg" alt="Whiskers the mouse painting a wooden fence">
 
 <!-- Page styles -->
 <style>

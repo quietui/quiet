@@ -94,7 +94,7 @@ Copy and paste the following code into the `<head>` section of any HTML document
   </quiet-button>
 </div>
 
-<img class="whiskers-center" src="/assets/images/whiskers/laying-bricks.svg" alt="Whiskers the mouse laying bricks">
+<img class="whiskers-center" src="/assets/images/whiskers/arms-crossed.svg" alt="Whiskers the mouse standing with arms crossed">
 
 <small class="copyright">
   Quiet UI is a project of A&nbsp;Beautiful&nbsp;Site,&nbsp;LLC

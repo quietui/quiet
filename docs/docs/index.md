@@ -95,8 +95,6 @@ preventTurboFouce();
 
 :::
 
-<img class="whiskers-center" src="/assets/images/whiskers/with-robot.svg" alt="Whiskers the mouse watches a robot juggle toy bricks">
-
 ## Manually importing <quiet-badge variant="destructive" data-no-outline data-no-anchor>Advanced</quiet-badge>
 
 If you don't want to use the autoloader, you can import components manually from npm installation or from the CDN. Quiet provides two npm packages to pick from, depending on how you want to use it.

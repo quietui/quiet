@@ -990,16 +990,19 @@ quiet-callout {
     max-width: 700px;
     max-height: 300px;
     margin-inline: auto;
+    margin-block-end: 2rem;
 
     /* Smaller image on mobile */
     @media screen and (max-width: 959px) {
-      max-width: 320px;
+      max-width: none;
       height: auto;
+      max-height: 24vh;
     }
 
     /* Shorter image when kinda short */
     @media screen and (max-height: 720px) {
-      max-height: 20vh;
+      max-width: none;
+      max-height: none;
     }
   }
 }
@@ -1012,12 +1015,8 @@ quiet-callout {
 .splash-actions {
   display: flex;
   justify-content: center;
-  margin-block-start: 4rem;
+  margin-block-start: 2rem;
   gap: 1rem;
-
-  quiet-button[variant='default']::part(button) {
-    background-color: var(--quiet-neutral-fill-softer);
-  }
 
   @media screen and (max-height: 550px) {
     margin-block-start: 1rem;
@@ -1032,8 +1031,8 @@ quiet-callout {
   gap: 1rem;
 
   quiet-button::part(button) {
-    border-color: var(--quiet-neutral-fill-loud);
-    color: var(--quiet-neutral-fill-loud);
+    border-color: var(--quiet-strident);
+    color: var(--quiet-strident);
   }
 }
 
@@ -1113,18 +1112,18 @@ quiet-callout {
   position: absolute;
   bottom: 1rem;
   left: calc(50% - 1.5rem);
-  color: color-mix(in hsl, var(--quiet-neutral-fill-louder), transparent 75%);
+  color: var(--quiet-primary-fill-mid);
   font-size: 3rem;
   animation: hint-bounce 2s infinite;
   transition:
-    0.75s ease scale,
-    0.75s ease opacity;
+    0.5s ease scale,
+    0.5s ease opacity;
 
   @media screen and (max-width: 767px) {
     bottom: 1rem;
   }
 
-  @media screen and (max-height: 400px) {
+  @media screen and (max-height: 720px) {
     opacity: 0;
   }
 }
@@ -1320,7 +1319,7 @@ td.table-reflects {
     margin: 0;
     padding: 1.5rem;
     border-radius: 1rem;
-    background-color: color-mix(in oklab, var(--quiet-neutral-fill-softer), transparent 25%);
+    background-color: color-mix(in oklab, var(--quiet-primary-fill-soft), transparent 75%);
     box-shadow: var(--quiet-shadow-softer);
     color: color-mix(in oklab, var(--quiet-neutral-text-on-soft), transparent 25%);
     line-height: 1.6;
@@ -1342,8 +1341,8 @@ td.table-reflects {
     }
 
     quiet-icon {
-      font-size: 2.75rem;
-      stroke-width: 1.25px;
+      font-size: 3.5rem;
+      stroke-width: 1px;
     }
   }
 }

@@ -219,6 +219,7 @@ html[data-scroll-restoring] body {
   }
 
   svg {
+    animation: 0.8375s infinite heartbeat alternate ease;
     transition: 0.5s transform ease;
   }
 
@@ -240,10 +241,6 @@ html[data-scroll-restoring] body {
   100% {
     transform: scaleX(-1);
   }
-}
-
-.heartbeat {
-  animation: 0.8375s infinite heartbeat alternate ease;
 }
 
 @keyframes heartbeat {

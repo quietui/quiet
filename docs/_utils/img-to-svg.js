@@ -51,23 +51,22 @@ export function imgToSvgPlugin(eleventyConfig, options = {}) {
 
         try {
           // Read the SVG file
-          console.log('Processing SVG: ' + svgPath);
           const svgContent = await fs.readFile(svgPath, 'utf8');
 
           // Parse the SVG content
-          const svgDom = parse(svgContent);
-          const svgRoot = svgDom.querySelector('svg');
+          const svgDoc = parse(svgContent);
+          const svg = svgDoc.querySelector('svg');
 
-          if (!svgRoot) continue;
+          if (!svg) continue;
 
           // Add aria-label from alt text
-          svgRoot.setAttribute('aria-label', alt);
+          svg.setAttribute('aria-label', alt);
 
-          if (classNames) svgRoot.setAttribute('class', classNames);
-          if (styles) svgRoot.setAttribute('style', styles);
+          if (classNames) svg.setAttribute('class', classNames);
+          if (styles) svg.setAttribute('style', styles);
 
           // Apply color replacements from colorMap
-          let modifiedSvgContent = svgDom.toString();
+          let modifiedSvgContent = svgDoc.querySelector('svg').toString();
 
           // Replace colors based on colorMap
           Object.entries(colorMap).forEach(([oldColor, newColor]) => {

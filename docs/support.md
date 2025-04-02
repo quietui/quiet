@@ -38,7 +38,7 @@ Quiet can be used for free under the MIT license. Unfortunately, I can't offer s
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Attribution on website</li>
     </ul>
     <quiet-button variant="primary" appearance="outline" pill href="https://github.com/sponsors/quietui" target="_blank">
-      <quiet-icon slot="start" family="filled" name="heart" style="color: deeppink;"></quiet-icon>
+      <quiet-icon slot="start" family="filled" name="heart" class="heartbeat" style="color: deeppink;"></quiet-icon>
       Sponsor
     </quiet-button>
   </div>

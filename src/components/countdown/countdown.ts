@@ -90,10 +90,7 @@ export class QuietCountdown extends QuietElement {
     }
   }
 
-  /**
-   * Starts or resumes the countdown timer after validating dates.
-   * @returns {boolean} Whether the timer was successfully started
-   */
+  /** Starts or resumes the countdown timer after validating dates. */
   public start(options: { resume?: boolean } = {}): boolean {
     // Validate dates first
     const start = new Date(this.startDate);
@@ -129,9 +126,7 @@ export class QuietCountdown extends QuietElement {
     return true;
   }
 
-  /**
-   * Stops the countdown timer and records the time it was stopped.
-   */
+  /** Stops the countdown timer and records the time it was stopped. */
   stop(): void {
     // Only record stop time if timer is currently running
     if (this.intervalId !== null) {
@@ -143,9 +138,7 @@ export class QuietCountdown extends QuietElement {
     }
   }
 
-  /**
-   * Calculates the update interval based on the minimum unit shown.
-   */
+  /** Calculates the update interval based on the minimum unit shown. */
   private getUpdateInterval(): number {
     switch (this.minUnit) {
       case 'seconds':
@@ -165,9 +158,7 @@ export class QuietCountdown extends QuietElement {
     }
   }
 
-  /**
-   * Calculates the time remaining and updates the display.
-   */
+  /** Calculates the time remaining and updates the display. */
   private updateCountdown() {
     const start = new Date(this.startDate);
     const end = new Date(this.endDate);
@@ -193,9 +184,7 @@ export class QuietCountdown extends QuietElement {
     this.requestUpdate();
   }
 
-  /**
-   * Calculates the time units from milliseconds.
-   */
+  /** Calculates the time units from milliseconds. */
   private calculateTimeUnits(milliseconds: number): Record<string, number> {
     const seconds = Math.floor(milliseconds / 1000) % 60;
     const minutes = Math.floor(milliseconds / (1000 * 60)) % 60;
@@ -207,9 +196,7 @@ export class QuietCountdown extends QuietElement {
     return { seconds, minutes, hours, days, months, years };
   }
 
-  /**
-   * Gets the visible units based on min-unit and max-unit properties.
-   */
+  /** Gets the visible units based on min-unit and max-unit properties. */
   private getVisibleUnits(): string[] {
     const allUnits = QuietCountdown.UNITS;
     const minIndex = allUnits.indexOf(this.minUnit);
@@ -223,27 +210,19 @@ export class QuietCountdown extends QuietElement {
     return allUnits.slice(minIndex, maxIndex + 1);
   }
 
-  /**
-   * Formats a number as a two-digit string.
-   */
+  /** Formats a number as a two-digit string. */
   private formatUnit(value: number): string {
     return value.toString().padStart(2, '0');
   }
 
-  /**
-   * Gets the unit label using Intl.DisplayNames or fallback.
-   */
+  /** Gets the unit label using Intl.DisplayNames or fallback. */
   private getUnitLabel(unit: string): string {
     const baseUnit = unit.endsWith('s') ? unit.slice(0, -1) : unit;
-    console.log(this.localize.lang());
     const displayNames = new Intl.DisplayNames(this.localize.lang(), { type: 'dateTimeField', style: 'narrow' });
-
     return displayNames.of(baseUnit)!;
   }
 
-  /**
-   * Checks if any visible units have changed and dispatches tick event if needed.
-   */
+  /** Checks if any visible units have changed and dispatches tick event if needed. */
   private checkForChanges(units: Record<string, number>, visibleUnits: string[]) {
     let hasChanged = false;
 

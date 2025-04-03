@@ -63,7 +63,7 @@ export class QuietBrowserFrame extends QuietElement {
 
   /**
    * Sets the window control style to use. 'mac' uses the traffic light controls, 'windows' uses Windows 11-style
-   * controls, and 'auto' will use the OS-appropriate style.
+   * controls, and 'auto' will use the most appropriate style based on the user's operating system.
    */
   @property({ reflect: true }) platform: 'mac' | 'windows' | 'auto' = 'auto';
 

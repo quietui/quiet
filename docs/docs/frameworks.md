@@ -4,7 +4,13 @@ description: How to get started with Quiet and your favorite framework.
 layout: docs
 ---
 
-If you're using a framework, you shouldn't use the autoloader. Instead, install Quiet via npm and manually [import each component](/docs/#manually-importing) as shown in the examples below.
+<img class="whiskers-end" src="/assets/images/whiskers/with-skateboard.svg" alt="Whiskers the mouse skateboarding">
+
+If you're using a framework, you shouldn't use the autoloader. Frameworks should typically be bundled to avoid timing issues with your app's lifecycle and autoloading.
+
+Instead, install Quiet via npm and manually [import each component](/docs/#manually-importing) as shown in the examples below.
+
+To install Quiet via npm, use the following command.
 
 ```sh
 npm install @quietui/quiet

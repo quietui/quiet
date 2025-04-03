@@ -5,8 +5,7 @@ layout: page-outline
 section: about
 ---
 
-<img class="whiskers-end quiet-if-light" src="/assets/images/whiskers/whiskers-happy-light.svg" alt="Whiskers the mouse standing and smiling">
-<img class="whiskers-end quiet-if-dark" src="/assets/images/whiskers/whiskers-happy-dark.svg" alt="Whiskers the mouse standing and smiling">
+<img class="whiskers-end" src="/assets/images/whiskers/standing-proud.svg" alt="Whiskers the mouse standing proudly">
 
 Quiet is an open source, MIT-licensed user interface library for the modern Web. It features dozens of accessible, performant, localized, and interoperable components along with an optional CSS reset to streamline development of websites and apps.
 
@@ -44,7 +43,7 @@ Why did I choose a mouse for Quiet's mascot? Because mice are quiet. Because the
 
 As some of the world's [most](https://en.wikipedia.org/wiki/Dinosaur) [impressive](https://en.wikipedia.org/wiki/Woolly_mammoth) [creatures](https://en.wikipedia.org/wiki/Smilodon) vanished into the mists of time, the humble mouse continued to live on. Their resilience reminds us that survival belongs not to the strongest or the most spectacular, but to those who can bend without breaking; who can find opportunity in adversity; who can thrive in the spaces between.
 
-This library's power lies not in keeping up with the latest trends, but in speaking the timeless language of Web browsers. When the next framework extinction event comes, Quiet will live on, scurrying through the foundations of the Web, making homes in every project that values simplicity over spectacle.
+This library's power lies not in keeping up with the latest trends, but in speaking the timeless language of Web browsers. When the next framework extinction event comes, Quiet will live on, scurrying through the foundations of the Web, finding a home in every project that values simplicity over spectacle.
 
 ## What's with all the cats?
 
@@ -55,7 +54,6 @@ I'd like to thank the following projects and people for making Quiet UI possible
 
 - [Lit](https://lit.dev/) for making Web Components so fun to build
 - [Eleventy](https://www.11ty.dev/) for generating the docs
-- [James Duncan](https://bsky.app/profile/jamesduncanart.bsky.social) for drawing a super cool mascot
 - [The Harmony color palette](https://evilmartians.com/opensource/harmony) for color inspiration
 - [The Custom Elements Manifest project](https://custom-elements-manifest.open-wc.org/) for making API documentation easy
 - [Floating UI](https://floating-ui.com/) for positioning all the things

@@ -4,6 +4,8 @@ description: Learn how to validate forms using Quiet's form controls.
 layout: docs
 ---
 
+<img class="whiskers-end" src="/assets/images/whiskers/with-submit.svg" alt="Whiskers the mouse sitting on a giant submit button">
+
 Quiet form controls are [form-associated custom elements](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/attachInternals), meaning their values will submit just like native form controls when you give them a name.
 
 To align with the platform, validation is built on top of the [Constraint Validation API](https://developer.mozilla.org/en-US/docs/Web/HTML/Constraint_validation). This allows Quiet's form controls to work seamlessly with native form validation techniques. You can use most standard HTML validation attributes and access validation states and methods in the same way as native form controls.

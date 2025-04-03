@@ -4,6 +4,8 @@ description: Please read the project's contribution guidelines.
 layout: docs
 ---
 
+<img class="whiskers-end" src="/assets/images/whiskers/arms-out.svg" alt="Whiskers the mouse with his arms out">
+
 Quiet UI is an open source project, meaning everyone can use it and contribute to its development. A common misconception about contributing to an open source project is that you need to know how to code.
 
 This simply isn't true.
@@ -308,4 +310,4 @@ For consistency, the `id` attribute should be displayed in lowercase when referr
 
 ### Whiskers
 
-For his own safety, Whiskers may only appear on pages where cats are not present.
+In most cases, Whiskers should only appear once on the same page. If he appears twice, he must be placed in such a way that he will not show more than once in the visible viewport. For his own safety, Whiskers may only appear on pages where cats are not present.

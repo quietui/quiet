@@ -1,6 +1,6 @@
 import type { CSSResultGroup } from 'lit';
 import { html } from 'lit';
-import { customElement, eventOptions, query } from 'lit/decorators.js';
+import { customElement, eventOptions, query, state } from 'lit/decorators.js';
 import hostStyles from '../../styles/host.styles.js';
 import { Localize } from '../../utilities/localize.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
@@ -32,6 +32,9 @@ export class QuietScroller extends QuietElement {
   private localize = new Localize(this);
   private resizeObserver = new ResizeObserver(() => this.updateScroll());
 
+  /** Indicates whether the scroller is currently scrollable. */
+  @state() canScroll = false;
+
   @query('#content') content: HTMLElement;
 
   connectedCallback() {
@@ -56,6 +59,7 @@ export class QuietScroller extends QuietElement {
 
     // Calculate total scrollable width
     const maxScroll = scrollWidth - clientWidth;
+    this.canScroll = maxScroll > 0;
 
     // Calculate shadow opacities based on first/last 2% of scroll
     const startShadowOpacity = Math.min(1, scrollLeft / (maxScroll * 0.05));
@@ -76,7 +80,7 @@ export class QuietScroller extends QuietElement {
         part="content"
         role="region"
         aria-label=${this.localize.term('scrollableRegion')}
-        tabindex="0"
+        tabindex=${this.canScroll ? '0' : '-1'}
         @scroll=${this.updateScroll}
       >
         <slot @slotchange=${this.handleSlotChange}></slot>

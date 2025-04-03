@@ -4,9 +4,13 @@ description: Quiet was built with platform APIs that allow its components to wor
 layout: docs
 ---
 
+<img class="whiskers-end" src="/assets/images/whiskers/with-blueprints.svg" alt="Whiskers the mouse wearing a hardhat while holding blueprints">
+
 Quiet includes a collection of [Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components), or custom HTML elements. They have attributes, properties, events, and methods, all of which are described in the documentation for each component.
 
-To use the components, install them using the instructions found on the [installation page](/docs/). Once installed, simply add the components you want to your HTML.
+To use the components, install them using the instructions found on the [installation page](/docs/).
+
+Once installed, simply add the components you want to your HTML.
 
 ```html
 <quiet-button>
@@ -14,7 +18,7 @@ To use the components, install them using the instructions found on the [install
 </quiet-button>
 ```
 
-You can obtain references using `document.querySelector()` and `document.getElementById()` just like a native element.
+You can obtain references using `document.querySelector()` and `document.getElementById()` just like a native HTML element.
 
 ```js
 const button = document.querySelector('quiet-button');

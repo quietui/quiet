@@ -861,7 +861,7 @@ export class QuietDropdown extends QuietElement {
       item.checked = !item.checked;
     }
 
-    const selectEvent = new QuietSelectEvent({ selection: item });
+    const selectEvent = new QuietSelectEvent({ item });
     this.dispatchEvent(selectEvent);
 
     // If the event was canceled, keep the dropdown open

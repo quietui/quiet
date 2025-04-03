@@ -4,6 +4,8 @@ description: Theme concepts, color palettes, and design tokens.
 layout: docs
 ---
 
+<img class="whiskers-end" src="/assets/images/whiskers/painting-fence.svg" alt="Whiskers the mouse painting a wooden fence">
+
 The default theme provides simple, elegant styles with support for light and dark modes and 21 built-in color presets. A number of [design tokens](#design-tokens) are exposed, giving you an easy way to make high-level changes to the library.
 
 ## Using the default theme
@@ -641,11 +643,15 @@ Here are some additional tokens you can use and customize for various purposes.
 
 </quiet-scroller>
 
-## Creating a new theme
+## Creating your own theme
 
-If you want to create an entirely new theme, the most efficient way is to fork ("copy") the [default theme's CSS](https://github.com/quietui/quiet/blob/main/src/themes/quiet.css) and modify it instead of writing everything from scratch. This method is faster, easier, and less prone to mistakes.
+Quiet uses [CSS layers](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer) to manage specificity. This means your custom styles will automatically take precedence over the library's styles without needing to use `!important` or increase selector specificity.
 
-If you just want to change a few things here and there, it's usually better to leave the default theme intact and extend it by adding your own stylesheet with the specific rules you want.
+If you just want to change a few things here and there, it's usually better to leave the default theme intact and _extend it_ by adding your own stylesheet with the specific rules you want. Use [design tokens](#design-tokens), [CSS custom properties](/docs/using-components/#css-custom-properties), [CSS parts](/docs/using-components/#css-parts), and [custom states](/docs/using-components/#custom-states) to customize virtually anything on any component.
+
+This is the recommended approach. 👆
+
+If you _really_ want to create an entirely new theme, the most efficient way is to fork ("copy") the [default theme's CSS](https://github.com/quietui/quiet/blob/main/src/themes/quiet.css) and modify it instead of writing everything from scratch. This is faster, easier, and less prone to mistakes.
 
 <!-- Page styles -->
 <style>

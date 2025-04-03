@@ -105,7 +105,7 @@ html[data-scroll-restoring] body {
   right: 0;
   bottom: 0;
   left: 0;
-  border-bottom: solid var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
+  border-bottom: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
   content: '';
   transition: 0.25s border-color ease;
 }
@@ -125,7 +125,7 @@ html[data-scroll-restoring] body {
 
 .header-group:not(:first-of-type) + .header-group {
   padding-inline-start: 1rem;
-  border-left: solid var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
+  border-left: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
 }
 
 /* Splash page divider colors should match the background better */
@@ -216,10 +216,10 @@ html[data-scroll-restoring] body {
 #header-group-links .with-heart {
   span {
     display: inline-block;
-    animation: 0.8375s infinite heartbeat alternate ease;
   }
 
   svg {
+    animation: 0.8375s infinite heartbeat alternate ease;
     transition: 0.5s transform ease;
   }
 
@@ -264,7 +264,7 @@ html[data-scroll-restoring] body {
 
 #header-group-links .current {
   z-index: calc(var(--docs-header-z-index) + 2);
-  border-bottom: solid calc(var(--quiet-border-width) * 2) var(--quiet-primary-text-colorful);
+  border-bottom: var(--quiet-border-style) max(2px, var(--quiet-border-width)) var(--quiet-primary-text-colorful);
   color: var(--quiet-primary-text-colorful);
   font-weight: var(--quiet-font-weight-semibold);
 }
@@ -286,6 +286,10 @@ html[data-scroll-restoring] body {
   background: none;
   color: inherit;
   cursor: pointer;
+
+  &:focus-visible {
+    outline-offset: calc(var(--quiet-focus-width) * -1 - var(--quiet-focus-offset));
+  }
 }
 
 #header-group-buttons quiet-icon {
@@ -383,7 +387,7 @@ html[data-scroll-restoring] body {
   overflow-x: hidden;
   overflow-y: auto;
   translate: calc(-1 * (var(--quiet-focus-width) + var(--quiet-focus-offset)) - 0.25rem);
-  border-right: solid var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
+  border-right: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
 }
 
 #sidebar-meta {
@@ -490,6 +494,7 @@ html[data-scroll-restoring] body {
 
 #content pre:has(code) {
   padding: 0;
+  clear: both;
   background-color: var(--quiet-neutral-900);
 
   > code {
@@ -894,26 +899,22 @@ quiet-callout {
 
   --grid-size: 100px;
   --grid-half-size: calc(var(--grid-size) / 2);
+  --grid-color: color-mix(
+    in oklab,
+    var(--quiet-primary-fill-mid),
+    transparent calc(100% - (100% * var(--opacity-base) * 0.5))
+  );
   --dot-size: 3px;
   --opacity-base: 0.18;
   /* prettier-ignore */
   background-image:
-    linear-gradient(to top, transparent 0, color-mix(in oklab, var(--quiet-background-color), transparent 25%) 100%),
+    linear-gradient(to top, transparent 0, color-mix(in oklab, var(--quiet-background-color), transparent 40%) 100%),
     linear-gradient(
       to bottom,
-      transparent 33%,
-      color-mix(in oklab, var(--quiet-primary-fill-softer), transparent 25%) 100%
+      transparent 66%,
+      color-mix(in oklab, var(--quiet-primary-fill-softer), transparent 40%) 100%
     ),
-    radial-gradient(
-      color-mix(in oklab, var(--quiet-primary-fill-mid), transparent calc(100% - (100% * var(--opacity-base) * 1)))
-        var(--dot-size),
-      transparent var(--dot-size)
-    ),
-    radial-gradient(
-      color-mix(in oklab, var(--quiet-primary-fill-mid), transparent calc(100% - (100% * var(--opacity-base) * 0.66)))
-        var(--dot-size),
-      transparent var(--dot-size)
-    ),
+    radial-gradient(var(--grid-color) var(--dot-size), transparent var(--dot-size)),
     linear-gradient(
       color-mix(in oklab, var(--quiet-primary-fill-mid), transparent calc(100% - (100% * var(--opacity-base) * 0.5)))
         1px,
@@ -928,14 +929,12 @@ quiet-callout {
   background-position:
     100%,
     100%,
-    0 0,
     calc(var(--grid-half-size)) calc(var(--grid-half-size)),
     -0.5px -0.5px,
     -0.5px -0.5px;
   background-size:
     100%,
     100%,
-    var(--grid-size) var(--grid-size),
     var(--grid-size) var(--grid-size),
     var(--grid-half-size) var(--grid-half-size),
     var(--grid-half-size) var(--grid-half-size);
@@ -974,20 +973,36 @@ quiet-callout {
   font-size: 1.375rem;
   line-height: 1.4;
   text-align: center;
+
+  @media screen and (max-height: 550px) {
+    height: auto;
+    padding-block-start: 2rem;
+  }
 }
 
 .splash-image {
+  width: 100%;
+
   img,
   svg {
     display: block;
     width: 100%;
-    max-width: 540px;
+    max-width: 700px;
+    max-height: 300px;
     margin-inline: auto;
+    margin-block-end: 2rem;
 
-    /* Smaller logo on mobile */
+    /* Smaller image on mobile */
     @media screen and (max-width: 959px) {
-      max-width: 320px;
+      max-width: none;
       height: auto;
+      max-height: 24vh;
+    }
+
+    /* Shorter image when kinda short */
+    @media screen and (max-height: 720px) {
+      max-width: none;
+      max-height: none;
     }
   }
 }
@@ -1000,11 +1015,11 @@ quiet-callout {
 .splash-actions {
   display: flex;
   justify-content: center;
-  margin-block-start: 4rem;
+  margin-block-start: 2rem;
   gap: 1rem;
 
-  quiet-button[variant='default']::part(button) {
-    background-color: color-mix(in oklab, var(--quiet-neutral-fill-softer), transparent 15%);
+  @media screen and (max-height: 550px) {
+    margin-block-start: 1rem;
   }
 }
 
@@ -1016,8 +1031,8 @@ quiet-callout {
   gap: 1rem;
 
   quiet-button::part(button) {
-    border-color: var(--quiet-neutral-fill-loud);
-    color: var(--quiet-neutral-fill-loud);
+    border-color: var(--quiet-strident);
+    color: var(--quiet-strident);
   }
 }
 
@@ -1097,18 +1112,18 @@ quiet-callout {
   position: absolute;
   bottom: 1rem;
   left: calc(50% - 1.5rem);
-  color: color-mix(in hsl, var(--quiet-neutral-fill-louder), transparent 75%);
+  color: var(--quiet-primary-fill-mid);
   font-size: 3rem;
   animation: hint-bounce 2s infinite;
   transition:
-    0.75s ease scale,
-    0.75s ease opacity;
+    0.5s ease scale,
+    0.5s ease opacity;
 
   @media screen and (max-width: 767px) {
     bottom: 1rem;
   }
 
-  @media screen and (max-height: 400px) {
+  @media screen and (max-height: 720px) {
     opacity: 0;
   }
 }
@@ -1203,7 +1218,7 @@ td.table-reflects {
 .whiskers-center {
   display: block;
   width: auto;
-  max-height: 10rem;
+  max-height: 12rem;
   margin-inline: auto;
   margin-block-end: 1.5rem;
 
@@ -1215,7 +1230,7 @@ td.table-reflects {
 .whiskers-end {
   display: inline;
   width: auto;
-  max-height: 10rem;
+  max-height: 12rem;
   margin-inline-start: 1.5rem;
   margin-block-end: 1.5rem;
   float: right;
@@ -1227,17 +1242,24 @@ td.table-reflects {
 
 .whiskers-email {
   position: relative;
-  width: 280px;
+  width: 319px;
   margin-inline: auto;
   margin-block: 3rem;
   text-align: center;
 
+  img,
+  svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
   .whiskers-email-controls {
     display: flex;
     position: absolute;
-    top: 95px;
-    left: 7.5%;
-    width: 85%;
+    top: 174px;
+    left: 5%;
+    width: 87%;
     gap: 8px;
   }
 
@@ -1297,9 +1319,9 @@ td.table-reflects {
     margin: 0;
     padding: 1.5rem;
     border-radius: 1rem;
-    background-color: color-mix(in oklab, var(--quiet-primary-fill-softer), transparent 25%);
+    background-color: color-mix(in oklab, var(--quiet-primary-fill-soft), transparent 75%);
     box-shadow: var(--quiet-shadow-softer);
-    color: color-mix(in oklab, var(--quiet-neutral-text-on-softer), transparent 25%);
+    color: color-mix(in oklab, var(--quiet-neutral-text-on-soft), transparent 25%);
     line-height: 1.6;
     list-style: none;
     text-align: center;
@@ -1319,8 +1341,8 @@ td.table-reflects {
     }
 
     quiet-icon {
-      font-size: 2.75rem;
-      stroke-width: 1.25px;
+      font-size: 3.5rem;
+      stroke-width: 1px;
     }
   }
 }

@@ -20,14 +20,10 @@ export default css`
     margin-inline: var(--spacing);
   }
 
-  .line {
-    background-color: var(--color);
-  }
-
   /* Horizontal */
   :host([aria-orientation='horizontal']) .line {
     flex-grow: 1;
-    height: var(--thickness);
+    border-bottom: var(--quiet-border-style) var(--thickness) var(--color);
   }
 
   :host([aria-orientation='horizontal']) .line:first-child {
@@ -43,7 +39,7 @@ export default css`
   /* Vertical */
   :host([aria-orientation='vertical']) .line {
     flex-grow: 1;
-    width: var(--thickness);
+    border-left: var(--quiet-border-style) var(--thickness) var(--color);
   }
 
   :host([aria-orientation='vertical']) .line:first-child {

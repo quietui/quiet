@@ -1,7 +1,9 @@
 import type { CSSResultGroup } from 'lit';
 import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { QuietFinishedEvent } from '../../events/finished.js';
 import hostStyles from '../../styles/host.styles.js';
+import { Localize } from '../../utilities/localize.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import styles from './countdown.styles.js';
 
@@ -12,6 +14,8 @@ import styles from './countdown.styles.js';
  * @documentation https://quietui.org/docs/components/countdown
  * @status stable
  * @since 1.0
+ *
+ * @event quiet-finished - Dispatched when the countdown finishes.
  */
 @customElement('quiet-countdown')
 export class QuietCountdown extends QuietElement {
@@ -38,32 +42,27 @@ export class QuietCountdown extends QuietElement {
    */
   @property({ attribute: 'end-date' }) endDate: Date | string;
 
-  /**
-   * The delimiter to use between units. Default is ':'.
-   */
+  /** The delimiter to show between units. */
   @property() delimiter: string = ':';
 
-  /**
-   * The smallest unit to display in the countdown.
-   */
+  /** The smallest unit to display in the countdown. */
   @property({ attribute: 'min-unit' }) minUnit: 'seconds' | 'minutes' | 'hours' | 'days' | 'months' | 'years' =
     'seconds';
 
-  /**
-   * The largest unit to display in the countdown.
-   */
+  /** The largest unit to display in the countdown. */
   @property({ attribute: 'max-unit' }) maxUnit: 'seconds' | 'minutes' | 'hours' | 'days' | 'months' | 'years' = 'days';
 
-  /**
-   * The previously displayed values, used to determine when to dispatch tick events
-   */
+  /** Whether to show long form labels for units (e.g., "hours" instead of "h"). */
+  @property({ type: Boolean, attribute: 'long-labels' }) longLabels = false;
+
+  private localize = new Localize(this);
   private previousValues: Record<string, number> = {};
 
   connectedCallback() {
     super.connectedCallback();
     this.style.display = 'inline-flex';
     this.style.alignItems = 'center';
-    this.startIfValid();
+    this.start();
   }
 
   disconnectedCallback() {
@@ -71,25 +70,44 @@ export class QuietCountdown extends QuietElement {
     super.disconnectedCallback();
   }
 
-  /**
-   * Check if dates are valid and start the timer if they are
-   */
-  private startIfValid() {
-    const start = new Date(this.startDate);
-    const end = new Date(this.endDate);
+  updated(changedProperties: Map<string, unknown>) {
+    super.updated(changedProperties);
 
-    // Verify both dates are valid and end is after start
-    if (!isNaN(start.getMilliseconds()) && !isNaN(end.getMilliseconds()) && end.getTime() > start.getTime()) {
-      this.start();
+    // If the dates or units change, we may need to restart the timer with a new interval
+    if (
+      changedProperties.has('startDate') ||
+      changedProperties.has('endDate') ||
+      changedProperties.has('minUnit') ||
+      changedProperties.has('maxUnit')
+    ) {
+      // If the timer is active, restart it with the new configuration
+      const wasActive = this.intervalId !== null;
+      this.stop();
+
+      if (wasActive) {
+        this.start();
+      }
     }
   }
 
   /**
-   * Starts or resumes the countdown timer.
+   * Starts or resumes the countdown timer after validating dates.
+   * @returns {boolean} Whether the timer was successfully started
    */
-  start(options: { resume?: boolean } = {}) {
+  public start(options: { resume?: boolean } = {}): boolean {
+    // Validate dates first
+    const start = new Date(this.startDate);
+    const end = new Date(this.endDate);
+
+    // Verify both dates are valid and end is after start
+    const isValid = !isNaN(start.getMilliseconds()) && !isNaN(end.getMilliseconds()) && end.getTime() > start.getTime();
+
+    if (!isValid) {
+      return false;
+    }
+
     // Clear any existing interval
-    this.stop({ keepStoppedAt: true });
+    this.stop();
 
     if (options.resume && this.stoppedAt !== null) {
       // Calculate how long the timer was stopped
@@ -107,20 +125,21 @@ export class QuietCountdown extends QuietElement {
     // Start the timer
     this.intervalId = window.setInterval(() => this.updateCountdown(), updateInterval);
     this.updateCountdown(); // Update immediately
+
+    return true;
   }
 
   /**
-   * Stops the countdown timer.
+   * Stops the countdown timer and records the time it was stopped.
    */
-  stop(options: { keepStoppedAt?: boolean } = {}) {
+  stop(): void {
+    // Only record stop time if timer is currently running
     if (this.intervalId !== null) {
       window.clearInterval(this.intervalId);
       this.intervalId = null;
-      if (!options.keepStoppedAt) {
-        this.stoppedAt = null;
-      } else if (this.stoppedAt === null) {
-        this.stoppedAt = Date.now();
-      }
+
+      // Record when the timer was stopped (for resuming later)
+      this.stoppedAt = Date.now();
     }
   }
 
@@ -147,29 +166,6 @@ export class QuietCountdown extends QuietElement {
   }
 
   /**
-   * Updates properties when they change
-   */
-  updated(changedProperties: Map<string, unknown>) {
-    super.updated(changedProperties);
-
-    // If the dates or units change, we may need to restart the timer with a new interval
-    if (
-      changedProperties.has('startDate') ||
-      changedProperties.has('endDate') ||
-      changedProperties.has('minUnit') ||
-      changedProperties.has('maxUnit')
-    ) {
-      // If the timer is active, restart it with the new configuration
-      const wasActive = this.intervalId !== null;
-      this.stop();
-
-      if (wasActive) {
-        this.startIfValid();
-      }
-    }
-  }
-
-  /**
    * Calculates the time remaining and updates the display.
    */
   private updateCountdown() {
@@ -190,7 +186,7 @@ export class QuietCountdown extends QuietElement {
     if (remaining <= 0 && !this.hasFinished) {
       remaining = 0;
       this.hasFinished = true;
-      this.dispatchEvent(new CustomEvent('quiet-finished'));
+      this.dispatchEvent(new QuietFinishedEvent());
       this.stop();
     }
 
@@ -232,6 +228,17 @@ export class QuietCountdown extends QuietElement {
    */
   private formatUnit(value: number): string {
     return value.toString().padStart(2, '0');
+  }
+
+  /**
+   * Gets the unit label using Intl.DisplayNames or fallback.
+   */
+  private getUnitLabel(unit: string): string {
+    const baseUnit = unit.endsWith('s') ? unit.slice(0, -1) : unit;
+    console.log(this.localize.lang());
+    const displayNames = new Intl.DisplayNames(this.localize.lang(), { type: 'dateTimeField', style: 'narrow' });
+
+    return displayNames.of(baseUnit)!;
   }
 
   /**
@@ -278,16 +285,22 @@ export class QuietCountdown extends QuietElement {
     // Check for changes and dispatch tick event if needed
     this.checkForChanges(units, visibleUnits);
 
-    // Create the display
+    // Create the display with new structure
     const unitElements = visibleUnits.map((unit, index) => {
       const value = units[unit];
       const formattedValue = this.formatUnit(value);
+      const label = this.getUnitLabel(unit);
 
       // Don't add a delimiter after the last unit
       const showDelimiter = index < visibleUnits.length - 1;
 
       return html`
-        <span part="unit">${formattedValue}</span>
+        <span part="unit">
+          <span part="value">${formattedValue}</span>
+          <span part="label">
+            <slot name="${unit}">${label}</slot>
+          </span>
+        </span>
         ${showDelimiter ? html`<span part="delimiter">${this.delimiter}</span>` : ''}
       `;
     });

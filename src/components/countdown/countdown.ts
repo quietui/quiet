@@ -7,6 +7,8 @@ import { Localize } from '../../utilities/localize.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import styles from './countdown.styles.js';
 
+const UNITS = ['seconds', 'minutes', 'hours', 'days', 'months', 'years'];
+
 /**
  * <quiet-countdown>
  *
@@ -21,14 +23,17 @@ import styles from './countdown.styles.js';
 export class QuietCountdown extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
-  // Unit types in ascending order of magnitude
-  private static readonly UNITS = ['seconds', 'minutes', 'hours', 'days', 'months', 'years'];
-
   // For tracking time and intervals
   private intervalId: number | null = null;
   private stoppedAt: number | null = null;
   private hasFinished = false;
   private endAdjustment = 0;
+
+  /**
+   * An accessible label for the countdown. This won't be shown, but it will be read to assistive devices so you should
+   * always include one.
+   */
+  @property() label = '';
 
   /**
    * The starting date for the countdown. If an attribute is passed, the date should be an [ISO 8601 string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString).
@@ -70,8 +75,17 @@ export class QuietCountdown extends QuietElement {
     super.disconnectedCallback();
   }
 
+  firstUpdated() {
+    this.setAttribute('role', 'timer');
+  }
+
   updated(changedProperties: Map<string, unknown>) {
     super.updated(changedProperties);
+
+    // Handle label changes
+    if (changedProperties.has('label')) {
+      this.setAttribute('aria-label', this.label);
+    }
 
     // If the dates or units change, we may need to restart the timer with a new interval
     if (
@@ -185,20 +199,94 @@ export class QuietCountdown extends QuietElement {
   }
 
   /** Calculates the time units from milliseconds. */
+  /** Calculates the time units from milliseconds, including rollovers. */
   private calculateTimeUnits(milliseconds: number): Record<string, number> {
-    const seconds = Math.floor(milliseconds / 1000) % 60;
-    const minutes = Math.floor(milliseconds / (1000 * 60)) % 60;
-    const hours = Math.floor(milliseconds / (1000 * 60 * 60)) % 24;
-    const days = Math.floor(milliseconds / (1000 * 60 * 60 * 24)) % 30; // Approximate
-    const months = Math.floor(milliseconds / (1000 * 60 * 60 * 24 * 30)) % 12; // Approximate
-    const years = Math.floor(milliseconds / (1000 * 60 * 60 * 24 * 365)); // Approximate
+    const visibleUnits = this.getVisibleUnits();
+    const allUnits = UNITS;
+    const result: Record<string, number> = {};
 
-    return { seconds, minutes, hours, days, months, years };
+    // Get the highest visible unit
+    const highestVisibleUnit = visibleUnits[visibleUnits.length - 1];
+    const highestVisibleIndex = allUnits.indexOf(highestVisibleUnit);
+
+    // Initialize all units to 0
+    for (const unit of allUnits) {
+      result[unit] = 0;
+    }
+
+    // Base calculation of time units
+    let remaining = milliseconds;
+
+    // Calculate seconds
+    if (visibleUnits.includes('seconds')) {
+      result.seconds = Math.floor(remaining / 1000) % 60;
+      remaining -= result.seconds * 1000;
+    }
+
+    // Calculate minutes
+    if (visibleUnits.includes('minutes')) {
+      result.minutes = Math.floor(remaining / (1000 * 60)) % 60;
+      remaining -= result.minutes * 1000 * 60;
+    }
+
+    // Calculate hours
+    if (visibleUnits.includes('hours')) {
+      result.hours = Math.floor(remaining / (1000 * 60 * 60)) % 24;
+      remaining -= result.hours * 1000 * 60 * 60;
+    }
+
+    // Calculate days
+    if (visibleUnits.includes('days')) {
+      result.days = Math.floor(remaining / (1000 * 60 * 60 * 24)) % 30;
+      remaining -= result.days * 1000 * 60 * 60 * 24;
+    }
+
+    // Calculate months
+    if (visibleUnits.includes('months')) {
+      result.months = Math.floor(remaining / (1000 * 60 * 60 * 24 * 30)) % 12;
+      remaining -= result.months * 1000 * 60 * 60 * 24 * 30;
+    }
+
+    // Calculate years
+    if (visibleUnits.includes('years')) {
+      result.years = Math.floor(remaining / (1000 * 60 * 60 * 24 * 365));
+    }
+
+    // Now handle rollovers for the highest visible unit
+    // Get all non-visible higher units
+    const higherUnits = allUnits.slice(highestVisibleIndex + 1);
+
+    if (higherUnits.length > 0 && highestVisibleUnit) {
+      // Calculate conversion factors to the highest visible unit
+      const conversionFactors: Record<string, number> = {
+        seconds: 1,
+        minutes: 60,
+        hours: 60 * 60,
+        days: 24 * 60 * 60,
+        months: 30 * 24 * 60 * 60,
+        years: 365 * 24 * 60 * 60
+      };
+
+      // Calculate the highest unit's factor
+      const highestUnitFactor = conversionFactors[highestVisibleUnit];
+
+      // Convert all higher non-visible units to the highest visible unit
+      for (const unit of higherUnits) {
+        const unitValue = Math.floor(milliseconds / (1000 * conversionFactors[unit]));
+
+        if (unitValue > 0) {
+          // Convert to the highest visible unit
+          result[highestVisibleUnit] += unitValue * (conversionFactors[unit] / highestUnitFactor);
+        }
+      }
+    }
+
+    return result;
   }
 
   /** Gets the visible units based on min-unit and max-unit properties. */
   private getVisibleUnits(): string[] {
-    const allUnits = QuietCountdown.UNITS;
+    const allUnits = UNITS;
     const minIndex = allUnits.indexOf(this.minUnit);
     const maxIndex = allUnits.indexOf(this.maxUnit);
 
@@ -264,27 +352,35 @@ export class QuietCountdown extends QuietElement {
     // Check for changes and dispatch tick event if needed
     this.checkForChanges(units, visibleUnits);
 
+    // Create a plain text representation for screen readers
+    const accessibleCountdown = visibleUnits
+      .map(unit => {
+        const value = units[unit];
+        const label = this.longLabels ? unit : this.getUnitLabel(unit);
+        return `${value} ${label}`;
+      })
+      .join(' ');
+
     // Create the display with new structure
     const unitElements = visibleUnits.map((unit, index) => {
       const value = units[unit];
       const formattedValue = this.formatUnit(value);
-      const label = this.getUnitLabel(unit);
-
-      // Don't add a delimiter after the last unit
+      const label = this.longLabels ? unit : this.getUnitLabel(unit);
       const showDelimiter = index < visibleUnits.length - 1;
 
       return html`
-        <span part="unit">
+        <span part="unit" aria-hidden="true">
           <span part="value">${formattedValue}</span>
-          <span part="label">
-            <slot name="${unit}">${label}</slot>
-          </span>
+          <span part="label"><slot name="${unit}">${label}</slot></span>
         </span>
-        ${showDelimiter ? html`<span part="delimiter">${this.delimiter}</span>` : ''}
+        ${showDelimiter ? html`<span part="delimiter" aria-hidden="true">${this.delimiter}</span>` : ''}
       `;
     });
 
-    return html`${unitElements}`;
+    return html`
+      <span class="vh">${accessibleCountdown}</span>
+      ${unitElements}
+    `;
   }
 }
 

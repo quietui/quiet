@@ -208,7 +208,7 @@ You can set the `lang` attribute on the countdown to localize the value. Use `gr
 
 ### Styling countdowns
 
-Countdowns come with a simple, minimal appearance. Feel free to customize them with your own styles.
+Countdowns come with a simple, minimal appearance. Feel free to customize them with your own styles. This one is inspired by [Rocket Blaster](https://rocketblaster.app/).
 
 ```html {.example}
 <quiet-countdown

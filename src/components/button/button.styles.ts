@@ -223,7 +223,7 @@ export default css`
     /* Toggle button indicators */
     #toggle-indicator {
       position: absolute;
-      top: 0.25em;
+      bottom: 0.25em;
       left: calc(50% - 0.375em);
       width: 0.75em;
       height: 0.25em;

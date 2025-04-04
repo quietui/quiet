@@ -212,7 +212,7 @@ Countdowns come with a simple, minimal appearance. Feel free to customize them w
 
 ```html {.example}
 <quiet-countdown
-  label="Notification alert"
+  label="It's the final countdown 🎶"
   date="2025-04-03 14:40:00"
   max-unit="hours"
   delimiter=":"

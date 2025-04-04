@@ -3,6 +3,7 @@ import { css } from 'lit';
 export default css`
   :host {
     display: inline-flex;
+    gap: 0.5em;
     line-height: 1.2;
     font-variant-numeric: tabular-nums;
   }
@@ -21,11 +22,12 @@ export default css`
 
   [part='label'] {
     display: block;
-    font-size: max(12px, .5em);
+    font-size: max(12px, 0.5em);
     text-align: center;
   }
 
   [part='delimiter'] {
     align-self: start;
-    margin: 0 0.125em;
+    margin-inline: -0.25em;
+  }
 `;

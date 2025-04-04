@@ -1,4 +1,4 @@
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { QuietFinishedEvent, QuietTickEvent } from '../../events/time.js';
@@ -84,21 +84,19 @@ export class QuietCountdown extends QuietElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.style.display = 'inline-flex';
-    this.style.alignItems = 'center';
     this.start();
   }
 
   disconnectedCallback() {
-    this.stop();
     super.disconnectedCallback();
+    this.stop();
   }
 
   firstUpdated() {
     this.setAttribute('role', 'timer');
   }
 
-  updated(changedProperties: Map<string, unknown>) {
+  updated(changedProperties: PropertyValues<this>) {
     super.updated(changedProperties);
 
     // Handle label changes

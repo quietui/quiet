@@ -4,8 +4,6 @@ description: How to get started with Quiet and your favorite framework.
 layout: docs
 ---
 
-<img class="whiskers-end" src="/assets/images/whiskers/with-skateboard.svg" alt="Whiskers the mouse skateboarding">
-
 If you're using a framework, you shouldn't use the autoloader. Frameworks should typically be bundled to avoid timing issues with your app's lifecycle and autoloading.
 
 Instead, install Quiet via npm and manually [import each component](/docs/#manually-importing) as shown in the examples below.
@@ -156,3 +154,5 @@ React also struggles with native events:
 While it's possible to use custom elements in React 18, the experience is less than optimal. The story is improving, however, as [React 19 has added full support for custom elements](https://react.dev/blog/2024/04/25/react-19#support-for-custom-elements).
 
 Some custom element libraries provide wrappers to improve the experience in older versions of React, but supporting legacy frameworks isn't an objective of this project. If you need to use Quiet with React 18 or below, consider trying [this utility](https://www.npmjs.com/package/@lit-labs/react) for a more idiomatic experience.
+
+<img class="whiskers-center" src="/assets/images/whiskers/with-skateboard.svg" alt="Whiskers the mouse skateboarding">

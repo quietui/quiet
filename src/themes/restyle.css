@@ -208,7 +208,7 @@
   mark {
     padding: 0.125em 0.25em;
     border-radius: 0;
-    border-radius: calc(var(--quiet-border-radius) / 2);
+    border-radius: calc(var(--quiet-border-radius) / 1.5);
     background-color: color-mix(in oklab, #f4dd01, transparent 75%);
     color: inherit;
   }
@@ -232,9 +232,9 @@
   samp,
   tt {
     padding: 0.125em 0.25em;
-    border-radius: calc(var(--quiet-border-radius) / 2);
-    background: var(--quiet-primary-fill-softer);
-    color: var(--quiet-primary-text-colorful);
+    border-radius: calc(var(--quiet-border-radius) / 1.5);
+    background: var(--quiet-neutral-fill-softer);
+    color: var(--quiet-neutral-text-on-soft);
     font-size: 0.875em;
     font-family: var(--quiet-font-family-code);
   }

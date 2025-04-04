@@ -10,8 +10,7 @@ Number tickers are commonly used in dashboards for displaying totals such as sal
   <p>
     <quiet-number-ticker
       end-value="1000"
-      duration="4000"
-      grouping
+      duration="3000"
       style="font-size: 2.5rem; font-weight: var(--quiet-font-weight-bold);"
     ></quiet-number-ticker>
   </p>
@@ -99,7 +98,7 @@ Use the `start-on-view` attribute to begin the animation only when the ticker en
 
 ### Grouping numbers
 
-The `grouping` attribute adds thousand separators to the displayed number, making large numbers easier to read.
+The `grouping` attribute controls how thousand separators are displayed. The default is `auto`. You can turn off grouping by setting this to `never`.
 
 ```html {.example}
 <div id="ticker__grouping">
@@ -107,7 +106,7 @@ The `grouping` attribute adds thousand separators to the displayed number, makin
     <quiet-number-ticker 
       start-value="0" 
       end-value="1000000" 
-      grouping 
+      grouping="auto"
       style="--duration: 2s;">
     </quiet-number-ticker>
   </p>
@@ -163,7 +162,6 @@ You can set the `lang` attribute on the ticker to localize the number, including
     <quiet-number-ticker 
       start-value="0" 
       end-value="1234567.89" 
-      grouping 
       decimal-places="2" 
       lang="de" 
       style="--duration: 2s;">
@@ -195,7 +193,6 @@ Listen for the `quiet-animation-complete` event to trigger actions when the anim
       start-value="0" 
       end-value="1000" 
       decimal-places="0" 
-      grouping="true"
     ></quiet-number-ticker>
   </p>
 

@@ -8,7 +8,7 @@ The fit text component is useful for displaying titles, headings, and content of
 A [Resize Observer](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) is used internally to make the text respond to window resizing and orientation changes. Try resizing the window or turning your device to see the text update.
 
 ```html {.example}
-<quiet-fit-text id="fit-text__editable" style="border: dashed 2px var(--quiet-neutral-stroke-soft);">
+<quiet-fit-text id="fit-text__editable" style="border: dashed 1px var(--quiet-neutral-stroke-soft);">
   The cute gray kitten jumped into the flower pot
 </quiet-fit-text>
 
@@ -42,7 +42,7 @@ Only slotted text nodes will be shown. All other [nodes types](https://developer
 By default, fit text has `block` styling so it stretches to fit its containing element. You can set a width or max-width on the component (or a parent element) if you need to constrain it.
 
 ```html {.example .flex-col}
-<quiet-fit-text style="max-width: 200px; border: dashed 2px var(--quiet-neutral-stroke-soft);">
+<quiet-fit-text style="max-width: 200px; border: dashed var(--quiet-border-width) var(--quiet-neutral-stroke-soft);">
   Be Quiet
 </quiet-fit-text>
 ```
@@ -52,7 +52,7 @@ By default, fit text has `block` styling so it stretches to fit its containing e
 Text styles are inherited, so you can set text-related properties on the component itself or an ancestor element.
 
 ```html {.example .flex-col}
-<div style="border: dashed 2px var(--quiet-neutral-stroke-soft);">
+<div style="border: dashed 1px var(--quiet-neutral-stroke-soft);">
   <quiet-fit-text style="font-family: Georgia, serif;">
     The cute gray kitten jumped into the flower pot
   </quiet-fit-text>

@@ -1112,7 +1112,7 @@ quiet-callout {
   position: absolute;
   bottom: 1rem;
   left: calc(50% - 1.5rem);
-  color: var(--quiet-primary-fill-mid);
+  color: var(--quiet-strident);
   font-size: 3rem;
   animation: hint-bounce 2s infinite;
   transition:
@@ -1319,7 +1319,7 @@ td.table-reflects {
     margin: 0;
     padding: 1.5rem;
     border-radius: 1rem;
-    background-color: color-mix(in oklab, var(--quiet-primary-fill-soft), transparent 75%);
+    background-color: var(--quiet-primary-fill-softer);
     box-shadow: var(--quiet-shadow-softer);
     color: color-mix(in oklab, var(--quiet-neutral-text-on-soft), transparent 25%);
     line-height: 1.6;

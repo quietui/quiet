@@ -51,3 +51,5 @@ If you want to test a single component, pass the tag name without the `quiet-` p
 ```sh
 npm run test:component button
 ```
+
+<img class="whiskers-center" src="/assets/images/whiskers/with-book.svg" alt="Whiskers the mouse doing a cartwheel">

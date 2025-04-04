@@ -4,8 +4,6 @@ description: Theme concepts, color palettes, and design tokens.
 layout: docs
 ---
 
-<img class="whiskers-end" src="/assets/images/whiskers/painting-fence.svg" alt="Whiskers the mouse painting a wooden fence">
-
 The default theme provides simple, elegant styles with support for light and dark modes and 21 built-in color presets. A number of [design tokens](#design-tokens) are exposed, giving you an easy way to make high-level changes to the library.
 
 ## Using the default theme
@@ -736,3 +734,5 @@ If you _really_ want to create an entirely new theme, the most efficient way is 
     min-width: 40ch;
   }
 </style>
+
+<img class="whiskers-center" src="/assets/images/whiskers/painting-fence.svg" alt="Whiskers the mouse painting a wooden fence">

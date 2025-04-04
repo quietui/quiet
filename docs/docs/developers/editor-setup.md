@@ -41,3 +41,5 @@ Quiet generates a file called `web-types.json` that JetBrains IDE will recognize
 :::info
 The `web-types` property also accepts an array, if you happen to be using types from more than one project.
 :::
+
+<img class="whiskers-center" src="/assets/images/whiskers/with-clipboard.svg" alt="Whiskers the mouse holding a clipboard">

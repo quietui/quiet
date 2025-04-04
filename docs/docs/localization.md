@@ -4,8 +4,6 @@ description: Use Quiet in your native tongue.
 layout: docs
 ---
 
-<img class="whiskers-end" src="/assets/images/whiskers/whistling.svg" alt="Whiskers the mouse whistling">
-
 Quiet components are fully localized using a tiny in-house library called [Squeak](https://github.com/quietui/squeak). Squeak was designed specifically for custom elements. It uses the standard `lang` and `dir` attributes to determine which language and directionality to use, making it easy to plug into existing apps.
 
 ## Registering translations
@@ -123,4 +121,6 @@ export default translation;
 
 </quiet-tab-panel>
 </quiet-tab-list>
+
+<img class="whiskers-center" src="/assets/images/whiskers/whistling.svg" alt="Whiskers the mouse whistling">
 

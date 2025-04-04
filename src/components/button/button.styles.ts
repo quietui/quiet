@@ -224,8 +224,8 @@ export default css`
     #toggle-indicator {
       position: absolute;
       bottom: 0.25em;
-      left: calc(50% - 0.375em);
-      width: 0.75em;
+      left: calc(50% - 0.5em);
+      width: 1em;
       height: 0.25em;
       border-radius: 9999px;
       background-color: currentColor;

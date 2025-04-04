@@ -1175,8 +1175,7 @@ td.table-reflects {
   font-size: 1.25rem;
 }
 
-.component-table td:not(.table-description) code,
-.dependency-list code {
+#content table code {
   background: none;
   color: inherit;
 }

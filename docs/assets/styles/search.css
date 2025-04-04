@@ -1,5 +1,6 @@
 #site-search {
   --width: 35rem;
+  --search-background-color: color-mix(in oklab, var(--quiet-background-color), white 5%);
 
   &::part(dialog) {
     margin: 10rem auto;
@@ -7,7 +8,7 @@
     overflow: hidden;
     border-radius: calc(var(--quiet-border-radius) * 2);
     backdrop-filter: blur(6px);
-    background-color: color-mix(in oklab, transparent, var(--quiet-background-color) 85%);
+    background-color: color-mix(in oklab, transparent, var(--search-background-color) 85%);
   }
 
   &::part(body) {

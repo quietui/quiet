@@ -46,7 +46,7 @@ export class QuietNumberTicker extends QuietElement {
   @property({ type: Number, attribute: 'decimal-places' }) decimalPlaces = 0;
 
   /** Whether to group numbers, e.g. with a thousands separator. */
-  @property({ type: Boolean }) grouping = false;
+  @property() grouping: 'always' | 'never' | 'auto' | 'min2' = 'auto';
 
   /** Whether to start the animation when the component comes into view. */
   @property({ type: Boolean, attribute: 'start-on-view' }) startOnView = false;
@@ -199,7 +199,8 @@ export class QuietNumberTicker extends QuietElement {
           ? this.valueFormatter(this.currentValue)
           : this.localize.number(this.currentValue, {
               maximumFractionDigits: this.decimalPlaces,
-              useGrouping: this.grouping
+              // @ts-expect-error - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#usegrouping
+              useGrouping: this.grouping === 'never' ? false : this.grouping
             })}
       </span>
     `;

@@ -152,7 +152,7 @@ Combine sparklines with [cards](/docs/components/card) and [number tickers](/doc
 <quiet-card class="sparkline__stat">
   <div class="description">
     <small>Revenue</small><br>
-    $<quiet-number-ticker end-value="12345" grouping start-on-view></quiet-number-ticker>
+    $<quiet-number-ticker end-value="12345" start-on-view></quiet-number-ticker>
   <div>
   <quiet-sparkline 
     label="Number of cat treats given per day showing an increasing trend"

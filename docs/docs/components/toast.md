@@ -45,8 +45,9 @@ Start by placing a `<quiet-toast>` somewhere on the page and obtain a reference 
 
   button.addEventListener('click', () => { 
     toast.create('The notification has been sent', {
-      variant: 'primary',
-      duration: 5000
+      allowHtml: false,
+      duration: 5000,
+      variant: 'primary'
     });
   });
 </script>

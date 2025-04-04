@@ -43,8 +43,8 @@ You can tell the autoloader to preload components that aren't initially on the p
 
 ```html
 <!-- 
-  This will load <quiet-button> and <quiet-tooltip> even
-  if they're not on the page when the autoloader runs
+  This will load <quiet-button> and <quiet-tooltip> 
+  even if they're not on the page at first
 -->
 <html data-quiet-preload="quiet-button quiet-tooltip">
   ...

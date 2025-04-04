@@ -5,7 +5,7 @@ layout: component
 
 ```html {.example}
 <quiet-browser-frame href="https://quietui.org/" target="_blank">
-  <img slot="icon" src="/assets/images/logo-light.svg" alt="" style="translate: 0 .125em;">
+  <quiet-icon slot="icon" name="lock"></quiet-icon>
   <quiet-empty-state>
     <quiet-icon slot="illustration" name="cheese"></quiet-icon>
     Who moved my cheese?
@@ -123,8 +123,11 @@ You can also embed videos.
 And, of course, websites.
 
 ```html {.example}
-<quiet-browser-frame label="example.com" flush>
-  <iframe src="https://example.com/" height="340"></iframe>
+<quiet-browser-frame label="quietui.org" flush>
+  <img slot="icon" src="/assets/images/logo-light.svg" alt="" style="translate: 0 .125em;">
+  <div style="transform: scale(0.5); transform-origin: 0 0; width: 200%; height: 400px;">
+    <iframe src="https://quietui.org/" style="width: 100%; height: 200%; border: none;"></iframe>
+  </div>  
 </quiet-browser-frame>
 ```
 

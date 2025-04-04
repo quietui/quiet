@@ -4,8 +4,6 @@ description: Quiet was built with platform APIs that allow its components to wor
 layout: docs
 ---
 
-<img class="whiskers-end" src="/assets/images/whiskers/with-blueprints.svg" alt="Whiskers the mouse wearing a hardhat while holding blueprints">
-
 Quiet includes a collection of [Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components), or custom HTML elements. They have attributes, properties, events, and methods, all of which are described in the documentation for each component.
 
 To use the components, install them using the instructions found on the [installation page](/docs/).
@@ -314,3 +312,5 @@ Some components have custom states, a newer API that let's you target a custom e
 ```
 
 Not all components have custom states. Refer to the documentation to see which custom states a component has.
+
+<img class="whiskers-center" src="/assets/images/whiskers/with-blueprints.svg" alt="Whiskers the mouse wearing a hardhat while holding blueprints">

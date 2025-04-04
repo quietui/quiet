@@ -4,8 +4,6 @@ description: It's dangerous to go alone. Take these optional CSS utilities!
 layout: docs
 ---
 
-<img class="whiskers-end" src="/assets/images/whiskers/with-toolbox.svg" alt="Whiskers the mouse holding a toolbox">
-
 A handful of optional CSS utilities are provided to make common things a little easier. The goal isn't to be comprehensive, but to reduce boilerplate in your stylesheet.
 
 ## Usage
@@ -163,6 +161,8 @@ Add `class="quiet-side-label"` to any Quiet form control that has a label, descr
 :::info
 The `quiet-side-label` class doesn't work on native form controls.
 :::
+
+<img class="whiskers-center" src="/assets/images/whiskers/with-toolbox.svg" alt="Whiskers the mouse holding a toolbox">
 
 <!-- Demo styles -->
 <style>

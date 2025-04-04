@@ -1112,7 +1112,7 @@ quiet-callout {
   position: absolute;
   bottom: 1rem;
   left: calc(50% - 1.5rem);
-  color: var(--quiet-primary-fill-mid);
+  color: var(--quiet-strident);
   font-size: 3rem;
   animation: hint-bounce 2s infinite;
   transition:

@@ -1,6 +1,6 @@
 import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 import { QuietFinishedEvent, QuietTickEvent } from '../../events/time.js';
 import hostStyles from '../../styles/host.styles.js';
 import { Localize } from '../../utilities/localize.js';
@@ -12,7 +12,7 @@ const UNITS = ['seconds', 'minutes', 'hours', 'days', 'months', 'years'];
 /**
  * <quiet-countdown>
  *
- * @summary Displays a countdown timer between two dates.
+ * @summary Displays a countdown until the specified date.
  * @documentation https://quietui.org/docs/components/countdown
  * @status stable
  * @since 1.0
@@ -45,6 +45,11 @@ export class QuietCountdown extends QuietElement {
   private localize = new Localize(this);
   private previousValues: Record<string, number> = {};
   private stoppedAt: number | null = null;
+
+  // Internal state for rendering
+  @state() currentTimeUnits: Record<string, number> = {};
+  @state() visibleUnits: string[] = [];
+  @state() effectiveEndDate: Date | null = null;
 
   private get endDate() {
     return new Date(this.date);
@@ -94,6 +99,7 @@ export class QuietCountdown extends QuietElement {
 
   firstUpdated() {
     this.setAttribute('role', 'timer');
+    this.updateTimeUnits();
   }
 
   updated(changedProperties: PropertyValues<this>) {
@@ -102,6 +108,11 @@ export class QuietCountdown extends QuietElement {
     // Handle label changes
     if (changedProperties.has('label')) {
       this.setAttribute('aria-label', this.label);
+    }
+
+    // Update visible units if min/max unit changes
+    if (changedProperties.has('minUnit') || changedProperties.has('maxUnit')) {
+      this.visibleUnits = this.getVisibleUnits().reverse(); // display largest to smallest
     }
 
     // Restart the timer if the date changes
@@ -136,8 +147,16 @@ export class QuietCountdown extends QuietElement {
 
     this.customStates.set('active', true);
     this.stoppedAt = null;
+
+    // Update the effective end date
+    this.updateEffectiveEndDate();
+
+    // Set the initial time units
+    this.updateTimeUnits();
+
+    // Set up the timer interval
     const updateInterval = this.getUpdateInterval();
-    this.intervalId = window.setInterval(() => this.requestUpdate(), updateInterval);
+    this.intervalId = window.setInterval(() => this.updateTimeUnits(), updateInterval);
     return true;
   }
 
@@ -150,6 +169,41 @@ export class QuietCountdown extends QuietElement {
       this.intervalId = null;
       this.stoppedAt = Date.now();
     }
+  }
+
+  /** Updates the effective end date with any adjustments */
+  private updateEffectiveEndDate() {
+    const end = this.endDate;
+
+    if (isNaN(end.getTime())) {
+      this.effectiveEndDate = null;
+      return;
+    }
+
+    // Apply any adjustments to the end date from pausing/resuming
+    if (this.endAdjustment > 0) {
+      this.effectiveEndDate = new Date(end.getTime() + this.endAdjustment);
+    } else {
+      this.effectiveEndDate = end;
+    }
+  }
+
+  /** Updates the current time units and checks for changes */
+  private updateTimeUnits() {
+    const now = new Date();
+
+    // Ensure we have a valid end date
+    if (!this.effectiveEndDate || isNaN(now.getTime()) || isNaN(this.effectiveEndDate.getTime())) {
+      this.currentTimeUnits = {};
+      return;
+    }
+
+    // Calculate the new time units
+    const units = this.calculateTimeUnits(now, this.effectiveEndDate);
+    this.currentTimeUnits = units;
+
+    // Check for changes and dispatch event if needed
+    this.checkForChanges(units, this.visibleUnits);
   }
 
   /** Calculates the update interval based on the minimum unit shown. */
@@ -389,41 +443,26 @@ export class QuietCountdown extends QuietElement {
   }
 
   render() {
-    const now = new Date();
-    let end = this.endDate;
-
-    // Ignore invalid dates
-    if (isNaN(now.getTime()) || isNaN(end.getTime())) {
+    if (this.visibleUnits.length === 0 || Object.keys(this.currentTimeUnits).length === 0) {
       return '';
     }
 
-    // Apply any adjustments to the end date from pausing/resuming
-    if (this.endAdjustment > 0) {
-      end = new Date(end.getTime() + this.endAdjustment);
-    }
-
-    const units = this.calculateTimeUnits(now, end);
-    const visibleUnits = this.getVisibleUnits().reverse(); // display largest to smallest
-
-    // Check for changes and dispatch `quiet-tick` event if needed
-    this.checkForChanges(units, visibleUnits);
-
     return html`
       <span class="vh">
-        ${visibleUnits
+        ${this.visibleUnits
           .map(unit => {
-            const value = units[unit];
+            const value = this.currentTimeUnits[unit];
             const label = this.getUnitLabel(unit);
             return `${value} ${label}`;
           })
           .join(' ')}
       </span>
 
-      ${visibleUnits.map((unit, index) => {
-        const value = units[unit];
-        const formattedValue = this.formatUnit(value); // This line applies our new formatting
+      ${this.visibleUnits.map((unit, index) => {
+        const value = this.currentTimeUnits[unit];
+        const formattedValue = this.formatUnit(value);
         const label = this.getUnitLabel(unit);
-        const showDelimiter = index < visibleUnits.length - 1 && this.delimiter !== '';
+        const showDelimiter = index < this.visibleUnits.length - 1 && this.delimiter !== '';
 
         return html`
           <span part="unit" aria-hidden="true">

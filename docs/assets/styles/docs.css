@@ -1458,6 +1458,6 @@ h2 + details {
 .copyright {
   display: block;
   margin-block-end: 2rem;
-  color: var(--quiet-text-muted);
+  color: revert;
   text-align: center;
 }

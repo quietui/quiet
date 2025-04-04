@@ -16,7 +16,7 @@ layout: splash
 <div class="splash-actions">
 
 <quiet-button href="/docs/" variant="primary" size="xl" pill>
-Get in here
+Installation
 </quiet-button>
 
 <quiet-button href="/about" size="xl" pill>

@@ -33,13 +33,19 @@ If you're using [Quiet Restyle](/docs/restyle), the entire page will enter dark 
 Sometimes, it's desirable to have a contrasting theme for certain sections of the page. For example, a light-themed page might have a dark-themed sidebar or footer. You can achieve this by applying the `quiet-light` or `quiet-dark` class to any element on the page.
 
 ```html {.example .no-buttons .flex-row}
-<quiet-button class="quiet-light">
-  Light button
-</quiet-button>
+<quiet-card class="quiet-light" style="text-align: center;">
+  <p>This is a light card.</p>
+  <quiet-button>
+    Light button
+  </quiet-button>
+</quiet-card>
 
-<quiet-button class="quiet-dark">
-  Dark button
-</quiet-button>
+<quiet-card class="quiet-dark" style="text-align: center;">
+  <p>This is a dark card.</p>
+  <quiet-button>
+    Dark button
+  </quiet-button>
+</quiet-card>
 ```
 
 :::info

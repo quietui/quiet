@@ -4,7 +4,7 @@ layout: component
 ---
 
 ```html {.example}
-<quiet-callout variant="primary">
+<quiet-callout variant="constructive">
   <quiet-icon slot="icon" name="book"></quiet-icon>
   A playful cat's antics can brighten any day with their boundless energy and curiosity. Watching a cat pounce and chase after toys is an endless source of entertainment.
 </quiet-callout>

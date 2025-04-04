@@ -24,7 +24,7 @@ import styles from './flip-card.styles.js';
  * @event quiet-flip - Emitted after the flip card has been flipped and the animation has completed.
  *
  * @cssproperty [--flip-duration=0.6s] - The duration of the card flip animation.
- * @cssproperty [--flip-easing=cubic-bezier(0.4, 0.0, 0.2, 1)] - The easing to use for the flip animation.
+ * @cssproperty [--flip-easing=cubic-bezier(0.2, 0.85, 0.3, 1.15)] - The easing to use for the flip animation.
  *
  * @cssstate flipped - Applied when the card is flipped over.
  */

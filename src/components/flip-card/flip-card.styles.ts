@@ -3,11 +3,12 @@ import { css } from 'lit';
 export default css`
   :host {
     --flip-duration: 0.6s;
-    --flip-easing: cubic-bezier(0.4, 0, 0.2, 1);
+    --flip-easing: cubic-bezier(0.2, 0.85, 0.3, 1.15);
 
     display: grid;
     position: relative;
     width: 100%;
+    perspective: 1500px; /* Increased perspective for more dramatic effect */
 
     /* Make the transition smoother in Chrome when the card's height changes and then gets flipped */
     will-change: contents;

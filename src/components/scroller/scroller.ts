@@ -1,6 +1,6 @@
 import type { CSSResultGroup } from 'lit';
 import { html } from 'lit';
-import { customElement, eventOptions, query, state } from 'lit/decorators.js';
+import { customElement, eventOptions, property, query, state } from 'lit/decorators.js';
 import hostStyles from '../../styles/host.styles.js';
 import { Localize } from '../../utilities/localize.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
@@ -9,8 +9,8 @@ import styles from './scroller.styles.js';
 /**
  * <quiet-scroller>
  *
- * @summary Scrollers add an accessible horizontal scrolling region with visual affordances to help users navigate wide
- *  content such as tables, especially on mobile devices.
+ * @summary Scrollers add an accessible container with visual affordances to help users identify and navigate scrolling
+ *  content.
  * @documentation https://quietui.org/docs/components/scroller
  * @status stable
  * @since 1.0
@@ -32,10 +32,13 @@ export class QuietScroller extends QuietElement {
   private localize = new Localize(this);
   private resizeObserver = new ResizeObserver(() => this.updateScroll());
 
+  @query('#content') content: HTMLElement;
+
   /** Indicates whether the scroller is currently scrollable. */
   @state() canScroll = false;
 
-  @query('#content') content: HTMLElement;
+  /** The scroller's orientation. */
+  @property({ reflect: true }) orientation: 'horizontal' | 'vertical' = 'horizontal';
 
   connectedCallback() {
     super.connectedCallback();
@@ -53,21 +56,39 @@ export class QuietScroller extends QuietElement {
 
   @eventOptions({ passive: true })
   private updateScroll() {
-    const clientWidth = Math.ceil(this.content.clientWidth);
-    const scrollLeft = Math.abs(Math.ceil(this.content.scrollLeft));
-    const scrollWidth = Math.ceil(this.content.scrollWidth);
+    if (this.orientation === 'horizontal') {
+      const clientWidth = Math.ceil(this.content.clientWidth);
+      const scrollLeft = Math.abs(Math.ceil(this.content.scrollLeft));
+      const scrollWidth = Math.ceil(this.content.scrollWidth);
 
-    // Calculate total scrollable width
-    const maxScroll = scrollWidth - clientWidth;
-    this.canScroll = maxScroll > 0;
+      // Calculate total scrollable width
+      const maxScroll = scrollWidth - clientWidth;
+      this.canScroll = maxScroll > 0;
 
-    // Calculate shadow opacities based on first/last 2% of scroll
-    const startShadowOpacity = Math.min(1, scrollLeft / (maxScroll * 0.05));
-    const endShadowOpacity = Math.min(1, (maxScroll - scrollLeft) / (maxScroll * 0.05));
+      // Calculate shadow opacities based on first/last 2% of scroll
+      const startShadowOpacity = Math.min(1, scrollLeft / (maxScroll * 0.05));
+      const endShadowOpacity = Math.min(1, (maxScroll - scrollLeft) / (maxScroll * 0.05));
 
-    // Update CSS custom properties
-    this.style.setProperty('--start-shadow-opacity', String(startShadowOpacity || 0));
-    this.style.setProperty('--end-shadow-opacity', String(endShadowOpacity || 0));
+      // Update CSS custom properties
+      this.style.setProperty('--start-shadow-opacity', String(startShadowOpacity || 0));
+      this.style.setProperty('--end-shadow-opacity', String(endShadowOpacity || 0));
+    } else {
+      const clientHeight = Math.ceil(this.content.clientHeight);
+      const scrollTop = Math.abs(Math.ceil(this.content.scrollTop));
+      const scrollHeight = Math.ceil(this.content.scrollHeight);
+
+      // Calculate total scrollable height
+      const maxScroll = scrollHeight - clientHeight;
+      this.canScroll = maxScroll > 0;
+
+      // Calculate shadow opacities based on first/last 2% of scroll
+      const startShadowOpacity = Math.min(1, scrollTop / (maxScroll * 0.05));
+      const endShadowOpacity = Math.min(1, (maxScroll - scrollTop) / (maxScroll * 0.05));
+
+      // Update CSS custom properties
+      this.style.setProperty('--start-shadow-opacity', String(startShadowOpacity || 0));
+      this.style.setProperty('--end-shadow-opacity', String(endShadowOpacity || 0));
+    }
   }
 
   render() {
@@ -80,6 +101,7 @@ export class QuietScroller extends QuietElement {
         part="content"
         role="region"
         aria-label=${this.localize.term('scrollableRegion')}
+        aria-orientation=${this.orientation}
         tabindex=${this.canScroll ? '0' : '-1'}
         @scroll=${this.updateScroll}
       >

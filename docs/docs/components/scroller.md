@@ -75,11 +75,11 @@ layout: component
 
 ### Adding content
 
-Slot the content you want to make scrollable into the scroller element. If necessary, you can set a fixed width on your content or let it remain fluid. When the container causes overflow, the scroller will kick in automatically. This example is contrived to demonstrate this behavior.
+Scrollers can accommodate virtually any content type within their container. By default, they handle horizontal overflow with scrolling. It might be necessary to specify a width or height on your container element to prevent unwanted wrapping and ensure proper scrolling behavior.
 
 ```html {.example}
 <quiet-scroller id="scroller__content">
-  <div class="card">
+  <div class="card" style="width: 1500px;">
     <p>Cats love to chase laser dots and yarn balls around the house, pouncing with surprising agility. Their whiskers help them navigate tight spaces, while their retractable claws keep them ready for playtime. Sometimes they zoom around at 3 AM for no reason, doing what cat owners call the "midnight zoomies."</p>
     <p>Purring isn't just for happiness — cats also purr when injured or stressed, as the vibrations may help with healing. A cat's sandpaper tongue has tiny hooks perfect for grooming their fur. When they slow-blink at you, it's actually a kitty kiss!</p>
     <p>Most cats spend up to 16 hours sleeping daily, often in strange positions or inconvenient spots like your keyboard. They're excellent jumpers, able to leap up to 6 times their length. Despite their independent reputation, many cats form strong bonds with their humans and other pets.</p>
@@ -90,7 +90,6 @@ Slot the content you want to make scrollable into the scroller element. If neces
 <style>
   #scroller__content {
     .card {
-      width: 1500px;
       padding: 1rem;
 
       p:last-child {
@@ -104,6 +103,46 @@ Slot the content you want to make scrollable into the scroller element. If neces
 :::info
 If you need to change the scroller's layout, e.g. to flex or grid, apply the appropriate styles to the `content` part, not the host element.
 :::
+
+### Changing the orientation
+
+Scrollers default to a horizontal orientation. To create a vertical scroller, set the `orientation` attribute to `vertical`. The scroller will adapt to the available space, or you can constrain its height with a wrapper or by setting a height directly.
+
+```html {.example}
+<div style="height: 300px;">
+  <quiet-scroller id="scroller__vertical" orientation="vertical">
+    <div class="card">
+      <h3>Cat Facts</h3>
+      <p>Cats have whiskers not only on their muzzles, but also above their eyes, on their chins, and on the backs of their front legs. These whiskers help them navigate tight spaces and monitor air currents.</p>
+      <p>A cat can jump up to six times its length in a single bound, making them exceptional jumpers compared to their size. Their powerful hind legs contain extra muscles specifically designed for jumping.</p>
+      <p>Cats have a third eyelid called a "haw" or nictitating membrane. This clear eyelid helps protect their eyes while maintaining visibility, especially during hunting or fights.</p>
+      <p>A cat's heart beats nearly twice as fast as a human heart, at 110 to 140 beats per minute. Their quick metabolism supports their naturally active lifestyle.</p>
+      <p>Cats can rotate their ears 180 degrees using 32 different muscles. This allows them to pinpoint the exact location of sounds without moving their heads.</p>
+      <p>A cat's nose print is unique, just like a human's fingerprint, with no two cats having the same pattern of bumps and ridges.</p>
+      <p>Cats can make over 100 different vocal sounds, while dogs can only make about 10. Their vocalizations include purrs, meows, chirps, trills, growls, and hisses.</p>
+      <p>Most cats have no taste buds for sweetness. They lack the gene that codes for the sweet taste receptor, making them indifferent to sugary foods.</p>
+      <p>A cat can change its meow to manipulate humans. They develop specific meows to communicate different needs, essentially training their owners to respond.</p>
+      <p>Cats can drink seawater in survival situations. Their kidneys are so efficient they can filter out the salt and use the water content.</p>
+    </div>
+  </quiet-scroller>
+</div>
+
+<style>
+  #scroller__vertical {
+    .card {
+      padding: 1rem;
+      
+      h3 {
+        margin-top: 0;
+      }
+      
+      p:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }  
+</style>
+```
 
 ### Styling the shadow
 

@@ -112,7 +112,6 @@ Scrollers default to a horizontal orientation. To create a vertical scroller, se
 <div style="height: 300px;">
   <quiet-scroller id="scroller__vertical" orientation="vertical">
     <div class="card">
-      <h3>Cat Facts</h3>
       <p>Cats have whiskers not only on their muzzles, but also above their eyes, on their chins, and on the backs of their front legs. These whiskers help them navigate tight spaces and monitor air currents.</p>
       <p>A cat can jump up to six times its length in a single bound, making them exceptional jumpers compared to their size. Their powerful hind legs contain extra muscles specifically designed for jumping.</p>
       <p>Cats have a third eyelid called a "haw" or nictitating membrane. This clear eyelid helps protect their eyes while maintaining visibility, especially during hunting or fights.</p>

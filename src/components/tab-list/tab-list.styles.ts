@@ -38,9 +38,12 @@ export default css`
     flex-direction: column;
   }
 
+  :host([placement='bottom']) #tabs {
+    order: 2;
+  }
+
   :host([placement='bottom']) #tabs::part(content) {
     align-items: center;
-    order: 2;
     overflow-x: auto;
     scrollbar-width: thin;
   }
@@ -100,10 +103,13 @@ export default css`
     flex-direction: row;
   }
 
+  :host([placement='end']) #tabs {
+    order: 2;
+  }
+
   :host([placement='end']) #tabs::part(content) {
     flex: 0 0 auto;
     flex-direction: column;
-    order: 2;
   }
 
   :host([placement='end']) #panels {

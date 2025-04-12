@@ -6,7 +6,7 @@
 
 /* Docs-specific variables */
 :root {
-  --docs-max-width: 1376px;
+  --docs-max-width: 1440px;
   --docs-header-height: 3.375rem;
   --docs-outline-width: 14rem;
   --docs-content-spacing: 5rem;

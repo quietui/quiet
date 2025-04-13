@@ -16,6 +16,7 @@
     "aria-errormessage",
     "aria-labelledby",
     "atrule",
+    "autocapitalize",
     "autocorrect",
     "autofix",
     "autoload",

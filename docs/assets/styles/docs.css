@@ -355,6 +355,7 @@ html[data-scroll-restoring] body {
   align-items: center;
   width: 100%;
   max-width: var(--docs-max-width);
+  padding-inline: 1rem;
   gap: 1rem;
 
   @media screen and (max-width: 959px) {
@@ -388,6 +389,10 @@ html[data-scroll-restoring] body {
   overflow-y: auto;
   translate: calc(-1 * (var(--quiet-focus-width) + var(--quiet-focus-offset)) - 0.25rem);
   border-right: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
+
+  @media screen and (min-width: 1420px) {
+    padding-inline: 1.5rem;
+  }
 }
 
 #sidebar-meta {

@@ -32,6 +32,7 @@ export default css`
 
   #content {
     max-width: var(--content-width);
+    margin-inline: auto;
 
     ::slotted(h1),
     ::slotted(h2),

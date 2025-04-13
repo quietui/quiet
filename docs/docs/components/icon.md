@@ -21,7 +21,7 @@ A common pitfall of this component is not [setting the library's path](/docs/#se
 
 ### Built-in icons
 
-Quiet includes the popular [Tabler Icons](https://tabler.io/icons) icon library out of the box. Use the `name` attribute to specify which icon should be drawn.
+Quiet includes the popular [Tabler Icons](https://tabler.io/icons) library out of the box. Use the `name` attribute to specify which icon should be drawn.
 
 ```html {.example}
 <div style="font-size: 1.5rem;">
@@ -33,9 +33,12 @@ Quiet includes the popular [Tabler Icons](https://tabler.io/icons) icon library 
 </div>
 ```
 
-:::info
-For a list of all available icons, please refer to the [Tabler Icons](https://tabler.io/icons) website. Be careful to copy the _name_ of the icon, e.g. `arrow-up`, and not the SVG code!
-:::
+<p>
+  <quiet-button href="/docs/components/icon-search">
+    Search for icons
+    <quiet-icon slot="end" name="chevron-right"></quiet-icon>
+  </quiet-button>
+</p>
 
 ### Setting the icon family
 

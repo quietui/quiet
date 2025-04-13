@@ -80,6 +80,7 @@ function generateManifest() {
 async function generateIcons() {
   const dirToCopy = join(rootDir, 'node_modules/@tabler/icons/icons');
   const licenseToCopy = join(rootDir, 'node_modules/@tabler/icons/LICENSE');
+  const iconsJson = join(rootDir, 'node_modules/@tabler/icons/icons.json');
 
   spinner.start('Packaging icons');
 
@@ -87,6 +88,7 @@ async function generateIcons() {
   await mkdir(iconDir, { recursive: true });
   await copy(dirToCopy, iconDir);
   await copy(licenseToCopy, join(iconDir, 'LICENSE'));
+  await copy(iconsJson, join(distDir, 'icons.json'));
 
   spinner.succeed();
 

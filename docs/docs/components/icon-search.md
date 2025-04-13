@@ -6,7 +6,7 @@ layout: docs
 
 Use this tool to find the perfect icon and copy its HTML into your project with just a click.
 
-For another way to browser available icons, refer to the [Tabler Icons](https://tabler.io/icons) website. Just make sure to copy the _name_ of the icon, e.g. `arrow-up`, and not the SVG code!
+For another way to browser available icons, head over to [Tabler Icons](https://tabler.io/icons). Just make sure to copy the _name_ of the icon, e.g. `arrow-up`, and not the SVG code!
 
 <p>
   <quiet-button href="/docs/components/icon">
@@ -41,8 +41,6 @@ For another way to browser available icons, refer to the [Tabler Icons](https://
 </quiet-empty-state>
 
 <div id="icon-results"></div>
-
-<img class="whiskers-center" src="/assets/images/whiskers/laying-bricks.svg" alt="Whiskers the mouse is laying bricks">
 
 <script type="module">
   import lunr from 'https://cdn.jsdelivr.net/npm/lunr/+esm';
@@ -276,7 +274,7 @@ For another way to browser available icons, refer to the [Tabler Icons](https://
     }
 
     quiet-icon {
-      font-size: 3rem;
+      font-size: 2.5rem;
       stroke-width: 1.25px;
     }
   }

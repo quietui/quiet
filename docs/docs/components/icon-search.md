@@ -136,12 +136,7 @@ For another way to browser available icons, head over to [Tabler Icons](https://
         // Filter results by selected style
         const matches = searchResults
           .map(result => iconsById[result.ref])
-          .filter(icon => icon.styles && icon.styles[selectedStyle])
-          .filter((icon, index) => {
-            // Limit results to 12 icons if the query is short to avoid loading too many icons at once
-            if (query.length < 3 && index > 12) return false;
-            return true;
-          });
+          .filter(icon => icon.styles && icon.styles[selectedStyle]);
 
         // Update UI based on search results
         if (matches.length === 0) {

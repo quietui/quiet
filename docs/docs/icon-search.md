@@ -109,7 +109,7 @@ For an alternative way to browse icons, head over to the [Tabler Icons](https://
 
     // Search function
     const performSearch = debounce(() => {
-      const query = searchField.value.trim();
+      const query = searchField.value.replace(/[^a-zA-Z0-9 ]/g, '').trim();
       const selectedStyle = styleSelect.value;
       let tooltipId = 0;
 
@@ -128,7 +128,7 @@ For an alternative way to browse icons, head over to the [Tabler Icons](https://
         let searchResults = [];
 
         if (query) {
-          const fuzzyQuery = query.split(' ').map(term => term.length > 2 ? `${term}*` : term).join(' ');
+          const fuzzyQuery = query.split(' ').map(term => term.length > 2 ? `${term}~1` : term).join(' ');
           searchResults = searchIndex.search(`${fuzzyQuery}`);
         }
 

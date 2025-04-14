@@ -4,20 +4,9 @@ description: Search thousands of icons to use in your project, courtesy of Table
 layout: docs
 ---
 
-Use this tool to find the perfect icon and copy its HTML into your project with just a click.
+Use this tool to find the perfect icon and copy it into your project with just a click. Refer to the [icon component](/docs/components/icon) to learn more about using icons in Quiet.
 
-For another way to browser available icons, head over to [Tabler Icons](https://tabler.io/icons). Just make sure to copy the _name_ of the icon, e.g. `arrow-up`, and not the SVG code!
-
-<p>
-  <quiet-button href="/docs/components/icon">
-    <quiet-icon slot="start" name="chevron-left"></quiet-icon>
-    Back to icon docs
-  </quiet-button>
-</p>
-
----
-
-<div style="display: flex; gap: 1rem;">
+<div id="search-container">
   <quiet-text-field
     type="search"
     label="Search icons"
@@ -41,6 +30,10 @@ For another way to browser available icons, head over to [Tabler Icons](https://
 </quiet-empty-state>
 
 <div id="icon-results"></div>
+
+:::info
+For an alternative way to browse icons, head over to the [Tabler Icons](https://tabler.io/icons) website.
+:::
 
 <script type="module">
   import lunr from 'https://cdn.jsdelivr.net/npm/lunr/+esm';
@@ -129,8 +122,8 @@ For another way to browser available icons, head over to [Tabler Icons](https://
         let searchResults = [];
 
         if (query) {
-          // Search using Lunr's query syntax capabilities
-          searchResults = searchIndex.search(`${query}`);
+          const fuzzyQuery = query.split(' ').map(term => term.length > 2 ? `${term}~1` : term).join(' ');
+          searchResults = searchIndex.search(`${fuzzyQuery}`);
         }
 
         // Filter results by selected style
@@ -233,6 +226,11 @@ For another way to browser available icons, head over to [Tabler Icons](https://
 </script>
 
 <style>
+  #search-container {
+    display: flex; 
+    gap: 1rem;
+  }
+
   #icon-style {
     max-width: 200px;
   }
@@ -243,7 +241,7 @@ For another way to browser available icons, head over to [Tabler Icons](https://
     gap: 1.5rem;
     width: 100%;
     padding: 0;
-    margin: 1.5rem 0 4rem 0;
+    margin: 1.5rem 0;
 
     &:empty {
       display: none;
@@ -274,7 +272,17 @@ For another way to browser available icons, head over to [Tabler Icons](https://
     }
   }
   
-  quiet-empty-state {
-    margin-block-end: 2rem;
-  }
+  @media screen and (max-width: 959px) {
+    #search-container {
+      flex-direction: column;
+    }
+
+     #icon-style {
+      max-width: none;
+    }
+
+    #icon-results quiet-icon {
+      font-size: 2rem;
+    }
+  } 
 </style>

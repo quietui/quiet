@@ -22,10 +22,22 @@ Use this tool to find the perfect icon and copy it into your project with just a
 </div>
 
 <quiet-empty-state id="icon-initial">
-  <p>Start typing to search <quiet-number id="icon-total" value="4000"></quiet-number> icons</p>
+  <img
+    slot="illustration"
+    src="/assets/images/whiskers/with-palette.svg"
+    alt="Whiskers the mouse is painting a picture"
+    style="width: auto; max-height: 12rem;"
+  >
+  <p>Start typing to search <quiet-number id="icon-total" number="4000"></quiet-number> icons</p>
 </quiet-empty-state>
 
 <quiet-empty-state id="icon-empty">
+  <img
+    slot="illustration"
+    src="/assets/images/whiskers/on-the-lookout.svg"
+    alt="Whiskers the mouse is on the lookout"
+    style="width: auto; max-height: 12rem;"
+  >
   <p>No matching icons found</p>
 </quiet-empty-state>
 

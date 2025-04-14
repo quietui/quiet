@@ -11,7 +11,7 @@ Use this tool to find the perfect icon and copy it into your project with just a
     type="search"
     label="Search icons"
     clearable
-    placeholder="Try arrows, files, media, settings, tools, etc."
+    placeholder="Type arrows, files, media, settings, tools, etc."
     id="icon-search"
     autofocus
   ></quiet-text-field>
@@ -22,17 +22,17 @@ Use this tool to find the perfect icon and copy it into your project with just a
 </div>
 
 <quiet-empty-state id="icon-initial">
+  <p>Start typing to search <quiet-number id="icon-total" number="4000"></quiet-number> icons</p>
+</quiet-empty-state>
+
+<quiet-empty-state id="icon-empty">
   <img
     slot="illustration"
     src="/assets/images/whiskers/with-palette.svg"
     alt="Whiskers the mouse is painting a picture"
     style="width: auto; max-height: 12rem;"
   >
-  <p>Start typing to search <quiet-number id="icon-total" number="4000"></quiet-number> icons</p>
-</quiet-empty-state>
-
-<quiet-empty-state id="icon-empty">
-  <p>No matching icons found</p>
+  <p>I haven't drawn anything like that yet</p>
 </quiet-empty-state>
 
 <div id="icon-results"></div>
@@ -202,7 +202,10 @@ For an alternative way to browse icons, head over to the [Tabler Icons](https://
     max-width: 200px;
   }
 
-  #icon-initial,
+  #icon-initial {
+    margin-block: 4rem;
+  }
+
   #icon-empty {
     margin-block: 1rem;
   }

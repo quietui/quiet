@@ -128,7 +128,7 @@ For an alternative way to browse icons, head over to the [Tabler Icons](https://
         let searchResults = [];
 
         if (query) {
-          const fuzzyQuery = query.split(' ').map(term => term.length > 2 ? `${term}~1` : term).join(' ');
+          const fuzzyQuery = query.split(' ').map(term => term.length > 2 ? `${term}*` : term).join(' ');
           searchResults = searchIndex.search(`${fuzzyQuery}`);
         }
 

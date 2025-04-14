@@ -270,6 +270,7 @@ For another way to browser available icons, head over to [Tabler Icons](https://
 
     quiet-icon {
       font-size: 2.5rem;
+      color: var(--quiet-neutral-fill-loud);
       stroke-width: 1.25px;
     }
   }

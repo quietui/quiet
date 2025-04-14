@@ -133,9 +133,23 @@ For an alternative way to browse icons, head over to the [Tabler Icons](https://
         }
 
         // Filter results by selected style
-        const matches = searchResults
+        let matches = searchResults
           .map(result => iconsById[result.ref])
           .filter(icon => icon.styles && icon.styles[selectedStyle]);
+        
+        // Sort the matches to prioritize exact name matches
+        const lowerQuery = query.toLowerCase();
+        matches.sort((a, b) => {
+          // Exact name match gets highest priority
+          const aExactMatch = a.name.toLowerCase() === lowerQuery;
+          const bExactMatch = b.name.toLowerCase() === lowerQuery;
+          
+          if (aExactMatch && !bExactMatch) return -1;
+          if (!aExactMatch && bExactMatch) return 1;
+          
+          // If neither or both are exact matches, keep original order
+          return 0;
+        });
 
         // Update UI based on search results
         if (matches.length === 0) {

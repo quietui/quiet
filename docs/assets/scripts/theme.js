@@ -49,7 +49,7 @@ document.addEventListener('click', event => {
 document.addEventListener('keydown', event => {
   if (
     event.key === '\\' &&
-    !event.composedPath().some(el => ['input', 'textarea'].includes(el?.tagName?.toLowerCase()))
+    !event.composedPath().some(el => ['input', 'textarea', 'select'].includes(el?.tagName?.toLowerCase()))
   ) {
     toggleTheme();
   }

@@ -4,25 +4,14 @@ description: Search thousands of icons to use in your project, courtesy of Table
 layout: docs
 ---
 
-Use this tool to find the perfect icon and copy its HTML into your project with just a click.
+Use this tool to find the perfect icon and copy it into your project with just a click. Refer to the [icon component](/docs/components/icon) to learn more about using icons in Quiet.
 
-For another way to browser available icons, head over to [Tabler Icons](https://tabler.io/icons). Just make sure to copy the _name_ of the icon, e.g. `arrow-up`, and not the SVG code!
-
-<p>
-  <quiet-button href="/docs/components/icon">
-    <quiet-icon slot="start" name="chevron-left"></quiet-icon>
-    Back to icon docs
-  </quiet-button>
-</p>
-
----
-
-<div style="display: flex; gap: 1rem;">
+<div id="search-container">
   <quiet-text-field
     type="search"
     label="Search icons"
     clearable
-    placeholder="Try arrows, files, media, settings, tools, etc."
+    placeholder="Type arrows, files, media, settings, tools, etc."
     id="icon-search"
     autofocus
   ></quiet-text-field>
@@ -33,14 +22,24 @@ For another way to browser available icons, head over to [Tabler Icons](https://
 </div>
 
 <quiet-empty-state id="icon-initial">
-  <p>Start typing to search <quiet-number id="icon-total" value="4000"></quiet-number> icons</p>
+  <p>Start typing to search <quiet-number id="icon-total" number="4000"></quiet-number> icons</p>
 </quiet-empty-state>
 
 <quiet-empty-state id="icon-empty">
-  <p>No matching icons found</p>
+  <img
+    slot="illustration"
+    src="/assets/images/whiskers/with-palette.svg"
+    alt="Whiskers the mouse is painting a picture"
+    style="width: auto; max-height: 12rem;"
+  >
+  <p>I haven't drawn anything like that yet</p>
 </quiet-empty-state>
 
 <div id="icon-results"></div>
+
+:::info
+For an alternative way to browse icons, head over to the [Tabler Icons](https://tabler.io/icons) website.
+:::
 
 <script type="module">
   import lunr from 'https://cdn.jsdelivr.net/npm/lunr/+esm';
@@ -110,7 +109,7 @@ For another way to browser available icons, head over to [Tabler Icons](https://
 
     // Search function
     const performSearch = debounce(() => {
-      const query = searchField.value.trim();
+      const query = searchField.value.replace(/[^a-zA-Z0-9 ]/g, '').trim();
       const selectedStyle = styleSelect.value;
       let tooltipId = 0;
 
@@ -129,14 +128,28 @@ For another way to browser available icons, head over to [Tabler Icons](https://
         let searchResults = [];
 
         if (query) {
-          // Search using Lunr's query syntax capabilities
-          searchResults = searchIndex.search(`${query}`);
+          const fuzzyQuery = query.split(' ').map(term => term.length > 2 ? `${term}~1` : term).join(' ');
+          searchResults = searchIndex.search(`${fuzzyQuery}`);
         }
 
         // Filter results by selected style
-        const matches = searchResults
+        let matches = searchResults
           .map(result => iconsById[result.ref])
           .filter(icon => icon.styles && icon.styles[selectedStyle]);
+        
+        // Sort the matches to prioritize exact name matches
+        const lowerQuery = query.toLowerCase();
+        matches.sort((a, b) => {
+          // Exact name match gets highest priority
+          const aExactMatch = a.name.toLowerCase() === lowerQuery;
+          const bExactMatch = b.name.toLowerCase() === lowerQuery;
+          
+          if (aExactMatch && !bExactMatch) return -1;
+          if (!aExactMatch && bExactMatch) return 1;
+          
+          // If neither or both are exact matches, keep original order
+          return 0;
+        });
 
         // Update UI based on search results
         if (matches.length === 0) {
@@ -162,60 +175,7 @@ For another way to browser available icons, head over to [Tabler Icons](https://
           results.innerHTML = iconElements;
         }
       } catch (lunrError) {
-        // Handle Lunr-specific errors (like invalid query syntax)
-        console.error('Lunr search error:', lunrError);
-
-        // Fall back to basic filtering for safer search
-        const fallbackMatches = Object.values(icons)
-          .filter((icon) => {
-            // Check if the icon supports the selected style
-            if (!icon.styles || !icon.styles[selectedStyle]) {
-              return false;
-            }
-
-            const queryLower = query.toLowerCase();
-
-            // Check if query matches icon name
-            if (icon.name.toLowerCase().includes(queryLower)) return true;
-
-            // Check if query matches icon category
-            if (icon.category && icon.category.toLowerCase().includes(queryLower)) return true;
-
-            // Check if query matches any tags
-            if (icon.tags && Array.isArray(icon.tags)) {
-              return icon.tags.some(tag => {
-                if (typeof tag !== 'string') return false;
-                return tag.toLowerCase().includes(queryLower);
-              });
-            }
-
-            return false;
-          })
-          .filter((icon, index) => {
-            // Limit results
-            if (query.length < 3 && index > 12) return false;
-            return true;
-          });
-
-        if (fallbackMatches.length === 0) {
-          emptyState.style.display = 'block';
-          results.innerHTML = '';
-        } else {
-          emptyState.style.display = 'none';
-
-          // Create HTML for matched icons using fallback search
-          const iconElements = fallbackMatches.map(icon => {
-            return `
-              <quiet-copy data="&lt;quiet-icon name=&quot;${icon.name}&quot; family=&quot;${selectedStyle}&quot;&gt;&lt;/quiet-icon&gt;">
-                <button type="button">
-                  <quiet-icon name="${icon.name}" family="${selectedStyle}"></quiet-icon><br>
-                </button>
-              </quiet-copy>
-            `;
-          }).join('');
-
-          results.innerHTML = iconElements;
-        }
+        // ignore errors as the user types
       }
     }, 300); // Debounce for 300ms
 
@@ -233,8 +193,21 @@ For another way to browser available icons, head over to [Tabler Icons](https://
 </script>
 
 <style>
+  #search-container {
+    display: flex; 
+    gap: 1rem;
+  }
+
   #icon-style {
     max-width: 200px;
+  }
+
+  #icon-initial {
+    margin-block: 2rem;
+  }
+
+  #icon-empty {
+    margin-block: 1rem;
   }
 
   #icon-results {
@@ -243,7 +216,7 @@ For another way to browser available icons, head over to [Tabler Icons](https://
     gap: 1.5rem;
     width: 100%;
     padding: 0;
-    margin: 1.5rem 0 4rem 0;
+    margin: 1.5rem 0;
 
     &:empty {
       display: none;
@@ -275,7 +248,17 @@ For another way to browser available icons, head over to [Tabler Icons](https://
     }
   }
   
-  quiet-empty-state {
-    margin-block-end: 2rem;
-  }
+  @media screen and (max-width: 959px) {
+    #search-container {
+      flex-direction: column;
+    }
+
+     #icon-style {
+      max-width: none;
+    }
+
+    #icon-results quiet-icon {
+      font-size: 2rem;
+    }
+  } 
 </style>

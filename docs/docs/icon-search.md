@@ -161,60 +161,7 @@ For an alternative way to browse icons, head over to the [Tabler Icons](https://
           results.innerHTML = iconElements;
         }
       } catch (lunrError) {
-        // Handle Lunr-specific errors (like invalid query syntax)
-        console.error('Lunr search error:', lunrError);
-
-        // Fall back to basic filtering for safer search
-        const fallbackMatches = Object.values(icons)
-          .filter((icon) => {
-            // Check if the icon supports the selected style
-            if (!icon.styles || !icon.styles[selectedStyle]) {
-              return false;
-            }
-
-            const queryLower = query.toLowerCase();
-
-            // Check if query matches icon name
-            if (icon.name.toLowerCase().includes(queryLower)) return true;
-
-            // Check if query matches icon category
-            if (icon.category && icon.category.toLowerCase().includes(queryLower)) return true;
-
-            // Check if query matches any tags
-            if (icon.tags && Array.isArray(icon.tags)) {
-              return icon.tags.some(tag => {
-                if (typeof tag !== 'string') return false;
-                return tag.toLowerCase().includes(queryLower);
-              });
-            }
-
-            return false;
-          })
-          .filter((icon, index) => {
-            // Limit results
-            if (query.length < 3 && index > 12) return false;
-            return true;
-          });
-
-        if (fallbackMatches.length === 0) {
-          emptyState.style.display = 'block';
-          results.innerHTML = '';
-        } else {
-          emptyState.style.display = 'none';
-
-          // Create HTML for matched icons using fallback search
-          const iconElements = fallbackMatches.map(icon => {
-            return `
-              <quiet-copy data="&lt;quiet-icon name=&quot;${icon.name}&quot; family=&quot;${selectedStyle}&quot;&gt;&lt;/quiet-icon&gt;">
-                <button type="button">
-                  <quiet-icon name="${icon.name}" family="${selectedStyle}"></quiet-icon><br>
-                </button>
-              </quiet-copy>
-            `;
-          }).join('');
-
-          results.innerHTML = iconElements;
-        }
+        // ignore errors as the user types
       }
     }, 300); // Debounce for 300ms
 

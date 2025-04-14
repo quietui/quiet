@@ -202,6 +202,11 @@ For an alternative way to browse icons, head over to the [Tabler Icons](https://
     max-width: 200px;
   }
 
+  #icon-initial,
+  #icon-empty {
+    margin-block: 1rem;
+  }
+
   #icon-results {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));

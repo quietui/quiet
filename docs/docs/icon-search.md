@@ -32,12 +32,6 @@ Use this tool to find the perfect icon and copy it into your project with just a
 </quiet-empty-state>
 
 <quiet-empty-state id="icon-empty">
-  <img
-    slot="illustration"
-    src="/assets/images/whiskers/on-the-lookout.svg"
-    alt="Whiskers the mouse is on the lookout"
-    style="width: auto; max-height: 12rem;"
-  >
   <p>No matching icons found</p>
 </quiet-empty-state>
 

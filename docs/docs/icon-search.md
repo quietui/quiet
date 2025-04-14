@@ -203,7 +203,7 @@ For an alternative way to browse icons, head over to the [Tabler Icons](https://
   }
 
   #icon-initial {
-    margin-block: 4rem;
+    margin-block: 2rem;
   }
 
   #icon-empty {

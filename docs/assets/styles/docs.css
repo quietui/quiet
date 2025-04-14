@@ -429,9 +429,7 @@ html[data-scroll-restoring] body {
   padding-inline-start: var(--docs-content-spacing);
 
   @media screen and (max-width: 959px) {
-    & {
-      padding-inline-start: 1.5rem;
-    }
+    padding-inline-start: 1.5rem;
   }
 }
 

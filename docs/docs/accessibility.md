@@ -4,8 +4,6 @@ description: Everything as accessible as possible by default.
 layout: docs
 ---
 
-<img class="whiskers-end" src="/assets/images/whiskers/flexing.svg" alt="Whiskers the mouse flexing his muscle">
-
 I recognize the need for all users, regardless of ability or device, to have undeterred access to the websites and applications that are created with my software. This is an important goal of my projects.
 
 Oftentimes, people will ask "is it accessible?" I'm reluctant to answer because accessibility isn't binary — there's no simple "yes" or "no" response to provide. What seems accessible to a sighted user might be completely inaccessible to a non-sighted user. And even if you optimize for various screen readers, you still have to account for low-level vision, color blindness, hearing impairments, mobility impairments, and more.
@@ -24,3 +22,5 @@ This is the path forward. Together, we will continue to make accessible software
 _Creator of Quiet UI_
 
 [_Source_](https://www.abeautifulsite.net/posts/my-commitment-to-accessibility/)
+
+<img class="whiskers-center" src="/assets/images/whiskers/flexing.svg" alt="Whiskers the mouse flexing his muscle">

@@ -33,7 +33,7 @@ Components marked [stable] are well-tested, ready for production, and less likel
       required
     ></quiet-text-field>    
     <!-- cspell:enable -->
-    <quiet-button icon-label="Sign up" type="submit" variant="primary">
+    <quiet-button icon-label="Sign up" type="submit" variant="primary" size="sm">
       <quiet-icon name="send"></quiet-icon>
     </quiet-button>
   </div>

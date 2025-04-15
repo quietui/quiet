@@ -4,8 +4,6 @@ description: Start using Quiet with just a couple lines of code.
 layout: docs
 ---
 
-<img class="whiskers-end" src="/assets/images/whiskers/with-book.svg" alt="Whiskers the mouse holding a book">
-
 Quiet is an open source library for building modern user interfaces on the Web. It features dozens of high-quality, accessible,  interoperable [components](/docs/components), a [modern theme](/docs/theming) with light and darks modes that can adapt to any brand, an optional [CSS reset](/docs/restyle), and more!
 
 **There are two ways to install Quiet components.** [Autoloading](#autoloading) is the fastest way to get started — just copy, paste, and start coding. Or you can [import components manually](#manually-importing) from npm or the CDN.
@@ -161,3 +159,5 @@ setLibraryPath('/path/to/quiet/dist');
 :::warn
 If components or icons aren't loading, make sure you've copied the necessary files into your project and set the library path correctly!
 :::
+
+<img class="whiskers-center" src="/assets/images/whiskers/with-book.svg" alt="Whiskers the mouse holding a book">

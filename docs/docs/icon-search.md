@@ -30,14 +30,14 @@ For an alternative way to browse icons, head over to the [Tabler Icons](https://
   <p>Start typing to search <quiet-number id="icon-total" number="4000"></quiet-number> icons</p>
 </quiet-empty-state>
 
-<quiet-empty-state id="icon-empty">
+<quiet-empty-state id="icon-empty" hidden>
   <img
     slot="illustration"
     src="/assets/images/whiskers/with-palette.svg"
     alt="Whiskers the mouse painting a picture"
     style="width: auto; max-height: 12rem;"
   >
-  <p>I haven't drawn anything like that yet</p>
+  <p>No icons match your search</p>
 </quiet-empty-state>
 
 <div id="icon-results"></div>
@@ -51,10 +51,6 @@ For an alternative way to browse icons, head over to the [Tabler Icons](https://
   const emptyState = document.getElementById('icon-empty');
   const total = document.getElementById('icon-total');
   const results = document.getElementById('icon-results');
-
-  // Set initial visibility
-  initialState.style.display = 'block';
-  emptyState.style.display = 'none';
 
   // Debounce function
   function debounce(func, wait) {
@@ -116,12 +112,12 @@ For an alternative way to browse icons, head over to the [Tabler Icons](https://
 
       // Handle initial state visibility
       if (query === '') {
-        initialState.style.display = 'block';
-        emptyState.style.display = 'none';
+        initialState.hidden = false;
+        emptyState.hidden = true;
         results.innerHTML = '';
         return;
       } else {
-        initialState.style.display = 'none';
+        initialState.hidden = true;
       }
 
       try {
@@ -161,10 +157,10 @@ For an alternative way to browse icons, head over to the [Tabler Icons](https://
 
         // Update UI based on search results
         if (matches.length === 0) {
-          emptyState.style.display = 'block';
+          emptyState.hidden = false;
           results.innerHTML = '';
         } else {
-          emptyState.style.display = 'none';
+          emptyState.hidden = true;
 
           // Create HTML for matched icons, including the style attribute
           const iconElements = matches.map(icon => {

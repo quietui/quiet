@@ -137,11 +137,37 @@ async function updateSearchResults(query = '') {
 
   try {
     const hasQuery = query.length > 0;
-    const searchTokens = query
-      .split(' ')
-      .map((term, index, arr) => `${term}${index === arr.length - 1 ? `* ${term}~1` : '~1'}`)
-      .join(' ');
-    const matches = hasQuery ? searchIndex.search(`${query} ${searchTokens}`) : [];
+    let matches = [];
+
+    if (hasQuery) {
+      // First perform an exact search
+      const exactMatches = searchIndex.search(query);
+
+      // Then perform a fuzzy search
+      const fuzzyTokens = query
+        .split(' ')
+        .map(term => `${term}~1`)
+        .join(' ');
+      const fuzzyMatches = searchIndex.search(fuzzyTokens);
+
+      // Track seen refs to avoid duplicates
+      const seenRefs = new Set();
+
+      // Add exact matches first
+      exactMatches.forEach(match => {
+        matches.push(match);
+        seenRefs.add(match.ref);
+      });
+
+      // Then add fuzzy matches (if not already included)
+      fuzzyMatches.forEach(match => {
+        if (!seenRefs.has(match.ref)) {
+          matches.push(match);
+          seenRefs.add(match.ref);
+        }
+      });
+    }
+
     const hasResults = hasQuery && matches.length > 0;
 
     dialog.classList.toggle('has-results', hasQuery && hasResults);

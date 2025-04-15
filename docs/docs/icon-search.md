@@ -6,6 +6,11 @@ layout: docs
 
 Use this tool to find the perfect icon and copy it into your project with just a click. Refer to the [icon component](/docs/components/icon) to learn more about using icons in Quiet.
 
+:::info
+For an alternative way to browse icons, head over to the [Tabler Icons](https://tabler.io/icons) website.
+:::
+
+
 <div id="search-container">
   <quiet-text-field
     type="search"
@@ -36,10 +41,6 @@ Use this tool to find the perfect icon and copy it into your project with just a
 </quiet-empty-state>
 
 <div id="icon-results"></div>
-
-:::info
-For an alternative way to browse icons, head over to the [Tabler Icons](https://tabler.io/icons) website.
-:::
 
 <script type="module">
   import lunr from 'https://cdn.jsdelivr.net/npm/lunr/+esm';
@@ -109,7 +110,7 @@ For an alternative way to browse icons, head over to the [Tabler Icons](https://
 
     // Search function
     const performSearch = debounce(() => {
-      const query = searchField.value.replace(/[^a-zA-Z0-9 ]/g, '').trim();
+      const query = searchField.value.replace(/[^a-zA-Z0-9 ]/g, ' ').trim();
       const selectedStyle = styleSelect.value;
       let tooltipId = 0;
 
@@ -128,28 +129,35 @@ For an alternative way to browse icons, head over to the [Tabler Icons](https://
         let searchResults = [];
 
         if (query) {
-          const fuzzyQuery = query.split(' ').map(term => term.length > 2 ? `${term}~1` : term).join(' ');
-          searchResults = searchIndex.search(`${fuzzyQuery}`);
+          // First perform exact search
+          const exactResults = searchIndex.search(query);
+          
+          // Then perform fuzzy search
+          const fuzzySearch = query.split(' ').map(term => term.length > 2 ? `${term}~1` : term).join(' ');
+          const fuzzyResults = searchIndex.search(fuzzySearch);
+          
+          // Track seen IDs to avoid duplicates
+          const seenIds = new Set();
+          
+          // Add exact matches first
+          exactResults.forEach(result => {
+            searchResults.push(result);
+            seenIds.add(result.ref);
+          });
+          
+          // Then add fuzzy matches (if not already included)
+          fuzzyResults.forEach(result => {
+            if (!seenIds.has(result.ref)) {
+              searchResults.push(result);
+              seenIds.add(result.ref);
+            }
+          });
         }
 
         // Filter results by selected style
         let matches = searchResults
           .map(result => iconsById[result.ref])
           .filter(icon => icon.styles && icon.styles[selectedStyle]);
-        
-        // Sort the matches to prioritize exact name matches
-        const lowerQuery = query.toLowerCase();
-        matches.sort((a, b) => {
-          // Exact name match gets highest priority
-          const aExactMatch = a.name.toLowerCase() === lowerQuery;
-          const bExactMatch = b.name.toLowerCase() === lowerQuery;
-          
-          if (aExactMatch && !bExactMatch) return -1;
-          if (!aExactMatch && bExactMatch) return 1;
-          
-          // If neither or both are exact matches, keep original order
-          return 0;
-        });
 
         // Update UI based on search results
         if (matches.length === 0) {
@@ -185,7 +193,6 @@ For an alternative way to browse icons, head over to the [Tabler Icons](https://
 
     // Trigger initial search to show icons based on default style
     performSearch();
-
   } catch (error) {
     console.error('Error loading icons:', error);
     results.innerHTML = '<p>Error loading icons. Please try again later.</p>';

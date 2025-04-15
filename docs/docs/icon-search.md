@@ -29,7 +29,7 @@ Use this tool to find the perfect icon and copy it into your project with just a
   <img
     slot="illustration"
     src="/assets/images/whiskers/with-palette.svg"
-    alt="Whiskers the mouse is painting a picture"
+    alt="Whiskers the mouse painting a picture"
     style="width: auto; max-height: 12rem;"
   >
   <p>I haven't drawn anything like that yet</p>

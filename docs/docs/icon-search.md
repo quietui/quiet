@@ -243,6 +243,7 @@ For an alternative way to browse icons, head over to the [Tabler Icons](https://
 
     quiet-icon {
       font-size: 2.5rem;
+      color: var(--quiet-neutral-fill-loud);
       stroke-width: 1.25px;
     }
   }

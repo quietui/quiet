@@ -4,7 +4,6 @@ export default css`
   :host {
     display: flex;
     position: relative;
-    flex: 1 0 auto;
     flex-wrap: wrap;
     gap: min(var(--quiet-border-width), 0.125rem);
     isolation: isolate;

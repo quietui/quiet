@@ -5,18 +5,6 @@ layout: component
 
 ```html {.example}
 <quiet-slider
-  label="Price Range"
-  range
-  min="0"
-  max="100"
-  min-value="25"
-  max-value="75"
-  with-tooltip
-></quiet-slider>
-```
-
-```html {.example}
-<quiet-slider
   label="Number of cats"
   description="Limit six per household"
   name="value" 
@@ -121,11 +109,11 @@ You can format the value that gets shown in tooltips and/or announced by screen 
 ></quiet-slider><br>
 
 <script>
-  const percentSlider = document.getElementById('slider__percent');
+  const slider = document.getElementById('slider__percent');
   const formatter = new Intl.NumberFormat('en-US', { style: 'percent' });
 
   customElements.whenDefined('quiet-slider').then(() => {
-    percentSlider.valueFormatter = value => formatter.format(value);
+    slider.valueFormatter = value => formatter.format(value);
   });
 </script>
 
@@ -141,11 +129,11 @@ You can format the value that gets shown in tooltips and/or announced by screen 
 ></quiet-slider><br>
 
 <script>
-  const hourSlider = document.getElementById('slider__duration');
+  const slider = document.getElementById('slider__duration');
   const formatter = new Intl.NumberFormat('en-US', { style: 'unit', unit: 'hour', unitDisplay: 'long' });
 
   customElements.whenDefined('quiet-slider').then(() => {
-    hourSlider.valueFormatter = value => formatter.format(value);
+    slider.valueFormatter = value => formatter.format(value);
   });
 </script>
 
@@ -161,11 +149,11 @@ You can format the value that gets shown in tooltips and/or announced by screen 
 ></quiet-slider><br>
 
 <script>
-  const angleSlider = document.getElementById('slider__angle');
+  const slider = document.getElementById('slider__angle');
   const formatter = new Intl.NumberFormat('en-US', { style: 'unit', unit: 'degree', unitDisplay: 'narrow' });
 
   customElements.whenDefined('quiet-slider').then(() => {
-    angleSlider.valueFormatter = value => formatter.format(value);
+    slider.valueFormatter = value => formatter.format(value);
   });
 </script>
 
@@ -181,7 +169,7 @@ You can format the value that gets shown in tooltips and/or announced by screen 
 ></quiet-slider>
 
 <script>
-  const currencySlider = document.getElementById('slider__currency');
+  const slider = document.getElementById('slider__currency');
   const formatter = new Intl.NumberFormat('en-US', { 
     style: 'currency', 
     currency: 'USD', 
@@ -190,9 +178,54 @@ You can format the value that gets shown in tooltips and/or announced by screen 
   });
 
   customElements.whenDefined('quiet-slider').then(() => {
-    currencySlider.valueFormatter = value => formatter.format(value);
+    slider.valueFormatter = value => formatter.format(value);
   });
 </script>
+```
+
+### Range selection
+
+Add the `range` attribute to create a slider with two thumbs for selecting a range of values. Use `min-value` and `max-value` attributes to set the initial positions of each thumb.
+
+```html {.example}
+<quiet-slider
+  label="Price Range"
+  description="Select minimum and maximum price"
+  name="price" 
+  range
+  min="0"
+  max="100"
+  min-value="20"
+  max-value="80"
+  with-tooltip
+  with-references
+  id="slider__range"
+>
+  <span slot="reference">$0</span>
+  <span slot="reference">$50</span>
+  <span slot="reference">$100</span>
+</quiet-slider>
+
+<script>
+  const slider = document.getElementById('slider__range');
+  const formatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+
+  customElements.whenDefined('quiet-slider').then(() => {
+    slider.valueFormatter = value => formatter.format(value);
+  });
+</script>
+```
+
+For range sliders, minValue and maxValue properties represent the current positions of the thumbs. When the form is submitted, both values will be included as separate entries with the same name.
+
+```ts
+// Get the current values
+const slider = document.querySelector('quiet-slider[range]');
+console.log(`Min value: ${slider.minValue}, Max value: ${slider.maxValue}`);
+
+// Set the values programmatically
+slider.minValue = 30;
+slider.maxValue = 70;
 ```
 
 ### Changing the orientation
@@ -225,6 +258,38 @@ To make a vertical slider, set the `orientation` attribute to `vertical`. Vertic
     style="width: 80px"
   ></quiet-slider>
 </div>
+```
+
+Range sliders can also be vertical.
+
+```html {.example}
+<div style="height: 300px; display: flex; align-items: center; gap: 2rem;">
+  <quiet-slider
+    label="Temperature Range"
+    orientation="vertical" 
+    range
+    min="0"
+    max="100"
+    min-value="30"
+    max-value="70"
+    with-tooltip
+    id="slider__vertical-range"
+  >
+  </quiet-slider>
+</div>
+
+<script>
+  const slider = document.getElementById('slider__vertical-range');
+  slider.valueFormatter = value => {
+    return new Intl.NumberFormat('en', {
+      style: 'unit',
+      unit: 'fahrenheit',
+      unitDisplay: 'short',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 1
+    }).format(value);
+  };
+</script>
 ```
 
 ### Changing the size

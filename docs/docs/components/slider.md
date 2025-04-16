@@ -5,6 +5,18 @@ layout: component
 
 ```html {.example}
 <quiet-slider
+  label="Price Range"
+  range
+  min="0"
+  max="100"
+  min-value="25"
+  max-value="75"
+  with-tooltip
+></quiet-slider>
+```
+
+```html {.example}
+<quiet-slider
   label="Number of cats"
   description="Limit six per household"
   name="value" 

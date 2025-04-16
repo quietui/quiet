@@ -1,6 +1,6 @@
 import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
-import { customElement, property, query, state } from 'lit/decorators.js';
+import { customElement, property, query, queryAll, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { QuietBlurEvent, QuietChangeEvent, QuietFocusEvent, QuietInputEvent } from '../../events/form.js';
 import formControlStyles from '../../styles/form-control.styles.js';
@@ -42,6 +42,8 @@ import styles from './slider.styles.js';
  * @csspart marker - The individual markers that are shown when `with-markers` is used.
  * @csspart references - The container that holds references that get slotted in.
  * @csspart thumb - The slider's thumb.
+ * @csspart thumb-min - The min value thumb in a range slider.
+ * @csspart thumb-max - The max value thumb in a range slider.
  * @csspart tooltip - The tooltip, a `<quiet-tooltip>` element.
  * @csspart tooltip__tooltip - The tooltip's `tooltip` part.
  * @csspart tooltip__content - The tooltip's `content` part.
@@ -66,17 +68,24 @@ export class QuietSlider extends QuietFormControlElement {
   static styles: CSSResultGroup = [hostStyles, formControlStyles, styles];
 
   private draggableTrack: DraggableElement;
+  private draggableThumbMin: DraggableElement | null = null;
+  private draggableThumbMax: DraggableElement | null = null;
   private localize = new Localize(this);
   private trackBoundingClientRect: DOMRect;
   private valueWhenDraggingStarted: number | undefined;
+  private activeThumb: 'min' | 'max' | null = null;
+  private _lastTrackPosition: number | null = null; // Track last position for direction detection
   protected get focusableAnchor() {
-    return this.slider;
+    return this.isRange ? this.thumbMin || this.slider : this.slider;
   }
 
   @query('#slider') slider: HTMLElement;
   @query('#thumb') thumb: HTMLElement;
+  @query('#thumb-min') thumbMin: HTMLElement;
+  @query('#thumb-max') thumbMax: HTMLElement;
   @query('#track') track: HTMLElement;
   @query('#tooltip') tooltip: QuietTooltip;
+  @queryAll('quiet-tooltip') tooltips: NodeListOf<QuietTooltip>;
 
   @state() isInvalid = false;
   @state() hadUserInteraction = false;
@@ -97,6 +106,20 @@ export class QuietSlider extends QuietFormControlElement {
 
   /** The slider's value. */
   @property({ type: Number }) value = 0;
+
+  /** The minimum value of a range selection. Used only when range attribute is set. */
+  @property({ type: Number, attribute: 'min-value' }) minValue = 0;
+
+  /** The maximum value of a range selection. Used only when range attribute is set. */
+  @property({ type: Number, attribute: 'max-value' }) maxValue = 50;
+
+  /** Converts the slider to a range slider with two thumbs. */
+  @property({ type: Boolean, reflect: true }) range = false;
+
+  /** Get if this is a range slider */
+  get isRange(): boolean {
+    return this.range;
+  }
 
   /** Disables the slider. */
   @property({ type: Boolean, reflect: true }) disabled = false;
@@ -164,47 +187,194 @@ export class QuietSlider extends QuietFormControlElement {
   }
 
   firstUpdated() {
-    // Enable dragging on the slider's track
-    this.draggableTrack = new DraggableElement(this.slider, {
-      start: (x, y) => {
-        // Cache coords when dragging starts to avoid calling it on every move
-        this.trackBoundingClientRect = this.track.getBoundingClientRect();
-        this.valueWhenDraggingStarted = this.value;
-        this.customStates.set('dragging', true);
-        this.setValueFromCoordinates(x, y);
-        this.showTooltip();
-      },
-      move: (x, y) => {
-        this.setValueFromCoordinates(x, y);
-      },
-      stop: () => {
-        // Dispatch change events when dragging stops
-        if (this.value !== this.valueWhenDraggingStarted) {
-          this.dispatchEvent(new QuietChangeEvent());
-          this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
-          this.hadUserInteraction = true;
+    // Setup dragging based on range or single thumb mode
+    if (this.isRange) {
+      // Enable dragging on both thumbs for range slider
+      this.draggableThumbMin = new DraggableElement(this.thumbMin, {
+        start: () => {
+          this.activeThumb = 'min';
+          this.trackBoundingClientRect = this.track.getBoundingClientRect();
+          this.valueWhenDraggingStarted = this.minValue;
+          this.customStates.set('dragging', true);
+          this.showMinTooltip();
+        },
+        move: (x, y) => {
+          this.setThumbValueFromCoordinates(x, y, 'min');
+        },
+        stop: () => {
+          if (this.minValue !== this.valueWhenDraggingStarted) {
+            this.dispatchEvent(new QuietChangeEvent());
+            this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
+            this.hadUserInteraction = true;
+          }
+          this.hideTooltips();
+          this.customStates.set('dragging', false);
+          this.valueWhenDraggingStarted = undefined;
+          this.activeThumb = null;
         }
+      });
 
-        this.hideTooltip();
-        this.customStates.set('dragging', false);
-        this.valueWhenDraggingStarted = undefined;
-      }
-    });
+      this.draggableThumbMax = new DraggableElement(this.thumbMax, {
+        start: () => {
+          this.activeThumb = 'max';
+          this.trackBoundingClientRect = this.track.getBoundingClientRect();
+          this.valueWhenDraggingStarted = this.maxValue;
+          this.customStates.set('dragging', true);
+          this.showMaxTooltip();
+        },
+        move: (x, y) => {
+          this.setThumbValueFromCoordinates(x, y, 'max');
+        },
+        stop: () => {
+          if (this.maxValue !== this.valueWhenDraggingStarted) {
+            this.dispatchEvent(new QuietChangeEvent());
+            this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
+            this.hadUserInteraction = true;
+          }
+          this.hideTooltips();
+          this.customStates.set('dragging', false);
+          this.valueWhenDraggingStarted = undefined;
+          this.activeThumb = null;
+        }
+      });
+
+      // Enable track dragging for finding the closest thumb
+      this.draggableTrack = new DraggableElement(this.track, {
+        start: (x, y) => {
+          this.trackBoundingClientRect = this.track.getBoundingClientRect();
+
+          // When a drag starts, we need to determine which thumb to move
+          // If the thumbs are in nearly the same position, we prioritize the one that's already active
+          // or the one that received focus most recently
+          if (this.activeThumb) {
+            // Keep using the already active thumb (useful for keyboard interactions)
+            this.valueWhenDraggingStarted = this.activeThumb === 'min' ? this.minValue : this.maxValue;
+          } else {
+            // Otherwise select by closest distance
+            const value = this.getValueFromCoordinates(x, y);
+            const minDistance = Math.abs(value - this.minValue);
+            const maxDistance = Math.abs(value - this.maxValue);
+
+            if (minDistance === maxDistance) {
+              // If distances are equal, prioritize the max thumb when value is higher than both thumbs
+              // and min thumb when value is lower than both thumbs
+              if (value > this.maxValue) {
+                this.activeThumb = 'max';
+              } else if (value < this.minValue) {
+                this.activeThumb = 'min';
+              } else {
+                // If the value is between the thumbs and they're at the same distance,
+                // prioritize the thumb that's in the direction of movement
+                const isRtl = this.localize.dir() === 'rtl';
+                const isVertical = this.orientation === 'vertical';
+                const position = isVertical ? y : x;
+                const previousPosition = this._lastTrackPosition || position;
+                this._lastTrackPosition = position;
+
+                // Determine direction of movement
+                const movingForward =
+                  (position > previousPosition !== isRtl && !isVertical) || (position < previousPosition && isVertical);
+
+                this.activeThumb = movingForward ? 'max' : 'min';
+              }
+            } else {
+              // Select the closest thumb
+              this.activeThumb = minDistance <= maxDistance ? 'min' : 'max';
+            }
+
+            this.valueWhenDraggingStarted = this.activeThumb === 'min' ? this.minValue : this.maxValue;
+          }
+
+          this.customStates.set('dragging', true);
+          this.setThumbValueFromCoordinates(x, y, this.activeThumb);
+
+          if (this.activeThumb === 'min') {
+            this.showMinTooltip();
+          } else {
+            this.showMaxTooltip();
+          }
+        },
+        move: (x, y) => {
+          if (this.activeThumb) {
+            this.setThumbValueFromCoordinates(x, y, this.activeThumb);
+          }
+        },
+        stop: () => {
+          if (this.activeThumb) {
+            const currentValue = this.activeThumb === 'min' ? this.minValue : this.maxValue;
+            if (currentValue !== this.valueWhenDraggingStarted) {
+              this.dispatchEvent(new QuietChangeEvent());
+              this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
+              this.hadUserInteraction = true;
+            }
+          }
+          this.hideTooltips();
+          this.customStates.set('dragging', false);
+          this.valueWhenDraggingStarted = undefined;
+          this.activeThumb = null;
+        }
+      });
+    } else {
+      // Single thumb mode - original behavior
+      this.draggableTrack = new DraggableElement(this.slider, {
+        start: (x, y) => {
+          this.trackBoundingClientRect = this.track.getBoundingClientRect();
+          this.valueWhenDraggingStarted = this.value;
+          this.customStates.set('dragging', true);
+          this.setValueFromCoordinates(x, y);
+          this.showTooltip();
+        },
+        move: (x, y) => {
+          this.setValueFromCoordinates(x, y);
+        },
+        stop: () => {
+          if (this.value !== this.valueWhenDraggingStarted) {
+            this.dispatchEvent(new QuietChangeEvent());
+            this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
+            this.hadUserInteraction = true;
+          }
+          this.hideTooltip();
+          this.customStates.set('dragging', false);
+          this.valueWhenDraggingStarted = undefined;
+        }
+      });
+    }
   }
 
   updated(changedProperties: PropertyValues<this>) {
     // Always be updating
     this.updateValidity();
 
-    // Handle value
-    if (changedProperties.has('value')) {
-      this.value = clamp(this.value, this.min, this.max);
-      this.internals.setFormValue(String(this.value));
+    // Handle range mode changes
+    if (changedProperties.has('range')) {
+      this.requestUpdate();
+    }
+
+    if (this.isRange) {
+      // Handle min/max values for range mode
+      if (changedProperties.has('minValue') || changedProperties.has('maxValue')) {
+        // Ensure min doesn't exceed max
+        this.minValue = clamp(this.minValue, this.min, this.maxValue);
+        this.maxValue = clamp(this.maxValue, this.minValue, this.max);
+        // Update form value
+        this.updateFormValue();
+      }
+    } else {
+      // Handle value for single thumb mode
+      if (changedProperties.has('value')) {
+        this.value = clamp(this.value, this.min, this.max);
+        this.internals.setFormValue(String(this.value));
+      }
     }
 
     // Handle min/max
     if (changedProperties.has('min') || changedProperties.has('max')) {
-      this.value = clamp(this.value, this.min, this.max);
+      if (this.isRange) {
+        this.minValue = clamp(this.minValue, this.min, this.max);
+        this.maxValue = clamp(this.maxValue, this.min, this.max);
+      } else {
+        this.value = clamp(this.value, this.min, this.max);
+      }
     }
 
     // Handle disabled
@@ -214,7 +384,16 @@ export class QuietSlider extends QuietFormControlElement {
 
     // Disable dragging when disabled or readonly
     if (changedProperties.has('disabled') || changedProperties.has('readonly')) {
-      this.draggableTrack.toggle(!(this.disabled || this.readonly));
+      const enabled = !(this.disabled || this.readonly);
+
+      if (this.isRange) {
+        if (this.draggableThumbMin) this.draggableThumbMin.toggle(enabled);
+        if (this.draggableThumbMax) this.draggableThumbMax.toggle(enabled);
+      }
+
+      if (this.draggableTrack) {
+        this.draggableTrack.toggle(enabled);
+      }
     }
 
     // Handle user interactions. When the form control's value has changed and lost focus (e.g. change event), we can
@@ -235,7 +414,12 @@ export class QuietSlider extends QuietFormControlElement {
 
   /** @internal Called when the form is reset. */
   formResetCallback() {
-    this.value = parseFloat(this.getAttribute('value') ?? String(this.min));
+    if (this.isRange) {
+      this.minValue = parseFloat(this.getAttribute('min-value') ?? String(this.min));
+      this.maxValue = parseFloat(this.getAttribute('max-value') ?? String(this.max));
+    } else {
+      this.value = parseFloat(this.getAttribute('value') ?? String(this.min));
+    }
     this.isInvalid = false;
     this.hadUserInteraction = false;
     this.wasSubmitted = false;
@@ -255,14 +439,50 @@ export class QuietSlider extends QuietFormControlElement {
     return ((value - this.min) / (this.max - this.min)) * 100;
   }
 
+  /** Converts coordinates to slider value */
+  private getValueFromCoordinates(x: number, y: number) {
+    const isRtl = this.localize.dir() === 'rtl';
+    const isVertical = this.orientation === 'vertical';
+    const { top, right, bottom, left, height, width } = this.trackBoundingClientRect;
+    const pointerPosition = isVertical ? y : x;
+    const sliderCoords = isVertical
+      ? { start: top, end: bottom, size: height }
+      : { start: left, end: right, size: width };
+    const relativePosition = isVertical
+      ? sliderCoords.end - pointerPosition
+      : isRtl
+        ? sliderCoords.end - pointerPosition
+        : pointerPosition - sliderCoords.start;
+    const percentage = relativePosition / sliderCoords.size;
+    return this.clampAndRoundToStep(this.min + (this.max - this.min) * percentage);
+  }
+
   private handleBlur() {
-    this.hideTooltip();
+    if (this.isRange) {
+      this.hideTooltips();
+    } else {
+      this.hideTooltip();
+    }
     this.customStates.set('focused', false);
     this.dispatchEvent(new QuietBlurEvent());
   }
 
-  private handleFocus() {
-    this.showTooltip();
+  private handleFocus(event: FocusEvent) {
+    const target = event.target as HTMLElement;
+
+    // Handle focus for specific thumbs in range mode
+    if (this.isRange) {
+      if (target === this.thumbMin) {
+        this.activeThumb = 'min';
+        this.showMinTooltip();
+      } else if (target === this.thumbMax) {
+        this.activeThumb = 'max';
+        this.showMaxTooltip();
+      }
+    } else {
+      this.showTooltip();
+    }
+
     this.customStates.set('focused', true);
     this.dispatchEvent(new QuietFocusEvent());
   }
@@ -279,72 +499,152 @@ export class QuietSlider extends QuietFormControlElement {
 
   private handleKeyDown(event: KeyboardEvent) {
     const isRtl = this.localize.dir() === 'rtl';
-    const oldValue = this.value;
-    let newValue = this.value;
+    const target = event.target as HTMLElement;
 
     if (this.disabled || this.readonly) return;
 
-    // Increase
-    if (event.key === 'ArrowUp' || event.key === (isRtl ? 'ArrowLeft' : 'ArrowRight')) {
-      event.preventDefault();
-      newValue = this.clampAndRoundToStep(newValue + this.step);
-    }
+    // For range slider, determine which thumb is active
+    if (this.isRange) {
+      if (target === this.thumbMin) {
+        this.activeThumb = 'min';
+      } else if (target === this.thumbMax) {
+        this.activeThumb = 'max';
+      }
 
-    // Decrease
-    if (event.key === 'ArrowDown' || event.key === (isRtl ? 'ArrowRight' : 'ArrowLeft')) {
-      event.preventDefault();
-      newValue = this.clampAndRoundToStep(newValue - this.step);
-    }
+      if (!this.activeThumb) return;
 
-    // Minimum value
-    if (event.key === 'Home') {
-      event.preventDefault();
-      newValue = this.clampAndRoundToStep(this.min);
-    }
+      const oldValue = this.activeThumb === 'min' ? this.minValue : this.maxValue;
+      let newValue = oldValue;
 
-    // Maximum value
-    if (event.key === 'End') {
-      event.preventDefault();
-      newValue = this.clampAndRoundToStep(this.max);
-    }
+      // Increase
+      if (event.key === 'ArrowUp' || event.key === (isRtl ? 'ArrowLeft' : 'ArrowRight')) {
+        event.preventDefault();
+        newValue = this.clampAndRoundToStep(newValue + this.step);
+      }
 
-    // Move up 10%
-    if (event.key === 'PageUp') {
-      event.preventDefault();
-      newValue = this.clampAndRoundToStep(
-        Math.max(
-          newValue + (this.max - this.min) / 10,
-          newValue + this.step // make sure we at least move up to the next step
-        )
-      );
-    }
+      // Decrease
+      if (event.key === 'ArrowDown' || event.key === (isRtl ? 'ArrowRight' : 'ArrowLeft')) {
+        event.preventDefault();
+        newValue = this.clampAndRoundToStep(newValue - this.step);
+      }
 
-    // Move down 10%
-    if (event.key === 'PageDown') {
-      event.preventDefault();
-      newValue = this.clampAndRoundToStep(
-        Math.min(
-          newValue - (this.max - this.min) / 10,
-          newValue - this.step // make sure we at least move down to the previous step
-        )
-      );
-    }
+      // Minimum value
+      if (event.key === 'Home') {
+        event.preventDefault();
+        newValue = this.activeThumb === 'min' ? this.min : this.minValue;
+      }
 
-    // If a key trigger a change, update the value and dispatch events
-    if (newValue !== oldValue) {
-      // Keep within range
-      if (newValue < this.min) newValue = this.min;
-      if (newValue > this.max) newValue = this.max;
+      // Maximum value
+      if (event.key === 'End') {
+        event.preventDefault();
+        newValue = this.activeThumb === 'max' ? this.max : this.maxValue;
+      }
 
-      this.value = newValue;
+      // Move up 10%
+      if (event.key === 'PageUp') {
+        event.preventDefault();
+        newValue = this.clampAndRoundToStep(
+          Math.max(
+            newValue + (this.max - this.min) / 10,
+            newValue + this.step // make sure we at least move up to the next step
+          )
+        );
+      }
 
-      this.dispatchEvent(new QuietInputEvent());
-      this.dispatchEvent(new QuietChangeEvent());
+      // Move down 10%
+      if (event.key === 'PageDown') {
+        event.preventDefault();
+        newValue = this.clampAndRoundToStep(
+          Math.min(
+            newValue - (this.max - this.min) / 10,
+            newValue - this.step // make sure we at least move down to the previous step
+          )
+        );
+      }
 
-      // Dispatch native change/input events for better framework binding support
-      this.dispatchEvent(new InputEvent('input', { bubbles: true, composed: true }));
-      this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
-      this.hadUserInteraction = true;
+      // If a key triggered a change, update the value and dispatch events
+      if (newValue !== oldValue) {
+        // Keep within constraints
+        if (this.activeThumb === 'min') {
+          this.minValue = clamp(newValue, this.min, this.maxValue);
+        } else {
+          this.maxValue = clamp(newValue, this.minValue, this.max);
+        }
+
+        this.dispatchEvent(new QuietInputEvent());
+        this.dispatchEvent(new QuietChangeEvent());
+        this.dispatchEvent(new InputEvent('input', { bubbles: true, composed: true }));
+        this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
+        this.hadUserInteraction = true;
+        this.updateFormValue();
+      }
+    } else {
+      // Original single-thumb behavior
+      const oldValue = this.value;
+      let newValue = this.value;
+
+      // Increase
+      if (event.key === 'ArrowUp' || event.key === (isRtl ? 'ArrowLeft' : 'ArrowRight')) {
+        event.preventDefault();
+        newValue = this.clampAndRoundToStep(newValue + this.step);
+      }
+
+      // Decrease
+      if (event.key === 'ArrowDown' || event.key === (isRtl ? 'ArrowRight' : 'ArrowLeft')) {
+        event.preventDefault();
+        newValue = this.clampAndRoundToStep(newValue - this.step);
+      }
+
+      // Minimum value
+      if (event.key === 'Home') {
+        event.preventDefault();
+        newValue = this.clampAndRoundToStep(this.min);
+      }
+
+      // Maximum value
+      if (event.key === 'End') {
+        event.preventDefault();
+        newValue = this.clampAndRoundToStep(this.max);
+      }
+
+      // Move up 10%
+      if (event.key === 'PageUp') {
+        event.preventDefault();
+        newValue = this.clampAndRoundToStep(
+          Math.max(
+            newValue + (this.max - this.min) / 10,
+            newValue + this.step // make sure we at least move up to the next step
+          )
+        );
+      }
+
+      // Move down 10%
+      if (event.key === 'PageDown') {
+        event.preventDefault();
+        newValue = this.clampAndRoundToStep(
+          Math.min(
+            newValue - (this.max - this.min) / 10,
+            newValue - this.step // make sure we at least move down to the previous step
+          )
+        );
+      }
+
+      // If a key trigger a change, update the value and dispatch events
+      if (newValue !== oldValue) {
+        // Keep within range
+        if (newValue < this.min) newValue = this.min;
+        if (newValue > this.max) newValue = this.max;
+
+        this.value = newValue;
+
+        this.dispatchEvent(new QuietInputEvent());
+        this.dispatchEvent(new QuietChangeEvent());
+
+        // Dispatch native change/input events for better framework binding support
+        this.dispatchEvent(new InputEvent('input', { bubbles: true, composed: true }));
+        this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
+        this.hadUserInteraction = true;
+      }
     }
 
     // When enter is pressed in a slider, the associated form should submit
@@ -363,26 +663,17 @@ export class QuietSlider extends QuietFormControlElement {
     event.preventDefault();
 
     if (!this.disabled) {
-      this.slider.focus();
+      if (this.isRange) {
+        this.thumbMin?.focus();
+      } else {
+        this.slider.focus();
+      }
     }
   }
 
   private setValueFromCoordinates(x: number, y: number) {
-    const isRtl = this.localize.dir() === 'rtl';
-    const isVertical = this.orientation === 'vertical';
     const oldValue = this.value;
-    const { top, right, bottom, left, height, width } = this.trackBoundingClientRect;
-    const pointerPosition = isVertical ? y : x;
-    const sliderCoords = isVertical
-      ? { start: top, end: bottom, size: height }
-      : { start: left, end: right, size: width };
-    const relativePosition = isVertical
-      ? sliderCoords.end - pointerPosition
-      : isRtl
-        ? sliderCoords.end - pointerPosition
-        : pointerPosition - sliderCoords.start;
-    const percentage = relativePosition / sliderCoords.size;
-    this.value = this.clampAndRoundToStep(this.min + (this.max - this.min) * percentage);
+    this.value = this.getValueFromCoordinates(x, y);
 
     // Dispatch input events when the value changes by dragging
     if (this.value !== oldValue) {
@@ -391,15 +682,80 @@ export class QuietSlider extends QuietFormControlElement {
     }
   }
 
+  private setThumbValueFromCoordinates(x: number, y: number, thumb: 'min' | 'max') {
+    const value = this.getValueFromCoordinates(x, y);
+    const oldValue = thumb === 'min' ? this.minValue : this.maxValue;
+
+    if (thumb === 'min') {
+      // Min thumb can't go beyond max thumb
+      this.minValue = clamp(value, this.min, this.maxValue);
+    } else {
+      // Max thumb can't go below min thumb
+      this.maxValue = clamp(value, this.minValue, this.max);
+    }
+
+    // Dispatch input events
+    if (oldValue !== (thumb === 'min' ? this.minValue : this.maxValue)) {
+      this.dispatchEvent(new QuietInputEvent());
+      this.dispatchEvent(new InputEvent('input'));
+      this.updateFormValue();
+    }
+  }
+
   private showTooltip() {
-    if (this.withTooltip) {
+    if (this.withTooltip && this.tooltip) {
       this.tooltip.open = true;
     }
   }
 
   private hideTooltip() {
-    if (this.withTooltip) {
+    if (this.withTooltip && this.tooltip) {
       this.tooltip.open = false;
+    }
+  }
+
+  private showMinTooltip() {
+    if (this.withTooltip) {
+      const minTooltip = this.shadowRoot?.querySelector('#tooltip-min') as QuietTooltip;
+      if (minTooltip) {
+        minTooltip.open = true;
+      }
+    }
+  }
+
+  private showMaxTooltip() {
+    if (this.withTooltip) {
+      const maxTooltip = this.shadowRoot?.querySelector('#tooltip-max') as QuietTooltip;
+      if (maxTooltip) {
+        maxTooltip.open = true;
+      }
+    }
+  }
+
+  private showTooltips() {
+    if (this.withTooltip) {
+      this.tooltips.forEach(tooltip => {
+        tooltip.open = true;
+      });
+    }
+  }
+
+  private hideTooltips() {
+    if (this.withTooltip) {
+      this.tooltips.forEach(tooltip => {
+        tooltip.open = false;
+      });
+    }
+  }
+
+  /** Updates the form value submission for range sliders */
+  private updateFormValue() {
+    if (this.isRange) {
+      // Submit both values using FormData for range sliders
+      const formData = new FormData();
+      formData.append(this.name || '', String(this.minValue));
+      formData.append(this.name || '', String(this.maxValue));
+      this.internals.setFormValue(formData);
     }
   }
 
@@ -427,12 +783,24 @@ export class QuietSlider extends QuietFormControlElement {
 
   /** Sets focus to the slider. */
   public focus() {
-    this.slider.focus();
+    if (this.isRange) {
+      this.thumbMin?.focus();
+    } else {
+      this.slider.focus();
+    }
   }
 
   /** Removes focus from the slider. */
   public blur() {
-    this.slider.blur();
+    if (this.isRange) {
+      if (document.activeElement === this.thumbMin) {
+        this.thumbMin.blur();
+      } else if (document.activeElement === this.thumbMax) {
+        this.thumbMax.blur();
+      }
+    } else {
+      this.slider.blur();
+    }
   }
 
   /**
@@ -440,8 +808,15 @@ export class QuietSlider extends QuietFormControlElement {
    * emitted when this is called.
    */
   public stepDown() {
-    const newValue = this.clampAndRoundToStep(this.value - this.step);
-    this.value = newValue;
+    if (this.isRange) {
+      // If in range mode, default to stepping down the min value
+      const newValue = this.clampAndRoundToStep(this.minValue - this.step);
+      this.minValue = clamp(newValue, this.min, this.maxValue);
+      this.updateFormValue();
+    } else {
+      const newValue = this.clampAndRoundToStep(this.value - this.step);
+      this.value = newValue;
+    }
   }
 
   /**
@@ -449,19 +824,33 @@ export class QuietSlider extends QuietFormControlElement {
    * emitted when this is called.
    */
   public stepUp() {
-    const newValue = this.clampAndRoundToStep(this.value + this.step);
-    this.value = newValue;
+    if (this.isRange) {
+      // If in range mode, default to stepping up the max value
+      const newValue = this.clampAndRoundToStep(this.maxValue + this.step);
+      this.maxValue = clamp(newValue, this.minValue, this.max);
+      this.updateFormValue();
+    } else {
+      const newValue = this.clampAndRoundToStep(this.value + this.step);
+      this.value = newValue;
+    }
   }
 
   render() {
     const hasLabel = this.label || this.slotsWithContent.has('label');
     const hasDescription = this.description || this.slotsWithContent.has('description');
+
+    // For single thumb mode
     const thumbPosition = clamp(this.getPercentageFromValue(this.value), 0, 100);
     const indicatorOffsetPosition = clamp(
       this.getPercentageFromValue(typeof this.indicatorOffset === 'number' ? this.indicatorOffset : this.min),
       0,
       100
     );
+
+    // For range mode
+    const minThumbPosition = clamp(this.getPercentageFromValue(this.minValue), 0, 100);
+    const maxThumbPosition = clamp(this.getPercentageFromValue(this.maxValue), 0, 100);
+
     const markers: number[] = [];
 
     // Determine marker positions
@@ -471,113 +860,262 @@ export class QuietSlider extends QuietFormControlElement {
       }
     }
 
-    return html`
-      <label
-        id="label"
-        part="label"
-        for="text-box"
-        class=${classMap({ vh: !hasLabel })}
-        @pointerdown=${this.handleLabelPointerDown}
-      >
-        <slot name="label">${this.label}</slot>
-      </label>
+    // Render either range or single thumb mode
+    if (this.isRange) {
+      return html`
+        <label
+          id="label"
+          part="label"
+          for="thumb-min"
+          class=${classMap({ vh: !hasLabel })}
+          @pointerdown=${this.handleLabelPointerDown}
+        >
+          <slot name="label">${this.label}</slot>
+        </label>
 
-      <div id="description" part="description" class=${classMap({ vh: !hasDescription })}>
-        <slot name="description">${this.description}</slot>
-      </div>
+        <div id="description" part="description" class=${classMap({ vh: !hasDescription })}>
+          <slot name="description">${this.description}</slot>
+        </div>
 
-      <div
-        id="slider"
-        part="slider"
-        class=${classMap({
-          // Sizes
-          xs: this.size === 'xs',
-          sm: this.size === 'sm',
-          md: this.size === 'md',
-          lg: this.size === 'lg',
-          xl: this.size === 'xl',
-          // Modifiers
-          horizontal: this.orientation === 'horizontal',
-          vertical: this.orientation === 'vertical',
-          // States
-          disabled: this.disabled
-        })}
-        role="slider"
-        aria-disabled=${this.disabled ? 'true' : 'false'}
-        aria-readonly=${this.disabled ? 'true' : 'false'}
-        aria-orientation=${this.orientation}
-        aria-valuemin=${this.min}
-        aria-valuenow=${this.value}
-        aria-valuetext=${typeof this.valueFormatter === 'function'
-          ? this.valueFormatter(this.value)
-          : this.localize.number(this.value)}
-        aria-valuemax=${this.max}
-        aria-labelledby="label"
-        aria-describedby="description"
-        tabindex=${this.disabled ? -1 : 0}
-        @blur=${this.handleBlur}
-        @focus=${this.handleFocus}
-        @keydown=${this.handleKeyDown}
-      >
-        <div id="track" part="track">
-          <div
-            id="indicator"
-            part="indicator"
-            style="--start: ${indicatorOffsetPosition}%; --end: ${thumbPosition}%"
-          ></div>
+        <div
+          id="slider"
+          part="slider"
+          class=${classMap({
+            // Sizes
+            xs: this.size === 'xs',
+            sm: this.size === 'sm',
+            md: this.size === 'md',
+            lg: this.size === 'lg',
+            xl: this.size === 'xl',
+            // Modifiers
+            horizontal: this.orientation === 'horizontal',
+            vertical: this.orientation === 'vertical',
+            // States
+            disabled: this.disabled
+          })}
+        >
+          <div id="track" part="track">
+            <div
+              id="indicator"
+              part="indicator"
+              style="--start: ${Math.min(minThumbPosition, maxThumbPosition)}%; --end: ${Math.max(
+                minThumbPosition,
+                maxThumbPosition
+              )}%"
+            ></div>
 
-          ${this.withMarkers
+            ${this.withMarkers
+              ? html`
+                  <div id="markers" part="markers">
+                    ${markers.map(marker => {
+                      return html` <span part="marker" class="marker" style="--position: ${marker}%"></span> `;
+                    })}
+                  </div>
+                `
+              : ''}
+
+            <span
+              id="thumb-min"
+              part="thumb thumb-min"
+              style="--position: ${minThumbPosition}%"
+              role="slider"
+              aria-valuemin=${this.min}
+              aria-valuenow=${this.minValue}
+              aria-valuetext=${typeof this.valueFormatter === 'function'
+                ? this.valueFormatter(this.minValue)
+                : this.localize.number(this.minValue)}
+              aria-valuemax=${this.max}
+              aria-label="${this.label ? `${this.label} (minimum value)` : 'Minimum value'}"
+              aria-orientation=${this.orientation}
+              aria-disabled=${this.disabled ? 'true' : 'false'}
+              aria-readonly=${this.readonly ? 'true' : 'false'}
+              tabindex=${this.disabled ? -1 : 0}
+              @blur=${this.handleBlur}
+              @focus=${this.handleFocus}
+              @keydown=${this.handleKeyDown}
+            ></span>
+
+            <span
+              id="thumb-max"
+              part="thumb thumb-max"
+              style="--position: ${maxThumbPosition}%"
+              role="slider"
+              aria-valuemin=${this.min}
+              aria-valuenow=${this.maxValue}
+              aria-valuetext=${typeof this.valueFormatter === 'function'
+                ? this.valueFormatter(this.maxValue)
+                : this.localize.number(this.maxValue)}
+              aria-valuemax=${this.max}
+              aria-label="${this.label ? `${this.label} (maximum value)` : 'Maximum value'}"
+              aria-orientation=${this.orientation}
+              aria-disabled=${this.disabled ? 'true' : 'false'}
+              aria-readonly=${this.readonly ? 'true' : 'false'}
+              tabindex=${this.disabled ? -1 : 0}
+              @blur=${this.handleBlur}
+              @focus=${this.handleFocus}
+              @keydown=${this.handleKeyDown}
+            ></span>
+          </div>
+
+          ${this.withReferences
             ? html`
-                <div id="markers" part="markers">
-                  ${markers.map(marker => {
-                    return html` <span part="marker" class="marker" style="--position: ${marker}%"></span> `;
-                  })}
+                <div id="references" part="references" aria-hidden="true">
+                  <slot name="reference"></slot>
                 </div>
               `
             : ''}
-
-          <span id="thumb" part="thumb" style="--position: ${thumbPosition}%"></span>
         </div>
 
-        ${this.withReferences
+        ${this.withTooltip
           ? html`
-              <div id="references" part="references" aria-hidden="true">
-                <slot name="reference"></slot>
-              </div>
+              <quiet-tooltip
+                id="tooltip-min"
+                part="tooltip"
+                exportparts="
+                  tooltip:tooltip__tooltip,
+                  content:tooltip__content,
+                  arrow:tooltip__arrow
+                "
+                distance=${this.tooltipDistance}
+                placement=${this.tooltipPlacement}
+                for="thumb-min"
+                activation="manual"
+                dir=${this.localize.dir()}
+              >
+                <span aria-hidden="true">
+                  ${typeof this.valueFormatter === 'function'
+                    ? this.valueFormatter(this.minValue)
+                    : this.localize.number(this.minValue)}
+                </span>
+              </quiet-tooltip>
+
+              <quiet-tooltip
+                id="tooltip-max"
+                part="tooltip"
+                exportparts="
+                  tooltip:tooltip__tooltip,
+                  content:tooltip__content,
+                  arrow:tooltip__arrow
+                "
+                distance=${this.tooltipDistance}
+                placement=${this.tooltipPlacement}
+                for="thumb-max"
+                activation="manual"
+                dir=${this.localize.dir()}
+              >
+                <span aria-hidden="true">
+                  ${typeof this.valueFormatter === 'function'
+                    ? this.valueFormatter(this.maxValue)
+                    : this.localize.number(this.maxValue)}
+                </span>
+              </quiet-tooltip>
             `
           : ''}
-      </div>
+      `;
+    } else {
+      // Original single thumb mode
+      return html`
+        <label
+          id="label"
+          part="label"
+          for="text-box"
+          class=${classMap({ vh: !hasLabel })}
+          @pointerdown=${this.handleLabelPointerDown}
+        >
+          <slot name="label">${this.label}</slot>
+        </label>
 
-      ${this.withTooltip
-        ? html`
-            <quiet-tooltip
-              id="tooltip"
-              part="tooltip"
-              exportparts="
-                tooltip:tooltip__tooltip,
-                content:tooltip__content,
-                arrow:tooltip__arrow
-              "
-              distance=${this.tooltipDistance}
-              placement=${this.tooltipPlacement}
-              for="thumb"
-              activation="manual"
-              dir=${this.localize.dir()}
-            >
-              <span aria-hidden="true">
-                ${typeof this.valueFormatter === 'function'
-                  ? this.valueFormatter(this.value)
-                  : this.localize.number(this.value)}
-              </span>
-            </quiet-tooltip>
-          `
-        : ''}
-    `;
-  }
-}
+        <div id="description" part="description" class=${classMap({ vh: !hasDescription })}>
+          <slot name="description">${this.description}</slot>
+        </div>
 
-declare global {
-  interface HTMLElementTagNameMap {
-    'quiet-slider': QuietSlider;
+        <div
+          id="slider"
+          part="slider"
+          class=${classMap({
+            // Sizes
+            xs: this.size === 'xs',
+            sm: this.size === 'sm',
+            md: this.size === 'md',
+            lg: this.size === 'lg',
+            xl: this.size === 'xl',
+            // Modifiers
+            horizontal: this.orientation === 'horizontal',
+            vertical: this.orientation === 'vertical',
+            // States
+            disabled: this.disabled
+          })}
+          role="slider"
+          aria-disabled=${this.disabled ? 'true' : 'false'}
+          aria-readonly=${this.disabled ? 'true' : 'false'}
+          aria-orientation=${this.orientation}
+          aria-valuemin=${this.min}
+          aria-valuenow=${this.value}
+          aria-valuetext=${typeof this.valueFormatter === 'function'
+            ? this.valueFormatter(this.value)
+            : this.localize.number(this.value)}
+          aria-valuemax=${this.max}
+          aria-labelledby="label"
+          aria-describedby="description"
+          tabindex=${this.disabled ? -1 : 0}
+          @blur=${this.handleBlur}
+          @focus=${this.handleFocus}
+          @keydown=${this.handleKeyDown}
+        >
+          <div id="track" part="track">
+            <div
+              id="indicator"
+              part="indicator"
+              style="--start: ${indicatorOffsetPosition}%; --end: ${thumbPosition}%"
+            ></div>
+
+            ${this.withMarkers
+              ? html`
+                  <div id="markers" part="markers">
+                    ${markers.map(marker => {
+                      return html` <span part="marker" class="marker" style="--position: ${marker}%"></span> `;
+                    })}
+                  </div>
+                `
+              : ''}
+
+            <span id="thumb" part="thumb" style="--position: ${thumbPosition}%"></span>
+          </div>
+
+          ${this.withReferences
+            ? html`
+                <div id="references" part="references" aria-hidden="true">
+                  <slot name="reference"></slot>
+                </div>
+              `
+            : ''}
+        </div>
+
+        ${this.withTooltip
+          ? html`
+              <quiet-tooltip
+                id="tooltip"
+                part="tooltip"
+                exportparts="
+                  tooltip:tooltip__tooltip,
+                  content:tooltip__content,
+                  arrow:tooltip__arrow
+                "
+                distance=${this.tooltipDistance}
+                placement=${this.tooltipPlacement}
+                for="thumb"
+                activation="manual"
+                dir=${this.localize.dir()}
+              >
+                <span aria-hidden="true">
+                  ${typeof this.valueFormatter === 'function'
+                    ? this.valueFormatter(this.value)
+                    : this.localize.number(this.value)}
+                </span>
+              </quiet-tooltip>
+            `
+          : ''}
+      `;
+    }
   }
 }

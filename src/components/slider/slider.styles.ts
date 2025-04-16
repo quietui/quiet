@@ -13,6 +13,10 @@ export default css`
     width: auto;
   }
 
+  :host([range]) {
+    /* Range-specific host styles if needed */
+  }
+
   #label:has(~ .vertical) {
     display: block;
     order: 2;
@@ -39,7 +43,9 @@ export default css`
       outline: none;
     }
 
-    &:focus-visible:not(.disabled) #thumb {
+    &:focus-visible:not(.disabled) #thumb,
+    &:focus-visible:not(.disabled) #thumb-min,
+    &:focus-visible:not(.disabled) #thumb-max {
       outline: var(--quiet-focus-ring);
       /* intentionally no offset due to border */
     }
@@ -93,14 +99,15 @@ export default css`
 
   .vertical #indicator {
     top: calc(100% - var(--end));
-
     bottom: var(--start);
     left: 0;
     width: 100%;
   }
 
-  /* Thumb */
-  #thumb {
+  /* Thumbs */
+  #thumb,
+  #thumb-min,
+  #thumb-max {
     z-index: 3;
     position: absolute;
     width: var(--thumb-width);
@@ -111,11 +118,15 @@ export default css`
     cursor: pointer;
   }
 
-  .disabled #thumb {
+  .disabled #thumb,
+  .disabled #thumb-min,
+  .disabled #thumb-max {
     cursor: inherit;
   }
 
-  .horizontal #thumb {
+  .horizontal #thumb,
+  .horizontal #thumb-min,
+  .horizontal #thumb-max {
     top: calc(50% - var(--thumb-height) / 2);
 
     &:dir(ltr) {
@@ -129,9 +140,21 @@ export default css`
     }
   }
 
-  .vertical #thumb {
+  .vertical #thumb,
+  .vertical #thumb-min,
+  .vertical #thumb-max {
     bottom: calc(var(--position) - var(--thumb-height) / 2);
     left: calc(50% - var(--thumb-width) / 2);
+  }
+
+  /* Range-specific thumb styles */
+  :host([range]) {
+    #thumb-min:focus-visible,
+    #thumb-max:focus-visible {
+      z-index: 4; /* Ensure focused thumb appears on top */
+      outline: var(--quiet-focus-ring);
+      /* intentionally no offset due to border */
+    }
   }
 
   /* Markers */

@@ -13,10 +13,6 @@ export default css`
     width: auto;
   }
 
-  :host([range]) {
-    /* Range-specific host styles if needed */
-  }
-
   #label:has(~ .vertical) {
     display: block;
     order: 2;

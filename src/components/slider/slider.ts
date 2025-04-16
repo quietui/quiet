@@ -594,9 +594,21 @@ export class QuietSlider extends QuietFormControlElement {
     // Apply the new value with appropriate constraints
     if (this.isRange) {
       if (this.activeThumb === 'min') {
-        this.minValue = clamp(newValue, this.min, this.maxValue);
+        if (newValue > this.maxValue) {
+          // If min thumb would exceed max thumb, move both
+          this.maxValue = newValue;
+          this.minValue = newValue;
+        } else {
+          this.minValue = Math.max(this.min, newValue);
+        }
       } else {
-        this.maxValue = clamp(newValue, this.minValue, this.max);
+        if (newValue < this.minValue) {
+          // If max thumb would go below min thumb, move both
+          this.minValue = newValue;
+          this.maxValue = newValue;
+        } else {
+          this.maxValue = Math.min(this.max, newValue);
+        }
       }
       this.updateFormValue();
     } else {
@@ -639,11 +651,26 @@ export class QuietSlider extends QuietFormControlElement {
     const oldValue = thumb === 'min' ? this.minValue : this.maxValue;
 
     if (thumb === 'min') {
-      // Min thumb can't go beyond max thumb
-      this.minValue = clamp(value, this.min, this.maxValue);
+      // If min thumb is being dragged and would exceed max thumb
+      if (value > this.maxValue) {
+        // Move both thumbs, keeping their distance at 0
+        this.maxValue = value;
+        this.minValue = value;
+      } else {
+        // Normal case - just move min thumb
+        this.minValue = Math.max(this.min, value);
+      }
     } else {
-      // Max thumb can't go below min thumb
-      this.maxValue = clamp(value, this.minValue, this.max);
+      // thumb === 'max'
+      // If max thumb is being dragged and would go below min thumb
+      if (value < this.minValue) {
+        // Move both thumbs, keeping their distance at 0
+        this.minValue = value;
+        this.maxValue = value;
+      } else {
+        // Normal case - just move max thumb
+        this.maxValue = Math.min(this.max, value);
+      }
     }
 
     // Dispatch input events

@@ -74,7 +74,7 @@ export class QuietSlider extends QuietFormControlElement {
   private trackBoundingClientRect: DOMRect;
   private valueWhenDraggingStarted: number | undefined;
   private activeThumb: 'min' | 'max' | null = null;
-  private _lastTrackPosition: number | null = null; // Track last position for direction detection
+  private lastTrackPosition: number | null = null; // Track last position for direction detection
   protected get focusableAnchor() {
     return this.isRange ? this.thumbMin || this.slider : this.slider;
   }
@@ -196,7 +196,7 @@ export class QuietSlider extends QuietFormControlElement {
           this.trackBoundingClientRect = this.track.getBoundingClientRect();
           this.valueWhenDraggingStarted = this.minValue;
           this.customStates.set('dragging', true);
-          this.showMinTooltip();
+          this.showTooltips();
         },
         move: (x, y) => {
           this.setThumbValueFromCoordinates(x, y, 'min');
@@ -220,7 +220,7 @@ export class QuietSlider extends QuietFormControlElement {
           this.trackBoundingClientRect = this.track.getBoundingClientRect();
           this.valueWhenDraggingStarted = this.maxValue;
           this.customStates.set('dragging', true);
-          this.showMaxTooltip();
+          this.showTooltips();
         },
         move: (x, y) => {
           this.setThumbValueFromCoordinates(x, y, 'max');
@@ -268,8 +268,8 @@ export class QuietSlider extends QuietFormControlElement {
                 const isRtl = this.localize.dir() === 'rtl';
                 const isVertical = this.orientation === 'vertical';
                 const position = isVertical ? y : x;
-                const previousPosition = this._lastTrackPosition || position;
-                this._lastTrackPosition = position;
+                const previousPosition = this.lastTrackPosition || position;
+                this.lastTrackPosition = position;
 
                 // Determine direction of movement
                 const movingForward =

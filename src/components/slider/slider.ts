@@ -196,7 +196,7 @@ export class QuietSlider extends QuietFormControlElement {
           this.trackBoundingClientRect = this.track.getBoundingClientRect();
           this.valueWhenDraggingStarted = this.minValue;
           this.customStates.set('dragging', true);
-          this.showTooltips();
+          this.showRangeTooltips();
         },
         move: (x, y) => {
           this.setThumbValueFromCoordinates(x, y, 'min');
@@ -207,7 +207,7 @@ export class QuietSlider extends QuietFormControlElement {
             this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
             this.hadUserInteraction = true;
           }
-          this.hideTooltips();
+          this.hideRangeTooltips();
           this.customStates.set('dragging', false);
           this.valueWhenDraggingStarted = undefined;
           this.activeThumb = null;
@@ -220,7 +220,7 @@ export class QuietSlider extends QuietFormControlElement {
           this.trackBoundingClientRect = this.track.getBoundingClientRect();
           this.valueWhenDraggingStarted = this.maxValue;
           this.customStates.set('dragging', true);
-          this.showTooltips();
+          this.showRangeTooltips();
         },
         move: (x, y) => {
           this.setThumbValueFromCoordinates(x, y, 'max');
@@ -231,7 +231,7 @@ export class QuietSlider extends QuietFormControlElement {
             this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
             this.hadUserInteraction = true;
           }
-          this.hideTooltips();
+          this.hideRangeTooltips();
           this.customStates.set('dragging', false);
           this.valueWhenDraggingStarted = undefined;
           this.activeThumb = null;
@@ -287,12 +287,7 @@ export class QuietSlider extends QuietFormControlElement {
 
           this.customStates.set('dragging', true);
           this.setThumbValueFromCoordinates(x, y, this.activeThumb);
-
-          if (this.activeThumb === 'min') {
-            this.showMinTooltip();
-          } else {
-            this.showMaxTooltip();
-          }
+          this.showRangeTooltips();
         },
         move: (x, y) => {
           if (this.activeThumb) {
@@ -308,7 +303,7 @@ export class QuietSlider extends QuietFormControlElement {
               this.hadUserInteraction = true;
             }
           }
-          this.hideTooltips();
+          this.hideRangeTooltips();
           this.customStates.set('dragging', false);
           this.valueWhenDraggingStarted = undefined;
           this.activeThumb = null;
@@ -465,7 +460,7 @@ export class QuietSlider extends QuietFormControlElement {
         const focusedElement = this.shadowRoot?.activeElement;
         const thumbHasFocus = focusedElement === this.thumbMin || focusedElement === this.thumbMax;
         if (!thumbHasFocus) {
-          this.hideTooltips();
+          this.hideRangeTooltips();
         }
       });
     } else {
@@ -485,7 +480,7 @@ export class QuietSlider extends QuietFormControlElement {
       } else if (target === this.thumbMax) {
         this.activeThumb = 'max';
       }
-      this.showTooltips();
+      this.showRangeTooltips();
     } else {
       this.showTooltip();
     }
@@ -595,7 +590,7 @@ export class QuietSlider extends QuietFormControlElement {
     if (this.isRange) {
       if (this.activeThumb === 'min') {
         if (newValue > this.maxValue) {
-          // If min thumb would exceed max thumb, move both
+          // If min thumb exceeds max thumb, move both
           this.maxValue = newValue;
           this.minValue = newValue;
         } else {
@@ -603,7 +598,7 @@ export class QuietSlider extends QuietFormControlElement {
         }
       } else {
         if (newValue < this.minValue) {
-          // If max thumb would go below min thumb, move both
+          // If max thumb goes below min thumb, move both
           this.minValue = newValue;
           this.maxValue = newValue;
         } else {
@@ -693,25 +688,7 @@ export class QuietSlider extends QuietFormControlElement {
     }
   }
 
-  private showMinTooltip() {
-    if (this.withTooltip) {
-      const minTooltip = this.shadowRoot?.querySelector('#tooltip-min') as QuietTooltip;
-      if (minTooltip) {
-        minTooltip.open = true;
-      }
-    }
-  }
-
-  private showMaxTooltip() {
-    if (this.withTooltip) {
-      const maxTooltip = this.shadowRoot?.querySelector('#tooltip-max') as QuietTooltip;
-      if (maxTooltip) {
-        maxTooltip.open = true;
-      }
-    }
-  }
-
-  private showTooltips() {
+  private showRangeTooltips() {
     if (this.withTooltip) {
       this.tooltips.forEach(tooltip => {
         tooltip.open = true;
@@ -719,7 +696,7 @@ export class QuietSlider extends QuietFormControlElement {
     }
   }
 
-  private hideTooltips() {
+  private hideRangeTooltips() {
     if (this.withTooltip) {
       this.tooltips.forEach(tooltip => {
         tooltip.open = false;
@@ -815,64 +792,97 @@ export class QuietSlider extends QuietFormControlElement {
   }
 
   render() {
+    // Common data preparation
     const hasLabel = this.label || this.slotsWithContent.has('label');
     const hasDescription = this.description || this.slotsWithContent.has('description');
 
-    // For single thumb mode
-    const thumbPosition = clamp(this.getPercentageFromValue(this.value), 0, 100);
-    const indicatorOffsetPosition = clamp(
-      this.getPercentageFromValue(typeof this.indicatorOffset === 'number' ? this.indicatorOffset : this.min),
-      0,
-      100
-    );
+    const sliderClasses = classMap({
+      xs: this.size === 'xs',
+      sm: this.size === 'sm',
+      md: this.size === 'md',
+      lg: this.size === 'lg',
+      xl: this.size === 'xl',
+      horizontal: this.orientation === 'horizontal',
+      vertical: this.orientation === 'vertical',
+      disabled: this.disabled
+    });
 
-    // For range mode
-    const minThumbPosition = clamp(this.getPercentageFromValue(this.minValue), 0, 100);
-    const maxThumbPosition = clamp(this.getPercentageFromValue(this.maxValue), 0, 100);
-
-    const markers: number[] = [];
-
-    // Determine marker positions
+    // Calculate marker positions
+    const markers = [];
     if (this.withMarkers) {
       for (let i = this.min; i <= this.max; i += this.step) {
         markers.push(this.getPercentageFromValue(i));
       }
     }
 
-    // Render either range or single thumb mode
+    // Common UI fragments
+    const labelAndDescription = html`
+      <label
+        id="label"
+        part="label"
+        for=${this.isRange ? 'thumb-min' : 'text-box'}
+        class=${classMap({ vh: !hasLabel })}
+        @pointerdown=${this.handleLabelPointerDown}
+      >
+        <slot name="label">${this.label}</slot>
+      </label>
+
+      <div id="description" part="description" class=${classMap({ vh: !hasDescription })}>
+        <slot name="description">${this.description}</slot>
+      </div>
+    `;
+
+    const markersTemplate = this.withMarkers
+      ? html`
+          <div id="markers" part="markers">
+            ${markers.map(marker => html`<span part="marker" class="marker" style="--position: ${marker}%"></span>`)}
+          </div>
+        `
+      : '';
+
+    const referencesTemplate = this.withReferences
+      ? html`
+          <div id="references" part="references" aria-hidden="true">
+            <slot name="reference"></slot>
+          </div>
+        `
+      : '';
+
+    // Create tooltip template function
+    const createTooltip = (thumbId: string, value: number) =>
+      this.withTooltip
+        ? html`
+            <quiet-tooltip
+              id=${`tooltip${thumbId !== 'thumb' ? '-' + thumbId : ''}`}
+              part="tooltip"
+              exportparts="
+              tooltip:tooltip__tooltip,
+              content:tooltip__content,
+              arrow:tooltip__arrow
+            "
+              distance=${this.tooltipDistance}
+              placement=${this.tooltipPlacement}
+              for=${thumbId}
+              activation="manual"
+              dir=${this.localize.dir()}
+            >
+              <span aria-hidden="true">
+                ${typeof this.valueFormatter === 'function' ? this.valueFormatter(value) : this.localize.number(value)}
+              </span>
+            </quiet-tooltip>
+          `
+        : '';
+
+    // Render based on mode
     if (this.isRange) {
+      // Range slider mode
+      const minThumbPosition = clamp(this.getPercentageFromValue(this.minValue), 0, 100);
+      const maxThumbPosition = clamp(this.getPercentageFromValue(this.maxValue), 0, 100);
+
       return html`
-        <label
-          id="label"
-          part="label"
-          for="thumb-min"
-          class=${classMap({ vh: !hasLabel })}
-          @pointerdown=${this.handleLabelPointerDown}
-        >
-          <slot name="label">${this.label}</slot>
-        </label>
+        ${labelAndDescription}
 
-        <div id="description" part="description" class=${classMap({ vh: !hasDescription })}>
-          <slot name="description">${this.description}</slot>
-        </div>
-
-        <div
-          id="slider"
-          part="slider"
-          class=${classMap({
-            // Sizes
-            xs: this.size === 'xs',
-            sm: this.size === 'sm',
-            md: this.size === 'md',
-            lg: this.size === 'lg',
-            xl: this.size === 'xl',
-            // Modifiers
-            horizontal: this.orientation === 'horizontal',
-            vertical: this.orientation === 'vertical',
-            // States
-            disabled: this.disabled
-          })}
-        >
+        <div id="slider" part="slider" class=${sliderClasses}>
           <div id="track" part="track">
             <div
               id="indicator"
@@ -883,15 +893,7 @@ export class QuietSlider extends QuietFormControlElement {
               )}%"
             ></div>
 
-            ${this.withMarkers
-              ? html`
-                  <div id="markers" part="markers">
-                    ${markers.map(marker => {
-                      return html` <span part="marker" class="marker" style="--position: ${marker}%"></span> `;
-                    })}
-                  </div>
-                `
-              : ''}
+            ${markersTemplate}
 
             <span
               id="thumb-min"
@@ -936,94 +938,27 @@ export class QuietSlider extends QuietFormControlElement {
             ></span>
           </div>
 
-          ${this.withReferences
-            ? html`
-                <div id="references" part="references" aria-hidden="true">
-                  <slot name="reference"></slot>
-                </div>
-              `
-            : ''}
+          ${referencesTemplate}
         </div>
 
-        ${this.withTooltip
-          ? html`
-              <quiet-tooltip
-                id="tooltip-min"
-                part="tooltip"
-                exportparts="
-                  tooltip:tooltip__tooltip,
-                  content:tooltip__content,
-                  arrow:tooltip__arrow
-                "
-                distance=${this.tooltipDistance}
-                placement=${this.tooltipPlacement}
-                for="thumb-min"
-                activation="manual"
-                dir=${this.localize.dir()}
-              >
-                <span aria-hidden="true">
-                  ${typeof this.valueFormatter === 'function'
-                    ? this.valueFormatter(this.minValue)
-                    : this.localize.number(this.minValue)}
-                </span>
-              </quiet-tooltip>
-
-              <quiet-tooltip
-                id="tooltip-max"
-                part="tooltip"
-                exportparts="
-                  tooltip:tooltip__tooltip,
-                  content:tooltip__content,
-                  arrow:tooltip__arrow
-                "
-                distance=${this.tooltipDistance}
-                placement=${this.tooltipPlacement}
-                for="thumb-max"
-                activation="manual"
-                dir=${this.localize.dir()}
-              >
-                <span aria-hidden="true">
-                  ${typeof this.valueFormatter === 'function'
-                    ? this.valueFormatter(this.maxValue)
-                    : this.localize.number(this.maxValue)}
-                </span>
-              </quiet-tooltip>
-            `
-          : ''}
+        ${createTooltip('thumb-min', this.minValue)} ${createTooltip('thumb-max', this.maxValue)}
       `;
     } else {
-      // Original single thumb mode
-      return html`
-        <label
-          id="label"
-          part="label"
-          for="text-box"
-          class=${classMap({ vh: !hasLabel })}
-          @pointerdown=${this.handleLabelPointerDown}
-        >
-          <slot name="label">${this.label}</slot>
-        </label>
+      // Single thumb mode
+      const thumbPosition = clamp(this.getPercentageFromValue(this.value), 0, 100);
+      const indicatorOffsetPosition = clamp(
+        this.getPercentageFromValue(typeof this.indicatorOffset === 'number' ? this.indicatorOffset : this.min),
+        0,
+        100
+      );
 
-        <div id="description" part="description" class=${classMap({ vh: !hasDescription })}>
-          <slot name="description">${this.description}</slot>
-        </div>
+      return html`
+        ${labelAndDescription}
 
         <div
           id="slider"
           part="slider"
-          class=${classMap({
-            // Sizes
-            xs: this.size === 'xs',
-            sm: this.size === 'sm',
-            md: this.size === 'md',
-            lg: this.size === 'lg',
-            xl: this.size === 'xl',
-            // Modifiers
-            horizontal: this.orientation === 'horizontal',
-            vertical: this.orientation === 'vertical',
-            // States
-            disabled: this.disabled
-          })}
+          class=${sliderClasses}
           role="slider"
           aria-disabled=${this.disabled ? 'true' : 'false'}
           aria-readonly=${this.disabled ? 'true' : 'false'}
@@ -1048,52 +983,14 @@ export class QuietSlider extends QuietFormControlElement {
               style="--start: ${indicatorOffsetPosition}%; --end: ${thumbPosition}%"
             ></div>
 
-            ${this.withMarkers
-              ? html`
-                  <div id="markers" part="markers">
-                    ${markers.map(marker => {
-                      return html` <span part="marker" class="marker" style="--position: ${marker}%"></span> `;
-                    })}
-                  </div>
-                `
-              : ''}
-
+            ${markersTemplate}
             <span id="thumb" part="thumb" style="--position: ${thumbPosition}%"></span>
           </div>
 
-          ${this.withReferences
-            ? html`
-                <div id="references" part="references" aria-hidden="true">
-                  <slot name="reference"></slot>
-                </div>
-              `
-            : ''}
+          ${referencesTemplate}
         </div>
 
-        ${this.withTooltip
-          ? html`
-              <quiet-tooltip
-                id="tooltip"
-                part="tooltip"
-                exportparts="
-                  tooltip:tooltip__tooltip,
-                  content:tooltip__content,
-                  arrow:tooltip__arrow
-                "
-                distance=${this.tooltipDistance}
-                placement=${this.tooltipPlacement}
-                for="thumb"
-                activation="manual"
-                dir=${this.localize.dir()}
-              >
-                <span aria-hidden="true">
-                  ${typeof this.valueFormatter === 'function'
-                    ? this.valueFormatter(this.value)
-                    : this.localize.number(this.value)}
-                </span>
-              </quiet-tooltip>
-            `
-          : ''}
+        ${createTooltip('thumb', this.value)}
       `;
     }
   }

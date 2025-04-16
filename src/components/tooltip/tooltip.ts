@@ -201,8 +201,12 @@ export class QuietTooltip extends QuietElement {
       button?.setAttribute('aria-description', String(this.textContent));
     }
 
-    // Close other tooltips that are open
-    openTooltips.forEach(tooltip => (tooltip.open = false));
+    // Close other non-manual tooltips that are open
+    openTooltips.forEach(tooltip => {
+      if (tooltip.activation !== 'manual') {
+        tooltip.open = false;
+      }
+    });
 
     this.tooltip.showPopover();
     this.customStates.set('open', true);

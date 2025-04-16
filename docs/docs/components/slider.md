@@ -216,11 +216,12 @@ Add the `range` attribute to create a slider with two thumbs for selecting a ran
 </script>
 ```
 
-For range sliders, minValue and maxValue properties represent the current positions of the thumbs. When the form is submitted, both values will be included as separate entries with the same name.
+For range sliders, the `minValue` and `maxValue` properties represent the current positions of the thumbs. When the form is submitted, both values will be included as separate entries with the same name.
 
 ```ts
-// Get the current values
 const slider = document.querySelector('quiet-slider[range]');
+
+// Get the current values
 console.log(`Min value: ${slider.minValue}, Max value: ${slider.maxValue}`);
 
 // Set the values programmatically

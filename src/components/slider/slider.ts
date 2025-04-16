@@ -458,8 +458,16 @@ export class QuietSlider extends QuietFormControlElement {
   }
 
   private handleBlur() {
+    // Only hide tooltips if neither thumb has focus
     if (this.isRange) {
-      this.hideTooltips();
+      // Allow a subsequent focus event to fire on the other thumb if the user is tabbing
+      requestAnimationFrame(() => {
+        const focusedElement = this.shadowRoot?.activeElement;
+        const thumbHasFocus = focusedElement === this.thumbMin || focusedElement === this.thumbMax;
+        if (!thumbHasFocus) {
+          this.hideTooltips();
+        }
+      });
     } else {
       this.hideTooltip();
     }
@@ -474,11 +482,10 @@ export class QuietSlider extends QuietFormControlElement {
     if (this.isRange) {
       if (target === this.thumbMin) {
         this.activeThumb = 'min';
-        this.showMinTooltip();
       } else if (target === this.thumbMax) {
         this.activeThumb = 'max';
-        this.showMaxTooltip();
       }
+      this.showTooltips();
     } else {
       this.showTooltip();
     }
@@ -512,151 +519,96 @@ export class QuietSlider extends QuietFormControlElement {
       }
 
       if (!this.activeThumb) return;
+    }
 
-      const oldValue = this.activeThumb === 'min' ? this.minValue : this.maxValue;
-      let newValue = oldValue;
+    // Get current value based on slider mode
+    const current = this.isRange ? (this.activeThumb === 'min' ? this.minValue : this.maxValue) : this.value;
 
+    let newValue = current;
+
+    // Handle key presses
+    switch (event.key) {
       // Increase
-      if (event.key === 'ArrowUp' || event.key === (isRtl ? 'ArrowLeft' : 'ArrowRight')) {
+      case 'ArrowUp':
+      case isRtl ? 'ArrowLeft' : 'ArrowRight':
         event.preventDefault();
-        newValue = this.clampAndRoundToStep(newValue + this.step);
-      }
+        newValue = this.clampAndRoundToStep(current + this.step);
+        break;
 
       // Decrease
-      if (event.key === 'ArrowDown' || event.key === (isRtl ? 'ArrowRight' : 'ArrowLeft')) {
+      case 'ArrowDown':
+      case isRtl ? 'ArrowRight' : 'ArrowLeft':
         event.preventDefault();
-        newValue = this.clampAndRoundToStep(newValue - this.step);
-      }
+        newValue = this.clampAndRoundToStep(current - this.step);
+        break;
 
       // Minimum value
-      if (event.key === 'Home') {
+      case 'Home':
         event.preventDefault();
-        newValue = this.activeThumb === 'min' ? this.min : this.minValue;
-      }
+        newValue = this.isRange && this.activeThumb === 'min' ? this.min : this.isRange ? this.minValue : this.min;
+        break;
 
       // Maximum value
-      if (event.key === 'End') {
+      case 'End':
         event.preventDefault();
-        newValue = this.activeThumb === 'max' ? this.max : this.maxValue;
-      }
+        newValue = this.isRange && this.activeThumb === 'max' ? this.max : this.isRange ? this.maxValue : this.max;
+        break;
 
       // Move up 10%
-      if (event.key === 'PageUp') {
+      case 'PageUp':
         event.preventDefault();
-        newValue = this.clampAndRoundToStep(
-          Math.max(
-            newValue + (this.max - this.min) / 10,
-            newValue + this.step // make sure we at least move up to the next step
-          )
+        const stepUp = Math.max(
+          current + (this.max - this.min) / 10,
+          current + this.step // make sure we at least move up to the next step
         );
-      }
+        newValue = this.clampAndRoundToStep(stepUp);
+        break;
 
       // Move down 10%
-      if (event.key === 'PageDown') {
+      case 'PageDown':
         event.preventDefault();
-        newValue = this.clampAndRoundToStep(
-          Math.min(
-            newValue - (this.max - this.min) / 10,
-            newValue - this.step // make sure we at least move down to the previous step
-          )
+        const stepDown = Math.min(
+          current - (this.max - this.min) / 10,
+          current - this.step // make sure we at least move down to the previous step
         );
-      }
+        newValue = this.clampAndRoundToStep(stepDown);
+        break;
 
-      // If a key triggered a change, update the value and dispatch events
-      if (newValue !== oldValue) {
-        // Keep within constraints
-        if (this.activeThumb === 'min') {
-          this.minValue = clamp(newValue, this.min, this.maxValue);
-        } else {
-          this.maxValue = clamp(newValue, this.minValue, this.max);
+      // Handle form submission on Enter
+      case 'Enter':
+        if (this.internals.form) {
+          const submitter = [...this.internals.form.elements].find((el: HTMLInputElement | HTMLButtonElement) => {
+            // The first submit button associated with the form will be the submitter. At this time, only native buttons
+            // can be submitters (see https://github.com/WICG/webcomponents/issues/814)
+            return ['button', 'input'].includes(el.localName) && el.type === 'submit';
+          }) as HTMLElement;
+
+          this.internals.form.requestSubmit(submitter);
         }
+        return;
+    }
 
-        this.dispatchEvent(new QuietInputEvent());
-        this.dispatchEvent(new QuietChangeEvent());
-        this.dispatchEvent(new InputEvent('input', { bubbles: true, composed: true }));
-        this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
-        this.hadUserInteraction = true;
-        this.updateFormValue();
+    // If no value change, exit early
+    if (newValue === current) return;
+
+    // Apply the new value with appropriate constraints
+    if (this.isRange) {
+      if (this.activeThumb === 'min') {
+        this.minValue = clamp(newValue, this.min, this.maxValue);
+      } else {
+        this.maxValue = clamp(newValue, this.minValue, this.max);
       }
+      this.updateFormValue();
     } else {
-      // Original single-thumb behavior
-      const oldValue = this.value;
-      let newValue = this.value;
-
-      // Increase
-      if (event.key === 'ArrowUp' || event.key === (isRtl ? 'ArrowLeft' : 'ArrowRight')) {
-        event.preventDefault();
-        newValue = this.clampAndRoundToStep(newValue + this.step);
-      }
-
-      // Decrease
-      if (event.key === 'ArrowDown' || event.key === (isRtl ? 'ArrowRight' : 'ArrowLeft')) {
-        event.preventDefault();
-        newValue = this.clampAndRoundToStep(newValue - this.step);
-      }
-
-      // Minimum value
-      if (event.key === 'Home') {
-        event.preventDefault();
-        newValue = this.clampAndRoundToStep(this.min);
-      }
-
-      // Maximum value
-      if (event.key === 'End') {
-        event.preventDefault();
-        newValue = this.clampAndRoundToStep(this.max);
-      }
-
-      // Move up 10%
-      if (event.key === 'PageUp') {
-        event.preventDefault();
-        newValue = this.clampAndRoundToStep(
-          Math.max(
-            newValue + (this.max - this.min) / 10,
-            newValue + this.step // make sure we at least move up to the next step
-          )
-        );
-      }
-
-      // Move down 10%
-      if (event.key === 'PageDown') {
-        event.preventDefault();
-        newValue = this.clampAndRoundToStep(
-          Math.min(
-            newValue - (this.max - this.min) / 10,
-            newValue - this.step // make sure we at least move down to the previous step
-          )
-        );
-      }
-
-      // If a key trigger a change, update the value and dispatch events
-      if (newValue !== oldValue) {
-        // Keep within range
-        if (newValue < this.min) newValue = this.min;
-        if (newValue > this.max) newValue = this.max;
-
-        this.value = newValue;
-
-        this.dispatchEvent(new QuietInputEvent());
-        this.dispatchEvent(new QuietChangeEvent());
-
-        // Dispatch native change/input events for better framework binding support
-        this.dispatchEvent(new InputEvent('input', { bubbles: true, composed: true }));
-        this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
-        this.hadUserInteraction = true;
-      }
+      this.value = clamp(newValue, this.min, this.max);
     }
 
-    // When enter is pressed in a slider, the associated form should submit
-    if (event.key === 'Enter' && this.internals.form) {
-      const submitter = [...this.internals.form.elements].find((el: HTMLInputElement | HTMLButtonElement) => {
-        // The first submit button associated with the form will be the submitter. At this time, only native buttons
-        // can be submitters (see https://github.com/WICG/webcomponents/issues/814)
-        return ['button', 'input'].includes(el.localName) && el.type === 'submit';
-      }) as HTMLElement;
-
-      this.internals.form.requestSubmit(submitter);
-    }
+    // Dispatch events
+    this.dispatchEvent(new QuietInputEvent());
+    this.dispatchEvent(new QuietChangeEvent());
+    this.dispatchEvent(new InputEvent('input', { bubbles: true, composed: true }));
+    this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
+    this.hadUserInteraction = true;
   }
 
   private handleLabelPointerDown(event: PointerEvent) {

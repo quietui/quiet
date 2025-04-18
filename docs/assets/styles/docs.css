@@ -778,6 +778,11 @@ quiet-badge.experimental {
 .docs-aside h2 {
   margin-block: 0.5rem;
   font-size: inherit;
+
+  quiet-icon {
+    font-size: 1.25rem;
+    vertical-align: -0.125em;
+  }
 }
 
 .docs-aside ul {

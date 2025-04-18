@@ -68,6 +68,12 @@ export class QuietSplitter extends QuietElement {
   /** The maximum distance (in pixels) within which the divider will snap to a specified snap point. */
   @property({ attribute: 'snap-threshold', type: Number }) snapThreshold = 10;
 
+  firstUpdated() {
+    this.setupDragging();
+    this.updateGridTemplate();
+    this.updateAriaValue();
+  }
+
   updated(changedProperties: PropertyValues<this>) {
     if (changedProperties.has('orientation') || changedProperties.has('snap')) {
       this.updateGridTemplate();
@@ -86,12 +92,6 @@ export class QuietSplitter extends QuietElement {
     if (changedProperties.has('isDragging')) {
       this.customStates.set('dragging', this.isDragging);
     }
-  }
-
-  firstUpdated() {
-    this.setupDragging();
-    this.updateGridTemplate();
-    this.updateAriaValue();
   }
 
   disconnectedCallback() {

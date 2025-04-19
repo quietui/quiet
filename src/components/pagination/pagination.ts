@@ -172,7 +172,7 @@ export class QuietPagination extends QuietElement {
     return html`
       <nav part="nav" aria-label="${label}">
         <ul part="list">
-          <!-- First button (left edge) -->
+          <!-- First button -->
           ${this.withEdges
             ? html`
                 <li part="item">
@@ -253,7 +253,7 @@ export class QuietPagination extends QuietElement {
               `
             : nothing}
 
-          <!-- Last button (right edge) -->
+          <!-- Last button -->
           ${this.withEdges
             ? html`
                 <li part="item">

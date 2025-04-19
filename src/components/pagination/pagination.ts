@@ -40,30 +40,20 @@ export class QuietPagination extends QuietElement {
 
   @query('nav') private nav!: HTMLElement;
 
-  /**
-   * The total number of pages.
-   */
+  /** A label to use to describe the control to assistive devices. */
+  @property() label = '';
+
+  /** The total number of pages to show. */
   @property({ type: Number }) total = 1;
 
-  /**
-   * The current page.
-   */
+  /** The current page. */
   @property({ type: Number, reflect: true }) page = 1;
 
-  /**
-   * The number of siblings (pages displayed to the left and right of the current page).
-   */
+  /** The number of siblings (pages displayed to the left and right of the current page). */
   @property({ type: Number }) siblings = 1;
 
-  /**
-   * The number of boundary pages (pages displayed at the edges).
-   */
+  /** The number of boundary pages (pages displayed at the edges). */
   @property({ type: Number }) boundaries = 1;
-
-  /**
-   * The aria-label for the pagination.
-   */
-  @property() label = 'Pagination';
 
   /**
    * Disables the pagination controls.
@@ -176,9 +166,11 @@ export class QuietPagination extends QuietElement {
   }
 
   render() {
-    // Ensure consistent ordering: first/last on edges, prev/next, then page numbers
+    const label = this.label || this.localize.term('pagination');
+
+    // Ordering: first/last on edges, prev/next, then page numbers
     return html`
-      <nav part="nav" aria-label="${this.label}">
+      <nav part="nav" aria-label="${label}">
         <ul part="list">
           <!-- First button (left edge) -->
           ${this.withEdges
@@ -186,7 +178,7 @@ export class QuietPagination extends QuietElement {
                 <li part="item">
                   <button
                     part="button button-first"
-                    aria-label="${this.localize.term('first')}"
+                    aria-label="${this.localize.term('firstPage')}"
                     ?disabled="${this.disabled || this.page === 1}"
                     @click="${(e: Event) => this.handleClick(e, 1)}"
                   >
@@ -233,10 +225,10 @@ export class QuietPagination extends QuietElement {
                     <button
                       part="button button-page ${isCurrent ? 'button-current' : ''}"
                       class=${classMap({ current: isCurrent })}
-                      aria-label="${this.localize.term('page')} ${pageNumber}"
-                      aria-current="${isCurrent ? 'page' : nothing}"
+                      aria-label=${this.localize.term('pageNumber', pageNumber)}
+                      aria-current=${isCurrent ? 'page' : 'false'}
                       ?disabled="${this.disabled}"
-                      @click="${(e: Event) => this.handleClick(e, pageNumber)}"
+                      @click="${(event: Event) => this.handleClick(event, pageNumber)}"
                     >
                       ${pageNumber}
                     </button>
@@ -267,7 +259,7 @@ export class QuietPagination extends QuietElement {
                 <li part="item">
                   <button
                     part="button button-last"
-                    aria-label="${this.localize.term('last')}"
+                    aria-label="${this.localize.term('lastPage')}"
                     ?disabled="${this.disabled || this.page === this.total}"
                     @click="${(e: Event) => this.handleClick(e, this.total)}"
                   >

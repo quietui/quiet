@@ -107,7 +107,7 @@ export class QuietToastItem extends QuietElement {
     }
   }
 
-  private tick = () => {
+  private tick = async () => {
     if (!this.startTime || this.isPaused) {
       return;
     }
@@ -119,14 +119,17 @@ export class QuietToastItem extends QuietElement {
     if (progress < 1) {
       this.animationFrame = requestAnimationFrame(this.tick);
     } else {
+      await this.waitForStackTransition();
       this.remove();
     }
   };
 
   /** Close it! */
-  private handleCloseClick(event: MouseEvent) {
+  private async handleCloseClick(event: MouseEvent) {
     event.stopPropagation();
     this.stopTimer();
+
+    await this.waitForStackTransition();
     this.remove();
   }
 
@@ -145,6 +148,15 @@ export class QuietToastItem extends QuietElement {
     this.isPaused = false;
     this.startTimer();
   };
+
+  /** Waits for the toast stack's transition group to finish transitioning and then resolves. */
+  private async waitForStackTransition() {
+    const stack = this.closest('quiet-toast')?.stack;
+
+    if (stack) {
+      await stack.transitionComplete();
+    }
+  }
 
   render() {
     return html`

@@ -77,7 +77,7 @@ export default css`
   }
 
   /* Ellipsis */
-  button[part*='button-ellipsis'] {
+  button.ellipsis {
     justify-content: center;
     min-width: 2.5em; /* Match regular buttons */
     border-color: transparent;

@@ -41,16 +41,10 @@ export class QuietPagination extends QuietElement {
   @property() label = '';
 
   /** The total number of pages to show. */
-  @property({ type: Number }) total = 1;
+  @property({ attribute: 'total-pages', type: Number }) totalPages = 10;
 
   /** The current page. */
   @property({ type: Number, reflect: true }) page = 1;
-
-  /**
-   * The maximum number of pages to display including pages and ellipses. This number does not include adjacent or
-   * boundary buttons.
-   */
-  @property({ attribute: 'max-visible', type: Number }) maxVisible = 8;
 
   /**
    * Disables the pagination control.
@@ -61,11 +55,6 @@ export class QuietPagination extends QuietElement {
    * Shows the previous and next buttons.
    */
   @property({ type: Boolean, attribute: 'with-adjacent', reflect: true }) withAdjacent = false;
-
-  /**
-   * Shows the first and last buttons.
-   */
-  @property({ type: Boolean, attribute: 'with-boundary', reflect: true }) withBoundary = false;
 
   render() {
     const label = this.label || this.localize.term('pagination');
@@ -78,20 +67,6 @@ export class QuietPagination extends QuietElement {
     return html`
       <nav part="nav" aria-label="${label}">
         <ul part="list">
-          ${this.withBoundary
-            ? // first page
-              html`
-                <li part="item">
-                  <button
-                    part="button button-first"
-                    aria-label="${this.localize.term('firstPage')}"
-                    ?disabled="${this.disabled || this.page === 1}"
-                  >
-                    <quiet-icon name="chevron-left-pipe"></quiet-icon>
-                  </button>
-                </li>
-              `
-            : ''}
           ${this.withAdjacent
             ? // previous page
               html`
@@ -104,14 +79,7 @@ export class QuietPagination extends QuietElement {
             : ''}
           ${
             ''
-            // add ellipsis using <button class="ellipsis" disabled><quiet-icon name="dots"></quiet-icon></button>
-            // add page buttons here, ensuring we never have more than `this.maxVisible` page/ellipsis buttons
-            // ensure when there's a gap between page numbers, there's ALWAYS an ellipsis in between that counts as 1 button
-            // ensure pages and ellipses are well balanced visually
-            // ensure there's NEVER more than one ellipsis next to each other.
-            // it's OK to have less buttons than `this.maxVisible` ONLY IF there are less pages available
-            // it's NEVER OK to have more buttons than `this.maxVisible`
-            // don't make unnecessary abstractions, keep it simple and maintainable
+            // TODO - render pages here
           }
           ${this.withAdjacent
             ? // next page
@@ -119,20 +87,6 @@ export class QuietPagination extends QuietElement {
                 <li part="item">
                   <button part="button button-first" aria-label="${this.localize.term('next')}">
                     <quiet-icon name="chevron-right"></quiet-icon>
-                  </button>
-                </li>
-              `
-            : ''}
-          ${this.withBoundary
-            ? // last page
-              html`
-                <li part="item">
-                  <button
-                    part="button button-last"
-                    aria-label="${this.localize.term('lastPage')}"
-                    ?disabled="${this.disabled || this.page === this.total}"
-                  >
-                    <quiet-icon name="chevron-right-pipe"></quiet-icon>
                   </button>
                 </li>
               `

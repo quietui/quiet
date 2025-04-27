@@ -587,6 +587,10 @@ quiet-badge.experimental {
   margin-block-end: var(--quiet-content-spacing);
 }
 
+#content .code-example quiet-tab-list {
+  margin-block-end: revert;
+}
+
 @media screen and (max-width: 959px) {
   #content aside {
     max-width: none;

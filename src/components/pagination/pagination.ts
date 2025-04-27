@@ -46,46 +46,47 @@ export class QuietPagination extends QuietElement {
   /** The current page. */
   @property({ type: Number, reflect: true }) page = 1;
 
-  /**
-   * Disables the pagination control.
-   */
+  /** The number of pages to show on each side of the selected page. */
+  @property({ type: Number }) siblings = 1;
+
+  /** The pagination's appearance. */
+  @property({ reflect: true }) appearance: 'compact' | 'standard' = 'standard';
+
+  /** Disables the pagination control. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
-  /**
-   * Shows the previous and next buttons.
-   */
+  /** Shows the previous and next buttons. */
   @property({ type: Boolean, attribute: 'with-adjacent', reflect: true }) withAdjacent = false;
 
   render() {
     const label = this.label || this.localize.term('pagination');
-
-    //
-    // Localized terms available: 'pagination', 'firstPage', 'previous', 'next', 'lastPage'
-    // For page numbers, use `this.localize.term('pageNumber', currentPageNum)`
-    //
+    const isPrevDisabled = this.page <= 1 || this.disabled;
+    const isNextDisabled = this.page >= this.totalPages || this.disabled;
 
     return html`
       <nav part="nav" aria-label="${label}">
         <ul part="list">
           ${this.withAdjacent
-            ? // previous page
-              html`
+            ? html`
                 <li part="item">
-                  <button part="button button-first" aria-label="${this.localize.term('previous')}">
+                  <button
+                    part="button button-previous"
+                    aria-label="${this.localize.term('previous')}"
+                    ?disabled=${isPrevDisabled}
+                  >
                     <quiet-icon name="chevron-left"></quiet-icon>
                   </button>
                 </li>
               `
             : ''}
-          ${
-            ''
-            // TODO - render pages here
-          }
           ${this.withAdjacent
-            ? // next page
-              html`
+            ? html`
                 <li part="item">
-                  <button part="button button-first" aria-label="${this.localize.term('next')}">
+                  <button
+                    part="button button-next"
+                    aria-label="${this.localize.term('next')}"
+                    ?disabled=${isNextDisabled}
+                  >
                     <quiet-icon name="chevron-right"></quiet-icon>
                   </button>
                 </li>

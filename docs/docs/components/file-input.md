@@ -100,7 +100,7 @@ The `files` property must be reassigned, not mutated! Avoid using functions that
 
 ### Accepting multiple files
 
-Add the `multiple` attribute to allow the file input to accept more than one file.
+Add the `multiple` attribute to allow the file input to accept more than one file. If the user drops a folder, all files within it will be added to the file input.
 
 ```html {.example}
 <quiet-file-input 

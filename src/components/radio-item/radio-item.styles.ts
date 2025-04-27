@@ -40,8 +40,8 @@ export default css`
   #visual-box {
     display: flex;
     position: relative;
-    width: 1.25em;
-    height: 1.25em;
+    width: 1.125em;
+    height: 1.125em;
     border-radius: 50%;
     transition:
       100ms background-color ease,

@@ -5,6 +5,7 @@ import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import hostStyles from '../../styles/host.styles.js';
 import { Localize } from '../../utilities/localize.js';
+import { clamp } from '../../utilities/math.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import styles from './pagination.styles.js';
 
@@ -54,7 +55,7 @@ export class QuietPagination extends QuietElement {
   @property({ type: Number, reflect: true }) page = 1;
 
   /** The maximum number of visible page buttons. Must be a minimum of 5. */
-  @property({ attribute: 'max-visible', type: Number }) maxVisible = 7;
+  @property({ attribute: 'max-buttons', type: Number }) maxButtons = 7;
 
   /** The pagination's appearance. */
   @property({ reflect: true }) appearance: 'compact' | 'standard' = 'standard';
@@ -65,27 +66,24 @@ export class QuietPagination extends QuietElement {
   /** Shows the previous and next buttons. */
   @property({ type: Boolean, attribute: 'with-adjacent', reflect: true }) withAdjacent = false;
 
-  /**
-   * Generates the list of pagination items, including pages, ellipses, and placeholders.
-   *
-   * @returns An array of pagination items.
-   */
+  /** Generates the list of pagination items, including pages, ellipses, and placeholders. */
   private getPaginationItems(): PaginationItem[] {
     const items: PaginationItem[] = [];
+    const clampedMax = clamp(this.maxButtons, 5, Infinity);
 
     if (this.totalPages < 1) return items;
 
-    if (this.totalPages <= this.maxVisible) {
+    if (this.totalPages <= clampedMax) {
       // Show all pages and add placeholders if needed
       for (let i = 1; i <= this.totalPages; i++) {
         items.push({ type: 'page', page: i });
       }
-      while (items.length < this.maxVisible) {
+      while (items.length < clampedMax) {
         items.push({ type: 'placeholder' });
       }
     } else {
-      const threshold = this.maxVisible - 3;
-      const middlePageCount = this.maxVisible - 4;
+      const threshold = clampedMax - 3;
+      const middlePageCount = clampedMax - 4;
 
       if (this.page <= threshold) {
         // Show pages from 1 to threshold + 1, then ellipsis, then last page
@@ -118,11 +116,7 @@ export class QuietPagination extends QuietElement {
     return items;
   }
 
-  /**
-   * Changes the current page, emitting a cancellable 'quiet-page-change' event.
-   *
-   * @param newPage - The new page number to navigate to.
-   */
+  /** Changes the current page, emitting a cancellable 'quiet-page-change' event. */
   private changePage(newPage: number) {
     // Exit if new page is invalid or same as current
     if (newPage < 1 || newPage > this.totalPages || newPage === this.page) return;
@@ -140,11 +134,6 @@ export class QuietPagination extends QuietElement {
     }
   }
 
-  /**
-   * Renders the pagination component with navigation buttons and page items.
-   *
-   * @returns The rendered HTML template.
-   */
   render() {
     const label = this.label || this.localize.term('pagination');
     const isPrevDisabled = this.page <= 1 || this.disabled;

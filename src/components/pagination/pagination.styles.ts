@@ -48,55 +48,54 @@ export default css`
       100ms translate ease;
     user-select: none;
     -webkit-user-select: none;
-  }
 
-  button:hover:not(:disabled, .current) {
-    border-color: var(--quiet-neutral-stroke-soft);
-    box-shadow: var(--quiet-shadow-softer);
-  }
+    &:hover:not(:disabled, .current) {
+      border-color: var(--quiet-neutral-stroke-soft);
+      box-shadow: var(--quiet-shadow-softer);
+    }
 
-  button:active:not(:disabled, .current) {
-    translate: 0 var(--quiet-button-active-offset);
-    background-color: var(--quiet-neutral-fill-softer);
-    box-shadow: var(--quiet-shadow-inner);
-  }
+    &:active:not(:disabled, .current) {
+      translate: 0 var(--quiet-button-active-offset);
+      background-color: var(--quiet-neutral-fill-softer);
+      box-shadow: var(--quiet-shadow-inner);
+    }
 
-  button:focus-visible {
-    border-color: var(--quiet-primary-stroke);
-    outline: none;
-    box-shadow: var(--quiet-focus-ring);
-  }
+    &:focus-visible {
+      outline: var(--quiet-focus-ring);
+      outline-offset: var(--quiet-focus-offset);
+    }
 
-  /* Current page */
-  button.current {
-    border-color: var(--quiet-primary-fill-mid);
-    background-color: var(--quiet-primary-fill-mid);
-    color: var(--quiet-primary-text-on-mid);
-    font-weight: var(--quiet-font-weight-semibold);
-    cursor: default;
-  }
+    /* Current page */
+    &.current {
+      border-color: var(--quiet-primary-fill-mid);
+      background-color: var(--quiet-primary-fill-mid);
+      color: var(--quiet-primary-text-on-mid);
+      font-weight: var(--quiet-font-weight-semibold);
+      cursor: default;
+    }
 
-  /* Ellipsis */
-  button.ellipsis {
-    justify-content: center;
-    min-width: 2.5em; /* Match regular buttons */
-    border-color: transparent;
-    background-color: transparent;
-    box-shadow: none;
-    color: var(--quiet-text-muted);
-    text-align: center;
-    cursor: default;
-  }
+    /* Ellipsis */
+    &.ellipsis {
+      justify-content: center;
+      min-width: 2.5em;
+      border-color: transparent;
+      background-color: transparent;
+      box-shadow: none;
+      color: var(--quiet-text-muted);
+      text-align: center;
+      cursor: default;
+    }
 
-  /* Disabled state */
-  :host(:state(disabled)) {
-    opacity: 0.7;
-  }
+    /* Disabled state */
+    :host(:state(disabled)) & {
+      opacity: 0.7;
+    }
 
-  button:disabled {
-    box-shadow: none;
-    cursor: not-allowed;
-    opacity: 0.5;
+    &:disabled {
+      box-shadow: none;
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
   }
 
   quiet-icon {

@@ -56,8 +56,6 @@ export default css`
 
     &:active:not(:disabled, .current) {
       translate: 0 var(--quiet-button-active-offset);
-      background-color: var(--quiet-neutral-fill-softer);
-      box-shadow: var(--quiet-shadow-inner);
     }
 
     &:focus-visible {
@@ -71,18 +69,6 @@ export default css`
       background-color: var(--quiet-primary-fill-mid);
       color: var(--quiet-primary-text-on-mid);
       font-weight: var(--quiet-font-weight-semibold);
-      cursor: default;
-    }
-
-    /* Ellipsis */
-    &.ellipsis {
-      justify-content: center;
-      min-width: 2.5em;
-      border-color: transparent;
-      background-color: transparent;
-      box-shadow: none;
-      color: var(--quiet-text-muted);
-      text-align: center;
       cursor: default;
     }
 

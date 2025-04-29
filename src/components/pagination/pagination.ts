@@ -53,8 +53,8 @@ export class QuietPagination extends QuietElement {
   /** The current page. */
   @property({ type: Number, reflect: true }) page = 1;
 
-  /** The number of pages to show on each side of the selected page. */
-  @property({ type: Number }) siblings = 1;
+  /** The maximum number of visible page buttons. Must be a minimum of 5. */
+  @property({ attribute: 'max-visible', type: Number }) maxVisible = 7;
 
   /** The pagination's appearance. */
   @property({ reflect: true }) appearance: 'compact' | 'standard' = 'standard';
@@ -71,67 +71,48 @@ export class QuietPagination extends QuietElement {
    * @returns An array of pagination items.
    */
   private getPaginationItems(): PaginationItem[] {
-    const { totalPages, page, siblings } = this;
-    const maxButtons = 2 * siblings + 5; // e.g., 7 when siblings = 1
-    const threshold = maxButtons - 3; // e.g., 4 when maxButtons = 7
     const items: PaginationItem[] = [];
 
-    if (totalPages < 1) return items;
+    if (this.totalPages < 1) return items;
 
-    // Case 1: Total pages are less than or equal to maxButtons
-    if (totalPages <= maxButtons) {
-      for (let i = 1; i <= totalPages; i++) {
+    if (this.totalPages <= this.maxVisible) {
+      // Show all pages and add placeholders if needed
+      for (let i = 1; i <= this.totalPages; i++) {
         items.push({ type: 'page', page: i });
       }
-      while (items.length < maxButtons) {
+      while (items.length < this.maxVisible) {
         items.push({ type: 'placeholder' });
       }
-    }
-    // Case 2: Total pages exceed maxButtons
-    else {
-      let start: number;
-      let end: number;
-      let showLeftEllipsis = true;
-      let showRightEllipsis = true;
+    } else {
+      const threshold = this.maxVisible - 3;
+      const middlePageCount = this.maxVisible - 4;
 
-      // Near the start: show consecutive pages from 1, then ellipsis, then last page
-      if (page <= threshold) {
-        start = 2;
-        end = threshold + 1; // e.g., 5 when threshold = 4
-        showLeftEllipsis = false;
-      }
-      // Near the end: show first page, ellipsis, then consecutive pages to the end
-      else if (page >= totalPages - threshold + 1) {
-        start = totalPages - threshold; // e.g., 6 when totalPages = 10, threshold = 4
-        end = totalPages - 1;
-        showRightEllipsis = false;
-      }
-      // In the middle: show first page, ellipsis, pages around current, ellipsis, last page
-      else {
-        start = Math.max(2, page - siblings);
-        end = Math.min(totalPages - 1, page + siblings);
-      }
-
-      // Add first page
-      items.push({ type: 'page', page: 1 });
-
-      // Add left ellipsis if needed
-      if (showLeftEllipsis && start > 2) {
+      if (this.page <= threshold) {
+        // Show pages from 1 to threshold + 1, then ellipsis, then last page
+        for (let i = 1; i <= threshold + 1; i++) {
+          items.push({ type: 'page', page: i });
+        }
         items.push({ type: 'ellipsis' });
-      }
-
-      // Add middle pages
-      for (let i = start; i <= end; i++) {
-        items.push({ type: 'page', page: i });
-      }
-
-      // Add right ellipsis if needed
-      if (showRightEllipsis && end < totalPages - 1) {
+        items.push({ type: 'page', page: this.totalPages });
+      } else if (this.page >= this.totalPages - threshold + 1) {
+        // Show first page, ellipsis, then pages from (totalPages - threshold) to totalPages
+        items.push({ type: 'page', page: 1 });
         items.push({ type: 'ellipsis' });
+        for (let i = this.totalPages - threshold; i <= this.totalPages; i++) {
+          items.push({ type: 'page', page: i });
+        }
+      } else {
+        // Show first page, ellipsis, pages around current, ellipsis, last page
+        const middleStart = this.page - Math.floor((middlePageCount - 1) / 2);
+        const middleEnd = this.page + Math.floor(middlePageCount / 2);
+        items.push({ type: 'page', page: 1 });
+        items.push({ type: 'ellipsis' });
+        for (let i = middleStart; i <= middleEnd; i++) {
+          items.push({ type: 'page', page: i });
+        }
+        items.push({ type: 'ellipsis' });
+        items.push({ type: 'page', page: this.totalPages });
       }
-
-      // Add last page
-      items.push({ type: 'page', page: totalPages });
     }
 
     return items;

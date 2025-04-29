@@ -17,10 +17,10 @@ import styles from './pagination.styles.js';
  * @status stable
  * @since 1.0
  *
- * @csspart nav - The navigation container.
- * @csspart list - The list that contains the pagination items.
- * @csspart item - A pagination item (button container).
- * @csspart button - A pagination button.
+ * @csspart nav - The navigation container, a `<nav>` element.
+ * @csspart list - The list that contains the pagination items, a `<ul>` element.
+ * @csspart item - A pagination item, an `<li>` element.
+ * @csspart button - A pagination button, a `<button>` element.
  * @csspart button-first - The button that navigates to the first page.
  * @csspart button-previous - The button that navigates to the previous page.
  * @csspart button-next - The button that navigates to the next page.

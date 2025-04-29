@@ -161,7 +161,16 @@ export class QuietPagination extends QuietElement {
               `
             : ''}
           ${paginationItems.map(item => {
-            if (item.type === 'page') {
+            if (item.type === 'ellipsis') {
+              return html`
+                <li part="item" class="ellipsis">
+                  <button part="button button-ellipsis" class="ellipsis">
+                    <quiet-icon library="system" name="dots"></quiet-icon>
+                  </button>
+                </li>
+              `;
+            } else {
+              // Render a page
               const isCurrent = item.page === this.page;
               const part = `button button-page${isCurrent ? ' button-current' : ''}${item.page === 1 ? ' button-first' : ''}${item.page === this.totalPages ? ' button-last' : ''}`;
               return html`
@@ -175,14 +184,6 @@ export class QuietPagination extends QuietElement {
                     @click=${() => this.changePage(item.page)}
                   >
                     ${item.page}
-                  </button>
-                </li>
-              `;
-            } else if (item.type === 'ellipsis') {
-              return html`
-                <li part="item" class="ellipsis">
-                  <button part="button button-ellipsis" class="ellipsis" disabled>
-                    <quiet-icon library="system" name="dots"></quiet-icon>
                   </button>
                 </li>
               `;

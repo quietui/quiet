@@ -38,12 +38,9 @@ import styles from './pagination.styles.js';
  */
 
 /**
- * Represents an item in the pagination list, which can be a page number, an ellipsis, or a placeholder.
+ * Represents an item in the pagination list, which can be a page number or an ellipsis.
  */
-type PaginationItem =
-  | { type: 'page'; page: number }
-  | { type: 'ellipsis'; position: 'left' | 'right' }
-  | { type: 'placeholder' };
+type PaginationItem = { type: 'page'; page: number } | { type: 'ellipsis'; position: 'start' | 'end' };
 
 @customElement('quiet-pagination')
 export class QuietPagination extends QuietElement {
@@ -72,7 +69,7 @@ export class QuietPagination extends QuietElement {
   /** Shows the previous and next buttons. */
   @property({ type: Boolean, attribute: 'with-adjacent', reflect: true }) withAdjacent = false;
 
-  /** Generates the list of pagination items, including pages, ellipses, and placeholders. */
+  /** Generates the list of pagination items, including pages, and ellipses. */
   private getPaginationItems(): PaginationItem[] {
     const items: PaginationItem[] = [];
     const clampedMax = clamp(this.maxButtons, 5, Infinity);
@@ -84,9 +81,6 @@ export class QuietPagination extends QuietElement {
       for (let i = 1; i <= this.totalPages; i++) {
         items.push({ type: 'page', page: i });
       }
-      while (items.length < clampedMax) {
-        items.push({ type: 'placeholder' });
-      }
     } else {
       const threshold = clampedMax - 3;
       const middlePageCount = clampedMax - 4;
@@ -96,12 +90,12 @@ export class QuietPagination extends QuietElement {
         for (let i = 1; i <= threshold + 1; i++) {
           items.push({ type: 'page', page: i });
         }
-        items.push({ type: 'ellipsis', position: 'right' });
+        items.push({ type: 'ellipsis', position: 'end' });
         items.push({ type: 'page', page: this.totalPages });
       } else if (this.page >= this.totalPages - threshold + 1) {
         // Show first page, ellipsis, then pages from (totalPages - threshold) to totalPages
         items.push({ type: 'page', page: 1 });
-        items.push({ type: 'ellipsis', position: 'left' });
+        items.push({ type: 'ellipsis', position: 'start' });
         for (let i = this.totalPages - threshold; i <= this.totalPages; i++) {
           items.push({ type: 'page', page: i });
         }
@@ -110,11 +104,11 @@ export class QuietPagination extends QuietElement {
         const middleStart = this.page - Math.floor((middlePageCount - 1) / 2);
         const middleEnd = this.page + Math.floor(middlePageCount / 2);
         items.push({ type: 'page', page: 1 });
-        items.push({ type: 'ellipsis', position: 'left' });
+        items.push({ type: 'ellipsis', position: 'start' });
         for (let i = middleStart; i <= middleEnd; i++) {
           items.push({ type: 'page', page: i });
         }
-        items.push({ type: 'ellipsis', position: 'right' });
+        items.push({ type: 'ellipsis', position: 'end' });
         items.push({ type: 'page', page: this.totalPages });
       }
     }
@@ -140,30 +134,14 @@ export class QuietPagination extends QuietElement {
     }
   }
 
-  /**
-   * Handles ellipsis click to navigate to previous or next group of pages
-   * by adding or subtracting the number of middle pages shown
-   */
-  private handleEllipsisClick(position: 'left' | 'right') {
-    const clampedMax = clamp(this.maxButtons, 5, Infinity);
-    let newPage;
-
-    if (position === 'left') {
-      // For left ellipsis, subtract the number of middle pages
-      newPage = Math.max(1, this.page - clampedMax);
-    } else {
-      // For right ellipsis, add the number of middle pages
-      newPage = Math.min(this.totalPages, this.page + clampedMax);
-    }
-
-    this.changePage(newPage);
-  }
-
   render() {
     const label = this.label || this.localize.term('pagination');
     const isPrevDisabled = this.page <= 1 || this.disabled;
     const isNextDisabled = this.page >= this.totalPages || this.disabled;
+    const isRtl = this.localize.dir() === 'rtl';
     const paginationItems = this.getPaginationItems();
+    const chevronLeftIcon = html`<quiet-icon library="system" name="chevron-left"></quiet-icon>`;
+    const chevronRightIcon = html`<quiet-icon library="system" name="chevron-right"></quiet-icon>`;
 
     return html`
       <nav part="nav" aria-label="${label}">
@@ -177,7 +155,7 @@ export class QuietPagination extends QuietElement {
                     ?disabled=${isPrevDisabled}
                     @click=${() => this.changePage(this.page - 1)}
                   >
-                    <quiet-icon library="system" name="chevron-left"></quiet-icon>
+                    ${isRtl ? chevronRightIcon : chevronLeftIcon}
                   </button>
                 </li>
               `
@@ -203,16 +181,9 @@ export class QuietPagination extends QuietElement {
             } else if (item.type === 'ellipsis') {
               return html`
                 <li part="item" class="ellipsis">
-                  <button part="button button-ellipsis" @click=${() => this.handleEllipsisClick(item.position)}>
+                  <button part="button button-ellipsis" class="ellipsis" disabled>
                     <quiet-icon library="system" name="dots"></quiet-icon>
                   </button>
-                </li>
-              `;
-            } else {
-              // Placeholder
-              return html`
-                <li part="item" class="placeholder">
-                  <button part="button button-placeholder" disabled></button>
                 </li>
               `;
             }
@@ -226,7 +197,7 @@ export class QuietPagination extends QuietElement {
                     ?disabled=${isNextDisabled}
                     @click=${() => this.changePage(this.page + 1)}
                   >
-                    <quiet-icon library="system" name="chevron-right"></quiet-icon>
+                    ${isRtl ? chevronLeftIcon : chevronRightIcon}
                   </button>
                 </li>
               `

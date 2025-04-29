@@ -164,7 +164,7 @@ export class QuietPagination extends QuietElement {
             if (item.type === 'ellipsis') {
               return html`
                 <li part="item" class="ellipsis">
-                  <button part="button button-ellipsis" class="ellipsis">
+                  <button part="button button-ellipsis" class="ellipsis" disabled>
                     <quiet-icon library="system" name="dots"></quiet-icon>
                   </button>
                 </li>

@@ -49,7 +49,7 @@ export default css`
     user-select: none;
     -webkit-user-select: none;
 
-    &:hover:not(:disabled, .current) {
+    &:hover:not(:disabled, .current, .ellipsis) {
       border-color: var(--quiet-neutral-stroke-soft);
       box-shadow: var(--quiet-shadow-softer);
     }
@@ -72,12 +72,21 @@ export default css`
       cursor: default;
     }
 
+    /* Ellipsis */
+    &.ellipsis {
+      justify-content: center;
+      border-color: transparent;
+      background-color: transparent;
+      box-shadow: none;
+      cursor: default;
+    }
+
     /* Disabled state */
-    :host(:state(disabled)) & {
+    :host(:state(disabled)) {
       opacity: 0.7;
     }
 
-    &:disabled {
+    :host(:state(disabled)) button.disabled {
       box-shadow: none;
       cursor: not-allowed;
       opacity: 0.5;

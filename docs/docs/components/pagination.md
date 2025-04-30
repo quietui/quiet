@@ -9,7 +9,7 @@ layout: component
   total-pages="10"
   page="1" 
   max-buttons="9"
-  with-adjacent
+  with-nav
 ></quiet-pagination>
 
 <br><br>
@@ -19,7 +19,7 @@ layout: component
   total-pages="30"
   page="1" 
   max-buttons="9"
-  with-adjacent
+  with-nav
 ></quiet-pagination>
 ```
 

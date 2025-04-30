@@ -67,7 +67,7 @@ export class QuietPagination extends QuietElement {
   @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Shows the previous and next buttons. */
-  @property({ type: Boolean, attribute: 'with-adjacent', reflect: true }) withAdjacent = false;
+  @property({ type: Boolean, attribute: 'with-nav', reflect: true }) withNav = false;
 
   /** Changes the current page, emitting a cancellable 'quiet-page-change' event. */
   private changePage(newPage: number) {
@@ -190,7 +190,7 @@ export class QuietPagination extends QuietElement {
     return html`
       <nav part="nav" aria-label="${label}">
         <ul part="list">
-          ${this.withAdjacent
+          ${this.withNav
             ? html`
                 <li part="item">
                   <button
@@ -238,7 +238,7 @@ export class QuietPagination extends QuietElement {
               `;
             }
           })}
-          ${this.withAdjacent
+          ${this.withNav
             ? html`
                 <li part="item">
                   <button

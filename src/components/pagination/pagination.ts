@@ -69,53 +69,6 @@ export class QuietPagination extends QuietElement {
   /** Shows the previous and next buttons. */
   @property({ type: Boolean, attribute: 'with-adjacent', reflect: true }) withAdjacent = false;
 
-  /** Generates the list of pagination items, including pages, and ellipses. */
-  private getPaginationItems(): PaginationItem[] {
-    const items: PaginationItem[] = [];
-    const clampedMax = clamp(this.maxButtons, 5, Infinity);
-
-    if (this.totalPages < 1) return items;
-
-    if (this.totalPages <= clampedMax) {
-      // Show all pages and add placeholders if needed
-      for (let i = 1; i <= this.totalPages; i++) {
-        items.push({ type: 'page', page: i });
-      }
-    } else {
-      const threshold = clampedMax - 3;
-      const middlePageCount = clampedMax - 4;
-
-      if (this.page <= threshold) {
-        // Show pages from 1 to threshold + 1, then ellipsis, then last page
-        for (let i = 1; i <= threshold + 1; i++) {
-          items.push({ type: 'page', page: i });
-        }
-        items.push({ type: 'ellipsis', position: 'end' });
-        items.push({ type: 'page', page: this.totalPages });
-      } else if (this.page >= this.totalPages - threshold + 1) {
-        // Show first page, ellipsis, then pages from (totalPages - threshold) to totalPages
-        items.push({ type: 'page', page: 1 });
-        items.push({ type: 'ellipsis', position: 'start' });
-        for (let i = this.totalPages - threshold; i <= this.totalPages; i++) {
-          items.push({ type: 'page', page: i });
-        }
-      } else {
-        // Show first page, ellipsis, pages around current, ellipsis, last page
-        const middleStart = this.page - Math.floor((middlePageCount - 1) / 2);
-        const middleEnd = this.page + Math.floor(middlePageCount / 2);
-        items.push({ type: 'page', page: 1 });
-        items.push({ type: 'ellipsis', position: 'start' });
-        for (let i = middleStart; i <= middleEnd; i++) {
-          items.push({ type: 'page', page: i });
-        }
-        items.push({ type: 'ellipsis', position: 'end' });
-        items.push({ type: 'page', page: this.totalPages });
-      }
-    }
-
-    return items;
-  }
-
   /** Changes the current page, emitting a cancellable 'quiet-page-change' event. */
   private changePage(newPage: number) {
     // Exit if new page is invalid or same as current
@@ -132,6 +85,85 @@ export class QuietPagination extends QuietElement {
     if (!cancelled) {
       this.page = newPage;
     }
+  }
+
+  /** Generates the list of pagination items, including pages, and ellipses. */
+  private getPaginationItems(): PaginationItem[] {
+    const items: PaginationItem[] = [];
+    const clampedMax = clamp(this.maxButtons, 5, Infinity);
+
+    if (this.totalPages < 1) return items;
+
+    if (this.totalPages <= clampedMax) {
+      // Show all pages and add placeholders if needed
+      for (let i = 1; i <= this.totalPages; i++) {
+        items.push({ type: 'page', page: i });
+      }
+    } else {
+      const middlePageCount = clampedMax - 4; // For pages between first/last and ellipses
+      const sideButtons = Math.floor(middlePageCount / 2);
+
+      // Determine if we need to show ellipsis at start and/or end
+      const showStartEllipsis = this.page > sideButtons + 2;
+      const showEndEllipsis = this.page < this.totalPages - sideButtons - 1;
+
+      // Calculate start and end of visible page range
+      let rangeStart, rangeEnd;
+
+      if (!showStartEllipsis && showEndEllipsis) {
+        // Near start, show more pages at beginning
+        rangeStart = 2;
+        rangeEnd = clampedMax - 2; // -2 for first page and end ellipsis
+      } else if (showStartEllipsis && !showEndEllipsis) {
+        // Near end, show more pages at end
+        rangeStart = this.totalPages - (clampedMax - 3); // -3 for first page, last page, start ellipsis
+        rangeEnd = this.totalPages - 1;
+      } else if (showStartEllipsis && showEndEllipsis) {
+        // In middle, center current page
+        rangeStart = Math.max(2, this.page - sideButtons);
+        rangeEnd = Math.min(this.totalPages - 1, this.page + sideButtons);
+
+        // Adjust if range is too small (near start or end)
+        if (rangeEnd - rangeStart + 1 < middlePageCount) {
+          if (rangeStart === 2) {
+            rangeEnd = Math.min(this.totalPages - 1, rangeStart + middlePageCount - 1);
+          } else if (rangeEnd === this.totalPages - 1) {
+            rangeStart = Math.max(2, rangeEnd - middlePageCount + 1);
+          }
+        }
+      } else {
+        // No ellipses needed, show all possible pages
+        rangeStart = 2;
+        rangeEnd = this.totalPages - 1;
+      }
+
+      // Add first page
+      items.push({ type: 'page', page: 1 });
+
+      // Check if we should show page 2 instead of start ellipsis
+      if (rangeStart === 3) {
+        items.push({ type: 'page', page: 2 });
+      } else if (showStartEllipsis) {
+        items.push({ type: 'ellipsis', position: 'start' });
+      }
+
+      // Add range of pages
+      for (let i = rangeStart; i <= rangeEnd; i++) {
+        items.push({ type: 'page', page: i });
+      }
+
+      // Check if we should show second-to-last page instead of end ellipsis
+      if (rangeEnd === this.totalPages - 2) {
+        items.push({ type: 'page', page: this.totalPages - 1 });
+      } else if (showEndEllipsis) {
+        items.push({ type: 'ellipsis', position: 'end' });
+      }
+
+      // Add last page
+      items.push({ type: 'page', page: this.totalPages });
+    }
+
+    return items;
   }
 
   private handleEllipsisClick(position: 'start' | 'end') {

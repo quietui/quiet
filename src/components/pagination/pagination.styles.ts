@@ -72,15 +72,6 @@ export default css`
       cursor: default;
     }
 
-    /* Ellipsis */
-    &.ellipsis {
-      justify-content: center;
-      border-color: transparent;
-      background-color: transparent;
-      box-shadow: none;
-      cursor: default;
-    }
-
     /* Disabled state */
     :host(:state(disabled)) {
       opacity: 0.7;

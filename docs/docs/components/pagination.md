@@ -11,6 +11,16 @@ layout: component
   max-buttons="9"
   with-adjacent
 ></quiet-pagination>
+
+<br><br>
+
+<quiet-pagination 
+  id="custom" 
+  total-pages="30"
+  page="1" 
+  max-buttons="9"
+  with-adjacent
+></quiet-pagination>
 ```
 
 ## Examples

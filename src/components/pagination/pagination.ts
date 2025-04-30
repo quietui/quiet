@@ -57,8 +57,8 @@ export class QuietPagination extends QuietElement {
   /** The current page. */
   @property({ type: Number, reflect: true }) page = 1;
 
-  /** The maximum number of visible page buttons. Must be a minimum of 5. */
-  @property({ attribute: 'max-buttons', type: Number }) maxButtons = 7;
+  /** The maximum number of visible page buttons. Odd numbers work best. Must be no less than 5. */
+  @property({ attribute: 'max-buttons', type: Number }) maxButtons = 9;
 
   /** The pagination's appearance. */
   @property({ reflect: true }) appearance: 'compact' | 'standard' = 'standard';
@@ -134,6 +134,18 @@ export class QuietPagination extends QuietElement {
     }
   }
 
+  private handleEllipsisClick(position: 'start' | 'end') {
+    let newPage: number;
+    if (position === 'start') {
+      // Move backward by 5 pages, but stop at page 2
+      newPage = Math.max(2, this.page - 5);
+    } else {
+      // Move forward by 5 pages, but stop at totalPages - 1
+      newPage = Math.min(this.totalPages - 1, this.page + 5);
+    }
+    this.changePage(newPage);
+  }
+
   render() {
     const label = this.label || this.localize.term('pagination');
     const isPrevDisabled = this.page <= 1 || this.disabled;
@@ -164,7 +176,12 @@ export class QuietPagination extends QuietElement {
             if (item.type === 'ellipsis') {
               return html`
                 <li part="item" class="ellipsis">
-                  <button part="button button-ellipsis" class="ellipsis" disabled>
+                  <button
+                    part="button button-ellipsis"
+                    aria-label="${this.localize.term('jump')}"
+                    class="ellipsis"
+                    @click=${() => this.handleEllipsisClick(item.position)}
+                  >
                     <quiet-icon library="system" name="dots"></quiet-icon>
                   </button>
                 </li>

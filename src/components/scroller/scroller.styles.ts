@@ -49,18 +49,6 @@ export default css`
     overflow-y: auto;
   }
 
-  #scroll-left {
-    position: absolute;
-    top: calc(50% - var(--quiet-form-control-height-md) / 2);
-    left: 0.5em;
-  }
-
-  #scroll-right {
-    position: absolute;
-    top: calc(50% - var(--quiet-form-control-height-md) / 2);
-    right: 0.5em;
-  }
-
   /* Horizontal shadows */
   :host([orientation='horizontal']) {
     #start-shadow,

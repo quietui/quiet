@@ -49,11 +49,6 @@ export default css`
     user-select: none;
     -webkit-user-select: none;
 
-    &:hover:not(:disabled, .current, .ellipsis) {
-      border-color: var(--quiet-neutral-stroke-soft);
-      box-shadow: var(--quiet-shadow-softer);
-    }
-
     &:active:not(:disabled, .current) {
       translate: 0 var(--quiet-button-active-offset);
     }

@@ -20,7 +20,7 @@ export default css`
     display: flex;
   }
 
-  button {
+  [part~='button'] {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -31,11 +31,13 @@ export default css`
     border-radius: var(--quiet-border-radius);
     background-color: var(--quiet-paper-color);
     box-shadow: var(--quiet-shadow-softer);
+    color: inherit;
     font-size: inherit;
     line-height: 1;
     font-family: inherit;
     font-variant-numeric: tabular-nums;
     text-align: center;
+    text-decoration: none;
     cursor: pointer;
     transition:
       100ms background-color ease,
@@ -68,6 +70,7 @@ export default css`
     &:disabled {
       box-shadow: none;
       cursor: not-allowed;
+      opacity: 0.5;
     }
   }
 

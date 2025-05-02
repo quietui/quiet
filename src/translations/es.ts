@@ -25,7 +25,7 @@ const translation: Translation = {
   loading: 'Cargando',
   hue: 'Matiz',
   next: 'Siguiente',
-  numberOutOfTotal: (number, total) => `${number} de ${total}`,
+  numberOfTotal: (number, total) => `${number} de ${total}`,
   opacity: 'Opacidad',
   pageNumber: number => `Página ${number}`,
   pagination: 'Paginación',

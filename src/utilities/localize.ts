@@ -32,7 +32,7 @@ export interface Translation extends DefaultTranslation {
   jumpForward: string;
   lastPage: string;
   next: string;
-  numberOutOfTotal: (number: number, total: number) => string;
+  numberOfTotal: (number: number, total: number) => string;
   opacity: string;
   pageNumber: (number: number) => string;
   pagination: string;

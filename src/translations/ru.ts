@@ -25,7 +25,7 @@ const translation: Translation = {
   jumpForward: 'Перейти вперёд',
   lastPage: 'Последняя страница',
   next: 'Следующий',
-  numberOutOfTotal: (number, total) => `${number} из ${total}`,
+  numberOfTotal: (number, total) => `${number} из ${total}`,
   opacity: 'Непрозрачность',
   pageNumber: number => `Страница ${number}`,
   pagination: 'Пагинация',

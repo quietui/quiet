@@ -447,7 +447,7 @@ export class QuietRating extends QuietFormControlElement {
         aria-readonly=${this.readonly ? 'true' : 'false'}
         aria-valuemin="0"
         aria-valuenow=${this.value}
-        aria-valuetext="${this.localize.term('numberOutOfTotal', this.value, this.max)}"
+        aria-valuetext="${this.localize.term('numberOfTotal', this.value, this.max)}"
         aria-valuemax=${this.max}
         tabindex=${this.disabled || this.readonly ? '-1' : '0'}
         @focus=${this.handleFocus}

@@ -50,6 +50,24 @@ export class QuietScroller extends QuietElement {
     this.resizeObserver.disconnect();
   }
 
+  private handleKeyDown(event: KeyboardEvent) {
+    if (event.key === 'Home') {
+      event.preventDefault();
+      this.content.scrollTo({
+        left: this.orientation === 'horizontal' ? 0 : undefined,
+        top: this.orientation === 'vertical' ? 0 : undefined
+      });
+    }
+
+    if (event.key === 'End') {
+      event.preventDefault();
+      this.content.scrollTo({
+        left: this.orientation === 'horizontal' ? this.content.scrollWidth : undefined,
+        top: this.orientation === 'vertical' ? this.content.scrollHeight : undefined
+      });
+    }
+  }
+
   private handleSlotChange() {
     this.updateScroll();
   }
@@ -103,6 +121,7 @@ export class QuietScroller extends QuietElement {
         aria-label=${this.localize.term('scrollableRegion')}
         aria-orientation=${this.orientation}
         tabindex=${this.canScroll ? '0' : '-1'}
+        @keydown=${this.handleKeyDown}
         @scroll=${this.updateScroll}
       >
         <slot @slotchange=${this.handleSlotChange}></slot>

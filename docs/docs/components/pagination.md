@@ -6,8 +6,8 @@ layout: component
 ```html {.example}
 <quiet-pagination 
   id="custom"
-  total-pages="10000"
-  page="1" 
+  total-pages="20"
+  page="1"
   siblings="3"
   with-nav
 ></quiet-pagination>

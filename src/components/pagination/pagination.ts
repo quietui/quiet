@@ -187,6 +187,7 @@ export class QuietPagination extends QuietElement {
     const paginationItems = this.getPaginationItems();
     const chevronLeftIcon = html`<quiet-icon library="system" name="chevron-left"></quiet-icon>`;
     const chevronRightIcon = html`<quiet-icon library="system" name="chevron-right"></quiet-icon>`;
+    const numberFormatter = new Intl.NumberFormat(this.localize.lang());
 
     return html`
       <nav part="nav" aria-label="${label}">
@@ -233,7 +234,7 @@ export class QuietPagination extends QuietElement {
                     aria-current=${ifDefined(isCurrent ? 'page' : undefined)}
                     @click=${() => this.changePage(item.page)}
                   >
-                    ${item.page}
+                    ${numberFormatter.format(item.page)}
                   </button>
                 </li>
               `;

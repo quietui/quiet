@@ -1,4 +1,4 @@
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
@@ -30,7 +30,8 @@ import styles from './pagination.styles.js';
  * @csspart button-last - The button that navigates to the last page.
  * @csspart button-page - A button that navigates to a specific page.
  * @csspart button-current - The button that represents the current page.
- * @csspart button-ellipsis - A button that represents an ellipsis.
+ * @csspart button-jump - A jump (ellipsis) button.
+ * @csspart range - The text that shows the page you're on (compact appearance only).
  *
  * @cssstate disabled - Applied when the pagination is disabled.
  *
@@ -71,6 +72,12 @@ export class QuietPagination extends QuietElement {
 
   /** Removes the previous and next buttons. */
   @property({ type: Boolean, attribute: 'without-nav', reflect: true }) withoutNav = false;
+
+  updated(changedProperties: PropertyValues<this>) {
+    if (changedProperties.has('disabled')) {
+      this.customStates.set('disabled', this.disabled);
+    }
+  }
 
   /** Changes the current page, emitting a cancellable 'quiet-page-change' event. */
   private changePage(newPage: number) {
@@ -197,7 +204,7 @@ export class QuietPagination extends QuietElement {
         <button
           part="button button-previous"
           aria-label="${this.localize.term('previous')}"
-          ?disabled=${isPrevDisabled}
+          ?disabled=${isPrevDisabled || this.disabled}
           @click=${() => this.changePage(this.page - 1)}
         >
           ${isRtl ? chevronRightIcon : chevronLeftIcon}
@@ -210,7 +217,7 @@ export class QuietPagination extends QuietElement {
         <button
           part="button button-next"
           aria-label="${this.localize.term('next')}"
-          ?disabled=${isNextDisabled}
+          ?disabled=${isNextDisabled || this.disabled}
           @click=${() => this.changePage(this.page + 1)}
         >
           ${isRtl ? chevronLeftIcon : chevronRightIcon}
@@ -225,7 +232,7 @@ export class QuietPagination extends QuietElement {
           <ul part="list">
             ${this.withoutNav ? '' : previousButton}
             <li part="item">
-              <span part="page-info"> ${this.localize.term('numberOfTotal', this.page, this.totalPages)} </span>
+              <span part="range"> ${this.localize.term('numberOfTotal', this.page, this.totalPages)} </span>
             </li>
             ${this.withoutNav ? '' : nextButton}
           </ul>
@@ -245,9 +252,10 @@ export class QuietPagination extends QuietElement {
               return html`
                 <li part="item" class="ellipsis">
                   <button
-                    part="button button-ellipsis"
-                    aria-label="${this.localize.term(item.position === 'start' ? 'jumpBackward' : 'jumpForward')}"
+                    part="button button-jump"
                     class="ellipsis"
+                    aria-label="${this.localize.term(item.position === 'start' ? 'jumpBackward' : 'jumpForward')}"
+                    ?disabled=${this.disabled}
                     @click=${() => this.handleEllipsisClick(item.position)}
                   >
                     <quiet-icon library="system" name="dots"></quiet-icon>
@@ -266,6 +274,7 @@ export class QuietPagination extends QuietElement {
                       current: isCurrent
                     })}
                     aria-current=${ifDefined(isCurrent ? 'page' : undefined)}
+                    ?disabled=${this.disabled}
                     @click=${() => this.changePage(item.page)}
                   >
                     ${numberFormatter.format(item.page)}

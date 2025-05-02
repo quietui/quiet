@@ -56,7 +56,7 @@ export default css`
     }
 
     /* Current page */
-    &.current {
+    &.current:not(:disabled) {
       border-color: var(--quiet-primary-fill-mid);
       background-color: var(--quiet-primary-fill-mid);
       color: var(--quiet-primary-text-on-mid);
@@ -64,20 +64,20 @@ export default css`
       cursor: default;
     }
 
-    /* Disabled state */
-    :host(:state(disabled)) {
-      opacity: 0.7;
-    }
-
-    :host(:state(disabled)) button.disabled {
+    /* Disabled buttons */
+    &:disabled {
       box-shadow: none;
       cursor: not-allowed;
-      opacity: 0.5;
     }
   }
 
   quiet-icon {
     font-size: 1.25em;
+  }
+
+  :host(:state(disabled)) {
+    cursor: not-allowed;
+    opacity: 0.5;
   }
 
   /* Compact */
@@ -86,7 +86,7 @@ export default css`
     align-items: center;
   }
 
-  :host([appearance='compact']) [part~='page-info'] {
+  :host([appearance='compact']) [part~='range'] {
     margin-inline: 0.5em;
     font-size: 0.9375em;
     font-variant-numeric: tabular-nums;

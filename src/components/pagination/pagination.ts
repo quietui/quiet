@@ -70,7 +70,7 @@ export class QuietPagination extends QuietElement {
   @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Removes the previous and next buttons. */
-  @property({ type: Boolean, attribute: 'no-nav', reflect: true }) noNav = false;
+  @property({ type: Boolean, attribute: 'without-nav', reflect: true }) withoutNav = false;
 
   /** Changes the current page, emitting a cancellable 'quiet-page-change' event. */
   private changePage(newPage: number) {
@@ -223,11 +223,11 @@ export class QuietPagination extends QuietElement {
       return html`
         <nav part="nav" aria-label="${label}">
           <ul part="list">
-            ${this.noNav ? '' : previousButton}
+            ${this.withoutNav ? '' : previousButton}
             <li part="item">
               <span part="page-info"> ${this.localize.term('numberOfTotal', this.page, this.totalPages)} </span>
             </li>
-            ${this.noNav ? '' : nextButton}
+            ${this.withoutNav ? '' : nextButton}
           </ul>
         </nav>
       `;
@@ -239,7 +239,7 @@ export class QuietPagination extends QuietElement {
     return html`
       <nav part="nav" aria-label="${label}">
         <ul part="list">
-          ${this.noNav ? '' : previousButton}
+          ${this.withoutNav ? '' : previousButton}
           ${paginationItems.map(item => {
             if (item.type === 'ellipsis') {
               return html`
@@ -274,7 +274,7 @@ export class QuietPagination extends QuietElement {
               `;
             }
           })}
-          ${this.noNav ? '' : nextButton}
+          ${this.withoutNav ? '' : nextButton}
         </ul>
       </nav>
     `;

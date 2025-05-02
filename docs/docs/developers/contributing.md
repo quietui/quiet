@@ -157,7 +157,7 @@ If a component needs to set attributes on itself, such as `role`, `aria-*`, or `
 
 Boolean attributes should always default to `false`, since HTML users can't remove them declaratively otherwise.
 
-Use `with-*` attributes for features that enable optional content. Use `no-*` attributes for features that disable optional content.
+Use `with-*` attributes for features that enable optional content. Use `without-*` attributes for features that disable optional content.
 
 ### Attribute reflection
 

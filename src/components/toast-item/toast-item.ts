@@ -65,7 +65,7 @@ export class QuietToastItem extends QuietElement {
   @property({ type: Number }) duration = 5000;
 
   /** When set, the close button will be omitted. */
-  @property({ attribute: 'no-close-button', type: Boolean, reflect: true }) noCloseButton = false;
+  @property({ attribute: 'without-close-button', type: Boolean, reflect: true }) withoutCloseButton = false;
 
   connectedCallback() {
     super.connectedCallback();
@@ -164,7 +164,7 @@ export class QuietToastItem extends QuietElement {
 
       <div id="content" part="content"><slot></slot></div>
 
-      ${!this.noCloseButton
+      ${!this.withoutCloseButton
         ? html` <button
             id="close-button"
             part="close-button"

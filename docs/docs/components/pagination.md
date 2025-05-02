@@ -25,7 +25,7 @@ layout: component
 <quiet-pagination 
   id="custom" 
   appearance="compact"
-  total-pages="10"
+  total-pages="5"
   page="1" 
   siblings="3"
 ></quiet-pagination>

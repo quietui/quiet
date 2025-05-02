@@ -79,7 +79,7 @@ Use the `size` attribute to change the rating's size.
 
 ### Using custom symbols
 
-To customize the symbols shown, use JavaScript to set the `getSymbol` property to a function that returns the HTML for each symbol. The function will receive the `value` and `isSelected` arguments that you can use to customize the symbol based on specific values or whether the symbol is in the selected state.
+To customize the symbols shown, use JavaScript to set the `symbolFormatter` property to a function that returns the HTML for each symbol. The function will receive the `value` and `isSelected` arguments that you can use to customize the symbol based on specific values or whether the symbol is in the selected state.
 
 ```html {.example}
 <quiet-rating 
@@ -95,7 +95,7 @@ To customize the symbols shown, use JavaScript to set the `getSymbol` property t
 <script>
   const rating = document.getElementById('rating__custom-symbols');
 
-  rating.getSymbol = (value, isSelected) => {
+  rating.symbolFormatter = (value, isSelected) => {
     return isSelected ? 
       `<quiet-icon family="filled" name="heart"></quiet-icon>` : 
       `<quiet-icon family="outline" name="heart"></quiet-icon>`;
@@ -114,7 +114,7 @@ To customize the symbols shown, use JavaScript to set the `getSymbol` property t
 <script>
   const rating = document.getElementById('rating__numbers');
 
-  rating.getSymbol = (value, isSelected) => {
+  rating.symbolFormatter = (value, isSelected) => {
     const family = isSelected ? 'filled' : 'outline';
     return `<quiet-icon family="${family}" name="square-number-${value}"></quiet-icon>`
   }
@@ -132,7 +132,7 @@ To customize the symbols shown, use JavaScript to set the `getSymbol` property t
 <script>
   const rating = document.getElementById('rating__diamonds');
 
-  rating.getSymbol = (value, isSelected) => {
+  rating.symbolFormatter = (value, isSelected) => {
     const family = isSelected ? 'filled' : 'outline';
     const name = isSelected ? 'diamond' : 'point'
     return `<quiet-icon family="${family}" name="${name}"></quiet-icon>`
@@ -141,7 +141,7 @@ To customize the symbols shown, use JavaScript to set the `getSymbol` property t
 ```
 
 :::warn
-You should only return trusted HTML from the `getSymbol()` function, otherwise you may become vulnerable to XSS exploits.
+You should only return trusted HTML from the `symbolFormatter()` function, otherwise you may become vulnerable to XSS exploits.
 :::
 
 ### Readonly ratings

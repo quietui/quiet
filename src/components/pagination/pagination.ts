@@ -60,6 +60,9 @@ export class QuietPagination extends QuietElement {
   /** The number of page buttons to show on each side of the current page. */
   @property({ attribute: 'siblings', type: Number }) siblings = 3;
 
+  /** The number of pages to jump when ellipsis buttons are clicked. */
+  @property({ attribute: 'jump', type: Number }) jump = 5;
+
   /** The pagination's appearance. */
   @property({ reflect: true }) appearance: 'compact' | 'standard' = 'standard';
 
@@ -170,11 +173,11 @@ export class QuietPagination extends QuietElement {
   private handleEllipsisClick(position: 'start' | 'end') {
     let newPage: number;
     if (position === 'start') {
-      // Move backward by 5 pages, but stop at page 2
-      newPage = Math.max(2, this.page - 5);
+      // Move backward by jump pages, but stop at page 2
+      newPage = Math.max(2, this.page - this.jump);
     } else {
-      // Move forward by 5 pages, but stop at totalPages - 1
-      newPage = Math.min(this.totalPages - 1, this.page + 5);
+      // Move forward by jump pages, but stop at totalPages - 1
+      newPage = Math.min(this.totalPages - 1, this.page + this.jump);
     }
     this.changePage(newPage);
   }

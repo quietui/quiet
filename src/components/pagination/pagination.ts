@@ -69,8 +69,8 @@ export class QuietPagination extends QuietElement {
   /** Disables the pagination control. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
-  /** Shows the previous and next buttons. */
-  @property({ type: Boolean, attribute: 'with-nav', reflect: true }) withNav = false;
+  /** Removes the previous and next buttons. */
+  @property({ type: Boolean, attribute: 'no-nav', reflect: true }) noNav = false;
 
   /** Changes the current page, emitting a cancellable 'quiet-page-change' event. */
   private changePage(newPage: number) {
@@ -187,28 +187,59 @@ export class QuietPagination extends QuietElement {
     const isPrevDisabled = this.page <= 1 || this.disabled;
     const isNextDisabled = this.page >= this.totalPages || this.disabled;
     const isRtl = this.localize.dir() === 'rtl';
-    const paginationItems = this.getPaginationItems();
     const chevronLeftIcon = html`<quiet-icon library="system" name="chevron-left"></quiet-icon>`;
     const chevronRightIcon = html`<quiet-icon library="system" name="chevron-right"></quiet-icon>`;
     const numberFormatter = new Intl.NumberFormat(this.localize.lang());
 
+    // Navigation buttons for either appearance
+    const previousButton = html`
+      <li part="item">
+        <button
+          part="button button-previous"
+          aria-label="${this.localize.term('previous')}"
+          ?disabled=${isPrevDisabled}
+          @click=${() => this.changePage(this.page - 1)}
+        >
+          ${isRtl ? chevronRightIcon : chevronLeftIcon}
+        </button>
+      </li>
+    `;
+
+    const nextButton = html`
+      <li part="item">
+        <button
+          part="button button-next"
+          aria-label="${this.localize.term('next')}"
+          ?disabled=${isNextDisabled}
+          @click=${() => this.changePage(this.page + 1)}
+        >
+          ${isRtl ? chevronLeftIcon : chevronRightIcon}
+        </button>
+      </li>
+    `;
+
+    // Render the compact appearance
+    if (this.appearance === 'compact') {
+      return html`
+        <nav part="nav" aria-label="${label}">
+          <ul part="list">
+            ${this.noNav ? '' : previousButton}
+            <li part="item">
+              <span part="page-info"> ${this.localize.term('numberOfTotal', this.page, this.totalPages)} </span>
+            </li>
+            ${this.noNav ? '' : nextButton}
+          </ul>
+        </nav>
+      `;
+    }
+
+    // Render the standard appearance
+    const paginationItems = this.getPaginationItems();
+
     return html`
       <nav part="nav" aria-label="${label}">
         <ul part="list">
-          ${this.withNav
-            ? html`
-                <li part="item">
-                  <button
-                    part="button button-previous"
-                    aria-label="${this.localize.term('previous')}"
-                    ?disabled=${isPrevDisabled}
-                    @click=${() => this.changePage(this.page - 1)}
-                  >
-                    ${isRtl ? chevronRightIcon : chevronLeftIcon}
-                  </button>
-                </li>
-              `
-            : ''}
+          ${this.noNav ? '' : previousButton}
           ${paginationItems.map(item => {
             if (item.type === 'ellipsis') {
               return html`
@@ -243,20 +274,7 @@ export class QuietPagination extends QuietElement {
               `;
             }
           })}
-          ${this.withNav
-            ? html`
-                <li part="item">
-                  <button
-                    part="button button-next"
-                    aria-label="${this.localize.term('next')}"
-                    ?disabled=${isNextDisabled}
-                    @click=${() => this.changePage(this.page + 1)}
-                  >
-                    ${isRtl ? chevronLeftIcon : chevronRightIcon}
-                  </button>
-                </li>
-              `
-            : ''}
+          ${this.noNav ? '' : nextButton}
         </ul>
       </nav>
     `;

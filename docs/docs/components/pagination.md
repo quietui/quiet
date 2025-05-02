@@ -9,7 +9,6 @@ layout: component
   total-pages="20"
   page="1"
   siblings="3"
-  with-nav
 ></quiet-pagination>
 
 <br><br>
@@ -19,7 +18,16 @@ layout: component
   total-pages="30"
   page="1" 
   siblings="3"
-  with-nav
+></quiet-pagination>
+
+<br><br>
+
+<quiet-pagination 
+  id="custom" 
+  appearance="compact"
+  total-pages="10"
+  page="1" 
+  siblings="3"
 ></quiet-pagination>
 ```
 

@@ -38,6 +38,7 @@ export default css`
     font-size: inherit;
     line-height: 1;
     font-family: inherit;
+    font-variant-numeric: tabular-nums;
     text-align: center;
     cursor: pointer;
     transition:
@@ -81,5 +82,17 @@ export default css`
 
   quiet-icon {
     font-size: 1.25em;
+  }
+
+  /* Compact */
+  :host([appearance='compact']) [part~='list'] {
+    display: flex;
+    align-items: center;
+  }
+
+  :host([appearance='compact']) [part~='page-info'] {
+    margin-inline: 0.5em;
+    font-size: 0.9375em;
+    font-variant-numeric: tabular-nums;
   }
 `;

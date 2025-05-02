@@ -57,8 +57,8 @@ export class QuietPagination extends QuietElement {
   /** The current page. */
   @property({ type: Number, reflect: true }) page = 1;
 
-  /** The maximum number of visible page buttons. Odd numbers work best. Must be no less than 5. */
-  @property({ attribute: 'max-buttons', type: Number }) maxButtons = 9;
+  /** The number of page buttons to show on each side of the current page. */
+  @property({ attribute: 'siblings', type: Number }) siblings = 3;
 
   /** The pagination's appearance. */
   @property({ reflect: true }) appearance: 'compact' | 'standard' = 'standard';
@@ -90,17 +90,18 @@ export class QuietPagination extends QuietElement {
   /** Generates the list of pagination items, including pages, and ellipses. */
   private getPaginationItems(): PaginationItem[] {
     const items: PaginationItem[] = [];
-    const clampedMax = clamp(this.maxButtons, 5, Infinity);
+    const totalButtons = 2 * this.siblings + 1; // Current page + siblings on both sides
+    const clampedTotalButtons = clamp(totalButtons, 5, Infinity);
 
     if (this.totalPages < 1) return items;
 
-    if (this.totalPages <= clampedMax) {
+    if (this.totalPages <= clampedTotalButtons) {
       // Show all pages and add placeholders if needed
       for (let i = 1; i <= this.totalPages; i++) {
         items.push({ type: 'page', page: i });
       }
     } else {
-      const middlePageCount = clampedMax - 4; // For pages between first/last and ellipses
+      const middlePageCount = clampedTotalButtons - 4; // For pages between first/last and ellipses
       const sideButtons = Math.floor(middlePageCount / 2);
 
       // Determine if we need to show ellipsis at start and/or end
@@ -113,10 +114,10 @@ export class QuietPagination extends QuietElement {
       if (!showStartEllipsis && showEndEllipsis) {
         // Near start, show more pages at beginning
         rangeStart = 2;
-        rangeEnd = clampedMax - 2; // -2 for first page and end ellipsis
+        rangeEnd = clampedTotalButtons - 2; // -2 for first page and end ellipsis
       } else if (showStartEllipsis && !showEndEllipsis) {
         // Near end, show more pages at end
-        rangeStart = this.totalPages - (clampedMax - 3); // -3 for first page, last page, start ellipsis
+        rangeStart = this.totalPages - (clampedTotalButtons - 3); // -3 for first page, last page, start ellipsis
         rangeEnd = this.totalPages - 1;
       } else if (showStartEllipsis && showEndEllipsis) {
         // In middle, center current page
@@ -210,7 +211,7 @@ export class QuietPagination extends QuietElement {
                 <li part="item" class="ellipsis">
                   <button
                     part="button button-ellipsis"
-                    aria-label="${this.localize.term('jump')}"
+                    aria-label="${this.localize.term(item.position === 'start' ? 'jumpBackward' : 'jumpForward')}"
                     class="ellipsis"
                     @click=${() => this.handleEllipsisClick(item.position)}
                   >

@@ -21,6 +21,8 @@ const translation: Translation = {
   hide: 'Скрыть',
   loading: 'Загрузка',
   hue: 'Оттенок',
+  jumpBackward: 'Перейти назад',
+  jumpForward: 'Перейти вперёд',
   lastPage: 'Последняя страница',
   next: 'Следующий',
   numberOutOfTotal: (number, total) => `${number} из ${total}`,

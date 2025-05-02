@@ -18,6 +18,8 @@ const translation: Translation = {
   firstPage: 'First page',
   hidePassword: 'Hide password',
   hide: 'Hide',
+  jumpBackward: 'Jump backward',
+  jumpForward: 'Jump forward',
   lastPage: 'Last page',
   loading: 'Loading',
   hue: 'Hue',

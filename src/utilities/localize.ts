@@ -28,6 +28,8 @@ export interface Translation extends DefaultTranslation {
   hidePassword: string;
   hide: string;
   hue: string;
+  jumpBackward: string;
+  jumpForward: string;
   lastPage: string;
   next: string;
   numberOutOfTotal: (number: number, total: number) => string;

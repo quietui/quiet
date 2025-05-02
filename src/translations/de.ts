@@ -22,6 +22,8 @@ const translation: Translation = {
   lastPage: 'Letzte Seite',
   loading: 'Wird geladen',
   hue: 'Farbton',
+  jumpBackward: 'Zurückspringen',
+  jumpForward: 'Vorwärtsspringen',
   next: 'Nächste',
   numberOutOfTotal: (number, total) => `${number} von ${total}`,
   opacity: 'Opazität',

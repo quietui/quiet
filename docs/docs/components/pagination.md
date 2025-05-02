@@ -5,10 +5,10 @@ layout: component
 
 ```html {.example}
 <quiet-pagination 
-  id="custom" 
+  id="custom"
   total-pages="10"
   page="1" 
-  max-buttons="9"
+  siblings="3"
   with-nav
 ></quiet-pagination>
 
@@ -18,7 +18,7 @@ layout: component
   id="custom" 
   total-pages="30"
   page="1" 
-  max-buttons="9"
+  siblings="3"
   with-nav
 ></quiet-pagination>
 ```

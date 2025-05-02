@@ -19,6 +19,8 @@ const translation: Translation = {
   firstPage: 'Primera página',
   hidePassword: 'Ocultar contraseña',
   hide: 'Ocultar',
+  jumpBackward: 'Saltar hacia atrás',
+  jumpForward: 'Saltar hacia adelante',
   lastPage: 'Última página',
   loading: 'Cargando',
   hue: 'Matiz',

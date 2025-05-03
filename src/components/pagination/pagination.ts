@@ -3,12 +3,23 @@ import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
+import { QuietBeforePageChangeEvent, QuietPageChangeEvent } from '../../events/page.js';
 import hostStyles from '../../styles/host.styles.js';
 import { Localize } from '../../utilities/localize.js';
 import { clamp } from '../../utilities/math.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import '../icon/icon.js';
 import styles from './pagination.styles.js';
+
+type PaginationButton =
+  | {
+      type: 'page';
+      page: number;
+    }
+  | {
+      type: 'jump';
+      position: 'start' | 'end';
+    };
 
 /**
  * <quiet-pagination>
@@ -20,6 +31,16 @@ import styles from './pagination.styles.js';
  *
  * @dependency quiet-icon
  *
+ * @slot previous-icon - A custom icon to use for the previous button.
+ * @slot next-icon - A custom icon to use for the next button.
+ * @slot jump-backward-icon - A custom icon to use for the jump backward button.
+ * @slot jump-forward-icon - A custom icon to use for jump forward button.
+ *
+ * @event quiet-before-page-change - Emitted when the page is going to change but before it actually changes. Calling
+ *  `event.preventDefault()` will prevent the page from changing. Inspect `event.detail` to get the `currentPage` and
+ *  `requestedPage` properties.
+ * @event quiet-page-change - Emitted after the page has been changed and the UI has been updated.
+ *
  * @csspart nav - The navigation container, a `<nav>` element.
  * @csspart list - The list that contains the pagination items, a `<ul>` element.
  * @csspart item - A pagination item, an `<li>` element.
@@ -30,48 +51,50 @@ import styles from './pagination.styles.js';
  * @csspart button-last - The button that navigates to the last page.
  * @csspart button-page - A button that navigates to a specific page.
  * @csspart button-current - The button that represents the current page.
- * @csspart button-jump - A jump (ellipsis) button.
- * @csspart range - The text that shows the page you're on (compact appearance only).
+ * @csspart button-jump-backward - The jump backward button.
+ * @csspart button-jump-forward - The jump forward button.
+ * @csspart range - The page range that shows the page when viewed in the compact format, e.g. "1 of 10".
  *
  * @cssstate disabled - Applied when the pagination is disabled.
- *
- * @event quiet-page-change - Emitted when the page changes and can be cancelled.
  */
-
-/**
- * Represents an item in the pagination list, which can be a page number or an ellipsis.
- */
-type PaginationItem = { type: 'page'; page: number } | { type: 'ellipsis'; position: 'start' | 'end' };
-
 @customElement('quiet-pagination')
 export class QuietPagination extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
   private localize = new Localize(this);
 
-  /** A label to use to describe the control to assistive devices. */
+  /** A label to use to describe the control to assistive devices. Defaults to "Pagination" when not set. */
   @property() label = '';
 
   /** The total number of pages to show. */
-  @property({ attribute: 'total-pages', type: Number }) totalPages = 10;
+  @property({ attribute: 'total-pages', type: Number }) totalPages = 1;
 
   /** The current page. */
   @property({ type: Number, reflect: true }) page = 1;
 
-  /** The number of page buttons to show on each side of the current page. */
+  /** The number of pages to show on each side of the current page. Minimum 2. */
   @property({ attribute: 'siblings', type: Number }) siblings = 3;
 
-  /** The number of pages to jump when ellipsis buttons are clicked. */
+  /** The number of pages to increase or decrease when jump buttons are clicked. */
   @property({ attribute: 'jump', type: Number }) jump = 5;
 
-  /** The pagination's appearance. */
-  @property({ reflect: true }) appearance: 'compact' | 'standard' = 'standard';
+  /** How the pagination will display buttons. */
+  @property({ reflect: true }) format: 'compact' | 'standard' = 'standard';
 
   /** Disables the pagination control. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Removes the previous and next buttons. */
   @property({ type: Boolean, attribute: 'without-nav', reflect: true }) withoutNav = false;
+
+  willUpdate(changedProperties: PropertyValues<this>) {
+    super.willUpdate(changedProperties);
+
+    // Ensure page is always a number, even if the user passes in a string
+    if (changedProperties.has('page')) {
+      this.page = Number(this.page);
+    }
+  }
 
   updated(changedProperties: PropertyValues<this>) {
     if (changedProperties.has('disabled')) {
@@ -80,26 +103,29 @@ export class QuietPagination extends QuietElement {
   }
 
   /** Changes the current page, emitting a cancellable 'quiet-page-change' event. */
-  private changePage(newPage: number) {
+  private async changePage(newPage: number) {
     // Exit if new page is invalid or same as current
     if (newPage < 1 || newPage > this.totalPages || newPage === this.page) return;
 
-    // Create and dispatch cancellable event with new page details
-    const event = new CustomEvent('quiet-page-change', {
-      detail: { page: newPage },
-      cancelable: true
-    });
-    const cancelled = !this.dispatchEvent(event);
-
-    // Update page if event wasn't cancelled
-    if (!cancelled) {
-      this.page = newPage;
+    // Dispatch `quiet-before-page-change`
+    const beforePageChangeEvent = new QuietBeforePageChangeEvent({ currentPage: this.page, requestedPage: newPage });
+    this.dispatchEvent(beforePageChangeEvent);
+    if (beforePageChangeEvent.defaultPrevented) {
+      return;
     }
+
+    // Switch to the new page
+    this.page = newPage;
+    await this.updateComplete;
+
+    // Dispatch `quiet-page-change` after the UI updates
+    const pageChangeEvent = new QuietPageChangeEvent();
+    this.dispatchEvent(pageChangeEvent);
   }
 
-  /** Generates the list of pagination items, including pages, and ellipses. */
-  private getPaginationItems(): PaginationItem[] {
-    const items: PaginationItem[] = [];
+  /** Generates the list of pagination items, including pages and jump buttons. */
+  private getPaginationItems(): PaginationButton[] {
+    const items: PaginationButton[] = [];
     const totalButtons = 2 * this.siblings + 1; // Current page + siblings on both sides
     const clampedTotalButtons = clamp(totalButtons, 5, Infinity);
 
@@ -111,25 +137,25 @@ export class QuietPagination extends QuietElement {
         items.push({ type: 'page', page: i });
       }
     } else {
-      const middlePageCount = clampedTotalButtons - 4; // For pages between first/last and ellipses
+      const middlePageCount = clampedTotalButtons - 4; // For pages between first/last and jump buttons
       const sideButtons = Math.floor(middlePageCount / 2);
 
-      // Determine if we need to show ellipsis at start and/or end
-      const showStartEllipsis = this.page > sideButtons + 2;
-      const showEndEllipsis = this.page < this.totalPages - sideButtons - 1;
+      // Determine if we need to show jumps at start and/or end
+      const showJumpBackward = this.page > sideButtons + 2;
+      const showJumpForward = this.page < this.totalPages - sideButtons - 1;
 
       // Calculate start and end of visible page range
       let rangeStart, rangeEnd;
 
-      if (!showStartEllipsis && showEndEllipsis) {
+      if (!showJumpBackward && showJumpForward) {
         // Near start, show more pages at beginning
         rangeStart = 2;
-        rangeEnd = clampedTotalButtons - 2; // -2 for first page and end ellipsis
-      } else if (showStartEllipsis && !showEndEllipsis) {
+        rangeEnd = clampedTotalButtons - 2;
+      } else if (showJumpBackward && !showJumpForward) {
         // Near end, show more pages at end
-        rangeStart = this.totalPages - (clampedTotalButtons - 3); // -3 for first page, last page, start ellipsis
+        rangeStart = this.totalPages - (clampedTotalButtons - 3);
         rangeEnd = this.totalPages - 1;
-      } else if (showStartEllipsis && showEndEllipsis) {
+      } else if (showJumpBackward && showJumpForward) {
         // In middle, center current page
         rangeStart = Math.max(2, this.page - sideButtons);
         rangeEnd = Math.min(this.totalPages - 1, this.page + sideButtons);
@@ -143,7 +169,7 @@ export class QuietPagination extends QuietElement {
           }
         }
       } else {
-        // No ellipses needed, show all possible pages
+        // No jump needed, show all possible pages
         rangeStart = 2;
         rangeEnd = this.totalPages - 1;
       }
@@ -151,11 +177,11 @@ export class QuietPagination extends QuietElement {
       // Add first page
       items.push({ type: 'page', page: 1 });
 
-      // Check if we should show page 2 instead of start ellipsis
+      // Check if we should show page 2 instead of the jump button
       if (rangeStart === 3) {
         items.push({ type: 'page', page: 2 });
-      } else if (showStartEllipsis) {
-        items.push({ type: 'ellipsis', position: 'start' });
+      } else if (showJumpBackward) {
+        items.push({ type: 'jump', position: 'start' });
       }
 
       // Add range of pages
@@ -163,11 +189,11 @@ export class QuietPagination extends QuietElement {
         items.push({ type: 'page', page: i });
       }
 
-      // Check if we should show second-to-last page instead of end ellipsis
+      // Check if we should show second-to-last page instead of the jump button
       if (rangeEnd === this.totalPages - 2) {
         items.push({ type: 'page', page: this.totalPages - 1 });
-      } else if (showEndEllipsis) {
-        items.push({ type: 'ellipsis', position: 'end' });
+      } else if (showJumpForward) {
+        items.push({ type: 'jump', position: 'end' });
       }
 
       // Add last page
@@ -177,13 +203,13 @@ export class QuietPagination extends QuietElement {
     return items;
   }
 
-  private handleEllipsisClick(position: 'start' | 'end') {
+  private handleJump(position: 'start' | 'end') {
     let newPage: number;
     if (position === 'start') {
-      // Move backward by jump pages, but stop at page 2
+      // Jump backwards, but stop at page 2
       newPage = Math.max(2, this.page - this.jump);
     } else {
-      // Move forward by jump pages, but stop at totalPages - 1
+      // Jump forward, but but stop at totalPages - 1
       newPage = Math.min(this.totalPages - 1, this.page + this.jump);
     }
     this.changePage(newPage);
@@ -196,9 +222,8 @@ export class QuietPagination extends QuietElement {
     const isRtl = this.localize.dir() === 'rtl';
     const chevronLeftIcon = html`<quiet-icon library="system" name="chevron-left"></quiet-icon>`;
     const chevronRightIcon = html`<quiet-icon library="system" name="chevron-right"></quiet-icon>`;
-    const numberFormatter = new Intl.NumberFormat(this.localize.lang());
 
-    // Navigation buttons for either appearance
+    // Previous button
     const previousButton = html`
       <li part="item">
         <button
@@ -207,11 +232,12 @@ export class QuietPagination extends QuietElement {
           ?disabled=${isPrevDisabled || this.disabled}
           @click=${() => this.changePage(this.page - 1)}
         >
-          ${isRtl ? chevronRightIcon : chevronLeftIcon}
+          <slot name="previous-icon"> ${isRtl ? chevronRightIcon : chevronLeftIcon} </slot>
         </button>
       </li>
     `;
 
+    // Next button
     const nextButton = html`
       <li part="item">
         <button
@@ -220,19 +246,25 @@ export class QuietPagination extends QuietElement {
           ?disabled=${isNextDisabled || this.disabled}
           @click=${() => this.changePage(this.page + 1)}
         >
-          ${isRtl ? chevronLeftIcon : chevronRightIcon}
+          <slot name="next-icon"> ${isRtl ? chevronLeftIcon : chevronRightIcon} </slot>
         </button>
       </li>
     `;
 
-    // Render the compact appearance
-    if (this.appearance === 'compact') {
+    // Render the compact format
+    if (this.format === 'compact') {
       return html`
-        <nav part="nav" aria-label="${label}">
-          <ul part="list">
+        <nav id="nav" part="nav" aria-label="${label}">
+          <ul id="list" part="list">
             ${this.withoutNav ? '' : previousButton}
             <li part="item">
-              <span part="range"> ${this.localize.term('numberOfTotal', this.page, this.totalPages)} </span>
+              <span id="range" part="range">
+                ${this.localize.term(
+                  'numberOfTotal',
+                  this.localize.number(this.page, { useGrouping: true }),
+                  this.localize.number(this.totalPages, { useGrouping: true })
+                )}
+              </span>
             </li>
             ${this.withoutNav ? '' : nextButton}
           </ul>
@@ -240,25 +272,24 @@ export class QuietPagination extends QuietElement {
       `;
     }
 
-    // Render the standard appearance
-    const paginationItems = this.getPaginationItems();
-
+    // Render the standard format
     return html`
       <nav part="nav" aria-label="${label}">
         <ul part="list">
           ${this.withoutNav ? '' : previousButton}
-          ${paginationItems.map(item => {
-            if (item.type === 'ellipsis') {
+          ${this.getPaginationItems().map(item => {
+            if (item.type === 'jump') {
               return html`
-                <li part="item" class="ellipsis">
+                <li part="item">
                   <button
-                    part="button button-jump"
-                    class="ellipsis"
+                    part="button ${item.position === 'start' ? 'button-jump-backward' : 'button-jump-forward'}"
                     aria-label="${this.localize.term(item.position === 'start' ? 'jumpBackward' : 'jumpForward')}"
                     ?disabled=${this.disabled}
-                    @click=${() => this.handleEllipsisClick(item.position)}
+                    @click=${() => this.handleJump(item.position)}
                   >
-                    <quiet-icon library="system" name="dots"></quiet-icon>
+                    <slot name=${item.position === 'start' ? 'jump-backward-icon' : 'jump-forward-icon'}>
+                      <quiet-icon library="system" name="dots"></quiet-icon>
+                    </slot>
                   </button>
                 </li>
               `;
@@ -270,14 +301,13 @@ export class QuietPagination extends QuietElement {
                 <li part="item">
                   <button
                     part=${part}
-                    class=${classMap({
-                      current: isCurrent
-                    })}
+                    class=${classMap({ current: isCurrent })}
+                    aria-label=${this.localize.term('pageNumber', item.page)}
                     aria-current=${ifDefined(isCurrent ? 'page' : undefined)}
                     ?disabled=${this.disabled}
                     @click=${() => this.changePage(item.page)}
                   >
-                    ${numberFormatter.format(item.page)}
+                    ${this.localize.number(item.page, { useGrouping: true })}
                   </button>
                 </li>
               `;

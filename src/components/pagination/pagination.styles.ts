@@ -46,8 +46,10 @@ export default css`
     user-select: none;
     -webkit-user-select: none;
 
-    &:hover:not(:disabled, .current) {
-      background-color: color-mix(in oklab, var(--quiet-neutral-fill-softer), black 5%);
+    @media (hover: hover) {
+      &:hover:not(:disabled, .current) {
+        background-color: color-mix(in oklab, var(--quiet-neutral-fill-softer), black 5%);
+      }
     }
 
     &:active:not(:disabled, .current) {

@@ -10,7 +10,7 @@ layout: docs
     description="Results will automatically update as you type"
     pill 
     autofocus 
-    clearable
+    with-clear
     class="quiet-vh-description"
   >
     <quiet-icon slot="start" name="search"></quiet-icon>

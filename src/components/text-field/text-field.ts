@@ -91,7 +91,7 @@ export class QuietTextField extends QuietFormControlElement {
   @property({ type: Boolean, reflect: true }) readonly = false;
 
   /** Adds a clear button to the text field when it's not blank. */
-  @property({ type: Boolean, reflect: true }) clearable = false;
+  @property({ attribute: 'with-clear', type: Boolean, reflect: true }) withClear = false;
 
   /** The type of text field to render. */
   @property({ reflect: true }) appearance: 'normal' | 'filled' | 'unstyled' = 'normal';
@@ -494,7 +494,7 @@ export class QuietTextField extends QuietFormControlElement {
               </button>
             `
           : ''}
-        ${this.clearable && this.value?.length > 0 && !this.disabled && !this.readonly
+        ${this.withClear && this.value?.length > 0 && !this.disabled && !this.readonly
           ? html`
               <button
                 id="clear-button"

@@ -115,7 +115,7 @@ export class QuietRating extends QuietFormControlElement {
    * that you can use to customize the symbol based on specific values or whether the symbol is in the selected state.
    * You should only return trusted HTML from this function, otherwise you may become vulnerable to XSS exploits.
    */
-  @property({ attribute: false }) getSymbol: (step: number, isSelected: boolean) => string = (_, isSelected) => {
+  @property({ attribute: false }) symbolFormatter: (step: number, isSelected: boolean) => string = (_, isSelected) => {
     return isSelected
       ? `<quiet-icon library="system" name="star" family="filled"></quiet-icon>`
       : `<quiet-icon library="system" name="star" family="outline"></quiet-icon>`;
@@ -408,7 +408,7 @@ export class QuietRating extends QuietFormControlElement {
     const symbols = [];
 
     for (let i = 1; i <= this.max; i += 1) {
-      symbols.push([this.getSymbol(i, true), this.getSymbol(i, false)]);
+      symbols.push([this.symbolFormatter(i, true), this.symbolFormatter(i, false)]);
     }
 
     return html`
@@ -447,7 +447,7 @@ export class QuietRating extends QuietFormControlElement {
         aria-readonly=${this.readonly ? 'true' : 'false'}
         aria-valuemin="0"
         aria-valuenow=${this.value}
-        aria-valuetext="${this.localize.term('numberOutOfTotal', this.value, this.max)}"
+        aria-valuetext="${this.localize.term('numberOfTotal', this.value, this.max)}"
         aria-valuemax=${this.max}
         tabindex=${this.disabled || this.readonly ? '-1' : '0'}
         @focus=${this.handleFocus}

@@ -24,14 +24,22 @@ export interface Translation extends DefaultTranslation {
   dragFileHereOrChooseFromFolder: string;
   dragFilesHereOrChooseFromFolder: string;
   error: string;
+  firstPage: string;
   hidePassword: string;
   hide: string;
   hue: string;
-  numberOutOfTotal: (number: number, total: number) => string;
+  jumpBackward: string;
+  jumpForward: string;
+  lastPage: string;
+  next: string;
+  numberOfTotal: (number: number | string, total: number | string) => string;
   opacity: string;
+  pageNumber: (number: number | string) => string;
+  pagination: string;
   percentLuminosity: (percentage: string) => string;
   percentSaturation: (percentage: string) => string;
   pressSpaceForOneSecondToActivate: string;
+  previous: string;
   loading: string;
   remove: string;
   resize: string;
@@ -40,7 +48,7 @@ export interface Translation extends DefaultTranslation {
   share: string;
   showPassword: string;
   show: string;
-  showingNumberOfTotalItems: (number: number, total: number) => string;
-  showingAllNumberItems: (number: number) => string;
+  showingNumberOfTotalItems: (number: number | string, total: number) => string;
+  showingAllNumberItems: (number: number | string) => string;
   spoiler: string;
 }

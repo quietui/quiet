@@ -348,6 +348,10 @@ To turn a dropdown menu into a context menu, omit the trigger and set the `conte
 </div>
 
 <quiet-dropdown context-menu="dropdown__context">
+  <quiet-dropdown-item value="cut">Cut</quiet-dropdown-item>
+  <quiet-dropdown-item value="cut">Copy</quiet-dropdown-item>
+  <quiet-dropdown-item value="cut">Paste</quiet-dropdown-item>
+  <quiet-divider></quiet-divider>
   <quiet-dropdown-item>
     Adjust
     <quiet-dropdown-item slot="submenu" value="brightness">Brightness</quiet-dropdown-item>

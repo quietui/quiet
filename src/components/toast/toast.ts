@@ -227,6 +227,7 @@ export class QuietToast extends QuietElement {
 
   /** Removes all elements from the toast stack and turns when the remove transition finishes. */
   public async empty() {
+    await this.stack.transitionComplete();
     this.innerHTML = '';
     await this.stack.transitionComplete();
   }

@@ -12,7 +12,7 @@ layout: component
   with-input
   with-alpha
   with-eye-dropper
-  clearable
+  with-clear
 ></quiet-color-input>
 ```
 
@@ -58,14 +58,14 @@ Add the `with-alpha` attribute to allow users to adjust opacity. Hex colors will
 
 ### Adding a clear button
 
-To add a clear button to the color input, use the `clearable` attribute. The `quiet-input` event will be emitted when the clear button is activated.
+To add a clear button to the color input, use the `with-clear` attribute. The `quiet-input` event will be emitted when the clear button is activated.
 
 ```html {.example}
 <quiet-color-input 
   label="Select a color"
   name="color"
   value="#21b8bc" 
-  clearable
+  with-clear
 ></quiet-color-input>
 ```
 

@@ -15,7 +15,7 @@ For an alternative way to browse icons, head over to the [Tabler Icons](https://
   <quiet-text-field
     type="search"
     label="Search icons"
-    clearable
+    with-clear
     placeholder="Type arrows, files, media, settings, tools, etc."
     id="icon-search"
     autofocus

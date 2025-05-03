@@ -109,7 +109,7 @@ Set the `appearance` attribute to `outline` to draw outlined buttons.
 
 ### Text buttons
 
-Set the `appearance` attribute to `text` to draw text buttons. Text buttons share the same side and padding as normal buttons, but don't have a background.
+Set the `appearance` attribute to `text` to draw text buttons. Text buttons share the same size and padding as normal buttons, but don't have a background.
 
 ```html {.example .flex-row}
 <quiet-button appearance="text">

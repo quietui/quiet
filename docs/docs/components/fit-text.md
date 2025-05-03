@@ -18,7 +18,7 @@ A [Resize Observer](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObser
   id="fit-text__editable-input"
   label="Customize the text"
   value="The cute gray kitten jumped into the flower pot"
-  clearable
+  with-clear
 ></quiet-text-field>
 
 <script>

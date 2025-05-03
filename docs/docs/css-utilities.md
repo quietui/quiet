@@ -63,7 +63,7 @@ If you're using [constraint validation](https://developer.mozilla.org/en-US/docs
   label="Enter text, then blur" 
   description="I automatically show the valid state after user interaction" 
   required
-  clearable
+  with-clear
 ></quiet-text-field>
 
 <br>
@@ -74,7 +74,7 @@ If you're using [constraint validation](https://developer.mozilla.org/en-US/docs
   description="I automatically show the invalid state after user interaction" 
   value="Delete this text"
   required
-  clearable
+  with-clear
 ></quiet-text-field>
 
 <br>
@@ -84,7 +84,7 @@ If you're using [constraint validation](https://developer.mozilla.org/en-US/docs
   label="Enter text, then blur, then clear" 
   description="I automatically show the valid or invalid state after user interaction" 
   required
-  clearable
+  with-clear
 ></quiet-text-field>
 ```
 

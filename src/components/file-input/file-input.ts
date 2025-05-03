@@ -217,14 +217,69 @@ export class QuietFileInput extends QuietFormControlElement {
     this.isDragging = false;
     this.hadUserInteraction = true;
 
-    if (this.multiple) {
-      this.files = this.files.concat([...event.dataTransfer!.files]);
-    } else {
-      this.files = [event.dataTransfer!.files[0]];
+    const entryQueue: FileSystemEntry[] = [];
+    const filesToAdd: File[] = [];
+    const items = event.dataTransfer?.items;
+    if (!items) return;
+
+    // Add all top-level entries to the queue
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].kind === 'file') {
+        const entry = items[i].webkitGetAsEntry();
+        if (entry) {
+          entryQueue.push(entry);
+        }
+      }
     }
 
-    this.dispatchEvent(new QuietInputEvent());
-    this.dispatchEvent(new QuietChangeEvent());
+    // Process the queue until it's empty or we have a file in single mode
+    const processQueue = async () => {
+      while (entryQueue.length > 0) {
+        // Stop if we already have a file in single-file mode
+        if (!this.multiple && filesToAdd.length > 0) {
+          break;
+        }
+
+        const currentEntry = entryQueue.shift()!;
+
+        if (currentEntry.isFile) {
+          // Process file entry
+          await new Promise<void>(resolve => {
+            (currentEntry as FileSystemFileEntry).file(file => {
+              filesToAdd.push(file);
+              resolve();
+            });
+          });
+        } else if (currentEntry.isDirectory) {
+          // Process directory entry
+          const reader = (currentEntry as FileSystemDirectoryEntry).createReader();
+
+          // Read directory entries in batches until no more entries
+          let entries: FileSystemEntry[] = [];
+          do {
+            entries = await new Promise<FileSystemEntry[]>(resolve => {
+              reader.readEntries(results => resolve(results));
+            });
+
+            // Add all directory entries to the front of the queue
+            entryQueue.unshift(...entries);
+          } while (entries.length > 0);
+        }
+      }
+
+      // Update files array with all processed files
+      if (this.multiple) {
+        this.files = this.files.concat(filesToAdd);
+      } else if (filesToAdd.length > 0) {
+        // In single-file mode, just take the first file
+        this.files = [filesToAdd[0]];
+      }
+
+      this.dispatchEvent(new QuietInputEvent());
+      this.dispatchEvent(new QuietChangeEvent());
+    };
+
+    processQueue();
   }
 
   private handleFileInput() {

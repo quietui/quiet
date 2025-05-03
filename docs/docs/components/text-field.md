@@ -55,14 +55,14 @@ Use the `placeholder` attribute to show a placeholder in the text field when it'
 
 ### Adding a clear button
 
-To add a clear button to the text field, use the `clearable` attribute. The `quiet-input` event will be emitted when the clear button is activated.
+To add a clear button to the text field, use the `with-clear` attribute. The `quiet-input` event will be emitted when the clear button is activated.
 
 ```html {.example}
 <quiet-text-field 
   name="name" 
   label="Name" 
   value="Meowy McGee"
-  clearable
+  with-clear
 ></quiet-text-field>
 ```
 

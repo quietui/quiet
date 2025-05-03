@@ -13,7 +13,7 @@ Search Lists provide real-time filtering of content as the user types, supportin
     label="Search cats"
     description="Results will update as you type"
     type="search" 
-    clearable
+    with-clear
     pill
   >
     <quiet-icon slot="start" name="search"></quiet-icon>
@@ -206,7 +206,7 @@ By default, the search list shows results based on case-insensitive, exact match
     slot="controller" 
     label="Search for names"
     type="search" 
-    clearable
+    with-clear
     pill
   >
     <quiet-icon slot="start" name="search"></quiet-icon>
@@ -265,7 +265,7 @@ Add the `data-keywords` attribute to any item to include additional keywords the
     label="Search by color"
     description="e.g. brown, orange, white, gray, black"
     type="search" 
-    clearable
+    with-clear
     pill
   >
     <quiet-icon slot="start" name="search"></quiet-icon>
@@ -346,7 +346,7 @@ To change what users see before they enter a query, use the `initial` slot. When
     label="Search cats"
     description="Find your perfect feline friend"
     type="search" 
-    clearable
+    with-clear
     pill
   >
     <quiet-icon slot="start" name="search"></quiet-icon>
@@ -479,7 +479,7 @@ An optional empty state will be shown when no results are found. Use the `empty`
     label="Search"
     type="search" 
     value="foo"
-    clearable
+    with-clear
     pill
   >
     <quiet-icon slot="start" name="search"></quiet-icon>
@@ -553,7 +553,7 @@ The callback receives three arguments: `query` (the current search term), `conte
     label="Search cats"
     description="Add @indoor or @outdoor to filter by environment"
     type="search" 
-    clearable
+    with-clear
     pill
   >
     <quiet-icon slot="start" name="search"></quiet-icon>

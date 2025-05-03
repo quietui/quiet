@@ -22,7 +22,7 @@ Set the `data` attribute to a URL, email address, or any other string you want t
 ```html {.example}
 <div id="qr__text">
   <quiet-qr data="https://quietui.org/"></quiet-qr>
-  <quiet-text-field label="URL, email address, or other text" value="https://quietui.org/" clearable></quiet-text-field>
+  <quiet-text-field label="URL, email address, or other text" value="https://quietui.org/" with-clear></quiet-text-field>
 </div>
 
 <script>

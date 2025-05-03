@@ -32,9 +32,9 @@ export interface Translation extends DefaultTranslation {
   jumpForward: string;
   lastPage: string;
   next: string;
-  numberOfTotal: (number: number, total: number) => string;
+  numberOfTotal: (number: number | string, total: number | string) => string;
   opacity: string;
-  pageNumber: (number: number) => string;
+  pageNumber: (number: number | string) => string;
   pagination: string;
   percentLuminosity: (percentage: string) => string;
   percentSaturation: (percentage: string) => string;
@@ -48,7 +48,7 @@ export interface Translation extends DefaultTranslation {
   share: string;
   showPassword: string;
   show: string;
-  showingNumberOfTotalItems: (number: number, total: number) => string;
-  showingAllNumberItems: (number: number) => string;
+  showingNumberOfTotalItems: (number: number | string, total: number) => string;
+  showingAllNumberItems: (number: number | string) => string;
   spoiler: string;
 }

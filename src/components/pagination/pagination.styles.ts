@@ -76,11 +76,13 @@ export default css`
     }
   }
 
+  /* Icons */
   quiet-icon,
   ::slotted(quiet-icon) {
     font-size: 1.25em;
   }
 
+  /* Disabled */
   :host(:state(disabled)) {
     cursor: not-allowed;
     opacity: 0.5;
@@ -92,7 +94,7 @@ export default css`
     align-items: center;
   }
 
-  :host([format='compact']) #range {
+  #range {
     margin-inline: 0.5em;
     font-variant-numeric: tabular-nums;
   }

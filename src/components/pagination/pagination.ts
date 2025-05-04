@@ -206,11 +206,11 @@ export class QuietPagination extends QuietElement {
   private handleJump(position: 'start' | 'end') {
     let newPage: number;
     if (position === 'start') {
-      // Jump backwards, but stop at page 2
-      newPage = Math.max(2, this.page - this.jump);
+      // Jump backwards, but stop at page 1
+      newPage = Math.max(1, this.page - this.jump);
     } else {
-      // Jump forward, but but stop at totalPages - 1
-      newPage = Math.min(this.totalPages - 1, this.page + this.jump);
+      // Jump forward, but but stop at totalPages
+      newPage = Math.min(this.totalPages, this.page + this.jump);
     }
     this.changePage(newPage);
   }

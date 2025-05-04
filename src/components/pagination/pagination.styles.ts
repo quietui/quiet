@@ -27,7 +27,7 @@ export default css`
     min-width: 2.25em;
     min-height: 2.25em;
     border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
-    border-radius: var(--quiet-border-radius);
+    border-radius: calc(var(--quiet-border-radius) * 1.25);
     background-color: var(--quiet-paper-color);
     color: var(--quiet-text-body);
     font: inherit;

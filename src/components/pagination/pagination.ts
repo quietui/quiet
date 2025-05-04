@@ -225,8 +225,9 @@ export class QuietPagination extends QuietElement {
     const isRtl = this.localize.dir() === 'rtl';
     const chevronLeftIcon = html`<quiet-icon library="system" name="chevron-left"></quiet-icon>`;
     const chevronRightIcon = html`<quiet-icon library="system" name="chevron-right"></quiet-icon>`;
+    let content;
 
-    // Previous button
+    // Shared avigation buttons
     const previousButton = html`
       <li part="item">
         <button
@@ -239,8 +240,6 @@ export class QuietPagination extends QuietElement {
         </button>
       </li>
     `;
-
-    // Next button
     const nextButton = html`
       <li part="item">
         <button
@@ -254,69 +253,64 @@ export class QuietPagination extends QuietElement {
       </li>
     `;
 
-    // Render the compact format
     if (this.format === 'compact') {
-      return html`
-        <nav id="nav" part="nav" aria-label="${label}">
-          <ul id="list" part="list">
-            ${this.withoutNav ? '' : previousButton}
-            <li part="item">
-              <span id="range" part="range">
-                ${this.localize.term(
-                  'numberOfTotal',
-                  this.localize.number(this.page, { useGrouping: true }),
-                  this.localize.number(this.totalPages, { useGrouping: true })
-                )}
-              </span>
-            </li>
-            ${this.withoutNav ? '' : nextButton}
-          </ul>
-        </nav>
+      // Compact format
+      content = html`
+        <li part="item">
+          <span id="range" part="range">
+            ${this.localize.term(
+              'numberOfTotal',
+              this.localize.number(this.page, { useGrouping: true }),
+              this.localize.number(this.totalPages, { useGrouping: true })
+            )}
+          </span>
+        </li>
       `;
+    } else {
+      // Standard format
+      content = this.getPaginationItems().map(item => {
+        if (item.type === 'jump') {
+          return html`
+            <li part="item">
+              <button
+                part="button ${item.position === 'start' ? 'button-jump-backward' : 'button-jump-forward'}"
+                aria-label="${this.localize.term(item.position === 'start' ? 'jumpBackward' : 'jumpForward')}"
+                ?disabled=${this.disabled}
+                @click=${() => this.handleJump(item.position)}
+              >
+                <slot name=${item.position === 'start' ? 'jump-backward-icon' : 'jump-forward-icon'}>
+                  <quiet-icon library="system" name="dots"></quiet-icon>
+                </slot>
+              </button>
+            </li>
+          `;
+        } else {
+          // Render a page
+          const isCurrent = item.page === this.page;
+          const part = `button button-page${isCurrent ? ' button-current' : ''}${item.page === 1 ? ' button-first' : ''}${item.page === this.totalPages ? ' button-last' : ''}`;
+          return html`
+            <li part="item">
+              <button
+                part=${part}
+                class=${classMap({ current: isCurrent })}
+                aria-label=${this.localize.term('pageNumber', item.page)}
+                aria-current=${ifDefined(isCurrent ? 'page' : undefined)}
+                ?disabled=${this.disabled}
+                @click=${() => this.changePage(item.page)}
+              >
+                ${this.localize.number(item.page, { useGrouping: true })}
+              </button>
+            </li>
+          `;
+        }
+      });
     }
 
-    // Render the standard format
+    // Shared nav and ul structure
     return html`
-      <nav part="nav" aria-label="${label}">
-        <ul part="list">
-          ${this.withoutNav ? '' : previousButton}
-          ${this.getPaginationItems().map(item => {
-            if (item.type === 'jump') {
-              return html`
-                <li part="item">
-                  <button
-                    part="button ${item.position === 'start' ? 'button-jump-backward' : 'button-jump-forward'}"
-                    aria-label="${this.localize.term(item.position === 'start' ? 'jumpBackward' : 'jumpForward')}"
-                    ?disabled=${this.disabled}
-                    @click=${() => this.handleJump(item.position)}
-                  >
-                    <slot name=${item.position === 'start' ? 'jump-backward-icon' : 'jump-forward-icon'}>
-                      <quiet-icon library="system" name="dots"></quiet-icon>
-                    </slot>
-                  </button>
-                </li>
-              `;
-            } else {
-              // Render a page
-              const isCurrent = item.page === this.page;
-              const part = `button button-page${isCurrent ? ' button-current' : ''}${item.page === 1 ? ' button-first' : ''}${item.page === this.totalPages ? ' button-last' : ''}`;
-              return html`
-                <li part="item">
-                  <button
-                    part=${part}
-                    class=${classMap({ current: isCurrent })}
-                    aria-label=${this.localize.term('pageNumber', item.page)}
-                    aria-current=${ifDefined(isCurrent ? 'page' : undefined)}
-                    ?disabled=${this.disabled}
-                    @click=${() => this.changePage(item.page)}
-                  >
-                    ${this.localize.number(item.page, { useGrouping: true })}
-                  </button>
-                </li>
-              `;
-            }
-          })}
-          ${this.withoutNav ? '' : nextButton}
+      <nav id="nav" part="nav" aria-label="${label}">
+        <ul id="list" part="list">
+          ${this.withoutNav ? '' : previousButton} ${content} ${this.withoutNav ? '' : nextButton}
         </ul>
       </nav>
     `;

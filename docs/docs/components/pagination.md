@@ -4,7 +4,7 @@ layout: component
 ---
 
 ```html {.example}
-<quiet-pagination total-pages="10"></quiet-pagination>
+<quiet-pagination total-pages="5"></quiet-pagination>
 ```
 
 ## Examples
@@ -14,7 +14,7 @@ layout: component
 Use the `total-pages` attribute to set the total number of pages available.
 
 ```html {.example}
-<quiet-pagination total-pages="30"></quiet-pagination>
+<quiet-pagination total-pages="20"></quiet-pagination>
 ```
 
 ### Setting the initial page
@@ -22,7 +22,7 @@ Use the `total-pages` attribute to set the total number of pages available.
 Use the `page` attribute to set the initial page that's selected.
 
 ```html {.example}
-<quiet-pagination total-pages="10" page="5"></quiet-pagination>
+<quiet-pagination total-pages="5" page="3"></quiet-pagination>
 ```
 
 ### Responding to page changes
@@ -124,9 +124,9 @@ Set the `format` attribute to `compact` or `standard` to change the pagination's
 Use the `siblings` attribute to control the number of pages that show on each side of the current page. The default is 3. The minimum is 2.
 
 ```html {.example .flex-col}
+<quiet-pagination siblings="2" total-pages="20" page="10"></quiet-pagination>
 <quiet-pagination siblings="3" total-pages="20" page="10"></quiet-pagination>
 <quiet-pagination siblings="4" total-pages="20" page="10"></quiet-pagination>
-<quiet-pagination siblings="5" total-pages="20" page="10"></quiet-pagination>
 ```
 
 ### Changing the size
@@ -202,6 +202,7 @@ Pagination controls come with a simple, minimal appearance. Feel free to customi
   #pagination__styling {
     &::part(button) {
       border-radius: 9999px;
+      border: none;
     }
 
     /* Light gray circles for previous and next buttons */

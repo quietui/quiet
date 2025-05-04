@@ -24,13 +24,13 @@ export default css`
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: 2.5em;
-    min-height: 2.5em;
-    border: none;
-    border-radius: calc(var(--quiet-border-radius) * 1.5);
-    background-color: var(--quiet-neutral-fill-softer);
+    min-width: 2.25em;
+    min-height: 2.25em;
+    border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
+    border-radius: var(--quiet-border-radius);
+    background-color: var(--quiet-paper-color);
     color: var(--quiet-text-body);
-    font-size: inherit;
+    font: inherit;
     line-height: 1;
     font-family: inherit;
     font-variant-numeric: tabular-nums;
@@ -48,7 +48,7 @@ export default css`
 
     @media (hover: hover) {
       &:hover:not(:disabled, .current) {
-        background-color: color-mix(in oklab, var(--quiet-neutral-fill-softer), black 5%);
+        background-color: var(--quiet-neutral-fill-softer);
       }
     }
 

@@ -9,7 +9,7 @@ export default css`
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
     margin: 0;
     padding: 0;
     gap: 0.25em;

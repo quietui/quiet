@@ -74,7 +74,7 @@ export default css`
 
     @media (hover: hover) {
       &:hover:not(:disabled, .current) {
-        border-color: color-mix(in oklab, var(--quiet-neutral-stroke-softer), black 5%);
+        border-color: color-mix(in oklab, var(--quiet-neutral-stroke-softer), var(--quiet-strident) 5%);
         background-color: var(--quiet-neutral-fill-softer);
       }
     }

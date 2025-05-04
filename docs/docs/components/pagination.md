@@ -119,6 +119,16 @@ Set the `format` attribute to `compact` or `standard` to change the pagination's
 </script>
 ```
 
+### Changing the appearance
+
+Set the `appearance` attribute to `normal`, `filled`, or `unstyled` to change the pagination's appearance.
+
+```html {.example .flex-col}
+<quiet-pagination appearance="normal" total-pages="5"></quiet-pagination>
+<quiet-pagination appearance="filled" total-pages="5"></quiet-pagination>
+<quiet-pagination appearance="unstyled" total-pages="5"></quiet-pagination>
+```
+
 ### Changing the number of buttons
 
 Use the `siblings` attribute to control the number of pages that show on each side of the current page. The default is 3. The minimum is 2.

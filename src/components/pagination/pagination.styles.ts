@@ -26,9 +26,7 @@ export default css`
     justify-content: center;
     min-width: 2.25em;
     min-height: 2.25em;
-    border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
     border-radius: calc(var(--quiet-border-radius) * 1.25);
-    background-color: var(--quiet-paper-color);
     color: var(--quiet-text-body);
     font: inherit;
     line-height: 1;
@@ -46,12 +44,6 @@ export default css`
     user-select: none;
     -webkit-user-select: none;
 
-    @media (hover: hover) {
-      &:hover:not(:disabled, .current) {
-        background-color: var(--quiet-neutral-fill-softer);
-      }
-    }
-
     &:active:not(:disabled, .current) {
       translate: 0 var(--quiet-button-active-offset);
     }
@@ -63,9 +55,6 @@ export default css`
 
     /* Current page */
     &.current:not(:disabled) {
-      border-color: var(--quiet-primary-fill-mid);
-      background-color: var(--quiet-primary-fill-mid);
-      color: var(--quiet-primary-text-on-mid);
       font-weight: var(--quiet-font-weight-semibold);
       cursor: default;
     }
@@ -75,6 +64,52 @@ export default css`
       box-shadow: none;
       cursor: not-allowed;
       opacity: 0.5;
+    }
+  }
+
+  /* Normal */
+  :host([appearance='normal']) button {
+    border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
+    background-color: var(--quiet-paper-color);
+
+    @media (hover: hover) {
+      &:hover:not(:disabled, .current) {
+        background-color: var(--quiet-neutral-fill-softer);
+      }
+    }
+
+    &.current:not(:disabled) {
+      border-color: var(--quiet-primary-fill-mid);
+      background-color: var(--quiet-primary-fill-mid);
+      color: var(--quiet-primary-text-on-mid);
+    }
+  }
+
+  /* Filled */
+  :host([appearance='filled']) button {
+    border: none;
+    background-color: var(--quiet-neutral-fill-softer);
+
+    @media (hover: hover) {
+      &:hover:not(:disabled, .current) {
+        background-color: var(--quiet-neutral-fill-soft);
+      }
+    }
+
+    &.current:not(:disabled) {
+      background-color: var(--quiet-primary-fill-mid);
+      color: var(--quiet-primary-text-on-mid);
+    }
+  }
+
+  /* Unstyled */
+  :host([appearance='unstyled']) button {
+    border: none;
+    background-color: transparent;
+
+    &.current:not(:disabled) {
+      background-color: var(--quiet-primary-fill-mid);
+      color: var(--quiet-primary-text-on-mid);
     }
   }
 

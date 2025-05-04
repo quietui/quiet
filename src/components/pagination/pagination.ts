@@ -84,6 +84,9 @@ export class QuietPagination extends QuietElement {
   /** Disables the pagination control. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
+  /** Determine's the pagination's appearance. */
+  @property({ reflect: true }) appearance: 'normal' | 'filled' | 'unstyled' = 'normal';
+
   /** Removes the previous and next buttons. */
   @property({ type: Boolean, attribute: 'without-nav', reflect: true }) withoutNav = false;
 

@@ -206,26 +206,18 @@ Pagination controls come with a simple, minimal appearance. Feel free to customi
 
 
 ```html {.example .flex-col}
-<quiet-pagination total-pages="10" page="5" id="pagination__styling"></quiet-pagination>
+<quiet-pagination total-pages="10" page="5" appearance="unstyled" id="pagination__styling"></quiet-pagination>
 
 <style>
   #pagination__styling {
     &::part(button) {
       border-radius: 9999px;
-      border: none;
     }
 
     /* Light gray circles for previous and next buttons */
     &::part(button-previous),
     &::part(button-next) {
       background-color: var(--quiet-neutral-fill-softer);
-    }
-
-    /* Simpler styles for pages and jump buttons */
-    &::part(button-page),
-    &::part(button-jump-backward),
-    &::part(button-jump-forward) {
-      background-color: transparent;
     }
 
     /* The current page is larger and has a subtle gradient */

@@ -69,7 +69,7 @@ export class QuietToast extends QuietElement {
     | 'top-end'
     | 'bottom-start'
     | 'bottom-center'
-    | 'bottom-end' = 'top-end';
+    | 'bottom-end' = 'bottom-end';
 
   connectedCallback() {
     super.connectedCallback();

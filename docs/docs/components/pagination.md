@@ -204,7 +204,6 @@ Add the `disabled` attribute to disable the pagination control.
 
 Pagination controls come with a simple, minimal appearance. Feel free to customize them with your own styles.
 
-
 ```html {.example .flex-col}
 <quiet-pagination total-pages="10" page="5" appearance="unstyled" id="pagination__styling"></quiet-pagination>
 

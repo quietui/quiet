@@ -125,14 +125,22 @@ To move focus to a specific form control when the popover opens, use the [`autof
 ```html {.example}
 <quiet-popover for="popover__autofocus">
   <div style="display: flex; flex-direction: column; gap: 1rem;">
-    <quiet-text-field autofocus label="New value" size="sm"></quiet-text-field>
-    <quiet-button variant="primary" size="sm" data-popover="close">Update</quiet-button>
+    <quiet-text-area 
+      autofocus
+      placeholder="What did you think?"
+      size="sm" 
+      resize="none" 
+      class="quiet-vh-label"
+    ></quiet-text-area>
+    <quiet-button variant="primary" size="sm" data-popover="close">
+      Submit
+    </quiet-button>
   </div>
 </quiet-popover>
 
 <quiet-button id="popover__autofocus">
-  <quiet-icon slot="start" name="edit"></quiet-icon>
-  Edit
+  <quiet-icon slot="start" name="message-circle"></quiet-icon>
+  Feedback
 </quiet-button>
 ```
 

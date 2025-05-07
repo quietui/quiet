@@ -146,23 +146,21 @@
               <quiet-icon family="filled" name="square" style="color: var(--quiet-primary-seed);"></quiet-icon>
               <quiet-icon name="chevron-down"></quiet-icon>
             </button>
-            <div class="color-picker-swatches">
-              {%
-                set themeColors = {
-                  default: '#989cff', red: '#ef5655', orange: '#f08039', amber: '#e89a26', yellow: '#dcb31e',
-                  lime: '#9abb28', green: '#5dbb55', emerald: '#47b873', teal: '#37b995', cyan: '#20b8bc',
-                  sky: '#1caedd', blue: '#4a97f4', indigo: '#6e85f8', violet: '#927cfb', purple: '#ae75f6',
-                  fuchsia: '#d26ae8', pink: '#e468b0', rose: '#ee6383', slate: '#848da0', zinc: '#8b8c93',
-                  stone: '#918c87'
-                }
-              %}
-              {% for name, color in themeColors %}
-                <quiet-dropdown-item value="{{ name }}">
-                  <span slot="icon" class="color-picker-swatch" style="background-color: {{ color }};"></span>
-                  {{ name }}
-                </quiet-dropdown-item>
-              {% endfor %}
-            </div>
+            {%
+              set themeColors = {
+                default: '#989cff', red: '#ef5655', orange: '#f08039', amber: '#e89a26', yellow: '#dcb31e',
+                lime: '#9abb28', green: '#5dbb55', emerald: '#47b873', teal: '#37b995', cyan: '#20b8bc',
+                sky: '#1caedd', blue: '#4a97f4', indigo: '#6e85f8', violet: '#927cfb', purple: '#ae75f6',
+                fuchsia: '#d26ae8', pink: '#e468b0', rose: '#ee6383', slate: '#848da0', zinc: '#8b8c93',
+                stone: '#918c87'
+              }
+            %}
+            {% for name, color in themeColors %}
+              <quiet-dropdown-item value="{{ name }}">
+                <span slot="icon" class="color-picker-swatch" style="background-color: {{ color }};"></span>
+                {{ name }}
+              </quiet-dropdown-item>
+            {% endfor %}
           </quiet-dropdown>
         </div>
       </div>

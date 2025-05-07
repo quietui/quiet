@@ -316,8 +316,10 @@ html[data-scroll-restoring] body {
 
 /* Color picker dropdowns */
 .color-picker {
-  ::part(menu) {
+  &::part(menu) {
     display: block;
+    gap: 0.5rem;
+    columns: 3;
   }
 
   quiet-dropdown-item {
@@ -331,11 +333,6 @@ html[data-scroll-restoring] body {
       font-weight: var(--quiet-font-weight-semibold);
     }
   }
-}
-
-.color-picker-swatches {
-  gap: 0.5rem;
-  columns: 3;
 }
 
 .color-picker-swatch {

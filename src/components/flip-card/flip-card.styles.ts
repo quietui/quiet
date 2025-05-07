@@ -3,7 +3,7 @@ import { css } from 'lit';
 export default css`
   :host {
     --flip-duration: 0.6s;
-    --flip-easing: cubic-bezier(0.2, 0.85, 0.3, 1.15);
+    --flip-easing: ease;
 
     display: grid;
     position: relative;

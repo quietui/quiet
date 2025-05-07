@@ -54,7 +54,7 @@ Add the `disabled` attribute to lock the comparison in its current position.
 Slot an icon or similar in the `handle-icon` slot to use a custom icon in the handle.
 
 ```html {.example}
-<quiet-comparison>
+<quiet-comparison position="33">
   <quiet-icon slot="handle-icon" name="arrow-bar-both"></quiet-icon>
   <img slot="start" src="https://images.unsplash.com/photo-1719310694054-6fc99b7c14ec?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="An orange kitten explores a tall grassy yard">
   <img slot="end" src="https://images.unsplash.com/photo-1719310694054-6fc99b7c14ec?q=80&w=1000&sat=-100&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="The same kitten in a grayscale photo">

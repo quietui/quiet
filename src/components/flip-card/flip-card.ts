@@ -16,7 +16,7 @@ import styles from './flip-card.styles.js';
  * @status stable
  * @since 1.0
  *
- * @slot - The content to show on the front of the card.
+ * @slot front - The content to show on the front of the card.
  * @slot back - The content to show on the back of the card.
  *
  * @event quiet-before-flip - Emitted when the flip card is instructed to flip but before it actually flips. Calling
@@ -98,7 +98,7 @@ export class QuietFlipCard extends QuietElement {
   render() {
     return html`
       <div id="front" part="front" ?inert=${this.flipped}>
-        <slot></slot>
+        <slot name="front"></slot>
       </div>
       <div id="back" part="back" ?inert=${!this.flipped}>
         <slot name="back"></slot>

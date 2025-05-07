@@ -5,7 +5,7 @@ layout: component
 
 ```html {.example}
 <quiet-flip-card id="flip-card__overview">
-  <quiet-card>
+  <quiet-card slot="front">
     <quiet-avatar image="https://images.unsplash.com/photo-1672487209629-4d52e0c043d0?q=80&w=256&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"></quiet-avatar>
     <h3 class="name">Meowy McGee</h3>
     <div class="tagline">Freedom's just another word for nothing left to lose.</div>
@@ -101,16 +101,20 @@ layout: component
 
 Flip cards span the full width of their container, by default. The height is determined by the content you slot in. The flip card will grow to fit the content of the front or back side, whichever is greater.
 
-The most basic flip card requires two child elements. Content in the default slot will be shown on the card's front side and content in the `back` slot will be shown on the card's back side.
+The most basic flip card requires two child elements. Content in the `front` slot will be shown on the card's front side and content in the `back` slot will be shown on the card's back side.
 
 ```html
 <quiet-flip-card>
-  <div>Front content</div>
+  <div slot="front">Front content</div>
   <div slot="back">Back content</div>
 </quiet-flip-card>
 ```
 
 Flip cards work with any content, but they work exceptionally well with [cards](/docs/components/card).
+
+:::info
+If your flip card is empty, make sure you've included `slot="front"` as shown above.
+:::
 
 ### Flipping the card
 
@@ -130,7 +134,7 @@ However, it's often more convenient for a button to control the flip card _witho
 
 ```html {.example}
 <quiet-flip-card id="flip-card__toggle">
-  <quiet-card>Front content</quiet-card>
+  <quiet-card slot="front">Front content</quiet-card>
   <quiet-card slot="back">Back content</quiet-card>
 </quiet-flip-card>
 
@@ -150,7 +154,7 @@ To flip the card to a specific side, use `data-flip-card="front *"` or `data-fli
 
 ```html {.example}
 <quiet-flip-card id="flip-card__sides">
-  <quiet-card>Front content</quiet-card>
+  <quiet-card slot="front">Front content</quiet-card>
   <quiet-card slot="back">Back content</quiet-card>
 </quiet-flip-card>
 
@@ -176,13 +180,14 @@ Use the `orientation` attribute to set the flip animation to `horizontal` (defau
 
 ```html {.example}
 <quiet-flip-card orientation="vertical" style="max-width: 300px;" id="flip-card__vertical">
-  <quiet-card>
+  <quiet-card slot="front">
     <img slot="media" src="https://images.unsplash.com/photo-1734654901149-02a9a5f7993b?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="A beautiful food dish surrounded by kibbles">
     <h3>Kitty Bowl</h3>
     <p>Our signature dinner plate.</p>
     <p><strong>$9.99</strong></p>
     <button type="button" data-flip-card="toggle">View features</button>
   </quiet-card>
+
   <quiet-card slot="back">
     <h3>Features</h3>
     <ul>
@@ -256,7 +261,7 @@ Add the `flipped` attribute to show the back of the flip card initially.
 
 ```html {.example}
 <quiet-flip-card id="flip-card__back" orientation="vertical" flipped>
-  <div class="front" aria-label="Ace of hearts">
+  <div slot="front" class="front" aria-label="Ace of hearts">
     <span class="corner" aria-hidden="true">A<br><quiet-icon name="heart" family="filled"></quiet-icon></span>
     <span class="corner" aria-hidden="true">A<br><quiet-icon name="heart" family="filled"></quiet-icon></span>
     <quiet-icon name="heart" family="filled" aria-hidden="true"></quiet-icon>
@@ -329,7 +334,7 @@ Use the `autofocus` attribute to assign focus to a specific element when the fli
 
 ```html {.example}
 <quiet-flip-card id="flip-card__autofocus">
-  <quiet-card>
+  <quiet-card slot="front">
     Flip the card to observe autofocus. The text field will receive focus as soon as you flip it.
   </quiet-card>
 
@@ -356,7 +361,7 @@ The height of a flip card is the height of its tallest side. If you're using [ca
 
 ```html {.example}
 <quiet-flip-card id="flip-card__centering">
-  <quiet-card>
+  <quiet-card slot="front">
     Front content, nicely centered
   </quiet-card>
   <quiet-card slot="back">

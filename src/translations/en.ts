@@ -47,7 +47,8 @@ const translation: Translation = {
     if (number === 1) return `Showing ${number} item`;
     return `Showing all ${number} items`;
   },
-  spoiler: 'Spoiler'
+  spoiler: 'Spoiler',
+  visualComparisonSlider: 'Visual comparison slider'
 };
 
 registerDefaultTranslation(translation);

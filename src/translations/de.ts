@@ -48,7 +48,8 @@ const translation: Translation = {
     if (number === 1) return `Zeige ${number} artikel`;
     return `Zeige alle ${number} artikel`;
   },
-  spoiler: 'Spoiler'
+  spoiler: 'Spoiler',
+  visualComparisonSlider: 'Visueller Vergleichsregler'
   /* cSpell:enable */
 };
 

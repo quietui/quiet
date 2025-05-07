@@ -51,4 +51,5 @@ export interface Translation extends DefaultTranslation {
   showingNumberOfTotalItems: (number: number | string, total: number) => string;
   showingAllNumberItems: (number: number | string) => string;
   spoiler: string;
+  visualComparisonSlider: string;
 }

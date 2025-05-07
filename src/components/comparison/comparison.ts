@@ -181,7 +181,7 @@ export class QuietComparison extends QuietElement {
       >
         <div id="handle" part="handle">
           <slot name="handle-icon">
-            <quiet-icon library="system" name="grip-vertical"></quiet-icon>
+            <quiet-icon library="system" name="grip-vertical" family="filled"></quiet-icon>
           </slot>
         </div>
       </div>

@@ -279,7 +279,7 @@ export class QuietPagination extends QuietElement {
                 @click=${() => this.handleJump(item.position)}
               >
                 <slot name=${item.position === 'start' ? 'jump-backward-icon' : 'jump-forward-icon'}>
-                  <quiet-icon library="system" name="dots"></quiet-icon>
+                  <quiet-icon library="system" name="dots" family="filled"></quiet-icon>
                 </slot>
               </button>
             </li>

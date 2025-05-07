@@ -14,9 +14,7 @@ layout: component
 
 ### Providing content
 
-Comparisons are commonly used for images, but you can compare just about any content. Use the `start` and `end` slots to place content on each side of the comparison.
-
-For best results, use elements that shares the same dimensions.
+Comparisons are commonly used for images, but you can compare just about any content. Use the `start` and `end` slots to place content on each side of the comparison. For best results, use elements that shares the same dimensions.
 
 ```html {.example}
 <quiet-comparison style="max-width: 380px;">

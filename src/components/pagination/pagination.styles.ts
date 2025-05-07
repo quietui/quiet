@@ -120,11 +120,6 @@ export default css`
     font-size: 1.25em;
   }
 
-  /* The default ellipsis gets a thicker stroke to avoid outlines */
-  quiet-icon {
-    stroke-width: 0.125em;
-  }
-
   /* Disabled */
   :host(:state(disabled)) {
     cursor: not-allowed;

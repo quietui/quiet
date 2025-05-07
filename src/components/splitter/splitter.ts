@@ -42,7 +42,6 @@ export class QuietSplitter extends QuietElement {
 
   private localize = new Localize(this);
   private dragHandler?: DraggableElement;
-  private lastDispatchedPosition: number | null = null;
   private previousPosition = 50;
   private dragStartPosition = 0;
   private dragStartClientX = 0;
@@ -160,14 +159,6 @@ export class QuietSplitter extends QuietElement {
     return Math.max(minPosition, Math.min(maxPosition, position));
   }
 
-  private dispatchResizeEvent() {
-    // Only dispatch if the position has changed from the last dispatched value and it's not a programmatic change
-    if (this.position !== this.lastDispatchedPosition && !this.hasUpdated) {
-      this.dispatchEvent(new QuietResizeEvent());
-      this.lastDispatchedPosition = this.position;
-    }
-  }
-
   private setupDragging() {
     this.dragHandler?.stop();
 
@@ -195,13 +186,15 @@ export class QuietSplitter extends QuietElement {
         }
 
         const newPositionRaw = this.dragStartPosition + deltaPercentage;
-        this.position = this.snapToNearest(this.clampPosition(newPositionRaw));
+        const newPosition = this.snapToNearest(this.clampPosition(newPositionRaw));
 
-        requestAnimationFrame(() => {
+        // Only update and dispatch if position changed
+        if (this.position !== newPosition) {
+          this.position = newPosition;
           this.updateGridTemplate();
           this.updateAriaValue();
-          this.dispatchResizeEvent();
-        });
+          this.dispatchEvent(new QuietResizeEvent());
+        }
       },
       stop: () => {
         this.isDragging = false;
@@ -227,6 +220,8 @@ export class QuietSplitter extends QuietElement {
   }
 
   private handleKeydown(event: KeyboardEvent) {
+    if (this.disabled) return;
+
     const isRtl = this.localize.dir() === 'rtl';
     const step = 5; // 5% movement per key press
     let newPosition = this.position;
@@ -234,11 +229,11 @@ export class QuietSplitter extends QuietElement {
     switch (event.key) {
       case 'ArrowLeft':
       case 'ArrowUp':
-        newPosition = Math.max(0, isRtl ? this.position + step : this.position - step);
+        newPosition = isRtl ? this.position + step : this.position - step;
         break;
       case 'ArrowRight':
       case 'ArrowDown':
-        newPosition = Math.min(100, isRtl ? this.position - step : this.position + step);
+        newPosition = isRtl ? this.position - step : this.position + step;
         break;
       case 'Home':
         newPosition = isRtl ? 100 : 0;
@@ -256,14 +251,21 @@ export class QuietSplitter extends QuietElement {
           this.isCollapsed = false;
         }
         break;
+      default:
+        // Exit if it's not a key we handle
+        return;
     }
 
+    // Clamp the position
+    newPosition = this.clampPosition(newPosition);
+
+    // Only update if the position has changed
     if (newPosition !== this.position) {
       event.preventDefault();
-      this.position = this.clampPosition(newPosition);
+      this.position = newPosition;
       this.updateGridTemplate();
       this.updateAriaValue();
-      this.dispatchResizeEvent();
+      this.dispatchEvent(new QuietResizeEvent());
     }
   }
 

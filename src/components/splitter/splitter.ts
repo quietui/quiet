@@ -175,7 +175,7 @@ export class QuietSplitter extends QuietElement {
 
     this.dragHandler = new DraggableElement(this.divider, {
       start: (clientX: number, clientY: number) => {
-        this.divider.classList.add('dragging');
+        this.isDragging = true;
         this.dragStartPosition = this.position;
         this.dragStartClientX = clientX;
         this.dragStartClientY = clientY;
@@ -204,7 +204,7 @@ export class QuietSplitter extends QuietElement {
         });
       },
       stop: () => {
-        this.divider.classList.remove('dragging');
+        this.isDragging = false;
         this.customStates.set('dragging', false);
       }
     });

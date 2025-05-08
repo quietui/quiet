@@ -14,7 +14,7 @@ import styles from './comparison.styles.js';
 /**
  * <quiet-comparison>
  *
- * @summary Comparisons display elements side-by-side with a draggable divider, allowing users to adjust the visible
+ * @summary Comparisons display two elements side-by-side with a draggable divider, allowing users to adjust the visible
  *  portions for direct visual comparison.
  * @documentation https://quietui.org/docs/components/comparison
  * @status stable
@@ -22,8 +22,8 @@ import styles from './comparison.styles.js';
  *
  * @dependency quiet-icon
  *
- * @slot start - The content to show on the left/start side.
- * @slot end - The content to show on the right/end side.
+ * @slot start - The content to show on the left/start side or top side, depending on orientation.
+ * @slot end - The content to show on the right/end side or bottom side, depending on orientation.
  * @slot handle-icon - A custom icon to use for the divider's handle.
  *
  * @csspart start - The container for the start content.
@@ -43,6 +43,7 @@ export class QuietComparison extends QuietElement {
   private dragHandler?: DraggableElement;
   private dragStartPosition = 0;
   private dragStartClientX = 0;
+  private dragStartClientY = 0;
 
   @query('#divider') private divider!: HTMLElement;
 
@@ -50,6 +51,9 @@ export class QuietComparison extends QuietElement {
 
   /** The position of the divider as a percentage (0-100). */
   @property({ type: Number }) position = 50;
+
+  /** The orientation of the comparison slider, either 'horizontal' or 'vertical'. */
+  @property({ type: String, reflect: true }) orientation: 'horizontal' | 'vertical' = 'horizontal';
 
   /** Disables the comparison component, preventing it from being focused and adjusted. */
   @property({ type: Boolean, reflect: true }) disabled = false;
@@ -71,6 +75,10 @@ export class QuietComparison extends QuietElement {
       this.customStates.set('disabled', this.disabled);
       this.setupDragging();
     }
+
+    if (changedProperties.has('orientation')) {
+      this.setupDragging();
+    }
   }
 
   disconnectedCallback() {
@@ -88,22 +96,37 @@ export class QuietComparison extends QuietElement {
 
   private handleKeydown(event: KeyboardEvent) {
     const isRtl = this.localize.dir() === 'rtl';
+    const isVertical = this.orientation === 'vertical';
     let newPosition = this.position;
 
     if (this.disabled) return;
 
     switch (event.key) {
       case 'ArrowLeft':
-        newPosition = isRtl ? this.position + 5 : this.position - 5;
+        if (!isVertical) {
+          newPosition = isRtl ? this.position + 5 : this.position - 5;
+        }
         break;
       case 'ArrowRight':
-        newPosition = isRtl ? this.position - 5 : this.position + 5;
+        if (!isVertical) {
+          newPosition = isRtl ? this.position - 5 : this.position + 5;
+        }
+        break;
+      case 'ArrowUp':
+        if (isVertical) {
+          newPosition = this.position - 5;
+        }
+        break;
+      case 'ArrowDown':
+        if (isVertical) {
+          newPosition = this.position + 5;
+        }
         break;
       case 'Home':
-        newPosition = isRtl ? 100 : 0;
+        newPosition = 0;
         break;
       case 'End':
-        newPosition = isRtl ? 0 : 100;
+        newPosition = 100;
         break;
       default:
         return; // Exit if it's not a key we handle
@@ -126,21 +149,28 @@ export class QuietComparison extends QuietElement {
     if (this.disabled) return;
 
     this.dragHandler = new DraggableElement(this.divider, {
-      start: (clientX: number) => {
+      start: (clientX: number, clientY: number) => {
         this.divider.classList.add('dragging');
         this.dragStartPosition = this.position;
         this.dragStartClientX = clientX;
+        this.dragStartClientY = clientY;
         this.customStates.set('dragging', true);
       },
-      move: (clientX: number) => {
+      move: (clientX: number, clientY: number) => {
         const isRtl = this.localize.dir() === 'rtl';
         const rect = this.getBoundingClientRect();
-        const deltaX = clientX - this.dragStartClientX;
-        let deltaPercentage = (deltaX / rect.width) * 100;
+        let deltaPercentage = 0;
 
-        // Invert the delta percentage for RTL layouts
-        if (isRtl) {
-          deltaPercentage = -deltaPercentage;
+        if (this.orientation === 'vertical') {
+          const deltaY = clientY - this.dragStartClientY;
+          deltaPercentage = (deltaY / rect.height) * 100;
+        } else {
+          const deltaX = clientX - this.dragStartClientX;
+          deltaPercentage = (deltaX / rect.width) * 100;
+          // Invert the delta percentage for RTL layouts in horizontal orientation
+          if (isRtl) {
+            deltaPercentage = -deltaPercentage;
+          }
         }
 
         // Calculate new position
@@ -161,16 +191,19 @@ export class QuietComparison extends QuietElement {
   }
 
   render() {
+    const isVertical = this.orientation === 'vertical';
+
     return html`
       <div id="start" part="start"><slot name="start"></slot></div>
       <div id="end" part="end"><slot name="end"></slot></div>
       <div
         id="divider"
         part="divider"
-        class=${classMap({ dragging: this.isDragging })}
+        class=${classMap({ dragging: this.isDragging, vertical: isVertical })}
         role="slider"
         tabindex=${this.disabled ? '-1' : '0'}
         aria-label=${this.localize.term('visualComparisonSlider')}
+        aria-orientation=${isVertical ? 'vertical' : 'horizontal'}
         aria-disabled=${this.disabled ? 'true' : 'false'}
         aria-valuemin="0"
         aria-valuemax="100"
@@ -181,7 +214,8 @@ export class QuietComparison extends QuietElement {
       >
         <div id="handle" part="handle">
           <slot name="handle-icon">
-            <quiet-icon library="system" name="grip-vertical" family="filled"></quiet-icon>
+            <quiet-icon library="system" name=${isVertical ? 'grip-horizontal' : 'grip-vertical'} family="filled">
+            </quiet-icon>
           </slot>
         </div>
       </div>

@@ -35,7 +35,7 @@ Comparisons are commonly used for images, but you can compare just about any con
 ```
 
 :::info
-For a strict visual comparison, i.e. no interaction, add the [`inert`](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/inert) attribute to the slotted elements as shown above.
+To prevent interactions while comparing, add the [`inert`](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/inert) attribute to both slotted elements as shown above.
 :::
 
 ### Setting the initial position
@@ -46,6 +46,17 @@ Add the `disabled` attribute to lock the comparison in its current position.
 <quiet-comparison position="75">
   <img slot="start" src="https://images.unsplash.com/photo-1736593494119-d0a69181b414?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="A kitten lays in its bed and cuddles a pillow">
   <img slot="end" src="https://images.unsplash.com/photo-1736593494119-d0a69181b414?q=80&w=1000&sat=-100&bri=-15&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="The same kitten in a grayscale photo">
+</quiet-comparison>
+```
+
+### Changing the orientation
+
+Set the `orientation` attribute to `vertical` to make the comparison vertical.
+
+```html {.example}
+<quiet-comparison orientation="vertical">
+  <img slot="start" src="https://images.unsplash.com/photo-1622576041274-ae5dc580175d?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Two kittens nestled up on a blanket">
+  <img slot="end" src="https://images.unsplash.com/photo-1622576041274-ae5dc580175d?q=80&w=800&sat=-100&bri=-15&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="The same two kittens in a grayscale photo">
 </quiet-comparison>
 ```
 

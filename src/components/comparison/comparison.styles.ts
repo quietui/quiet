@@ -11,12 +11,30 @@ export default css`
     isolation: isolate;
   }
 
+  :host([orientation='vertical']) {
+    flex-direction: column;
+    height: 100%;
+  }
+
   /* Start */
   #start {
     display: block;
     width: 100%;
     height: 100%;
     overflow: hidden;
+    clip-path: polygon(0 0, var(--position) 0, var(--position) 100%, 0 100%);
+  }
+
+  :host(:dir(rtl)) #start {
+    clip-path: polygon(0 0, calc(100% - var(--position)) 0, calc(100% - var(--position)) 100%, 0 100%);
+  }
+
+  :host([orientation='vertical']) #start {
+    clip-path: polygon(0 0, 100% 0, 100% var(--position), 0 var(--position));
+  }
+
+  :host([orientation='vertical']:dir(rtl)) #start {
+    clip-path: polygon(0 0, 100% 0, 100% var(--position), 0 var(--position));
   }
 
   /* End */
@@ -34,8 +52,16 @@ export default css`
     will-change: transform;
   }
 
+  :host([orientation='vertical']) #end {
+    clip-path: polygon(0 var(--position), 100% var(--position), 100% 100%, 0 100%);
+  }
+
   :host(:dir(rtl)) #end {
     clip-path: polygon(0 0, calc(100% - var(--position)) 0, calc(100% - var(--position)) 100%, 0 100%);
+  }
+
+  :host([orientation='vertical']:dir(rtl)) #end {
+    clip-path: polygon(0 var(--position), 100% var(--position), 100% 100%, 0 100%);
   }
 
   /* Slotted defaults */
@@ -43,6 +69,7 @@ export default css`
     display: block;
     width: 100%;
     max-width: 100%;
+    height: auto;
   }
 
   /* Divider */
@@ -70,12 +97,29 @@ export default css`
     }
   }
 
-  :host(:dir(ltr)) #divider {
+  #divider.vertical {
+    top: var(--position);
+    left: 0;
+    width: 100%;
+    height: var(--divider-width);
+    transform: translateY(-50%);
+    cursor: ns-resize;
+
+    &::before {
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: var(--divider-draggable-area);
+      transform: translateY(-50%);
+    }
+  }
+
+  :host(:dir(ltr)) #divider:not(.vertical) {
     left: var(--position);
     transform: translateX(-50%);
   }
 
-  :host(:dir(rtl)) #divider {
+  :host(:dir(rtl)) #divider:not(.vertical) {
     right: var(--position);
     transform: translateX(50%);
   }

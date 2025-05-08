@@ -140,27 +140,30 @@ async function updateSearchResults(query = '') {
     let matches = [];
 
     if (hasQuery) {
-      // First perform an exact search
-      const exactMatches = searchIndex.search(query);
-
-      // Then perform a fuzzy search
-      const fuzzyTokens = query
-        .split(' ')
-        .map(term => `${term}~1`)
-        .join(' ');
-      const fuzzyMatches = searchIndex.search(fuzzyTokens);
-
       // Track seen refs to avoid duplicates
       const seenRefs = new Set();
 
-      // Add exact matches first
-      exactMatches.forEach(match => {
+      // Start with a standard search to get the best "exact match" result
+      searchIndex.search(`${query}`).forEach(match => {
         matches.push(match);
         seenRefs.add(match.ref);
       });
 
-      // Then add fuzzy matches (if not already included)
-      fuzzyMatches.forEach(match => {
+      // Add wildcard matches if not already included
+      searchIndex.search(`${query}*`).forEach(match => {
+        if (!seenRefs.has(match.ref)) {
+          matches.push(match);
+          seenRefs.add(match.ref);
+        }
+      });
+
+      // Add fuzzy search matches last
+      const fuzzyTokens = query
+        .split(' ')
+        .map(term => `${term}~1`)
+        .join(' ');
+
+      searchIndex.search(fuzzyTokens).forEach(match => {
         if (!seenRefs.has(match.ref)) {
           matches.push(match);
           seenRefs.add(match.ref);

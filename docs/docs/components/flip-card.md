@@ -113,7 +113,7 @@ The most basic flip card requires two child elements. Content in the `front` slo
 Flip cards work with any content, but they work exceptionally well with [cards](/docs/components/card).
 
 :::info
-If your flip card is empty, make sure you've included `slot="front"` as shown above.
+If your flip card appears empty, make sure you've included `slot="front"` as shown above.
 :::
 
 ### Flipping the card

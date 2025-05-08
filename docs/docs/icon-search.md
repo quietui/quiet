@@ -16,11 +16,17 @@ For an alternative way to browse icons, head over to the [Tabler Icons](https://
     type="search"
     label="Search icons"
     with-clear
-    placeholder="Type arrows, files, media, settings, tools, etc."
+    placeholder="e.g. arrows, files, media, settings, tools, etc."
     id="icon-search"
     autofocus
   ></quiet-text-field>
-  <quiet-select label="Style" id="icon-style">
+
+  <quiet-select label="Copy" value="html" id="icon-copy">
+    <option value="html">Icon HTML</option>
+    <option value="name">Icon name</option>
+  </quiet-select>
+
+  <quiet-select label="Icon family" id="icon-family">
     <option value="outline">Outline</option>
     <option value="filled">Filled</option>
   </quiet-select>
@@ -46,11 +52,36 @@ For an alternative way to browse icons, head over to the [Tabler Icons](https://
   import lunr from 'https://cdn.jsdelivr.net/npm/lunr/+esm';
 
   const searchField = document.getElementById('icon-search');
-  const styleSelect = document.getElementById('icon-style');
+  const copySelect = document.getElementById('icon-copy');
+  const familySelect = document.getElementById('icon-family');
   const initialState = document.getElementById('icon-initial');
   const emptyState = document.getElementById('icon-empty');
   const total = document.getElementById('icon-total');
   const results = document.getElementById('icon-results');
+
+  // Restore saved preferences from localStorage
+  function restorePreferences() {
+    // Restore style preference
+    const savedFamily = localStorage.getItem('iconFamily');
+    if (savedFamily) {
+      familySelect.value = savedFamily;
+    }
+    
+    // Restore copy mode preference
+    const savedCopyMode = localStorage.getItem('iconCopyMode');
+    if (savedCopyMode) {
+      copySelect.value = savedCopyMode;
+    }
+  }
+
+  // Save preferences to localStorage
+  function saveFamilyPreference() {
+    localStorage.setItem('iconFamily', familySelect.value);
+  }
+
+  function saveCopyModePreference() {
+    localStorage.setItem('iconCopyMode', copySelect.value);
+  }
 
   // Debounce function
   function debounce(func, wait) {
@@ -104,10 +135,27 @@ For an alternative way to browse icons, head over to the [Tabler Icons](https://
       });
     });
 
+    // Update the copy behavior based on selected radio option
+    const updateCopyData = (event) => {
+      const copyItems = document.querySelectorAll('#icon-results quiet-copy');
+      const copyMode = copySelect.value;
+      
+      copyItems.forEach(item => {
+        if (copyMode === 'name') {
+          item.data = item.getAttribute('data-name');
+        } else {
+          item.data = item.getAttribute('data-html');
+        }
+      });
+      
+      // Save the preference
+      saveCopyModePreference();
+    };
+
     // Search function
     const performSearch = debounce(() => {
       const query = searchField.value.replace(/[^a-zA-Z0-9 ]/g, ' ').trim();
-      const selectedStyle = styleSelect.value;
+      const selectedFamily = familySelect.value;
       let tooltipId = 0;
 
       // Handle initial state visibility
@@ -150,10 +198,10 @@ For an alternative way to browse icons, head over to the [Tabler Icons](https://
           });
         }
 
-        // Filter results by selected style
+        // Filter results by selected family
         let matches = searchResults
           .map(result => iconsById[result.ref])
-          .filter(icon => icon.styles && icon.styles[selectedStyle]);
+          .filter(icon => icon.styles && icon.styles[selectedFamily]);
 
         // Update UI based on search results
         if (matches.length === 0) {
@@ -161,13 +209,25 @@ For an alternative way to browse icons, head over to the [Tabler Icons](https://
           results.innerHTML = '';
         } else {
           emptyState.hidden = true;
-
-          // Create HTML for matched icons, including the style attribute
+          
+          const copyMode = copySelect.value;
+          
+          // Create HTML for matched icons, including both data attributes
           const iconElements = matches.map(icon => {
+            const htmlData = `&lt;quiet-icon name=&quot;${icon.name}&quot;${selectedFamily === 'outline' ? '' : ` family=&quot;${selectedFamily}&quot;`}&gt;&lt;/quiet-icon&gt;`;
+            const nameData = icon.name;
+            
+            // Set the data attribute based on current copy mode
+            const dataValue = copyMode === 'name' ? nameData : htmlData;
+            
             return `
-              <quiet-copy data="&lt;quiet-icon name=&quot;${icon.name}&quot;${selectedStyle === 'outline' ? '' : ` family=&quot;${selectedStyle}&quot;`}&gt;&lt;/quiet-icon&gt;" id="icon-search-result-${++tooltipId}">
+              <quiet-copy 
+                data="${dataValue}" 
+                data-html="${htmlData}" 
+                data-name="${nameData}" 
+                id="icon-search-result-${++tooltipId}">
                 <button type="button">
-                  <quiet-icon name="${icon.name}" family="${selectedStyle}"></quiet-icon><br>
+                  <quiet-icon name="${icon.name}" family="${selectedFamily}"></quiet-icon>
                 </button>
               </quiet-copy>
               <quiet-tooltip for="icon-search-result-${tooltipId}">
@@ -183,11 +243,20 @@ For an alternative way to browse icons, head over to the [Tabler Icons](https://
       }
     }, 300); // Debounce for 300ms
 
+    // Restore preferences before attaching event handlers
+    restorePreferences();
+
     // Attach event listeners
     searchField.addEventListener('input', performSearch);
-    styleSelect.addEventListener('input', performSearch);
+    
+    familySelect.addEventListener('input', () => {
+      saveFamilyPreference();
+      performSearch();
+    });
+    
+    copySelect.addEventListener('input', updateCopyData);
 
-    // Trigger initial search to show icons based on default style
+    // Trigger initial search to show icons based on selected family
     performSearch();
   } catch (error) {
     console.error('Error loading icons:', error);
@@ -201,8 +270,9 @@ For an alternative way to browse icons, head over to the [Tabler Icons](https://
     gap: 1rem;
   }
 
-  #icon-style {
-    max-width: 200px;
+  #icon-copy,
+  #icon-family {
+    max-width: 160px;
   }
 
   #icon-initial {
@@ -251,12 +321,29 @@ For an alternative way to browse icons, head over to the [Tabler Icons](https://
     }
   }
   
-  @media screen and (max-width: 959px) {
+  @media screen and (max-width: 1199px) {
     #search-container {
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: 1fr 1fr
+      width: 100%;
     }
 
-     #icon-style {
+    #icon-search {
+      grid-column: 1 / span 2;
+    }
+
+    #icon-copy {
+      grid-column: 1;
+    }
+
+    #icon-family {
+      grid-column: 2;
+
+    }
+
+
+    #icon-copy, 
+    #icon-family {
       max-width: none;
     }
 

@@ -27,7 +27,7 @@ Please take a moment to review these guidelines to make the contribution process
 
 ## Feature requests
 
-It's important to remember that this project is [very opinionated](/about). Many feature requests will be considered out of scope and will not be fulfilled. This doesn't mean your idea is bad — it means it's not a good fit for the project right now. The maintainer strongly believes that certain tradeoffs are worth eliminating complexity and bloat, which ultimately leads to improved longevity.
+It's important to remember that this project is [very opinionated](/about). Many feature requests will be considered out of scope and will not be fulfilled. This doesn't mean your idea is bad — it means it's not a good fit for the project right now. As a maintainer, I strongly believe that certain tradeoffs are worth eliminating complexity and bloat, which ultimately leads to a better experience and improved longevity.
 
 - Please **do** search for an existing request before suggesting a new feature.
 - Please **do** use the voting buttons to vote for a feature.
@@ -48,20 +48,24 @@ A bug is a demonstrable problem caused by code in the library. Bug reports are a
 - Please **do not** paste in screenshots of code
 
 :::info
-A minimal test case is critical to getting your bug fixed! It demonstrates that the bug exists in the library and not in surrounding code. Contributors should be able to understand the bug without studying your code.
+A minimal test case is critical to getting your bug fixed! It demonstrates that the bug exists in the library and not in surrounding code. Contributors should be able to understand the bug with relative ease.
 :::
 
 ## Pull requests
 
 To keep the project on track, please read the following guidelines before submitting a PR.
 
-- ==Please **do** open an issue before submitting a PR== unless the changes are trivial (e.g. fixing typos or outdated docs). This will prevent you from doing work that won't be accepted for various reasons (e.g. someone is already working on it, it's not a good fit for the project's roadmap, it needs additional exploration, etc.)
+- ==Please **do** open an issue before submitting a PR.== This will prevent you from doing work that won't be accepted for various reasons (e.g. someone is already working on it, it's not a good fit for the project's roadmap, it needs additional exploration, etc.)
 - Please **do** make sure your PR clearly defines what you're changing. Even if you feel your changes are obvious, please explain them so other contributors can more easily review your work.
 - Please **do not** edit anything in `dist/`, as those files are generated at build time.
 
-The maintainer reserves the right to reject any contribution that doesn't align with the project's mission or for any other reason.
+:::warn
+**As a maintainer, I reserve the right to reject any contribution for any reason.** 
 
-Remember, Quiet is very opinionated. Oftentimes, saying "no" is key to maintaining the quality of the library and the maintainer's ability to steward it effectively.
+More often than not, I will prefer to do things myself. Or I will have a different vision. Or I won't want to adopt code I'm not comfortable maintaining.
+
+Remember, this library is very opinionated. Oftentimes, saying "no" is key to maintaining the quality of the library and my ability to steward it effectively.
+:::
 
 ## Documentation
 

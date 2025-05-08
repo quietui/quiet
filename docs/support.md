@@ -6,7 +6,7 @@ isWide: true
 section: support
 ---
 
-Quiet can be used for free under the MIT license. Unfortunately, I can't offer support for every user, but if you need help [you can sponsor the project](https://github.com/sponsors/quietui) to unlock all of the benefits shown below.
+Quiet can be used for free under the MIT license. Unfortunately, I can't offer free support for everyone, but if you need help you can [become a sponsor](https://github.com/sponsors/quietui) to unlock support and other benefits shown below.
 
 <div class="sponsor-tiers">
   <div class="sponsor-tier">

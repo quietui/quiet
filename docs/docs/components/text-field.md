@@ -88,7 +88,7 @@ Use the `start` and `end` slots to add presentational icons or text. Avoid inter
 </quiet-text-field>
 ```
 
-### Adding a datalist
+### Autocomplete
 
 Slot a [`<datalist>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/datalist) into the text field's default slot to show a list of autocomplete options. Unlike native `<input>` elements, there's no need to provide a `list` attribute.
 

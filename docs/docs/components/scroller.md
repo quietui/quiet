@@ -171,6 +171,10 @@ Add the `without-scrollbar` attribute to prevent the scrollbar from being visibl
 </style>
 ```
 
+:::warn
+Using this option will affect users' ability to scroll on certain devices.
+:::
+
 ### Styling the shadow
 
 Use the `--shadow-color`, `--shadow-opacity`, and `--shadow-width` custom properties to style the shadows that appear when scrolling is possible. To customize the line that runs along the edge of the shadow, use the `--edge-width` and `--edge-color` custom properties.

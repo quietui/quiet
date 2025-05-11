@@ -70,7 +70,7 @@ export class QuietDialog extends QuietElement {
    * By default, the dialog will appear in the center of the screen. Changing the placement will cause the dialog to
    * slide in from the side of the screen like a drawer.
    */
-  @property({ reflect: true }) placement: 'center' | 'top' | 'bottom' | 'start' | 'end' = 'center';
+  @property({ reflect: true }) placement: 'center' | 'top' | 'bottom' | 'start' | 'end' | 'full' = 'center';
 
   /** Allows the dialog to be closed when clicking outside of it. */
   @property({ attribute: 'light-dismiss', type: Boolean }) lightDismiss = false;

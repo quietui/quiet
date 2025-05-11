@@ -146,7 +146,7 @@ The `actions` slot is only available when the header is enabled.
 
 ### Changing the placement
 
-By default, dialogs appear in the center of the screen. To make the dialog slide in from the side of the screen like a drawer, set the `placement` attribute to `start`, `end`, `top`, or `bottom`.
+By default, dialogs appear in the center of the screen. To make the dialog slide in from the side of the screen like a drawer, set the `placement` attribute to `start`, `end`, `top`, `bottom`, or `full`.
 
 ```html {.example}
 <quiet-dialog id="dialog__placement">
@@ -166,6 +166,7 @@ By default, dialogs appear in the center of the screen. To make the dialog slide
   <quiet-button data-placement="end">End</quiet-button>
   <quiet-button data-placement="top">Top</quiet-button>
   <quiet-button data-placement="bottom">Bottom</quiet-button>
+  <quiet-button data-placement="full">Full</quiet-button>
 </div>
 
 <script>
@@ -173,14 +174,16 @@ By default, dialogs appear in the center of the screen. To make the dialog slide
   const container = dialog.nextElementSibling;
 
   container.addEventListener('click', event => {
-    dialog.placement = event.target.getAttribute('data-placement');
-    dialog.open = true;
+    if (event.target.closest('quiet-button')) {
+      dialog.placement = event.target.getAttribute('data-placement');
+      dialog.open = true;
+    }
   });
 </script>
 ```
 
 :::info
-The `--width` custom property has no effect on dialogs with `top` and `bottom` placements. Similarly, the `--height` custom property has no effect on dialogs with `start` and `end` placements.
+The `--width` custom property has no effect on dialogs with `top` and `bottom` placements. Similarly, the `--height` custom property has no effect on dialogs with `start` and `end` placements. Neither have an effect on dialogs with the `full` placement.
 :::
 
 ### Changing the size

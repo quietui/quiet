@@ -206,6 +206,32 @@ export default css`
         }
       }
     }
+
+    /* Full placement */
+    &[data-placement='full'] {
+      width: 100dvw;
+      max-width: 100dvw;
+      height: 100dvh;
+      max-height: 100dvh;
+      inset: 0;
+      border-radius: 0;
+
+      &.show {
+        animation: show-from-center var(--show-duration) ease;
+
+        &::backdrop {
+          animation: show-backdrop var(--show-duration, 200ms) ease;
+        }
+      }
+
+      &.hide {
+        animation: show-from-center var(--show-duration) ease reverse;
+
+        &::backdrop {
+          animation: show-backdrop var(--show-duration, 200ms) ease reverse;
+        }
+      }
+    }
   }
 
   /* Header */

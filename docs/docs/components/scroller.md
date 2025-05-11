@@ -177,7 +177,7 @@ Using this option will affect users' ability to scroll on certain devices.
 
 ### Styling the shadow
 
-Use the `--shadow-color`, `--shadow-opacity`, and `--shadow-width` custom properties to style the shadows that appear when scrolling is possible. To customize the line that runs along the edge of the shadow, use the `--edge-width` and `--edge-color` custom properties.
+Use the `--shadow-color` and `--shadow-width` custom properties to style the shadows that appear when scrolling is available. This example adds edges and a more natural shadow for light mode, while leaving dark mode intact.
 
 ```html {.example}
 <quiet-scroller id="scroller__shadow">
@@ -190,13 +190,35 @@ Use the `--shadow-color`, `--shadow-opacity`, and `--shadow-width` custom proper
 </quiet-scroller>
 
 <style>
-  #scroller__shadow {
-    --edge-color: var(--quiet-primary-fill-soft);
-    --edge-width: 1px;
-    --shadow-color: var(--quiet-primary-fill-mid);
-    --shadow-opacity: 15%;
-    --shadow-width: 2rem;
+  html:not(.quiet-dark) {
+    #scroller__shadow {
+      --shadow-color: #0001;
+      --shadow-width: .75rem;
+      
+      /* Add a border to each shadow */
+      &::part(start-shadow) {
+        border-left: solid 1px #0002;
+      }
+      
+      &::part(end-shadow) {
+        border-right: solid 1px #0002;
+      }
 
+      /* Taper the shadows at the top and bottom for a realistic effect */
+      &::part(start-shadow),
+      &::part(end-shadow) {
+        mask-image: linear-gradient(
+          to bottom, 
+          transparent 0%, 
+          black 10%, 
+          black 90%, 
+          transparent 100%
+        );
+      }
+    }
+  }
+
+  #scroller__shadow {
     .card {
       width: 1500px;
       padding: 1rem;

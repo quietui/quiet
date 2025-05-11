@@ -3,7 +3,6 @@ import { css } from 'lit';
 export default css`
   :host {
     --shadow-color: var(--quiet-background-color);
-    --shadow-opacity: 100%;
     --shadow-width: 2rem;
 
     /* private (defined dynamically) */
@@ -63,7 +62,6 @@ export default css`
       top: 0;
       bottom: 0;
       width: var(--shadow-width);
-      isolation: isolate;
       pointer-events: none;
     }
 
@@ -78,40 +76,24 @@ export default css`
     #start-shadow {
       &:dir(ltr) {
         left: 0;
-        background: linear-gradient(
-          to right,
-          color-mix(in srgb, var(--shadow-color) var(--shadow-opacity), transparent) 0%,
-          transparent 100%
-        );
+        background: linear-gradient(to right, var(--shadow-color), transparent 100%);
       }
 
       &:dir(rtl) {
         right: 0;
-        background: linear-gradient(
-          to left,
-          color-mix(in srgb, var(--shadow-color) var(--shadow-opacity), transparent) 0%,
-          transparent 100%
-        );
+        background: linear-gradient(to left, var(--shadow-color), transparent 100%);
       }
     }
 
     #end-shadow {
       &:dir(ltr) {
         right: 0;
-        background: linear-gradient(
-          to left,
-          color-mix(in srgb, var(--shadow-color) var(--shadow-opacity), transparent) 0%,
-          transparent 100%
-        );
+        background: linear-gradient(to left, var(--shadow-color), transparent 100%);
       }
 
       &:dir(rtl) {
         left: 0;
-        background: linear-gradient(
-          to right,
-          color-mix(in srgb, var(--shadow-color) var(--shadow-opacity), transparent) 0%,
-          transparent 100%
-        );
+        background: linear-gradient(to right, var(--shadow-color), transparent 100%);
       }
     }
   }
@@ -124,26 +106,17 @@ export default css`
       right: 0;
       left: 0;
       height: var(--shadow-width);
-      isolation: isolate;
       pointer-events: none;
     }
 
     #start-shadow {
       top: 0;
-      background: linear-gradient(
-        to bottom,
-        color-mix(in srgb, var(--shadow-color) var(--shadow-opacity), transparent) 0%,
-        transparent 100%
-      );
+      background: linear-gradient(to bottom, var(--shadow-color), transparent 100%);
     }
 
     #end-shadow {
       bottom: 0;
-      background: linear-gradient(
-        to top,
-        color-mix(in srgb, var(--shadow-color) var(--shadow-opacity), transparent) 0%,
-        transparent 100%
-      );
+      background: linear-gradient(to top, var(--shadow-color), transparent 100%);
     }
   }
 `;

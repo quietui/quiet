@@ -18,10 +18,11 @@ import styles from './scroller.styles.js';
  * @slot - The content to show inside the scroller.
  *
  * @cssproperty [--shadow-color=var(--quiet-neutral-fill-mid)] - The base color of the shadow.
- * @cssproperty [--shadow-opacity=10%] - The opacity of the shadow.
  * @cssproperty [--shadow-width=0.5rem] - The width of the shadow.
  *
  * @csspart content - The container that wraps the slotted content.
+ * @csspart start-shadow - The starting shadow.
+ * @csspart end-shadow - The ending shadow.
  */
 @customElement('quiet-scroller')
 export class QuietScroller extends QuietElement {
@@ -112,8 +113,8 @@ export class QuietScroller extends QuietElement {
 
   render() {
     return html`
-      <div id="start-shadow" aria-hidden="true"></div>
-      <div id="end-shadow" aria-hidden="true"></div>
+      <div id="start-shadow" part="start-shadow" aria-hidden="true"></div>
+      <div id="end-shadow" part="end-shadow" aria-hidden="true"></div>
 
       <div
         id="content"

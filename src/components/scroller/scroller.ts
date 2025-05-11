@@ -17,8 +17,6 @@ import styles from './scroller.styles.js';
  *
  * @slot - The content to show inside the scroller.
  *
- * @cssproperty [--edge-color=var(--quiet-neutral-stroke-softer)] - The color of the shadow's edge.
- * @cssproperty [--edge-width=var(--quiet-border-width)] - The width of the shadow's edge.
  * @cssproperty [--shadow-color=var(--quiet-neutral-fill-mid)] - The base color of the shadow.
  * @cssproperty [--shadow-opacity=10%] - The opacity of the shadow.
  * @cssproperty [--shadow-width=0.5rem] - The width of the shadow.

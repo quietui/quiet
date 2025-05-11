@@ -450,7 +450,7 @@ Listboxes are styled like form controls for consistency, but feel free to custom
 
     &::part(listbox) {
       height: auto;
-      padding-block: 0;
+      padding: 0;
     }
     
     quiet-listbox-item {
@@ -462,6 +462,7 @@ Listboxes are styled like form controls for consistency, but feel free to custom
       grid-gap: 4px .75em;
       padding: .75em;
       border-bottom-color: var(--quiet-neutral-stroke-softer);
+      border-radius: 0;
       align-items: center;
     }
 

@@ -3,9 +3,10 @@ import { css } from 'lit';
 export default css`
   :host {
     display: block;
-    padding: 0.5em 1em;
+    padding: 0.5em 0.5em;
     /* Use a border instead of gap to prevent dead zones when clicking in the listbox */
     border-bottom: var(--quiet-border-width) var(--quiet-border-style) var(--quiet-paper-color);
+    border-radius: calc(var(--quiet-border-radius) / 2);
     background-color: var(--quiet-paper-color);
     color: var(--quiet-text-body);
     cursor: pointer;

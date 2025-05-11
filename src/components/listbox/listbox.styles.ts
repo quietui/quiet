@@ -6,6 +6,7 @@ export default css`
     flex-direction: column;
     height: 12.125em;
     padding: 0.25em 0;
+    padding: 0.25em;
     overflow: auto;
     border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
     border-radius: calc(var(--quiet-border-radius) / 1.5);

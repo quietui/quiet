@@ -37,6 +37,10 @@ export default css`
     }
   }
 
+  :host([without-scrollbar]) #content {
+    scrollbar-width: none;
+  }
+
   :host([orientation='horizontal']) #content {
     overflow-x: auto;
     overflow-y: hidden;

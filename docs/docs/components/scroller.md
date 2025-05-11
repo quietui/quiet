@@ -143,6 +143,34 @@ Scrollers default to a horizontal orientation. To create a vertical scroller, se
 </style>
 ```
 
+### Hiding the scrollbar
+
+Add the `without-scrollbar` attribute to prevent the scrollbar from being visible.
+
+```html {.example}
+<quiet-scroller id="scroller__hiding" without-scrollbar>
+  <div class="card">
+    <p>Cats are expert hunters with sharp reflexes and incredible patience. They can spend hours watching prey before making their move. Their whiskers act as precision sensors, detecting even the slightest air movements around them.</p>
+    <p>When sleeping, cats curl into tight balls to conserve body heat and protect vital organs. This instinctive position dates back to their wild ancestors who needed to stay warm and safe while resting.</p>
+    <p>A cat's purr vibrates at a frequency that can promote healing and bone growth. This may explain why cats with broken bones heal faster than many other animals. Their therapeutic purr ranges from 25 to 150 Hertz.</p>
+    <p>House cats share 95.6% of their genetic makeup with tigers, despite the enormous size difference. This close relationship is evident in their similar behaviors, from scent marking to stalking techniques.</p>
+  </div>
+</quiet-scroller>
+
+<style>
+  #scroller__hiding {
+    .card {
+      width: 1200px;
+      padding: 1rem;
+      
+      p:last-child {
+        margin-block-end: 0;
+      }
+    }
+  }  
+</style>
+```
+
 ### Styling the shadow
 
 Use the `--shadow-color`, `--shadow-opacity`, and `--shadow-width` custom properties to style the shadows that appear when scrolling is possible. To customize the line that runs along the edge of the shadow, use the `--edge-width` and `--edge-color` custom properties.

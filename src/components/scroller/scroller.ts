@@ -40,6 +40,9 @@ export class QuietScroller extends QuietElement {
   /** The scroller's orientation. */
   @property({ reflect: true }) orientation: 'horizontal' | 'vertical' = 'horizontal';
 
+  /** Removes the visible scrollbar. */
+  @property({ attribute: 'without-scrollbar', type: Boolean, reflect: true }) withoutScrollbar = false;
+
   connectedCallback() {
     super.connectedCallback();
     this.resizeObserver.observe(this);

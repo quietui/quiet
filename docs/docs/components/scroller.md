@@ -112,16 +112,16 @@ Scrollers default to a horizontal orientation. To create a vertical scroller, se
 <div style="height: 300px;">
   <quiet-scroller id="scroller__vertical" orientation="vertical">
     <div class="card">
-      <p>Cats have whiskers not only on their muzzles, but also above their eyes, on their chins, and on the backs of their front legs. These whiskers help them navigate tight spaces and monitor air currents.</p>
-      <p>A cat can jump up to six times its length in a single bound, making them exceptional jumpers compared to their size. Their powerful hind legs contain extra muscles specifically designed for jumping.</p>
+      <p style="margin-block-start: 0;">Cats have whiskers not only on their muzzles, but also above their eyes, on their chins, and on the backs of their front legs. These whiskers help them navigate tight spaces and monitor air currents.</p>
       <p>Cats have a third eyelid called a "haw" or nictitating membrane. This clear eyelid helps protect their eyes while maintaining visibility, especially during hunting or fights.</p>
       <p>A cat's heart beats nearly twice as fast as a human heart, at 110 to 140 beats per minute. Their quick metabolism supports their naturally active lifestyle.</p>
       <p>Cats can rotate their ears 180 degrees using 32 different muscles. This allows them to pinpoint the exact location of sounds without moving their heads.</p>
       <p>A cat's nose print is unique, just like a human's fingerprint, with no two cats having the same pattern of bumps and ridges.</p>
+      <p>A cat can jump up to six times its length in a single bound, making them exceptional jumpers compared to their size. Their powerful hind legs contain extra muscles specifically designed for jumping.</p>
       <p>Cats can make over 100 different vocal sounds, while dogs can only make about 10. Their vocalizations include purrs, meows, chirps, trills, growls, and hisses.</p>
       <p>Most cats have no taste buds for sweetness. They lack the gene that codes for the sweet taste receptor, making them indifferent to sugary foods.</p>
       <p>A cat can change its meow to manipulate humans. They develop specific meows to communicate different needs, essentially training their owners to respond.</p>
-      <p>Cats can drink seawater in survival situations. Their kidneys are so efficient they can filter out the salt and use the water content.</p>
+      <p style="margin-block-end: 0;">Cats can drink seawater in survival situations. Their kidneys are so efficient they can filter out the salt and use the water content.</p>
     </div>
   </quiet-scroller>
 </div>

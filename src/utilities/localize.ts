@@ -18,12 +18,14 @@ export interface Translation extends DefaultTranslation {
   breadcrumbs: string;
   clearEntry: string;
   close: string;
+  collapse: string;
   colorValue: string;
   copied: string;
   copyToClipboard: string;
   dragFileHereOrChooseFromFolder: string;
   dragFilesHereOrChooseFromFolder: string;
   error: string;
+  expand: string;
   firstPage: string;
   hidePassword: string;
   hide: string;

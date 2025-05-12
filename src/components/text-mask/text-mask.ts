@@ -11,7 +11,7 @@ import styles from './text-mask.styles.js';
  * @summary Text masks apply text as a mask over an image, creating visually stylized characters.
  * @documentation https://quietui.org/docs/components/text-mask
  * @status stable
- * @since 1.0.0
+ * @since 1.0
  *
  * @slot - The text to be masked.
  *

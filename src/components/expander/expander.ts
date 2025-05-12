@@ -69,7 +69,7 @@ export class QuietExpander extends QuietElement {
   }
 
   /** Toggle the expanded state with animation */
-  private toggleExpanded() {
+  private async toggleExpanded() {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const content = this.shadowRoot?.querySelector('#content') as HTMLElement;
     const duration = prefersReducedMotion ? 0 : this.duration;
@@ -77,7 +77,7 @@ export class QuietExpander extends QuietElement {
     if (!content) return;
 
     // Store current state before changing
-    const isCurrentlyExpanded = this.expanded;
+    const isExpanded = this.expanded;
 
     // Get the full content height for animation
     const contentHeight = content.scrollHeight;
@@ -85,61 +85,42 @@ export class QuietExpander extends QuietElement {
     // Cancel any running animations
     content.getAnimations().forEach(animation => animation.cancel());
 
-    if (isCurrentlyExpanded) {
-      // Animate collapsing to preview height
-      const animation = content.animate(
+    if (isExpanded) {
+      this.expanded = false;
+
+      // Collapse animation
+      await content.animate(
         [
           { height: `${contentHeight}px`, overflow: 'hidden' },
           { height: `${this.previewHeight}px`, overflow: 'hidden' }
         ],
         {
           duration,
-          easing: this.easing,
-          fill: 'forwards'
+          easing: this.easing
         }
-      );
+      ).finished;
 
-      // Update ARIA attributes immediately for accessibility
-      this.expanded = false;
-
-      // Optional: Add event listener for animation completion
-      animation.addEventListener(
-        'finish',
-        () => {
-          content.style.height = `${this.previewHeight}px`;
-          content.style.overflow = 'hidden';
-        },
-        { once: true }
-      );
+      content.style.height = `${this.previewHeight}px`;
+      content.style.overflow = 'hidden';
     } else {
       // Set initial state for animation
       content.style.height = `${this.previewHeight}px`;
+      this.expanded = true;
 
-      // Animate expanding
-      const animation = content.animate(
+      // Expand animation
+      await content.animate(
         [
           { height: `${this.previewHeight}px`, overflow: 'hidden' },
           { height: `${contentHeight}px`, overflow: 'hidden' }
         ],
         {
           duration,
-          easing: this.easing,
-          fill: 'forwards'
+          easing: this.easing
         }
-      );
+      ).finished;
 
-      // Update ARIA attributes immediately for accessibility
-      this.expanded = true;
-
-      // Reset to auto height after animation completes for dynamic content
-      animation.addEventListener(
-        'finish',
-        () => {
-          content.style.height = 'auto';
-          content.style.overflow = 'visible';
-        },
-        { once: true }
-      );
+      content.style.height = 'auto';
+      content.style.overflow = 'visible';
     }
   }
 

@@ -1,6 +1,6 @@
 import type { CSSResultGroup } from 'lit';
 import { html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, query } from 'lit/decorators.js';
 import hostStyles from '../../styles/host.styles.js';
 import { animateWithClass } from '../../utilities/animate.js';
 import { Localize } from '../../utilities/localize.js';
@@ -27,6 +27,8 @@ export class QuietExpander extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
   private localize = new Localize(this);
+
+  @query('#content') content: HTMLElement;
 
   /** Whether the content is expanded */
   @property({ type: Boolean, reflect: true }) expanded = false;
@@ -62,63 +64,56 @@ export class QuietExpander extends QuietElement {
 
   firstUpdated() {
     // Initialize collapsed state if needed
-    const content = this.shadowRoot?.querySelector('#content') as HTMLElement;
-    if (!this.expanded && content) {
-      content.style.height = `${this.previewHeight}px`;
-      content.style.overflow = 'hidden';
+    if (!this.expanded) {
+      this.content.style.height = `${this.previewHeight}px`;
+      this.content.style.overflow = 'hidden';
     }
   }
 
   /** Toggle the expanded state with animation */
   private async toggleExpanded() {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const content = this.shadowRoot?.querySelector('#content') as HTMLElement;
 
-    if (!content) return;
+    // Get all running animations and collect their current values
+    const runningAnimations = this.content.getAnimations();
+    let currentHeight = this.expanded ? this.content.scrollHeight : this.previewHeight;
 
-    // Store current state before changing
-    const isExpanded = this.expanded;
+    // If there are running animations, get the current computed height
+    if (runningAnimations.length > 0) {
+      // Get computed style at this moment to find actual current height
+      const computedStyle = getComputedStyle(this.content);
+      currentHeight = parseFloat(computedStyle.height);
 
-    // Update expanded state immediately to change the label
-    this.expanded = !isExpanded;
-
-    // Cancel any running animations
-    content.getAnimations().forEach(animation => animation.cancel());
-
-    if (prefersReducedMotion) {
-      // TODO
+      // Cancel all running animations
+      runningAnimations.forEach(animation => animation.cancel());
     }
 
-    if (isExpanded) {
-      // Get current height for animation start
-      const currentHeight = content.scrollHeight;
-      content.style.height = `${currentHeight}px`;
-      content.style.overflow = 'hidden';
+    // Update expanded state
+    this.expanded = !this.expanded;
 
-      // Set target height for animation end
-      content.style.setProperty('--start-height', `${currentHeight}px`);
-      content.style.setProperty('--target-height', `${this.previewHeight}px`);
+    // Skip animation for reduced motion
+    if (prefersReducedMotion) {
+      this.content.style.height = this.expanded ? 'auto' : `${this.previewHeight}px`;
+      this.content.style.overflow = this.expanded ? 'visible' : 'hidden';
+      return;
+    }
 
-      // Set collapsed class
-      await animateWithClass(content, 'collapse');
+    // Set up animation with actual current height as starting point
+    const targetHeight = this.expanded ? this.content.scrollHeight : this.previewHeight;
+    this.content.style.setProperty('--start-height', `${currentHeight}px`);
+    this.content.style.setProperty('--target-height', `${targetHeight}px`);
+    this.content.style.overflow = 'hidden';
 
-      content.style.height = `${this.previewHeight}px`;
-      content.style.overflow = 'hidden';
+    // Run the animation
+    await animateWithClass(this.content, this.expanded ? 'expand' : 'collapse');
+
+    // Set final state
+    if (this.expanded) {
+      this.content.style.height = 'auto';
+      this.content.style.overflow = 'visible';
     } else {
-      // Set full height for animation target
-      const contentHeight = content.scrollHeight;
-      content.style.setProperty('--start-height', `${this.previewHeight}px`);
-      content.style.setProperty('--target-height', `${contentHeight}px`);
-
-      // Start with collapsed state
-      content.style.height = `${this.previewHeight}px`;
-      content.style.overflow = 'hidden';
-
-      // Set expanded class
-      await animateWithClass(content, 'expand');
-
-      content.style.height = 'auto';
-      content.style.overflow = 'visible';
+      this.content.style.height = `${this.previewHeight}px`;
+      this.content.style.overflow = 'hidden';
     }
   }
 

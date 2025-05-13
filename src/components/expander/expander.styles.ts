@@ -3,20 +3,28 @@ import { css } from 'lit';
 export default css`
   :host {
     --preview-height: 3lh;
+    --duration: 300ms;
+    --easing: ease;
 
     display: block;
     position: relative;
   }
 
   #content {
-    max-height: var(--preview-height);
+    min-height: var(--preview-height);
     overflow: hidden;
-    transition: none;
-  }
 
-  #content.expanded {
-    max-height: none;
-    overflow: visible;
+    &.has-updated {
+      transition: max-height var(--duration) var(--easing);
+    }
+
+    &:not(.expanded) {
+      max-height: var(--preview-height);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
   }
 
   #toggle {
@@ -38,6 +46,11 @@ export default css`
     &:focus-visible {
       outline: var(--quiet-focus-ring);
       outline-offset: var(--quiet-focus-offset);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
     }
   }
 `;

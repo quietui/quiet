@@ -1,4 +1,4 @@
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
@@ -22,8 +22,8 @@ import styles from './expander.styles.js';
  * @since 1.0
  *
  * @slot - The default slot for content to be expanded/collapsed.
- * @slot show-label - The label for the button when content is collapsed.
- * @slot hide-label - The label for the button when content is expanded.
+ * @slot expand-label - The label for the button that expands the content.
+ * @slot collapse-label - The label for the button that collapses the content.
  *
  * @event quiet-before-open - Emitted before the expander opens. Cancelable event that prevents opening when canceled.
  * @event quiet-open - Emitted after the expander has opened.
@@ -33,7 +33,12 @@ import styles from './expander.styles.js';
  * @csspart content - The container holding the expandable content.
  * @csspart toggle - The button that toggles between expanded and collapsed states.
  *
- * @cssproperty [--preview-height=3lh] - The maximum height of the expander when collapsed.
+ * @cssproperty [--preview-height=3lh] - The visible height of the expander's content when collapsed.
+ * @cssproperty [--duration=300ms] - The duration of the expand/collapse animation.
+ * @cssproperty [--easing=ease] - The easing to use for the expand/collapse animation.
+ *
+ * @cssstate disabled - Applied when the expander is disabled.
+ * @cssstate expanded - Applied when the content is expanded.
  */
 @customElement('quiet-expander')
 export class QuietExpander extends QuietElement {
@@ -46,22 +51,61 @@ export class QuietExpander extends QuietElement {
   /** Whether the content is expanded */
   @property({ type: Boolean, reflect: true }) expanded = false;
 
-  /** Toggle the expanded state */
-  private toggleExpanded() {
-    const willExpand = !this.expanded;
-    const beforeEvent = willExpand ? new QuietBeforeOpenEvent() : new QuietBeforeCloseEvent({ source: this });
+  /** Disables the expand/collapse functionality */
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
-    // Emit the event and check if it was canceled
-    this.dispatchEvent(beforeEvent);
-    if (beforeEvent.defaultPrevented) {
-      return;
+  firstUpdated() {
+    // This prevents expanders that are initially expanded from animation on page load
+    requestAnimationFrame(() => {
+      this.content.classList.add('has-updated');
+    });
+  }
+
+  /** Update max-height when the expanded property changes */
+  updated(changedProperties: PropertyValues<this>) {
+    if (changedProperties.has('disabled')) {
+      this.customStates.set('disabled', this.disabled);
     }
 
-    // Update expanded state
-    this.expanded = !this.expanded;
+    if (changedProperties.has('expanded')) {
+      this.customStates.set('expanded', this.expanded);
+      if (this.expanded) {
+        this.content.style.maxHeight = `${this.content.scrollHeight}px`;
+      } else {
+        this.content.style.maxHeight = getComputedStyle(this).getPropertyValue('--preview-height');
+      }
+    }
+  }
 
-    // Dispatch after event
-    this.dispatchEvent(this.expanded ? new QuietOpenEvent() : new QuietCloseEvent());
+  private handleClick() {
+    this.toggleExpanded(true);
+  }
+
+  /** Toggle the expanded state */
+  private toggleExpanded(wasUserInteraction = false) {
+    const willExpand = !this.expanded;
+
+    if (wasUserInteraction) {
+      const beforeEvent = willExpand ? new QuietBeforeOpenEvent() : new QuietBeforeCloseEvent({ source: this });
+
+      this.dispatchEvent(beforeEvent);
+      if (beforeEvent.defaultPrevented) {
+        return;
+      }
+    }
+
+    this.expanded = willExpand;
+
+    // Dispatch the event when the transition completes
+    if (wasUserInteraction) {
+      this.content.addEventListener(
+        'transitionend',
+        () => {
+          this.dispatchEvent(willExpand ? new QuietOpenEvent() : new QuietCloseEvent());
+        },
+        { once: true }
+      );
+    }
   }
 
   render() {
@@ -69,7 +113,9 @@ export class QuietExpander extends QuietElement {
       <div
         id="content"
         part="content"
-        class=${classMap({ expanded: this.expanded })}
+        class=${classMap({
+          expanded: this.expanded
+        })}
         role="region"
         aria-labelledby="toggle"
       >
@@ -82,11 +128,12 @@ export class QuietExpander extends QuietElement {
         class="toggle"
         aria-expanded="${this.expanded}"
         aria-controls="content"
-        @click="${this.toggleExpanded}"
+        ?disabled=${this.disabled}
+        @click="${this.handleClick}"
       >
         ${this.expanded
-          ? html`<slot name="hide-label">${this.localize.term('collapse')}</slot>`
-          : html`<slot name="show-label">${this.localize.term('expand')}</slot>`}
+          ? html`<slot name="collapse-label">${this.localize.term('collapse')}</slot>`
+          : html`<slot name="expand-label">${this.localize.term('expand')}</slot>`}
       </button>
     `;
   }

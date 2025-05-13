@@ -12,19 +12,12 @@ export default css`
 
   #content {
     min-height: var(--preview-height);
+    max-height: var(--preview-height);
     overflow: hidden;
+  }
 
-    &.has-updated {
-      transition: max-height var(--duration) var(--easing);
-    }
-
-    &:not(.expanded) {
-      max-height: var(--preview-height);
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      transition: none;
-    }
+  :host([expanded]) #content {
+    max-height: none;
   }
 
   #toggle {

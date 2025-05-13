@@ -1,7 +1,6 @@
 import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
 import {
   QuietBeforeCloseEvent,
   QuietBeforeOpenEvent,
@@ -54,13 +53,6 @@ export class QuietExpander extends QuietElement {
   /** Disables the expand/collapse functionality */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
-  firstUpdated() {
-    // This prevents expanders that are initially expanded from animation on page load
-    requestAnimationFrame(() => {
-      this.content.classList.add('has-updated');
-    });
-  }
-
   /** Update max-height when the expanded property changes */
   updated(changedProperties: PropertyValues<this>) {
     if (changedProperties.has('disabled')) {
@@ -69,11 +61,6 @@ export class QuietExpander extends QuietElement {
 
     if (changedProperties.has('expanded')) {
       this.customStates.set('expanded', this.expanded);
-      if (this.expanded) {
-        this.content.style.maxHeight = `${this.content.scrollHeight}px`;
-      } else {
-        this.content.style.maxHeight = getComputedStyle(this).getPropertyValue('--preview-height');
-      }
     }
   }
 
@@ -96,29 +83,13 @@ export class QuietExpander extends QuietElement {
 
     this.expanded = willExpand;
 
-    // Dispatch the event when the transition completes
-    if (wasUserInteraction) {
-      this.content.addEventListener(
-        'transitionend',
-        () => {
-          this.dispatchEvent(willExpand ? new QuietOpenEvent() : new QuietCloseEvent());
-        },
-        { once: true }
-      );
-    }
+    // Dispatch the event
+    this.dispatchEvent(willExpand ? new QuietOpenEvent() : new QuietCloseEvent());
   }
 
   render() {
     return html`
-      <div
-        id="content"
-        part="content"
-        class=${classMap({
-          expanded: this.expanded
-        })}
-        role="region"
-        aria-labelledby="toggle"
-      >
+      <div id="content" part="content" role="region" aria-labelledby="toggle">
         <slot></slot>
       </div>
 

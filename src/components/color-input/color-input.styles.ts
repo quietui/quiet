@@ -64,6 +64,10 @@ export default css`
     box-shadow: var(--quiet-shadow-mid);
     cursor: default;
 
+    &::part(picker) {
+      border-color: var(--quiet-neutral-stroke-soft);
+    }
+
     &.show {
       animation: show var(--show-duration) ease;
     }

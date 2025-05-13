@@ -2,54 +2,27 @@ import { css } from 'lit';
 
 export default css`
   :host {
-    --height: 3lh;
-    --animation-duration: 300ms;
-    --animation-easing: cubic-bezier(0.4, 0, 0.2, 1);
-    --target-height: auto;
-    --start-height: auto;
+    --preview-height: 3lh;
 
     display: block;
     position: relative;
   }
 
   #content {
+    max-height: var(--preview-height);
+    overflow: hidden;
+    transition: none;
+  }
+
+  #content.expanded {
+    max-height: none;
     overflow: visible;
-  }
-
-  #content.expand {
-    animation: expand var(--animation-duration) var(--animation-easing) forwards;
-  }
-
-  #content.collapse {
-    animation: collapse var(--animation-duration) var(--animation-easing) forwards;
-  }
-
-  @keyframes expand {
-    from {
-      height: var(--start-height);
-      overflow: hidden;
-    }
-    to {
-      height: var(--target-height);
-      overflow: hidden;
-    }
-  }
-
-  @keyframes collapse {
-    from {
-      height: var(--start-height);
-      overflow: hidden;
-    }
-    to {
-      height: var(--target-height);
-      overflow: hidden;
-    }
   }
 
   #toggle {
     display: block;
     width: max-content;
-    padding: 0.5rem 0;
+    padding: 0.5em 0;
     border: none;
     border-radius: var(--quiet-border-radius);
     background: none;

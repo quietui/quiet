@@ -1,6 +1,12 @@
 import type { CSSResultGroup } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
+import {
+  QuietBeforeCloseEvent,
+  QuietBeforeOpenEvent,
+  QuietCloseEvent,
+  QuietOpenEvent
+} from '../../events/open-close.js';
 import hostStyles from '../../styles/host.styles.js';
 import { animateWithClass } from '../../utilities/animate.js';
 import { Localize } from '../../utilities/localize.js';
@@ -18,6 +24,11 @@ import styles from './expander.styles.js';
  * @slot - The default slot for content to be expanded/collapsed.
  * @slot show-label - The label for the button when content is collapsed.
  * @slot hide-label - The label for the button when content is expanded.
+ *
+ * @event quiet-before-open - Emitted before the expander opens. Cancelable event that prevents opening when canceled.
+ * @event quiet-open - Emitted after the expander has opened.
+ * @event quiet-before-close - Emitted before the expander closes. Cancelable event that prevents closing when canceled.
+ * @event quiet-close - Emitted after the expander has closed.
  *
  * @csspart content - The container holding the expandable content.
  * @csspart toggle - The button that toggles between expanded and collapsed states.
@@ -88,6 +99,18 @@ export class QuietExpander extends QuietElement {
       runningAnimations.forEach(animation => animation.cancel());
     }
 
+    // Dispatch before event
+    const willExpand = !this.expanded;
+    const beforeEvent = willExpand ? new QuietBeforeOpenEvent() : new QuietBeforeCloseEvent({ source: this });
+
+    // Emit the event and check if it was canceled
+    const notCanceled = this.dispatchEvent(beforeEvent);
+
+    // If the event was canceled, stop here
+    if (!notCanceled) {
+      return;
+    }
+
     // Update expanded state
     this.expanded = !this.expanded;
 
@@ -95,6 +118,9 @@ export class QuietExpander extends QuietElement {
     if (prefersReducedMotion) {
       this.content.style.height = this.expanded ? 'auto' : `${this.previewHeight}px`;
       this.content.style.overflow = this.expanded ? 'visible' : 'hidden';
+
+      // Dispatch after event
+      this.dispatchEvent(this.expanded ? new QuietOpenEvent() : new QuietCloseEvent());
       return;
     }
 
@@ -115,6 +141,9 @@ export class QuietExpander extends QuietElement {
       this.content.style.height = `${this.previewHeight}px`;
       this.content.style.overflow = 'hidden';
     }
+
+    // Dispatch after event
+    this.dispatchEvent(this.expanded ? new QuietOpenEvent() : new QuietCloseEvent());
   }
 
   render() {

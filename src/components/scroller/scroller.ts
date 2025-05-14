@@ -42,6 +42,9 @@ export class QuietScroller extends QuietElement {
   /** Removes the visible scrollbar. */
   @property({ attribute: 'without-scrollbar', type: Boolean, reflect: true }) withoutScrollbar = false;
 
+  /** Removes the shadows. */
+  @property({ attribute: 'without-shadow', type: Boolean, reflect: true }) withoutShadow = false;
+
   connectedCallback() {
     super.connectedCallback();
     this.resizeObserver.observe(this);
@@ -113,8 +116,12 @@ export class QuietScroller extends QuietElement {
 
   render() {
     return html`
-      <div id="start-shadow" part="start-shadow" aria-hidden="true"></div>
-      <div id="end-shadow" part="end-shadow" aria-hidden="true"></div>
+      ${this.withoutShadow
+        ? ''
+        : html`
+            <div id="start-shadow" part="start-shadow" aria-hidden="true"></div>
+            <div id="end-shadow" part="end-shadow" aria-hidden="true"></div>
+          `}
 
       <div
         id="content"

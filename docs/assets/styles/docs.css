@@ -283,6 +283,7 @@ html[data-scroll-restoring] body {
   margin: 0;
   padding: 0 0.5rem;
   border: none;
+  border-radius: 0;
   background: none;
   color: inherit;
   cursor: pointer;

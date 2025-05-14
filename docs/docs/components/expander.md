@@ -30,9 +30,9 @@ Add the `expanded` attribute to expand the content by default.
 </quiet-expander>
 ```
 
-### Adjusting the height
+### Changing the height
 
-You can change the preview height by setting the `--preview-height` custom property to a custom value.
+You can change the height of the preview that shows when the expander is collapsed by setting the `--preview-height` custom property.
 
 ```html {.example}
 <quiet-expander style="--preview-height: 6lh;">
@@ -44,7 +44,7 @@ You can change the preview height by setting the `--preview-height` custom prope
 
 ### Customizing labels
 
-To provide custom labels, use the `expand-label` and `collapse-label` slots.
+To provide custom labels for the trigger, use the `expand-label` and `collapse-label` slots.
 
 ```html {.example}
 <quiet-expander>
@@ -82,4 +82,46 @@ Add the `disabled` attribute to disable the expand/collapse functionality. When 
 
 ### Styling expanders
 
-TODO
+You can customize the expander's appearance with CSS custom properties and parts.
+
+```html {.example}
+<quiet-expander id="expander__styling">
+  <p>Cats have a remarkable sense of balance, thanks to their flexible spines and inner ear mechanisms. Imagine them tightrope-walking along a fence, flicking their tails like seasoned acrobats, completely unfazed by gravity’s pull!</p>
+  <p>A group of cats is called a “colony,” though these independent souls rarely agree to collective plans. They might briefly unite for a sunny nap spot, but good luck getting them to share the prime real estate!</p>
+  <p>Each cat’s paw pads are uniquely textured, acting like tiny shock absorbers for stealthy landings. These cushioned marvels are as individual as a signature, making every step a masterpiece of feline engineering.</p>
+</quiet-expander>
+
+<style>
+  #expander__styling {
+    --duration: 350ms;
+    --easing: cubic-bezier(0.4, 0.0, 0.2, 1);
+
+    &::part(trigger) {
+      display: block;
+      width: fit-content;
+      margin: 1rem auto 0;
+      padding: 0.5rem 1.25rem;
+      background-color: #4a6cf7;
+      color: white;
+      border: none;
+      border-radius: 24px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    &::part(trigger):hover {
+      background-color: #3a5ce5;
+    }
+
+    &::part(trigger):active {
+      transform: translateY(1px);
+    }
+
+    &::part(trigger):focus-visible {
+      outline-color: #4a6cf7;
+    }
+  }
+</style>
+```

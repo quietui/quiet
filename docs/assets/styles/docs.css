@@ -827,7 +827,7 @@ quiet-badge.experimental {
   }
 }
 
-.docs-aside {
+.docs-aside ul {
   .current {
     color: var(--quiet-primary-text-colorful);
     font-weight: var(--quiet-font-weight-bold);

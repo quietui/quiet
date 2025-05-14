@@ -3,7 +3,7 @@ import { css } from 'lit';
 export default css`
   :host {
     display: block;
-    padding: 0.5em 0.5em;
+    padding: 0.5em 0.9375em;
     /* Use a border instead of gap to prevent dead zones when clicking in the listbox */
     border-bottom: var(--quiet-border-width) var(--quiet-border-style) var(--quiet-paper-color);
     border-radius: calc(var(--quiet-border-radius) / 2);

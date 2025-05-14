@@ -6,7 +6,7 @@ export default css`
     --duration: 300ms;
     --easing: ease;
     --shadow-color: var(--quiet-background-color);
-    --shadow-width: 2rem;
+    --shadow-width: 1lh;
 
     display: block;
     position: relative;
@@ -53,7 +53,8 @@ export default css`
     border-radius: var(--quiet-border-radius);
     background: none;
     color: var(--quiet-primary-text-colorful);
-    font-size: inherit;
+    font-weight: var(--quiet-font-weight-semibold);
+    font-size: 0.9375em;
     line-height: inherit;
     font-family: inherit;
     cursor: pointer;

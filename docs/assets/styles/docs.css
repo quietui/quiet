@@ -1189,6 +1189,26 @@ td.table-reflects {
   color: inherit;
 }
 
+html:not(.quiet-dark) quiet-scroller:has(.component-table) {
+  --shadow-color: #0001;
+  --shadow-width: 0.75rem;
+
+  /* Add a border to each shadow */
+  &::part(start-shadow) {
+    border-left: solid 1px #0002;
+  }
+
+  &::part(end-shadow) {
+    border-right: solid 1px #0002;
+  }
+
+  /* Taper the shadows at the top and bottom for a realistic effect */
+  &::part(start-shadow),
+  &::part(end-shadow) {
+    mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+  }
+}
+
 /* Copy buttons in tables */
 .component-table quiet-copy quiet-button {
   &::part(button) {

@@ -20,7 +20,11 @@ function getElements() {
 document.addEventListener('keydown', event => {
   if (
     (event.key === 'k' && (event.metaKey || event.ctrlKey)) ||
-    (event.key === '/' && !event.composedPath().some(el => ['input', 'textarea'].includes(el?.tagName?.toLowerCase())))
+    (event.key === '/' &&
+      !event.composedPath().some(el => {
+        const tag = el?.tagName?.toLowerCase();
+        return tag === 'textarea' || (tag === 'input' && !['checkbox', 'radio'].includes(el.type));
+      }))
   ) {
     event.preventDefault();
     show();

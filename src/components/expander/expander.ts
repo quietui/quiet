@@ -8,6 +8,7 @@ import {
   QuietOpenEvent
 } from '../../events/open-close.js';
 import hostStyles from '../../styles/host.styles.js';
+import { parseCssDuration } from '../../utilities/animate.js';
 import { Localize } from '../../utilities/localize.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import styles from './expander.styles.js';
@@ -30,7 +31,8 @@ import styles from './expander.styles.js';
  * @event quiet-close - Emitted after the expander has closed.
  *
  * @csspart content - The container holding the expandable content.
- * @csspart toggle - The button that toggles between expanded and collapsed states.
+ * @csspart shadow - The shadow that shows above collapsed content.
+ * @csspart trigger - The button that toggles between expanded and collapsed states.
  *
  * @cssproperty [--preview-height=3lh] - The visible height of the expander's content when collapsed.
  * @cssproperty [--duration=300ms] - The duration of the expand/collapse animation.
@@ -53,6 +55,9 @@ export class QuietExpander extends QuietElement {
   /** Disables the expand/collapse functionality */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
+  /** When true, the shadow above collapsed content will not be rendered. */
+  @property({ attribute: 'without-shadow', type: Boolean }) withoutShadow = false;
+
   /** Update max-height when the expanded property changes */
   updated(changedProperties: PropertyValues<this>) {
     if (changedProperties.has('disabled')) {
@@ -69,9 +74,10 @@ export class QuietExpander extends QuietElement {
   }
 
   /** Toggle the expanded state */
-  private toggleExpanded(wasUserInteraction = false) {
+  private async toggleExpanded(wasUserInteraction = false) {
     const willExpand = !this.expanded;
 
+    // Dispatch quiet-before-open / quiet-before-close
     if (wasUserInteraction) {
       const beforeEvent = willExpand ? new QuietBeforeOpenEvent() : new QuietBeforeCloseEvent({ source: this });
 
@@ -81,22 +87,58 @@ export class QuietExpander extends QuietElement {
       }
     }
 
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const computedStyle = getComputedStyle(this);
+    const duration = prefersReducedMotion ? 0 : parseCssDuration(computedStyle.getPropertyValue('--duration'));
+    const easing = computedStyle.getPropertyValue('--easing');
+    const currentHeight = this.content.clientHeight;
+
     this.expanded = willExpand;
 
-    // Dispatch the event
-    this.dispatchEvent(willExpand ? new QuietOpenEvent() : new QuietCloseEvent());
+    if (willExpand) {
+      // Expanding animation
+      const targetHeight = this.content.scrollHeight;
+
+      await this.content.animate([{ height: `${currentHeight}px` }, { height: `${targetHeight}px` }], {
+        duration,
+        easing
+      }).finished;
+    } else {
+      // Collapsing animation
+      this.content.style.maxHeight = 'var(--preview-height)';
+      this.content.style.overflow = 'hidden';
+      const targetHeight = this.content.clientHeight;
+      this.content.style.removeProperty('max-height');
+      this.content.style.removeProperty('overflow');
+
+      await this.content.animate(
+        [
+          { height: `${currentHeight}px`, maxHeight: 'none' },
+          { height: `${targetHeight}px`, maxHeight: 'none' }
+        ],
+        {
+          duration,
+          easing
+        }
+      ).finished;
+    }
+
+    // Dispatch quiet-open / quiet-close
+    if (wasUserInteraction) {
+      this.dispatchEvent(willExpand ? new QuietOpenEvent() : new QuietCloseEvent());
+    }
   }
 
   render() {
     return html`
-      <div id="content" part="content" role="region" aria-labelledby="toggle">
+      <div id="content" part="content" role="region" aria-labelledby="trigger">
         <slot></slot>
+        ${this.withoutShadow ? '' : html`<div id="shadow" part="shadow" aria-hidden="true"></div>`}
       </div>
 
       <button
-        id="toggle"
-        part="toggle"
-        class="toggle"
+        id="trigger"
+        part="trigger"
         aria-expanded="${this.expanded}"
         aria-controls="content"
         ?disabled=${this.disabled}

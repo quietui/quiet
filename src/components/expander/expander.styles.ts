@@ -24,6 +24,7 @@ export default css`
 
   :host([expanded]) #content {
     max-height: none;
+    overflow: visible;
   }
 
   /* Shadow */

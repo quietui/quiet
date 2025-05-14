@@ -1,6 +1,6 @@
 import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
+import { customElement, eventOptions, property, query } from 'lit/decorators.js';
 import {
   QuietBeforeCloseEvent,
   QuietBeforeOpenEvent,
@@ -48,6 +48,7 @@ export class QuietExpander extends QuietElement {
   private localize = new Localize(this);
 
   @query('#content') content: HTMLElement;
+  @query('#trigger') trigger: HTMLButtonElement;
 
   /** Whether the content is expanded */
   @property({ type: Boolean, reflect: true }) expanded = false;
@@ -73,11 +74,19 @@ export class QuietExpander extends QuietElement {
     this.toggleExpanded(true);
   }
 
+  @eventOptions({ passive: true })
+  private handleContentScroll() {
+    // When content is scrolled while collapsed, move it back to the stop
+    if (!this.expanded) {
+      this.content.scrollTop = 0;
+    }
+  }
+
   /** Toggle the expanded state */
   private async toggleExpanded(wasUserInteraction = false) {
     const willExpand = !this.expanded;
 
-    // Dispatch quiet-before-open / quiet-before-close
+    // Dispatch quiet-before-open + quiet-before-close events
     if (wasUserInteraction) {
       const beforeEvent = willExpand ? new QuietBeforeOpenEvent() : new QuietBeforeCloseEvent({ source: this });
 
@@ -99,10 +108,16 @@ export class QuietExpander extends QuietElement {
       // Expanding animation
       const targetHeight = this.content.scrollHeight;
 
-      await this.content.animate([{ height: `${currentHeight}px` }, { height: `${targetHeight}px` }], {
-        duration,
-        easing
-      }).finished;
+      await this.content.animate(
+        [
+          { height: `${currentHeight}px`, overflow: 'hidden' },
+          { height: `${targetHeight}px`, overflow: 'hidden' }
+        ],
+        {
+          duration,
+          easing
+        }
+      ).finished;
     } else {
       // Collapsing animation
       this.content.style.maxHeight = 'var(--preview-height)';
@@ -113,8 +128,8 @@ export class QuietExpander extends QuietElement {
 
       await this.content.animate(
         [
-          { height: `${currentHeight}px`, maxHeight: 'none' },
-          { height: `${targetHeight}px`, maxHeight: 'none' }
+          { height: `${currentHeight}px`, maxHeight: 'none', overflow: 'hidden' },
+          { height: `${targetHeight}px`, maxHeight: 'none', overflow: 'hidden' }
         ],
         {
           duration,
@@ -123,7 +138,7 @@ export class QuietExpander extends QuietElement {
       ).finished;
     }
 
-    // Dispatch quiet-open / quiet-close
+    // Dispatch quiet-open + quiet-close events
     if (wasUserInteraction) {
       this.dispatchEvent(willExpand ? new QuietOpenEvent() : new QuietCloseEvent());
     }
@@ -131,7 +146,7 @@ export class QuietExpander extends QuietElement {
 
   render() {
     return html`
-      <div id="content" part="content" role="region" aria-labelledby="trigger">
+      <div id="content" part="content" role="region" aria-labelledby="trigger" @scroll=${this.handleContentScroll}>
         <slot></slot>
         ${this.withoutShadow ? '' : html`<div id="shadow" part="shadow" aria-hidden="true"></div>`}
       </div>

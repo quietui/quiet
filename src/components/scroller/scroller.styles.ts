@@ -12,6 +12,7 @@ export default css`
     display: block;
     position: relative;
     max-width: 100%;
+    isolation: isolate;
   }
 
   :host([orientation='vertical']) {
@@ -58,6 +59,7 @@ export default css`
   :host([orientation='horizontal']) {
     #start-shadow,
     #end-shadow {
+      z-index: 1;
       position: absolute;
       top: 0;
       bottom: 0;

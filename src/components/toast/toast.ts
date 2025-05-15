@@ -172,7 +172,7 @@ export class QuietToast extends QuietElement {
     };
 
     const toastItemHtml = html`
-      <quiet-toast-item variant=${opts.variant} duration=${opts.duration} ?without-close-button=${opts.noCloseButton}>
+      <quiet-toast-item variant=${opts.variant} duration=${opts.duration} ?without-close=${opts.noCloseButton}>
         ${opts.allowHtml ? unsafeHTML(content) : content}
       </quiet-toast-item>
     `;

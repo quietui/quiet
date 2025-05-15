@@ -158,7 +158,7 @@ When calling `create()`, set the `duration` option to change how long notificati
 
 ### Removing the close button
 
-Use the `no-close-button` attribute to hide the close button and the progress ring. This is only recommended when a duration is set or when you're using custom buttons to dismiss the notification.
+Use the `without-close-button` attribute to hide the close button and the progress ring. This is only recommended when a duration is set or when you're using custom buttons to dismiss the notification.
 
 ```html {.example}
 <quiet-toast id="toast__no-close"></quiet-toast>

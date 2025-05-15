@@ -73,10 +73,10 @@ By default, toast items dismiss themselves after five seconds. Set the `duration
 
 ### Hiding the close button
 
-Use the `no-close-button` attribute to hide the close button. This is only recommended when a duration is set or when you're using custom buttons to dismiss the notification.
+Use the `without-close-button` attribute to hide the close button. This is only recommended when a duration is set or when you're using custom buttons to dismiss the notification.
 
 ```html {.example}
-<quiet-toast-item no-close-button duration="0">
+<quiet-toast-item without-close-button duration="0">
   This notification does not have a close button.
 </quiet-toast-item>
 ```

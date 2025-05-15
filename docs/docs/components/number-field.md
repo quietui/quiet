@@ -47,20 +47,6 @@ Use the `placeholder` attribute to show a placeholder in the text field when it'
 ></quiet-number-field>
 ```
 
-### Adding a clear button
-
-To add a clear button to the text field, use the `with-clear` attribute. The `quiet-input` event will be emitted when the clear button is activated.
-
-```html {.example}
-<quiet-number-field 
-  name="name" 
-  label="Name" 
-  value="Meowy McGee"
-  with-clear
-  style="max-width: 200px;"
-></quiet-number-field>
-```
-
 ### Filled and unstyled number fields
 
 Set the `appearance` attribute to `normal`, `filled`, or `unstyled` to change the text field's appearance.

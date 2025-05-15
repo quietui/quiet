@@ -35,8 +35,6 @@ import styles from './number-field.styles.js';
  * @csspart description - The element that contains the number field's description.
  * @csspart visual-box - The element that wraps the internal text box.
  * @csspart text-box - The internal text box, an `<input>` element.
- * @csspart clear-button - The clear button, a `<button>` element.
- * @csspart password-toggle-button - The password toggle button, a `<button>` element.
  *
  * @cssstate disabled - Applied when the number field is disabled.
  * @cssstate blank - Applied when the number field has a blank value.
@@ -86,9 +84,6 @@ export class QuietNumberField extends QuietFormControlElement {
 
   /** Makes the number field a read-only field. */
   @property({ type: Boolean, reflect: true }) readonly = false;
-
-  /** Adds a clear button to the number field when it's not blank. */
-  @property({ attribute: 'with-clear', type: Boolean, reflect: true }) withClear = false;
 
   /** The type of number field to render. */
   @property({ reflect: true }) appearance: 'normal' | 'filled' | 'unstyled' = 'normal';
@@ -193,14 +188,6 @@ export class QuietNumberField extends QuietFormControlElement {
     this.dispatchEvent(new QuietChangeEvent());
     // The native change event isn't composed, so we need to dispatch it ourselves
     this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
-  }
-
-  private handleClearClick() {
-    this.hadUserInteraction = true;
-    this.value = '';
-    this.textBox.focus();
-    this.dispatchEvent(new QuietInputEvent());
-    this.dispatchEvent(new InputEvent('input', { bubbles: true, composed: true, cancelable: false }));
   }
 
   private handleFocus() {
@@ -425,23 +412,6 @@ export class QuietNumberField extends QuietFormControlElement {
           @blur=${this.handleBlur}
           @keydown=${this.handleKeyDown}
         />
-
-        ${this.withClear && this.value?.length > 0 && !this.disabled && !this.readonly
-          ? html`
-              <button
-                id="clear-button"
-                part="clear-button"
-                class="text-box-button"
-                type="button"
-                aria-label=${this.localize.term('clearEntry')}
-                tabindex="-1"
-                @pointerdown=${this.handleTextBoxButtonPointerDown}
-                @click=${this.handleClearClick}
-              >
-                <quiet-icon library="system" name="circle-x"></quiet-icon>
-              </button>
-            `
-          : ''}
 
         <button
           id="increase-button"

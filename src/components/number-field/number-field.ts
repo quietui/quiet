@@ -392,7 +392,7 @@ export class QuietNumberField extends QuietFormControlElement {
       >
         <button
           id="decrease-button"
-          ?disabled=${!canDecrease}
+          ?disabled=${!canDecrease || this.disabled}
           @pointerdown=${this.maintainFocusOnPointerDown}
           @click=${this.handleDecrease}
         >
@@ -445,7 +445,7 @@ export class QuietNumberField extends QuietFormControlElement {
 
         <button
           id="increase-button"
-          ?disabled=${!canIncrease}
+          ?disabled=${!canIncrease || this.disabled}
           @pointerdown=${this.maintainFocusOnPointerDown}
           @click=${this.handleIncrease}
         >

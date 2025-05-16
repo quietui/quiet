@@ -6,7 +6,7 @@ export default css`
     --duration: 300ms;
     --easing: ease;
     --shadow-color: var(--quiet-background-color);
-    --shadow-width: 1lh;
+    --shadow-size: 1lh;
 
     display: block;
     position: relative;
@@ -33,7 +33,7 @@ export default css`
     right: 0;
     bottom: 0;
     left: 0;
-    height: var(--shadow-width);
+    height: var(--shadow-size);
     background: linear-gradient(to top, var(--shadow-color), transparent 100%);
     pointer-events: none;
   }

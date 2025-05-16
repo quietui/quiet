@@ -162,7 +162,6 @@ A number of attributes can be used to enable validation using the [Constraint Va
   <quiet-number-field name="required" label="Number of Cats" required style="max-width: 200px;"></quiet-number-field><br>
   <quiet-number-field name="min" label="Minimum Cats (min 3)" required min="3" style="max-width: 200px;"></quiet-number-field><br>
   <quiet-number-field name="max" label="Maximum Cats (max 10)" required max="10" style="max-width: 200px;"></quiet-number-field><br>
-  <quiet-number-field name="step" label="Food Portions" required step="0.5" style="max-width: 200px;"></quiet-number-field><br>
   <quiet-button type="submit" variant="primary">Submit</quiet-button>
   <quiet-button type="reset">Reset</quiet-button>
 </form>

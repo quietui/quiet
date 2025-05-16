@@ -24,6 +24,8 @@ import styles from './number-field.styles.js';
  * @slot label - The number field's label. For plain-text labels, you can use the `label` attribute instead.
  * @slot description - The number field's description. For plain-text descriptions, you can use the `description`
  *  attribute instead.
+ * @slot start - An icon or similar element to place before the label. Works great with `<quiet-icon>`.
+ * @slot end - An icon or similar element to place after the label. Works great with `<quiet-icon>`.
  *
  * @event quiet-blur - Emitted when the number field loses focus. This event does not bubble.
  * @event quiet-change - Emitted when the user commits changes to the number field's value.
@@ -391,6 +393,8 @@ export class QuietNumberField extends QuietFormControlElement {
             `
           : ''}
 
+        <slot name="start"></slot>
+
         <input
           id="text-box"
           part="text-box"
@@ -417,6 +421,8 @@ export class QuietNumberField extends QuietFormControlElement {
           @blur=${this.handleBlur}
           @keydown=${this.handleKeyDown}
         />
+
+        <slot name="end"></slot>
 
         ${!this.withoutSteppers
           ? html`

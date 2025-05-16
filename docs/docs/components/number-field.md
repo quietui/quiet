@@ -72,6 +72,31 @@ Use the `placeholder` attribute to show a placeholder in the text field when it'
 ></quiet-number-field>
 ```
 
+### Start and end content
+
+Use the `start` and `end` slots to add presentational icons or text. Avoid interactive elements such as buttons, links, etc. Works well with [`<quiet-icon>`](/docs/components/icon) and `<svg>` elements.
+
+```html {.example}
+<div style="max-width: 200px;">
+  <quiet-number-field type="number" value="100" name="adoption" label="Adoption fee">
+    <span slot="start">$</span>
+  </quiet-number-field>  
+
+  <br>
+
+  <quiet-number-field type="number" value="30" name="playtime" label="Playtime minutes">
+    <quiet-icon slot="end" name="clock"></quiet-icon>
+  </quiet-number-field>
+
+  <br>
+
+  <quiet-number-field name="treats" value="2" label="Daily treats">
+    <quiet-icon slot="start" name="cat"></quiet-icon>
+    <quiet-icon slot="end" name="cookie"></quiet-icon>
+  </quiet-number-field>
+</quiet-number-field>
+```
+
 ### Filled and unstyled number fields
 
 Set the `appearance` attribute to `normal`, `filled`, or `unstyled` to change the text field's appearance.

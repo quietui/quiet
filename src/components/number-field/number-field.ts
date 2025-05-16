@@ -215,8 +215,9 @@ export class QuietNumberField extends QuietFormControlElement {
     this.stepDown();
     this.handleInput();
 
-    // Since this isn't triggered by a natural `input` event, dispatch one here. The `quiet-input` event is dispatched
-    // through `handleInput`.
+    // Since this isn't triggered by a natural event, dispatch a `change` and `input` here. The `quiet-input` event is
+    // dispatched through `handleInput`.
+    this.dispatchEvent(new InputEvent('change', { bubbles: true, composed: true, cancelable: false }));
     this.dispatchEvent(new InputEvent('input', { bubbles: true, composed: true, cancelable: false }));
   }
 
@@ -225,6 +226,7 @@ export class QuietNumberField extends QuietFormControlElement {
     this.handleInput();
 
     // Since this isn't triggered by a natural input event, simulate it here
+    this.dispatchEvent(new InputEvent('change', { bubbles: true, composed: true, cancelable: false }));
     this.dispatchEvent(new InputEvent('input', { bubbles: true, composed: true, cancelable: false }));
   }
 
@@ -411,7 +413,7 @@ export class QuietNumberField extends QuietFormControlElement {
           step=${ifDefined(this.step as number)}
           .value=${live(this.value) /* live() is required for proper validation */}
           autocomplete=${ifDefined(this.autocomplete) as any}
-          spellcheck=${ifDefined(this.spellcheck)}
+          spellcheck="false"
           enterkeyhint=${ifDefined(this.enterkeyhint)}
           aria-describedby="description"
           aria-invalid=${this.isInvalid ? 'true' : 'false'}

@@ -219,6 +219,7 @@ export class QuietNumberField extends QuietFormControlElement {
     // dispatched through `handleInput`.
     this.dispatchEvent(new InputEvent('change', { bubbles: true, composed: true, cancelable: false }));
     this.dispatchEvent(new InputEvent('input', { bubbles: true, composed: true, cancelable: false }));
+    this.dispatchEvent(new QuietChangeEvent());
   }
 
   private handleIncrease() {
@@ -228,6 +229,7 @@ export class QuietNumberField extends QuietFormControlElement {
     // Since this isn't triggered by a natural input event, simulate it here
     this.dispatchEvent(new InputEvent('change', { bubbles: true, composed: true, cancelable: false }));
     this.dispatchEvent(new InputEvent('input', { bubbles: true, composed: true, cancelable: false }));
+    this.dispatchEvent(new QuietChangeEvent());
   }
 
   private maintainFocusOnPointerDown(event: PointerEvent) {

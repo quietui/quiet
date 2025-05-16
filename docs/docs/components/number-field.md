@@ -19,7 +19,7 @@ layout: component
 You can use the `label` and `description` attributes to provide plain text labels and descriptions for the text field. If you want to provide HTML, use the `label` and `description` slots instead.
 
 ```html {.example}
-<quiet-number-field name="name" label="Kitten Age (months)" style="max-width: 200px;">
+<quiet-number-field name="name" label="Kitten age (months)" style="max-width: 200px;">
   <span slot="description">
     <a href="https://example.com/" target="_blank">How to determine age</a>
   </span>
@@ -33,7 +33,7 @@ Use the `value` attribute to provide an initial value for the text field.
 ```html {.example}
 <quiet-number-field 
   name="name" 
-  label="Treats Given Today"
+  label="Treats given today"
   value="9" style="max-width: 200px;"
 >
 </quiet-number-field>
@@ -46,7 +46,7 @@ Use the `min` and `max` attributes to set a minimum and maximum value for the nu
 ```html {.example}
 <quiet-number-field 
   name="donation" 
-  label="Monthly Shelter Donation"
+  label="Monthly shelter donation"
   description="Amount in dollars (5-100)"
   min="5"
   max="100"
@@ -87,7 +87,7 @@ Set the `appearance` attribute to `normal`, `filled`, or `unstyled` to change th
 Text fields can be rendered with pill-shaped edges by adding the `pill` attribute.
 
 ```html {.example}
-<quiet-number-field pill label="Whiskers Count" style="max-width: 200px;"></quiet-number-field>
+<quiet-number-field pill label="Whiskers count" style="max-width: 200px;"></quiet-number-field>
 ```
 
 ### Without steppers
@@ -97,7 +97,7 @@ Add the `without-steppers` attribute to remove the stepper buttons.
 ```html {.example}
 <quiet-number-field 
   name="name" 
-  label="Purrs Per Minute" 
+  label="Purrs per minute" 
   value="25"
   without-steppers
   style="max-width: 200px;"
@@ -113,11 +113,11 @@ This will remove the stepper buttons, but keyboard users can still modify the va
 Use the `size` attribute to change the text field's size.
 
 ```html {.example}
-<quiet-number-field size="xs" label="Cat Hair Count (xs)" style="max-width: 200px;"></quiet-number-field><br>
-<quiet-number-field size="sm" label="Cat Meows Per Hour (sm)" style="max-width: 200px;"></quiet-number-field><br>
-<quiet-number-field size="md" label="Cat Zoomies Today (md)" style="max-width: 200px;"></quiet-number-field><br>
-<quiet-number-field size="lg" label="Cat Treats Budget (lg)" style="max-width: 200px;"></quiet-number-field><br>
-<quiet-number-field size="xl" label="Seconds Until Food Bowl Empty (xl)" style="max-width: 200px;"></quiet-number-field>
+<quiet-number-field size="xs" label="Hairball count (xs)" style="max-width: 200px;"></quiet-number-field><br>
+<quiet-number-field size="sm" label="Meows per hour (sm)" style="max-width: 200px;"></quiet-number-field><br>
+<quiet-number-field size="md" label="Zoomies today (md)" style="max-width: 200px;"></quiet-number-field><br>
+<quiet-number-field size="lg" label="Treats budget (lg)" style="max-width: 200px;"></quiet-number-field><br>
+<quiet-number-field size="xl" label="Seconds until empty bowl (xl)" style="max-width: 200px;"></quiet-number-field>
 ```
 
 ### Disabling
@@ -125,7 +125,7 @@ Use the `size` attribute to change the text field's size.
 Use the `disabled` attribute to disable the text field.
 
 ```html {.example}
-<quiet-number-field label="Cat Limit Reached (no more cats!)" disabled style="max-width: 200px;"></quiet-number-field>
+<quiet-number-field label="Limit reached (no more cats!)" disabled style="max-width: 200px;"></quiet-number-field>
 ```
 
 ### Showing labels on the side
@@ -138,7 +138,7 @@ With the [`quiet-side-label`](/docs/css-utilities/#side-labels) utility, you can
     class="quiet-side-label"
     style="--label-width: 12ch;"
     name="name" 
-    label="Cat Age" 
+    label="Age" 
     description="How old is your feline friend?"
   ></quiet-number-field>
   <br>
@@ -147,7 +147,7 @@ With the [`quiet-side-label`](/docs/css-utilities/#side-labels) utility, you can
     style="--label-width: 12ch;"
     type="number" 
     name="email" 
-    label="Cat Weight" 
+    label="Weight" 
     description="In pounds, please be honest!"
   ></quiet-number-field>
 </div>
@@ -159,9 +159,9 @@ A number of attributes can be used to enable validation using the [Constraint Va
 
 ```html {.example}
 <form action="about:blank" method="get" target="_blank">
-  <quiet-number-field name="required" label="Number of Cats" required style="max-width: 200px;"></quiet-number-field><br>
-  <quiet-number-field name="min" label="Minimum Cats (min 3)" required min="3" style="max-width: 200px;"></quiet-number-field><br>
-  <quiet-number-field name="max" label="Maximum Cats (max 10)" required max="10" style="max-width: 200px;"></quiet-number-field><br>
+  <quiet-number-field name="required" label="Number of cats" required style="max-width: 200px;"></quiet-number-field><br>
+  <quiet-number-field name="min" label="Minimum cats (min 3)" required min="3" style="max-width: 200px;"></quiet-number-field><br>
+  <quiet-number-field name="max" label="Maximum cats (max 10)" required max="10" style="max-width: 200px;"></quiet-number-field><br>
   <quiet-button type="submit" variant="primary">Submit</quiet-button>
   <quiet-button type="reset">Reset</quiet-button>
 </form>
@@ -175,7 +175,7 @@ Use the `setCustomValidity()` method to make the text field invalid and show a c
 <form action="about:blank" method="get" target="_blank" id="number-field__custom-validation">
   <quiet-number-field 
     name="name"
-    label="Cat Happiness Level (1-10)"
+    label="Happiness level (1-10)"
     description="This field will be invalid until custom validation is removed"
     style="max-width: 200px;"
   ></quiet-number-field>
@@ -203,7 +203,7 @@ You can style valid and invalid text fields using the `:valid` and `:invalid` ps
 <form action="about:blank" method="get" target="_blank" class="number-field__validation-pseudo">
   <quiet-number-field 
     name="name"
-    label="Cat Toy Budget"
+    label="Toy budget"
     description="Must be at least $50"
     min="50"
     required
@@ -235,10 +235,11 @@ However, these selectors will match even before the user has had a chance to fil
 <form action="about:blank" method="get" target="_blank" class="number-field__validation-custom">
   <quiet-number-field 
     name="name"
-    label="Number of Cat Videos Watched Today"
-    description="This field is required (be honest!)"
+    label="Cat videos watched"
+    description="Be honest…"
     required
     style="max-width: 200px;"
+    value="1000"
   ></quiet-number-field>
   <br>
   <quiet-button type="submit" variant="primary">Submit</quiet-button>

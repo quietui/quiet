@@ -29,8 +29,8 @@ export default css`
     display: none;
   }
 
-  #increase-button,
-  #decrease-button {
+  #stepper-up,
+  #stepper-down {
     display: flex;
     top: 0;
     bottom: 0;

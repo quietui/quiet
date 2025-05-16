@@ -7,7 +7,6 @@ import { live } from 'lit/directives/live.js';
 import { QuietBlurEvent, QuietChangeEvent, QuietFocusEvent, QuietInputEvent } from '../../events/form.js';
 import formControlStyles from '../../styles/form-control.styles.js';
 import hostStyles from '../../styles/host.styles.js';
-import { Localize } from '../../utilities/localize.js';
 import { QuietFormControlElement } from '../../utilities/quiet-element.js';
 import '../icon/icon.js';
 import styles from './number-field.styles.js';
@@ -35,6 +34,9 @@ import styles from './number-field.styles.js';
  * @csspart description - The element that contains the number field's description.
  * @csspart visual-box - The element that wraps the internal text box.
  * @csspart text-box - The internal text box, an `<input>` element.
+ * @csspart stepper - The up and down stepper buttons.
+ * @csspart stepper-up - The up stepper button.
+ * @csspart stepper-down - The down stepper button.
  *
  * @cssstate disabled - Applied when the number field is disabled.
  * @cssstate blank - Applied when the number field has a blank value.
@@ -48,7 +50,6 @@ export class QuietNumberField extends QuietFormControlElement {
   static observeSlots = true;
   static styles: CSSResultGroup = [hostStyles, formControlStyles, styles];
 
-  private localize = new Localize(this);
   protected get focusableAnchor() {
     return this.textBox;
   }
@@ -128,6 +129,9 @@ export class QuietNumberField extends QuietFormControlElement {
 
   /** Sets the enter key label on virtual keyboards. */
   @property() enterkeyhint: 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send';
+
+  /** When true, the add/subtract steppers won't be displayed. */
+  @property({ attribute: 'without-steppers', type: Boolean }) withoutSteppers = false;
 
   connectedCallback() {
     super.connectedCallback();
@@ -244,11 +248,6 @@ export class QuietNumberField extends QuietFormControlElement {
 
       this.internals.form.requestSubmit(submitter);
     }
-  }
-
-  private handleTextBoxButtonPointerDown(event: PointerEvent) {
-    // Prevent the number field from losing focus when text box buttons are activated
-    event.preventDefault();
   }
 
   private handleVisualBoxPointerDown(event: PointerEvent) {
@@ -377,14 +376,20 @@ export class QuietNumberField extends QuietFormControlElement {
         })}
         @pointerdown=${this.handleVisualBoxPointerDown}
       >
-        <button
-          id="decrease-button"
-          ?disabled=${!canDecrease || this.disabled}
-          @pointerdown=${this.maintainFocusOnPointerDown}
-          @click=${this.handleDecrease}
-        >
-          <quiet-icon library="system" name="minus" label="-"></quiet-icon>
-        </button>
+        ${!this.withoutSteppers
+          ? html`
+              <button
+                id="stepper-down"
+                part="stepper stepper-down"
+                ?disabled=${!canDecrease || this.disabled}
+                tabindex="-1"
+                @pointerdown=${this.maintainFocusOnPointerDown}
+                @click=${this.handleDecrease}
+              >
+                <quiet-icon library="system" name="minus" label="-"></quiet-icon>
+              </button>
+            `
+          : ''}
 
         <input
           id="text-box"
@@ -413,14 +418,20 @@ export class QuietNumberField extends QuietFormControlElement {
           @keydown=${this.handleKeyDown}
         />
 
-        <button
-          id="increase-button"
-          ?disabled=${!canIncrease || this.disabled}
-          @pointerdown=${this.maintainFocusOnPointerDown}
-          @click=${this.handleIncrease}
-        >
-          <quiet-icon library="system" name="plus" label="+"></quiet-icon>
-        </button>
+        ${!this.withoutSteppers
+          ? html`
+              <button
+                id="stepper-up"
+                part="stepper stepper-up"
+                ?disabled=${!canIncrease || this.disabled}
+                tabindex="-1"
+                @pointerdown=${this.maintainFocusOnPointerDown}
+                @click=${this.handleIncrease}
+              >
+                <quiet-icon library="system" name="plus" label="+"></quiet-icon>
+              </button>
+            `
+          : ''}
       </div>
     `;
   }

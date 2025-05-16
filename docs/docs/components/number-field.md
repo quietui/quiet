@@ -7,7 +7,6 @@ layout: component
 <quiet-number-field 
   name="name" 
   label="Number" 
-  value="0" 
   style="max-width: 200px;" style="max-width: 200px;"
 ></quiet-number-field>
 ```
@@ -31,7 +30,7 @@ You can use the `label` and `description` attributes to provide plain text label
 Use the `value` attribute to provide an initial value for the text field.
 
 ```html {.example}
-<quiet-number-field name="name" label="Name" value="Meowy McGee" style="max-width: 200px;"></quiet-number-field>
+<quiet-number-field name="name" label="Name" value="42" style="max-width: 200px;"></quiet-number-field>
 ```
 
 ### Adding a placeholder
@@ -65,6 +64,24 @@ Text fields can be rendered with pill-shaped edges by adding the `pill` attribut
 <quiet-number-field pill label="Pill-shaped" style="max-width: 200px;"></quiet-number-field>
 ```
 
+### Without steppers
+
+Add the `without-steppers` attribute to remove the stepper buttons.
+
+```html {.example}
+<quiet-number-field 
+  name="name" 
+  label="Number" 
+  value="0"
+  without-steppers
+  style="max-width: 200px;" style="max-width: 200px;"
+></quiet-number-field>
+```
+
+:::info
+This will remove the stepper buttons, but keyboard users can still modify the value using the arrow keys.
+:::
+
 ### Changing the size
 
 Use the `size` attribute to change the text field's size.
@@ -90,24 +107,24 @@ Use the `disabled` attribute to disable the text field.
 With the [`quiet-side-label`](/docs/css-utilities/#side-labels) utility, you can show labels on the side instead of on top of the text field. You can control the width of the label by setting the `--label-width` custom property.
 
 ```html {.example}
-<quiet-number-field
-  class="quiet-side-label"
-  style="--label-width: 8ch;"
-  name="name" 
-  label="Name" 
-  description="What do people call you?"
-  style="max-width: 200px;"
-></quiet-number-field>
-<br>
-<quiet-number-field
-  class="quiet-side-label"
-  style="--label-width: 8ch;"
-  type="email" 
-  name="email" 
-  label="Email" 
-  description="How can we get in touch?"
-  style="max-width: 200px;"
-></quiet-number-field>
+<div style="max-width: 300px;">
+  <quiet-number-field
+    class="quiet-side-label"
+    style="--label-width: 8ch;"
+    name="name" 
+    label="Name" 
+    description="What do people call you?"
+  ></quiet-number-field>
+  <br>
+  <quiet-number-field
+    class="quiet-side-label"
+    style="--label-width: 8ch;"
+    type="email" 
+    name="email" 
+    label="Email" 
+    description="How can we get in touch?"
+  ></quiet-number-field>
+</div>
 ```
 
 ### Validation

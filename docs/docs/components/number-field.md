@@ -102,9 +102,11 @@ Use the `start` and `end` slots to add presentational icons or text. Avoid inter
 Set the `appearance` attribute to `normal`, `filled`, or `unstyled` to change the text field's appearance.
 
 ```html {.example}
-<quiet-number-field appearance="normal" label="Normal number field" placeholder="Enter number" style="max-width: 200px;"></quiet-number-field><br>
-<quiet-number-field appearance="filled" label="Filled number field" placeholder="Enter number" style="max-width: 200px;"></quiet-number-field><br>
-<quiet-number-field appearance="unstyled" label="Unstyled number field" placeholder="Enter number" style="max-width: 200px;"></quiet-number-field>
+<div style="max-width: 200px;">
+  <quiet-number-field appearance="normal" label="Normal number field" placeholder="Enter number" style="max-width: 200px;"></quiet-number-field><br>
+  <quiet-number-field appearance="filled" label="Filled number field" placeholder="Enter number" style="max-width: 200px;"></quiet-number-field><br>
+  <quiet-number-field appearance="unstyled" label="Unstyled number field" placeholder="Enter number" style="max-width: 200px;"></quiet-number-field>
+</div>
 ```
 
 ### Pill-shaped number fields
@@ -138,11 +140,13 @@ This will remove the stepper buttons, but keyboard users can still modify the va
 Use the `size` attribute to change the text field's size.
 
 ```html {.example}
-<quiet-number-field size="xs" label="Hairball count (xs)" style="max-width: 200px;"></quiet-number-field><br>
-<quiet-number-field size="sm" label="Meows per hour (sm)" style="max-width: 200px;"></quiet-number-field><br>
-<quiet-number-field size="md" label="Zoomies today (md)" style="max-width: 200px;"></quiet-number-field><br>
-<quiet-number-field size="lg" label="Treats budget (lg)" style="max-width: 200px;"></quiet-number-field><br>
-<quiet-number-field size="xl" label="Seconds until empty bowl (xl)" style="max-width: 200px;"></quiet-number-field>
+<div style="max-width: 200px;">
+  <quiet-number-field size="xs" label="Hairball count (xs)"></quiet-number-field><br>
+  <quiet-number-field size="sm" label="Meows per hour (sm)"></quiet-number-field><br>
+  <quiet-number-field size="md" label="Zoomies today (md)"></quiet-number-field><br>
+  <quiet-number-field size="lg" label="Treats budget (lg)"></quiet-number-field><br>
+  <quiet-number-field size="xl" label="Seconds until empty bowl (xl)"></quiet-number-field>
+</div>
 ```
 
 ### Disabling
@@ -183,10 +187,10 @@ With the [`quiet-side-label`](/docs/css-utilities/#side-labels) utility, you can
 A number of attributes can be used to enable validation using the [Constraint Validation API](https://developer.mozilla.org/en-US/docs/Web/HTML/Constraint_validation). These include `required`, `pattern`, `minlength`, `maxlength`, `min`, `max`, and `step`. They work exactly like their native counterparts.
 
 ```html {.example}
-<form action="about:blank" method="get" target="_blank">
-  <quiet-number-field name="required" label="Number of cats" required style="max-width: 200px;"></quiet-number-field><br>
-  <quiet-number-field name="min" label="Minimum cats (min 3)" required min="3" style="max-width: 200px;"></quiet-number-field><br>
-  <quiet-number-field name="max" label="Maximum cats (max 10)" required max="10" style="max-width: 200px;"></quiet-number-field><br>
+<form action="about:blank" method="get" target="_blank" style="max-width: 200px;">
+  <quiet-number-field name="required" label="Number of cats" required></quiet-number-field><br>
+  <quiet-number-field name="min" label="Minimum cats (min 3)" required min="3"></quiet-number-field><br>
+  <quiet-number-field name="max" label="Maximum cats (max 10)" required max="10"></quiet-number-field><br>
   <quiet-button type="submit" variant="primary">Submit</quiet-button>
   <quiet-button type="reset">Reset</quiet-button>
 </form>

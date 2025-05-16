@@ -1192,7 +1192,7 @@ td.table-reflects {
 
 html:not(.quiet-dark) quiet-scroller:has(.component-table) {
   --shadow-color: #0001;
-  --shadow-width: 0.75rem;
+  --shadow-size: 0.75rem;
 
   /* Add a border to each shadow */
   &::part(start-shadow) {

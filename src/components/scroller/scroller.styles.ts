@@ -3,7 +3,7 @@ import { css } from 'lit';
 export default css`
   :host {
     --shadow-color: var(--quiet-background-color);
-    --shadow-width: 2rem;
+    --shadow-size: 2rem;
 
     /* private (defined dynamically) */
     --start-shadow-opacity: 0;
@@ -59,11 +59,10 @@ export default css`
   :host([orientation='horizontal']) {
     #start-shadow,
     #end-shadow {
-      z-index: 1;
       position: absolute;
       top: 0;
       bottom: 0;
-      width: var(--shadow-width);
+      width: var(--shadow-size);
       pointer-events: none;
     }
 
@@ -107,7 +106,7 @@ export default css`
       position: absolute;
       right: 0;
       left: 0;
-      height: var(--shadow-width);
+      height: var(--shadow-size);
       pointer-events: none;
     }
 

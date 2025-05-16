@@ -73,7 +73,7 @@ layout: component
 
 ## Examples
 
-### Adding content
+### Providing content
 
 Scrollers can accommodate virtually any content type within their container. By default, they handle horizontal overflow with scrolling. It might be necessary to specify a width or height on your container element to prevent unwanted wrapping and ensure proper scrolling behavior.
 
@@ -143,34 +143,6 @@ Scrollers default to a horizontal orientation. To create a vertical scroller, se
 </style>
 ```
 
-### Hiding the shadow
-
-Use the `without-shadow` attribute to remove the shadows from the scroller.
-
-```html {.example}
-<quiet-scroller without-shadow id="scroller__without-shadow">
-  <div class="card">
-    <p>A cat's sense of smell is astonishingly powerful - they have over 200 million odor sensors compared to our mere 5 million. Their specialized paw pads contain scent glands that leave invisible territory markers wherever they walk. Most cats actually sleep between 12-16 hours daily, spending nearly two-thirds of their lives in various states of slumber.</p> 
-    <p>Cats possess a unique collarbone that floats freely and isn't attached to other bones, allowing them to squeeze through any opening the size of their head. Their purring occurs at a frequency of 25-150 vibrations per second and has been shown to promote healing in both bone and soft tissue. The distinctive sandpaper texture of a cat's tongue comes from tiny backward-facing spines called papillae.</p> 
-    <p>A domestic cat can jump approximately six times its body length in a single bound. Their night vision is six times better than humans, though they can't see in complete darkness. Interestingly, cats cannot taste sweetness as they lack the specific taste receptors required for detecting sugars.</p> 
-    <p>The average cat has 18 toes - five on each front paw and four on each back paw, though polydactyl cats can have many more. A cat's heart beats nearly twice as fast as a human's, with 110-140 beats per minute. When cats rub against objects or people, they're depositing their scent through special glands on their face, claiming you as part of their territory.</p>
-  </div>
-</quiet-scroller>
-
-<style>
-  #scroller__without-shadow {
-    .card {
-      width: 1500px;
-      padding: 1rem;
-
-      p:last-child {
-        margin-block-end: 0;
-      }
-    }
-  } 
-</style>
-```
-
 ### Hiding the scrollbar
 
 Add the `without-scrollbar` attribute to prevent the scrollbar from being visible.
@@ -203,9 +175,37 @@ Add the `without-scrollbar` attribute to prevent the scrollbar from being visibl
 Using this option will affect users' ability to scroll on certain devices.
 :::
 
+### Hiding the shadow
+
+Use the `without-shadow` attribute to remove the shadows from the scroller.
+
+```html {.example}
+<quiet-scroller without-shadow id="scroller__without-shadow">
+  <div class="card">
+    <p>A cat's sense of smell is astonishingly powerful - they have over 200 million odor sensors compared to our mere 5 million. Their specialized paw pads contain scent glands that leave invisible territory markers wherever they walk. Most cats actually sleep between 12-16 hours daily, spending nearly two-thirds of their lives in various states of slumber.</p> 
+    <p>Cats possess a unique collarbone that floats freely and isn't attached to other bones, allowing them to squeeze through any opening the size of their head. Their purring occurs at a frequency of 25-150 vibrations per second and has been shown to promote healing in both bone and soft tissue. The distinctive sandpaper texture of a cat's tongue comes from tiny backward-facing spines called papillae.</p> 
+    <p>A domestic cat can jump approximately six times its body length in a single bound. Their night vision is six times better than humans, though they can't see in complete darkness. Interestingly, cats cannot taste sweetness as they lack the specific taste receptors required for detecting sugars.</p> 
+    <p>The average cat has 18 toes - five on each front paw and four on each back paw, though polydactyl cats can have many more. A cat's heart beats nearly twice as fast as a human's, with 110-140 beats per minute. When cats rub against objects or people, they're depositing their scent through special glands on their face, claiming you as part of their territory.</p>
+  </div>
+</quiet-scroller>
+
+<style>
+  #scroller__without-shadow {
+    .card {
+      width: 1500px;
+      padding: 1rem;
+
+      p:last-child {
+        margin-block-end: 0;
+      }
+    }
+  } 
+</style>
+```
+
 ### Styling the shadow
 
-Use the `--shadow-color` and `--shadow-width` custom properties to style the shadows that appear when scrolling is available. This example adds edges and a more natural shadow for light mode, while leaving dark mode intact.
+Use the `--shadow-color` and `--shadow-size` custom properties to style the shadows that appear when scrolling is available. This example adds edges and a more natural shadow for light mode, while leaving dark mode intact.
 
 ```html {.example}
 <quiet-scroller id="scroller__shadow">
@@ -221,7 +221,7 @@ Use the `--shadow-color` and `--shadow-width` custom properties to style the sha
   html:not(.quiet-dark) {
     #scroller__shadow {
       --shadow-color: #0001;
-      --shadow-width: .75rem;
+      --shadow-size: .75rem;
       
       /* Add a border to each shadow */
       &::part(start-shadow) {

@@ -18,7 +18,7 @@ import styles from './scroller.styles.js';
  * @slot - The content to show inside the scroller.
  *
  * @cssproperty [--shadow-color=var(--quiet-neutral-fill-mid)] - The base color of the shadow.
- * @cssproperty [--shadow-width=0.5rem] - The width of the shadow.
+ * @cssproperty [--shadow-size=2rem] - The width of the shadow.
  *
  * @csspart content - The container that wraps the slotted content.
  * @csspart start-shadow - The starting shadow.
@@ -33,7 +33,6 @@ export class QuietScroller extends QuietElement {
 
   @query('#content') content: HTMLElement;
 
-  /** Indicates whether the scroller is currently scrollable. */
   @state() canScroll = false;
 
   /** The scroller's orientation. */

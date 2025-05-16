@@ -79,24 +79,55 @@ Scrollers can accommodate virtually any content type within their container. By 
 
 ```html {.example}
 <quiet-scroller id="scroller__content">
-  <div class="card" style="width: 1500px;">
-    <p>Cats love to chase laser dots and yarn balls around the house, pouncing with surprising agility. Their whiskers help them navigate tight spaces, while their retractable claws keep them ready for playtime. Sometimes they zoom around at 3 AM for no reason, doing what cat owners call the "midnight zoomies."</p>
-    <p>Purring isn't just for happiness — cats also purr when injured or stressed, as the vibrations may help with healing. A cat's sandpaper tongue has tiny hooks perfect for grooming their fur. When they slow-blink at you, it's actually a kitty kiss!</p>
-    <p>Most cats spend up to 16 hours sleeping daily, often in strange positions or inconvenient spots like your keyboard. They're excellent jumpers, able to leap up to 6 times their length. Despite their independent reputation, many cats form strong bonds with their humans and other pets.</p>
-    <p>A cat's meow is mainly for human communication — adult cats rarely meow at each other. They express themselves through body language, like tail positions and ear movements. Their superior night vision comes from special reflective cells, though they can't see in complete darkness.</p>
-  </div>
+  <quiet-card>
+    <h2>Cat Agility</h2>
+    <p>Cats love to chase laser dots and yarn balls around the house, pouncing with surprising agility. Their whiskers help them navigate tight spaces, while their retractable claws keep them ready for playtime.</p>
+    <p>Sometimes they zoom around at 3 AM for no reason, doing what cat owners call the "midnight zoomies."</p>
+  </quiet-card>
+  <quiet-card>
+    <h2>Purring Secrets</h2>
+    <p>Purring isn't just for happiness — cats also purr when injured or stressed, as the vibrations may help with healing. A cat's sandpaper tongue has tiny hooks perfect for grooming their fur.</p>
+    <p>When they slow-blink at you, it's actually a kitty kiss!</p>
+  </quiet-card>
+  <quiet-card>
+    <h2>Sleep & Jumps</h2>
+    <p>Most cats spend up to 16 hours sleeping daily, often in strange positions or inconvenient spots like your keyboard. They're excellent jumpers, able to leap up to 6 times their length.</p>
+    <p>Despite their independent reputation, many cats form strong bonds with their humans and other pets.</p>
+  </quiet-card>
+  <quiet-card>
+    <h2>Communication</h2>
+    <p>A cat's meow is mainly for human communication — adult cats rarely meow at each other. They express themselves through body language, like tail positions and ear movements.</p>
+    <p>Their superior night vision comes from special reflective cells, though they can't see in complete darkness.</p>
+  </quiet-card>
 </quiet-scroller>
 
 <style>
-  #scroller__content {
-    .card {
-      padding: 1rem;
+  #scroller__content::part(content) {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 1rem;
+  }
+  
+  #scroller__content quiet-card {
+    width: 300px;
+    flex: 0 0 auto;
 
-      p:last-child {
-        margin-block-end: 0;
-      }
+    h2 {
+      margin-top: 0;
+      font-size: 1.5rem;
+      color: #333;
     }
-  }  
+
+    p {
+      margin: 0.5rem 0;
+      line-height: 1.6;
+      color: #555;
+    }
+
+    p:last-child {
+      margin-block-end: 0;
+    }
+  }
 </style>
 ```
 

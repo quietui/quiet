@@ -1,5 +1,6 @@
 ---
 title: Browse Components
+description: Look through some of the best components on the planet.
 layout: docs
 ---
 

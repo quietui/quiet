@@ -172,6 +172,12 @@
     }
   }
 
+  /* Code inside an anchor should remain the anchor color */
+  a code,
+  a pre {
+    color: inherit;
+  }
+
   abbr[title] {
     text-decoration: underline;
     text-decoration-style: dotted;

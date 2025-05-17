@@ -34,7 +34,8 @@ Use the `value` attribute to provide an initial value for the text field.
 <quiet-number-field 
   name="name" 
   label="Treats given today"
-  value="9" style="max-width: 200px;"
+  value="2"
+  style="max-width: 200px;"
 >
 </quiet-number-field>
 ```

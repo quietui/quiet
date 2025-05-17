@@ -108,7 +108,7 @@ By default, the delimiter is automatically determined by the platform (no charac
 
 ### Changing the appearance
 
-By default, the keyboard hotkey is styled with `<kbd>` styles. Set the `appearance` attribute to `unstyled` to make it look like plain text. To target individual keys, use the `key` and `keyword` parts.
+By default, the keyboard hotkey is styled with `<kbd>` styles. Set the `appearance` attribute to `unstyled` to make it look like plain text.
 
 ```html {.example}
 Press 

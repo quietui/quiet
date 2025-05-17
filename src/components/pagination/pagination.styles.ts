@@ -20,7 +20,7 @@ export default css`
     display: flex;
   }
 
-  button {
+  [part~='button'] {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -44,7 +44,7 @@ export default css`
     user-select: none;
     -webkit-user-select: none;
 
-    &:active:not(:disabled, .current) {
+    &:active:not(.disabled, .current) {
       translate: 0 var(--quiet-button-active-offset);
     }
 
@@ -54,13 +54,13 @@ export default css`
     }
 
     /* Current page */
-    &.current:not(:disabled) {
+    &.current:not(.disabled) {
       font-weight: var(--quiet-font-weight-semibold);
       cursor: default;
     }
 
     /* Disabled buttons */
-    &:disabled {
+    &.disabled {
       box-shadow: none;
       cursor: not-allowed;
       opacity: 0.5;
@@ -68,18 +68,18 @@ export default css`
   }
 
   /* Normal */
-  :host([appearance='normal']) button {
+  :host([appearance='normal']) [part~='button'] {
     border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
     background-color: var(--quiet-paper-color);
 
     @media (hover: hover) {
-      &:hover:not(:disabled, .current) {
+      &:hover:not(.disabled, .current) {
         border-color: color-mix(in oklab, var(--quiet-neutral-stroke-softer), var(--quiet-strident) 5%);
         background-color: var(--quiet-neutral-fill-softer);
       }
     }
 
-    &.current:not(:disabled) {
+    &.current:not(.disabled) {
       border-color: var(--quiet-primary-fill-mid);
       background-color: var(--quiet-primary-fill-mid);
       color: var(--quiet-primary-text-on-mid);
@@ -87,28 +87,28 @@ export default css`
   }
 
   /* Filled */
-  :host([appearance='filled']) button {
+  :host([appearance='filled']) [part~='button'] {
     border: none;
     background-color: var(--quiet-neutral-fill-softer);
 
     @media (hover: hover) {
-      &:hover:not(:disabled, .current) {
+      &:hover:not(.disabled, .current) {
         background-color: var(--quiet-neutral-fill-soft);
       }
     }
 
-    &.current:not(:disabled) {
+    &.current:not(.disabled) {
       background-color: var(--quiet-primary-fill-mid);
       color: var(--quiet-primary-text-on-mid);
     }
   }
 
   /* Unstyled */
-  :host([appearance='unstyled']) button {
+  :host([appearance='unstyled']) [part~='button'] {
     border: none;
     background-color: transparent;
 
-    &.current:not(:disabled) {
+    &.current:not(.disabled) {
       background-color: var(--quiet-primary-fill-mid);
       color: var(--quiet-primary-text-on-mid);
     }

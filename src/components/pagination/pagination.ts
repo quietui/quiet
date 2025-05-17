@@ -1,8 +1,8 @@
 import type { CSSResultGroup, PropertyValues } from 'lit';
-import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
+import { html, literal } from 'lit/static-html.js';
 import { QuietBeforePageChangeEvent, QuietPageChangeEvent } from '../../events/page.js';
 import hostStyles from '../../styles/host.styles.js';
 import { Localize } from '../../utilities/localize.js';
@@ -44,7 +44,7 @@ type PaginationButton =
  * @csspart nav - The navigation container, a `<nav>` element.
  * @csspart list - The list that contains the pagination items, a `<ul>` element.
  * @csspart item - A pagination item, an `<li>` element.
- * @csspart button - A pagination button, a `<button>` element.
+ * @csspart button - A pagination button, a `<button>` or an `<a>` element.
  * @csspart button-first - The button that navigates to the first page.
  * @csspart button-previous - The button that navigates to the previous page.
  * @csspart button-next - The button that navigates to the next page.
@@ -81,6 +81,13 @@ export class QuietPagination extends QuietElement {
   /** How the pagination will display buttons. */
   @property({ reflect: true }) format: 'compact' | 'standard' = 'standard';
 
+  /**
+   * A string that, when provided, renders `<a>` elements instead of `<${tag}s>` using this as the link's template.
+   * Use `$page` to indicate the page number, e.g. `"/path/to/$page"`. Alternatively, you can provide a JavaScript
+   * function that accepts a page number and returns a URL.
+   */
+  @property({ attribute: 'link-formatter' }) linkFormatter: string | ((page: number) => string) = '';
+
   /** Disables the pagination control. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
@@ -107,7 +114,10 @@ export class QuietPagination extends QuietElement {
 
   /** Changes the current page, emitting a cancellable 'quiet-page-change' event. */
   private async changePage(newPage: number) {
-    // Exit if new page is invalid or same as current
+    // Don't change the page when disabled or if a link formatter was provided
+    if (this.disabled || this.linkFormatter) return;
+
+    // Don't change the page if the target is invalid or the current page
     if (newPage < 1 || newPage > this.totalPages || newPage === this.page) return;
 
     // Dispatch `quiet-before-page-change`
@@ -206,19 +216,28 @@ export class QuietPagination extends QuietElement {
     return items;
   }
 
-  private handleJump(position: 'start' | 'end') {
-    let newPage: number;
-    if (position === 'start') {
-      // Jump backwards, but stop at page 1
-      newPage = Math.max(1, this.page - this.jump);
-    } else {
-      // Jump forward, but but stop at totalPages
-      newPage = Math.min(this.totalPages, this.page + this.jump);
+  private handleNavClick(event: PointerEvent) {
+    // When disabled, we prevent clicks bubbling up through the nav, which means `<a>` elements are also "disabled"
+    if (this.disabled) {
+      event.preventDefault();
     }
-    this.changePage(newPage);
+  }
+
+  private renderLink(page: number) {
+    page = clamp(page, 1, this.totalPages);
+
+    if (typeof this.linkFormatter === 'string') {
+      return this.linkFormatter.replace(/\{page\}/g, page + '');
+    } else if (typeof this.linkFormatter === 'function') {
+      return this.linkFormatter(page);
+    } else {
+      return undefined;
+    }
   }
 
   render() {
+    const isLink = this.linkFormatter;
+    const tag = isLink ? literal`a` : literal`button`;
     const label = this.label || this.localize.term('pagination');
     const isPrevDisabled = this.page <= 1 || this.disabled;
     const isNextDisabled = this.page >= this.totalPages || this.disabled;
@@ -227,29 +246,35 @@ export class QuietPagination extends QuietElement {
     const chevronRightIcon = html`<quiet-icon library="system" name="chevron-right"></quiet-icon>`;
     let content;
 
-    // Shared avigation buttons
+    // Shared navigation buttons
     const previousButton = html`
       <li part="item">
-        <button
+        <${tag}
+          href=${ifDefined(this.renderLink(this.page - 1))}
           part="button button-previous"
+          class=${classMap({ disabled: isPrevDisabled || this.disabled })}
           aria-label="${this.localize.term('previous')}"
-          ?disabled=${isPrevDisabled || this.disabled}
+          ?disabled=${ifDefined(isLink ? undefined : isPrevDisabled || this.disabled)}
+          tabindex=${ifDefined(this.disabled ? '-1' : undefined)}
           @click=${() => this.changePage(this.page - 1)}
         >
           <slot name="previous-icon"> ${isRtl ? chevronRightIcon : chevronLeftIcon} </slot>
-        </button>
+        </${tag}>
       </li>
     `;
     const nextButton = html`
       <li part="item">
-        <button
+        <${tag}
+          href=${ifDefined(this.renderLink(this.page + 1))}
           part="button button-next"
+          class=${classMap({ disabled: isNextDisabled || this.disabled })}
           aria-label="${this.localize.term('next')}"
-          ?disabled=${isNextDisabled || this.disabled}
+          ?disabled=${ifDefined(isLink ? undefined : isNextDisabled || this.disabled)}
+          tabindex=${ifDefined(this.disabled ? '-1' : undefined)}
           @click=${() => this.changePage(this.page + 1)}
         >
           <slot name="next-icon"> ${isRtl ? chevronLeftIcon : chevronRightIcon} </slot>
-        </button>
+        </${tag}>
       </li>
     `;
 
@@ -270,18 +295,23 @@ export class QuietPagination extends QuietElement {
       // Standard format
       content = this.getPaginationItems().map(item => {
         if (item.type === 'jump') {
+          const jumpToPage = this.page + (item.position === 'start' ? -5 : 5);
+
           return html`
             <li part="item">
-              <button
+              <${tag}
+                href=${ifDefined(this.renderLink(jumpToPage))}
                 part="button ${item.position === 'start' ? 'button-jump-backward' : 'button-jump-forward'}"
+                class=${classMap({ disabled: this.disabled })}
                 aria-label="${this.localize.term(item.position === 'start' ? 'jumpBackward' : 'jumpForward')}"
-                ?disabled=${this.disabled}
-                @click=${() => this.handleJump(item.position)}
+                ?disabled=${ifDefined(isLink ? undefined : this.disabled)}
+                tabindex=${ifDefined(this.disabled ? '-1' : undefined)}
+                @click=${() => this.changePage(clamp(this.page + (item.position === 'start' ? -5 : 5), 1, this.totalPages))}
               >
                 <slot name=${item.position === 'start' ? 'jump-backward-icon' : 'jump-forward-icon'}>
                   <quiet-icon library="system" name="dots" family="filled"></quiet-icon>
                 </slot>
-              </button>
+              </${tag}>
             </li>
           `;
         } else {
@@ -290,16 +320,18 @@ export class QuietPagination extends QuietElement {
           const part = `button button-page${isCurrent ? ' button-current' : ''}${item.page === 1 ? ' button-first' : ''}${item.page === this.totalPages ? ' button-last' : ''}`;
           return html`
             <li part="item">
-              <button
+              <${tag}
+                href=${ifDefined(this.renderLink(item.page))}
                 part=${part}
-                class=${classMap({ current: isCurrent })}
+                class=${classMap({ current: isCurrent, disabled: this.disabled })}
                 aria-label=${this.localize.term('pageNumber', item.page)}
                 aria-current=${ifDefined(isCurrent ? 'page' : undefined)}
-                ?disabled=${this.disabled}
+                ?disabled=${ifDefined(isLink ? undefined : this.disabled)}
+                tabindex=${ifDefined(this.disabled ? '-1' : undefined)}
                 @click=${() => this.changePage(item.page)}
               >
                 ${this.localize.number(item.page, { useGrouping: true })}
-              </button>
+              </${tag}>
             </li>
           `;
         }
@@ -308,7 +340,7 @@ export class QuietPagination extends QuietElement {
 
     // Shared nav and ul structure
     return html`
-      <nav id="nav" part="nav" aria-label="${label}">
+      <nav id="nav" part="nav" aria-label="${label}" @click=${this.handleNavClick}>
         <ul id="list" part="list">
           ${this.withoutNav ? '' : previousButton} ${content} ${this.withoutNav ? '' : nextButton}
         </ul>

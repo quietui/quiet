@@ -92,6 +92,34 @@ Set the `page` property to any valid page to change the current page. Note that 
 </script>
 ```
 
+### Rendering links instead of buttons
+
+By default, the pagination component renders `<button>` elements internally. To have it render links instead, set the `link-formatter` attribute to a URL with a `{page}` placeholder that corresponds to the target page, e.g. `/path/to/{page}`.
+
+```html
+<quiet-pagination 
+  total-pages="10" 
+  page="5" 
+  link-formatter="https://example.com/path/to/{page}"
+></quiet-pagination>
+```
+
+For more control over the URL, you can set the `linkFormatter` property to a JavaScript function that accepts a page number and returns a URL.
+
+```html
+<quiet-pagination id="pagination__links" total-pages="5"></quiet-pagination>
+
+<script>
+  const pagination = document.getElementById('pagination__links');
+  
+  pagination.linkFormatter = page => `https://example.com/path/to/${page}`;
+</script>
+```
+
+:::info
+When a link formatter is provided, users will be redirected to the corresponding URL when they select a page. In this case, the pagination component _will not_ update dynamically. This is the intended behavior when using links.
+:::
+
 ### Changing the format
 
 Set the `format` attribute to `compact` or `standard` to change the pagination's format.
@@ -100,7 +128,6 @@ Set the `format` attribute to `compact` or `standard` to change the pagination's
 <quiet-pagination 
   format="compact"
   total-pages="5"
-  siblings="3"
   id="pagination__format"
 ></quiet-pagination>
 

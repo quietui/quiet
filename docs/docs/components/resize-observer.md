@@ -114,3 +114,30 @@ The host element uses `display: contents`, which makes it invisible in the layou
   }
 </style>
 ```
+
+## Example
+
+### Providing content
+
+Slot one or more elements into the resize observer and listen for the `quiet-resize` event. The event includes `event.detail.entry`, which is a [`ResizeObserverEntry`](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserverEntry) object that corresponds to the observed change.
+
+In it's simplest form, a resize observer can be used like this.
+
+```html
+<quiet-resize-observer>
+  <div>...</div>
+</quiet-resize-observer>
+
+<script>
+  const resizeObserver = document.querySelector('quiet-resize-observer');
+
+  // Listen for resize
+  resizeObserver.addEventListener('quiet-resize', event => {
+    console.log(event.detail.entry); // ResizeObserverEntry
+  });
+</script>
+```
+
+:::info
+Remember that only direct children of the host element are observed.
+:::

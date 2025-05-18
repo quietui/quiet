@@ -25,6 +25,7 @@ import styles from './resize-observer.styles.js';
 export class QuietResizeObserver extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
+  private hasInitialized = false;
   private resizeObserver: ResizeObserver | null = null;
 
   /** Disables the resize observer. */
@@ -39,32 +40,43 @@ export class QuietResizeObserver extends QuietElement {
     super.disconnectedCallback();
   }
 
+  firstUpdated() {
+    // Wait for the component to render the first time, then start the observers. This prevents the observer from being
+    // set and unset multiple times due to slot changes and initial property assignments.
+    requestAnimationFrame(() => {
+      this.startObserver();
+      this.hasInitialized = true;
+    });
+  }
+
   /** Component lifecycle method that runs when properties change */
   updated(changedProperties: PropertyValues<this>) {
     super.updated(changedProperties);
 
-    /* Handle disabled changes */
-    if (changedProperties.has('disabled')) {
+    // Toggle the disabled state
+    if (changedProperties.has('disabled') && this.hasInitialized) {
       if (this.disabled) {
         this.stopObserver();
-      } else {
+      } else if (!this.resizeObserver) {
         this.startObserver();
       }
     }
 
-    /* When the box model changes, restart observers */
-    if (changedProperties.has('box')) {
-      if (this.disabled) return;
+    // Handle box changes
+    if (changedProperties.has('box') && this.hasInitialized) {
+      this.startObserver();
+    }
+  }
+
+  private handleSlotChange() {
+    if (this.hasInitialized) {
       this.startObserver();
     }
   }
 
   /** Starts or restarts the resize observer. */
   private startObserver() {
-    // Clean up existing observer
-    if (this.resizeObserver) {
-      this.resizeObserver.disconnect();
-    }
+    this.stopObserver();
 
     // Don't set up new observer if disabled
     if (this.disabled) return;
@@ -85,14 +97,12 @@ export class QuietResizeObserver extends QuietElement {
 
   /** Stops the resize observer. */
   private stopObserver() {
-    if (this.resizeObserver) {
-      this.resizeObserver.disconnect();
-      this.resizeObserver = null;
-    }
+    this.resizeObserver?.disconnect();
+    this.resizeObserver = null;
   }
 
   render() {
-    return html` <slot @slotchange=${this.startObserver}></slot> `;
+    return html` <slot @slotchange=${this.handleSlotChange}></slot> `;
   }
 }
 

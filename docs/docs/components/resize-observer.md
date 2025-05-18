@@ -5,6 +5,8 @@ layout: component
 
 The component utilizes a [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) to monitor the dimensions of its direct children. A `quiet-resize` event is dispatched for each observed element, once when the element is first observed and once every time the element is resized.
 
+The host element uses `display: contents`, which makes it invisible in the layout flow while its children appear as direct children of the parent element.
+
 ```html {.example}
 <div id="resize__overview">
   <quiet-resize-observer>

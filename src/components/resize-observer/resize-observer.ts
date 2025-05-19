@@ -34,19 +34,20 @@ export class QuietResizeObserver extends QuietElement {
   /** Sets which box model the observer will observe changes to. */
   @property() box: 'content-box' | 'border-box' | 'device-pixel-content-box' = 'content-box';
 
+  connectedCallback() {
+    super.connectedCallback();
+    this.startObserver();
+
+    // Add an init flag to prevent the observers from mounting multiple times on first load
+    requestAnimationFrame(() => {
+      this.hasInitialized = true;
+    });
+  }
+
   /** Component lifecycle method that runs when the element disconnects from the DOM */
   disconnectedCallback() {
     this.stopObserver();
     super.disconnectedCallback();
-  }
-
-  firstUpdated() {
-    // Wait for the component to render the first time, then start the observers. This prevents the observer from being
-    // set and unset multiple times due to slot changes and initial property assignments.
-    requestAnimationFrame(() => {
-      this.startObserver();
-      this.hasInitialized = true;
-    });
   }
 
   /** Component lifecycle method that runs when properties change */
@@ -89,8 +90,8 @@ export class QuietResizeObserver extends QuietElement {
       });
     });
 
-    // Observe all child elements
-    Array.from(this.children).forEach(child => {
+    // Observe direct children
+    [...this.children].forEach(child => {
       this.resizeObserver?.observe(child, { box: this.box });
     });
   }

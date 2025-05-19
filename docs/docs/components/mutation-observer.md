@@ -3,7 +3,7 @@ title: Mutation Observer
 layout: component
 ---
 
-Add and remove some items, then check the console to see the output.
+Add and remove some items, then open the console to inspect the output.
 
 ```html {.example}
 <div id="mutation__overview">

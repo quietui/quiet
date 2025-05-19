@@ -2,7 +2,7 @@ import { css } from 'lit';
 
 export default css`
   :host {
-    --border-radius: 9999px;
+    --border-radius: calc(var(--quiet-border-radius) * 1.5);
     --thumb-width: 4em;
     --thumb-inset: 0.125em;
     --shimmer-color: color-mix(in oklab, var(--quiet-strident) 12.5%, transparent) 50%;

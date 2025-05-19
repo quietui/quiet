@@ -3,9 +3,7 @@ title: Resize Observer
 layout: component
 ---
 
-The component utilizes a [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) to monitor the dimensions of its direct children. A `quiet-resize` event is dispatched for each observed element, once when the element is first observed and once every time the element is resized.
-
-The host element uses `display: contents`, which makes it invisible in the layout flow while its children appear as direct children of the parent element.
+The component uses a [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) to monitor the dimensions of its direct children. A `quiet-resize` event is dispatched for each observed element, once when the element is first observed and once every time the element is resized.
 
 ```html {.example}
 <div id="resize__overview">
@@ -30,14 +28,14 @@ The host element uses `display: contents`, which makes it invisible in the layou
 
     dimensions.innerHTML = `${width}px &times; ${height}px`;
   });
-  
+
   /* The code below is just to make the example resizable */
   const resizable = container.querySelector('.resizable');
   const handle = container.querySelector('.handle');
   const dimensions = container.querySelector('.dimensions');
   let isResizing = false;
   let startX, startY, startWidth, startHeight;
-
+  
   function startResize(event) {
     isResizing = true;
     startX = event.clientX;
@@ -68,6 +66,9 @@ The host element uses `display: contents`, which makes it invisible in the layou
   }
 
   handle.addEventListener('pointerdown', startResize);  
+
+  // Show initial dimensions
+  dimensions.innerHTML = `${resizable.clientWidth}px &times; ${resizable.clientHeight}px`;
 </script>
 
 <style>
@@ -79,11 +80,11 @@ The host element uses `display: contents`, which makes it invisible in the layou
       z-index: 2;
       position: relative;
       width: 100%;
-      min-width: 54px; /* 50px + borders */
+      min-width: 50px;
       max-width: 100%;
       height: 100%;
-      min-height: 54px;  /* 50px + borders */
-      max-height: 204px; /* 200px + borders */
+      min-height: 50px;
+      max-height: 200px;
       border: solid 2px var(--quiet-neutral-stroke-mid);
       border-radius: var(--quiet-border-radius);
     }

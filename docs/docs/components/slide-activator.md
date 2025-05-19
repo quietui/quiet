@@ -232,7 +232,7 @@ Slide activators come with a simple, minimal appearance. Feel free to customize 
 
 ```html {.example}
 <quiet-slide-activator 
-  label="Empty the litter box" 
+  label="Empty the box" 
   activated-label="Emptying…"
   attention="shimmer" 
   id="slide-activator__styling"
@@ -253,8 +253,8 @@ Slide activators come with a simple, minimal appearance. Feel free to customize 
 
 <style>
   quiet-slide-activator#slide-activator__styling {
-    --border-radius: 0.5rem;
-    --thumb-width: 4rem;
+    --border-radius: 9999px;
+    --thumb-width: 5rem;
     --thumb-inset: 0.25rem;
     --shimmer-color: #fff2;
     --current-color: 

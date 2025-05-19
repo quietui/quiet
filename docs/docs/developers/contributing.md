@@ -181,7 +181,7 @@ Attribute reflection in custom elements is [an interesting challenge](https://ww
 
 #### Special cases
 
-- All `with-*` and `no-*` attributes must reflect.
+- All `with-*` and `without-*` attributes must reflect.
 - In form controls, the `name` and `required` attributes must always reflect, like the platform.
 - The `disabled` and `readonly` attributes should always reflect.
 - The `checked`, `active`, `selected`, and similar value-related attributes should not reflect.

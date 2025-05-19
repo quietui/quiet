@@ -8,9 +8,9 @@ Add and remove some items, then open the console to inspect the output.
 ```html {.example}
 <div id="mutation__overview">
   <quiet-mutation-observer child-list>
-    <div class="box">1 <button aria-label="Remove">&times;</button></div>
-    <div class="box">2 <button aria-label="Remove">&times;</button></div>
-    <div class="box">3 <button aria-label="Remove">&times;</button></div>
+    <div class="box">1 <button aria-label="Remove">✕</button></div>
+    <div class="box">2 <button aria-label="Remove">✕</button></div>
+    <div class="box">3 <button aria-label="Remove">✕</button></div>
   </quiet-mutation-observer>
 </div>
 
@@ -36,7 +36,7 @@ Add and remove some items, then open the console to inspect the output.
 
   // Append a box
   appendButton.addEventListener('click', () => {
-    const html = `<div class="box">${++count} <button aria-label="Remove">&times;</button></div>`;
+    const html = `<div class="box">${++count} <button aria-label="Remove">✕</button></div>`;
     mutationObserver.insertAdjacentHTML('beforeEnd', html);
   });
 </script>
@@ -69,13 +69,14 @@ Add and remove some items, then open the console to inspect the output.
       justify-content: center;
       background-color: var(--quiet-neutral-fill-loud);
       color: var(--quiet-neutral-text-on-loud);
+      font-size: .75em;
       padding: 0;
-      width: 1.5rem;
-      height: 1.5rem;
+      width: 1.25rem;
+      height: 1.25rem;
       min-height: 0;
       position: absolute;
-      top: -0.75rem;
-      right: -0.75rem;
+      top: -0.625rem;
+      right: -0.625rem;
       border-radius: 50%;
     }
   }

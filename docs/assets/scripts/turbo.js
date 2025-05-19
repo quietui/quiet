@@ -15,7 +15,7 @@ function saveScrollPosition() {
         left: el.scrollLeft
       };
     } else {
-      console.warn(`Can't save scroll position for elements without an id.`, el);
+      console.warn(`Can't save scroll position for elements without an ID.`, el);
     }
   });
 }

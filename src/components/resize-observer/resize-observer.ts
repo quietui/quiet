@@ -9,7 +9,7 @@ import styles from './resize-observer.styles.js';
 /**
  * <quiet-resize-observer>
  *
- * @summary A container that observes child elements and emits an event when they resize.
+ * @summary Resize observers watch child elements and dispatch an event when they resize.
  * @documentation https://quietui.org/docs/components/resize
  * @status stable
  * @since 1.0

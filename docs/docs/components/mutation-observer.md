@@ -3,6 +3,8 @@ title: Mutation Observer
 layout: component
 ---
 
+Add and remove some items, then check the console to see the output.
+
 ```html {.example}
 <div id="mutation__overview">
   <quiet-mutation-observer child-list>

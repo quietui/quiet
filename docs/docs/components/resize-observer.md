@@ -125,13 +125,13 @@ In it's simplest form, a resize observer can be used like this.
 
 ```html
 <quiet-resize-observer>
-  <div>...</div>
+  ...
 </quiet-resize-observer>
 
 <script>
   const resizeObserver = document.querySelector('quiet-resize-observer');
 
-  // Listen for resize
+  // Listen for resizes
   resizeObserver.addEventListener('quiet-resize', event => {
     console.log(event.detail.entry); // ResizeObserverEntry
   });

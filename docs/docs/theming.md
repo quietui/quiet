@@ -4,6 +4,8 @@ description: Theme concepts, color palettes, and design tokens.
 layout: docs
 ---
 
+Quiet features a sleek, modern aesthetic that looks great out of the box, especially when coupled with [Restyle](/docs/restyle). But it's also designed to be highly customizable — with pure CSS — for those who want something a little different.
+
 The default theme provides simple, elegant styles with support for light and dark modes and 21 built-in color presets. A number of [design tokens](#design-tokens) are exposed, giving you an easy way to make high-level changes to the library.
 
 ## Using the default theme

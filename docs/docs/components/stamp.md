@@ -88,7 +88,7 @@ When you need to make changes to repetitive content, stamps make it easy by lett
 
 ### Writing templates
 
-Before using a stamp, you must create a `<template>` with an ID of your choice. Templates can include just about any HTML you want. To render a template, add a `<quiet-stamp>` element and set the `template` attribute to the template's id. The rendered template will be appended to the DOM inside the stamp component.
+Before using a stamp, you must create a `<template>` with an ID of your choice. Templates can include just about any HTML you want. To render a template, add a `<quiet-stamp>` element and set the `template` attribute to the template's ID. The rendered template will be appended to the DOM inside the stamp component.
 
 In most cases, templates aren't very useful without data. To pass data to a stamp, add one or more [data attributes](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes) to it. You can reference the data in the template using _expressions_ that look like `{propertyName}`, where _propertyName_ is a [dataset](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset) property name that corresponds to a data attribute you've supplied, e.g. `data-first-name` can be referenced in a template using `{firstName}`.
 

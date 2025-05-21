@@ -11,7 +11,7 @@ export default css`
     margin: 0 auto;
   }
 
-  #container {
+  #items {
     display: flex;
     width: 100%;
     height: var(--height);
@@ -29,7 +29,7 @@ export default css`
     }
   }
 
-  #container::-webkit-scrollbar {
+  #items::-webkit-scrollbar {
     display: none;
   }
 
@@ -116,7 +116,7 @@ export default css`
 
   /* Reduced motion preference */
   @media (prefers-reduced-motion: reduce) {
-    #container {
+    #items {
       scroll-behavior: auto;
     }
 

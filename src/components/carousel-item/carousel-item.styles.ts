@@ -5,7 +5,7 @@ export default css`
     flex: 0 0 100%;
     height: 100%;
     border-radius: var(--quiet-border-radius);
-    scroll-snap-align: start;
+    scroll-snap-align: center;
     scroll-snap-stop: always;
   }
 

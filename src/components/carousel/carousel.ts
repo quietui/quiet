@@ -16,8 +16,10 @@ import styles from './carousel.styles.js';
  *
  * @slot - The default slot for carousel items.
  *
- * @csspart container - The scrollable container that holds the carousel items.
+ * @csspart items - The scrollable container that holds the carousel items.
  * @csspart nav-button - The previous and next buttons.
+ * @csspart nav-button-previous - The previous button.
+ * @csspart nav-button-next - The next button.
  * @csspart pagination - The container for the pagination dots.
  * @csspart dot - The individual pagination dots.
  *
@@ -31,7 +33,7 @@ export class QuietCarousel extends QuietElement {
 
   private localize = new Localize(this);
 
-  @query('#container') container: HTMLElement;
+  @query('#items') items: HTMLElement;
 
   @state() private itemCount = 0;
 
@@ -82,8 +84,8 @@ export class QuietCarousel extends QuietElement {
 
   @eventOptions({ passive: true })
   private handleScroll() {
-    if (!this.container) return;
-    const scrollLeft = this.container.scrollLeft;
+    if (!this.items) return;
+    const scrollLeft = this.items.scrollLeft;
     const items = this.getItems();
 
     // Find which item is most visible in the viewport
@@ -104,7 +106,7 @@ export class QuietCarousel extends QuietElement {
    * Scroll to a specific item index without updating the active dot directly
    */
   private scrollToIndex(index: number) {
-    if (!this.container) return;
+    if (!this.items) return;
 
     // Ensure index is within bounds
     const boundedIndex = Math.max(0, Math.min(index, this.itemCount - 1));
@@ -116,8 +118,8 @@ export class QuietCarousel extends QuietElement {
     const targetItem = items[boundedIndex];
 
     // Just scroll to the position - the scroll event handler will update the active dot
-    this.container.scrollTo({
-      left: targetItem.offsetLeft - this.container.offsetLeft,
+    this.items.scrollTo({
+      left: targetItem.offsetLeft - this.items.offsetLeft,
       behavior: 'smooth'
     });
 
@@ -187,21 +189,22 @@ export class QuietCarousel extends QuietElement {
   }
 
   render() {
+    const hasNav = this.withNav || this.withDots;
     const isRtl = this.localize.dir() === 'rtl';
 
     return html`
-      <div id="container" part="container" aria-live="polite" tabindex="0" @scroll=${this.handleScroll}>
+      <div id="items" part="items" aria-live="polite" tabindex="0" @scroll=${this.handleScroll}>
         <slot @slotchange=${this.handleSlotChange}></slot>
       </div>
 
-      ${this.withNav || this.withDots
+      ${hasNav
         ? html`
             <div id="nav" part="nav">
               ${this.withNav
                 ? html`
                     <button
                       id="previous-button"
-                      part="nav-button"
+                      part="nav-button nav-button-previous"
                       aria-label=${this.localize.term('previous')}
                       ?disabled=${this.index === 0}
                       @click=${this.handlePrevious}
@@ -210,7 +213,7 @@ export class QuietCarousel extends QuietElement {
                     </button>
                     <button
                       id="next-button"
-                      part="nav-button"
+                      part="nav-button nav-button-next"
                       aria-label=${this.localize.term('next')}
                       ?disabled=${this.index === this.itemCount - 1}
                       @click=${this.handleNext}

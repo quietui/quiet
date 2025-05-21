@@ -4,6 +4,7 @@ export default css`
   :host {
     --height: 18.75em;
 
+    display: block;
     position: relative;
     width: 100%;
     max-width: 100%;
@@ -21,6 +22,11 @@ export default css`
     -webkit-overflow-scrolling: touch;
     border-radius: var(--quiet-border-radius);
     background-color: transparent;
+
+    &:focus-visible {
+      outline: var(--quiet-focus-ring);
+      outline-offset: var(--quiet-focus-offset);
+    }
   }
 
   #container::-webkit-scrollbar {
@@ -69,7 +75,7 @@ export default css`
   }
 
   /* Pagination */
-  .pagination {
+  #pagination {
     display: flex;
     align-items: center;
     justify-content: end;
@@ -99,18 +105,18 @@ export default css`
   }
 
   /* When any dot has focus, active dots look inactive */
-  .pagination:has(.dot:focus) .dot.active:not(:focus) {
+  #pagination:has(.dot:focus) .dot.active:not(:focus) {
     background-color: var(--quiet-neutral-fill-soft);
   }
 
   /* When any dot has focus, all dots get an outline (regardless of focus-visible) */
-  .pagination:has(.dot:focus-visible) .dot:focus-visible {
+  #pagination:has(.dot:focus-visible) .dot:focus-visible {
     outline: var(--quiet-focus-ring);
     outline-offset: var(--quiet-focus-offset);
   }
 
   /* The specific dot that has focus gets the active color */
-  .pagination:has(.dot:focus) .dot:focus {
+  #pagination:has(.dot:focus) .dot:focus {
     background-color: var(--quiet-neutral-fill-loud);
   }
 

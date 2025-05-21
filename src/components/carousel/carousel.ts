@@ -1,4 +1,4 @@
-import type { CSSResultGroup } from 'lit';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, eventOptions, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
@@ -35,6 +35,9 @@ export class QuietCarousel extends QuietElement {
 
   @state() private itemCount = 0;
 
+  /** A custom label for the carousel. This won't be shown, but it will be read to assistive devices. */
+  @property({ type: String }) label = '';
+
   /** The current active item index. */
   @property({ type: Number, reflect: true }) index = 0;
 
@@ -43,6 +46,17 @@ export class QuietCarousel extends QuietElement {
 
   /** Shows pagination dots when present. */
   @property({ type: Boolean, attribute: 'with-dots', reflect: true }) withDots = false;
+
+  firstUpdated() {
+    this.setAttribute('role', 'region');
+    this.setAttribute('aria-roledescription', 'carousel');
+  }
+
+  updated(changedProperties: PropertyValues<this>) {
+    if (changedProperties.has('label')) {
+      this.setAttribute('aria-label', this.label || 'Carousel'); // TODO - localize
+    }
+  }
 
   /** Get the items from the default slot. */
   private getItems(): HTMLElement[] {
@@ -54,6 +68,16 @@ export class QuietCarousel extends QuietElement {
 
   private handleSlotChange() {
     this.itemCount = this.getItems().length;
+
+    // Set the appropriate aria attributes on each carousel item
+    const items = this.getItems();
+    items.forEach((item, i) => {
+      if (!item.hasAttribute('aria-label') && !item.hasAttribute('aria-labelledby')) {
+        item.setAttribute('role', 'group');
+        item.setAttribute('aria-roledescription', 'slide');
+        item.setAttribute('aria-label', this.localize.term('numberOfTotal', i + 1, items.length));
+      }
+    });
   }
 
   @eventOptions({ passive: true })
@@ -73,14 +97,6 @@ export class QuietCarousel extends QuietElement {
     if (newIndex !== this.index && newIndex >= 0 && newIndex < this.itemCount) {
       this.index = newIndex;
       this.dispatchEvent(new CustomEvent('quiet-item-change', { detail: { index: this.index } }));
-    }
-  }
-
-  private blurPagination() {
-    const activeEl = this.shadowRoot.activeElement as HTMLButtonElement | null;
-
-    if (activeEl?.closest('[part="dot"]')) {
-      activeEl.blur();
     }
   }
 
@@ -174,13 +190,7 @@ export class QuietCarousel extends QuietElement {
     const isRtl = this.localize.dir() === 'rtl';
 
     return html`
-      <div
-        id="container"
-        part="container"
-        @touchstart=${this.blurPagination}
-        @pointerover=${this.blurPagination}
-        @scroll=${this.handleScroll}
-      >
+      <div id="container" part="container" aria-live="polite" tabindex="0" @scroll=${this.handleScroll}>
         <slot @slotchange=${this.handleSlotChange}></slot>
       </div>
 
@@ -192,10 +202,8 @@ export class QuietCarousel extends QuietElement {
                     <button
                       id="previous-button"
                       part="nav-button"
-                      class="nav-button"
                       aria-label=${this.localize.term('previous')}
                       ?disabled=${this.index === 0}
-                      tabindex="-1"
                       @click=${this.handlePrevious}
                     >
                       <quiet-icon name=${isRtl ? 'chevron-right' : 'chevron-left'}></quiet-icon>
@@ -203,10 +211,8 @@ export class QuietCarousel extends QuietElement {
                     <button
                       id="next-button"
                       part="nav-button"
-                      class="nav-button"
                       aria-label=${this.localize.term('next')}
                       ?disabled=${this.index === this.itemCount - 1}
-                      tabindex="-1"
                       @click=${this.handleNext}
                     >
                       <quiet-icon name=${isRtl ? 'chevron-left' : 'chevron-right'}></quiet-icon>
@@ -215,7 +221,7 @@ export class QuietCarousel extends QuietElement {
                 : ''}
               ${this.withDots
                 ? html`
-                    <div part="pagination" class="pagination" role="tablist" aria-label="Carousel pagination">
+                    <div id="pagination" part="pagination" role="tablist" aria-label="Choose slide to display">
                       ${Array.from({ length: this.itemCount }, (_, i) => {
                         const isActive = i === this.index;
                         return html`

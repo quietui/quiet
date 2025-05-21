@@ -109,12 +109,6 @@ export default css`
     background-color: var(--quiet-neutral-fill-soft);
   }
 
-  /* When any dot has focus, all dots get an outline (regardless of focus-visible) */
-  #pagination:has(.dot:focus-visible) .dot:focus-visible {
-    outline: var(--quiet-focus-ring);
-    outline-offset: var(--quiet-focus-offset);
-  }
-
   /* The specific dot that has focus gets the active color */
   #pagination:has(.dot:focus) .dot:focus {
     background-color: var(--quiet-neutral-fill-loud);

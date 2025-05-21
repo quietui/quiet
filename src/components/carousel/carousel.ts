@@ -31,6 +31,7 @@ import styles from './carousel.styles.js';
 export class QuietCarousel extends QuietElement {
   static styles: CSSResultGroup = styles;
 
+  private itemDimensionsCache: Array<{ left: number; width: number }> | null = null;
   private localize = new Localize(this);
 
   @query('#items') items: HTMLElement;
@@ -68,8 +69,17 @@ export class QuietCarousel extends QuietElement {
       : [];
   }
 
+  private cacheItemDimensions() {
+    const items = this.getItems();
+    this.itemDimensionsCache = items.map(item => ({
+      left: item.offsetLeft - this.items.offsetLeft,
+      width: item.offsetWidth
+    }));
+  }
+
   private handleSlotChange() {
     this.itemCount = this.getItems().length;
+    this.itemDimensionsCache = null; // Clear cache when items change
 
     // Set the appropriate aria attributes on each carousel item
     const items = this.getItems();
@@ -85,16 +95,30 @@ export class QuietCarousel extends QuietElement {
   @eventOptions({ passive: true })
   private handleScroll() {
     if (!this.items) return;
+
+    // Cache dimensions if not already cached
+    if (!this.itemDimensionsCache) {
+      this.cacheItemDimensions();
+    }
+
+    if (!this.itemDimensionsCache || this.itemDimensionsCache.length === 0) return;
+
     const scrollLeft = this.items.scrollLeft;
-    const items = this.getItems();
+    const viewportCenter = scrollLeft + this.items.clientWidth / 2;
 
-    // Find which item is most visible in the viewport
-    const itemWidth = items.length > 0 ? items[0].offsetWidth : 0;
-    const gapWidth = items.length > 1 ? items[1].offsetLeft - (items[0].offsetLeft + itemWidth) : 0;
-    const itemFullWidth = itemWidth + gapWidth;
+    // Find which item's center is closest to the viewport center
+    let minDistance = Infinity;
+    let newIndex = this.index;
 
-    // Calculate the index based on scroll position
-    const newIndex = Math.round(scrollLeft / itemFullWidth);
+    this.itemDimensionsCache.forEach((item, i) => {
+      const itemCenter = item.left + item.width / 2;
+      const distance = Math.abs(viewportCenter - itemCenter);
+
+      if (distance < minDistance) {
+        minDistance = distance;
+        newIndex = i;
+      }
+    });
 
     if (newIndex !== this.index && newIndex >= 0 && newIndex < this.itemCount) {
       this.index = newIndex;
@@ -152,18 +176,20 @@ export class QuietCarousel extends QuietElement {
    * Handle keyboard navigation for the pagination dots
    */
   private handleDotKeyDown(event: KeyboardEvent, index: number) {
-    // Get all dot elements
+    const isRtl = this.localize.dir() === 'rtl';
+    const prevKey = isRtl ? 'ArrowRight' : 'ArrowLeft';
+    const nextKey = isRtl ? 'ArrowLeft' : 'ArrowRight';
     const dots = this.shadowRoot.querySelectorAll('.dot');
     if (!dots.length) return;
 
     let nextIndex = index;
 
     switch (event.key) {
-      case 'ArrowLeft':
+      case prevKey:
         nextIndex = Math.max(0, index - 1);
         event.preventDefault();
         break;
-      case 'ArrowRight':
+      case nextKey:
         nextIndex = Math.min(this.itemCount - 1, index + 1);
         event.preventDefault();
         break;

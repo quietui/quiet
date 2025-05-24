@@ -92,81 +92,6 @@ export class QuietCarousel extends QuietElement {
     });
   }
 
-  @eventOptions({ passive: true })
-  private handleScroll() {
-    if (!this.items) return;
-
-    // Cache dimensions if not already cached
-    if (!this.itemDimensionsCache) {
-      this.cacheItemDimensions();
-    }
-
-    if (!this.itemDimensionsCache || this.itemDimensionsCache.length === 0) return;
-
-    const scrollLeft = this.items.scrollLeft;
-    const viewportCenter = scrollLeft + this.items.clientWidth / 2;
-
-    // Find which item's center is closest to the viewport center
-    let minDistance = Infinity;
-    let newIndex = this.index;
-
-    this.itemDimensionsCache.forEach((item, i) => {
-      const itemCenter = item.left + item.width / 2;
-      const distance = Math.abs(viewportCenter - itemCenter);
-
-      if (distance < minDistance) {
-        minDistance = distance;
-        newIndex = i;
-      }
-    });
-
-    if (newIndex !== this.index && newIndex >= 0 && newIndex < this.itemCount) {
-      this.index = newIndex;
-      this.dispatchEvent(new CustomEvent('quiet-item-change', { detail: { index: this.index } }));
-    }
-  }
-
-  /**
-   * Scroll to a specific item index without updating the active dot directly
-   */
-  private scrollToIndex(index: number) {
-    if (!this.items) return;
-
-    // Ensure index is within bounds
-    const boundedIndex = Math.max(0, Math.min(index, this.itemCount - 1));
-
-    const items = this.getItems();
-    if (items.length <= boundedIndex) return;
-
-    const targetItem = items[boundedIndex];
-    const containerWidth = this.items.clientWidth;
-    const itemWidth = targetItem.offsetWidth;
-    const itemLeft = targetItem.offsetLeft - this.items.offsetLeft;
-
-    // Calculate scroll position to center the item in the viewport
-    // This ensures the target item will be detected as the active one
-    const scrollPosition = itemLeft - (containerWidth - itemWidth) / 2;
-
-    this.items.scrollTo({
-      left: scrollPosition,
-      behavior: 'smooth'
-    });
-  }
-
-  /**
-   * Navigate to the previous item
-   */
-  private handlePrevious() {
-    this.scrollToIndex(this.index - 1);
-  }
-
-  /**
-   * Navigate to the next item
-   */
-  private handleNext() {
-    this.scrollToIndex(this.index + 1);
-  }
-
   /**
    * Navigate to the selected dot's index
    */
@@ -217,12 +142,102 @@ export class QuietCarousel extends QuietElement {
     }
   }
 
+  /**
+   * Navigate to the next item
+   */
+  private handleNext() {
+    this.scrollToIndex(this.index + 1);
+  }
+
+  /**
+   * Navigate to the previous item
+   */
+  private handlePrevious() {
+    this.scrollToIndex(this.index - 1);
+  }
+
+  @eventOptions({ passive: true })
+  private handleScroll() {
+    if (!this.items) return;
+
+    // Cache dimensions if not already cached
+    if (!this.itemDimensionsCache) {
+      this.cacheItemDimensions();
+    }
+
+    if (!this.itemDimensionsCache || this.itemDimensionsCache.length === 0) return;
+
+    const scrollLeft = this.items.scrollLeft;
+    const viewportCenter = scrollLeft + this.items.clientWidth / 2;
+
+    // Find which item's center is closest to the viewport center
+    let minDistance = Infinity;
+    let newIndex = this.index;
+
+    this.itemDimensionsCache.forEach((item, i) => {
+      const itemCenter = item.left + item.width / 2;
+      const distance = Math.abs(viewportCenter - itemCenter);
+
+      if (distance < minDistance) {
+        minDistance = distance;
+        newIndex = i;
+      }
+    });
+
+    if (newIndex !== this.index && newIndex >= 0 && newIndex < this.itemCount) {
+      this.index = newIndex;
+      this.dispatchEvent(new CustomEvent('quiet-item-change', { detail: { index: this.index } }));
+    }
+  }
+
+  @eventOptions({ passive: true })
+  private handleWheel() {
+    // Blur any focused dot when user scrolls with mouse wheel to ensure the dots are accurate when scrolling after
+    // using the keyboard or clicking them directly
+    const focusedDot = this.shadowRoot?.querySelector<HTMLButtonElement>('.dot:focus');
+    focusedDot?.blur();
+  }
+
+  /**
+   * Scroll to a specific item index without updating the active dot directly
+   */
+  private scrollToIndex(index: number) {
+    if (!this.items) return;
+
+    // Ensure index is within bounds
+    const boundedIndex = Math.max(0, Math.min(index, this.itemCount - 1));
+
+    const items = this.getItems();
+    if (items.length <= boundedIndex) return;
+
+    const targetItem = items[boundedIndex];
+    const containerWidth = this.items.clientWidth;
+    const itemWidth = targetItem.offsetWidth;
+    const itemLeft = targetItem.offsetLeft - this.items.offsetLeft;
+
+    // Calculate scroll position to center the item in the viewport
+    // This ensures the target item will be detected as the active one
+    const scrollPosition = itemLeft - (containerWidth - itemWidth) / 2;
+
+    this.items.scrollTo({
+      left: scrollPosition,
+      behavior: 'smooth'
+    });
+  }
+
   render() {
     const hasNav = this.withNav || this.withDots;
     const isRtl = this.localize.dir() === 'rtl';
 
     return html`
-      <div id="items" part="items" aria-live="polite" tabindex="0" @scroll=${this.handleScroll}>
+      <div
+        id="items"
+        part="items"
+        aria-live="polite"
+        tabindex="0"
+        @scroll=${this.handleScroll}
+        @wheel=${this.handleWheel}
+      >
         <slot @slotchange=${this.handleSlotChange}></slot>
       </div>
 

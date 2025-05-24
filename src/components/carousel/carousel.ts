@@ -135,8 +135,6 @@ export class QuietCarousel extends QuietElement {
     const dots = this.shadowRoot.querySelectorAll('.dot');
     if (!dots.length) return;
 
-    console.log(event.key);
-
     let nextIndex = index;
 
     switch (event.key) {

@@ -53,11 +53,11 @@ export class QuietCarousel extends QuietElement {
   /** The current active item index. */
   @property({ attribute: 'active-index', type: Number, reflect: true }) activeIndex = 0;
 
-  /** Shows navigation buttons when present. */
-  @property({ type: Boolean, attribute: 'with-nav', reflect: true }) withNav = false;
+  /** Hides navigation buttons. */
+  @property({ type: Boolean, attribute: 'without-nav', reflect: true }) withoutNav = false;
 
-  /** Shows pagination dots when present. */
-  @property({ type: Boolean, attribute: 'with-dots', reflect: true }) withDots = false;
+  /** Hides pagination dots. */
+  @property({ type: Boolean, attribute: 'without-dots', reflect: true }) withoutDots = false;
 
   firstUpdated() {
     this.setAttribute('role', 'region');
@@ -261,7 +261,7 @@ export class QuietCarousel extends QuietElement {
   }
 
   render() {
-    const hasNav = this.withNav || this.withDots;
+    const hasNav = !this.withoutNav || !this.withoutDots;
     const isRtl = this.localize.dir() === 'rtl';
 
     return html`
@@ -280,35 +280,32 @@ export class QuietCarousel extends QuietElement {
       ${hasNav
         ? html`
             <div id="nav" part="nav">
-              ${this.withNav
+              ${!this.withoutNav
                 ? html`
                     <button
                       id="previous-button"
                       part="nav-button nav-button-previous"
                       aria-label=${this.localize.term('previous')}
                       ?disabled=${this.activeIndex === 0}
-                      tabindex=${this.withDots ? -1 : 0}
+                      tabindex=${this.withoutDots ? 0 : -1}
                       @click=${this.previousItem}
                     >
                       <quiet-icon name=${isRtl ? 'chevron-right' : 'chevron-left'}></quiet-icon>
                     </button>
-                  `
-                : ''}
-              ${this.withNav
-                ? html`
+
                     <button
                       id="next-button"
                       part="nav-button nav-button-next"
                       aria-label=${this.localize.term('next')}
                       ?disabled=${this.activeIndex === this.itemCount - 1}
-                      tabindex=${this.withDots ? -1 : 0}
+                      tabindex=${this.withoutDots ? 0 : -1}
                       @click=${this.nextItem}
                     >
                       <quiet-icon name=${isRtl ? 'chevron-left' : 'chevron-right'}></quiet-icon>
                     </button>
                   `
                 : ''}
-              ${this.withDots
+              ${!this.withoutDots
                 ? html`
                     <div id="pagination" part="pagination" role="tablist" aria-label="Choose slide to display">
                       ${Array.from({ length: this.itemCount }, (_, i) => {

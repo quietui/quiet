@@ -39,25 +39,26 @@ export default css`
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     min-height: 2.5em;
     margin-block-start: 1rem;
   }
 
+  #previous-button {
+    order: 1;
+  }
+  #next-button {
+    order: 3;
+  }
+  #pagination {
+    order: 2;
+  }
+
   /* When navigation buttons AND pagination are present */
-  :host([with-nav]:not([with-dots])),
-  :host([with-dots][with-nav]) {
+  :host([without-nav]:not([without-dots])),
+  :host([without-nav][without-dots]) {
     #nav {
-      justify-content: space-between;
-    }
-    #previous-button {
-      order: 1;
-    }
-    #next-button {
-      order: 3;
-    }
-    #pagination {
-      order: 2;
+      justify-content: center;
     }
   }
 

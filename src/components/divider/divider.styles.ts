@@ -17,6 +17,7 @@ export default css`
   :host([aria-orientation='vertical']) {
     flex-direction: column;
     height: 100%;
+    min-block-size: 1lh;
     margin-inline: var(--spacing);
   }
 

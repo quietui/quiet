@@ -32,7 +32,7 @@ Add a decorative symbol or icon in the middle of the divider with the `symbol` s
 Set the `orientation` attribute to `vertical` for a vertical orientation. This is best used inside of flex containers.
 
 ```html {.example}
-<div style="display: flex; align-items: center; height: 2rem;">
+<div style="display: flex; align-items: center;">
   <span>First</span>
   <quiet-divider orientation="vertical"></quiet-divider>
   <span>Second</span>

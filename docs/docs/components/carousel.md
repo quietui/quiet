@@ -34,6 +34,7 @@ layout: component
 
 TODO
 
+```html {.example}
 <quiet-carousel active-index="2">
   <quiet-carousel-item>Slide 1</quiet-carousel-item>
   <quiet-carousel-item>Slide 2</quiet-carousel-item>
@@ -41,7 +42,7 @@ TODO
   <quiet-carousel-item>Slide 4</quiet-carousel-item>
   <quiet-carousel-item>Slide 5</quiet-carousel-item>
 </quiet-carousel>
-
+```
 
 ### Without navigation
 

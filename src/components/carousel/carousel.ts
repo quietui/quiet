@@ -28,7 +28,7 @@ import styles from './carousel.styles.js';
  * @csspart pagination - The container for the pagination dots.
  * @csspart pagination-dot - Each individual pagination dot.
  *
- * @event quiet-item-change - Emitted when the active item changes through user interaction.
+ * @event quiet-item-change - Emitted when the active item changes and the slide has been fully scrolled into view.
  *
  * @cssproperty [--item-height=20em] - The height of items in the carousel.
  * @cssproperty [--item-gap=2rem] - The gap between items in the carousel.
@@ -43,14 +43,15 @@ export class QuietCarousel extends QuietElement {
 
   private itemDimensionsCache: Array<{ left: number; width: number }> | null = null;
   private localize = new Localize(this);
-  private skipScrollOnNextActiveChange = false;
+  private isUserInitiated = false;
+  private pendingEventDispatch = false;
 
   @query('#items') items: HTMLElement;
 
   @state() isScrolling = false;
   @state() itemCount = 0;
 
-  /** A custom label for the carousel. This won't be shown, but it will be read to assistive devices. */
+  /** A custom label for the carousel. This won't be visible, but it will be read to assistive devices. */
   @property({ type: String }) label = '';
 
   /** The current active item index. */
@@ -70,14 +71,15 @@ export class QuietCarousel extends QuietElement {
     // Schedule initial scroll after carousel items are rendered
     requestAnimationFrame(() => {
       if (this.activeIndex !== 0) {
-        this.scrollToIndex(this.activeIndex, 'instant');
+        this.setActiveItem(this.activeIndex, 'instant');
       }
     });
   }
 
   updated(changedProperties: PropertyValues<this>) {
-    if (changedProperties.has('activeIndex') && !this.skipScrollOnNextActiveChange) {
-      this.scrollToIndex(this.activeIndex);
+    if (changedProperties.has('activeIndex') && !this.isUserInitiated) {
+      // Programmatic changes scroll instantly without animation
+      this.setActiveItem(this.activeIndex, 'instant');
     }
 
     if (changedProperties.has('label')) {
@@ -124,7 +126,8 @@ export class QuietCarousel extends QuietElement {
    * Navigate to the selected dot's index
    */
   private handleDotClick(dot: HTMLButtonElement, index: number) {
-    this.scrollToIndex(index);
+    this.isUserInitiated = true;
+    this.setActiveItem(index);
     dot.focus();
   }
 
@@ -163,7 +166,8 @@ export class QuietCarousel extends QuietElement {
 
     if (nextIndex !== index) {
       // Scroll to the new index
-      this.scrollToIndex(nextIndex);
+      this.isUserInitiated = true;
+      this.setActiveItem(nextIndex);
 
       // Focus the new dot
       (dots[nextIndex] as HTMLElement).focus();
@@ -201,29 +205,39 @@ export class QuietCarousel extends QuietElement {
 
     // Detect when the item has changed
     if (newIndex !== this.activeIndex && newIndex >= 0 && newIndex < this.itemCount) {
-      this.skipScrollOnNextActiveChange = true; // prevent the update function from scrolling for this update
       this.activeIndex = newIndex;
-      requestAnimationFrame(() => (this.skipScrollOnNextActiveChange = false));
-      this.dispatchEvent(new QuietItemChangeEvent({ index: this.activeIndex }));
+      if (this.isUserInitiated) {
+        this.pendingEventDispatch = true;
+      }
     }
   }
 
   private handleScrollEnd() {
     this.isScrolling = false;
+
+    // Dispatch event only if this was a user-initiated scroll
+    if (this.pendingEventDispatch && this.isUserInitiated) {
+      this.dispatchEvent(new QuietItemChangeEvent({ index: this.activeIndex }));
+      this.pendingEventDispatch = false;
+    }
+
+    // Reset the flag after scroll ends
+    this.isUserInitiated = false;
   }
 
   @eventOptions({ passive: true })
   private handleWheel() {
+    // Mark as user-initiated when scrolling with mouse wheel
+    this.isUserInitiated = true;
+
     // Blur any focused dot when user scrolls with mouse wheel to ensure the dots are accurate when scrolling after
     // using the keyboard or clicking them directly
     const focusedDot = this.shadowRoot?.querySelector<HTMLButtonElement>('.pagination-dot:focus');
     focusedDot?.blur();
   }
 
-  /**
-   * Scroll to a specific item index without updating the active dot directly
-   */
-  private scrollToIndex(index: number, behavior: ScrollBehavior = 'smooth') {
+  /** Set's the active item and scrolls to it */
+  private setActiveItem(index: number, behavior: ScrollBehavior = 'smooth') {
     if (!this.items) return;
 
     // Ensure index is within bounds
@@ -237,8 +251,8 @@ export class QuietCarousel extends QuietElement {
     const itemWidth = targetItem.offsetWidth;
     const itemLeft = targetItem.offsetLeft - this.items.offsetLeft;
 
-    // Calculate scroll position to center the item in the viewport
-    // This ensures the target item will be detected as the active one
+    // Calculate scroll position to center the item in the viewport, ensuring the target item will be detected as the
+    // active one
     const scrollPosition = itemLeft - (containerWidth - itemWidth) / 2;
 
     this.items.scrollTo({
@@ -247,18 +261,22 @@ export class QuietCarousel extends QuietElement {
     });
   }
 
-  /**
-   * Navigate to the next item
-   */
-  public nextItem() {
-    this.scrollToIndex(this.activeIndex + 1);
+  /** Navigate to the specified item. Calling this */
+  public scrollToIndex(index: number, scrollBehavior: ScrollBehavior = 'smooth') {
+    this.isUserInitiated = true;
+    this.setActiveItem(index, scrollBehavior);
   }
 
-  /**
-   * Navigate to the previous item
-   */
-  public previousItem() {
-    this.scrollToIndex(this.activeIndex - 1);
+  /** Navigate to the next item */
+  public scrollToNext(scrollBehavior: ScrollBehavior = 'smooth') {
+    this.isUserInitiated = true;
+    this.setActiveItem(this.activeIndex + 1, scrollBehavior);
+  }
+
+  /** Navigate to the previous item */
+  public scrollToPrevious(scrollBehavior: ScrollBehavior = 'smooth') {
+    this.isUserInitiated = true;
+    this.setActiveItem(this.activeIndex - 1, scrollBehavior);
   }
 
   render() {
@@ -289,7 +307,7 @@ export class QuietCarousel extends QuietElement {
                       aria-label=${this.localize.term('previous')}
                       ?disabled=${this.activeIndex === 0}
                       tabindex=${this.withoutPagination ? 0 : -1}
-                      @click=${this.previousItem}
+                      @click=${this.scrollToPrevious}
                     >
                       <quiet-icon name=${isRtl ? 'chevron-right' : 'chevron-left'}></quiet-icon>
                     </button>
@@ -300,7 +318,7 @@ export class QuietCarousel extends QuietElement {
                       aria-label=${this.localize.term('next')}
                       ?disabled=${this.activeIndex === this.itemCount - 1}
                       tabindex=${this.withoutPagination ? 0 : -1}
-                      @click=${this.nextItem}
+                      @click=${this.scrollToNext}
                     >
                       <quiet-icon name=${isRtl ? 'chevron-left' : 'chevron-right'}></quiet-icon>
                     </button>

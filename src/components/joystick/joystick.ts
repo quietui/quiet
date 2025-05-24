@@ -50,7 +50,7 @@ export class QuietJoystick extends QuietElement {
   @query('#thumb') thumbEl: HTMLDivElement;
 
   /**
-   * An accessible label for the joystick. This won't be shown, but it will be read to assistive devices so you should
+   * An accessible label for the joystick. This won't be visible, but it will be read to assistive devices so you should
    * always include one.
    */
   @property() label = '';

@@ -27,7 +27,7 @@ This component is a primitive for enabling color selection. It is not a form con
 
 ### Labels
 
-Use the `label` attribute to provide an accessible label for the color picker. This won't be shown, but it will be read to assistive devices.
+Use the `label` attribute to provide an accessible label for the color picker. This won't be visible, but it will be read to assistive devices.
 
 ```html {.example}
 <quiet-color-picker label="Select a color"></quiet-color-picker>

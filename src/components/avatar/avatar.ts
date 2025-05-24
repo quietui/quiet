@@ -28,7 +28,7 @@ export class QuietAvatar extends QuietElement {
   @state() hasImageLoaded = false;
 
   /**
-   * An accessible label for the avatar. This won't be shown, but it will be read to assistive devices so you should
+   * An accessible label for the avatar. This won't be visible, but it will be read to assistive devices so you should
    * always include one.
    */
   @property() label?: string;

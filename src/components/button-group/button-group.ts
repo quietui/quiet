@@ -21,7 +21,7 @@ export class QuietButtonGroup extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
   /**
-   * An accessible label for the tab list. This won't be shown, but it will be read to assistive devices so it's
+   * An accessible label for the tab list. This won't be visible, but it will be read to assistive devices so it's
    * usually a good idea to include one.
    */
   @property() label = '';

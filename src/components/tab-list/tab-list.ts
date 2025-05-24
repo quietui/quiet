@@ -54,7 +54,7 @@ export class QuietTabList extends QuietElement {
   @query('#panels > slot') private panelSlot: HTMLSlotElement;
 
   /**
-   * An accessible label for the tab list. This won't be shown, but it will be read to assistive devices so you should
+   * An accessible label for the tab list. This won't be visible, but it will be read to assistive devices so you should
    * always include one.
    */
   @property() label: string;

@@ -101,7 +101,7 @@ export class QuietColorPicker extends QuietElement {
   @state() hadUserInteraction = false;
 
   /**
-   * The color picker's label. This won't be shown, but it will be read to assistive devices so you should always
+   * The color picker's label. This won't be visible, but it will be read to assistive devices so you should always
    * include one.
    */
   @property() label: string;

@@ -56,7 +56,7 @@ export class QuietCountdown extends QuietElement {
   }
 
   /**
-   * An accessible label for the countdown. This won't be shown, but it will be read to assistive devices so you should
+   * An accessible label for the countdown. This won't be visible, but it will be read to assistive devices so you should
    * always include one.
    */
   @property() label = '';

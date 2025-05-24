@@ -83,7 +83,7 @@ export class QuietCarousel extends QuietElement {
 
   updated(changedProperties: PropertyValues<this>) {
     if (changedProperties.has('activeIndex') && !this.isUserInitiated) {
-      // Programmatic changes scroll instantly without animation
+      // Programmatic changes scroll instantly without an animation
       this.setActiveItem(this.activeIndex, 'instant');
     }
 
@@ -96,7 +96,7 @@ export class QuietCarousel extends QuietElement {
     }
   }
 
-  /** Get the items from the default slot. */
+  /** Get the items from the default slot */
   private getItems(): HTMLElement[] {
     const slot = this.shadowRoot!.querySelector('slot') as HTMLSlotElement;
     return slot

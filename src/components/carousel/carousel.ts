@@ -2,6 +2,7 @@ import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, eventOptions, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
+import { QuietItemChangeEvent } from '../../events/item.js';
 import { Localize } from '../../utilities/localize.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import { scrollEndPolyfill } from '../../utilities/scroll.js';
@@ -201,7 +202,7 @@ export class QuietCarousel extends QuietElement {
       this.ignoreIndexChange = true;
       this.activeIndex = newIndex;
       requestAnimationFrame(() => (this.ignoreIndexChange = false));
-      this.dispatchEvent(new CustomEvent('quiet-item-change', { detail: { index: this.activeIndex } }));
+      this.dispatchEvent(new QuietItemChangeEvent({ index: this.activeIndex }));
     }
   }
 

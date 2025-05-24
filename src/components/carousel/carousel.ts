@@ -30,7 +30,10 @@ import styles from './carousel.styles.js';
  *
  * @event quiet-item-change - Emitted when the active item changes through user interaction.
  *
- * @cssproperty --item-height - The height of items in the carousel.
+ * @cssproperty [--item-height=20em] - The height of items in the carousel.
+ * @cssproperty [--item-gap=2rem] - The gap between items in the carousel.
+ * @cssproperty [--dot-size=0.875em] - The size of each pagination dot.
+ * @cssproperty [--dot-gap=0.5em] - The size of the gap between pagination dots.
  *
  * @cssstate scrolling - Applied when the carousel is scrolling.
  */

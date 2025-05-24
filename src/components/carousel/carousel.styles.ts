@@ -2,7 +2,7 @@ import { css } from 'lit';
 
 export default css`
   :host {
-    --item-height: 20rem;
+    --item-height: 20em;
     --item-gap: 2em;
     --dot-size: 0.875em;
     --dot-gap: 0.5em;

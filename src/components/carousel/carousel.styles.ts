@@ -22,6 +22,7 @@ export default css`
     -webkit-overflow-scrolling: touch;
     border-radius: var(--quiet-border-radius);
     background-color: transparent;
+    scrollbar-width: none;
 
     &:focus-visible {
       outline: var(--quiet-focus-ring);
@@ -48,8 +49,8 @@ export default css`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 2em;
-    height: 2em;
+    width: 2.5em;
+    height: 2.5em;
     margin: 0;
     padding: 0;
     border: none;
@@ -83,12 +84,14 @@ export default css`
   }
 
   .dot {
-    width: 1em;
-    height: 1em;
+    width: 0.875em;
+    height: 0.875em;
+    margin: 0;
     padding: 0;
     border: none;
     border-radius: 50%;
     background-color: var(--quiet-neutral-fill-soft);
+    font: inherit;
     cursor: pointer;
     transition: all var(--carousel-transition-duration) ease;
 

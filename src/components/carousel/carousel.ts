@@ -62,6 +62,13 @@ export class QuietCarousel extends QuietElement {
     this.setAttribute('role', 'region');
     this.setAttribute('aria-roledescription', 'carousel');
     scrollEndPolyfill(this.items);
+
+    // Schedule initial scroll after carousel items are rendered
+    requestAnimationFrame(() => {
+      if (this.activeIndex !== 0) {
+        this.scrollToIndex(this.activeIndex, 'instant');
+      }
+    });
   }
 
   updated(changedProperties: PropertyValues<this>) {

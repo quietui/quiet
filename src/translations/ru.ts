@@ -8,6 +8,7 @@ const translation: Translation = {
   $dir: 'ltr',
 
   breadcrumbs: 'Панировочные сухари',
+  carousel: 'Карусель',
   clearEntry: 'Очистить запись',
   close: 'Закрыть',
   collapse: 'Свернуть',

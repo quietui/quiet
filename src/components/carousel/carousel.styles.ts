@@ -36,12 +36,29 @@ export default css`
 
   /* Previous + next */
   #nav {
-    display: grid;
-    grid-template-columns: auto auto 1fr;
+    display: flex;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
+    min-height: 2.5em;
     margin-block-start: 1rem;
-    gap: 0.5em;
+  }
+
+  /* When navigation buttons AND pagination are present */
+  :host([with-nav]:not([with-dots])),
+  :host([with-dots][with-nav]) {
+    #nav {
+      justify-content: space-between;
+    }
+    #previous-button {
+      order: 1;
+    }
+    #next-button {
+      order: 3;
+    }
+    #pagination {
+      order: 2;
+    }
   }
 
   #previous-button,

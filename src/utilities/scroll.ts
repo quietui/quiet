@@ -36,3 +36,14 @@ export function unlockScrolling(el: Element) {
     }
   }
 }
+
+/** A tiny polyfill for scrollend. Only applies to the target element, not the entire DOM. */
+export function scrollEndPolyfill(element: Element) {
+  if ('onscrollend' in element) return;
+
+  let timer: ReturnType<typeof setTimeout>;
+  element.addEventListener('scroll', () => {
+    clearTimeout(timer);
+    timer = setTimeout(() => element.dispatchEvent(new Event('scrollend')), 100);
+  });
+}

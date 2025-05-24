@@ -16,6 +16,7 @@ export interface Translation extends DefaultTranslation {
 
   // Translated terms
   breadcrumbs: string;
+  carousel: string;
   clearEntry: string;
   close: string;
   collapse: string;

@@ -8,6 +8,7 @@ const translation: Translation = {
   $dir: 'ltr',
 
   breadcrumbs: 'Brotkrumens',
+  carousel: 'Karussell',
   clearEntry: 'Eingabe löschen',
   close: 'Schließen',
   collapse: 'Einklappen',

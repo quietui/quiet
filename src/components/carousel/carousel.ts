@@ -4,6 +4,7 @@ import { customElement, eventOptions, property, query, state } from 'lit/decorat
 import { classMap } from 'lit/directives/class-map.js';
 import { Localize } from '../../utilities/localize.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
+import { scrollEndPolyfill } from '../../utilities/scroll.js';
 import styles from './carousel.styles.js';
 
 /**
@@ -26,18 +27,21 @@ import styles from './carousel.styles.js';
  * @event quiet-item-change - Emitted when the active item changes through user interaction.
  *
  * @cssproperty --height - The height of the carousel.
+ *
+ * @cssstate scrolling - Applied when the carousel is scrolling.
  */
 @customElement('quiet-carousel')
 export class QuietCarousel extends QuietElement {
   static styles: CSSResultGroup = styles;
 
+  private ignoreIndexChange = false;
   private itemDimensionsCache: Array<{ left: number; width: number }> | null = null;
-  private isScrolling = false;
   private localize = new Localize(this);
 
   @query('#items') items: HTMLElement;
 
-  @state() private itemCount = 0;
+  @state() isScrolling = false;
+  @state() itemCount = 0;
 
   /** A custom label for the carousel. This won't be shown, but it will be read to assistive devices. */
   @property({ type: String }) label = '';
@@ -54,16 +58,20 @@ export class QuietCarousel extends QuietElement {
   firstUpdated() {
     this.setAttribute('role', 'region');
     this.setAttribute('aria-roledescription', 'carousel');
+    scrollEndPolyfill(this.items);
   }
 
   updated(changedProperties: PropertyValues<this>) {
-    if (changedProperties.has('label')) {
-      this.setAttribute('aria-label', this.label || 'Carousel'); // TODO - localize
+    if (changedProperties.has('activeIndex') && !this.ignoreIndexChange) {
+      this.scrollToIndex(this.activeIndex);
     }
 
-    // When index changes programmatically, scroll to that item
-    if (changedProperties.has('activeIndex') && !this.isScrolling) {
-      this.scrollToIndex(this.activeIndex);
+    if (changedProperties.has('label')) {
+      this.setAttribute('aria-label', this.label || this.localize.term('carousel'));
+    }
+
+    if (changedProperties.has('isScrolling')) {
+      this.customStates.set('scrolling', this.isScrolling);
     }
   }
 
@@ -116,6 +124,8 @@ export class QuietCarousel extends QuietElement {
     const dots = this.shadowRoot.querySelectorAll('.dot');
     if (!dots.length) return;
 
+    console.log(event.key);
+
     let nextIndex = index;
 
     switch (event.key) {
@@ -166,22 +176,27 @@ export class QuietCarousel extends QuietElement {
     let minDistance = Infinity;
     let newIndex = this.activeIndex;
 
-    this.itemDimensionsCache.forEach((item, i) => {
+    this.isScrolling = true;
+    this.itemDimensionsCache.forEach((item, index) => {
       const itemCenter = item.left + item.width / 2;
       const distance = Math.abs(viewportCenter - itemCenter);
 
       if (distance < minDistance) {
         minDistance = distance;
-        newIndex = i;
+        newIndex = index;
       }
     });
 
     if (newIndex !== this.activeIndex && newIndex >= 0 && newIndex < this.itemCount) {
-      this.isScrolling = true;
+      this.ignoreIndexChange = true;
       this.activeIndex = newIndex;
-      requestAnimationFrame(() => (this.isScrolling = false));
+      requestAnimationFrame(() => (this.ignoreIndexChange = false));
       this.dispatchEvent(new CustomEvent('quiet-item-change', { detail: { index: this.activeIndex } }));
     }
+  }
+
+  private handleScrollEnd() {
+    this.isScrolling = false;
   }
 
   @eventOptions({ passive: true })
@@ -242,8 +257,9 @@ export class QuietCarousel extends QuietElement {
         id="items"
         part="items"
         aria-live="polite"
-        tabindex="0"
+        tabindex="-1"
         @scroll=${this.handleScroll}
+        @scrollend=${this.handleScrollEnd}
         @wheel=${this.handleWheel}
       >
         <slot @slotchange=${this.handleSlotChange}></slot>
@@ -259,15 +275,21 @@ export class QuietCarousel extends QuietElement {
                       part="nav-button nav-button-previous"
                       aria-label=${this.localize.term('previous')}
                       ?disabled=${this.activeIndex === 0}
+                      tabindex=${this.withDots ? -1 : 0}
                       @click=${this.previousItem}
                     >
                       <quiet-icon name=${isRtl ? 'chevron-right' : 'chevron-left'}></quiet-icon>
                     </button>
+                  `
+                : ''}
+              ${this.withNav
+                ? html`
                     <button
                       id="next-button"
                       part="nav-button nav-button-next"
                       aria-label=${this.localize.term('next')}
                       ?disabled=${this.activeIndex === this.itemCount - 1}
+                      tabindex=${this.withDots ? -1 : 0}
                       @click=${this.nextItem}
                     >
                       <quiet-icon name=${isRtl ? 'chevron-left' : 'chevron-right'}></quiet-icon>

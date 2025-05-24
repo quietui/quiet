@@ -50,3 +50,7 @@ TODO
   <quiet-carousel-item style="max-width: 450px;">Slide 5</quiet-carousel-item>
 </quiet-carousel>
 ```
+
+### Styling carousels
+
+TODO - example with nav buttons and dots overlaying the images

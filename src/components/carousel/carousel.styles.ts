@@ -39,8 +39,8 @@ export default css`
     display: none;
   }
 
-  /* Previous + next */
-  #nav {
+  /* Controls */
+  #controls {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -51,11 +51,12 @@ export default css`
   /* When navigation buttons AND pagination are present */
   :host([without-nav]:not([without-pagination])),
   :host([without-nav][without-pagination]) {
-    #nav {
+    #controls {
       justify-content: center;
     }
   }
 
+  /* Previous + next */
   #previous-button,
   #next-button {
     display: flex;

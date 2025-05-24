@@ -7,6 +7,7 @@ import { Localize } from '../../utilities/localize.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import { scrollEndPolyfill } from '../../utilities/scroll.js';
 import '../carousel-item/carousel-item.js';
+import '../icon/icon.js';
 import styles from './carousel.styles.js';
 
 /**
@@ -18,20 +19,21 @@ import styles from './carousel.styles.js';
  * @since 1.0
  *
  * @dependency quiet-carousel-item
+ * @dependency quiet-quiet-icon
  *
  * @slot - The default slot for carousel items.
  *
  * @csspart items - The scrollable container that holds the carousel items.
- * @csspart nav-button - The previous and next buttons.
- * @csspart nav-button-previous - The previous button.
- * @csspart nav-button-next - The next button.
+ * @csspart controls - The container that surrounds nav buttons and pagination.
+ * @csspart previous-button - The previous button.
+ * @csspart next-button - The next button.
  * @csspart pagination - The container for the pagination dots.
  * @csspart pagination-dot - Each individual pagination dot.
  * @csspart pagination-dot-active - The active pagination dot.
  *
  * @event quiet-item-change - Emitted when the active item changes and the slide has been fully scrolled into view.
  *
- * @cssproperty [--item-height=20em] - The height of items in the carousel.
+ * @cssproperty [--item-height=20em] - The height of items container in the carousel.
  * @cssproperty [--item-gap=2rem] - The gap between items in the carousel.
  * @cssproperty [--dot-size=0.875em] - The size of each pagination dot.
  * @cssproperty [--dot-gap=0.5em] - The size of the gap between pagination dots.
@@ -239,7 +241,7 @@ export class QuietCarousel extends QuietElement {
     focusedDot?.blur();
   }
 
-  /** Set's the active item and scrolls to it */
+  /** Sets the active item and scrolls to it */
   private setActiveItem(index: number, behavior: ScrollBehavior = 'smooth') {
     if (!this.items) return;
 
@@ -264,7 +266,7 @@ export class QuietCarousel extends QuietElement {
     });
   }
 
-  /** Navigate to the specified item. Calling this */
+  /** Navigate to the specified item. */
   public scrollToIndex(index: number, scrollBehavior: ScrollBehavior = 'smooth') {
     this.isUserInitiated = true;
     this.setActiveItem(index, scrollBehavior);
@@ -283,7 +285,7 @@ export class QuietCarousel extends QuietElement {
   }
 
   render() {
-    const hasNav = !this.withoutNav || !this.withoutPagination;
+    const hasControls = !this.withoutNav || !this.withoutPagination;
     const isRtl = this.localize.dir() === 'rtl';
 
     return html`
@@ -299,31 +301,31 @@ export class QuietCarousel extends QuietElement {
         <slot @slotchange=${this.handleSlotChange}></slot>
       </div>
 
-      ${hasNav
+      ${hasControls
         ? html`
-            <div id="nav" part="nav">
+            <div id="controls" part="controls">
               ${!this.withoutNav
                 ? html`
                     <button
                       id="previous-button"
-                      part="nav-button nav-button-previous"
+                      part="previous-button"
                       aria-label=${this.localize.term('previous')}
                       ?disabled=${this.activeIndex === 0}
                       tabindex=${this.withoutPagination ? 0 : -1}
                       @click=${() => this.scrollToPrevious()}
                     >
-                      <quiet-icon name=${isRtl ? 'chevron-right' : 'chevron-left'}></quiet-icon>
+                      <quiet-icon library="system" name=${isRtl ? 'chevron-right' : 'chevron-left'}></quiet-icon>
                     </button>
 
                     <button
                       id="next-button"
-                      part="nav-button nav-button-next"
+                      part="next-button"
                       aria-label=${this.localize.term('next')}
                       ?disabled=${this.activeIndex === this.itemCount - 1}
                       tabindex=${this.withoutPagination ? 0 : -1}
                       @click=${() => this.scrollToNext()}
                     >
-                      <quiet-icon name=${isRtl ? 'chevron-left' : 'chevron-right'}></quiet-icon>
+                      <quiet-icon library="system" name=${isRtl ? 'chevron-left' : 'chevron-right'}></quiet-icon>
                     </button>
                   `
                 : ''}

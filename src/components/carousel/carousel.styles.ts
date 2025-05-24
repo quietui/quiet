@@ -3,6 +3,9 @@ import { css } from 'lit';
 export default css`
   :host {
     --item-height: 20rem;
+    --item-gap: 2em;
+    --dot-size: 0.875em;
+    --dot-gap: 0.5em;
 
     display: block;
     position: relative;
@@ -16,7 +19,7 @@ export default css`
     width: 100%;
     height: var(--item-height);
     overflow-x: scroll;
-    gap: 2em;
+    gap: var(--item-gap);
     scroll-behavior: smooth;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
@@ -40,18 +43,7 @@ export default css`
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    min-height: 2.5em;
     margin-block-start: 1rem;
-  }
-
-  #previous-button {
-    order: 1;
-  }
-  #next-button {
-    order: 3;
-  }
-  #pagination {
-    order: 2;
   }
 
   /* When navigation buttons AND pagination are present */
@@ -93,17 +85,27 @@ export default css`
     }
   }
 
+  #previous-button {
+    order: 1;
+  }
+
+  #next-button {
+    order: 3;
+  }
+
   /* Pagination */
   #pagination {
     display: flex;
     align-items: center;
     justify-content: end;
-    gap: 0.5em;
+    order: 2;
+    gap: var(--dot-gap);
   }
 
-  .dot {
-    width: 0.875em;
-    height: 0.875em;
+  .pagination-dot {
+    position: relative;
+    width: var(--dot-size);
+    height: var(--dot-size);
     margin: 0;
     padding: 0;
     border: none;
@@ -116,22 +118,29 @@ export default css`
     &.active {
       background-color: var(--quiet-neutral-fill-loud);
     }
+
+    /* Cover the gap to increase the hit area of each dot */
+    &::after {
+      position: absolute;
+      inset: calc(var(--dot-gap) / -2);
+      content: '';
+    }
   }
 
   /* Focus states for dots */
-  .dot:focus-visible {
+  .pagination-dot:focus-visible {
     outline: var(--quiet-focus-ring);
     outline-offset: var(--quiet-focus-offset);
     background-color: var(--quiet-neutral-fill-loud);
   }
 
   /* When any dot has focus, active dots look inactive */
-  #pagination:has(.dot:focus) .dot.active:not(:focus) {
+  #pagination:has(.pagination-dot:focus) .pagination-dot.active:not(:focus) {
     background-color: var(--quiet-neutral-fill-soft);
   }
 
   /* The specific dot that has focus gets the active color */
-  #pagination:has(.dot:focus) .dot:focus {
+  #pagination:has(.pagination-dot:focus) .pagination-dot:focus {
     background-color: var(--quiet-neutral-fill-loud);
   }
 
@@ -141,7 +150,7 @@ export default css`
       scroll-behavior: auto;
     }
 
-    .dot.active {
+    .pagination-dot.active {
       transform: none;
     }
   }

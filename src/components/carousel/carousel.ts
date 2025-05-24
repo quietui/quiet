@@ -26,7 +26,7 @@ import styles from './carousel.styles.js';
  * @csspart nav-button-previous - The previous button.
  * @csspart nav-button-next - The next button.
  * @csspart pagination - The container for the pagination dots.
- * @csspart dot - The individual pagination dots.
+ * @csspart pagination-dot - Each individual pagination dot.
  *
  * @event quiet-item-change - Emitted when the active item changes through user interaction.
  *
@@ -57,7 +57,7 @@ export class QuietCarousel extends QuietElement {
   @property({ type: Boolean, attribute: 'without-nav', reflect: true }) withoutNav = false;
 
   /** Hides pagination dots. */
-  @property({ type: Boolean, attribute: 'without-dots', reflect: true }) withoutDots = false;
+  @property({ type: Boolean, attribute: 'without-pagination', reflect: true }) withoutPagination = false;
 
   firstUpdated() {
     this.setAttribute('role', 'region');
@@ -132,7 +132,7 @@ export class QuietCarousel extends QuietElement {
     const isRtl = this.localize.dir() === 'rtl';
     const prevKey = isRtl ? 'ArrowRight' : 'ArrowLeft';
     const nextKey = isRtl ? 'ArrowLeft' : 'ArrowRight';
-    const dots = this.shadowRoot.querySelectorAll('.dot');
+    const dots = this.shadowRoot.querySelectorAll('.pagination-dot');
     if (!dots.length) return;
 
     let nextIndex = index;
@@ -213,7 +213,7 @@ export class QuietCarousel extends QuietElement {
   private handleWheel() {
     // Blur any focused dot when user scrolls with mouse wheel to ensure the dots are accurate when scrolling after
     // using the keyboard or clicking them directly
-    const focusedDot = this.shadowRoot?.querySelector<HTMLButtonElement>('.dot:focus');
+    const focusedDot = this.shadowRoot?.querySelector<HTMLButtonElement>('.pagination-dot:focus');
     focusedDot?.blur();
   }
 
@@ -259,7 +259,7 @@ export class QuietCarousel extends QuietElement {
   }
 
   render() {
-    const hasNav = !this.withoutNav || !this.withoutDots;
+    const hasNav = !this.withoutNav || !this.withoutPagination;
     const isRtl = this.localize.dir() === 'rtl';
 
     return html`
@@ -285,7 +285,7 @@ export class QuietCarousel extends QuietElement {
                       part="nav-button nav-button-previous"
                       aria-label=${this.localize.term('previous')}
                       ?disabled=${this.activeIndex === 0}
-                      tabindex=${this.withoutDots ? 0 : -1}
+                      tabindex=${this.withoutPagination ? 0 : -1}
                       @click=${this.previousItem}
                     >
                       <quiet-icon name=${isRtl ? 'chevron-right' : 'chevron-left'}></quiet-icon>
@@ -296,14 +296,14 @@ export class QuietCarousel extends QuietElement {
                       part="nav-button nav-button-next"
                       aria-label=${this.localize.term('next')}
                       ?disabled=${this.activeIndex === this.itemCount - 1}
-                      tabindex=${this.withoutDots ? 0 : -1}
+                      tabindex=${this.withoutPagination ? 0 : -1}
                       @click=${this.nextItem}
                     >
                       <quiet-icon name=${isRtl ? 'chevron-left' : 'chevron-right'}></quiet-icon>
                     </button>
                   `
                 : ''}
-              ${!this.withoutDots
+              ${!this.withoutPagination
                 ? html`
                     <div id="pagination" part="pagination" role="tablist" aria-label="Choose slide to display">
                       ${Array.from({ length: this.itemCount }, (_, i) => {
@@ -311,7 +311,7 @@ export class QuietCarousel extends QuietElement {
                         return html`
                           <button
                             part="dot"
-                            class=${classMap({ dot: true, active: isActive })}
+                            class=${classMap({ 'pagination-dot': true, active: isActive })}
                             role="tab"
                             aria-label="Go to slide ${i + 1}"
                             aria-selected=${isActive ? 'true' : 'false'}

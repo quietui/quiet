@@ -16,4 +16,17 @@ export default css`
     width: 100%;
     height: 100%;
   }
+
+  /* Ensure images cover the entire slide */
+  ::slotted(img) {
+    max-height: 100%;
+    object-fit: cover;
+  }
+
+  /* Ensure elements with controls are contained and visible */
+  ::slotted(iframe),
+  ::slotted(video) {
+    max-height: 100%;
+    object-fit: contain;
+  }
 `;

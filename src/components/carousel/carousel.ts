@@ -27,6 +27,7 @@ import styles from './carousel.styles.js';
  * @csspart nav-button-next - The next button.
  * @csspart pagination - The container for the pagination dots.
  * @csspart pagination-dot - Each individual pagination dot.
+ * @csspart pagination-dot-active - The active pagination dot.
  *
  * @event quiet-item-change - Emitted when the active item changes and the slide has been fully scrolled into view.
  *
@@ -34,6 +35,8 @@ import styles from './carousel.styles.js';
  * @cssproperty [--item-gap=2rem] - The gap between items in the carousel.
  * @cssproperty [--dot-size=0.875em] - The size of each pagination dot.
  * @cssproperty [--dot-gap=0.5em] - The size of the gap between pagination dots.
+ * @cssproperty [--dot-color=var(--quiet-neutral-fill-soft)] - The color of inactive pagination dots.
+ * @cssproperty [--dot-active-color=var(--quiet-neutral-fill-loud)] - The color of active pagination dots.
  *
  * @cssstate scrolling - Applied when the carousel is scrolling.
  */
@@ -307,7 +310,7 @@ export class QuietCarousel extends QuietElement {
                       aria-label=${this.localize.term('previous')}
                       ?disabled=${this.activeIndex === 0}
                       tabindex=${this.withoutPagination ? 0 : -1}
-                      @click=${this.scrollToPrevious}
+                      @click=${() => this.scrollToPrevious()}
                     >
                       <quiet-icon name=${isRtl ? 'chevron-right' : 'chevron-left'}></quiet-icon>
                     </button>
@@ -318,7 +321,7 @@ export class QuietCarousel extends QuietElement {
                       aria-label=${this.localize.term('next')}
                       ?disabled=${this.activeIndex === this.itemCount - 1}
                       tabindex=${this.withoutPagination ? 0 : -1}
-                      @click=${this.scrollToNext}
+                      @click=${() => this.scrollToNext()}
                     >
                       <quiet-icon name=${isRtl ? 'chevron-left' : 'chevron-right'}></quiet-icon>
                     </button>
@@ -331,7 +334,7 @@ export class QuietCarousel extends QuietElement {
                         const isActive = i === this.activeIndex;
                         return html`
                           <button
-                            part="dot"
+                            part="pagination-dot ${isActive ? 'pagination-dot-active' : ''}"
                             class=${classMap({ 'pagination-dot': true, active: isActive })}
                             role="tab"
                             aria-label="Go to slide ${i + 1}"

@@ -2,10 +2,12 @@ import { css } from 'lit';
 
 export default css`
   :host {
-    --item-height: 20em;
+    --item-height: 20rem; /* fixed height to make controls adjustable */
     --item-gap: 2em;
     --dot-size: 0.875em;
     --dot-gap: 0.5em;
+    --dot-color: var(--quiet-neutral-fill-soft);
+    --dot-active-color: var(--quiet-neutral-fill-loud);
 
     display: block;
     position: relative;
@@ -110,13 +112,13 @@ export default css`
     padding: 0;
     border: none;
     border-radius: 50%;
-    background-color: var(--quiet-neutral-fill-soft);
+    background-color: var(--dot-color);
     font: inherit;
     cursor: pointer;
     transition: all var(--carousel-transition-duration) ease;
 
     &.active {
-      background-color: var(--quiet-neutral-fill-loud);
+      background-color: var(--dot-active-color);
     }
 
     /* Cover the gap to increase the hit area of each dot */
@@ -131,17 +133,17 @@ export default css`
   .pagination-dot:focus-visible {
     outline: var(--quiet-focus-ring);
     outline-offset: var(--quiet-focus-offset);
-    background-color: var(--quiet-neutral-fill-loud);
+    background-color: var(--dot-active-color);
   }
 
   /* When any dot has focus, active dots look inactive */
   #pagination:has(.pagination-dot:focus) .pagination-dot.active:not(:focus) {
-    background-color: var(--quiet-neutral-fill-soft);
+    background-color: var(--dot-color);
   }
 
   /* The specific dot that has focus gets the active color */
   #pagination:has(.pagination-dot:focus) .pagination-dot:focus {
-    background-color: var(--quiet-neutral-fill-loud);
+    background-color: var(--dot-active-color);
   }
 
   /* Reduced motion preference */

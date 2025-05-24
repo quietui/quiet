@@ -43,7 +43,7 @@ export class QuietCarousel extends QuietElement {
   @property({ type: String }) label = '';
 
   /** The current active item index. */
-  @property({ type: Number, reflect: true }) index = 0;
+  @property({ attribute: 'active-index', type: Number, reflect: true }) activeIndex = 0;
 
   /** Shows navigation buttons when present. */
   @property({ type: Boolean, attribute: 'with-nav', reflect: true }) withNav = false;
@@ -62,8 +62,8 @@ export class QuietCarousel extends QuietElement {
     }
 
     // When index changes programmatically, scroll to that item
-    if (changedProperties.has('index') && !this.isScrolling) {
-      this.scrollToIndex(this.index);
+    if (changedProperties.has('activeIndex') && !this.isScrolling) {
+      this.scrollToIndex(this.activeIndex);
     }
   }
 
@@ -148,20 +148,6 @@ export class QuietCarousel extends QuietElement {
     }
   }
 
-  /**
-   * Navigate to the next item
-   */
-  private handleNext() {
-    this.scrollToIndex(this.index + 1);
-  }
-
-  /**
-   * Navigate to the previous item
-   */
-  private handlePrevious() {
-    this.scrollToIndex(this.index - 1);
-  }
-
   @eventOptions({ passive: true })
   private handleScroll() {
     if (!this.items) return;
@@ -178,7 +164,7 @@ export class QuietCarousel extends QuietElement {
 
     // Find which item's center is closest to the viewport center
     let minDistance = Infinity;
-    let newIndex = this.index;
+    let newIndex = this.activeIndex;
 
     this.itemDimensionsCache.forEach((item, i) => {
       const itemCenter = item.left + item.width / 2;
@@ -190,11 +176,11 @@ export class QuietCarousel extends QuietElement {
       }
     });
 
-    if (newIndex !== this.index && newIndex >= 0 && newIndex < this.itemCount) {
+    if (newIndex !== this.activeIndex && newIndex >= 0 && newIndex < this.itemCount) {
       this.isScrolling = true;
-      this.index = newIndex;
+      this.activeIndex = newIndex;
       requestAnimationFrame(() => (this.isScrolling = false));
-      this.dispatchEvent(new CustomEvent('quiet-item-change', { detail: { index: this.index } }));
+      this.dispatchEvent(new CustomEvent('quiet-item-change', { detail: { index: this.activeIndex } }));
     }
   }
 
@@ -233,6 +219,20 @@ export class QuietCarousel extends QuietElement {
     });
   }
 
+  /**
+   * Navigate to the next item
+   */
+  public nextItem() {
+    this.scrollToIndex(this.activeIndex + 1);
+  }
+
+  /**
+   * Navigate to the previous item
+   */
+  public previousItem() {
+    this.scrollToIndex(this.activeIndex - 1);
+  }
+
   render() {
     const hasNav = this.withNav || this.withDots;
     const isRtl = this.localize.dir() === 'rtl';
@@ -258,8 +258,8 @@ export class QuietCarousel extends QuietElement {
                       id="previous-button"
                       part="nav-button nav-button-previous"
                       aria-label=${this.localize.term('previous')}
-                      ?disabled=${this.index === 0}
-                      @click=${this.handlePrevious}
+                      ?disabled=${this.activeIndex === 0}
+                      @click=${this.previousItem}
                     >
                       <quiet-icon name=${isRtl ? 'chevron-right' : 'chevron-left'}></quiet-icon>
                     </button>
@@ -267,8 +267,8 @@ export class QuietCarousel extends QuietElement {
                       id="next-button"
                       part="nav-button nav-button-next"
                       aria-label=${this.localize.term('next')}
-                      ?disabled=${this.index === this.itemCount - 1}
-                      @click=${this.handleNext}
+                      ?disabled=${this.activeIndex === this.itemCount - 1}
+                      @click=${this.nextItem}
                     >
                       <quiet-icon name=${isRtl ? 'chevron-left' : 'chevron-right'}></quiet-icon>
                     </button>
@@ -278,7 +278,7 @@ export class QuietCarousel extends QuietElement {
                 ? html`
                     <div id="pagination" part="pagination" role="tablist" aria-label="Choose slide to display">
                       ${Array.from({ length: this.itemCount }, (_, i) => {
-                        const isActive = i === this.index;
+                        const isActive = i === this.activeIndex;
                         return html`
                           <button
                             part="dot"

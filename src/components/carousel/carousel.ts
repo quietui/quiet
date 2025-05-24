@@ -5,6 +5,7 @@ import { classMap } from 'lit/directives/class-map.js';
 import { Localize } from '../../utilities/localize.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import { scrollEndPolyfill } from '../../utilities/scroll.js';
+import '../carousel-item/carousel-item.js';
 import styles from './carousel.styles.js';
 
 /**
@@ -14,6 +15,8 @@ import styles from './carousel.styles.js';
  * @documentation https://quietui.com/docs/components/carousel
  * @status stable
  * @since 1.0
+ *
+ * @dependency quiet-carousel-item
  *
  * @slot - The default slot for carousel items.
  *

@@ -9,11 +9,13 @@ export default css`
     --dot-color: var(--quiet-neutral-fill-soft);
     --dot-active-color: var(--quiet-neutral-fill-loud);
 
-    display: block;
+    display: flex;
     position: relative;
+    flex-direction: column;
     width: 100%;
     max-width: 100%;
     margin: 0 auto;
+    gap: 1em;
   }
 
   #items {
@@ -25,6 +27,7 @@ export default css`
     scroll-behavior: smooth;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
+    overflow-y: hidden;
     border-radius: var(--quiet-border-radius);
     background-color: transparent;
     scrollbar-width: none;
@@ -45,7 +48,6 @@ export default css`
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    margin-block-start: 1rem;
   }
 
   /* When navigation buttons AND pagination are present */

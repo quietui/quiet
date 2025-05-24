@@ -138,16 +138,19 @@ export class QuietCarousel extends QuietElement {
     const items = this.getItems();
     if (items.length <= boundedIndex) return;
 
-    // Get the target item to scroll to
     const targetItem = items[boundedIndex];
+    const containerWidth = this.items.clientWidth;
+    const itemWidth = targetItem.offsetWidth;
+    const itemLeft = targetItem.offsetLeft - this.items.offsetLeft;
 
-    // Just scroll to the position - the scroll event handler will update the active dot
+    // Calculate scroll position to center the item in the viewport
+    // This ensures the target item will be detected as the active one
+    const scrollPosition = itemLeft - (containerWidth - itemWidth) / 2;
+
     this.items.scrollTo({
-      left: targetItem.offsetLeft - this.items.offsetLeft,
+      left: scrollPosition,
       behavior: 'smooth'
     });
-
-    // Note: We don't update this.index here - the scroll event will handle that
   }
 
   /**

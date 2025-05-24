@@ -49,8 +49,8 @@ export default css`
   }
 
   /* When navigation buttons AND pagination are present */
-  :host([without-nav]:not([without-dots])),
-  :host([without-nav][without-dots]) {
+  :host([without-nav]:not([without-pagination])),
+  :host([without-nav][without-pagination]) {
     #nav {
       justify-content: center;
     }

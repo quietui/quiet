@@ -38,9 +38,9 @@ import styles from './carousel.styles.js';
 export class QuietCarousel extends QuietElement {
   static styles: CSSResultGroup = styles;
 
-  private ignoreIndexChange = false;
   private itemDimensionsCache: Array<{ left: number; width: number }> | null = null;
   private localize = new Localize(this);
+  private skipScrollOnNextActiveChange = false;
 
   @query('#items') items: HTMLElement;
 
@@ -73,7 +73,7 @@ export class QuietCarousel extends QuietElement {
   }
 
   updated(changedProperties: PropertyValues<this>) {
-    if (changedProperties.has('activeIndex') && !this.ignoreIndexChange) {
+    if (changedProperties.has('activeIndex') && !this.skipScrollOnNextActiveChange) {
       this.scrollToIndex(this.activeIndex);
     }
 
@@ -198,10 +198,11 @@ export class QuietCarousel extends QuietElement {
       }
     });
 
+    // Detect when the item has changed
     if (newIndex !== this.activeIndex && newIndex >= 0 && newIndex < this.itemCount) {
-      this.ignoreIndexChange = true;
+      this.skipScrollOnNextActiveChange = true; // prevent the update function from scrolling for this update
       this.activeIndex = newIndex;
-      requestAnimationFrame(() => (this.ignoreIndexChange = false));
+      requestAnimationFrame(() => (this.skipScrollOnNextActiveChange = false));
       this.dispatchEvent(new QuietItemChangeEvent({ index: this.activeIndex }));
     }
   }

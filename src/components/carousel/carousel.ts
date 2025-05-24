@@ -26,7 +26,7 @@ import styles from './carousel.styles.js';
  *
  * @event quiet-item-change - Emitted when the active item changes through user interaction.
  *
- * @cssproperty --height - The height of the carousel.
+ * @cssproperty --item-height - The height of items in the carousel.
  *
  * @cssstate scrolling - Applied when the carousel is scrolling.
  */
@@ -210,7 +210,7 @@ export class QuietCarousel extends QuietElement {
   /**
    * Scroll to a specific item index without updating the active dot directly
    */
-  private scrollToIndex(index: number) {
+  private scrollToIndex(index: number, behavior: ScrollBehavior = 'smooth') {
     if (!this.items) return;
 
     // Ensure index is within bounds
@@ -230,7 +230,7 @@ export class QuietCarousel extends QuietElement {
 
     this.items.scrollTo({
       left: scrollPosition,
-      behavior: 'smooth'
+      behavior
     });
   }
 

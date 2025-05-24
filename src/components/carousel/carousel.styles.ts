@@ -2,7 +2,7 @@ import { css } from 'lit';
 
 export default css`
   :host {
-    --height: 18.75em;
+    --item-height: 20rem;
 
     display: block;
     position: relative;
@@ -14,7 +14,7 @@ export default css`
   #items {
     display: flex;
     width: 100%;
-    height: var(--height);
+    height: var(--item-height);
     overflow-x: scroll;
     gap: 2em;
     scroll-behavior: smooth;

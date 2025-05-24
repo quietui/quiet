@@ -32,6 +32,7 @@ export class QuietCarousel extends QuietElement {
   static styles: CSSResultGroup = styles;
 
   private itemDimensionsCache: Array<{ left: number; width: number }> | null = null;
+  private isScrolling = false;
   private localize = new Localize(this);
 
   @query('#items') items: HTMLElement;
@@ -58,6 +59,11 @@ export class QuietCarousel extends QuietElement {
   updated(changedProperties: PropertyValues<this>) {
     if (changedProperties.has('label')) {
       this.setAttribute('aria-label', this.label || 'Carousel'); // TODO - localize
+    }
+
+    // When index changes programmatically, scroll to that item
+    if (changedProperties.has('index') && !this.isScrolling) {
+      this.scrollToIndex(this.index);
     }
   }
 
@@ -185,7 +191,9 @@ export class QuietCarousel extends QuietElement {
     });
 
     if (newIndex !== this.index && newIndex >= 0 && newIndex < this.itemCount) {
+      this.isScrolling = true;
       this.index = newIndex;
+      requestAnimationFrame(() => (this.isScrolling = false));
       this.dispatchEvent(new CustomEvent('quiet-item-change', { detail: { index: this.index } }));
     }
   }

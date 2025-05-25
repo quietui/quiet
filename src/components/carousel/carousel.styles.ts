@@ -31,6 +31,7 @@ export default css`
     border-radius: var(--quiet-border-radius);
     background-color: transparent;
     scrollbar-width: none;
+    will-change: scroll-position;
 
     &:focus-visible {
       outline: var(--quiet-focus-ring);

@@ -3,10 +3,4 @@ title: Carousel Item
 layout: component
 ---
 
-```html {.example}
-<quiet-carousel-item></quiet-carousel-item>
-```
-
-## Examples
-
-TODO
+This component must only be used within a [carousel](/docs/components/carousel). You can see some examples of carousel items being used in the [carousel documentation](/docs/components/carousel).

@@ -20,6 +20,11 @@ import styles from './carousel-item.styles.js';
 export class QuietCarouselItem extends QuietElement {
   static styles: CSSResultGroup = styles;
 
+  firstUpdated() {
+    this.setAttribute('role', 'group');
+    this.setAttribute('aria-roledescription', 'slide');
+  }
+
   render() {
     return html`
       <div id="content" part="content">

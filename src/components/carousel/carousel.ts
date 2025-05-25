@@ -134,8 +134,6 @@ export class QuietCarousel extends QuietElement {
     const items = this.getItems();
     items.forEach((item, i) => {
       if (!item.hasAttribute('aria-label') && !item.hasAttribute('aria-labelledby')) {
-        item.setAttribute('role', 'group');
-        item.setAttribute('aria-roledescription', 'slide');
         item.setAttribute('aria-label', this.localize.term('numberOfTotal', i + 1, items.length));
       }
     });

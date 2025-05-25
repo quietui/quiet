@@ -206,6 +206,9 @@ export class QuietCarousel extends QuietElement {
 
     if (!this.itemDimensionsCache || this.itemDimensionsCache.length === 0) return;
 
+    //
+    // TODO - these are causing layout thrashing in mobile Safari
+    //
     const scrollLeft = this.items.scrollLeft;
     const viewportCenter = scrollLeft + this.items.clientWidth / 2;
 

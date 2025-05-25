@@ -94,6 +94,8 @@
     "nums",
     "nwse",
     "oklab",
+    "onscrollsnapchange",
+    "onscrollsnapchanging",
     "Orbitron",
     "outdir",
     "packagejson",

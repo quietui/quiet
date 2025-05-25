@@ -122,6 +122,8 @@
     "RRGGBBAA",
     "scroller",
     "scrollers",
+    "scrollsnapchange",
+    "scrollsnapchanging",
     "Shortcode",
     "Shortcodes",
     "signup",

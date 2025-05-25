@@ -184,23 +184,6 @@ export class QuietCarousel extends QuietElement {
   }
 
   @eventOptions({ passive: true })
-  private handleScrollSnapChanging(event: Event) {
-    if (!this.items) return;
-
-    const snapEvent = event as any; // scrollsnapchanging is not in TypeScript yet
-    const snappingElement = snapEvent.snapTargetInline;
-
-    if (snappingElement) {
-      const items = this.getItems();
-      const newIndex = items.indexOf(snappingElement);
-
-      if (newIndex !== -1 && newIndex !== this.activeIndex) {
-        this.activeIndex = newIndex;
-      }
-    }
-  }
-
-  @eventOptions({ passive: true })
   private handleScrollSnapChange(event: Event) {
     if (!this.items) return;
 
@@ -217,6 +200,23 @@ export class QuietCarousel extends QuietElement {
 
       if (this.isUserInitiated) {
         this.pendingEventDispatch = true;
+      }
+    }
+  }
+
+  @eventOptions({ passive: true })
+  private handleScrollSnapChanging(event: Event) {
+    if (!this.items) return;
+
+    const snapEvent = event as any; // scrollsnapchanging is not in TypeScript yet
+    const snappingElement = snapEvent.snapTargetInline;
+
+    if (snappingElement) {
+      const items = this.getItems();
+      const newIndex = items.indexOf(snappingElement);
+
+      if (newIndex !== -1 && newIndex !== this.activeIndex) {
+        this.activeIndex = newIndex;
       }
     }
   }

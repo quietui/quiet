@@ -50,6 +50,7 @@ export class QuietCarousel extends QuietElement {
   private localize = new Localize(this);
   private isUserInitiated = false;
   private pendingEventDispatch = false;
+  private resizeObserver: ResizeObserver | null = null;
 
   @query('#items') items: HTMLElement;
 
@@ -67,6 +68,19 @@ export class QuietCarousel extends QuietElement {
 
   /** Hides pagination dots. */
   @property({ type: Boolean, attribute: 'without-pagination', reflect: true }) withoutPagination = false;
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.setupResizeObserver();
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
+      this.resizeObserver = null;
+    }
+  }
 
   firstUpdated() {
     this.setAttribute('role', 'region');
@@ -125,6 +139,8 @@ export class QuietCarousel extends QuietElement {
         item.setAttribute('aria-label', this.localize.term('numberOfTotal', i + 1, items.length));
       }
     });
+
+    this.setupResizeObserver();
   }
 
   /**
@@ -263,6 +279,22 @@ export class QuietCarousel extends QuietElement {
     this.items.scrollTo({
       left: scrollPosition,
       behavior
+    });
+  }
+
+  private setupResizeObserver() {
+    const items = this.getItems();
+
+    this.resizeObserver?.disconnect();
+    this.resizeObserver = new ResizeObserver(() => {
+      // Invalidate cache when any item resizes
+      this.itemDimensionsCache = null;
+      this.setActiveItem(this.activeIndex, 'instant');
+    });
+
+    // Observe every item in the carousel
+    items.forEach(item => {
+      this.resizeObserver!.observe(item);
     });
   }
 

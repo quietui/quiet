@@ -22,6 +22,12 @@ layout: component
     }
   }
 </style>
+
+<script>
+  const carousel = document.getElementById('carousel__overview');
+
+  carousel.addEventListener('quiet-item-change', event => console.log(event.detail.index));
+</script>
 ```
 
 ## Examples

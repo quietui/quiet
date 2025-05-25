@@ -46,7 +46,6 @@ import styles from './carousel.styles.js';
 export class QuietCarousel extends QuietElement {
   static styles: CSSResultGroup = styles;
 
-  private itemDimensionsCache: Array<{ left: number; width: number }> | null = null;
   private localize = new Localize(this);
   private isUserInitiated = false;
   private pendingEventDispatch = false;
@@ -118,17 +117,8 @@ export class QuietCarousel extends QuietElement {
       : [];
   }
 
-  private cacheItemDimensions() {
-    const items = this.getItems();
-    this.itemDimensionsCache = items.map(item => ({
-      left: item.offsetLeft - this.items.offsetLeft,
-      width: item.offsetWidth
-    }));
-  }
-
   private handleSlotChange() {
     this.itemCount = this.getItems().length;
-    this.itemDimensionsCache = null; // Clear cache when items change
 
     // Set the appropriate aria attributes on each carousel item
     const items = this.getItems();
@@ -194,44 +184,46 @@ export class QuietCarousel extends QuietElement {
   }
 
   @eventOptions({ passive: true })
-  private handleScroll() {
+  private handleScrollSnapChanging(event: Event) {
     if (!this.items) return;
 
-    // Cache dimensions if not already cached
-    if (!this.itemDimensionsCache) {
-      this.cacheItemDimensions();
-    }
+    const snapEvent = event as any; // scrollsnapchanging is not in TypeScript yet
+    const snappingElement = snapEvent.snapTargetInline;
 
-    if (!this.itemDimensionsCache || this.itemDimensionsCache.length === 0) return;
+    if (snappingElement) {
+      const items = this.getItems();
+      const newIndex = items.indexOf(snappingElement);
 
-    //
-    // TODO - these are causing layout thrashing in mobile Safari
-    //
-    const scrollLeft = this.items.scrollLeft;
-    const viewportCenter = scrollLeft + this.items.clientWidth / 2;
-
-    // Find which item's center is closest to the viewport center
-    let minDistance = Infinity;
-    let newIndex = this.activeIndex;
-
-    this.isScrolling = true;
-    this.itemDimensionsCache.forEach((item, index) => {
-      const itemCenter = item.left + item.width / 2;
-      const distance = Math.abs(viewportCenter - itemCenter);
-
-      if (distance < minDistance) {
-        minDistance = distance;
-        newIndex = index;
+      if (newIndex !== -1 && newIndex !== this.activeIndex) {
+        this.activeIndex = newIndex;
       }
-    });
+    }
+  }
 
-    // Detect when the item has changed
-    if (newIndex !== this.activeIndex && newIndex >= 0 && newIndex < this.itemCount) {
-      this.activeIndex = newIndex;
+  @eventOptions({ passive: true })
+  private handleScrollSnapChange(event: Event) {
+    if (!this.items) return;
+
+    const snapEvent = event as any; // scrollsnapchange is not in TypeScript yet
+    const snappedElement = snapEvent.snapTargetInline;
+
+    if (snappedElement) {
+      const items = this.getItems();
+      const newIndex = items.indexOf(snappedElement);
+
+      if (newIndex !== -1 && newIndex !== this.activeIndex) {
+        this.activeIndex = newIndex;
+      }
+
       if (this.isUserInitiated) {
         this.pendingEventDispatch = true;
       }
     }
+  }
+
+  @eventOptions({ passive: true })
+  private handleScroll() {
+    this.isScrolling = true;
   }
 
   private handleScrollEnd() {
@@ -288,8 +280,6 @@ export class QuietCarousel extends QuietElement {
 
     this.resizeObserver?.disconnect();
     this.resizeObserver = new ResizeObserver(() => {
-      // Invalidate cache when any item resizes
-      this.itemDimensionsCache = null;
       this.setActiveItem(this.activeIndex, 'instant');
     });
 
@@ -329,6 +319,8 @@ export class QuietCarousel extends QuietElement {
         tabindex="-1"
         @scroll=${this.handleScroll}
         @scrollend=${this.handleScrollEnd}
+        @scrollsnapchanging=${this.handleScrollSnapChanging}
+        @scrollsnapchange=${this.handleScrollSnapChange}
         @wheel=${this.handleWheel}
       >
         <slot @slotchange=${this.handleSlotChange}></slot>

@@ -46,10 +46,12 @@ import styles from './carousel.styles.js';
 export class QuietCarousel extends QuietElement {
   static styles: CSSResultGroup = styles;
 
-  private localize = new Localize(this);
   private isUserInitiated = false;
+  private localize = new Localize(this);
   private pendingEventDispatch = false;
   private resizeObserver: ResizeObserver | null = null;
+  private intersectionObserver: IntersectionObserver | null = null;
+  private intersectionRatios: Map<HTMLElement, number> = new Map();
 
   @query('#items') items: HTMLElement;
 
@@ -79,6 +81,10 @@ export class QuietCarousel extends QuietElement {
       this.resizeObserver.disconnect();
       this.resizeObserver = null;
     }
+    if (this.intersectionObserver) {
+      this.intersectionObserver.disconnect();
+      this.intersectionObserver = null;
+    }
   }
 
   firstUpdated() {
@@ -91,6 +97,7 @@ export class QuietCarousel extends QuietElement {
       if (this.activeIndex !== 0) {
         this.setActiveItem(this.activeIndex, 'instant');
       }
+      this.setupIntersectionObserver();
     });
   }
 
@@ -129,6 +136,12 @@ export class QuietCarousel extends QuietElement {
     });
 
     this.setupResizeObserver();
+    this.setupIntersectionObserver();
+
+    // Update active item based on center after slot changes
+    requestAnimationFrame(() => {
+      this.updateActiveItemFromIntersection();
+    });
   }
 
   /**
@@ -184,45 +197,8 @@ export class QuietCarousel extends QuietElement {
   }
 
   @eventOptions({ passive: true })
-  private handleScrollSnapChange(event: Event) {
-    if (!this.items) return;
-
-    const snapEvent = event as any; // scrollsnapchange is not in TypeScript yet
-    const snappedElement = snapEvent.snapTargetInline;
-
-    if (snappedElement) {
-      const items = this.getItems();
-      const newIndex = items.indexOf(snappedElement);
-
-      if (newIndex !== -1 && newIndex !== this.activeIndex) {
-        this.activeIndex = newIndex;
-      }
-
-      if (this.isUserInitiated) {
-        this.pendingEventDispatch = true;
-      }
-    }
-  }
-
-  @eventOptions({ passive: true })
-  private handleScrollSnapChanging(event: Event) {
-    if (!this.items) return;
-
-    const snapEvent = event as any; // scrollsnapchanging is not in TypeScript yet
-    const snappingElement = snapEvent.snapTargetInline;
-
-    if (snappingElement) {
-      const items = this.getItems();
-      const newIndex = items.indexOf(snappingElement);
-
-      if (newIndex !== -1 && newIndex !== this.activeIndex) {
-        this.activeIndex = newIndex;
-      }
-    }
-  }
-
-  @eventOptions({ passive: true })
   private handleScroll() {
+    // Only track scrolling state, no position calculations
     this.isScrolling = true;
   }
 
@@ -281,12 +257,68 @@ export class QuietCarousel extends QuietElement {
     this.resizeObserver?.disconnect();
     this.resizeObserver = new ResizeObserver(() => {
       this.setActiveItem(this.activeIndex, 'instant');
+      // Update active item based on center after resize
+      requestAnimationFrame(() => {
+        this.updateActiveItemFromIntersection();
+      });
     });
 
     // Observe every item in the carousel
     items.forEach(item => {
       this.resizeObserver!.observe(item);
     });
+  }
+
+  private setupIntersectionObserver() {
+    const items = this.getItems();
+
+    this.intersectionObserver?.disconnect();
+    this.intersectionRatios.clear();
+
+    if (this.items && items.length > 0) {
+      this.intersectionObserver = new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            this.intersectionRatios.set(entry.target as HTMLElement, entry.intersectionRatio);
+          });
+
+          // Add debounce after RAF
+          this.updateActiveItemFromIntersection();
+        },
+        {
+          root: this.items,
+          threshold: Array.from({ length: 21 }, (_, i) => i * 0.05) // 0%, 5%, 10%...100%
+        }
+      );
+
+      // Observe every item in the carousel
+      items.forEach(item => {
+        this.intersectionObserver!.observe(item);
+      });
+    }
+  }
+
+  private updateActiveItemFromIntersection() {
+    if (this.intersectionRatios.size === 0) return;
+
+    const items = this.getItems();
+    let bestMatch: { index: number; ratio: number } | null = null;
+
+    // Find the item with the highest intersection ratio (most visible)
+    items.forEach((item, index) => {
+      const ratio = this.intersectionRatios.get(item) || 0;
+      if (!bestMatch || ratio > bestMatch.ratio) {
+        bestMatch = { index, ratio };
+      }
+    });
+
+    if (bestMatch && bestMatch.index !== this.activeIndex) {
+      this.activeIndex = bestMatch.index;
+
+      if (this.isUserInitiated) {
+        this.pendingEventDispatch = true;
+      }
+    }
   }
 
   /** Navigate to the specified item. */
@@ -319,8 +351,6 @@ export class QuietCarousel extends QuietElement {
         tabindex="-1"
         @scroll=${this.handleScroll}
         @scrollend=${this.handleScrollEnd}
-        @scrollsnapchanging=${this.handleScrollSnapChanging}
-        @scrollsnapchange=${this.handleScrollSnapChange}
         @wheel=${this.handleWheel}
       >
         <slot @slotchange=${this.handleSlotChange}></slot>

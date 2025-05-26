@@ -28,6 +28,7 @@ export default css`
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     overflow-y: hidden;
+    transform: translateZ(0);
     border-radius: var(--quiet-border-radius);
     background-color: transparent;
     scrollbar-width: none;

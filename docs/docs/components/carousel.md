@@ -121,6 +121,11 @@ You can hide the previous/next buttons by adding the `without-nav` attribute. To
 
 ```html {.example}
 <div id="carousel__without">
+  <div class="controls">
+    <quiet-switch checked label="With nav"></quiet-switch><br>
+    <quiet-switch checked label="With pagination"></quiet-switch>
+  </div>
+    
   <quiet-carousel>
     <quiet-carousel-item>Slide 1</quiet-carousel-item>
     <quiet-carousel-item>Slide 2</quiet-carousel-item>
@@ -128,11 +133,6 @@ You can hide the previous/next buttons by adding the `without-nav` attribute. To
     <quiet-carousel-item>Slide 4</quiet-carousel-item>
     <quiet-carousel-item>Slide 5</quiet-carousel-item>
   </quiet-carousel>
-
-  <br>
-
-  <quiet-switch label="Without nav"></quiet-switch><br>
-  <quiet-switch label="Without pagination"></quiet-switch>
 </div>
 
 <script>
@@ -142,20 +142,25 @@ You can hide the previous/next buttons by adding the `without-nav` attribute. To
   const paginationSwitch = container.querySelectorAll('quiet-switch')[1];
 
   navSwitch.addEventListener('input', () => {
-    carousel.toggleAttribute('without-nav', navSwitch.checked);
+    carousel.toggleAttribute('without-nav', !navSwitch.checked);
   });
 
   paginationSwitch.addEventListener('input', () => {
-    carousel.toggleAttribute('without-pagination', paginationSwitch.checked);
+    carousel.toggleAttribute('without-pagination', !paginationSwitch.checked);
   });
 </script>
 
 <style>
   #carousel__without {
-    quiet-carousel {
-      /* carousel height + controls to prevent shifting in the demo */
-      min-height: calc(23.5rem);
-    }
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .controls {
+      display: flex;
+      gap: 1rem; 
+      justify-content: center;
+    }    
 
     quiet-carousel-item {
       background: var(--quiet-neutral-fill-soft);
@@ -217,7 +222,6 @@ Carousels come with a simple, minimal appearance. Feel free to customize them wi
 
 <style>
   #carousel__styling {
-    --item-height: 25rem;
     --dot-size: .75rem;
     --dot-color: #fff4;
     --dot-active-color: white;

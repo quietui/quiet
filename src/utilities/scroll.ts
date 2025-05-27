@@ -1,3 +1,6 @@
+export const SUPPORTS_SCROLLSNAPCHANGE = 'onscrollsnapchange' in document.body;
+export const SUPPORTS_SCROLLSNAPCHANGING = 'onscrollsnapchanging' in document.body;
+
 const locks = new Set();
 const stylesheet = new CSSStyleSheet();
 

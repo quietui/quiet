@@ -47,9 +47,10 @@ export default css`
   /* Controls */
   #controls {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: center;
     justify-content: space-between;
+    gap: 1em;
   }
 
   /* When navigation buttons AND pagination are present */
@@ -64,6 +65,7 @@ export default css`
   #previous-button,
   #next-button {
     display: flex;
+    flex: 0 0 auto;
     align-items: center;
     justify-content: center;
     width: 2.5em;
@@ -103,8 +105,9 @@ export default css`
   /* Pagination */
   #pagination {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    justify-content: end;
+    justify-content: center;
     order: 2;
     gap: var(--dot-gap);
   }

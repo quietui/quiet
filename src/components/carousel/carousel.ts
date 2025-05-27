@@ -10,6 +10,8 @@ import '../carousel-item/carousel-item.js';
 import '../icon/icon.js';
 import styles from './carousel.styles.js';
 
+const IS_IOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+
 /**
  * <quiet-carousel>
  *
@@ -50,6 +52,7 @@ export class QuietCarousel extends QuietElement {
   private isUserInitiated = false;
   private pendingEventDispatch = false;
   private resizeObserver: ResizeObserver | null = null;
+  private activeItemInterval: ReturnType<typeof setInterval> | null;
 
   @query('#items') items: HTMLElement;
 
@@ -224,10 +227,20 @@ export class QuietCarousel extends QuietElement {
   @eventOptions({ passive: true })
   private handleScroll() {
     this.isScrolling = true;
+
+    // In unsupportive browsers, measure the active index during scroll to sync up the pagination dots. We skip the
+    // check doing a crude platform test to avoid janky scrolling in iOS that doesn't happen in desktop browsers.
+    if ((!SUPPORTS_SCROLLSNAPCHANGE || !SUPPORTS_SCROLLSNAPCHANGING) && !IS_IOS && !this.activeItemInterval) {
+      this.activeItemInterval = setInterval(() => {
+        this.updateActiveIndexFromScroll();
+      }, 100);
+    }
   }
 
   private handleScrollEnd() {
     this.isScrolling = false;
+    this.activeItemInterval = null;
+    if (this.activeItemInterval) clearInterval(this.activeItemInterval);
 
     // In unsupportive browsers, measure and update the activeIndex after scrolling
     if (!SUPPORTS_SCROLLSNAPCHANGE || !SUPPORTS_SCROLLSNAPCHANGING) {

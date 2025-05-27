@@ -2,7 +2,7 @@ import { css } from 'lit';
 
 export default css`
   :host {
-    --item-height: 20rem; /* fixed height to make controls adjustable */
+    --aspect-ratio: 16 / 9;
     --item-gap: 2em;
     --dot-size: 0.875em;
     --dot-gap: 0.5em;
@@ -20,8 +20,8 @@ export default css`
 
   #items {
     display: flex;
+    aspect-ratio: var(--aspect-ratio);
     width: 100%;
-    height: var(--item-height);
     overflow-x: scroll;
     gap: var(--item-gap);
     scroll-behavior: smooth;

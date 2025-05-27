@@ -4,13 +4,12 @@ import { customElement, eventOptions, property, query, state } from 'lit/decorat
 import { classMap } from 'lit/directives/class-map.js';
 import { QuietItemChangeEvent } from '../../events/item.js';
 import { Localize } from '../../utilities/localize.js';
+import { IS_IOS } from '../../utilities/platform.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import { scrollEndPolyfill, SUPPORTS_SCROLLSNAPCHANGE, SUPPORTS_SCROLLSNAPCHANGING } from '../../utilities/scroll.js';
 import '../carousel-item/carousel-item.js';
 import '../icon/icon.js';
 import styles from './carousel.styles.js';
-
-const IS_IOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
 /**
  * <quiet-carousel>
@@ -35,7 +34,8 @@ const IS_IOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
  *
  * @event quiet-item-change - Emitted when the active item changes and the slide has been fully scrolled into view.
  *
- * @cssproperty [--item-height=20em] - The height of items container in the carousel.
+ * @cssproperty [--aspect-ratio=16/9] - The aspect ratio of the carousel. By default, carousels render 100% wide, so
+ *  this helps retain proportions across various devices. Gets applied to the `items` part.
  * @cssproperty [--item-gap=2rem] - The gap between items in the carousel.
  * @cssproperty [--dot-size=0.875em] - The size of each pagination dot.
  * @cssproperty [--dot-gap=0.5em] - The size of the gap between pagination dots.

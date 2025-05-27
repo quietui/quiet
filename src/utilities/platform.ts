@@ -7,6 +7,9 @@ interface NavigatorUAData {
 
 export type Platform = 'mac' | 'windows' | 'linux' | 'other';
 
+/** Specific sniff for iOS devices */
+export const IS_IOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+
 /**
  * Detects the current platform using modern APIs with fallbacks. Yes, this is a browser sniff. No, in most cases it
  * shouldn't be used. Currently, the use case is for displaying platform-specific keyboard shortcuts through the

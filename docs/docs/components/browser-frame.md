@@ -107,27 +107,27 @@ You can also embed videos.
 
 ```html {.example}
 <quiet-browser-frame label="youtube.com" flush>
-  <iframe 
-    width="560" 
-    height="315" 
+  <quiet-zoomable-frame 
     src="https://www.youtube.com/embed/y0sF5xhGreA?si=vN-Q9GI9UK5jH6f6" 
-    title="YouTube video player" 
     frameborder="0" 
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
     referrerpolicy="strict-origin-when-cross-origin" 
     allowfullscreen
-  ></iframe>
+    without-controls
+  ></quiet-zoomable-frame>
 </quiet-browser-frame>
 ```
 
-And, of course, websites.
+And, of course, websites. Browser frame works particularly well with [zoomable frames](/docs/components/zoomable-frame).
 
 ```html {.example}
 <quiet-browser-frame label="quietui.org" flush>
   <img slot="icon" src="/assets/images/logo-light.svg" alt="" style="translate: 0 .125em;">
-  <div style="transform: scale(0.5); transform-origin: 0 0; width: 200%; height: 400px;">
-    <iframe src="https://quietui.org/" style="width: 100%; height: 200%; border: none;"></iframe>
-  </div>  
+  <quiet-zoomable-frame 
+    src="https://quietui.org/" 
+    zoom="0.5" 
+    style="width: 100%; height: 200%; border: none;"
+  ></quiet-zoomable-frame>
 </quiet-browser-frame>
 ```
 

@@ -39,13 +39,15 @@ If both `src` and `srcdoc` are provided, `srcdoc` takes precedence.
 
 ### Zooming
 
-Set the `zoom` attribute to change the frame's zoom level. A value of `1` means 100%, a value of `2` means 200%, etc. Use the `zoom-levels` attribute to define specific zoom steps that users can navigate through with the zoom controls. You can specify levels as percentages or decimal values, or a mix of both.
+Set the `zoom` attribute to change the frame's zoom level. A value of `1` means 100%, a value of `2` means 200%, etc.
+
+Use the `zoom-levels` attribute to define specific zoom steps that users can navigate through with the zoom controls. You can specify levels as a space-delimited set of percentages and decimal values, e.g. `zoom-levels="0.25 0.5 75% 100%"`.
 
 ```html {.example}
 <quiet-zoomable-frame 
   src="https://quietui.org/" 
-  zoom="0.75"
-  zoom-levels="50% 75% 100%"
+  zoom="0.5"
+  zoom-levels="50% 0.75 100%"
 >
 </quiet-zoomable-frame>
 ```
@@ -65,7 +67,7 @@ Add the `without-controls` attribute to remove the zoom controls from the frame.
 
 ### Disabling interactions
 
-To make the frame inert, add the `without-interaction` attribute. Users won't be able to scroll or tab into the frame when this is applied.
+To make the frame inert, add the `without-interaction` attribute. Users won't be able to tab into the frame when this is applied, potentially affecting accessibility.
 
 ```html {.example}
 <quiet-zoomable-frame

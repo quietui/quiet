@@ -2,6 +2,7 @@
 title: Browse Components
 description: Look through some of the best components on the planet.
 layout: docs
+bodyClass: browse-components
 ---
 
 <quiet-search-list id="component-index" match="fuzzy">

@@ -459,6 +459,17 @@ html[data-scroll-restoring] body {
   max-width: 90ch;
 }
 
+/* Page-specific settings */
+body.browse-components {
+  #body {
+    max-width: 1500px;
+  }
+
+  #page {
+    grid-template-columns: unset;
+  }
+}
+
 #content {
   order: 1;
   min-width: 0; /* prevent overflowing content from stretching the column */

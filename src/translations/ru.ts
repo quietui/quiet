@@ -15,6 +15,7 @@ const translation: Translation = {
   colorValue: 'Значение цвета',
   copied: 'Скопировано',
   copyToClipboard: 'Скопировать в буфер обмена',
+  decrease: 'Уменьшить',
   dragFileHereOrChooseFromFolder: 'Перетащите файл сюда или выберите из папки',
   dragFilesHereOrChooseFromFolder: 'Перетащите файлы сюда или выберите из папки',
   error: 'Ошибка',
@@ -22,6 +23,7 @@ const translation: Translation = {
   firstPage: 'Первая страница',
   hidePassword: 'Скрыть пароль',
   hide: 'Скрыть',
+  increase: 'Уменьшить',
   loading: 'Загрузка',
   hue: 'Оттенок',
   jumpBackward: 'Перейти назад',
@@ -52,7 +54,9 @@ const translation: Translation = {
     return `Показано все ${number} элемента`;
   },
   spoiler: 'Спойлер',
-  visualComparisonSlider: 'Ползунок визуального сравнения'
+  visualComparisonSlider: 'Ползунок визуального сравнения',
+  zoomIn: 'Приблизить',
+  zoomOut: 'Отдалить'
   /* cSpell:enable */
 };
 

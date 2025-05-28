@@ -7,6 +7,7 @@ import { live } from 'lit/directives/live.js';
 import { QuietBlurEvent, QuietChangeEvent, QuietFocusEvent, QuietInputEvent } from '../../events/form.js';
 import formControlStyles from '../../styles/form-control.styles.js';
 import hostStyles from '../../styles/host.styles.js';
+import { Localize } from '../../utilities/localize.js';
 import { QuietFormControlElement } from '../../utilities/quiet-element.js';
 import '../icon/icon.js';
 import styles from './number-field.styles.js';
@@ -51,6 +52,8 @@ export class QuietNumberField extends QuietFormControlElement {
   static formAssociated = true;
   static observeSlots = true;
   static styles: CSSResultGroup = [hostStyles, formControlStyles, styles];
+
+  private localize = new Localize(this);
 
   protected get focusableAnchor() {
     return this.textBox;
@@ -389,10 +392,11 @@ export class QuietNumberField extends QuietFormControlElement {
                 part="stepper stepper-down"
                 ?disabled=${!canDecrease || this.disabled}
                 tabindex="-1"
+                aria-label=${this.localize.term('decrease')}
                 @pointerdown=${this.maintainFocusOnPointerDown}
                 @click=${this.handleDecrease}
               >
-                <quiet-icon library="system" name="minus" label="-"></quiet-icon>
+                <quiet-icon library="system" name="minus"></quiet-icon>
               </button>
             `
           : ''}
@@ -435,10 +439,11 @@ export class QuietNumberField extends QuietFormControlElement {
                 part="stepper stepper-up"
                 ?disabled=${!canIncrease || this.disabled}
                 tabindex="-1"
+                aria-label=${this.localize.term('increase')}
                 @pointerdown=${this.maintainFocusOnPointerDown}
                 @click=${this.handleIncrease}
               >
-                <quiet-icon library="system" name="plus" label="+"></quiet-icon>
+                <quiet-icon library="system" name="plus"></quiet-icon>
               </button>
             `
           : ''}

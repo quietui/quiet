@@ -14,6 +14,7 @@ const translation: Translation = {
   colorValue: 'Color value',
   copied: 'Copied',
   copyToClipboard: 'Copy to clipboard',
+  decrease: 'Decrease',
   dragFileHereOrChooseFromFolder: 'Drag file here or choose from folder',
   dragFilesHereOrChooseFromFolder: 'Drag files here or choose from folder',
   error: 'Error',
@@ -21,6 +22,7 @@ const translation: Translation = {
   firstPage: 'First page',
   hidePassword: 'Hide password',
   hide: 'Hide',
+  increase: 'Increase',
   jumpBackward: 'Jump backward',
   jumpForward: 'Jump forward',
   lastPage: 'Last page',
@@ -51,7 +53,9 @@ const translation: Translation = {
     return `Showing all ${number} items`;
   },
   spoiler: 'Spoiler',
-  visualComparisonSlider: 'Visual comparison slider'
+  visualComparisonSlider: 'Visual comparison slider',
+  zoomIn: 'Zoom in',
+  zoomOut: 'Zoom out'
 };
 
 registerDefaultTranslation(translation);

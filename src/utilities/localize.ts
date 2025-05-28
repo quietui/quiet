@@ -23,6 +23,7 @@ export interface Translation extends DefaultTranslation {
   colorValue: string;
   copied: string;
   copyToClipboard: string;
+  decrease: string;
   dragFileHereOrChooseFromFolder: string;
   dragFilesHereOrChooseFromFolder: string;
   error: string;
@@ -31,6 +32,7 @@ export interface Translation extends DefaultTranslation {
   hidePassword: string;
   hide: string;
   hue: string;
+  increase: string;
   jumpBackward: string;
   jumpForward: string;
   lastPage: string;
@@ -55,4 +57,6 @@ export interface Translation extends DefaultTranslation {
   showingAllNumberItems: (number: number | string) => string;
   spoiler: string;
   visualComparisonSlider: string;
+  zoomIn: string;
+  zoomOut: string;
 }

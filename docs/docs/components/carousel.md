@@ -36,7 +36,7 @@ layout: component
 
 Slot in `<quiet-carousel>` items with the content you'd like to show in each slide. Images work well, but you can add just about any content, including interactive elements such as links and buttons.
 
-By default, the carousel spans 100% and uses a 16/9 aspect ratio. To accommodate various content, you can adjust this using the `--aspect-ratio` custom property as shown below. For full control over the width and height, you can target the `items` part using CSS.
+By default, the carousel spans 100% of the width and uses a 16/9 aspect ratio. You can adjust this using the `--aspect-ratio` custom property as shown below. For full control over the width and height, you can target the `items` part using CSS.
 
 ```html {.example}
 <quiet-carousel label="Example slides" id="carousel__providing">

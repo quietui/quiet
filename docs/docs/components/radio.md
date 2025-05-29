@@ -34,7 +34,7 @@ You can use the `label` and `description` attributes to provide plain text label
   <quiet-radio-item value="dog">Dog</quiet-radio-item>
   <quiet-radio-item value="bird">Bird</quiet-radio-item>
   <quiet-radio-item value="lizard">Lizard</quiet-radio-item>
-</quiet-radio-item>
+</quiet-radio>
 ```
 
 ### Providing an initial value
@@ -47,7 +47,7 @@ Use the `value` attribute to provide an initial value for the radio. The value s
   <quiet-radio-item value="medium">Medium</quiet-radio-item>
   <quiet-radio-item value="long">Long</quiet-radio-item>
   <quiet-radio-item value="hairless">Hairless</quiet-radio-item>
-</quiet-radio-item>
+</quiet-radio>
 ```
 
 :::warn
@@ -64,7 +64,7 @@ To stack radio items on top of each other instead of side by side, set the `orie
   <quiet-radio-item value="medium">Medium</quiet-radio-item>
   <quiet-radio-item value="long">Long</quiet-radio-item>
   <quiet-radio-item value="hairless">Hairless</quiet-radio-item>
-</quiet-radio-item>
+</quiet-radio>
 ```
 
 ### Filled radios
@@ -103,7 +103,8 @@ You can disable one or more radio items by adding the `disabled` attribute.
   <quiet-radio-item value="cat">Cat</quiet-radio-item>
   <quiet-radio-item value="dog" disabled>Dog</quiet-radio-item>
   <quiet-radio-item value="bird">Bird</quiet-radio-item>
-  <quiet-radio-item value="lizard">Lizard</quiet-radio-item></quiet-radio>
+  <quiet-radio-item value="lizard">Lizard</quiet-radio-item>
+</quiet-radio>
 ```
 
 ### Validation

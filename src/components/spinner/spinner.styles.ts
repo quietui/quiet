@@ -3,7 +3,7 @@ import { css } from 'lit';
 export default css`
   :host {
     --indicator-color: var(--quiet-primary-fill-mid);
-    --track-color: var(--quiet-neutral-stroke-softer);
+    --track-color: color-mix(in oklab, var(--quiet-neutral-fill-mid), transparent 75%);
     --speed: 0.75s;
 
     display: inline-flex;

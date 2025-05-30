@@ -68,9 +68,9 @@ export class QuietVeil extends QuietElement {
   updated(changedProperties: PropertyValues<this>) {
     // Activate or deactivate the veil
     if (changedProperties.has('active')) {
-      if (this.active && !this.customStates.has('active')) {
+      if (this.active) {
         this.activate();
-      } else if (!this.active && this.customStates.has('active')) {
+      } else if (!this.active) {
         this.deactivate();
       }
     }

@@ -53,6 +53,11 @@ export default css`
     inset: 0;
     border: none;
 
+    /* The dialog is acting as the backdrop */
+    &::backdrop {
+      display: none;
+    }
+
     &:focus {
       outline: none;
     }

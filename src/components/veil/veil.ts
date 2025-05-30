@@ -45,6 +45,7 @@ import styles from './veil.styles.js';
 export class QuietVeil extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
+  private isFirstUpdate = true;
   private localize = new Localize(this);
 
   @query('#front') front: HTMLDivElement;
@@ -58,6 +59,11 @@ export class QuietVeil extends QuietElement {
 
   /** Set to true to show the veil over the entire viewport instead of the content inside of it. */
   @property({ type: Boolean, reflect: true }) fullscreen = false;
+
+  firstUpdated() {
+    // Prevent the veil from animating when active initially
+    requestAnimationFrame(() => (this.isFirstUpdate = false));
+  }
 
   updated(changedProperties: PropertyValues<this>) {
     // Activate or deactivate the veil
@@ -101,7 +107,7 @@ export class QuietVeil extends QuietElement {
       this.dialog.showModal();
     }
 
-    if (this.hasUpdated) {
+    if (!this.isFirstUpdate) {
       await animateWithClass(this.front, 'show');
     }
 

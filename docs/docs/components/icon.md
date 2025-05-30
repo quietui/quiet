@@ -34,7 +34,7 @@ Quiet includes the popular [Tabler Icons](https://tabler.io/icons) library out o
 ```
 
 <p>
-  <quiet-button href="/docs/components/icon-search">
+  <quiet-button href="/docs/icon-search">
     Search for icons
     <quiet-icon slot="end" name="chevron-right"></quiet-icon>
   </quiet-button>

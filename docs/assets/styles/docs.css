@@ -794,7 +794,8 @@ quiet-badge.experimental {
 
   quiet-icon {
     font-size: 1.25rem;
-    vertical-align: -0.125em;
+    vertical-align: -0.25em;
+    opacity: 0.5;
   }
 }
 

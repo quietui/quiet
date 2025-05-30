@@ -153,7 +153,7 @@ export default function (eleventyConfig) {
       {
         replace: /\[experimental\]/gs,
         replaceWith:
-          '<quiet-badge class="experimental"><quiet-icon name="bulb"></quiet-icon> experimental</quiet-badge>'
+          '<quiet-badge class="experimental"><quiet-icon name="flask"></quiet-icon> experimental</quiet-badge>'
       },
       // Replace [stable] with a badge
       {

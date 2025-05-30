@@ -1,4 +1,3 @@
-// veil.styles.ts
 import { css } from 'lit';
 
 export default css`

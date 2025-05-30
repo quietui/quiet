@@ -109,7 +109,7 @@ async function generateFiles() {
     // Add to index with description
     indexOutput += `${titleCaseName} <${component.tagName}>\n`;
     indexOutput += `  Description: ${removeNewlines(component.summary) || 'No description available.'}\n`;
-    indexOutput += `  See ${fileName}\n\n`;
+    indexOutput += `  File: ./${fileName}\n\n`;
   });
 
   // Add index file write promise

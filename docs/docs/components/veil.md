@@ -5,7 +5,7 @@ layout: component
 
 ```html {.example}
 <div id="veil__overview">
-  <quiet-veil id="veil__overview">
+  <quiet-veil active>
     <quiet-card>
       <form>
         <quiet-text-field label="Name" name="name" placeholder="Meowy McGee"></quiet-text-field>
@@ -14,28 +14,15 @@ layout: component
       </form>
     </quiet-card>
   </quiet-veil>
+
+  <quiet-button toggle="on">Activated</quiet-button>
 </div>
-
-<script>
-  const container = document.getElementById('veil__overview');
-  const form = container.querySelector('form');
-  const veil = container.querySelector('quiet-veil');
-  
-  form.addEventListener('submit', event => {
-    event.preventDefault();
-
-    // Show the veil
-    veil.active = true;
-
-    // Simulate an async operation, then hide it
-    setTimeout(() => veil.active = false, 2000);
-  });
-</script>
 
 <style>
   #veil__overview {
     quiet-veil {
       max-width: 360px;
+      margin-block-end: 2rem;
     }
 
     form {
@@ -45,13 +32,26 @@ layout: component
     }
   }
 </style>
+
+<script>
+  const container = document.getElementById('veil__overview');
+  const veil = container.querySelector('quiet-veil');
+  const form = container.querySelector('form');
+  const activateButton = container.querySelector('quiet-button[toggle]');
+
+  form.addEventListener('submit', event => event.preventDefault());
+
+  activateButton.addEventListener('click', () => {
+    veil.active = activateButton.toggle === 'on';
+  });
+</script>
 ```
 
 ## Examples
 
 ### Controlling the veil
 
-Veils are designed to wrap block-level content. They are invisible and remain dormant until you activate them. When a veil is activated, it will show its `front` slot and everything inside of it will become [inert](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/inert) until deactivated.
+Veils are designed to wrap block-level content or [cover the entire screen](#fullscreen). They are invisible and remain dormant until you activate them. When a veil is activated, it will show its `front` slot and everything inside of it will become [inert](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/inert) until deactivated.
 
 To activate a veil, set the `active` property to `true`. To deactivate a veil, set the `active` property to `false`.
 
@@ -76,6 +76,31 @@ To activate a veil, set the `active` property to `true`. To deactivate a veil, s
     // Hide the veil
     veil.active = false;
   }
+</script>
+```
+
+### Fullscreen
+
+To cover the entire viewport, add the `fullscreen` attribute. Under the hood, a modal dialog is used to ensure the rest of the document is inert until the veil is deactivated.
+
+```html {.example}
+<div id="veil__fullscreen">
+  <quiet-veil fullscreen></quiet-veil>
+  <quiet-button variant="primary">Try it for two seconds</quiet-button>
+</div>
+
+<script>
+  const container = document.getElementById('veil__fullscreen');
+  const veil = container.querySelector('quiet-veil');
+  const button = container.querySelector('quiet-button');
+  
+  button.addEventListener('click', () => {
+    // Show the veil
+    veil.active = true;
+
+    // Simulate an async operation, then hide it
+    setTimeout(() => veil.active = false, 2000);
+  });
 </script>
 ```
 

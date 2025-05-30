@@ -43,6 +43,21 @@ export default css`
     }
   }
 
+  dialog#front {
+    position: fixed;
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    max-height: none;
+    margin: 0;
+    inset: 0;
+    border: none;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
   /* Hidden state */
   :host(:not(:state(active))) #front {
     display: none;

@@ -12,6 +12,7 @@ import hostStyles from '../../styles/host.styles.js';
 import { animateWithClass } from '../../utilities/animate.js';
 import { Localize } from '../../utilities/localize.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
+import { lockScrolling, unlockScrolling } from '../../utilities/scroll.js';
 import '../spinner/spinner.js';
 import styles from './veil.styles.js';
 
@@ -47,12 +48,16 @@ export class QuietVeil extends QuietElement {
   private localize = new Localize(this);
 
   @query('#front') front: HTMLDivElement;
+  @query('dialog') dialog: HTMLDialogElement;
 
   /** The label for screen readers when veil is active. */
   @property({ type: String, attribute: 'aria-label' }) label = '';
 
   /** Description of the property. */
   @property({ type: Boolean, reflect: true }) active = false;
+
+  /** Set to true to show the veil over the entire viewport instead of the content inside of it. */
+  @property({ type: Boolean, reflect: true }) fullscreen = false;
 
   updated(changedProperties: PropertyValues<this>) {
     // Activate or deactivate the veil
@@ -63,11 +68,25 @@ export class QuietVeil extends QuietElement {
         this.deactivate();
       }
     }
+
+    // Toggle fullscreen
+    if (changedProperties.has('fullscreen')) {
+      if (!this.active) return;
+
+      if (this.fullscreen) {
+        lockScrolling(this);
+        this.dialog.showModal();
+      } else {
+        unlockScrolling(this);
+        this.dialog?.close();
+      }
+    }
   }
 
   /** Activates the veil. */
   private async activate() {
     const beforeActivateEvent = new QuietBeforeActivateEvent();
+
     this.dispatchEvent(beforeActivateEvent);
     if (beforeActivateEvent.defaultPrevented) {
       this.active = false;
@@ -75,13 +94,24 @@ export class QuietVeil extends QuietElement {
     }
 
     this.customStates.set('active', true);
-    await animateWithClass(this.front, 'show');
+    document.addEventListener('keydown', this.handleDocumentKeyDown);
+
+    if (this.fullscreen) {
+      lockScrolling(this);
+      this.dialog.showModal();
+    }
+
+    if (this.hasUpdated) {
+      await animateWithClass(this.front, 'show');
+    }
+
     this.dispatchEvent(new QuietActivateEvent());
   }
 
   /** Deactivates the veil. */
   private async deactivate() {
     const beforeDeactivateEvent = new QuietBeforeDeactivateEvent();
+
     this.dispatchEvent(beforeDeactivateEvent);
     if (beforeDeactivateEvent.defaultPrevented) {
       this.active = true;
@@ -89,25 +119,49 @@ export class QuietVeil extends QuietElement {
     }
 
     await animateWithClass(this.front, 'hide');
+
     this.customStates.set('active', false);
+    document.removeEventListener('keydown', this.handleDocumentKeyDown);
+
+    unlockScrolling(this);
+    this.dialog?.close();
+
     this.dispatchEvent(new QuietDeactivateEvent());
   }
 
+  private handleDialogCancel(event: Event) {
+    // Prevents the escape key from closing the dialog
+    event.preventDefault();
+  }
+
+  private handleDocumentKeyDown = (event: KeyboardEvent) => {
+    // Prevent escape from closing the dialog
+    if (event.key === 'Escape' && this.fullscreen) {
+      event.preventDefault();
+    }
+  };
+
   render() {
     return html`
-      <div id="front" role="status" aria-live="polite" aria-label=${this.label || this.localize.term('loading')}>
-        <slot name="front">
-          <quiet-spinner></quiet-spinner>
-        </slot>
-      </div>
+      ${this.fullscreen
+        ? // fullscreen view
+          html`
+            <dialog id="front" @cancel=${this.handleDialogCancel}>
+              <slot name="front">
+                <quiet-spinner></quiet-spinner>
+              </slot>
+            </dialog>
+          `
+        : // contained view
+          html`
+            <div id="front" role="status" aria-live="polite" aria-label=${this.label || this.localize.term('loading')}>
+              <slot name="front">
+                <quiet-spinner></quiet-spinner>
+              </slot>
+            </div>
 
-      <div
-        ?inert=${this.active}
-        aria-busy=${this.active ? 'true' : 'false'}
-        aria-hidden=${this.active ? 'true' : 'false'}
-      >
-        <slot></slot>
-      </div>
+            <slot ?inert=${this.active}></slot>
+          `}
     `;
   }
 }

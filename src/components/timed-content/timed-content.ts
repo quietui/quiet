@@ -3,13 +3,13 @@ import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import hostStyles from '../../styles/host.styles.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
-import styles from './between.styles.js';
+import styles from './timed-content.styles.js';
 
 /**
- * <quiet-between>
+ * <quiet-timed-content>
  *
- * @summary Between shows certain content based on the current date.
- * @documentation https://quietui.org/docs/components/between
+ * @summary Timed content shows certain content based on the current date and time.
+ * @documentation https://quietui.org/docs/components/timed-content
  * @status stable
  * @since 1.0
  *
@@ -17,8 +17,8 @@ import styles from './between.styles.js';
  * @slot before - Optional content that shows before the specified date/time.
  * @slot after - Optional content that shows after the specified date/time.
  */
-@customElement('quiet-between')
-export class QuietBetween extends QuietElement {
+@customElement('quiet-timed-content')
+export class QuietTimedContent extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
   private updateInterval: ReturnType<typeof setInterval> | undefined;
@@ -96,6 +96,6 @@ export class QuietBetween extends QuietElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'quiet-between': QuietBetween;
+    'quiet-timed-content': QuietTimedContent;
   }
 }

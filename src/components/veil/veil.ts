@@ -52,7 +52,7 @@ export class QuietVeil extends QuietElement {
   @query('dialog') dialog: HTMLDialogElement;
 
   /** The label for screen readers when veil is active. */
-  @property({ type: String, attribute: 'aria-label' }) label = '';
+  @property({ type: String, attribute: 'label' }) label = '';
 
   /** Description of the property. */
   @property({ type: Boolean, reflect: true }) active = false;
@@ -148,19 +148,20 @@ export class QuietVeil extends QuietElement {
   };
 
   render() {
+    const label = this.label || this.localize.term('loading');
     return html`
       ${this.fullscreen
         ? // fullscreen view
           html`
             <dialog id="front" @cancel=${this.handleDialogCancel}>
               <slot name="front">
-                <quiet-spinner></quiet-spinner>
+                <quiet-spinner label=${label}></quiet-spinner>
               </slot>
             </dialog>
           `
         : // contained view
           html`
-            <div id="front" role="status" aria-live="polite" aria-label=${this.label || this.localize.term('loading')}>
+            <div id="front" role="status" aria-live="polite" aria-label=${label}>
               <slot name="front">
                 <quiet-spinner></quiet-spinner>
               </slot>

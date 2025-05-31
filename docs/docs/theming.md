@@ -659,6 +659,42 @@ This is the recommended approach. 👆
 
 If you _really_ want to create an entirely new theme, the most efficient way is to fork ("copy") the [default theme's CSS](https://github.com/quietui/quiet/blob/main/src/themes/quiet.css) and modify it. This is faster, easier, and will result in less mistakes than starting from scratch.
 
+## Adding custom variants
+
+Some components offer multiple variants and appearances. Consider buttons, for example:
+
+```html
+<quiet-button>Normal button</quiet-button>
+<quiet-button variant="primary">Primary button</quiet-button>
+<quiet-button variant="destructive">Destructive button</quiet-button>
+```
+
+It may be tempting to add your own variants using attribute selectors.
+
+```html
+<quiet-button variant="custom-variant">Custom button</quiet-button>
+
+<style>
+  quiet-button[custom-variant] {
+    /* custom styles */
+  }
+</style>
+```
+
+But it's much better to use classes for this purpose.
+
+```html
+<quiet-button class="custom-variant">Custom button</quiet-button>
+
+<style>
+  quiet-button.custom-variant {
+    /* custom styles */
+  }
+</style>
+```
+
+This prevents type errors for users who have type checking enabled. It also maintains a clear separation between the library's responsibilities and your app's customizations.
+
 <!-- Page styles -->
 <style>
   .palette {

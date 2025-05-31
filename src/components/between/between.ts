@@ -55,7 +55,7 @@ export class QuietBetween extends QuietElement {
     }
   }
 
-  // Update every minute to check for date changes
+  // Update every 60 seconds to check for date changes
   private setupTimer() {
     this.cleanupTimer();
     this.updateInterval = setInterval(() => this.requestUpdate(), 60000);

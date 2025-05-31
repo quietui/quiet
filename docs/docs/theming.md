@@ -657,7 +657,7 @@ If you just want to change a few things here and there, it's usually better to l
 
 This is the recommended approach. 👆
 
-If you _really_ want to create an entirely new theme, the most efficient way is to fork ("copy") the [default theme's CSS](https://github.com/quietui/quiet/blob/main/src/themes/quiet.css) and modify it instead of writing everything from scratch. This is faster, easier, and less prone to mistakes.
+If you _really_ want to create an entirely new theme, the most efficient way is to fork ("copy") the [default theme's CSS](https://github.com/quietui/quiet/blob/main/src/themes/quiet.css) and modify it. This is faster, easier, and will result in less mistakes than starting from scratch.
 
 <!-- Page styles -->
 <style>

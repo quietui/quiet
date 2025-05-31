@@ -64,7 +64,10 @@ window.addEventListener('scroll', updateScrollClass);
 window.addEventListener('turbo:render', updateScrollClass);
 updateScrollClass();
 
-// Restore scroll position after components are defined
+//
+// Restore scroll position after components are defined. This prevents the page from moving around when reloading,
+// which is especially annoying in a development environment.
+//
 allDefined().then(() => {
   const navigationType = getNavigationType();
   const key = `scroll-y-[${location.pathname}]`;

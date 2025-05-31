@@ -12,16 +12,24 @@ layout: component
 </quiet-between>
 
 <script>
+  // Obtain a reference
   const between = document.getElementById('between__overview');
 
-  // Get Date objects for the current year's National Cat Day
+  // Calculate dates for this year's National Cat Day
   const currentYear = new Date().getFullYear();
   const catDayStart = new Date(currentYear, 9, 29).setHours(0, 0, 0, 0); // October = 9
   const catDayEnd = new Date(currentYear, 9, 29).setHours(23, 59, 59, 999);
 
+  // Set the start and end dates
   between.startDate = new Date(catDayStart);
   between.endDate = new Date(catDayEnd);
 </script>
+
+<style>
+  #between__overview p {
+    margin-block-end: 0;
+  }
+</style>
 ```
 
 :::info

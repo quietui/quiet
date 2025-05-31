@@ -1,6 +1,6 @@
 import type { CSSResultGroup } from 'lit';
 import { html } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 import hostStyles from '../../styles/host.styles.js';
 import { Localize } from '../../utilities/localize.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
@@ -31,9 +31,13 @@ export class QuietSpinner extends QuietElement {
 
   private localize = new Localize(this);
 
+  /** A custom label for screen readers. */
+  @property({ type: String, attribute: 'label' }) label = '';
+
   firstUpdated() {
+    const label = this.label || this.localize.term('loading');
     this.setAttribute('role', 'progressbar');
-    this.setAttribute('aria-label', this.localize.term('loading'));
+    this.setAttribute('aria-label', label);
   }
 
   render() {

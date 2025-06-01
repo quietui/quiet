@@ -29,7 +29,7 @@ Slot in some text to show content in the progress bar's indicator.
 
 ### Progress rings
 
-Set the `type` attribute to `ring` to show progress in the shape of a ring.
+Set the `appearance` attribute to `ring` to show progress in the shape of a ring.
 
 ```html {.example .flex-row}
 <quiet-progress label="Completion" appearance="ring" value="50">

@@ -11,9 +11,9 @@ Tab lists follow the [ARIA APG tooltip pattern](https://www.w3.org/WAI/ARIA/apg/
 	<quiet-tab panel="second">Second</quiet-tab>
 	<quiet-tab panel="third">Third</quiet-tab>
 
-	<quiet-tab-panel name="first">Lobortis mattis aliquam faucibus purus in massa tempor. Eu lobortis elementum nibh tellus molestie nunc non blandit. Ultrices sagittis orci a scelerisque purus.</quiet-tab-panel>
-	<quiet-tab-panel name="second">Vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum. Aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices.</quiet-tab-panel>
-	<quiet-tab-panel name="third">Pretium vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae. Mattis enim ut tellus elementum. Ultrices dui sapien eget mi proin sed libero.</quiet-tab-panel>
+	<quiet-tab-panel name="first">Whiskers twitching with curiosity, cats patrol their domain with silent paws and keen eyes. Every corner holds potential adventure or the perfect sunny spot for an afternoon nap.</quiet-tab-panel>
+	<quiet-tab-panel name="second">Purring contentedly on warm windowsills, felines observe the world with ancient wisdom. Their graceful movements and mysterious expressions captivate humans across all cultures.</quiet-tab-panel>
+	<quiet-tab-panel name="third">Playful pouncing and midnight zoomies reveal the wild hunter within every house cat. From cardboard boxes to feather toys, everything becomes an exciting opportunity for feline fun.</quiet-tab-panel>
 </quiet-tab-list>
 ```
 
@@ -33,9 +33,9 @@ To make a specific tab show initially, or to programmatically activate a tab, se
 	<quiet-tab panel="second">Second</quiet-tab>
 	<quiet-tab panel="third">Third</quiet-tab>
 
-	<quiet-tab-panel name="first">Lobortis mattis aliquam faucibus purus in massa tempor. Eu lobortis elementum nibh tellus molestie nunc non blandit. Ultrices sagittis orci a scelerisque purus.</quiet-tab-panel>
-	<quiet-tab-panel name="second">Vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum. Aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices.</quiet-tab-panel>
-	<quiet-tab-panel name="third">Pretium vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae. Mattis enim ut tellus elementum. Ultrices dui sapien eget mi proin sed libero.</quiet-tab-panel>
+	<quiet-tab-panel name="first">Whiskers twitching with curiosity, cats patrol their domain with silent paws and keen eyes. Every corner holds potential adventure or the perfect sunny spot for an afternoon nap.</quiet-tab-panel>
+	<quiet-tab-panel name="second">Purring contentedly on warm windowsills, felines observe the world with ancient wisdom. Their graceful movements and mysterious expressions captivate humans across all cultures.</quiet-tab-panel>
+	<quiet-tab-panel name="third">Playful pouncing and midnight zoomies reveal the wild hunter within every house cat. From cardboard boxes to feather toys, everything becomes an exciting opportunity for feline fun.</quiet-tab-panel>
 </quiet-tab-list>
 ```
 
@@ -49,9 +49,9 @@ Set the `placement` attribute to `bottom` to show tabs at the bottom.
 	<quiet-tab panel="second">Second</quiet-tab>
 	<quiet-tab panel="third">Third</quiet-tab>
 
-	<quiet-tab-panel name="first">Lobortis mattis aliquam faucibus purus in massa tempor. Eu lobortis elementum nibh tellus molestie nunc non blandit. Ultrices sagittis orci a scelerisque purus.</quiet-tab-panel>
-	<quiet-tab-panel name="second">Vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum. Aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices.</quiet-tab-panel>
-	<quiet-tab-panel name="third">Pretium vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae. Mattis enim ut tellus elementum. Ultrices dui sapien eget mi proin sed libero.</quiet-tab-panel>
+	<quiet-tab-panel name="first">Whiskers twitching with curiosity, cats patrol their domain with silent paws and keen eyes. Every corner holds potential adventure or the perfect sunny spot for an afternoon nap.</quiet-tab-panel>
+	<quiet-tab-panel name="second">Purring contentedly on warm windowsills, felines observe the world with ancient wisdom. Their graceful movements and mysterious expressions captivate humans across all cultures.</quiet-tab-panel>
+	<quiet-tab-panel name="third">Playful pouncing and midnight zoomies reveal the wild hunter within every house cat. From cardboard boxes to feather toys, everything becomes an exciting opportunity for feline fun.</quiet-tab-panel>
 </quiet-tab-list>
 ```
 
@@ -65,9 +65,9 @@ Set the `placement` attribute to `start` to show tabs at the start. The tabs wil
 	<quiet-tab panel="second">Second</quiet-tab>
 	<quiet-tab panel="third">Third</quiet-tab>
 
-	<quiet-tab-panel name="first">Lobortis mattis aliquam faucibus purus in massa tempor. Eu lobortis elementum nibh tellus molestie nunc non blandit. Ultrices sagittis orci a scelerisque purus.</quiet-tab-panel>
-	<quiet-tab-panel name="second">Vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum. Aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices.</quiet-tab-panel>
-	<quiet-tab-panel name="third">Pretium vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae. Mattis enim ut tellus elementum. Ultrices dui sapien eget mi proin sed libero.</quiet-tab-panel>
+	<quiet-tab-panel name="first">Whiskers twitching with curiosity, cats patrol their domain with silent paws and keen eyes. Every corner holds potential adventure or the perfect sunny spot for an afternoon nap.</quiet-tab-panel>
+	<quiet-tab-panel name="second">Purring contentedly on warm windowsills, felines observe the world with ancient wisdom. Their graceful movements and mysterious expressions captivate humans across all cultures.</quiet-tab-panel>
+	<quiet-tab-panel name="third">Playful pouncing and midnight zoomies reveal the wild hunter within every house cat. From cardboard boxes to feather toys, everything becomes an exciting opportunity for feline fun.</quiet-tab-panel>
 </quiet-tab-list>
 ```
 
@@ -81,9 +81,9 @@ Set the `placement` attribute to `end` to show tabs at the end. The tabs will au
 	<quiet-tab panel="second">Second</quiet-tab>
 	<quiet-tab panel="third">Third</quiet-tab>
 
-	<quiet-tab-panel name="first">Lobortis mattis aliquam faucibus purus in massa tempor. Eu lobortis elementum nibh tellus molestie nunc non blandit. Ultrices sagittis orci a scelerisque purus.</quiet-tab-panel>
-	<quiet-tab-panel name="second">Vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum. Aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices.</quiet-tab-panel>
-	<quiet-tab-panel name="third">Pretium vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae. Mattis enim ut tellus elementum. Ultrices dui sapien eget mi proin sed libero.</quiet-tab-panel>
+	<quiet-tab-panel name="first">Whiskers twitching with curiosity, cats patrol their domain with silent paws and keen eyes. Every corner holds potential adventure or the perfect sunny spot for an afternoon nap.</quiet-tab-panel>
+	<quiet-tab-panel name="second">Purring contentedly on warm windowsills, felines observe the world with ancient wisdom. Their graceful movements and mysterious expressions captivate humans across all cultures.</quiet-tab-panel>
+	<quiet-tab-panel name="third">Playful pouncing and midnight zoomies reveal the wild hunter within every house cat. From cardboard boxes to feather toys, everything becomes an exciting opportunity for feline fun.</quiet-tab-panel>
 </quiet-tab-list>
 ```
 
@@ -104,16 +104,16 @@ When the number of tabs exceeds the available space in a top or bottom placement
 	<quiet-tab panel="ninth">Ninth</quiet-tab>
 	<quiet-tab panel="tenth">Tenth</quiet-tab>
 
-	<quiet-tab-panel name="first">Lobortis mattis aliquam faucibus purus in massa tempor. Eu lobortis elementum nibh tellus molestie nunc non blandit. Ultrices sagittis orci a scelerisque purus.</quiet-tab-panel>
-	<quiet-tab-panel name="second">Vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum. Aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices.</quiet-tab-panel>
-	<quiet-tab-panel name="third">Pretium vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae. Mattis enim ut tellus elementum. Ultrices dui sapien eget mi proin sed libero.</quiet-tab-panel>
-	<quiet-tab-panel name="fourth">Lobortis mattis aliquam faucibus purus in massa tempor. Eu lobortis elementum nibh tellus molestie nunc non blandit. Ultrices sagittis orci a scelerisque purus.</quiet-tab-panel>
-	<quiet-tab-panel name="fifth">Vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum. Aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices.</quiet-tab-panel>
-	<quiet-tab-panel name="sixth">Pretium vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae. Mattis enim ut tellus elementum. Ultrices dui sapien eget mi proin sed libero.</quiet-tab-panel>
-	<quiet-tab-panel name="seventh">Lobortis mattis aliquam faucibus purus in massa tempor. Eu lobortis elementum nibh tellus molestie nunc non blandit. Ultrices sagittis orci a scelerisque purus.</quiet-tab-panel>
-	<quiet-tab-panel name="eight">Vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum. Aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices.</quiet-tab-panel>
-	<quiet-tab-panel name="ninth">Pretium vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae. Mattis enim ut tellus elementum. Ultrices dui sapien eget mi proin sed libero.</quiet-tab-panel>
-	<quiet-tab-panel name="tenth">Lobortis mattis aliquam faucibus purus in massa tempor. Eu lobortis elementum nibh tellus molestie nunc non blandit. Ultrices sagittis orci a scelerisque purus.</quiet-tab-panel>
+	<quiet-tab-panel name="first">Whiskers twitching with curiosity, cats patrol their domain with silent paws and keen eyes. Every corner holds potential adventure or the perfect sunny spot for an afternoon nap.</quiet-tab-panel>
+	<quiet-tab-panel name="second">Purring contentedly on warm windowsills, felines observe the world with ancient wisdom. Their graceful movements and mysterious expressions captivate humans across all cultures.</quiet-tab-panel>
+	<quiet-tab-panel name="third">Playful pouncing and midnight zoomies reveal the wild hunter within every house cat. From cardboard boxes to feather toys, everything becomes an exciting opportunity for feline fun.</quiet-tab-panel>
+	<quiet-tab-panel name="fourth">Stealthy shadows in the moonlight, cats emerge for nocturnal adventures through gardens and alleyways. Their night vision reveals a secret world invisible to human eyes during daylight hours.</quiet-tab-panel>
+	<quiet-tab-panel name="fifth">Cozy blanket burrows become the ultimate fortress for sleepy kitties seeking warmth. The rhythmic breathing of a napping cat creates the most soothing soundtrack for peaceful afternoons.</quiet-tab-panel>
+	<quiet-tab-panel name="sixth">Laser pointer dots trigger ancient hunting instincts, sending cats into acrobatic displays of athleticism. Every red dot becomes the ultimate prey in this eternal game of chase and pounce.</quiet-tab-panel>
+	<quiet-tab-panel name="seventh">Catnip-infused toys transform ordinary house cats into euphoric party animals rolling with unbridled joy. This magical herb unlocks a level of feline happiness that's absolutely contagious to witness.</quiet-tab-panel>
+	<quiet-tab-panel name="eight">Scratching posts serve as both manicure stations and territorial markers for our feline friends. Each scratch communicates ownership while maintaining those razor-sharp claws in perfect hunting condition.</quiet-tab-panel>
+	<quiet-tab-panel name="ninth">Cardboard boxes become luxury penthouses in the cat real estate market, regardless of size. Whether tiny or enormous, every box offers the perfect hideout for surveillance and surprise attacks.</quiet-tab-panel>
+	<quiet-tab-panel name="tenth">Sunrise stretches and yoga poses demonstrate the incredible flexibility that makes cats natural contortionists. Their graceful movements inspire humans to embrace daily stretching routines for better health.</quiet-tab-panel>
 </quiet-tab-list>
 ```
 
@@ -132,16 +132,16 @@ If you don't want the tabs to scroll, you can apply `flex-wrap: wrap` to the `ta
 	<quiet-tab panel="ninth">Ninth</quiet-tab>
 	<quiet-tab panel="tenth">Tenth</quiet-tab>
 
-	<quiet-tab-panel name="first">Lobortis mattis aliquam faucibus purus in massa tempor. Eu lobortis elementum nibh tellus molestie nunc non blandit. Ultrices sagittis orci a scelerisque purus.</quiet-tab-panel>
-	<quiet-tab-panel name="second">Vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum. Aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices.</quiet-tab-panel>
-	<quiet-tab-panel name="third">Pretium vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae. Mattis enim ut tellus elementum. Ultrices dui sapien eget mi proin sed libero.</quiet-tab-panel>
-	<quiet-tab-panel name="fourth">Lobortis mattis aliquam faucibus purus in massa tempor. Eu lobortis elementum nibh tellus molestie nunc non blandit. Ultrices sagittis orci a scelerisque purus.</quiet-tab-panel>
-	<quiet-tab-panel name="fifth">Vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum. Aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices.</quiet-tab-panel>
-	<quiet-tab-panel name="sixth">Pretium vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae. Mattis enim ut tellus elementum. Ultrices dui sapien eget mi proin sed libero.</quiet-tab-panel>
-	<quiet-tab-panel name="seventh">Lobortis mattis aliquam faucibus purus in massa tempor. Eu lobortis elementum nibh tellus molestie nunc non blandit. Ultrices sagittis orci a scelerisque purus.</quiet-tab-panel>
-	<quiet-tab-panel name="eight">Vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum. Aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices.</quiet-tab-panel>
-	<quiet-tab-panel name="ninth">Pretium vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae. Mattis enim ut tellus elementum. Ultrices dui sapien eget mi proin sed libero.</quiet-tab-panel>
-	<quiet-tab-panel name="tenth">Lobortis mattis aliquam faucibus purus in massa tempor. Eu lobortis elementum nibh tellus molestie nunc non blandit. Ultrices sagittis orci a scelerisque purus.</quiet-tab-panel>
+	<quiet-tab-panel name="first">Whiskers twitching with curiosity, cats patrol their domain with silent paws and keen eyes. Every corner holds potential adventure or the perfect sunny spot for an afternoon nap.</quiet-tab-panel>
+	<quiet-tab-panel name="second">Purring contentedly on warm windowsills, felines observe the world with ancient wisdom. Their graceful movements and mysterious expressions captivate humans across all cultures.</quiet-tab-panel>
+	<quiet-tab-panel name="third">Playful pouncing and midnight zoomies reveal the wild hunter within every house cat. From cardboard boxes to feather toys, everything becomes an exciting opportunity for feline fun.</quiet-tab-panel>
+	<quiet-tab-panel name="fourth">Stealthy shadows in the moonlight, cats emerge for nocturnal adventures through gardens and alleyways. Their night vision reveals a secret world invisible to human eyes during daylight hours.</quiet-tab-panel>
+	<quiet-tab-panel name="fifth">Cozy blanket burrows become the ultimate fortress for sleepy kitties seeking warmth. The rhythmic breathing of a napping cat creates the most soothing soundtrack for peaceful afternoons.</quiet-tab-panel>
+	<quiet-tab-panel name="sixth">Laser pointer dots trigger ancient hunting instincts, sending cats into acrobatic displays of athleticism. Every red dot becomes the ultimate prey in this eternal game of chase and pounce.</quiet-tab-panel>
+	<quiet-tab-panel name="seventh">Catnip-infused toys transform ordinary house cats into euphoric party animals rolling with unbridled joy. This magical herb unlocks a level of feline happiness that's absolutely contagious to witness.</quiet-tab-panel>
+	<quiet-tab-panel name="eight">Scratching posts serve as both manicure stations and territorial markers for our feline friends. Each scratch communicates ownership while maintaining those razor-sharp claws in perfect hunting condition.</quiet-tab-panel>
+	<quiet-tab-panel name="ninth">Cardboard boxes become luxury penthouses in the cat real estate market, regardless of size. Whether tiny or enormous, every box offers the perfect hideout for surveillance and surprise attacks.</quiet-tab-panel>
+	<quiet-tab-panel name="tenth">Sunrise stretches and yoga poses demonstrate the incredible flexibility that makes cats natural contortionists. Their graceful movements inspire humans to embrace daily stretching routines for better health.</quiet-tab-panel>
 </quiet-tab-list>
 
 <style>
@@ -161,9 +161,9 @@ To disable a tab, add the `disabled` attribute to it. Since tabs use [automatic 
 	<quiet-tab panel="second" disabled>Second (disabled)</quiet-tab>
 	<quiet-tab panel="third">Third</quiet-tab>
 
-	<quiet-tab-panel name="first">Lobortis mattis aliquam faucibus purus in massa tempor. Eu lobortis elementum nibh tellus molestie nunc non blandit. Ultrices sagittis orci a scelerisque purus.</quiet-tab-panel>
-	<quiet-tab-panel name="second">Vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum. Aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices.</quiet-tab-panel>
-	<quiet-tab-panel name="third">Pretium vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae. Mattis enim ut tellus elementum. Ultrices dui sapien eget mi proin sed libero.</quiet-tab-panel>
+	<quiet-tab-panel name="first">Whiskers twitching with curiosity, cats patrol their domain with silent paws and keen eyes. Every corner holds potential adventure or the perfect sunny spot for an afternoon nap.</quiet-tab-panel>
+	<quiet-tab-panel name="second">Purring contentedly on warm windowsills, felines observe the world with ancient wisdom. Their graceful movements and mysterious expressions captivate humans across all cultures.</quiet-tab-panel>
+	<quiet-tab-panel name="third">Playful pouncing and midnight zoomies reveal the wild hunter within every house cat. From cardboard boxes to feather toys, everything becomes an exciting opportunity for feline fun.</quiet-tab-panel>
 </quiet-tab-list>
 ```
 
@@ -176,7 +176,7 @@ Quiet considers lazy loading tab content to be an anti-pattern but, when necessa
 	<quiet-tab panel="regular">Regular</quiet-tab>
 	<quiet-tab panel="lazy">Lazy</quiet-tab>
 
-	<quiet-tab-panel name="regular">Vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum. Aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices.</quiet-tab-panel>
+	<quiet-tab-panel name="regular">Purring contentedly on warm windowsills, felines observe the world with ancient wisdom. Their graceful movements and mysterious expressions captivate humans across all cultures.</quiet-tab-panel>
 	<quiet-tab-panel name="lazy">
     <quiet-spinner label="Loading" style="display: block; margin-inline: auto;"></quiet-spinner>
   </quiet-tab-panel>
@@ -193,7 +193,7 @@ Quiet considers lazy loading tab content to be an anti-pattern but, when necessa
       // Some async operation...
 
       setTimeout(() => {
-        lazyPanel.innerHTML = 'I was loaded after the tab was shown.';
+        lazyPanel.innerHTML = 'Surprise! A sleepy kitten just finished loading and is now ready for belly rubs and treats.';
       }, 2000);
     }
   });
@@ -215,9 +215,9 @@ Note that we use `tabindex="-1"` on the close button to prevent it from interfer
   </quiet-button>
 	<quiet-tab panel="third">Third</quiet-tab>
 
-	<quiet-tab-panel name="first">Lobortis mattis aliquam faucibus purus in massa tempor. Eu lobortis elementum nibh tellus molestie nunc non blandit. Ultrices sagittis orci a scelerisque purus.</quiet-tab-panel>
-	<quiet-tab-panel name="second">Vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum. Aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices.</quiet-tab-panel>
-	<quiet-tab-panel name="third">Pretium vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae. Mattis enim ut tellus elementum. Ultrices dui sapien eget mi proin sed libero.</quiet-tab-panel>
+	<quiet-tab-panel name="first">Whiskers twitching with curiosity, cats patrol their domain with silent paws and keen eyes. Every corner holds potential adventure or the perfect sunny spot for an afternoon nap.</quiet-tab-panel>
+	<quiet-tab-panel name="second">Purring contentedly on warm windowsills, felines observe the world with ancient wisdom. Their graceful movements and mysterious expressions captivate humans across all cultures.</quiet-tab-panel>
+	<quiet-tab-panel name="third">Playful pouncing and midnight zoomies reveal the wild hunter within every house cat. From cardboard boxes to feather toys, everything becomes an exciting opportunity for feline fun.</quiet-tab-panel>
 </quiet-tab-list>
 
 <quiet-button disabled style="margin-block-start: 2rem;">Restore Tab</quiet-button>
@@ -289,9 +289,9 @@ Tab lists come with a simple, minimal appearance. Feel free to customize them wi
 	<quiet-tab panel="second">Second</quiet-tab>
 	<quiet-tab panel="third">Third</quiet-tab>
 
-	<quiet-tab-panel name="first">Lobortis mattis aliquam faucibus purus in massa tempor. Eu lobortis elementum nibh tellus molestie nunc non blandit. Ultrices sagittis orci a scelerisque purus.</quiet-tab-panel>
-	<quiet-tab-panel name="second">Vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum. Aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices.</quiet-tab-panel>
-	<quiet-tab-panel name="third">Pretium vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae. Mattis enim ut tellus elementum. Ultrices dui sapien eget mi proin sed libero.</quiet-tab-panel>
+	<quiet-tab-panel name="first">Whiskers twitching with curiosity, cats patrol their domain with silent paws and keen eyes. Every corner holds potential adventure or the perfect sunny spot for an afternoon nap.</quiet-tab-panel>
+	<quiet-tab-panel name="second">Purring contentedly on warm windowsills, felines observe the world with ancient wisdom. Their graceful movements and mysterious expressions captivate humans across all cultures.</quiet-tab-panel>
+	<quiet-tab-panel name="third">Playful pouncing and midnight zoomies reveal the wild hunter within every house cat. From cardboard boxes to feather toys, everything becomes an exciting opportunity for feline fun.</quiet-tab-panel>
 </quiet-tab-list>
 
 <style>
@@ -349,9 +349,9 @@ Tab lists come with a simple, minimal appearance. Feel free to customize them wi
 	<quiet-tab panel="second">Second</quiet-tab>
 	<quiet-tab panel="third">Third</quiet-tab>
 
-	<quiet-tab-panel name="first">Lobortis mattis aliquam faucibus purus in massa tempor. Eu lobortis elementum nibh tellus molestie nunc non blandit. Ultrices sagittis orci a scelerisque purus.</quiet-tab-panel>
-	<quiet-tab-panel name="second">Vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum. Aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices.</quiet-tab-panel>
-	<quiet-tab-panel name="third">Pretium vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae. Mattis enim ut tellus elementum. Ultrices dui sapien eget mi proin sed libero.</quiet-tab-panel>
+	<quiet-tab-panel name="first">Whiskers twitching with curiosity, cats patrol their domain with silent paws and keen eyes. Every corner holds potential adventure or the perfect sunny spot for an afternoon nap.</quiet-tab-panel>
+	<quiet-tab-panel name="second">Purring contentedly on warm windowsills, felines observe the world with ancient wisdom. Their graceful movements and mysterious expressions captivate humans across all cultures.</quiet-tab-panel>
+	<quiet-tab-panel name="third">Playful pouncing and midnight zoomies reveal the wild hunter within every house cat. From cardboard boxes to feather toys, everything becomes an exciting opportunity for feline fun.</quiet-tab-panel>
 </quiet-tab-list>
 
 <style>

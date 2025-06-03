@@ -46,6 +46,7 @@ This library's power lies not in keeping up with the latest trends, but in speak
 ## What's with all the cats?
 
 The cats? Oh, uh, I'm not really sure. They keep sneaking into the docs. I think they like the logo.
+
 ## Special thanks
 
 I'd like to thank the following projects and people for making Quiet UI possible.

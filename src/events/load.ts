@@ -26,3 +26,14 @@ declare global {
     'quiet-load-error': QuietLoadErrorEvent;
   }
 }
+
+/** Emitted when scrolling has reached the threshold and more items should be loaded. */
+export class QuietLoadMoreEvent extends Event {
+  constructor() {
+    super('quiet-load-more', {
+      bubbles: true,
+      cancelable: false,
+      composed: true
+    });
+  }
+}

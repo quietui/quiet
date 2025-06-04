@@ -73,7 +73,6 @@ export class QuietColorPicker extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, formControlStyles, styles];
 
   private colorSliderBoundingClientRect: DOMRect;
-
   private draggableThumb: DraggableElement;
   private isDragging = false;
   private localize = new Localize(this);

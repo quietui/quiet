@@ -18,7 +18,7 @@ import styles from './infinite-scroll.styles.js';
  *
  * @slot - The default slot for feed items. Each item should have role="article" and be focusable.
  *
- * @event quiet-load-more - Emitted once when scrolling reaches the threshold and more items should be loaded.
+ * @event quiet-load-more - Emitted when scrolling reaches the threshold and more items should be loaded.
  *
  * @cssstate loading - Applied when the infinite scroll is loading more content.
  * @cssstate complete - Applied when the infinite scroll has no more content to load.
@@ -36,7 +36,7 @@ export class QuietInfiniteScroll extends QuietElement {
    * The scroll threshold at which to trigger loading more items. Accepts percentages (e.g., "75%") or pixels
    * (e.g., "200px").
    */
-  @property() threshold = '85%';
+  @property() threshold = '75%';
 
   /** Label for the feed. Defaults to "Feed". */
   @property() label = 'Feed';
@@ -44,7 +44,7 @@ export class QuietInfiniteScroll extends QuietElement {
   /** Debounce delay for scroll events in milliseconds. Defaults to 100ms. */
   @property({ type: Number, attribute: 'scroll-debounce' }) scrollDebounce = 100;
 
-  private scrollTimeoutId?: number;
+  private scrollTimeoutId?: ReturnType<typeof setTimeout>;
 
   connectedCallback() {
     super.connectedCallback();
@@ -85,40 +85,41 @@ export class QuietInfiniteScroll extends QuietElement {
   private handleScroll = () => {
     if (this.isComplete || this.loading) return;
 
+    if (this.checkScrollThreshold()) {
+      this.loading = true;
+      this.dispatchEvent(new CustomEvent('quiet-load-more'));
+      return;
+    }
+
     // Clear existing timeout
     if (this.scrollTimeoutId) {
       clearTimeout(this.scrollTimeoutId);
     }
 
-    // Set new timeout
-    this.scrollTimeoutId = window.setTimeout(() => {
+    this.scrollTimeoutId = setTimeout(() => {
       // Check again after debounce
       if (!this.isComplete && !this.loading) {
-        this.checkScrollThreshold();
+        if (this.checkScrollThreshold()) {
+          this.loading = true;
+          this.dispatchEvent(new CustomEvent('quiet-load-more'));
+        }
       }
     }, this.scrollDebounce);
   };
 
-  private checkScrollThreshold() {
+  private checkScrollThreshold(): boolean {
     const scrollPosition = this.scrollTop + this.clientHeight;
     let triggerPoint: number;
 
     if (this.threshold.endsWith('%')) {
       const percentage = parseFloat(this.threshold) / 100;
       triggerPoint = this.scrollHeight * percentage;
-    } else if (this.threshold.endsWith('px')) {
+    } else {
       const pixels = parseFloat(this.threshold);
       triggerPoint = this.scrollHeight - pixels;
-    } else {
-      // Fallback: treat as percentage decimal (backward compatibility)
-      const percentage = parseFloat(this.threshold);
-      triggerPoint = this.scrollHeight * (percentage > 1 ? percentage / 100 : percentage);
     }
 
-    if (scrollPosition >= triggerPoint) {
-      this.loading = true;
-      this.dispatchEvent(new CustomEvent('quiet-load-more'));
-    }
+    return scrollPosition >= triggerPoint;
   }
 
   private handleSlotChange() {

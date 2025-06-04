@@ -1,3 +1,5 @@
+const supportsTouch = typeof window !== 'undefined' && 'ontouchstart' in window;
+
 /**
  * Attaches the necessary events to make an element draggable.
  *
@@ -15,9 +17,6 @@
  *   stop: (clientX, clientY) => { ... }
  * });
  */
-
-const supportsTouch = typeof window !== 'undefined' && 'ontouchstart' in window;
-
 export class DraggableElement {
   private element: Element;
   private isActive = false;

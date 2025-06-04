@@ -93,13 +93,14 @@ export class QuietInfiniteScroll extends QuietElement {
 
     // Set new timeout
     this.scrollTimeoutId = window.setTimeout(() => {
-      this.checkScrollThreshold();
+      // Check again after debounce
+      if (!this.isComplete && !this.loading) {
+        this.checkScrollThreshold();
+      }
     }, this.scrollDebounce);
   };
 
   private checkScrollThreshold() {
-    if (this.isComplete || this.loading) return;
-
     const scrollPosition = this.scrollTop + this.clientHeight;
     let triggerPoint: number;
 

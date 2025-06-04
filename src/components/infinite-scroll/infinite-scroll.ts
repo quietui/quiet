@@ -1,4 +1,3 @@
-// infinite-scroll.ts
 import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';

@@ -27,12 +27,13 @@ import styles from './infinite-scroll.styles.js';
 export class QuietInfiniteScroll extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
-  private scrollTimeoutId?: ReturnType<typeof setTimeout>;
+  @query('slot:not([name])') defaultSlot: HTMLSlotElement;
 
-  @state() loading = false;
+  @state() isLoading = false;
   @state() isComplete = false;
 
-  @query('slot:not([name])') defaultSlot: HTMLSlotElement;
+  private thresholdInPixels = 0;
+  private thresholdInPercent = 0;
 
   /** An accessible label for the feed. */
   @property() label = 'Feed'; // TODO - localize
@@ -41,20 +42,18 @@ export class QuietInfiniteScroll extends QuietElement {
    * The scroll threshold at which to trigger loading more items. Accepts percentages (e.g., "75%") or pixels
    * (e.g., "200px").
    */
-  @property() threshold = '85%';
+  @property() threshold = '20%';
 
   connectedCallback() {
     super.connectedCallback();
     this.setAttribute('role', 'feed');
-    this.addEventListener('scroll', this.handleScroll, { passive: true });
+    this.parseThreshold();
+    this.addEventListener('scroll', this.handleScroll);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     this.removeEventListener('scroll', this.handleScroll);
-    if (this.scrollTimeoutId) {
-      clearTimeout(this.scrollTimeoutId);
-    }
   }
 
   updated(changedProperties: PropertyValues<this>) {
@@ -62,8 +61,12 @@ export class QuietInfiniteScroll extends QuietElement {
       this.setAttribute('aria-label', this.label);
     }
 
-    if (changedProperties.has('loading')) {
-      this.customStates.set('loading', this.loading);
+    if (changedProperties.has('threshold')) {
+      this.parseThreshold();
+    }
+
+    if (changedProperties.has('isLoading')) {
+      this.customStates.set('loading', this.isLoading);
     }
 
     if (changedProperties.has('isComplete')) {
@@ -71,47 +74,33 @@ export class QuietInfiniteScroll extends QuietElement {
     }
   }
 
+  private parseThreshold() {
+    const val = this.threshold;
+    if (val.endsWith('%')) {
+      this.thresholdInPixels = 0;
+      this.thresholdInPercent = parseFloat(val) / 100;
+    } else {
+      this.thresholdInPixels = parseFloat(val);
+      this.thresholdInPercent = 0;
+    }
+  }
+
   private checkScrollThreshold(): boolean {
     const scrollPosition = this.scrollTop + this.clientHeight;
-    let triggerPoint: number;
-
-    // Parse threshold
-    const thresholdValue = parseFloat(this.threshold);
-    const isPercentage = this.threshold.endsWith('%');
-
-    if (isPercentage) {
-      // Calculate trigger point as percentage of scroll height
-      triggerPoint = this.scrollHeight * (thresholdValue / 100);
-    } else {
-      // Calculate trigger point as pixels from bottom
-      triggerPoint = this.scrollHeight - thresholdValue;
-    }
+    const threshold =
+      this.thresholdInPercent !== 0 ? this.clientHeight * this.thresholdInPercent : this.thresholdInPixels;
+    const triggerPoint = this.scrollHeight - threshold;
 
     return scrollPosition >= triggerPoint;
   }
 
   private handleScroll = () => {
-    if (this.isComplete || this.loading) return;
+    if (this.isComplete || this.isLoading) return;
 
-    // Clear existing timeout to avoid stale checks
-    if (this.scrollTimeoutId) {
-      clearTimeout(this.scrollTimeoutId);
-    }
-
-    // Check threshold immediately
     if (this.checkScrollThreshold()) {
-      this.loading = true;
+      this.isLoading = true;
       this.dispatchEvent(new CustomEvent('quiet-load-more'));
-      return;
     }
-
-    // Schedule debounced check for continuous scrolling
-    this.scrollTimeoutId = setTimeout(() => {
-      if (!this.isComplete && !this.loading && this.checkScrollThreshold()) {
-        this.loading = true;
-        this.dispatchEvent(new CustomEvent('quiet-load-more'));
-      }
-    }, 100);
   };
 
   private handleSlotChange() {
@@ -129,8 +118,8 @@ export class QuietInfiniteScroll extends QuietElement {
     });
 
     // Reset states when new items are added
-    this.loading = false;
     this.isComplete = false;
+    this.isLoading = false;
   }
 
   /**
@@ -138,8 +127,8 @@ export class QuietInfiniteScroll extends QuietElement {
    * and re-enable infinite scrolling.
    */
   public complete() {
-    this.loading = false;
     this.isComplete = true;
+    this.isLoading = false;
   }
 
   render() {

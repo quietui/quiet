@@ -35,8 +35,8 @@ layout: component
     console.log('added');
 
     // Stop at 100 and prevent the event to indicate no more scrolling is possible
-    if (count > 400) {
-      infiniteScroll.complete() = true;
+    if (count > 1000) {
+      infiniteScroll.complete();
       return;
     }
 
@@ -48,13 +48,12 @@ layout: component
         item.textContent = `Item ${++count}`;
         infiniteScroll.append(item);
       }
-    }, 700);
+    }, 100);
   });
 </script>
 
 <style>
   #infinite__overview {
-   
     .item {
       padding: 1rem 1.5rem;
 

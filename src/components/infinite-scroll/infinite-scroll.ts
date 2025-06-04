@@ -1,3 +1,4 @@
+// infinite-scroll.ts
 import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
@@ -32,8 +33,11 @@ export class QuietInfiniteScroll extends QuietElement {
 
   @query('slot:not([name])') defaultSlot: HTMLSlotElement;
 
-  /** The scroll threshold (0-1) at which to trigger loading more items. */
-  @property({ type: Number }) threshold = 0.75;
+  /**
+   * The scroll threshold at which to trigger loading more items. Accepts percentages (e.g., "75%") or pixels
+   * (e.g., "200px").
+   */
+  @property() threshold = '85%';
 
   /** Label for the feed. Defaults to "Feed". */
   @property() label = 'Feed';
@@ -71,17 +75,10 @@ export class QuietInfiniteScroll extends QuietElement {
     }
   }
 
-  render() {
-    return html`
-      <slot @slotchange=${this.handleSlotChange}></slot>
-      ${this.loading ? html`<quiet-spinner></quiet-spinner>` : ''}
-    `;
-  }
-
   /**
    * Mark the feed as completed, preventing further load events
    */
-  complete() {
+  public complete() {
     this.loading = false;
     this.isComplete = true;
   }
@@ -103,7 +100,22 @@ export class QuietInfiniteScroll extends QuietElement {
   private checkScrollThreshold() {
     if (this.isComplete || this.loading) return;
 
-    if (this.scrollTop + this.clientHeight >= this.scrollHeight * this.threshold) {
+    const scrollPosition = this.scrollTop + this.clientHeight;
+    let triggerPoint: number;
+
+    if (this.threshold.endsWith('%')) {
+      const percentage = parseFloat(this.threshold) / 100;
+      triggerPoint = this.scrollHeight * percentage;
+    } else if (this.threshold.endsWith('px')) {
+      const pixels = parseFloat(this.threshold);
+      triggerPoint = this.scrollHeight - pixels;
+    } else {
+      // Fallback: treat as percentage decimal (backward compatibility)
+      const percentage = parseFloat(this.threshold);
+      triggerPoint = this.scrollHeight * (percentage > 1 ? percentage / 100 : percentage);
+    }
+
+    if (scrollPosition >= triggerPoint) {
       this.loading = true;
       this.dispatchEvent(new CustomEvent('quiet-load-more'));
     }
@@ -126,6 +138,13 @@ export class QuietInfiniteScroll extends QuietElement {
     // Reset states when new items are added
     this.loading = false;
     this.isComplete = false;
+  }
+
+  render() {
+    return html`
+      <slot @slotchange=${this.handleSlotChange}></slot>
+      ${!this.isComplete ? html`<quiet-spinner></quiet-spinner>` : ''}
+    `;
   }
 }
 

@@ -27,24 +27,21 @@ import styles from './infinite-scroll.styles.js';
 export class QuietInfiniteScroll extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
+  private scrollTimeoutId?: ReturnType<typeof setTimeout>;
+
   @state() loading = false;
   @state() isComplete = false;
 
   @query('slot:not([name])') defaultSlot: HTMLSlotElement;
 
+  /** An accessible label for the feed. */
+  @property() label = 'Feed'; // TODO - localize
+
   /**
    * The scroll threshold at which to trigger loading more items. Accepts percentages (e.g., "75%") or pixels
    * (e.g., "200px").
    */
-  @property() threshold = '75%';
-
-  /** Label for the feed. Defaults to "Feed". */
-  @property() label = 'Feed';
-
-  /** Debounce delay for scroll events in milliseconds. Defaults to 100ms. */
-  @property({ type: Number, attribute: 'scroll-debounce' }) scrollDebounce = 100;
-
-  private scrollTimeoutId?: ReturnType<typeof setTimeout>;
+  @property() threshold = '85%';
 
   connectedCallback() {
     super.connectedCallback();
@@ -74,53 +71,48 @@ export class QuietInfiniteScroll extends QuietElement {
     }
   }
 
-  /**
-   * Mark the feed as completed, preventing further load events
-   */
-  public complete() {
-    this.loading = false;
-    this.isComplete = true;
+  private checkScrollThreshold(): boolean {
+    const scrollPosition = this.scrollTop + this.clientHeight;
+    let triggerPoint: number;
+
+    // Parse threshold
+    const thresholdValue = parseFloat(this.threshold);
+    const isPercentage = this.threshold.endsWith('%');
+
+    if (isPercentage) {
+      // Calculate trigger point as percentage of scroll height
+      triggerPoint = this.scrollHeight * (thresholdValue / 100);
+    } else {
+      // Calculate trigger point as pixels from bottom
+      triggerPoint = this.scrollHeight - thresholdValue;
+    }
+
+    return scrollPosition >= triggerPoint;
   }
 
   private handleScroll = () => {
     if (this.isComplete || this.loading) return;
 
+    // Clear existing timeout to avoid stale checks
+    if (this.scrollTimeoutId) {
+      clearTimeout(this.scrollTimeoutId);
+    }
+
+    // Check threshold immediately
     if (this.checkScrollThreshold()) {
       this.loading = true;
       this.dispatchEvent(new CustomEvent('quiet-load-more'));
       return;
     }
 
-    // Clear existing timeout
-    if (this.scrollTimeoutId) {
-      clearTimeout(this.scrollTimeoutId);
-    }
-
+    // Schedule debounced check for continuous scrolling
     this.scrollTimeoutId = setTimeout(() => {
-      // Check again after debounce
-      if (!this.isComplete && !this.loading) {
-        if (this.checkScrollThreshold()) {
-          this.loading = true;
-          this.dispatchEvent(new CustomEvent('quiet-load-more'));
-        }
+      if (!this.isComplete && !this.loading && this.checkScrollThreshold()) {
+        this.loading = true;
+        this.dispatchEvent(new CustomEvent('quiet-load-more'));
       }
-    }, this.scrollDebounce);
+    }, 100);
   };
-
-  private checkScrollThreshold(): boolean {
-    const scrollPosition = this.scrollTop + this.clientHeight;
-    let triggerPoint: number;
-
-    if (this.threshold.endsWith('%')) {
-      const percentage = parseFloat(this.threshold) / 100;
-      triggerPoint = this.scrollHeight * percentage;
-    } else {
-      const pixels = parseFloat(this.threshold);
-      triggerPoint = this.scrollHeight - pixels;
-    }
-
-    return scrollPosition >= triggerPoint;
-  }
 
   private handleSlotChange() {
     const assignedElements = this.defaultSlot.assignedElements({ flatten: true });
@@ -139,6 +131,15 @@ export class QuietInfiniteScroll extends QuietElement {
     // Reset states when new items are added
     this.loading = false;
     this.isComplete = false;
+  }
+
+  /**
+   * Mark the feed as completed, preventing further load events. Changing content in the default slot will reset this
+   * and re-enable infinite scrolling.
+   */
+  public complete() {
+    this.loading = false;
+    this.isComplete = true;
   }
 
   render() {

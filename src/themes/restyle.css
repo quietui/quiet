@@ -175,6 +175,7 @@
   /* Code inside an anchor should remain the anchor color */
   a code,
   a pre {
+    background-color: inherit;
     color: inherit;
   }
 

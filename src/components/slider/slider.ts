@@ -995,3 +995,9 @@ export class QuietSlider extends QuietFormControlElement {
     }
   }
 }
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'quiet-slider': QuietSlider;
+  }
+}

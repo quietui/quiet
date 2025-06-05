@@ -33,8 +33,8 @@ Infinite scrolls load new content automatically as users scroll down a feed. Ins
         infiniteScroll.append(item);
       }
 
-      // We'll pretend there's nothing more to load after 50
-      if (count >= 50) {
+      // We'll pretend there's nothing more to load after 100
+      if (count >= 100) {
         infiniteScroll.complete();
         return;
       }      
@@ -57,7 +57,7 @@ Infinite scrolls load new content automatically as users scroll down a feed. Ins
 
 ## Examples
 
-### Providing content
+### Providing initial content
 
 You can slot just about any content you want into an infinite scroll container. The component watches the scroll position and dispatches the `quiet-load-more` event when users get close to the bottom.
 
@@ -70,6 +70,8 @@ You can slot just about any content you want into an infinite scroll container. 
   ...
 </quiet-infinite-scroll>
 ```
+
+### Loading more content
 
 In your code, listen for the `quiet-load-more` event. This is your cue to asynchronously load more content, e.g. from the server, and append it to the container. If no more content is available, call the component's `complete()` method to disable further loading.
 

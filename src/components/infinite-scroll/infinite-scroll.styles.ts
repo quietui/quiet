@@ -20,4 +20,13 @@ export default css`
     margin-inline: auto;
     margin-block: 1rem;
   }
+
+  ::slotted(*:focus) {
+    outline: none;
+  }
+
+  ::slotted(*:focus-visible) {
+    outline: var(--quiet-focus-ring);
+    outline-offset: calc(-1 * var(--quiet-focus-width));
+  }
 `;

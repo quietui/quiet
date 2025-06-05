@@ -37,7 +37,7 @@ export default css`
     align-items: center;
     padding: 0.25em 0.5em;
     gap: 0.5em;
-    border-radius: 0.25em;
+    border-radius: 0.375em;
     background: #000b;
     color: white;
     font-size: min(12px, 0.75em);
@@ -57,7 +57,6 @@ export default css`
       align-items: center;
       padding: 0.25em;
       border: none;
-      border-radius: calc(var(--quiet-border-radius) / 2);
       background: none;
       color: inherit;
       cursor: pointer;

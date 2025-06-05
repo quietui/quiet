@@ -274,6 +274,7 @@ Range sliders can also be vertical.
     min-value="30"
     max-value="70"
     with-tooltip
+    tooltip-placement="right"
     id="slider__vertical-range"
   >
   </quiet-slider>

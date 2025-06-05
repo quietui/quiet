@@ -43,10 +43,10 @@ export class QuietInfiniteScroll extends QuietElement {
   @property() label = '';
 
   /**
-   * The scroll threshold at which to trigger loading more items. Accepts percentages (e.g., "75%") or pixels
+   * The scroll threshold at which to trigger loading more items. Accepts percentages (e.g., "20%") or pixels
    * (e.g., "200px").
    */
-  @property() threshold = '25%';
+  @property() threshold = '20%';
 
   connectedCallback() {
     super.connectedCallback();

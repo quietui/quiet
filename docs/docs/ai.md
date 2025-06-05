@@ -4,40 +4,39 @@ description: Leverage Quiet UI's component documentation with AI assistants for 
 layout: docs
 ---
 
-To streamline development with AI, a set of _component reference files_ are available for use with [LLMs](https://en.wikipedia.org/wiki/Large_language_model). These files offer a complete breakdown of Quiet's components, making it easy to get quick, accurate help from your AI assistant.
+To streamline development with AI, a _component reference file_ is available for use with [LLMs](https://en.wikipedia.org/wiki/Large_language_model). This file offers a complete breakdown of Quiet's components, making it easy to get quick, accurate help from your AI assistant.
 
-Component reference files are a collection of plain-text documents that describe every Quiet UI component in detail. An `index.txt` file lists all available components while individual `.txt` files (e.g., `button.txt`, `card.txt`, etc.) provide an in-depth look at each component's features.
+The component reference file is a plain-text document that describes every Quiet UI component in detail and provides links to additional resources. The file follows the [`llms.txt` proposal](https://llmstxt.org/).
 
-## Where are the files located?
-
-The component reference files are available in the `dist/llm` directory of the project. If you've installed Quiet using npm, they will mostly likely be in:
+If you just want to explore it, you can access the file online at [quietui.org/dist/llms.txt](https://quietui.org/dist/llms.txt). If you've installed Quiet using npm, it will be located at:
 
 ```
-node_modules/@quietui/quiet/dist/llm
+node_modules/@quietui/quiet/dist/llms.txt
 ```
 
-The structure of the `dist/llm` folder is as follows:
+If you're building the project locally, the file will be generated at build time and placed in:
 
-- `dist/llm/index.txt`: A list of all available components, including descriptions.
-- `dist/llm/[name].txt`: Individual component reference files with API info, where `[name]` is the component's name, e.g. "avatar", "button", "callout", etc.
+```
+/dist/llms.txt
+```
 
-## How do I use the files with AI assistants?
+## Using the file with AI assistants
 
-AI-powered coding tools can interpret these reference files to deliver tailored suggestions, code snippets, and answers based on Quiet UI's capabilities. Here's how to make the most of them:
+AI-powered coding tools can interpret `llms.txt` to deliver tailored suggestions, code snippets, and answers based on Quiet UI's capabilities. Here's how to make the most of it:
 
-### Provide the files to the LLM
+### Provide the file to the LLM
 
 Depending on the tool, options include:
 
-- **Uploading the files:** Many assistants support uploading text files directly. Submit the `index.txt` and any component-specific `.txt` files relevant to the task.
-- **Copying and pasting:** Open a file (e.g., `button.txt`) and paste its contents into the assistant's input area.
-- **Pointing to the directory:** Some tools can scan a folder. Direct these tools to your project's `dist/llm` folder to let it explore.
+- **Uploading the file:** many assistants support uploading text files directly. Submit the `llms.txt` file.
+- **Copying and pasting:** open the `llms.txt` file and paste its contents into the assistant's input area.
+- **Pointing to the file:** some tools can scan files. Direct these tools to the file on your local drive.
 
-The `index.txt` file serves as an excellent starting point, offering an overview of all components to help the assistant recommend the best one for the job.
+The file serves as a comprehensive reference, offering an overview of all components and their detailed APIs to help the assistant recommend the best one for the job.
 
 ### Ask high-level questions
 
-Once the relevant files are loaded, broad questions can be posed, such as:
+Once the file is loaded, broad questions can be posed, such as:
 
 - "What components does Quiet UI offer for navigation?"
 - "How can a `<quiet-button>` be styled with custom colors?"
@@ -53,20 +52,20 @@ For quick snippets, try prompts like:
 - "Write HTML for a `<quiet-button>` that triggers an alert on click."
 - "How can I listen for the change event from `<quiet-slider>`?"
 
-The detailed properties, methods, and events in the files ensure responses match Quiet's API.
+The detailed properties, methods, and events in the file ensure responses match Quiet's API.
 
 ### Troubleshoot and explore
 
 If something isn't working, share code and ask:
 
-- "Why isn't `<quiet-input>` validating?"
-- "How does the value property work on `<quiet-select>`?"
+- "Why isn't `<quiet-text-field>` validating?"
+- "How does the value property work in `<quiet-select>`?"
 
 Advanced features can also be explored:
 
 - "What CSS parts can be targeted in `<quiet-button>`?"
 - "How does the `getValueAs()` method work in `<quiet-color-picker>`?"
 
-The files equip the assistant with the context needed to assist with debugging or deeper dives.
+The file equips the assistant with the context needed to assist with debugging.
 
 <img class="whiskers-center" src="/assets/images/whiskers/with-robot.svg" alt="Whiskers the mouse watching a robot juggle toy bricks">

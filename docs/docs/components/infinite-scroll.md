@@ -63,7 +63,7 @@ You can slot just about any content you want into an infinite scroll container. 
 
 ```html
 <quiet-infinite-scroll label="News Feed">
-  <!-- Initial content goes here -->
+  <!-- Initial content -->
   <article class="feed-item">First item</article>
   <article class="feed-item">Second item</article>
   <article class="feed-item">Third item</article>
@@ -106,5 +106,5 @@ infiniteScroll.addEventListener('quiet-load-more', async () => {
 To reenable loading, append additional items to the container or perform any DOM action that results in a `slotchange`.
 
 :::info
-When the initial items don't cause the container to scroll, the `quiet-load-more` event will be dispatched immediately to request more items. This behavior allows the entire feed to be loaded, regardless of screen size.
+When the container is empty initially or if the items don't cause the container to scroll, the `quiet-load-more` event will be dispatched immediately to request more items. This behavior allows the entire feed to load, regardless of content or screen size.
 :::

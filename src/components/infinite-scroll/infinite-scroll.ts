@@ -11,7 +11,7 @@ import styles from './infinite-scroll.styles.js';
 /**
  * <quiet-infinite-scroll>
  *
- * @summary Infinite scroll that implements ARIA feed pattern for accessible dynamic content loading
+ * @summary Infinite scrolls provide an accessible container for continuously loading content feeds.
  * @documentation https://quietui.org/docs/components/infinite-scroll
  * @status stable
  * @since 1.0
@@ -113,6 +113,7 @@ export class QuietInfiniteScroll extends QuietElement {
   private handleSlotChange() {
     const assignedElements = this.defaultSlot.assignedElements({ flatten: true });
 
+    // Apply roles
     assignedElements.forEach(el => {
       if (el instanceof HTMLElement) {
         if (!el.hasAttribute('role')) {
@@ -140,11 +141,11 @@ export class QuietInfiniteScroll extends QuietElement {
       cancelAnimationFrame(this.contentCheckFrameId);
     }
 
-    // Use RAF to ensure DOM layout is complete before measuring
+    // Ensure the DOM is ready before measuring
     this.contentCheckFrameId = requestAnimationFrame(() => {
       if (this.isComplete || this.isLoading) return;
 
-      // If content doesn't fill the container, trigger loading
+      // If content doesn't fill the container, load more
       if (!this.isScrollable() || this.checkScrollThreshold()) {
         this.isLoading = true;
         this.dispatchEvent(new QuietLoadMoreEvent());

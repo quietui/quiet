@@ -1,6 +1,7 @@
 import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
+import { QuietLoadMoreEvent } from '../../events/load.js';
 import hostStyles from '../../styles/host.styles.js';
 import { Localize } from '../../utilities/localize.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
@@ -33,6 +34,7 @@ export class QuietInfiniteScroll extends QuietElement {
   @state() isLoading = false;
   @state() isComplete = false;
 
+  private contentCheckFrameId: number | null = null;
   private localize = new Localize(this);
   private thresholdInPixels = 0;
   private thresholdInPercent = 0;
@@ -56,6 +58,9 @@ export class QuietInfiniteScroll extends QuietElement {
   disconnectedCallback() {
     super.disconnectedCallback();
     this.removeEventListener('scroll', this.handleScroll);
+    if (this.contentCheckFrameId) {
+      cancelAnimationFrame(this.contentCheckFrameId);
+    }
   }
 
   updated(changedProperties: PropertyValues<this>) {
@@ -101,7 +106,7 @@ export class QuietInfiniteScroll extends QuietElement {
 
     if (this.checkScrollThreshold()) {
       this.isLoading = true;
-      this.dispatchEvent(new CustomEvent('quiet-load-more'));
+      this.dispatchEvent(new QuietLoadMoreEvent());
     }
   };
 
@@ -119,9 +124,32 @@ export class QuietInfiniteScroll extends QuietElement {
       }
     });
 
-    // Reset states when new items are added
-    this.isComplete = false;
+    // Reset loading state when new items are added
     this.isLoading = false;
+
+    // Check if we need to load more content after DOM updates
+    this.scheduleContentCheck();
+  }
+
+  private isScrollable(): boolean {
+    return this.scrollHeight > this.clientHeight;
+  }
+
+  private scheduleContentCheck() {
+    if (this.contentCheckFrameId) {
+      cancelAnimationFrame(this.contentCheckFrameId);
+    }
+
+    // Use RAF to ensure DOM layout is complete before measuring
+    this.contentCheckFrameId = requestAnimationFrame(() => {
+      if (this.isComplete || this.isLoading) return;
+
+      // If content doesn't fill the container, trigger loading
+      if (!this.isScrollable() || this.checkScrollThreshold()) {
+        this.isLoading = true;
+        this.dispatchEvent(new QuietLoadMoreEvent());
+      }
+    });
   }
 
   /**

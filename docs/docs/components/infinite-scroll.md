@@ -48,7 +48,7 @@ layout: component
         item.textContent = `Item ${++count}`;
         infiniteScroll.append(item);
       }
-    }, 100);
+    }, 300);
   });
 </script>
 

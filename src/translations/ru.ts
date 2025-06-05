@@ -20,6 +20,7 @@ const translation: Translation = {
   dragFilesHereOrChooseFromFolder: 'Перетащите файлы сюда или выберите из папки',
   error: 'Ошибка',
   expand: 'Развернуть',
+  feed: 'Лента',
   firstPage: 'Первая страница',
   hidePassword: 'Скрыть пароль',
   hide: 'Скрыть',

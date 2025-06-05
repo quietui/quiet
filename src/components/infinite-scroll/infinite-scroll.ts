@@ -2,6 +2,7 @@ import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import hostStyles from '../../styles/host.styles.js';
+import { Localize } from '../../utilities/localize.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import '../spinner/spinner.js';
 import styles from './infinite-scroll.styles.js';
@@ -32,17 +33,18 @@ export class QuietInfiniteScroll extends QuietElement {
   @state() isLoading = false;
   @state() isComplete = false;
 
+  private localize = new Localize(this);
   private thresholdInPixels = 0;
   private thresholdInPercent = 0;
 
   /** An accessible label for the feed. */
-  @property() label = 'Feed'; // TODO - localize
+  @property() label = '';
 
   /**
    * The scroll threshold at which to trigger loading more items. Accepts percentages (e.g., "75%") or pixels
    * (e.g., "200px").
    */
-  @property() threshold = '20%';
+  @property() threshold = '25%';
 
   connectedCallback() {
     super.connectedCallback();
@@ -58,7 +60,7 @@ export class QuietInfiniteScroll extends QuietElement {
 
   updated(changedProperties: PropertyValues<this>) {
     if (changedProperties.has('label')) {
-      this.setAttribute('aria-label', this.label);
+      this.setAttribute('aria-label', this.label || this.localize.term('feed'));
     }
 
     if (changedProperties.has('threshold')) {

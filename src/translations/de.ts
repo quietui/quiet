@@ -20,6 +20,7 @@ const translation: Translation = {
   dragFilesHereOrChooseFromFolder: 'Ziehen Sie Dateien hierher oder wählen Sie sie aus einem Ordner aus',
   expand: 'Erweitern',
   error: 'Fehler',
+  feed: 'Beiträge',
   firstPage: 'Erste Seite',
   hidePassword: 'Passwort verbergen',
   hide: 'Verbergen',

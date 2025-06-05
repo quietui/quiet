@@ -28,6 +28,7 @@ export interface Translation extends DefaultTranslation {
   dragFilesHereOrChooseFromFolder: string;
   error: string;
   expand: string;
+  feed: string;
   firstPage: string;
   hidePassword: string;
   hide: string;

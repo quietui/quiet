@@ -32,9 +32,11 @@ const optionalLinks = [
 // Helper function to convert PascalCase to Title Case
 function toTitleCase(str) {
   return str
-    .replace(/([A-Z])/g, ' $1')
+    .replace(/([a-z])([A-Z])/g, '$1 $2') // only split when lowercase is followed by uppercase
     .trim()
-    .replace(/^./, str => str.toUpperCase());
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(' ');
 }
 
 // Helper function to remove newlines from text
@@ -60,18 +62,26 @@ Quiet UI provides a comprehensive set of accessible, customizable web components
 All of its custom elements use shadow DOM. Its form controls are form-associated elements that follow native form
 control patterns such as the Constraint Validation API.
 
-Quiet also provides an optional, opinionated, classless CSS reset called Quiet Restyle that's good for building out new
+The current version of Quiet UI is: ${version}
+
+Quiet offers an optional, opinionated, classless CSS reset called Quiet Restyle that's good for building out new
 websites and apps.
 
-The current version is: ${version}
+Tabler is the default icon library, so \`<quiet-icon family="..." name="...">\` values must come from this manifest,
+where outline and filled are the only family options: https://cdn.jsdelivr.net/npm/@tabler/icons@3/icons.json
+
+When installing Quiet, follow the instructions on https://quietui.org/docs/ to install the components, theme, and the
+optional CSS reset. Users can install the library using the Autoloader via CDN (recommended) or via npm (bundlers and
+advanced use cases).
+
 \n`.trimStart();
 
   // Components section
   output += `## Components\n\n`;
 
   components.forEach(component => {
-    const titleCaseName = toTitleCase(component.name);
     const tagWithoutPrefix = component.tagName.replace(/^quiet-/, '');
+    const titleCaseName = toTitleCase(tagWithoutPrefix.replace(/-/g, ' '));
 
     output += `- [${titleCaseName}](https://quietui.org/docs/components/${tagWithoutPrefix}): ${removeNewlines(component.summary) || 'No description available.'}\n`;
   });
@@ -87,7 +97,6 @@ The current version is: ${version}
 
   // Detailed API documentation for each component
   components.forEach(component => {
-    const titleCaseName = toTitleCase(component.name);
     const tagWithoutPrefix = component.tagName.replace(/^quiet-/, '');
 
     output += `### \`<${component.tagName}>\`\n\n`;

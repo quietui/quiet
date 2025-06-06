@@ -6,13 +6,13 @@ import hostStyles from '../../styles/host.styles.js';
 import { Localize } from '../../utilities/localize.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import '../spinner/spinner.js';
-import styles from './infinite-scroll.styles.js';
+import styles from './infinite-scroller.styles.js';
 
 /**
- * <quiet-infinite-scroll>
+ * <quiet-infinite-scroller>
  *
- * @summary Infinite scrolls provide an accessible container for continuously loading content feeds.
- * @documentation https://quietui.org/docs/components/infinite-scroll
+ * @summary Infinite scrollers provide an accessible container for continuously loading content feeds.
+ * @documentation https://quietui.org/docs/components/infinite-scroller
  * @status stable
  * @since 1.0
  *
@@ -22,11 +22,11 @@ import styles from './infinite-scroll.styles.js';
  *
  * @event quiet-load-more - Emitted when scrolling reaches the threshold and more items should be loaded.
  *
- * @cssstate loading - Applied when the infinite scroll is loading more content.
- * @cssstate complete - Applied when the infinite scroll has no more content to load.
+ * @cssstate loading - Applied when the infinite scroller is loading more content.
+ * @cssstate complete - Applied when the infinite scroller has no more content to load.
  */
-@customElement('quiet-infinite-scroll')
-export class QuietInfiniteScroll extends QuietElement {
+@customElement('quiet-infinite-scroller')
+export class QuietInfiniteScroller extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
   @query('slot:not([name])') defaultSlot: HTMLSlotElement;
@@ -172,6 +172,6 @@ export class QuietInfiniteScroll extends QuietElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'quiet-infinite-scroll': QuietInfiniteScroll;
+    'quiet-infinite-scroller': QuietInfiniteScroller;
   }
 }

@@ -60,10 +60,17 @@ Quiet UI provides a comprehensive set of accessible, customizable web components
 All of its custom elements use shadow DOM. Its form controls are form-associated elements that follow native form
 control patterns such as the Constraint Validation API.
 
-Quiet also provides an optional, opinionated, classless CSS reset called Quiet Restyle that's good for building out new
+The current version of Quiet UI is: ${version}
+
+Quiet offers an optional, opinionated, classless CSS reset called Quiet Restyle that's good for building out new
 websites and apps.
 
-The current version is: ${version}
+The default icon library is Tabler: https://tabler.io/icons
+
+When installing Quiet, follow the instructions on https://quietui.org/docs/ to install the components, theme, and the
+optional CSS reset. Users can install the library using the Autoloader via CDN (recommended) or via npm (bundlers and
+advanced use cases).
+
 \n`.trimStart();
 
   // Components section
@@ -87,7 +94,6 @@ The current version is: ${version}
 
   // Detailed API documentation for each component
   components.forEach(component => {
-    const titleCaseName = toTitleCase(component.name);
     const tagWithoutPrefix = component.tagName.replace(/^quiet-/, '');
 
     output += `### \`<${component.tagName}>\`\n\n`;

@@ -4,6 +4,7 @@ import { customElement, property, query, state } from 'lit/decorators.js';
 import hostStyles from '../../styles/host.styles.js';
 import { animateWithClass } from '../../utilities/animate.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
+import '../icon/icon.js';
 import styles from './dropdown-item.styles.js';
 
 /**
@@ -13,6 +14,8 @@ import styles from './dropdown-item.styles.js';
  * @documentation https://quietui.org/docs/components/dropdown-item
  * @status stable
  * @since 1.0
+ *
+ * @dependency quiet-icon
  *
  * @slot - The item's label or description.
  * @slot icon - An optional icon to show at the start of the item.

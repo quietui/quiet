@@ -233,7 +233,7 @@ export class QuietDropdown extends QuietElement {
     }
   }
 
-  /** Get the slotted trigger button, a <quiet-button< or <button> element */
+  /** Get the slotted trigger button, a <quiet-button> or <button> element */
   private getTrigger(): HTMLButtonElement | QuietButton | null {
     return this.querySelector<QuietButton | HTMLButtonElement>('[slot="trigger"]');
   }

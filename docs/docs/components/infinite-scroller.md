@@ -1,12 +1,12 @@
 ---
-title: Infinite Scroll
+title: Infinite Scroller
 layout: component
 ---
 
-Infinite scrolls load new content automatically as users scroll down a feed. Instead of clicking "Next" buttons, content continuously appears as they approach the bottom. Infinite scroll follows the [ARIA APG Infinite Scrolling Feed](https://www.w3.org/WAI/ARIA/apg/patterns/feed/examples/feed/) pattern for accessibility.
+Infinite scrollers load new content automatically as users scroll down a feed. Instead of clicking "Next" buttons, content continuously appears as they approach the bottom. Infinite scroller follows the [ARIA APG Infinite Scrolling Feed](https://www.w3.org/WAI/ARIA/apg/patterns/feed/examples/feed/) pattern for accessibility.
 
 ```html {.example}
-<quiet-infinite-scroll id="infinite__overview">
+<quiet-infinite-scroller id="infinite__overview">
   <div class="item">Item 1</div>
   <div class="item">Item 2</div>
   <div class="item">Item 3</div>
@@ -17,7 +17,7 @@ Infinite scrolls load new content automatically as users scroll down a feed. Ins
   <div class="item">Item 8</div>
   <div class="item">Item 9</div>
   <div class="item">Item 10</div>
-</quiet-infinite-scroll>
+</quiet-infinite-scroller>
 
 <script>
   const infiniteScroll = document.getElementById('infinite__overview');
@@ -59,16 +59,16 @@ Infinite scrolls load new content automatically as users scroll down a feed. Ins
 
 ### Providing initial content
 
-You can slot just about any content you want into an infinite scroll container. The component watches the scroll position and dispatches the `quiet-load-more` event when users get close to the bottom.
+You can slot just about any content you want into an infinite scroller container. The component watches the scroll position and dispatches the `quiet-load-more` event when users get close to the bottom.
 
 ```html
-<quiet-infinite-scroll label="News Feed">
+<quiet-infinite-scroller label="News Feed">
   <!-- Initial content -->
   <article class="feed-item">First item</article>
   <article class="feed-item">Second item</article>
   <article class="feed-item">Third item</article>
   ...
-</quiet-infinite-scroll>
+</quiet-infinite-scroller>
 ```
 
 ### Loading more content

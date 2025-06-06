@@ -32,9 +32,11 @@ const optionalLinks = [
 // Helper function to convert PascalCase to Title Case
 function toTitleCase(str) {
   return str
-    .replace(/([A-Z])/g, ' $1')
+    .replace(/([a-z])([A-Z])/g, '$1 $2') // only split when lowercase is followed by uppercase
     .trim()
-    .replace(/^./, str => str.toUpperCase());
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(' ');
 }
 
 // Helper function to remove newlines from text
@@ -78,8 +80,8 @@ advanced use cases).
   output += `## Components\n\n`;
 
   components.forEach(component => {
-    const titleCaseName = toTitleCase(component.name);
     const tagWithoutPrefix = component.tagName.replace(/^quiet-/, '');
+    const titleCaseName = toTitleCase(tagWithoutPrefix.replace(/-/g, ' '));
 
     output += `- [${titleCaseName}](https://quietui.org/docs/components/${tagWithoutPrefix}): ${removeNewlines(component.summary) || 'No description available.'}\n`;
   });

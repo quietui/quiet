@@ -133,7 +133,7 @@ function generateLlmData() {
   spinner.start('Generating training data for LLMs');
 
   try {
-    execSync(`node ./scripts/llm.js`);
+    execSync(`node ./scripts/llms.js`);
   } catch (error) {
     // Report the error, but don't break the build
     spinner.fail(`Error:\n\n${chalk.red(error.stdout.toString().trim())}\n`);

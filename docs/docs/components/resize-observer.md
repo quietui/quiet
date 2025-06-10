@@ -85,7 +85,7 @@ The component uses a [ResizeObserver](https://developer.mozilla.org/en-US/docs/W
       height: 100%;
       min-height: 50px;
       max-height: 200px;
-      border: solid 2px var(--quiet-neutral-stroke-mid);
+      border: solid 2px var(--quiet-neutral-stroke-soft);
       border-radius: var(--quiet-border-radius);
     }
     

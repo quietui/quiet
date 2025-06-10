@@ -3,6 +3,8 @@ title: Mutation Observer
 layout: component
 ---
 
+The component uses a [MutationObserver](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) to monitor when its direct children mutate. Events are dispatched when elements are added, removed, or changed depending on how it's configured.
+
 Add and remove some items, then open the console to inspect the output.
 
 ```html {.example}
@@ -82,10 +84,6 @@ Add and remove some items, then open the console to inspect the output.
   }
 </style>
 ```
-
-:::info
-Remember that only direct children of the host element are observed. Nested elements will not trigger intersection events.
-:::
 
 ## Examples
 

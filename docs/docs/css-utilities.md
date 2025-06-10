@@ -95,7 +95,7 @@ If you need to control validation styles manually, add the `quiet-force-valid` o
 ```html {.example}
 <quiet-text-field
   class="quiet-force-valid"
-  label="I totally am valid" 
+  label="I'm totally valid" 
   description="Hints are also valid" 
 ></quiet-text-field>
 

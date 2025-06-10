@@ -5,6 +5,8 @@ layout: component
 
 The component uses a [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) to monitor the dimensions of its direct children. A `quiet-resize` event is dispatched for each observed element, once when the element is first observed and once every time the element is resized.
 
+The component is styled with [`display: contents`](https://developer.mozilla.org/en-US/docs/Web/CSS/display#contents), allowing you to easily apply flex and grid layouts to the containing element without the component interfering.
+
 ```html {.example}
 <div id="resize__overview">
   <quiet-resize-observer>

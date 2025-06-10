@@ -48,40 +48,44 @@ Add and remove some items, then open the console to inspect the output.
     gap: 1.5rem;
     min-height: 5rem;
     margin-block-end: 1rem;
-  }
 
-  .box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    min-width: 5rem;
-    height: 5rem;
-    border-radius: var(--quiet-border-radius);
-    background-color: var(--quiet-neutral-fill-softer);
-    box-shadow: var(--quiet-shadow-softer);
-    text-align: center;
-    padding: 1rem;
-
-    button {
+    .box {
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: var(--quiet-neutral-fill-loud);
-      color: var(--quiet-neutral-text-on-loud);
-      font-size: .75em;
-      padding: 0;
-      width: 1.25rem;
-      height: 1.25rem;
-      min-height: 0;
-      position: absolute;
-      top: -0.625rem;
-      right: -0.625rem;
-      border-radius: 50%;
+      position: relative;
+      min-width: 5rem;
+      height: 5rem;
+      border-radius: var(--quiet-border-radius);
+      background-color: var(--quiet-neutral-fill-softer);
+      box-shadow: var(--quiet-shadow-softer);
+      text-align: center;
+      padding: 1rem;
+
+      button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--quiet-neutral-fill-loud);
+        color: var(--quiet-neutral-text-on-loud);
+        font-size: .75em;
+        padding: 0;
+        width: 1.25rem;
+        height: 1.25rem;
+        min-height: 0;
+        position: absolute;
+        top: -0.625rem;
+        right: -0.625rem;
+        border-radius: 50%;
+      }
     }
   }
 </style>
 ```
+
+:::info
+Remember that only direct children of the host element are observed. Nested elements will not trigger intersection events.
+:::
 
 ## Examples
 

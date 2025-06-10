@@ -116,6 +116,10 @@ The component uses a [ResizeObserver](https://developer.mozilla.org/en-US/docs/W
 </style>
 ```
 
+:::info
+Remember that only direct children of the host element are observed. Nested elements will not trigger intersection events.
+:::
+
 ## Example
 
 ### Providing content

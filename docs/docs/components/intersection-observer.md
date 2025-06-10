@@ -3,83 +3,67 @@ title: Intersection Observer
 layout: component
 ---
 
-The component uses an [IntersectionObserver](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver) to monitor when its direct children intersect with a root element. Events are dispatched when elements enter or leave the viewport.
+The component uses an [IntersectionObserver](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver) to monitor when its direct children intersect with a root element. The `quiet-intersect` event is dispatched when elements enter and leave the viewport.
 
 ```html {.example}
 <div id="intersection__overview">
-  <quiet-intersection-observer threshold="0.5" intersection-class="visible">
-    <div class="box">
-      <div class="status">Not intersecting</div>
-    </div>
-    <div class="box">
-      <div class="status">Not intersecting</div>
-    </div>
-    <div class="box">
-      <div class="status">Not intersecting</div>
-    </div>
-    <div class="box">
-      <div class="status">Not intersecting</div>
-    </div>
+  <quiet-intersection-observer threshold=".95" intersect-class="visible">
+    <div class="box"><quiet-icon name="send"></quiet-icon></div>
+    <div class="box"><quiet-icon name="car-fan"></quiet-icon></div>
+    <div class="box"><quiet-icon name="map"></quiet-icon></div>
+    <div class="box"><quiet-icon name="air-balloon"></quiet-icon></div>
+    <div class="box"><quiet-icon name="grill"></quiet-icon></div>
+    <div class="box"><quiet-icon name="device-gamepad"></quiet-icon></div>
+    <div class="box"><quiet-icon name="diamond"></quiet-icon></div>
+    <div class="box"><quiet-icon name="cat"></quiet-icon></div>
   </quiet-intersection-observer>
-
-  <small>Scroll to see elements intersect at 50% visibility</small>
 </div>
 
-<script>
-  const container = document.getElementById('intersection__overview');
-  const intersectionObserver = container.querySelector('quiet-intersection-observer');
-  
-  /* Update the status text when intersection state changes */
-  intersectionObserver.addEventListener('quiet-intersect', event => {
-    const box = event.detail.entry.target;
-    const isIntersecting = event.detail.entry.isIntersecting;
-    
-    if (box.classList.contains('box')) {
-      box.querySelector('.status').textContent = isIntersecting ? 'Intersecting' : 'Not intersecting';
-    }
-  });
-</script>
+<small>Scroll to see elements intersect at 95% visibility</small>
 
 <style>
+  /* Container styles */
   #intersection__overview {
-    quiet-intersection-observer {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      height: 300px;
-      border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
-      border-radius: var(--quiet-border-radius);
-      padding-inline: 1rem;
-      overflow-y: auto;
-    }
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    height: 300px;
+    border: 2px solid var(--quiet-neutral-stroke-soft);
+    border-radius: var(--quiet-border-radius);
+    padding: 1rem;
+    overflow-y: auto;
 
+    /* Box styles */
     .box {
       flex-shrink: 0;
+      width: 150px;
       height: 150px;
       border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
       border-radius: var(--quiet-border-radius);
-      background-color: var(--quiet-paper-color);
+      background-color: var(--quiet-neutral-fill-softer);
+      color: var(--quiet-neutral-text-on-soft);
       box-shadow: var(--quiet-shadow-softer);
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 100ms ease;
+      transition: all 300ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      margin-inline: auto;
+      opacity: 0.7;
+
+      quiet-icon {
+        font-size: 3rem;
+        stroke-width: 1px;
+      }
 
       &.visible {
-        background-color: var(--quiet-primary-fill-soft);
-        border-color: var(--quiet-primary-fill-soft);
-      }
-
-      &:first-of-type {
-        margin-block-start: 275px;
-      }
-
-      &:last-of-type {
-        margin-block-end: 275px;
+        background-color: var(--quiet-primary-fill-softer);
+        border-color: var(--quiet-primary-stroke-soft);
+        opacity: 1;
+        box-shadow: var(--quiet-shadow-soft);
       }
     }
 
-    small {
+    + small {
       display: block;
       text-align: center;
       margin-block-start: 1rem;
@@ -88,11 +72,29 @@ The component uses an [IntersectionObserver](https://developer.mozilla.org/en-US
 </style>
 ```
 
-## Events
+:::info
+Remember that only direct children of the host element are observed. Nested elements will not trigger intersection events.
+:::
 
-The intersection observer dispatches a single `quiet-intersect` event whenever an element's intersection state changes. The event includes `event.detail.entry`, which is an [`IntersectionObserverEntry`](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserverEntry) object containing information about the intersection.
+## Examples
 
-You can determine whether an element is entering or leaving the viewport by checking `event.detail.entry.isIntersecting`:
+### Providing content
+
+Only direct children of the intersection observer are observed. The component is styled with [`display: contents`](https://developer.mozilla.org/en-US/docs/Web/CSS/display#contents), allowing you to easily apply flex and grid layouts to a containing element.
+
+```html
+<div style="display: flex; flex-direction: column;">
+  <quiet-intersection-observer>
+    <div class="box">Box 1</div>
+    <div class="box">Box 2</div>
+    <div class="box">Box 3</div>
+  </quiet-intersection-observer>
+</div>
+```
+
+The component monitors when elements enter and leave the root element (the viewport by default) and dispatches the `quiet-intersect` event whenever an intersection state changes. The event includes `event.detail.entry`, which is an [`IntersectionObserverEntry`](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserverEntry) object containing information about the intersection.
+
+You can determine which element triggered the event with `entry.target`. You can determine whether an element is entering or leaving the viewport by checking `entry.isIntersecting`.
 
 ```javascript
 observer.addEventListener('quiet-intersect', event => {
@@ -106,282 +108,260 @@ observer.addEventListener('quiet-intersect', event => {
 });
 ```
 
-## Examples
+### Customizing the root
 
-### Basic usage
-
-In its simplest form, an intersection observer monitors when elements enter and leave the viewport:
+Intersections can be observed within a specific container by setting the `root` attribute to the ID of the [root element](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/root). Use `root-margin` to apply a [`rootMargin`](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/rootMargin) to one or all sides of the element.
 
 ```html
-<quiet-intersection-observer>
-  <div>Content to observe</div>
-</quiet-intersection-observer>
-
-<script>
-  const observer = document.querySelector('quiet-intersection-observer');
-
-  observer.addEventListener('quiet-intersect', event => {
-    const entry = event.detail.entry;
-    
-    if (entry.isIntersecting) {
-      console.log('Element is visible:', entry.target);
-    } else {
-      console.log('Element is no longer visible:', entry.target);
-    }
-  });
-</script>
+<div id="scroll-container">
+  <quiet-intersection-observer 
+    root="scroll-container"
+    root-margin="50px 0px"
+  >
+    ...
+  </quiet-intersection-observer>
+</div>
 ```
 
-### Using intersection-class for automatic styling
+### Providing multiple thresholds
 
-The `intersection-class` attribute automatically applies a CSS class to elements when they intersect, making it easy to style them without event handlers:
+You can monitor different visibility percentages by specifying multiple [`threshold`](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API#threshold) values separated by a space.
+
+```html
+<quiet-intersection-observer threshold="0 0.25 0.5 0.75 1">
+  ...
+</quiet-intersection-observer>
+```
+
+### Applying classes on intersect
+
+Use the `intersect-class` attribute to automatically apply the specified class to direct children when they intersect. This makes it easy to style them without event listeners.
 
 ```html {.example}
-<div id="intersection__automatic-styling">
- <quiet-intersection-observer threshold="0.5" intersection-class="visible">
-   <div class="fade-box">Fade In Animation</div>
-   <div class="slide-box">Slide In Animation</div>
-   <div class="scale-box">Scale & Rotate Animation</div>
-   <div class="bounce-box">Bounce Animation</div>
- </quiet-intersection-observer>
-
- <small>Scroll to see elements transition at 50% visibility</small>
+<div id="intersection__classes">
+  <quiet-intersection-observer 
+    threshold="0.5" 
+    intersect-class="visible" 
+    root="intersection__classes"
+  >
+    <div class="box fade">Fade In</div>
+    <div class="box slide">Slide In</div>
+    <div class="box scale">Scale & Rotate</div>
+    <div class="box bounce">Bounce</div>
+  </quiet-intersection-observer>
 </div>
 
+<small>Scroll to see elements transition at 50% visibility</small>
+
 <style>
-  #intersection__automatic-styling {
-    quiet-intersection-observer {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      height: 300px;
-      border: 2px solid #e0e0e0;
-      border-radius: 12px;
-      padding: 1rem;
-      overflow-y: auto;
+  /* Container styles */
+  #intersection__classes {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    height: 300px;
+    border: 2px solid var(--quiet-neutral-stroke-softer);
+    border-radius: var(--quiet-border-radius);
+    padding: 1rem;
+    overflow-y: auto;
+
+    /* Spacers to demonstrate scrolling */
+    &::before {
+      content: '';
+      height: 250px;
+      flex-shrink: 0;
     }
 
-    small {
+    &::after {
+      content: '';
+      height: 250px;
+      flex-shrink: 0;
+    }    
+
+    + small {
       display: block;
       text-align: center;
       margin-block-start: 1rem;
     }
   }
 
-  .fade-box {
+  /* Shared box styles */
+  .box {
+    flex-shrink: 0;
+    width: 150px;
     height: 150px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
     color: white;
     font-weight: bold;
+    text-shadow: 0 1px #0008;
     opacity: 0;
+    padding: 2rem;
+    margin-inline: auto;
+  }
+
+  /* Fade */
+  .box.fade {
+    background: linear-gradient(135deg, #5a6fd4 0%, #6a4292 100%);
     transform: translateY(30px);
     transition: all 0.6s ease;
-    flex-shrink: 0;
+
+    &.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
-  .fade-box.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .slide-box {
-    height: 150px;
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: bold;
-    opacity: 0;
+  /* Slide */
+  .box.slide {
+    background: linear-gradient(135deg, #d984e2 0%, #dd4e61 100%);
     transform: translateX(-50px);
     transition: all 0.5s ease;
-    flex-shrink: 0;
+
+    &.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
 
-  .slide-box.visible {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
-  .scale-box {
-    height: 150px;
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: bold;
-    opacity: 0;
-    transform: scale(0.6) rotate(-5deg);
+  /* Scale */
+  .box.scale {
+    background: linear-gradient(135deg, #439be4 0%, #00dae4 100%);
+    transform: scale(0.6) rotate(-15deg);
     transition: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    flex-shrink: 0;
+
+    &.visible {
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
+    }
   }
 
-  .scale-box.visible {
-    opacity: 1;
-    transform: scale(1) rotate(0deg);
-  }
-
-  .bounce-box {
-    height: 150px;
-    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: bold;
+  /* Bounce In and Out */
+  .box.bounce {
+    background: linear-gradient(135deg, #e1658a 0%, #e5cb39 100%);
     opacity: 0;
-    transform: translateY(50px) scale(0.8);
-    transition: all 0.5s cubic-bezier(0.68, 0.55, 0.265, 1.2);
-    flex-shrink: 0;
-  }
- 
- .bounce-box.visible {
-   opacity: 1;
-   transform: translateY(0) scale(1);
- }
+    transform: scale(0.8);
+    transition: none;
 
- quiet-intersection-observer > div:first-of-type {
-   margin-top: 250px;
- }
+    &.visible {
+      opacity: 1;
+      transform: scale(1);
+      animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+    }
+
+    &:not(.visible) {
+      animation: bounceOut 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+    }
+  }
+
+  @keyframes bounceIn {
+    0% {
+      transform: scale(0.8);
+    }
+    40% {
+      transform: scale(1.08);
+    }
+    65% {
+      transform: scale(0.98);
+    }
+    80% {
+      transform: scale(1.02);
+    }
+    90% {
+      transform: scale(0.99);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes bounceOut {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    20% {
+      transform: scale(1.02);
+      opacity: 1;
+    }
+    40% {
+      transform: scale(0.98);
+      opacity: 0.8;
+    }
+    60% {
+      transform: scale(1.05);
+      opacity: 0.6;
+    }
+    80% {
+      transform: scale(0.95);
+      opacity: 0.3;
+    }
+    100% {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+  }
 </style>
 ```
 
-### Custom root and margins
+Use CSS transitions and animations to create advanced, modern effects without a single line of JavaScript.
 
-You can observe intersections with a specific container element and add margins to trigger events before elements are actually visible:
-
-```html
-<div id="scroll-container" style="height: 400px; overflow: auto;">
+```html {.example}
+<div id="intersection__images">
   <quiet-intersection-observer 
-    root="#scroll-container"
-    root-margin="50px 0px"
-    intersection-class="in-view"
+    threshold="0.8" 
+    intersect-class="visible"
+    root="intersection__images" 
   >
-    <div class="content">...</div>
+    <img src="https://images.unsplash.com/photo-1671707696618-ca0685b0012e?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="An orange cat smiles up at the camera">
+    <img src="https://images.unsplash.com/photo-1736593494119-d0a69181b414?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="A kitten lays in its bed and cuddles a pillow">
+    <img src="https://images.unsplash.com/photo-1622576041274-ae5dc580175d?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Two kittens nestled up on a blanket">
+    <img src="https://images.unsplash.com/photo-1719310694054-6fc99b7c14ec?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="An orange kitten explores a tall grassy yard">
+    <img src="https://images.unsplash.com/photo-1601217156006-3358e1514676?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="A kitten peeks out from inside a cardboard box">    
+    <img src="https://images.unsplash.com/photo-1737912031624-e17ba0d7f673?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="A gray and white cat sleeps on a blanket with evening lights in the background">
   </quiet-intersection-observer>
 </div>
+
+<style>
+  /* Container styles */
+  #intersection__images {
+    display: flex;
+    flex-direction: row;
+    gap: 0;
+    border: 2px solid var(--quiet-neutral-stroke-soft);
+    border-radius: var(--quiet-border-radius);
+    padding: 1rem;
+    overflow-y: auto;
+    scroll-snap-type: x mandatory;
+
+    /* Image styles */
+    img {
+      flex-shrink: 0;
+      display: block;
+      width: 75%;
+      object-fit: cover;
+      border-radius: var(--quiet-border-radius);
+      background-color: var(--quiet-neutral-fill-softer);
+      color: var(--quiet-neutral-text-on-soft);
+      box-shadow: var(--quiet-shadow-softer);
+      filter: grayscale(100%);
+      margin-inline: auto;
+      transform: scale(0.85) rotateY(-15deg);
+      opacity: 0.6;
+      transition: all 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      scroll-snap-align: center;
+
+      &.visible {
+        background-color: var(--quiet-primary-fill-softer);
+        transform: scale(1) rotateY(0deg);
+        filter: grayscale(0);
+        opacity: 1;
+        box-shadow: var(--quiet-shadow-soft);
+      }
+    }
+  }
+</style>
 ```
-
-### Multiple thresholds
-
-Monitor different visibility percentages by specifying multiple threshold values:
-
-```html
-<quiet-intersection-observer threshold="0 0.25 0.5 0.75 1">
-  <div class="animated-content">...</div>
-</quiet-intersection-observer>
-
-<script>
-  const observer = document.querySelector('quiet-intersection-observer');
-
-  observer.addEventListener('quiet-intersect', event => {
-    const entry = event.detail.entry;
-    const ratio = entry.intersectionRatio;
-    const element = entry.target;
-    
-    // Apply different styles based on visibility percentage
-    element.style.opacity = ratio;
-    element.style.transform = `translateY(${(1 - ratio) * 20}px)`;
-  });
-</script>
-```
-
-## Properties
-
-### root
-
-A CSS selector for the element that is used as the viewport for checking visibility. By default (empty string), this is the browser viewport. You can set it to any scrollable container element using a CSS selector.
-
-```html
-<!-- Use a specific container -->
-<quiet-intersection-observer root="#my-container">
-  ...
-</quiet-intersection-observer>
-
-<!-- Use a class selector -->
-<quiet-intersection-observer root=".scroll-area">
-  ...
-</quiet-intersection-observer>
-```
-
-The component uses `getRootNode().querySelector()` to find the root element, allowing it to work across shadow DOM boundaries.
-
-### rootMargin
-
-Margin around the root element. Can have values similar to the CSS margin property (e.g., "10px 20px 30px 40px"). This margin creates an invisible boundary around the root that can trigger intersection events before or after the actual boundaries.
-
-```html
-<!-- Trigger 100px before entering viewport -->
-<quiet-intersection-observer root-margin="100px">
-  ...
-</quiet-intersection-observer>
-
-<!-- Different margins for each side -->
-<quiet-intersection-observer root-margin="50px 0px -50px 0px">
-  ...
-</quiet-intersection-observer>
-```
-
-### threshold
-
-A space-delimited list of numbers between 0 and 1, indicating at what percentage of the target's visibility the observer should trigger. A value of 0 means as soon as one pixel is visible, 1.0 means the entire element must be visible.
-
-```html
-<!-- Trigger when 50% visible -->
-<quiet-intersection-observer threshold="0.5">
-  ...
-</quiet-intersection-observer>
-
-<!-- Multiple thresholds -->
-<quiet-intersection-observer threshold="0 0.5 1">
-  ...
-</quiet-intersection-observer>
-```
-
-### intersectionClass
-
-A CSS class name to automatically add to elements when they are intersecting with the root. The class is removed when elements stop intersecting. This provides a declarative way to style intersecting elements without needing event handlers.
-
-```html
-<!-- Apply 'visible' class to intersecting elements -->
-<quiet-intersection-observer intersection-class="visible">
-  ...
-</quiet-intersection-observer>
-
-<!-- Use any class name -->
-<quiet-intersection-observer intersection-class="animate-in">
-  ...
-</quiet-intersection-observer>
-```
-
-### once
-
-When set to `true`, each observed element will only trigger the `quiet-intersect` event once, after which it will no longer be observed. This is useful for one-time animations or lazy loading scenarios.
-
-```html
-<quiet-intersection-observer once>
-  ...
-</quiet-intersection-observer>
-```
-
-### disabled
-
-Disables the intersection observer when set to `true`. The observer will stop monitoring elements until re-enabled.
-
-```html
-<quiet-intersection-observer disabled>
-  ...
-</quiet-intersection-observer>
-```
-
-:::info
-Remember that only direct children of the host element are observed. Nested elements will not trigger intersection events.
-:::

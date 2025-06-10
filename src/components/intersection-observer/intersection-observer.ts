@@ -3,6 +3,7 @@ import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { QuietIntersectEvent } from '../../events/intersect.js';
 import hostStyles from '../../styles/host.styles.js';
+import { clamp } from '../../utilities/math.js';
 import { parseSpaceDelimitedTokens } from '../../utilities/parse.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import styles from './intersection-observer.styles.js';
@@ -15,9 +16,9 @@ import styles from './intersection-observer.styles.js';
  * @status stable
  * @since 1.0
  *
- * @slot - The elements to observe. All direct children of the host element are observed, but not nested elements.
+ * @slot - The elements to observe. Only direct children of the host element are observed.
  *
- * @event quiet-intersect - Emitted when a slotted element starts or stops intersecting. `event.detail.entry` contains
+ * @event quiet-intersect - Emitted when an observed element starts or stops intersecting. `event.detail.entry` contains
  *  the respective [`IntersectionObserverEntry`](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserverEntry)
  *  object.
  */
@@ -29,8 +30,8 @@ export class QuietIntersectionObserver extends QuietElement {
   private intersectionObserver: IntersectionObserver | null = null;
   private observedElements = new Map<Element, boolean>();
 
-  /** A CSS selector for the element that is used as the viewport for checking visibility of the target. */
-  @property() root = '';
+  /** The ID of the element to use as as the bounding box of the viewport for the observed targets. */
+  @property() root: string | null = null;
 
   /** Margin around the root. Can have values similar to the CSS margin property. */
   @property({ attribute: 'root-margin' }) rootMargin = '0px';
@@ -38,8 +39,12 @@ export class QuietIntersectionObserver extends QuietElement {
   /** Either a single number or space-delimited numbers which indicate at what percentage of the target's visibility the observer's callback should be executed. */
   @property() threshold = '0';
 
-  /** A CSS class name to apply to elements when they're intersecting. */
-  @property({ attribute: 'intersection-class' }) intersectionClass = '';
+  /**
+   * A CSS class name to apply to elements while they're intersecting. The class will be removed when the element is no
+   * longer in the viewport. This allows you to apply styles to elements as they enter and exit the viewport using pure
+   * CSS.
+   */
+  @property({ attribute: 'intersect-class' }) intersectClass = '';
 
   /** When true, stops observing after the first intersection. */
   @property({ type: Boolean, reflect: true }) once = false;
@@ -52,18 +57,14 @@ export class QuietIntersectionObserver extends QuietElement {
     this.startObserver();
 
     // Add an init flag to prevent the observers from mounting multiple times on first load
-    requestAnimationFrame(() => {
-      this.hasInitialized = true;
-    });
+    requestAnimationFrame(() => (this.hasInitialized = true));
   }
 
-  /** Component lifecycle method that runs when the element disconnects from the DOM */
   disconnectedCallback() {
     this.stopObserver();
     super.disconnectedCallback();
   }
 
-  /** Component lifecycle method that runs when properties change */
   updated(changedProperties: PropertyValues<this>) {
     super.updated(changedProperties);
 
@@ -91,24 +92,33 @@ export class QuietIntersectionObserver extends QuietElement {
     }
   }
 
-  /** Parses the threshold property into an array of numbers */
+  /** Parses the threshold property into an array of numbers. */
   private parseThreshold(): number[] {
     const tokens = parseSpaceDelimitedTokens(this.threshold);
     return tokens.map(token => {
       const num = parseFloat(token);
-      return isNaN(num) ? 0 : Math.max(0, Math.min(1, num));
+      return isNaN(num) ? 0 : clamp(num, 0, 1);
     });
   }
 
-  /** Resolves the root element from the selector */
+  /** Resolves the root element from the provided ID. */
   private resolveRoot(): Element | null {
     if (!this.root) return null;
 
     try {
-      const doc = this.getRootNode() as HTMLHtmlElement | ShadowRoot;
-      return doc.querySelector(this.root) as Element;
-    } catch (e) {
-      console.warn(`Invalid selector for root: "${this.root}"`);
+      const doc = this.getRootNode() as Document | ShadowRoot;
+      const target = doc.getElementById(this.root);
+
+      if (!target) {
+        console.warn(
+          `An intersection observer was assigned to an element with an ID of "${this.root}" but the element could not be found.`,
+          this
+        );
+      }
+
+      return target;
+    } catch {
+      console.warn(`Invalid selector for root: "${this.root}"`, this);
       return null;
     }
   }
@@ -137,11 +147,11 @@ export class QuietIntersectionObserver extends QuietElement {
           this.observedElements.set(entry.target, isIntersecting);
 
           // Apply or remove intersecting class
-          if (this.intersectionClass) {
+          if (this.intersectClass) {
             if (isIntersecting) {
-              entry.target.classList.add(this.intersectionClass);
+              entry.target.classList.add(this.intersectClass);
             } else {
-              entry.target.classList.remove(this.intersectionClass);
+              entry.target.classList.remove(this.intersectClass);
             }
           }
 
@@ -165,7 +175,7 @@ export class QuietIntersectionObserver extends QuietElement {
       }
     );
 
-    // Observe direct children
+    // Observe all direct children
     [...this.children].forEach(child => {
       this.intersectionObserver?.observe(child);
       // Initialize state as not intersecting
@@ -176,9 +186,9 @@ export class QuietIntersectionObserver extends QuietElement {
   /** Stops the intersection observer. */
   private stopObserver() {
     // Remove intersecting class from all observed elements before stopping
-    if (this.intersectionClass) {
+    if (this.intersectClass) {
       this.observedElements.forEach((_, element) => {
-        element.classList.remove(this.intersectionClass);
+        element.classList.remove(this.intersectClass);
       });
     }
 

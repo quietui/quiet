@@ -5,7 +5,7 @@ layout: component
 
 The component uses a [MutationObserver](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) to monitor when its direct children mutate. Events are dispatched when elements are added, removed, or changed depending on how it's configured.
 
-Add and remove some items, then open the console to inspect the output.
+The component is styled with [`display: contents`](https://developer.mozilla.org/en-US/docs/Web/CSS/display#contents), allowing you to easily apply flex and grid layouts to the containing element without the component interfering.
 
 ```html {.example}
 <div id="mutation__overview">
@@ -17,6 +17,8 @@ Add and remove some items, then open the console to inspect the output.
 </div>
 
 <quiet-button>Add box</quiet-button>
+
+<small>Add and remove some items, then open the console to inspect the output.</small>
 
 <script>
   const container = document.getElementById('mutation__overview');
@@ -80,6 +82,11 @@ Add and remove some items, then open the console to inspect the output.
         right: -0.625rem;
         border-radius: 50%;
       }
+    }
+
+    ~ small {
+      display: block;
+      margin-block-start: 1rem;
     }
   }
 </style>

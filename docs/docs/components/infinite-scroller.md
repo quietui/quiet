@@ -17,6 +17,16 @@ Infinite scrollers load new content automatically as users scroll down a feed. I
   <div class="item">Item 8</div>
   <div class="item">Item 9</div>
   <div class="item">Item 10</div>
+  <div class="item">Item 11</div>
+  <div class="item">Item 12</div>
+  <div class="item">Item 13</div>
+  <div class="item">Item 14</div>
+  <div class="item">Item 15</div>
+  <div class="item">Item 16</div>
+  <div class="item">Item 17</div>
+  <div class="item">Item 18</div>
+  <div class="item">Item 19</div>
+  <div class="item">Item 20</div>
 </quiet-infinite-scroller>
 
 <script>
@@ -26,7 +36,7 @@ Infinite scrollers load new content automatically as users scroll down a feed. I
   infiniteScroll.addEventListener('quiet-load-more', async event => {
     // Simulate fetching content from a server
     setTimeout(() => {
-      for (let i = 0; i < 10; i++) {
+      for (let i = 0; i < 20; i++) {
         const item = document.createElement('div');
         item.classList.add('item');
         item.textContent = `Item ${++count}`;

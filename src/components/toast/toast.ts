@@ -6,6 +6,7 @@ import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import type { QuietContentChangedEvent } from '../../events/content.js';
 import { QuietBeforeCloseEvent, QuietCloseEvent } from '../../events/open-close.js';
 import hostStyles from '../../styles/host.styles.js';
+import { escapeHtml } from '../../utilities/html.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import '../toast-item/toast-item.js';
 import type { QuietToastItem } from '../toast-item/toast-item.js';
@@ -230,6 +231,11 @@ export class QuietToast extends QuietElement {
     await this.stack.transitionComplete();
     this.innerHTML = '';
     await this.stack.transitionComplete();
+  }
+
+  /** Escapes HTML special characters in the given string. */
+  public async escapeHtml(html: string) {
+    return escapeHtml(html);
   }
 
   render() {

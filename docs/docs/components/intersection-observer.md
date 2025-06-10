@@ -7,7 +7,7 @@ The component uses an [IntersectionObserver](https://developer.mozilla.org/en-US
 
 ```html {.example}
 <div id="intersection__overview">
-  <quiet-intersection-observer threshold="1" intersect-class="visible">
+  <quiet-intersection-observer threshold="0.9" intersect-class="visible">
     <div class="box"><quiet-icon name="send"></quiet-icon></div>
     <div class="box"><quiet-icon name="car-fan"></quiet-icon></div>
     <div class="box"><quiet-icon name="map"></quiet-icon></div>
@@ -19,7 +19,7 @@ The component uses an [IntersectionObserver](https://developer.mozilla.org/en-US
   </quiet-intersection-observer>
 </div>
 
-<small>Scroll to see elements intersect at 100% visibility</small>
+<small>Scroll to see elements intersect at 90% visibility</small>
 
 <style>
   /* Container styles */
@@ -46,7 +46,7 @@ The component uses an [IntersectionObserver](https://developer.mozilla.org/en-US
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 300ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      transition: all 50ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
       margin-inline: auto;
       opacity: 0.7;
 

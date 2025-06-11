@@ -7,19 +7,12 @@ The component uses an [IntersectionObserver](https://developer.mozilla.org/en-US
 
 ```html {.example}
 <div id="intersection__overview">
-  <quiet-intersection-observer threshold="0.9" intersect-class="visible">
-    <div class="box"><quiet-icon name="send"></quiet-icon></div>
-    <div class="box"><quiet-icon name="car-fan"></quiet-icon></div>
-    <div class="box"><quiet-icon name="map"></quiet-icon></div>
-    <div class="box"><quiet-icon name="air-balloon"></quiet-icon></div>
-    <div class="box"><quiet-icon name="grill"></quiet-icon></div>
-    <div class="box"><quiet-icon name="device-gamepad"></quiet-icon></div>
-    <div class="box"><quiet-icon name="diamond"></quiet-icon></div>
-    <div class="box"><quiet-icon name="cat"></quiet-icon></div>
+  <quiet-intersection-observer threshold="1" intersect-class="visible">
+    <div class="box"><quiet-icon name="bulb"></quiet-icon></div>
   </quiet-intersection-observer>
 </div>
 
-<small>Scroll to see elements intersect at 90% visibility</small>
+<small>Scroll to see the element intersect at 100% visibility</small>
 
 <style>
   /* Container styles */
@@ -33,11 +26,24 @@ The component uses an [IntersectionObserver](https://developer.mozilla.org/en-US
     padding: 1rem;
     overflow-y: auto;
 
+    /* Spacers to demonstrate scrolling */
+    &::before {
+      content: '';
+      height: 260px;
+      flex-shrink: 0;
+    }
+
+    &::after {
+      content: '';
+      height: 260px;
+      flex-shrink: 0;
+    }   
+
     /* Box styles */
     .box {
       flex-shrink: 0;
-      width: 150px;
-      height: 150px;
+      width: 120px;
+      height: 120px;
       border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
       border-radius: var(--quiet-border-radius);
       background-color: var(--quiet-neutral-fill-softer);
@@ -46,9 +52,8 @@ The component uses an [IntersectionObserver](https://developer.mozilla.org/en-US
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 50ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
       margin-inline: auto;
-      opacity: 0.7;
+      transition: all 50ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
       quiet-icon {
         font-size: 3rem;
@@ -58,6 +63,7 @@ The component uses an [IntersectionObserver](https://developer.mozilla.org/en-US
       &.visible {
         background-color: var(--quiet-primary-fill-softer);
         border-color: var(--quiet-primary-stroke-soft);
+        color: var(--quiet-primary-text-colorful);
         opacity: 1;
         box-shadow: var(--quiet-shadow-soft);
       }
@@ -168,13 +174,13 @@ Use the `intersect-class` attribute to automatically apply the specified class t
     /* Spacers to demonstrate scrolling */
     &::before {
       content: '';
-      height: 250px;
+      height: 260px;
       flex-shrink: 0;
     }
 
     &::after {
       content: '';
-      height: 250px;
+      height: 260px;
       flex-shrink: 0;
     }    
 
@@ -183,77 +189,77 @@ Use the `intersect-class` attribute to automatically apply the specified class t
       text-align: center;
       margin-block-start: 1rem;
     }
-  }
 
-  /* Shared box styles */
-  .box {
-    flex-shrink: 0;
-    width: 150px;
-    height: 150px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: white;
-    font-weight: bold;
-    text-shadow: 0 1px #0008;
-    opacity: 0;
-    padding: 2rem;
-    margin-inline: auto;
-  }
+    /* Shared box styles */
+    .box {
+      flex-shrink: 0;
+      width: 120px;
+      height: 120px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      font-weight: bold;
+      text-shadow: 0 1px #0008;
+      opacity: 0;
+      padding: 2rem;
+      margin-inline: auto;
 
-  /* Fade */
-  .box.fade {
-    background: linear-gradient(135deg, #5a6fd4 0%, #6a4292 100%);
-    transform: translateY(30px);
-    transition: all 0.6s ease;
+      /* Fade */
+      &.fade {
+        background: linear-gradient(135deg, #5a6fd4 0%, #6a4292 100%);
+        transform: translateY(30px);
+        transition: all 0.6s ease;
 
-    &.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+        &.visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
 
-  /* Slide */
-  .box.slide {
-    background: linear-gradient(135deg, #d984e2 0%, #dd4e61 100%);
-    transform: translateX(-50px);
-    transition: all 0.5s ease;
+      /* Slide */
+      &.slide {
+        background: linear-gradient(135deg, #d984e2 0%, #dd4e61 100%);
+        transform: translateX(-50px);
+        transition: all 0.5s ease;
 
-    &.visible {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
+        &.visible {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
 
-  /* Scale */
-  .box.scale {
-    background: linear-gradient(135deg, #439be4 0%, #00dae4 100%);
-    transform: scale(0.6) rotate(-15deg);
-    transition: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      /* Scale */
+      &.scale {
+        background: linear-gradient(135deg, #439be4 0%, #00dae4 100%);
+        transform: scale(0.6) rotate(-15deg);
+        transition: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
-    &.visible {
-      opacity: 1;
-      transform: scale(1) rotate(0deg);
-    }
-  }
+        &.visible {
+          opacity: 1;
+          transform: scale(1) rotate(0deg);
+        }
+      }
 
-  /* Bounce In and Out */
-  .box.bounce {
-    background: linear-gradient(135deg, #e1658a 0%, #e5cb39 100%);
-    opacity: 0;
-    transform: scale(0.8);
-    transition: none;
+      /* Bounce In and Out */
+      &.bounce {
+        background: linear-gradient(135deg, #e1658a 0%, #e5cb39 100%);
+        opacity: 0;
+        transform: scale(0.8);
+        transition: none;
 
-    &.visible {
-      opacity: 1;
-      transform: scale(1);
-      animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
-    }
+        &.visible {
+          opacity: 1;
+          transform: scale(1);
+          animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+        }
 
-    &:not(.visible) {
-      animation: bounceOut 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+        &:not(.visible) {
+          animation: bounceOut 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+        }
+      }      
     }
   }
 

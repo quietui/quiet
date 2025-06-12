@@ -19,8 +19,8 @@ layout: splash
 Installation
 </quiet-button>
 
-<quiet-button href="/about" size="xl" pill>
-About this project
+<quiet-button href="/components" size="xl" pill>
+Browse components
 </quiet-button>
 
 </div>
@@ -89,8 +89,8 @@ Copy and paste the following code into the `<head>` section of any HTML document
     Installation guide
   </quiet-button>
   
-  <quiet-button size="lg" appearance="outline" pill href="/components">
-    Browse components
+  <quiet-button size="lg" appearance="outline" pill href="/support">
+    Help &amp; support
   </quiet-button>
 </div>
 

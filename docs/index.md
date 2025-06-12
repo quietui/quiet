@@ -34,7 +34,7 @@ About this project
 
 <ul class="features-grid">
   <li>
-    <a class="stretch" href="/docs/components">
+    <a class="stretch" href="/components">
       <quiet-icon name="packages" style="color: #b394f4;"></quiet-icon><br>
       {{ components.length }} high-quality, accessible, and interoperable UI components
     </a>
@@ -89,7 +89,7 @@ Copy and paste the following code into the `<head>` section of any HTML document
     Installation guide
   </quiet-button>
   
-  <quiet-button size="lg" appearance="outline" pill href="/docs/components">
+  <quiet-button size="lg" appearance="outline" pill href="/components">
     Browse components
   </quiet-button>
 </div>

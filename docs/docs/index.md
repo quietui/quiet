@@ -4,7 +4,7 @@ description: Start using Quiet with just a couple lines of code.
 layout: docs
 ---
 
-Quiet is an open source library for building modern user interfaces on the Web. It features dozens of high-quality, accessible,  interoperable [components](/docs/components), a [modern theme](/docs/theming) with light and darks modes that can adapt to any brand, an optional [CSS reset](/docs/restyle), and more!
+Quiet is an open source library for building modern user interfaces on the Web. It features dozens of high-quality, accessible,  interoperable [components](/components), a [modern theme](/docs/theming) with light and darks modes that can adapt to any brand, an optional [CSS reset](/docs/restyle), and more!
 
 **There are two ways to install Quiet components.** [Autoloading](#autoloading) is the fastest way to get started — just copy, paste, and start coding. Or you can [import components manually](#manually-importing) from npm or the CDN.
 
@@ -27,7 +27,7 @@ Copy and paste the following code into the `<head>` section of any HTML document
 <link rel="stylesheet" href="{% cdnUrl '/dist/themes/restyle.css' %}">
 ```
 
-Now you can use [any component](/docs/components) in your HTML!
+Now you can use [any component](/components) in your HTML!
 
 ```html {.example .no-buttons .flex-row}
 <quiet-button variant="primary">

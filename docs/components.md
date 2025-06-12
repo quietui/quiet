@@ -1,19 +1,20 @@
 ---
 title: Browse Components
-description: Look through some of the best components on the planet.
-layout: docs
+description: Look through some of the best custom elements on the planet.
+layout: page
+section: components
 bodyClass: browse-components
 ---
 
 <quiet-search-list id="component-index" match="fuzzy">
   <quiet-text-field 
     slot="controller" 
-    label="Searching {{ components.length }} custom elements" 
-    description="Results will automatically update as you type"
+    label="Browsing {{ components.length }} components" 
+    description="Results will automatically update as you type" 
     pill 
     autofocus 
     with-clear
-    class="quiet-vh-description"
+    class="quiet-vh-label quiet-vh-description"
   >
     <quiet-icon slot="start" name="search"></quiet-icon>
   </quiet-text-field>
@@ -50,17 +51,31 @@ bodyClass: browse-components
 </quiet-search-list>
 
 <style>
+  h1.title {
+    text-align: center;
+  }
+
   #component-index {
     &::part(items) {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
       align-items: start;
-      gap: 1rem;
       width: 100%;
       margin-block-end: 2rem;
     }
 
+    quiet-text-field {
+      max-width: 460px;
+      margin-inline: auto;
+      margin-block-end: 3rem;
+
+      &::part(label) {
+        margin-inline: auto;
+      }
+    }
+
     .component {
+      position: relative;
       display: flex;
       flex-direction: column;
       flex: 1 1 auto;
@@ -73,16 +88,16 @@ bodyClass: browse-components
       padding: 1.25rem;
       text-decoration: none;
       color: inherit;
-      transition: all 0.1s ease-in-out;
-      
+      transition: all 100ms ease-out;
+
       &:focus-visible {
         outline-offset: calc(-1 * var(--quiet-border-width));
       }
 
       @media (hover: hover) {
         &:hover {
-          transform: translateY(-2px) scale(1.01);
-          box-shadow: var(--quiet-shadow-soft);
+          transform: translateY(-3px) scale(1.04);
+          box-shadow: var(--quiet-shadow-mid);
         }
       }
 

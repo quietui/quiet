@@ -1,47 +1,47 @@
 /** Sets the theme to light or dark mode */
-function setTheme(name, skipTransition = false) {
+function setColorScheme(name, skipTransition = false) {
   const isDark = name === 'dark';
-  const toggleThemeClass = () => document.documentElement.classList.toggle('quiet-dark', isDark);
+  const toggleColorSchemeClass = () => document.documentElement.classList.toggle('quiet-dark', isDark);
 
-  localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  localStorage.setItem('color-scheme', isDark ? 'dark' : 'light');
 
   if (skipTransition || !document.startViewTransition) {
-    toggleThemeClass();
+    toggleColorSchemeClass();
   } else if (document.startViewTransition) {
-    document.startViewTransition(() => toggleThemeClass());
+    document.startViewTransition(() => toggleColorSchemeClass());
   }
 }
 
-/** Gets the current theme */
-function getTheme() {
+/** Gets the current color scheme */
+function getColorScheme() {
   // Use session preference, if one exists
-  if (localStorage.getItem('theme')) {
-    return localStorage.getItem('theme') === 'dark' ? 'dark' : 'light';
+  if (localStorage.getItem('color-scheme')) {
+    return localStorage.getItem('color-scheme') === 'dark' ? 'dark' : 'light';
   }
 
   // Fall back to system
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
 
-/** Toggles the current theme between light and dark */
-function toggleTheme() {
-  setTheme(getTheme() === 'dark' ? 'light' : 'dark');
+/** Toggles the current color scheme between light and dark */
+function toggleColorScheme() {
+  setColorScheme(getColorScheme() === 'dark' ? 'light' : 'dark');
 }
 
 const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
 
 // Initial set/restore
-setTheme(getTheme(), true);
+setColorScheme(getColorScheme(), true);
 
 // Update when the OS preference changes
 prefersDark.addEventListener('change', event => {
-  setTheme(event.matches ? 'dark' : 'light');
+  setColorScheme(event.matches ? 'dark' : 'light');
 });
 
 // Update when a dark mode toggle is activated
 document.addEventListener('click', event => {
   if (event.target.closest('[data-toggle="dark-mode"]')) {
-    toggleTheme();
+    toggleColorScheme();
   }
 });
 
@@ -51,12 +51,12 @@ document.addEventListener('keydown', event => {
     event.key === '\\' &&
     !event.composedPath().some(el => ['input', 'textarea', 'select'].includes(el?.tagName?.toLowerCase()))
   ) {
-    toggleTheme();
+    toggleColorScheme();
   }
 });
 
 /** Sets the theme color and updates the UI */
-function setThemeColor(newColor, skipTransition = false) {
+function setColorSchemeColor(newColor, skipTransition = false) {
   const dropdown = document.getElementById('header-color-picker');
   const items = [...dropdown.querySelectorAll('quiet-dropdown-item')];
   const colorNames = items.map(item => item.textContent.trim());
@@ -73,7 +73,7 @@ function setThemeColor(newColor, skipTransition = false) {
     document.head.querySelector('meta[name="theme-color"]').content = hex;
   };
 
-  localStorage.setItem('primary-color', color);
+  localStorage.setItem('theme-color', color);
 
   // Update the color picker dropdown
   dropdown.querySelectorAll('quiet-dropdown-item').forEach(item => {
@@ -91,21 +91,21 @@ function setThemeColor(newColor, skipTransition = false) {
 // Update when a new color is selected from the theme picker
 document.addEventListener('quiet-select', event => {
   if (event.target.id === 'header-color-picker') {
-    setThemeColor(event.detail.item.value);
+    setColorSchemeColor(event.detail.item.value);
   }
 });
 
 // Update when a new color is selected from a data-preset attribute
 document.addEventListener('click', event => {
   if (event.target.closest('[data-preset]')) {
-    setThemeColor(event.target.getAttribute('data-preset'));
+    setColorSchemeColor(event.target.getAttribute('data-preset'));
   }
 });
 
 // Keep the theme in sync when new pages load
 document.addEventListener('turbo:load', () => {
-  setThemeColor(localStorage.getItem('primary-color'), true);
+  setColorSchemeColor(localStorage.getItem('theme-color'), true);
 });
 
 // Initial sync
-setThemeColor(localStorage.getItem('primary-color'), true);
+setColorSchemeColor(localStorage.getItem('theme-color'), true);

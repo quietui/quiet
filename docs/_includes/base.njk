@@ -7,15 +7,15 @@
     <meta name="theme-color" content="#989cff">
     {% if noindex %}<meta name="robots" content="noindex">{% endif %}
 
-    {# Set the theme and theme color here to prevent flashing #}
+    {# Set the color scheme and theme color here to prevent flashing #}
     <script>
       document.documentElement.classList.toggle(
         'quiet-dark',
-        localStorage.getItem('theme') === 'dark' || window.matchMedia('(prefers-color-scheme: dark)').matches
+        localStorage.getItem('color-scheme') === 'dark' || window.matchMedia('(prefers-color-scheme: dark)').matches
       );
 
-      if (localStorage.getItem('primary-color')) {
-        document.documentElement.classList.add(`quiet-${localStorage.getItem('primary-color')}`);
+      if (localStorage.getItem('theme-color')) {
+        document.documentElement.classList.add(`quiet-${localStorage.getItem('theme-color')}`);
       }
     </script>
 

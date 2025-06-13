@@ -141,7 +141,7 @@ Features can be [requested on GitHub](https://github.com/quietui/quiet/discussio
 :::details Can I sponsor/prioritize a feature? {.faq}
 I generally don't accept sponsorships for specific features. This lets me focus on what's best for the project. That doesn't mean I ignore feature requests — it means I'm not willing to let money influence the roadmap.
 
-Quiet is the result of many years of experience and my commitment to painstakingly curate the project. I want people to sponsor it because they see the vision, not because they want to change it.
+Quiet is the result of many years of experience and my commitment to painstakingly curating the project. I want people to sponsor it because they see the vision, not because they want to change it.
 :::
 
 :::details What about server-side rendering (SSR)? {.faq}

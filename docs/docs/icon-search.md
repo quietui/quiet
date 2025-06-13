@@ -48,7 +48,7 @@ For an alternative way to browse icons, head over to the [Tabler Icons](https://
 <div id="icon-results"></div>
 
 <script type="module">
-  import lunr from 'https://cdn.jsdelivr.net/npm/lunr/+esm';
+  import lunr from 'https://cdn.jsdelivr.net/npm/lunr@2.3/+esm';
 
   const searchField = document.getElementById('icon-search');
   const copySelect = document.getElementById('icon-copy');

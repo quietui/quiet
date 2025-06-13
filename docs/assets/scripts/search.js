@@ -1,5 +1,5 @@
 // Search data
-const res = await Promise.all([import('https://cdn.jsdelivr.net/npm/lunr/+esm'), fetch('/search.json')]);
+const res = await Promise.all([import('https://cdn.jsdelivr.net/npm/lunr@2.3/+esm'), fetch('/search.json')]);
 const lunr = res[0].default;
 const searchData = await res[1].json();
 const searchIndex = lunr.Index.load(searchData.searchIndex);

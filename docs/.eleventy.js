@@ -164,7 +164,7 @@ export default function (eleventyConfig) {
       {
         replace: /\[form\]/gs,
         replaceWith: `
-          <quiet-badge title="This is a form associated custom element.">
+          <quiet-badge title="This component is a form associated custom element. It will submit its value when placed inside a <form> and given a name.">
             <quiet-icon name="forms"></quiet-icon>
           </quiet-badge>
         `

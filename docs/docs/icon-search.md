@@ -10,7 +10,6 @@ Use this tool to find the perfect icon and copy it into your project with just a
 For an alternative way to browse icons, head over to the [Tabler Icons](https://tabler.io/icons) website.
 :::
 
-
 <div id="search-container">
   <quiet-text-field
     type="search"

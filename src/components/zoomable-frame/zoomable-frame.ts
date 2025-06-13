@@ -30,6 +30,9 @@ import styles from './zoomable-frame.styles.js';
  * @csspart zoom-out-button - The zoom out button.
  *
  * @cssproperty [--aspect-ratio=16/9] - The aspect ratio of the frame.
+ *
+ * @cssstate loading - Applied when the iframe is loading.
+ * @cssstate error - Applied when the iframe failed to load.
  */
 @customElement('quiet-zoomable-frame')
 export class QuietZoomableFrame extends QuietElement {
@@ -145,6 +148,11 @@ export class QuietZoomableFrame extends QuietElement {
   }
 
   updated(changedProperties: PropertyValues<this>) {
+    if (changedProperties.has('src') || changedProperties.has('srcdoc')) {
+      this.customStates.set('loading', true);
+      this.customStates.set('error', false);
+    }
+
     if (changedProperties.has('zoom')) {
       this.style.setProperty('--zoom', `${this.zoom}`);
     }
@@ -191,10 +199,13 @@ export class QuietZoomableFrame extends QuietElement {
   }
 
   private handleLoad() {
+    this.customStates.set('loading', false);
     this.dispatchEvent(new Event('load', { bubbles: false, cancelable: false, composed: true }));
   }
 
   private handleError() {
+    this.customStates.set('loading', false);
+    this.customStates.set('error', true);
     this.dispatchEvent(new Event('error', { bubbles: false, cancelable: false, composed: true }));
   }
 

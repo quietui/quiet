@@ -15,7 +15,7 @@ layout: component
 <style>
   #carousel__overview {
     quiet-carousel-item {
-      background: var(--quiet-neutral-fill-soft);
+      background: var(--quiet-neutral-fill-softer);
       color: var(--quiet-text-muted);
       font-size: 2rem;
       font-weight: 500;
@@ -106,7 +106,7 @@ Use the `active-index` attribute to set the item that should show initially. The
 <style>
   #carousel__index {
     quiet-carousel-item {
-      background: var(--quiet-neutral-fill-soft);
+      background: var(--quiet-neutral-fill-softer);
       color: var(--quiet-text-muted);
       font-size: 2rem;
       font-weight: 500;
@@ -163,7 +163,7 @@ You can hide the previous/next buttons by adding the `without-nav` attribute. To
     }    
 
     quiet-carousel-item {
-      background: var(--quiet-neutral-fill-soft);
+      background: var(--quiet-neutral-fill-softer);
       color: var(--quiet-text-muted);
       font-size: 2rem;
       font-weight: 500;
@@ -188,7 +188,7 @@ You can create carousel items with various widths and max widths by applying the
 <style>
   #carousel__varying {
     quiet-carousel-item {
-      background: var(--quiet-neutral-fill-soft);
+      background: var(--quiet-neutral-fill-softer);
       color: var(--quiet-text-muted);
       font-size: 2rem;
       font-weight: 500;

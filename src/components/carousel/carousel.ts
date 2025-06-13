@@ -14,7 +14,7 @@ import styles from './carousel.styles.js';
 /**
  * <quiet-carousel>
  *
- * @summary A carousel component that displays content in a scrollable horizontal slider with navigation controls.
+ * @summary Displays content in a scrollable horizontal slider with navigation controls.
  * @documentation https://quietui.com/docs/components/carousel
  * @status stable
  * @since 1.0

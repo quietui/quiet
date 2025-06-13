@@ -8,7 +8,7 @@ import styles from './timed-content.styles.js';
 /**
  * <quiet-timed-content>
  *
- * @summary Timed content shows certain content based on the current date and time.
+ * @summary Shows certain content based on the current date and time.
  * @documentation https://quietui.org/docs/components/timed-content
  * @status stable
  * @since 1.0

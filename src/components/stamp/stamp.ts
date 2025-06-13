@@ -8,7 +8,7 @@ import styles from './stamp.styles.js';
 /**
  * <quiet-stamp>
  *
- * @summary Stamps render templates with simple expressions, logic, and custom data.
+ * @summary Renders templates with simple expressions, logic, and custom data.
  * @documentation https://quietui.org/docs/components/stamp
  * @status experimental
  * @since 1.0

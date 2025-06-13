@@ -17,7 +17,7 @@ const VALIDATION_MESSAGE = nativeFileInput.validationMessage;
 /**
  * <quiet-toggle-icon>
  *
- * @summary Toggle icons are like checkboxes, except with icons to represent the checked and unchecked states.
+ * @summary Similar to checkboxes, except with icons to represent the checked and unchecked states.
  * @documentation https://quietui.org/docs/components/toggle-icon
  * @status stable
  * @since 1.0

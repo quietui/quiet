@@ -14,7 +14,7 @@ import styles from './copy.styles.js';
 /**
  * <quiet-copy>
  *
- * @summary Copy buttons let you copy text and other types of data to the clipboard.
+ * @summary Copies text and other types of data to the clipboard.
  * @documentation https://quietui.org/docs/components/copy
  * @status stable
  * @since 1.0

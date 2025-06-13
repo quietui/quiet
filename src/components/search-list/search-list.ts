@@ -11,7 +11,7 @@ import styles from './search-list.styles.js';
 /**
  * <quiet-search-list>
  *
- * @summary Search lists let you query a collection of items based on their content and keywords.
+ * @summary Queries a collection of items based on their content and keywords.
  * @documentation https://quietui.org/docs/components/search-list
  * @status stable
  * @since 1.0

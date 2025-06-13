@@ -11,7 +11,7 @@ import styles from './infinite-scroller.styles.js';
 /**
  * <quiet-infinite-scroller>
  *
- * @summary Infinite scrollers provide an accessible container for continuously loading content feeds.
+ * @summary Provides an accessible container for continuously loading content feeds.
  * @documentation https://quietui.org/docs/components/infinite-scroller
  * @status stable
  * @since 1.0

@@ -9,7 +9,7 @@ import styles from './mutation-observer.styles.js';
 /**
  * <quiet-mutation-observer>
  *
- * @summary Mutation observers watch child elements and dispatch an event when they mutate.
+ * @summary Watches child elements and dispatches an event when they mutate.
  * @documentation https://quietui.org/docs/components/mutation
  * @status stable
  * @since 1.0

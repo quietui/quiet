@@ -8,8 +8,8 @@ import styles from './card.styles.js';
 /**
  * <quiet-card>
  *
- * @summary Cards provide a flexible and visually appealing way to organize and present content in a consistent and
- *  easily digestible format.
+ * @summary Provides a flexible and visually appealing way to organize and present content in a consistent and easily
+ *  digestible format.
  * @documentation https://quietui.org/docs/components/card
  * @status stable
  * @since 1.0

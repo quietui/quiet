@@ -20,7 +20,7 @@ import styles from './passcode.styles.js';
 /**
  * <quiet-passcode>
  *
- * @summary Passcodes let users enter fixed-length passcodes, verification tokens, one-time codes, and similar data in a
+ * @summary Allows users to enter fixed-length passcodes, verification tokens, one-time codes, and similar data in a
  *  user-friendly way.
  * @documentation https://quietui.org/docs/components/passcode
  * @status stable

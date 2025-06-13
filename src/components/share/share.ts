@@ -12,7 +12,7 @@ import styles from './share.styles.js';
 /**
  * <quiet-share>
  *
- * @summary Share buttons let users share links, files and text via their operating system's share interface.
+ * @summary Allows users to share links, files and text via their operating system's share interface.
  * @documentation https://quietui.org/docs/components/share
  * @status stable
  * @since 1.0

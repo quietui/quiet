@@ -11,7 +11,7 @@ import styles from './intersection-observer.styles.js';
 /**
  * <quiet-intersection-observer>
  *
- * @summary Intersection observers watch child elements and dispatch events when they intersect with their root element.
+ * @summary Watches child elements and dispatches events when they intersect with their root element.
  * @documentation https://quietui.org/docs/components/intersection
  * @status stable
  * @since 1.0

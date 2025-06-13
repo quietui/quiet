@@ -24,7 +24,7 @@ type PaginationButton =
 /**
  * <quiet-pagination>
  *
- * @summary Pagination splits content into numbered pages so users can navigate datasets in manageable chunks.
+ * @summary Splits content into numbered pages so users can navigate datasets in manageable chunks.
  * @documentation https://quietui.org/docs/components/pagination
  * @status stable
  * @since 1.0

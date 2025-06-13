@@ -14,8 +14,8 @@ import styles from './comparison.styles.js';
 /**
  * <quiet-comparison>
  *
- * @summary Comparisons display two elements side-by-side with a draggable divider, allowing users to adjust the visible
- *  portions for direct visual comparison.
+ * @summary Displays two elements side-by-side with a draggable divider, allowing users to adjust the visible portions
+ *  for direct visual comparison.
  * @documentation https://quietui.org/docs/components/comparison
  * @status stable
  * @since 1.0

@@ -10,7 +10,7 @@ import styles from './checkbox-group.styles.js';
 /**
  * <quiet-checkbox-group>
  *
- * @summary Checkbox groups let you attach a label and description to a group of related checkboxes or switches.
+ * @summary Attaches a label and description to a group of related checkboxes or switches.
  * @documentation https://quietui.org/docs/components/checkbox-group
  * @status stable
  * @since 1.0

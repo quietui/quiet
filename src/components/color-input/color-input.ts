@@ -20,7 +20,7 @@ const openColorPickers = new Set<QuietColorInput>();
 /**
  * <quiet-color-input>
  *
- * @summary Color inputs let users enter or select a color and submit it with a form.
+ * @summary Allows users to enter or select a color and submit it with a form.
  * @documentation https://quietui.org/docs/components/color-input
  * @status stable
  * @since 1.0

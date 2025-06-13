@@ -11,7 +11,7 @@ import styles from './toast-item.styles.js';
 /**
  * <quiet-toast-item>
  *
- * @summary Toast items are the notifications displayed by the toast component.
+ * @summary Notifications displayed by the toast component.
  * @documentation https://quietui.org/docs/components/toast-item
  * @status stable
  * @since 1.0

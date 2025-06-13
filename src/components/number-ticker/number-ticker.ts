@@ -10,7 +10,7 @@ import styles from './number-ticker.styles.js';
 /**
  * `<quiet-number-ticker>`
  *
- * @summary Number tickers animate a number from a starting value to an ending value.
+ * @summary Animates a number from a starting value to an ending value.
  * @documentation https://quietui.com/docs/components/number-ticker
  * @status stable
  * @since 1.0

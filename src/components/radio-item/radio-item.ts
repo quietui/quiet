@@ -11,7 +11,7 @@ import styles from './radio-item.styles.js';
 /**
  * <quiet-radio-item>
  *
- * @summary Radio items represent individual choices within a radio.
+ * @summary Represents individual choices within a radio.
  * @documentation https://quietui.org/docs/components/radio-item
  * @status stable
  * @since 1.0

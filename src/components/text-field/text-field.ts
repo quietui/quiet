@@ -15,7 +15,7 @@ import styles from './text-field.styles.js';
 /**
  * <quiet-text-field>
  *
- * @summary Text fields let users input and edit text.
+ * @summary Allows users to input and edit text.
  * @documentation https://quietui.org/docs/components/text-field
  * @status stable
  * @since 1.0

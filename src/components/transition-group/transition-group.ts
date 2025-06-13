@@ -12,8 +12,8 @@ import styles from './transition-group.styles.js';
 /**
  * <quiet-transition-group>
  *
- * @summary Transition groups improve the user's experience by adding subtle animations as items are added, removed, and
- *  reordered in the group.
+ * @summary Improves the user's experience by adding subtle animations as items are added, removed, and reordered in the
+ *  group.
  * @documentation https://quietui.org/docs/components/transition-group
  * @status stable
  * @since 1.0

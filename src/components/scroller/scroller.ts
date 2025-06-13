@@ -9,8 +9,7 @@ import styles from './scroller.styles.js';
 /**
  * <quiet-scroller>
  *
- * @summary Scrollers add an accessible container with visual affordances to help users identify and navigate scrolling
- *  content.
+ * @summary Adds an accessible container with visual affordances to help users identify and navigate scrolling content.
  * @documentation https://quietui.org/docs/components/scroller
  * @status stable
  * @since 1.0

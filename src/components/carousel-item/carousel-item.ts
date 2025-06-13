@@ -7,7 +7,7 @@ import styles from './carousel-item.styles.js';
 /**
  * <quiet-carousel-item>
  *
- * @summary Carousel items represent individual items used in a carousel.
+ * @summary Represents individual items used in a carousel.
  * @documentation https://quietui.com/docs/components/carousel
  * @status stable
  * @since 1.0

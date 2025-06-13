@@ -8,8 +8,8 @@ import styles from './empty-state.styles.js';
 /**
  * <quiet-empty-state>
  *
- * @summary Empty states guide users during first-time experiences or when content is missing, transforming blank spaces
- *  into opportunities with helpful visuals and clear actions.
+ * @summary Guides users during first-time experiences or when content is missing, transforming blank spaces into
+ *  opportunities with helpful visuals and clear actions.
  * @documentation https://quietui.org/docs/components/empty-state
  * @status stable
  * @since 1.0

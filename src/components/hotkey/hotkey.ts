@@ -26,7 +26,7 @@ const keywordMap = {
 /**
  * <quiet-hotkey>
  *
- * @summary Hotkeys show keyboard shortcut combinations based on the user's operating system.
+ * @summary Shows keyboard shortcut combinations based on the user's operating system.
  * @documentation https://quietui.org/docs/components/hotkey
  * @status stable
  * @since 1.0

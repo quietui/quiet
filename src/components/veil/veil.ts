@@ -19,7 +19,7 @@ import styles from './veil.styles.js';
 /**
  * <quiet-veil>
  *
- * @summary Veils are used to cover elements visually and disable interaction during important states such as loading.
+ * @summary Covers elements visually and disables interaction during important states such as submitting or loading.
  * @documentation https://quietui.org/docs/components/veil
  * @status stable
  * @since 1.0

@@ -13,7 +13,7 @@ import styles from './switch.styles.js';
 /**
  * <quiet-switch>
  *
- * @summary Switches let the user toggle between two mutually exclusive states, such as on and off.
+ * @summary Allows the user to toggle between two mutually exclusive states, such as on and off.
  * @documentation https://quietui.org/docs/components/switch
  * @status stable
  * @since 1.0

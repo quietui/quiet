@@ -9,7 +9,7 @@ import styles from './listbox-item.styles.js';
 /**
  * <quiet-listbox-item>
  *
- * @summary Listbox items represent individual choices within a listbox.
+ * @summary Represents individual choices within a listbox.
  * @documentation https://quietui.org/docs/components/listbox-item
  * @status stable
  * @since 1.0

@@ -10,8 +10,8 @@ import styles from './flip-card.styles.js';
 /**
  * <quiet-flip-card>
  *
- * @summary Flip cards display information on two sides, allowing users to flip between the front and back with the
- *  click of a button.
+ * @summary Displays information on two sides, allowing users to flip between the front and back with the click of a
+ *  button.
  * @documentation https://quietui.com/docs/components/flip-card
  * @status stable
  * @since 1.0

@@ -8,7 +8,7 @@ import styles from './divider.styles.js';
 /**
  * <quiet-divider>
  *
- * @summary Dividers separate and group content visually.
+ * @summary Separates and groups content visually.
  * @documentation https://quietui.org/docs/components/divider
  * @status stable
  * @since 1.0

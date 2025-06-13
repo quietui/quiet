@@ -9,7 +9,7 @@ import styles from './spinner.styles.js';
 /**
  * <quiet-spinner>
  *
- * @summary Spinners tell the user that content is loading or a request is processing in the background.
+ * @summary Tells the user that content is loading or a request is processing in the background.
  * @documentation https://quietui.org/docs/components/spinner
  * @status stable
  * @since 1.0

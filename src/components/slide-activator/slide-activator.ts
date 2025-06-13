@@ -21,8 +21,7 @@ import styles from './slide-activator.styles.js';
 /**
  * <quiet-slide-activator>
  *
- * @summary Slide activators give users a draggable thumb that must be moved to the end of its track to trigger an
- *  action.
+ * @summary Gives users a draggable thumb that must be moved to the end of its track to trigger an action.
  * @documentation https://quietui.org/docs/components/slide-activator
  * @status stable
  * @since 1.0

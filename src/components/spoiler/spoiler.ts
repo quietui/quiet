@@ -11,8 +11,8 @@ import styles from './spoiler.styles.js';
 /**
  * <quiet-spoiler>
  *
- * @summary Spoilers conceal sensitive content and give the user the option of showing it or not, preventing
- *  unintentional disclosure.
+ * @summary Conceals sensitive content and gives the user the option of showing it or not, preventing unintentional
+ *  disclosure.
  * @documentation https://quietui.org/docs/components/spoiler
  * @status stable
  * @since 1.0

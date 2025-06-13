@@ -9,7 +9,7 @@ import styles from './breadcrumb-item.styles.js';
 /**
  * <quiet-breadcrumb-item>
  *
- * @summary Breadcrumb items represent a single link or step in the hierarchical structure of an app or website.
+ * @summary Represents a single link or step in the hierarchical structure of an app or website.
  * @documentation https://quietui.org/docs/components/breadcrumb-item
  * @status stable
  * @since 1.0

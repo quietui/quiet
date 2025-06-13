@@ -11,7 +11,7 @@ import styles from './zoomable-frame.styles.js';
 /**
  * <quiet-zoomable-frame>
  *
- * @summary Zoomable frames render iframe content with zoom and interaction controls.
+ * @summary Renders iframe content with zoom and interaction controls.
  * @documentation https://quietui.com/docs/components/zoomable-frame
  * @status stable
  * @since 1.0

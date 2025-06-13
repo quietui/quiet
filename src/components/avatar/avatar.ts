@@ -9,7 +9,7 @@ import styles from './avatar.styles.js';
 /**
  * <quiet-avatar>
  *
- * @summary Avatars provide a visual representation of a user to enhance personalization and recognition.
+ * @summary Provides a visual representation of a user to enhance personalization and recognition.
  * @documentation https://quietui.org/docs/components/avatar
  * @status stable
  * @since 1.0

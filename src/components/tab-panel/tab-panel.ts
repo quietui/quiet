@@ -8,7 +8,7 @@ import styles from './tab-panel.styles.js';
 /**
  * <quiet-tab-panel>
  *
- * @summary Tab panels hold the content that gets displayed when a tab is selected.
+ * @summary Holds the content that gets displayed when a tab is selected.
  * @documentation https://quietui.org/docs/components/tab-panel
  * @status stable
  * @since 1.0

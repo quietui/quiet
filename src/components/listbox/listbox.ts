@@ -21,7 +21,7 @@ const VALIDATION_MESSAGE = nativeFileInput.validationMessage;
 /**
  * <quiet-listbox>
  *
- * @summary Listbox displays a list of options, allowing users to select one or more items from the available choices.
+ * @summary Displays a list of options, allowing users to select one or more items from the available choices.
  * @documentation https://quietui.org/docs/components/listbox
  * @status stable
  * @since 1.0

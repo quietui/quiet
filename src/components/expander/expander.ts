@@ -16,7 +16,7 @@ import styles from './expander.styles.js';
 /**
  * <quiet-expander>
  *
- * @summary An expandable content container with smooth animation on show/hide
+ * @summary An expandable content container with smooth animation on show/hide.
  * @documentation https://quietui.org/docs/components/expander
  * @status stable
  * @since 1.0

@@ -15,7 +15,7 @@ const requests = new Map<string, Promise<Response>>();
 /**
  * <quiet-include>
  *
- * @summary Includes let you pull content from another file into your page.
+ * @summary Pulls content from another file into your page.
  * @documentation https://quietui.org/docs/components/include
  * @status stable
  * @since 1.0

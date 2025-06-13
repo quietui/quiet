@@ -15,7 +15,7 @@ import styles from './number-field.styles.js';
 /**
  * <quiet-number-field>
  *
- * @summary Number fields let users input and edit numbers.
+ * @summary Allows users to input and edit numbers.
  * @documentation https://quietui.org/docs/components/number-field
  * @status stable
  * @since 1.0

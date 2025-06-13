@@ -9,7 +9,7 @@ import styles from './typewriter.styles.js';
 /**
  * `<quiet-typewriter>`
  *
- * @summary Typewriters simulate a natural typing effect with customizable speed, delay, and looping options.
+ * @summary Simulates a natural typing effect with customizable speed, delay, and looping options.
  * @documentation https://quietui.com/docs/components/typewriter
  * @status stable
  * @since 1.0

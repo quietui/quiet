@@ -14,7 +14,7 @@ interface GetButtonsOptions {
 /**
  * <quiet-toolbar>
  *
- * @summary Toolbar turns a collection of buttons and button groups into an accessible toolbar.
+ * @summary Turns a collection of buttons and button groups into an accessible toolbar.
  * @documentation https://quietui.org/docs/components/toolbar
  * @status stable
  * @since 1.0

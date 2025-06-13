@@ -8,7 +8,7 @@ import styles from './sparkline.styles.js';
 /**
  * <quiet-sparkline>
  *
- * @summary Sparklines show at-a-glance trends in a small, inline chart that fits within text or tables.
+ * @summary Shows at-a-glance trends in a small, inline chart that fits within text or tables.
  * @documentation https://quietui.org/docs/components/sparkline
  * @status stable
  * @since 1.0

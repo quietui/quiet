@@ -9,7 +9,7 @@ import styles from './button-group.styles.js';
 /**
  * <quiet-button-group>
  *
- * @summary Button groups display related buttons in a stylized group.
+ * @summary Displays related buttons in a stylized group.
  * @documentation https://quietui.org/docs/components/button-group
  * @status stable
  * @since 1.0

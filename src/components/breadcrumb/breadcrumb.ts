@@ -9,8 +9,8 @@ import styles from './breadcrumb.styles.js';
 /**
  * <quiet-breadcrumb>
  *
- * @summary Breadcrumbs offer a trail of links that correspond to an app or website's hierarchy, making navigation more
- *  predictable for users.
+ * @summary Offers a trail of links that correspond to an app or website's hierarchy, making navigation more predictable
+ *  for users.
  * @documentation https://quietui.org/docs/components/breadcrumb
  * @status stable
  * @since 1.0

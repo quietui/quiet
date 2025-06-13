@@ -38,7 +38,7 @@ export interface CreateOptions {
 /**
  * <quiet-toast>
  *
- * @summary Toasts are temporary, non-intrusive notifications that appear above the page's content.
+ * @summary A mechanism for showing temporary, non-intrusive notifications that appear above the page's content.
  * @documentation https://quietui.org/docs/components/toast
  * @status stable
  * @since 1.0

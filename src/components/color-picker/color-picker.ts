@@ -22,8 +22,7 @@ const hasEyeDropper = 'EyeDropper' in window;
 /**
  * <quiet-color-picker>
  *
- * @summary Color picker provides a customizable interface for selecting a color using a two-dimensional slider for
- *  luminosity and saturation and standard sliders for hue and opacity.
+ * @summary Provides a customizable interface for selecting a color.
  * @documentation https://quietui.org/docs/components/color-picker
  * @status stable
  * @since 1.0

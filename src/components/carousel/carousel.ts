@@ -127,9 +127,7 @@ export class QuietCarousel extends QuietElement {
       }
     });
 
-    requestAnimationFrame(() => {
-      this.setActiveItem(this.activeIndex, 'instant');
-    });
+    this.setActiveItem(this.activeIndex, 'instant');
     this.setupResizeObserver();
   }
 

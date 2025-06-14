@@ -42,7 +42,7 @@ export class QuietSplitter extends QuietElement {
 
   private localize = new Localize(this);
   private dragHandler?: DraggableElement;
-  private previousPosition = 50;
+  private previousPosition = 0.5;
   private dragStartPosition = 0;
   private dragStartClientX = 0;
   private dragStartClientY = 0;
@@ -52,8 +52,8 @@ export class QuietSplitter extends QuietElement {
   @state() isCollapsed = false;
   @state() isDragging = false;
 
-  /** The current position of the divider as a percentage (0-100). */
-  @property({ type: Number }) position = 50;
+  /** The current position of the divider as a decimal (0-1). */
+  @property({ type: Number }) position = 0.5;
 
   /** The orientation of the splitter. */
   @property({ reflect: true }) orientation: 'horizontal' | 'vertical' = 'horizontal';
@@ -120,27 +120,27 @@ export class QuietSplitter extends QuietElement {
 
     const rect = this.getBoundingClientRect();
     const totalSize = this.orientation === 'horizontal' ? rect.width : rect.height;
-    const positionInPixels = (position / 100) * totalSize;
+    const positionInPixels = ((position * 100) / 100) * totalSize;
 
     // Find the closest snap point within the pixel threshold
     for (const snapPoint of snapPoints) {
       const snapPointInPixels = (snapPoint / 100) * totalSize;
       if (Math.abs(positionInPixels - snapPointInPixels) <= this.snapThreshold) {
-        return snapPoint;
+        return snapPoint / 100;
       }
     }
     return position; // Return original position if no snap point is within threshold
   }
 
   private getDividerConstraint(value: string, totalSize: number, isMin: boolean): number {
-    if (!value) return isMin ? 0 : 100;
+    if (!value) return isMin ? 0 : 1;
     if (value.endsWith('%')) {
-      return parseFloat(value.replace('%', ''));
+      return parseFloat(value.replace('%', '')) / 100;
     } else if (value.endsWith('px')) {
       const pixels = parseFloat(value.replace('px', ''));
-      return (pixels / totalSize) * 100;
+      return pixels / totalSize;
     }
-    return isMin ? 0 : 100; // Fallback
+    return isMin ? 0 : 1; // Fallback
   }
 
   private clampPosition(position: number): number {
@@ -179,10 +179,10 @@ export class QuietSplitter extends QuietElement {
 
         if (this.orientation === 'horizontal') {
           const deltaX = clientX - this.dragStartClientX;
-          deltaPercentage = (deltaX / rect.width) * 100 * (isRtl ? -1 : 1);
+          deltaPercentage = (deltaX / rect.width) * (isRtl ? -1 : 1);
         } else {
           const deltaY = clientY - this.dragStartClientY;
-          deltaPercentage = (deltaY / rect.height) * 100;
+          deltaPercentage = deltaY / rect.height;
         }
 
         const newPositionRaw = this.dragStartPosition + deltaPercentage;
@@ -204,26 +204,27 @@ export class QuietSplitter extends QuietElement {
   }
 
   private updateGridTemplate() {
+    const positionPercent = this.position * 100;
     if (this.orientation === 'horizontal') {
       this.style.gridTemplateColumns =
-        `minmax(0, ${this.position}%) ` + `var(--divider-width, 0.125rem) ` + `minmax(0, ${100 - this.position}%)`;
+        `minmax(0, ${positionPercent}%) ` + `var(--divider-width, 0.125rem) ` + `minmax(0, ${100 - positionPercent}%)`;
       this.style.gridTemplateRows = '1fr';
     } else {
       this.style.gridTemplateRows =
-        `minmax(0, ${this.position}%) ` + `var(--divider-width, 0.125rem) ` + `minmax(0, ${100 - this.position}%)`;
+        `minmax(0, ${positionPercent}%) ` + `var(--divider-width, 0.125rem) ` + `minmax(0, ${100 - positionPercent}%)`;
       this.style.gridTemplateColumns = '1fr';
     }
   }
 
   private updateAriaValue() {
-    this.divider.setAttribute('aria-valuenow', this.position.toString());
+    this.divider.setAttribute('aria-valuenow', (this.position * 100).toString());
   }
 
   private handleKeydown(event: KeyboardEvent) {
     if (this.disabled) return;
 
     const isRtl = this.localize.dir() === 'rtl';
-    const step = 5; // 5% movement per key press
+    const step = 0.05; // 5% movement per key press
     let newPosition = this.position;
 
     switch (event.key) {
@@ -236,10 +237,10 @@ export class QuietSplitter extends QuietElement {
         newPosition = isRtl ? this.position - step : this.position + step;
         break;
       case 'Home':
-        newPosition = isRtl ? 100 : 0;
+        newPosition = isRtl ? 1 : 0;
         break;
       case 'End':
-        newPosition = isRtl ? 0 : 100;
+        newPosition = isRtl ? 0 : 1;
         break;
       case 'Enter':
         if (!this.isCollapsed) {

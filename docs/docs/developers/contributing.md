@@ -163,6 +163,12 @@ Boolean attributes should always default to `false`, since HTML users can't remo
 
 Use `with-*` attributes for features that enable optional content. Use `without-*` attributes for features that disable optional content.
 
+### Attributes representing percentages
+
+When an attribute maps to a percentage, it should accept 0-1. For example, 50% is represented as "0.5". For consistency, this is the preferred pattern.
+
+Percentages may be represented as "50%" in cases where CSS-like values are provided, e.g. `100px 25%`.
+
 ### Attribute reflection
 
 Attribute reflection in custom elements is [an interesting challenge](https://www.abeautifulsite.net/posts/reflection-and-custom-states-in-web-components/) because the platform hasn't established a clear pattern for it. This section defines such a pattern to enable consistency throughout the library.

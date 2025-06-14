@@ -207,6 +207,7 @@ Use `<table>` to display tabular data.
 
 ```html {.example .no-edit}
 <table>
+  <caption>Table caption</caption>
   <thead>
     <tr>
       <th>First column</th>
@@ -250,6 +251,7 @@ Add `class="quiet-striped"` to add stripes to alternating rows.
 
 ```html {.example .no-edit}
 <table class="quiet-striped">
+  <caption>Table caption</caption>
   <thead>
     <tr>
       <th>First column</th>

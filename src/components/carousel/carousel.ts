@@ -48,11 +48,12 @@ import styles from './carousel.styles.js';
 export class QuietCarousel extends QuietElement {
   static styles: CSSResultGroup = styles;
 
-  private localize = new Localize(this);
+  private activeItemInterval: ReturnType<typeof setInterval> | null;
+  private hasInitialized = false;
   private isUserInitiated = false;
+  private localize = new Localize(this);
   private pendingEventDispatch = false;
   private resizeObserver: ResizeObserver | null = null;
-  private activeItemInterval: ReturnType<typeof setInterval> | null;
 
   @query('#items') items: HTMLElement;
 
@@ -89,12 +90,7 @@ export class QuietCarousel extends QuietElement {
     this.setAttribute('aria-roledescription', 'carousel');
     scrollEndPolyfill(this.items);
 
-    // Schedule initial scroll after carousel items are rendered
-    requestAnimationFrame(() => {
-      if (this.activeIndex !== 0) {
-        this.setActiveItem(this.activeIndex, 'instant');
-      }
-    });
+    this.hasInitialized = true;
   }
 
   updated(changedProperties: PropertyValues<this>) {
@@ -131,6 +127,9 @@ export class QuietCarousel extends QuietElement {
       }
     });
 
+    requestAnimationFrame(() => {
+      this.setActiveItem(this.activeIndex, 'instant');
+    });
     this.setupResizeObserver();
   }
 
@@ -188,7 +187,7 @@ export class QuietCarousel extends QuietElement {
 
   @eventOptions({ passive: true })
   private handleScrollSnapChanging(event: Event) {
-    if (!this.items) return;
+    if (!this.items || !this.hasInitialized) return;
 
     const snapEvent = event as any; // scrollsnapchanging is not in TypeScript yet
     const snappingElement = snapEvent.snapTargetInline;
@@ -205,7 +204,7 @@ export class QuietCarousel extends QuietElement {
 
   @eventOptions({ passive: true })
   private handleScrollSnapChange(event: Event) {
-    if (!this.items) return;
+    if (!this.items || !this.hasInitialized) return;
 
     const snapEvent = event as any; // scrollsnapchange is not in TypeScript yet
     const snappedElement = snapEvent.snapTargetInline;

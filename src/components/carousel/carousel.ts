@@ -66,6 +66,9 @@ export class QuietCarousel extends QuietElement {
   /** The current active item index. */
   @property({ attribute: 'active-index', type: Number, reflect: true }) activeIndex = 0;
 
+  /** The current active item's name. */
+  @property({ attribute: 'active-name', reflect: true }) activeName = '';
+
   /** Hides navigation buttons. */
   @property({ type: Boolean, attribute: 'without-nav', reflect: true }) withoutNav = false;
 
@@ -97,6 +100,15 @@ export class QuietCarousel extends QuietElement {
     if (changedProperties.has('activeIndex') && !this.isUserInitiated) {
       // Programmatic changes scroll instantly without an animation
       this.setActiveItem(this.activeIndex, 'instant');
+    }
+
+    if (changedProperties.has('activeName') && this.activeName) {
+      const items = this.getItems();
+      const foundIndex = items.findIndex(item => item.getAttribute('name') === this.activeName);
+      if (foundIndex !== -1 && foundIndex !== this.activeIndex) {
+        this.activeIndex = foundIndex;
+        this.setActiveItem(foundIndex, 'smooth');
+      }
     }
 
     if (changedProperties.has('label')) {
@@ -196,6 +208,7 @@ export class QuietCarousel extends QuietElement {
 
       if (newIndex !== -1 && newIndex !== this.activeIndex) {
         this.activeIndex = newIndex;
+        this.activeName = items[newIndex]?.getAttribute('name') || '';
       }
     }
   }
@@ -213,6 +226,7 @@ export class QuietCarousel extends QuietElement {
 
       if (newIndex !== -1 && newIndex !== this.activeIndex) {
         this.activeIndex = newIndex;
+        this.activeName = items[newIndex]?.getAttribute('name') || '';
       }
 
       if (this.isUserInitiated) {
@@ -329,6 +343,7 @@ export class QuietCarousel extends QuietElement {
 
     if (closestIndex !== this.activeIndex) {
       this.activeIndex = closestIndex;
+      this.activeName = items[closestIndex]?.getAttribute('name') || '';
       return true;
     }
 

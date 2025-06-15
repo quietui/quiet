@@ -90,7 +90,7 @@ By default, the carousel spans 100% of the width and uses a 16/9 aspect ratio. Y
 </style>
 ```
 
-### Setting the initial item
+### Setting items by index
 
 Use the `active-index` attribute to set the item that should show initially. The index is zero-based, so the first slide has an index of 0, the second slide has an index of 1, etc.
 
@@ -113,6 +113,46 @@ Use the `active-index` attribute to set the item that should show initially. The
     }
   }
 </style>
+```
+
+### Setting items by name
+
+You can assign names to carousel items using the `name` attribute. When a carousel item is named, you can use the `active-name` attribute on the carousel to point to the respective item. This is a convenient way to reference specific slides without having to track index numbers.
+
+```html {.example}
+<quiet-carousel active-name="fourth" label="Named slides" id="carousel__named">
+  <quiet-carousel-item name="first">Slide 1</quiet-carousel-item>
+  <quiet-carousel-item name="second">Slide 2</quiet-carousel-item>
+  <quiet-carousel-item name="third">Slide 3</quiet-carousel-item>
+  <quiet-carousel-item name="fourth">Slide 4</quiet-carousel-item>
+  <quiet-carousel-item name="fifth">Slide 5</quiet-carousel-item>
+</quiet-carousel>
+
+<style>
+  #carousel__named {
+    quiet-carousel-item {
+      background: var(--quiet-neutral-fill-softer);
+      color: var(--quiet-text-muted);
+      font-size: 2rem;
+      font-weight: 500;
+    }
+  }
+
+  .controls {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+</style>
+
+<script>
+  const namedCarousel = document.getElementById('carousel__named');
+  
+  namedCarousel.addEventListener('quiet-item-change', event => {
+    console.log(`Active slide: ${namedCarousel.activeName || 'unnamed'} (index ${event.detail.index})`);
+  });
+</script>
 ```
 
 ### Hiding navigation

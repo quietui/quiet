@@ -48,11 +48,12 @@ import styles from './carousel.styles.js';
 export class QuietCarousel extends QuietElement {
   static styles: CSSResultGroup = styles;
 
-  private localize = new Localize(this);
+  private activeItemInterval: ReturnType<typeof setInterval> | null;
+  private hasInitialized = false;
   private isUserInitiated = false;
+  private localize = new Localize(this);
   private pendingEventDispatch = false;
   private resizeObserver: ResizeObserver | null = null;
-  private activeItemInterval: ReturnType<typeof setInterval> | null;
 
   @query('#items') items: HTMLElement;
 
@@ -64,6 +65,9 @@ export class QuietCarousel extends QuietElement {
 
   /** The current active item index. */
   @property({ attribute: 'active-index', type: Number, reflect: true }) activeIndex = 0;
+
+  /** The current active item's name. */
+  @property({ attribute: 'active-name', reflect: true }) activeName = '';
 
   /** Hides navigation buttons. */
   @property({ type: Boolean, attribute: 'without-nav', reflect: true }) withoutNav = false;
@@ -89,18 +93,22 @@ export class QuietCarousel extends QuietElement {
     this.setAttribute('aria-roledescription', 'carousel');
     scrollEndPolyfill(this.items);
 
-    // Schedule initial scroll after carousel items are rendered
-    requestAnimationFrame(() => {
-      if (this.activeIndex !== 0) {
-        this.setActiveItem(this.activeIndex, 'instant');
-      }
-    });
+    this.hasInitialized = true;
   }
 
   updated(changedProperties: PropertyValues<this>) {
     if (changedProperties.has('activeIndex') && !this.isUserInitiated) {
       // Programmatic changes scroll instantly without an animation
       this.setActiveItem(this.activeIndex, 'instant');
+    }
+
+    if (changedProperties.has('activeName') && this.activeName) {
+      const items = this.getItems();
+      const foundIndex = items.findIndex(item => item.getAttribute('name') === this.activeName);
+      if (foundIndex !== -1 && foundIndex !== this.activeIndex) {
+        this.activeIndex = foundIndex;
+        this.setActiveItem(foundIndex, 'smooth');
+      }
     }
 
     if (changedProperties.has('label')) {
@@ -131,6 +139,7 @@ export class QuietCarousel extends QuietElement {
       }
     });
 
+    this.setActiveItem(this.activeIndex, 'instant');
     this.setupResizeObserver();
   }
 
@@ -188,7 +197,7 @@ export class QuietCarousel extends QuietElement {
 
   @eventOptions({ passive: true })
   private handleScrollSnapChanging(event: Event) {
-    if (!this.items) return;
+    if (!this.items || !this.hasInitialized) return;
 
     const snapEvent = event as any; // scrollsnapchanging is not in TypeScript yet
     const snappingElement = snapEvent.snapTargetInline;
@@ -199,13 +208,14 @@ export class QuietCarousel extends QuietElement {
 
       if (newIndex !== -1 && newIndex !== this.activeIndex) {
         this.activeIndex = newIndex;
+        this.activeName = items[newIndex]?.getAttribute('name') || '';
       }
     }
   }
 
   @eventOptions({ passive: true })
   private handleScrollSnapChange(event: Event) {
-    if (!this.items) return;
+    if (!this.items || !this.hasInitialized) return;
 
     const snapEvent = event as any; // scrollsnapchange is not in TypeScript yet
     const snappedElement = snapEvent.snapTargetInline;
@@ -216,6 +226,7 @@ export class QuietCarousel extends QuietElement {
 
       if (newIndex !== -1 && newIndex !== this.activeIndex) {
         this.activeIndex = newIndex;
+        this.activeName = items[newIndex]?.getAttribute('name') || '';
       }
 
       if (this.isUserInitiated) {
@@ -332,6 +343,7 @@ export class QuietCarousel extends QuietElement {
 
     if (closestIndex !== this.activeIndex) {
       this.activeIndex = closestIndex;
+      this.activeName = items[closestIndex]?.getAttribute('name') || '';
       return true;
     }
 

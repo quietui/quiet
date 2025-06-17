@@ -43,7 +43,7 @@ To prevent interactions while comparing, add the [`inert`](https://developer.moz
 Add the `disabled` attribute to lock the comparison in its current position.
 
 ```html {.example}
-<quiet-comparison position="75">
+<quiet-comparison position=".75">
   <img slot="start" src="https://images.unsplash.com/photo-1736593494119-d0a69181b414?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="A kitten lays in its bed and cuddles a pillow">
   <img slot="end" src="https://images.unsplash.com/photo-1736593494119-d0a69181b414?q=80&w=1000&sat=-100&bri=-15&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="The same kitten in a grayscale photo">
 </quiet-comparison>
@@ -65,7 +65,7 @@ Set the `orientation` attribute to `vertical` to make the comparison vertical.
 Slot an icon or similar in the `handle-icon` slot to use a custom icon in the handle.
 
 ```html {.example}
-<quiet-comparison position="66">
+<quiet-comparison position=".66">
   <quiet-icon slot="handle-icon" name="arrow-bar-both"></quiet-icon>
   <img slot="start" src="https://images.unsplash.com/photo-1719310694054-6fc99b7c14ec?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="An orange kitten explores a tall grassy yard">
   <img slot="end" src="https://images.unsplash.com/photo-1719310694054-6fc99b7c14ec?q=80&w=1000&sat=-100&bri=-15&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="The same kitten in a grayscale photo">
@@ -77,7 +77,7 @@ Slot an icon or similar in the `handle-icon` slot to use a custom icon in the ha
 Add the `disabled` attribute to lock the comparison in place. You can still change the position programmatically when disabled.
 
 ```html {.example}
-<quiet-comparison position="40" disabled>
+<quiet-comparison position=".40" disabled>
   <img slot="start" src="https://images.unsplash.com/photo-1601217156006-3358e1514676?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="A kitten peeks out from inside a cardboard box">
   <img slot="end" src="https://images.unsplash.com/photo-1601217156006-3358e1514676?q=80&w=1000&sat=-100&bri=-15&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="The same kitten in a grayscale photo">
 </quiet-comparison>

@@ -9,7 +9,7 @@ bodyClass: browse-components
 <quiet-search-list id="component-index" match="fuzzy">
   <quiet-text-field 
     slot="controller" 
-    label="Browsing {{ components.length }} components" 
+    placeholder="Searching {{ components.length }} custom elements" 
     description="Results will automatically update as you type" 
     pill 
     autofocus 

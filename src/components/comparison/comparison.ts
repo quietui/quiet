@@ -49,8 +49,8 @@ export class QuietComparison extends QuietElement {
 
   @state() isDragging = false;
 
-  /** The position of the divider as a percentage (0-100). */
-  @property({ type: Number }) position = 50;
+  /** The position of the divider as a decimal (0-1). */
+  @property({ type: Number }) position = 0.5;
 
   /** The orientation of the comparison slider, either 'horizontal' or 'vertical'. */
   @property({ type: String, reflect: true }) orientation: 'horizontal' | 'vertical' = 'horizontal';
@@ -64,7 +64,7 @@ export class QuietComparison extends QuietElement {
 
   updated(changedProperties: PropertyValues<this>) {
     if (changedProperties.has('position')) {
-      this.style.setProperty('--position', `${clamp(this.position, 0, 100)}%`);
+      this.style.setProperty('--position', `${clamp(this.position * 100, 0, 100)}%`);
     }
 
     if (changedProperties.has('isDragging')) {
@@ -104,36 +104,36 @@ export class QuietComparison extends QuietElement {
     switch (event.key) {
       case 'ArrowLeft':
         if (!isVertical) {
-          newPosition = isRtl ? this.position + 5 : this.position - 5;
+          newPosition = isRtl ? this.position + 0.05 : this.position - 0.05;
         }
         break;
       case 'ArrowRight':
         if (!isVertical) {
-          newPosition = isRtl ? this.position - 5 : this.position + 5;
+          newPosition = isRtl ? this.position - 0.05 : this.position + 0.05;
         }
         break;
       case 'ArrowUp':
         if (isVertical) {
-          newPosition = this.position - 5;
+          newPosition = this.position - 0.05;
         }
         break;
       case 'ArrowDown':
         if (isVertical) {
-          newPosition = this.position + 5;
+          newPosition = this.position + 0.05;
         }
         break;
       case 'Home':
         newPosition = 0;
         break;
       case 'End':
-        newPosition = 100;
+        newPosition = 1;
         break;
       default:
         return; // Exit if it's not a key we handle
     }
 
-    // Clamp the position between 0 and 100
-    newPosition = clamp(newPosition, 0, 100);
+    // Clamp the position between 0 and 1
+    newPosition = clamp(newPosition, 0, 1);
 
     // Only update if the position has changed
     if (newPosition !== this.position) {
@@ -159,23 +159,23 @@ export class QuietComparison extends QuietElement {
       move: (clientX: number, clientY: number) => {
         const isRtl = this.localize.dir() === 'rtl';
         const rect = this.getBoundingClientRect();
-        let deltaPercentage = 0;
+        let deltaFraction = 0;
 
         if (this.orientation === 'vertical') {
           const deltaY = clientY - this.dragStartClientY;
-          deltaPercentage = (deltaY / rect.height) * 100;
+          deltaFraction = deltaY / rect.height;
         } else {
           const deltaX = clientX - this.dragStartClientX;
-          deltaPercentage = (deltaX / rect.width) * 100;
-          // Invert the delta percentage for RTL layouts in horizontal orientation
+          deltaFraction = deltaX / rect.width;
+          // Invert the delta for RTL layouts in horizontal orientation
           if (isRtl) {
-            deltaPercentage = -deltaPercentage;
+            deltaFraction = -deltaFraction;
           }
         }
 
         // Calculate new position
-        const newPosition = this.dragStartPosition + deltaPercentage;
-        const clampedPosition = clamp(newPosition, 0, 100);
+        const newPosition = this.dragStartPosition + deltaFraction;
+        const clampedPosition = clamp(newPosition, 0, 1);
 
         // Only dispatch event if position actually changed
         if (this.position !== clampedPosition) {
@@ -207,7 +207,7 @@ export class QuietComparison extends QuietElement {
         aria-disabled=${this.disabled ? 'true' : 'false'}
         aria-valuemin="0"
         aria-valuemax="100"
-        aria-valuenow="${Math.round(this.position)}"
+        aria-valuenow="${Math.round(this.position * 100)}"
         @keydown=${this.handleKeydown}
         @focus=${this.handleFocus}
         @blur=${this.handleBlur}

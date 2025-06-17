@@ -383,6 +383,13 @@
     width: 100%;
     border-spacing: 0;
     font-size: 0.9375rem;
+
+    caption {
+      margin-block-start: 1em;
+      color: var(--quiet-text-muted);
+      font-size: 0.9375em;
+      caption-side: bottom;
+    }
   }
 
   thead th,

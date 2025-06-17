@@ -163,6 +163,18 @@ Boolean attributes should always default to `false`, since HTML users can't remo
 
 Use `with-*` attributes for features that enable optional content. Use `without-*` attributes for features that disable optional content.
 
+### Attributes representing percentages
+
+When an attribute maps to a percentage, it should accept 0-1. For example, 50% is represented as "0.5". For consistency, this is the preferred pattern.
+
+Percentages may be represented as "50%" in cases where CSS-like values are provided, e.g. `100px 25%`.
+
+### Attributes representing indexes
+
+In components track items by index, use the `active-index` attribute to identify the  active item. This will be the source of truth for selected items.
+
+For convenience, allow users to add the `name` attribute to one or more items. Then they can use use the `active-name` attribute to get and set the active item. This attribute must reflect and be kept in sync with `active-index`. When an item doesn't have a name, the attribute should be empty.
+
 ### Attribute reflection
 
 Attribute reflection in custom elements is [an interesting challenge](https://www.abeautifulsite.net/posts/reflection-and-custom-states-in-web-components/) because the platform hasn't established a clear pattern for it. This section defines such a pattern to enable consistency throughout the library.

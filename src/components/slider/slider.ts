@@ -164,9 +164,6 @@ export class QuietSlider extends QuietFormControlElement {
   /** Draws markers at each step along the slider. */
   @property({ attribute: 'with-markers', type: Boolean }) withMarkers = false;
 
-  /** Renders the slider with the `references` slot. */
-  @property({ attribute: 'with-references', type: Boolean, reflect: true }) withReferences = false;
-
   /** Draws a tooltip above the thumb when the control has focus or is dragged. */
   @property({ attribute: 'with-tooltip', type: Boolean }) withTooltip = false;
 
@@ -840,13 +837,14 @@ export class QuietSlider extends QuietFormControlElement {
         `
       : '';
 
-    const referencesTemplate = this.withReferences
-      ? html`
-          <div id="references" part="references" aria-hidden="true">
-            <slot name="reference"></slot>
-          </div>
-        `
-      : '';
+    const referencesTemplate = this.whenSlotted(
+      'reference',
+      html`
+        <div id="references" part="references" aria-hidden="true">
+          <slot name="reference"></slot>
+        </div>
+      `
+    );
 
     // Create tooltip template function
     const createTooltip = (thumbId: string, value: number) =>

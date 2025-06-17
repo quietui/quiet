@@ -13,7 +13,6 @@ layout: component
   max="6"
   with-markers
   with-tooltip
-  with-references
 >
   <span slot="reference">Less</span>
   <span slot="reference">More</span>
@@ -69,7 +68,7 @@ Add the `with-markers` attribute to show visual markers at each step. Markers wo
 
 ### Adding references
 
-Use the `with-references` attribute and the `reference` slot to add visual references below the slider. By default, references are positioned with `space-between`, making it easy to align them with starting, ending, and center markers.
+Use the `reference` slot to add visual references below the slider. By default, references are positioned with `space-between`, making it easy to align them with starting, ending, and center markers.
 
 ```html {.example}
 <quiet-slider 
@@ -79,7 +78,6 @@ Use the `with-references` attribute and the `reference` slot to add visual refer
   max="5"
   value="3"
   with-markers
-  with-references
 >
   <span slot="reference">Slow</span>
   <span slot="reference">Medium</span>
@@ -198,7 +196,6 @@ Add the `range` attribute to create a slider with two thumbs for selecting a ran
   min-value="20"
   max-value="80"
   with-tooltip
-  with-references
   id="slider__range"
 >
   <span slot="reference">$0</span>
@@ -700,7 +697,6 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
   min="0"
   max="7"
   with-markers
-  with-references
 >
   <span slot="reference">Off</span>
   <span slot="reference" class="repeat-slow">Slow</span>

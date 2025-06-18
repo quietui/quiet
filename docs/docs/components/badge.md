@@ -11,10 +11,10 @@ layout: component
 
 ### Variants
 
-Set the `variant` attribute to `default`, `primary`, `constructive`, or `destructive` to change the badges's variant.
+Set the `variant` attribute to `neutral`, `primary`, `constructive`, or `destructive` to change the badges's variant.
 
 ```html {.example .flex-row}
-<quiet-badge variant="default">Default</quiet-badge>
+<quiet-badge variant="neutral">Neutral</quiet-badge>
 <quiet-badge variant="primary">Primary</quiet-badge>
 <quiet-badge variant="constructive">Constructive</quiet-badge>
 <quiet-badge variant="destructive">Destructive</quiet-badge>
@@ -25,7 +25,7 @@ Set the `variant` attribute to `default`, `primary`, `constructive`, or `destruc
 Set the `appearance` attribute to `outline` to draw outlined badges.
 
 ```html {.example .flex-row}
-<quiet-badge appearance="outline" variant="default">Default</quiet-badge>
+<quiet-badge appearance="outline" variant="neutral">Neutral</quiet-badge>
 <quiet-badge appearance="outline" variant="primary">Primary</quiet-badge>
 <quiet-badge appearance="outline" variant="constructive">Constructive</quiet-badge>
 <quiet-badge appearance="outline" variant="destructive">Destructive</quiet-badge>

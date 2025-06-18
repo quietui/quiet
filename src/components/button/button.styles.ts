@@ -80,8 +80,8 @@ export default css`
 
     /* Normal buttons */
     &.normal {
-      /* Default */
-      &.default {
+      /* Neutral */
+      &.neutral {
         background-color: var(--quiet-neutral-fill-softer);
         color: var(--quiet-neutral-text-on-soft);
 
@@ -130,7 +130,7 @@ export default css`
     }
 
     /* Outline buttons */
-    &.outline.default {
+    &.outline.neutral {
       border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-fill-mid);
       background: transparent;
       color: var(--quiet-neutral-text-colorful);

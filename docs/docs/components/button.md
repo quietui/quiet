@@ -7,11 +7,11 @@ layout: component
 
 ### Variants
 
-Set the `variant` attribute to `default`, `primary`, or `destructive` to change the button's variant.
+Set the `variant` attribute to `neutral`, `primary`, or `destructive` to change the button's variant.
 
 ```html {.example .flex-row}
-<quiet-button variant="default">
-  Default
+<quiet-button variant="neutral">
+  Neutral
 </quiet-button>
 
 <quiet-button variant="primary">
@@ -94,8 +94,8 @@ Use the `size` attribute to change the button's size. Available sizes include `x
 Set the `appearance` attribute to `outline` to draw outlined buttons.
 
 ```html {.example .flex-row}
-<quiet-button appearance="outline" variant="default">
-  Default
+<quiet-button appearance="outline" variant="neutral">
+  Neutral
 </quiet-button>
 
 <quiet-button appearance="outline" variant="primary">
@@ -136,8 +136,8 @@ Don't forget to include `alt` text on images for assistive devices.
 Buttons can be rendered with pill-shaped edges by adding the `pill` attribute.
 
 ```html {.example .flex-row}
-<quiet-button pill variant="default">
-  Default
+<quiet-button pill variant="neutral">
+  Neutral
 </quiet-button>
 
 <quiet-button pill variant="primary">
@@ -176,7 +176,7 @@ To create an icon button, place an icon into the button's default slot and set t
 Create a toggle button by adding the `toggle="off"` attribute. To make it active by default, use `toggle="on"` instead. An indicator is shown to make it obvious when the toggle is selected.
 
 ```html {.example .flex-row}
-<quiet-button variant="default" toggle="off" icon-label="Filter">
+<quiet-button variant="neutral" toggle="off" icon-label="Filter">
   <quiet-icon name="filter"></quiet-icon>
 </quiet-button>
 

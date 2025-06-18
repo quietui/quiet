@@ -32,7 +32,7 @@ export interface CreateOptions {
   /**
    * The type of notification to render.
    */
-  variant: 'primary' | 'constructive' | 'destructive' | 'default';
+  variant: 'primary' | 'constructive' | 'destructive' | 'neutral';
 }
 
 /**
@@ -167,7 +167,7 @@ export class QuietToast extends QuietElement {
     const opts: CreateOptions = {
       allowHtml: false,
       noCloseButton: false,
-      variant: 'default',
+      variant: 'neutral',
       duration: 5000,
       ...options
     };

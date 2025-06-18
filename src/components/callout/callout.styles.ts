@@ -13,13 +13,13 @@ export default css`
     border-radius: var(--quiet-border-radius);
   }
 
-  /* Default */
-  :host([variant='default']) {
+  /* Neutral */
+  :host([variant='neutral']) {
     border-color: var(--quiet-neutral-stroke-softer);
     background-color: var(--quiet-neutral-fill-softer);
   }
 
-  :host([variant='default']) #icon {
+  :host([variant='neutral']) #icon {
     color: var(--quiet-neutral-text-colorful);
   }
 

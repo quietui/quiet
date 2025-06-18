@@ -24,7 +24,7 @@ For documentation purposes, this page omits the `<template>` tag, allowing the t
 Set the `variant` attribute to `default`, `primary`, `constructive`, or `destructive` to change the button's variant.
 
 ```html {.example .flex-col}
-<quiet-toast-item variant="default" duration="0">
+<quiet-toast-item variant="neutral" duration="0">
   <quiet-icon slot="icon" name="settings"></quiet-icon>
   Your changes have been saved
 </quiet-toast-item>

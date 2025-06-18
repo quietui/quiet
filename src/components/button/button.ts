@@ -59,7 +59,7 @@ export class QuietButton extends QuietFormControlElement {
   @property({ reflect: true }) appearance: 'normal' | 'outline' | 'text' | 'image' = 'normal';
 
   /** The type of button to render. This attribute has no effect on text or image buttons. */
-  @property({ reflect: true }) variant: 'default' | 'primary' | 'destructive' = 'default';
+  @property({ reflect: true }) variant: 'neutral' | 'primary' | 'destructive' = 'neutral';
 
   /** Disables the button. */
   @property({ type: Boolean, reflect: true }) disabled = false;
@@ -233,7 +233,7 @@ export class QuietButton extends QuietFormControlElement {
         part="button"
         class=${classMap({
           // Variants
-          default: this.variant === 'default',
+          neutral: this.variant === 'neutral',
           primary: this.variant === 'primary',
           destructive: this.variant === 'destructive',
           // Appearances

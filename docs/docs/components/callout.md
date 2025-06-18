@@ -14,11 +14,11 @@ layout: component
 
 ### Variants
 
-Set the `variant` attribute to `default`, `primary`, `constructive`, or `destructive` to change the callout's variant.
+Set the `variant` attribute to `neutral`, `primary`, `constructive`, or `destructive` to change the callout's variant.
 
 ```html {.example}
-<quiet-callout variant="default">
-  This is a default callout. Use me for informative content.
+<quiet-callout variant="neutral">
+  This is a neutral callout. Use me for informative content.
 </quiet-callout>
 
 <quiet-callout variant="primary">
@@ -39,7 +39,7 @@ Set the `variant` attribute to `default`, `primary`, `constructive`, or `destruc
 Add an icon to a callout using the `icon` slot. Works best with `<quiet-icon>` and `<svg>` elements.
 
 ```html {.example}
-<quiet-callout variant="default">
+<quiet-callout variant="neutral">
   <quiet-icon slot="icon" name="settings"></quiet-icon>
   Sleep mode has been enabled. You can disable it in settings.
 </quiet-callout>

@@ -25,7 +25,7 @@ export default css`
   }
 
   /* Normal badges */
-  :host([appearance='normal'][variant='default']) {
+  :host([appearance='normal'][variant='neutral']) {
     background-color: var(--quiet-neutral-fill-softer);
     color: var(--quiet-primary-text-on-soft);
   }
@@ -51,7 +51,7 @@ export default css`
     background-color: transparent;
   }
 
-  :host([appearance='outline'][variant='default']) {
+  :host([appearance='outline'][variant='neutral']) {
     border-color: var(--quiet-neutral-stroke-loud);
     color: var(--quiet-neutral-text-colorful);
   }

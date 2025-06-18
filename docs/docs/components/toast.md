@@ -59,7 +59,7 @@ The first argument is the content to show in the notification. The second argume
 | -------- | ----------- | ------- |
 | `allowHtml` | Set this to true to allow HTML content. Make sure you trust the included content, otherwise your app may become vulnerable to XSS exploits! | `false` |
 | `duration` | The length of time in milliseconds to show the notification before removing it. Set this to `0` to show the notification until the user dismisses it. | `5000` |
-| `variant` | The type of notification to render, either `primary`, `constructive`, `destructive`, or `default`. | `default` |
+| `variant` | The type of notification to render, either `primary`, `constructive`, `destructive`, or `neutral`. | `neutral` |
 
 ### Creating notifications from templates
 
@@ -100,14 +100,14 @@ Refer to the [toast item](/docs/components/toast-item) docs to see more examples
 
 ### Variants
 
-When calling `create()`, set the `variant` option to `primary`, `constructive`, `destructive`, or `default` to change the type of notification.
+When calling `create()`, set the `variant` option to `primary`, `constructive`, `destructive`, or `neutral` to change the type of notification.
 
 ```html {.example}
 <div id="toast__variant">
   <quiet-toast></quiet-toast>
 
   <div style="display: flex; flex-wrap: wrap; gap: .5rem;">
-    <quiet-button data-variant="default" data-icon="settings">Default</quiet-button>
+    <quiet-button data-variant="neutral" data-icon="settings">Neutral</quiet-button>
     <quiet-button data-variant="primary" data-icon="info-circle">Primary</quiet-button>
     <quiet-button data-variant="constructive" data-icon="check">Constructive</quiet-button>
     <quiet-button data-variant="destructive" data-icon="alert-triangle">Destructive</quiet-button>

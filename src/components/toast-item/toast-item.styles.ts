@@ -20,7 +20,7 @@ export default css`
     user-select: none;
   }
 
-  :host([variant='default']) {
+  :host([variant='neutral']) {
     --accent-color: var(--quiet-neutral-fill-mid);
   }
 

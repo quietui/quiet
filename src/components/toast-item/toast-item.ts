@@ -56,7 +56,7 @@ export class QuietToastItem extends QuietElement {
   @state() timeLeft = 100;
 
   /** The type of notification to render. */
-  @property({ reflect: true }) variant: 'primary' | 'constructive' | 'destructive' | 'default' = 'default';
+  @property({ reflect: true }) variant: 'primary' | 'constructive' | 'destructive' | 'neutral' = 'neutral';
 
   /**
    * The length of time to show the notification before removing it. Set this to `0` to show the notification until the

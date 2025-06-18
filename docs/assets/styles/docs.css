@@ -866,7 +866,7 @@ quiet-callout {
     color: inherit;
   }
 
-  &[variant='default'] {
+  &[variant='neutral'] {
     code {
       background-color: color-mix(in oklab, var(--quiet-neutral-fill-soft), transparent 50%);
     }

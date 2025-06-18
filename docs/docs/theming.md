@@ -590,11 +590,11 @@ These tokens control borders and edges.
 | --------------- | ----------- |
 | `--quiet-border-style` | The default border style for most elements. |
 | `--quiet-border-width` | The default border width for most elements. |
-| `--quiet-border-radius-xs` | Extra small border radius. |
-| `--quiet-border-radius-sm` | Small border radius. |
-| `--quiet-border-radius-md` | Medium border radius. |
-| `--quiet-border-radius-lg` | Large border radius. |
-| `--quiet-border-radius-xl` | Extra large border radius. |
+| `--quiet-border-radius-xs` | Extra small border radii. |
+| `--quiet-border-radius-sm` | Small border radii. |
+| `--quiet-border-radius-md` | Medium border radii. |
+| `--quiet-border-radius-lg` | Large border radii. |
+| `--quiet-border-radius-xl` | Extra large border radii. |
 | `--quiet-border-radius-pill` | Pill-shaped borders. |
 | `--quiet-border-radius-circle` | Circular borders. |
 

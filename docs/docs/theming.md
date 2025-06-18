@@ -91,6 +91,10 @@ To use a preset in your app, add the `quiet-{preset}` class to the `<html>` elem
 </html>
 ```
 
+:::info
+Presets must be added to the `<html>` element. They won't have any affect if you place them elsewhere on the page.
+:::
+
 ### Adapting to existing brands
 
 Using a preset is an easy way to change the library's overall appearance, but it probably won't be a perfect match if you already have brand guidelines to follow. In that case, it might be tempting to set `--quiet-primary-seed` to whatever your brand color is.

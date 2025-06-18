@@ -115,13 +115,11 @@ Scrollers can accommodate virtually any content type within their container. By 
     h2 {
       margin-top: 0;
       font-size: 1.5rem;
-      color: #333;
     }
 
     p {
       margin: 0.5rem 0;
       line-height: 1.6;
-      color: #555;
     }
 
     p:last-child {

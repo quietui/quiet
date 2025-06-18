@@ -87,7 +87,7 @@ The component is styled with [`display: contents`](https://developer.mozilla.org
       height: 100%;
       min-height: 50px;
       max-height: 200px;
-      border: solid 2px var(--quiet-neutral-stroke-soft);
+      border: solid 2px var(--quiet-neutral-stroke-softer);
       border-radius: var(--quiet-border-radius);
     }
     

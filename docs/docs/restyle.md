@@ -22,7 +22,7 @@ To add Restyle to your app, add the following markup to the `<head>` of your doc
 
 Restyle uses [CSS layers](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer) to manage specificity. This means your custom styles will automatically take precedence over the library's styles without needing to use `!important` or increase selector specificity.
 
-The following sections show the native HTML elements that are supported in Restyle. Feel free to inspect the source to view the markup.
+The following sections demonstrate the native HTML elements that are supported by Restyle.
 
 :::info
 Restyle is just a starting point. Feel free to customize any of its styles in your own CSS by overriding the properties you want to change!
@@ -55,7 +55,7 @@ Paragraphs have the spacing you would expect and come with `text-wrap: pretty` t
 
 ### Inline elements
 
-Many inline elements are styled consistently based on theme tokens.
+Inline elements are styled consistently based on design tokens.
 
 ```html {.example .no-edit}
 <div class="two-columns" style="line-height: 3;">
@@ -297,7 +297,7 @@ Wrap large tables in [`<quiet-scroller>`](/docs/components/scroller) to ensure t
 
 ### Details
 
-Use `<details>` and `<summary>` to show expandable content. Use the optional [`name`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details#name) attribute to group them, ensuring only one is open at a time.
+Use `<details>` and `<summary>` to show expandable content. The optional [`name`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details#name) attribute lets you group them, ensuring only one is open at a time.
 
 ```html {.example .no-edit}
 <details name="example">
@@ -410,7 +410,7 @@ Add an icon before or after the label, if desired.
 </div>
 ```
 
-Use the `quiet-pill` class to make the button pill appear like pills.
+Use the `quiet-pill` class to make rounded pill buttons.
 
 ```html {.example .no-edit}
 <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">

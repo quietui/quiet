@@ -21,7 +21,7 @@ The component uses an [IntersectionObserver](https://developer.mozilla.org/en-US
     flex-direction: column;
     gap: 2rem;
     height: 300px;
-    border: 2px solid var(--quiet-neutral-stroke-soft);
+    border: 2px solid var(--quiet-neutral-stroke-softer);
     border-radius: var(--quiet-border-radius);
     padding: 1rem;
     overflow-y: auto;
@@ -337,7 +337,7 @@ Use CSS transitions and animations to create advanced, modern effects without a 
     display: flex;
     flex-direction: row;
     gap: 0;
-    border: 2px solid var(--quiet-neutral-stroke-soft);
+    border: 2px solid var(--quiet-neutral-stroke-softer);
     border-radius: var(--quiet-border-radius);
     padding: 1rem;
     overflow-y: auto;

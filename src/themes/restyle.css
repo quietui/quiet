@@ -112,7 +112,7 @@
     overflow-wrap: break-word;
 
     &:not(:last-child) {
-      margin-block: 0 1lh;
+      margin-block: 0 var(--quiet-content-spacing);
     }
   }
 

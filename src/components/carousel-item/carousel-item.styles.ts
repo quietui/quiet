@@ -6,7 +6,7 @@ export default css`
     flex: 0 0 100%;
     height: 100%;
     transform: translate3d(0, 0, 0);
-    border-radius: var(--quiet-border-radius);
+    border-radius: var(--quiet-border-radius-md);
     scroll-snap-align: center;
     scroll-snap-stop: always;
   }

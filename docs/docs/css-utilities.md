@@ -173,7 +173,7 @@ The `quiet-side-label` class doesn't work on native form controls.
     align-items: center;
     justify-content: center;
     background-color: var(--quiet-primary-fill-mid);
-    border-radius: var(--quiet-border-radius);
+    border-radius: var(--quiet-border-radius-md);
     color: var(--quiet-primary-text-on-mid);
     text-align: center;
     font-size: 0.875rem;

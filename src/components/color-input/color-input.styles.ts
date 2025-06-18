@@ -9,7 +9,7 @@ export default css`
   /* Pills */
   #visual-box.pill {
     padding: 0 0.5em;
-    border-radius: 9999px;
+    border-radius: var(--quiet-border-radius-pill);
   }
 
   :host(:state(open):not(:state(disabled)) #visual-box:is(.normal, .filled)) {
@@ -22,7 +22,7 @@ export default css`
     aspect-ratio: 1;
     width: var(--preview-size);
     height: var(--preview-size);
-    border-radius: 50%;
+    border-radius: var(--quiet-border-radius-circle);
     background-image:
       linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%),
       linear-gradient(45deg, transparent 75%, var(--quiet-neutral-fill-soft) 75%),

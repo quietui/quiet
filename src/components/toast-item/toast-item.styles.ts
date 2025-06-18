@@ -10,7 +10,7 @@ export default css`
     width: 100%;
     padding-inline-start: calc(1.5em + var(--accent-line-width));
     border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
-    border-radius: var(--quiet-border-radius);
+    border-radius: var(--quiet-border-radius-md);
     background-color: var(--quiet-paper-color);
     box-shadow: var(--quiet-shadow-loud);
     color: var(--quiet-text-body);
@@ -39,12 +39,12 @@ export default css`
   /** Accent line */
   :host::after {
     position: absolute;
-    --inset: max(var(--accent-line-width), calc(var(--accent-line-width) + (var(--quiet-border-radius) - 0.5em) * 0.7));
+    --inset: var(--accent-line-width);
     top: var(--inset);
     bottom: var(--inset);
     left: var(--accent-line-width);
     width: var(--accent-line-width);
-    border-radius: 9999px;
+    border-radius: var(--quiet-border-radius-pill);
     background-color: var(--accent-color);
     content: '';
   }

@@ -7,7 +7,7 @@ export default css`
     aspect-ratio: 16 / 9;
     width: 100%;
     overflow: hidden;
-    border-radius: var(--quiet-border-radius);
+    border-radius: var(--quiet-border-radius-md);
   }
 
   #frame-container {

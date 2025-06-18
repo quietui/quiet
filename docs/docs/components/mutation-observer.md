@@ -60,7 +60,7 @@ The component is styled with [`display: contents`](https://developer.mozilla.org
       position: relative;
       min-width: 5rem;
       height: 5rem;
-      border-radius: var(--quiet-border-radius);
+      border-radius: var(--quiet-border-radius-md);
       background-color: var(--quiet-neutral-fill-softer);
       box-shadow: var(--quiet-shadow-softer);
       text-align: center;
@@ -80,7 +80,7 @@ The component is styled with [`display: contents`](https://developer.mozilla.org
         position: absolute;
         top: -0.625rem;
         right: -0.625rem;
-        border-radius: 50%;
+        border-radius: var(--quiet-border-radius-circle);
       }
     }
 

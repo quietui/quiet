@@ -17,7 +17,7 @@ export default css`
     width: 100%;
     gap: 0.4em;
     border: none;
-    border-radius: var(--quiet-border-radius);
+    border-radius: var(--quiet-border-radius-md);
     background: none;
     font: inherit;
     font-weight: var(--quiet-font-weight-semibold);
@@ -187,10 +187,10 @@ export default css`
       height: auto;
       min-height: 0;
       padding: 0;
-      border-radius: calc(var(--quiet-border-radius) * 2);
+      border-radius: var(--quiet-border-radius-xl);
 
       ::slotted(*) {
-        border-radius: calc(var(--quiet-border-radius) * 2) !important;
+        border-radius: var(--quiet-border-radius-xl) !important;
       }
     }
 
@@ -217,7 +217,7 @@ export default css`
 
     /* Pills */
     &.pill {
-      border-radius: 9999px;
+      border-radius: var(--quiet-border-radius-pill);
     }
 
     /* Toggle button indicators */
@@ -227,7 +227,7 @@ export default css`
       left: calc(50% - 0.5em);
       width: 1em;
       height: 0.25em;
-      border-radius: 9999px;
+      border-radius: var(--quiet-border-radius-pill);
       background-color: currentColor;
       opacity: 0.15;
     }

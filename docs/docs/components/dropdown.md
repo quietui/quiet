@@ -391,7 +391,7 @@ To turn a dropdown menu into a context menu, omit the trigger and set the `conte
     color: var(--quiet-text-muted);
     background-color: var(--quiet-paper-color);
     border: dashed var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
-    border-radius: var(--quiet-border-radius);
+    border-radius: var(--quiet-border-radius-md);
     padding: 1rem;
 
     &:focus {

@@ -103,7 +103,7 @@ Wrap a collection of elements in a transition group and use normal DOM APIs to a
       font-size: 1.5rem;
       font-weight: var(--quiet-font-weight-semibold);
       background: var(--quiet-primary-fill-mid);
-      border-radius: var(--quiet-border-radius);
+      border-radius: var(--quiet-border-radius-md);
       color: var(--quiet-primary-text-on-mid);
 
       @media screen and (max-width: 959px) {
@@ -282,7 +282,7 @@ Use standard DOM APIs to add, remove, and reorder elements and the transition gr
       width: 100%;
       background-color: var(--quiet-paper-color);
       border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
-      border-radius: var(--quiet-border-radius);
+      border-radius: var(--quiet-border-radius-md);
       box-shadow: var(--quiet-shadow-softer);
       color: var(--quiet-neutral-text-on-soft);
       padding: .5rem 1rem;
@@ -351,7 +351,7 @@ Avoid making DOM changes while a transition is running. The `transitionComplete`
     .box {
       width: 80px;
       height: 80px;
-      border-radius: var(--quiet-border-radius);
+      border-radius: var(--quiet-border-radius-md);
     }
 
     .controls {
@@ -417,7 +417,7 @@ To change the animation speed, set the `--duration` custom property on the trans
     .box {
       width: 80px;
       height: 80px;
-      border-radius: var(--quiet-border-radius);
+      border-radius: var(--quiet-border-radius-md);
     }
   }
 </style>
@@ -578,7 +578,7 @@ Here you can preview the animations that are available in Scurry.
       display: flex;
       width: 80px;
       height: 80px;
-      border-radius: var(--quiet-border-radius);
+      border-radius: var(--quiet-border-radius-md);
       color: var(--quiet-primary-text-on-mid);
     }
 
@@ -663,7 +663,7 @@ Add the `disable-transitions` attribute to disable transition animations. Note t
     .circle {
       width: 80px;
       height: 80px;
-      border-radius: 50%;
+      border-radius: var(--quiet-border-radius-circle);
 
       &:nth-child(1) {
         grid-column: 1 / -1;

@@ -50,7 +50,7 @@ export default css`
     width: max-content;
     padding: 0.5em 0;
     border: none;
-    border-radius: var(--quiet-border-radius);
+    border-radius: var(--quiet-border-radius-md);
     background: none;
     color: var(--quiet-primary-text-colorful);
     font-weight: var(--quiet-font-weight-semibold);

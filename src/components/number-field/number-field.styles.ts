@@ -12,7 +12,7 @@ export default css`
 
   /* Pills */
   #visual-box.pill {
-    border-radius: 9999px;
+    border-radius: var(--quiet-border-radius-pill);
   }
 
   #text-box {

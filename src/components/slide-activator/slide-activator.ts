@@ -43,8 +43,8 @@ import styles from './slide-activator.styles.js';
  * @csspart thumb - The slide activator's thumb.
  * @csspart label - The slide activator's label.
  *
- * @cssproperty [--border-radius=9999px] - The control's border radius. We use a CSS custom property so we can properly
- *  calculate the inset border radius for the thumb.
+ * @cssproperty [--border-radius=var(--quiet-border-radius-lg)] - The control's border radius. We use a CSS custom
+ *  property so we can properly calculate the inset border radius for the thumb.
  * @cssproperty [--thumb-width=4em] - The thumb's width.
  * @cssproperty [--thumb-inset=0.125em] - The thumb's inset from the host element.
  * @cssproperty [--shimmer-color] - The color to use as a base for the shimmer animation.

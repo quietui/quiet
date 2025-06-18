@@ -125,14 +125,14 @@ export default css`
 
       &::-webkit-color-swatch {
         border: none;
-        border-radius: calc(var(--quiet-border-radius) / 1.75);
+        border-radius: var(--quiet-border-radius-md);
       }
 
       &::-moz-color-swatch,
       &::-moz-focus-inner {
         height: calc(100% - 0.5em);
         padding: 0;
-        border-radius: calc(var(--quiet-border-radius) / 1.75);
+        border-radius: var(--quiet-border-radius-md);
       }
 
       &:-moz-focus-inner {
@@ -204,7 +204,7 @@ export default css`
   #visual-box.normal {
     padding: 0 0.75em;
     border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
-    border-radius: calc(var(--quiet-border-radius) / 1.5);
+    border-radius: var(--quiet-border-radius-md);
     background-color: var(--quiet-paper-color);
     color: var(--quiet-text-body);
 
@@ -218,7 +218,7 @@ export default css`
   #visual-box.filled {
     padding: 0 0.75em;
     border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-fill-softer);
-    border-radius: calc(var(--quiet-border-radius) / 1.5);
+    border-radius: var(--quiet-border-radius-md);
     background-color: var(--quiet-neutral-fill-softer);
 
     &:has(#text-box:focus-visible) {
@@ -271,15 +271,15 @@ export default css`
   /* Pills */
   #visual-box.pill {
     padding: 0 1.25em;
-    border-radius: 9999px;
+    border-radius: var(--quiet-border-radius-pill);
 
     &::-webkit-color-swatch {
-      border-radius: 9999px;
+      border-radius: var(--quiet-border-radius-pill);
     }
 
     &::-moz-color-swatch,
     &::-moz-focus-inner {
-      border-radius: 9999px;
+      border-radius: var(--quiet-border-radius-pill);
     }
   }
 

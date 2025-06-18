@@ -7,7 +7,7 @@ export default css`
     display: flex;
     flex-direction: column;
     border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
-    border-radius: var(--quiet-border-radius);
+    border-radius: var(--quiet-border-radius-md);
     background-color: var(--quiet-paper-color);
     box-shadow: var(--quiet-shadow-softer);
   }
@@ -28,8 +28,8 @@ export default css`
     width: 100% !important;
     margin: 0 !important;
     object-fit: cover !important;
-    border-top-right-radius: var(--quiet-border-radius) !important;
-    border-top-left-radius: var(--quiet-border-radius) !important;
+    border-top-right-radius: var(--quiet-border-radius-md) !important;
+    border-top-left-radius: var(--quiet-border-radius-md) !important;
     border-bottom-right-radius: 0 !important;
     border-bottom-left-radius: 0 !important;
   }
@@ -40,9 +40,9 @@ export default css`
     margin: 0 !important;
     object-fit: cover !important;
     border-top-right-radius: 0 !important;
-    border-top-left-radius: var(--quiet-border-radius) !important;
+    border-top-left-radius: var(--quiet-border-radius-md) !important;
     border-bottom-right-radius: 0 !important;
-    border-bottom-left-radius: var(--quiet-border-radius) !important;
+    border-bottom-left-radius: var(--quiet-border-radius-md) !important;
   }
 
   /* Header */

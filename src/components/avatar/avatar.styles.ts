@@ -12,7 +12,7 @@ export default css`
     width: var(--size);
     height: var(--size);
     overflow: hidden;
-    border-radius: 50%;
+    border-radius: var(--quiet-border-radius-circle);
     background-color: var(--quiet-neutral-fill-softer);
     color: var(--quiet-neutral-text-on-soft);
     font-weight: var(--quiet-font-weight-semibold);

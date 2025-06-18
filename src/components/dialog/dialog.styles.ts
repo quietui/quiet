@@ -24,7 +24,7 @@ export default css`
     inset-block-start: 0;
     padding: 0;
     border: none;
-    border-radius: var(--quiet-border-radius);
+    border-radius: var(--quiet-border-radius-md);
     background: var(--quiet-paper-color);
     box-shadow: var(--quiet-shadow-loud);
 

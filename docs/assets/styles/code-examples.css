@@ -1,7 +1,7 @@
 .code-example {
   margin-block-end: 1.25lh;
   border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
-  border-radius: var(--quiet-border-radius);
+  border-radius: var(--quiet-border-radius-md);
 }
 
 .code-example-preview {
@@ -64,8 +64,8 @@
   border-bottom: none;
 
   pre {
-    border-bottom-right-radius: var(--quiet-border-radius);
-    border-bottom-left-radius: var(--quiet-border-radius);
+    border-bottom-right-radius: var(--quiet-border-radius-md);
+    border-bottom-left-radius: var(--quiet-border-radius-md);
   }
 }
 
@@ -93,11 +93,11 @@
 
     &:first-of-type {
       border-inline-start: none;
-      border-end-start-radius: var(--quiet-border-radius);
+      border-end-start-radius: var(--quiet-border-radius-md);
     }
 
     &:last-of-type {
-      border-end-end-radius: var(--quiet-border-radius);
+      border-end-end-radius: var(--quiet-border-radius-md);
     }
 
     &:focus-visible {

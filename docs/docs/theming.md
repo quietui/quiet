@@ -590,7 +590,13 @@ These tokens control borders and edges.
 | --------------- | ----------- |
 | `--quiet-border-style` | The default border style for most elements. |
 | `--quiet-border-width` | The default border width for most elements. |
-| `--quiet-border-radius` | The base border radius for elements. Often used with `calc()` to scale to smaller and larger elements. |
+| `--quiet-border-radius-xs` | Extra small border radius. |
+| `--quiet-border-radius-sm` | Small border radius. |
+| `--quiet-border-radius-md` | Medium border radius. |
+| `--quiet-border-radius-lg` | Large border radius. |
+| `--quiet-border-radius-xl` | Extra large border radius. |
+| `--quiet-border-radius-pill` | Pill-shaped borders. |
+| `--quiet-border-radius-circle` | Circular borders. |
 
 </quiet-scroller>
 
@@ -733,7 +739,7 @@ This prevents type errors for users who have type checking enabled. It also main
     button {
       aspect-ratio: 1 / .95;
       border: none;
-      border-radius: calc(var(--quiet-border-radius) / 2);
+      border-radius: var(--quiet-border-radius-md);
       cursor: pointer;
       transition: 100ms translate ease;
 

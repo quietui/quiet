@@ -9,7 +9,7 @@ export default css`
     padding: 0.25em;
     overflow: auto;
     border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
-    border-radius: calc(var(--quiet-border-radius) / 1.5);
+    border-radius: var(--quiet-border-radius-md);
     background-color: var(--quiet-paper-color);
   }
 

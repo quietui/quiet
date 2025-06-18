@@ -8,7 +8,7 @@ export default css`
     display: block;
     position: relative;
     width: 100%;
-    border-radius: var(--quiet-border-radius);
+    border-radius: var(--quiet-border-radius-md);
     isolation: isolate;
   }
 

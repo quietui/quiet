@@ -272,7 +272,7 @@ Note that we use `tabindex="-1"` on the close button to prevent it from interfer
     }
     
     quiet-button::part(button) {
-      border-radius: var(--quiet-border-radius);
+      border-radius: var(--quiet-border-radius-md);
       height: 2rem;
     }
   }
@@ -297,7 +297,7 @@ Tab lists come with a simple, minimal appearance. Feel free to customize them wi
 <style>
   .tab-list__cards {
     border: solid 1px var(--quiet-neutral-stroke-softer);
-    border-radius: var(--quiet-border-radius);
+    border-radius: var(--quiet-border-radius-md);
     box-shadow: var(--quiet-shadow-softer);
 
     &::part(tabs) {
@@ -311,8 +311,8 @@ Tab lists come with a simple, minimal appearance. Feel free to customize them wi
     quiet-tab {
       background-color: var(--quiet-paper-color);
       border: solid 1px var(--quiet-neutral-stroke-softer);
-      border-start-start-radius: var(--quiet-border-radius);
-      border-start-end-radius: var(--quiet-border-radius);
+      border-start-start-radius: var(--quiet-border-radius-md);
+      border-start-end-radius: var(--quiet-border-radius-md);
       color: var(--quiet-text-muted);
       padding-block: 0.75rem;
       margin-inline: 0.25rem;
@@ -359,7 +359,7 @@ Tab lists come with a simple, minimal appearance. Feel free to customize them wi
     &::part(tabs) {
       justify-content: space-between;
       background-color: var(--quiet-neutral-fill-softer);
-      border-radius: var(--quiet-border-radius);
+      border-radius: var(--quiet-border-radius-md);
       padding: .25rem;
     }
 
@@ -367,7 +367,7 @@ Tab lists come with a simple, minimal appearance. Feel free to customize them wi
       flex: 1 1 auto;
       justify-content: center;
       border: none;
-      border-radius: calc(var(--quiet-border-radius) * .75);
+      border-radius: var(--quiet-border-radius-md);
       color: var(--quiet-text-muted);
       padding-inline: 2rem;
       padding-block: .25rem;

@@ -5,7 +5,7 @@
     margin: 10rem auto;
     padding: 0;
     overflow: hidden;
-    border-radius: calc(var(--quiet-border-radius) * 2);
+    border-radius: var(--quiet-border-radius-xl);
     backdrop-filter: blur(6px);
     background-color: var(--quiet-background-color);
   }
@@ -42,12 +42,12 @@
   flex: 0 0 auto;
   align-items: middle;
   /* Fixes an iOS Safari 16.4 bug that draws the parent element's border radius incorrectly when showing/hiding results */
-  border-radius: calc(var(--quiet-border-radius) * 2);
+  border-radius: var(--quiet-border-radius-xl);
 }
 
 #site-search.has-results header {
-  border-start-start-radius: calc(var(--quiet-border-radius) * 2);
-  border-start-end-radius: calc(var(--quiet-border-radius) * 2);
+  border-start-start-radius: var(--quiet-border-radius-xl);
+  border-start-end-radius: var(--quiet-border-radius-xl);
   border-end-start-radius: 0;
   border-end-end-radius: 0;
 }

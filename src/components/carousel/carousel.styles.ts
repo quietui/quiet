@@ -29,7 +29,7 @@ export default css`
     -webkit-overflow-scrolling: touch;
     overflow-y: hidden;
     transform: translateZ(0);
-    border-radius: var(--quiet-border-radius);
+    border-radius: var(--quiet-border-radius-md);
     background-color: transparent;
     scrollbar-width: none;
     will-change: scroll-position;
@@ -70,7 +70,7 @@ export default css`
     margin: 0;
     padding: 0;
     border: none;
-    border-radius: 50%;
+    border-radius: var(--quiet-border-radius-circle);
     background: var(--quiet-neutral-fill-softer);
     color: var(--quiet-neutral-text-on-soft);
     font: inherit;
@@ -116,7 +116,7 @@ export default css`
     margin: 0;
     padding: 0;
     border: none;
-    border-radius: 50%;
+    border-radius: var(--quiet-border-radius-circle);
     background-color: var(--dot-color);
     font: inherit;
     cursor: pointer;

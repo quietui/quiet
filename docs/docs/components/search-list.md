@@ -181,7 +181,7 @@ Here is the example from above, modified with example styles.
 
     > div {
       border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
-      border-radius: var(--quiet-border-radius);
+      border-radius: var(--quiet-border-radius-md);
       background-color: var(--quiet-paper-color);
       box-shadow: var(--quiet-shadow-softer);
       text-align: center;
@@ -240,7 +240,7 @@ By default, the search list shows results based on case-insensitive, exact match
     /* Custom item styles */
     .item {
       border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
-      border-radius: 9999px;
+      border-radius: var(--quiet-border-radius-pill);
       background-color: var(--quiet-paper-color);
       box-shadow: var(--quiet-shadow-softer);
       padding: 0.5rem 1rem; 
@@ -517,7 +517,7 @@ An optional empty state will be shown when no results are found. Use the `empty`
 
     .item {
       border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
-      border-radius: var(--quiet-border-radius);
+      border-radius: var(--quiet-border-radius-md);
       background-color: var(--quiet-paper-color);
       box-shadow: var(--quiet-shadow-softer);
       padding: 0.5rem 1rem; 
@@ -636,7 +636,7 @@ The callback receives three arguments: `query` (the current search term), `conte
 
     .item {
       border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
-      border-radius: var(--quiet-border-radius);
+      border-radius: var(--quiet-border-radius-md);
       background-color: var(--quiet-paper-color);
       box-shadow: var(--quiet-shadow-softer);
       padding: 1rem;
@@ -701,7 +701,7 @@ In some cases, the controller might need to exist outside of the component. In t
 
     > div {
       border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
-      border-radius: var(--quiet-border-radius);
+      border-radius: var(--quiet-border-radius-md);
       background-color: var(--quiet-paper-color);
       box-shadow: var(--quiet-shadow-softer);
       text-align: center;

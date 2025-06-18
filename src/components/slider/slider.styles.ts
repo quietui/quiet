@@ -49,7 +49,7 @@ export default css`
 
   #track {
     position: relative;
-    border-radius: 9999px;
+    border-radius: var(--quiet-border-radius-pill);
     background: var(--quiet-neutral-fill-soft);
     isolation: isolate;
   }
@@ -109,7 +109,7 @@ export default css`
     width: var(--thumb-width);
     height: var(--thumb-height);
     border: solid 0.125em var(--quiet-background-color);
-    border-radius: 50%;
+    border-radius: var(--quiet-border-radius-circle);
     background-color: var(--quiet-primary-fill-mid);
     cursor: pointer;
   }
@@ -163,7 +163,7 @@ export default css`
     position: absolute;
     width: var(--marker-width);
     height: var(--marker-height);
-    border-radius: 50%;
+    border-radius: var(--quiet-border-radius-circle);
     background-color: var(--quiet-silent);
   }
 

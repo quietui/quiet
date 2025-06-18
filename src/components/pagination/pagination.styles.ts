@@ -26,7 +26,7 @@ export default css`
     justify-content: center;
     min-width: 2.25em;
     min-height: 2.25em;
-    border-radius: var(--quiet-border-radius);
+    border-radius: var(--quiet-border-radius-md);
     color: var(--quiet-text-body);
     font: inherit;
     line-height: 1;

@@ -285,7 +285,7 @@ Breadcrumbs come with a simple, minimal appearance. Feel free to customize them 
 <style>
   .breadcrumb__bar {
     background-color: var(--quiet-neutral-fill-softer);
-    border-radius: 9999px;
+    border-radius: var(--quiet-border-radius-pill);
     padding-inline: 1em;
     padding-block: .5em;
 
@@ -335,7 +335,7 @@ Breadcrumbs come with a simple, minimal appearance. Feel free to customize them 
     quiet-breadcrumb-item:not([current])::part(label) {
       background-color: var(--quiet-paper);
       border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
-      border-radius: calc(var(--quiet-border-radius) / 1.25);
+      border-radius: var(--quiet-border-radius-md);
       box-shadow: var(--quiet-shadow-softer);
     }
 

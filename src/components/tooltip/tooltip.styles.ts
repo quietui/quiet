@@ -43,7 +43,7 @@ export default css`
     z-index: 2;
     padding: 0.33em 0.66em;
     border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-fill-loud);
-    border-radius: calc(var(--quiet-border-radius) * 0.75);
+    border-radius: var(--quiet-border-radius-sm);
     background-color: var(--quiet-neutral-fill-loud);
     box-shadow: var(--quiet-shadow-soft);
     color: var(--quiet-neutral-text-on-loud);

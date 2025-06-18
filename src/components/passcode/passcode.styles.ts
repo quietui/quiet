@@ -47,7 +47,7 @@ export default css`
       align-items: center;
       justify-content: center;
       aspect-ratio: 9 / 11;
-      border-radius: calc(var(--quiet-border-radius) / 1.5);
+      border-radius: var(--quiet-border-radius-md);
       color: var(--quiet-text-body);
     }
 
@@ -59,7 +59,7 @@ export default css`
         left: calc(50% - 0.125em);
         width: 0.25em;
         height: 0.25em;
-        border-radius: 50%;
+        border-radius: var(--quiet-border-radius-circle);
         background-color: var(--quiet-text-body);
         content: '';
       }

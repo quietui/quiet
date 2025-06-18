@@ -12,7 +12,7 @@ export default css`
     align-items: center;
     width: fit-content;
     gap: 0.0625em;
-    border-radius: var(--quiet-border-radius);
+    border-radius: var(--quiet-border-radius-md);
     cursor: pointer;
 
     &:focus {

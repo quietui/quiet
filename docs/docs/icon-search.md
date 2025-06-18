@@ -303,7 +303,7 @@ For an alternative way to browse icons, head over to the [Tabler Icons](https://
       text-align: center;
       transition: 100ms translate ease;
       border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
-      border-radius: var(--quiet-border-radius);
+      border-radius: var(--quiet-border-radius-md);
       background-color: var(--quiet-paper-color);
       box-shadow: var(--quiet-shadow-softer);
       padding: 1rem;

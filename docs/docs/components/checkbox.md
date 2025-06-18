@@ -168,7 +168,7 @@ Checkboxes come with a simple, minimal appearance. Feel free to customize them w
   .checkbox__tile {
     position: relative;
     border: solid 1px var(--quiet-neutral-stroke-soft);
-    border-radius: var(--quiet-border-radius);
+    border-radius: var(--quiet-border-radius-md);
     box-shadow: var(--quiet-shadow-softer);
 
     &::part(label) {

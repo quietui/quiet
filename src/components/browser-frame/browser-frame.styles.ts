@@ -17,7 +17,7 @@ export default css`
     height: 100%;
     overflow: hidden;
     border: var(--quiet-border-style) var(--quiet-border-width) var(--border-color);
-    border-radius: calc(1.5 * var(--quiet-border-radius));
+    border-radius: calc(1.5 * var(--quiet-border-radius-md));
     background-color: var(--quiet-background-color);
     box-shadow: var(--quiet-shadow-softer);
   }
@@ -64,7 +64,7 @@ export default css`
   .mac-controls .control {
     width: 0.75em;
     height: 0.75em;
-    border-radius: 50%;
+    border-radius: var(--quiet-border-radius-circle);
   }
 
   .mac-controls .control.close {
@@ -102,7 +102,7 @@ export default css`
     height: 1.6em;
     padding: 0 0.5em;
     overflow: hidden;
-    border-radius: 9999px;
+    border-radius: var(--quiet-border-radius-pill);
     background-color: var(--address-background-color);
     color: var(--address-color);
     font-size: 0.8125em;

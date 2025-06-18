@@ -21,7 +21,7 @@ export default css`
     padding: 0.25em;
     overflow: hidden;
     border: none;
-    border-radius: calc(var(--quiet-border-radius) / 2);
+    border-radius: var(--quiet-border-radius-md);
     background: none;
     font: inherit;
     text-decoration: none;

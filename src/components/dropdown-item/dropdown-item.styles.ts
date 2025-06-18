@@ -6,7 +6,7 @@ export default css`
     position: relative;
     align-items: center;
     padding: 0.33em 1em;
-    border-radius: calc(var(--quiet-border-radius) / 1.5);
+    border-radius: var(--quiet-border-radius-sm);
     isolation: isolate;
     color: var(--quiet-neutral-text-on-soft);
     font-size: 0.9375em;
@@ -136,7 +136,7 @@ export default css`
     margin: 0;
     padding: 0.25em;
     border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
-    border-radius: var(--quiet-border-radius);
+    border-radius: var(--quiet-border-radius-md);
     background-color: var(--quiet-paper-color);
     box-shadow: var(--quiet-shadow-mid);
     color: var(--quiet-neutral-text-on-soft);
@@ -149,7 +149,7 @@ export default css`
       inset: auto;
       padding: 0.25em;
       overflow: visible;
-      border-radius: var(--quiet-border-radius);
+      border-radius: var(--quiet-border-radius-md);
     }
 
     &.show {

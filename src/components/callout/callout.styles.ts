@@ -10,7 +10,7 @@ export default css`
     gap: 1em;
     border-width: var(--quiet-border-width);
     border-style: var(--quiet-border-style);
-    border-radius: var(--quiet-border-radius);
+    border-radius: var(--quiet-border-radius-md);
   }
 
   /* Neutral */

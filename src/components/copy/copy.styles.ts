@@ -22,7 +22,7 @@ export default css`
     padding-inline: 0.5rem;
     padding-block: 0.25rem;
     border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-fill-loud);
-    border-radius: var(--quiet-border-radius);
+    border-radius: var(--quiet-border-radius-md);
     background-color: var(--quiet-neutral-fill-loud);
     box-shadow: var(--quiet-shadow-soft);
     color: var(--quiet-neutral-text-on-loud);

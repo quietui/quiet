@@ -42,7 +42,7 @@ export default css`
     position: relative;
     width: 1.125em;
     height: 1.125em;
-    border-radius: 50%;
+    border-radius: var(--quiet-border-radius-circle);
     transition:
       100ms background-color ease,
       100ms border-color ease;

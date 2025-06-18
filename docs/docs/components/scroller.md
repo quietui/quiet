@@ -324,7 +324,7 @@ If you'd like to add [scroll snap](https://developer.mozilla.org/en-US/docs/Web/
       width: calc(50% - 2rem);
       height: 200px;
       border: none;
-      border-radius: var(--quiet-border-radius);
+      border-radius: var(--quiet-border-radius-md);
       font-size: 72px;
       color: white;
       scroll-snap-align: start;

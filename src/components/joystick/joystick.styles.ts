@@ -12,7 +12,7 @@ export default css`
     aspect-ratio: 1;
     width: var(--size);
     height: var(--size);
-    border-radius: 50%;
+    border-radius: var(--quiet-border-radius-circle);
     background: var(--quiet-neutral-fill-softer);
     box-shadow: var(--quiet-inset-shadow-soft);
     cursor: grab;
@@ -44,7 +44,7 @@ export default css`
     justify-content: center;
     width: var(--thumb-size);
     height: var(--thumb-size);
-    border-radius: 50%;
+    border-radius: var(--quiet-border-radius-circle);
     background-color: var(--quiet-neutral-fill-mid);
     color: var(--quiet-neutral-text-on-mid);
     transition: transform 75ms ease-out;

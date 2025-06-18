@@ -298,7 +298,7 @@ You can add custom progress indicators using the readonly `--progress` custom pr
       position: relative;
       height: 0.25em; 
       width: 100%; 
-      border-radius: 9999px; 
+      border-radius: var(--quiet-border-radius-pill); 
       background-color: var(--quiet-neutral-fill-softer);
       box-shadow: var(--quiet-inset-shadow-soft);
       margin-block-start: -.5rem;

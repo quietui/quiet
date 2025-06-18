@@ -20,7 +20,7 @@ export default css`
     width: 100%;
     height: var(--track-size);
     overflow: hidden;
-    border-radius: 9999px;
+    border-radius: var(--quiet-border-radius-pill);
     background-color: var(--track-color);
     box-shadow: var(--quiet-inset-shadow-soft);
     font-size: 0.875em;

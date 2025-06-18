@@ -10,7 +10,7 @@ export default css`
     overflow-y: auto;
     gap: 0;
     border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
-    border-radius: var(--quiet-border-radius);
+    border-radius: var(--quiet-border-radius-md);
     background-color: var(--quiet-paper-color);
     box-shadow: var(--quiet-shadow-softer);
     -webkit-overflow-scrolling: touch;

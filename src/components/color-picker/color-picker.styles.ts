@@ -33,7 +33,7 @@ export default css`
     padding: 1em;
     gap: 1em;
     border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
-    border-radius: var(--quiet-border-radius);
+    border-radius: var(--quiet-border-radius-md);
     background-color: var(--quiet-paper-color);
     box-shadow: var(--quiet-shadow-softer);
 
@@ -47,7 +47,7 @@ export default css`
   #color-slider {
     position: relative;
     aspect-ratio: 1.4;
-    border-radius: calc(var(--quiet-border-radius) * 0.75);
+    border-radius: var(--quiet-border-radius-md);
     background-color: var(--color-slider-background);
     box-shadow: inset 0 0 0 0.0625rem color-mix(in oklab, black, transparent 90%);
     cursor: crosshair;
@@ -79,7 +79,7 @@ export default css`
     height: 1.25em;
     translate: calc(1.25em / -2) calc(1.25em / -2);
     border: solid 0.0625rem rgb(0 0 0 / 33%);
-    border-radius: 50%;
+    border-radius: var(--quiet-border-radius-circle);
     transition: 100ms scale ease;
 
     &::after {
@@ -151,14 +151,14 @@ export default css`
     }
 
     &::part(track) {
-      border-radius: calc(var(--quiet-border-radius) / 1.5);
+      border-radius: var(--quiet-border-radius-sm);
       box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--quiet-strident), transparent 90%);
       font-size: inherit;
     }
 
     &::part(thumb) {
       border: solid 0.0625rem rgb(0 0 0 / 33%);
-      border-radius: 9999px;
+      border-radius: var(--quiet-border-radius-pill);
     }
 
     &::part(thumb)::after {
@@ -168,7 +168,7 @@ export default css`
       width: 100%;
       height: 100%;
       border: solid max(0.125em, 1px) white;
-      border-radius: 9999px;
+      border-radius: var(--quiet-border-radius-pill);
       box-shadow: inset 0 0 0 1px rgb(0 0 0 / 33%);
       content: '';
     }
@@ -247,7 +247,7 @@ export default css`
   /* Eye dropper button */
   #eye-dropper::part(button) {
     min-height: 2.75em;
-    border-radius: 50%;
+    border-radius: var(--quiet-border-radius-circle);
     font-size: inherit;
   }
 
@@ -263,7 +263,7 @@ export default css`
       height: 2.75em;
       min-height: 0;
       border: none;
-      border-radius: 50%;
+      border-radius: var(--quiet-border-radius-circle);
       background-image:
         linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%),
         linear-gradient(45deg, transparent 75%, var(--quiet-neutral-fill-soft) 75%),
@@ -328,7 +328,7 @@ export default css`
       margin: 0;
       padding: 0;
       border: none;
-      border-radius: calc(var(--quiet-border-radius) / 2);
+      border-radius: var(--quiet-border-radius-sm);
       background: none;
       background-image:
         linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%),

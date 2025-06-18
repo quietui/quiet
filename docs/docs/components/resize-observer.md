@@ -88,7 +88,7 @@ The component is styled with [`display: contents`](https://developer.mozilla.org
       min-height: 50px;
       max-height: 200px;
       border: solid 2px var(--quiet-neutral-stroke-softer);
-      border-radius: var(--quiet-border-radius);
+      border-radius: var(--quiet-border-radius-md);
     }
     
     .handle {
@@ -99,7 +99,7 @@ The component is styled with [`display: contents`](https://developer.mozilla.org
       height: 1.5rem;
       background-color: var(--quiet-primary-fill-mid);
       border: solid 2px var(--quiet-silent);
-      border-radius: 50%;
+      border-radius: var(--quiet-border-radius-circle);
       cursor: nwse-resize;
       touch-action: none;
     }

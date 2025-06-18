@@ -66,7 +66,7 @@ html[data-scroll-restoring] body {
   top: 0.5rem;
   left: 0.5rem;
   padding: 0.75rem 1rem;
-  border-radius: var(--quiet-border-radius);
+  border-radius: var(--quiet-border-radius-md);
   outline-offset: 0;
   background: var(--quiet-paper-color);
   box-shadow: 0 5px 20px rgb(0 0 0 / 0.125);
@@ -339,13 +339,13 @@ html[data-scroll-restoring] body {
 .color-picker-swatch {
   width: 1.25rem;
   height: 1.25rem;
-  border-radius: calc(var(--quiet-border-radius) / 2);
+  border-radius: var(--quiet-border-radius-sm);
 }
 
 #open-sidebar,
 #close-sidebar {
   display: none;
-  border-radius: var(--quiet-border-radius);
+  border-radius: var(--quiet-border-radius-md);
 }
 
 #navbar {
@@ -580,7 +580,7 @@ quiet-badge.experimental {
   margin-block: 1.5rem;
   padding: 1.5rem;
   float: inline-end;
-  border-radius: calc(var(--quiet-border-radius) * 1.5);
+  border-radius: var(--quiet-border-radius-sm);
   background-color: var(--quiet-background-color-lowered);
 }
 
@@ -711,7 +711,7 @@ quiet-badge.experimental {
     padding-block: 1rem 2rem;
     translate: 0 100vh;
     border-right: none;
-    border-radius: calc(var(--quiet-border-radius) * 2);
+    border-radius: var(--quiet-border-radius-xl);
     background: var(--quiet-background-color);
     font-size: 1rem;
     transition:
@@ -832,7 +832,7 @@ quiet-badge.experimental {
   @media (hover: hover) {
     &:not(.current):hover {
       position: relative;
-      border-radius: var(--quiet-border-radius);
+      border-radius: var(--quiet-border-radius-md);
       color: var(--quiet-primary-text-colorful);
       text-decoration: underline;
     }
@@ -1341,7 +1341,7 @@ html:not(.quiet-dark) quiet-scroller:has(.component-table) {
   margin-inline-start: 2rem;
   margin-block-end: 1rem;
   float: right;
-  border-radius: 50%;
+  border-radius: var(--quiet-border-radius-circle);
 
   @media screen and (max-width: 959px) {
     max-width: 7.5rem;

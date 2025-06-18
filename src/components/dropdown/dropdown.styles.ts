@@ -17,7 +17,7 @@ export default css`
     margin: 0;
     padding: 0.25em;
     border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
-    border-radius: var(--quiet-border-radius);
+    border-radius: var(--quiet-border-radius-md);
     background-color: var(--quiet-paper-color);
     box-shadow: var(--quiet-shadow-mid);
     color: var(--quiet-neutral-text-on-soft);

@@ -39,7 +39,7 @@ export default css`
     margin: 0;
     padding: 0;
     border: none;
-    border-radius: var(--quiet-border-radius);
+    border-radius: var(--quiet-border-radius-md);
     background: none;
     color: inherit;
     font: inherit;
@@ -105,7 +105,7 @@ export default css`
   :host(:not([inline])) #label {
     padding: 0.25em 1em;
     scale: 1;
-    border-radius: 9999px;
+    border-radius: var(--quiet-border-radius-pill);
     background-color: var(--quiet-neutral-fill-loud);
     color: var(--quiet-neutral-text-on-loud);
     transition:

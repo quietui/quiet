@@ -278,7 +278,7 @@ Carousels come with a simple, minimal appearance. Feel free to customize them wi
       bottom: 0;
       width: 5rem;
       height: 100%;
-      border-radius: var(--quiet-border-radius);
+      border-radius: var(--quiet-border-radius-md);
       font-size: 1.5rem;
       background: none;
       color: white;

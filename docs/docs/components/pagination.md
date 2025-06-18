@@ -237,7 +237,7 @@ Pagination controls come with a simple, minimal appearance. Feel free to customi
 <style>
   #pagination__styling {
     &::part(button) {
-      border-radius: 9999px;
+      border-radius: var(--quiet-border-radius-pill);
     }
 
     /* Light gray circles for previous and next buttons */

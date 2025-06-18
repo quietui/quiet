@@ -151,7 +151,7 @@ Set the `snap` attribute to a space-separated list of positions at which to snap
       width: 4px;
       height: 4px;
       background-color: gray;
-      border-radius: 50%;
+      border-radius: var(--quiet-border-radius-circle);
       transform: translateX(-50%);
     }    
   }

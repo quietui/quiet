@@ -5,7 +5,7 @@ export default css`
     position: relative;
     padding: 3em 2em;
     border: dashed var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
-    border-radius: var(--quiet-border-radius);
+    border-radius: var(--quiet-border-radius-md);
     background-color: var(--quiet-paper-color);
     color: var(--quiet-neutral-text-colorful);
     font-weight: var(--quiet-font-weight-semibold);
@@ -75,7 +75,7 @@ export default css`
     padding: 0.5em;
     gap: 1em;
     border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
-    border-radius: var(--quiet-border-radius);
+    border-radius: var(--quiet-border-radius-md);
     background-color: var(--quiet-paper-color);
     box-shadow: var(--quiet-shadow-softer);
 
@@ -87,7 +87,7 @@ export default css`
       justify-content: center;
       aspect-ratio: 1;
       width: 100%;
-      border-radius: calc(var(--quiet-border-radius) * 0.5);
+      border-radius: var(--quiet-border-radius-sm);
       background: var(--quiet-neutral-fill-softer);
 
       img {

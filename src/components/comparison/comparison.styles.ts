@@ -139,7 +139,7 @@ export default css`
     width: 2.5rem;
     height: 2.5rem;
     transform: translate(-50%, -50%);
-    border-radius: 50%;
+    border-radius: var(--quiet-border-radius-circle);
     background-color: var(--quiet-silent);
     color: var(--quiet-primary-text-on-soft);
 

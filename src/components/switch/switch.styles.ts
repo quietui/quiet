@@ -47,7 +47,7 @@ export default css`
     align-items: center;
     width: var(--width);
     height: var(--height);
-    border-radius: 9999px;
+    border-radius: var(--quiet-border-radius-pill);
     background-color: var(--quiet-neutral-fill-soft);
     transition:
       100ms background-color ease,
@@ -69,7 +69,7 @@ export default css`
       top: calc(50% - (var(--thumb-size) / 2));
       width: var(--thumb-size);
       height: var(--thumb-size);
-      border-radius: 9999px;
+      border-radius: var(--quiet-border-radius-pill);
       background-color: var(--quiet-primary-text-on-mid); /* always white, same as checkbox icons */
       transition:
         100ms width ease,

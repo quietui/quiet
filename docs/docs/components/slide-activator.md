@@ -253,7 +253,7 @@ Slide activators come with a simple, minimal appearance. Feel free to customize 
 
 <style>
   quiet-slide-activator#slide-activator__styling {
-    --border-radius: 9999px;
+    --border-radius: var(--quiet-border-radius-pill);
     --thumb-width: 5rem;
     --thumb-inset: 0.25rem;
     --shimmer-color: #fff2;

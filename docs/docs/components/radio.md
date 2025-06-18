@@ -334,7 +334,7 @@ Radios come with a simple, minimal appearance. Feel free to customize them with 
       background-color: currentColor;
       background-image: linear-gradient(#fff8, transparent);
       box-shadow: inset 0 1px 2px color-mix(in oklab, currentColor, black 12.5%);
-      border-radius: 50%;
+      border-radius: var(--quiet-border-radius-circle);
       cursor: pointer;
     }
 

@@ -22,7 +22,7 @@ The component uses an [IntersectionObserver](https://developer.mozilla.org/en-US
     gap: 2rem;
     height: 300px;
     border: 2px solid var(--quiet-neutral-stroke-softer);
-    border-radius: var(--quiet-border-radius);
+    border-radius: var(--quiet-border-radius-md);
     padding: 1rem;
     overflow-y: auto;
 
@@ -45,7 +45,7 @@ The component uses an [IntersectionObserver](https://developer.mozilla.org/en-US
       width: 120px;
       height: 120px;
       border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
-      border-radius: var(--quiet-border-radius);
+      border-radius: var(--quiet-border-radius-md);
       background-color: var(--quiet-neutral-fill-softer);
       color: var(--quiet-neutral-text-on-soft);
       box-shadow: var(--quiet-shadow-softer);
@@ -167,7 +167,7 @@ Use the `intersect-class` attribute to automatically apply the specified class t
     gap: 2rem;
     height: 300px;
     border: 2px solid var(--quiet-neutral-stroke-softer);
-    border-radius: var(--quiet-border-radius);
+    border-radius: var(--quiet-border-radius-md);
     padding: 1rem;
     overflow-y: auto;
 
@@ -338,7 +338,7 @@ Use CSS transitions and animations to create advanced, modern effects without a 
     flex-direction: row;
     gap: 0;
     border: 2px solid var(--quiet-neutral-stroke-softer);
-    border-radius: var(--quiet-border-radius);
+    border-radius: var(--quiet-border-radius-md);
     padding: 1rem;
     overflow-y: auto;
     scroll-snap-type: x mandatory;
@@ -349,7 +349,7 @@ Use CSS transitions and animations to create advanced, modern effects without a 
       display: block;
       width: 75%;
       object-fit: cover;
-      border-radius: var(--quiet-border-radius);
+      border-radius: var(--quiet-border-radius-md);
       background-color: var(--quiet-neutral-fill-softer);
       color: var(--quiet-neutral-text-on-soft);
       box-shadow: var(--quiet-shadow-softer);

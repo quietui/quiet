@@ -12,7 +12,7 @@ export default css`
     height: 100%;
     overflow: hidden;
     border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
-    border-radius: var(--quiet-border-radius);
+    border-radius: var(--quiet-border-radius-md);
   }
 
   #start,
@@ -57,7 +57,7 @@ export default css`
     width: var(--divider-width);
     height: 1.5rem;
     transform: translate(-50%, -50%);
-    border-radius: calc(var(--quiet-border-radius) / 4);
+    border-radius: var(--quiet-border-radius-xs);
     background-color: var(--quiet-neutral-fill-mid);
     color: var(--quiet-neutral-text-on-mid);
   }

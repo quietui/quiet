@@ -81,7 +81,7 @@ bodyClass: browse-components
       flex: 1 1 auto;
       height: 100%;
       border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
-      border-radius: var(--quiet-border-radius);
+      border-radius: var(--quiet-border-radius-md);
       background-color: var(--quiet-paper-color);
       box-shadow: var(--quiet-shadow-softer);
       font-weight: inherit;

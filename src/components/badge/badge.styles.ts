@@ -14,7 +14,7 @@ export default css`
     height: 2em;
     padding: 0 0.75em;
     gap: 0.33em;
-    border-radius: 9999px;
+    border-radius: var(--quiet-border-radius-pill);
     font-weight: var(--quiet-font-weight-semibold);
     font-size: 0.75em;
   }

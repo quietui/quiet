@@ -104,7 +104,7 @@ You can customize the expander's appearance with CSS custom properties and parts
       background-color: #4a6cf7;
       color: white;
       border: none;
-      border-radius: 9999px;
+      border-radius: var(--quiet-border-radius-pill);
       font-weight: 500;
       cursor: pointer;
       transition: background-color 0.2s ease, transform 0.2s ease;

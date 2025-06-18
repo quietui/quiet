@@ -587,12 +587,12 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
 
     &::part(track) {
       box-shadow: inset 0 0 0 0.0625em color-mix(in oklab, black, transparent 90%);
-      border-radius: var(--quiet-border-radius);
+      border-radius: var(--quiet-border-radius-md);
     }
 
     &::part(thumb) {
       border: solid 0.0625em rgb(0 0 0 / 33%);
-      border-radius: 50%;
+      border-radius: var(--quiet-border-radius-circle);
       transition: 100ms scale ease;
     }
 

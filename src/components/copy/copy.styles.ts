@@ -10,7 +10,7 @@ export default css`
 
   quiet-button,
   ::slotted(*) {
-    cursor: copy;
+    cursor: copy !important;
   }
 
   #feedback {

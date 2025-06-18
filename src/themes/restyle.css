@@ -724,7 +724,7 @@
     overflow: hidden;
     border-radius: 9999px;
     background: var(--quiet-neutral-fill-softer);
-    box-shadow: inset 0 0.25em 0.25em -0.25em color-mix(in oklab, black, transparent 95%);
+    box-shadow: var(--quiet-inset-shadow-soft);
     transition: all 0.3s linear;
   }
 
@@ -775,7 +775,7 @@
     border: none;
     border-radius: 9999px;
     background: var(--quiet-neutral-fill-softer);
-    box-shadow: var(--quiet-inset-shadow-softer);
+    box-shadow: var(--quiet-inset-shadow-soft);
   }
 
   /* Determinate state */

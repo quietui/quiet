@@ -109,7 +109,7 @@ Set the `orientation` attribute to `vertical` to change the splitter's orientati
 
 ### Snapping
 
-Set the `snap` attribute to a space-separated list of positions at which to snap. Only percentages are supported. Use the `snap-threshold` attribute to change the threshold at which snapping occurs.
+Set the `snap` attribute to a space-separated list of positions at which to snap. Only percentages are supported, e.g. `snap="25% 50% 75%"`. Use the `snap-threshold` attribute to change the proximity at which snapping occurs.
 
 ```html {.example}
 <div id="splitter__snap">

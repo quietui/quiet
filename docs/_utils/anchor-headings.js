@@ -4,8 +4,8 @@ import { v4 as uuid } from 'uuid';
 
 function createId(text) {
   let slug = slugify(String(text), {
-    remove: /[^\w|\s]/g,
-    lower: true
+    lower: true,
+    remove: /[^\w|\s|\.]/g // allow dots for things like changelog versions
   });
 
   // IDs must start with a letter

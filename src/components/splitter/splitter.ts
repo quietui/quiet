@@ -21,6 +21,8 @@ import styles from './splitter.styles.js';
  * @slot end - The content for the secondary (end) panel.
  * @slot handle - The draggable handle that separates the panels.
  *
+ * @event quiet-resize - Dispatched when the splitter's handle is moved.
+ *
  * @csspart start - The content to show in the first (start) panel.
  * @csspart end - The content to show in the second (end) panel.
  * @csspart divider - The draggable divider that separates the panels.

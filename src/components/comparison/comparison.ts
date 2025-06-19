@@ -26,6 +26,8 @@ import styles from './comparison.styles.js';
  * @slot end - The content to show on the right/end side or bottom side, depending on orientation.
  * @slot handle-icon - A custom icon to use for the divider's handle.
  *
+ * @event quiet-resize - Dispatched when the comparison's handle is moved.
+ *
  * @csspart start - The container for the start content.
  * @csspart end - The container for the end content.
  * @csspart divider - The draggable divider between start and end.

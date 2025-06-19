@@ -24,6 +24,29 @@ export default function (eleventyConfig) {
   // Add template data
   eleventyConfig.addGlobalData('package', packageData);
   eleventyConfig.addGlobalData('components', components);
+  eleventyConfig.addGlobalData('presetColors', {
+    default: '#989cff',
+    red: '#ef5655',
+    orange: '#f08039',
+    amber: '#e89a26',
+    yellow: '#dcb31e',
+    lime: '#9abb28',
+    green: '#5dbb55',
+    emerald: '#47b873',
+    teal: '#37b995',
+    cyan: '#20b8bc',
+    sky: '#1caedd',
+    blue: '#4a97f4',
+    indigo: '#6e85f8',
+    violet: '#927cfb',
+    purple: '#ae75f6',
+    fuchsia: '#d26ae8',
+    pink: '#e468b0',
+    rose: '#ee6383',
+    slate: '#848da0',
+    zinc: '#8b8c93',
+    stone: '#918c87'
+  });
 
   // Template filters - {{ content | filter }}
   eleventyConfig.addFilter('inlineMarkdown', content => {

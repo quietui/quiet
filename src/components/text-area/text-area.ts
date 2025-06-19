@@ -259,15 +259,29 @@ export class QuietTextArea extends QuietFormControlElement {
       this.textAreaAutoSizer.id = this.textBox.id; // briefly use the same ID to match styles
       this.textAreaAutoSizer.inert = true;
       this.textAreaAutoSizer.value = this.value;
+      this.textAreaAutoSizer.rows = this.rows;
       this.textAreaAutoSizer.style.position = 'absolute';
       this.textAreaAutoSizer.style.top = '0';
       this.textAreaAutoSizer.style.left = '0';
       this.textAreaAutoSizer.style.width = '100%';
       this.textAreaAutoSizer.style.height = 'auto';
+      this.textAreaAutoSizer.style.minHeight = 'auto';
       this.textAreaAutoSizer.style.pointerEvents = 'none';
       this.textAreaAutoSizer.style.opacity = '0';
       this.textBox.insertAdjacentElement('afterend', this.textAreaAutoSizer);
-      this.textBox.style.height = `${this.textAreaAutoSizer.scrollHeight}px`;
+
+      // Calculate the minimum height based on rows
+      const emptyAutoSizer = this.textAreaAutoSizer.cloneNode() as HTMLTextAreaElement;
+      emptyAutoSizer.value = ''; // Empty content to get base height
+      emptyAutoSizer.rows = this.rows;
+      this.textBox.insertAdjacentElement('afterend', emptyAutoSizer);
+      const minHeight = emptyAutoSizer.scrollHeight;
+      emptyAutoSizer.remove();
+
+      // Use the larger of content height or minimum height
+      const contentHeight = this.textAreaAutoSizer.scrollHeight;
+      this.textBox.style.height = `${Math.max(contentHeight, minHeight)}px`;
+
       this.textAreaAutoSizer.remove();
       this.textAreaAutoSizer.id = '';
     }

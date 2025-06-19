@@ -125,14 +125,14 @@ export default css`
 
       &::-webkit-color-swatch {
         border: none;
-        border-radius: var(--quiet-border-radius-md);
+        border-radius: var(--quiet-border-radius-sm);
       }
 
       &::-moz-color-swatch,
       &::-moz-focus-inner {
         height: calc(100% - 0.5em);
         padding: 0;
-        border-radius: var(--quiet-border-radius-md);
+        border-radius: var(--quiet-border-radius-sm);
       }
 
       &:-moz-focus-inner {

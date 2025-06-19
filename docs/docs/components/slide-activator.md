@@ -103,7 +103,7 @@ Additionally, a `quiet-progress` event will be emitted while the user slides the
 
   // Update progress as the user drags
   slideActivator.addEventListener('quiet-progress', event => {
-    progress.number = event.detail.percent;
+    progress.number = event.detail.percent * 100;
   });
 
   // Update the label and reset the demo when component is activated

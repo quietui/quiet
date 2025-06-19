@@ -1362,13 +1362,26 @@ html:not(.quiet-dark) quiet-scroller:has(.component-table) {
     position: relative;
     margin: 0;
     padding: 1.5rem;
+    border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
     border-radius: 1rem;
-    background-color: var(--quiet-primary-fill-softer);
-    box-shadow: var(--quiet-shadow-softer);
+    background-color: var(--quiet-background-color);
+    box-shadow: var(--quiet-shadow-soft);
     color: color-mix(in oklab, var(--quiet-neutral-text-on-soft), transparent 25%);
     line-height: 1.6;
     list-style: none;
     text-align: center;
+
+    &:has(a) {
+      box-shadow: var(--quiet-shadow-softer);
+      transition: all 100ms ease-out;
+
+      @media (hover: hover) {
+        &:hover {
+          transform: translateY(-3px) scale(1.02);
+          box-shadow: var(--quiet-shadow-mid);
+        }
+      }
+    }
 
     a.stretch {
       display: block;
@@ -1457,7 +1470,7 @@ html:not(.quiet-dark) quiet-scroller:has(.component-table) {
   border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
   border-radius: 1rem;
   background-color: var(--quiet-paper-color);
-  box-shadow: var(--quiet-shadow-softer);
+  box-shadow: var(--quiet-shadow-soft);
 
   .sponsor-tier-icon {
     font-size: 4rem;

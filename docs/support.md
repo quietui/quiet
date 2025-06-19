@@ -161,7 +161,7 @@ Component tag names, e.g. `<quiet-button>`, cannot be changed without modifying 
 :::
 
 :::details Can I subclass the components? {.faq}
-While components are written as classes, they aren't designed to be subclassed. This is not supported and isn't an objective of the library. Instead, use composition when possible.
+While components are written as classes, they aren't designed to be subclassed. This is neither supported nor an objective of the library and doing so will cause things to break. Instead, use composition when possible.
 :::
 
 :::details Can I use this library with a micro frontend? {.faq}

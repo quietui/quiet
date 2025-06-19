@@ -16,8 +16,8 @@ import styles from './resize-observer.styles.js';
  *
  * @slot - The elements to observe. All direct children of the host element are observed, but not nested elements.
  *
- * @event quiet-resize-observer - Emitted when a slotted element is resized. Like `ResizeObserver`, this event is also
- *  dispatched when each element is first observed. The `event.detail.entry` property contains a
+ * @event quiet-resize - Emitted when a slotted element is resized. Like `ResizeObserver`, this event is also dispatched
+ *  when each element is first observed. The `event.detail.entry` property contains a
  *  [`ResizeObserverEntry`](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserverEntry) with information about
  *  the element's dimensions.
  */

@@ -39,6 +39,7 @@ import styles from './slide-activator.styles.js';
  * @event quiet-before-deactivate - Emitted when the control will deactivate. Calling `event.preventDefault()` will
  *  prevent the deactivation from occurring.
  * @event quiet-deactivate - Emitted immediately after the control is deactivated.
+ * @event quiet-progress - Emitted as the slider progresses. Use `event.details.percent` to see how far along it is.
  *
  * @csspart thumb - The slide activator's thumb.
  * @csspart label - The slide activator's label.
@@ -285,7 +286,7 @@ export class QuietSlideActivator extends QuietElement {
 
     if (value !== this.thumbPosition) {
       this.thumbPosition = value;
-      const percentage = Number(value.toFixed(2));
+      const percentage = value / 100;
       if (percentage !== this.lastDispatchedPercentage) {
         this.dispatchEvent(new QuietProgressEvent({ percent: percentage }));
       }

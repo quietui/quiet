@@ -49,9 +49,9 @@ The cats? Oh, uh, I'm not really sure. They keep sneaking into the docs. I think
 
 ## Special thanks
 
-I'd like to thank the following projects and people for making Quiet UI possible.
+I'd like to thank the following projects and the amazing people behind them for making Quiet UI possible.
 
-- [Lit](https://lit.dev/) for making Web Components so fun to build
+- [Lit](https://lit.dev/) for making Web Components fun to build
 - [Eleventy](https://www.11ty.dev/) for generating the docs
 - [The Harmony color palette](https://evilmartians.com/opensource/harmony) for color inspiration
 - [The Custom Elements Manifest project](https://custom-elements-manifest.open-wc.org/) for making API documentation easy

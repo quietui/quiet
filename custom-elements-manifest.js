@@ -78,6 +78,21 @@ export default {
       }
     },
 
+    // The analyzer eagerly looks for any `this.dispatchEvent()` and populates events with ones we don't actually want
+    // in the docs. This removes any event that doesn't have a name or description.
+    {
+      name: 'filter-events',
+      packageLinkPhase({ customElementsManifest }) {
+        customElementsManifest.modules?.forEach(module => {
+          module.declarations?.forEach(declaration => {
+            if (declaration.events) {
+              declaration.events = declaration.events.filter(event => event.name && event.description);
+            }
+          });
+        });
+      }
+    },
+
     // Custom data for VS Code
     customElementVsCodePlugin({
       outdir,

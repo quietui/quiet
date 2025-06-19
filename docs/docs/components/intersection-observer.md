@@ -44,7 +44,6 @@ The component uses an [IntersectionObserver](https://developer.mozilla.org/en-US
       flex-shrink: 0;
       width: 120px;
       height: 120px;
-      border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
       border-radius: var(--quiet-border-radius-md);
       background-color: var(--quiet-neutral-fill-softer);
       color: var(--quiet-neutral-text-on-soft);
@@ -62,7 +61,6 @@ The component uses an [IntersectionObserver](https://developer.mozilla.org/en-US
 
       &.visible {
         background-color: var(--quiet-primary-fill-softer);
-        border-color: var(--quiet-primary-stroke-soft);
         color: var(--quiet-primary-text-colorful);
         opacity: 1;
         box-shadow: var(--quiet-shadow-soft);

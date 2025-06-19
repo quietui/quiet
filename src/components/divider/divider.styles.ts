@@ -28,13 +28,13 @@ export default css`
   }
 
   :host([aria-orientation='horizontal']) .line:first-child {
-    border-top-left-radius: 9999px;
-    border-bottom-left-radius: 9999px;
+    border-top-left-radius: var(--quiet-border-radius-pill);
+    border-bottom-left-radius: var(--quiet-border-radius-pill);
   }
 
   :host([aria-orientation='horizontal']) .line:last-child {
-    border-top-right-radius: 9999px;
-    border-bottom-right-radius: 9999px;
+    border-top-right-radius: var(--quiet-border-radius-pill);
+    border-bottom-right-radius: var(--quiet-border-radius-pill);
   }
 
   /* Vertical */
@@ -44,13 +44,13 @@ export default css`
   }
 
   :host([aria-orientation='vertical']) .line:first-child {
-    border-top-right-radius: 9999px;
-    border-top-left-radius: 9999px;
+    border-top-right-radius: var(--quiet-border-radius-pill);
+    border-top-left-radius: var(--quiet-border-radius-pill);
   }
 
   :host([aria-orientation='vertical']) .line:last-child {
-    border-bottom-right-radius: 9999px;
-    border-bottom-left-radius: 9999px;
+    border-bottom-right-radius: var(--quiet-border-radius-pill);
+    border-bottom-left-radius: var(--quiet-border-radius-pill);
   }
 
   /* Symbols */

@@ -189,7 +189,7 @@ async function updateSearchResults(query = '') {
       const a = document.createElement('a');
       const displayTitle = page.title ?? '';
       const displayDescription = page.description ?? '';
-      const displayUrl = page.url.replace(/^\//, '');
+      const displayUrl = `/${page.url.replace(/^\//, '')}`;
       let icon = 'file-text';
 
       li.classList.add('site-search-result');
@@ -200,10 +200,12 @@ async function updateSearchResults(query = '') {
       if (page.url === '/') icon = 'home';
       if (page.url.startsWith('/about')) icon = 'info-circle';
       if (page.url.startsWith('/docs/components')) icon = 'box';
+      if (page.url.startsWith('/components')) icon = 'packages';
       if (page.url.startsWith('/support')) icon = 'heart';
       if (page.url.startsWith('/docs/theming') || page.url.startsWith('/docs/restyle')) icon = 'color-swatch';
       if (page.url.startsWith('/docs/ai')) icon = 'sparkles';
-      if (page.url.startsWith('/docs/accessibility')) icon = 'accessible';
+      if (page.url.startsWith('/docs/developers/accessibility')) icon = 'accessible';
+      if (page.url.startsWith('/docs/icon-search')) icon = 'search';
       if (page.url.startsWith('/docs/css-utilities')) icon = 'tools';
       if (page.url.includes('github.com')) icon = 'brand-github';
       if (page.url.includes('github.com') && page.url.endsWith('/issues')) icon = 'bug';

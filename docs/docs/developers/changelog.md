@@ -48,6 +48,19 @@ Components marked [stable] are well-tested, ready for production, and less likel
 
 ## Releases
 
-### 1.0.0
+### 1.0.0 🧀
 
-- Initial release
+<small>August 1, 2025</small>
+
+This is the first public release of Quiet UI, which includes:
+
+- 80 framework agnostic components
+- Modern theme with dark mode
+- Optional CSS reset
+- Ready-to-use AI component intelligence
+- Helpful CSS utilities
+- Built to last
+- Open source
+
+
+<small><em><a href="https://x.com/pants/status/1912832380794003928">The next brushstroke could change everything.</a></em></small>

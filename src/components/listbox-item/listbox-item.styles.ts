@@ -6,7 +6,7 @@ export default css`
     padding: 0.5em 0.9375em;
     /* Use a border instead of gap to prevent dead zones when clicking in the listbox */
     border-bottom: var(--quiet-border-width) var(--quiet-border-style) var(--quiet-paper-color);
-    border-radius: var(--quiet-border-radius-md);
+    border-radius: var(--quiet-border-radius-sm);
     background-color: var(--quiet-paper-color);
     color: var(--quiet-text-body);
     cursor: pointer;

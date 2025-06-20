@@ -926,40 +926,44 @@ quiet-callout {
     var(--quiet-primary-fill-mid),
     transparent calc(100% - (100% * var(--opacity-base) * 0.5))
   );
-  --dot-size: 3px;
   --opacity-base: 0.18;
+
   /* prettier-ignore */
   background-image:
+    /* Gradient top fade to transparent */
     linear-gradient(to top, transparent 0, color-mix(in oklab, var(--quiet-background-color), transparent 40%) 100%),
+    /* Gradient bottom fade to primary */
     linear-gradient(
       to bottom,
       transparent 66%,
       color-mix(in oklab, var(--quiet-primary-fill-softer), transparent 40%) 100%
     ),
-    radial-gradient(var(--grid-color) var(--dot-size), transparent var(--dot-size)),
+    /* Vertical grid lines */
     linear-gradient(
       color-mix(in oklab, var(--quiet-primary-fill-mid), transparent calc(100% - (100% * var(--opacity-base) * 0.5)))
         1px,
       transparent 1px
     ),
+    /* Horizontal grid lines */
     linear-gradient(
       90deg,
       color-mix(in oklab, var(--quiet-primary-fill-mid), transparent calc(100% - (100% * var(--opacity-base) * 0.5)))
         1px,
       transparent 1px
     );
+
   background-position:
     100%,
     100%,
-    calc(var(--grid-half-size)) calc(var(--grid-half-size)),
     -0.5px -0.5px,
     -0.5px -0.5px;
+
   background-size:
     100%,
     100%,
-    var(--grid-size) var(--grid-size),
     var(--grid-half-size) var(--grid-half-size),
     var(--grid-half-size) var(--grid-half-size);
+
   background-repeat: repeat;
   background-attachment: fixed;
   text-wrap: balance;

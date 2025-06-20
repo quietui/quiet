@@ -1,11 +1,48 @@
 // Search data
-const res = await Promise.all([import('https://cdn.jsdelivr.net/npm/lunr@2.3/+esm'), fetch('/search.json')]);
+const version = document.documentElement.getAttribute('data-version');
+const res = await Promise.all([import('https://cdn.jsdelivr.net/npm/lunr@2.3/+esm'), getSearchData()]);
 const lunr = res[0].default;
-const searchData = await res[1].json();
+const searchData = res[1];
 const searchIndex = lunr.Index.load(searchData.searchIndex);
 const map = searchData.map;
 const searchDebounce = 200;
 let searchTimeout;
+
+// Loads search.json, first trying from cache
+async function getSearchData() {
+  const isDev = ['localhost', '127.0.0.1'].includes(location.hostname);
+  const url = `/search.json`;
+
+  // Don't use cache in dev
+  if (isDev) {
+    return (await fetch(url)).json();
+  }
+
+  try {
+    const currentCacheName = `v${version}`;
+    const cache = await caches.open(currentCacheName);
+
+    // Clean up old version caches
+    const cacheNames = await caches.keys();
+    cacheNames.forEach(name => {
+      if (name.startsWith('v') && name !== currentCacheName) {
+        caches.delete(name);
+      }
+    });
+
+    const cached = await cache.match(url);
+    if (cached) {
+      return await cached.json();
+    }
+
+    const response = await fetch(url);
+    const data = await response.json();
+    cache.put(url, new Response(JSON.stringify(data))).catch(() => {});
+    return data;
+  } catch {
+    return (await fetch(url)).json();
+  }
+}
 
 // We're using Turbo, so references to these elements aren't guaranteed to remain intact
 function getElements() {

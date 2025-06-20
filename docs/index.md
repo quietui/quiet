@@ -1,6 +1,6 @@
 ---
 title: Quiet UI
-description: A hand-crafted UI library for the Web with a focus on accessibility, longevity, performance, and simplicity.
+description: An open source UI library for the Web with a focus on accessibility, longevity, performance, and simplicity.
 layout: splash
 bodyClass: with-grid
 ---
@@ -10,7 +10,7 @@ bodyClass: with-grid
 
 {% include 'splash-image.njk' %}
 
-<p class="subtitle">A hand-crafted UI library for the Web</p>
+<p class="subtitle">An open source UI library for the Web</p>
 
 <p>Focusing on accessibility, longevity, performance, and simplicity</p>
 

@@ -1,6 +1,6 @@
 import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { QuietBlurEvent, QuietFocusEvent } from '../../events/form.js';
 import hostStyles from '../../styles/host.styles.js';
@@ -35,6 +35,9 @@ import styles from './radio-item.styles.js';
 @customElement('quiet-radio-item')
 export class QuietRadioItem extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
+
+  /** @internal Indicates if the radio item is disabled by the controller. */
+  @state() disabledByController = false;
 
   /**
    * The radio item's label. If you need to provide HTML in the label, use the `label` slot instead.
@@ -84,13 +87,14 @@ export class QuietRadioItem extends QuietElement {
       this.customStates.set('checked', this.checked);
     }
 
-    // Handle disabled
-    if (changedProperties.has('disabled')) {
-      this.setAttribute('aria-disabled', this.disabled ? 'true' : 'false');
-      this.customStates.set('disabled', this.disabled);
+    // Handle disabled or disabledByController
+    if (changedProperties.has('disabled') || changedProperties.has('disabledByController')) {
+      const isDisabled = this.disabled || this.disabledByController;
+      this.setAttribute('aria-disabled', isDisabled ? 'true' : 'false');
+      this.customStates.set('disabled', isDisabled);
 
       // Tell the controller to reset the roving tab index if a selected radio becomes disabled
-      if (this.checked && this.disabled) {
+      if (this.checked && isDisabled) {
         this.closest('quiet-radio')?.resetRovingTabIndex();
       }
     }
@@ -107,6 +111,8 @@ export class QuietRadioItem extends QuietElement {
   };
 
   render() {
+    const isDisabled = this.disabled || this.disabledByController;
+
     return html`
       <div id="label" part="label">
         <div
@@ -125,7 +131,7 @@ export class QuietRadioItem extends QuietElement {
             xl: this.size === 'xl',
             /* States */
             checked: this.checked,
-            disabled: this.disabled
+            disabled: isDisabled
           })}
         >
           <quiet-icon

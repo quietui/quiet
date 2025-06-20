@@ -96,13 +96,24 @@ Use the `size` attribute to change a radio item's size.
 
 ### Disabling
 
-You can disable one or more radio items by adding the `disabled` attribute.
+To disable the entire control, add the `disabled` attribute to the radio element.
 
 ```html {.example}
-<quiet-radio label="Favorite pet" name="animal">
+<quiet-radio label="Favorite pet" name="animal" disabled value="cat">
+  <quiet-radio-item value="cat">Cat</quiet-radio-item>
+  <quiet-radio-item value="dog">Dog</quiet-radio-item>
+  <quiet-radio-item value="bird">Bird</quiet-radio-item>
+  <quiet-radio-item value="lizard">Lizard</quiet-radio-item>
+</quiet-radio>
+```
+
+To disable individual options, add the `disabled` attribute to one or more radio items.
+
+```html {.example}
+<quiet-radio label="Favorite pet" name="animal" value="cat">
   <quiet-radio-item value="cat">Cat</quiet-radio-item>
   <quiet-radio-item value="dog" disabled>Dog</quiet-radio-item>
-  <quiet-radio-item value="bird">Bird</quiet-radio-item>
+  <quiet-radio-item value="bird" disabled>Bird</quiet-radio-item>
   <quiet-radio-item value="lizard">Lizard</quiet-radio-item>
 </quiet-radio>
 ```

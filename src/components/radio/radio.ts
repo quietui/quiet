@@ -90,6 +90,9 @@ export class QuietRadio extends QuietFormControlElement {
   /** Indicates at least one option in the radio is required. */
   @property({ type: Boolean, reflect: true }) required = false;
 
+  /** Disables the radio control. */
+  @property({ type: Boolean, reflect: true }) disabled = false;
+
   connectedCallback() {
     super.connectedCallback();
     this.addEventListener('invalid', this.handleHostInvalid);
@@ -102,7 +105,7 @@ export class QuietRadio extends QuietFormControlElement {
 
   firstUpdated() {
     if (this.value) {
-      const selectedItem = this.getSelectedItem();
+      const selectedItem = this.getSelectedItem({ includeDisabled: true });
       if (selectedItem) {
         this.setSelectedItem(selectedItem);
       }
@@ -118,6 +121,12 @@ export class QuietRadio extends QuietFormControlElement {
       this.internals.setFormValue(this.value);
     }
 
+    // Handle disabled changes
+    if (changedProperties.has('disabled')) {
+      this.customStates.set('disabled', this.disabled);
+      this.updateControllerDisabledState();
+    }
+
     // Handle user interactions. When the form control's value has changed and lost focus (e.g. change event), we can
     // show user-valid and user-invalid states. We also show it if the form has been submitted.
     if (this.hadUserInteraction || this.wasSubmitted) {
@@ -131,7 +140,7 @@ export class QuietRadio extends QuietFormControlElement {
 
   /** @internal Called when a containing fieldset is disabled. */
   formDisabledCallback(isDisabled: boolean) {
-    this.getItems({ includeDisabled: true }).forEach(item => (item.disabled = isDisabled));
+    this.getItems({ includeDisabled: true }).forEach(item => (item.disabledByController = isDisabled));
   }
 
   /** @internal Called when the form is reset. */
@@ -171,7 +180,7 @@ export class QuietRadio extends QuietFormControlElement {
     const selectedItem = this.getSelectedItem();
     const radioItem = (event.target as HTMLElement).closest('quiet-radio-item');
 
-    if (radioItem && !radioItem.disabled) {
+    if (radioItem && !radioItem.disabled && !radioItem.disabledByController) {
       this.setSelectedItem(radioItem);
       this.hadUserInteraction = true;
 
@@ -237,20 +246,24 @@ export class QuietRadio extends QuietFormControlElement {
    * item will be tabbable.
    */
   public resetRovingTabIndex() {
-    const radioItems = this.getItems();
-    const selectedItem = this.getSelectedItem();
-    const selectedItemIndex = radioItems.findIndex(item => item === selectedItem) || 0;
+    const radioItems = this.getItems({ includeDisabled: true }); // Get ALL items, including disabled ones
+    const selectedItem = this.getSelectedItem({ includeDisabled: true }); // Get selected item even if disabled
+    const selectedItemIndex = radioItems.findIndex(item => item === selectedItem);
     const targetIndex = selectedItemIndex > -1 ? selectedItemIndex : 0;
 
     // Reset the roving tab index to the selected radio (or the first radio if none are selected)
     radioItems.forEach((item, index) => {
-      item.tabIndex = index === targetIndex ? 0 : -1;
+      if (this.disabled) {
+        item.tabIndex = -1;
+      } else {
+        item.tabIndex = index === targetIndex ? 0 : -1;
+      }
     });
   }
 
   /** Gets the selected item. */
-  private getSelectedItem() {
-    return this.getItems().find(item => item.value === this.value) || null;
+  private getSelectedItem(options?: Partial<GetRadioItemOptions>) {
+    return this.getItems(options).find(item => item.value === this.value) || null;
   }
 
   /**
@@ -279,6 +292,17 @@ export class QuietRadio extends QuietFormControlElement {
         this.value = '';
       }
     }
+  }
+
+  /** Updates the controller disabled state for all radio items */
+  private updateControllerDisabledState() {
+    const items = this.getItems({ includeDisabled: true });
+
+    // Disable each item
+    items.forEach(item => (item.disabledByController = this.disabled));
+
+    // Reset the roving tab index after all updates
+    requestAnimationFrame(() => this.resetRovingTabIndex());
   }
 
   /** Sets the form control's validity */

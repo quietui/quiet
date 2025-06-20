@@ -1027,12 +1027,6 @@ quiet-callout {
       height: auto;
       max-height: 24vh;
     }
-
-    /* Shorter image when kinda short */
-    @media screen and (max-height: 720px) {
-      max-width: none;
-      max-height: none;
-    }
   }
 }
 

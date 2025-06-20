@@ -83,7 +83,7 @@ bodyClass: browse-components with-grid
       border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
       border-radius: var(--quiet-border-radius-md);
       background-color: var(--quiet-paper-color);
-      box-shadow: var(--quiet-shadow-soft);
+      box-shadow: var(--quiet-shadow-softer);
       font-weight: inherit;
       padding: 1.25rem;
       text-decoration: none;
@@ -97,7 +97,7 @@ bodyClass: browse-components with-grid
       @media (hover: hover) {
         &:hover {
           transform: translateY(-3px) scale(1.02);
-          box-shadow: var(--quiet-shadow-mid);
+          box-shadow: var(--quiet-shadow-soft);
         }
       }
 

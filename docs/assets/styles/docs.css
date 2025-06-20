@@ -915,8 +915,8 @@ quiet-callout {
   }
 }
 
-/* Splash */
-.layout-splash {
+/* Grid background */
+.with-grid {
   position: relative;
 
   --grid-size: 100px;
@@ -969,6 +969,7 @@ quiet-callout {
   text-wrap: balance;
 }
 
+/* Splash layout */
 .layout-splash:not(.scrolled-down) #header {
   backdrop-filter: none;
   -webkit-backdrop-filter: none;

@@ -4,6 +4,7 @@ description: Unlock personal support, priority bug fixes, and other sponsor-only
 layout: page
 isWide: true
 section: support
+bodyClass: with-grid
 ---
 
 Quiet can be used for free under the MIT license. Unfortunately, I can't offer free support for everyone, but if you need help you can [become a sponsor](https://github.com/sponsors/quietui) to unlock support and other benefits shown below.

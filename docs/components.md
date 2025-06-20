@@ -3,7 +3,7 @@ title: Browse Components
 description: Look through some of the best custom elements on the planet.
 layout: page
 section: components
-bodyClass: browse-components
+bodyClass: browse-components with-grid
 ---
 
 <quiet-search-list id="component-index" match="fuzzy">

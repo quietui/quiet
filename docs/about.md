@@ -3,6 +3,7 @@ title: About this project
 description: Learn more about Quiet and the person behind it.
 layout: page-outline
 section: about
+bodyClass: with-grid
 ---
 
 Quiet is an [open source](https://github.com/quietui/quiet/blob/main/LICENSE) user interface library for the modern Web. It features {{ components.length }} accessible, performant, localized, and interoperable components along with an optional CSS reset to streamline development of websites and apps.

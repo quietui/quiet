@@ -921,7 +921,7 @@ quiet-callout {
 .with-grid {
   position: relative;
 
-  --grid-size: 100px;
+  --grid-size: 75px;
   --grid-half-size: calc(var(--grid-size) / 2);
   --grid-color: color-mix(
     in oklab,

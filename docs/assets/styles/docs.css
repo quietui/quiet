@@ -41,20 +41,20 @@ html[data-scroll-restoring] body {
   }
 }
 
-@media screen and (min-width: 960px) {
+@media screen and (min-width: 768px) {
   .two-columns {
     gap: 2rem;
     columns: 2;
   }
 }
 
-@media screen and (min-width: 960px) {
+@media screen and (min-width: 768px) {
   .only-mobile {
     display: none !important;
   }
 }
 
-@media screen and (max-width: 959px) {
+@media screen and (max-width: 767px) {
   .not-mobile {
     display: none !important;
   }
@@ -181,7 +181,7 @@ html[data-scroll-restoring] body {
 }
 
 /* Header group links */
-@media screen and (min-width: 960px) {
+@media screen and (min-width: 768px) {
   #header-group-links > :first-child {
     /* Allow header links to be scrollable and right aligned on larger screens */
     margin-inline-start: auto;
@@ -264,7 +264,9 @@ html[data-scroll-restoring] body {
 
 #header-group-links .current {
   z-index: calc(var(--docs-header-z-index) + 2);
-  border-bottom: var(--quiet-border-style) max(2px, var(--quiet-border-width)) var(--quiet-primary-text-colorful);
+  position: relative;
+  height: calc(var(--docs-header-height) - var(--quiet-border-width));
+  border-bottom: var(--quiet-border-style) calc(var(--quiet-border-width) * 2) var(--quiet-primary-text-colorful);
   color: var(--quiet-primary-text-colorful);
   font-weight: var(--quiet-font-weight-semibold);
 }

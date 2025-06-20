@@ -244,6 +244,7 @@
     color: var(--quiet-neutral-text-on-soft);
     font-size: 0.875em;
     font-family: var(--quiet-font-family-code);
+    tab-size: 2;
   }
 
   a:has(code, samp, tt, pre) {
@@ -258,6 +259,7 @@
     color: var(--quiet-neutral-text-on-soft);
     font-size: 0.9375rem;
     font-family: var(--quiet-font-family-code);
+    tab-size: 2;
 
     code {
       font-size: inherit;

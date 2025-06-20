@@ -1066,7 +1066,7 @@ quiet-callout {
     margin-block-end: 0;
 
     quiet-button {
-      width: fit-content;
+      width: 100%;
     }
   }
 }

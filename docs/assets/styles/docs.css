@@ -475,7 +475,7 @@ body.browse-components {
 #content {
   order: 1;
   min-width: 0; /* prevent overflowing content from stretching the column */
-  margin-block-end: 2rem;
+  padding-block-end: 2rem;
 
   .title {
     margin-block-start: 3rem;
@@ -1514,7 +1514,6 @@ h2 + details {
 /* Copyrights */
 .copyright {
   display: block;
-  margin-block-end: 2rem;
   color: revert;
   text-align: center;
 }

@@ -25,7 +25,7 @@ export default css`
     border-radius: inherit;
     backdrop-filter: blur(var(--blur));
     -webkit-backdrop-filter: blur(var(--blur));
-    background-color: color-mix(in oklab, var(--quiet-neutral-fill-softer), transparent 50%);
+    background-color: color-mix(in oklab, var(--quiet-background-color), transparent 50%);
 
     quiet-spinner,
     ::slotted(quiet-spinner) {

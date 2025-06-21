@@ -112,7 +112,7 @@ Set the `appearance` attribute to `normal`, `filled`, or `unstyled` to change th
 
 ### Pill-shaped selects
 
-selects can be rendered with pill-shaped edges by adding the `pill` attribute.
+Selects can be rendered with pill-shaped edges by adding the `pill` attribute.
 
 ```html {.example}
 <quiet-select pill label="Pill-shaped">

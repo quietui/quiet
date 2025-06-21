@@ -79,6 +79,7 @@
     padding: 0.5rem;
     border-inline-start: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
     color: var(--quiet-text-muted);
+    font-weight: var(--quiet-font-weight-semibold);
     font-size: 0.875rem;
     text-align: center;
     cursor: pointer;

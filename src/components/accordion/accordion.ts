@@ -79,8 +79,8 @@ export class QuietAccordion extends QuietElement {
       : [];
   }
 
-  /** Handle accordion item toggle requests from accordion items */
-  handleItemToggle(item: QuietAccordionItem): boolean {
+  /** @internal Handles accordion item toggle requests from accordion items */
+  public handleItemToggle(item: QuietAccordionItem): boolean {
     const targetExpanded = !item.expanded;
 
     if (targetExpanded) {

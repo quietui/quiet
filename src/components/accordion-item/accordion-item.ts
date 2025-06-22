@@ -47,6 +47,7 @@ export class QuietAccordionItem extends QuietElement {
 
   @query('#body') body: HTMLElement;
   @query('#content') content: HTMLElement;
+  @query('#header') header: HTMLElement;
 
   @property({ type: Boolean, reflect: true }) expanded = false;
 
@@ -61,6 +62,16 @@ export class QuietAccordionItem extends QuietElement {
 
   /** Disables the accordion item. */
   @property({ type: Boolean, reflect: true }) disabled = false;
+
+  /** Sets focus to the accordion item. */
+  public focus() {
+    this.header.focus();
+  }
+
+  /** Removes focus from the accordion item. */
+  public blur() {
+    this.header.blur();
+  }
 
   updated(changedProperties: PropertyValues<this>) {
     if (changedProperties.has('disabled')) {

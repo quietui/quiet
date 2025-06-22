@@ -123,10 +123,15 @@ export class QuietAccordion extends QuietElement {
 
   private handleClick = (event: MouseEvent) => {
     const path = event.composedPath();
-    const item = event.target as QuietAccordionItem;
-    if (item.localName === 'quiet-accordion-item' && !item.disabled) {
+
+    // Find the accordion item in the event path
+    const item = path.find(
+      el => el instanceof HTMLElement && el.localName === 'quiet-accordion-item'
+    ) as QuietAccordionItem;
+
+    if (item && !item.disabled) {
       const header = item.header;
-      if (header && path.some(el => el === header)) {
+      if (header && path.includes(header)) {
         this.handleItemToggle(item);
       }
     }

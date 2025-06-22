@@ -3,6 +3,8 @@ title: Accordion
 layout: component
 ---
 
+Accordions follow the [ARIA APG accordion pattern](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/) for accessibility. They are comprised of two different components. A single accordion surrounds one or more accordion items.
+
 ```html {.example}
 <quiet-accordion>
   <quiet-accordion-item>

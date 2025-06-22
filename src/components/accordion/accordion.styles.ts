@@ -14,11 +14,7 @@ export default css`
     width: 100%;
   }
 
-  /* Appearance: normal */
-  :host([appearance='normal']) {
-  }
-
-  /* Appearance: contained */
+  /* Contained appearance */
   :host([appearance='contained']) {
     border: var(--border-style) var(--border-width) var(--border-color);
     border-radius: var(--quiet-border-radius-md);
@@ -26,12 +22,8 @@ export default css`
     box-shadow: var(--quiet-shadow-softer);
   }
 
-  /* Appearance: separated */
+  /* Separated appearance */
   :host([appearance='separated']) {
     gap: 1em;
-  }
-
-  /* Appearance: unstyled */
-  :host([appearance='unstyled']) {
   }
 `;

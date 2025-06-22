@@ -1,6 +1,6 @@
 import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
-import { customElement, property, query, state } from 'lit/decorators.js';
+import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import hostStyles from '../../styles/host.styles.js';
 import { parseCssDuration } from '../../utilities/animate.js';
@@ -43,13 +43,11 @@ export class QuietAccordionItem extends QuietElement {
   @query('#body') body: HTMLElement;
   @query('#content') content: HTMLElement;
 
-  @state() expanded = false;
-
-  /** An optional name for the accordion item so you can reference it with the `active-name` attribute. */
-  @property() name = '';
+  @property({ type: Boolean, reflect: true }) expanded = false;
 
   /** The accordion item's label. If you need to provide HTML in the label, use the `label` slot instead. */
   @property() label: string;
+
   /** The accordion item's appearance. This will be set automatically by the accordion controller. */
   @property({ reflect: true }) appearance: 'normal' | 'contained' | 'separated' | 'unstyled' = 'normal';
 
@@ -58,10 +56,6 @@ export class QuietAccordionItem extends QuietElement {
 
   /** Disables the accordion item. */
   @property({ type: Boolean, reflect: true }) disabled = false;
-
-  firstUpdated() {
-    this.setAttribute('role', 'region');
-  }
 
   updated(changedProperties: PropertyValues<this>) {
     if (changedProperties.has('disabled')) {
@@ -189,6 +183,7 @@ export class QuietAccordionItem extends QuietElement {
         })}
         tabindex=${this.disabled ? -1 : 0}
         role="button"
+        aria-controls="body"
         aria-expanded=${this.expanded ? 'true' : 'false'}
         aria-disabled=${this.disabled ? 'true' : 'false'}
         @click=${this.handleHeaderClick}
@@ -199,7 +194,7 @@ export class QuietAccordionItem extends QuietElement {
         </div>
         <div id="icon" part="icon">
           <slot name="icon">
-            <quiet-icon library="system" name="chevron-down"></quiet-icon>
+            <quiet-icon id="default-icon" library="system" name="chevron-down"></quiet-icon>
           </slot>
         </div>
       </header>

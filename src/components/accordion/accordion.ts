@@ -1,26 +1,23 @@
 import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { QuietItemChangeEvent } from '../../events/item.js';
 import hostStyles from '../../styles/host.styles.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
+import '../accordion-item/accordion-item.js';
 import type { QuietAccordionItem } from '../accordion-item/accordion-item.js';
 import styles from './accordion.styles.js';
 
 /**
  * <quiet-accordion>
  *
- * @summary A container for accordion items that manages their expand/collapse states.
+ * @summary A container for content that expands and collapses when selected.
  * @documentation https://quietui.org/docs/components/accordion
  * @status stable
  * @since 1.0
  *
  * @dependency quiet-accordion-item
- * @dependency quiet-icon
  *
  * @slot - The default slot for accordion items.
- *
- * @event quiet-item-change - Emitted when the active item changes.
  *
  * @cssproperty [--duration=200ms] - The expand and collapse duration.
  * @cssproperty [--easing=ease] - The expand and collapse easing.
@@ -33,20 +30,14 @@ import styles from './accordion.styles.js';
 export class QuietAccordion extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
-  /** The current active item's index. */
-  @property({ attribute: 'active-index', type: Number, reflect: true }) activeIndex = -1;
-
-  /** The current active item's name. */
-  @property({ attribute: 'active-name', reflect: true }) activeName = '';
-
   /** When set, selecting an accordion item will automatically collapse the others. */
   @property({ attribute: 'auto-collapse', type: Boolean }) autoCollapse = false;
 
   /** Determines the accordion's appearance. */
-  @property() appearance: 'normal' | 'contained' | 'separated' | 'unstyled' = 'normal';
+  @property({ reflect: true }) appearance: 'normal' | 'contained' | 'separated' | 'unstyled' = 'normal';
 
   /** Determines which side of the accordion item the expand/collapse icon shows. */
-  @property({ attribute: 'icon-position' }) iconPosition: 'start' | 'end' = 'end';
+  @property({ attribute: 'icon-position', reflect: true }) iconPosition: 'start' | 'end' = 'end';
 
   connectedCallback() {
     super.connectedCallback();
@@ -58,28 +49,9 @@ export class QuietAccordion extends QuietElement {
     this.removeEventListener('quiet-accordion-item-toggle', this.handleItemToggle);
   }
 
-  firstUpdated() {
-    this.setAttribute('role', 'region');
-  }
-
   updated(changedProperties: PropertyValues<this>) {
     if (changedProperties.has('appearance') || changedProperties.has('iconPosition')) {
       this.syncItemProperties();
-    }
-
-    if (changedProperties.has('activeIndex') && this.activeIndex >= 0) {
-      const items = this.getItems();
-      if (items[this.activeIndex]) {
-        this.expandItem(items[this.activeIndex]);
-      }
-    }
-
-    if (changedProperties.has('activeName') && this.activeName) {
-      const items = this.getItems();
-      const item = items.find(item => item.name === this.activeName);
-      if (item) {
-        this.expandItem(item);
-      }
     }
   }
 
@@ -111,32 +83,8 @@ export class QuietAccordion extends QuietElement {
           }
         });
       }
-
-      this.activeIndex = index;
-      this.activeName = item.name || '';
-
-      this.dispatchEvent(new QuietItemChangeEvent({ index: this.activeIndex }));
-    } else if (this.activeIndex === index) {
-      // If the active item is being collapsed
-      this.activeIndex = -1;
-      this.activeName = '';
     }
   };
-
-  /** Expand a specific item */
-  private expandItem(item: QuietAccordionItem) {
-    const items = this.getItems();
-
-    if (this.autoCollapse) {
-      items.forEach(otherItem => {
-        if (otherItem !== item) {
-          otherItem.expanded = false;
-        }
-      });
-    }
-
-    item.expanded = true;
-  }
 
   private handleSlotChange() {
     this.syncItemProperties();

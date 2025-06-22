@@ -16,8 +16,8 @@ export default css`
   #header {
     display: flex;
     align-items: center;
-    padding: 1rem;
-    gap: 0.5rem;
+    padding: 1em;
+    gap: 1em;
     background: transparent;
     cursor: pointer;
     user-select: none;
@@ -30,11 +30,15 @@ export default css`
       outline: var(--quiet-focus-ring);
       outline-offset: -2px;
     }
+  }
 
-    &[aria-disabled='true'] {
-      cursor: not-allowed;
-      opacity: 0.5;
-    }
+  :host(:state(disabled)) #header {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  :host([icon-position='start']) #header {
+    flex-direction: row-reverse;
   }
 
   /* Label */
@@ -54,11 +58,11 @@ export default css`
     display: flex;
     align-items: center;
     font-size: 1.25em;
-    transition: transform var(--duration) var(--easing);
+    transition: rotate var(--duration) var(--easing);
   }
 
   :host(:state(expanded)) #icon {
-    transform: rotate(180deg);
+    rotate: 180deg;
   }
 
   /* Icon position */
@@ -89,15 +93,19 @@ export default css`
 
   /* Content */
   #content {
-    padding: 0 1rem 1rem;
+    padding: 0 1em 1em;
   }
 
-  /* Appearance: normal */
+  /* Normal appearance */
   :host([appearance='normal']) {
     border-bottom: var(--border-style) var(--border-width) var(--border-color);
   }
 
-  /* Appearance: contained */
+  :host([appearance='normal'][data-accordion-item-first]) {
+    border-top: var(--border-style) var(--border-width) var(--border-color);
+  }
+
+  /* Contained appearance */
   :host([appearance='contained'][data-accordion-item-first]) #header {
     border-top-right-radius: var(--border-radius);
     border-top-left-radius: var(--border-radius);
@@ -112,7 +120,7 @@ export default css`
     border-bottom: var(--border-style) var(--border-width) var(--border-color);
   }
 
-  /* Appearance: separated */
+  /* Separated appearance */
   :host([appearance='separated']) {
     border: var(--border-style) var(--border-width) var(--quiet-neutral-fill-soft);
     border-radius: var(--border-radius);
@@ -123,6 +131,10 @@ export default css`
 
   :host([appearance='separated']:state(expanded)) {
     border-color: var(--border-color);
+  }
+
+  :host([appearance='separated']) #header {
+    border-radius: inherit;
   }
 
   /* Position-based styling */

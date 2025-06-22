@@ -4,140 +4,137 @@ layout: component
 ---
 
 ```html {.example}
-<quiet-accordion id="accordion__overview" auto-collapse active-name="">
-  <quiet-accordion-item name="overview">
-    <span slot="label">What is an accordion?</span>
-    <p>An accordion is a vertically stacked list of headers that reveal or hide associated sections of content. It's perfect for FAQs, settings panels, and any content that benefits from progressive disclosure.</p>
+<quiet-accordion>
+  <quiet-accordion-item>
+    <span slot="label">What is a cat?</span>
+    <p>A cat is a small, independent feline companion known for their purring, hunting skills, and tendency to knock things off tables. They're perfect for providing endless entertainment, companionship, and the occasional hairball surprise.</p>
   </quiet-accordion-item>
 
-  <quiet-accordion-item name="when-to-use">
-    <span slot="label">When should I use it?</span>
-    <p>Use accordions when you have limited vertical space but need to present multiple sections of content. They're ideal when users don't need to see all content at once, allowing them to focus on one section at a time.</p>
+  <quiet-accordion-item>
+    <span slot="label">When should I adopt one?</span>
+    <p>Adopt a cat when you're ready for a lifetime commitment of love, responsibility, and being owned by a furry overlord. They're ideal when you need a companion who will judge your life choices while simultaneously demanding treats.</p>
   </quiet-accordion-item>
 
-  <quiet-accordion-item name="best-practices">
-    <span slot="label">Best practices</span>
-    <ul>
-      <li>Keep labels concise and descriptive</li>
-      <li>Order items logically (alphabetically, by importance, or by frequency of use)</li>
-      <li>Consider auto-collapse behavior for mutually exclusive content</li>
-      <li>Ensure keyboard navigation works smoothly</li>
-    </ul>
+  <quiet-accordion-item>
+    <span slot="label">Cat care best practices</span>
+    <p>Essential cat care includes keeping litter boxes clean and accessible, providing scratching posts to save your furniture, scheduling regular vet checkups, and ensuring they have cozy hiding spots and sunny windowsills for optimal feline happiness.</p>
   </quiet-accordion-item>
 </quiet-accordion>
-
-<style>
-  #accordion__overview {
-    max-width: 40rem;
-  }
-</style>
 ```
 
 ## Examples
 
 ### Providing content
 
-Accordion items accept content through the default slot and labels through the `label` slot. For plain-text labels, you can use the `label` attribute instead of the slot.
+Use the `label` attribute to provide a plain text label. To provide icons and other HTML, use the `label` slot instead.
 
 ```html {.example}
 <quiet-accordion>
-  <quiet-accordion-item label="Simple label with attribute">
-    <p>This accordion item uses the label attribute for its header text.</p>
+  <quiet-accordion-item label="Why do cats purr?">
+    <p>Cats purr for many reasons including contentment, self-healing, and communication. It's their built-in happiness meter!</p>
+  </quiet-accordion-item>
+
+  <quiet-accordion-item label="Why do cats knead with their paws?">
+    <p>Kneading is a comfort behavior from kittenhood when they kneaded their mother's belly for milk. Adult cats knead when they're happy and relaxed.</p>
   </quiet-accordion-item>
 
   <quiet-accordion-item>
-    <span slot="label">Label with <strong>HTML</strong> content</span>
-    <p>This accordion item uses the label slot, which allows for HTML content in the header.</p>
-  </quiet-accordion-item>
-
-  <quiet-accordion-item>
-    <quiet-icon slot="label" name="settings"></quiet-icon>
-    <span slot="label">Label with icon</span>
-    <p>You can include icons and other elements in the label slot for richer headers.</p>
+    <quiet-icon slot="label" name="cat"></quiet-icon>
+    <span slot="label">Cat behavior mysteries</span>
+    <p>From zoomies at 3 AM to bringing you "gifts" of dead mice, cats are wonderfully mysterious creatures with behaviors that keep us guessing.</p>
   </quiet-accordion-item>
 </quiet-accordion>
 ```
 
-### Open initially
+### Expanded initially
 
-TODO - show `active-index` and `active-name` examples 
+Add the `expanded` attribute to any accordion item that should be expanded initially.
+
+```html {.example}
+<quiet-accordion>
+  <quiet-accordion-item expanded>
+    <span slot="label">What is a cat?</span>
+    <p>A cat is a small, independent feline companion known for their purring, hunting skills, and tendency to knock things off tables. They're perfect for providing endless entertainment, companionship, and the occasional hairball surprise.</p>
+  </quiet-accordion-item>
+
+  <quiet-accordion-item>
+    <span slot="label">When should I adopt one?</span>
+    <p>Adopt a cat when you're ready for a lifetime commitment of love, responsibility, and being owned by a furry overlord. They're ideal when you need a companion who will judge your life choices while simultaneously demanding treats.</p>
+  </quiet-accordion-item>
+
+  <quiet-accordion-item>
+    <span slot="label">Cat care best practices</span>
+    <p>Essential cat care includes keeping litter boxes clean and accessible, providing scratching posts to save your furniture, scheduling regular vet checkups, and ensuring they have cozy hiding spots and sunny windowsills for optimal feline happiness.</p>
+  </quiet-accordion-item>
+</quiet-accordion>
+```
 
 ### Changing the appearance
 
-Set the `appearance` attribute to `contained` to draw the accordion with a border.
+Set the `appearance` attribute to `normal`, `contained`, `separated`, or `unstyled` to control the accordion's appearance.
 
 ```html {.example}
-<quiet-accordion appearance="contained" class="accordion__appearance">
-  <quiet-accordion-item name="overview" expanded>
-    <span slot="label">What is an accordion?</span>
-    <p>An accordion is a vertically stacked list of headers that reveal or hide associated sections of content. It's perfect for FAQs, settings panels, and any content that benefits from progressive disclosure.</p>
-  </quiet-accordion-item>
+<div id="accordion__appearance">
+  <quiet-radio label="Appearance" value="normal">
+    <quiet-radio-item value="normal">Normal</quiet-radio-item>
+    <quiet-radio-item value="contained">Contained</quiet-radio-item>
+    <quiet-radio-item value="separated">Separated</quiet-radio-item>
+    <quiet-radio-item value="unstyled">Unstyled</quiet-radio-item>
+  </quiet-radio>
 
-  <quiet-accordion-item name="when-to-use">
-    <span slot="label">When should I use it?</span>
-    <p>Use accordions when you have limited vertical space but need to present multiple sections of content. They're ideal when users don't need to see all content at once, allowing them to focus on one section at a time.</p>
-  </quiet-accordion-item>
+  <quiet-accordion>
+    <quiet-accordion-item expanded>
+      <span slot="label">What is a cat?</span>
+      <p>A cat is a small, independent feline companion known for their purring, hunting skills, and tendency to knock things off tables. They're perfect for providing endless entertainment, companionship, and the occasional hairball surprise.</p>
+    </quiet-accordion-item>
 
-  <quiet-accordion-item name="best-practices">
-    <span slot="label">Best practices</span>
-    <ul>
-      <li>Keep labels concise and descriptive</li>
-      <li>Order items logically (alphabetically, by importance, or by frequency of use)</li>
-      <li>Consider auto-collapse behavior for mutually exclusive content</li>
-      <li>Ensure keyboard navigation works smoothly</li>
-    </ul>
-  </quiet-accordion-item>
-</quiet-accordion>
+    <quiet-accordion-item>
+      <span slot="label">When should I adopt one?</span>
+      <p>Adopt a cat when you're ready for a lifetime commitment of love, responsibility, and being owned by a furry overlord. They're ideal when you need a companion who will judge your life choices while simultaneously demanding treats.</p>
+    </quiet-accordion-item>
+
+    <quiet-accordion-item>
+      <span slot="label">Cat care best practices</span>
+      <p>Essential cat care includes keeping litter boxes clean and accessible, providing scratching posts to save your furniture, scheduling regular vet checkups, and ensuring they have cozy hiding spots and sunny windowsills for optimal feline happiness.</p>
+    </quiet-accordion-item>
+  </quiet-accordion>
+</div>
+
+<script>
+  const container = document.getElementById('accordion__appearance');
+  const accordion = container.querySelector('quiet-accordion');
+  const radio = container.querySelector('quiet-radio');
+
+  radio.addEventListener('input', () => {
+    accordion.appearance = radio.value;
+  });
+</script>
+
+<style>
+  #accordion__appearance {
+    quiet-radio {
+      margin-block-end: 2rem;
+    }
+  }
+</style>
 ```
 
-Set the `appearance` attribute to `separated` draw accordion items as separate items.
+### Disabling items
+
+Use the `disabled` attribute to prevent users from expanding certain accordion items. This is useful for sections that require certain conditions to be met before they can be accessed.
 
 ```html {.example}
-<quiet-accordion appearance="separated">
-  <quiet-accordion-item name="overview" expanded>
-    <span slot="label">What is an accordion?</span>
-    <p>An accordion is a vertically stacked list of headers that reveal or hide associated sections of content. It's perfect for FAQs, settings panels, and any content that benefits from progressive disclosure.</p>
+<quiet-accordion>
+  <quiet-accordion-item label="Indoor cats">
+    <p>Indoor cats live longer, safer lives and are protected from outdoor dangers like traffic, predators, and diseases.</p>
   </quiet-accordion-item>
 
-  <quiet-accordion-item name="when-to-use">
-    <span slot="label">When should I use it?</span>
-    <p>Use accordions when you have limited vertical space but need to present multiple sections of content. They're ideal when users don't need to see all content at once, allowing them to focus on one section at a time.</p>
+  <quiet-accordion-item label="Outdoor cats" disabled>
+    <p>This section about outdoor cats is disabled until you've completed the indoor cat safety course.</p>
   </quiet-accordion-item>
 
-  <quiet-accordion-item name="best-practices">
-    <span slot="label">Best practices</span>
-    <ul>
-      <li>Keep labels concise and descriptive</li>
-      <li>Order items logically (alphabetically, by importance, or by frequency of use)</li>
-      <li>Consider auto-collapse behavior for mutually exclusive content</li>
-      <li>Ensure keyboard navigation works smoothly</li>
-    </ul>
-  </quiet-accordion-item>
-</quiet-accordion>
-```
-
-Set the `appearance` attribute to `unstyled` draw unstyled accordion items.
-
-```html {.example}
-<quiet-accordion appearance="unstyled">
-  <quiet-accordion-item name="overview" expanded>
-    <span slot="label">What is an accordion?</span>
-    <p>An accordion is a vertically stacked list of headers that reveal or hide associated sections of content. It's perfect for FAQs, settings panels, and any content that benefits from progressive disclosure.</p>
-  </quiet-accordion-item>
-
-  <quiet-accordion-item name="when-to-use">
-    <span slot="label">When should I use it?</span>
-    <p>Use accordions when you have limited vertical space but need to present multiple sections of content. They're ideal when users don't need to see all content at once, allowing them to focus on one section at a time.</p>
-  </quiet-accordion-item>
-
-  <quiet-accordion-item name="best-practices">
-    <span slot="label">Best practices</span>
-    <ul>
-      <li>Keep labels concise and descriptive</li>
-      <li>Order items logically (alphabetically, by importance, or by frequency of use)</li>
-      <li>Consider auto-collapse behavior for mutually exclusive content</li>
-      <li>Ensure keyboard navigation works smoothly</li>
-    </ul>
+  <quiet-accordion-item label="Senior cat care">
+    <p>Senior cats need extra attention with diet, comfort, and regular health monitoring as they age gracefully.</p>
   </quiet-accordion-item>
 </quiet-accordion>
 ```
@@ -148,124 +145,95 @@ By default, multiple accordion items can be expanded at the same time. Add the `
 
 ```html {.example}
 <quiet-accordion auto-collapse>
-  <quiet-accordion-item label="First section" expanded>
-    <p>When auto-collapse is enabled, opening another section will automatically close this one.</p>
+  <quiet-accordion-item label="Kitten care" expanded>
+    <p>When auto-collapse is enabled, opening another section will automatically close this one. Kittens need frequent feeding, socialization, and lots of love!</p>
   </quiet-accordion-item>
 
-  <quiet-accordion-item label="Second section">
-    <p>Click me to see the first section collapse automatically.</p>
+  <quiet-accordion-item label="Adult cat care">
+    <p>Click me to see the kitten section collapse automatically. Adult cats are more independent but still need daily attention and care.</p>
   </quiet-accordion-item>
 
-  <quiet-accordion-item label="Third section">
-    <p>Only one section can be open at a time with auto-collapse enabled.</p>
+  <quiet-accordion-item label="Senior cat care">
+    <p>Only one cat life stage can be discussed at a time with auto-collapse enabled. Senior cats deserve extra comfort and patience.</p>
   </quiet-accordion-item>
 </quiet-accordion>
 ```
 
-### Disabling items
+### Changing the icon position
 
-Use the `disabled` attribute to prevent users from expanding certain accordion items. This is useful for sections that require certain conditions to be met before they can be accessed.
+Set the `icon-position` to `start` to render the icon on the front of the header.
 
 ```html {.example}
-<quiet-accordion>
-  <quiet-accordion-item label="Available section">
-    <p>This section is interactive and can be expanded or collapsed.</p>
+<quiet-accordion icon-position="start">
+  <quiet-accordion-item label="Why do cats sleep so much?">
+    <p>Cats sleep 12-16 hours a day because they're natural predators who conserve energy for hunting (even if they're just hunting dust bunnies).</p>
   </quiet-accordion-item>
 
-  <quiet-accordion-item label="Disabled section" disabled>
-    <p>This content is not accessible because the item is disabled.</p>
-  </quiet-accordion-item>
-
-  <quiet-accordion-item label="Another available section">
-    <p>This section is also interactive.</p>
+  <quiet-accordion-item label="Do cats dream?">
+    <p>Yes! Cats experience REM sleep and likely dream about hunting, playing, or plotting world domination.</p>
   </quiet-accordion-item>
 </quiet-accordion>
 ```
 
 ### Customizing the icon
 
-The expand/collapse icon can be customized in several ways. You can replace it entirely, change its position, or show different icons for expanded and collapsed states.
+The expand/collapse icon can be customized by slotting in your own icon. If you don't want the default rotation, target the `icon` part and set the `rotate` property to a custom rotation angle.
 
 ```html {.example}
-<h4>Custom icon</h4>
 <quiet-accordion id="accordion__custom-icon">
-  <quiet-accordion-item label="Custom chevron icon">
+  <quiet-accordion-item label="Cat communication">
     <quiet-icon slot="icon" name="chevron-right"></quiet-icon>
-    <p>This accordion uses a different chevron icon.</p>
+    <p>Cats communicate through meowing, purring, chirping, and the infamous slow blink of love.</p>
   </quiet-accordion-item>
 
-  <quiet-accordion-item label="Custom arrow icon">
-    <quiet-icon slot="icon" name="arrow-down"></quiet-icon>
-    <p>This one uses an arrow instead of a chevron.</p>
-  </quiet-accordion-item>
-</quiet-accordion>
-
-<h4>Icon position</h4>
-<quiet-accordion icon-position="start">
-  <quiet-accordion-item label="Icon on the left">
-    <p>The icon appears before the label when icon-position is set to "start".</p>
-  </quiet-accordion-item>
-
-  <quiet-accordion-item label="Consistent positioning">
-    <p>All items in this accordion have their icons on the left.</p>
-  </quiet-accordion-item>
-</quiet-accordion>
-
-<h4>Plus and minus icons</h4>
-<quiet-accordion id="accordion__plus-minus">
-  <quiet-accordion-item label="Expandable section">
-    <quiet-icon slot="icon" name="plus" class="plus"></quiet-icon>
-    <quiet-icon slot="icon" name="minus" class="minus"></quiet-icon>
-    <p>This accordion shows a plus icon when collapsed and a minus icon when expanded.</p>
-  </quiet-accordion-item>
-
-  <quiet-accordion-item label="Another section">
-    <quiet-icon slot="icon" name="plus" class="plus"></quiet-icon>
-    <quiet-icon slot="icon" name="minus" class="minus"></quiet-icon>
-    <p>The icons switch based on the expanded state.</p>
+  <quiet-accordion-item label="Cat body language">
+    <quiet-icon slot="icon" name="chevron-right"></quiet-icon>
+    <p>A cat's tail, ears, and posture tell you everything about their mood - from happy to "I'm plotting your demise."</p>
   </quiet-accordion-item>
 </quiet-accordion>
 
 <style>
   #accordion__custom-icon {
-    quiet-icon[slot="icon"] {
-      transition: transform 200ms ease;
+    quiet-accordion-item::part(icon) {
+      rotate: 0deg;
     }
 
-    quiet-accordion-item[expanded] {
-      quiet-icon[name="chevron-right"] {
-        transform: rotate(90deg);
-      }
-
-      quiet-icon[name="arrow-down"] {
-        transform: rotate(180deg);
-      }
+    quiet-accordion-item:state(expanded)::part(icon) {
+      rotate: 90deg;
     }
   }
+</style>
+```
 
-  #accordion__plus-minus {
-    .minus {
-      display: none;
-    }
+A common way to style accordion icons is with plus and minus icons. For this, you can toggle which icon shows when the accordion item is expanded using the `:state(expanded)` CSS selector.
 
-    quiet-accordion-item[expanded] {
-      .plus {
-        display: none;
-      }
+```html {.example}
+<quiet-accordion id="accordion__plus-minus">
+  <quiet-accordion-item label="Cat breeds">
+    <quiet-icon slot="icon" name="plus" class="plus"></quiet-icon>
+    <quiet-icon slot="icon" name="minus" class="minus"></quiet-icon>
+    <p>From fluffy Maine Coons to hairless Sphynx cats, there are over 40 recognized cat breeds, each with their own personality traits.</p>
+  </quiet-accordion-item>
 
-      .minus {
-        display: block;
-      }
-    }
+  <quiet-accordion-item label="Cat colors and patterns">
+    <quiet-icon slot="icon" name="plus" class="plus"></quiet-icon>
+    <quiet-icon slot="icon" name="minus" class="minus"></quiet-icon>
+    <p>Cats come in amazing colors and patterns like tabby, calico, tuxedo, and tortoiseshell - nature's own art gallery!</p>
+  </quiet-accordion-item>
+</quiet-accordion>
+
+<style>
+  #accordion__plus-minus .minus {
+    display: none;
   }
 
-  quiet-accordion {
-    max-width: 40rem;
+  /* When expanded: hide plus and show minus */
+  #accordion__plus-minus quiet-accordion-item:state(expanded) .plus {
+    display: none;
   }
 
-  h4 {
-    margin-block-start: 2rem;
-    margin-block-end: 1rem;
+  #accordion__plus-minus quiet-accordion-item:state(expanded) .minus {
+    display: block;
   }
 </style>
 ```

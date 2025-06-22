@@ -1,6 +1,6 @@
 import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, query } from 'lit/decorators.js';
 import {
   QuietBeforeCollapseEvent,
   QuietBeforeExpandEvent,
@@ -23,7 +23,7 @@ import styles from './accordion.styles.js';
  *
  * @dependency quiet-accordion-item
  *
- * @slot - One or more `<quiet-accordion-items>` to place in the accordion.
+ * @slot - One or more `<quiet-accordion-item>` elements to place in the accordion.
  *
  * @event quiet-before-expand - Emitted when an accordion item is instructed to expand but before it is shown. Calling
  *  `event.preventDefault()` will prevent the item from expanding. `event.detail.item` will contain the expanding item.
@@ -46,6 +46,8 @@ import styles from './accordion.styles.js';
 export class QuietAccordion extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
+  @query('slot:not([name])') private defaultSlot: HTMLSlotElement;
+
   /** When set, selecting an accordion item will automatically collapse the others. */
   @property({ attribute: 'auto-collapse', type: Boolean }) autoCollapse = false;
 
@@ -55,14 +57,6 @@ export class QuietAccordion extends QuietElement {
   /** Determines which side of the accordion item the expand/collapse icon shows. */
   @property({ attribute: 'icon-position', reflect: true }) iconPosition: 'start' | 'end' = 'end';
 
-  connectedCallback() {
-    super.connectedCallback();
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback();
-  }
-
   updated(changedProperties: PropertyValues<this>) {
     if (changedProperties.has('appearance') || changedProperties.has('iconPosition')) {
       this.syncItemProperties();
@@ -71,12 +65,9 @@ export class QuietAccordion extends QuietElement {
 
   /** Get accordion items from the default slot */
   private getItems(): QuietAccordionItem[] {
-    const slot = this.shadowRoot!.querySelector('slot') as HTMLSlotElement;
-    return slot
-      ? (slot
-          .assignedElements()
-          .filter(el => el.tagName.toLowerCase() === 'quiet-accordion-item') as QuietAccordionItem[])
-      : [];
+    return this.defaultSlot
+      .assignedElements()
+      .filter(el => el.tagName.toLowerCase() === 'quiet-accordion-item') as QuietAccordionItem[];
   }
 
   /** @internal Handles accordion item toggle requests from accordion items */
@@ -138,22 +129,14 @@ export class QuietAccordion extends QuietElement {
       item.appearance = this.appearance;
       item.iconPosition = this.iconPosition;
 
-      // Remove all position attributes first
-      item.removeAttribute('data-accordion-item-first');
-      item.removeAttribute('data-accordion-item-middle');
-      item.removeAttribute('data-accordion-item-last');
+      // Use toggleAttribute to conditionally set position attributes
+      const isFirst = index === 0;
+      const isLast = index === items.length - 1;
+      const isMiddle = items.length > 2 && !isFirst && !isLast;
 
-      // Add appropriate position attribute
-      if (items.length === 1) {
-        item.setAttribute('data-accordion-item-first', '');
-        item.setAttribute('data-accordion-item-last', '');
-      } else if (index === 0) {
-        item.setAttribute('data-accordion-item-first', '');
-      } else if (index === items.length - 1) {
-        item.setAttribute('data-accordion-item-last', '');
-      } else {
-        item.setAttribute('data-accordion-item-middle', '');
-      }
+      item.toggleAttribute('data-accordion-item-first', isFirst);
+      item.toggleAttribute('data-accordion-item-middle', isMiddle);
+      item.toggleAttribute('data-accordion-item-last', isLast);
     });
   }
 

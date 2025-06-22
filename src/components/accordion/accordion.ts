@@ -1,6 +1,12 @@
 import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import {
+  QuietBeforeCollapseEvent,
+  QuietBeforeExpandEvent,
+  QuietCollapseEvent,
+  QuietExpandEvent
+} from '../../events/expand-collapse.js';
 import hostStyles from '../../styles/host.styles.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import '../accordion-item/accordion-item.js';
@@ -17,7 +23,17 @@ import styles from './accordion.styles.js';
  *
  * @dependency quiet-accordion-item
  *
- * @slot - The default slot for accordion items.
+ * @slot - One or more `<quiet-accordion-items>` to place in the accordion.
+ *
+ * @event quiet-before-expand - Emitted when an accordion item is instructed to expand but before it is shown. Calling
+ *  `event.preventDefault()` will prevent the item from expanding. `event.detail.item` will contain the expanding item.
+ * @event quiet-expand - Emitted after an accordion item has been expanded. `event.detail.item` will contain the
+ *  expanded item.
+ * @event quiet-before-collapse - Emitted when an accordion item is instructed to collapse but before it is hidden.
+ *  Calling `event.preventDefault()` will prevent the item from collapsing. `event.detail.item` will contain the
+ *  collapsing item.
+ * @event quiet-collapse - Emitted after an accordion item has been collapsed. `event.detail.item` will contain the
+ *  collapsed item.
  *
  * @cssproperty [--duration=200ms] - The expand and collapse duration.
  * @cssproperty [--easing=ease] - The expand and collapse easing.
@@ -41,12 +57,10 @@ export class QuietAccordion extends QuietElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.addEventListener('quiet-accordion-item-toggle', this.handleItemToggle);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    this.removeEventListener('quiet-accordion-item-toggle', this.handleItemToggle);
   }
 
   updated(changedProperties: PropertyValues<this>) {
@@ -65,26 +79,52 @@ export class QuietAccordion extends QuietElement {
       : [];
   }
 
-  /** Handle accordion item toggle events */
-  private handleItemToggle = (event: Event) => {
-    const customEvent = event as CustomEvent<{ expanded: boolean }>;
-    const item = event.target as QuietAccordionItem;
-    const items = this.getItems();
-    const index = items.indexOf(item);
+  /** Handle accordion item toggle requests from accordion items */
+  handleItemToggle(item: QuietAccordionItem): boolean {
+    const targetExpanded = !item.expanded;
 
-    if (index === -1) return;
+    if (targetExpanded) {
+      // Expanding
+      const beforeExpandEvent = new QuietBeforeExpandEvent(item);
+      this.dispatchEvent(beforeExpandEvent);
 
-    if (customEvent.detail.expanded) {
-      // If auto-collapse is enabled, collapse other items
+      if (beforeExpandEvent.defaultPrevented) {
+        return false;
+      }
+
+      // If auto-collapse is enabled, collapse other items first
       if (this.autoCollapse) {
-        items.forEach((otherItem, otherIndex) => {
-          if (otherIndex !== index && otherItem.expanded) {
-            otherItem.expanded = false;
+        const items = this.getItems();
+        items.forEach(otherItem => {
+          if (otherItem !== item && otherItem.expanded) {
+            const beforeCollapseEvent = new QuietBeforeCollapseEvent(otherItem);
+            this.dispatchEvent(beforeCollapseEvent);
+
+            if (!beforeCollapseEvent.defaultPrevented) {
+              otherItem.expanded = false;
+              this.dispatchEvent(new QuietCollapseEvent(otherItem));
+            }
           }
         });
       }
+
+      item.expanded = true;
+      this.dispatchEvent(new QuietExpandEvent(item));
+      return true;
+    } else {
+      // Collapsing
+      const beforeCollapseEvent = new QuietBeforeCollapseEvent(item);
+      this.dispatchEvent(beforeCollapseEvent);
+
+      if (beforeCollapseEvent.defaultPrevented) {
+        return false;
+      }
+
+      item.expanded = false;
+      this.dispatchEvent(new QuietCollapseEvent(item));
+      return true;
     }
-  };
+  }
 
   private handleSlotChange() {
     this.syncItemProperties();

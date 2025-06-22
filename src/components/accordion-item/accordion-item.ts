@@ -5,6 +5,7 @@ import { classMap } from 'lit/directives/class-map.js';
 import hostStyles from '../../styles/host.styles.js';
 import { parseCssDuration } from '../../utilities/animate.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
+import type { QuietAccordion } from '../accordion/accordion.js';
 import '../icon/icon.js';
 import styles from './accordion-item.styles.js';
 
@@ -19,7 +20,7 @@ import styles from './accordion-item.styles.js';
  * @dependency quiet-icon
  *
  * @slot - The content to show when expanded.
- * @slot icon - The icon to show when expanded and collapsed.
+ * @slot icon - The expand/collapse icon.
  * @slot label - The accordion item's label. For plain-text labels, you can use the `label` attribute instead.
  *
  * @csspart header - The accordion item's header that contains the label and icon.
@@ -75,16 +76,10 @@ export class QuietAccordionItem extends QuietElement {
   private handleHeaderClick() {
     if (this.disabled) return;
 
-    this.expanded = !this.expanded;
-
-    // Dispatch custom event for accordion to handle
-    this.dispatchEvent(
-      new CustomEvent('quiet-accordion-item-toggle', {
-        bubbles: true,
-        composed: true,
-        detail: { expanded: this.expanded }
-      })
-    );
+    const accordion = this.closest('quiet-accordion') as QuietAccordion;
+    if (accordion) {
+      accordion.handleItemToggle(this);
+    }
   }
 
   /** Handle keyboard navigation on the header */

@@ -5,7 +5,6 @@ import { classMap } from 'lit/directives/class-map.js';
 import hostStyles from '../../styles/host.styles.js';
 import { parseCssDuration } from '../../utilities/animate.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
-import type { QuietAccordion } from '../accordion/accordion.js';
 import '../icon/icon.js';
 import styles from './accordion-item.styles.js';
 
@@ -75,24 +74,6 @@ export class QuietAccordionItem extends QuietElement {
       if (changedProperties.get('expanded') !== undefined) {
         this.animateBody();
       }
-    }
-  }
-
-  /** Handle header click to toggle expansion */
-  private handleHeaderClick() {
-    if (this.disabled) return;
-
-    const accordion = this.closest('quiet-accordion') as QuietAccordion;
-    if (accordion) {
-      accordion.handleItemToggle(this);
-    }
-  }
-
-  /** Handle keyboard navigation on the header */
-  private handleHeaderKeyDown(event: KeyboardEvent) {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
-      this.handleHeaderClick();
     }
   }
 
@@ -187,8 +168,6 @@ export class QuietAccordionItem extends QuietElement {
         aria-controls="body"
         aria-expanded=${this.expanded ? 'true' : 'false'}
         aria-disabled=${this.disabled ? 'true' : 'false'}
-        @click=${this.handleHeaderClick}
-        @keydown=${this.handleHeaderKeyDown}
       >
         <div id="label" part="label">
           <slot name="label">${this.label}</slot>

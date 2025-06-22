@@ -57,6 +57,18 @@ export class QuietAccordion extends QuietElement {
   /** Determines which side of the accordion item the expand/collapse icon shows. */
   @property({ attribute: 'icon-position', reflect: true }) iconPosition: 'start' | 'end' = 'end';
 
+  connectedCallback() {
+    super.connectedCallback();
+    this.addEventListener('click', this.handleClick);
+    this.addEventListener('keydown', this.handleKeyDown);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.removeEventListener('click', this.handleClick);
+    this.removeEventListener('keydown', this.handleKeyDown);
+  }
+
   updated(changedProperties: PropertyValues<this>) {
     if (changedProperties.has('appearance') || changedProperties.has('iconPosition')) {
       this.syncItemProperties();
@@ -70,7 +82,57 @@ export class QuietAccordion extends QuietElement {
       .filter(el => el.tagName.toLowerCase() === 'quiet-accordion-item') as QuietAccordionItem[];
   }
 
-  /** @internal Handles accordion item toggle requests from accordion items */
+  /** Get enabled (non-disabled) accordion items */
+  private getEnabledItems(): QuietAccordionItem[] {
+    return this.getItems().filter(item => !item.disabled);
+  }
+
+  /** Focus the next enabled accordion item */
+  private focusNextItem(currentItem: QuietAccordionItem) {
+    const enabledItems = this.getEnabledItems();
+    const currentIndex = enabledItems.indexOf(currentItem);
+    if (currentIndex < enabledItems.length - 1) {
+      enabledItems[currentIndex + 1].focus();
+    }
+  }
+
+  /** Focus the previous enabled accordion item */
+  private focusPreviousItem(currentItem: QuietAccordionItem) {
+    const enabledItems = this.getEnabledItems();
+    const currentIndex = enabledItems.indexOf(currentItem);
+    if (currentIndex > 0) {
+      enabledItems[currentIndex - 1].focus();
+    }
+  }
+
+  /** Focus the first enabled accordion item */
+  private focusFirstItem() {
+    const enabledItems = this.getEnabledItems();
+    if (enabledItems.length > 0) {
+      enabledItems[0].focus();
+    }
+  }
+
+  /** Focus the last enabled accordion item */
+  private focusLastItem() {
+    const enabledItems = this.getEnabledItems();
+    if (enabledItems.length > 0) {
+      enabledItems[enabledItems.length - 1].focus();
+    }
+  }
+
+  private handleClick = (event: MouseEvent) => {
+    const path = event.composedPath();
+    const item = event.target as QuietAccordionItem;
+    if (item.localName === 'quiet-accordion-item' && !item.disabled) {
+      const header = item.header;
+      if (header && path.some(el => el === header)) {
+        this.handleItemToggle(item);
+      }
+    }
+  };
+
+  /** @internal Handles accordion item toggle requests */
   public handleItemToggle(item: QuietAccordionItem): boolean {
     const targetExpanded = !item.expanded;
 
@@ -116,6 +178,41 @@ export class QuietAccordion extends QuietElement {
       return true;
     }
   }
+
+  private handleKeyDown = (event: KeyboardEvent) => {
+    const path = event.composedPath();
+    const target = path[0] as HTMLElement;
+
+    if (target.getAttribute('part') === 'header') {
+      const shadowRoot = target.getRootNode() as ShadowRoot;
+      const item = shadowRoot.host as QuietAccordionItem;
+      if (item && !item.disabled) {
+        switch (event.key) {
+          case 'Enter':
+          case ' ':
+            event.preventDefault();
+            this.handleItemToggle(item);
+            break;
+          case 'ArrowUp':
+            event.preventDefault();
+            this.focusPreviousItem(item);
+            break;
+          case 'ArrowDown':
+            event.preventDefault();
+            this.focusNextItem(item);
+            break;
+          case 'Home':
+            event.preventDefault();
+            this.focusFirstItem();
+            break;
+          case 'End':
+            event.preventDefault();
+            this.focusLastItem();
+            break;
+        }
+      }
+    }
+  };
 
   private handleSlotChange() {
     this.syncItemProperties();

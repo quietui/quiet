@@ -29,10 +29,10 @@ import styles from './accordion-item.styles.js';
  * @csspart body - The accordion item's body that contains the content.
  * @csspart content - The content wrapper inside the body.
  *
- * @cssproperty [--border-color=inherit)] - The accordion item's border color.
+ * @cssproperty [--border-color=inherit] - The accordion item's border color.
  * @cssproperty [--border-width=inherit] - The accordion item's border width.
  * @cssproperty [--border-style=inherit] - The accordion item's border style.
- * @cssproperty [--border-radius=inherit)] - The border radius to apply to rounded edges.
+ * @cssproperty [--border-radius=inherit] - The border radius to apply to rounded edges.
  *
  * @cssstate disabled - Applies when the accordion item is disabled.
  * @cssstate expanded - Applies when the accordion item is expanded.

@@ -1,6 +1,6 @@
 import type { CSSResultGroup } from 'lit';
 import { html } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import styles from './carousel-item.styles.js';
 
@@ -19,6 +19,9 @@ import styles from './carousel-item.styles.js';
 @customElement('quiet-carousel-item')
 export class QuietCarouselItem extends QuietElement {
   static styles: CSSResultGroup = styles;
+
+  /** An optional name for the carousel item so you can reference it with the `active-name` attribute. */
+  @property() name = '';
 
   firstUpdated() {
     this.setAttribute('role', 'group');

@@ -63,7 +63,7 @@ export class QuietCarousel extends QuietElement {
   /** A custom label for the carousel. This won't be visible, but it will be read to assistive devices. */
   @property({ type: String }) label = '';
 
-  /** The current active item index. */
+  /** The current active item's index. */
   @property({ attribute: 'active-index', type: Number, reflect: true }) activeIndex = 0;
 
   /** The current active item's name. */

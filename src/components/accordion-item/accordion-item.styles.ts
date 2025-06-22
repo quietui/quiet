@@ -85,6 +85,9 @@ export default css`
   #body {
     height: 0;
     overflow: hidden;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    will-change: height;
   }
 
   :host(:state(expanded)) #body {

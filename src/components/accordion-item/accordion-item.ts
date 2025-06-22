@@ -29,15 +29,6 @@ import styles from './accordion-item.styles.js';
  * @csspart body - The accordion item's body that contains the content.
  * @csspart content - The content wrapper inside the body.
  *
- * @cssproperty [--border-color=inherit] - The accordion item's border color. This property inherits from the containing
- *  accordion by default.
- * @cssproperty [--border-width=inherit] - The accordion item's border width. This property inherits from the containing
- *  accordion by default.
- * @cssproperty [--border-style=inherit] - The accordion item's border style. This property inherits from the containing
- *  accordion by default.
- * @cssproperty [--border-radius=inherit] - The border radius to apply to rounded edges. This property inherits from the
- *  containing accordion by default.
- *
  * @cssstate disabled - Applies when the accordion item is disabled.
  * @cssstate expanded - Applies when the accordion item is expanded.
  */

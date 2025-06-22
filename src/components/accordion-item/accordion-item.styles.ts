@@ -2,8 +2,9 @@ import { css } from 'lit';
 
 export default css`
   :host {
-    --duration: 200ms;
-    --easing: ease;
+    /* Private, inherited from <quiet-accordion> */
+    --duration: inherit;
+    --easing: inherit;
     --border-color: inherit;
     --border-style: inherit;
     --border-width: inherit;

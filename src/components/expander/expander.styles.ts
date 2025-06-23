@@ -3,7 +3,7 @@ import { css } from 'lit';
 export default css`
   :host {
     --preview-height: 3lh;
-    --duration: 300ms;
+    --duration: 200ms;
     --easing: ease;
     --shadow-color: var(--quiet-background-color);
     --shadow-size: 1lh;

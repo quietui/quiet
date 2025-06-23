@@ -159,6 +159,12 @@ export class QuietAccordion extends QuietElement {
             this.dispatchEvent(beforeCollapseEvent);
 
             if (!beforeCollapseEvent.defaultPrevented) {
+              // Ensure the body has an explicit height before collapsing
+              if (otherItem.body && (!otherItem.body.style.height || otherItem.body.style.height === 'auto')) {
+                otherItem.body.style.height = `${otherItem.body.scrollHeight}px`;
+                otherItem.body.offsetHeight; // Force reflow
+              }
+
               otherItem.expanded = false;
               this.dispatchEvent(new QuietCollapseEvent(otherItem));
             }

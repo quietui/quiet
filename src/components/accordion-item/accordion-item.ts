@@ -66,9 +66,6 @@ export class QuietAccordionItem extends QuietElement {
     if (this.expanded) {
       this.body.style.height = 'auto';
       this.body.style.overflow = 'visible';
-    } else {
-      this.body.style.height = '0px';
-      this.body.style.overflow = 'hidden';
     }
   }
 
@@ -113,11 +110,7 @@ export class QuietAccordionItem extends QuietElement {
       const currentHeight = this.body.getBoundingClientRect().height;
       this.body.style.height = `${currentHeight}px`;
       this.body.style.overflow = 'hidden';
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          this.body.style.height = '0px';
-        });
-      });
+      requestAnimationFrame(() => (this.body.style.height = '0px'));
     }
   }
 

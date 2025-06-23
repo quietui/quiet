@@ -3,7 +3,6 @@ import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import hostStyles from '../../styles/host.styles.js';
-import { parseCssDuration } from '../../utilities/animate.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import '../icon/icon.js';
 import styles from './accordion-item.styles.js';
@@ -77,80 +76,29 @@ export class QuietAccordionItem extends QuietElement {
     }
   }
 
-  /** Animate the expansion/collapse of the body */
+  /** Animate the expand/collapse of the body */
   private async animateBody() {
     if (!this.body || !this.content) return;
-
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const computedStyle = getComputedStyle(this);
-    const duration = prefersReducedMotion ? 0 : parseCssDuration(computedStyle.getPropertyValue('--duration'));
-    const easing = computedStyle.getPropertyValue('--easing') || 'ease';
 
     if (this.expanded) {
       // Expanding
       const targetHeight = this.content.scrollHeight;
-
-      // Set initial state
-      this.body.style.height = '0';
-      this.body.style.overflow = 'hidden';
-
-      // Force reflow
-      this.body.offsetHeight;
-
-      // Transition to target height
-      this.body.style.transition = `height ${duration}ms ${easing}`;
       this.body.style.height = `${targetHeight}px`;
 
-      // Wait for transition to complete
-      await new Promise(resolve => {
-        const handleTransitionEnd = () => {
-          this.body.removeEventListener('transitionend', handleTransitionEnd);
-          resolve(undefined);
-        };
-
-        if (duration === 0) {
-          resolve(undefined);
-        } else {
-          this.body.addEventListener('transitionend', handleTransitionEnd);
-        }
-      });
-
-      // Remove inline styles after transition
-      this.body.style.removeProperty('height');
-      this.body.style.removeProperty('overflow');
-      this.body.style.removeProperty('transition');
+      // Remove height after transition completes
+      const handleTransitionEnd = () => {
+        this.body.removeEventListener('transitionend', handleTransitionEnd);
+        this.body.style.removeProperty('height');
+      };
+      this.body.addEventListener('transitionend', handleTransitionEnd);
     } else {
       // Collapsing
       const currentHeight = this.body.scrollHeight;
-
-      // Set explicit height to current height
       this.body.style.height = `${currentHeight}px`;
-      this.body.style.overflow = 'hidden';
 
-      // Force reflow
+      // Force reflow then collapse
       this.body.offsetHeight;
-
-      // Transition to 0
-      this.body.style.transition = `height ${duration}ms ${easing}`;
       this.body.style.height = '0';
-
-      // Wait for transition to complete
-      await new Promise(resolve => {
-        const handleTransitionEnd = () => {
-          this.body.removeEventListener('transitionend', handleTransitionEnd);
-          resolve(undefined);
-        };
-
-        if (duration === 0) {
-          resolve(undefined);
-        } else {
-          this.body.addEventListener('transitionend', handleTransitionEnd);
-        }
-      });
-
-      // Keep height at 0 but remove other styles
-      this.body.style.removeProperty('overflow');
-      this.body.style.removeProperty('transition');
     }
   }
 

@@ -87,6 +87,7 @@ export default css`
     overflow: hidden;
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
+    transition: height var(--duration) var(--easing);
     will-change: height;
   }
 

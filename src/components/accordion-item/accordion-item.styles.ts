@@ -83,16 +83,15 @@ export default css`
 
   /* Body */
   #body {
-    height: 0;
-    overflow: hidden;
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    transition: height var(--duration) var(--easing);
     will-change: height;
   }
 
+  :host(:not(:state(expanded))) #body {
+    height: 0;
+    overflow: hidden;
+  }
+
   :host(:state(expanded)) #body {
-    height: auto;
     overflow: visible;
   }
 

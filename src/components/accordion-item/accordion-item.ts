@@ -3,6 +3,7 @@ import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import hostStyles from '../../styles/host.styles.js';
+import { parseCssDuration } from '../../utilities/animate.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import '../icon/icon.js';
 import styles from './accordion-item.styles.js';
@@ -62,13 +63,6 @@ export class QuietAccordionItem extends QuietElement {
     this.header.blur();
   }
 
-  firstUpdated() {
-    if (this.expanded) {
-      this.body.style.height = 'auto';
-      this.body.style.overflow = 'visible';
-    }
-  }
-
   updated(changedProperties: PropertyValues<this>) {
     if (changedProperties.has('disabled')) {
       this.customStates.set('disabled', this.disabled);
@@ -76,38 +70,50 @@ export class QuietAccordionItem extends QuietElement {
 
     if (changedProperties.has('expanded')) {
       this.customStates.set('expanded', this.expanded);
-
-      if (changedProperties.get('expanded') !== undefined) {
-        this.animateBody();
-      }
     }
   }
 
-  /** Animate the expand/collapse of the body */
-  private async animateBody() {
-    if (this.expanded) {
-      // Expanding
-      this.body.style.height = '0px';
-      this.body.style.overflow = 'hidden';
-      requestAnimationFrame(() => {
-        this.body.style.height = `${this.body.scrollHeight}px`;
-        const handleTransitionEnd = (event: TransitionEvent) => {
-          if (event.propertyName !== 'height') return;
-          this.body.removeEventListener('transitionend', handleTransitionEnd);
-          if (this.expanded) {
-            this.body.style.height = 'auto';
-            this.body.style.overflow = 'visible';
-          }
-        };
-        this.body.addEventListener('transitionend', handleTransitionEnd);
-      });
-    } else {
-      // Collapsing
-      const currentHeight = this.body.getBoundingClientRect().height;
-      this.body.style.height = `${currentHeight}px`;
-      this.body.style.overflow = 'hidden';
-      requestAnimationFrame(() => (this.body.style.height = '0px'));
+  /** Animate the expansion of the body - called by the accordion controller */
+  public async animateExpand() {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const computedStyle = getComputedStyle(this);
+    const duration = prefersReducedMotion ? 0 : parseCssDuration(computedStyle.getPropertyValue('--duration'));
+    const easing = computedStyle.getPropertyValue('--easing');
+
+    // Expanding animation
+    this.body.style.height = '0px';
+    this.body.style.overflow = 'hidden';
+
+    const targetHeight = this.content.scrollHeight;
+
+    await this.body.animate([{ height: '0px' }, { height: `${targetHeight}px` }], { duration, easing }).finished;
+
+    this.body.style.removeProperty('height');
+    this.body.style.removeProperty('overflow');
+  }
+
+  /** Animate the collapse of the body - called by the accordion controller */
+  public async animateCollapse() {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const computedStyle = getComputedStyle(this);
+    const duration = prefersReducedMotion ? 0 : parseCssDuration(computedStyle.getPropertyValue('--duration'));
+    const easing = computedStyle.getPropertyValue('--easing');
+
+    // Ensure the body has an explicit height before collapsing
+    if (this.body && (!this.body.style.height || this.body.style.height === 'auto')) {
+      this.body.style.height = `${this.body.scrollHeight}px`;
+      this.body.offsetHeight; // Force reflow
     }
+
+    const currentHeight = this.body.scrollHeight;
+
+    this.body.style.height = `${currentHeight}px`;
+    this.body.style.overflow = 'hidden';
+
+    await this.body.animate([{ height: `${currentHeight}px` }, { height: '0px' }], { duration, easing }).finished;
+
+    this.body.style.removeProperty('height');
+    this.body.style.removeProperty('overflow');
   }
 
   render() {

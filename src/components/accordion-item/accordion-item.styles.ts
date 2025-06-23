@@ -87,13 +87,16 @@ export default css`
     overflow: hidden;
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
-    transition: height var(--duration) var(--easing);
+    opacity: 0;
+    transition:
+      height var(--duration) var(--easing),
+      opacity var(--duration) var(--easing);
     will-change: height;
   }
 
   :host(:state(expanded)) #body {
     height: auto;
-    overflow: visible;
+    opacity: 1;
   }
 
   /* Content */
@@ -140,27 +143,5 @@ export default css`
 
   :host([appearance='separated']) #header {
     border-radius: inherit;
-  }
-
-  /* Position-based styling */
-  :host([data-accordion-item-first]) {
-    /* Styles for first item */
-  }
-
-  :host([data-accordion-item-middle]) {
-    /* Styles for middle items */
-  }
-
-  :host([data-accordion-item-last]) {
-    /* Styles for last item */
-  }
-
-  /* Single item (both first and last) */
-  :host([data-accordion-item-first][data-accordion-item-last]) {
-    /* Styles for single item */
-  }
-
-  /* Appearance: unstyled */
-  :host([appearance='unstyed']) {
   }
 `;

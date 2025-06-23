@@ -82,23 +82,41 @@ export class QuietAccordionItem extends QuietElement {
 
     if (this.expanded) {
       // Expanding
-      const targetHeight = this.content.scrollHeight;
+
+      // Measure the target height
+      this.body.style.height = 'auto';
+      const targetHeight = this.body.scrollHeight;
+
+      // Reset to 0 and force reflow
+      this.body.style.height = '0px';
+      this.body.offsetHeight;
+
+      // Animate to target height
       this.body.style.height = `${targetHeight}px`;
 
-      // Remove height after transition completes
-      const handleTransitionEnd = () => {
+      // After transition, set to auto for dynamic content
+      const handleTransitionEnd = (e: TransitionEvent) => {
+        if (e.propertyName !== 'height') return;
         this.body.removeEventListener('transitionend', handleTransitionEnd);
-        this.body.style.removeProperty('height');
+        if (this.expanded) {
+          this.body.style.height = 'auto';
+          this.body.style.overflow = 'visible';
+        }
       };
       this.body.addEventListener('transitionend', handleTransitionEnd);
     } else {
       // Collapsing
-      const currentHeight = this.body.scrollHeight;
-      this.body.style.height = `${currentHeight}px`;
 
-      // Force reflow then collapse
-      this.body.offsetHeight;
-      this.body.style.height = '0';
+      // If height is auto, we need to set it to a fixed value first
+      if (this.body.style.height === 'auto' || !this.body.style.height) {
+        const currentHeight = this.body.scrollHeight;
+        this.body.style.height = `${currentHeight}px`;
+        this.body.offsetHeight; // Force reflow
+      }
+
+      // Set overflow hidden and animate to 0
+      this.body.style.overflow = 'hidden';
+      this.body.style.height = '0px';
     }
   }
 

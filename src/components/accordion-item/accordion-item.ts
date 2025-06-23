@@ -85,16 +85,12 @@ export class QuietAccordionItem extends QuietElement {
 
   /** Animate the expand/collapse of the body */
   private async animateBody() {
-    const body = this.shadowRoot.querySelector('#body');
-    const content = this.shadowRoot.querySelector('#content');
-    if (!body || !content) return;
-
     if (this.expanded) {
       // Expanding
       this.body.style.height = '0px';
       this.body.style.overflow = 'hidden';
       requestAnimationFrame(() => {
-        this.body.style.height = `${body.scrollHeight}px`;
+        this.body.style.height = `${this.body.scrollHeight}px`;
         const handleTransitionEnd = (event: TransitionEvent) => {
           if (event.propertyName !== 'height') return;
           this.body.removeEventListener('transitionend', handleTransitionEnd);

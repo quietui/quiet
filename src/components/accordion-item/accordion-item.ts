@@ -62,6 +62,16 @@ export class QuietAccordionItem extends QuietElement {
     this.header.blur();
   }
 
+  firstUpdated() {
+    if (this.expanded) {
+      this.body.style.height = 'auto';
+      this.body.style.overflow = 'visible';
+    } else {
+      this.body.style.height = '0px';
+      this.body.style.overflow = 'hidden';
+    }
+  }
+
   updated(changedProperties: PropertyValues<this>) {
     if (changedProperties.has('disabled')) {
       this.customStates.set('disabled', this.disabled);
@@ -78,45 +88,36 @@ export class QuietAccordionItem extends QuietElement {
 
   /** Animate the expand/collapse of the body */
   private async animateBody() {
-    if (!this.body || !this.content) return;
+    const body = this.shadowRoot.querySelector('#body');
+    const content = this.shadowRoot.querySelector('#content');
+    if (!body || !content) return;
 
     if (this.expanded) {
       // Expanding
-
-      // Measure the target height
-      this.body.style.height = 'auto';
-      const targetHeight = this.body.scrollHeight;
-
-      // Reset to 0 and force reflow
       this.body.style.height = '0px';
-      this.body.offsetHeight;
-
-      // Animate to target height
-      this.body.style.height = `${targetHeight}px`;
-
-      // After transition, set to auto for dynamic content
-      const handleTransitionEnd = (e: TransitionEvent) => {
-        if (e.propertyName !== 'height') return;
-        this.body.removeEventListener('transitionend', handleTransitionEnd);
-        if (this.expanded) {
-          this.body.style.height = 'auto';
-          this.body.style.overflow = 'visible';
-        }
-      };
-      this.body.addEventListener('transitionend', handleTransitionEnd);
+      this.body.style.overflow = 'hidden';
+      requestAnimationFrame(() => {
+        this.body.style.height = `${body.scrollHeight}px`;
+        const handleTransitionEnd = (event: TransitionEvent) => {
+          if (event.propertyName !== 'height') return;
+          this.body.removeEventListener('transitionend', handleTransitionEnd);
+          if (this.expanded) {
+            this.body.style.height = 'auto';
+            this.body.style.overflow = 'visible';
+          }
+        };
+        this.body.addEventListener('transitionend', handleTransitionEnd);
+      });
     } else {
       // Collapsing
-
-      // If height is auto, we need to set it to a fixed value first
-      if (this.body.style.height === 'auto' || !this.body.style.height) {
-        const currentHeight = this.body.scrollHeight;
-        this.body.style.height = `${currentHeight}px`;
-        this.body.offsetHeight; // Force reflow
-      }
-
-      // Set overflow hidden and animate to 0
+      const currentHeight = this.body.getBoundingClientRect().height;
+      this.body.style.height = `${currentHeight}px`;
       this.body.style.overflow = 'hidden';
-      this.body.style.height = '0px';
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          this.body.style.height = '0px';
+        });
+      });
     }
   }
 

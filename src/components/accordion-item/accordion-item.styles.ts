@@ -87,16 +87,13 @@ export default css`
     overflow: hidden;
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
-    opacity: 0;
-    transition:
-      height var(--duration) var(--easing),
-      opacity var(--duration) var(--easing);
+    transition: height var(--duration) var(--easing);
     will-change: height;
   }
 
   :host(:state(expanded)) #body {
     height: auto;
-    opacity: 1;
+    overflow: visible;
   }
 
   /* Content */

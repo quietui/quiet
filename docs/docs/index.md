@@ -35,21 +35,7 @@ Now you can use [any component](/components) in your HTML!
 </quiet-button>
 ```
 
-### Preloading components
-
-You can tell the autoloader to preload components that aren't initially on the page by adding the `data-quiet-preload` attribute anywhere in the document. Tags must be separated by a space, as shown below. A good practice is to add it to the `<html>` element.
-
-```html
-<!-- 
-  This will load <quiet-button> and <quiet-tooltip> 
-  even if they're not on the page at first
--->
-<html data-quiet-preload="quiet-button quiet-tooltip">
-  ...
-</html>
-```
-
-### Autoloader events
+### Discovery complete
 
 As a convenience, Quiet's autoloader emits an event called `quiet-discovery-complete` when all elements on the page have been "discovered" and registered. This is useful if you want to show, for example, a loading indicator until all components are registered.
 
@@ -92,6 +78,20 @@ preventTurboFouce();
 ```
 
 :::
+
+### Preloading components
+
+You can tell the autoloader to preload components that aren't initially on the page by adding the `data-quiet-preload` attribute anywhere in the document. Tags must be separated by a space, as shown below. A good practice is to add it to the `<html>` element.
+
+```html
+<!-- 
+  This will load <quiet-button> and <quiet-tooltip> 
+  even if they're not on the page at first
+-->
+<html data-quiet-preload="quiet-button quiet-tooltip">
+  ...
+</html>
+```
 
 ## Manually importing <quiet-badge variant="destructive" data-no-outline data-no-anchor>Advanced</quiet-badge>
 

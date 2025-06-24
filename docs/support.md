@@ -70,14 +70,62 @@ Quiet can be used for free under the MIT license. Unfortunately, I can't help ev
 </p>
 
 <ul class="features-grid" aria-label="Features">
-  <li><quiet-icon name="send" style="color: #58acf2;"></quiet-icon><br>Support from the maintainer</li>
-  <li><quiet-icon name="bug" style="color: #e98d61;"></quiet-icon><br>Priority bug fixes</li>
-  <li><quiet-icon name="circle-dashed-check" style="color: #e886a7;"></quiet-icon><br>Sponsors badge on GitHub</li>
-  <li><quiet-icon name="key" style="color: #c5a231;"></quiet-icon><br>Access to sponsors-only forums</li>
-  <li><quiet-icon name="plug" style="color: #b394f4;"></quiet-icon><br>Works with all frameworks</li>
-  <li><quiet-icon name="school" style="color: #7db664;"></quiet-icon><br>Learn once, use forever</li>
-  <li><quiet-icon name="lock-heart" style="color: #e886a7;"></quiet-icon><br>No ads, no tracking, no nonsense</li>
-  <li><quiet-icon name="tools" style="color: #2ab6d1;"></quiet-icon><br>Actively updated and maintained</li>
+  <li>
+    <a class="stretch" href="https://github.com/sponsors/quietui" target="_blank" data-no-external-icon>
+      <quiet-icon name="send" style="color: #58acf2;"></quiet-icon><br>
+      Direct access to the maintainer<br>
+      <small>Get unstuck fast with personalized help</small>
+    </a>
+  </li>
+  <li>
+    <a class="stretch" href="https://github.com/sponsors/quietui" target="_blank" data-no-external-icon>
+      <quiet-icon name="bug" style="color: #e98d61;"></quiet-icon><br>
+      Priority bug fixes<br>
+      <small>Your issues get fixed quickly</small>
+    </a>
+  </li>
+  <li>
+    <a class="stretch" href="https://github.com/sponsors/quietui" target="_blank" data-no-external-icon>
+      <quiet-icon name="circle-dashed-check" style="color: #e886a7;"></quiet-icon><br>
+      Sponsors badge on GitHub<br>
+      <small>Proudly show your support</small>
+    </a>
+  </li>
+  <li>
+    <a class="stretch" href="https://github.com/sponsors/quietui" target="_blank" data-no-external-icon>
+      <quiet-icon name="key" style="color: #c5a231;"></quiet-icon><br>
+      Private sponsors-only forums<br>
+      <small>Join an exclusive community of supporters</small>
+    </a>
+  </li>
+  <li>
+    <a class="stretch" href="https://github.com/sponsors/quietui" target="_blank" data-no-external-icon>
+      <quiet-icon name="plug" style="color: #b394f4;"></quiet-icon><br>
+      Works with every framework<br>
+      <small>Take it with you no matter the stack</small>
+    </a>
+  </li>
+  <li>
+    <a class="stretch" href="https://github.com/sponsors/quietui" target="_blank" data-no-external-icon>
+      <quiet-icon name="school" style="color: #7db664;"></quiet-icon><br>
+      Learn once, use everywhere<br>
+      <small>Platform APIs help ensure longevity</small>
+    </a>
+  </li>
+  <li>
+    <a class="stretch" href="https://github.com/sponsors/quietui" target="_blank" data-no-external-icon>
+      <quiet-icon name="lock-heart" style="color: #e886a7;"></quiet-icon><br>
+      Zero tracking, zero ads<br>
+      <small>Clean, focused development without distractions</small>
+    </a>
+  </li>
+  <li>
+    <a class="stretch" href="https://github.com/sponsors/quietui" target="_blank" data-no-external-icon>
+      <quiet-icon name="tools" style="color: #2ab6d1;"></quiet-icon><br>
+      Actively maintained &amp; evolving<br>
+      <small>Regular updates keep you on the cutting edge</small>
+    </a>
+  </li>
 </ul>
 
 <img class="whiskers-center" src="/assets/images/whiskers/with-heart.svg" alt="Whiskers the mouse holding a giant heart">

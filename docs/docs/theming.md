@@ -596,17 +596,17 @@ These tokens control borders and edges.
 
 <quiet-scroller>
 
-| Custom property | Description |
-| --------------- | ----------- |
-| `--quiet-border-style` | The default border style for most elements. |
-| `--quiet-border-width` | The default border width for most elements. |
-| `--quiet-border-radius-xs` | Extra small border radii. |
-| `--quiet-border-radius-sm` | Small border radii. |
-| `--quiet-border-radius-md` | Medium border radii. |
-| `--quiet-border-radius-lg` | Large border radii. |
-| `--quiet-border-radius-xl` | Extra large border radii. |
-| `--quiet-border-radius-pill` | Pill-shaped borders. |
-| `--quiet-border-radius-circle` | Circular borders. |
+| Custom property | Description |         |
+| --------------- | ----------- | ------- |
+| `--quiet-border-style` | The default border style for most elements. | |
+| `--quiet-border-width` | The default border width for most elements. | |
+| `--quiet-border-radius-xs` | Extra small border radii. | <div class="border" style="border: var(--quiet-border-width) solid var(--quiet-neutral-stroke-soft); border-radius: var(--quiet-border-radius-xs);">xs</div> |
+| `--quiet-border-radius-sm` | Small border radii. | <div class="border" style="border: var(--quiet-border-width) solid var(--quiet-neutral-stroke-soft); border-radius: var(--quiet-border-radius-sm);">sm</div> |
+| `--quiet-border-radius-md` | Medium border radii. | <div class="border" style="border: var(--quiet-border-width) solid var(--quiet-neutral-stroke-soft); border-radius: var(--quiet-border-radius-md);">md</div> |
+| `--quiet-border-radius-lg` | Large border radii. | <div class="border" style="border: var(--quiet-border-width) solid var(--quiet-neutral-stroke-soft); border-radius: var(--quiet-border-radius-lg);">lg</div> |
+| `--quiet-border-radius-xl` | Extra large border radii. | <div class="border" style="border: var(--quiet-border-width) solid var(--quiet-neutral-stroke-soft); border-radius: var(--quiet-border-radius-xl);">xl</div> |
+| `--quiet-border-radius-pill` | Pill-shaped borders. | <div class="border" style="border: var(--quiet-border-width) solid var(--quiet-neutral-stroke-soft); border-radius: var(--quiet-border-radius-pill);">pill</div> |
+| `--quiet-border-radius-circle` | Circular borders. | <div class="border" style="border: var(--quiet-border-width) solid var(--quiet-neutral-stroke-soft); border-radius: var(--quiet-border-radius-circle); width: 50px;"></div> |
 
 </quiet-scroller>
 
@@ -616,19 +616,19 @@ These tokens controls shadows and can be used with the `box-shadow` property.
 
 <quiet-scroller>
 
-| Custom property | Description |
-| --------------- | ----------- |
-| `--quiet-shadow-color` | The base color used in all shadows. |
-| `--quiet-shadow-softer` | The softest shadow, for subtle elevation effects. |
-| `--quiet-shadow-soft` | A gentle shadow, for light elevation effects. |
-| `--quiet-shadow-mid` | A moderate shadow, for clear elevation effects. |
-| `--quiet-shadow-loud` | A strong shadow, for prominent elevation effects. |
-| `--quiet-shadow-louder` | The strongest shadow, for maximum elevation effects. |
-| `--quiet-inset-shadow-softer` | The softest inset shadow, for subtle depression effects. |
-| `--quiet-inset-shadow-soft` | A gentle inset shadow, for light depression effects. |
-| `--quiet-inset-shadow-mid` | A moderate inset shadow, for clear depression effects. |
-| `--quiet-inset-shadow-loud` | A strong inset shadow, for prominent depression effects. |
-| `--quiet-inset-shadow-louder` | The strongest inset shadow, for maximum depression effects. |
+| Custom property | Description |         |
+| --------------- | ----------- | ------- |
+| `--quiet-shadow-color` | The base color used in all shadows. | |
+| `--quiet-shadow-softer` | The softest shadow, for subtle elevation effects. | <div class="shadow" style="box-shadow: var(--quiet-shadow-softer);">softer</div> |
+| `--quiet-shadow-soft` | A gentle shadow, for light elevation effects. | <div class="shadow" style="box-shadow: var(--quiet-shadow-soft);">soft</div> |
+| `--quiet-shadow-mid` | A moderate shadow, for clear elevation effects. | <div class="shadow" style="box-shadow: var(--quiet-shadow-mid);">mid</div> |
+| `--quiet-shadow-loud` | A strong shadow, for prominent elevation effects. | <div class="shadow" style="box-shadow: var(--quiet-shadow-loud);">loud</div> |
+| `--quiet-shadow-louder` | The strongest shadow, for maximum elevation effects. | <div class="shadow" style="box-shadow: var(--quiet-shadow-louder);">louder</div> |
+| `--quiet-inset-shadow-softer` | The softest inset shadow, for subtle depression effects. | <div class="shadow" style="box-shadow: var(--quiet-inset-shadow-softer);">softer</div> |
+| `--quiet-inset-shadow-soft` | A gentle inset shadow, for light depression effects. | <div class="shadow" style="box-shadow: var(--quiet-inset-shadow-soft);">soft</div> |
+| `--quiet-inset-shadow-mid` | A moderate inset shadow, for clear depression effects. | <div class="shadow" style="box-shadow: var(--quiet-inset-shadow-mid);">mid</div> |
+| `--quiet-inset-shadow-loud` | A strong inset shadow, for prominent depression effects. | <div class="shadow" style="box-shadow: var(--quiet-inset-shadow-loud);">loud</div> |
+| `--quiet-inset-shadow-louder` | The strongest inset shadow, for maximum depression effects. | <div class="shadow" style="box-shadow: var(--quiet-inset-shadow-louder);">louder</div> |
 
 </quiet-scroller>
 
@@ -796,6 +796,31 @@ This prevents type errors for users who have type checking enabled. It also main
 
   quiet-scroller td:nth-child(2) {
     min-width: 40ch;
+  }
+
+  /* Demo styles */
+  .border {
+    width: 100px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: #495057;
+    margin: 8px 0;
+  }
+
+  .shadow {
+    width: 100px;
+    height: 50px;
+    background: var(--quiet-background-color);
+    border-radius: var(--quiet-border-radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: #495057;
+    margin: 8px 0;
   }
 </style>
 

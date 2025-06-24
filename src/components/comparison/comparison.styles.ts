@@ -80,6 +80,7 @@ export default css`
     height: 100%;
     background-color: var(--quiet-silent);
     cursor: ew-resize;
+    touch-action: none;
 
     &::before {
       position: absolute;

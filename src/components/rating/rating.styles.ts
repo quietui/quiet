@@ -14,6 +14,7 @@ export default css`
     gap: 0.0625em;
     border-radius: var(--quiet-border-radius-md);
     cursor: pointer;
+    touch-action: none;
 
     &:focus {
       outline: none;

@@ -26,6 +26,8 @@ export default css`
   }
 
   #slider {
+    touch-action: none;
+
     /* Orientation */
     &.horizontal {
       margin-block-start: 0.5em;

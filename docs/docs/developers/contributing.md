@@ -267,6 +267,10 @@ In this case, `component` is replaced with the component's tag name minus its `q
 
 If the invoker is positioned within the controlling component, such as a `<button data-dialog="close">` inside of a `<quiet-dialog>`, the ID should be optional.
 
+### Draggable elements
+
+Draggable elements should generally use the `DraggableElement` class in `src/utilities/drag.ts`. In addition, the draggable elements must have `touch-action: none`, otherwise certain devices such as the Surface Pro won't behave as expected.
+
 ### Dispatching events
 
 Events must extend the `Event` object and start with `quiet-`. You can dispatch events using `this.dispatchEvent()`. Although the `CustomEvent` type is unused, event details must be made available to the user in `event.detail`. Take a look at existing events to see how to extend and provide details. Event declarations do include some boilerplate, but they enable strong typing and help keep usage consistent.

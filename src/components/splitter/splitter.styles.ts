@@ -31,6 +31,7 @@ export default css`
     outline: none; /* Remove default focus outline */
     background-color: var(--divider-color, var(--quiet-neutral-stroke-softer));
     cursor: ew-resize;
+    touch-action: none;
     transition:
       50ms background-color ease,
       50ms color ease;

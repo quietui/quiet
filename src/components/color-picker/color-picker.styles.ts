@@ -51,6 +51,7 @@ export default css`
     background-color: var(--color-slider-background);
     box-shadow: inset 0 0 0 0.0625rem color-mix(in oklab, black, transparent 90%);
     cursor: crosshair;
+    touch-action: none;
 
     &:dir(ltr) {
       background-image:

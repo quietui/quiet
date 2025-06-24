@@ -100,6 +100,7 @@ export default css`
     background-color: var(--quiet-primary-text-on-mid); /* always white, same as checkbox icons */
     color: black;
     cursor: grab;
+    touch-action: none;
     transition: left 0.3s ease-out;
 
     &.rtl {

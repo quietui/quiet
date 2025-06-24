@@ -115,6 +115,8 @@ When nested components export parts, they should be delimited by two underscores
 
 Icons that are rendered in a component's shadow root _must_ use the `system` icon library. The system icon library uses inline SVGs for performance, so they load instantly instead of requiring additional HTTP requests. System icons _must not_ be used in examples.
 
+By default, icons used in components should be sized at 1.25em.
+
 ### Creating form controls
 
 Form controls must extend the `QuietFormControlElement` abstract class. By doing so, they will automatically become form-associated. Form controls must follow patterns of existing form controls, for familiarity. Use `value` for value, `disable` to disable, `require` to require, etc.

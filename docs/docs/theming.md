@@ -447,7 +447,7 @@ _[Refer to this article](https://medium.com/@think_ui/why-color-contrast-is-not-
 
 #### Stroke colors
 
-Stroke colors are used to draw borders and outlines around elements and UI chrome.
+Stroke colors are used to draw borders and outlines around elements and UI chrome. By design, strokes have no loud variants.
 
 **Syntax:** `--quiet-{variant}-stroke-{volume}`
 

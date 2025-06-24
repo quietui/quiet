@@ -138,7 +138,7 @@ export class QuietAccordion extends QuietElement {
   };
 
   /** @internal Handles accordion item toggle requests */
-  public handleItemToggle(item: QuietAccordionItem): boolean {
+  public async handleItemToggle(item: QuietAccordionItem): Promise<boolean> {
     const targetExpanded = !item.expanded;
 
     if (targetExpanded) {
@@ -150,30 +150,41 @@ export class QuietAccordion extends QuietElement {
         return false;
       }
 
-      // If auto-collapse is enabled, collapse other items first
+      // If auto-collapse is enabled, collapse other items
+      const itemsToCollapse: QuietAccordionItem[] = [];
       if (this.autoCollapse) {
         const items = this.getItems();
-        items.forEach(otherItem => {
+        for (const otherItem of items) {
           if (otherItem !== item && otherItem.expanded) {
             const beforeCollapseEvent = new QuietBeforeCollapseEvent(otherItem);
             this.dispatchEvent(beforeCollapseEvent);
 
             if (!beforeCollapseEvent.defaultPrevented) {
-              // Ensure the body has an explicit height before collapsing
-              if (otherItem.body && (!otherItem.body.style.height || otherItem.body.style.height === 'auto')) {
-                otherItem.body.style.height = `${otherItem.body.scrollHeight}px`;
-                otherItem.body.offsetHeight; // Force reflow
-              }
-
               otherItem.expanded = false;
-              this.dispatchEvent(new QuietCollapseEvent(otherItem));
+              itemsToCollapse.push(otherItem);
             }
           }
-        });
+        }
       }
 
+      // Set expanded state and run all animations simultaneously
       item.expanded = true;
+
+      // Create animation promises
+      const animations: Promise<void>[] = [item.animateExpand()];
+      for (const collapsingItem of itemsToCollapse) {
+        animations.push(collapsingItem.animateCollapse());
+      }
+
+      // Wait for all animations to complete
+      await Promise.allSettled(animations);
+
+      // Dispatch events after all animations complete
       this.dispatchEvent(new QuietExpandEvent(item));
+      for (const collapsedItem of itemsToCollapse) {
+        this.dispatchEvent(new QuietCollapseEvent(collapsedItem));
+      }
+
       return true;
     } else {
       // Collapsing
@@ -185,6 +196,7 @@ export class QuietAccordion extends QuietElement {
       }
 
       item.expanded = false;
+      await item.animateCollapse();
       this.dispatchEvent(new QuietCollapseEvent(item));
       return true;
     }

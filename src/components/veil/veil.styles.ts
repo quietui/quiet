@@ -2,7 +2,7 @@ import { css } from 'lit';
 
 export default css`
   :host {
-    --show-duration: 300ms;
+    --show-duration: 200ms;
     --blur: 3px;
 
     display: block;

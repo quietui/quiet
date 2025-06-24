@@ -121,6 +121,26 @@ Set the `appearance` attribute to `normal`, `contained`, `separated`, or `unstyl
 </style>
 ```
 
+### Changing the size
+
+Accordions are sized based on the current font size. To change their size, set the `font-size` on the accordion or an ancestor element.
+
+```html {.example}
+<quiet-accordion style="font-size: 1.25rem;">
+  <quiet-accordion-item label="Why do cats purr?">
+    <p>Cats purr for many reasons including contentment, self-healing, and communication. It's their built-in happiness meter!</p>
+  </quiet-accordion-item>
+
+  <quiet-accordion-item label="Cat grooming habits">
+    <p>Cats spend 30-50% of their day grooming themselves to stay clean, regulate temperature, and reduce stress.</p>
+  </quiet-accordion-item>
+
+  <quiet-accordion-item label="Why do cats sleep so much?">
+    <p>Cats sleep 12-16 hours a day because they're natural predators who conserve energy for hunting (even if they're just hunting dust bunnies).</p>
+  </quiet-accordion-item>
+</quiet-accordion>
+```
+
 ### Disabling items
 
 Use the `disabled` attribute to prevent users from expanding certain accordion items. This is useful for sections that require certain conditions to be met before they can be accessed.

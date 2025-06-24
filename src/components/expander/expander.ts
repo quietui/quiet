@@ -35,7 +35,7 @@ import styles from './expander.styles.js';
  * @csspart trigger - The button that toggles between expanded and collapsed states.
  *
  * @cssproperty [--preview-height=3lh] - The visible height of the expander's content when collapsed.
- * @cssproperty [--duration=300ms] - The duration of the expand/collapse animation.
+ * @cssproperty [--duration=200ms] - The duration of the expand/collapse animation.
  * @cssproperty [--easing=ease] - The easing to use for the expand/collapse animation.
  *
  * @cssstate disabled - Applied when the expander is disabled.

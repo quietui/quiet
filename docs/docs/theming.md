@@ -54,6 +54,16 @@ Sometimes, it's desirable to have a contrasting theme for certain sections of th
 When using `quiet-light` and `quiet-dark`, you may want to set the background color to an appropriate value. You can use `--quiet-background-color` for an adaptive background. [Learn more about design tokens](#design-tokens)
 :::
 
+## Cascade Layers
+
+Quiet uses [Cascade Layers](https://developer.mozilla.org/en-docs/Learn_web_development/Core/Styling_basics/Cascade_layers) to organize CSS with predictable specificity and allow easy customization. The library defines three layers:
+
+- `quiet` - core theme styles
+- `quiet-restyle` - optional CSS reset  
+- `quiet-utilities` - optional utility classes
+
+This approach ensures your custom styles will override library defaults simply by placing them in higher layers or using normal cascade rules, giving you complete control over styling precedence while maintaining the library's internal organization.
+
 ## Theme concepts
 
 Quiet's default theme is designed to be highly customizable with minimal effort. The following seed colors are used to generate color palettes with pure CSS — one for each variant.

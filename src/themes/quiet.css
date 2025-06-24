@@ -46,7 +46,7 @@
     /* Border tokens */
     --quiet-border-style: solid;
     --quiet-border-width: 1px;
-    --quiet-border-radius-xs: 0.125rem; /* 2px */
+    --quiet-border-radius-xs: 0.1875rem; /* 3px */
     --quiet-border-radius-sm: 0.25rem; /* 4px */
     --quiet-border-radius-md: 0.375rem; /* 6px */
     --quiet-border-radius-lg: 0.5625rem; /* 9px */
@@ -153,16 +153,16 @@
     --quiet-selection-background-color: var(--quiet-primary-300);
     --quiet-selection-color: var(--quiet-text-body);
     --quiet-shadow-color: black;
-    --quiet-shadow-softer: 0 1px 1px color-mix(in oklab, transparent, var(--quiet-shadow-color) 2.5%);
-    --quiet-shadow-soft: 0 2px 4px color-mix(in oklab, transparent, var(--quiet-shadow-color) 5%);
-    --quiet-shadow-mid: 0 4px 8px color-mix(in oklab, transparent, var(--quiet-shadow-color) 6%);
-    --quiet-shadow-loud: 0 8px 16px color-mix(in oklab, transparent, var(--quiet-shadow-color) 7%);
-    --quiet-shadow-louder: 0 12px 20px color-mix(in oklab, transparent, var(--quiet-shadow-color) 8%);
-    --quiet-inset-shadow-softer: inset 0 0.125em 0.125em -0.125em color-mix(in oklab, black, transparent 97.5%);
-    --quiet-inset-shadow-soft: inset 0 0.25em 0.25em -0.25em color-mix(in oklab, black, transparent 95%);
-    --quiet-inset-shadow-mid: inset 0 0.5em 0.5em -0.5em color-mix(in oklab, black, transparent 94%);
-    --quiet-inset-shadow-loud: inset 0 1em 1em -1em color-mix(in oklab, black, transparent 93%);
-    --quiet-inset-shadow-louder: inset 0 1.5em 1.5em -1.5em color-mix(in oklab, black, transparent 92%);
+    --quiet-shadow-softer: 0 1px 1px color-mix(in oklab, transparent, var(--quiet-shadow-color) 4%);
+    --quiet-shadow-soft: 0 2px 3px color-mix(in oklab, transparent, var(--quiet-shadow-color) 8%);
+    --quiet-shadow-mid: 0 3px 6px color-mix(in oklab, transparent, var(--quiet-shadow-color) 10%);
+    --quiet-shadow-loud: 0 6px 12px color-mix(in oklab, transparent, var(--quiet-shadow-color) 12%);
+    --quiet-shadow-louder: 0 8px 16px color-mix(in oklab, transparent, var(--quiet-shadow-color) 14%);
+    --quiet-inset-shadow-softer: inset 0 0.125em 0.125em -0.125em color-mix(in oklab, black, transparent 94%);
+    --quiet-inset-shadow-soft: inset 0 0.25em 0.25em -0.25em color-mix(in oklab, black, transparent 90%);
+    --quiet-inset-shadow-mid: inset 0 0.5em 0.5em -0.5em color-mix(in oklab, black, transparent 88%);
+    --quiet-inset-shadow-loud: inset 0 1em 1em -1em color-mix(in oklab, black, transparent 85%);
+    --quiet-inset-shadow-louder: inset 0 1.5em 1.5em -1.5em color-mix(in oklab, black, transparent 82%);
 
     /* Primary */
     --quiet-primary-fill-softer: var(--quiet-primary-100);

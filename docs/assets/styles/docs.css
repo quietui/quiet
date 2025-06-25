@@ -818,6 +818,7 @@ quiet-badge.experimental {
 
 .docs-aside li {
   color: var(--quiet-text-muted);
+  font-weight: var(--quiet-font-weight-normal);
   list-style: none;
 }
 
@@ -827,7 +828,7 @@ quiet-badge.experimental {
 
 .docs-aside a {
   color: inherit;
-  font-weight: var(--quiet-font-weight-normal);
+  font-weight: inherit;
   text-decoration: none;
   transition: 150ms color ease;
 

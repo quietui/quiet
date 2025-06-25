@@ -43,6 +43,17 @@ Use `<h1>` through `<h6>` to create headings. Headings use `text-wrap: balance` 
 <h6>Heading level six</h6>
 ```
 
+To apply heading styles to non-heading elements, use `.quiet-h1` through `.quiet-h6`.
+
+```html {.example .no-edit}
+<p class="quiet-h1">Heading level one</p>
+<p class="quiet-h2">Heading level two</p>
+<p class="quiet-h3">Heading level three</p>
+<p class="quiet-h4">Heading level four</p>
+<p class="quiet-h5">Heading level five</p>
+<p class="quiet-h6">Heading level six</p>
+```
+
 ### Paragraphs
 
 Paragraphs have the spacing you would expect and come with `text-wrap: pretty` to prevent orphans.

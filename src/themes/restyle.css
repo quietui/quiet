@@ -65,7 +65,13 @@
   h3,
   h4,
   h5,
-  h6 {
+  h6,
+  .quiet-h1,
+  .quiet-h2,
+  .quiet-h3,
+  .quiet-h4,
+  .quiet-h5,
+  .quiet-h6 {
     margin: 0;
     font-weight: var(--quiet-font-weight-bold);
     line-height: 1.3;
@@ -82,27 +88,33 @@
     }
   }
 
-  h1 {
+  h1,
+  .quiet-h1 {
     font-size: 2.488rem;
   }
 
-  h2 {
+  h2,
+  .quiet-h2 {
     font-size: 2.074rem;
   }
 
-  h3 {
+  h3,
+  .quiet-h3 {
     font-size: 1.728rem;
   }
 
-  h4 {
+  h4,
+  .quiet-h4 {
     font-size: 1.44rem;
   }
 
-  h5 {
+  h5,
+  .quiet-h5 {
     font-size: 1.2rem;
   }
 
-  h6 {
+  h6,
+  .quiet-h6 {
     font-size: 1.125rem;
   }
 

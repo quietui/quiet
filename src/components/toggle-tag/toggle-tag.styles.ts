@@ -44,6 +44,10 @@ export default css`
     }
   }
 
+  ::slotted(quiet-icon) {
+    font-size: 1.25em;
+  }
+
   :host(:not(:state(disabled)):active) #label {
     translate: 0 var(--quiet-button-active-offset);
   }

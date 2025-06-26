@@ -260,18 +260,18 @@ A common way to style accordion icons is with plus and minus icons. For this, yo
 </style>
 ```
 
-### Styling accordions
+### Customizing label content
 
-Accordions come with a simple, minimal appearance. Feel free to customize them with your own styles.
+Accordions can have structured content as labels, but consider the experience for screen reader users. You may want to add `aria-hidden="true'` to decorative elements supplementary text that don't add meaningful context when the accordion is navigated with assistive technology.
 
 ```html {.example}
 <quiet-accordion appearance="contained" auto-collapse id="accordion__styling">
   <quiet-accordion-item>
     <div slot="label">
-      <quiet-avatar label="Meowy McGee" image="https://images.unsplash.com/photo-1672487209629-4d52e0c043d0?q=80&w=256&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"></quiet-avatar>
+      <quiet-avatar image="https://images.unsplash.com/photo-1672487209629-4d52e0c043d0?q=80&w=256&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"></quiet-avatar>
       <div>
         Meowy McGee
-        <p><small>Freedom's just another word for nothing left to lose</small></p>
+        <p aria-hidden="true"><small>Freedom's just another word for nothing left to lose</small></p>
       </div>
     </div>
     <p>
@@ -281,10 +281,10 @@ Accordions come with a simple, minimal appearance. Feel free to customize them w
 
   <quiet-accordion-item>
     <div slot="label">
-      <quiet-avatar label="Lady Pawington" image="https://images.unsplash.com/photo-1516310789627-2ff305829fbb?q=80&w=256&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"></quiet-avatar>
+      <quiet-avatar image="https://images.unsplash.com/photo-1516310789627-2ff305829fbb?q=80&w=256&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"></quiet-avatar>
       <div>
         Lady Pawington
-        <p><small>Professional sunbeam chaser and nap enthusiast</small></p>
+        <p aria-hidden="true"><small>Professional sunbeam chaser and nap enthusiast</small></p>
       </div>
     </div>
     <p>
@@ -294,10 +294,10 @@ Accordions come with a simple, minimal appearance. Feel free to customize them w
 
   <quiet-accordion-item>
     <div slot="label">
-      <quiet-avatar label="Sir Whiskertons III" image="https://images.unsplash.com/photo-1569591159212-b02ea8a9f239?q=80&w=256&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"></quiet-avatar>
+      <quiet-avatar image="https://images.unsplash.com/photo-1569591159212-b02ea8a9f239?q=80&w=256&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"></quiet-avatar>
       <div>
         Sir Whiskertons III
-        <p><small>Living all nine lives to the fullest, one treat at a time</small></p>
+        <p aria-hidden="true"><small>Living all nine lives to the fullest, one treat at a time</small></p>
       </div>
     </div>
     <p>

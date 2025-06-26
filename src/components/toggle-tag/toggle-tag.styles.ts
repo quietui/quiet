@@ -24,23 +24,23 @@ export default css`
     user-select: none;
 
     &.xs {
-      font-size: calc(var(--quiet-form-control-font-size-xs) * 0.9375);
+      font-size: calc(var(--quiet-form-control-font-size-xs) * 0.875);
     }
 
     &.sm {
-      font-size: calc(var(--quiet-form-control-font-size-sm) * 0.9375);
+      font-size: calc(var(--quiet-form-control-font-size-sm) * 0.875);
     }
 
     &.md {
-      font-size: calc(var(--quiet-form-control-font-size-md) * 0.9375);
+      font-size: calc(var(--quiet-form-control-font-size-md) * 0.875);
     }
 
     &.lg {
-      font-size: calc(var(--quiet-form-control-font-size-lg) * 0.9375);
+      font-size: calc(var(--quiet-form-control-font-size-lg) * 0.875);
     }
 
     &.xl {
-      font-size: calc(var(--quiet-form-control-font-size-xl) * 0.9375);
+      font-size: calc(var(--quiet-form-control-font-size-xl) * 0.875);
     }
   }
 

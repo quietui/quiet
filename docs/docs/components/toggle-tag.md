@@ -9,14 +9,38 @@ Toggle tags should generally be used in groups. In fact, they work best when pla
 
 ```html {.example}
 <quiet-checkbox-group label="Amenities" style="--gap: .5em; max-width: 460px;">
-  <quiet-toggle-tag><quiet-icon name="coffee"></quiet-icon> Coffee</quiet-toggle-tag>
-  <quiet-toggle-tag><quiet-icon name="wash-machine"></quiet-icon> Laundry</quiet-toggle-tag>
-  <quiet-toggle-tag><quiet-icon name="microwave"></quiet-icon> Microwave</quiet-toggle-tag>
-  <quiet-toggle-tag><quiet-icon name="parking"></quiet-icon> Parking</quiet-toggle-tag>
-  <quiet-toggle-tag><quiet-icon name="cat"></quiet-icon> Pet friendly</quiet-toggle-tag>
-  <quiet-toggle-tag><quiet-icon name="pool"></quiet-icon> Pool</quiet-toggle-tag>
-  <quiet-toggle-tag><quiet-icon name="device-tv"></quiet-icon> TV</quiet-toggle-tag>
-  <quiet-toggle-tag><quiet-icon name="wifi"></quiet-icon> Wifi</quiet-toggle-tag>
+  <quiet-toggle-tag name="amenities" value="coffee">
+    <quiet-icon name="coffee"></quiet-icon> 
+    Coffee
+  </quiet-toggle-tag>
+  <quiet-toggle-tag name="amenities" value="laundry">
+    <quiet-icon name="wash-machine"></quiet-icon> 
+    Laundry
+  </quiet-toggle-tag>
+  <quiet-toggle-tag name="amenities" value="microwave">
+    <quiet-icon name="microwave"></quiet-icon> 
+    Microwave
+  </quiet-toggle-tag>
+  <quiet-toggle-tag name="amenities" value="parking">
+    <quiet-icon name="parking"></quiet-icon> 
+    Parking
+  </quiet-toggle-tag>
+  <quiet-toggle-tag name="amenities" value="pet-friendly">
+    <quiet-icon name="cat"></quiet-icon> 
+    Pet friendly
+  </quiet-toggle-tag>
+  <quiet-toggle-tag name="amenities" value="pool">
+    <quiet-icon name="pool"></quiet-icon> 
+    Pool
+  </quiet-toggle-tag>
+  <quiet-toggle-tag name="amenities" value="tv">
+    <quiet-icon name="device-tv"></quiet-icon> 
+    TV
+  </quiet-toggle-tag>
+  <quiet-toggle-tag name="amenities" value="wifi">
+    <quiet-icon name="wifi"></quiet-icon> 
+    Wifi
+  </quiet-toggle-tag>
 </quiet-checkbox-group>
 ```
 
@@ -28,19 +52,19 @@ Add the `checked` attribute to check the toggle tag initially.
 
 ```html {.example}
 <quiet-checkbox-group label="Default notifications" style="--gap: .5em;">
-  <quiet-toggle-tag checked>
+  <quiet-toggle-tag name="notifications" value="email" checked>
     <quiet-icon name="mail"></quiet-icon>
     Email updates
   </quiet-toggle-tag>
-  <quiet-toggle-tag checked>
+  <quiet-toggle-tag name="notifications" value="push" checked>
     <quiet-icon name="bell"></quiet-icon>
     Push notifications
   </quiet-toggle-tag>
-  <quiet-toggle-tag>
+  <quiet-toggle-tag name="notifications" value="sms">
     <quiet-icon name="message-circle"></quiet-icon>
     SMS alerts
   </quiet-toggle-tag>
-  <quiet-toggle-tag>
+  <quiet-toggle-tag name="notifications" value="phone">
     <quiet-icon name="phone"></quiet-icon>
     Phone calls
   </quiet-toggle-tag>
@@ -116,8 +140,28 @@ Use the `disabled` attribute to prevent interaction with toggle tags. Disabled t
 
 ```html {.example}
 <quiet-checkbox-group label="Options" style="--gap: .5em;">
-  <quiet-toggle-tag>Option 1</quiet-toggle-tag>
-  <quiet-toggle-tag disabled>Option 2</quiet-toggle-tag>
-  <quiet-toggle-tag>Option 3</quiet-toggle-tag>
+  <quiet-toggle-tag name="options" value="option1">Option 1</quiet-toggle-tag>
+  <quiet-toggle-tag name="options" value="option2" disabled>Option 2</quiet-toggle-tag>
+  <quiet-toggle-tag name="options" value="option3">Option 3</quiet-toggle-tag>
 </quiet-checkbox-group>
+```
+
+### Handling form submission
+
+Toggle tags are form-associated custom elements that behave like native checkboxes when submitting forms. When a toggle tag is checked, its `name` and `value` attributes are included in the form data, just like a standard checkbox.
+
+```html {.example}
+<form id="toggle-tag__form" action="about:blank" target="_blank">
+  <quiet-checkbox-group label="Languages" style="--gap: .5em; margin-bottom: 1rem;">
+    <quiet-toggle-tag name="languages" value="cpp">C++</quiet-toggle-tag>
+    <quiet-toggle-tag name="languages" value="go">Go</quiet-toggle-tag>
+    <quiet-toggle-tag name="languages" value="javascript" checked>JavaScript</quiet-toggle-tag>
+    <quiet-toggle-tag name="languages" value="php">PHP</quiet-toggle-tag>
+    <quiet-toggle-tag name="languages" value="python">Python</quiet-toggle-tag>
+    <quiet-toggle-tag name="languages" value="qb">QBasic</quiet-toggle-tag>
+    <quiet-toggle-tag name="languages" value="rust">Rust</quiet-toggle-tag>
+  </quiet-checkbox-group>
+  
+  <quiet-button type="submit">Submit</quiet-button>
+</form>
 ```

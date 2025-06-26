@@ -63,8 +63,12 @@ export default css`
     transition: rotate var(--duration) var(--easing);
   }
 
-  :host(:state(expanded)) #icon {
+  :host(:state(expanded):dir(ltr)) #icon {
     rotate: 180deg;
+  }
+
+  :host(:state(expanded):dir(rtl)) #icon {
+    rotate: -180deg;
   }
 
   /* Icon position */

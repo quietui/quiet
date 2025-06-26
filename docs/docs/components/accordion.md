@@ -259,3 +259,65 @@ A common way to style accordion icons is with plus and minus icons. For this, yo
   }
 </style>
 ```
+
+### Styling accordions
+
+Accordions come with a simple, minimal appearance. Feel free to customize them with your own styles.
+
+```html {.example}
+<quiet-accordion appearance="contained" auto-collapse id="accordion__styling">
+  <quiet-accordion-item>
+    <div slot="label">
+      <quiet-avatar label="Meowy McGee" image="https://images.unsplash.com/photo-1672487209629-4d52e0c043d0?q=80&w=256&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"></quiet-avatar>
+      <div>
+        Meowy McGee
+        <p><small>Freedom's just another word for nothing left to lose</small></p>
+      </div>
+    </div>
+    <p>
+      A philosophical feline with a rebellious streak, Meowy spends their days contemplating the deeper meaning of cardboard boxes and refusing to acknowledge the concept of "off-limits" furniture. When not busy knocking things off counters with purposeful intent, they can be found staring intensely at walls, presumably seeing things the rest of us mere mortals cannot.
+    </p>
+  </quiet-accordion-item>
+
+  <quiet-accordion-item>
+    <div slot="label">
+      <quiet-avatar label="Lady Pawington" image="https://images.unsplash.com/photo-1516310789627-2ff305829fbb?q=80&w=256&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"></quiet-avatar>
+      <div>
+        Lady Pawington
+        <p><small>Professional sunbeam chaser and nap enthusiast</small></p>
+      </div>
+    </div>
+    <p>
+      The epitome of feline sophistication, Lady Pawington has mastered the art of finding the perfect sunbeam at precisely 2:47 PM every day. She maintains a rigorous schedule of 16-hour power naps, interrupted only by brief but important meetings with her food bowl and the occasional judgmental stare at the humans who dare to disturb her royal slumber.
+    </p>
+  </quiet-accordion-item>
+
+  <quiet-accordion-item>
+    <div slot="label">
+      <quiet-avatar label="Sir Whiskertons III" image="https://images.unsplash.com/photo-1569591159212-b02ea8a9f239?q=80&w=256&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"></quiet-avatar>
+      <div>
+        Sir Whiskertons III
+        <p><small>Living all nine lives to the fullest, one treat at a time</small></p>
+      </div>
+    </div>
+    <p>
+      A distinguished gentleman cat with an insatiable appetite for adventure (and treats), Sir Whiskertons approaches each day like it's his personal buffet of experiences. Whether he's conducting important business meetings with dust bunnies under the couch or hosting diplomatic summits with the neighborhood squirrels from his window perch, he does it all with the confidence of someone who knows they've got eight lives in reserve.
+    </p>
+  </quiet-accordion-item>
+</quiet-accordion>
+
+<style>
+  #accordion__styling {
+    div[slot="label"] {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      p {
+        line-height: 1.2;
+      }
+    }
+
+  }
+</style>
+```

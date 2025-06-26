@@ -20,6 +20,7 @@ export default css`
     padding: 1em;
     gap: 1em;
     background: transparent;
+    font-weight: var(--quiet-font-weight-semibold);
     cursor: pointer;
     user-select: none;
 

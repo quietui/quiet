@@ -1,6 +1,10 @@
 import { css } from 'lit';
 
 export default css`
+  :host {
+    --gap: 1rem;
+  }
+
   #group {
     display: flex;
     margin-block-start: 0.5rem;
@@ -8,7 +12,7 @@ export default css`
 
   :host([orientation='horizontal']) #group {
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: var(--gap);
   }
 
   :host([orientation='vertical']) #group {

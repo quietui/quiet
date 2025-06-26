@@ -23,6 +23,8 @@ import styles from './checkbox-group.styles.js';
  * @csspart label - The element that contains the checkbox group's label.
  * @csspart description - The element that contains the checkbox group's description.
  * @csspart group - The element that wraps the grouped checkboxes.
+ *
+ * @cssproperty [--gap=1em] - The gap between checkboxes.
  */
 @customElement('quiet-checkbox-group')
 export class QuietCheckboxGroup extends QuietElement {

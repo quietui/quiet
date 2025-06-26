@@ -3,7 +3,9 @@ title: Checkbox Group
 layout: component
 ---
 
-You can use checkboxes without grouping them but, when you want to apply a label and description to a group of related checkboxes, this component will come in handy.
+You can use [checkboxes](/docs/components/checkbox) without grouping them but, when you want to apply a label and description to a group of related checkboxes, this component will come in handy.
+
+You can also use checkbox groups with [toggle icons](/docs/components/toggle-icon) and [toggle tags](/docs/components/toggle-tag).
 
 ```html {.example}
 <quiet-checkbox-group label="Things for the cats" description="Select as few or as many as you'd like.">

@@ -152,7 +152,7 @@ Toggle tags are form-associated custom elements that behave like native checkbox
 
 ```html {.example}
 <form id="toggle-tag__form" action="about:blank" target="_blank">
-  <quiet-checkbox-group label="Languages" style="--gap: .5em; margin-bottom: 1rem;">
+  <quiet-checkbox-group label="Languages" style="--gap: .5em; margin-bottom: 1.5rem;">
     <quiet-toggle-tag name="languages" value="cpp">C++</quiet-toggle-tag>
     <quiet-toggle-tag name="languages" value="go">Go</quiet-toggle-tag>
     <quiet-toggle-tag name="languages" value="javascript" checked>JavaScript</quiet-toggle-tag>

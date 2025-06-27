@@ -336,6 +336,7 @@
 
     summary {
       font-weight: var(--quiet-font-weight-semibold);
+      font-size: 0.9375em;
       text-wrap: balance;
 
       &:focus {

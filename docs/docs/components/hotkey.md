@@ -4,7 +4,7 @@ layout: component
 ---
 
 ```html {.example}
-<quiet-hotkey keys="$command K"></quiet-hotkey>
+<quiet-hotkey keys="$cmdctrl K"></quiet-hotkey>
 ```
 
 ## Examples
@@ -17,7 +17,8 @@ You can use any of the following keywords to show platform-specific keys.
 
 | Keyword      | Mac | Others    |
 |--------------|-----|-----------|
-| `$command`   | ⌘   | Ctrl      |
+| `$command`   | ⌘   |           |
+| `$cmdctrl`   | ⌘   | Ctrl      |
 | `$control`   | ⌃   | Ctrl      |
 | `$option`    | ⌥   | Alt       |
 | `$shift`     | ⇧   | Shift     |
@@ -36,7 +37,7 @@ You can use any of the following keywords to show platform-specific keys.
 ```
 
 :::info
-Note that `$cmd` and `$option` map to "CTRL" and "ALT" on non-Mac platforms. This is a common practice, but not guaranteed for all keyboard shortcuts.
+Note that `$command` doesn't output anything on non-Mac devices. When command and control are interchangeable, you can use `$cmdctrl` to show command on Mac and control on other platforms.
 :::
 
 ### Platform-specific shortcuts
@@ -45,7 +46,7 @@ To show platform-specific hotkeys, use the `windows`, `mac`, and `linux` attribu
 
 ```html {.example}
 <quiet-hotkey
-  keys="$command $shift A"
+  keys="$control $shift A"
   mac="$shift $command A"
 ></quiet-hotkey>
 ```
@@ -57,7 +58,7 @@ By default, screen readers will announce the hotkey text as-is. To set a custom 
 ```html {.example}
 <quiet-hotkey
   label="Press command or control + Q to quit"
-  keys="$command Q"
+  keys="$cmdctrl Q"
 ></quiet-hotkey>
 ```
 
@@ -71,8 +72,8 @@ Use the `platform` attribute to show hotkeys for a specific platform, regardless
     <quiet-hotkey 
       platform="mac"
       mac="$shift $command M"
-      windows="$command $shift W"
-      linux="$command $shift L"
+      windows="$control $shift W"
+      linux="$control $shift L"
     ></quiet-hotkey>
   </p>
 
@@ -101,7 +102,7 @@ By default, the delimiter is automatically determined by the platform (no charac
 
 ```html {.example}
 <quiet-hotkey 
-  keys="$command $shift A" 
+  keys="$cmdctrl $shift A" 
   delimiter="·"
 ></quiet-hotkey>
 ```
@@ -113,7 +114,7 @@ By default, the keyboard hotkey is styled with `<kbd>` styles. Set the `appearan
 ```html {.example}
 Press 
 <quiet-hotkey 
-  keys="$command K"
+  keys="$cmdctrl K"
   appearance="unstyled"
 ></quiet-hotkey>
 to search.
@@ -126,7 +127,7 @@ Use the `key` and `keyword` parts to change the styles of individual characters.
 ```html {.example}
 Press 
 <quiet-hotkey 
-  keys="$command K"
+  keys="$cmdctrl K"
   id="hotkeys__styling"
 ></quiet-hotkey>
 to search.

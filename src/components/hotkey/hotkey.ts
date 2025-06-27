@@ -8,7 +8,8 @@ import { QuietElement } from '../../utilities/quiet-element.js';
 import styles from './hotkey.styles.js';
 
 const keywordMap = {
-  command: { mac: '⌘', other: 'Ctrl' },
+  command: { mac: '⌘', other: '' },
+  cmdCtrl: { mac: '⌘', other: 'Ctrl' },
   control: { mac: '⌃', other: 'Ctrl' },
   option: { mac: '⌥', other: 'Alt' },
   shift: { mac: '⇧', other: 'Shift' },

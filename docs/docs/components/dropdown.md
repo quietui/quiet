@@ -17,19 +17,19 @@ Dropdown menus appear when their trigger element is clicked. They are not modal,
   <quiet-dropdown-item value="reply">
     <quiet-icon slot="icon" name="corner-up-left"></quiet-icon>
     Reply
-    <quiet-hotkey slot="details" keys="$command R" appearance="unstyled"></quiet-hotkey>
+    <quiet-hotkey slot="details" keys="$cmdctrl R" appearance="unstyled"></quiet-hotkey>
   </quiet-dropdown-item>
 
   <quiet-dropdown-item value="forward">
     <quiet-icon slot="icon" name="corner-up-right"></quiet-icon>
     Forward
-    <quiet-hotkey slot="details" keys="$command F" appearance="unstyled"></quiet-hotkey>
+    <quiet-hotkey slot="details" keys="$cmdctrl F" appearance="unstyled"></quiet-hotkey>
   </quiet-dropdown-item>
 
   <quiet-dropdown-item value="archive">
     <quiet-icon slot="icon" name="archive"></quiet-icon>
     Archive
-    <quiet-hotkey slot="details" keys="$shift $command A" appearance="unstyled"></quiet-hotkey>
+    <quiet-hotkey slot="details" keys="$shift $cmdctrl A" appearance="unstyled"></quiet-hotkey>
   </quiet-dropdown-item>
 
   <quiet-dropdown-item value="delete" variant="destructive">
@@ -152,24 +152,24 @@ Use the `details` slot to display details, such as keyboard shortcuts, inside [d
 
   <quiet-dropdown-item value="reply">
     Reply
-    <quiet-hotkey slot="details" keys="$command R" appearance="unstyled"></quiet-hotkey>
+    <quiet-hotkey slot="details" keys="$cmdctrl R" appearance="unstyled"></quiet-hotkey>
   </quiet-dropdown-item>
 
   <quiet-dropdown-item value="forward">
     Forward
-    <quiet-hotkey slot="details" keys="$command F" appearance="unstyled"></quiet-hotkey>
+    <quiet-hotkey slot="details" keys="$cmdctrl F" appearance="unstyled"></quiet-hotkey>
   </quiet-dropdown-item>
 
   <quiet-dropdown-item value="move">
     Move
-    <quiet-hotkey slot="details" keys="$command M" appearance="unstyled"></quiet-hotkey>
+    <quiet-hotkey slot="details" keys="$cmdctrl M" appearance="unstyled"></quiet-hotkey>
   </quiet-dropdown-item>
 
   <quiet-divider></quiet-divider>
 
   <quiet-dropdown-item value="archive">
     Archive
-    <quiet-hotkey slot="details" keys="$command A" appearance="unstyled"></quiet-hotkey>
+    <quiet-hotkey slot="details" keys="$cmdctrl A" appearance="unstyled"></quiet-hotkey>
   </quiet-dropdown-item>
 
   <quiet-dropdown-item value="delete" variant="destructive">

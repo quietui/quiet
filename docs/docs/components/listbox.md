@@ -179,7 +179,7 @@ Add the `disabled` attribute to individual listbox items to make them non-select
 
 ### Multiple selection
 
-Use the `multiple` attribute to enable multi-selection mode. Users can select multiple items using <quiet-hotkey keys="$command" platform="mac"></quiet-hotkey> or <quiet-hotkey keys="$command" platform="windows"></quiet-hotkey> + click, <quiet-hotkey keys="$shift"></quiet-hotkey> + click for ranges, or <quiet-hotkey keys="$command A"></quiet-hotkey> to select all. For coarse pointers, such as touch, tapping an item will toggle the selection.
+Use the `multiple` attribute to enable multi-selection mode. Users can select multiple items using <quiet-hotkey keys="$command" platform="mac"></quiet-hotkey> or <quiet-hotkey keys="$control" platform="windows"></quiet-hotkey> + click, <quiet-hotkey keys="$shift"></quiet-hotkey> + click for ranges, or <quiet-hotkey keys="$cmdctrl A"></quiet-hotkey> to select all. For coarse pointers, such as touch, tapping an item will toggle the selection.
 
 ```html {.example}
 <quiet-listbox label="Kitty Behavior" description="Select your cat's typical antics." multiple>

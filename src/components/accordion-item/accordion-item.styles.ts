@@ -21,6 +21,7 @@ export default css`
     gap: 1em;
     background: transparent;
     font-weight: var(--quiet-font-weight-semibold);
+    font-size: 0.9375em;
     cursor: pointer;
     user-select: none;
 

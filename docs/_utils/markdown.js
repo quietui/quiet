@@ -24,7 +24,7 @@ markdown.use(markdownItMark);
 ['info', 'warn'].forEach(type => {
   markdown.use(markdownItContainer, type, {
     render: function (tokens, idx) {
-      const variant = type === 'warn' ? 'destructive' : 'constructive';
+      const variant = type === 'warn' ? 'destructive' : 'primary';
       const icon = type === 'warn' ? 'hand-stop' : 'hand-click';
       if (tokens[idx].nesting === 1) {
         return `

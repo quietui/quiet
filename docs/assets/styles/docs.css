@@ -817,7 +817,7 @@ quiet-badge.experimental {
 }
 
 .docs-aside li {
-  color: var(--quiet-text-muted);
+  color: color-mix(in oklab, var(--quiet-text-body), var(--quiet-background-color) 27.5%);
   font-weight: var(--quiet-font-weight-normal);
   list-style: none;
 }

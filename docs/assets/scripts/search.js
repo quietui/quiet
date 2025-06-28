@@ -226,7 +226,7 @@ async function updateSearchResults(query = '') {
       const a = document.createElement('a');
       const displayTitle = page.title ?? '';
       const displayDescription = page.description ?? '';
-      const displayUrl = `/${page.url.replace(/^\//, '')}`;
+      const displayUrl = (/^https?:/.test(page.url) ? '' : '/') + page.url.replace(/^\//, '');
       let icon = 'file-text';
 
       li.classList.add('site-search-result');

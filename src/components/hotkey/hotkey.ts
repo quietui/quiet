@@ -9,7 +9,7 @@ import styles from './hotkey.styles.js';
 
 const keywordMap = {
   command: { mac: '⌘', other: '' },
-  cmdCtrl: { mac: '⌘', other: 'Ctrl' },
+  cmdctrl: { mac: '⌘', other: 'Ctrl' },
   control: { mac: '⌃', other: 'Ctrl' },
   option: { mac: '⌥', other: 'Alt' },
   shift: { mac: '⇧', other: 'Shift' },
@@ -82,7 +82,7 @@ export class QuietHotkey extends QuietElement {
     return text.split(' ').map(segment => {
       if (segment.startsWith('$')) {
         const keyword = segment.slice(1);
-        const value = keywordMap[keyword as keyof typeof keywordMap];
+        const value = keywordMap[keyword as keyof typeof keywordMap] ?? '';
         const replacement = typeof value === 'string' ? value : platform === 'mac' ? value.mac : value.other;
         return { text: replacement, isKeyword: true };
       }

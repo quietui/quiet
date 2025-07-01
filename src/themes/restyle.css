@@ -323,8 +323,9 @@
   /* Details */
   details {
     padding-inline: calc(var(--quiet-content-spacing) / 2);
+    border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
     border-radius: var(--quiet-border-radius-md);
-    background-color: var(--quiet-neutral-fill-softer);
+    background-color: var(--quiet-paper-color);
 
     &[open] {
       padding-block-end: calc(var(--quiet-content-spacing) / 2);

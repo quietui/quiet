@@ -33,8 +33,8 @@ export default css`
 
   /* Activated */
   :host(:state(activated)) {
-    background-color: var(--quiet-constructive-fill-mid);
-    color: var(--quiet-constructive-text-on-mid);
+    background-color: var(--quiet-primary-fill-mid);
+    color: var(--quiet-primary-text-on-mid);
     animation: activated 0.3s ease-out;
   }
 

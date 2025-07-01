@@ -125,12 +125,12 @@ Additionally, a `quiet-progress` event will be emitted while the user slides the
         color-mix(
           in oklab, 
           var(--quiet-neutral-fill-soft) calc((1 - var(--thumb-position)) * 100%), 
-          var(--quiet-primary-fill-mid) calc(var(--thumb-position) * 100%)
+          var(--quiet-constructive-fill-mid) calc(var(--thumb-position) * 100%)
         );
 
       /* Change the text color when activated */
       &:state(activated) {
-        color: var(--quiet-primary-text-on-mid);
+        color: var(--quiet-constructive-text-on-mid);
       }
     }
   }

@@ -198,7 +198,7 @@ _Framework SSR_ was created to solve problems introduced by client-side framewor
 
 The idea behind framework SSR is that fetching and hydrating can be done in the background before the user is likely to interact with the page. As such, it first sends the user a "fully painted" picture they can't actually do anything with while waiting for the browser to download and process a multi-megabyte bundle. However, it's become common to see 5+ seconds until [TTI](https://developer.chrome.com/docs/lighthouse/performance/interactive) in the wild, leaving many users confused and frustrated.
 
-Quiet isn't interested in supporting the framework SSR fallacy. As part of the platform, web components can be server-side rendered traditionally like all other HTML elements have since the early days of the Web. Just generate the appropriate HTML tags, import the components, and you're good to go.
+Quiet isn't interested in supporting the framework SSR fallacy. As part of the platform, web components can be server-side rendered like all other HTML elements have since the early days of the Web. Just generate the appropriate HTML tags, import the components, and you're good to go.
 
 If you're using Quiet's autoloader, it will only fetch the components you're actually using on the page. And to eliminate [FOUCE](https://www.abeautifulsite.net/posts/flash-of-undefined-custom-elements), the most common reason people reach for SSR when using web components, Quiet provides some [simple and effective tools](/docs/#reducing-fouce).
 

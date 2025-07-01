@@ -817,7 +817,7 @@ quiet-badge.experimental {
 }
 
 .docs-aside li {
-  color: color-mix(in oklab, var(--quiet-text-body), var(--quiet-background-color) 27.5%);
+  color: var(--quiet-text-muted);
   font-weight: var(--quiet-font-weight-normal);
   list-style: none;
 }
@@ -1366,7 +1366,7 @@ html:not(.quiet-dark) quiet-scroller:has(.component-table) {
     padding: 1.5rem;
     border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
     border-radius: 1rem;
-    background-color: var(--quiet-background-color);
+    background-color: var(--quiet-paper-color);
     box-shadow: var(--quiet-shadow-softer);
     color: color-mix(in oklab, var(--quiet-neutral-text-on-soft), transparent 25%);
     line-height: 1.6;

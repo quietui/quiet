@@ -3,9 +3,10 @@ import { css } from 'lit';
 export default css`
   :host {
     --size: 3rem;
-    display: inline-flex;
 
+    display: inline-flex;
     position: relative;
+    flex: 0 0 auto;
     align-items: center;
     justify-content: center;
     aspect-ratio: 1 / 1;

@@ -161,7 +161,7 @@ By default, dialogs appear in the center of the screen. To make the dialog slide
   </quiet-button>
 </quiet-dialog>
 
-<div class="code-example-flex-wrap">
+<div style="display: flex; flex-wrap: wrap; gap: 0.25rem;">
   <quiet-button data-placement="start">Start</quiet-button>
   <quiet-button data-placement="end">End</quiet-button>
   <quiet-button data-placement="top">Top</quiet-button>

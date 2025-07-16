@@ -364,7 +364,14 @@ export class QuietColorInput extends QuietFormControlElement {
     }
 
     if (!this.isOpen && !event.composedPath().includes(this.colorPicker)) {
-      this.textBox.focus();
+      if (event.pointerType === 'touch') {
+        // On iOS and similar devices, forcing focus will cause the virtual keyboard which leads to unexpected
+        // scrolling. This provides a better experience on those devices.
+        event.preventDefault();
+      } else {
+        // Focus as usual when using other devices
+        this.textBox.focus();
+      }
       this.isOpen = true;
     }
   }

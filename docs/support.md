@@ -7,7 +7,7 @@ section: support
 bodyClass: with-grid
 ---
 
-Quiet can be used for free under the MIT license. Unfortunately, I can't help everyone for free, but you can [become a sponsor](https://github.com/sponsors/quietui) to unlock support from the maintainer, priority bug fixes, and other sponsor-only benefits.
+Quiet can be used under the terms of the MIT license. Unfortunately, I can't provide free help to everyone, but you can [become a sponsor](https://github.com/sponsors/quietui) to unlock support from the maintainer, priority bug fixes, and other sponsor-only benefits.
 
 <div class="sponsor-tiers">
   <div class="sponsor-tier">

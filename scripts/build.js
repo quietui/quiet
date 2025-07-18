@@ -20,6 +20,9 @@ const spinner = ora({ text: 'Quiet UI', color: 'magenta' }).start();
 const packageData = JSON.parse(await readFile(join(rootDir, 'package.json'), 'utf-8'));
 const version = packageData.version;
 let buildContext;
+let docsPromise = null;
+let isGeneratingDocs = false;
+let pendingDocsRebuild = false;
 
 /**
  * Runs the full build.
@@ -214,26 +217,51 @@ async function regenerateBuild() {
  * Generates the documentation site.
  */
 async function generateDocs() {
-  spinner.start('Writing the docs');
-
-  // 11ty
-  const output = (await runScript(join(__dirname, 'docs.js'), isDeveloping ? ['--develop'] : undefined))
-    // Cleanup the output
-    .replace('[11ty]', '')
-    .replace(' seconds', 's')
-    .replace(/\(.*?\)/, '')
-    .toLowerCase()
-    .trim();
-
-  // Copy assets
-  await copy(join(docsDir, 'assets'), join(siteDir, 'assets'), { overwrite: true });
-
-  // Copy dist (production only)
-  if (!isDeveloping) {
-    await copy(distDir, join(siteDir, 'dist'));
+  // If we're already generating, return the existing docs promise
+  if (isGeneratingDocs) {
+    pendingDocsRebuild = true;
+    return docsPromise;
   }
 
-  spinner.succeed(`Writing the docs ${chalk.gray(`(${output}`)})`);
+  isGeneratingDocs = true;
+
+  // Create a new promise that resolves when all generation is done
+  docsPromise = (async () => {
+    try {
+      spinner.start('Writing the docs');
+
+      // 11ty
+      const output = (await runScript(join(__dirname, 'docs.js'), isDeveloping ? ['--develop'] : undefined))
+        // Cleanup the output
+        .replace('[11ty]', '')
+        .replace(' seconds', 's')
+        .replace(/\(.*?\)/, '')
+        .toLowerCase()
+        .trim();
+
+      // Copy assets
+      await copy(join(docsDir, 'assets'), join(siteDir, 'assets'), { overwrite: true });
+
+      // Copy dist (production only)
+      if (!isDeveloping) {
+        await copy(distDir, join(siteDir, 'dist'));
+      }
+
+      spinner.succeed(`Writing the docs ${chalk.gray(`(${output}`)})`);
+
+      // Check for pending rebuild
+      if (pendingDocsRebuild) {
+        pendingDocsRebuild = false;
+        isGeneratingDocs = false; // Reset flag before recursive call
+        await generateDocs(); // Recursive call for pending rebuild
+      }
+    } finally {
+      isGeneratingDocs = false;
+      docsPromise = null;
+    }
+  })();
+
+  return docsPromise;
 }
 
 // Initial build

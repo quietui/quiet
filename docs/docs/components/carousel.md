@@ -4,7 +4,7 @@ layout: component
 ---
 
 ```html {.example}
-<quiet-carousel label="Example slides" id="carousel__overview">
+<quiet-carousel label="Example slides" id="carousel__overview" loop>
   <quiet-carousel-item>Slide 1</quiet-carousel-item>
   <quiet-carousel-item>Slide 2</quiet-carousel-item>
   <quiet-carousel-item>Slide 3</quiet-carousel-item>
@@ -153,6 +153,29 @@ You can assign names to carousel items using the `name` attribute. When a carous
     console.log(`Active slide: ${namedCarousel.activeName || 'unnamed'} (index ${event.detail.index})`);
   });
 </script>
+```
+
+### Looping navigation
+
+Add the `loop` attribute to enable looping when using navigation buttons and arrow keys. This will not cause slides to loop when scrolling.
+
+```html {.example}
+<quiet-carousel label="Looping slides" id="carousel__loop" loop>
+  <quiet-carousel-item>Slide 1</quiet-carousel-item>
+  <quiet-carousel-item>Slide 2</quiet-carousel-item>
+  <quiet-carousel-item>Slide 3</quiet-carousel-item>
+  <quiet-carousel-item>Slide 4</quiet-carousel-item>
+  <quiet-carousel-item>Slide 5</quiet-carousel-item>
+</quiet-carousel>
+
+<style>
+  #carousel__loop quiet-carousel-item {
+    background: var(--quiet-neutral-fill-softer);
+    color: var(--quiet-text-muted);
+    font-size: 2rem;
+    font-weight: 500;
+  }
+</style>
 ```
 
 ### Hiding navigation

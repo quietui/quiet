@@ -69,6 +69,9 @@ export class QuietCarousel extends QuietElement {
   /** The current active item's name. */
   @property({ attribute: 'active-name', reflect: true }) activeName = '';
 
+  /** Enables looping navigation. When true, prev/next buttons wrap around to the opposite end. */
+  @property({ type: Boolean, reflect: true }) loop = false;
+
   /** Hides navigation buttons. */
   @property({ type: Boolean, attribute: 'without-nav', reflect: true }) withoutNav = false;
 
@@ -166,11 +169,17 @@ export class QuietCarousel extends QuietElement {
 
     switch (event.key) {
       case prevKey:
-        nextIndex = Math.max(0, index - 1);
+        nextIndex = index - 1;
+        if (nextIndex < 0) {
+          nextIndex = this.loop ? this.itemCount - 1 : 0;
+        }
         event.preventDefault();
         break;
       case nextKey:
-        nextIndex = Math.min(this.itemCount - 1, index + 1);
+        nextIndex = index + 1;
+        if (nextIndex >= this.itemCount) {
+          nextIndex = this.loop ? 0 : this.itemCount - 1;
+        }
         event.preventDefault();
         break;
       case 'Home':
@@ -359,13 +368,21 @@ export class QuietCarousel extends QuietElement {
   /** Navigate to the next item */
   public scrollToNext(scrollBehavior: ScrollBehavior = 'smooth') {
     this.isUserInitiated = true;
-    this.setActiveItem(this.activeIndex + 1, scrollBehavior);
+    let newIndex = this.activeIndex + 1;
+    if (this.loop && newIndex >= this.itemCount) {
+      newIndex = 0;
+    }
+    this.setActiveItem(newIndex, scrollBehavior);
   }
 
   /** Navigate to the previous item */
   public scrollToPrevious(scrollBehavior: ScrollBehavior = 'smooth') {
     this.isUserInitiated = true;
-    this.setActiveItem(this.activeIndex - 1, scrollBehavior);
+    let newIndex = this.activeIndex - 1;
+    if (this.loop && newIndex < 0) {
+      newIndex = this.itemCount - 1;
+    }
+    this.setActiveItem(newIndex, scrollBehavior);
   }
 
   render() {
@@ -396,7 +413,7 @@ export class QuietCarousel extends QuietElement {
                       id="previous-button"
                       part="previous-button"
                       aria-label=${this.localize.term('previous')}
-                      ?disabled=${this.activeIndex === 0}
+                      ?disabled=${!this.loop && this.activeIndex === 0}
                       tabindex=${this.withoutPagination ? 0 : -1}
                       @click=${() => this.scrollToPrevious()}
                     >
@@ -407,7 +424,7 @@ export class QuietCarousel extends QuietElement {
                       id="next-button"
                       part="next-button"
                       aria-label=${this.localize.term('next')}
-                      ?disabled=${this.activeIndex === this.itemCount - 1}
+                      ?disabled=${!this.loop && this.activeIndex === this.itemCount - 1}
                       tabindex=${this.withoutPagination ? 0 : -1}
                       @click=${() => this.scrollToNext()}
                     >

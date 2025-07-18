@@ -2,17 +2,18 @@ import { readFile } from 'fs/promises';
 import { parse, resolve } from 'path';
 import process from 'process';
 import { analyticsPlugin } from './_utils/analytics.js';
-import { anchorHeadingsPlugin } from './_utils/anchor-headings.js';
-import { codeExamplesPlugin } from './_utils/code-examples.js';
-import { copyCodePlugin } from './_utils/copy-code.js';
-import { currentLink } from './_utils/current-link.js';
-import { externalLinksPlugin } from './_utils/external-links.js';
+import { anchorHeadingsTransformer } from './_utils/anchor-headings.js';
+import { codeExamplesTransformer } from './_utils/code-examples.js';
+import { copyCodeTransformer } from './_utils/copy-code.js';
+import { currentLinkTransformer } from './_utils/current-link.js';
+import { externalLinksTransformer } from './_utils/external-links.js';
 import { formatCodePlugin } from './_utils/format-code.js';
-import { highlightCodePlugin } from './_utils/highlight-code.js';
+import { highlightCodeTransformer } from './_utils/highlight-code.js';
 import { imgToSvgPlugin } from './_utils/img-to-svg.js';
 import { getComponents } from './_utils/manifest.js';
 import { markdown } from './_utils/markdown.js';
-import { outlinePlugin } from './_utils/outline.js';
+import { outlineTransformer } from './_utils/outline.js';
+import { parseAndTransform } from './_utils/parse-and-transform.js';
 import { replaceTextPlugin } from './_utils/replace-text.js';
 import { searchPlugin } from './_utils/search.js';
 
@@ -21,6 +22,10 @@ const isDeveloping = process.argv.includes('--develop');
 const components = getComponents();
 
 export default function (eleventyConfig) {
+  // Use our own markdown instance
+  eleventyConfig.setLibrary('md', markdown);
+  eleventyConfig.setWatchThrottleWaitTime(10);
+
   // Add template data
   eleventyConfig.addGlobalData('package', packageData);
   eleventyConfig.addGlobalData('components', components);
@@ -93,17 +98,6 @@ export default function (eleventyConfig) {
     return `https://cdn.jsdelivr.net/npm/@quietui/quiet-browser@${packageData.version}/` + location.replace(/^\//, '');
   });
 
-  // SVG colors plugin
-  eleventyConfig.addPlugin(imgToSvgPlugin, {
-    inputDir: resolve('./docs'),
-    shouldProcess: filename => filename.includes('images/whiskers/'),
-    colorMap: {
-      '#7a7bbe': 'var(--quiet-primary-600, #7a7bbe)', // primary
-      '#6969a3': 'var(--quiet-primary-700, #6969a3)', // primary shade
-      '#c9cdd4': 'var(--quiet-neutral-fill-softer)' // shadows
-    }
-  });
-
   // Helpers
   eleventyConfig.addNunjucksGlobal('getComponent', tagName => {
     const component = components.find(c => c.tagName === tagName);
@@ -116,38 +110,32 @@ export default function (eleventyConfig) {
     return component;
   });
 
-  // Use our own markdown instance
-  eleventyConfig.setLibrary('md', markdown);
-
-  // Add anchors to headings
-  eleventyConfig.addPlugin(anchorHeadingsPlugin({ container: '#content' }));
-
-  // Add an outline to the page
+  // Custom transformers that use a DOM parser
   eleventyConfig.addPlugin(
-    outlinePlugin({
-      container: '#content',
-      target: '.outline-links',
-      selector: 'h2, h3',
-      ifEmpty: doc => {
-        doc.querySelector('#outline')?.remove();
-      }
-    })
+    parseAndTransform([
+      // Add anchor to headings
+      anchorHeadingsTransformer({ container: '#content' }),
+      // Add an outline to the page
+      outlineTransformer({
+        container: '#content',
+        target: '.outline-links',
+        selector: 'h2, h3',
+        ifEmpty: doc => {
+          doc.querySelector('#outline')?.remove();
+        }
+      }),
+      // Add current link classes
+      currentLinkTransformer(),
+      // Add icons and attributes to external links
+      externalLinksTransformer(),
+      // Add copy code buttons to code blocks
+      copyCodeTransformer(),
+      // Highlight code blocks with Prism
+      highlightCodeTransformer(),
+      // Add code examples for `<code class="example">` blocks (must run AFTER highlight code blocks)
+      codeExamplesTransformer()
+    ])
   );
-
-  // Add current link classes
-  eleventyConfig.addPlugin(currentLink());
-
-  // Add icons and attributes to external links
-  eleventyConfig.addPlugin(externalLinksPlugin());
-
-  // Add code examples for `<code class="example">` blocks
-  eleventyConfig.addPlugin(codeExamplesPlugin());
-
-  // Highlight code blocks with Prism
-  eleventyConfig.addPlugin(highlightCodePlugin());
-
-  // Add copy code buttons to code blocks
-  eleventyConfig.addPlugin(copyCodePlugin());
 
   // Various text replacements
   eleventyConfig.addPlugin(
@@ -194,6 +182,17 @@ export default function (eleventyConfig) {
       }
     ])
   );
+
+  // SVG colors plugin
+  eleventyConfig.addPlugin(imgToSvgPlugin, {
+    inputDir: resolve('./docs'),
+    shouldProcess: filename => filename.includes('images/whiskers/'),
+    colorMap: {
+      '#7a7bbe': 'var(--quiet-primary-600, #7a7bbe)', // primary
+      '#6969a3': 'var(--quiet-primary-700, #6969a3)', // primary shade
+      '#c9cdd4': 'var(--quiet-neutral-fill-softer)' // shadows
+    }
+  });
 
   // Build the search index
   eleventyConfig.addPlugin(

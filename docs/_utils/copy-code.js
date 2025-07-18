@@ -1,32 +1,27 @@
-import { parse } from 'node-html-parser';
-
 /**
- * Eleventy plugin to add copy buttons to code blocks.
+ * Transformer to add copy buttons to code blocks.
  */
-export function copyCodePlugin(options = {}) {
+export function copyCodeTransformer(options = {}) {
   options = {
     container: 'body',
     ...options
   };
 
-  return function (eleventyConfig) {
-    eleventyConfig.addTransform('copy-code', function (content) {
-      const doc = parse(content, { blockTextElements: { code: true } });
-      const container = doc.querySelector(options.container);
+  return function (doc) {
+    const container = doc.querySelector(options.container);
 
-      if (!container) {
-        return content;
-      }
+    if (!container) {
+      return;
+    }
 
-      // Look for code blocks
-      container.querySelectorAll('pre > code').forEach(code => {
-        const pre = code.closest('pre');
+    // Look for code blocks
+    container.querySelectorAll('pre > code').forEach(code => {
+      const pre = code.closest('pre');
 
-        // Add a copy button (we set the copy data at runtime to reduce page bloat)
-        pre.innerHTML += `<quiet-copy class="copy-button"></quiet-copy>`;
-      });
-
-      return doc.toString();
+      // Add a copy button (we set the copy data at runtime to reduce page bloat)
+      pre.innerHTML += `<quiet-copy class="copy-button"></quiet-copy>`;
     });
+
+    return doc;
   };
 }

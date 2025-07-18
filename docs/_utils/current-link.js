@@ -1,5 +1,3 @@
-import { parse } from 'node-html-parser';
-
 function normalize(pathname) {
   pathname = pathname.trim();
 
@@ -22,32 +20,29 @@ function normalize(pathname) {
 }
 
 /**
- * Eleventy plugin to decorate current links with a custom class.
+ * Transformer to decorate current links with a custom class.
  */
-export function currentLink(options = {}) {
+export function currentLinkTransformer(options = {}) {
   options = {
     container: 'body',
     className: 'current',
     ...options
   };
 
-  return function (eleventyConfig) {
-    eleventyConfig.addTransform('current-link', function (content) {
-      const doc = parse(content);
-      const container = doc.querySelector(options.container);
+  return function (doc) {
+    const container = doc.querySelector(options.container);
 
-      if (!container) {
-        return content;
+    if (!container) {
+      return content;
+    }
+
+    // Compare the href attribute to 11ty's page URL
+    container.querySelectorAll('a[href]').forEach(a => {
+      if (normalize(a.getAttribute('href')) === normalize(this.page.url)) {
+        a.classList.add(options.className);
       }
-
-      // Compare the href attribute to 11ty's page URL
-      container.querySelectorAll('a[href]').forEach(a => {
-        if (normalize(a.getAttribute('href')) === normalize(this.page.url)) {
-          a.classList.add(options.className);
-        }
-      });
-
-      return doc.toString();
     });
+
+    return doc;
   };
 }

@@ -11,9 +11,7 @@ import { parse } from 'node-html-parser';
  *    //
  *    // Modify doc using the node-html-parser API: https://www.npmjs.com/package/node-html-parser
  *    //
- *    // No need to return anything. The changes occur in the doc object.
- *    //
- *    // Transformers MUST return a node-html-parser document
+ *    // The transformer MUST return a node-html-parser document.
  *    //
  *    return doc;
  *  }

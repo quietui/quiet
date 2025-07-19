@@ -10,9 +10,10 @@ import { dirname, join, relative } from 'path';
 import process from 'process';
 import copy from 'recursive-copy';
 import { fileURLToPath } from 'url';
-import { distDir, docsDir, rootDir, runScript, siteDir } from './utils.js';
+import { distDir, docsDir, rootDir, runScript, siteDir, SkipQueue } from './utils.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
+const changeQueue = new SkipQueue(500);
 const isBrowserBuild = process.argv.includes('--browser');
 const isDeveloping = process.argv.includes('--develop');
 const iconDir = join(distDir, 'assets/icons');
@@ -20,9 +21,6 @@ const spinner = ora({ text: 'Quiet UI', color: 'magenta' }).start();
 const packageData = JSON.parse(await readFile(join(rootDir, 'package.json'), 'utf-8'));
 const version = packageData.version;
 let buildContext;
-let docsPromise = null;
-let isGeneratingDocs = false;
-let pendingDocsRebuild = false;
 
 /**
  * Runs the full build.
@@ -217,51 +215,26 @@ async function regenerateBuild() {
  * Generates the documentation site.
  */
 async function generateDocs() {
-  // If we're already generating, return the existing docs promise
-  if (isGeneratingDocs) {
-    pendingDocsRebuild = true;
-    return docsPromise;
+  spinner.start('Writing the docs');
+
+  // 11ty
+  const output = (await runScript(join(__dirname, 'docs.js'), isDeveloping ? ['--develop'] : undefined))
+    // Cleanup the output
+    .replace('[11ty]', '')
+    .replace(' seconds', 's')
+    .replace(/\(.*?\)/, '')
+    .toLowerCase()
+    .trim();
+
+  // Copy assets
+  await copy(join(docsDir, 'assets'), join(siteDir, 'assets'), { overwrite: true });
+
+  // Copy dist (production only)
+  if (!isDeveloping) {
+    await copy(distDir, join(siteDir, 'dist'));
   }
 
-  isGeneratingDocs = true;
-
-  // Create a new promise that resolves when all generation is done
-  docsPromise = (async () => {
-    try {
-      spinner.start('Writing the docs');
-
-      // 11ty
-      const output = (await runScript(join(__dirname, 'docs.js'), isDeveloping ? ['--develop'] : undefined))
-        // Cleanup the output
-        .replace('[11ty]', '')
-        .replace(' seconds', 's')
-        .replace(/\(.*?\)/, '')
-        .toLowerCase()
-        .trim();
-
-      // Copy assets
-      await copy(join(docsDir, 'assets'), join(siteDir, 'assets'), { overwrite: true });
-
-      // Copy dist (production only)
-      if (!isDeveloping) {
-        await copy(distDir, join(siteDir, 'dist'));
-      }
-
-      spinner.succeed(`Writing the docs ${chalk.gray(`(${output}`)})`);
-
-      // Check for pending rebuild
-      if (pendingDocsRebuild) {
-        pendingDocsRebuild = false;
-        isGeneratingDocs = false; // Reset flag before recursive call
-        await generateDocs(); // Recursive call for pending rebuild
-      }
-    } finally {
-      isGeneratingDocs = false;
-      docsPromise = null;
-    }
-  })();
-
-  return docsPromise;
+  spinner.succeed(`Writing the docs ${chalk.gray(`(${output}`)})`);
 }
 
 // Initial build
@@ -331,46 +304,52 @@ if (isDeveloping) {
 
   // Rebuild and reload when source files change
   bs.watch('src/**/!(*.test).*').on('change', async filename => {
-    spinner.info(`File modified ${chalk.gray(`(${relative(rootDir, filename)})`)}`);
+    // Queue the change event to prevent race conditions
+    await changeQueue.add(async () => {
+      spinner.info(`File modified ${chalk.gray(`(${relative(rootDir, filename)})`)}`);
 
-    try {
-      const isTestFile = filename.includes('.test.ts');
-      const isJsStylesheet = filename.includes('.styles.ts');
-      const isCssStylesheet = filename.includes('.css');
-      const isComponent =
-        filename.includes('components/') &&
-        filename.includes('.ts') &&
-        !isJsStylesheet &&
-        !isCssStylesheet &&
-        !isTestFile;
+      try {
+        const isTestFile = filename.includes('.test.ts');
+        const isJsStylesheet = filename.includes('.styles.ts');
+        const isCssStylesheet = filename.includes('.css');
+        const isComponent =
+          filename.includes('components/') &&
+          filename.includes('.ts') &&
+          !isJsStylesheet &&
+          !isCssStylesheet &&
+          !isTestFile;
 
-      // Re-bundle when relevant files change
-      if (!isTestFile && !isCssStylesheet) {
-        await regenerateBuild();
+        // Re-bundle when relevant files change
+        if (!isTestFile && !isCssStylesheet) {
+          await regenerateBuild();
+        }
+
+        // Copy stylesheets when CSS files change
+        if (isCssStylesheet) {
+          await generateStyles();
+        }
+
+        // Regenerate metadata when components change
+        if (isComponent) {
+          await generateManifest();
+          await generateDocs();
+        }
+
+        reload();
+      } catch (err) {
+        console.error(chalk.red(err));
       }
-
-      // Copy stylesheets when CSS files change
-      if (isCssStylesheet) {
-        await generateStyles();
-      }
-
-      // Regenerate metadata when components change
-      if (isComponent) {
-        await generateManifest();
-        await generateDocs();
-      }
-
-      reload();
-    } catch (err) {
-      console.error(chalk.red(err));
-    }
+    });
   });
 
   // Rebuild the docs and reload when the docs change
   bs.watch(`${docsDir}/**/*.*`).on('change', async filename => {
-    spinner.info(`File modified ${chalk.gray(`(${relative(rootDir, filename)})`)}`);
-    await generateDocs();
-    reload();
+    // Queue the change event to prevent race conditions
+    await changeQueue.add(async () => {
+      spinner.info(`File modified ${chalk.gray(`(${relative(rootDir, filename)})`)}`);
+      await generateDocs();
+      reload();
+    });
   });
 }
 

@@ -55,3 +55,32 @@ export function runScript(scriptPath, args = []) {
     });
   });
 }
+
+/**
+ * A simple queue that skips to the latest task and adds an optional delay before running the next task.
+ */
+export class SkipQueue {
+  constructor(delay = 0) {
+    this.delay = delay;
+    this.queue = Promise.resolve();
+    this.latestTask = null;
+  }
+
+  add(task) {
+    this.latestTask = task;
+
+    this.queue = this.queue.then(() => this.runLatest(task)).catch(() => this.runLatest(task));
+
+    return this.queue;
+  }
+
+  async runLatest(task) {
+    if (this.latestTask === task) {
+      await task();
+      this.latestTask = null;
+      if (this.delay > 0) {
+        await new Promise(r => setTimeout(r, this.delay));
+      }
+    }
+  }
+}

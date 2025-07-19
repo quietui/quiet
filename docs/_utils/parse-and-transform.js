@@ -13,16 +13,14 @@ import { parse } from 'node-html-parser';
  *    //
  *    // No need to return anything. The changes occur in the doc object.
  *    //
+ *    // Transformers MUST return a node-html-parser document
+ *    //
+ *    return doc;
  *  }
  */
 export function parseAndTransform(transformers = []) {
   return function (eleventyConfig) {
     eleventyConfig.addTransform('parse-and-transform', function (content) {
-      // let doc = parse(content);
-
-      //
-      // TODO
-      //
       let doc = parse(content, { blockTextElements: { code: true } });
 
       transformers.forEach(transformer => {

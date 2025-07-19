@@ -232,8 +232,8 @@
 
     --quiet-silent: black;
     --quiet-strident: white;
-    --quiet-background-color: color-mix(in oklab, var(--quiet-neutral-950), white 2.5%);
-    --quiet-paper-color: color-mix(in oklab, var(--quiet-neutral-950), white 4%);
+    --quiet-background-color: var(--quiet-neutral-950);
+    --quiet-paper-color: color-mix(in oklab, var(--quiet-neutral-950), white 2.5%);
     --quiet-text-body: var(--quiet-neutral-200);
     --quiet-text-muted: var(--quiet-neutral-500);
     --quiet-focus-color: var(--quiet-primary-fill-mid);

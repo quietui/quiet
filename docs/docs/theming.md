@@ -517,7 +517,7 @@ These tokens represent pure black and white, but their values invert in dark mod
 
 <div class="swatches">
   <quiet-copy data="var(--quiet-silent)">
-    <button aria-label="Silent" style="background-color: var(--quiet-silent); border: solid 1px var(--quiet-strident);"></button> silent
+    <button aria-label="Silent" style="background-color: var(--quiet-silent); border: solid 1px color-mix(in oklab, var(--quiet-strident), transparent 75%);"></button> silent
   </quiet-copy>
   <quiet-copy data="var(--quiet-strident)">
     <button aria-label="Strident" style="background-color: var(--quiet-strident); border: solid 1px var(--quiet-silent);"></button> strident

@@ -251,7 +251,7 @@ Add `variant="destructive"` to any [dropdown item](/docs/components/dropdown-ite
 
 ### Submenus
 
-To create submenus, nest [dropdown items](/docs/components/dropdown-item) inside of a dropdown item and assign `slot="submenu"` to each one. You can also add [dividers](/docs/components/divider) as needed.
+To create submenus, nest additional [dropdown items](/docs/components/dropdown-item) in a dropdown item and assign `slot="submenu"` to them. You can also add [dividers](/docs/components/divider) as needed.
 
 ```html {.example}
 <quiet-dropdown id="dropdown__submenus">
@@ -302,7 +302,7 @@ To create submenus, nest [dropdown items](/docs/components/dropdown-item) inside
 ```
 
 :::info
-Dropdown items that have a submenu will not dispatch the `quiet-select` event. However, items inside the submenu will, unless they also have a submenu.
+Dropdown items that contain a submenu will not dispatch the `quiet-select` event when clicked. However, items inside of the submenu will, unless they also have a submenu.
 :::
 
 ### Disabling items

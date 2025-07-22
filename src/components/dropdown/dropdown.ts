@@ -788,19 +788,28 @@ export class QuietDropdown extends QuietElement {
     item.submenuElement.style.setProperty('--safe-triangle-visible', 'block');
 
     const submenuRect = item.submenuElement.getBoundingClientRect();
+    const placement = item.submenuElement.getAttribute('data-placement') || '';
     const isRtl = this.localize.dir() === 'rtl';
+    const isLeftPlacement = placement.startsWith('left');
+    const isRightPlacement = placement.startsWith('right');
+
+    // Determine which edge of the submenu to use based on actual placement
+    let submenuEdgeX: number;
+    if (isLeftPlacement) {
+      // Submenu is on the left, use right edge
+      submenuEdgeX = submenuRect.right;
+    } else if (isRightPlacement) {
+      // Submenu is on the right, use left edge
+      submenuEdgeX = submenuRect.left;
+    } else {
+      // Fallback to RTL/LTR logic for other placements
+      submenuEdgeX = isRtl ? submenuRect.right : submenuRect.left;
+    }
 
     // Set the start and end points of the submenu side of the triangle
-    // In RTL, we use the right edge of the submenu; in LTR, we use the left edge
-    item.submenuElement.style.setProperty(
-      '--safe-triangle-submenu-start-x',
-      `${isRtl ? submenuRect.right : submenuRect.left}px`
-    );
+    item.submenuElement.style.setProperty('--safe-triangle-submenu-start-x', `${submenuEdgeX}px`);
     item.submenuElement.style.setProperty('--safe-triangle-submenu-start-y', `${submenuRect.top}px`);
-    item.submenuElement.style.setProperty(
-      '--safe-triangle-submenu-end-x',
-      `${isRtl ? submenuRect.right : submenuRect.left}px`
-    );
+    item.submenuElement.style.setProperty('--safe-triangle-submenu-end-x', `${submenuEdgeX}px`);
     item.submenuElement.style.setProperty('--safe-triangle-submenu-end-y', `${submenuRect.bottom}px`);
   }
 
@@ -810,20 +819,22 @@ export class QuietDropdown extends QuietElement {
     const currentSubmenuItem = this.getCurrentSubmenuItem();
     if (!currentSubmenuItem?.submenuOpen || !currentSubmenuItem.submenuElement) return;
 
-    // Get submenu rect for boundary checking
     const submenuRect = currentSubmenuItem.submenuElement.getBoundingClientRect();
-    const isRtl = this.localize.dir() === 'rtl';
-
-    // Determine the submenu edge x-coordinate
-    // LTR: we use the left edge.
-    // RTL: use the right edge
-    const submenuEdgeX = isRtl ? submenuRect.right : submenuRect.left;
-
-    // Calculate the constrained cursor position
-    // LTR: cursor must be to the left of submenu edge (min)
-    // RTL: cursor must be to the right of submenu edge (max)
-    const constrainedX = isRtl ? Math.max(event.clientX, submenuEdgeX) : Math.min(event.clientX, submenuEdgeX);
+    const placement = currentSubmenuItem.submenuElement.getAttribute('data-placement') || '';
+    const isLeftPlacement = placement.startsWith('left');
     const constrainedY = Math.max(submenuRect.top, Math.min(event.clientY, submenuRect.bottom));
+    let submenuEdgeX: number;
+    let constrainedX: number;
+
+    if (isLeftPlacement) {
+      // Submenu is on the left - cursor must be to the right of the right edge
+      submenuEdgeX = submenuRect.right;
+      constrainedX = Math.max(event.clientX, submenuEdgeX);
+    } else {
+      // Submenu is on the right - cursor must be to the left of the left edge
+      submenuEdgeX = submenuRect.left;
+      constrainedX = Math.min(event.clientX, submenuEdgeX);
+    }
 
     // Update cursor position
     currentSubmenuItem.submenuElement.style.setProperty('--safe-triangle-cursor-x', `${constrainedX}px`);
@@ -837,7 +848,7 @@ export class QuietDropdown extends QuietElement {
         .composedPath()
         .find(el => el instanceof HTMLElement && el.closest('[part="submenu"]') === currentSubmenuItem.submenuElement);
 
-    // Close if not in safe area
+    // Close if it's outside of the safe area
     if (!isOverItem && !isOverSubmenu) {
       setTimeout(() => {
         if (!currentSubmenuItem.matches(':hover') && !currentSubmenuItem.submenuElement?.matches(':hover')) {

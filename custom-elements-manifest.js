@@ -1,3 +1,4 @@
+import { jsxTypesPlugin } from '@wc-toolkit/jsx-types';
 import { parse } from 'comment-parser';
 import { customElementVsCodePlugin } from 'custom-element-vs-code-integration';
 import { readFileSync } from 'fs';
@@ -103,6 +104,12 @@ export default {
           url: `https://quietui.org/docs/components/${tag.replace('quiet-', '')}`
         }
       ]
+    }),
+
+    // Generate JSX types (see https://wc-toolkit.com/integrations/jsx/)
+    jsxTypesPlugin({
+      fileName: 'custom-elements-jsx.d.ts',
+      outdir
     })
   ]
 };

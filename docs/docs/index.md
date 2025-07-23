@@ -160,4 +160,36 @@ setLibraryPath('/path/to/quiet/dist');
 If components or icons aren't loading, make sure you've copied the necessary files into your project and set the library path correctly!
 :::
 
+## Using with JSX
+
+To support JSX-based frameworks such as React, Preact, and Solid, a special types file is available at:
+
+```
+@quietui/quiet/dist/custom-elements-jsx.d.ts
+```
+
+These types will provide inline documentation, autocomplete, and type-safe validation for every component. To use the types, add them to your `tsconfig.json` file as shown below. (If you're not using npm, you might need to adjust the path.)
+
+```json
+{
+  "compilerOptions": {
+    "types": ["node-modules/@quietui/quiet/dist/custom-elements-jsx.d.ts"]
+  }
+}
+```
+
+Alternatively, you can create a declaration file and extend JSX's `IntrinsicElements`.
+
+```ts
+import type { CustomElements, CustomCssProperties } from "@quietui/quiet/dist/custom-elements-jsx.d.ts";
+
+// The module name is typically 'react', 'preact', 'solid-js', or similar
+declare module 'preact' {
+  namespace JSX {
+    interface IntrinsicElements extends CustomElements {}
+  }
+  interface CSSProperties extends CustomCssProperties {}
+}
+```
+
 <img class="whiskers-center" src="/assets/images/whiskers/with-book.svg" alt="Whiskers the mouse holding a book">

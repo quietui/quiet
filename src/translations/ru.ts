@@ -55,6 +55,7 @@ const translation: Translation = {
     return `Показано все ${number} элемента`;
   },
   spoiler: 'Спойлер',
+  toggleNavigation: 'Переключить навигацию',
   visualComparisonSlider: 'Ползунок визуального сравнения',
   zoomIn: 'Приблизить',
   zoomOut: 'Отдалить'

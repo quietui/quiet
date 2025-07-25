@@ -54,6 +54,7 @@ const translation: Translation = {
     return `Showing all ${number} items`;
   },
   spoiler: 'Spoiler',
+  toggleNavigation: 'Toggle navigation',
   visualComparisonSlider: 'Visual comparison slider',
   zoomIn: 'Zoom in',
   zoomOut: 'Zoom out'

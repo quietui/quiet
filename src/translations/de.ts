@@ -55,6 +55,7 @@ const translation: Translation = {
     return `Zeige alle ${number} artikel`;
   },
   spoiler: 'Spoiler',
+  toggleNavigation: 'Navigation umschalten',
   visualComparisonSlider: 'Visueller Vergleichsregler',
   zoomIn: 'Heranzoomen',
   zoomOut: 'Herauszoomen'

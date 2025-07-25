@@ -29,7 +29,7 @@ import styles from './navicon.styles.js';
  * @cssstate disabled - Applied when the navicon is disabled.
  * @cssstate focused - Applied when the navicon has focus.
  *
- * @cssproperty [--line-width=0.0625em] - The spacing between lines from the edges. Defaults to 25%.
+ * @cssproperty [--line-width=2px] - The spacing between lines from the edges. Defaults to 25%.
  * @cssproperty [--line-transition-duration=200ms] - The duration of the symbol's animation.
  * @cssproperty [--line-transition-easing=cubic-bezier(0.4, 0, 0.2, 1)] - The easing to use for the symbol's animation.
  */

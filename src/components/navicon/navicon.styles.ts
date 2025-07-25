@@ -2,7 +2,7 @@ import { css } from 'lit';
 
 export default css`
   :host {
-    --line-width: 0.0625em;
+    --line-width: 2px; /* px value to keep the lines crisp */
     --line-transition-duration: 200ms;
     --line-transition-easing: cubic-bezier(0.4, 0, 0.2, 1);
 
@@ -17,7 +17,7 @@ export default css`
     border-radius: var(--quiet-border-radius-md);
     background: none;
     color: inherit;
-    font-size: 2rem; /* intentionally use rem to set an opinionated default size */
+    font-size: 1.75rem; /* intentionally use rem to set an opinionated default size */
     cursor: pointer;
     touch-action: manipulation;
     user-select: none;

@@ -31,10 +31,6 @@ export default css`
     }
   }
 
-  :host(:active:not([disabled])) {
-    translate: 0 var(--quiet-button-active-offset);
-  }
-
   :host(:focus) {
     outline: none;
   }

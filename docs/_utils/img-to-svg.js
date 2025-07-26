@@ -15,7 +15,7 @@ export function imgToSvgPlugin(eleventyConfig, options = {}) {
   const { colorMap = {}, inputDir = '.', shouldProcess = filename => filename.endsWith('.svg') } = options;
 
   // Register a transform to process HTML after it's been generated
-  eleventyConfig.addTransform('svgColorsTransform', async function (content, outputPath) {
+  eleventyConfig.addTransform('imgToSvgTransform', async function (content, outputPath) {
     // Only process HTML files
     if (!outputPath || !outputPath.endsWith('.html')) {
       return content;

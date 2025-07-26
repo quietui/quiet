@@ -40,6 +40,12 @@ export class QuietNavicon extends QuietElement {
 
   private localize = new Localize(this);
 
+  /**
+   * The ID of the associated menu that gets shown/hidden when the navicon is toggled. The element must be in the same
+   * document as the navicon.
+   */
+  @property({ reflect: true }) for: string;
+
   /** Determines if the navicon is toggled on. */
   @property({ reflect: true, type: Boolean }) expanded = false;
 
@@ -80,6 +86,10 @@ export class QuietNavicon extends QuietElement {
     if (changedProperties.has('expanded')) {
       this.customStates.set('expanded', this.expanded);
       this.setAttribute('aria-expanded', this.expanded ? 'true' : 'false');
+    }
+
+    if (changedProperties.has('for')) {
+      this.setAttribute('aria-controls', this.for);
     }
 
     if (changedProperties.has('label')) {

@@ -11,10 +11,10 @@ layout: component
 
 ### Associating a menu
 
-The host element has a role of `button` and automatically sets `aria-expanded` and `aria-label`. To associated it with a navigation menu, add `aria-controls="id"` to the navicon. This tells assistive devices what it controls, but the navicon is not responsible for actually showing or hiding the menu.
+To associate the navicon with a navigation menu, add `for="id"`, where `id` is the ID of the nav menu that will show/hide when toggled. This tells assistive devices which element the navicon controls. The nav menu must exist in the same document as the navicon to work correctly.
 
 ```html
-<quiet-navicon aria-controls="nav-menu"></quiet-navicon>
+<quiet-navicon for="nav-menu"></quiet-navicon>
 
 <!-- The navicon will toggle this element -->
 <nav id="nav-menu">
@@ -22,7 +22,7 @@ The host element has a role of `button` and automatically sets `aria-expanded` a
 </nav>
 ```
 
-To show or hide the menu when the navicon is clicked, you must add your own JavaScript and/or CSS. You can listen for the `click` event and manage it with JavaScript.
+**The navicon does not show or hide the menu for you.** You must add your own JavaScript and/or CSS to toggle it. You can listen for the `click` event and manage things with JavaScript.
 
 ```js
 const navicon = document.querySelector('quiet-navicon');
@@ -36,7 +36,7 @@ navicon.addEventListener('click', () => {
 });
 ```
 
-Or, for a CSS-only solution, you can use the `:has()` selector combined with `:state(expanded)` to target the menu when the navicon is expanded., e.g.:
+For a CSS-only solution, try using the `:has()` selector combined with `:state(expanded)` to target the nav menu when the navicon is expanded.
 
 ```css
 #nav-menu {

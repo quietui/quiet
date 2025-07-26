@@ -4,7 +4,7 @@ layout: component
 ---
 
 ```html {.example}
-<quiet-navicon label="Toggle menu"></quiet-navicon>
+<quiet-navicon label="Toggle menu" style="font-size: 1.75rem;"></quiet-navicon>
 ```
 
 ## Examples
@@ -22,7 +22,7 @@ The host element has a role of `button` and automatically sets `aria-expanded` a
 </nav>
 ```
 
-To show or hide the menu when the navicon is clicked, you must add your own JavaScript and/or CSS. You can listen for the `click` event with JavaScript.
+To show or hide the menu when the navicon is clicked, you must add your own JavaScript and/or CSS. You can listen for the `click` event and manage it with JavaScript.
 
 ```js
 const navicon = document.querySelector('quiet-navicon');
@@ -36,14 +36,14 @@ navicon.addEventListener('click', () => {
 });
 ```
 
-For a CSS-only solution, try using the `:has()` selector with `:state(toggled)`, e.g.:
+Or, for a CSS-only solution, you can use the `:has()` selector combined with `:state(activated)` to target the menu when the navicon is activated., e.g.:
 
 ```css
 #nav-menu {
   /* Hidden menu styles */
 }
 
-html:has(quiet-navicon:state(toggled)) #nav-menu {
+body:has(quiet-navicon:state(activated)) #nav-menu {
   /* Visible menu styles */
 }
 ```
@@ -53,7 +53,7 @@ html:has(quiet-navicon:state(toggled)) #nav-menu {
 By default, the navicon's accessible label is a localized version of the phrase "toggle navigation." Use the `label` attribute to provide your own label. Labels aren't displayed on the screen, but they're announced by assistive devices.
 
 ```html {.example}
-<quiet-navicon label="View mobile menu"></quiet-navicon>
+<quiet-navicon label="View mobile menu" style="font-size: 1.75rem;"></quiet-navicon>
 ```
 
 ### Changing the symbol
@@ -61,20 +61,22 @@ By default, the navicon's accessible label is a localized version of the phrase 
 Use the `symbol` attribute to choose between the `hamburger` and the `equals` symbols.
 
 ```html {.example}
-<quiet-navicon symbol="hamburger"></quiet-navicon>
-<quiet-navicon symbol="equals"></quiet-navicon>
+<div style="font-size: 1.75rem;">
+  <quiet-navicon symbol="hamburger"></quiet-navicon>
+  <quiet-navicon symbol="equals"></quiet-navicon>
+</div>
 ```
 
 ### Changing the size
 
-Navicons have a default size, but you can override the `font-size` property to make them bigger or smaller.
+Navicons are sized based on the current font size. You can make them bigger or smaller by changing the `font-size` property on the component or an ancestor. A good default size is 1.75rem, which equals 28&times;28px with a 16px root size.
 
 ```html {.example}
-<quiet-navicon style="font-size: 1.5rem;"></quiet-navicon>
-<quiet-navicon style="font-size: 1.5rem;" symbol="equals"></quiet-navicon>
+<quiet-navicon style="font-size: 1rem;"></quiet-navicon>
+<quiet-navicon style="font-size: 1rem;" symbol="equals"></quiet-navicon>
 <br><br>
-<quiet-navicon style="font-size: 2.5rem;"></quiet-navicon>
-<quiet-navicon style="font-size: 2.5rem;" symbol="equals" ></quiet-navicon>
+<quiet-navicon style="font-size: 3rem;"></quiet-navicon>
+<quiet-navicon style="font-size: 3rem;" symbol="equals" ></quiet-navicon>
 ```
 
 ### Changing the color
@@ -82,8 +84,10 @@ Navicons have a default size, but you can override the `font-size` property to m
 Set the `color` CSS property to control the color of the navicon.
 
 ```html {.example}
-<quiet-navicon style="color: deeppink;"></quiet-navicon>
-<quiet-navicon symbol="equals" style="color: dodgerblue;"></quiet-navicon>
+<div style="font-size: 1.75rem;">
+  <quiet-navicon style="color: deeppink;"></quiet-navicon>
+  <quiet-navicon symbol="equals" style="color: dodgerblue;"></quiet-navicon>
+</div>
 ```
 
 ### Disabling
@@ -91,5 +95,5 @@ Set the `color` CSS property to control the color of the navicon.
 Use the `disabled` attribute to disable the navicon.
 
 ```html {.example}
-<quiet-navicon disabled></quiet-navicon>
+<quiet-navicon disabled style="font-size: 1.75rem;"></quiet-navicon>
 ```

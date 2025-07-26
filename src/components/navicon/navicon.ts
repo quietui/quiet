@@ -11,8 +11,7 @@ import styles from './navicon.styles.js';
 /**
  * <quiet-navicon>
  *
- * @summary A navicon, or "hamburger button", typically controls a navigation menu and shows a sleek animation when
- *  toggled.
+ * @summary A navicon, or "hamburger button", is a special button used to control mobile navigation menus.
  * @documentation https://quietui.org/docs/components/navicon
  * @status stable
  * @since 1.0
@@ -25,13 +24,15 @@ import styles from './navicon.styles.js';
  * @csspart line-middle - The middle line (hamburger symbol only).
  * @csspart line-bottom - The bottom line.
  *
- * @cssstate activated - Applied when the navicon is activated.
+ * @cssstate expanded - Applied when the navicon is toggled on.
  * @cssstate disabled - Applied when the navicon is disabled.
  * @cssstate focused - Applied when the navicon has focus.
  *
- * @cssproperty [--line-width=0.0625em] - The width of the lines.
+ * @cssproperty [--dot-size=0.125em] - The width of each dot. Available when symbol is `dots`.
+ * @cssproperty [--line-width=0.0625em] - The width of each line. Available when symbol is `hamburger` or `equals`.
  * @cssproperty [--line-transition-duration=200ms] - The duration of the symbol's animation.
  * @cssproperty [--line-transition-easing=cubic-bezier(0.4, 0, 0.2, 1)] - The easing to use for the symbol's animation.
+ * @cssproperty [--dot-size=0.125em] - The size of the dots in the dots symbol.
  */
 @customElement('quiet-navicon')
 export class QuietNavicon extends QuietElement {
@@ -39,11 +40,11 @@ export class QuietNavicon extends QuietElement {
 
   private localize = new Localize(this);
 
-  /** True when the navicon is activated (e.g. showing a menu). */
-  @property({ reflect: true, type: Boolean }) activated = false;
+  /** Determines if the navicon is toggled on. */
+  @property({ reflect: true, type: Boolean }) expanded = false;
 
   /** Determines the navicon's symbol. */
-  @property({ reflect: true }) symbol: 'hamburger' | 'equals' = 'hamburger';
+  @property({ reflect: true }) symbol: 'hamburger' | 'equals' | 'dots' = 'hamburger';
 
   /** Disables the navicon. */
   @property({ type: Boolean, reflect: true }) disabled = false;
@@ -76,9 +77,9 @@ export class QuietNavicon extends QuietElement {
   }
 
   updated(changedProperties: PropertyValues<this>) {
-    if (changedProperties.has('activated')) {
-      this.customStates.set('activated', this.activated);
-      this.setAttribute('aria-expanded', this.activated ? 'true' : 'false');
+    if (changedProperties.has('expanded')) {
+      this.customStates.set('expanded', this.expanded);
+      this.setAttribute('aria-expanded', this.expanded ? 'true' : 'false');
     }
 
     if (changedProperties.has('label')) {
@@ -109,7 +110,7 @@ export class QuietNavicon extends QuietElement {
       return;
     }
 
-    this.activated = !this.activated;
+    this.expanded = !this.expanded;
   };
 
   private handleKeyDown = (event: KeyboardEvent) => {
@@ -120,7 +121,7 @@ export class QuietNavicon extends QuietElement {
 
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
-      this.activated = !this.activated;
+      this.expanded = !this.expanded;
     }
   };
 
@@ -128,13 +129,16 @@ export class QuietNavicon extends QuietElement {
     return html`
       <span
         class=${classMap({
-          lines: true,
+          lines: this.symbol === 'hamburger' || this.symbol === 'equals',
+          dots: this.symbol === 'dots',
           hamburger: this.symbol === 'hamburger',
           equals: this.symbol === 'equals'
         })}
       >
         <span part="line line-top" class="line top"></span>
-        ${this.symbol === 'hamburger' ? html`<span part="line line-middle" class="line middle"></span>` : ''}
+        ${['hamburger', 'dots'].includes(this.symbol)
+          ? html`<span part="line line-middle" class="line middle"></span>`
+          : ''}
         <span part="line line-bottom" class="line bottom"></span>
       </span>
     `;

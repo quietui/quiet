@@ -2,6 +2,7 @@ import { css } from 'lit';
 
 export default css`
   :host {
+    --dot-size: 0.125em;
     --line-width: 0.0625em;
     --line-transition-duration: 200ms;
     --line-transition-easing: cubic-bezier(0.4, 0, 0.2, 1);
@@ -17,6 +18,7 @@ export default css`
     border-radius: var(--quiet-border-radius-md);
     background: none;
     color: inherit;
+    vertical-align: middle;
     cursor: pointer;
     touch-action: manipulation;
     user-select: none;
@@ -85,17 +87,17 @@ export default css`
     }
   }
 
-  :host(:state(activated)) .lines.hamburger .top {
+  :host(:state(expanded)) .lines.hamburger .top {
     top: 50%;
     transform: translateY(-50%) rotate(45deg);
   }
 
-  :host(:state(activated)) .lines.hamburger .middle {
+  :host(:state(expanded)) .lines.hamburger .middle {
     transform: translateY(-50%) scale(0);
     opacity: 0;
   }
 
-  :host(:state(activated)) .lines.hamburger .bottom {
+  :host(:state(expanded)) .lines.hamburger .bottom {
     bottom: 50%;
     transform: translateY(50%) rotate(-45deg);
   }
@@ -111,13 +113,74 @@ export default css`
     }
   }
 
-  :host(:state(activated)) .lines.equals .top {
+  :host(:state(expanded)) .lines.equals .top {
     top: 50%;
     transform: translateY(-50%) rotate(45deg);
   }
 
-  :host(:state(activated)) .lines.equals .bottom {
+  :host(:state(expanded)) .lines.equals .bottom {
     bottom: 50%;
     transform: translateY(50%) rotate(-45deg);
+  }
+
+  /* Dots symbol (3 dots arranged vertically) */
+  .dots {
+    .top {
+      position: absolute;
+      top: 18%;
+      left: 50%;
+      width: round(var(--dot-size), 1px);
+      height: round(var(--dot-size), 1px);
+      transform: translateX(-50%); /* Center horizontally */
+      border-radius: 50%;
+      background-color: currentColor;
+      transition: all var(--line-transition-duration) var(--line-transition-easing);
+    }
+
+    .middle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: round(var(--dot-size), 1px);
+      height: round(var(--dot-size), 1px);
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background-color: currentColor;
+      transition: all var(--line-transition-duration) var(--line-transition-easing);
+    }
+
+    .bottom {
+      position: absolute;
+      bottom: 18%;
+      left: 50%;
+      width: round(var(--dot-size), 1px);
+      height: round(var(--dot-size), 1px);
+      transform: translateX(-50%); /* Center horizontally */
+      border-radius: 50%;
+      background-color: currentColor;
+      transition: all var(--line-transition-duration) var(--line-transition-easing);
+    }
+  }
+
+  /* Expanded state: dots transform into X */
+  :host(:state(expanded)) .dots .top {
+    top: 50%;
+    width: 62.5%;
+    height: round(var(--line-width), 1px);
+    transform: translate(-50%, -50%) rotate(45deg); /* Maintain centering with rotation */
+    border-radius: var(--quiet-border-radius-pill);
+  }
+
+  :host(:state(expanded)) .dots .middle {
+    transform: translate(-50%, -50%) scale(0); /* Maintain centering while scaling */
+    opacity: 0;
+  }
+
+  :host(:state(expanded)) .dots .bottom {
+    bottom: 50%;
+    width: 62.5%;
+    height: round(var(--line-width), 1px);
+    transform: translate(-50%, 50%) rotate(-45deg); /* Maintain centering with rotation */
+    border-radius: var(--quiet-border-radius-pill);
   }
 `;

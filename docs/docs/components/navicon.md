@@ -9,7 +9,7 @@ layout: component
 
 ## Examples
 
-### Associating with a menu
+### Associating a menu
 
 The host element has a role of `button` and automatically sets `aria-expanded` and `aria-label`. To associated it with a navigation menu, add `aria-controls="id"` to the navicon. This tells assistive devices what it controls, but the navicon is not responsible for actually showing or hiding the menu.
 
@@ -28,7 +28,7 @@ To show or hide the menu when the navicon is clicked, you must add your own Java
 const navicon = document.querySelector('quiet-navicon');
 
 navicon.addEventListener('click', () => {
-  if (navicon.activated) {
+  if (navicon.expanded) {
     // Show the menu
   } else {
     // Hide the menu
@@ -36,14 +36,14 @@ navicon.addEventListener('click', () => {
 });
 ```
 
-Or, for a CSS-only solution, you can use the `:has()` selector combined with `:state(activated)` to target the menu when the navicon is activated., e.g.:
+Or, for a CSS-only solution, you can use the `:has()` selector combined with `:state(expanded)` to target the menu when the navicon is expanded., e.g.:
 
 ```css
 #nav-menu {
   /* Hidden menu styles */
 }
 
-body:has(quiet-navicon:state(activated)) #nav-menu {
+body:has(quiet-navicon:state(expanded)) #nav-menu {
   /* Visible menu styles */
 }
 ```
@@ -58,12 +58,13 @@ By default, the navicon's accessible label is a localized version of the phrase 
 
 ### Changing the symbol
 
-Use the `symbol` attribute to choose between the `hamburger` and the `equals` symbols.
+Use the `symbol` attribute to choose between the `hamburger`, `equals`, and `dots` symbols.
 
 ```html {.example}
 <div style="font-size: 1.75rem;">
   <quiet-navicon symbol="hamburger"></quiet-navicon>
   <quiet-navicon symbol="equals"></quiet-navicon>
+  <quiet-navicon symbol="dots"></quiet-navicon>
 </div>
 ```
 
@@ -74,9 +75,11 @@ Navicons are sized based on the current font size. You can make them bigger or s
 ```html {.example}
 <quiet-navicon style="font-size: 1rem;"></quiet-navicon>
 <quiet-navicon style="font-size: 1rem;" symbol="equals"></quiet-navicon>
+<quiet-navicon style="font-size: 1rem;" symbol="dots"></quiet-navicon>
 <br><br>
 <quiet-navicon style="font-size: 3rem;"></quiet-navicon>
 <quiet-navicon style="font-size: 3rem;" symbol="equals" ></quiet-navicon>
+<quiet-navicon style="font-size: 3rem;" symbol="dots" ></quiet-navicon>
 ```
 
 ### Changing the color

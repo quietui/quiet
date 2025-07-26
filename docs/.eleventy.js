@@ -72,7 +72,6 @@ export default function (eleventyConfig) {
 
     return displayName;
   });
-
   eleventyConfig.addFilter('stripExtension', string => parse(string).name);
   eleventyConfig.addFilter('stripQuietPrefix', content => content.replace(/^quiet-/, ''));
   eleventyConfig.addFilter('splitPipes', content => {

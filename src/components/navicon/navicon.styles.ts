@@ -17,7 +17,6 @@ export default css`
     border-radius: var(--quiet-border-radius-md);
     background: none;
     color: inherit;
-    font-size: 1.75rem; /* intentionally use rem to set an opinionated default size */
     cursor: pointer;
     touch-action: manipulation;
     user-select: none;

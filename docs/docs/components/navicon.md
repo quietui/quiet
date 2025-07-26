@@ -90,6 +90,7 @@ Set the `color` CSS property to control the color of the navicon.
 <div style="font-size: 1.75rem;">
   <quiet-navicon style="color: deeppink;"></quiet-navicon>
   <quiet-navicon symbol="equals" style="color: dodgerblue;"></quiet-navicon>
+  <quiet-navicon symbol="dots" style="color: tomato;"></quiet-navicon>
 </div>
 ```
 

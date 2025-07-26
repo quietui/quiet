@@ -2,7 +2,7 @@ import { css } from 'lit';
 
 export default css`
   :host {
-    --line-width: 2px; /* px value to keep the lines crisp */
+    --line-width: 0.0625em;
     --line-transition-duration: 200ms;
     --line-transition-easing: cubic-bezier(0.4, 0, 0.2, 1);
 
@@ -63,7 +63,7 @@ export default css`
     display: block;
     position: absolute;
     width: 62.5%;
-    height: var(--line-width);
+    height: round(var(--line-width), 1px);
     transform-origin: center;
     border-radius: var(--quiet-border-radius-pill);
     background-color: currentColor;

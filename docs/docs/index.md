@@ -162,7 +162,7 @@ If components or icons aren't loading, make sure you've copied the necessary fil
 
 ## Using with JSX
 
-To support JSX-based frameworks such as React, Preact, and Solid, a special types file is available at:
+To support JSX-based frameworks such as React and Preact, a special types file is available at:
 
 ```
 @quietui/quiet/dist/custom-elements-jsx.d.ts
@@ -183,7 +183,7 @@ Alternatively, you can create a declaration file and extend JSX's `IntrinsicElem
 ```ts
 import type { CustomElements, CustomCssProperties } from "@quietui/quiet/dist/custom-elements-jsx.d.ts";
 
-// The module name is typically 'react', 'preact', 'solid-js', or similar
+// The module name is typically 'react', 'preact', or similar
 declare module 'preact' {
   namespace JSX {
     interface IntrinsicElements extends CustomElements {}

@@ -28,7 +28,7 @@ import styles from './navicon.styles.js';
  * @cssstate disabled - Applied when the navicon is disabled.
  * @cssstate focused - Applied when the navicon has focus.
  *
- * @cssproperty [--dot-size=0.125em] - The width of each dot. Available when symbol is `dots`.
+ * @cssproperty [--dot-size=0.125em] - The width of each dot. Available when symbol is `vertical-dots` or `horizontal-dots`.
  * @cssproperty [--line-width=0.0625em] - The width of each line. Available when symbol is `hamburger` or `equals`.
  * @cssproperty [--line-transition-duration=200ms] - The duration of the symbol's animation.
  * @cssproperty [--line-transition-easing=cubic-bezier(0.4, 0, 0.2, 1)] - The easing to use for the symbol's animation.
@@ -44,7 +44,7 @@ export class QuietNavicon extends QuietElement {
   @property({ reflect: true, type: Boolean }) expanded = false;
 
   /** Determines the navicon's symbol. */
-  @property({ reflect: true }) symbol: 'hamburger' | 'equals' | 'dots' = 'hamburger';
+  @property({ reflect: true }) symbol: 'hamburger' | 'equals' | 'horizontal-dots' | 'vertical-dots' = 'hamburger';
 
   /** Disables the navicon. */
   @property({ type: Boolean, reflect: true }) disabled = false;
@@ -130,13 +130,15 @@ export class QuietNavicon extends QuietElement {
       <span
         class=${classMap({
           lines: this.symbol === 'hamburger' || this.symbol === 'equals',
-          dots: this.symbol === 'dots',
+          dots: this.symbol === 'vertical-dots' || this.symbol === 'horizontal-dots',
+          'vertical-dots': this.symbol === 'vertical-dots',
+          'horizontal-dots': this.symbol === 'horizontal-dots',
           hamburger: this.symbol === 'hamburger',
           equals: this.symbol === 'equals'
         })}
       >
         <span part="line line-top" class="line top"></span>
-        ${['hamburger', 'dots'].includes(this.symbol)
+        ${['hamburger', 'vertical-dots', 'horizontal-dots'].includes(this.symbol)
           ? html`<span part="line line-middle" class="line middle"></span>`
           : ''}
         <span part="line line-bottom" class="line bottom"></span>

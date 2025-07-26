@@ -58,13 +58,14 @@ By default, the navicon's accessible label is a localized version of the phrase 
 
 ### Changing the symbol
 
-Use the `symbol` attribute to choose between the `hamburger`, `equals`, and `dots` symbols.
+Use the `symbol` attribute to choose between the `hamburger`, `equals`, `horizontal-dots`, and `vertical-dots` symbols.
 
 ```html {.example}
 <div style="font-size: 1.75rem;">
   <quiet-navicon symbol="hamburger"></quiet-navicon>
   <quiet-navicon symbol="equals"></quiet-navicon>
-  <quiet-navicon symbol="dots"></quiet-navicon>
+  <quiet-navicon symbol="horizontal-dots"></quiet-navicon>
+  <quiet-navicon symbol="vertical-dots"></quiet-navicon>
 </div>
 ```
 
@@ -75,11 +76,13 @@ Navicons are sized based on the current font size. You can make them bigger or s
 ```html {.example}
 <quiet-navicon style="font-size: 1rem;"></quiet-navicon>
 <quiet-navicon style="font-size: 1rem;" symbol="equals"></quiet-navicon>
-<quiet-navicon style="font-size: 1rem;" symbol="dots"></quiet-navicon>
+<quiet-navicon style="font-size: 1rem;" symbol="horizontal-dots"></quiet-navicon>
+<quiet-navicon style="font-size: 1rem;" symbol="vertical-dots"></quiet-navicon>
 <br><br>
 <quiet-navicon style="font-size: 3rem;"></quiet-navicon>
 <quiet-navicon style="font-size: 3rem;" symbol="equals" ></quiet-navicon>
-<quiet-navicon style="font-size: 3rem;" symbol="dots" ></quiet-navicon>
+<quiet-navicon style="font-size: 3rem;" symbol="horizontal-dots" ></quiet-navicon>
+<quiet-navicon style="font-size: 3rem;" symbol="vertical-dots" ></quiet-navicon>
 ```
 
 ### Changing the color
@@ -90,7 +93,8 @@ Set the `color` CSS property to control the color of the navicon.
 <div style="font-size: 1.75rem;">
   <quiet-navicon style="color: deeppink;"></quiet-navicon>
   <quiet-navicon symbol="equals" style="color: dodgerblue;"></quiet-navicon>
-  <quiet-navicon symbol="dots" style="color: tomato;"></quiet-navicon>
+  <quiet-navicon symbol="horizontal-dots" style="color: seagreen;"></quiet-navicon>
+  <quiet-navicon symbol="vertical-dots" style="color: tomato;"></quiet-navicon>
 </div>
 ```
 

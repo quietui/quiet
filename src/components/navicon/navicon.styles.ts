@@ -123,8 +123,8 @@ export default css`
     transform: translateY(50%) rotate(-45deg);
   }
 
-  /* Dots symbol (3 dots arranged vertically) */
-  .dots {
+  /* Vertical dots symbol (3 dots arranged vertically) */
+  .dots.vertical-dots {
     .top {
       position: absolute;
       top: 18%;
@@ -162,8 +162,8 @@ export default css`
     }
   }
 
-  /* Expanded state: dots transform into X */
-  :host(:state(expanded)) .dots .top {
+  /* Expanded state: vertical dots transform into X */
+  :host(:state(expanded)) .dots.vertical-dots .top {
     top: 50%;
     width: 62.5%;
     height: round(var(--line-width), 1px);
@@ -171,16 +171,79 @@ export default css`
     border-radius: var(--quiet-border-radius-pill);
   }
 
-  :host(:state(expanded)) .dots .middle {
+  :host(:state(expanded)) .dots.vertical-dots .middle {
     transform: translate(-50%, -50%) scale(0); /* Maintain centering while scaling */
     opacity: 0;
   }
 
-  :host(:state(expanded)) .dots .bottom {
+  :host(:state(expanded)) .dots.vertical-dots .bottom {
     bottom: 50%;
     width: 62.5%;
     height: round(var(--line-width), 1px);
     transform: translate(-50%, 50%) rotate(-45deg); /* Maintain centering with rotation */
+    border-radius: var(--quiet-border-radius-pill);
+  }
+
+  /* Horizontal dots symbol (3 dots arranged horizontally) */
+  .dots.horizontal-dots {
+    .top {
+      position: absolute;
+      top: 50%;
+      left: 18%;
+      width: round(var(--dot-size), 1px);
+      height: round(var(--dot-size), 1px);
+      transform: translateY(-50%); /* Center vertically */
+      border-radius: 50%;
+      background-color: currentColor;
+      transition: all var(--line-transition-duration) var(--line-transition-easing);
+    }
+
+    .middle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: round(var(--dot-size), 1px);
+      height: round(var(--dot-size), 1px);
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background-color: currentColor;
+      transition: all var(--line-transition-duration) var(--line-transition-easing);
+    }
+
+    .bottom {
+      position: absolute;
+      top: 50%;
+      right: 18%;
+      width: round(var(--dot-size), 1px);
+      height: round(var(--dot-size), 1px);
+      transform: translateY(-50%); /* Center vertically */
+      border-radius: 50%;
+      background-color: currentColor;
+      transition: all var(--line-transition-duration) var(--line-transition-easing);
+    }
+  }
+
+  /* Expanded state: horizontal dots transform into X */
+  :host(:state(expanded)) .dots.horizontal-dots .top {
+    top: 50%;
+    left: 50%;
+    width: 62.5%;
+    height: round(var(--line-width), 1px);
+    transform: translate(-50%, -50%) rotate(45deg); /* Maintain centering with rotation */
+    border-radius: var(--quiet-border-radius-pill);
+  }
+
+  :host(:state(expanded)) .dots.horizontal-dots .middle {
+    transform: translate(-50%, -50%) scale(0); /* Maintain centering while scaling */
+    opacity: 0;
+  }
+
+  :host(:state(expanded)) .dots.horizontal-dots .bottom {
+    top: 50%;
+    right: 50%;
+    width: 62.5%;
+    height: round(var(--line-width), 1px);
+    transform: translate(50%, -50%) rotate(-45deg); /* Maintain centering with rotation */
     border-radius: var(--quiet-border-radius-pill);
   }
 `;

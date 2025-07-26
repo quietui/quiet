@@ -13,7 +13,7 @@ export function externalLinksTransformer(options = {}) {
     const container = doc.querySelector(options.container);
 
     if (!container) {
-      return;
+      return doc;
     }
 
     // Look for external links

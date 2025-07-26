@@ -24,7 +24,7 @@ export function outlineTransformer(options = {}) {
     let numLinks = 0;
 
     if (!container) {
-      return;
+      return doc;
     }
 
     container.querySelectorAll(options.selector).forEach(heading => {
@@ -34,7 +34,7 @@ export function outlineTransformer(options = {}) {
 
       // Skip headings with data-no-outline
       if (heading.closest('[data-no-outline]')) {
-        return;
+        return doc;
       }
 
       // Create a clone of the heading so we can remove links and [data-no-outline] elements from the text content

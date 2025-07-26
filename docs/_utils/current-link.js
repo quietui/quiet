@@ -33,7 +33,7 @@ export function currentLinkTransformer(options = {}) {
     const container = doc.querySelector(options.container);
 
     if (!container) {
-      return content;
+      return doc;
     }
 
     // Compare the href attribute to 11ty's page URL

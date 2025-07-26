@@ -45,7 +45,7 @@ export function highlightCodeTransformer(options = {}) {
     const container = doc.querySelector(options.container);
 
     if (!container) {
-      return content;
+      return doc;
     }
 
     // Look for <code class="language-*"> and highlight each one

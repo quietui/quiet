@@ -1,5 +1,6 @@
 import { jsxTypesPlugin } from '@wc-toolkit/jsx-types';
 import { parse } from 'comment-parser';
+import { customElementSolidJsPlugin } from 'custom-element-solidjs-integration';
 import { customElementVsCodePlugin } from 'custom-element-vs-code-integration';
 import { readFileSync } from 'fs';
 
@@ -109,6 +110,12 @@ export default {
     // Generate JSX types (see https://wc-toolkit.com/integrations/jsx/)
     jsxTypesPlugin({
       fileName: 'custom-elements-jsx.d.ts',
+      outdir
+    }),
+
+    // Generate Solid.js types (see https://github.com/break-stuff/cem-tools/tree/main/packages/solidjs-integration)
+    customElementSolidJsPlugin({
+      fileName: 'solid-integration.d.ts',
       outdir
     })
   ]

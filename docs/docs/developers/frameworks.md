@@ -109,6 +109,35 @@ export function Component() {
 }
 ```
 
+If you're using TypeScript, a special types file is available at:
+
+```
+@quietui/quiet/dist/custom-elements-jsx.d.ts
+```
+
+These types will provide inline documentation, autocomplete, and type-safe validation for every component. To use the types, add them to your `tsconfig.json` file as shown below. (If you're not using npm, you might need to adjust the path.)
+
+```json
+{
+  "compilerOptions": {
+    "types": ["node-modules/@quietui/quiet/dist/custom-elements-jsx.d.ts"]
+  }
+}
+```
+
+Alternatively, you can create a declaration file and extend JSX's `IntrinsicElements` as shown below.
+
+```ts
+import type { CustomElements, CustomCssProperties } from "@quietui/quiet/dist/custom-elements-jsx.d.ts";
+
+declare module 'preact' {
+  namespace JSX {
+    interface IntrinsicElements extends CustomElements {}
+  }
+  interface CSSProperties extends CustomCssProperties {}
+}
+```
+
 ## SolidJS
 
 SolidJS plays nicely with custom elements without additional configuration. Just import the component and use it like a regular HTML element.
@@ -127,6 +156,24 @@ function App() {
 export default App;
 ```
 
+If you're using TypeScript, a special types file for SolidJS is available at:
+
+```
+@quietui/quiet/dist/solid-integration.d.ts
+```
+
+These types will generate inline documentation, autocomplete, and type-safe validation for your custom elements in SolidJS. To use them, create a declaration file and extend JSX's `IntrinsicElements` as shown below.
+
+```ts
+import type { CustomElements } from '@quietui/quiet/dist/solid-integration.d.ts';
+
+declare module 'solid-js' {
+  namespace JSX {
+    interface IntrinsicElements extends CustomElements {}
+  }
+}
+```
+
 ## Svelte
 
 Svelte plays nicely with custom elements without additional configuration. Just import the component and use it like a regular HTML element.
@@ -143,16 +190,57 @@ Svelte plays nicely with custom elements without additional configuration. Just 
 
 ## React
 
-React 18 and below is [harder to work](https://custom-elements-everywhere.com/#react) with because:
+React 19 [added support for custom elements](https://react.dev/blog/2024/04/25/react-19#support-for-custom-elements) and generally works well with them.
+
+```jsx
+import '@quietui/quiet/components/button/button.js';
+
+function App() {
+ return (
+   <quiet-button variant="primary">Click me</quiet-button>
+ );
+}
+
+export default App;
+```
+
+If you're using TypeScript, a special types file is available at:
+
+```
+@quietui/quiet/dist/custom-elements-jsx.d.ts
+```
+
+These types will provide inline documentation, autocomplete, and type-safe validation for every component. To use the types, add them to your `tsconfig.json` file as shown below. (If you're not using npm, you might need to adjust the path.)
+
+```json
+{
+  "compilerOptions": {
+    "types": ["node-modules/@quietui/quiet/dist/custom-elements-jsx.d.ts"]
+  }
+}
+```
+
+Alternatively, you can create a declaration file and extend JSX's `IntrinsicElements` as shown below.
+
+```ts
+import type { CustomElements, CustomCssProperties } from "@quietui/quiet/dist/custom-elements-jsx.d.ts";
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends CustomElements {}
+  }
+  interface CSSProperties extends CustomCssProperties {}
+}
+```
+
+Alas, **React 18 and below** are [harder to work with](https://custom-elements-everywhere.com/#react) because:
 
 > React passes all data to Custom Elements in the form of HTML attributes. For primitive data this is fine, but the system breaks down when passing rich data, like objects or arrays. In these instances you end up with stringified values like `some-attr="[object Object]"` which can't actually be used.
 
-React also struggles with native events:
+Older versions of React also struggles with native events:
 
 > Because React implements its own synthetic event system, it cannot listen for DOM events coming from Custom Elements without the use of a workaround. Developers will need to reference their Custom Elements using a ref and manually attach event listeners with addEventListener. This makes working with Custom Elements cumbersome.
 
-While it's possible to use custom elements in React 18, the experience is less than optimal. The story is improving, however, as [React 19 has added full support for custom elements](https://react.dev/blog/2024/04/25/react-19#support-for-custom-elements).
+While it's possible to use custom elements in React 18 and below, the experience is less than optimal. Some custom element libraries provide wrappers to improve the experience in older versions of React, but supporting legacy frameworks isn't an objective of this project.
 
-Some custom element libraries provide wrappers to improve the experience in older versions of React, but supporting legacy frameworks isn't an objective of this project. If you need to use Quiet with React 18 or below, consider trying [this utility](https://www.npmjs.com/package/@lit-labs/react) for a more idiomatic experience.
-
-<img class="whiskers-center" src="/assets/images/whiskers/with-skateboard.svg" alt="Whiskers the mouse skateboarding">
+If you need to React 18 or below, consider trying [this utility](https://www.npmjs.com/package/@lit-labs/react) for a more idiomatic experience.

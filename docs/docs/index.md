@@ -9,7 +9,7 @@ Quiet is an open source library for building modern user interfaces on the Web. 
 **There are two ways to install Quiet components.** [Autoloading](#autoloading) is the fastest way to get started — just copy, paste, and start coding. Or you can [import components manually](#manually-importing) from npm or the CDN.
 
 :::info
-Quiet uses a handful of modern Web APIs that were recently added to some browsers. The most notable are [CSS nesting](https://caniuse.com/css-nesting), the [`color-mix()`](https://caniuse.com/?search=color-mix) function, the [`:has()`](https://caniuse.com/css-has) selector, and the [Popover API](https://caniuse.com/mdn-api_htmlelement_showpopover).
+Quiet uses a handful of modern Web APIs that were somewhat recently added to browsers. The most notable are [CSS nesting](https://caniuse.com/css-nesting), the [`color-mix()`](https://caniuse.com/?search=color-mix) function, the [`:has()`](https://caniuse.com/css-has) selector, and the [Popover API](https://caniuse.com/mdn-api_htmlelement_showpopover).
 
 All of these features are part of [Baseline 2023–2024](https://web.dev/baseline), but please check your browser requirements to make sure this library is a good fit for your project.
 :::

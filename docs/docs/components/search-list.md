@@ -3,7 +3,7 @@ title: Search List
 layout: component
 ---
 
-Search Lists provide real-time filtering of content as the user types, supporting exact or fuzzy matching, custom keywords, and customizable empty states. The component works with just about any type of content and can be customized with different layouts and styling.
+Search Lists provide real-time filtering of on-page content as the user types, supporting exact or fuzzy matching, custom keywords, and customizable empty states. The component works with just about any type of content and can be customized with different layouts and styling.
 
 ```html {.example}
 <quiet-search-list match="fuzzy" id="search-list__overview">

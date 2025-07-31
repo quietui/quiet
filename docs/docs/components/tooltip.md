@@ -90,7 +90,7 @@ You can change the size of the tooltip's arrow with the `--arrow-size` custom pr
 <quiet-tooltip for="tooltip__big-arrow" style="--arrow-size: 8px;">I have a big arrow</quiet-tooltip>
 
 <quiet-button id="tooltip__no-arrow">No arrow</quiet-button>
-<quiet-tooltip for="tooltip__no-arrow" style="--arrow-size: 0;">I don't have an arrow</quiet-tooltip>
+<quiet-tooltip for="tooltip__no-arrow" without-arrow>I don't have an arrow</quiet-tooltip>
 ```
 
 ### Setting a max width

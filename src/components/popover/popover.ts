@@ -33,7 +33,7 @@ const openPopovers = new Set<QuietPopover>();
  * @event quiet-before-close - Emitted when the popover is dismissed but before it is hidden.
  * @event quiet-close - Emitted when the popover has closed. and the animation has completed.
  *
- * @cssproperty [--arrow-size=0.3125rem] - The size of the arrow. Set this to `0` to hide the arrow.
+ * @cssproperty [--arrow-size=0.3125rem] - The size of the arrow. To hide the arrow, use the `without-arrow` attribute.
  * @cssproperty [--max-width=25rem] - The maximum width the popover be before wrapping.
  * @cssproperty [--show-duration=100ms] - The duration of the show/hide animation.
 
@@ -87,6 +87,9 @@ export class QuietPopover extends QuietElement {
 
   /** The offset of the popover along its trigger. */
   @property({ type: Number }) offset = 0;
+
+  /** Renders the popover without an arrow. */
+  @property({ attribute: 'without-arrow', type: Boolean, reflect: true }) withoutArrow = false;
 
   firstUpdated() {
     // Make sure the host element has an id
@@ -293,7 +296,7 @@ export class QuietPopover extends QuietElement {
         <div id="content" part="content">
           <slot></slot>
         </div>
-        <div id="arrow" part="arrow" role="presentation"></div>
+        <div id="arrow" part="arrow" role="presentation" ?hidden=${this.withoutArrow}></div>
       </dialog>
     `;
   }

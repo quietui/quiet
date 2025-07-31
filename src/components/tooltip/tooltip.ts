@@ -32,7 +32,7 @@ const openTooltips = new Set<QuietTooltip>();
  * @event quiet-before-close - Emitted when the tooltip is dismissed but before it is hidden.
  * @event quiet-close - Emitted when the tooltip has closed. and the animation has completed.
  *
- * @cssproperty [--arrow-size=0.3125rem] - The size of the arrow. Set this to `0` to hide the arrow.
+ * @cssproperty [--arrow-size=0.3125rem] - The size of the arrow. To hide the arrow, use the `without-arrow` attribute.
  * @cssproperty [--max-width=20rem] - The maximum width the tooltip can be before wrapping.
  * @cssproperty [--show-duration=100ms] - The duration of the show/hide animation.
  *
@@ -100,6 +100,9 @@ export class QuietTooltip extends QuietElement {
    * the tooltip programmatically, set this to `manual`.
    */
   @property() activation: 'auto' | 'manual' = 'auto';
+
+  /** Renders the tooltip without an arrow. */
+  @property({ attribute: 'without-arrow', type: Boolean, reflect: true }) withoutArrow = false;
 
   disconnectedCallback() {
     super.disconnectedCallback();
@@ -411,7 +414,7 @@ export class QuietTooltip extends QuietElement {
         <div id="content" part="content">
           <slot></slot>
         </div>
-        <div id="arrow" part="arrow" role="presentation"></div>
+        <div id="arrow" part="arrow" role="presentation" ?hidden=${this.withoutArrow}></div>
         <div id="polygon" role="presentation"></div>
       </div>
     `;

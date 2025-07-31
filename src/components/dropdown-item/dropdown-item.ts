@@ -1,6 +1,7 @@
 import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import hostStyles from '../../styles/host.styles.js';
 import { animateWithClass } from '../../utilities/animate.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
@@ -45,6 +46,7 @@ export class QuietDropdownItem extends QuietElement {
   // Enable slot observation
   static observeSlots = true;
 
+  @query('#hidden-link') hiddenLink: HTMLAnchorElement;
   @query('#submenu') submenuElement: HTMLDivElement;
 
   /** @internal The controller will set this property to true when the item is active. */
@@ -82,6 +84,23 @@ export class QuietDropdownItem extends QuietElement {
 
   /** Whether the submenu is currently open. */
   @property({ type: Boolean, reflect: true }) submenuOpen = false;
+
+  /** Tells the dropdown item to behave like a link. When selected, the browser will navigate to the target URL. */
+  @property() href: string;
+
+  /** Opens the link in the specified target. Only works when `href` is provided. */
+  @property() target: '_blank' | '_parent' | '_self' | '_top' | undefined;
+
+  /**
+   * Sets the link's `rel` attribute. Only works when `href` is provided. When linking to an external domain, you should
+   * probably set this to `noreferrer noopener`.
+   */
+  @property() rel?: string;
+
+  /**
+   * Sets the link's `download` attribute, causing the linked file to be downloaded. Only works when `href` is provided.
+   */
+  @property() download?: string;
 
   /** @internal Store whether this item has a submenu */
   @state() hasSubmenu = false;
@@ -243,6 +262,8 @@ export class QuietDropdownItem extends QuietElement {
   }
 
   render() {
+    const isLink = typeof this.href === 'string';
+
     return html`
       ${this.type === 'checkbox'
         ? html`
@@ -296,6 +317,22 @@ export class QuietDropdownItem extends QuietElement {
         `,
         { force: this.hasSubmenu }
       )}
+      ${isLink
+        ? // Render a hidden link we can use to simulate clicks when the dropdown item is selected
+          html`
+            <a
+              id="hidden-link"
+              class="vh"
+              href=${ifDefined(isLink && !this.disabled ? this.href : undefined)}
+              target=${ifDefined(isLink ? this.target : undefined)}
+              download=${ifDefined(isLink ? this.download : undefined)}
+              rel=${ifDefined(isLink && this.rel ? this.rel : undefined)}
+              tabindex="0"
+              aria-hidden="true"
+              @click=${(event: MouseEvent) => event.stopImmediatePropagation()}
+            ></a>
+          `
+        : ''}
     `;
   }
 }

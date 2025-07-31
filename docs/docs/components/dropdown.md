@@ -249,6 +249,33 @@ Add `variant="destructive"` to any [dropdown item](/docs/components/dropdown-ite
 </quiet-dropdown>
 ```
 
+### Link items
+
+Add `href` to any [dropdown item](/docs/components/dropdown-item) to make it behave like a link. When selected, the browser will navigate to the target URL. When creating link items, you can also use the `target`, `rel`, and `download` attributes to control how the link opens.
+
+```html {.example}
+<quiet-dropdown>
+  <quiet-button slot="trigger" with-caret>Components</quiet-button>
+  <quiet-dropdown-item href="/docs/components/button">Button</quiet-dropdown-item>
+  <quiet-dropdown-item href="/docs/components/checkbox">Checkbox</quiet-dropdown-item>
+  <quiet-dropdown-item href="/docs/components/radio">Radio</quiet-dropdown-item>
+  <quiet-dropdown-item href="/docs/components/switch">Switch</quiet-dropdown-item>
+  <quiet-dropdown-item href="/docs/components/text-field">Text Field</quiet-dropdown-item>
+  <quiet-dropdown-item href="/docs/components/text-area">Text Area</quiet-dropdown-item>
+  <quiet-divider></quiet-divider>
+  <quiet-dropdown-item href="https://example.com/" target="_blank">
+    Visit external website
+    <quiet-icon name="external-link" slot="icon"></quiet-icon>
+  </quiet-dropdown-item>
+</quiet-dropdown>
+```
+
+:::info
+Note that link items are not actual links! You won't see a URL when hovering and users of assistive devices will need to infer it's behavior from context.
+
+When a link item is selected, the component renders a hidden link and dispatches a synthetic event to open it. Modifier keys are passed from the original event, but only Chrome and Firefox appear to honor them. Safari opens the link, but ignores modifier keys.
+:::
+
 ### Submenus
 
 To create submenus, nest additional [dropdown items](/docs/components/dropdown-item) in a dropdown item and assign `slot="submenu"` to them. You can also add [dividers](/docs/components/divider) as needed.

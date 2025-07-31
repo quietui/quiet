@@ -536,7 +536,7 @@ export class QuietDropdown extends QuietElement {
         }, 0);
       } else {
         // Regular item - handle selection
-        this.makeSelection(activeItem);
+        this.makeSelection(activeItem, event);
       }
     }
   };
@@ -580,7 +580,7 @@ export class QuietDropdown extends QuietElement {
     }
 
     // Handle standard selectable item
-    this.makeSelection(item);
+    this.makeSelection(item, event);
   }
 
   /** Prepares dropdown items when they get added or removed */
@@ -859,7 +859,7 @@ export class QuietDropdown extends QuietElement {
   };
 
   /** Makes a selection, emits the quiet-select event, and closes the dropdown. */
-  private makeSelection(item: QuietDropdownItem) {
+  private makeSelection(item: QuietDropdownItem, originalEvent: MouseEvent | KeyboardEvent) {
     const trigger = this.getTrigger();
 
     // Disabled items can't be selected
@@ -879,6 +879,24 @@ export class QuietDropdown extends QuietElement {
     if (!selectEvent.defaultPrevented) {
       this.open = false;
       trigger?.focus();
+    }
+
+    // If the item has a link and the event wasn't prevented, open it by dispatching a synthetic click on the hidden
+    // label inside the dropdown item. We pass modifier keys from the original event so the link opens in a new window
+    // or tab. This works well in Chrome and Firefox. The link opens in Safari, but modifier keys seem to be ignored.
+    if (item.hiddenLink) {
+      const clickEvent = new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+        view: window,
+        detail: originalEvent.detail,
+        ctrlKey: originalEvent.ctrlKey,
+        shiftKey: originalEvent.shiftKey,
+        altKey: originalEvent.altKey,
+        metaKey: originalEvent.metaKey
+      });
+
+      item.hiddenLink.dispatchEvent(clickEvent);
     }
   }
 

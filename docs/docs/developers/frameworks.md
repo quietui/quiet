@@ -180,7 +180,7 @@ Svelte plays nicely with custom elements without additional configuration. Just 
 
 ```html
 <script>
-  import '@quietui/quiet/components/button/button.js';
+  import '@quietui/quiet/dist/components/button/button.js';
 </script>
 
 <quiet-button variant="primary">
@@ -193,7 +193,7 @@ Svelte plays nicely with custom elements without additional configuration. Just 
 React 19 [added support for custom elements](https://react.dev/blog/2024/04/25/react-19#support-for-custom-elements) and generally works well with them.
 
 ```jsx
-import '@quietui/quiet/components/button/button.js';
+import '@quietui/quiet/dist/components/button/button.js';
 
 function App() {
  return (

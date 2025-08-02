@@ -40,7 +40,7 @@ As a result, you'll find that Quiet is rather opinionated. I carefully curate ev
 
 Why did I choose a mouse for Quiet's mascot? Because mice are quiet. Because the computer mouse was an incredible boon to UX. Because I've [rescued and raised](https://x.com/cory_laviska/status/1508128840937316360) numerous mice over the years. It seemed like a good fit. But then something much deeper clicked…
 
-As some of the world's [most](https://en.wikipedia.org/wiki/Dinosaur) [impressive](https://en.wikipedia.org/wiki/Woolly_mammoth) [creatures](https://en.wikipedia.org/wiki/Smilodon) vanished into the mists of time, the humble mouse continued to live on. Their resilience reminds us that survival belongs not to the strongest or the most spectacular, but to those who can bend without breaking; who can find opportunity in adversity; who can thrive in the spaces between.
+As some of the world's [most](https://en.wikipedia.org/wiki/Dinosaur) [impressive](https://en.wikipedia.org/wiki/Woolly_mammoth) [creatures](https://en.wikipedia.org/wiki/Smilodon) vanished in the mists of time, the humble mouse continued to live on. Their resilience reminds us that survival belongs not to the strongest or the most spectacular, but to those who can bend without breaking; who can find opportunity in adversity; who can thrive in the spaces between.
 
 This library's power lies not in keeping up with the latest trends, but in speaking the timeless language of Web browsers. When the next framework extinction event comes, Quiet will live on, scurrying through the foundations of the Web, finding a home in every project that values simplicity over spectacle.
 

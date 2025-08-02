@@ -68,7 +68,7 @@ Quiet offers an optional, opinionated, classless CSS reset called Quiet Restyle 
 websites and apps.
 
 Tabler is the default icon library, so \`<quiet-icon family="..." name="...">\` values must come from this manifest,
-where outline and filled are the only family options: https://cdn.jsdelivr.net/npm/@tabler/icons@3/icons.json
+where \`outline\` and \`filled\` are the only family options: https://cdn.jsdelivr.net/npm/@tabler/icons@3/icons.json
 
 When installing Quiet, follow the instructions on https://quietui.org/docs/ to install the components, theme, and the
 optional CSS reset. Users can install the library using the Autoloader via CDN (recommended) or via npm (bundlers and

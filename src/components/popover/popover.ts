@@ -196,8 +196,12 @@ export class QuietPopover extends QuietElement {
       return;
     }
 
-    // Close other popovers that are open
-    openPopovers.forEach(popover => (popover.open = false));
+    // Close other popovers that are open, except ancestors
+    openPopovers.forEach(popover => {
+      if (!popover.contains(this)) {
+        popover.open = false;
+      }
+    });
 
     this.dialog.showPopover();
     this.customStates.set('open', true);

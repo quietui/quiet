@@ -8,7 +8,7 @@ import styles from './number.styles.js';
 /**
  * <quiet-number>
  *
- * @summary Outputs a number in the specified format.
+ * @summary Outputs a formatted number with support for currency, percentages, and units.
  * @documentation https://quietui.org/docs/components/number
  * @status stable
  * @since 1.0

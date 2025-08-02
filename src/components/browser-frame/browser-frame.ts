@@ -91,7 +91,7 @@ export class QuietBrowserFrame extends QuietElement {
 
   private renderMacControls() {
     return html`
-      <div id="controls" part="controls" class="mac-controls">
+      <div id="controls" part="controls" class="mac-controls" aria-hidden="true">
         <span class="control close"></span>
         <span class="control minimize"></span>
         <span class="control maximize"></span>
@@ -101,7 +101,7 @@ export class QuietBrowserFrame extends QuietElement {
 
   private renderWindowsControls() {
     return html`
-      <div id="controls" part="controls" class="windows-controls">
+      <div id="controls" part="controls" class="windows-controls" aria-hidden="true">
         <span class="control minimize">
           <svg viewBox="0 0 12 12" fill="currentColor">
             <rect x="2" y="5.5" width="8" height="1" rx="0.5"></rect>

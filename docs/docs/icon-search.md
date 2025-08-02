@@ -7,7 +7,7 @@ layout: docs
 Use this tool to find the perfect icon and copy it into your project with just a click. Refer to the [icon component](/docs/components/icon) to learn more about using icons in Quiet.
 
 :::info
-For an alternative way to browse icons, head over to the [Tabler Icons](https://tabler.io/icons) website.
+For another way to browse icons, head over to the [Tabler Icons](https://tabler.io/icons) website. When you select an icon, clicking its name in the resulting dialog will copy the value you need for `<quiet-icon name="...">`.
 :::
 
 <div id="search-container">

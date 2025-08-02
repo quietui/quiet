@@ -46,7 +46,7 @@ export default css`
       position: relative;
       align-items: center;
       justify-content: center;
-      aspect-ratio: 9 / 11;
+      aspect-ratio: 13 / 15;
       border-radius: var(--quiet-border-radius-md);
       color: var(--quiet-text-body);
     }

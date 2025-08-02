@@ -6,8 +6,8 @@ import { distDir, rootDir } from './utils.js';
 const packageData = JSON.parse(await readFile(join(rootDir, 'package.json'), 'utf-8'));
 const version = packageData.version;
 
-// Optional links configuration
-const optionalLinks = [
+// Important links configuration
+const resources = [
   { title: 'Documentation', description: "The project's website.", url: 'https://quietui.org/' },
   {
     title: 'Theming & Design Tokens',
@@ -73,11 +73,28 @@ where outline and filled are the only family options: https://cdn.jsdelivr.net/n
 When installing Quiet, follow the instructions on https://quietui.org/docs/ to install the components, theme, and the
 optional CSS reset. Users can install the library using the Autoloader via CDN (recommended) or via npm (bundlers and
 advanced use cases).
-
 \n`.trimStart();
 
-  // Components section
-  output += `## Components\n\n`;
+  // Resources section
+  output += `
+## Resources
+
+Use these official links to find more information about how to use Quiet UI.
+\n`.trimStart();
+
+  // Add optional/secondary documentation links
+  resources.forEach(link => {
+    output += `- [${link.title}](${link.url}): ${link.description}\n`;
+  });
+
+  output += `\n`;
+
+  // Component doc links
+  output += `
+## Component docs
+
+Comprehensive documentation for each component can be found using the following links.
+\n`.trimStart();
 
   components.forEach(component => {
     const tagWithoutPrefix = component.tagName.replace(/^quiet-/, '');
@@ -86,14 +103,12 @@ advanced use cases).
     output += `- [${titleCaseName}](https://quietui.org/docs/components/${tagWithoutPrefix}): ${removeNewlines(component.summary) || 'No description available.'}\n`;
   });
 
-  output += `\n## Optional\n\n`;
-
-  // Add optional/secondary documentation links
-  optionalLinks.forEach(link => {
-    output += `- [${link.title}](${link.url}): ${link.description}\n`;
-  });
-
   output += '\n';
+  output += `
+## Optional
+
+The following is a quick reference describing every component's API. For more comprehensive documentation, refer to the component documentation using the URLs provided above.
+\n`.trimStart();
 
   // Detailed API documentation for each component
   components.forEach(component => {

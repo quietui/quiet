@@ -64,6 +64,10 @@ As a convenience, you can add `data-popover="close"` to any button inside a popo
 <quiet-button id="popover__opening">Show popover</quiet-button>
 ```
 
+:::info
+Nested popovers are allowed. When opening a popover, all non-ancestor popovers will close, but parent popovers will remain open.
+:::
+
 ### Placement
 
 Use the `placement` attribute to change the preferred location of the popover in reference to its anchor. The popover will shift to a more optimal location if the preferred placement doesn't have enough room. The default placement is `top`.

@@ -107,14 +107,13 @@ You can also embed videos.
 
 ```html {.example}
 <quiet-browser-frame label="youtube.com" flush>
-  <quiet-zoomable-frame 
+  <iframe
     src="https://www.youtube.com/embed/y0sF5xhGreA?si=vN-Q9GI9UK5jH6f6" 
     frameborder="0" 
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
     referrerpolicy="strict-origin-when-cross-origin" 
     allowfullscreen
-    without-controls
-  ></quiet-zoomable-frame>
+  ></iframe>
 </quiet-browser-frame>
 ```
 

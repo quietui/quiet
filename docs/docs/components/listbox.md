@@ -394,7 +394,7 @@ However, these selectors will match even before the user has had a chance to int
 </style>
 ```
 
-## Styling listboxes
+### Styling listboxes
 
 Listboxes are styled like form controls for consistency, but feel free to customize them to your liking. Here's an example you might see in an email client.
 

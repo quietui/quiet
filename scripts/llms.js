@@ -120,7 +120,7 @@ The following is a quick reference describing every component's API. For more co
 
     // Slots
     if (component.slots?.length) {
-      output += `**Slots:**\n`;
+      output += `**Slots:**\n\n`;
       component.slots.forEach(slot => {
         output += `- \`${slot.name || '(default)'}\`: ${removeNewlines(slot.description)}\n`;
       });
@@ -129,7 +129,7 @@ The following is a quick reference describing every component's API. For more co
 
     // Properties + Attributes
     if (component.properties?.length) {
-      output += `**Properties:**\n`;
+      output += `**Properties:**\n\n`;
       component.properties.forEach(prop => {
         const attr = prop.attribute && prop.attribute !== prop.name ? ` (attribute: \`${prop.attribute}\`)` : '';
         output += `- \`${prop.name}\`${attr}: ${removeNewlines(prop.description)} (Type: \`${removeNewlines(prop.type?.text) || 'unknown'}\`${prop.default ? `, Default: \`${prop.default}\`` : ''})\n`;
@@ -139,7 +139,7 @@ The following is a quick reference describing every component's API. For more co
 
     // Methods
     if (component.methods?.length) {
-      output += `**Methods:**\n`;
+      output += `**Methods:**\n\n`;
       component.methods.forEach(method => {
         const params = method.parameters?.length
           ? `(${method.parameters.map(p => `${p.name}: ${removeNewlines(p.type?.text) || 'unknown'}`).join(', ')})`
@@ -151,7 +151,7 @@ The following is a quick reference describing every component's API. For more co
 
     // Events
     if (component.events?.length) {
-      output += `**Events:**\n`;
+      output += `**Events:**\n\n`;
       component.events.forEach(event => {
         if (event.name) {
           output += `- \`${event.name}\`: ${removeNewlines(event.description) || 'No description available.'}\n`;
@@ -162,7 +162,7 @@ The following is a quick reference describing every component's API. For more co
 
     // Custom Properties
     if (component.cssProperties?.length) {
-      output += `**CSS Custom Properties:**\n`;
+      output += `**CSS Custom Properties:**\n\n`;
       component.cssProperties.forEach(cssProp => {
         output += `- \`${cssProp.name}\`: ${removeNewlines(cssProp.description)}${cssProp.default ? ` (Default: \`${cssProp.default}\`)` : ''}\n`;
       });
@@ -171,7 +171,7 @@ The following is a quick reference describing every component's API. For more co
 
     // CSS Parts
     if (component.cssParts?.length) {
-      output += `**CSS Parts:**\n`;
+      output += `**CSS Parts:**\n\n`;
       component.cssParts.forEach(part => {
         output += `- \`${part.name}\`: ${removeNewlines(part.description)}\n`;
       });
@@ -180,7 +180,7 @@ The following is a quick reference describing every component's API. For more co
 
     // Custom States
     if (component.cssStates?.length) {
-      output += `**CSS Custom States:**\n`;
+      output += `**CSS Custom States:**\n\n`;
       component.cssStates.forEach(state => {
         output += `- \`${state.name}\`: ${removeNewlines(state.description)}\n`;
       });

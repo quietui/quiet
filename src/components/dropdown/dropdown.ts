@@ -64,6 +64,7 @@ export class QuietDropdown extends QuietElement {
   private userTypedTimeout: ReturnType<typeof setTimeout>;
   private openSubmenuStack: QuietDropdownItem[] = [];
 
+  @query('slot:not([name])') defaultSlot: HTMLSlotElement;
   @query('#menu') private menu: HTMLDivElement;
 
   /** Opens or closes the dropdown. */
@@ -158,19 +159,28 @@ export class QuietDropdown extends QuietElement {
 
   /** Gets all <quiet-dropdown-item> elements slotted in the menu that aren't disabled. */
   private getItems(includeDisabled = false): QuietDropdownItem[] {
-    // Only select direct children of the dropdown, not deep descendants
-    const items = [...this.children].filter(
-      el => el.localName === 'quiet-dropdown-item' && !el.hasAttribute('slot')
-    ) as QuietDropdownItem[];
+    const items = this.defaultSlot
+      .assignedElements({ flatten: true })
+      .filter(el => el.localName === 'quiet-dropdown-item') as QuietDropdownItem[];
+
     return includeDisabled ? items : items.filter(item => !item.disabled);
   }
 
   /** Gets all dropdown items in a specific submenu. */
   private getSubmenuItems(parentItem: QuietDropdownItem, includeDisabled = false): QuietDropdownItem[] {
-    // Only get direct children with slot="submenu", not nested ones
-    const items = [...parentItem.children].filter(
-      el => el.localName === 'quiet-dropdown-item' && el.getAttribute('slot') === 'submenu'
-    ) as QuietDropdownItem[];
+    // Find the submenu slot within the parent item
+    const submenuSlot =
+      parentItem.shadowRoot?.querySelector<HTMLSlotElement>('slot[name="submenu"]') ||
+      parentItem.querySelector<HTMLSlotElement>('slot[name="submenu"]');
+    if (!submenuSlot) {
+      return [];
+    }
+
+    // Get the items from the submenu slot
+    const items = submenuSlot
+      .assignedElements({ flatten: true })
+      .filter(el => el.localName === 'quiet-dropdown-item') as QuietDropdownItem[];
+
     return includeDisabled ? items : items.filter(item => !item.disabled);
   }
 

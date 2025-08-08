@@ -29,6 +29,8 @@ export class QuietScroller extends QuietElement {
 
   private localize = new Localize(this);
   private resizeObserver = new ResizeObserver(() => this.updateScroll());
+  private previousStartOpacity: string | null = null;
+  private previousEndOpacity: string | null = null;
 
   @query('#content') content: HTMLElement;
 
@@ -77,38 +79,43 @@ export class QuietScroller extends QuietElement {
 
   @eventOptions({ passive: true })
   private updateScroll() {
+    let startShadowOpacity: number;
+    let endShadowOpacity: number;
+
     if (this.orientation === 'horizontal') {
       const clientWidth = Math.ceil(this.content.clientWidth);
       const scrollLeft = Math.abs(Math.ceil(this.content.scrollLeft));
       const scrollWidth = Math.ceil(this.content.scrollWidth);
 
-      // Calculate total scrollable width
       const maxScroll = scrollWidth - clientWidth;
       this.canScroll = maxScroll > 0;
 
-      // Calculate shadow opacities based on first/last 2% of scroll
-      const startShadowOpacity = Math.min(1, scrollLeft / (maxScroll * 0.05));
-      const endShadowOpacity = Math.min(1, (maxScroll - scrollLeft) / (maxScroll * 0.05));
-
-      // Update CSS custom properties
-      this.style.setProperty('--start-shadow-opacity', String(startShadowOpacity || 0));
-      this.style.setProperty('--end-shadow-opacity', String(endShadowOpacity || 0));
+      startShadowOpacity = Math.min(1, scrollLeft / (maxScroll * 0.05));
+      endShadowOpacity = Math.min(1, (maxScroll - scrollLeft) / (maxScroll * 0.05));
     } else {
       const clientHeight = Math.ceil(this.content.clientHeight);
       const scrollTop = Math.abs(Math.ceil(this.content.scrollTop));
       const scrollHeight = Math.ceil(this.content.scrollHeight);
 
-      // Calculate total scrollable height
       const maxScroll = scrollHeight - clientHeight;
       this.canScroll = maxScroll > 0;
 
-      // Calculate shadow opacities based on first/last 2% of scroll
-      const startShadowOpacity = Math.min(1, scrollTop / (maxScroll * 0.05));
-      const endShadowOpacity = Math.min(1, (maxScroll - scrollTop) / (maxScroll * 0.05));
+      startShadowOpacity = Math.min(1, scrollTop / (maxScroll * 0.05));
+      endShadowOpacity = Math.min(1, (maxScroll - scrollTop) / (maxScroll * 0.05));
+    }
 
-      // Update CSS custom properties
-      this.style.setProperty('--start-shadow-opacity', String(startShadowOpacity || 0));
-      this.style.setProperty('--end-shadow-opacity', String(endShadowOpacity || 0));
+    // Only update CSS custom properties if values changed
+    const newStartOpacity = String(startShadowOpacity || 0);
+    const newEndOpacity = String(endShadowOpacity || 0);
+
+    if (this.previousStartOpacity !== newStartOpacity) {
+      this.style.setProperty('--start-shadow-opacity', newStartOpacity);
+      this.previousStartOpacity = newStartOpacity;
+    }
+
+    if (this.previousEndOpacity !== newEndOpacity) {
+      this.style.setProperty('--end-shadow-opacity', newEndOpacity);
+      this.previousEndOpacity = newEndOpacity;
     }
   }
 

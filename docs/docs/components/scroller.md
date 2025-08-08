@@ -130,6 +130,10 @@ Scrollers can accommodate virtually any content type within their container. By 
 ```
 
 :::info
+If you have a lot of content to scroll, consider setting [`content-visibility`](https://developer.mozilla.org/en-US/docs/Web/CSS/content-visibility) to `auto` for child elements to improve performance.
+:::
+
+:::info
 If you need to change the scroller's layout, e.g. to flex or grid, apply the appropriate styles to the `content` part, not the host element.
 :::
 

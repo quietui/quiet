@@ -11,6 +11,7 @@ import {
 } from '../../events/open-close.js';
 import { QuietSelectEvent } from '../../events/select.js';
 import hostStyles from '../../styles/host.styles.js';
+import { activeElements } from '../../utilities/active-element.js';
 import { animateWithClass } from '../../utilities/animate.js';
 import { Localize } from '../../utilities/localize.js';
 import { LongPress, LongPressEvent } from '../../utilities/long-press.js';
@@ -378,7 +379,7 @@ export class QuietDropdown extends QuietElement {
     }
 
     // Get the current active or focused item
-    const activeElement = document.activeElement as HTMLElement;
+    const activeElement = [...activeElements()].find(el => el.localName === 'quiet-dropdown-item');
     const isFocusedOnItem = activeElement?.localName === 'quiet-dropdown-item';
 
     // Determine if we're in a submenu

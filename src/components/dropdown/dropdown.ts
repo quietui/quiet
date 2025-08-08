@@ -1,5 +1,5 @@
 import type { VirtualElement } from '@floating-ui/dom';
-import { autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
+import { autoUpdate, computePosition, flip, offset, shift, size } from '@floating-ui/dom';
 import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
@@ -316,7 +316,21 @@ export class QuietDropdown extends QuietElement {
 
     computePosition(anchor, this.menu, {
       placement: this.placement,
-      middleware: [offset({ mainAxis: this.distance, crossAxis: this.offset }), flip(), shift()]
+      middleware: [
+        offset({ mainAxis: this.distance, crossAxis: this.offset }),
+        flip(),
+        shift(),
+        size({
+          apply: ({ availableWidth, availableHeight }) => {
+            console.log(this.menu, 'apply size');
+            Object.assign(this.menu.style, {
+              maxWidth: `${Math.max(0, availableWidth)}px`,
+              maxHeight: `${Math.max(0, availableHeight)}px`
+            });
+          },
+          padding: 10 // so it doesn't touch the edge
+        })
+      ]
     }).then(({ x, y, placement }) => {
       // Set the determined placement for users to hook into and for transform origin styles
       this.setAttribute('data-placement', placement);

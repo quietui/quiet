@@ -322,7 +322,6 @@ export class QuietDropdown extends QuietElement {
         shift(),
         size({
           apply: ({ availableWidth, availableHeight }) => {
-            console.log(this.menu, 'apply size');
             Object.assign(this.menu.style, {
               maxWidth: `${Math.max(0, availableWidth)}px`,
               maxHeight: `${Math.max(0, availableHeight)}px`

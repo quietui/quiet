@@ -337,11 +337,6 @@ export class QuietSlider extends QuietFormControlElement {
     // Always be updating
     this.updateValidity();
 
-    // Handle range mode changes
-    if (changedProperties.has('range')) {
-      this.requestUpdate();
-    }
-
     if (this.isRange) {
       // Handle min/max values for range mode
       if (changedProperties.has('minValue') || changedProperties.has('maxValue')) {

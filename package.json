@@ -1,5 +1,5 @@
 {
-  "name": "@quietui/components",
+  "name": "@quietui/quiet",
   "type": "module",
   "version": "1.0.0",
   "description": "An open source UI library for the Web with a focus on accessibility, longevity, performance, and simplicity.",
@@ -8,6 +8,12 @@
     ".": {
       "types": "./dist/quiet.d.ts",
       "import": "./dist/quiet.js"
+    },
+    "./jsx": {
+      "types": "./dist/custom-elements-jsx.d.ts"
+    },
+    "./solid": {
+      "types": "./dist/solid-integration.d.ts"
     },
     "./quiet.js": "./dist/quiet.js",
     "./quiet.loader.js": "./dist/quiet.loader.js",
@@ -26,13 +32,13 @@
   ],
   "author": "Cory LaViska",
   "license": "MIT",
-  "homepage": "https://github.com/quietui/components#readme",
+  "homepage": "https://github.com/quietui/quiet#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/quietui/components.git"
+    "url": "git+https://github.com/quietui/quiet.git"
   },
   "bugs": {
-    "url": "https://github.com/quietui/components/issues"
+    "url": "https://github.com/quietui/quiet/issues"
   },
   "funding": {
     "type": "individual",

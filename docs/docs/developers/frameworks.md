@@ -109,26 +109,25 @@ export function Component() {
 }
 ```
 
-If you're using TypeScript, a special types file is available at:
+If you're using TypeScript, you can import JSX types for a better developer experience:
 
-```
-@quietui/quiet/dist/custom-elements-jsx.d.ts
-```
+```tsx
+import type {} from '@quietui/quiet/jsx';
+import '@quietui/quiet/dist/components/button/button.js';
 
-These types will provide inline documentation, autocomplete, and type-safe validation for every component. To use the types, add them to your `tsconfig.json` file as shown below. (If you're not using npm, you might need to adjust the path.)
-
-```json
-{
-  "compilerOptions": {
-    "types": ["node-modules/@quietui/quiet/dist/custom-elements-jsx.d.ts"]
-  }
+export function Component() {
+  return (
+    <quiet-button variant="primary">Click me</quiet-button>
+  );
 }
 ```
+
+This provides inline documentation, autocomplete, and type-safe validation for every component.
 
 Alternatively, you can create a declaration file and extend JSX's `IntrinsicElements` as shown below.
 
 ```ts
-import type { CustomElements, CustomCssProperties } from "@quietui/quiet/dist/custom-elements-jsx.d.ts";
+import type { CustomElements, CustomCssProperties } from '@quietui/quiet/jsx';
 
 declare module 'preact' {
   namespace JSX {
@@ -156,16 +155,29 @@ function App() {
 export default App;
 ```
 
-If you're using TypeScript, a special types file for SolidJS is available at:
+If you're using TypeScript, you can import JSX types for a better developer experience:
 
-```
-@quietui/quiet/dist/solid-integration.d.ts
+```tsx
+import type {} from '@quietui/quiet/jsx';
+import '@quietui/quiet/components/button/button.js';
+
+function App() {
+  return (
+    <quiet-button variant="primary">
+      Click me
+    </quiet-button>
+  );
+}
+
+export default App;
 ```
 
-These types will generate inline documentation, autocomplete, and type-safe validation for your custom elements in SolidJS. To use them, create a declaration file and extend JSX's `IntrinsicElements` as shown below.
+This provides inline documentation, autocomplete, and type-safe validation for every component.
+
+Alternatively, you can create a declaration file and extend JSX's `IntrinsicElements` as shown below.
 
 ```ts
-import type { CustomElements } from '@quietui/quiet/dist/solid-integration.d.ts';
+import type { CustomElements } from '@quietui/quiet/jsx';
 
 declare module 'solid-js' {
   namespace JSX {
@@ -204,26 +216,27 @@ function App() {
 export default App;
 ```
 
-If you're using TypeScript, a special types file is available at:
+If you're using TypeScript, you can import JSX types for a better developer experience:
 
-```
-@quietui/quiet/dist/custom-elements-jsx.d.ts
-```
+```tsx
+import type {} from '@quietui/quiet/jsx';
+import '@quietui/quiet/dist/components/button/button.js';
 
-These types will provide inline documentation, autocomplete, and type-safe validation for every component. To use the types, add them to your `tsconfig.json` file as shown below. (If you're not using npm, you might need to adjust the path.)
-
-```json
-{
-  "compilerOptions": {
-    "types": ["node-modules/@quietui/quiet/dist/custom-elements-jsx.d.ts"]
-  }
+function App() {
+  return (
+    <quiet-button variant="primary">Click me</quiet-button>
+  );
 }
+
+export default App;
 ```
+
+This provides inline documentation, autocomplete, and type-safe validation for every component.
 
 Alternatively, you can create a declaration file and extend JSX's `IntrinsicElements` as shown below.
 
 ```ts
-import type { CustomElements, CustomCssProperties } from "@quietui/quiet/dist/custom-elements-jsx.d.ts";
+import type { CustomElements, CustomCssProperties } from '@quietui/quiet/jsx';
 
 declare module 'react' {
   namespace JSX {

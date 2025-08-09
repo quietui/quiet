@@ -95,8 +95,6 @@ export class QuietCarousel extends QuietElement {
     this.setAttribute('role', 'region');
     this.setAttribute('aria-roledescription', 'carousel');
     scrollEndPolyfill(this.items);
-
-    this.hasInitialized = true;
   }
 
   updated(changedProperties: PropertyValues<this>) {
@@ -144,6 +142,13 @@ export class QuietCarousel extends QuietElement {
 
     this.setActiveItem(this.activeIndex, 'instant');
     this.setupResizeObserver();
+
+    // Mark as initialized after first slot change and update
+    requestAnimationFrame(() => {
+      if (!this.hasInitialized) {
+        this.hasInitialized = true;
+      }
+    });
   }
 
   /**

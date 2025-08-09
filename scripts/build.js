@@ -170,6 +170,7 @@ async function generateBuild() {
     ],
     outdir: distDir,
     chunkNames: 'chunks/[name].[hash]',
+    conditions: isDeveloping ? ['development'] : undefined,
     define: {
       'process.env.NODE_ENV': '"production"' // required by Floating UI
     },

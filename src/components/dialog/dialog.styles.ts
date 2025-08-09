@@ -259,6 +259,8 @@ export default css`
     padding-inline: var(--spacing);
     padding-block: calc(var(--spacing) / 2);
     overflow: auto;
+    scrollbar-color: var(--quiet-neutral-fill-mid) transparent;
+    scrollbar-width: thin;
   }
 
   /* Normalize spacing when the header and footer are absent */

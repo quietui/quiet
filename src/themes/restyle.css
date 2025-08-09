@@ -21,6 +21,7 @@
     line-height: var(--quiet-line-height);
     font-family: var(--quiet-font-family);
     text-rendering: optimizeLegibility;
+    scrollbar-color: var(--quiet-neutral-fill-mid) transparent;
     tab-size: 4;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

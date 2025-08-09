@@ -11,6 +11,8 @@ export default css`
     border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
     border-radius: var(--quiet-border-radius-md);
     background-color: var(--quiet-paper-color);
+    scrollbar-color: var(--quiet-neutral-fill-mid) transparent;
+    scrollbar-width: thin;
   }
 
   /* Focus state for the listbox */

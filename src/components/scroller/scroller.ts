@@ -16,12 +16,15 @@ import styles from './scroller.styles.js';
  *
  * @slot - The content to show inside the scroller.
  *
- * @cssproperty [--shadow-color=var(--quiet-neutral-fill-mid)] - The base color of the shadow.
- * @cssproperty [--shadow-size=2rem] - The width of the shadow.
- *
  * @csspart content - The container that wraps the slotted content.
  * @csspart start-shadow - The starting shadow.
  * @csspart end-shadow - The ending shadow.
+ *
+ * @cssproperty [--shadow-color=var(--quiet-neutral-fill-mid)] - The base color of the shadow.
+ * @cssproperty [--shadow-size=2rem] - The width of the shadow.
+ * @cssproperty [--thumb-color=var(--quiet-neutral-fill-mid)] - The color of the scrollbar's thumb (supportive browsers
+ *  only).
+ * @cssproperty [--track-color=transparent] - The color of the scrollbar's track (supportive browsers only).
  */
 @customElement('quiet-scroller')
 export class QuietScroller extends QuietElement {

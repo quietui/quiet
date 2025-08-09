@@ -361,6 +361,8 @@ html[data-scroll-restoring] body {
   top: var(--docs-header-height);
   align-self: start;
   height: calc(100dvh - var(--docs-header-height));
+  scrollbar-color: var(--quiet-neutral-fill-mid) transparent;
+  scrollbar-width: thin;
   -webkit-text-size-adjust: 100%; /* prevent mobile Safari from showing larger text sometimes*/
 
   /* Bump the padding so focus rings and dots don't get clipped, then transform is back so it's visually aligned */
@@ -601,6 +603,8 @@ quiet-badge.experimental {
   height: calc(100dvh - var(--docs-header-height));
   padding-block: 3rem 2rem;
   overflow: auto;
+  scrollbar-color: var(--quiet-neutral-fill-mid) transparent;
+  scrollbar-width: thin;
 }
 
 #outline h2 > a {

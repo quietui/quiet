@@ -153,6 +153,8 @@ export default css`
     flex: 1;
     padding: var(--body-padding);
     overflow: auto;
+    scrollbar-color: var(--quiet-neutral-fill-mid) transparent;
+    scrollbar-width: thin;
 
     ::slotted(img),
     ::slotted(iframe) {

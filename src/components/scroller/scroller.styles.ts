@@ -4,6 +4,8 @@ export default css`
   :host {
     --shadow-color: var(--quiet-background-color);
     --shadow-size: 2rem;
+    --thumb-color: var(--quiet-neutral-fill-mid);
+    --track-color: transparent;
 
     /* private (defined dynamically) */
     --start-shadow-opacity: 0;
@@ -24,6 +26,7 @@ export default css`
   #content {
     border-radius: inherit;
     scroll-behavior: smooth;
+    scrollbar-color: var(--thumb-color) var(--track-color);
     scrollbar-width: thin;
 
     /* Prevent text in mobile Safari from being larger when the container width larger than the viewport */

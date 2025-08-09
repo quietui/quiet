@@ -18,6 +18,8 @@ export default css`
   #start,
   #end {
     overflow: auto;
+    scrollbar-color: var(--quiet-neutral-fill-mid) transparent;
+    scrollbar-width: thin;
   }
 
   #divider {

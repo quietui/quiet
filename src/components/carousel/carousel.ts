@@ -464,3 +464,7 @@ export class QuietCarousel extends QuietElement {
     `;
   }
 }
+
+// Due to the parent/child relationship between carousel and carousel items, the next update can only be scheduled as a
+// side effect of the previous update so we need to disable Lit's dev warning.
+QuietCarousel.disableWarning?.('change-in-update');

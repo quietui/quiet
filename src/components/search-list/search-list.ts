@@ -270,3 +270,7 @@ declare global {
     'quiet-search-list': QuietSearchList;
   }
 }
+
+// Due to the relationship between the search list, the controller, and the results, the next update can only be
+// scheduled as a side effect of the previous update so we need to disable Lit's dev warning.
+QuietSearchList.disableWarning?.('change-in-update');

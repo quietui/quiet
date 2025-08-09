@@ -107,7 +107,7 @@ export class QuietDropdownItem extends QuietElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.addEventListener('mouseenter', this.handleMouseEnter.bind(this));
+    this.addEventListener('mouseenter', this.handleMouseEnter);
   }
 
   disconnectedCallback() {
@@ -254,12 +254,12 @@ export class QuietDropdownItem extends QuietElement {
   }
 
   /** Handles mouse enter to open the submenu */
-  private handleMouseEnter() {
+  private handleMouseEnter = () => {
     if (this.hasSubmenu && !this.disabled) {
       this.notifyParentOfOpening();
       this.submenuOpen = true;
     }
-  }
+  };
 
   render() {
     const isLink = typeof this.href === 'string';
@@ -342,3 +342,7 @@ declare global {
     'quiet-dropdown-item': QuietDropdownItem;
   }
 }
+
+// Due to the possibility of submenus, some updates can only be scheduled as a side effect of the previous update. This
+// disables Lit's dev warning about it.
+QuietDropdownItem.disableWarning?.('change-in-update');

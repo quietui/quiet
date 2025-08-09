@@ -710,6 +710,10 @@ declare global {
   }
 }
 
+// The synchronization between string and HSVA values is essential for the color picker to function, so some updates can
+// only be scheduled as a side effect of the previous update. This disables that Lit dev warning about it.
+QuietColorPicker.disableWarning?.('change-in-update');
+
 // The EyeDropper API isn't in all browsers or TypeScript yet
 interface EyeDropperConstructor {
   new (): EyeDropperInterface;

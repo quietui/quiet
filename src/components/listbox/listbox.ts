@@ -903,3 +903,7 @@ declare global {
     'quiet-listbox': QuietListbox;
   }
 }
+
+// Due to the parent/child relationship between listbox and listbox items, some updates can only be scheduled as a side
+// effect of the previous update. This disables Lit's dev warning about it.
+QuietListbox.disableWarning?.('change-in-update');

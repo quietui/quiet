@@ -1,0 +1,211 @@
+---
+title: License
+description: Unlock commercial projects, support from the maintainer, and priority bug fixes with a commercial license.
+layout: page
+isWide: true
+section: license
+bodyClass: with-grid
+---
+
+Quiet is available under the [AGPL license](https://www.gnu.org/licenses/agpl-3.0.en.html), making it free for use with open source projects. If you're building closed-source software or proprietary applications, you'll need to purchase a commercial license.
+
+<div class="pricing-tiers">
+  <div class="pricing-tier">
+    <quiet-icon class="pricing-tier-icon" name="code" style="color: #7db664;"></quiet-icon>
+    <h3 data-no-anchor>Open Source</h3><br>
+    <ul>
+      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> AGPL license</li>
+      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Use in open source projects</li>
+      <li><quiet-icon name="x" style="color: #b91c1c;"></quiet-icon> <s>Private GitHub forum</s></li>
+      <li><quiet-icon name="x" style="color: #b91c1c;"></quiet-icon> <s>Private Discord access</s></li>
+      <li><quiet-icon name="x" style="color: #b91c1c;"></quiet-icon> <s>Maintainer support</s></li>
+      <li><quiet-icon name="x" style="color: #b91c1c;"></quiet-icon> <s>Priority bug fixes</s></li>
+    </ul>
+    <quiet-button pill href="..." target="_blank">
+      <quiet-icon slot="start" name="brand-github"></quiet-icon>
+      Get the code
+    </quiet-button>
+  </div>
+
+  <div class="pricing-tier">
+    <quiet-icon class="pricing-tier-icon" name="license" style="color: #7577c5;"></quiet-icon>
+    <h3 data-no-anchor>Commercial</h3><br>
+    <ul>
+      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Commercial license</li>
+      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Use in one project</li>
+      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Private GitHub forum</li>
+      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Private Discord access</li>
+      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Maintainer support</li>
+      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Priority bug fixes</li>
+    </ul>
+    <quiet-button variant="primary" pill href="..." target="_blank">
+      Purchase &middot; $199
+    </quiet-button>
+  </div>
+
+  <div class="pricing-tier">
+    <quiet-icon class="pricing-tier-icon" name="comet" style="color: #c5a231;"></quiet-icon>
+    <h3 data-no-anchor>Unlimited</h3><br>
+    <ul>
+      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Commercial license</li>
+      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Use in unlimited projects</li>
+      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Private GitHub forum</li>
+      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Private Discord access</li>
+      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Maintainer support</li>
+      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Priority bug fixes</li>
+    </ul>
+    <quiet-button pill href="https://github.com/quietui/quiet/stargazers" target="_blank">
+      Purchase &middot; $799
+    </quiet-button>
+  </div>  
+</div>
+
+<p style="text-align: center; text-wrap: balance; margin-block: 2.5rem 2rem;">
+  <small>
+    All prices are one-time payments. Commercial licenses are perpetual, so you can use them for the life of your projects.
+  </small>
+</p>
+
+<ul class="features-grid" aria-label="Features">
+  <li>
+    <a class="stretch" href="..." target="_blank" data-no-external-icon>
+      <quiet-icon name="send" style="color: #58acf2;"></quiet-icon><br>
+      Support from the maintainer<br>
+      <small>Get unstuck fast with personalized help</small>
+    </a>
+  </li>
+  <li>
+    <a class="stretch" href="..." target="_blank" data-no-external-icon>
+      <quiet-icon name="bug" style="color: #e98d61;"></quiet-icon><br>
+      Priority bug fixes<br>
+      <small>Your issues get fixed quickly</small>
+    </a>
+  </li>
+  <li>
+    <a class="stretch" href="..." target="_blank" data-no-external-icon>
+      <quiet-icon name="brand-discord" style="color: #e886a7;"></quiet-icon><br>
+      Private Discord<br>
+      <small>Proudly show your support</small>
+    </a>
+  </li>
+  <li>
+    <a class="stretch" href="..." target="_blank" data-no-external-icon>
+      <quiet-icon name="messages" style="color: #c5a231;"></quiet-icon><br>
+      Private discussion forum<br>
+      <small>Join an exclusive community of supporters</small>
+    </a>
+  </li>
+  <li>
+    <a class="stretch" href="..." target="_blank" data-no-external-icon>
+      <quiet-icon name="plug" style="color: #b394f4;"></quiet-icon><br>
+      Works with every framework<br>
+      <small>Take it with you no matter the stack</small>
+    </a>
+  </li>
+  <li>
+    <a class="stretch" href="..." target="_blank" data-no-external-icon>
+      <quiet-icon name="school" style="color: #7db664;"></quiet-icon><br>
+      Learn once, use everywhere<br>
+      <small>Platform APIs help ensure longevity</small>
+    </a>
+  </li>
+  <li>
+    <a class="stretch" href="..." target="_blank" data-no-external-icon>
+      <quiet-icon name="lock-heart" style="color: #e886a7;"></quiet-icon><br>
+      Zero tracking, zero ads<br>
+      <small>Clean, focused development without distractions</small>
+    </a>
+  </li>
+  <li>
+    <a class="stretch" href="..." target="_blank" data-no-external-icon>
+      <quiet-icon name="tools" style="color: #2ab6d1;"></quiet-icon><br>
+      Actively maintained &amp; evolving<br>
+      <small>Regular updates keep you on the cutting edge</small>
+    </a>
+  </li>
+</ul>
+
+<p style="text-align: center; text-wrap: balance; margin-block: 2.5rem 2rem;">
+  <small>
+    Want to support the project, but don't need a commercial license? Become a sponsor and get a sponsor's badge on your GitHub profile!
+  </small>
+</p>
+
+<img class="whiskers-center" src="/assets/images/whiskers/with-heart.svg" alt="Whiskers the mouse holding a giant heart">
+
+<div 
+  style="
+    display: flex; 
+    gap: 1rem; 
+    justify-content: center; 
+    margin-block: 2.5rem 2rem;
+  "
+>
+  <quiet-button variant="primary" size="lg" appearance="outline" pill href="https://github.com/sponsors/quietui" target="_blank">
+    <quiet-icon slot="start" family="filled" name="heart" style="color: deeppink;"></quiet-icon>
+    Become a sponsor
+  </quiet-button>
+</div>
+
+---
+
+## Frequently asked questions
+
+:::details Do you offer technical support? {.faq}
+Yes. You can purchase a commercial license to unlock access to the private discussion forum and the private Discord channel where you can get help directly from me, the maintainer, and other commercial license holders. My response times are usually within 24 hours.
+:::
+
+:::details Is support guaranteed? {.faq}
+I will always do my best to help you and I typically reply within 24 hours. However, that doesn't guarantee I'll be able to fix your problem every time.
+:::
+
+:::details When will my bug be fixed? {.faq}
+I prioritize bug fixes that affect commercial license holders. I try to submit fixes quickly, but some bugs are tricky and require more time, research, etc. I will communicate my progress with you so you're always aware of what's happening.
+:::
+
+:::details Where is the private GitHub forum?
+[The forum is located here.](https://github.com/quietui/sponsors) Please note that the page will appear as a 404 error until you've been granted access.
+:::
+
+:::details How can I report a bug? {.faq}
+Bugs should be [reported on GitHub](https://github.com/quietui/quiet/issues). For best results, please include a minimal reproduction with your report.
+:::
+
+:::details How can I request a feature? {.faq}
+Features can be [requested on GitHub](https://github.com/quietui/quiet/discussions/categories/feature-requests). Please search before posting to prevent duplicate requests and use the 👍 reaction to vote.
+:::
+
+:::details Can I sponsor a feature? {.faq}
+I generally don't accept sponsorships for specific features. This lets me focus on what's best for the project. That doesn't mean I ignore feature requests — it means I'm not willing to let money influence the roadmap.
+
+Quiet is the result of many years of experience and my commitment to painstakingly curating the project. I want people to sponsor it because they see the vision, not because they want to change it.
+:::
+
+:::details What about server-side rendering (SSR)? {.faq}
+_Framework SSR_ was created to solve problems introduced by client-side frameworks. When we moved to rendering everything with JavaScript, we broke SEO, social media previews, and page load performance. While framework SSR can be helpful in some scenarios, it's often misused to justify shipping massive JavaScript bundles that leave pages looking ready but completely unresponsive until everything loads and hydration completes.
+
+The idea behind framework SSR is that fetching and hydrating can be done in the background before the user is likely to interact with the page. As such, it first sends the user a "fully painted" picture they can't actually do anything with while waiting for the browser to download and process a multi-megabyte bundle. However, it's become common to see 5+ seconds until [TTI](https://developer.chrome.com/docs/lighthouse/performance/interactive) in the wild, leaving many users confused and frustrated.
+
+Quiet isn't interested in supporting the framework SSR fallacy. As part of the platform, web components can be server-side rendered like all other HTML elements have since the early days of the Web. Just generate the appropriate HTML tags, import the components, and you're good to go.
+
+If you're using Quiet's autoloader, it will only fetch the components you're actually using on the page. And to eliminate [FOUCE](https://www.abeautifulsite.net/posts/flash-of-undefined-custom-elements), the most common reason people reach for SSR when using web components, Quiet provides some [simple and effective tools](/docs/#reducing-fouce).
+
+The key to a great experience on the web isn't SSR, it's less JavaScript. If you're of the belief that you need framework SSR and all the needless complexity it brings to a project, this library isn't for you.
+:::
+
+:::details Can I change the tag names? {.faq}
+Component tag names, e.g. `<quiet-button>`, cannot be changed without modifying the source code due to the way tags are referenced in code and styles. Attempting to change tag names, e.g. by extending the associated classes, will cause unexpected breakages and isn't a supported feature of the library.
+:::
+
+:::details Can I subclass the components? {.faq}
+While components are written as classes, they aren't designed to be subclassed. This is neither supported nor an objective of the library and doing so will cause things to break. Instead, use composition when possible.
+:::
+
+:::details Can I use this library with a micro frontend? {.faq}
+Because custom elements are registered globally, I don't recommend using Quiet in a micro frontend architecture _unless_ you move it to the top of the stack. Avoid loading the library multiple times, as this will cause version conflicts and load more code than is necessary.
+:::
+
+<small class="copyright">
+  Quiet UI is a project of A&nbsp;Beautiful&nbsp;Site,&nbsp;LLC
+  &copy;<quiet-date year="numeric"></quiet-date>
+</small>

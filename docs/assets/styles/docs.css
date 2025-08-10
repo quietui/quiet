@@ -1409,7 +1409,7 @@ html:not(.quiet-dark) quiet-scroller:has(.component-table) {
 }
 
 /* Pricing table */
-.sponsor-tiers {
+.pricing-tiers {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 0.5rem;
@@ -1423,16 +1423,16 @@ html:not(.quiet-dark) quiet-scroller:has(.component-table) {
   @media screen and (min-width: 768px) {
     margin-block: 3rem;
 
-    .sponsor-tier:nth-child(1) {
+    .pricing-tier:nth-child(1) {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
     }
 
-    .sponsor-tier:nth-child(2) {
+    .pricing-tier:nth-child(2) {
       scale: 1.09;
     }
 
-    .sponsor-tier:nth-child(3) {
+    .pricing-tier:nth-child(3) {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
     }
@@ -1445,13 +1445,13 @@ html:not(.quiet-dark) quiet-scroller:has(.component-table) {
     margin-block: 2rem;
     gap: 0.5rem;
 
-    .sponsor-tier:nth-child(2) {
+    .pricing-tier:nth-child(2) {
       scale: 1.1;
     }
   }
 }
 
-.sponsor-tier {
+.pricing-tier {
   padding: 1.5rem 1rem 2rem 1rem;
   overflow: hidden;
   border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
@@ -1459,7 +1459,7 @@ html:not(.quiet-dark) quiet-scroller:has(.component-table) {
   background-color: var(--quiet-paper-color);
   box-shadow: var(--quiet-shadow-softer);
 
-  .sponsor-tier-icon {
+  .pricing-tier-icon {
     font-size: 4rem;
     stroke-width: 1px;
   }

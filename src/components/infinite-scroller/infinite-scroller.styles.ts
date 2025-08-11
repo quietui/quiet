@@ -13,6 +13,8 @@ export default css`
     border-radius: var(--quiet-border-radius-md);
     background-color: var(--quiet-paper-color);
     box-shadow: var(--quiet-shadow-softer);
+    scrollbar-color: var(--quiet-neutral-fill-mid) transparent;
+    scrollbar-width: thin;
     -webkit-overflow-scrolling: touch;
   }
 

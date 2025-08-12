@@ -81,7 +81,7 @@ By submitting a contribution to this project, you agree to license your entire c
 
 If you do not agree to license your contribution under these terms, do not make contributions to the project. Unless otherwise noted:
 
-- The project's source code is licensed under the AGPL license
+- The project's source code is licensed under the [AGPL 3.0](https://www.gnu.org/licenses/agpl-3.0.en.html)
 - Code examples in the documentation are public domain
 - The website and documentation are copyrighted and may not be reproduced without prior written consent from the maintainer
 

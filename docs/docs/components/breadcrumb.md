@@ -305,7 +305,6 @@ Breadcrumbs come with a simple, minimal appearance. Feel free to customize them 
 </style>
 ```
 
-
 ```html {.example}
 <quiet-breadcrumb class="breadcrumb__borders">
   <quiet-breadcrumb-item href="https://example.com/">
@@ -333,7 +332,7 @@ Breadcrumbs come with a simple, minimal appearance. Feel free to customize them 
     }
 
     quiet-breadcrumb-item:not([current])::part(label) {
-      background-color: var(--quiet-paper);
+      background-color: var(--quiet-paper-color);
       border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
       border-radius: var(--quiet-border-radius-md);
       box-shadow: var(--quiet-shadow-softer);

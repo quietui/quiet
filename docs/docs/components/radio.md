@@ -236,7 +236,7 @@ Radios come with a simple, minimal appearance. Feel free to customize them with 
 <style>
   .radio__auth {
     quiet-radio-item {
-      background: var(--quiet-paper);
+      background: var(--quiet-paper-color);
       border: solid 1px var(--quiet-neutral-stroke-soft);
       border-radius: .5rem;
       box-shadow: var(--quiet-shadow-softer);
@@ -285,7 +285,7 @@ Radios come with a simple, minimal appearance. Feel free to customize them with 
     quiet-radio-item {
       position: relative;
       width: 100%;
-      background: var(--quiet-paper);
+      background: var(--quiet-paper-color);
       border: solid 1px var(--quiet-neutral-stroke-soft);
       box-shadow: var(--quiet-shadow-softer);
       border-radius: .5rem;

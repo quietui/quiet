@@ -7,7 +7,7 @@ section: license
 bodyClass: with-grid
 ---
 
-Quiet UI is available under the [Affero General Public License (AGPL)](https://www.gnu.org/licenses/agpl-3.0.en.html), making it free for use with compatible open source projects. If you're building closed-source software or proprietary applications, you'll need to purchase a commercial license.
+Quiet UI is available under the [Affero General Public License (AGPL)](https://www.gnu.org/licenses/agpl-3.0.en.html), making it free for use with compatible open source projects. If you're building closed source software or proprietary applications, you'll need to purchase a commercial license.
 
 <div class="pricing-tiers">
   <div class="pricing-tier">
@@ -22,7 +22,7 @@ Quiet UI is available under the [Affero General Public License (AGPL)](https://w
       <li><quiet-icon name="x" style="color: #b91c1c;"></quiet-icon> <s>Priority bug fixes</s></li>
       <li><quiet-icon name="x" style="color: #b91c1c;"></quiet-icon> <s>Private Discord access</s></li>
     </ul>
-    <quiet-button pill>
+    <quiet-button pill href="https://github.com/quietui/quiet" target="_blank">
       <quiet-icon slot="start" name="brand-github"></quiet-icon>
       Get the code
     </quiet-button>
@@ -40,7 +40,7 @@ Quiet UI is available under the [Affero General Public License (AGPL)](https://w
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Priority bug fixes</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Private Discord access</li>
     </ul>
-    <quiet-button variant="primary" pill>
+    <quiet-button variant="primary" pill href="/purchase">
       Purchase &middot; $199
     </quiet-button>
   </div>
@@ -57,7 +57,7 @@ Quiet UI is available under the [Affero General Public License (AGPL)](https://w
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Priority bug fixes</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Private Discord access</li>
     </ul>
-    <quiet-button pill href="https://github.com/quietui/quiet/stargazers" target="_blank">
+    <quiet-button pill href="/purchase">
       Purchase &middot; $799
     </quiet-button>
   </div>  
@@ -65,37 +65,65 @@ Quiet UI is available under the [Affero General Public License (AGPL)](https://w
 
 <p style="text-align: center; text-wrap: balance; margin-block: 2.5rem 2rem;">
   <small>
-    All prices are one-time payments
+    Prices shown are flat rate, one-time payments
   </small>
 </p>
 
 <ul class="features-grid" aria-label="Features">
   <li>
-    <a class="stretch" href="..." target="_blank" data-no-external-icon>
-      <quiet-icon name="plug" style="color: #b394f4;"></quiet-icon><br>
+    <a class="stretch" href="/purchase" data-no-external-icon>
+      <quiet-icon name="contract" style="color: #c5a231;"></quiet-icon><br>
+      Remove AGPL Requirements<br>
+      <small>Build closed source and proprietary apps</small>
+    </a>
+  </li>
+  <li>
+    <a class="stretch" href="/purchase" data-no-external-icon>
+      <quiet-icon name="send" style="color: #58acf2;"></quiet-icon><br>
+      Support from the maintainer<br>
+      <small>Get unstuck fast with personalized help</small>
+    </a>
+  </li>
+  <li>
+    <a class="stretch" href="/purchase" data-no-external-icon>
+      <quiet-icon name="bug" style="color: #e98d61;"></quiet-icon><br>
+      Priority bug fixes<br>
+      <small>Most issues get fixed promptly</small>
+    </a>
+  </li>
+  <li>
+    <a class="stretch" href="/purchase" data-no-external-icon>
+      <quiet-icon name="brand-discord" style="color: #b394f4;"></quiet-icon><br>
+      Private Discord<br>
+      <small>Exclusive access to the private Discord chat</small>
+    </a>
+  </li>
+  <li>
+    <a class="stretch" href="/purchase" data-no-external-icon>
+      <quiet-icon name="plug" style="color: #848da0;"></quiet-icon><br>
       Works with every framework<br>
       <small>Take it with you no matter the stack</small>
     </a>
   </li>
   <li>
-    <a class="stretch" href="..." target="_blank" data-no-external-icon>
+    <a class="stretch" href="/purchase" data-no-external-icon>
       <quiet-icon name="school" style="color: #7db664;"></quiet-icon><br>
       Learn once, use everywhere<br>
       <small>Platform APIs help ensure longevity</small>
     </a>
   </li>
   <li>
-    <a class="stretch" href="..." target="_blank" data-no-external-icon>
-      <quiet-icon name="lock-heart" style="color: #e886a7;"></quiet-icon><br>
-      Zero tracking, zero ads<br>
-      <small>Clean, focused development without distractions</small>
-    </a>
-  </li>
-  <li>
-    <a class="stretch" href="..." target="_blank" data-no-external-icon>
+    <a class="stretch" href="/purchase" data-no-external-icon>
       <quiet-icon name="tools" style="color: #2ab6d1;"></quiet-icon><br>
       Actively maintained &amp; evolving<br>
       <small>Regular updates keep you on the cutting edge</small>
+    </a>
+  </li>
+  <li>
+    <a class="stretch" href="/purchase" data-no-external-icon>
+      <quiet-icon name="lock-heart" style="color: #e886a7;"></quiet-icon><br>
+      Zero tracking, zero ads<br>
+      <small>Clean, focused development without distractions</small>
     </a>
   </li>
 </ul>

@@ -17,7 +17,7 @@ Quiet UI is available under the [Affero General Public License (AGPL)](https://w
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> AGPL license</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Use in open source projects</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Modify the software</li>
-      <li><quiet-icon name="x" style="color: #b91c1c;"></quiet-icon> <s>Keep everything private</s></li>
+      <li><quiet-icon name="x" style="color: #b91c1c;"></quiet-icon> <s>Keep your code private</s></li>
       <li><quiet-icon name="x" style="color: #b91c1c;"></quiet-icon> <s>Maintainer support</s></li>
       <li><quiet-icon name="x" style="color: #b91c1c;"></quiet-icon> <s>Priority bug fixes</s></li>
       <li><quiet-icon name="x" style="color: #b91c1c;"></quiet-icon> <s>Private Discord access</s></li>
@@ -35,7 +35,7 @@ Quiet UI is available under the [Affero General Public License (AGPL)](https://w
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Commercial license</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Use in one project</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Modify the software</li>
-      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Keep everything private</li>
+      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Keep your code private</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Maintainer support</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Priority bug fixes</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Private Discord access</li>
@@ -52,7 +52,7 @@ Quiet UI is available under the [Affero General Public License (AGPL)](https://w
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Commercial license</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Use in unlimited projects</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Modify the software</li>
-      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Keep everything private</li>
+      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Keep your code private</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Maintainer support</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Priority bug fixes</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Private Discord access</li>

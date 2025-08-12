@@ -30,7 +30,10 @@
     "ui",
     "web components"
   ],
-  "author": "Cory LaViska",
+  "author": {
+    "name": "Cory LaViska",
+    "url": "https://abeautifulsite.net/"
+  },
   "license": "AGPL-3.0-only",
   "homepage": "https://github.com/quietui/quiet#readme",
   "repository": {

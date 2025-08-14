@@ -74,7 +74,7 @@ Quiet UI is [source-available](https://github.com/quietui/quiet/blob/main/LICENS
     <a class="stretch" href="/purchase" data-no-external-icon>
       <quiet-icon name="contract" style="color: #c5a231;"></quiet-icon><br>
       Commercial licenses<br>
-      <small>Build closed source and proprietary apps</small>
+      <small>Build proprietary, commercial applications</small>
     </a>
   </li>
   <li>
@@ -161,7 +161,7 @@ Unfortunately, there's no fair way for open source authors to build something va
 
 Copyleft licenses try to solve this by requiring everyone who uses the code to open source their entire application. But this places an unfair burden on noncommercial users who just want to keep their code private without having to navigate complex licensing requirements.
 
-Quiet's dual-license approach lets individuals, students, and non-profits use, learn from, and adapt it freely while ensuring that businesses who profit from it help fund continued development.
+Quiet's dual-license approach lets individuals, students, and non-profits use, learn from, and adapt the software freely while ensuring that businesses who profit from it help fund continued development.
 :::
 
 :::details Do you offer support? {.faq}

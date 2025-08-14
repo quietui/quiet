@@ -7,7 +7,7 @@ section: license
 bodyClass: with-grid
 ---
 
-Quiet UI is [source-available](https://github.com/quietui/quiet/blob/main/LICENSE) and completely free of charge for all personal, educational, and non-profit purposes. Commercial licenses are available for those who intend to use the software in business applications or require support.
+Quiet UI is source-available and completely free of charge for personal, educational, and non-profit uses under the terms of the [PolyForm Noncommercial License](https://github.com/quietui/quiet/blob/main/LICENSE). Commercial licenses are available for those who intend to use the software in business applications or require support.
 
 <div class="pricing-tiers">
   <div class="pricing-tier">

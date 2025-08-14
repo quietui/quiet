@@ -6,7 +6,7 @@ section: about
 bodyClass: with-grid
 ---
 
-Quiet is an [open source](https://github.com/quietui/quiet/blob/main/LICENSE) user interface library for the modern Web. It features {{ components.length }} accessible, performant, localized, and interoperable components along with an optional CSS reset to streamline development of websites and apps.
+Quiet is a [source-available](/license) user interface library for the modern Web. It features {{ components.length }} accessible, performant, localized, and interoperable components along with an optional CSS reset to streamline development of websites and apps.
 
 You might be curious to learn that Quiet's components aren't built with React, Vue, or any other framework. They're custom HTML elements, or [Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components), which means you can use them in plain ol' HTML _and_ with your favorite frameworks.
 

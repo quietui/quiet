@@ -1,8 +1,32 @@
 {
   "name": "@quietui/quiet",
-  "type": "module",
+  "description": "A UI library for the Web with a focus on accessibility, longevity, performance, and simplicity.",
   "version": "1.0.0",
-  "description": "An open source UI library for the Web with a focus on accessibility, longevity, performance, and simplicity.",
+  "license": "SEE LICENSE IN LICENSE",
+  "author": {
+    "name": "Cory LaViska",
+    "url": "https://abeautifulsite.net/"
+  },
+  "homepage": "https://github.com/quietui/quiet#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quietui/quiet.git"
+  },
+  "bugs": {
+    "url": "https://github.com/quietui/quiet/issues"
+  },
+  "funding": {
+    "type": "individual",
+    "url": "https://github.com/sponsors/quietui"
+  },
+  "keywords": [
+    "components",
+    "custom elements",
+    "design systems",
+    "ui",
+    "web components"
+  ],
+  "type": "module",
   "types": "dist/quiet.d.ts",
   "exports": {
     ".": {
@@ -23,30 +47,6 @@
   "files": [
     "dist"
   ],
-  "keywords": [
-    "components",
-    "custom elements",
-    "design systems",
-    "ui",
-    "web components"
-  ],
-  "author": {
-    "name": "Cory LaViska",
-    "url": "https://abeautifulsite.net/"
-  },
-  "license": "AGPL-3.0-only",
-  "homepage": "https://github.com/quietui/quiet#readme",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/quietui/quiet.git"
-  },
-  "bugs": {
-    "url": "https://github.com/quietui/quiet/issues"
-  },
-  "funding": {
-    "type": "individual",
-    "url": "https://github.com/sponsors/quietui"
-  },
   "scripts": {
     "start": "node scripts/build.js --develop --browser",
     "build": "node scripts/build.js",

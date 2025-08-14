@@ -1,23 +1,23 @@
 ---
 title: License
-description: Open source and commercial licenses are available.
+description: Learn more about how this software can be used.
 layout: page
 isWide: true
 section: license
 bodyClass: with-grid
 ---
 
-Quiet UI is available under the [Affero General Public License (AGPL)](https://www.gnu.org/licenses/agpl-3.0.en.html), making it free for use with compatible open source projects. If you're building closed source software or proprietary applications, you'll need to purchase a commercial license.
+Quiet UI is [source-available](https://github.com/quietui/quiet/blob/main/LICENSE) and completely free of charge for all personal, educational, and non-profit purposes. Commercial licenses are available for those who intend to use the software in business applications or require support.
 
 <div class="pricing-tiers">
   <div class="pricing-tier">
     <quiet-icon class="pricing-tier-icon" name="code" style="color: #7db664;"></quiet-icon>
-    <h3 data-no-anchor>Open Source</h3><br>
+    <h3 data-no-anchor>Source-available</h3><br>
     <ul>
-      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> AGPL license</li>
-      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Use in open source projects</li>
+      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Personal &amp; non-profit apps</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Modify the software</li>
-      <li><quiet-icon name="x" style="color: #b91c1c;"></quiet-icon> <s>Keep your code private</s></li>
+      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Keep your code private</li>
+      <li><quiet-icon name="x" style="color: #b91c1c;"></quiet-icon> <s>Use in commercial apps</s></li>
       <li><quiet-icon name="x" style="color: #b91c1c;"></quiet-icon> <s>Maintainer support</s></li>
       <li><quiet-icon name="x" style="color: #b91c1c;"></quiet-icon> <s>Priority bug fixes</s></li>
       <li><quiet-icon name="x" style="color: #b91c1c;"></quiet-icon> <s>Private Discord access</s></li>
@@ -33,9 +33,9 @@ Quiet UI is available under the [Affero General Public License (AGPL)](https://w
     <h3 data-no-anchor>Commercial</h3><br>
     <ul>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Commercial license</li>
-      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Use in one project</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Modify the software</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Keep your code private</li>
+      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Use in one commercial app</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Maintainer support</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Priority bug fixes</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Private Discord access</li>
@@ -50,9 +50,9 @@ Quiet UI is available under the [Affero General Public License (AGPL)](https://w
     <h3 data-no-anchor>Unlimited</h3><br>
     <ul>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Commercial license</li>
-      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Use in unlimited projects</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Modify the software</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Keep your code private</li>
+      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Unlimited commercial apps</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Maintainer support</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Priority bug fixes</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Private Discord access</li>
@@ -73,7 +73,7 @@ Quiet UI is available under the [Affero General Public License (AGPL)](https://w
   <li>
     <a class="stretch" href="/purchase" data-no-external-icon>
       <quiet-icon name="contract" style="color: #c5a231;"></quiet-icon><br>
-      Remove AGPL Requirements<br>
+      Commercial licenses<br>
       <small>Build closed source and proprietary apps</small>
     </a>
   </li>
@@ -154,14 +154,14 @@ Quiet UI is available under the [Affero General Public License (AGPL)](https://w
 
 ## Frequently asked questions
 
-:::details How does the AGPL work? {.faq}
-The AGPL is a license that protects your rights as a software user by keeping applications open and transparent. When you use software built with AGPL code, you have the right to access its complete source code — meaning you can see exactly how it works, modify it for your needs, or even run your own version.
+:::details What is a source-available license?
+While not fully open source, Quiet's [source-available license](https://github.com/quietui/quiet/blob/main/LICENSE) is actually _more_ permissive than most [copyleft](https://www.gnu.org/licenses/copyleft.en.html) licenses that require you to open source your entire application — even if you're not using it to make money. You can use it, learn from it, and change it just like open source software.
 
-If developers want to build on AGPL-licensed code, they must share their improvements and make their entire application available under the same open terms. This creates a cycle that continuously grows the pool of free, accessible software for everyone to benefit from.
+Unfortunately, there's no fair way for open source authors to build something valuable and sustainable while giving it away completely free to everyone. Traditional open source means any company can take years of your work, build profitable products with it, and contribute nothing back to development.
 
-This approach ensures that useful software innovations remain in the public domain rather than being locked away in proprietary systems. As a user, you're guaranteed transparency and the freedom to understand, modify, and control the software you depend on.
+Copyleft licenses try to solve this by requiring everyone who uses the code to open source their entire application. But this places an unfair burden on noncommercial users who just want to keep their code private without having to navigate complex licensing requirements.
 
-**Companies that prefer to keep their code private can purchase a commercial license to bypass the AGPL's requirements.**
+Quiet's dual-license approach lets individuals, students, and non-profits use, learn from, and adapt it freely while ensuring that businesses who profit from it help fund continued development.
 :::
 
 :::details Do you offer support? {.faq}
@@ -186,6 +186,14 @@ Features can be [requested on GitHub](https://github.com/quietui/quiet/discussio
 
 :::details Can I sponsor a feature? {.faq}
 I generally don't accept sponsorships for specific features. This lets me focus on what's best for the project. Quiet is the result of many years of experience and my commitment to painstakingly curating the project. I want people to sponsor it because they see the vision, not because they want to change it.
+:::
+
+:::details Can I fork the project?
+You can fork and modify the software for your own use, but creating a competing product is and/or changing the license is prohibited.
+:::
+
+:::details Can I ship Quiet with my open source project?
+It's best to not ship Quiet with open source projects, as that creates a complicated downstream licensing requirement for end users.
 :::
 
 :::details What about server-side rendering (SSR)? {.faq}

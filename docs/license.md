@@ -7,7 +7,7 @@ section: license
 bodyClass: with-grid
 ---
 
-Quiet UI is source-available and completely free of charge for personal, educational, and non-profit uses under the terms of the [PolyForm Noncommercial License](https://github.com/quietui/quiet/blob/main/LICENSE). Commercial licenses are available for those who intend to use the software in business applications or require support.
+Quiet UI is source-available and completely free of charge for personal, educational, and non-profit use under the terms of the [PolyForm Noncommercial License](https://github.com/quietui/quiet/blob/main/LICENSE). Commercial licenses are available for those who wish to use the software in business applications or require support.
 
 <div class="pricing-tiers">
   <div class="pricing-tier">
@@ -52,7 +52,7 @@ Quiet UI is source-available and completely free of charge for personal, educati
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Commercial license</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Modify the software</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Keep your code private</li>
-      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Unlimited commercial apps</li>
+      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> <mark>Unlimited commercial apps</mark></li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Maintainer support</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Priority bug fixes</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Private Discord access</li>
@@ -155,11 +155,11 @@ Quiet UI is source-available and completely free of charge for personal, educati
 ## Frequently asked questions
 
 :::details What is a source-available license?
-While not fully open source, Quiet's [source-available license](https://github.com/quietui/quiet/blob/main/LICENSE) is actually _more_ permissive than most [copyleft](https://www.gnu.org/licenses/copyleft.en.html) licenses that require you to open source your entire application — even if you're not using it to make money. You can use it, learn from it, and change it just like open source software.
+While not fully open source, Quiet's [source-available license](https://github.com/quietui/quiet/blob/main/LICENSE) is actually _more_ permissive than most viral open source licenses. You can use Quiet, learn from it, and change it just like open source software.
 
 Unfortunately, there's no fair way for open source authors to build something valuable and sustainable while giving it away completely free to everyone. Traditional open source means any company can take years of your work, build profitable products with it, and contribute nothing back to development.
 
-Copyleft licenses try to solve this by requiring everyone who uses the code to open source their entire application. But this places an unfair burden on noncommercial users who just want to keep their code private without having to navigate complex licensing requirements.
+[Copyleft licenses](https://www.gnu.org/licenses/copyleft.en.html) try to solve this problem by requiring everyone who uses the code to open source their entire application. But this creates an unfair burden on noncommercial users — individuals, students, and hobbyists who just want to keep their code private without having to navigate complex licensing requirements.
 
 Quiet's dual-license approach lets individuals, students, and non-profits use, learn from, and adapt the software freely while ensuring that businesses who profit from it help fund continued development.
 :::

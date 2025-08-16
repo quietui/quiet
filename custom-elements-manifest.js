@@ -1,7 +1,6 @@
 import { jsxTypesPlugin } from '@wc-toolkit/jsx-types';
 import { parse } from 'comment-parser';
 import { customElementSolidJsPlugin } from 'custom-element-solidjs-integration';
-import { customElementVsCodePlugin } from 'custom-element-vs-code-integration';
 import { readFileSync } from 'fs';
 
 const packageData = JSON.parse(readFileSync('./package.json', 'utf8'));
@@ -94,18 +93,6 @@ export default {
         });
       }
     },
-
-    // Custom data for VS Code
-    customElementVsCodePlugin({
-      outdir,
-      cssFileName: null,
-      referencesTemplate: (_, tag) => [
-        {
-          name: 'Documentation',
-          url: `https://quietui.org/docs/components/${tag.replace('quiet-', '')}`
-        }
-      ]
-    }),
 
     // Generate JSX types (see https://wc-toolkit.com/integrations/jsx/)
     jsxTypesPlugin({

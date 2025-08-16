@@ -1,8 +1,4 @@
 {
   "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
-  },
-  "html.customData": ["./dist/vscode.html-custom-data.json"]
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
 }

@@ -91,7 +91,6 @@
     "comment-parser": "^1.4.1",
     "cspell": "^9.1.5",
     "custom-element-solidjs-integration": "^1.9.0",
-    "custom-element-vs-code-integration": "^1.5.0",
     "esbuild": "^0.25.6",
     "get-port": "^7.1.0",
     "globby": "^14.1.0",

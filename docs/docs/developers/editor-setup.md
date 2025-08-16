@@ -6,23 +6,9 @@ layout: docs
 
 ## Visual Studio Code
 
-Quiet generates a file called `vscode.html-custom-data.json` that informs VS Code of your custom elements. To enable code completion, you need to tell VS Code where the file is.
+Quiet UI includes a Custom Elements Manifest (CEM) file that contains useful information about its components. Many tools are emerging that make use of CEMs, including the [Web Components Language Server](https://wc-toolkit.com/integrations/web-components-language-server/).
 
-1. Install Quiet via npm using `npm install @quietui/quiet`
-2. Create a folder named `.vscode` at the root of your project (if it doesn't already exist)
-3. Create a file inside that folder called `settings.json` (if it doesn't already exist)
-4. Add the following rule to the file
-
-```json
-{
-  "html.customData": ["./node_modules/@quietui/quiet/dist/vscode.html-custom-data.json"]
-}
-```
-
-:::info
-You might need to restart VS Code after updating `settings.json`.
-:::
-
+This extension gives supported editors auto-completion and type-aware suggestions for all components. It ships as a recommended extension for VS Code, but you can [install it manually](https://marketplace.visualstudio.com/items?itemName=wc-toolkit.web-components-language-server) from the marketplace.
 
 ## JetBrains
 

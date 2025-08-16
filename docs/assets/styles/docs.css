@@ -1438,6 +1438,12 @@ html:not(.quiet-dark) quiet-scroller:has(.component-table) {
     text-align: center;
   }
 
+  @media screen and (min-width: 768px) and (max-width: 959px) {
+    h3 {
+      font-size: 1.33rem;
+    }
+  }
+
   @media screen and (min-width: 768px) {
     margin-block: 3rem;
 
@@ -1490,6 +1496,10 @@ html:not(.quiet-dark) quiet-scroller:has(.component-table) {
     color: var(--quiet-text-muted);
     font-size: 0.9375rem;
     text-align: start;
+
+    @media screen and (min-width: 768px) and (max-width: 959px) {
+      font-size: 0.875rem;
+    }
   }
 
   &:nth-child(2) ul {

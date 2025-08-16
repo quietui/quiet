@@ -97,7 +97,10 @@ export default {
     // Generate JSX types (see https://wc-toolkit.com/integrations/jsx/)
     jsxTypesPlugin({
       fileName: 'custom-elements-jsx.d.ts',
-      outdir
+      outdir,
+      componentTypePath: (_name, _tag, modulePath) => {
+        return `.${modulePath.replace(/^src/, '')}`;
+      }
     }),
 
     // Generate Solid.js types (see https://github.com/break-stuff/cem-tools/tree/main/packages/solidjs-integration)

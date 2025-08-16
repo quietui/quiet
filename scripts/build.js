@@ -20,6 +20,7 @@ const iconDir = join(distDir, 'assets/icons');
 const spinner = ora({ text: 'Quiet UI', color: 'magenta' }).start();
 const packageData = JSON.parse(await readFile(join(rootDir, 'package.json'), 'utf-8'));
 const version = packageData.version;
+const currentYear = new Date().getFullYear();
 let buildContext;
 
 /**
@@ -175,6 +176,9 @@ async function generateBuild() {
       'process.env.NODE_ENV': '"production"' // required by Floating UI
     },
     bundle: isBrowserBuild,
+    banner: {
+      js: `/*! Required Notice: Copyright ${currentYear} A Beautiful Site, LLC - https://quietui.org/license */`
+    },
     legalComments: 'none',
     splitting: true
   };

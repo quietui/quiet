@@ -165,7 +165,7 @@ Quiet's dual-license approach lets individuals, students, and non-profits use, l
 :::
 
 :::details Do you offer support? {.faq}
-Yes. You can purchase a commercial license to unlock access to the private Discord where you can get help directly from me, the maintainer, and other commercial license holders. My response times are usually within 24 hours.
+Yes. You can purchase a commercial license to unlock access to the private Discord where you can get help directly from me, the maintainer, and chat with other patrons of the project. My response times are usually within 24 hours.
 :::
 
 :::details Is support guaranteed? {.faq}

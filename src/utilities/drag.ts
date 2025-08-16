@@ -9,6 +9,9 @@ const supportsTouch = typeof window !== 'undefined' && 'ontouchstart' in window;
  * Drag functionality will be enabled as soon as the constructor is called. A `start()` and `stop()` method can be used
  * to start and stop it, if needed.
  *
+ * Note: to prevent undesired scrolling while dragging on touch devices, use `touch-action: none` in the component's
+ * styles instead of preventing the `pointerdown` event.
+ *
  * @usage
  *
  * const draggable = new DraggableElement(element, {
@@ -38,9 +41,6 @@ export class DraggableElement {
   private handleDragStart = (event: PointerEvent | TouchEvent) => {
     const clientX = 'touches' in event ? event.touches[0].clientX : (event as PointerEvent).clientX;
     const clientY = 'touches' in event ? event.touches[0].clientY : (event as PointerEvent).clientY;
-
-    // Prevent scrolling while dragging
-    event.preventDefault();
 
     if (
       this.isDragging ||

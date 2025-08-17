@@ -189,7 +189,7 @@ I generally don't accept sponsorships for specific features. This lets me focus 
 :::
 
 :::details Can I fork the project?
-You can fork and modify the software for your own use, but creating a competing product is and/or changing the license is prohibited.
+You can fork and modify the software for your own use, but creating a competing product and/or changing the license is prohibited.
 :::
 
 :::details Can I ship Quiet with my open source project?

@@ -14,7 +14,7 @@ Quiet UI is source-available and completely free of charge for personal, educati
     <quiet-icon class="pricing-tier-icon" name="code" style="color: #7db664;"></quiet-icon>
     <h3 data-no-anchor>Source-available</h3><br>
     <ul>
-      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Personal/non-profit use</li>
+      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Noncommercial use</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Modify the software</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Keep your code private</li>
       <li><quiet-icon name="x" style="color: #b91c1c;"></quiet-icon> <s>Use in commercial apps</s></li>
@@ -32,10 +32,10 @@ Quiet UI is source-available and completely free of charge for personal, educati
     <quiet-icon class="pricing-tier-icon" name="license" style="color: #7577c5;"></quiet-icon>
     <h3 data-no-anchor>Commercial</h3><br>
     <ul>
-      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Commercial license</li>
+      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Commercial use</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Modify the software</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Keep your code private</li>
-      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> One commercial app</li>
+      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Use in 1 commercial app</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Maintainer support</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Priority bug fixes</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Private Discord access</li>
@@ -49,10 +49,10 @@ Quiet UI is source-available and completely free of charge for personal, educati
     <quiet-icon class="pricing-tier-icon" name="comet" style="color: #c5a231;"></quiet-icon>
     <h3 data-no-anchor>Unlimited</h3><br>
     <ul>
-      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Commercial license</li>
+      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Commercial use</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Modify the software</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Keep your code private</li>
-      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> <mark>Unlimited apps</mark></li>
+      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> <mark>Use in unlimited apps</mark></li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Maintainer support</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Priority bug fixes</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Private Discord access</li>

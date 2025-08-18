@@ -650,7 +650,8 @@ Sliders come with a simple, minimal appearance. Feel free to customize them with
       background-image: linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%),
         linear-gradient(45deg, transparent 75%, var(--quiet-neutral-fill-soft) 75%),
         linear-gradient(45deg, transparent 75%, var(--quiet-neutral-fill-soft) 75%),
-        linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%);    }
+        linear-gradient(45deg, var(--quiet-neutral-fill-soft) 25%, transparent 25%);
+    }
 
     &::part(indicator) {
       width: 100% !important;

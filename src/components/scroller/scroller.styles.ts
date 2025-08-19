@@ -24,7 +24,9 @@ export default css`
   }
 
   #content {
+    z-index: 1; /* below shadows */
     border-radius: inherit;
+    isolation: isolate;
     scroll-behavior: smooth;
     scrollbar-color: var(--thumb-color) var(--track-color);
     scrollbar-width: thin;
@@ -56,6 +58,11 @@ export default css`
     min-height: 0; /* This is crucial for flex children to respect overflow */
     overflow-x: hidden;
     overflow-y: auto;
+  }
+
+  #start-shadow,
+  #end-shadow {
+    z-index: 2; /* above content */
   }
 
   /* Horizontal shadows */

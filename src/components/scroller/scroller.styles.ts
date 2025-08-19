@@ -26,7 +26,6 @@ export default css`
   #content {
     z-index: 1; /* below shadows */
     border-radius: inherit;
-    isolation: isolate;
     scroll-behavior: smooth;
     scrollbar-color: var(--thumb-color) var(--track-color);
     scrollbar-width: thin;

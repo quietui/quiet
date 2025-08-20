@@ -181,12 +181,12 @@ By default, multiple accordion items can be expanded at the same time. Add the `
 </quiet-accordion>
 ```
 
-### Changing the icon position
+### Changing the icon placement
 
-Set the `icon-position` to `start` to render the icon on the front of the header.
+Set the `icon-placement` to `start` to render the icon on the front of the header.
 
 ```html {.example}
-<quiet-accordion icon-position="start">
+<quiet-accordion icon-placement="start">
   <quiet-accordion-item label="Why do cats sleep so much?">
     <p>Cats sleep 12-16 hours a day because they're natural predators who conserve energy for hunting (even if they're just hunting dust bunnies).</p>
   </quiet-accordion-item>

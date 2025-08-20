@@ -151,6 +151,10 @@ Sizes in attributes, utility classes, and similar uses should use shorthand t-sh
 
 Avoid using the `xxs` and `xxl` pattern. For additional scales, use `2xs` and `2xl` as it's more accessible, especially to visually impaired users.
 
+### Naming placements
+
+When an attribute accepts values such as `start`, `end`, `top`, `bottom`, etc., it should be named `placement` or `[descriptor]-placement` and not `position`. The term `position` is reserved for numeric- and percentage-based values.
+
 ### Dependencies
 
 A component should import and mark another component as a dependency when a) the dependency is rendered as part of the host element's shadow root or b) the dependency must be slotted in for the host element to function. For example, `<quiet-dropdown-item>` is a dependency of `<quiet-dropdown>`, even though the user slots it in.

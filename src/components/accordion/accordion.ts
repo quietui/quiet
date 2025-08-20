@@ -55,7 +55,7 @@ export class QuietAccordion extends QuietElement {
   @property({ reflect: true }) appearance: 'normal' | 'contained' | 'separated' | 'unstyled' = 'normal';
 
   /** Determines which side of the accordion item the expand/collapse icon shows. */
-  @property({ attribute: 'icon-position', reflect: true }) iconPosition: 'start' | 'end' = 'end';
+  @property({ attribute: 'icon-placement', reflect: true }) iconPlacement: 'start' | 'end' = 'end';
 
   connectedCallback() {
     super.connectedCallback();
@@ -70,7 +70,7 @@ export class QuietAccordion extends QuietElement {
   }
 
   updated(changedProperties: PropertyValues<this>) {
-    if (changedProperties.has('appearance') || changedProperties.has('iconPosition')) {
+    if (changedProperties.has('appearance') || changedProperties.has('iconPlacement')) {
       this.syncItemProperties();
     }
   }
@@ -241,13 +241,13 @@ export class QuietAccordion extends QuietElement {
     this.syncItemProperties();
   }
 
-  /** Sync appearance and iconPosition to accordion items */
+  /** Sync appearance and iconPlacement to accordion items */
   private syncItemProperties() {
     const items = this.getItems();
 
     items.forEach((item, index) => {
       item.appearance = this.appearance;
-      item.iconPosition = this.iconPosition;
+      item.iconPlacement = this.iconPlacement;
 
       // Use toggleAttribute to conditionally set position attributes
       const isFirst = index === 0;

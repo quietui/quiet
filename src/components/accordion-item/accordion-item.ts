@@ -48,7 +48,7 @@ export class QuietAccordionItem extends QuietElement {
   @property({ reflect: true }) appearance: 'normal' | 'contained' | 'separated' | 'unstyled' = 'normal';
 
   /** The position of the expand/collapse icon. This will be set automatically by the accordion controller. */
-  @property({ attribute: 'icon-position', reflect: true }) iconPosition: 'start' | 'end' = 'end';
+  @property({ attribute: 'icon-placement', reflect: true }) iconPlacement: 'start' | 'end' = 'end';
 
   /** Disables the accordion item. */
   @property({ type: Boolean, reflect: true }) disabled = false;
@@ -122,8 +122,8 @@ export class QuietAccordionItem extends QuietElement {
         id="header"
         part="header"
         class=${classMap({
-          'icon-start': this.iconPosition === 'start',
-          'icon-end': this.iconPosition === 'end'
+          'icon-start': this.iconPlacement === 'start',
+          'icon-end': this.iconPlacement === 'end'
         })}
         tabindex=${this.disabled ? -1 : 0}
         role="button"

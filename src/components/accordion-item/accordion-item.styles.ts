@@ -40,7 +40,7 @@ export default css`
     opacity: 0.5;
   }
 
-  :host([icon-position='start']) #header {
+  :host([icon-placement='start']) #header {
     flex-direction: row-reverse;
   }
 

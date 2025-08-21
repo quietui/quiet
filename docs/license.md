@@ -157,7 +157,7 @@ Quiet UI is source-available and completely free of charge for personal, educati
 :::details What does "noncommercial" mean?
 _Noncommercial_ means you can't use the software to make money or as part of your business. It's free to use for personal projects, learning, research, hobby stuff, or if you work for a nonprofit, school, or government agency.
 
-The key thing is that you're not profiting from the software or using it to support a business. If you are, you'll need to purchase a commercial license.
+The key thing is that you're not profiting from the software or using it to support a business. If you are, you'll need to [purchase a commercial license](/license).
 :::
 
 :::details What is a source-available license?

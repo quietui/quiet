@@ -167,7 +167,7 @@ You can register additional icon libraries using the `registerIconLibrary()` fun
     // the icon before it gets rendered.
     //
     // The mutator is handy when you're pulling in SVGs from, for 
-    // example, a  CDN and you need to adjust the fill, stroke, and 
+    // example, a CDN and you need to adjust the fill, stroke, and 
     // other properties.
     //
     mutate: svg =>  {

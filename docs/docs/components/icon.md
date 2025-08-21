@@ -219,7 +219,7 @@ If you choose to change the system library, you must reimplement _all_ of the sy
 
 ### Bootstrap icons
 
-This examples demonstrates how to load the [Bootstrap Icons](https://icons.getbootstrap.com/) library using the jsDelivr CDN. Available families include `regular` (default) and `filled`.
+This example demonstrates how to load the [Bootstrap Icons](https://icons.getbootstrap.com/) library using the jsDelivr CDN. Available families include `regular` (default) and `filled`.
 
 ```html {.example}
 <script type="module">

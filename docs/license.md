@@ -73,8 +73,8 @@ Quiet UI is source-available and completely free of charge for personal, educati
   <li>
     <a class="stretch" href="/purchase" data-no-external-icon>
       <quiet-icon name="contract" style="color: #c5a231;"></quiet-icon><br>
-      Commercial licenses<br>
-      <small>Build proprietary, commercial applications</small>
+      Commercial licenses available<br>
+      <small>Allows use in commercial applications</small>
     </a>
   </li>
   <li>
@@ -168,6 +168,12 @@ Unfortunately, there's no fair way for open source authors to build something va
 [Copyleft licenses](https://www.gnu.org/licenses/copyleft.en.html) try to solve this problem by requiring everyone who uses the code to open source their entire application. But this creates an unfair burden on noncommercial users — individuals, students, and hobbyists who just want to keep their code private without having to navigate complex licensing requirements.
 
 Quiet's dual-license approach lets individuals, students, and non-profits use, learn from, and adapt the software freely while ensuring that businesses who profit from it help fund continued development.
+:::
+
+:::details Can I contribute to the project?
+Quiet doesn't qualify as "open source" under the [OSI's definition](https://en.wikipedia.org/wiki/Open_Source_Initiative) of the term, but the spirit of the project is undeniably open. The key divergence in Quiet's source-available license is this: if you're using the software for commercial purposes, you must purchase a license.
+
+You can still view the source code and contribute to the project in a variety of ways. However, please refer to the [contribution guidelines](/contributing), as this project is very opinionated.
 :::
 
 :::details Do you offer support? {.faq}

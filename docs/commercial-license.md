@@ -66,10 +66,6 @@ This license terminates automatically if Licensee breaches any term. Upon termin
 
 This Agreement is governed by the laws of Florida, United States, with disputes resolved in Orange County courts.
 
-## 11. Contact
-
-For inquiries, contact cory@abeautifulsite.net.
-
 By using the Software, Licensee agrees to be bound by this Agreement.
 
 Copyright © 2025 A Beautiful Site, LLC. All rights reserved.

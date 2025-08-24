@@ -200,6 +200,10 @@ Features can be [requested on GitHub](https://github.com/quietui/quiet/discussio
 I generally don't accept sponsorships for specific features. This lets me focus on what's best for the project. Quiet is the result of many years of experience and my commitment to painstakingly curating the project. I want people to sponsor it because they see the vision, not because they want to change it.
 :::
 
+:::details What does the commercial license say?
+The exact text of the commercial license [can be found here](/commercial-license).
+:::
+
 :::details Can I fork the project?
 You can fork and modify the software for your own use, but creating a competing product and/or changing the license is prohibited.
 :::

@@ -262,7 +262,7 @@ A common way to style accordion icons is with plus and minus icons. For this, yo
 
 ### Customizing label content
 
-Accordions can have structured content as labels, but consider the experience for screen reader users. You may want to add `aria-hidden="true'` to decorative elements supplementary text that don't add meaningful context when the accordion is navigated with assistive technology.
+Accordions can have structured content as labels, but consider the experience for screen reader users. You may want to add `aria-hidden="true'` to decorative elements and supplementary text that don't add meaningful context when the accordion is navigated with assistive technology.
 
 ```html {.example}
 <quiet-accordion appearance="contained" auto-collapse id="accordion__styling">

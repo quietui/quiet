@@ -20,14 +20,14 @@ For another way to browse icons, head over to the [Tabler Icons](https://tabler.
     autofocus
   ></quiet-text-field>
 
-  <quiet-select label="Copy" value="html" id="icon-copy">
-    <option value="html">Icon HTML</option>
-    <option value="name">Icon name</option>
-  </quiet-select>
-
   <quiet-select label="Icon family" id="icon-family">
     <option value="outline">Outline</option>
     <option value="filled">Filled</option>
+  </quiet-select>
+
+  <quiet-select label="Click to copy…" value="html" id="icon-copy">
+    <option value="html">Icon HTML</option>
+    <option value="name">Icon name</option>
   </quiet-select>
 </div>
 

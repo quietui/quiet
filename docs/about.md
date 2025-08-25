@@ -36,6 +36,8 @@ A passion project. Something I'm building from scratch to explore new ideas and 
 
 As a result, you'll find that Quiet is rather opinionated. I carefully curate everything from the project's scope down to every individual line of code. Oftentimes, saying "no" is key to maintaining the quality of the library and my ability to steward it effectively.
 
+You can use Quiet free for personal, educational, and non-profit use. If you're making money with it, I ask that you support the project by [purchasing a commercial license](/license). It's how I justify spending weekends building components instead of — you know — doing other weekend things.
+
 ## Tell me about the mouse
 
 Why did I choose a mouse for Quiet's mascot? Because mice are quiet. Because the computer mouse was an incredible boon to UX. Because I've [rescued and raised](https://x.com/cory_laviska/status/1508128840937316360) numerous mice over the years. It seemed like a good fit. But then something much deeper clicked…

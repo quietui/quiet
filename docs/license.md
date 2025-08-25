@@ -73,8 +73,8 @@ Quiet UI is source-available and completely free of charge for personal, educati
   <li>
     <a class="stretch" href="/purchase" data-no-external-icon>
       <quiet-icon name="contract" style="color: #c5a231;"></quiet-icon><br>
-      Commercial licenses<br>
-      <small>Build proprietary, commercial applications</small>
+      Commercial licenses available<br>
+      <small>Allows use in commercial applications</small>
     </a>
   </li>
   <li>
@@ -154,6 +154,12 @@ Quiet UI is source-available and completely free of charge for personal, educati
 
 ## Frequently asked questions
 
+:::details What does "noncommercial" mean?
+_Noncommercial_ means you can't use the software to make money or as part of your business. It's free to use for personal projects, learning, research, hobby stuff, or if you work for a nonprofit, school, or government agency.
+
+The key thing is that you're not profiting from the software or using it to support a business. If you are, you'll need to [purchase a commercial license](/license).
+:::
+
 :::details What is a source-available license?
 While not fully open source, Quiet's [source-available license](https://github.com/quietui/quiet/blob/main/LICENSE) is actually _more_ permissive than most viral open source licenses. You can use Quiet, learn from it, and change it just like open source software.
 
@@ -162,6 +168,12 @@ Unfortunately, there's no fair way for open source authors to build something va
 [Copyleft licenses](https://www.gnu.org/licenses/copyleft.en.html) try to solve this problem by requiring everyone who uses the code to open source their entire application. But this creates an unfair burden on noncommercial users — individuals, students, and hobbyists who just want to keep their code private without having to navigate complex licensing requirements.
 
 Quiet's dual-license approach lets individuals, students, and non-profits use, learn from, and adapt the software freely while ensuring that businesses who profit from it help fund continued development.
+:::
+
+:::details Can I contribute to the project?
+Quiet doesn't qualify as "open source" under the [OSI's definition](https://en.wikipedia.org/wiki/Open_Source_Initiative) of the term, but the spirit of the project is undeniably open. The key divergence in Quiet's source-available license is this: if you're using the software for commercial purposes, you must purchase a license.
+
+You can still view the source code and contribute to the project in a variety of ways. However, please refer to the [contribution guidelines](/contributing), as this project is very opinionated.
 :::
 
 :::details Do you offer support? {.faq}
@@ -186,6 +198,10 @@ Features can be [requested on GitHub](https://github.com/quietui/quiet/discussio
 
 :::details Can I sponsor a feature? {.faq}
 I generally don't accept sponsorships for specific features. This lets me focus on what's best for the project. Quiet is the result of many years of experience and my commitment to painstakingly curating the project. I want people to sponsor it because they see the vision, not because they want to change it.
+:::
+
+:::details What does the commercial license say?
+The exact text of the commercial license [can be found here](/commercial-license).
 :::
 
 :::details Can I fork the project?

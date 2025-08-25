@@ -332,6 +332,12 @@ Components should never use `console.log()`.
 
 For consistency, the `id` attribute should be displayed in lowercase when referring to an attribute or property. Everywhere else, it should be spelled "ID" and the plural form "IDs."
 
+## Branding
+
+The Quiet UI mouse logo must always face to the left. It may appear standalone or next to the wordmark, but never rotated, flipped, or stretched. The tail acts like a descender, so the bottom of the mouse should align with the baseline of the wordmark while the tail descends below. Avoid making the logo smaller than 16x12, which is suitable for favicons. Avoid adding shadows, outlines, and other decorations.
+
+You may use the logo to share, promote, or reference Quiet UI. You may not use it to market competing products, claim you made Quiet UI, or pretend to be officially affiliated with the project.
+
 ### Whiskers
 
 In most cases, Whiskers should only appear once on the same page. If he appears twice, he must be placed in such a way that he will not show more than once in the visible viewport. For his own safety, Whiskers may only appear on pages where cats are not present.

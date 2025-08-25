@@ -1521,6 +1521,18 @@ html:not(.quiet-dark) quiet-scroller:has(.component-table) {
   }
 }
 
+/* Unlimited buttons */
+.button-unlimited {
+  &::part(button) {
+    background-color: var(--quiet-neutral-fill-loud);
+    color: var(--quiet-neutral-text-on-loud);
+  }
+
+  &:hover::part(button) {
+    background-color: color-mix(in oklab, var(--quiet-neutral-fill-loud), black 5%);
+  }
+}
+
 /* FAQ */
 h2 + details {
   margin-block-start: 2rem;

@@ -311,4 +311,33 @@ Some components have custom states, a newer API that let's you target a custom e
 
 Not all components have custom states. Refer to the documentation to see which custom states a component has.
 
+### Creating custom variations
+
+If you want to add a custom variant to a component, you may be tempted to extend the `variant` or `appearance` attributes with custom values:
+
+```html
+<!-- Avoid adding your own variants and appearances -->
+<quiet-button variant="custom">Incorrect</quiet-button>
+```
+
+However, this is not recommended because it won't work well with TypeScript-based frameworks and tooling. While it's possible to extend types in various environments, it's generally much easier to use a class and apply styles like so:
+
+```html
+<!-- Instead, use a class and scope your styles to it -->
+<quiet-button class="custom">Correct</quiet-button>
+
+<style>
+  quiet-button.custom {
+    /* Styles for the host element go here */
+
+    /* Tip: you can target CSS parts by nesting them like this */
+    &::part(button) {
+      /* Styles for the CSS part named `button` go here */
+    }
+  }
+</style>
+```
+
+This approach lets you create an unlimited number of variations without compromising type checking and developer experience.
+
 <img class="whiskers-center" src="/assets/images/whiskers/with-blueprints.svg" alt="Whiskers the mouse wearing a hardhat while holding blueprints">

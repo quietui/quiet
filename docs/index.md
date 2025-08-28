@@ -90,8 +90,8 @@ Copy and paste the following code into the `<head>` section of any HTML document
     Installation guide
   </quiet-button>
   
-  <quiet-button size="lg" appearance="outline" pill href="/support">
-    Help &amp; support
+  <quiet-button size="lg" appearance="outline" pill href="/license">
+    Licensing &amp; Support
   </quiet-button>
 </div>
 

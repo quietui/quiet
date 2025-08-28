@@ -95,7 +95,7 @@ You can tell the autoloader to preload components that aren't initially on the p
 
 ## Manually importing <quiet-badge variant="destructive" data-no-outline data-no-anchor>Advanced</quiet-badge>
 
-If you don't want to use the autoloader, you can import components manually from npm installation or from the CDN. Quiet provides two npm packages to pick from, depending on how you want to use it.
+If you don't want to use the autoloader, you can import components manually from npm or from the CDN. Quiet provides two npm packages to pick from, depending on how you want to use it.
 
 - [`@quietui/quiet`](https://www.npmjs.com/package/@quietui/quiet) - use this if you're using a bundler or a framework
 - [`@quietui/quiet-browser`](https://www.npmjs.com/package/@quietui/quiet-browser) - use this if you're using Quiet directly in a browser or serving it via CDN

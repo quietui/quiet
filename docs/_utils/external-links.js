@@ -1,5 +1,3 @@
-import { parse } from 'node-html-parser';
-
 /**
  * Transformer to decorate external links.
  */
@@ -19,9 +17,10 @@ export function externalLinksTransformer(options = {}) {
     doc.querySelectorAll('a[href]').forEach(a => {
       const href = a.getAttribute('href') || '';
       const isExternal = /^https?:\/\//i.test(href);
-      const noIcon = a.hasAttribute('data-no-external-icon');
+      const noExternal = a.hasAttribute('data-no-external');
+      const noIcon = noExternal || a.hasAttribute('data-no-external-icon');
 
-      if (isExternal) {
+      if (isExternal && !noExternal) {
         a.classList.add('external');
         a.setAttribute('rel', 'noopener noreferrer');
         a.setAttribute('target', '_blank');

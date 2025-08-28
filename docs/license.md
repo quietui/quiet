@@ -40,7 +40,11 @@ Quiet UI is source-available and completely free of charge for personal, educati
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Priority bug fixes</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Private Discord access</li>
     </ul>
-    <quiet-button variant="primary" pill href="/purchase">
+    <quiet-button 
+      variant="primary" 
+      pill 
+      href="https://buy.polar.sh/polar_cl_iRqZcL1zYDR6HYDZKYAOiDHMxZPsIGZvUebXF1T2xIj"
+    >
       Purchase &middot; $199
     </quiet-button>
   </div>
@@ -57,7 +61,11 @@ Quiet UI is source-available and completely free of charge for personal, educati
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Priority bug fixes</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Private Discord access</li>
     </ul>
-    <quiet-button class="button-unlimited" pill href="/purchase">
+    <quiet-button 
+      class="button-unlimited" 
+      pill 
+      href="https://buy.polar.sh/polar_cl_iRqZcL1zYDR6HYDZKYAOiDHMxZPsIGZvUebXF1T2xIj"
+    >
       Purchase &middot; $799
     </quiet-button>
   </div>  
@@ -71,56 +79,56 @@ Quiet UI is source-available and completely free of charge for personal, educati
 
 <ul class="features-grid" aria-label="Features">
   <li>
-    <a class="stretch" href="/purchase" data-no-external-icon>
+    <a class="stretch" href="https://buy.polar.sh/polar_cl_iRqZcL1zYDR6HYDZKYAOiDHMxZPsIGZvUebXF1T2xIj" data-no-external>
       <quiet-icon name="contract" style="color: #c5a231;"></quiet-icon><br>
       Commercial licenses available<br>
       <small>Allows use in commercial applications</small>
     </a>
   </li>
   <li>
-    <a class="stretch" href="/purchase" data-no-external-icon>
+    <a class="stretch" href="https://buy.polar.sh/polar_cl_iRqZcL1zYDR6HYDZKYAOiDHMxZPsIGZvUebXF1T2xIj" data-no-external>
       <quiet-icon name="send" style="color: #58acf2;"></quiet-icon><br>
       Support from the maintainer<br>
       <small>Get unstuck fast with personalized help</small>
     </a>
   </li>
   <li>
-    <a class="stretch" href="/purchase" data-no-external-icon>
+    <a class="stretch" href="https://buy.polar.sh/polar_cl_iRqZcL1zYDR6HYDZKYAOiDHMxZPsIGZvUebXF1T2xIj" data-no-external>
       <quiet-icon name="bug" style="color: #e98d61;"></quiet-icon><br>
       Priority bug fixes<br>
       <small>Most issues get fixed promptly</small>
     </a>
   </li>
   <li>
-    <a class="stretch" href="/purchase" data-no-external-icon>
+    <a class="stretch" href="https://buy.polar.sh/polar_cl_iRqZcL1zYDR6HYDZKYAOiDHMxZPsIGZvUebXF1T2xIj" data-no-external>
       <quiet-icon name="brand-discord" style="color: #b394f4;"></quiet-icon><br>
       Private Discord<br>
       <small>Exclusive access to the private Discord chat</small>
     </a>
   </li>
   <li>
-    <a class="stretch" href="/purchase" data-no-external-icon>
+    <a class="stretch" href="https://buy.polar.sh/polar_cl_iRqZcL1zYDR6HYDZKYAOiDHMxZPsIGZvUebXF1T2xIj" data-no-external>
       <quiet-icon name="plug" style="color: #848da0;"></quiet-icon><br>
       Works with every framework<br>
       <small>Take it with you no matter the stack</small>
     </a>
   </li>
   <li>
-    <a class="stretch" href="/purchase" data-no-external-icon>
+    <a class="stretch" href="https://buy.polar.sh/polar_cl_iRqZcL1zYDR6HYDZKYAOiDHMxZPsIGZvUebXF1T2xIj" data-no-external>
       <quiet-icon name="school" style="color: #7db664;"></quiet-icon><br>
       Learn once, use everywhere<br>
       <small>Platform APIs help ensure longevity</small>
     </a>
   </li>
   <li>
-    <a class="stretch" href="/purchase" data-no-external-icon>
+    <a class="stretch" href="https://buy.polar.sh/polar_cl_iRqZcL1zYDR6HYDZKYAOiDHMxZPsIGZvUebXF1T2xIj" data-no-external>
       <quiet-icon name="tools" style="color: #2ab6d1;"></quiet-icon><br>
       Actively maintained &amp; evolving<br>
       <small>Regular updates keep you on the cutting edge</small>
     </a>
   </li>
   <li>
-    <a class="stretch" href="/purchase" data-no-external-icon>
+    <a class="stretch" href="https://buy.polar.sh/polar_cl_iRqZcL1zYDR6HYDZKYAOiDHMxZPsIGZvUebXF1T2xIj" data-no-external>
       <quiet-icon name="lock-heart" style="color: #e886a7;"></quiet-icon><br>
       Zero tracking, zero ads<br>
       <small>Clean, focused development without distractions</small>

@@ -22,7 +22,10 @@ export function searchPlugin(options = {}) {
   };
 
   return function (eleventyConfig) {
-    const pagesToSkip = ['/404.html'];
+    const pagesToSkip = [
+      '/404.html', // permalinks use the extension
+      '/thanks/' // other URLs do not
+    ];
     const pagesToIndex = [
       //
       // Let's add some some useful pages into the search

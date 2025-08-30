@@ -1037,7 +1037,8 @@ export class QuietCombobox extends QuietFormControlElement {
                       type="button"
                       tabindex="-1"
                       aria-label="Remove ${item.textContent}"
-                      @click=${(e: Event) => this.removeTag(item, e)}
+                      @click=${(event: Event) => this.removeTag(item, event)}
+                      @mousedown=${(event: Event) => event.preventDefault()}
                     >
                       <quiet-icon library="system" name="x"></quiet-icon>
                     </button>

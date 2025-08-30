@@ -36,7 +36,7 @@ export default css`
   }
 
   /* Keyboard focus visible on active items */
-  :host(:state(focus-visible):state(active)) {
+  :host(:state(active)[data-keyboard-nav]) {
     z-index: 1;
     outline: var(--quiet-focus-ring);
     outline-offset: var(--quiet-focus-ring-offset);

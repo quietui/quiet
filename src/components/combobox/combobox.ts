@@ -87,7 +87,6 @@ export class QuietCombobox extends QuietFormControlElement {
   @state() private isInvalid = false;
   @state() private hadUserInteraction = false;
   @state() private wasSubmitted = false;
-  @state() private isFocusVisible = false;
   @state() private liveAnnouncement = '';
 
   /** The combobox's label. */
@@ -340,7 +339,7 @@ export class QuietCombobox extends QuietFormControlElement {
 
     // Set initial active item to first item
     if (this.filteredItems.length > 0) {
-      this.setActiveItem(this.filteredItems[0]);
+      this.setActiveItem(this.filteredItems[0], false); // Explicitly false - no keyboard nav on initial open
     }
   }
 
@@ -355,6 +354,11 @@ export class QuietCombobox extends QuietFormControlElement {
     this.dropdown.hidden = true;
     this.dropdown.hidePopover();
     this.cleanup?.();
+
+    // Clean up keyboard navigation state when closing
+    if (this.activeItem) {
+      this.activeItem.removeAttribute('data-keyboard-nav');
+    }
 
     this.dispatchEvent(new QuietCloseEvent());
   }
@@ -391,18 +395,20 @@ export class QuietCombobox extends QuietFormControlElement {
     });
   }
 
-  private setActiveItem(item: QuietComboboxItem | null) {
+  private setActiveItem(item: QuietComboboxItem | null, isKeyboard = false) {
     if (this.activeItem) {
       this.activeItem.active = false;
-      this.activeItem.focusVisible = false;
+      this.activeItem.removeAttribute('data-keyboard-nav');
     }
+
     this.activeItem = item;
+
     if (item) {
       item.active = true;
-      item.focusVisible = this.isFocusVisible;
+      if (isKeyboard) {
+        item.setAttribute('data-keyboard-nav', '');
+      }
       item.scrollIntoView({ block: 'nearest' });
-
-      // Announce the active item using live region
       this.announceOption(item);
     }
   }
@@ -749,9 +755,6 @@ export class QuietCombobox extends QuietFormControlElement {
   private handleKeyDown = (event: KeyboardEvent) => {
     if (this.disabled) return;
 
-    // Track keyboard usage for focus visibility
-    this.isFocusVisible = true;
-
     // Handle backspace to remove tags
     if (event.key === 'Backspace' && !this.inputValue && this.multiple && this.selectedItems.length > 0) {
       const lastItem = this.selectedItems[this.selectedItems.length - 1];
@@ -831,14 +834,14 @@ export class QuietCombobox extends QuietFormControlElement {
       case 'Home':
         event.preventDefault();
         if (this.filteredItems.length > 0) {
-          this.setActiveItem(this.filteredItems[0]);
+          this.setActiveItem(this.filteredItems[0], true); // Add true flag
         }
         break;
 
       case 'End':
         event.preventDefault();
         if (this.filteredItems.length > 0) {
-          this.setActiveItem(this.filteredItems[this.filteredItems.length - 1]);
+          this.setActiveItem(this.filteredItems[this.filteredItems.length - 1], true); // Add true flag
         }
         break;
     }
@@ -850,9 +853,9 @@ export class QuietCombobox extends QuietFormControlElement {
     if (!this.activeItem) {
       // No item is active, select first or last based on direction
       if (direction > 0) {
-        this.setActiveItem(this.filteredItems[0]);
+        this.setActiveItem(this.filteredItems[0], true); // Add true flag
       } else {
-        this.setActiveItem(this.filteredItems[this.filteredItems.length - 1]);
+        this.setActiveItem(this.filteredItems[this.filteredItems.length - 1], true); // Add true flag
       }
       return;
     }
@@ -867,7 +870,7 @@ export class QuietCombobox extends QuietFormControlElement {
       index = 0;
     }
 
-    this.setActiveItem(this.filteredItems[index]);
+    this.setActiveItem(this.filteredItems[index], true); // Add true flag
   }
 
   private handleDocumentClick = (event: MouseEvent) => {
@@ -934,8 +937,10 @@ export class QuietCombobox extends QuietFormControlElement {
   };
 
   private handleItemMouseEnter = () => {
-    // Disable focus visibility when using mouse
-    this.isFocusVisible = false;
+    // Clear keyboard navigation data attribute from all items
+    if (this.activeItem) {
+      this.activeItem.removeAttribute('data-keyboard-nav');
+    }
 
     // When using mouse, clear all active states to prevent interference
     // between keyboard navigation (active) and mouse hover states
@@ -943,7 +948,7 @@ export class QuietCombobox extends QuietFormControlElement {
     if (!this.disabled) {
       this.filteredItems.forEach(i => {
         i.active = false;
-        i.focusVisible = false;
+        i.removeAttribute('data-keyboard-nav'); // Also clear from all filtered items
       });
     }
   };

@@ -28,7 +28,6 @@ import styles from './combobox-item.styles.js';
  * @cssstate selected - Applied when the item is selected.
  * @cssstate disabled - Applied when the item is disabled.
  * @cssstate active - Applied when the item is active (keyboard navigation).
- * @cssstate focus-visible - Applied when the item should show focus visible styling.
  */
 @customElement('quiet-combobox-item')
 export class QuietComboboxItem extends QuietElement {
@@ -50,9 +49,6 @@ export class QuietComboboxItem extends QuietElement {
   /** @internal Whether the item is currently active (keyboard navigation). */
   @property({ type: Boolean, reflect: true }) active = false;
 
-  /** @internal Whether the item should show focus visible styling. */
-  @property({ type: Boolean, reflect: true }) focusVisible = false;
-
   connectedCallback() {
     super.connectedCallback();
     this.setAttribute('role', 'option');
@@ -73,10 +69,6 @@ export class QuietComboboxItem extends QuietElement {
 
     if (changedProperties.has('active')) {
       this.customStates.set('active', this.active);
-    }
-
-    if (changedProperties.has('focusVisible')) {
-      this.customStates.set('focus-visible', this.focusVisible);
     }
   }
 

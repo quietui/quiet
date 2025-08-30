@@ -1102,6 +1102,7 @@ export class QuietCombobox extends QuietFormControlElement {
         popover="manual"
         hidden
         @click=${this.handleItemClick}
+        @mousedown=${(event: MouseEvent) => event.preventDefault()}
         @mousemove=${this.handleItemMouseEnter}
       >
         <slot @slotchange=${this.handleSlotChange}></slot>

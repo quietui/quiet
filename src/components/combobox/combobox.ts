@@ -464,8 +464,10 @@ export class QuietCombobox extends QuietFormControlElement {
     }, 75); // 75ms delay - adjust if needed
   }
 
-  private filterItems(query: string) {
+  private filterItems(query: string, preserveActiveItem = false) {
     const items = this.getItems();
+    // Store the current active item to potentially preserve it
+    const currentActiveItem = preserveActiveItem ? this.activeItem : null;
 
     if (!query) {
       this.filteredItems = items;
@@ -498,8 +500,13 @@ export class QuietCombobox extends QuietFormControlElement {
     if (this.filteredItems.length === 0 && this.open) {
       this.open = false;
     } else if (this.filteredItems.length > 0 && this.open) {
-      // Set first item as active when filtering
-      this.setActiveItem(this.filteredItems[0]);
+      // Preserve active item if requested and it's still in the filtered list
+      if (preserveActiveItem && currentActiveItem && this.filteredItems.includes(currentActiveItem)) {
+        this.setActiveItem(currentActiveItem);
+      } else {
+        // Set first item as active when filtering
+        this.setActiveItem(this.filteredItems[0]);
+      }
     }
   }
 
@@ -540,7 +547,8 @@ export class QuietCombobox extends QuietFormControlElement {
         const values = this.selectedItems.map(i => i.value || i.textContent || '');
         this.value = values;
         this.inputValue = '';
-        this.filterItems('');
+        // Pass true to preserve the active item when filtering
+        this.filterItems('', true);
 
         // Announce selection
         this.announce(`${item.textContent} added`);
@@ -661,7 +669,19 @@ export class QuietCombobox extends QuietFormControlElement {
   private handleFocus = () => {
     this.customStates.set('focused', true);
     this.dispatchEvent(new QuietFocusEvent());
+    // Only auto-open on focus if we have items and the dropdown isn't already open
+    // This prevents conflicts with click handlers
     if (!this.open && this.filteredItems.length > 0) {
+      this.open = true;
+    }
+  };
+
+  private handleInputClick = (event: MouseEvent) => {
+    // Prevent the click from closing the dropdown via document handler
+    event.stopPropagation();
+
+    // If we're already focused and have items, ensure dropdown is open
+    if (this.customStates.has('focused') && this.filteredItems.length > 0 && !this.open) {
       this.open = true;
     }
   };
@@ -867,6 +887,29 @@ export class QuietCombobox extends QuietFormControlElement {
     }
   };
 
+  private handleVisualBoxClick = (event: MouseEvent) => {
+    // Don't do anything if disabled
+    if (this.disabled) return;
+
+    // Don't toggle if clicking on clear button or tag remove button
+    const target = event.target as HTMLElement;
+    if (target.closest('#clear-button') || target.closest('.tag-remove')) {
+      return;
+    }
+
+    // Prevent this click from immediately closing via document handler
+    event.stopPropagation();
+
+    // If already focused, just toggle the dropdown
+    // If not focused, the focus event will handle opening
+    if (this.customStates.has('focused')) {
+      this.open = !this.open;
+    }
+
+    // Focus the text box (this will trigger handleFocus if not already focused)
+    this.textBox.focus();
+  };
+
   private handleClear = () => {
     this.value = this.multiple ? [] : '';
     this.selectedItems.forEach(item => (item.selected = false));
@@ -980,6 +1023,7 @@ export class QuietCombobox extends QuietFormControlElement {
           multiple: this.multiple,
           'has-clear': this.withClear && !this.isBlank() && !this.disabled
         })}
+        @click=${this.handleVisualBoxClick}
       >
         <div class="input-area">
           ${this.multiple
@@ -1022,6 +1066,7 @@ export class QuietCombobox extends QuietFormControlElement {
             @focus=${this.handleFocus}
             @blur=${this.handleBlur}
             @keydown=${this.handleKeyDown}
+            @click=${this.handleInputClick}
           />
         </div>
 

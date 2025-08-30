@@ -6,6 +6,7 @@ export default css`
     position: relative;
     align-items: center;
     padding: 0.33em 1em;
+    padding-inline-start: 2.25em;
     border-radius: var(--quiet-border-radius-sm);
     color: var(--quiet-neutral-text-on-soft);
     font-size: 0.9375em;
@@ -23,14 +24,14 @@ export default css`
 
   /* Hover state for non-selected items */
   @media (hover: hover) {
-    :host(:hover:not(:state(disabled)):not(:state(selected))) {
+    :host(:hover:not(:state(disabled))) {
       background-color: var(--quiet-neutral-fill-softer);
       color: var(--quiet-neutral-text-on-soft);
     }
   }
 
   /* Active state (keyboard navigation) for non-selected items */
-  :host(:state(active):not(:state(selected))) {
+  :host(:state(active)) {
     background-color: var(--quiet-neutral-fill-softer);
     color: var(--quiet-neutral-text-on-soft);
   }
@@ -42,52 +43,23 @@ export default css`
     outline-offset: var(--quiet-focus-ring-offset);
   }
 
-  /* Selected state */
-  :host(:state(selected)) {
-    background-color: var(--quiet-primary-fill-soft);
-    color: var(--quiet-primary-text-on-soft);
-  }
-
-  /* Selected + hover */
-  @media (hover: hover) {
-    :host(:state(selected):hover:not(:state(disabled))) {
-      background-color: var(--quiet-primary-fill-soft);
-      color: var(--quiet-primary-text-on-soft);
-    }
-  }
-
-  /* Selected + active */
-  :host(:state(selected):state(active)) {
-    background-color: var(--quiet-primary-fill-soft);
-    color: var(--quiet-primary-text-on-soft);
-  }
-
-  /* Multiple mode - adjust padding for checkmark */
-  :host-context(quiet-combobox[multiple]) {
-    padding-inline-start: 2.25em;
-  }
-
-  /* Multiple mode hover/active colors */
-  :host-context(quiet-combobox[multiple]):hover:not(:state(disabled)):not(:state(selected)) {
-    background-color: var(--quiet-neutral-fill-soft);
-    color: var(--quiet-neutral-text-on-soft);
-  }
-
-  :host-context(quiet-combobox[multiple]):state(active):not(:state(selected)) {
-    background-color: var(--quiet-neutral-fill-soft);
-    color: var(--quiet-neutral-text-on-soft);
-  }
-
-  /* Checkmark */
+  /* Checkmark - base styles, hidden by default */
   .checkmark {
+    visibility: hidden;
     position: absolute;
     left: 0.5em;
-    color: var(--quiet-primary-text-on-soft);
-    font-size: 1.125em;
+    color: var(--quiet-primary-text);
+    font-size: 1.25em;
+    opacity: 0;
+    transition:
+      opacity 150ms ease,
+      visibility 150ms ease;
   }
 
-  .checkmark[hidden] {
-    display: none;
+  /* Show checkmark when selected (works for both single and multiple mode) */
+  .checkmark.selected {
+    visibility: visible;
+    opacity: 1;
   }
 
   /* RTL support */
@@ -129,7 +101,20 @@ export default css`
   }
 
   :host(:state(selected)) .details {
-    color: var(--quiet-primary-text-on-soft);
+    color: var(--quiet-text-muted);
     opacity: 0.8;
+  }
+
+  /* Multiple mode specific styles - using attribute selector on host */
+  /* When the parent combobox has multiple attribute, items get different hover/active colors */
+  /* We detect this via the multiple class presence */
+  :host(:has(.multiple)):hover:not(:state(disabled)):not(:state(selected)) {
+    background-color: var(--quiet-neutral-fill-soft);
+    color: var(--quiet-neutral-text-on-soft);
+  }
+
+  :host(:has(.multiple)):state(active):not(:state(selected)) {
+    background-color: var(--quiet-neutral-fill-soft);
+    color: var(--quiet-neutral-text-on-soft);
   }
 `;

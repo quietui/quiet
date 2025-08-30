@@ -1,6 +1,7 @@
 import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
 import hostStyles from '../../styles/host.styles.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import type { QuietCombobox } from '../combobox/combobox.js';
@@ -73,20 +74,20 @@ export class QuietComboboxItem extends QuietElement {
   }
 
   render() {
-    const isMultiple = this.combobox?.multiple;
+    // Check if parent combobox is in multiple mode
+    const isMultiple = this.combobox?.multiple ?? false;
 
     return html`
-      ${isMultiple
-        ? html`
-            <quiet-icon
-              part="checkmark"
-              class="checkmark"
-              library="system"
-              name="check"
-              ?hidden=${!this.selected}
-            ></quiet-icon>
-          `
-        : ''}
+      <quiet-icon
+        part="checkmark"
+        class=${classMap({
+          checkmark: true,
+          selected: this.selected,
+          multiple: isMultiple
+        })}
+        library="system"
+        name="check"
+      ></quiet-icon>
 
       <span part="icon" class="icon">
         <slot name="icon"></slot>

@@ -12,7 +12,7 @@ import styles from './combobox-item.styles.js';
  *
  * @summary An item that can be selected from a combobox dropdown.
  * @documentation https://quietui.org/docs/components/combobox-item
- * @status experimental
+ * @status stable
  * @since 1.0
  *
  * @dependency quiet-icon

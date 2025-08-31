@@ -936,7 +936,7 @@ export class QuietCombobox extends QuietFormControlElement {
     }
   };
 
-  private handleItemMouseEnter = () => {
+  private handleItemMouseMove = () => {
     // Clear keyboard navigation data attribute from all items
     if (this.activeItem) {
       this.activeItem.removeAttribute('data-keyboard-nav');
@@ -1102,7 +1102,7 @@ export class QuietCombobox extends QuietFormControlElement {
         hidden
         @click=${this.handleItemClick}
         @mousedown=${(event: MouseEvent) => event.preventDefault()}
-        @mousemove=${this.handleItemMouseEnter}
+        @mousemove=${this.handleItemMouseMove}
       >
         <slot @slotchange=${this.handleSlotChange}></slot>
       </div>

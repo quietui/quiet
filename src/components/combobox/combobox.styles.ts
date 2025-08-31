@@ -104,26 +104,6 @@ export default css`
     user-select: none;
   }
 
-  #visual-box.xs .tag {
-    height: calc(var(--quiet-form-control-height-xs) - (var(--quiet-border-width) * 2));
-  }
-
-  #visual-box.sm .tag {
-    height: calc(var(--quiet-form-control-height-sm) - (var(--quiet-border-width) * 2));
-  }
-
-  #visual-box.md .tag {
-    height: calc(var(--quiet-form-control-height-md) - (var(--quiet-border-width) * 2));
-  }
-
-  #visual-box.lg .tag {
-    height: calc(var(--quiet-form-control-height-lg) - (var(--quiet-border-width) * 2));
-  }
-
-  #visual-box.xl .tag {
-    height: calc(var(--quiet-form-control-height-xl) - (var(--quiet-border-width) * 2));
-  }
-
   .tag-remove {
     display: inline-flex;
     flex: 0 0 auto;

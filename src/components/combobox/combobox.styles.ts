@@ -104,6 +104,26 @@ export default css`
     user-select: none;
   }
 
+  #visual-box.xs .tag {
+    height: calc(var(--quiet-form-control-height-xs) - (var(--quiet-border-width) * 2));
+  }
+
+  #visual-box.sm .tag {
+    height: calc(var(--quiet-form-control-height-sm) - (var(--quiet-border-width) * 2));
+  }
+
+  #visual-box.md .tag {
+    height: calc(var(--quiet-form-control-height-md) - (var(--quiet-border-width) * 2));
+  }
+
+  #visual-box.lg .tag {
+    height: calc(var(--quiet-form-control-height-lg) - (var(--quiet-border-width) * 2));
+  }
+
+  #visual-box.xl .tag {
+    height: calc(var(--quiet-form-control-height-xl) - (var(--quiet-border-width) * 2));
+  }
+
   .tag-remove {
     display: inline-flex;
     flex: 0 0 auto;
@@ -139,13 +159,15 @@ export default css`
     width: 100%;
     min-width: 0;
     margin: 0;
-    margin-inline: 0.5em;
-    padding: 0;
     border: none;
     background: none;
     color: var(--quiet-text-body);
     font: inherit;
     cursor: inherit;
+  }
+
+  #visual-box:has(.tag) #text-box {
+    margin-inline: 0.5em;
   }
 
   #text-box:focus {
@@ -156,27 +178,6 @@ export default css`
     color: var(--quiet-form-control-placeholder-color);
     user-select: none;
     -webkit-user-select: none;
-  }
-
-  /* Size-specific heights for text box - matching text field exactly */
-  #visual-box.xs #text-box {
-    min-height: calc(var(--quiet-form-control-height-xs) - var(--quiet-border-width) * 2);
-  }
-
-  #visual-box.sm #text-box {
-    min-height: calc(var(--quiet-form-control-height-sm) - var(--quiet-border-width) * 2);
-  }
-
-  #visual-box.md #text-box {
-    min-height: calc(var(--quiet-form-control-height-md) - var(--quiet-border-width) * 2);
-  }
-
-  #visual-box.lg #text-box {
-    min-height: calc(var(--quiet-form-control-height-lg) - var(--quiet-border-width) * 2);
-  }
-
-  #visual-box.xl #text-box {
-    min-height: calc(var(--quiet-form-control-height-xl) - var(--quiet-border-width) * 2);
   }
 
   /* Multiple select mode - dynamic width with constraints */

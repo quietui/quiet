@@ -3,9 +3,7 @@ import { css } from 'lit';
 export default css`
   :host {
     --dropdown-max-height: 300px;
-    --tag-height: 1.5em;
-    --tag-gap: 0.25em;
-    --input-min-width: 8ch;
+    --input-min-width: 12ch;
     --show-duration: 50ms;
   }
 
@@ -18,6 +16,10 @@ export default css`
     gap: 0.5em;
     font: inherit;
     cursor: text;
+
+    &:has(.tag) {
+      padding-inline-start: 0.25em;
+    }
   }
 
   /* Appearance styles */
@@ -58,24 +60,33 @@ export default css`
     border-radius: var(--quiet-border-radius-pill);
   }
 
-  /* Size-specific font sizes */
   #visual-box.xs {
+    min-height: calc(var(--quiet-form-control-height-xs) - 0.5em);
+    padding-block: 0.25em;
     font-size: var(--quiet-form-control-font-size-xs);
   }
 
   #visual-box.sm {
+    min-height: calc(var(--quiet-form-control-height-sm) - 0.5em);
+    padding-block: 0.25em;
     font-size: var(--quiet-form-control-font-size-sm);
   }
 
   #visual-box.md {
+    min-height: calc(var(--quiet-form-control-height-md));
+    padding-block: 0.25em;
     font-size: var(--quiet-form-control-font-size-md);
   }
 
   #visual-box.lg {
+    min-height: calc(var(--quiet-form-control-height-lg) - 0.5em);
+    padding-block: 0.25em;
     font-size: var(--quiet-form-control-font-size-lg);
   }
 
   #visual-box.xl {
+    min-height: calc(var(--quiet-form-control-height-xl) - 0.5em);
+    padding-block: 0.25em;
     font-size: var(--quiet-form-control-font-size-xl);
   }
 
@@ -85,7 +96,7 @@ export default css`
     flex: 1 1 auto;
     flex-wrap: wrap;
     align-items: center;
-    gap: var(--tag-gap);
+    gap: 0.25em;
   }
 
   /* Individual tags */
@@ -99,7 +110,6 @@ export default css`
     border-radius: var(--quiet-border-radius-sm);
     background-color: var(--quiet-neutral-fill-softer);
     color: var(--quiet-neutral-text-on-soft);
-    font-size: 0.875em;
     line-height: 1.2;
     user-select: none;
   }
@@ -144,6 +154,45 @@ export default css`
     color: var(--quiet-text-body);
     font: inherit;
     cursor: inherit;
+  }
+
+  #visual-box.xs {
+    .tag,
+    #text-box {
+      height: calc(var(--quiet-form-control-height-xs) - (2 * var(--quiet-border-width)) - 0.5em);
+      min-height: 0;
+    }
+  }
+
+  #visual-box.sm {
+    .tag,
+    #text-box {
+      height: calc(var(--quiet-form-control-height-sm) - (2 * var(--quiet-border-width)) - 0.5em);
+      min-height: 0;
+    }
+  }
+
+  #visual-box.md {
+    .tag,
+    #text-box {
+      height: calc(var(--quiet-form-control-height-md) - (2 * var(--quiet-border-width)) - 0.5em);
+      min-height: 0;
+    }
+  }
+
+  #visual-box.lg {
+    .tag,
+    #text-box {
+      height: calc(var(--quiet-form-control-height-lg) - (2 * var(--quiet-border-width)) - 0.5em);
+      min-height: 0;
+    }
+  }
+  #visual-box.xl {
+    .tag,
+    #text-box {
+      height: calc(var(--quiet-form-control-height-xl) - (2 * var(--quiet-border-width)) - 0.5em);
+      min-height: 0;
+    }
   }
 
   #visual-box:has(.tag) #text-box {

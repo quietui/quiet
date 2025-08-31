@@ -1034,7 +1034,7 @@ export class QuietCombobox extends QuietFormControlElement {
           ${this.multiple
             ? this.selectedItems.map(
                 item => html`
-                  <span part="tag" class="tag">
+                  <span part="tag" class="tag" @mousedown=${(event: Event) => event.preventDefault()}>
                     ${this.getTagContent(item)}
                     <button
                       part="tag-remove"
@@ -1043,7 +1043,6 @@ export class QuietCombobox extends QuietFormControlElement {
                       tabindex="-1"
                       aria-label="Remove ${item.textContent}"
                       @click=${(event: Event) => this.removeTag(item, event)}
-                      @mousedown=${(event: Event) => event.preventDefault()}
                     >
                       <quiet-icon library="system" name="x"></quiet-icon>
                     </button>

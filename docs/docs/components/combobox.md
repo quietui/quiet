@@ -7,7 +7,7 @@ layout: component
 <quiet-combobox
   label="Select a cat breed"
   description="Choose your favorite"
-  placeholder="Search breeds..."
+  placeholder="Search breeds"
   with-clear
 >
   <quiet-combobox-item value="persian" selected>Persian</quiet-combobox-item>
@@ -26,7 +26,7 @@ TODO
 <quiet-combobox
   label="Select cat behaviors"
   description="Choose all that apply"
-  placeholder="Search behaviors..."
+  placeholder="Search behaviors"
   multiple
   with-clear
 >
@@ -114,7 +114,7 @@ This example allows users to add their own cat names to the list. Type a name th
   id="combobox__free-form-single"
   label="Cat names"
   description="Select existing or add your own"
-  placeholder="Type or select..."
+  placeholder="Type or select"
   with-clear
 >
   <quiet-combobox-item value="luna">Luna</quiet-combobox-item>
@@ -167,7 +167,7 @@ TODO
   id="combobox__free-form-multiple"
   label="Cat names"
   description="Select existing or add your own"
-  placeholder="Type or select..."
+  placeholder="Type or select"
   multiple
   with-clear
 >

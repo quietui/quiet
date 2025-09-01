@@ -203,16 +203,14 @@ export class QuietCombobox extends QuietFormControlElement {
   // Item management methods
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  private getItems(): QuietComboboxItem[] {
-    return [...this.querySelectorAll<QuietComboboxItem>('quiet-combobox-item:not([disabled])')];
-  }
-
-  private getAllItems(): QuietComboboxItem[] {
-    return [...this.querySelectorAll<QuietComboboxItem>('quiet-combobox-item')];
+  /** Gets all <quiet-combobox-item> elements that aren't disabled (by default). */
+  private getItems(includeDisabled = false): QuietComboboxItem[] {
+    const items = [...this.querySelectorAll<QuietComboboxItem>('quiet-combobox-item')];
+    return includeDisabled ? items : items.filter(item => !item.disabled);
   }
 
   private updateItems() {
-    const items = this.getAllItems();
+    const items = this.getItems(true);
 
     // Set combobox reference on all items and assign IDs if needed
     items.forEach(item => {
@@ -251,7 +249,7 @@ export class QuietCombobox extends QuietFormControlElement {
   }
 
   private syncSelectedItems() {
-    const items = this.getAllItems();
+    const items = this.getItems(true);
     const values = Array.isArray(this.value) ? this.value : [this.value].filter(Boolean);
 
     // If we already have selected items, preserve their order
@@ -293,7 +291,7 @@ export class QuietCombobox extends QuietFormControlElement {
   }
 
   private findMatchingItem(query: string): QuietComboboxItem | undefined {
-    const items = this.getAllItems();
+    const items = this.getItems(true);
     return items.find(item => item.textContent?.trim().toLowerCase() === query.trim().toLowerCase());
   }
 

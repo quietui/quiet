@@ -58,7 +58,11 @@ export default css`
   /* Pill modifier */
   #visual-box.pill {
     padding: 0 1.25em;
-    border-radius: var(--quiet-border-radius-pill);
+    border-radius: 1.4em; /* fake a pill shape so when it wraps, tags still fit */
+
+    .tag {
+      border-radius: var(--quiet-border-radius-pill);
+    }
   }
 
   #visual-box.xs {

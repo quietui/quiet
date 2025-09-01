@@ -530,3 +530,43 @@ Use the `start` and `end` slots to add presentational icons or text. Avoid inter
   <quiet-combobox-item value="grooming">Grooming</quiet-combobox-item>
 </quiet-combobox>
 ```
+
+### Pill-shaped comboboxes
+
+Comboboxes can be rendered with pill-shaped edges by adding the `pill` attribute.
+
+```html {.example}
+<quiet-combobox 
+  label="Cat's Favorite Treat"
+  placeholder="Choose a treat..."
+  pill
+  with-clear
+>
+  <quiet-combobox-item value="salmon">Salmon Bites</quiet-combobox-item>
+  <quiet-combobox-item value="chicken">Chicken Strips</quiet-combobox-item>
+  <quiet-combobox-item value="tuna">Tuna Flakes</quiet-combobox-item>
+  <quiet-combobox-item value="catnip">Catnip Cookies</quiet-combobox-item>
+  <quiet-combobox-item value="cheese">Cheese Cubes</quiet-combobox-item>
+</quiet-combobox>
+```
+
+When using `multiple`, tags become pill-shaped and the combobox may grow to wrap around them.
+
+```html {.example}
+<quiet-combobox 
+  label="Cat's Daily Activities"
+  description="Select all that apply"
+  placeholder="What does your cat enjoy?"
+  pill
+  multiple
+  with-clear
+>
+  <quiet-combobox-item value="window-watching" selected>Bird Watching</quiet-combobox-item>
+  <quiet-combobox-item value="sunbathing" selected>Sunbathing</quiet-combobox-item>
+  <quiet-combobox-item value="toy-hunting" selected>Toy Hunting</quiet-combobox-item>
+  <quiet-combobox-item value="box-sitting" selected>Box Sitting</quiet-combobox-item>
+  <quiet-combobox-item value="treat-begging" selected>Treat Begging</quiet-combobox-item>
+  <quiet-combobox-item value="midnight-racing" selected>Midnight Racing</quiet-combobox-item>
+  <quiet-combobox-item value="lap-napping" selected>Lap Napping</quiet-combobox-item>
+</quiet-combobox>
+```

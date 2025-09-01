@@ -43,7 +43,7 @@ export default css`
   }
 
   /* Focus styles */
-  #visual-box:has(#text-box:focus-visible) {
+  :not(:host([appearance='unstyled'])) #visual-box:has(#text-box:focus-visible) {
     outline: var(--quiet-border-style) calc(var(--quiet-border-width) + 1px) var(--quiet-focus-color);
     outline-offset: calc(-1 * var(--quiet-border-width));
   }

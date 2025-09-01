@@ -229,10 +229,10 @@ Use the `appearance` attribute to change the visual style of the combobox. Optio
 Use the `size` attribute to change the combobox's size. Available sizes are `xs`, `sm`, `md` (default), `lg`, and `xl`.
 
 ```html {.example}
-<quiet-select label="Select a size" style="max-width: 18rem; margin-block-end: 2rem;">
+<quiet-select label="Select a size" value="md" style="max-width: 18rem; margin-block-end: 2rem;">
   <option value="xs">Extra small</option>
   <option value="sm">Small</option>
-  <option value="md" selected>Medium</option>
+  <option value="md">Medium</option>
   <option value="lg">Large</option>
   <option value="xl">Extra large</option>
 </quiet-select>
@@ -494,70 +494,4 @@ However, these selectors will match even before the user has had a chance to int
     }
   }
 </style>
-```
-
-### Keyboard navigation
-
-The combobox supports comprehensive keyboard navigation:
-
-- <quiet-hotkey keys="Tab"></quiet-hotkey> - Move focus to/from the combobox
-- <quiet-hotkey keys="ArrowDown"></quiet-hotkey> - Open dropdown and navigate to next item
-- <quiet-hotkey keys="ArrowUp"></quiet-hotkey> - Open dropdown and navigate to previous item  
-- <quiet-hotkey keys="Enter"></quiet-hotkey> - Select the focused item
-- <quiet-hotkey keys="Escape"></quiet-hotkey> - Close the dropdown
-- <quiet-hotkey keys="Home"></quiet-hotkey> - Navigate to first item
-- <quiet-hotkey keys="End"></quiet-hotkey> - Navigate to last item
-- <quiet-hotkey keys="Backspace"></quiet-hotkey> - In multiple mode, removes the last selected tag when input is empty
-
-### Accessibility features
-
-The combobox includes several accessibility features:
-
-- Full ARIA labeling and descriptions
-- Keyboard navigation support
-- Screen reader announcements for filtering results and selections
-- Proper focus management
-- Support for high contrast modes
-- Clear visual focus indicators
-
-### Events
-
-The combobox dispatches several custom events:
-
-- `quiet-change` - Emitted when the user commits a change to the value
-- `quiet-input` - Emitted when the user types in the search input
-- `quiet-focus` - Emitted when the combobox receives focus
-- `quiet-blur` - Emitted when the combobox loses focus
-- `quiet-open` - Emitted when the dropdown opens
-- `quiet-close` - Emitted when the dropdown closes
-- `quiet-select` - Emitted when an item is selected
-
-```html {.example}
-<quiet-combobox 
-  id="combobox__events"
-  label="Monitor Events"
-  placeholder="Interact to see events..."
->
-  <quiet-combobox-item value="option1">Option 1</quiet-combobox-item>
-  <quiet-combobox-item value="option2">Option 2</quiet-combobox-item>
-  <quiet-combobox-item value="option3">Option 3</quiet-combobox-item>
-</quiet-combobox>
-
-<div id="event-log" style="margin-top: 1rem; padding: 1rem; background: var(--quiet-neutral-fill-softest); border-radius: var(--quiet-border-radius-md); font-family: monospace; font-size: 0.875rem; min-height: 100px;">
-  Event log will appear here...
-</div>
-
-<script>
-  const combobox = document.getElementById('combobox__events');
-  const log = document.getElementById('event-log');
-  const events = ['quiet-change', 'quiet-input', 'quiet-focus', 'quiet-blur', 'quiet-open', 'quiet-close', 'quiet-select'];
-  
-  events.forEach(eventName => {
-    combobox.addEventListener(eventName, (e) => {
-      const time = new Date().toLocaleTimeString();
-      const detail = e.detail ? ` - ${JSON.stringify(e.detail)}` : '';
-      log.innerHTML = `[${time}] ${eventName}${detail}<br>` + log.innerHTML;
-    });
-  });
-</script>
 ```

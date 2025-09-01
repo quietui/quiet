@@ -936,20 +936,22 @@ export class QuietCombobox extends QuietFormControlElement {
     }
   };
 
-  private handleItemMouseMove = () => {
-    // Clear keyboard navigation data attribute from all items
-    if (this.activeItem) {
-      this.activeItem.removeAttribute('data-keyboard-nav');
-    }
+  private handleItemMouseMove = (event: MouseEvent) => {
+    // Only process if we're hovering over an actual item
+    const hoveredItem = (event.target as Element).closest('quiet-combobox-item') as QuietComboboxItem;
 
-    // When using mouse, clear all active states to prevent interference
-    // between keyboard navigation (active) and mouse hover states
-    // This ensures CSS :hover pseudo-class works properly
-    if (!this.disabled) {
-      this.filteredItems.forEach(i => {
-        i.active = false;
-        i.removeAttribute('data-keyboard-nav'); // Also clear from all filtered items
-      });
+    if (!hoveredItem || this.disabled) return;
+
+    // Only clear active states if we're hovering over a different item
+    if (hoveredItem !== this.activeItem) {
+      // Clear keyboard navigation data attribute from all items
+      if (this.activeItem) {
+        this.activeItem.active = false;
+        this.activeItem.removeAttribute('data-keyboard-nav');
+      }
+
+      // Don't set the hovered item as active - let CSS :hover handle the styling
+      // This prevents interference between keyboard and mouse navigation
     }
   };
 

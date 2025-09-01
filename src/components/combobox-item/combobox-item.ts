@@ -56,6 +56,21 @@ export class QuietComboboxItem extends QuietElement {
     this.setAttribute('tabindex', '-1');
   }
 
+  /** Gets the label text content only (excluding icon and details) */
+  getLabelText(): string {
+    // Get the default slot (not named slots like icon or details)
+    const slot = this.shadowRoot?.querySelector('slot:not([name])') as HTMLSlotElement;
+    if (slot) {
+      const nodes = slot.assignedNodes({ flatten: true });
+      return nodes
+        .map(node => node.textContent || '')
+        .join('')
+        .trim();
+    }
+    // Fallback to full textContent if we can't find the slot
+    return this.textContent?.trim() || '';
+  }
+
   updated(changedProperties: PropertyValues<this>) {
     // Update ARIA attributes
     if (changedProperties.has('selected')) {

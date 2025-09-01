@@ -286,13 +286,13 @@ export class QuietCombobox extends QuietFormControlElement {
 
     // Update input value for single select
     if (!this.multiple && this.selectedItems.length > 0) {
-      this.inputValue = this.selectedItems[0].textContent || '';
+      this.inputValue = this.selectedItems[0].getLabelText();
     }
   }
 
   private findMatchingItem(query: string): QuietComboboxItem | undefined {
     const items = this.getItems(true);
-    return items.find(item => item.textContent?.trim().toLowerCase() === query.trim().toLowerCase());
+    return items.find(item => item.getLabelText().toLowerCase() === query.trim().toLowerCase());
   }
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -318,7 +318,7 @@ export class QuietCombobox extends QuietFormControlElement {
       this.filteredItems = [];
 
       items.forEach(item => {
-        const text = item.textContent?.toLowerCase() || '';
+        const text = item.getLabelText().toLowerCase();
         const matches = text.includes(lowerQuery);
         item.hidden = !matches;
 
@@ -408,7 +408,7 @@ export class QuietCombobox extends QuietFormControlElement {
       // Clear the non-matching or disabled input
       if (!this.multiple) {
         // Restore previous selection or clear
-        this.inputValue = this.selectedItems.length > 0 ? this.selectedItems[0].textContent || '' : '';
+        this.inputValue = this.selectedItems.length > 0 ? this.selectedItems[0].getLabelText() : '';
       } else {
         // Always clear input in multiple mode
         this.inputValue = '';
@@ -451,7 +451,7 @@ export class QuietCombobox extends QuietFormControlElement {
       item.selected = true;
       this.selectedItems = [item];
       this.value = item.value || item.textContent || '';
-      this.inputValue = item.textContent || '';
+      this.inputValue = item.getLabelText();
       this.open = false;
 
       // Announce selection

@@ -440,6 +440,8 @@ export class QuietCombobox extends QuietFormControlElement {
         const values = this.selectedItems.map(i => i.value || i.textContent || '');
         this.value = values;
         this.inputValue = '';
+        this.setActiveItem(item);
+
         // Pass true to preserve the active item when filtering
         this.filterItems('', true);
 

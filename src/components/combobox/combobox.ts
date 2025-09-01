@@ -402,19 +402,22 @@ export class QuietCombobox extends QuietFormControlElement {
     if (!this.inputValue.trim()) return;
 
     const matchingItem = this.findMatchingItem(this.inputValue);
-    if (matchingItem) return;
 
-    // Clear the non-matching input
-    if (!this.multiple) {
-      // Restore previous selection or clear
-      this.inputValue = this.selectedItems.length > 0 ? this.selectedItems[0].textContent || '' : '';
-    } else {
-      // Always clear input in multiple mode
-      this.inputValue = '';
+    // Clear input if no matching item OR if the matching item is disabled
+    if (!matchingItem || matchingItem.disabled) {
+      // Clear the non-matching or disabled input
+      if (!this.multiple) {
+        // Restore previous selection or clear
+        this.inputValue = this.selectedItems.length > 0 ? this.selectedItems[0].textContent || '' : '';
+      } else {
+        // Always clear input in multiple mode
+        this.inputValue = '';
+      }
+
+      // Reset the filter to show all items again
+      this.filterItems('');
+      return;
     }
-
-    // Reset the filter to show all items again
-    this.filterItems('');
   }
 
   private selectItem(item: QuietComboboxItem) {
@@ -740,7 +743,8 @@ export class QuietCombobox extends QuietFormControlElement {
     if (!this.multiple) {
       const matchingItem = this.findMatchingItem(this.inputValue);
 
-      if (matchingItem) {
+      // Only process if matching item exists AND is not disabled
+      if (matchingItem && !matchingItem.disabled) {
         // Visual feedback that item matches
         this.selectedItems.forEach(i => (i.selected = false));
         matchingItem.selected = true;
@@ -748,7 +752,7 @@ export class QuietCombobox extends QuietFormControlElement {
         this.value = matchingItem.value || matchingItem.textContent || '';
         this.updateFormValue();
       } else if (this.selectedItems.length > 0) {
-        // Clear selection if text doesn't match
+        // Clear selection if text doesn't match or matches a disabled item
         this.selectedItems[0].selected = false;
         this.selectedItems = [];
         this.value = '';

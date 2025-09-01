@@ -39,7 +39,6 @@ import styles from './combobox.styles.js';
  * @event quiet-open - Emitted when the dropdown opens.
  * @event quiet-close - Emitted when the dropdown closes.
  * @event quiet-select - Emitted when an item is selected.
- * @event quiet-entry - Emitted when the user attempts to add a value not in the list. Prevent default to allow the value.
  *
  * @csspart label - The element that contains the combobox's label.
  * @csspart description - The element that contains the combobox's description.
@@ -146,12 +145,7 @@ export class QuietCombobox extends QuietFormControlElement {
     super.disconnectedCallback();
     this.removeEventListener('invalid', this.handleHostInvalid);
     this.cleanup?.();
-    if (this.liveRegionTimeoutId) {
-      clearTimeout(this.liveRegionTimeoutId);
-    }
-    if (this.navigationDebounceId) {
-      clearTimeout(this.navigationDebounceId);
-    }
+    this.clearAnnouncementTimers();
   }
 
   firstUpdated() {
@@ -160,47 +154,8 @@ export class QuietCombobox extends QuietFormControlElement {
     this.updateInputWidth();
   }
 
-  private updateItems() {
-    const items = this.getAllItems();
-
-    // Set combobox reference on all items and assign IDs if needed
-    items.forEach(item => {
-      if (!item.id) {
-        item.id = `quiet-combobox-option-${this.optionIdCounter++}`;
-      }
-      item.combobox = this;
-    });
-
-    // Update filtered items
-    this.filteredItems = this.getItems();
-
-    // If no value is set, check for items with selected attribute
-    if (!this.value || (Array.isArray(this.value) && this.value.length === 0)) {
-      const selectedItems = items.filter(item => item.hasAttribute('selected'));
-
-      if (selectedItems.length > 0) {
-        if (this.multiple) {
-          // Preserve DOM order for initial selection
-          this.value = selectedItems.map(item => item.value || item.textContent || '');
-          // Set selectedItems in DOM order for initial load
-          this.selectedItems = selectedItems;
-        } else {
-          // For single select, use the first selected item
-          this.value = selectedItems[0].value || selectedItems[0].textContent || '';
-          this.selectedItems = [selectedItems[0]];
-        }
-
-        // Mark items as selected
-        selectedItems.forEach(item => (item.selected = true));
-      }
-    } else {
-      // Sync selected state for existing values
-      this.syncSelectedItems();
-    }
-  }
-
   updated(changedProperties: PropertyValues<this>) {
-    // Update validity
+    // Always be updating
     this.updateValidity();
 
     // Handle open state
@@ -244,10 +199,9 @@ export class QuietCombobox extends QuietFormControlElement {
     }
   }
 
-  /** Custom function for rendering tag content */
-  public getTagContent(item: QuietComboboxItem): TemplateResult {
-    return html`${item.textContent}`;
-  }
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Item management methods
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   private getItems(): QuietComboboxItem[] {
     return [...this.querySelectorAll<QuietComboboxItem>('quiet-combobox-item:not([disabled])')];
@@ -255,6 +209,45 @@ export class QuietCombobox extends QuietFormControlElement {
 
   private getAllItems(): QuietComboboxItem[] {
     return [...this.querySelectorAll<QuietComboboxItem>('quiet-combobox-item')];
+  }
+
+  private updateItems() {
+    const items = this.getAllItems();
+
+    // Set combobox reference on all items and assign IDs if needed
+    items.forEach(item => {
+      if (!item.id) {
+        item.id = `quiet-combobox-option-${this.optionIdCounter++}`;
+      }
+      item.combobox = this;
+    });
+
+    // Update filtered items
+    this.filteredItems = this.getItems();
+
+    // If no value is set, check for items with selected attribute
+    if (!this.value || (Array.isArray(this.value) && this.value.length === 0)) {
+      const selectedItems = items.filter(item => item.hasAttribute('selected'));
+
+      if (selectedItems.length > 0) {
+        if (this.multiple) {
+          // Preserve DOM order for initial selection
+          this.value = selectedItems.map(item => item.value || item.textContent || '');
+          // Set selectedItems in DOM order for initial load
+          this.selectedItems = selectedItems;
+        } else {
+          // For single select, use the first selected item
+          this.value = selectedItems[0].value || selectedItems[0].textContent || '';
+          this.selectedItems = [selectedItems[0]];
+        }
+
+        // Mark items as selected
+        selectedItems.forEach(item => (item.selected = true));
+      }
+    } else {
+      // Sync selected state for existing values
+      this.syncSelectedItems();
+    }
   }
 
   private syncSelectedItems() {
@@ -299,28 +292,273 @@ export class QuietCombobox extends QuietFormControlElement {
     }
   }
 
-  private updateInputWidth() {
-    if (!this.multiple) {
-      this.inputWidth = 'auto';
+  private findMatchingItem(query: string): QuietComboboxItem | undefined {
+    const items = this.getAllItems();
+    return items.find(item => item.textContent?.trim().toLowerCase() === query.trim().toLowerCase());
+  }
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Filtering methods
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  private filterItems(query: string, preserveActiveItem = false) {
+    const items = this.getItems();
+    // Store the current active item to potentially preserve it
+    const currentActiveItem = preserveActiveItem ? this.activeItem : null;
+
+    if (!query) {
+      this.filteredItems = items;
+      items.forEach(item => (item.hidden = false));
+
+      // If focused and we have items, show the dropdown
+      if (this.filteredItems.length > 0 && this.customStates.has('focused')) {
+        this.open = true;
+        this.announceFilterResults(this.filteredItems.length);
+      }
+    } else {
+      const lowerQuery = query.toLowerCase();
+      this.filteredItems = [];
+
+      items.forEach(item => {
+        const text = item.textContent?.toLowerCase() || '';
+        const matches = text.includes(lowerQuery);
+        item.hidden = !matches;
+
+        if (matches) {
+          this.filteredItems.push(item);
+        }
+      });
+
+      // Announce filter results
+      this.announceFilterResults(this.filteredItems.length);
+    }
+
+    // Hide dropdown if no matches
+    if (this.filteredItems.length === 0 && this.open) {
+      this.open = false;
+    } else if (this.filteredItems.length > 0 && this.open) {
+      // Preserve active item if requested and it's still in the filtered list
+      if (preserveActiveItem && currentActiveItem && this.filteredItems.includes(currentActiveItem)) {
+        this.setActiveItem(currentActiveItem);
+      } else {
+        // Set first item as active when filtering
+        this.setActiveItem(this.filteredItems[0]);
+      }
+    }
+  }
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Navigation methods
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  private setActiveItem(item: QuietComboboxItem | null, isKeyboard = false) {
+    if (this.activeItem) {
+      this.activeItem.active = false;
+      this.activeItem.removeAttribute('data-keyboard-nav');
+    }
+
+    this.activeItem = item;
+
+    if (item) {
+      item.active = true;
+      if (isKeyboard) {
+        item.setAttribute('data-keyboard-nav', '');
+      }
+      item.scrollIntoView({ block: 'nearest' });
+      this.announceOption(item);
+    }
+  }
+
+  private navigateItems(direction: number) {
+    if (this.filteredItems.length === 0) return;
+
+    if (!this.activeItem) {
+      // No item is active, select first or last based on direction
+      if (direction > 0) {
+        this.setActiveItem(this.filteredItems[0], true);
+      } else {
+        this.setActiveItem(this.filteredItems[this.filteredItems.length - 1], true);
+      }
       return;
     }
 
-    // Calculate width based on input value or placeholder
-    const text = this.inputValue || this.placeholder || '';
-    const minChars = 8; // Minimum width in characters
-    const maxChars = 50; // Maximum width in characters
+    let index = this.filteredItems.indexOf(this.activeItem);
+    index += direction;
 
-    // Use ch units for more consistent sizing across fonts
-    const chars = Math.max(minChars, Math.min(text.length + 2, maxChars));
-    this.inputWidth = `${chars}ch`;
-  }
-
-  private isBlank(): boolean {
-    if (this.multiple) {
-      return !this.value || (Array.isArray(this.value) && this.value.length === 0);
+    // Wrap around navigation
+    if (index < 0) {
+      index = this.filteredItems.length - 1;
+    } else if (index >= this.filteredItems.length) {
+      index = 0;
     }
-    return !this.value;
+
+    this.setActiveItem(this.filteredItems[index], true);
   }
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Selection methods
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  private selectItem(item: QuietComboboxItem) {
+    if (item.disabled) return;
+
+    const selectEvent = new QuietSelectEvent({ item });
+    this.dispatchEvent(selectEvent);
+
+    if (selectEvent.defaultPrevented) return;
+
+    if (this.multiple) {
+      // Toggle selection in multiple mode
+      if (item.selected) {
+        this.deselectItem(item);
+      } else {
+        item.selected = true;
+        this.selectedItems.push(item);
+        const values = this.selectedItems.map(i => i.value || i.textContent || '');
+        this.value = values;
+        this.inputValue = '';
+        // Pass true to preserve the active item when filtering
+        this.filterItems('', true);
+
+        // Announce selection
+        this.announceChange(`${item.textContent} added`);
+      }
+      this.textBox.focus();
+    } else {
+      // Single selection
+      this.selectedItems.forEach(i => (i.selected = false));
+      item.selected = true;
+      this.selectedItems = [item];
+      this.value = item.value || item.textContent || '';
+      this.inputValue = item.textContent || '';
+      this.open = false;
+
+      // Announce selection
+      this.announceChange(`${item.textContent} selected`);
+    }
+
+    this.hadUserInteraction = true;
+    this.updateFormValue();
+    this.dispatchEvent(new QuietChangeEvent());
+  }
+
+  private deselectItem(item: QuietComboboxItem) {
+    item.selected = false;
+    const index = this.selectedItems.indexOf(item);
+    if (index > -1) {
+      this.selectedItems.splice(index, 1);
+    }
+
+    if (this.multiple) {
+      const values = this.selectedItems.map(i => i.value || i.textContent || '');
+      this.value = values;
+
+      // Announce deselection
+      this.announceChange(`${item.textContent} removed`);
+    } else {
+      this.value = '';
+      this.inputValue = '';
+    }
+
+    this.updateFormValue();
+    this.dispatchEvent(new QuietChangeEvent());
+  }
+
+  private removeTag(item: QuietComboboxItem, event: Event) {
+    event.stopPropagation();
+    this.deselectItem(item);
+    this.textBox.focus();
+    // Re-filter items based on current input
+    this.filterItems(this.inputValue);
+  }
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Announcement methods (accessibility)
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  private clearAnnouncementTimers() {
+    if (this.liveRegionTimeoutId) {
+      clearTimeout(this.liveRegionTimeoutId);
+      this.liveRegionTimeoutId = undefined;
+    }
+    if (this.navigationDebounceId) {
+      clearTimeout(this.navigationDebounceId);
+      this.navigationDebounceId = undefined;
+    }
+  }
+
+  private announceChange(message: string) {
+    // Use requestAnimationFrame to ensure the DOM updates
+    requestAnimationFrame(() => {
+      // Clear first to ensure change is detected by screen readers
+      this.liveAnnouncement = '';
+
+      // Then set the new announcement
+      requestAnimationFrame(() => {
+        this.liveAnnouncement = message;
+      });
+    });
+  }
+
+  private announceOption(item: QuietComboboxItem) {
+    // Clear any pending announcements
+    this.clearAnnouncementTimers();
+
+    // Get the position of this item in the filtered list
+    const position = this.filteredItems.indexOf(item) + 1;
+    const total = this.filteredItems.length;
+
+    // Build the announcement
+    let announcement = `${item.textContent}`;
+
+    // Add position information
+    if (total > 0) {
+      announcement += `, ${position} of ${total}`;
+    }
+
+    // Add selected state if applicable
+    if (item.selected) {
+      announcement += ', selected';
+    }
+
+    // Add disabled state if applicable
+    if (item.disabled) {
+      announcement += ', disabled';
+    }
+
+    // Debounce navigation announcements to avoid queueing
+    // This waits a short time to see if user is still navigating
+    this.navigationDebounceId = setTimeout(() => {
+      // Clear and then announce to ensure screen reader picks it up
+      this.liveAnnouncement = '';
+      requestAnimationFrame(() => {
+        this.liveAnnouncement = announcement;
+      });
+    }, 75); // 75ms delay - adjust if needed
+  }
+
+  private announceFilterResults(count: number) {
+    if (this.liveRegionTimeoutId) {
+      clearTimeout(this.liveRegionTimeoutId);
+    }
+
+    const announcement = count === 0 ? 'No results found' : `${count} result${count === 1 ? '' : 's'} available`;
+
+    // Use requestAnimationFrame to ensure the DOM updates
+    requestAnimationFrame(() => {
+      // Clear first to ensure change is detected
+      this.liveAnnouncement = '';
+
+      // Then set the new announcement
+      requestAnimationFrame(() => {
+        this.liveAnnouncement = announcement;
+      });
+    });
+  }
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Dropdown methods
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   private async showDropdown() {
     if (!this.dropdown) return;
@@ -395,217 +633,15 @@ export class QuietCombobox extends QuietFormControlElement {
     });
   }
 
-  private setActiveItem(item: QuietComboboxItem | null, isKeyboard = false) {
-    if (this.activeItem) {
-      this.activeItem.active = false;
-      this.activeItem.removeAttribute('data-keyboard-nav');
-    }
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Form methods
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    this.activeItem = item;
-
-    if (item) {
-      item.active = true;
-      if (isKeyboard) {
-        item.setAttribute('data-keyboard-nav', '');
-      }
-      item.scrollIntoView({ block: 'nearest' });
-      this.announceOption(item);
-    }
-  }
-
-  private announce(message: string) {
-    // Use requestAnimationFrame to ensure the DOM updates
-    requestAnimationFrame(() => {
-      // Clear first to ensure change is detected by screen readers
-      this.liveAnnouncement = '';
-
-      // Then set the new announcement
-      requestAnimationFrame(() => {
-        this.liveAnnouncement = message;
-      });
-    });
-  }
-
-  private announceOption(item: QuietComboboxItem) {
-    // Clear any pending announcement
-    if (this.liveRegionTimeoutId) {
-      clearTimeout(this.liveRegionTimeoutId);
-    }
-
-    // Clear any pending navigation announcement
-    if (this.navigationDebounceId) {
-      clearTimeout(this.navigationDebounceId);
-    }
-
-    // Get the position of this item in the filtered list
-    const position = this.filteredItems.indexOf(item) + 1;
-    const total = this.filteredItems.length;
-
-    // Build the announcement
-    let announcement = `${item.textContent}`;
-
-    // Add position information
-    if (total > 0) {
-      announcement += `, ${position} of ${total}`;
-    }
-
-    // Add selected state if applicable
-    if (item.selected) {
-      announcement += ', selected';
-    }
-
-    // Add disabled state if applicable
-    if (item.disabled) {
-      announcement += ', disabled';
-    }
-
-    // Debounce navigation announcements to avoid queueing
-    // This waits a short time to see if user is still navigating
-    this.navigationDebounceId = setTimeout(() => {
-      // Clear and then announce to ensure screen reader picks it up
-      this.liveAnnouncement = '';
-      requestAnimationFrame(() => {
-        this.liveAnnouncement = announcement;
-      });
-    }, 75); // 75ms delay - adjust if needed
-  }
-
-  private filterItems(query: string, preserveActiveItem = false) {
-    const items = this.getItems();
-    // Store the current active item to potentially preserve it
-    const currentActiveItem = preserveActiveItem ? this.activeItem : null;
-
-    if (!query) {
-      this.filteredItems = items;
-      items.forEach(item => (item.hidden = false));
-
-      // If focused and we have items, show the dropdown
-      if (this.filteredItems.length > 0 && this.customStates.has('focused')) {
-        this.open = true;
-        this.announceFilterResults(this.filteredItems.length);
-      }
-    } else {
-      const lowerQuery = query.toLowerCase();
-      this.filteredItems = [];
-
-      items.forEach(item => {
-        const text = item.textContent?.toLowerCase() || '';
-        const matches = text.includes(lowerQuery);
-        item.hidden = !matches;
-
-        if (matches) {
-          this.filteredItems.push(item);
-        }
-      });
-
-      // Announce filter results
-      this.announceFilterResults(this.filteredItems.length);
-    }
-
-    // Hide dropdown if no matches
-    if (this.filteredItems.length === 0 && this.open) {
-      this.open = false;
-    } else if (this.filteredItems.length > 0 && this.open) {
-      // Preserve active item if requested and it's still in the filtered list
-      if (preserveActiveItem && currentActiveItem && this.filteredItems.includes(currentActiveItem)) {
-        this.setActiveItem(currentActiveItem);
-      } else {
-        // Set first item as active when filtering
-        this.setActiveItem(this.filteredItems[0]);
-      }
-    }
-  }
-
-  private announceFilterResults(count: number) {
-    if (this.liveRegionTimeoutId) {
-      clearTimeout(this.liveRegionTimeoutId);
-    }
-
-    const announcement = count === 0 ? 'No results found' : `${count} result${count === 1 ? '' : 's'} available`;
-
-    // Use requestAnimationFrame to ensure the DOM updates
-    requestAnimationFrame(() => {
-      // Clear first to ensure change is detected
-      this.liveAnnouncement = '';
-
-      // Then set the new announcement
-      requestAnimationFrame(() => {
-        this.liveAnnouncement = announcement;
-      });
-    });
-  }
-
-  private selectItem(item: QuietComboboxItem) {
-    if (item.disabled) return;
-
-    const selectEvent = new QuietSelectEvent({ item });
-    this.dispatchEvent(selectEvent);
-
-    if (selectEvent.defaultPrevented) return;
-
+  private isBlank(): boolean {
     if (this.multiple) {
-      // Toggle selection in multiple mode
-      if (item.selected) {
-        this.deselectItem(item);
-      } else {
-        item.selected = true;
-        this.selectedItems.push(item);
-        const values = this.selectedItems.map(i => i.value || i.textContent || '');
-        this.value = values;
-        this.inputValue = '';
-        // Pass true to preserve the active item when filtering
-        this.filterItems('', true);
-
-        // Announce selection
-        this.announce(`${item.textContent} added`);
-      }
-      this.textBox.focus();
-    } else {
-      // Single selection
-      this.selectedItems.forEach(i => (i.selected = false));
-      item.selected = true;
-      this.selectedItems = [item];
-      this.value = item.value || item.textContent || '';
-      this.inputValue = item.textContent || '';
-      this.open = false;
-
-      // Announce selection
-      this.announce(`${item.textContent} selected`);
+      return !this.value || (Array.isArray(this.value) && this.value.length === 0);
     }
-
-    this.hadUserInteraction = true;
-    this.updateFormValue();
-    this.dispatchEvent(new QuietChangeEvent());
-  }
-
-  private deselectItem(item: QuietComboboxItem) {
-    item.selected = false;
-    const index = this.selectedItems.indexOf(item);
-    if (index > -1) {
-      this.selectedItems.splice(index, 1);
-    }
-
-    if (this.multiple) {
-      const values = this.selectedItems.map(i => i.value || i.textContent || '');
-      this.value = values;
-
-      // Announce deselection
-      this.announce(`${item.textContent} removed`);
-    } else {
-      this.value = '';
-      this.inputValue = '';
-    }
-
-    this.updateFormValue();
-    this.dispatchEvent(new QuietChangeEvent());
-  }
-
-  private removeTag(item: QuietComboboxItem, event: Event) {
-    event.stopPropagation();
-    this.deselectItem(item);
-    this.textBox.focus();
-    // Re-filter items based on current input
-    this.filterItems(this.inputValue);
+    return !this.value;
   }
 
   private updateFormValue() {
@@ -637,7 +673,43 @@ export class QuietCombobox extends QuietFormControlElement {
     this.internals.setValidity(flags, message, this.focusableAnchor);
   }
 
-  // Event handlers
+  formDisabledCallback(disabled: boolean) {
+    this.disabled = disabled;
+  }
+
+  formResetCallback() {
+    this.value = this.multiple ? [] : '';
+    this.selectedItems = [];
+    this.inputValue = '';
+    this.hadUserInteraction = false;
+    this.wasSubmitted = false;
+    this.isInvalid = false;
+  }
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // UI Helper Methods
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  private updateInputWidth() {
+    if (!this.multiple) {
+      this.inputWidth = 'auto';
+      return;
+    }
+
+    // Calculate width based on input value or placeholder
+    const text = this.inputValue || this.placeholder || '';
+    const minChars = 8; // Minimum width in characters
+    const maxChars = 50; // Maximum width in characters
+
+    // Use ch units for more consistent sizing across fonts
+    const chars = Math.max(minChars, Math.min(text.length + 2, maxChars));
+    this.inputWidth = `${chars}ch`;
+  }
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Event Handlers
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
   private handleInput = () => {
     this.inputValue = this.textBox.value;
     this.filterItems(this.inputValue);
@@ -648,10 +720,7 @@ export class QuietCombobox extends QuietFormControlElement {
 
     // In single select mode, check if input matches an item exactly
     if (!this.multiple) {
-      const items = this.getAllItems();
-      const matchingItem = items.find(
-        item => item.textContent?.trim().toLowerCase() === this.inputValue.trim().toLowerCase()
-      );
+      const matchingItem = this.findMatchingItem(this.inputValue);
 
       if (matchingItem) {
         // Visual feedback that item matches
@@ -704,51 +773,6 @@ export class QuietCombobox extends QuietFormControlElement {
       this.open = false;
     }
 
-    // Handle free-form entry on blur
-    if (this.inputValue.trim()) {
-      const items = this.getAllItems();
-      const matchingItem = items.find(
-        item => item.textContent?.trim().toLowerCase() === this.inputValue.trim().toLowerCase()
-      );
-
-      if (!matchingItem) {
-        // Dispatch quiet-entry event for non-matching input
-        const entryEvent = new CustomEvent('quiet-entry', {
-          detail: { value: this.inputValue.trim() },
-          bubbles: true,
-          composed: true,
-          cancelable: true
-        });
-
-        this.dispatchEvent(entryEvent);
-
-        // If event was prevented, developer is handling it
-        if (entryEvent.defaultPrevented) {
-          // Re-sync items after DOM mutation
-          requestAnimationFrame(() => {
-            this.updateItems();
-            // Clear input in multiple mode after syncing
-            if (this.multiple) {
-              this.inputValue = '';
-            }
-          });
-        } else {
-          // If not prevented, clear the invalid entry
-          if (this.multiple) {
-            // For multiple, just clear the input
-            this.inputValue = '';
-          } else {
-            // For single select, clear everything
-            this.inputValue = '';
-            this.value = '';
-            this.selectedItems.forEach(item => (item.selected = false));
-            this.selectedItems = [];
-            this.updateFormValue();
-          }
-        }
-      }
-    }
-
     this.dispatchEvent(new QuietBlurEvent());
   };
 
@@ -786,43 +810,6 @@ export class QuietCombobox extends QuietFormControlElement {
         event.preventDefault();
         if (this.activeItem) {
           this.selectItem(this.activeItem);
-        } else if (this.inputValue.trim()) {
-          // Dispatch quiet-entry for non-matching input in both single and multiple modes
-          const items = this.getAllItems();
-          const matchingItem = items.find(
-            item => item.textContent?.trim().toLowerCase() === this.inputValue.trim().toLowerCase()
-          );
-
-          if (!matchingItem) {
-            const entryEvent = new CustomEvent('quiet-entry', {
-              detail: { value: this.inputValue.trim() },
-              bubbles: true,
-              composed: true,
-              cancelable: true
-            });
-
-            this.dispatchEvent(entryEvent);
-
-            // If event was prevented, developer is handling it
-            if (entryEvent.defaultPrevented) {
-              // For multiple mode, clear the input after successful add
-              if (this.multiple) {
-                this.inputValue = '';
-                // Re-sync items after DOM mutation
-                requestAnimationFrame(() => {
-                  this.updateItems();
-                });
-              }
-            } else {
-              // If not prevented, clear the input
-              this.inputValue = '';
-              if (!this.multiple) {
-                // For single select, also clear the value
-                this.value = '';
-                this.updateFormValue();
-              }
-            }
-          }
         }
         break;
 
@@ -834,44 +821,18 @@ export class QuietCombobox extends QuietFormControlElement {
       case 'Home':
         event.preventDefault();
         if (this.filteredItems.length > 0) {
-          this.setActiveItem(this.filteredItems[0], true); // Add true flag
+          this.setActiveItem(this.filteredItems[0], true);
         }
         break;
 
       case 'End':
         event.preventDefault();
         if (this.filteredItems.length > 0) {
-          this.setActiveItem(this.filteredItems[this.filteredItems.length - 1], true); // Add true flag
+          this.setActiveItem(this.filteredItems[this.filteredItems.length - 1], true);
         }
         break;
     }
   };
-
-  private navigateItems(direction: number) {
-    if (this.filteredItems.length === 0) return;
-
-    if (!this.activeItem) {
-      // No item is active, select first or last based on direction
-      if (direction > 0) {
-        this.setActiveItem(this.filteredItems[0], true); // Add true flag
-      } else {
-        this.setActiveItem(this.filteredItems[this.filteredItems.length - 1], true); // Add true flag
-      }
-      return;
-    }
-
-    let index = this.filteredItems.indexOf(this.activeItem);
-    index += direction;
-
-    // Wrap around navigation
-    if (index < 0) {
-      index = this.filteredItems.length - 1;
-    } else if (index >= this.filteredItems.length) {
-      index = 0;
-    }
-
-    this.setActiveItem(this.filteredItems[index], true); // Add true flag
-  }
 
   private handleDocumentClick = (event: MouseEvent) => {
     const path = event.composedPath();
@@ -959,24 +920,18 @@ export class QuietCombobox extends QuietFormControlElement {
     this.wasSubmitted = true;
   };
 
-  formDisabledCallback(disabled: boolean) {
-    this.disabled = disabled;
+  /** Custom function for rendering tag content */
+  public getTagContent(item: QuietComboboxItem): TemplateResult {
+    return html`${item.textContent}`;
   }
 
-  formResetCallback() {
-    this.value = this.multiple ? [] : '';
-    this.selectedItems = [];
-    this.inputValue = '';
-    this.hadUserInteraction = false;
-    this.wasSubmitted = false;
-    this.isInvalid = false;
-  }
-
-  focus() {
+  /** Sets focus on the combobox. */
+  public focus() {
     this.textBox?.focus();
   }
 
-  blur() {
+  /** Removes focus from the combobox. */
+  public blur() {
     this.textBox?.blur();
   }
 

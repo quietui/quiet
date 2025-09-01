@@ -495,3 +495,38 @@ However, these selectors will match even before the user has had a chance to int
   }
 </style>
 ```
+
+### Start and end content
+
+Use the `start` and `end` slots to add presentational icons or text. Avoid interactive elements such as buttons, links, etc. Works well with [`<quiet-icon>`](/docs/components/icon) and `<svg>` elements.
+
+```html {.example}
+<quiet-combobox name="breed" label="Cat Breed" with-clear>
+  <quiet-icon slot="start" name="cat"></quiet-icon>
+  <quiet-combobox-item value="persian">Persian</quiet-combobox-item>
+  <quiet-combobox-item value="maine-coon">Maine Coon</quiet-combobox-item>
+  <quiet-combobox-item value="siamese">Siamese</quiet-combobox-item>
+  <quiet-combobox-item value="ragdoll">Ragdoll</quiet-combobox-item>
+</quiet-combobox>
+
+<br>
+
+<quiet-combobox name="toy" label="Cat Toy" placeholder="Choose a toy" with-clear>
+  <quiet-icon slot="end" name="gift"></quiet-icon>
+  <quiet-combobox-item value="feather-wand">Feather Wand</quiet-combobox-item>
+  <quiet-combobox-item value="laser-pointer">Laser Pointer</quiet-combobox-item>
+  <quiet-combobox-item value="catnip-mouse">Catnip Mouse</quiet-combobox-item>
+  <quiet-combobox-item value="puzzle-feeder">Puzzle Feeder</quiet-combobox-item>
+</quiet-combobox>
+
+<br>
+
+<quiet-combobox name="vet-visit" label="Visit Type" multiple with-clear>
+  <quiet-icon slot="start" name="cat"></quiet-icon>
+  <quiet-icon slot="end" name="clipboard-heart"></quiet-icon>
+  <quiet-combobox-item value="checkup">Annual Checkup</quiet-combobox-item>
+  <quiet-combobox-item value="vaccination">Vaccination</quiet-combobox-item>
+  <quiet-combobox-item value="dental">Dental Cleaning</quiet-combobox-item>
+  <quiet-combobox-item value="grooming">Grooming</quiet-combobox-item>
+</quiet-combobox>
+```

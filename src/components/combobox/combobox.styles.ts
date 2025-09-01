@@ -17,7 +17,8 @@ export default css`
     font: inherit;
     cursor: text;
 
-    &:has(.tag) {
+    /* Collapse padding when a tag is present and there's no start content */
+    &:has(.tag):not(.has-start) {
       padding-inline-start: 0.25em;
     }
   }
@@ -222,7 +223,7 @@ export default css`
     flex: 1 1 100%;
   }
 
-  /* Clear button positioning */
+  /* Clear button positioning - absolute like text-field */
   #visual-box.has-clear {
     position: relative;
     padding-inline-end: 2.5em;
@@ -266,6 +267,25 @@ export default css`
 
   .text-box-button:active {
     translate: 0 1px;
+  }
+
+  /* Start and end slot styles */
+  slot[name='start']::slotted(*),
+  slot[name='end']::slotted(*) {
+    color: var(--quiet-text-muted) !important;
+  }
+
+  slot[name='start']::slotted(quiet-icon),
+  slot[name='end']::slotted(quiet-icon) {
+    font-size: 1.25em !important;
+    pointer-events: none;
+  }
+
+  slot[name='start']::slotted(svg),
+  slot[name='end']::slotted(svg) {
+    width: 1.25em;
+    height: 1.25em;
+    pointer-events: none;
   }
 
   /* Dropdown styles */

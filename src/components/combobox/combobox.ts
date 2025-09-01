@@ -31,6 +31,8 @@ import styles from './combobox.styles.js';
  * @slot - One or more `<quiet-combobox-item>` elements to show as options.
  * @slot label - The combobox's label. For plain-text labels, use the `label` attribute instead.
  * @slot description - The combobox's description. For plain-text descriptions, use the `description` attribute instead.
+ * @slot start - An icon or similar element to place before the input. Works great with `<quiet-icon>`.
+ * @slot end - An icon or similar element to place after the input. Works great with `<quiet-icon>`.
  *
  * @event quiet-blur - Emitted when the combobox loses focus.
  * @event quiet-change - Emitted when the user commits changes to the combobox's value.
@@ -961,6 +963,8 @@ export class QuietCombobox extends QuietFormControlElement {
   render() {
     const hasLabel = this.label || this.slotsWithContent.has('label');
     const hasDescription = this.description || this.slotsWithContent.has('description');
+    const hasStart = this.slotsWithContent.has('start');
+    const hasEnd = this.slotsWithContent.has('end');
 
     // Dynamic styles for the input
     const inputStyles = {
@@ -1006,10 +1010,14 @@ export class QuietCombobox extends QuietFormControlElement {
           pill: this.pill,
           disabled: this.disabled,
           multiple: this.multiple,
-          'has-clear': this.withClear && !this.isBlank() && !this.disabled
+          'has-clear': this.withClear && !this.isBlank() && !this.disabled,
+          'has-start': hasStart,
+          'has-end': hasEnd
         })}
         @click=${this.handleVisualBoxClick}
       >
+        <slot name="start"></slot>
+
         <div class="input-area">
           ${this.multiple
             ? this.selectedItems.map(
@@ -1070,6 +1078,8 @@ export class QuietCombobox extends QuietFormControlElement {
               </button>
             `
           : ''}
+
+        <slot name="end"></slot>
       </div>
 
       <div

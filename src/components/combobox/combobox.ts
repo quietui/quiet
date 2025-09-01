@@ -397,6 +397,26 @@ export class QuietCombobox extends QuietFormControlElement {
   // Selection methods
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+  private clearInvalidInput() {
+    // Only clear if there's input that doesn't match any item
+    if (!this.inputValue.trim()) return;
+
+    const matchingItem = this.findMatchingItem(this.inputValue);
+    if (matchingItem) return;
+
+    // Clear the non-matching input
+    if (!this.multiple) {
+      // Restore previous selection or clear
+      this.inputValue = this.selectedItems.length > 0 ? this.selectedItems[0].textContent || '' : '';
+    } else {
+      // Always clear input in multiple mode
+      this.inputValue = '';
+    }
+
+    // Reset the filter to show all items again
+    this.filterItems('');
+  }
+
   private selectItem(item: QuietComboboxItem) {
     if (item.disabled) return;
 
@@ -766,8 +786,9 @@ export class QuietCombobox extends QuietFormControlElement {
     const relatedTarget = event.relatedTarget as HTMLElement;
     const isInternalFocus = relatedTarget && (this.contains(relatedTarget) || this.dropdown?.contains(relatedTarget));
 
-    // Close dropdown if focus is leaving the component entirely
+    // Close dropdown and clear invalid input if focus is leaving the component entirely
     if (!isInternalFocus) {
+      this.clearInvalidInput();
       this.open = false;
     }
 

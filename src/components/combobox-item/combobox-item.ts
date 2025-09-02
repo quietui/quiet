@@ -10,7 +10,7 @@ import styles from './combobox-item.styles.js';
 /**
  * <quiet-combobox-item>
  *
- * @summary An item that can be selected from a combobox dropdown.
+ * @summary An item that can be selected from a combobox control.
  * @documentation https://quietui.org/docs/components/combobox-item
  * @status stable
  * @since 1.0
@@ -58,7 +58,7 @@ export class QuietComboboxItem extends QuietElement {
     this.setAttribute('tabindex', '-1');
   }
 
-  /** Gets the label text content only (excluding icon and details) */
+  /** Gets the text content from the combobox item's label. */
   getLabelText(): string {
     if (this.defaultSlot) {
       const nodes = this.defaultSlot.assignedNodes({ flatten: true });
@@ -68,7 +68,7 @@ export class QuietComboboxItem extends QuietElement {
         .trim();
     }
 
-    // Fallback to full textContent if we can't find the slot
+    // Fallback to the full textContent if we can't find the slot
     return this.textContent?.trim() || '';
   }
 
@@ -89,7 +89,7 @@ export class QuietComboboxItem extends QuietElement {
   }
 
   render() {
-    // Check if parent combobox is in multiple mode
+    // Check if the controlling combobox is in multiple mode
     const isMultiple = this.combobox?.multiple ?? false;
 
     return html`

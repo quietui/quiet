@@ -6,7 +6,12 @@ import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { QuietBlurEvent, QuietChangeEvent, QuietFocusEvent, QuietInputEvent } from '../../events/form.js';
-import { QuietCloseEvent, QuietOpenEvent } from '../../events/open-close.js';
+import {
+  QuietBeforeCloseEvent,
+  QuietBeforeOpenEvent,
+  QuietCloseEvent,
+  QuietOpenEvent
+} from '../../events/open-close.js';
 import { QuietSelectEvent } from '../../events/select.js';
 import formControlStyles from '../../styles/form-control.styles.js';
 import hostStyles from '../../styles/host.styles.js';
@@ -38,7 +43,9 @@ import styles from './combobox.styles.js';
  * @event quiet-change - Emitted when the user commits changes to the combobox's value.
  * @event quiet-focus - Emitted when the combobox receives focus.
  * @event quiet-input - Emitted when the combobox receives input.
+ * @event quiet-before-open - Emitted when the dropdown is instructed to open but before it is shown.
  * @event quiet-open - Emitted when the dropdown opens.
+ * @event quiet-before-close - Emitted when the dropdown is instructed to close but before it is hidden.
  * @event quiet-close - Emitted when the dropdown closes.
  * @event quiet-select - Emitted when an item is selected.
  *
@@ -604,6 +611,14 @@ export class QuietCombobox extends QuietFormControlElement {
   private async showDropdown() {
     if (!this.dropdown) return;
 
+    // Dispatch before-open event (cancelable)
+    const beforeOpenEvent = new QuietBeforeOpenEvent();
+    this.dispatchEvent(beforeOpenEvent);
+    if (beforeOpenEvent.defaultPrevented) {
+      this.open = false;
+      return;
+    }
+
     this.dispatchEvent(new QuietOpenEvent());
     this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
 
@@ -619,12 +634,20 @@ export class QuietCombobox extends QuietFormControlElement {
 
     // Set initial active item to first item
     if (this.filteredItems.length > 0) {
-      this.setActiveItem(this.filteredItems[0], false); // Explicitly false - no keyboard nav on initial open
+      this.setActiveItem(this.filteredItems[0], false);
     }
   }
 
   private async hideDropdown() {
     if (!this.dropdown || this.dropdown.hidden) return;
+
+    // Dispatch before-close event (cancelable)
+    const beforeCloseEvent = new QuietBeforeCloseEvent({ source: this });
+    this.dispatchEvent(beforeCloseEvent);
+    if (beforeCloseEvent.defaultPrevented) {
+      this.open = true;
+      return;
+    }
 
     document.removeEventListener('click', this.handleDocumentClick);
     document.removeEventListener('keydown', this.handleDocumentKeyDown);

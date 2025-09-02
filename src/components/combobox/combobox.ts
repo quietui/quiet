@@ -465,6 +465,7 @@ export class QuietCombobox extends QuietFormControlElement {
     this.hadUserInteraction = true;
     this.updateFormValue();
     this.dispatchEvent(new QuietChangeEvent());
+    this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
   }
 
   private deselectItem(item: QuietComboboxItem) {
@@ -487,6 +488,7 @@ export class QuietCombobox extends QuietFormControlElement {
 
     this.updateFormValue();
     this.dispatchEvent(new QuietChangeEvent());
+    this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
   }
 
   private removeTag(item: QuietComboboxItem, event: Event) {
@@ -589,6 +591,7 @@ export class QuietCombobox extends QuietFormControlElement {
     if (!this.dropdown) return;
 
     this.dispatchEvent(new QuietOpenEvent());
+    this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
 
     this.dropdown.hidden = false;
     this.dropdown.showPopover();
@@ -624,6 +627,7 @@ export class QuietCombobox extends QuietFormControlElement {
     }
 
     this.dispatchEvent(new QuietCloseEvent());
+    this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
   }
 
   private positionDropdown() {
@@ -909,6 +913,8 @@ export class QuietCombobox extends QuietFormControlElement {
     this.filterItems('');
     this.updateFormValue();
     this.hadUserInteraction = true;
+    this.dispatchEvent(new QuietInputEvent());
+    this.dispatchEvent(new InputEvent('input', { bubbles: true, composed: true, cancelable: false }));
     this.dispatchEvent(new QuietChangeEvent());
     this.textBox.focus();
   };

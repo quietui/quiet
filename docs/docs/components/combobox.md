@@ -3,7 +3,7 @@ title: Combobox
 layout: component
 ---
 
-Comboboxes follow the [ARIA APG combobox pattern](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/) for accessibility. The combobox combines a text input with a dropdown list, allowing users to either type to filter options or select from the list. It supports both single and multiple selection modes.
+Comboboxes implement the [ARIA APG combobox pattern](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/) for roles and keyboard navigation, with enhanced screen reader announcements via ARIA live regions for improved context while navigating options.
 
 ```html {.example}
 <quiet-combobox

@@ -21,26 +21,73 @@ export default css`
     &:has(.tag):not(.has-start) {
       padding-inline-start: 0.25em;
     }
-  }
 
-  /* Appearance styles */
-  #visual-box.normal {
-    border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
-    border-radius: var(--quiet-border-radius-md);
-    background-color: var(--quiet-paper-color);
-    color: var(--quiet-text-body);
-  }
+    /* Appearance styles */
+    &.normal {
+      border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-soft);
+      border-radius: var(--quiet-border-radius-md);
+      background-color: var(--quiet-paper-color);
+      color: var(--quiet-text-body);
+    }
 
-  #visual-box.filled {
-    border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-fill-softer);
-    border-radius: var(--quiet-border-radius-md);
-    background-color: var(--quiet-neutral-fill-softer);
-  }
+    &.filled {
+      border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-fill-softer);
+      border-radius: var(--quiet-border-radius-md);
+      background-color: var(--quiet-neutral-fill-softer);
+    }
 
-  #visual-box.unstyled {
-    padding: 0;
-    border: none;
-    background: none;
+    &.unstyled {
+      padding: 0;
+      border: none;
+      background: none;
+    }
+
+    /* Disabled state */
+    #visual-box.disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    /* Pill modifier */
+    &.pill {
+      padding: 0 1.25em;
+      border-radius: 1.4em; /* fake a pill shape so when it wraps, tags still fit */
+
+      .tag {
+        border-radius: var(--quiet-border-radius-pill);
+      }
+    }
+
+    /* Sizes */
+    &.xs {
+      min-height: calc(var(--quiet-form-control-height-xs) - 0.5em);
+      padding-block: 0.25em;
+      font-size: var(--quiet-form-control-font-size-xs);
+    }
+
+    &.sm {
+      min-height: calc(var(--quiet-form-control-height-sm) - 0.5em);
+      padding-block: 0.25em;
+      font-size: var(--quiet-form-control-font-size-sm);
+    }
+
+    &.md {
+      min-height: calc(var(--quiet-form-control-height-md));
+      padding-block: 0.25em;
+      font-size: var(--quiet-form-control-font-size-md);
+    }
+
+    &.lg {
+      min-height: calc(var(--quiet-form-control-height-lg) - 0.5em);
+      padding-block: 0.25em;
+      font-size: var(--quiet-form-control-font-size-lg);
+    }
+
+    &.xl {
+      min-height: calc(var(--quiet-form-control-height-xl) - 0.5em);
+      padding-block: 0.25em;
+      font-size: var(--quiet-form-control-font-size-xl);
+    }
   }
 
   /* Focus styles */
@@ -49,54 +96,8 @@ export default css`
     outline-offset: calc(-1 * var(--quiet-border-width));
   }
 
-  /* Disabled state */
-  #visual-box.disabled {
-    cursor: not-allowed;
-    opacity: 0.5;
-  }
-
-  /* Pill modifier */
-  #visual-box.pill {
-    padding: 0 1.25em;
-    border-radius: 1.4em; /* fake a pill shape so when it wraps, tags still fit */
-
-    .tag {
-      border-radius: var(--quiet-border-radius-pill);
-    }
-  }
-
-  #visual-box.xs {
-    min-height: calc(var(--quiet-form-control-height-xs) - 0.5em);
-    padding-block: 0.25em;
-    font-size: var(--quiet-form-control-font-size-xs);
-  }
-
-  #visual-box.sm {
-    min-height: calc(var(--quiet-form-control-height-sm) - 0.5em);
-    padding-block: 0.25em;
-    font-size: var(--quiet-form-control-font-size-sm);
-  }
-
-  #visual-box.md {
-    min-height: calc(var(--quiet-form-control-height-md));
-    padding-block: 0.25em;
-    font-size: var(--quiet-form-control-font-size-md);
-  }
-
-  #visual-box.lg {
-    min-height: calc(var(--quiet-form-control-height-lg) - 0.5em);
-    padding-block: 0.25em;
-    font-size: var(--quiet-form-control-font-size-lg);
-  }
-
-  #visual-box.xl {
-    min-height: calc(var(--quiet-form-control-height-xl) - 0.5em);
-    padding-block: 0.25em;
-    font-size: var(--quiet-form-control-font-size-xl);
-  }
-
   /* Input area - single flex container for all content */
-  .input-area {
+  #input-area {
     display: flex;
     flex: 1 1 auto;
     flex-wrap: wrap;
@@ -159,6 +160,16 @@ export default css`
     color: var(--quiet-text-body);
     font: inherit;
     cursor: inherit;
+
+    &:focus {
+      outline: none;
+    }
+
+    &::placeholder {
+      color: var(--quiet-form-control-placeholder-color);
+      user-select: none;
+      -webkit-user-select: none;
+    }
   }
 
   #visual-box.xs {
@@ -204,16 +215,6 @@ export default css`
     margin-inline: 0.5em;
   }
 
-  #text-box:focus {
-    outline: none;
-  }
-
-  #text-box::placeholder {
-    color: var(--quiet-form-control-placeholder-color);
-    user-select: none;
-    -webkit-user-select: none;
-  }
-
   /* Multiple select mode - dynamic width with constraints */
   #visual-box.multiple #text-box {
     flex: 1 1 var(--input-min-width);
@@ -231,24 +232,24 @@ export default css`
   #visual-box.has-clear {
     position: relative;
     padding-inline-end: 2.5em;
-  }
 
-  #visual-box.has-clear #clear-button {
-    position: absolute;
-    top: 50%;
-    right: 0.25em;
-    transform: translateY(-50%);
+    #clear-button {
+      position: absolute;
+      top: 50%;
+      right: 0.25em;
+      transform: translateY(-50%);
+    }
   }
 
   /* RTL support for clear button */
   :host(:dir(rtl)) #visual-box.has-clear {
     padding-inline-start: 2.5em;
     padding-inline-end: 0.75em;
-  }
 
-  :host(:dir(rtl)) #visual-box.has-clear #clear-button {
-    right: auto;
-    left: 0.25em;
+    #clear-button {
+      right: auto;
+      left: 0.25em;
+    }
   }
 
   /* Clear button styles */
@@ -267,10 +268,10 @@ export default css`
     font-size: 1.25em;
     cursor: pointer;
     transition: 100ms translate ease;
-  }
 
-  .text-box-button:active {
-    translate: 0 1px;
+    &:active {
+      translate: 0 1px;
+    }
   }
 
   /* Start and end slot styles */
@@ -309,24 +310,23 @@ export default css`
     border-radius: var(--quiet-border-radius-md);
     background-color: var(--quiet-paper-color);
     box-shadow: var(--quiet-shadow-mid);
-  }
 
-  /* Popover API overrides */
-  #dropdown[popover] {
-    margin: 0;
-    inset: auto;
-    padding: 0.25em;
-    overflow: visible;
-    border-radius: var(--quiet-border-radius-md);
-  }
+    /* Popover API overrides */
+    &[popover] {
+      margin: 0;
+      inset: auto;
+      padding: 0.25em;
+      overflow: visible;
+      border-radius: var(--quiet-border-radius-md);
+    }
 
-  /* Dropdown animations */
-  #dropdown.show {
-    animation: show var(--show-duration) ease;
-  }
+    &.show {
+      animation: show var(--show-duration) ease;
+    }
 
-  #dropdown.hide {
-    animation: show var(--show-duration) ease reverse;
+    &.hide {
+      animation: show var(--show-duration) ease reverse;
+    }
   }
 
   /* Placement origins */

@@ -54,12 +54,12 @@ export default css`
     transition:
       opacity 150ms ease,
       visibility 150ms ease;
-  }
 
-  /* Show checkmark when selected (works for both single and multiple mode) */
-  .checkmark.selected {
-    visibility: visible;
-    opacity: 1;
+    /* Show checkmark when selected (works for both single and multiple mode) */
+    &.selected {
+      visibility: visible;
+      opacity: 1;
+    }
   }
 
   /* RTL support */
@@ -89,7 +89,7 @@ export default css`
     white-space: nowrap;
   }
 
-  /* Details slot */
+  /* Details */
   .details {
     display: flex;
     flex: 0 0 auto;
@@ -105,9 +105,7 @@ export default css`
     opacity: 0.8;
   }
 
-  /* Multiple mode specific styles - using attribute selector on host */
-  /* When the parent combobox has multiple attribute, items get different hover/active colors */
-  /* We detect this via the multiple class presence */
+  /* Multiple mode */
   :host(:has(.multiple)):hover:not(:state(disabled)):not(:state(selected)) {
     background-color: var(--quiet-neutral-fill-soft);
     color: var(--quiet-neutral-text-on-soft);

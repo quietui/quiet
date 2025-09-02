@@ -1026,7 +1026,7 @@ export class QuietCombobox extends QuietFormControlElement {
       >
         <slot name="start"></slot>
 
-        <div class="input-area">
+        <div id="input-area">
           ${this.multiple
             ? this.selectedItems.map(
                 item => html`

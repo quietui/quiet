@@ -77,8 +77,8 @@ export class QuietCombobox extends QuietFormControlElement {
     return this.textBox;
   }
 
-  @query('#text-box') private textBox: HTMLInputElement;
   @query('#dropdown') private dropdown: HTMLDivElement;
+  @query('#text-box') private textBox: HTMLInputElement;
 
   @state() open = false;
   @state() inputValue = '';
@@ -200,6 +200,19 @@ export class QuietCombobox extends QuietFormControlElement {
     if (changedProperties.has('inputValue')) {
       this.updateInputWidth();
     }
+  }
+
+  formDisabledCallback(disabled: boolean) {
+    this.disabled = disabled;
+  }
+
+  formResetCallback() {
+    this.value = this.multiple ? [] : '';
+    this.selectedItems = [];
+    this.inputValue = '';
+    this.hadUserInteraction = false;
+    this.wasSubmitted = false;
+    this.isInvalid = false;
   }
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -631,7 +644,7 @@ export class QuietCombobox extends QuietFormControlElement {
     this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
   }
 
-  private positionDropdown() {
+  private async positionDropdown() {
     const visualBox = this.shadowRoot?.querySelector('#visual-box') as HTMLElement;
     if (!visualBox) return;
 
@@ -703,19 +716,6 @@ export class QuietCombobox extends QuietFormControlElement {
     this.internals.setValidity(flags, message, this.focusableAnchor);
   }
 
-  formDisabledCallback(disabled: boolean) {
-    this.disabled = disabled;
-  }
-
-  formResetCallback() {
-    this.value = this.multiple ? [] : '';
-    this.selectedItems = [];
-    this.inputValue = '';
-    this.hadUserInteraction = false;
-    this.wasSubmitted = false;
-    this.isInvalid = false;
-  }
-
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // UI Helper Methods
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -782,7 +782,7 @@ export class QuietCombobox extends QuietFormControlElement {
     }
   };
 
-  private handleInputClick = (event: MouseEvent) => {
+  private handleInputClick = (event: PointerEvent) => {
     // Prevent the click from closing the dropdown via document handler
     event.stopPropagation();
 
@@ -866,7 +866,7 @@ export class QuietCombobox extends QuietFormControlElement {
     }
   };
 
-  private handleDocumentClick = (event: MouseEvent) => {
+  private handleDocumentClick = (event: PointerEvent) => {
     const path = event.composedPath();
     const visualBox = this.shadowRoot?.querySelector('#visual-box');
     const dropdown = this.dropdown;
@@ -883,7 +883,7 @@ export class QuietCombobox extends QuietFormControlElement {
     }
   };
 
-  private handleVisualBoxClick = (event: MouseEvent) => {
+  private handleVisualBoxClick = (event: PointerEvent) => {
     // Don't do anything if disabled
     if (this.disabled) return;
 
@@ -924,14 +924,14 @@ export class QuietCombobox extends QuietFormControlElement {
     this.updateItems();
   };
 
-  private handleItemClick = (event: MouseEvent) => {
+  private handleItemClick = (event: PointerEvent) => {
     const item = (event.target as Element).closest('quiet-combobox-item') as QuietComboboxItem;
     if (item && !item.disabled) {
       this.selectItem(item);
     }
   };
 
-  private handleItemMouseMove = (event: MouseEvent) => {
+  private handleItemPointerMove = (event: PointerEvent) => {
     // Only process if we're hovering over an actual item
     const hoveredItem = (event.target as Element).closest('quiet-combobox-item') as QuietComboboxItem;
 
@@ -945,8 +945,8 @@ export class QuietCombobox extends QuietFormControlElement {
         this.activeItem.removeAttribute('data-keyboard-nav');
       }
 
-      // Don't set the hovered item as active - let CSS :hover handle the styling
-      // This prevents interference between keyboard and mouse navigation
+      // We don't set the hovered item as active, let CSS `:hover` handle the styling to prevent interference between
+      // keyboard and mouse navigation
     }
   };
 
@@ -1031,7 +1031,7 @@ export class QuietCombobox extends QuietFormControlElement {
           ${this.multiple
             ? this.selectedItems.map(
                 item => html`
-                  <span part="tag" class="tag" @mousedown=${(event: Event) => event.preventDefault()}>
+                  <span part="tag" class="tag" @pointerdown=${(event: Event) => event.preventDefault()}>
                     ${this.getTagContent(item)}
                     <button
                       part="tag-remove"
@@ -1100,8 +1100,8 @@ export class QuietCombobox extends QuietFormControlElement {
         popover="manual"
         hidden
         @click=${this.handleItemClick}
-        @mousedown=${(event: MouseEvent) => event.preventDefault()}
-        @mousemove=${this.handleItemMouseMove}
+        @pointerdown=${(event: PointerEvent) => event.preventDefault()}
+        @pointermove=${this.handleItemPointerMove}
       >
         <slot @slotchange=${this.handleSlotChange}></slot>
       </div>

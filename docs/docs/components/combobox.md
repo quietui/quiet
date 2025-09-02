@@ -9,17 +9,17 @@ Comboboxes implement the [ARIA APG combobox pattern](https://www.w3.org/WAI/ARIA
 <quiet-combobox
   label="Select a cat breed"
   description="Type to search or select from the list"
-  placeholder="Search breeds..."
+  placeholder="Search breeds"
   with-clear
 >
   <quiet-combobox-item value="persian">Persian</quiet-combobox-item>
-  <quiet-combobox-item value="maine-coon">Maine Coon</quiet-combobox-item>
   <quiet-combobox-item value="siamese">Siamese</quiet-combobox-item>
+  <quiet-combobox-item value="tabby">Tabby</quiet-combobox-item>
   <quiet-combobox-item value="ragdoll">Ragdoll</quiet-combobox-item>
-  <quiet-combobox-item value="british-shorthair">British Shorthair</quiet-combobox-item>
   <quiet-combobox-item value="bengal">Bengal</quiet-combobox-item>
   <quiet-combobox-item value="sphynx">Sphynx</quiet-combobox-item>
-  <quiet-combobox-item value="scottish-fold">Scottish Fold</quiet-combobox-item>
+  <quiet-combobox-item value="calico">Calico</quiet-combobox-item>
+  <quiet-combobox-item value="russian">Russian Blue</quiet-combobox-item>
 </quiet-combobox>
 ```
 
@@ -30,8 +30,8 @@ Comboboxes implement the [ARIA APG combobox pattern](https://www.w3.org/WAI/ARIA
 You can use the `label` and `description` attributes to provide plain text labels and descriptions for the combobox. If you want to provide HTML, use the `label` and `description` slots instead.
 
 ```html {.example}
-<quiet-combobox placeholder="Type to search...">
-  <span slot="label">Choose Your <strong>Purrfect</strong> Companion</span>
+<quiet-combobox placeholder="Type to search">
+  <span slot="label">Choose your <strong>purrfect</strong> companion</span>
   <span slot="description">
     Browse our available cats or <a href="https://example.com/" target="_blank">schedule a visit</a>.
   </span>
@@ -46,7 +46,7 @@ You can use the `label` and `description` attributes to provide plain text label
 Create combobox options by adding `<quiet-combobox-item>` elements inside the combobox. Each item should have a `value` attribute that will be submitted with the form. If no value is provided, the text content is used.
 
 ```html {.example}
-<quiet-combobox label="Cat Personalities" placeholder="Search personalities...">
+<quiet-combobox label="Cat personalities" placeholder="Search personalities">
   <quiet-combobox-item value="playful">Playful and Energetic</quiet-combobox-item>
   <quiet-combobox-item value="cuddly">Cuddly Lap Cat</quiet-combobox-item>
   <quiet-combobox-item value="independent">Independent Spirit</quiet-combobox-item>
@@ -58,7 +58,7 @@ Create combobox options by adding `<quiet-combobox-item>` elements inside the co
 Combobox items can have structured content with icons and details.
 
 ```html {.example}
-<quiet-combobox label="Adoption Status" placeholder="Filter by status..." id="combobox__structured">
+<quiet-combobox label="Adoption status" placeholder="Filter by status" id="combobox__structured">
   <quiet-combobox-item value="available">
     <quiet-icon slot="icon" name="circle-check" variant="constructive"></quiet-icon>
     <span>Available Now</span>
@@ -99,7 +99,7 @@ Avoid placing interactive elements such as buttons and links inside the combobox
 Add the `selected` attribute to the combobox item you want to select initially. When using `multiple`, you can apply `selected` to more than one option.
 
 ```html {.example}
-<quiet-combobox label="Preferred Feeding Time" placeholder="Select time...">
+<quiet-combobox label="Preferred feeding time" placeholder="Select a time">
   <quiet-combobox-item value="morning">Morning (6-9 AM)</quiet-combobox-item>
   <quiet-combobox-item value="noon" selected>Noon (11 AM-1 PM)</quiet-combobox-item>
   <quiet-combobox-item value="evening">Evening (5-7 PM)</quiet-combobox-item>
@@ -129,8 +129,8 @@ The combobox automatically filters items as you type. Items that don't match the
 
 ```html {.example}
 <quiet-combobox 
-  label="Find Your Cat Name" 
-  placeholder="Try typing 'wh' or 'mit'..."
+  label="Find your cat name" 
+  placeholder="Try typing 'wh' or 'mi'"
   with-clear
 >
   <quiet-combobox-item value="whiskers">Whiskers</quiet-combobox-item>
@@ -148,7 +148,7 @@ The combobox automatically filters items as you type. Items that don't match the
 Add the `disabled` attribute to individual combobox items to make them non-selectable. Disabled items will still appear in search results but cannot be selected.
 
 ```html {.example}
-<quiet-combobox label="Veterinary Services" placeholder="Select service...">
+<quiet-combobox label="Veterinary services" placeholder="Select service">
   <quiet-combobox-item value="checkup">Annual Checkup</quiet-combobox-item>
   <quiet-combobox-item value="vaccination">Vaccination</quiet-combobox-item>
   <quiet-combobox-item value="spay-neuter" disabled>Spay/Neuter (Fully booked)</quiet-combobox-item>
@@ -163,9 +163,9 @@ Use the `multiple` attribute to enable multi-selection mode. Selected items appe
 
 ```html {.example}
 <quiet-combobox
-  label="Cat Behaviors"
+  label="Cat behaviors"
   description="Select all behaviors your cat exhibits"
-  placeholder="Search behaviors..."
+  placeholder="Search behaviors"
   multiple
   with-clear
 >
@@ -239,9 +239,9 @@ Use the `size` attribute to change the combobox's size. Available sizes are `xs`
 
 <quiet-combobox 
   size="md" 
-  label="Cat Coat Pattern"
+  label="Cat coat pattern"
   description="Size changes dynamically based on selection above"
-  placeholder="Search patterns..."
+  placeholder="Search patterns"
   id="combobox__size"
   with-clear
 >
@@ -269,8 +269,8 @@ Add the `pill` attribute to give the combobox rounded edges.
 
 ```html {.example}
 <quiet-combobox 
-  label="Quick Search"
-  placeholder="Find a kitty..."
+  label="Quick search"
+  placeholder="Find a kitty"
   pill
   with-clear
 >
@@ -288,7 +288,7 @@ Add the `with-clear` attribute to show a clear button when the combobox has a va
 ```html {.example}
 <quiet-combobox 
   label="With clear button"
-  placeholder="Select and then clear..."
+  placeholder="Select and then clear"
   with-clear
 >
   <quiet-combobox-item value="yes" selected>Yes, I want treats!</quiet-combobox-item>
@@ -304,7 +304,7 @@ Use the `placement` attribute to control where the dropdown appears relative to 
 ```html {.example}
 <quiet-combobox 
   label="Dropdown opens above"
-  placeholder="Select an option..."
+  placeholder="Select an option"
   placement="top"
   style="margin-top: 200px;"
 >
@@ -320,9 +320,9 @@ Add the `disabled` attribute to disable the entire combobox.
 
 ```html {.example}
 <quiet-combobox 
-  label="Grooming Services" 
+  label="Grooming services" 
   description="Currently unavailable"
-  placeholder="Service selection disabled..."
+  placeholder="Service selection disabled"
   disabled
 >
   <quiet-combobox-item value="bath">Bath & Blow-dry</quiet-combobox-item>
@@ -340,9 +340,9 @@ With the [`quiet-side-label`](/docs/css-utilities/#side-labels) utility, you can
   class="quiet-side-label"
   style="--label-width: 12ch;"
   name="age" 
-  label="Cat's Age" 
+  label="Cat's age" 
   description="How old is your cat?"
-  placeholder="Select age range..."
+  placeholder="Select age range"
 >
   <quiet-combobox-item value="kitten">Kitten (0-1 year)</quiet-combobox-item>
   <quiet-combobox-item value="young">Young (1-3 years)</quiet-combobox-item>
@@ -354,9 +354,9 @@ With the [`quiet-side-label`](/docs/css-utilities/#side-labels) utility, you can
   class="quiet-side-label"
   style="--label-width: 12ch;"
   name="activity" 
-  label="Activity Level" 
+  label="Activity level" 
   description="How active is your cat?"
-  placeholder="Select activity..."
+  placeholder="Select activity"
 >
   <quiet-combobox-item value="low">Couch Potato</quiet-combobox-item>
   <quiet-combobox-item value="moderate">Moderately Active</quiet-combobox-item>
@@ -372,8 +372,8 @@ The `required` attribute can be used to enable validation using the [Constraint 
 <form action="about:blank" method="get" target="_blank">
   <quiet-combobox 
     name="emergency-contact" 
-    label="Emergency Vet Contact" 
-    placeholder="Select a veterinarian..."
+    label="Emergency vet contact" 
+    placeholder="Select a veterinarian"
     required
   >
     <quiet-combobox-item value="dr-smith">Dr. Smith - City Animal Hospital</quiet-combobox-item>
@@ -394,9 +394,9 @@ Use the `setCustomValidity()` method to make the combobox invalid and show a cus
 <form action="about:blank" method="get" target="_blank" id="combobox__custom-validation">
   <quiet-combobox 
     name="special-diet"
-    label="Special Dietary Needs"
+    label="Special dietary needs"
     description="This field demonstrates custom validation"
-    placeholder="Select diet..."
+    placeholder="Select diet"
   >
     <quiet-combobox-item value="regular">Regular Diet</quiet-combobox-item>
     <quiet-combobox-item value="grain-free">Grain-Free</quiet-combobox-item>
@@ -433,7 +433,7 @@ You can style valid and invalid comboboxes using the `:valid` and `:invalid` pse
     name="chip-id"
     label="Microchip ID"
     description="Required for registration"
-    placeholder="Enter or select chip ID..."
+    placeholder="Enter or select chip ID"
     required
   >
     <quiet-combobox-item value="chip-12345">CHIP-12345</quiet-combobox-item>
@@ -466,9 +466,9 @@ However, these selectors will match even before the user has had a chance to int
 <form action="about:blank" method="get" target="_blank" class="combobox__validation-custom">
   <quiet-combobox 
     name="insurance"
-    label="Pet Insurance Provider"
+    label="Pet insurance provider"
     description="Select your insurance company"
-    placeholder="Search providers..."
+    placeholder="Search providers"
     required
   >
     <quiet-combobox-item value="healthy-paws">Healthy Paws</quiet-combobox-item>
@@ -501,17 +501,17 @@ However, these selectors will match even before the user has had a chance to int
 Use the `start` and `end` slots to add presentational icons or text. Avoid interactive elements such as buttons, links, etc. Works well with [`<quiet-icon>`](/docs/components/icon) and `<svg>` elements.
 
 ```html {.example}
-<quiet-combobox name="breed" label="Cat Breed" with-clear>
+<quiet-combobox name="breed" label="Cat breed" with-clear>
   <quiet-icon slot="start" name="cat"></quiet-icon>
   <quiet-combobox-item value="persian">Persian</quiet-combobox-item>
-  <quiet-combobox-item value="maine-coon">Maine Coon</quiet-combobox-item>
   <quiet-combobox-item value="siamese">Siamese</quiet-combobox-item>
+  <quiet-combobox-item value="tabby">Tabby</quiet-combobox-item>
   <quiet-combobox-item value="ragdoll">Ragdoll</quiet-combobox-item>
 </quiet-combobox>
 
 <br>
 
-<quiet-combobox name="toy" label="Cat Toy" placeholder="Choose a toy" with-clear>
+<quiet-combobox name="toy" label="Cat toy" placeholder="Choose a toy" with-clear>
   <quiet-icon slot="end" name="gift"></quiet-icon>
   <quiet-combobox-item value="feather-wand">Feather Wand</quiet-combobox-item>
   <quiet-combobox-item value="laser-pointer">Laser Pointer</quiet-combobox-item>
@@ -521,7 +521,7 @@ Use the `start` and `end` slots to add presentational icons or text. Avoid inter
 
 <br>
 
-<quiet-combobox name="vet-visit" label="Visit Type" multiple with-clear>
+<quiet-combobox name="vet-visit" label="Visit type" multiple with-clear>
   <quiet-icon slot="start" name="cat"></quiet-icon>
   <quiet-icon slot="end" name="clipboard-heart"></quiet-icon>
   <quiet-combobox-item value="checkup">Annual Checkup</quiet-combobox-item>
@@ -537,8 +537,8 @@ Comboboxes can be rendered with pill-shaped edges by adding the `pill` attribute
 
 ```html {.example}
 <quiet-combobox 
-  label="Cat's Favorite Treat"
-  placeholder="Choose a treat..."
+  label="Cat's favorite treat"
+  placeholder="Choose a treat"
   pill
   with-clear
 >
@@ -554,7 +554,7 @@ When using `multiple`, tags become pill-shaped and the combobox may grow to wrap
 
 ```html {.example}
 <quiet-combobox 
-  label="Cat's Daily Activities"
+  label="Cat's daily activities"
   description="Select all that apply"
   placeholder="What does your cat enjoy?"
   pill

@@ -1149,3 +1149,7 @@ declare global {
     'quiet-combobox': QuietCombobox;
   }
 }
+
+// Due to the parent/child relationship between combobox and combobox items, some updates can only be scheduled as a
+// side effect of the previous update. This disables Lit's dev warning about it.
+QuietCombobox.disableWarning?.('change-in-update');

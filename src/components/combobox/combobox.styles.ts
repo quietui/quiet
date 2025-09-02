@@ -2,8 +2,7 @@ import { css } from 'lit';
 
 export default css`
   :host {
-    --dropdown-max-height: 300px;
-    --input-min-width: 12ch;
+    --text-box-min-width: 12ch;
     --show-duration: 50ms;
   }
 
@@ -217,9 +216,9 @@ export default css`
 
   /* Multiple select mode - dynamic width with constraints */
   #visual-box.multiple #text-box {
-    flex: 1 1 var(--input-min-width);
+    flex: 1 1 var(--text-box-min-width);
     width: auto;
-    min-width: var(--input-min-width);
+    min-width: var(--text-box-min-width);
   }
 
   /* When tags wrap to multiple lines, let input take full width of new line */

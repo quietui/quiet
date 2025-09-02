@@ -45,7 +45,6 @@ import styles from './combobox.styles.js';
  * @csspart label - The element that contains the combobox's label.
  * @csspart description - The element that contains the combobox's description.
  * @csspart visual-box - The element that wraps the internal text box.
- * @csspart tags - The container for tags in multiple mode.
  * @csspart tag - Individual tag elements.
  * @csspart tag-remove - The remove button for tags.
  * @csspart text-box - The internal text box, an `<input>` element.
@@ -59,6 +58,8 @@ import styles from './combobox.styles.js';
  * @cssstate user-valid - Applied when valid after user interaction.
  * @cssstate user-invalid - Applied when invalid after user interaction.
  *
+ * @cssproperty [--text-box-min-width=12ch] - The minimum width of the input field when shown next to tags. Only
+ *  available in `multiple` mode.
  * @cssproperty [--show-duration=50ms] - The duration of the show/hide animation for the dropdown.
  */
 @customElement('quiet-combobox')

@@ -1,6 +1,6 @@
 import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import hostStyles from '../../styles/host.styles.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
@@ -35,8 +35,7 @@ export class QuietComboboxItem extends QuietElement {
   static observeSlots = true;
   static styles: CSSResultGroup = [hostStyles, styles];
 
-  /** @internal Reference to the parent combobox */
-  @property({ attribute: false }) public combobox: QuietCombobox | null = null;
+  @query('slot:not([name])') defaultSlot: HTMLSlotElement;
 
   /** The value to submit when this item is selected. If not provided, the text content is used. */
   @property() value: string;
@@ -50,6 +49,9 @@ export class QuietComboboxItem extends QuietElement {
   /** @internal Whether the item is currently active (keyboard navigation). */
   @property({ type: Boolean, reflect: true }) active = false;
 
+  /** @internal Reference to the parent combobox */
+  @property({ attribute: false }) public combobox: QuietCombobox | null = null;
+
   connectedCallback() {
     super.connectedCallback();
     this.setAttribute('role', 'option');
@@ -58,11 +60,8 @@ export class QuietComboboxItem extends QuietElement {
 
   /** Gets the label text content only (excluding icon and details) */
   getLabelText(): string {
-    // Get the default slot (not named slots like icon or details)
-    const slot = this.shadowRoot?.querySelector('slot:not([name])') as HTMLSlotElement;
-
-    if (slot) {
-      const nodes = slot.assignedNodes({ flatten: true });
+    if (this.defaultSlot) {
+      const nodes = this.defaultSlot.assignedNodes({ flatten: true });
       return nodes
         .map(node => node.textContent || '')
         .join('')

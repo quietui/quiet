@@ -190,10 +190,14 @@ export class QuietCombobox extends QuietFormControlElement {
       this.customStates.set('disabled', this.disabled);
     }
 
-    // Handle validation states
+    // Handle user interactions. When the form control's value has changed and lost focus (e.g. change event), we can
+    // show user-valid and user-invalid states. We also show it if the form has been submitted.
     if (this.hadUserInteraction || this.wasSubmitted) {
       this.customStates.set('user-invalid', this.isInvalid);
       this.customStates.set('user-valid', !this.isInvalid);
+    } else {
+      this.customStates.set('user-invalid', false);
+      this.customStates.set('user-valid', false);
     }
 
     // Handle multiple mode changes

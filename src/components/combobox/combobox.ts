@@ -574,15 +574,14 @@ export class QuietCombobox extends QuietFormControlElement {
       announcement += ', disabled';
     }
 
-    // Debounce navigation announcements to avoid queueing
-    // This waits a short time to see if user is still navigating
+    // Debounce navigation announcements to avoid queueing. This waits a short time to see if user is still navigating.
     this.navigationDebounceId = setTimeout(() => {
       // Clear and then announce to ensure screen reader picks it up
       this.liveAnnouncement = '';
       requestAnimationFrame(() => {
         this.liveAnnouncement = announcement;
       });
-    }, 75); // 75ms delay - adjust if needed
+    }, 75);
   }
 
   private announceFilterResults(count: number) {

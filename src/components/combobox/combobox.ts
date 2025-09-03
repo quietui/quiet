@@ -15,6 +15,7 @@ import {
 import formControlStyles from '../../styles/form-control.styles.js';
 import hostStyles from '../../styles/host.styles.js';
 import { animateWithClass } from '../../utilities/animate.js';
+import { Localize } from '../../utilities/localize.js';
 import { QuietFormControlElement } from '../../utilities/quiet-element.js';
 import '../combobox-item/combobox-item.js';
 import type { QuietComboboxItem } from '../combobox-item/combobox-item.js';
@@ -77,6 +78,7 @@ export class QuietCombobox extends QuietFormControlElement {
   private cleanup: ReturnType<typeof autoUpdate> | undefined;
   private optionIdCounter = 0;
   private liveRegionTimeoutId: ReturnType<typeof setTimeout> | undefined;
+  private localize = new Localize(this);
   private navigationDebounceId: ReturnType<typeof setTimeout> | undefined;
 
   protected get focusableAnchor() {
@@ -484,7 +486,7 @@ export class QuietCombobox extends QuietFormControlElement {
         this.filterItems('', true);
 
         // Announce selection
-        this.announceChange(`${item.textContent} added`);
+        this.announceChange(this.localize.term('itemAdded', item.textContent || ''));
       }
       this.textBox.focus();
     } else {
@@ -497,7 +499,7 @@ export class QuietCombobox extends QuietFormControlElement {
       this.open = false;
 
       // Announce selection
-      this.announceChange(`${item.textContent} selected`);
+      this.announceChange(this.localize.term('itemSelected', item.textContent || ''));
     }
 
     this.hadUserInteraction = true;
@@ -518,7 +520,7 @@ export class QuietCombobox extends QuietFormControlElement {
       this.value = values;
 
       // Announce deselection
-      this.announceChange(`${item.textContent} removed`);
+      this.announceChange(this.localize.term('itemRemoved', item.textContent || ''));
     } else {
       this.value = '';
       this.inputValue = '';
@@ -578,17 +580,17 @@ export class QuietCombobox extends QuietFormControlElement {
 
     // Add position information
     if (total > 0) {
-      announcement += `, ${position} of ${total}`;
+      announcement += `, ${this.localize.term('numberOfTotal', position, total)}`;
     }
 
     // Add selected state if applicable
     if (item.selected) {
-      announcement += ', selected';
+      announcement += `, ${this.localize.term('selected')}`;
     }
 
     // Add disabled state if applicable
     if (item.disabled) {
-      announcement += ', disabled';
+      announcement += `, ${this.localize.term('disabled')}`;
     }
 
     // Debounce navigation announcements to avoid queueing. This waits a short time to see if user is still navigating.
@@ -606,7 +608,8 @@ export class QuietCombobox extends QuietFormControlElement {
       clearTimeout(this.liveRegionTimeoutId);
     }
 
-    const announcement = count === 0 ? 'No results found' : `${count} result${count === 1 ? '' : 's'} available`;
+    const announcement =
+      count === 0 ? this.localize.term('noResultsFound') : this.localize.term('resultsAvailable', count);
 
     // Use requestAnimationFrame to ensure the DOM updates
     requestAnimationFrame(() => {
@@ -751,7 +754,7 @@ export class QuietCombobox extends QuietFormControlElement {
     }
 
     this.isInvalid = Object.values(flags).some(Boolean);
-    const message = customError || (flags.valueMissing ? 'Please select an option' : '');
+    const message = customError || (flags.valueMissing ? this.localize.term('pleaseSelectAnOption') : '');
     this.internals.setValidity(flags, message, this.focusableAnchor);
   }
 
@@ -1041,8 +1044,8 @@ export class QuietCombobox extends QuietFormControlElement {
 
       <!-- Screen reader instructions -->
       <div id="combobox-instructions" class="vh">
-        Use arrow keys to navigate options. Press Enter to select.
-        ${this.multiple ? 'Multiple selections allowed.' : ''}
+        ${this.localize.term('useArrowKeysToNavigateEnterToSelect')}
+        ${this.multiple ? this.localize.term('multipleSelectionsAllowed') : ''}
       </div>
 
       <div
@@ -1079,7 +1082,7 @@ export class QuietCombobox extends QuietFormControlElement {
                       class="tag-remove"
                       type="button"
                       tabindex="-1"
-                      aria-label="Remove ${item.textContent}"
+                      aria-label="${this.localize.term('removeItem', item.textContent || '')}"
                       @click=${(event: Event) => this.removeTag(item, event)}
                     >
                       <quiet-icon library="system" name="x"></quiet-icon>
@@ -1121,7 +1124,7 @@ export class QuietCombobox extends QuietFormControlElement {
                 class="text-box-button"
                 type="button"
                 tabindex="-1"
-                aria-label="Clear"
+                aria-label="${this.localize.term('clearEntry')}"
                 @click=${this.handleClear}
               >
                 <quiet-icon library="system" name="circle-x"></quiet-icon>

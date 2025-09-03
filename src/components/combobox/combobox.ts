@@ -55,6 +55,8 @@ import styles from './combobox.styles.js';
  * @csspart tag - Individual tag elements.
  * @csspart tag-remove - The remove button for tags.
  * @csspart text-box - The internal text box, an `<input>` element.
+ * @csspart chevron - The chevron icon, a `<quiet-icon>` element.
+ * @csspart chevron__svg - The chevron icon's `<svg>` part.
  * @csspart clear-button - The clear button.
  * @csspart dropdown - The dropdown container.
  *
@@ -1133,6 +1135,14 @@ export class QuietCombobox extends QuietFormControlElement {
           : ''}
 
         <slot name="end"></slot>
+
+        <quiet-icon
+          id="chevron"
+          part="chevron"
+          exportparts="svg:chevron__svg"
+          library="system"
+          name="selector"
+        ></quiet-icon>
       </div>
 
       <div

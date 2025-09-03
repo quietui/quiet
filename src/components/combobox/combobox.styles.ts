@@ -227,19 +227,6 @@ export default css`
     flex: 1 1 100%;
   }
 
-  /* Clear button positioning - absolute like text-field */
-  #visual-box.has-clear {
-    position: relative;
-    padding-inline-end: 2.5em;
-
-    #clear-button {
-      position: absolute;
-      top: 50%;
-      right: 0.25em;
-      transform: translateY(-50%);
-    }
-  }
-
   /* RTL support for clear button */
   :host(:dir(rtl)) #visual-box.has-clear {
     padding-inline-start: 2.5em;
@@ -289,6 +276,11 @@ export default css`
   slot[name='end']::slotted(svg) {
     width: 1.25em;
     height: 1.25em;
+    pointer-events: none;
+  }
+
+  #chevron {
+    font-size: 1.25em;
     pointer-events: none;
   }
 

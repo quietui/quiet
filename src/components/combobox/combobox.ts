@@ -12,7 +12,6 @@ import {
   QuietCloseEvent,
   QuietOpenEvent
 } from '../../events/open-close.js';
-import { QuietSelectEvent } from '../../events/select.js';
 import formControlStyles from '../../styles/form-control.styles.js';
 import hostStyles from '../../styles/host.styles.js';
 import { animateWithClass } from '../../utilities/animate.js';
@@ -47,11 +46,11 @@ import styles from './combobox.styles.js';
  * @event quiet-open - Emitted when the dropdown opens.
  * @event quiet-before-close - Emitted when the dropdown is instructed to close but before it is hidden.
  * @event quiet-close - Emitted when the dropdown closes.
- * @event quiet-select - Emitted when an item is selected.
  *
  * @csspart label - The element that contains the combobox's label.
  * @csspart description - The element that contains the combobox's description.
  * @csspart visual-box - The element that wraps the internal text box.
+ * @csspart input-area - The wrapper surrounding tags and the internal text box.
  * @csspart tag - Individual tag elements.
  * @csspart tag-remove - The remove button for tags.
  * @csspart text-box - The internal text box, an `<input>` element.
@@ -468,11 +467,6 @@ export class QuietCombobox extends QuietFormControlElement {
 
   private selectItem(item: QuietComboboxItem) {
     if (item.disabled) return;
-
-    const selectEvent = new QuietSelectEvent({ item });
-    this.dispatchEvent(selectEvent);
-
-    if (selectEvent.defaultPrevented) return;
 
     if (this.multiple) {
       // Toggle selection in multiple mode
@@ -1075,7 +1069,7 @@ export class QuietCombobox extends QuietFormControlElement {
       >
         <slot name="start"></slot>
 
-        <div id="input-area">
+        <div id="input-area" part="input-area">
           ${this.multiple
             ? this.selectedItems.map(
                 item => html`

@@ -44,7 +44,7 @@ export class QuietComboboxItem extends QuietElement {
   @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** @internal Whether the item is currently selected. */
-  @property({ type: Boolean, reflect: true }) selected = false;
+  @property({ type: Boolean }) selected = false;
 
   /** @internal Whether the item is currently active (keyboard navigation). */
   @property({ type: Boolean, reflect: true }) active = false;

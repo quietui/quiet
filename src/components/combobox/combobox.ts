@@ -999,12 +999,15 @@ export class QuietCombobox extends QuietFormControlElement {
     this.wasSubmitted = true;
   };
 
-  /** Custom function for rendering tag content */
+  /**
+   * A custom function for rendering tag content. By default, this function returns the item's full `textContent`. You
+   * can override it to customize the content that gets rendered in tags in `multiple` mode.
+   */
   public getTagContent(item: QuietComboboxItem): TemplateResult {
     return html`${item.textContent}`;
   }
 
-  /** Sets focus on the combobox. */
+  /** Sets focus to the combobox. */
   public focus() {
     this.textBox?.focus();
   }

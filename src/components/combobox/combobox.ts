@@ -935,8 +935,7 @@ export class QuietCombobox extends QuietFormControlElement {
     // Prevent this click from immediately closing via document handler
     event.stopPropagation();
 
-    // If already focused, just toggle the dropdown
-    // If not focused, the focus event will handle opening
+    // If already focused, just toggle the dropdown. If not focused, the focus event will handle opening.
     if (this.customStates.has('focused')) {
       this.open = !this.open;
     }
@@ -1040,7 +1039,7 @@ export class QuietCombobox extends QuietFormControlElement {
         <slot name="description">${this.description}</slot>
       </div>
 
-      <!-- Screen reader only instructions -->
+      <!-- Screen reader instructions -->
       <div id="combobox-instructions" class="vh">
         Use arrow keys to navigate options. Press Enter to select.
         ${this.multiple ? 'Multiple selections allowed.' : ''}
@@ -1148,7 +1147,6 @@ export class QuietCombobox extends QuietFormControlElement {
         <slot @slotchange=${this.handleSlotChange}></slot>
       </div>
 
-      <!-- ARIA Live Region for announcements -->
       <div
         id="live-region"
         class="vh"

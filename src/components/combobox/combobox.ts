@@ -218,12 +218,31 @@ export class QuietCombobox extends QuietFormControlElement {
   }
 
   formResetCallback() {
-    this.value = this.multiple ? [] : '';
-    this.selectedItems = [];
-    this.inputValue = '';
+    const initiallySelectedItems = this.getItems(true).filter(item => item.hasAttribute('selected'));
+
+    // Reset all item selections
+    this.getItems(true).forEach(item => {
+      item.selected = initiallySelectedItems.includes(item);
+    });
+
+    if (this.multiple) {
+      // In multiple mode, set the value to an array of selected values
+      this.value = initiallySelectedItems.map(item => item.value || item.textContent || '');
+      this.selectedItems = initiallySelectedItems;
+    } else {
+      // In single mode, use the first selected item
+      this.value =
+        initiallySelectedItems.length > 0
+          ? initiallySelectedItems[0].value || initiallySelectedItems[0].textContent || ''
+          : '';
+      this.selectedItems = initiallySelectedItems.length > 0 ? [initiallySelectedItems[0]] : [];
+      this.inputValue = initiallySelectedItems.length > 0 ? initiallySelectedItems[0].getLabelText() : '';
+    }
+
     this.hadUserInteraction = false;
     this.wasSubmitted = false;
     this.isInvalid = false;
+    this.updateFormValue();
   }
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

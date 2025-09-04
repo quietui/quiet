@@ -165,7 +165,7 @@ Set the `swatches` attribute to one or more space-delimited hex colors or CSS co
 
 ### Showing labels on the side
 
-With the [`quiet-side-label`](/docs/css-utilities/#side-labels) utility, you can show labels on the side instead of on top of the color input. You can control the width of the label by setting the `--label-width` custom property.
+With the [`quiet-side-label`](/docs/css-utilities/#showing-labels-on-the-side) utility, you can show labels on the side instead of on top of the color input. You can control the width of the label by setting the `--label-width` custom property.
 
 ```html {.example}
 <quiet-color-input

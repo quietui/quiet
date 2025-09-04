@@ -353,7 +353,7 @@ Add the `disabled` attribute to individual combobox items to make them non-selec
 
 ### Showing labels on the side
 
-With the [`quiet-side-label`](/docs/css-utilities/#side-labels) utility, you can show labels on the side instead of on top of the combobox. You can control the width of the label by setting the `--label-width` custom property.
+With the [`quiet-side-label`](/docs/css-utilities/#showing-labels-on-the-side) utility, you can show labels on the side instead of on top of the combobox. You can control the width of the label by setting the `--label-width` custom property.
 
 ```html {.example}
 <quiet-combobox

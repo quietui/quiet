@@ -491,10 +491,10 @@ However, these selectors will match even before the user has had a chance to int
     placeholder="Search providers"
     required
   >
-    <quiet-combobox-item value="healthy-paws">Healthy Paws</quiet-combobox-item>
-    <quiet-combobox-item value="petplan">Petplan</quiet-combobox-item>
-    <quiet-combobox-item value="embrace">Embrace</quiet-combobox-item>
-    <quiet-combobox-item value="trupanion">Trupanion</quiet-combobox-item>
+    <quiet-combobox-item value="pawguard-plus">PawGuard Plus</quiet-combobox-item>
+    <quiet-combobox-item value="furry-shield">Furry Shield</quiet-combobox-item>
+    <quiet-combobox-item value="petcare-prime">PetCare Prime</quiet-combobox-item>
+    <quiet-combobox-item value="whiskers-wellness">Whiskers Wellness</quiet-combobox-item>
   </quiet-combobox>
   <br>
   <quiet-button type="submit" variant="primary">Submit</quiet-button>

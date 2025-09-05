@@ -831,6 +831,9 @@ quiet-badge.experimental {
 }
 
 .docs-aside a {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
   color: inherit;
   font-weight: inherit;
   text-decoration: none;

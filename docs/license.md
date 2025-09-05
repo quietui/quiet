@@ -41,7 +41,7 @@ Quiet UI is source-available and completely free of charge for personal, educati
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Private Discord access</li>
     </ul>
     <quiet-button variant="primary" pill href="/purchase">
-      Purchase &middot; $199
+      Purchase &middot; $299
     </quiet-button>
   </div>
 
@@ -58,7 +58,7 @@ Quiet UI is source-available and completely free of charge for personal, educati
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Private Discord access</li>
     </ul>
     <quiet-button class="button-unlimited" pill href="/purchase">
-      Purchase &middot; $799
+      Purchase &middot; $999
     </quiet-button>
   </div>  
 </div>

@@ -117,7 +117,7 @@ export class QuietColorPicker extends QuietElement {
   @property({ reflect: true }) size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' = 'md';
 
   /**
-   * One or more space-delimited hex colors or CSS color names, e.g. `lightblue`, to show as preset swatches below the
+   * One or more semicolon-delimited colors (any valid CSS color format or name) to show as preset swatches below the
    * color picker.
    */
   @property() swatches = '';
@@ -524,7 +524,11 @@ export class QuietColorPicker extends QuietElement {
     const colorWithoutAlpha = new TinyColor({ h: this.h, s: this.s, v: this.v, a: 1 });
     const hueColor = new TinyColor({ h: this.h, s: 1, v: 1, a: 1 });
     const alphaColor = `color-mix(in oklab, var(--quiet-silent), ${currentColor.toHexString()} ${this.a * 100}%);`;
-    const swatches = this.swatches.split(' ').filter(val => val.trim() !== '');
+    // Parse swatches: split by semicolon, trim whitespace, and filter out empty values
+    const swatches = this.swatches
+      .split(';')
+      .map(val => val.trim())
+      .filter(val => val !== '');
     const luminosityText = this.localize.term('percentLuminosity', this.localize.number(this.v, { style: 'percent' }));
     const saturationText = this.localize.term('percentSaturation', this.localize.number(this.s, { style: 'percent' }));
     let valueText = '';

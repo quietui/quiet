@@ -116,7 +116,7 @@ export class QuietColorInput extends QuietFormControlElement {
   @property() format: 'hex' | 'rgb' | 'hsl' = 'hex';
 
   /**
-   * One or more space-delimited hex colors or CSS color names, e.g. `lightblue`, to show as preset swatches below the
+   * One or more semicolon-delimited colors (any valid CSS color format or name) to show as preset swatches below the
    * color picker.
    */
   @property() swatches = '';

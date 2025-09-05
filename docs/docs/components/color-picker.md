@@ -11,10 +11,10 @@ layout: component
   with-alpha
   with-eye-dropper
   swatches="
-    #09090b #71717a #ef4444 #f97316 
-    #f59e0b #eab308 #84cc16 #22c55e 
-    #10b981 #14b8a6 #06b6d4 #3b82f6 
-    #6366f1 #a855f7 #d946ef #ec4899
+    #09090b; #71717a; #ef4444; #f97316; 
+    #f59e0b; #eab308; #84cc16; #22c55e; 
+    #10b981; #14b8a6; #06b6d4; #3b82f6; 
+    #6366f1; #a855f7; #d946ef; #ec4899
   "
 ></quiet-color-picker>
 ```
@@ -86,16 +86,31 @@ Add the `with-input` attribute to show the color input, a text field the user ca
 
 ### Showing swatches
 
-Set the `swatches` attribute to one or more space-delimited hex colors or CSS color names, e.g. `lightblue`, to show as preset swatches below the color picker. This is useful for providing users with access to recent colors or a predefined color palette.
+Set the `swatches` attribute to one or more semicolon-delimited colors to show as preset swatches below the color picker. You can use any valid CSS color format including hex colors, RGB, HSL, named colors, and more. This is useful for providing users with access to recent colors or a predefined color palette.
 
 ```html {.example}
 <quiet-color-picker
   label="Select a color"
   swatches="
-    #09090b #71717a #ef4444 #f97316 
-    #f59e0b #eab308 #84cc16 #22c55e 
-    #10b981 #14b8a6 #06b6d4 #3b82f6 
-    #6366f1 #a855f7 #d946ef #ec4899
+    #09090b; #71717a; #ef4444; #f97316; 
+    #f59e0b; #eab308; #84cc16; #22c55e; 
+    #10b981; #14b8a6; #06b6d4; #3b82f6; 
+    #6366f1; #a855f7; #d946ef; #ec4899
+  "
+></quiet-color-picker>
+```
+
+You can also use any CSS color format in the swatches:
+
+```html {.example}
+<quiet-color-picker
+  label="Select a color"
+  swatches="
+    rgb(255 0 0); 
+    hsl(120, 100%, 50%); 
+    rgb(0 0 255 / 0.5); 
+    lightblue; 
+    #ff00ff
   "
 ></quiet-color-picker>
 ```
@@ -172,11 +187,11 @@ Use the `size` attribute to change the color pickers's size.
 <quiet-color-picker 
   size="xs" 
   label="Color picker sizes"
-    swatches="
-    #09090b #71717a #ef4444 #f97316 
-    #f59e0b #eab308 #84cc16 #22c55e 
-    #10b981 #14b8a6 #06b6d4 #3b82f6 
-    #6366f1 #a855f7 #d946ef #ec4899
+  swatches="
+    #09090b; #71717a; #ef4444; #f97316; 
+    #f59e0b; #eab308; #84cc16; #22c55e; 
+    #10b981; #14b8a6; #06b6d4; #3b82f6; 
+    #6366f1; #a855f7; #d946ef; #ec4899
   "
   with-input
   with-alpha
@@ -207,10 +222,10 @@ To disable a color picker, add the `disabled` attribute.
   with-input
   with-eye-dropper
   swatches="
-    #09090b #71717a #ef4444 #f97316 
-    #f59e0b #eab308 #84cc16 #22c55e 
-    #10b981 #14b8a6 #06b6d4 #3b82f6 
-    #6366f1 #a855f7 #d946ef #ec4899  
+    #09090b; #71717a; #ef4444; #f97316; 
+    #f59e0b; #eab308; #84cc16; #22c55e; 
+    #10b981; #14b8a6; #06b6d4; #3b82f6; 
+    #6366f1; #a855f7; #d946ef; #ec4899  
   "
 ></quiet-color-picker>
 ```

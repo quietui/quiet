@@ -85,7 +85,8 @@ export class QuietSlider extends QuietFormControlElement {
   @query('#thumb-max') thumbMax: HTMLElement;
   @query('#track') track: HTMLElement;
   @query('#tooltip') tooltip: QuietTooltip;
-  @queryAll('quiet-tooltip') tooltips: NodeListOf<QuietTooltip>;
+  @query('#tooltip-thumb-min') tooltipMin: QuietTooltip;
+  @query('#tooltip-thumb-max') tooltipMax: QuietTooltip;
 
   @state() isInvalid = false;
   @state() hadUserInteraction = false;
@@ -681,19 +682,23 @@ export class QuietSlider extends QuietFormControlElement {
   }
 
   private showRangeTooltips() {
-    if (this.withTooltip) {
-      this.tooltips.forEach(tooltip => {
-        tooltip.open = true;
-      });
+    if (!this.withTooltip) return;
+
+    // Show only the active tooltip, hide the other
+    if (this.activeThumb === 'min') {
+      this.tooltipMin.open = true;
+      this.tooltipMax.open = false;
+    } else if (this.activeThumb === 'max') {
+      this.tooltipMax.open = true;
+      this.tooltipMin.open = false;
     }
   }
 
   private hideRangeTooltips() {
-    if (this.withTooltip) {
-      this.tooltips.forEach(tooltip => {
-        tooltip.open = false;
-      });
-    }
+    if (!this.withTooltip) return;
+
+    this.tooltipMin.open = false;
+    this.tooltipMax.open = false;
   }
 
   /** Updates the form value submission for range sliders */

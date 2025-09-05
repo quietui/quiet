@@ -346,3 +346,7 @@ declare global {
     'quiet-select': QuietSelect;
   }
 }
+
+// The synchronization of options must occur on firstUpdate and is essential for the control to function, so some
+// updates can only be scheduled as a side effect of the previous update. This disables that Lit dev warning about it.
+QuietSelect.disableWarning?.('change-in-update');

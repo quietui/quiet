@@ -9,7 +9,7 @@ export default css`
     display: block;
     position: relative;
     width: 100%;
-    min-height: 200px;
+    min-height: 240px;
     overflow: hidden;
     background-color: var(--quiet-surface-1);
   }

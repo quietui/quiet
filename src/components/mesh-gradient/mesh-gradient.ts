@@ -19,7 +19,9 @@ import styles from './mesh-gradient.styles.js';
  * @part gradient - The gradient container element for styling the gradient layer.
  * @part content - The content container element for styling the content layer.
  *
- * @property {String} tone - Controls the overall tone of the gradient. Options: 'light', 'medium', 'dark', 'vibrant'. Default: 'medium'.
+ * @property {String} color - The base color for the gradient. Accepts any valid CSS color format.
+ * @property {Number} complexity - The number of gradient layers to generate. Default: 4.
+ * @property {Number} seed - Optional seed value for consistent gradient generation.
  *
  * @cssproperty [--gradient-opacity=1] - The opacity of the mesh gradient.
  * @cssproperty [--gradient-saturation=100%] - The saturation of the gradient colors.
@@ -31,31 +33,32 @@ export class QuietMeshGradient extends QuietElement {
 
   private gradientStyle = '';
 
-  /** Controls the overall tone of the gradient. */
-  @property({ type: String }) tone: 'light' | 'medium' | 'dark' | 'vibrant' = 'medium';
-
   /** The number of gradient layers to generate. */
   @property({ type: Number }) complexity = 4;
 
   /**
-   * The base color for the gradient. Accepts any valid CSS color format:
-   * - Hex: '#FF6B6B', '#F6B'
-   * - RGB/RGBA: 'rgb(255, 107, 107)', 'rgba(255, 107, 107, 0.8)'
-   * - HSL/HSLA: 'hsl(0, 100%, 71%)', 'hsla(0, 100%, 71%, 0.8)'
-   * - Named colors: 'tomato', 'dodgerblue', 'firebrick'
-   * - Modern formats: 'oklab(0.7 0.1 0.1)', 'oklch(0.7 0.15 30)'
-   * If not provided, a random color is used.
+   * The base color for the gradient. This can be any color parsable by
+   * [TinyColor](https://www.npmjs.com/package/@ctrl/tinycolor).
    */
-  @property({ attribute: 'base-color' }) baseColor = '';
+  @property() color = '';
 
   /** A seed value for consistent gradient generation. If not provided, the gradient will be random. */
   @property({ type: Number }) seed: number | undefined;
 
-  /**
-   * Extracts the hue value from any CSS color format using TinyColor.
-   * @internal
-   */
-  private colorToHue(color: string): number | undefined {
+  connectedCallback() {
+    super.connectedCallback();
+    this.generateGradient();
+  }
+
+  updated(changedProperties: PropertyValues<this>) {
+    if (changedProperties.has('complexity') || changedProperties.has('color') || changedProperties.has('seed')) {
+      this.generateGradient();
+      this.requestUpdate();
+    }
+  }
+
+  /** Extracts the HSL values from any CSS color format using TinyColor. */
+  private colorToHsl(color: string): { h: number; s: number; l: number } | undefined {
     try {
       const tinyColor = new TinyColor(color);
 
@@ -64,78 +67,81 @@ export class QuietMeshGradient extends QuietElement {
         return undefined;
       }
 
-      // Get HSL representation and return the hue
+      // Get HSL representation and return all values
       const hsl = tinyColor.toHsl();
-      return Math.round(hsl.h);
+      return {
+        h: Math.round(hsl.h),
+        s: Math.round(hsl.s * 100), // Convert to percentage
+        l: Math.round(hsl.l * 100) // Convert to percentage
+      };
     } catch {
       return undefined;
     }
   }
 
-  /**
-   * Generates an array of HSL colors based on color theory.
-   * @internal
-   */
-  /**
-   * Generates an array of HSL colors based on color theory.
-   * @internal
-   */
-  private generateColors(count: number, baseHue: number): string[] {
+  /** Generates an array of HSL colors based on color theory, preserving the base color's characteristics. */
+  private generateColors(count: number, baseHsl: { h: number; s: number; l: number }): string[] {
     const colors: string[] = [];
 
-    // Define lightness ranges for each tone
-    const toneConfigs = {
-      light: {
-        base: 85,
-        analogous: { start: 78, modifier: 1.2 },
-        complementary: { start: 80, modifier: 1.0 }
-      },
-      medium: {
-        base: 74,
-        analogous: { start: 64, modifier: 1.75 },
-        complementary: { start: 66, modifier: 1.25 }
-      },
-      dark: {
-        base: 45,
-        analogous: { start: 35, modifier: 2.0 },
-        complementary: { start: 38, modifier: 1.5 }
-      },
-      vibrant: {
-        base: 60,
-        analogous: { start: 50, modifier: 2.5 },
-        complementary: { start: 55, modifier: 2.0 }
-      }
-    };
+    // Calculate dynamic ranges based on the base color's lightness
+    // Darker colors have less room to go darker, lighter colors have less room to go lighter
+    const lightnessRangeDown = Math.min(30, baseHsl.l - 10); // How much darker we can go
+    const lightnessRangeUp = Math.min(30, 90 - baseHsl.l); // How much lighter we can go
 
-    const config = toneConfigs[this.tone];
+    // Saturation adjustments based on lightness
+    // Very light colors (pastels) work better with lower saturation
+    // Very dark colors also need controlled saturation to avoid muddiness
+    let baseSaturation = baseHsl.s;
+    if (baseHsl.l > 80) {
+      baseSaturation = Math.min(baseSaturation, 60); // Cap saturation for very light colors
+    } else if (baseHsl.l < 30) {
+      baseSaturation = Math.min(baseSaturation, 70); // Cap saturation for very dark colors
+    }
 
     for (let i = 0; i < count; i++) {
       if (i === 0) {
-        // Base color
-        colors.push(`hsl(${baseHue}, 100%, ${config.base}%)`);
+        // Base color - preserve the original color exactly
+        colors.push(`hsl(${baseHsl.h}, ${baseHsl.s}%, ${baseHsl.l}%)`);
       } else if (i < count / 1.4) {
-        // Analogous colors
+        // Analogous colors - slight hue shifts with complementary lightness changes
         const hueShift = 30 * (i % 2 === 0 ? 1 : -1) * Math.ceil(i / 2);
-        const lightness =
-          config.analogous.start - i * (i % 2 === 0 ? config.analogous.modifier : -config.analogous.modifier);
-        colors.push(`hsl(${baseHue + hueShift}, 100%, ${Math.round(lightness)}%)`);
+
+        // Alternate between lighter and darker, staying within calculated ranges
+        const lightnessShift =
+          i % 2 === 0
+            ? lightnessRangeUp * (i / count) // Go lighter
+            : -(lightnessRangeDown * (i / count)); // Go darker
+
+        const lightness = Math.max(10, Math.min(90, baseHsl.l + lightnessShift));
+
+        // Slightly vary saturation for depth
+        const saturationVariance = (Math.random() - 0.5) * 20; // ±10% random variance
+        const saturation = Math.max(20, Math.min(100, baseSaturation + saturationVariance));
+
+        colors.push(
+          `hsl(${(baseHsl.h + hueShift + 360) % 360}, ${Math.round(saturation)}%, ${Math.round(lightness)}%)`
+        );
       } else {
-        // Complementary colors
+        // Complementary colors - larger hue shifts with reduced saturation
         const hueShift = 150 * (i % 2 === 0 ? 1 : -1);
-        const lightness =
-          config.complementary.start -
-          i * (i % 2 === 0 ? config.complementary.modifier : -config.complementary.modifier);
-        colors.push(`hsl(${baseHue + hueShift}, 100%, ${Math.round(lightness)}%)`);
+
+        // Complementary colors work best with moderate lightness
+        const targetLightness = 50 + (baseHsl.l - 50) * 0.5; // Move toward middle
+        const lightness = Math.max(20, Math.min(80, targetLightness + (Math.random() - 0.5) * 20));
+
+        // Reduce saturation for complementary colors to avoid clashing
+        const saturation = Math.max(20, Math.min(80, baseSaturation * 0.7));
+
+        colors.push(
+          `hsl(${(baseHsl.h + hueShift + 360) % 360}, ${Math.round(saturation)}%, ${Math.round(lightness)}%)`
+        );
       }
     }
 
     return colors;
   }
 
-  /**
-   * Calculates gradient positions, either randomly or based on a seed.
-   * @internal
-   */
+  /** Calculates gradient positions, either randomly or based on a seed. */
   private getPosition(index: number, seed?: number): { x: number; y: number } {
     if (seed !== undefined) {
       // Seeded pseudo-random positioning
@@ -153,16 +159,22 @@ export class QuietMeshGradient extends QuietElement {
     };
   }
 
-  /**
-   * Generates the CSS gradient styles.
-   * @internal
-   */
-  private generateGradient(): void {
-    const baseHue = this.baseColor
-      ? (this.colorToHue(this.baseColor) ?? Math.round(Math.random() * 360))
-      : Math.round(Math.random() * 360);
+  /** Generates the CSS gradient styles. */
+  private generateGradient() {
+    // Get full HSL values or generate random ones
+    const baseHsl = this.color
+      ? (this.colorToHsl(this.color) ?? {
+          h: Math.round(Math.random() * 360),
+          s: 70 + Math.round(Math.random() * 30), // Random saturation between 70-100%
+          l: 50 + Math.round(Math.random() * 30) // Random lightness between 50-80%
+        })
+      : {
+          h: Math.round(Math.random() * 360),
+          s: 70 + Math.round(Math.random() * 30),
+          l: 50 + Math.round(Math.random() * 30)
+        };
 
-    const colors = this.generateColors(this.complexity, baseHue);
+    const colors = this.generateColors(this.complexity, baseHsl);
     const gradients: string[] = [];
 
     for (let i = 0; i < this.complexity; i++) {
@@ -176,30 +188,11 @@ export class QuietMeshGradient extends QuietElement {
     `;
   }
 
-  /**
-   * Regenerates the gradient. Useful for creating new random gradients programmatically.
-   */
-  regenerate(): void {
+  /** Regenerates the gradient. Useful for creating new random gradients programmatically. */
+  public regenerate() {
     this.seed = undefined;
     this.generateGradient();
     this.requestUpdate();
-  }
-
-  connectedCallback() {
-    super.connectedCallback();
-    this.generateGradient();
-  }
-
-  updated(changedProperties: PropertyValues<this>) {
-    if (
-      changedProperties.has('complexity') ||
-      changedProperties.has('baseColor') ||
-      changedProperties.has('seed') ||
-      changedProperties.has('tone') // Add this
-    ) {
-      this.generateGradient();
-      this.requestUpdate();
-    }
   }
 
   render() {

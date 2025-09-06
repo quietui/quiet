@@ -3,61 +3,112 @@ title: Mesh Gradient
 layout: component
 ---
 
+TODO - calculate the YIQ and set the `--color` to white or black 
+
 ```html {.example}
-<quiet-mesh-gradient></quiet-mesh-gradient>
+<div id="mesh__overview">
+  <quiet-mesh-gradient 
+    color="#3ad1ff" 
+    complexity="3" 
+    seed="952"
+  ></quiet-mesh-gradient>
+
+  <div class="row">
+    <quiet-color-input 
+      label="Base color"
+      value="#3ad1ff"
+      swatches="
+        #09090b; #71717a; #ef4444; #f97316; 
+        #f59e0b; #eab308; #84cc16; #22c55e; 
+        #10b981; #14b8a6; #06b6d4; #3b82f6; 
+        #6366f1; #a855f7; #d946ef; #ec4899
+      "  
+      with-input
+      with-eye-dropper
+      with-clear
+    ></quiet-color-input>
+
+    <quiet-button>
+      <quiet-icon slot="start" name="reload"></quiet-icon>
+      Random seed
+    </quiet-button>
+  </div>
+
+  <quiet-slider
+    label="Complexity"
+    min="1"
+    max="8"
+    value="3"
+    with-markers
+    with-tooltip
+  ></quiet-slider>
+</div>
+
+<script>
+  const container = document.getElementById('mesh__overview');
+  const meshGradient = container.querySelector('quiet-mesh-gradient');
+  const colorInput = container.querySelector('quiet-color-input');
+  const complexitySlider = container.querySelector('quiet-slider');
+  const seedButton = container.querySelector('quiet-button');
+
+  colorInput.addEventListener('input', () => {
+    meshGradient.color = colorInput.value;
+  });
+
+  complexitySlider.addEventListener('input', () => {
+    meshGradient.complexity = complexitySlider.value;
+  });
+
+  seedButton.addEventListener('click', () => {
+    meshGradient.seed = Math.floor(Math.random() * 1000) + 1;
+  });
+</script>
+
+<style>
+  #mesh__overview {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    quiet-mesh-gradient {
+      height: 300px;
+    }
+
+  .row {
+    display: flex;
+    flex-wrap: normal;
+    gap: 1.5rem;
+    align-items: end;
+  }
+  }
+</style>
 ```
 
 TODO - add a refresh button to regenerate a random one
 
 ## Examples
 
-### Basic Usage
-
-The simplest way to use the mesh gradient is without any properties. It will generate a random gradient each time:
-
-```html {.example}
-<quiet-mesh-gradient></quiet-mesh-gradient>
-```
-
 ### Base Color
 
 Set a specific base color for the gradient using hex format:
 
 ```html {.example .flex-col}
-<quiet-mesh-gradient base-color="red"></quiet-mesh-gradient>
-<quiet-mesh-gradient base-color="green"></quiet-mesh-gradient>
-<quiet-mesh-gradient base-color="blue"></quiet-mesh-gradient>
+<quiet-mesh-gradient color="#ff9797"></quiet-mesh-gradient>
+<quiet-mesh-gradient color="#6ce498"></quiet-mesh-gradient>
+<quiet-mesh-gradient color="#468df8"></quiet-mesh-gradient>
 ```
 
 TODO - add a color input for base color
 
-### Tones
-
-```html {.example .flex-col}
-<!-- Light, airy gradient -->
-<quiet-mesh-gradient tone="light" base-color="#4F46E5"></quiet-mesh-gradient>
-
-<!-- Default medium tone (current behavior) -->
-<quiet-mesh-gradient tone="medium" base-color="#4F46E5"></quiet-mesh-gradient>
-
-<!-- Dark, moody gradient -->
-<quiet-mesh-gradient tone="dark" base-color="#4F46E5"></quiet-mesh-gradient>
-
-<!-- Vibrant, punchy gradient -->
-<quiet-mesh-gradient tone="vibrant" base-color="4F46E5"></quiet-mesh-gradient>
-```
-
-TODO - add a radio to select tone and use a seed
-TODO - can we create a more sensible scale with a more consistent visual result?
 
 ### Custom Complexity
 
 Control the number of gradient layers with the `complexity` property:
 
 ```html {.example .flex-col}
-<quiet-mesh-gradient complexity="2" base-color="#FF6B6B"></quiet-mesh-gradient>
-<quiet-mesh-gradient complexity="6" base-color="#FF6B6B"></quiet-mesh-gradient>
-<quiet-mesh-gradient complexity="8" base-color="#FF6B6B"></quiet-mesh-gradient>
+<quiet-mesh-gradient complexity="2" color="#FF6B6B"></quiet-mesh-gradient>
+<quiet-mesh-gradient complexity="6" color="#FF6B6B"></quiet-mesh-gradient>
+<quiet-mesh-gradient complexity="8" color="#FF6B6B"></quiet-mesh-gradient>
 ```
 
 TODO - add a slider and use a seed for this
@@ -67,8 +118,8 @@ TODO - add a slider and use a seed for this
 Use a seed value for consistent gradient generation:
 
 ```html {.example .flex-col}
-<quiet-mesh-gradient seed="42" base-color="#9B59B6"></quiet-mesh-gradient>
-<quiet-mesh-gradient seed="42" base-color="#9B59B6"></quiet-mesh-gradient>
+<quiet-mesh-gradient seed="42" color="#9B59B6"></quiet-mesh-gradient>
+<quiet-mesh-gradient seed="42" color="#9B59B6"></quiet-mesh-gradient>
 <!-- These two will look identical -->
 ```
 
@@ -77,7 +128,7 @@ Use a seed value for consistent gradient generation:
 Place content over the gradient using the default slot:
 
 ```html {.example}
-<quiet-mesh-gradient base-color="steelblue" tone="dark">
+<quiet-mesh-gradient color="steelblue">
   <h2>Beautiful Mesh Gradient</h2>
   <p>Content displayed over the gradient</p>
 </quiet-mesh-gradient>
@@ -95,7 +146,7 @@ Customize the gradient appearance with CSS properties:
     --gradient-brightness: 100%;
   "
   seed="42"
-  base-color="#2ECC71">
+  color="#2ECC71">
 </quiet-mesh-gradient>
 ```
 
@@ -110,7 +161,7 @@ Use in the media slot for cards:
   <quiet-mesh-gradient 
     slot="media"
     complexity="3" 
-    base-color="#FF6B6B"
+    color="#FF6B6B"
     style="height: 200px;"
   >
     <h3>Card Title</h3>
@@ -131,8 +182,7 @@ Create an eye-catching hero section:
 <quiet-mesh-gradient 
   complexity="3"
   seed="123"
-  base-color="#787cbf"
-  tone="medium"
+  color="#787cbf"
   style="height: 400px;"
 >
   <h1>Welcome to QuietUI</h1>

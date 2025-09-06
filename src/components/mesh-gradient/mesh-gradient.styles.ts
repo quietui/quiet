@@ -45,12 +45,4 @@ export default css`
       animation: none;
     }
   }
-
-  /* Print styles */
-  @media print {
-    .gradient-container {
-      print-color-adjust: exact;
-      -webkit-print-color-adjust: exact;
-    }
-  }
 `;

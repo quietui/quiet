@@ -1,7 +1,7 @@
 import { TinyColor } from '@ctrl/tinycolor';
 import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 import hostStyles from '../../styles/host.styles.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import styles from './mesh-gradient.styles.js';
@@ -32,11 +32,12 @@ import styles from './mesh-gradient.styles.js';
 export class QuietMeshGradient extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
-  private contentStyle = '';
-  private gradientStyle = '';
-  private currentBaseColor = '';
   private observer?: MutationObserver;
   private rafId?: number;
+
+  @state() private contentStyle = '';
+  @state() private gradientStyle = '';
+  @state() private currentBaseColor = '';
 
   /** The number of gradient layers to generate. */
   @property({ type: Number }) complexity = 4;
@@ -87,7 +88,6 @@ export class QuietMeshGradient extends QuietElement {
       const baseColor = this.getBaseColor();
       this.currentBaseColor = baseColor || '';
       this.generateGradient(baseColor);
-      this.requestUpdate();
     }
   }
 
@@ -102,7 +102,6 @@ export class QuietMeshGradient extends QuietElement {
 
     this.rafId = requestAnimationFrame(() => {
       this.detectAndGenerateGradient();
-      this.requestUpdate();
     });
   }
 
@@ -283,7 +282,6 @@ export class QuietMeshGradient extends QuietElement {
   public regenerate() {
     this.seed = undefined;
     this.detectAndGenerateGradient();
-    this.requestUpdate();
   }
 
   render() {

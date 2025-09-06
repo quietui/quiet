@@ -6,7 +6,7 @@ layout: component
 ```html {.example}
 <div id="mesh__overview">
   <quiet-mesh-gradient 
-    style="--gradient-color: #3ad1ff; --gradient-opacity: 0.5"
+    style="--gradient-color: #b8edf1;"
     complexity="5" 
     seed="653"
   >
@@ -17,7 +17,7 @@ layout: component
   <div class="row">
     <quiet-color-input 
       label="Base color"
-      value="#3ad1ff"
+      value="#b8edf1"
       swatches="
         #09090b; #71717a; #ef4444; #f97316; 
         #f59e0b; #eab308; #84cc16; #22c55e; 
@@ -43,15 +43,6 @@ layout: component
     with-markers
     with-tooltip
   ></quiet-slider>
-
-  <quiet-slider
-    label="Opacity"
-    min="0"
-    max="1"
-    step="0.01"
-    value="0.5"
-    with-tooltip
-  ></quiet-slider>
 </div>
 
 <script>
@@ -59,7 +50,6 @@ layout: component
   const meshGradient = container.querySelector('quiet-mesh-gradient');
   const colorInput = container.querySelector('quiet-color-input');
   const complexitySlider = container.querySelector('quiet-slider[label="Complexity"]');
-  const opacitySlider = container.querySelector('quiet-slider[label="Opacity"]');
   const seedButton = container.querySelector('quiet-button');
 
   colorInput.addEventListener('input', () => {
@@ -68,10 +58,6 @@ layout: component
 
   complexitySlider.addEventListener('input', () => {
     meshGradient.complexity = complexitySlider.value;
-  });
-
-  opacitySlider.addEventListener('input', () => {
-    meshGradient.style.setProperty('--gradient-opacity', opacitySlider.value);
   });
 
   seedButton.addEventListener('click', () => {
@@ -165,24 +151,6 @@ Place content over the gradient using the default slot with automatic text color
 </quiet-mesh-gradient>
 ```
 
-### CSS Custom Properties
-
-Customize the gradient appearance with CSS properties:
-
-```html {.example}
-<quiet-mesh-gradient 
-  style="
-    --gradient-color: #2ECC71;
-    --gradient-opacity: 0.8;
-    --gradient-saturation: 50%;
-    --gradient-brightness: 100%;
-    height: 200px;
-  "
-  seed="42">
-  <p>Customized gradient properties</p>
-</quiet-mesh-gradient>
-```
-
 ### Card Backgrounds
 
 Use in the media slot for cards with readable text:
@@ -238,7 +206,3 @@ Create an eye-catching hero section with automatic text contrast:
   <quiet-button pill>Get Started</quiet-button>
 </quiet-mesh-gradient>
 ```
-
-### Opacity, brightness, & saturation
-
-TODO - example with sliders

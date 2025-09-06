@@ -23,10 +23,8 @@ import styles from './mesh-gradient.styles.js';
  * @property {Number} seed - Optional seed value for consistent gradient generation.
  *
  * @cssproperty [--gradient-color] - The base color for the gradient. Accepts any valid CSS color format.
- * @cssproperty [--gradient-opacity=1] - The opacity of the mesh gradient.
- * @cssproperty [--gradient-saturation=100%] - The saturation of the gradient colors.
- * @cssproperty [--gradient-brightness=100%] - The brightness of the gradient colors.
- * @cssproperty [--text-color] - The calculated optimal text color (black or white) based on the gradient's base color.
+ * @cssproperty [--optimal-text-color] - A readonly custom property that maps to the optimal text color (black or white)
+ *  based on the gradient's base color.
  */
 @customElement('quiet-mesh-gradient')
 export class QuietMeshGradient extends QuietElement {
@@ -35,7 +33,6 @@ export class QuietMeshGradient extends QuietElement {
   private observer?: MutationObserver;
   private rafId?: number;
 
-  @state() private contentStyle = '';
   @state() private gradientStyle = '';
   @state() private currentBaseColor = '';
 
@@ -268,13 +265,10 @@ export class QuietMeshGradient extends QuietElement {
       gradients.push(`radial-gradient(at ${x}% ${y}%, ${colors[i]} 0px, transparent 55%)`);
     }
 
+    this.style.setProperty('--optimal-text-color', this.getOptimalTextColor(colors[0]));
     this.gradientStyle = `
       background-color: ${colors[0]};
       background-image: ${gradients.join(', ')};
-    `;
-
-    this.contentStyle = `
-      color: ${this.getOptimalTextColor(colors[0])};
     `;
   }
 
@@ -287,7 +281,7 @@ export class QuietMeshGradient extends QuietElement {
   render() {
     return html`
       <div class="gradient-container" part="gradient" style=${this.gradientStyle}></div>
-      <div class="content" part="content" style=${this.contentStyle}>
+      <div class="content" part="content">
         <slot></slot>
       </div>
     `;

@@ -9,10 +9,6 @@ export default css`
   }
 
   :host {
-    --gradient-opacity: 1;
-    --gradient-saturation: 100%;
-    --gradient-brightness: 100%;
-
     display: flex;
     position: relative;
     align-items: center;
@@ -21,6 +17,7 @@ export default css`
     overflow: hidden;
     outline: none;
     background-color: var(--quiet-surface-1);
+    color: var(--optimal-text-color, inherit);
 
     /* Animation trick to detect CSS variable changes */
     animation: colorChange 1ms;
@@ -31,9 +28,6 @@ export default css`
     width: 100%;
     height: 100%;
     inset: 0;
-    filter: saturate(var(--gradient-saturation)) brightness(var(--gradient-brightness));
-    opacity: var(--gradient-opacity);
-    transition: opacity 0.3s ease;
     will-change: transform;
   }
 

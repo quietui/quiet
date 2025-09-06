@@ -16,11 +16,8 @@ import styles from './mesh-gradient.styles.js';
  *
  * @slot - Content to display over the gradient.
  *
- * @part gradient - The gradient container element for styling the gradient layer.
- * @part content - The content container element for styling the content layer.
- *
- * @property {Number} complexity - The number of gradient layers to generate. Default: 4.
- * @property {Number} seed - Optional seed value for consistent gradient generation.
+ * @csspart gradient - The gradient container element for styling the gradient layer.
+ * @csspart content - The content container element for styling the content layer.
  *
  * @cssproperty [--gradient-color] - The base color for the gradient. Accepts any valid CSS color format.
  * @cssproperty [--optimal-text-color] - A readonly custom property that maps to the optimal text color (black or white)
@@ -41,6 +38,9 @@ export class QuietMeshGradient extends QuietElement {
 
   /** A seed value for consistent gradient generation. If not provided, the gradient will be random. */
   @property({ type: Number }) seed: number | undefined;
+
+  /** Adjusts the brightness of the gradient from -100 (darker) to +100 (lighter). */
+  @property({ type: Number }) brightness = 0;
 
   connectedCallback() {
     super.connectedCallback();
@@ -81,7 +81,7 @@ export class QuietMeshGradient extends QuietElement {
   }
 
   updated(changedProperties: PropertyValues<this>) {
-    if (changedProperties.has('complexity') || changedProperties.has('seed')) {
+    if (changedProperties.has('complexity') || changedProperties.has('seed') || changedProperties.has('brightness')) {
       const baseColor = this.getBaseColor();
       this.currentBaseColor = baseColor || '';
       this.generateGradient(baseColor);
@@ -160,6 +160,27 @@ export class QuietMeshGradient extends QuietElement {
     } catch {
       return undefined;
     }
+  }
+
+  /**
+   * Adjusts the brightness of an HSL color using a hybrid tint/shade approach.
+   * Positive values tint the color (lighten + desaturate), negative values shade it (darken).
+   */
+  private adjustBrightness(hsl: { h: number; s: number; l: number }): { h: number; s: number; l: number } {
+    const amount = this.brightness / 100;
+
+    if (amount > 0) {
+      // Increases lightness and reduces saturation for a more natural brightening
+      const newL = hsl.l + (100 - hsl.l) * amount;
+      const newS = hsl.s * (1 - amount * 0.3);
+      return { ...hsl, l: Math.round(newL), s: Math.round(newS) };
+    } else if (amount < 0) {
+      // Decreases lightness while maintaining saturation for rich darks
+      const newL = hsl.l * (1 + amount);
+      return { ...hsl, l: Math.round(newL) };
+    }
+
+    return hsl;
   }
 
   /** Generates an array of HSL colors based on color theory, preserving the base color's characteristics. */
@@ -245,7 +266,7 @@ export class QuietMeshGradient extends QuietElement {
   /** Generates the CSS gradient styles. */
   private generateGradient(baseColor?: string) {
     // Get full HSL values or generate random ones
-    const baseHsl = baseColor
+    let baseHsl = baseColor
       ? (this.colorToHsl(baseColor) ?? {
           h: Math.round(Math.random() * 360),
           s: 70 + Math.round(Math.random() * 30), // Random saturation between 70-100%
@@ -257,6 +278,9 @@ export class QuietMeshGradient extends QuietElement {
           l: 50 + Math.round(Math.random() * 30)
         };
 
+    // Apply brightness adjustment
+    baseHsl = this.adjustBrightness(baseHsl);
+
     const colors = this.generateColors(this.complexity, baseHsl);
     const gradients: string[] = [];
 
@@ -265,6 +289,7 @@ export class QuietMeshGradient extends QuietElement {
       gradients.push(`radial-gradient(at ${x}% ${y}%, ${colors[i]} 0px, transparent 55%)`);
     }
 
+    // Set optimal text color based on the adjusted base color
     this.style.setProperty('--optimal-text-color', this.getOptimalTextColor(colors[0]));
     this.gradientStyle = `
       background-color: ${colors[0]};

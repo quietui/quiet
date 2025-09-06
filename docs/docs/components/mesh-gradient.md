@@ -6,9 +6,10 @@ layout: component
 ```html {.example}
 <div id="mesh__overview">
   <quiet-mesh-gradient 
-    style="--gradient-color: #b8edf1;"
-    complexity="5" 
-    seed="653"
+    style="--gradient-color: #f97316;"
+    complexity="3" 
+    seed="75"
+    brightness="40"
   >
     <h2>A Purrfect Mesh</h2>
     <p>Text colors automatically adjusts to ensure readability</p>
@@ -17,7 +18,7 @@ layout: component
   <div class="row">
     <quiet-color-input 
       label="Base color"
-      value="#b8edf1"
+      value="#f97316"
       swatches="
         #09090b; #71717a; #ef4444; #f97316; 
         #f59e0b; #eab308; #84cc16; #22c55e; 
@@ -39,8 +40,16 @@ layout: component
     label="Complexity"
     min="1"
     max="8"
-    value="5"
+    value="3"
     with-markers
+    with-tooltip
+  ></quiet-slider>
+
+  <quiet-slider
+    label="Brightness"
+    min="-100"
+    max="100"
+    value="40"
     with-tooltip
   ></quiet-slider>
 </div>
@@ -50,6 +59,7 @@ layout: component
   const meshGradient = container.querySelector('quiet-mesh-gradient');
   const colorInput = container.querySelector('quiet-color-input');
   const complexitySlider = container.querySelector('quiet-slider[label="Complexity"]');
+  const brightnessSlider = container.querySelector('quiet-slider[label="Brightness"]');
   const seedButton = container.querySelector('quiet-button');
 
   colorInput.addEventListener('input', () => {
@@ -58,6 +68,10 @@ layout: component
 
   complexitySlider.addEventListener('input', () => {
     meshGradient.complexity = complexitySlider.value;
+  });
+
+  brightnessSlider.addEventListener('input', () => {
+    meshGradient.brightness = brightnessSlider.value;
   });
 
   seedButton.addEventListener('click', () => {
@@ -104,9 +118,25 @@ Set a specific base color for the gradient using the CSS custom property:
 </quiet-mesh-gradient>
 ```
 
+### Brightness Control
+
+Adjust the brightness from -100 (darker) to +100 (lighter). Positive values create a tinted effect (lighter and slightly desaturated), while negative values create a shaded effect (darker while maintaining richness):
+
+```html {.example .flex-col}
+<quiet-mesh-gradient style="--gradient-color: #3b82f6;" brightness="-50" seed="100">
+  <p>Darker shade (-50)</p>
+</quiet-mesh-gradient>
+<quiet-mesh-gradient style="--gradient-color: #3b82f6;" brightness="0" seed="100">
+  <p>Original color (0)</p>
+</quiet-mesh-gradient>
+<quiet-mesh-gradient style="--gradient-color: #3b82f6;" brightness="50" seed="100">
+  <p>Lighter tint (+50)</p>
+</quiet-mesh-gradient>
+```
+
 ### Automatic Text Color
 
-The component automatically calculates the optimal text color (black or white) based on the gradient's base color:
+The component automatically calculates the optimal text color (black or white) based on the gradient's base color and brightness:
 
 ```html {.example .flex-col}
 <quiet-mesh-gradient class="gradient-demo" style="--gradient-color: #ffd93d;">
@@ -117,6 +147,11 @@ The component automatically calculates the optimal text color (black or white) b
 <quiet-mesh-gradient class="gradient-demo" style="--gradient-color: #1e3a8a;">
   <h3>Dark Background</h3>
   <p>Automatically uses light text</p>
+</quiet-mesh-gradient>
+
+<quiet-mesh-gradient class="gradient-demo" style="--gradient-color: #808080;" brightness="60">
+  <h3>Brightened Gray</h3>
+  <p>Text color adjusts with brightness</p>
 </quiet-mesh-gradient>
 ```
 
@@ -172,6 +207,30 @@ Use in the media slot for cards with readable text:
 </quiet-card>
 ```
 
+### Dramatic Effects with Brightness
+
+Create dramatic light and dark variations of the same color:
+
+```html {.example .flex-col}
+<quiet-mesh-gradient 
+  style="--gradient-color: #ec4899; height: 150px; padding: 2rem;"
+  brightness="-75"
+  seed="200"
+>
+  <h3>Deep Shadow</h3>
+  <p>Rich, vibrant dark variant</p>
+</quiet-mesh-gradient>
+
+<quiet-mesh-gradient 
+  style="--gradient-color: #ec4899; height: 150px; padding: 2rem;"
+  brightness="75"
+  seed="200"
+>
+  <h3>Soft Glow</h3>
+  <p>Light, luminous variant</p>
+</quiet-mesh-gradient>
+```
+
 ### Hero Section
 
 Create an eye-catching hero section with automatic text contrast:
@@ -200,6 +259,7 @@ Create an eye-catching hero section with automatic text contrast:
   complexity="3"
   seed="123"
   style="--gradient-color: #787cbf;"
+  brightness="20"
 >
   <h1>Welcome to QuietUI</h1>
   <p>Beautiful, accessible web components</p>

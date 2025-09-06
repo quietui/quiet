@@ -19,10 +19,10 @@ import styles from './mesh-gradient.styles.js';
  * @part gradient - The gradient container element for styling the gradient layer.
  * @part content - The content container element for styling the content layer.
  *
- * @property {String} color - The base color for the gradient. Accepts any valid CSS color format.
  * @property {Number} complexity - The number of gradient layers to generate. Default: 4.
  * @property {Number} seed - Optional seed value for consistent gradient generation.
  *
+ * @cssproperty [--gradient-color] - The base color for the gradient. Accepts any valid CSS color format.
  * @cssproperty [--gradient-opacity=1] - The opacity of the mesh gradient.
  * @cssproperty [--gradient-saturation=100%] - The saturation of the gradient colors.
  * @cssproperty [--gradient-brightness=100%] - The brightness of the gradient colors.
@@ -34,27 +34,93 @@ export class QuietMeshGradient extends QuietElement {
 
   private contentStyle = '';
   private gradientStyle = '';
+  private currentBaseColor = '';
+  private observer?: MutationObserver;
+  private rafId?: number;
 
   /** The number of gradient layers to generate. */
   @property({ type: Number }) complexity = 4;
 
-  /**
-   * The base color for the gradient. This can be any color parsable by
-   * [TinyColor](https://www.npmjs.com/package/@ctrl/tinycolor).
-   */
-  @property() color = '';
-
   /** A seed value for consistent gradient generation. If not provided, the gradient will be random. */
   @property({ type: Number }) seed: number | undefined;
 
+  connectedCallback() {
+    super.connectedCallback();
+
+    // Set up MutationObserver to watch for style changes
+    this.observer = new MutationObserver(mutations => {
+      const hasStyleChange = mutations.some(
+        mutation => mutation.type === 'attributes' && mutation.attributeName === 'style'
+      );
+
+      if (hasStyleChange) {
+        this.checkForColorChange();
+      }
+    });
+
+    this.observer.observe(this, {
+      attributes: true,
+      attributeFilter: ['style']
+    });
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+
+    if (this.observer) {
+      this.observer.disconnect();
+      this.observer = undefined;
+    }
+
+    if (this.rafId) {
+      cancelAnimationFrame(this.rafId);
+      this.rafId = undefined;
+    }
+  }
+
   firstUpdated() {
-    this.generateGradient();
+    this.detectAndGenerateGradient();
   }
 
   updated(changedProperties: PropertyValues<this>) {
-    if (changedProperties.has('complexity') || changedProperties.has('color') || changedProperties.has('seed')) {
-      this.generateGradient();
+    if (changedProperties.has('complexity') || changedProperties.has('seed')) {
+      const baseColor = this.getBaseColor();
+      this.currentBaseColor = baseColor || '';
+      this.generateGradient(baseColor);
       this.requestUpdate();
+    }
+  }
+
+  /**
+   * Checks if the base color has changed and regenerates if needed. Uses requestAnimationFrame to debounce rapid
+   * changes.
+   */
+  private checkForColorChange() {
+    if (this.rafId) {
+      cancelAnimationFrame(this.rafId);
+    }
+
+    this.rafId = requestAnimationFrame(() => {
+      this.detectAndGenerateGradient();
+      this.requestUpdate();
+    });
+  }
+
+  /** Gets the current value of `--gradient-color` from computed styles. */
+  private getBaseColor(): string | undefined {
+    const computedStyle = getComputedStyle(this);
+    const baseColor = computedStyle.getPropertyValue('--gradient-color').trim();
+    return baseColor || undefined;
+  }
+
+  /** Detects the current base color and regenerates the gradient if needed. */
+  private detectAndGenerateGradient() {
+    const baseColor = this.getBaseColor();
+
+    // Only regenerate if the color actually changed or this is the first generation
+    if (baseColor !== this.currentBaseColor || !this.gradientStyle) {
+      this.currentBaseColor = baseColor || '';
+      this.generateGradient(baseColor);
     }
   }
 
@@ -71,9 +137,7 @@ export class QuietMeshGradient extends QuietElement {
         return 'black'; // Default to black for invalid colors
       }
 
-      // TinyColor has built-in methods for this
-      // isLight() uses the YIQ equation to determine if a color is light
-      // We could also use getLuminance() for WCAG compliance
+      // TinyColor's built-in method `isLight()` uses the YIQ equation
       return tinyColor.isLight() ? 'black' : 'white';
     } catch {
       return 'black'; // Default to black on error
@@ -183,10 +247,10 @@ export class QuietMeshGradient extends QuietElement {
   }
 
   /** Generates the CSS gradient styles. */
-  private generateGradient() {
+  private generateGradient(baseColor?: string) {
     // Get full HSL values or generate random ones
-    const baseHsl = this.color
-      ? (this.colorToHsl(this.color) ?? {
+    const baseHsl = baseColor
+      ? (this.colorToHsl(baseColor) ?? {
           h: Math.round(Math.random() * 360),
           s: 70 + Math.round(Math.random() * 30), // Random saturation between 70-100%
           l: 50 + Math.round(Math.random() * 30) // Random lightness between 50-80%
@@ -218,7 +282,7 @@ export class QuietMeshGradient extends QuietElement {
   /** Regenerates the gradient. Useful for creating new random gradients programmatically. */
   public regenerate() {
     this.seed = undefined;
-    this.generateGradient();
+    this.detectAndGenerateGradient();
     this.requestUpdate();
   }
 

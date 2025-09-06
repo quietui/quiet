@@ -6,10 +6,9 @@ layout: component
 ```html {.example}
 <div id="mesh__overview">
   <quiet-mesh-gradient 
-    color="#3ad1ff" 
+    style="--gradient-color: #3ad1ff; --gradient-opacity: 0.5"
     complexity="5" 
     seed="653"
-    style="--gradient-opacity: 0.5"
   >
     <h2>A Purrfect Mesh</h2>
     <p>Text colors automatically adjusts to ensure readability</p>
@@ -64,7 +63,7 @@ layout: component
   const seedButton = container.querySelector('quiet-button');
 
   colorInput.addEventListener('input', () => {
-    meshGradient.color = colorInput.value;
+    meshGradient.style.setProperty('--gradient-color', colorInput.value);
   });
 
   complexitySlider.addEventListener('input', () => {
@@ -105,16 +104,16 @@ layout: component
 
 ### Base Color
 
-Set a specific base color for the gradient using hex format:
+Set a specific base color for the gradient using the CSS custom property:
 
 ```html {.example .flex-col}
-<quiet-mesh-gradient color="#ff9797">
+<quiet-mesh-gradient style="--gradient-color: #ff9797;">
   <p>Light gradient with dark text</p>
 </quiet-mesh-gradient>
-<quiet-mesh-gradient color="#2c3e50">
+<quiet-mesh-gradient style="--gradient-color: #2c3e50;">
   <p>Dark gradient with light text</p>
 </quiet-mesh-gradient>
-<quiet-mesh-gradient color="#468df8">
+<quiet-mesh-gradient style="--gradient-color: #468df8;">
   <p>Medium gradient with optimal contrast</p>
 </quiet-mesh-gradient>
 ```
@@ -124,12 +123,12 @@ Set a specific base color for the gradient using hex format:
 The component automatically calculates the optimal text color (black or white) based on the gradient's base color:
 
 ```html {.example .flex-col}
-<quiet-mesh-gradient class="gradient-demo" color="#ffd93d">
+<quiet-mesh-gradient class="gradient-demo" style="--gradient-color: #ffd93d;">
   <h3>Light Background</h3>
   <p>Automatically uses dark text</p>
 </quiet-mesh-gradient>
 
-<quiet-mesh-gradient class="gradient-demo" color="#1e3a8a">
+<quiet-mesh-gradient class="gradient-demo" style="--gradient-color: #1e3a8a;">
   <h3>Dark Background</h3>
   <p>Automatically uses light text</p>
 </quiet-mesh-gradient>
@@ -140,9 +139,9 @@ The component automatically calculates the optimal text color (black or white) b
 Control the number of gradient layers with the `complexity` property:
 
 ```html {.example .flex-col}
-<quiet-mesh-gradient complexity="2" color="#FF6B6B" seed="100"></quiet-mesh-gradient>
-<quiet-mesh-gradient complexity="6" color="#FF6B6B" seed="100"></quiet-mesh-gradient>
-<quiet-mesh-gradient complexity="8" color="#FF6B6B" seed="100"></quiet-mesh-gradient>
+<quiet-mesh-gradient complexity="2" style="--gradient-color: #FF6B6B;" seed="100"></quiet-mesh-gradient>
+<quiet-mesh-gradient complexity="6" style="--gradient-color: #FF6B6B;" seed="100"></quiet-mesh-gradient>
+<quiet-mesh-gradient complexity="8" style="--gradient-color: #FF6B6B;" seed="100"></quiet-mesh-gradient>
 ```
 
 ### Seeded Gradients
@@ -150,8 +149,8 @@ Control the number of gradient layers with the `complexity` property:
 Use a seed value for consistent gradient generation:
 
 ```html {.example .flex-col}
-<quiet-mesh-gradient seed="42" color="#9B59B6"></quiet-mesh-gradient>
-<quiet-mesh-gradient seed="42" color="#9B59B6"></quiet-mesh-gradient>
+<quiet-mesh-gradient seed="42" style="--gradient-color: #9B59B6;"></quiet-mesh-gradient>
+<quiet-mesh-gradient seed="42" style="--gradient-color: #9B59B6;"></quiet-mesh-gradient>
 <!-- These two will look identical -->
 ```
 
@@ -160,7 +159,7 @@ Use a seed value for consistent gradient generation:
 Place content over the gradient using the default slot with automatic text color:
 
 ```html {.example}
-<quiet-mesh-gradient class="content-example" color="steelblue">
+<quiet-mesh-gradient class="content-example" style="--gradient-color: steelblue;">
   <h2>Beautiful Mesh Gradient</h2>
   <p>Content displayed with optimal text color</p>
 </quiet-mesh-gradient>
@@ -173,13 +172,13 @@ Customize the gradient appearance with CSS properties:
 ```html {.example}
 <quiet-mesh-gradient 
   style="
+    --gradient-color: #2ECC71;
     --gradient-opacity: 0.8;
     --gradient-saturation: 50%;
     --gradient-brightness: 100%;
     height: 200px;
   "
-  seed="42"
-  color="#2ECC71">
+  seed="42">
   <p>Customized gradient properties</p>
 </quiet-mesh-gradient>
 ```
@@ -193,8 +192,7 @@ Use in the media slot for cards with readable text:
   <quiet-mesh-gradient 
     slot="media"
     complexity="3" 
-    color="#FF6B6B"
-    style="height: 200px; padding: 2rem;"
+    style="--gradient-color: #FF6B6B; height: 200px; padding: 2rem;"
   >
     <h3>Card Title</h3>
     <p>This card has a beautiful mesh gradient background with readable text.</p>
@@ -233,10 +231,14 @@ Create an eye-catching hero section with automatic text contrast:
   class="hero-section"
   complexity="3"
   seed="123"
-  color="#787cbf"
+  style="--gradient-color: #787cbf;"
 >
   <h1>Welcome to QuietUI</h1>
   <p>Beautiful, accessible web components</p>
   <quiet-button pill>Get Started</quiet-button>
 </quiet-mesh-gradient>
 ```
+
+### Opacity, brightness, & saturation
+
+TODO - example with sliders

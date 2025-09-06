@@ -26,11 +26,13 @@ import styles from './mesh-gradient.styles.js';
  * @cssproperty [--gradient-opacity=1] - The opacity of the mesh gradient.
  * @cssproperty [--gradient-saturation=100%] - The saturation of the gradient colors.
  * @cssproperty [--gradient-brightness=100%] - The brightness of the gradient colors.
+ * @cssproperty [--text-color] - The calculated optimal text color (black or white) based on the gradient's base color.
  */
 @customElement('quiet-mesh-gradient')
 export class QuietMeshGradient extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
+  private contentStyle = '';
   private gradientStyle = '';
 
   /** The number of gradient layers to generate. */
@@ -45,8 +47,7 @@ export class QuietMeshGradient extends QuietElement {
   /** A seed value for consistent gradient generation. If not provided, the gradient will be random. */
   @property({ type: Number }) seed: number | undefined;
 
-  connectedCallback() {
-    super.connectedCallback();
+  firstUpdated() {
     this.generateGradient();
   }
 
@@ -54,6 +55,28 @@ export class QuietMeshGradient extends QuietElement {
     if (changedProperties.has('complexity') || changedProperties.has('color') || changedProperties.has('seed')) {
       this.generateGradient();
       this.requestUpdate();
+    }
+  }
+
+  /**
+   * Determines the optimal text color (black or white) based on the background color.
+   * Uses TinyColor's luminance calculation to determine if the color is light or dark.
+   */
+  private getOptimalTextColor(color: string): 'black' | 'white' {
+    try {
+      const tinyColor = new TinyColor(color);
+
+      // Check if the color is valid
+      if (!tinyColor.isValid) {
+        return 'black'; // Default to black for invalid colors
+      }
+
+      // TinyColor has built-in methods for this
+      // isLight() uses the YIQ equation to determine if a color is light
+      // We could also use getLuminance() for WCAG compliance
+      return tinyColor.isLight() ? 'black' : 'white';
+    } catch {
+      return 'black'; // Default to black on error
     }
   }
 
@@ -186,6 +209,10 @@ export class QuietMeshGradient extends QuietElement {
       background-color: ${colors[0]};
       background-image: ${gradients.join(', ')};
     `;
+
+    this.contentStyle = `
+      color: ${this.getOptimalTextColor(colors[0])};
+    `;
   }
 
   /** Regenerates the gradient. Useful for creating new random gradients programmatically. */
@@ -198,7 +225,7 @@ export class QuietMeshGradient extends QuietElement {
   render() {
     return html`
       <div class="gradient-container" part="gradient" style=${this.gradientStyle}></div>
-      <div class="content" part="content">
+      <div class="content" part="content" style=${this.contentStyle}>
         <slot></slot>
       </div>
     `;

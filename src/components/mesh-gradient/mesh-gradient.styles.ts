@@ -6,10 +6,11 @@ export default css`
     --gradient-saturation: 100%;
     --gradient-brightness: 100%;
 
-    display: block;
+    display: flex;
     position: relative;
+    align-items: center;
     width: 100%;
-    min-height: 240px;
+    min-height: 200px;
     overflow: hidden;
     background-color: var(--quiet-surface-1);
   }
@@ -26,23 +27,10 @@ export default css`
   }
 
   .content {
-    display: flex;
+    box-sizing: border-box;
     z-index: 1;
     position: relative;
-    align-items: center;
-    justify-content: center;
     width: 100%;
-    height: 100%;
-    min-height: inherit;
-  }
-
-  slot:not([name]) {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
     text-align: center;
   }
 

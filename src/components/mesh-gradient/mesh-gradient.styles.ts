@@ -2,6 +2,8 @@ import { css } from 'lit';
 
 export default css`
   :host {
+    --gradient-color: ; /* empty generates a random hue */
+
     display: flex;
     position: relative;
     align-items: center;

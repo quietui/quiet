@@ -6,6 +6,8 @@ import hostStyles from '../../styles/host.styles.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import styles from './mesh-gradient.styles.js';
 
+type HSL = { h: number; s: number; l: number };
+
 /**
  * <quiet-mesh-gradient>
  *
@@ -79,81 +81,74 @@ export class QuietMeshGradient extends QuietElement {
     }
   }
 
-  /**
-   * Determines the optimal text color (black or white) based on the background color.
-   * Uses TinyColor's luminance calculation to determine if the color is light or dark.
-   */
+  /** Determines the optimal text color (black or white) based on the background color. */
   private getOptimalTextColor(color: string): 'black' | 'white' {
-    try {
-      const tinyColor = new TinyColor(color);
-
-      // Check if the color is valid
-      if (!tinyColor.isValid) {
-        return 'black'; // Default to black for invalid colors
-      }
-
-      // TinyColor's built-in method `isLight()` uses the YIQ equation
-      return tinyColor.isLight() ? 'black' : 'white';
-    } catch {
-      return 'black'; // Default to black on error
-    }
+    const tinyColor = new TinyColor(color);
+    return tinyColor.isValid && tinyColor.isLight() ? 'black' : 'white';
   }
 
   /** Extracts the HSL values from any CSS color format using TinyColor. */
-  private colorToHsl(color: string): { h: number; s: number; l: number } | undefined {
-    try {
-      const tinyColor = new TinyColor(color);
+  private colorToHsl(color: string): HSL | undefined {
+    const tinyColor = new TinyColor(color);
+    if (!tinyColor.isValid) return undefined;
 
-      // Check if the color is valid
-      if (!tinyColor.isValid) {
-        return undefined;
-      }
+    const hsl = tinyColor.toHsl();
+    return {
+      h: Math.round(hsl.h),
+      s: Math.round(hsl.s * 100), // Convert to percentage
+      l: Math.round(hsl.l * 100) // Convert to percentage
+    };
+  }
 
-      // Get HSL representation and return all values
-      const hsl = tinyColor.toHsl();
-      return {
-        h: Math.round(hsl.h),
-        s: Math.round(hsl.s * 100), // Convert to percentage
-        l: Math.round(hsl.l * 100) // Convert to percentage
-      };
-    } catch {
-      return undefined;
-    }
+  /** Creates a random HSL color for when no base color is provided. */
+  private randomHsl(): HSL {
+    return {
+      h: Math.round(Math.random() * 360),
+      s: 70 + Math.round(Math.random() * 30), // 70-100%
+      l: 50 + Math.round(Math.random() * 30) // 50-80%
+    };
   }
 
   /**
-   * Adjusts the brightness of an HSL color using a hybrid tint/shade approach.
-   * Positive values tint the color (lighten + desaturate), negative values shade it (darken).
+   * Adjusts the brightness of an HSL color using a hybrid tint/shade approach. Positive values tint the color
+   * (lighten + desaturate) and negative values shade it (darken only).
    */
-  private adjustBrightness(hsl: { h: number; s: number; l: number }): { h: number; s: number; l: number } {
+  private adjustBrightness(hsl: HSL): HSL {
     const amount = this.brightness / 100;
+
+    if (amount === 0) return hsl;
 
     if (amount > 0) {
       // Increases lightness and reduces saturation for a more natural brightening
-      const newL = hsl.l + (100 - hsl.l) * amount;
-      const newS = hsl.s * (1 - amount * 0.3);
-      return { ...hsl, l: Math.round(newL), s: Math.round(newS) };
-    } else if (amount < 0) {
-      // Decreases lightness while maintaining saturation for rich darks
-      const newL = hsl.l * (1 + amount);
-      return { ...hsl, l: Math.round(newL) };
+      return {
+        h: hsl.h,
+        s: Math.round(hsl.s * (1 - amount * 0.3)),
+        l: Math.round(hsl.l + (100 - hsl.l) * amount)
+      };
     }
 
-    return hsl;
+    // Decreases lightness while maintaining saturation for rich darks
+    return {
+      h: hsl.h,
+      s: hsl.s,
+      l: Math.round(hsl.l * (1 + amount))
+    };
+  }
+
+  /** Formats an HSL object as a CSS HSL string. */
+  private hslToString({ h, s, l }: HSL): string {
+    return `hsl(${h}, ${s}%, ${l}%)`;
   }
 
   /** Generates an array of HSL colors based on color theory, preserving the base color's characteristics. */
-  private generateColors(count: number, baseHsl: { h: number; s: number; l: number }): string[] {
+  private generateColors(count: number, baseHsl: HSL): string[] {
     const colors: string[] = [];
 
     // Calculate dynamic ranges based on the base color's lightness
-    // Darker colors have less room to go darker, lighter colors have less room to go lighter
-    const lightnessRangeDown = Math.min(30, baseHsl.l - 10); // How much darker we can go
-    const lightnessRangeUp = Math.min(30, 90 - baseHsl.l); // How much lighter we can go
+    const lightnessRangeDown = Math.min(30, baseHsl.l - 10);
+    const lightnessRangeUp = Math.min(30, 90 - baseHsl.l);
 
-    // Saturation adjustments based on lightness
-    // Very light colors (pastels) work better with lower saturation
-    // Very dark colors also need controlled saturation to avoid muddiness
+    // Adjust saturation based on lightness
     let baseSaturation = baseHsl.s;
     if (baseHsl.l > 80) {
       baseSaturation = Math.min(baseSaturation, 60); // Cap saturation for very light colors
@@ -164,39 +159,36 @@ export class QuietMeshGradient extends QuietElement {
     for (let i = 0; i < count; i++) {
       if (i === 0) {
         // Base color - preserve the original color exactly
-        colors.push(`hsl(${baseHsl.h}, ${baseHsl.s}%, ${baseHsl.l}%)`);
+        colors.push(this.hslToString(baseHsl));
       } else if (i < count / 1.4) {
         // Analogous colors - slight hue shifts with complementary lightness changes
         const hueShift = 30 * (i % 2 === 0 ? 1 : -1) * Math.ceil(i / 2);
-
-        // Alternate between lighter and darker, staying within calculated ranges
-        const lightnessShift =
-          i % 2 === 0
-            ? lightnessRangeUp * (i / count) // Go lighter
-            : -(lightnessRangeDown * (i / count)); // Go darker
+        const lightnessShift = i % 2 === 0 ? lightnessRangeUp * (i / count) : -(lightnessRangeDown * (i / count));
 
         const lightness = Math.max(10, Math.min(90, baseHsl.l + lightnessShift));
-
-        // Slightly vary saturation for depth
-        const saturationVariance = (Math.random() - 0.5) * 20; // ±10% random variance
+        const saturationVariance = (Math.random() - 0.5) * 20;
         const saturation = Math.max(20, Math.min(100, baseSaturation + saturationVariance));
 
         colors.push(
-          `hsl(${(baseHsl.h + hueShift + 360) % 360}, ${Math.round(saturation)}%, ${Math.round(lightness)}%)`
+          this.hslToString({
+            h: (baseHsl.h + hueShift + 360) % 360,
+            s: Math.round(saturation),
+            l: Math.round(lightness)
+          })
         );
       } else {
         // Complementary colors - larger hue shifts with reduced saturation
         const hueShift = 150 * (i % 2 === 0 ? 1 : -1);
-
-        // Complementary colors work best with moderate lightness
-        const targetLightness = 50 + (baseHsl.l - 50) * 0.5; // Move toward middle
+        const targetLightness = 50 + (baseHsl.l - 50) * 0.5;
         const lightness = Math.max(20, Math.min(80, targetLightness + (Math.random() - 0.5) * 20));
-
-        // Reduce saturation for complementary colors to avoid clashing
         const saturation = Math.max(20, Math.min(80, baseSaturation * 0.7));
 
         colors.push(
-          `hsl(${(baseHsl.h + hueShift + 360) % 360}, ${Math.round(saturation)}%, ${Math.round(lightness)}%)`
+          this.hslToString({
+            h: (baseHsl.h + hueShift + 360) % 360,
+            s: Math.round(saturation),
+            l: Math.round(lightness)
+          })
         );
       }
     }
@@ -210,9 +202,10 @@ export class QuietMeshGradient extends QuietElement {
       // Seeded pseudo-random positioning
       const hash = ((seed + index) * 2654435761) % 2147483647;
       const normalized = hash / 2147483647;
-      const x = Math.round((normalized * 100) % 100);
-      const y = Math.round((normalized * index * 10 * 100) % 100);
-      return { x, y };
+      return {
+        x: Math.round((normalized * 100) % 100),
+        y: Math.round((normalized * index * 10 * 100) % 100)
+      };
     }
 
     // Random positioning
@@ -225,28 +218,16 @@ export class QuietMeshGradient extends QuietElement {
   /** Generates the CSS gradient styles. */
   private generateGradient(baseColor?: string) {
     // Get full HSL values or generate random ones
-    let baseHsl = baseColor
-      ? (this.colorToHsl(baseColor) ?? {
-          h: Math.round(Math.random() * 360),
-          s: 70 + Math.round(Math.random() * 30), // Random saturation between 70-100%
-          l: 50 + Math.round(Math.random() * 30) // Random lightness between 50-80%
-        })
-      : {
-          h: Math.round(Math.random() * 360),
-          s: 70 + Math.round(Math.random() * 30),
-          l: 50 + Math.round(Math.random() * 30)
-        };
+    let baseHsl = baseColor ? (this.colorToHsl(baseColor) ?? this.randomHsl()) : this.randomHsl();
 
     // Apply brightness adjustment
     baseHsl = this.adjustBrightness(baseHsl);
 
     const colors = this.generateColors(this.complexity, baseHsl);
-    const gradients: string[] = [];
-
-    for (let i = 0; i < this.complexity; i++) {
+    const gradients = colors.map((color, i) => {
       const { x, y } = this.getPosition(i, this.seed);
-      gradients.push(`radial-gradient(at ${x}% ${y}%, ${colors[i]} 0px, transparent 55%)`);
-    }
+      return `radial-gradient(at ${x}% ${y}%, ${color} 0px, transparent 55%)`;
+    });
 
     // Set optimal text color based on the adjusted base color
     this.style.setProperty('--optimal-text-color', this.getOptimalTextColor(colors[0]));

@@ -5,6 +5,7 @@ layout: component
 
 ```html {.example}
 <div id="mesh__overview">
+  <!-- This generates a mesh gradient -->
   <quiet-mesh-gradient 
     style="--gradient-color: #f97316;"
     complexity="3" 
@@ -15,6 +16,7 @@ layout: component
     <p>Text colors automatically adjusts to ensure readability</p>
   </quiet-mesh-gradient>
 
+  <!-- Everything below is code for the demo -->
   <div class="row">
     <quiet-color-input 
       label="Base color"
@@ -52,32 +54,100 @@ layout: component
     value="40"
     with-tooltip
   ></quiet-slider>
+
+  <div class="row">
+    <quiet-copy class="copy-html">
+      <quiet-button>
+        <quiet-icon slot="start" name="file-type-html"></quiet-icon>
+        Copy Component HTML
+      </quiet-button>
+    </quiet-copy>
+
+    <quiet-copy class="copy-css">
+      <quiet-button>
+        <quiet-icon slot="start" name="file-type-css"></quiet-icon>
+        Copy Gradient CSS
+      </quiet-button>
+    </quiet-copy>
+  </div>
 </div>
 
-<script>
+<script type="module">
+  import { allDefined } from '/dist/quiet.js';
+
   const container = document.getElementById('mesh__overview');
   const meshGradient = container.querySelector('quiet-mesh-gradient');
   const colorInput = container.querySelector('quiet-color-input');
   const complexitySlider = container.querySelector('quiet-slider[label="Complexity"]');
   const brightnessSlider = container.querySelector('quiet-slider[label="Brightness"]');
   const seedButton = container.querySelector('quiet-button');
+  const copyHtmlButton = container.querySelector('.copy-html');
+  const copyCssButton = container.querySelector('.copy-css');  
+
+  // Track current values
+  let currentValues = {
+    color: '#f97316',
+    complexity: 3,
+    seed: 75,
+    brightness: 40
+  };
 
   colorInput.addEventListener('input', () => {
-    meshGradient.style.setProperty('--gradient-color', colorInput.value);
+    currentValues.color = colorInput.value;
+    meshGradient.style.setProperty('--gradient-color', currentValues.color);
+    updateCopyData();
   });
 
   complexitySlider.addEventListener('input', () => {
-    meshGradient.complexity = complexitySlider.value;
+    currentValues.complexity = complexitySlider.value;
+    meshGradient.complexity = currentValues.complexity;
+    updateCopyData();
   });
 
   brightnessSlider.addEventListener('input', () => {
-    meshGradient.brightness = brightnessSlider.value;
+    currentValues.brightness = brightnessSlider.value;
+    meshGradient.brightness = currentValues.brightness;
+    updateCopyData();
   });
 
   seedButton.addEventListener('click', () => {
-    meshGradient.seed = Math.floor(Math.random() * 1000) + 1;
+    currentValues.seed = Math.floor(Math.random() * 1000) + 1;
+    meshGradient.seed = currentValues.seed;
+    updateCopyData();
   });
-</script>
+  
+  // Update the copy button's data
+  function updateCopyData() {
+    copyHtmlButton.data = `
+  <quiet-mesh-gradient
+    style="--gradient-color: ${currentValues.color};"
+    complexity="${currentValues.complexity}"
+    seed="${currentValues.seed}"
+    brightness="${currentValues.brightness}"
+  >
+    <!-- Your content here -->
+  </quiet-mesh-gradient>
+  `.trim();
+
+    // Get CSS from the component's rendered styles
+    const textColor = meshGradient.style.getPropertyValue('--optimal-text-color') || 'inherit';
+    const gradientEl = meshGradient.shadowRoot.querySelector('#gradient');
+    const gradientStyle = gradientEl.getAttribute('style') || '';    
+    const cssProperties = gradientStyle.trim().replace(/;\s*/g, ';\n  ').replace(/;\n  $/, ';');
+
+    copyCssButton.data = `
+.mesh-gradient {
+  color: ${textColor};
+  ${cssProperties}
+}
+    `.trim();
+  }
+  
+  await allDefined();
+
+  // Initialize copy data
+  updateCopyData();
+  </script>
 
 <style>
   #mesh__overview {
@@ -90,15 +160,23 @@ layout: component
       padding: 2rem;
     }
 
+    quiet-color-input {
+      flex: 1;
+    }
+
     .row {
       display: flex;
-      flex-wrap: normal;
-      gap: 1.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
       align-items: end;
     }
   }
 </style>
 ```
+
+:::info
+This component is convenient, but it adds a lot more bytes than the gradient's CSS alone. If you don't need to generate mesh gradients dynamically, you'll get better performance using this generator and copying the gradient's CSS directly into your project.
+:::
 
 ## Examples
 

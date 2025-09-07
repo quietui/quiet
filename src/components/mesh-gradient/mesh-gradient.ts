@@ -30,8 +30,8 @@ export class QuietMeshGradient extends QuietElement {
   private observer?: MutationObserver;
   private rafId?: number;
 
-  @state() private gradientStyle = '';
   @state() private currentBaseColor = '';
+  @state() private gradientStyle = '';
 
   /** The number of gradient layers to generate. */
   @property({ type: Number }) complexity = 4;
@@ -318,3 +318,7 @@ declare global {
     'quiet-mesh-gradient': QuietMeshGradient;
   }
 }
+
+// The detection of CSS variable values via computed styles is essential for the mesh gradient to function, so some
+// updates can only be scheduled as a side effect of the previous update. This disables that Lit dev warning about it.
+QuietMeshGradient.disableWarning?.('change-in-update');

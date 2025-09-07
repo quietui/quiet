@@ -8,7 +8,6 @@ export default css`
     position: relative;
     align-items: center;
     width: 100%;
-    min-height: 200px;
     overflow: hidden;
     outline: none;
     color: var(--optimal-text-color, inherit);

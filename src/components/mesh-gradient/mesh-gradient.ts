@@ -21,7 +21,8 @@ type HSL = { h: number; s: number; l: number };
  * @csspart gradient - The gradient container element for styling the gradient layer.
  * @csspart content - The content container element for styling the content layer.
  *
- * @cssproperty [--gradient-color] - The base color for the gradient. Accepts any valid CSS color format.
+ * @cssproperty [--gradient-color] - The base color for the gradient. Accepts any valid CSS color format, but does not
+ *  accept custom properties, e.g. `var(--my-color)`.
  * @cssproperty [--optimal-text-color] - A readonly custom property that maps to the optimal text color (black or white)
  *  based on the gradient's base color.
  */
@@ -59,24 +60,13 @@ export class QuietMeshGradient extends QuietElement {
    */
   private adjustBrightness(hsl: HSL): HSL {
     const amount = this.brightness / 100;
-
-    if (amount === 0) return hsl;
-
-    if (amount > 0) {
-      // Increases lightness and reduces saturation for a more natural brightening
-      return {
-        h: hsl.h,
-        s: Math.round(hsl.s * (1 - amount * 0.3)),
-        l: Math.round(hsl.l + (100 - hsl.l) * amount)
-      };
-    }
-
-    // Decreases lightness while maintaining saturation for rich darks
-    return {
-      h: hsl.h,
-      s: hsl.s,
-      l: Math.round(hsl.l * (1 + amount))
-    };
+    return amount === 0
+      ? hsl
+      : {
+          h: hsl.h,
+          s: hsl.s,
+          l: Math.round(amount > 0 ? hsl.l + (100 - hsl.l) * amount : hsl.l * (1 + amount))
+        };
   }
 
   /** Extracts the HSL values from any CSS color format using TinyColor. */

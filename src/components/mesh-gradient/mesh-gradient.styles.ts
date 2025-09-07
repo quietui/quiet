@@ -12,7 +12,7 @@ export default css`
     color: var(--optimal-text-color, inherit);
   }
 
-  .gradient-container {
+  #gradient {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -25,7 +25,7 @@ export default css`
     will-change: transform;
   }
 
-  .content {
+  #content {
     box-sizing: border-box;
     z-index: 1;
     position: relative;
@@ -35,7 +35,7 @@ export default css`
 
   /* Reduced motion support */
   @media (prefers-reduced-motion: reduce) {
-    :host([data-animated]) .gradient-container {
+    :host([data-animated]) #gradient {
       animation: none;
     }
   }

@@ -264,13 +264,8 @@ export class QuietMeshGradient extends QuietElement {
 
   render() {
     return html`
-      <div
-        class="gradient-container"
-        part="gradient"
-        style=${this.gradientStyle}
-        @transitionend=${this.handleColorTransition}
-      ></div>
-      <div class="content" part="content">
+      <div id="gradient" part="gradient" style=${this.gradientStyle} @transitionend=${this.handleColorTransition}></div>
+      <div id="content" part="content">
         <slot></slot>
       </div>
     `;

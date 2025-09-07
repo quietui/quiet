@@ -27,9 +27,6 @@ import styles from './mesh-gradient.styles.js';
 export class QuietMeshGradient extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
-  private observer?: MutationObserver;
-  private rafId?: number;
-
   @state() private currentBaseColor = '';
   @state() private gradientStyle = '';
 
@@ -41,40 +38,6 @@ export class QuietMeshGradient extends QuietElement {
 
   /** Adjusts the brightness of the gradient from -100 (darker) to +100 (lighter). */
   @property({ type: Number }) brightness = 0;
-
-  connectedCallback() {
-    super.connectedCallback();
-
-    // Set up MutationObserver to watch for style changes
-    this.observer = new MutationObserver(mutations => {
-      const hasStyleChange = mutations.some(
-        mutation => mutation.type === 'attributes' && mutation.attributeName === 'style'
-      );
-
-      if (hasStyleChange) {
-        this.checkForColorChange();
-      }
-    });
-
-    this.observer.observe(this, {
-      attributes: true,
-      attributeFilter: ['style']
-    });
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback();
-
-    if (this.observer) {
-      this.observer.disconnect();
-      this.observer = undefined;
-    }
-
-    if (this.rafId) {
-      cancelAnimationFrame(this.rafId);
-      this.rafId = undefined;
-    }
-  }
 
   firstUpdated() {
     this.detectAndGenerateGradient();
@@ -89,18 +52,14 @@ export class QuietMeshGradient extends QuietElement {
   }
 
   /**
-   * Checks if the base color has changed and regenerates if needed. Uses requestAnimationFrame to debounce rapid
-   * changes.
+   * Handles the `transitionend` event to detect when `--gradient-color` changes. The 1ms transition on the `color`
+   * property triggers this.
    */
-  private checkForColorChange() {
-    if (this.rafId) {
-      cancelAnimationFrame(this.rafId);
-    }
-
-    this.rafId = requestAnimationFrame(() => {
+  private handleColorTransition = (event: TransitionEvent) => {
+    if (event.propertyName === 'color') {
       this.detectAndGenerateGradient();
-    });
-  }
+    }
+  };
 
   /** Gets the current value of `--gradient-color` from computed styles. */
   private getBaseColor(): string | undefined {
@@ -305,7 +264,12 @@ export class QuietMeshGradient extends QuietElement {
 
   render() {
     return html`
-      <div class="gradient-container" part="gradient" style=${this.gradientStyle}></div>
+      <div
+        class="gradient-container"
+        part="gradient"
+        style=${this.gradientStyle}
+        @transitionend=${this.handleColorTransition}
+      ></div>
       <div class="content" part="content">
         <slot></slot>
       </div>

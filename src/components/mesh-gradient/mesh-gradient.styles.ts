@@ -1,13 +1,6 @@
 import { css } from 'lit';
 
 export default css`
-  @keyframes colorChange {
-    from {
-      /* This animation uses the --gradient-color variable to detect changes */
-      outline-color: var(--gradient-color, transparent);
-    }
-  }
-
   :host {
     display: flex;
     position: relative;
@@ -16,11 +9,7 @@ export default css`
     min-height: 200px;
     overflow: hidden;
     outline: none;
-    background-color: var(--quiet-surface-1);
     color: var(--optimal-text-color, inherit);
-
-    /* Animation trick to detect CSS variable changes */
-    animation: colorChange 1ms;
   }
 
   .gradient-container {
@@ -28,6 +17,11 @@ export default css`
     width: 100%;
     height: 100%;
     inset: 0;
+    /* Use background-color as fallback before the gradient is generated */
+    background-color: var(--gradient-color, transparent);
+    /* Use color property to detect changes to --gradient-color via transition */
+    color: var(--gradient-color, transparent);
+    transition: color 1ms;
     will-change: transform;
   }
 

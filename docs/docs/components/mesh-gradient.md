@@ -119,14 +119,14 @@ layout: component
   // Update the copy button's data
   function updateCopyData() {
     copyHtmlButton.data = `
-  <quiet-mesh-gradient
-    style="--gradient-color: ${currentValues.color};"
-    complexity="${currentValues.complexity}"
-    seed="${currentValues.seed}"
-    brightness="${currentValues.brightness}"
-  >
-    <!-- Your content here -->
-  </quiet-mesh-gradient>
+<quiet-mesh-gradient
+  style="--gradient-color: ${currentValues.color};"
+  complexity="${currentValues.complexity}"
+  seed="${currentValues.seed}"
+  brightness="${currentValues.brightness}"
+>
+  <!-- Your content here -->
+</quiet-mesh-gradient>
   `.trim();
 
     // Get CSS from the component's rendered styles

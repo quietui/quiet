@@ -54,62 +54,6 @@ export class QuietMeshGradient extends QuietElement {
   }
 
   /**
-   * Handles the `transitionend` event to detect when `--gradient-color` changes. The 1ms transition on the `color`
-   * property triggers this.
-   */
-  private handleColorTransition = (event: TransitionEvent) => {
-    if (event.propertyName === 'color') {
-      this.detectAndGenerateGradient();
-    }
-  };
-
-  /** Gets the current value of `--gradient-color` from computed styles. */
-  private getBaseColor(): string | undefined {
-    const computedStyle = getComputedStyle(this);
-    const baseColor = computedStyle.getPropertyValue('--gradient-color').trim();
-    return baseColor || undefined;
-  }
-
-  /** Detects the current base color and regenerates the gradient if needed. */
-  private detectAndGenerateGradient() {
-    const baseColor = this.getBaseColor();
-
-    // Only regenerate if the color actually changed or this is the first generation
-    if (baseColor !== this.currentBaseColor || !this.gradientStyle) {
-      this.currentBaseColor = baseColor || '';
-      this.generateGradient(baseColor);
-    }
-  }
-
-  /** Determines the optimal text color (black or white) based on the background color. */
-  private getOptimalTextColor(color: string): 'black' | 'white' {
-    const tinyColor = new TinyColor(color);
-    return tinyColor.isValid && tinyColor.isLight() ? 'black' : 'white';
-  }
-
-  /** Extracts the HSL values from any CSS color format using TinyColor. */
-  private colorToHsl(color: string): HSL | undefined {
-    const tinyColor = new TinyColor(color);
-    if (!tinyColor.isValid) return undefined;
-
-    const hsl = tinyColor.toHsl();
-    return {
-      h: Math.round(hsl.h),
-      s: Math.round(hsl.s * 100), // Convert to percentage
-      l: Math.round(hsl.l * 100) // Convert to percentage
-    };
-  }
-
-  /** Creates a random HSL color for when no base color is provided. */
-  private randomHsl(): HSL {
-    return {
-      h: Math.round(Math.random() * 360),
-      s: 70 + Math.round(Math.random() * 30), // 70-100%
-      l: 50 + Math.round(Math.random() * 30) // 50-80%
-    };
-  }
-
-  /**
    * Adjusts the brightness of an HSL color using a hybrid tint/shade approach. Positive values tint the color
    * (lighten + desaturate) and negative values shade it (darken only).
    */
@@ -135,9 +79,28 @@ export class QuietMeshGradient extends QuietElement {
     };
   }
 
-  /** Formats an HSL object as a CSS HSL string. */
-  private hslToString({ h, s, l }: HSL): string {
-    return `hsl(${h}, ${s}%, ${l}%)`;
+  /** Extracts the HSL values from any CSS color format using TinyColor. */
+  private colorToHsl(color: string): HSL | undefined {
+    const tinyColor = new TinyColor(color);
+    if (!tinyColor.isValid) return undefined;
+
+    const hsl = tinyColor.toHsl();
+    return {
+      h: Math.round(hsl.h),
+      s: Math.round(hsl.s * 100), // Convert to percentage
+      l: Math.round(hsl.l * 100) // Convert to percentage
+    };
+  }
+
+  /** Detects the current base color and regenerates the gradient if needed. */
+  private detectAndGenerateGradient() {
+    const baseColor = this.getBaseColor();
+
+    // Only regenerate if the color actually changed or this is the first generation
+    if (baseColor !== this.currentBaseColor || !this.gradientStyle) {
+      this.currentBaseColor = baseColor || '';
+      this.generateGradient(baseColor);
+    }
   }
 
   /** Generates an array of HSL colors based on color theory, preserving the base color's characteristics. */
@@ -196,25 +159,6 @@ export class QuietMeshGradient extends QuietElement {
     return colors;
   }
 
-  /** Calculates gradient positions, either randomly or based on a seed. */
-  private getPosition(index: number, seed?: number): { x: number; y: number } {
-    if (seed !== undefined) {
-      // Seeded pseudo-random positioning
-      const hash = ((seed + index) * 2654435761) % 2147483647;
-      const normalized = hash / 2147483647;
-      return {
-        x: Math.round((normalized * 100) % 100),
-        y: Math.round((normalized * index * 10 * 100) % 100)
-      };
-    }
-
-    // Random positioning
-    return {
-      x: Math.round(Math.random() * 100),
-      y: Math.round(Math.random() * 100)
-    };
-  }
-
   /** Generates the CSS gradient styles. */
   private generateGradient(baseColor?: string) {
     // Get full HSL values or generate random ones
@@ -235,6 +179,62 @@ export class QuietMeshGradient extends QuietElement {
       background-color: ${colors[0]};
       background-image: ${gradients.join(', ')};
     `;
+  }
+
+  /** Gets the current value of `--gradient-color` from computed styles. */
+  private getBaseColor(): string | undefined {
+    const computedStyle = getComputedStyle(this);
+    const baseColor = computedStyle.getPropertyValue('--gradient-color').trim();
+    return baseColor || undefined;
+  }
+
+  /** Determines the optimal text color (black or white) based on the background color. */
+  private getOptimalTextColor(color: string): 'black' | 'white' {
+    const tinyColor = new TinyColor(color);
+    return tinyColor.isValid && tinyColor.isLight() ? 'black' : 'white';
+  }
+
+  /** Calculates gradient positions, either randomly or based on a seed. */
+  private getPosition(index: number, seed?: number): { x: number; y: number } {
+    if (seed !== undefined) {
+      // Seeded pseudo-random positioning
+      const hash = ((seed + index) * 2654435761) % 2147483647;
+      const normalized = hash / 2147483647;
+      return {
+        x: Math.round((normalized * 100) % 100),
+        y: Math.round((normalized * index * 10 * 100) % 100)
+      };
+    }
+
+    // Random positioning
+    return {
+      x: Math.round(Math.random() * 100),
+      y: Math.round(Math.random() * 100)
+    };
+  }
+
+  /**
+   * Handles the `transitionend` event to detect when `--gradient-color` changes. The 1ms transition on the `color`
+   * property triggers this.
+   */
+  private handleColorTransition = (event: TransitionEvent) => {
+    if (event.propertyName === 'color') {
+      this.detectAndGenerateGradient();
+    }
+  };
+
+  /** Formats an HSL object as a CSS HSL string. */
+  private hslToString({ h, s, l }: HSL): string {
+    return `hsl(${h}, ${s}%, ${l}%)`;
+  }
+
+  /** Creates a random HSL color for when no base color is provided. */
+  private randomHsl(): HSL {
+    return {
+      h: Math.round(Math.random() * 360),
+      s: 70 + Math.round(Math.random() * 30), // 70-100%
+      l: 50 + Math.round(Math.random() * 30) // 50-80%
+    };
   }
 
   /** Regenerates the gradient. Useful for creating new random gradients programmatically. */

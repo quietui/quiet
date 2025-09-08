@@ -293,6 +293,10 @@ html[data-scroll-restoring] body {
   &:focus-visible {
     outline-offset: calc(var(--quiet-focus-width) * -1 - var(--quiet-focus-offset));
   }
+
+  &:active {
+    translate: none;
+  }
 }
 
 #header-group-buttons quiet-icon {

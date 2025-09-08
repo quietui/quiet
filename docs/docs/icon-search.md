@@ -322,32 +322,23 @@ For another way to browse icons, head over to the [Tabler Icons](https://tabler.
   
   @media screen and (max-width: 1199px) {
     #search-container {
-      display: grid;
-      grid-template-columns: 1fr 1fr
+      display: flex;
+      flex-direction: column;
       width: 100%;
     }
 
     #icon-search {
-      grid-column: 1 / span 2;
+      width: 100%;
     }
-
-    #icon-copy {
-      grid-column: 1;
-    }
-
-    #icon-family {
-      grid-column: 2;
-
-    }
-
 
     #icon-copy, 
     #icon-family {
       max-width: none;
+      width: 100%;
     }
 
     #icon-results quiet-icon {
       font-size: 2rem;
     }
-  } 
+  }
 </style>

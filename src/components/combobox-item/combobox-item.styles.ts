@@ -6,7 +6,6 @@ export default css`
     position: relative;
     align-items: center;
     padding: 0.33em 1em;
-    padding-inline-start: 2.25em;
     border-radius: var(--quiet-border-radius-sm);
     color: var(--quiet-neutral-text-on-soft);
     font-size: 0.9375em;
@@ -43,11 +42,13 @@ export default css`
     outline-offset: var(--quiet-focus-ring-offset);
   }
 
-  /* Checkmark - base styles, hidden by default */
+  /* Checkmark (hidden by default) */
   .checkmark {
     visibility: hidden;
-    position: absolute;
-    left: 0.5em;
+    flex: 0 0 auto;
+    width: fit-content;
+    margin-inline-start: -0.5em;
+    margin-inline-end: 0.25em;
     color: var(--quiet-primary-text);
     font-size: 1.25em;
     opacity: 0;
@@ -60,12 +61,6 @@ export default css`
       visibility: visible;
       opacity: 1;
     }
-  }
-
-  /* RTL support */
-  :host(:dir(rtl)) .checkmark {
-    right: 0.5em;
-    left: auto;
   }
 
   /* Icon slot */

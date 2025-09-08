@@ -85,7 +85,7 @@ Combobox items can have structured content with icons and details.
 <style>
   #combobox__structured {
     quiet-combobox-item {
-      padding: 0.75rem;
+      padding-block: 0.75rem;
     }
   }
 </style>

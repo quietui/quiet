@@ -7,19 +7,20 @@ Comboboxes implement the [ARIA APG combobox pattern](https://www.w3.org/WAI/ARIA
 
 ```html {.example}
 <quiet-combobox
+  multiple
   label="Select a cat breed"
   description="Type to search or select from the list"
   placeholder="Search breeds"
   with-clear
 >
-  <quiet-combobox-item value="persian">Persian</quiet-combobox-item>
-  <quiet-combobox-item value="siamese">Siamese</quiet-combobox-item>
-  <quiet-combobox-item value="tabby">Tabby</quiet-combobox-item>
-  <quiet-combobox-item value="ragdoll">Ragdoll</quiet-combobox-item>
-  <quiet-combobox-item value="bengal">Bengal</quiet-combobox-item>
-  <quiet-combobox-item value="sphynx">Sphynx</quiet-combobox-item>
-  <quiet-combobox-item value="calico">Calico</quiet-combobox-item>
-  <quiet-combobox-item value="russian">Russian Blue</quiet-combobox-item>
+  <quiet-combobox-item selected value="persian">Persian</quiet-combobox-item>
+  <quiet-combobox-item selected value="siamese">Siamese</quiet-combobox-item>
+  <quiet-combobox-item selected value="tabby">Tabby</quiet-combobox-item>
+  <quiet-combobox-item selected value="ragdoll">Ragdoll</quiet-combobox-item>
+  <quiet-combobox-item selected value="bengal">Bengal</quiet-combobox-item>
+  <quiet-combobox-item selected value="sphynx">Sphynx</quiet-combobox-item>
+  <quiet-combobox-item selected value="calico">Calico</quiet-combobox-item>
+  <quiet-combobox-item selected value="russian">Russian Blue</quiet-combobox-item>
 </quiet-combobox>
 ```
 

@@ -11,7 +11,9 @@ export default css`
     display: flex;
     position: relative;
     align-items: center;
+    min-width: 0;
     padding: 0 0.75em;
+    overflow: hidden;
     gap: 0.5em;
     font: inherit;
     cursor: text;
@@ -98,9 +100,10 @@ export default css`
   /* Input area - single flex container for all content */
   #input-area {
     display: flex;
-    flex: 1 1 auto;
+    flex: 1 1 0;
     flex-wrap: wrap;
     align-items: center;
+    min-width: 0;
     gap: 0.25em;
   }
 
@@ -109,13 +112,17 @@ export default css`
     display: inline-flex;
     flex: 0 0 auto;
     align-items: center;
+    min-width: 0; /* Allow tags to shrink */
     max-width: 100%;
     padding: 0.25em 0.5em;
+    overflow: hidden;
     gap: 0.25em;
     border-radius: var(--quiet-border-radius-sm);
     background-color: var(--quiet-neutral-fill-softer);
     color: var(--quiet-neutral-text-on-soft);
     line-height: 1.2;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     user-select: none;
   }
 
@@ -241,6 +248,7 @@ export default css`
   /* Clear button styles */
   .text-box-button {
     display: flex;
+    flex: 0 0 auto;
     align-items: center;
     align-self: stretch;
     justify-content: center;
@@ -280,6 +288,7 @@ export default css`
   }
 
   #chevron {
+    flex: 0 0 auto;
     font-size: 1.25em;
     pointer-events: none;
   }

@@ -212,10 +212,10 @@ Content slotted into the mesh gradient will be centered by default. You can targ
 
 ```html {.example}
 <quiet-mesh-gradient
-  style="--gradient-color: #06b6d4; height: 250px;"
-  complexity="4"
-  seed="347"
-  brightness="-10"
+  style="--gradient-color: #5290f6; height: 250px;"
+  complexity="8"
+  seed="870"
+  brightness="24"
 >
   <h2>Beautiful mesh gradient</h2>
   <p>Text is automatically colored based on the background</p>

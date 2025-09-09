@@ -10,7 +10,6 @@ Comboboxes implement the [ARIA APG combobox pattern](https://www.w3.org/WAI/ARIA
   label="Select a cat breed"
   description="Type to search or select from the list"
   placeholder="Search breeds"
-  multiple
   with-clear
 >
   <quiet-combobox-item value="persian">Persian</quiet-combobox-item>

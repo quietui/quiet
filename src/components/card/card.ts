@@ -32,6 +32,9 @@ export class QuietCard extends QuietElement {
   static observeSlots = true;
   static styles: CSSResultGroup = [hostStyles, styles];
 
+  /** Determines the card's appearance. */
+  @property({ reflect: true }) appearance: 'normal' | 'filled' = 'normal';
+
   /** The card's orientation. */
   @property({ reflect: true }) orientation: 'horizontal' | 'vertical' = 'vertical';
 

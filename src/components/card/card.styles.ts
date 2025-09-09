@@ -1,15 +1,31 @@
 import { css } from 'lit';
 
 export default css`
+  /* Base styles + normal appearance */
   :host {
     --spacing: 1.5em;
+    --border-width: var(--quiet-border-width);
+    --border-style: var(--quiet-border-style);
 
     display: flex;
     flex-direction: column;
-    border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
     border-radius: var(--quiet-border-radius-md);
+  }
+
+  /* Normal */
+  :host {
+    --border-color: var(--quiet-neutral-stroke-softer);
+    border: var(--border-style) var(--border-width) var(--border-color);
     background-color: var(--quiet-paper-color);
     box-shadow: var(--quiet-shadow-softer);
+  }
+
+  /* Filled */
+  :host([appearance='filled']) {
+    --border-color: var(--quiet-background-color);
+
+    border: none;
+    background-color: var(--quiet-neutral-fill-softer);
   }
 
   /* Vertical cards */
@@ -20,7 +36,7 @@ export default css`
   /* Media */
   #media {
     position: relative;
-    margin: calc(-1 * var(--quiet-border-width));
+    margin: calc(-1 * var(--border-width));
   }
 
   :host([orientation='vertical']) #media ::slotted(*) {
@@ -67,7 +83,7 @@ export default css`
 
   /* Show a border for vertical cards only */
   :host([orientation='vertical']) #header {
-    border-bottom: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
+    border-bottom: var(--border-style) var(--border-width) var(--border-color);
   }
 
   #actions {
@@ -101,6 +117,6 @@ export default css`
 
   /* Show a border for vertical cards only */
   :host([orientation='vertical']) #footer {
-    border-top: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
+    border-top: var(--border-style) var(--border-width) var(--border-color);
   }
 `;

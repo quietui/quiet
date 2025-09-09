@@ -104,30 +104,28 @@ export class QuietDate extends QuietElement {
     }
 
     const isoDate = date.toISOString();
+    const displayDate = this.localize.date(date, {
+      dateStyle: this.dateStyle,
+      timeStyle: this.timeStyle,
+      hour12: this.hourFormat === 'auto' ? undefined : this.hourFormat === '12',
+      hourCycle: this.hourCycle,
+      timeZone: this.timeZone,
+      weekday: this.weekday,
+      era: this.era,
+      year: this.year,
+      month: this.month,
+      day: this.day,
+      dayPeriod: this.dayPeriod,
+      hour: this.hour,
+      minute: this.minute,
+      second: this.second,
+      // @ts-expect-error - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#fractionalseconddigits
+      fractionalSecondDigits: this.fractionalSecondDigits,
+      timeZoneName: this.timeZoneName
+    });
 
-    return html`
-      <time datetime=${isoDate}>
-        ${this.localize.date(date, {
-          dateStyle: this.dateStyle,
-          timeStyle: this.timeStyle,
-          hour12: this.hourFormat === 'auto' ? undefined : this.hourFormat === '12',
-          hourCycle: this.hourCycle,
-          timeZone: this.timeZone,
-          weekday: this.weekday,
-          era: this.era,
-          year: this.year,
-          month: this.month,
-          day: this.day,
-          dayPeriod: this.dayPeriod,
-          hour: this.hour,
-          minute: this.minute,
-          second: this.second,
-          // @ts-expect-error - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#fractionalseconddigits
-          fractionalSecondDigits: this.fractionalSecondDigits,
-          timeZoneName: this.timeZoneName
-        })}
-      </time>
-    `;
+    // Zero whitespace since the host element is `display: inline`
+    return html`<time datetime=${isoDate}>${displayDate}</time>`;
   }
 }
 

@@ -10,10 +10,10 @@ layout: component
   name="color"
   value="#f0803a"
   swatches="
-    #09090b #71717a #ef4444 #f97316 
-    #f59e0b #eab308 #84cc16 #22c55e 
-    #10b981 #14b8a6 #06b6d4 #3b82f6 
-    #6366f1 #a855f7 #d946ef #ec4899
+    #09090b; #71717a; #ef4444; #f97316; 
+    #f59e0b; #eab308; #84cc16; #22c55e; 
+    #10b981; #14b8a6; #06b6d4; #3b82f6; 
+    #6366f1; #a855f7; #d946ef; #ec4899
   "  
   with-input
   with-alpha
@@ -149,23 +149,38 @@ Use the `disabled` attribute to disable the color input.
 
 ### Showing swatches
 
-Set the `swatches` attribute to one or more space-delimited hex colors or CSS color names, e.g. `lightblue`, to show as preset swatches below the color picker. This is useful for providing users with access to recent colors or a predefined color palette.
+Set the `swatches` attribute to one or more semicolon-delimited colors to show as preset swatches below the color picker. You can use any valid CSS color format including hex colors, RGB, HSL, named colors, and more. This is useful for providing users with access to recent colors or a predefined color palette.
 
 ```html {.example}
 <quiet-color-input
   label="Select a color"
   swatches="
-    #09090b #71717a #ef4444 #f97316 
-    #f59e0b #eab308 #84cc16 #22c55e 
-    #10b981 #14b8a6 #06b6d4 #3b82f6 
-    #6366f1 #a855f7 #d946ef #ec4899
+    #09090b; #71717a; #ef4444; #f97316; 
+    #f59e0b; #eab308; #84cc16; #22c55e; 
+    #10b981; #14b8a6; #06b6d4; #3b82f6; 
+    #6366f1; #a855f7; #d946ef; #ec4899
+  "
+></quiet-color-input>
+```
+
+You can also mix different color formats in the swatches:
+
+```html {.example}
+<quiet-color-input
+  label="Select a color"
+  swatches="
+    rgb(255 0 0); 
+    hsl(120, 100%, 50%); 
+    rgb(0 0 255 / 0.5); 
+    lightblue; 
+    #ff00ff
   "
 ></quiet-color-input>
 ```
 
 ### Showing labels on the side
 
-With the [`quiet-side-label`](/docs/css-utilities/#side-labels) utility, you can show labels on the side instead of on top of the color input. You can control the width of the label by setting the `--label-width` custom property.
+With the [`quiet-side-label`](/docs/css-utilities/#showing-labels-on-the-side) utility, you can show labels on the side instead of on top of the color input. You can control the width of the label by setting the `--label-width` custom property.
 
 ```html {.example}
 <quiet-color-input

@@ -55,12 +55,10 @@ Components marked [stable] are well-tested, ready for production, and less likel
 This is the first public release of Quiet UI, which includes:
 
 - More than 80 framework agnostic components
-- Modern theme with dark mode
-- Optional CSS reset
-- Ready-to-use AI component intelligence
+- A modern theme with dark mode
+- An optional CSS reset
 - Helpful CSS utilities
-- Built to last
-- Open source
-
+- Ready-to-use AI component intelligence
+- A focus on accessibility, longevity, performance, and simplicity
 
 <small><em><a href="https://x.com/pants/status/1912832380794003928">The next brushstroke could change everything.</a></em></small>

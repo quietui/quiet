@@ -77,7 +77,7 @@ If you need help with documentation, feel free to reach out on the [discussion f
 
 ## Code contributions & licensing
 
-By submitting a contribution to this project, you agree to license your entire contribution under the same terms of the project's current or future license(s) as chosen by the maintainer. This includes open source and/or commercial licenses. The copyright holder reserves the right to change the license(s) as necessary to ensure the longevity of the project.
+By submitting a contribution to this project, you agree to license your entire contribution under the same terms of the project's current or future license(s) as chosen by the maintainer. This includes source-available, open source, and/or commercial licenses. The copyright holder reserves the right to change the license(s) as necessary to ensure the longevity of the project.
 
 If you do not agree to license your contribution under these terms, do not make contributions to the project. Unless otherwise noted:
 

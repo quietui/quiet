@@ -75,6 +75,19 @@ Place an image or video into the `media` slot to add media at the beginning of t
 </div>
 ```
 
+### Changing the appearance
+
+Set the `appearance` attribute to `filled` to change the card's appearance.
+
+```html {.example}
+<quiet-card appearance="filled" style="max-width: 340px;">
+  <strong>Did you know?</strong>
+  <p style="margin-block: .75rem 0;">A cat's purr isn't just adorable, it vibrates at frequencies between 25 and 150 Hz which studies suggest can promote healing and reduce stress in their human companions.</p>
+
+  <quiet-button slot="footer" variant="primary">Amazing!</quiet-button>
+</quiet-card>
+```
+
 ### Horizontal cards
 
 Set the `orientation` attribute to `horizontal` to create a card with a horizontal, side-by-side layout. When using the `media` slot, be sure to set a width or maximum width on the image. Horizontal cards do not draw borders to separate the header and footer slots.

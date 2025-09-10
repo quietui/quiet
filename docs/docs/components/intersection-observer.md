@@ -79,7 +79,7 @@ Remember that only direct children of the host element are observed. Nested elem
 
 ## Examples
 
-### Providing content
+### Observing elements
 
 Only direct children of the intersection observer are observed. The component is styled with [`display: contents`](https://developer.mozilla.org/en-US/docs/Web/CSS/display#contents), allowing you to easily apply flex and grid layouts to a containing element.
 

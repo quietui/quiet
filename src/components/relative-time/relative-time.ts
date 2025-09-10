@@ -88,7 +88,9 @@ export class QuietRelativeTime extends QuietElement {
       numeric: this.numeric,
       style: this.format
     });
-    return html` <time datetime=${isoDate}>${relativeDate}</time> `;
+
+    // Zero whitespace since the host element is `display: inline`
+    return html`<time datetime=${isoDate}>${relativeDate}</time>`;
   }
 }
 

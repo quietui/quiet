@@ -20,12 +20,8 @@ To add Restyle to your app, add the following markup to the `<head>` of your doc
 <link rel="stylesheet" href="{% cdnUrl '/dist/themes/restyle.css' %}">
 ```
 
-Restyle uses [CSS layers](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer) to manage specificity. This means your custom styles will automatically take precedence over the library's styles without needing to use `!important` or increase selector specificity.
-
-The following sections demonstrate the native HTML elements that are supported by Restyle.
-
 :::info
-Restyle is just a starting point. Feel free to customize any of its styles in your own CSS by overriding the properties you want to change!
+Restyle uses [CSS layers](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer) to manage specificity. This means you can customize anything with simple CSS selectors without worrying about specificity.
 :::
 
 ## Typography & text flow

@@ -1,6 +1,6 @@
 import type { CSSResultGroup, PropertyValues } from 'lit';
 import { html } from 'lit';
-import { customElement, property, query, queryAll, state } from 'lit/decorators.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { QuietBlurEvent, QuietChangeEvent, QuietFocusEvent, QuietInputEvent } from '../../events/form.js';
 import formControlStyles from '../../styles/form-control.styles.js';
@@ -85,7 +85,8 @@ export class QuietSlider extends QuietFormControlElement {
   @query('#thumb-max') thumbMax: HTMLElement;
   @query('#track') track: HTMLElement;
   @query('#tooltip') tooltip: QuietTooltip;
-  @queryAll('quiet-tooltip') tooltips: NodeListOf<QuietTooltip>;
+  @query('#tooltip-thumb-min') tooltipMin: QuietTooltip;
+  @query('#tooltip-thumb-max') tooltipMax: QuietTooltip;
 
   @state() isInvalid = false;
   @state() hadUserInteraction = false;
@@ -622,6 +623,36 @@ export class QuietSlider extends QuietFormControlElement {
     }
   }
 
+  private handleThumbPointerEnter = () => {
+    if (!this.disabled && !this.readonly) {
+      this.showTooltip();
+    }
+  };
+
+  private handleThumbPointerLeave = () => {
+    // Don't hide if we're dragging or focused
+    if (!this.customStates.has('dragging') && !this.customStates.has('focused')) {
+      this.hideTooltip();
+    }
+  };
+
+  private handleRangeThumbPointerEnter = (thumb: 'min' | 'max') => {
+    if (!this.disabled && !this.readonly) {
+      this.activeThumb = thumb;
+      this.showRangeTooltips();
+    }
+  };
+
+  private handleRangeThumbPointerLeave = (thumb: 'min' | 'max') => {
+    // Don't hide if we're dragging or focused
+    if (!this.customStates.has('dragging') && !this.customStates.has('focused')) {
+      // Only hide if this is the active thumb that's being hovered
+      if (this.activeThumb === thumb) {
+        this.hideRangeTooltips();
+      }
+    }
+  };
+
   private setValueFromCoordinates(x: number, y: number) {
     const oldValue = this.value;
     this.value = this.getValueFromCoordinates(x, y);
@@ -681,19 +712,23 @@ export class QuietSlider extends QuietFormControlElement {
   }
 
   private showRangeTooltips() {
-    if (this.withTooltip) {
-      this.tooltips.forEach(tooltip => {
-        tooltip.open = true;
-      });
+    if (!this.withTooltip) return;
+
+    // Show only the active tooltip, hide the other
+    if (this.activeThumb === 'min') {
+      this.tooltipMin.open = true;
+      this.tooltipMax.open = false;
+    } else if (this.activeThumb === 'max') {
+      this.tooltipMax.open = true;
+      this.tooltipMin.open = false;
     }
   }
 
   private hideRangeTooltips() {
-    if (this.withTooltip) {
-      this.tooltips.forEach(tooltip => {
-        tooltip.open = false;
-      });
-    }
+    if (!this.withTooltip) return;
+
+    this.tooltipMin.open = false;
+    this.tooltipMax.open = false;
   }
 
   /** Updates the form value submission for range sliders */
@@ -907,6 +942,8 @@ export class QuietSlider extends QuietFormControlElement {
               @blur=${this.handleBlur}
               @focus=${this.handleFocus}
               @keydown=${this.handleKeyDown}
+              @pointerenter=${() => this.handleRangeThumbPointerEnter('min')}
+              @pointerleave=${() => this.handleRangeThumbPointerLeave('min')}
             ></span>
 
             <span
@@ -928,6 +965,8 @@ export class QuietSlider extends QuietFormControlElement {
               @blur=${this.handleBlur}
               @focus=${this.handleFocus}
               @keydown=${this.handleKeyDown}
+              @pointerenter=${() => this.handleRangeThumbPointerEnter('max')}
+              @pointerleave=${() => this.handleRangeThumbPointerLeave('max')}
             ></span>
           </div>
 
@@ -977,7 +1016,13 @@ export class QuietSlider extends QuietFormControlElement {
             ></div>
 
             ${markersTemplate}
-            <span id="thumb" part="thumb" style="--position: ${thumbPosition}%"></span>
+            <span
+              id="thumb"
+              part="thumb"
+              style="--position: ${thumbPosition}%"
+              @pointerenter=${this.handleThumbPointerEnter}
+              @pointerleave=${this.handleThumbPointerLeave}
+            ></span>
           </div>
 
           ${referencesTemplate}

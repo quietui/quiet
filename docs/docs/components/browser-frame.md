@@ -154,7 +154,7 @@ Browser frames automatically adapt to light and dark mode. To force a specific c
 
 ### Scrolling
 
-Set a `max-height` on the component. Content will scroll within the body when it overflows.
+Set a `max-height` on the browser frame to enable scrolling when content overflows.
 
 ```html {.example}
 <quiet-browser-frame label="example.com" style="max-height: 250px;">

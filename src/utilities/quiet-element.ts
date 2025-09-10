@@ -1,6 +1,9 @@
 import type { TemplateResult } from 'lit';
 import { LitElement, html } from 'lit';
 import { property, state } from 'lit/decorators.js';
+import { hasValidationBug } from './webkit.js';
+
+let hasWarnedAboutValidationBug = false;
 
 /** The base class for all Quiet components */
 export class QuietElement extends LitElement {
@@ -32,6 +35,28 @@ export class QuietElement extends LitElement {
   constructor() {
     super();
     this.internals = this.attachInternals();
+
+    //
+    // Browsers affected by this bug will not allow custom element's that use constraint validation to submit the form:
+    //
+    // https://bugs.webkit.org/show_bug.cgi?id=261432
+    //
+    // To work around this, we detect affected browsers and disable calls to `internals.setValidity()` in them. This
+    // allows the form to submit at the expense of bypassing constraint validation. A bug fix landed in Safari TP and
+    // was confirmed resolved in September 2025, but it may exist in other WebKit browsers as well.
+    //
+    const constructor = this.constructor as typeof QuietElement;
+    if (constructor.formAssociated && hasValidationBug()) {
+      this.internals.setValidity = () => {};
+      if (!hasWarnedAboutValidationBug) {
+        hasWarnedAboutValidationBug = true;
+        console.warn(
+          `This browser is affected by the following WebKit bug, so constraint validation is disabled for Quiet UI elements: ` +
+            `https://bugs.webkit.org/show_bug.cgi?id=261432\n` +
+            `Please upgrade your browser for a better form experience and to prevent this warning.`
+        );
+      }
+    }
   }
 
   connectedCallback() {

@@ -74,6 +74,12 @@ export default css`
     &:has(#text-box[type='color']) {
       padding: 0 0.25em;
     }
+
+    /* When an autofill value is present, set the background color of the entire visual box, not just the input */
+    &:has(:autofill),
+    &:has(:-webkit-autofill) {
+      background-color: var(--quiet-primary-fill-softer);
+    }
   }
 
   #text-box {
@@ -97,12 +103,14 @@ export default css`
       -webkit-user-select: none;
     }
 
+    /* Override Safari's autofill background color so the visual box styles show through when autofill values exist */
     &:-webkit-autofill,
     &:-webkit-autofill:hover,
     &:-webkit-autofill:focus,
     &:-webkit-autofill:active {
-      box-shadow: 0 0 0 2em var(--quiet-background-color) inset !important;
-      -webkit-text-fill-color: var(--quiet-primary-text-colorful);
+      -webkit-background-clip: text;
+      background-color: transparent;
+      -webkit-text-fill-color: inherit;
     }
 
     &::-webkit-search-decoration,

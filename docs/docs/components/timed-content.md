@@ -5,29 +5,43 @@ layout: component
 
 ```html {.example}
 <quiet-timed-content id="timed__overview">
-  <p>It's national Cat Day! 😸</p>
+  <div>
+    <img src="https://images.unsplash.com/photo-1668303656123-54ae65ad75ee?q=80&w=2818&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="A cat curled up asleep in the moonlight">
+    <small>It's before noon, the cats are still sleeping</small>
+  </div>
 
-  <p slot="before">This will show <em>before</em> National Cat Day (October 29)</p>
-  <p slot="after">This will show <em>after</em> National Cat Day (October 29)</p>
+  <div slot="after">
+    <img src="https://images.unsplash.com/photo-1568043210943-0e8aac4b9734?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="A cat laying in the daylight">
+    <small>It's past noon, the cats are out and about</small>
+  </div>
 </quiet-timed-content>
 
 <script>
   // Obtain a reference
   const timedContent = document.getElementById('timed__overview');
 
-  // Calculate dates for this year's National Cat Day
-  const currentYear = new Date().getFullYear();
-  const catDayStart = new Date(currentYear, 9, 29).setHours(0, 0, 0, 0); // October = 9
-  const catDayEnd = new Date(currentYear, 9, 29).setHours(23, 59, 59, 999);
+  // Get today's date
+  const today = new Date();
+  
+  // Set the start date to 12am today and the end date to 12pm today
+  const startDate = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0);
+  const endDate = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 12, 0, 0);
 
   // Set the start and end dates
-  timedContent.startDate = new Date(catDayStart);
-  timedContent.endDate = new Date(catDayEnd);
+  timedContent.startDate = startDate;
+  timedContent.endDate = endDate;
 </script>
 
 <style>
-  #timed__overview p {
-    margin-block-end: 0;
+  #timed__overview {
+    img {
+      margin-block-end: 0.5rem;
+    }
+
+    small {
+      display: block;
+      text-align: center;
+    }
   }
 </style>
 ```

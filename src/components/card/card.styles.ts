@@ -15,6 +15,7 @@ export default css`
   /* Normal */
   :host {
     --border-color: var(--quiet-neutral-stroke-softer);
+
     border: var(--border-style) var(--border-width) var(--border-color);
     background-color: var(--quiet-paper-color);
     box-shadow: var(--quiet-shadow-softer);
@@ -24,7 +25,7 @@ export default css`
   :host([appearance='filled']) {
     --border-color: var(--quiet-background-color);
 
-    border: none;
+    border-color: var(--border-color);
     background-color: var(--quiet-neutral-fill-softer);
   }
 

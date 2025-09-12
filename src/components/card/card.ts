@@ -21,6 +21,8 @@ import styles from './card.styles.js';
  * @slot footer - Content to place in the dialog's footer.
  *
  * @cssproperty [--spacing=1.5rem] - The spacing to use throughout the card.
+ * @cssproperty [--border-width] - The width of the card's border, including interior borders.
+ * @cssproperty [--border-style] - The style of the card's border.
  *
  * @csspart body - The container that wraps the card's body.
  * @csspart header - The container that wraps the card's header. A flex container, by default.

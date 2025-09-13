@@ -1487,6 +1487,10 @@ html:not(.quiet-dark) quiet-scroller:has(.component-table) {
     font-size: 0.9375rem;
     text-align: start;
 
+    mark {
+      color: var(--quiet-text-body);
+    }
+
     @media screen and (min-width: 768px) and (max-width: 959px) {
       font-size: 0.875rem;
     }

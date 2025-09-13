@@ -60,5 +60,6 @@ I'd like to thank the following projects and the amazing people behind them for 
 - [The Custom Elements Manifest project](https://custom-elements-manifest.open-wc.org/) for making API documentation easy
 - [Floating UI](https://floating-ui.com/) for positioning all the things
 - [Tabler Icons](https://tabler.io/icons) for thousands of beautiful icons
+- [Tilt Warp](https://fonts.google.com/specimen/Tilt+Warp) for perfect letters
 
 <img class="whiskers-center" src="/assets/images/whiskers/standing-proud.svg" alt="Whiskers the mouse standing proudly">

@@ -81,16 +81,16 @@ export class QuietTimedContent extends QuietElement {
       if (start && !isStartValid) console.warn('Invalid start date:', this.startDate);
       if (end && !isEndValid) console.warn('Invalid end date:', this.endDate);
       // Fallback to default content
-      return html` <slot></slot> `;
+      return html`<slot></slot>`;
     }
 
     // Determine which slot to show
     const showBefore = isStartValid && now < start;
     const showAfter = isEndValid && now >= end;
 
-    if (showBefore) return html` <slot name="before"></slot> `;
-    if (showAfter) return html` <slot name="after"></slot> `;
-    return html` <slot></slot> `;
+    if (showBefore) return html`<slot name="before"></slot>`;
+    if (showAfter) return html`<slot name="after"></slot>`;
+    return html`<slot></slot>`;
   }
 }
 

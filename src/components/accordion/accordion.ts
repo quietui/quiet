@@ -261,7 +261,7 @@ export class QuietAccordion extends QuietElement {
   }
 
   render() {
-    return html` <slot @slotchange=${this.handleSlotChange}></slot> `;
+    return html`<slot @slotchange=${this.handleSlotChange}></slot>`;
   }
 }
 

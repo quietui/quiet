@@ -179,7 +179,7 @@ export class QuietLoremIpsum extends QuietElement {
       this.innerHTML = this.generateList();
     }
 
-    return html` <slot></slot> `;
+    return html`<slot></slot>`;
   }
 }
 

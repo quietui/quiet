@@ -56,7 +56,7 @@ export class QuietAvatar extends QuietElement {
   render() {
     return html`
       ${this.characters
-        ? html` <span id="characters" data-length=${this.characters.length}>${this.characters.slice(0, 5)}</span> `
+        ? html`<span id="characters" data-length=${this.characters.length}>${this.characters.slice(0, 5)}</span>`
         : html`
             <slot name="icon">
               <quiet-icon library="system" family="filled" name="user"></quiet-icon>

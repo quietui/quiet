@@ -71,7 +71,7 @@ export class QuietButtonGroup extends QuietElement {
   }
 
   render() {
-    return html` <slot @slotchange=${this.updateClassNames}></slot> `;
+    return html`<slot @slotchange=${this.updateClassNames}></slot>`;
   }
 }
 

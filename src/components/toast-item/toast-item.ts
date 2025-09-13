@@ -160,12 +160,12 @@ export class QuietToastItem extends QuietElement {
 
   render() {
     return html`
-      ${this.whenSlotted('icon', html` <div id="icon" part="icon"><slot name="icon"></slot></div> `)}
+      ${this.whenSlotted('icon', html`<div id="icon" part="icon"><slot name="icon"></slot></div>`)}
 
       <div id="content" part="content"><slot></slot></div>
 
       ${!this.withoutClose
-        ? html` <button
+        ? html`<button
             id="close-button"
             part="close-button"
             type="button"

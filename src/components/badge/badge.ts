@@ -32,7 +32,7 @@ export class QuietBadge extends QuietElement {
   @property({ reflect: true }) attention: 'tap' | 'shake' | 'sparkle';
 
   render() {
-    return html` <slot></slot> `;
+    return html`<slot></slot>`;
   }
 }
 

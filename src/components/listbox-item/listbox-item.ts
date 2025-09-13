@@ -71,7 +71,7 @@ export class QuietListboxItem extends QuietElement {
   }
 
   render() {
-    return html` <slot></slot> `;
+    return html`<slot></slot>`;
   }
 }
 

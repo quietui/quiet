@@ -42,14 +42,14 @@ export class QuietCard extends QuietElement {
 
   render() {
     return html`
-      ${this.whenSlotted('media', html` <div id="media" part="media"><slot name="media"></slot></div> `)}
+      ${this.whenSlotted('media', html`<div id="media" part="media"><slot name="media"></slot></div>`)}
       ${this.whenSlotted(
         'header',
         html`
           <header id="header" part="header">
             <slot name="header"></slot>
             ${this.orientation === 'vertical'
-              ? html` <div id="actions" part="actions"><slot name="actions"></slot></div> `
+              ? html`<div id="actions" part="actions"><slot name="actions"></slot></div>`
               : ''}
           </header>
         `
@@ -68,7 +68,7 @@ export class QuietCard extends QuietElement {
         `
       )}
       ${this.orientation === 'horizontal'
-        ? this.whenSlotted('actions', html` <div id="actions" part="actions"><slot name="actions"></slot></div> `)
+        ? this.whenSlotted('actions', html`<div id="actions" part="actions"><slot name="actions"></slot></div>`)
         : ''}
     `;
   }

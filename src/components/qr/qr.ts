@@ -80,7 +80,7 @@ export class QuietQr extends QuietElement {
   }
 
   render() {
-    return html` <canvas aria-hidden="true" @transitionend=${() => this.draw()}></canvas> `;
+    return html`<canvas aria-hidden="true" @transitionend=${() => this.draw()}></canvas>`;
   }
 }
 

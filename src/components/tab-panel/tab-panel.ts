@@ -43,7 +43,7 @@ export class QuietTabPanel extends QuietElement {
   }
 
   render() {
-    return html` <slot></slot> `;
+    return html`<slot></slot>`;
   }
 }
 

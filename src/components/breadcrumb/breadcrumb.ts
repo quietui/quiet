@@ -31,7 +31,7 @@ export class QuietBreadcrumb extends QuietElement {
   }
 
   render() {
-    return html` <slot></slot> `;
+    return html`<slot></slot>`;
   }
 }
 

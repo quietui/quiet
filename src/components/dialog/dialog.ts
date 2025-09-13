@@ -220,7 +220,7 @@ export class QuietDialog extends QuietElement {
           <slot></slot>
         </div>
 
-        ${this.whenSlotted('footer', html` <footer id="footer" part="footer"><slot name="footer"></slot></footer> `)}
+        ${this.whenSlotted('footer', html`<footer id="footer" part="footer"><slot name="footer"></slot></footer>`)}
       </dialog>
     `;
   }

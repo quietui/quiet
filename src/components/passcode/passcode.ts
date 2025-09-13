@@ -404,7 +404,7 @@ export class QuietPasscode extends QuietFormControlElement {
           }
 
           // Delimiters
-          return html` <div part="delimiter" class="delimiter">${this.format.charAt(index)}</div>`;
+          return html`<div part="delimiter" class="delimiter">${this.format.charAt(index)}</div>`;
         })}
 
         <input

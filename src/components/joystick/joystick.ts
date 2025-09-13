@@ -288,7 +288,7 @@ export class QuietJoystick extends QuietElement {
   }
 
   render() {
-    return html` <div id="thumb" part="thumb"><slot name="thumb"></slot></div> `;
+    return html`<div id="thumb" part="thumb"><slot name="thumb"></slot></div>`;
   }
 }
 

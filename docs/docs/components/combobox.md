@@ -123,6 +123,22 @@ console.log(multiCombobox.value); // ["persian", "siamese"]
 multiCombobox.value = ['bengal', 'ragdoll'];
 ```
 
+### Adding a clear button
+
+Add the `with-clear` attribute to show a clear button when the combobox has a value. This allows users to quickly clear their selection.
+
+```html {.example}
+<quiet-combobox 
+  label="With clear button"
+  placeholder="Select and then clear"
+  with-clear
+>
+  <quiet-combobox-item value="yes" selected>Yes, I want treats!</quiet-combobox-item>
+  <quiet-combobox-item value="no">No treats needed</quiet-combobox-item>
+  <quiet-combobox-item value="maybe">Maybe later</quiet-combobox-item>
+</quiet-combobox>
+```
+
 ### Multiple selection
 
 Use the `multiple` attribute to enable multi-selection mode. Selected items appear as tags in the input area. Users can remove tags by clicking the × button or pressing Backspace.
@@ -149,22 +165,6 @@ Use the `multiple` attribute to enable multi-selection mode. Selected items appe
 :::info
 In multiple mode, the dropdown stays open after selecting an item, allowing users to quickly select multiple options. Press Escape or click outside to close the dropdown.
 :::
-
-### Adding a clear button
-
-Add the `with-clear` attribute to show a clear button when the combobox has a value. This allows users to quickly clear their selection.
-
-```html {.example}
-<quiet-combobox 
-  label="With clear button"
-  placeholder="Select and then clear"
-  with-clear
->
-  <quiet-combobox-item value="yes" selected>Yes, I want treats!</quiet-combobox-item>
-  <quiet-combobox-item value="no">No treats needed</quiet-combobox-item>
-  <quiet-combobox-item value="maybe">Maybe later</quiet-combobox-item>
-</quiet-combobox>
-```
 
 ### Start and end content
 

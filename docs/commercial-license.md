@@ -6,7 +6,7 @@ section: license
 bodyClass: with-grid
 ---
 
-Here is the text of Quiet UI's commercial license agreement. This license only applies to users who have purchased a valid license from A Beautiful Site, LLC.
+For reference, here is the full text of Quiet UI's commercial license agreement. This license only applies to users who have purchased a valid license from A Beautiful Site, LLC.
 
 ---
 

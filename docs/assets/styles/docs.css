@@ -1368,7 +1368,7 @@ html:not(.quiet-dark) quiet-scroller:has(.component-table) {
     text-align: center;
 
     &:has(a) {
-      transition: all 100ms ease-out;
+      transition: all 150ms ease-out;
 
       @media (hover: hover) {
         &:hover {

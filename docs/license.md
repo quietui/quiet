@@ -41,7 +41,7 @@ Quiet UI is source-available and completely free of charge for personal, educati
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Private Discord access</li>
     </ul>
     <quiet-button variant="primary" pill href="https://buy.polar.sh/polar_cl_iRqZcL1zYDR6HYDZKYAOiDHMxZPsIGZvUebXF1T2xIj">
-      Purchase &middot; $299
+      Purchase &middot; $199
     </quiet-button>
   </div>
 
@@ -58,14 +58,15 @@ Quiet UI is source-available and completely free of charge for personal, educati
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Private Discord access</li>
     </ul>
     <quiet-button class="button-unlimited" pill href="https://buy.polar.sh/polar_cl_iRqZcL1zYDR6HYDZKYAOiDHMxZPsIGZvUebXF1T2xIj">
-      Purchase &middot; $999
+      Purchase &middot; $799
     </quiet-button>
   </div>  
 </div>
 
 <p style="text-align: center; text-wrap: balance; margin-block: 2.5rem 2rem;">
   <small>
-    Prices shown are flat rate, one-time payments
+    Prices are flat rate, one-time payments.
+    Visit the <a href="https://polar.sh/quietui/portal" class="link-disguised">customer portal</a> for order history and receipts.
   </small>
 </p>
 
@@ -154,6 +155,10 @@ Quiet UI is source-available and completely free of charge for personal, educati
 
 ## Frequently asked questions
 
+:::details Where can I find my order history, receipts, and commercial license?
+You can access your orders and receipts by visiting the [customer portal](https://polar.sh/quietui/portal). The exact text of the commercial license [can be found here](/commercial-license).
+:::
+
 :::details What is a source-available license?
 Quiet doesn't qualify as "open source" under the [OSI's definition](https://en.wikipedia.org/wiki/Open_Source_Initiative) of the term, but it's [source-available license](https://github.com/quietui/quiet/blob/main/LICENSE) is actually _more_ permissive than most viral open source licenses. You can use Quiet, learn from it, and change it just like open source software.
 
@@ -170,18 +175,8 @@ _Noncommercial_ means you can't use the software to make money or as part of you
 The key thing is that you're not using the software to support a business in any way. If you are, you'll need to [purchase a commercial license](/license).
 :::
 
-:::details Can I contribute to the project?
-While not technically open source, the spirit of the project is undeniably open. The key divergence in Quiet's source-available license is this: if you're using the software for commercial purposes, you must purchase a license.
-
-You can still view the source code and contribute to the project in a variety of ways. However, please review the [contribution guidelines](/docs/developers/contributing) first, as this project is very opinionated.
-:::
-
 :::details Do you offer support? {.faq}
-Yes. You can purchase a commercial license to unlock access to the private Discord where you can get help directly from me, the maintainer, and chat with other patrons of the project. My response times are usually within 24 hours.
-:::
-
-:::details Is support guaranteed? {.faq}
-I will always do my best to help you and I usually reply within 24 hours. However, that doesn't guarantee I'll be able to fix your problem every time.
+Yes. You can purchase a commercial license to unlock access to the private Discord where you can get help directly from me, the maintainer, and chat with other patrons of the project. My response times are usually within 24 hours. I will always do my best to help you, but that doesn't guarantee I'll be able to fix your problem every time.
 :::
 
 :::details How can I report a bug? {.faq}
@@ -198,10 +193,6 @@ Features can be [requested on GitHub](https://github.com/quietui/quiet/discussio
 
 :::details Can I sponsor a feature? {.faq}
 I generally don't accept sponsorships for specific features. This lets me focus on what's best for the project. Quiet is the result of many years of experience and my commitment to painstakingly curating the project. I want people to sponsor it because they see the vision, not because they want to change it.
-:::
-
-:::details What does the commercial license say?
-The exact text of the commercial license [can be found here](/commercial-license).
 :::
 
 :::details Can I fork the project?

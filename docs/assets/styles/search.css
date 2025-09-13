@@ -7,7 +7,7 @@
     overflow: hidden;
     border-radius: var(--quiet-border-radius-xl);
     backdrop-filter: blur(6px);
-    background-color: var(--quiet-background-color);
+    background-color: var(--quiet-paper-color);
   }
 
   &::part(body) {

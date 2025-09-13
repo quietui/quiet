@@ -932,53 +932,22 @@ quiet-callout {
 /* Grid background */
 .with-grid {
   position: relative;
-
-  --grid-size: 75px;
-  --grid-half-size: calc(var(--grid-size) / 2);
-  --grid-color: color-mix(
-    in oklab,
-    var(--quiet-primary-fill-mid),
-    transparent calc(100% - (100% * var(--opacity-base) * 0.5))
-  );
-  --opacity-base: 0.18;
-
-  /* prettier-ignore */
   background-image:
-    /* Gradient top fade to transparent */
-    linear-gradient(to top, transparent 0, color-mix(in oklab, var(--quiet-background-color), transparent 40%) 100%),
     /* Gradient bottom fade to primary */
     linear-gradient(
       to bottom,
       transparent 66%,
-      color-mix(in oklab, var(--quiet-primary-fill-softer), transparent 40%) 100%
+      color-mix(in oklab, var(--quiet-primary-fill-mid), transparent 85%) 100%
     ),
-    /* Vertical grid lines */
-    linear-gradient(
-      color-mix(in oklab, var(--quiet-primary-fill-mid), transparent calc(100% - (100% * var(--opacity-base) * 0.5)))
-        1px,
-      transparent 1px
-    ),
-    /* Horizontal grid lines */
-    linear-gradient(
-      90deg,
-      color-mix(in oklab, var(--quiet-primary-fill-mid), transparent calc(100% - (100% * var(--opacity-base) * 0.5)))
-        1px,
-      transparent 1px
-    );
-
+    /* Dots */
+      radial-gradient(color-mix(in oklab, var(--quiet-primary-fill-mid), transparent 85%) 1px, transparent 1.5px);
   background-position:
     100%,
-    100%,
-    -0.5px -0.5px,
-    -0.5px -0.5px;
-
+    0 0;
   background-size:
     100%,
-    100%,
-    var(--grid-half-size) var(--grid-half-size),
-    var(--grid-half-size) var(--grid-half-size);
-
-  background-repeat: repeat;
+    1.125em 1.125em;
+  background-repeat: no-repeat, space;
   background-attachment: fixed;
   text-wrap: balance;
 }
@@ -1110,6 +1079,7 @@ quiet-callout {
   p,
   div {
     text-align: center;
+    text-wrap: balance;
   }
 
   h2 {
@@ -1294,6 +1264,18 @@ html:not(.quiet-dark) quiet-scroller:has(.component-table) {
   }
 }
 
+.whiskers-center-large {
+  display: block;
+  width: auto;
+  max-height: 20rem;
+  margin-inline: auto;
+  margin-block-end: 1.5rem;
+
+  @media screen and (max-width: 959px) {
+    max-height: 16rem;
+  }
+}
+
 .whiskers-email {
   position: relative;
   width: 300px;
@@ -1374,8 +1356,9 @@ html:not(.quiet-dark) quiet-scroller:has(.component-table) {
     display: block;
     position: relative;
     margin: 0;
-    padding: 1.5rem;
+    padding: 2.5rem 1.5rem;
     border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
+
     border-radius: 1rem;
     background-color: var(--quiet-paper-color);
     box-shadow: var(--quiet-shadow-softer);
@@ -1410,7 +1393,7 @@ html:not(.quiet-dark) quiet-scroller:has(.component-table) {
     }
 
     quiet-icon {
-      font-size: 3.5rem;
+      font-size: 4rem;
       stroke-width: 1px;
     }
   }
@@ -1550,4 +1533,72 @@ h2 + details {
   display: block;
   color: revert;
   text-align: center;
+}
+
+.link-disguised {
+  color: inherit;
+  font-weight: inherit;
+}
+
+/* Print styles */
+@media print {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .features-grid {
+    break-after: avoid;
+  }
+
+  #header,
+  #sidebar,
+  #outline {
+    display: none !important;
+  }
+
+  #page {
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  #body {
+    display: block !important;
+    width: auto !important;
+    max-width: none !important;
+  }
+
+  .code-example,
+  .code-example-source {
+    border: none !important;
+  }
+
+  .code-example-preview,
+  .code-example-buttons {
+    display: none !important;
+  }
+
+  .code-example-source {
+    display: block !important;
+  }
+
+  quiet-scroller {
+    &::part(content) {
+      max-width: 100% !important;
+      overflow: visible !important;
+    }
+  }
+
+  .component-table {
+    td {
+      width: auto !important;
+      min-width: 0 !important;
+    }
+
+    quiet-copy quiet-icon {
+      display: none !important;
+    }
+  }
 }

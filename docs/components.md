@@ -81,14 +81,14 @@ bodyClass: browse-components with-grid
       flex: 1 1 auto;
       height: 100%;
       border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
-      border-radius: var(--quiet-border-radius-md);
+      border-radius: 1rem;
       background-color: var(--quiet-paper-color);
       box-shadow: var(--quiet-shadow-softer);
       font-weight: inherit;
       padding: 1.25rem;
       text-decoration: none;
       color: inherit;
-      transition: all 100ms ease-out;
+      transition: all 150ms ease-out;
 
       &:focus-visible {
         outline-offset: calc(-1 * var(--quiet-border-width));
@@ -102,13 +102,17 @@ bodyClass: browse-components with-grid
       }
 
       .name {
-        font-size: 1.3875rem;
+        font-size: 1.25rem;
         font-weight: var(--quiet-font-weight-semibold);
         margin-block-end: 0.25rem;
       }
 
       .tag-name {
         margin-block: 0;
+
+        code {
+          font-size: 0.975rem;
+        }
       }
 
       .summary {

@@ -197,7 +197,7 @@ Use the `intersect-class` attribute to automatically apply the specified class t
       text-align: center;
       color: white;
       font-weight: bold;
-      text-shadow: 0 1px #0008;
+      text-shadow: 0 -0.5px #0008;
       opacity: 0;
       padding: 2rem;
       margin-inline: auto;

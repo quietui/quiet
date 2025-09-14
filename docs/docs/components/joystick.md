@@ -198,11 +198,32 @@ You can customize the joystick's appearance using CSS custom properties and part
     --size: 10rem;
     --thumb-size: 3rem;
 
-    /* Stay forestgreen until 75%, then transition to firebrick from 75% to 100% */
-    background-color: color-mix(in oklab, forestgreen, firebrick calc(clamp(0, (var(--distance) - 0.75) / 0.25, 1) * 100%));
+    /* Mesh gradient with red overlay that fades in after 75% distance */
+    background: 
+      /* Red overlay */
+      linear-gradient(
+        rgb(255 98 82 / calc(clamp(0, (var(--distance) - 0.75) * 4, 1))),
+        rgb(255 98 82 / calc(clamp(0, (var(--distance) - 0.75) * 4, 1)))
+      ),
+      /* Mesh gradient */
+      radial-gradient(at 71% 0%, hsl(25, 95%, 72%) 0px, transparent 55%),
+      radial-gradient(at 94% 41%, hsl(355, 95%, 62%) 0px, transparent 55%),
+      radial-gradient(at 18% 54%, hsl(55, 87%, 84%) 0px, transparent 55%),
+      hsl(25, 95%, 72%);
 
+    /* Aluminum thumb */
     &::part(thumb) {
-      background-color: white;
+      background: 
+        radial-gradient(ellipse at 35% 30%, rgb(255 255 255 / 0.8) 0%, rgb(255 255 255 / 0.3) 20%, transparent 40%),
+        radial-gradient(ellipse at 65% 70%, rgb(255 255 255 / 0.2) 0%, transparent 30%),
+        radial-gradient(circle at center, rgb(236 240 241) 0%, rgb(189 195 199) 30%, rgb(149 165 166) 60%, rgb(127 140 141) 100%);
+      box-shadow: 
+        inset 0 3px 6px rgb(255 255 255 / 0.6),
+        inset 0 -3px 8px rgb(0 0 0 / 0.4),
+        inset 2px 0 4px rgb(0 0 0 / 0.1),
+        inset -2px 0 4px rgb(0 0 0 / 0.1),
+        0 0 20px rgb(189 195 199 / 0.4),
+        0 6px 16px rgb(0 0 0 / 0.2);
     }
   }
 </style>

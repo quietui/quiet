@@ -6,7 +6,7 @@ export default css`
     position: relative;
     align-items: center;
     padding: 0.33em 1em;
-    border-radius: var(--quiet-border-radius-sm);
+    border-radius: calc(var(--quiet-border-radius-sm) / 2);
     isolation: isolate;
     color: var(--quiet-neutral-text-on-soft);
     font-size: 0.9375em;

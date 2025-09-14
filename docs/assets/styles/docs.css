@@ -1373,14 +1373,18 @@ html:not(.quiet-dark) quiet-scroller:has(.component-table) {
     margin: 0;
     padding: 2.5rem 1.5rem;
     border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
-
     border-radius: 1rem;
     background-color: var(--quiet-paper-color);
     box-shadow: var(--quiet-shadow-softer);
     color: color-mix(in oklab, var(--quiet-neutral-text-on-soft), transparent 25%);
+    font-weight: var(--quiet-font-weight-semibold);
     line-height: 1.6;
     list-style: none;
     text-align: center;
+
+    small {
+      font-weight: var(--quiet-font-weight-normal);
+    }
 
     &:has(a) {
       transition: all 150ms ease-out;
@@ -1437,6 +1441,10 @@ html:not(.quiet-dark) quiet-scroller:has(.component-table) {
   grid-template-columns: 1fr 1fr 1fr;
   gap: 0.5rem;
   text-align: center;
+
+  h3 {
+    font-size: 1.5rem;
+  }
 
   h3:first-of-type {
     margin-block: 0;

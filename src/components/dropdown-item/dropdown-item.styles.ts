@@ -6,7 +6,7 @@ export default css`
     position: relative;
     align-items: center;
     padding: 0.33em 1em;
-    border-radius: calc(var(--quiet-border-radius-sm) / 2);
+    border-radius: var(--quiet-border-radius-sm);
     isolation: isolate;
     color: var(--quiet-neutral-text-on-soft);
     font-size: 0.9375em;
@@ -26,6 +26,7 @@ export default css`
 
   :host(:focus-visible) {
     z-index: 1;
+    border-radius: calc(var(--quiet-border-radius-sm) / 2); /* to align with the menu's curve */
     outline: var(--quiet-focus-ring);
     outline-offset: var(--quiet-focus-ring-offset);
     background-color: var(--quiet-neutral-fill-softer);

@@ -7,10 +7,9 @@ layout: component
 <div id="mesh__overview">
   <!-- This generates a mesh gradient -->
   <quiet-mesh-gradient 
-    style="--gradient-color: #f97316;"
+    style="--gradient-color: #f97316; --brightness: 40;"
     complexity="3" 
     seed="75"
-    brightness="40"
   >
     <h2>A Purrfect Mesh</h2>
     <p>Text colors automatically adjust to ensure readability</p>
@@ -106,7 +105,7 @@ layout: component
 
   brightnessSlider.addEventListener('input', () => {
     currentValues.brightness = brightnessSlider.value;
-    meshGradient.brightness = currentValues.brightness;
+    meshGradient.style.setProperty('--brightness', currentValues.brightness);
     updateCopyData();
   });
 
@@ -120,10 +119,9 @@ layout: component
   function updateCopyData() {
     copyHtmlButton.data = `
 <quiet-mesh-gradient
-  style="--gradient-color: ${currentValues.color};"
+  style="--gradient-color: ${currentValues.color}; --brightness: ${currentValues.brightness};"
   complexity="${currentValues.complexity}"
   seed="${currentValues.seed}"
-  brightness="${currentValues.brightness}"
 >
   <!-- Your content here -->
 </quiet-mesh-gradient>
@@ -188,19 +186,17 @@ The text color will automatically adjust to white or black based on the gradient
 
 ```html {.example .flex-col}
 <quiet-mesh-gradient
-  style="--gradient-color: #fad5ff; height: 250px;"
+  style="--gradient-color: #fad5ff; --brightness: 40; height: 250px;"
   complexity="3"
   seed="24"
-  brightness="40"
 >
   Light backgrounds get dark text
 </quiet-mesh-gradient>
 
 <quiet-mesh-gradient
-  style="--gradient-color: #561161; height: 250px;"
+  style="--gradient-color: #561161; --brightness: 40; height: 250px;"
   complexity="3"
   seed="75"
-  brightness="40"
 >
   Dark background get light text
 </quiet-mesh-gradient>
@@ -212,10 +208,9 @@ Content slotted into the mesh gradient will be centered by default. You can targ
 
 ```html {.example}
 <quiet-mesh-gradient
-  style="--gradient-color: #5290f6; height: 250px;"
+  style="--gradient-color: #5290f6; --brightness: 24; height: 250px;"
   complexity="8"
   seed="870"
-  brightness="24"
 >
   <h2>Beautiful mesh gradient</h2>
   <p>Text is automatically colored based on the background</p>
@@ -227,13 +222,13 @@ Content slotted into the mesh gradient will be centered by default. You can targ
 Adjust the brightness from -100 (darker) to +100 (lighter). Positive values create a tinted effect (lighter and slightly desaturated), while negative values create a shaded effect (darker while maintaining richness):
 
 ```html {.example .flex-col}
-<quiet-mesh-gradient style="--gradient-color: #3b82f6; height: 250px;" brightness="75" seed="100">
+<quiet-mesh-gradient style="--gradient-color: #3b82f6; --brightness: 75; height: 250px;" seed="100">
   <p>Lighter (+75)</p>
 </quiet-mesh-gradient>
-<quiet-mesh-gradient style="--gradient-color: #3b82f6; height: 250px;" brightness="0" seed="100">
+<quiet-mesh-gradient style="--gradient-color: #3b82f6; --brightness: 0; height: 250px;" seed="100">
   <p>Original</p>
 </quiet-mesh-gradient>
-<quiet-mesh-gradient style="--gradient-color: #3b82f6; height: 250px;" brightness="-75" seed="100">
+<quiet-mesh-gradient style="--gradient-color: #3b82f6; --brightness: -75; height: 250px;" seed="100">
   <p>Darker (-75)</p>
 </quiet-mesh-gradient>
 ```

@@ -23,6 +23,7 @@ type HSL = { h: number; s: number; l: number };
  *
  * @cssproperty [--gradient-color] - The base color for the gradient. Accepts any valid CSS color format, but does not
  *  accept custom properties, e.g. `var(--my-color)`.
+ * @cssproperty [--brightness=0] - Adjusts the brightness of the gradient from -100 (darker) to +100 (lighter).
  * @cssproperty [--optimal-text-color] - A readonly custom property that maps to the optimal text color (black or white)
  *  based on the gradient's base color.
  */
@@ -31,6 +32,7 @@ export class QuietMeshGradient extends QuietElement {
   static styles: CSSResultGroup = [hostStyles, styles];
 
   @state() private currentBaseColor = '';
+  @state() private currentBrightness = 0;
   @state() private gradientStyle = '';
 
   /** The number of gradient layers to generate. */
@@ -39,17 +41,16 @@ export class QuietMeshGradient extends QuietElement {
   /** A seed value for consistent gradient generation. If not provided, the gradient will be random. */
   @property({ type: Number }) seed: number | undefined;
 
-  /** Adjusts the brightness of the gradient from -100 (darker) to +100 (lighter). */
-  @property({ type: Number }) brightness = 0;
-
   firstUpdated() {
     this.detectAndGenerateGradient();
   }
 
   updated(changedProperties: PropertyValues<this>) {
-    if (changedProperties.has('complexity') || changedProperties.has('seed') || changedProperties.has('brightness')) {
+    if (changedProperties.has('complexity') || changedProperties.has('seed')) {
       const baseColor = this.getBaseColor();
+      const brightness = this.getBrightness();
       this.currentBaseColor = baseColor || '';
+      this.currentBrightness = brightness;
       this.generateGradient(baseColor);
     }
   }
@@ -59,7 +60,8 @@ export class QuietMeshGradient extends QuietElement {
    * (lighten + desaturate) and negative values shade it (darken only).
    */
   private adjustBrightness(hsl: HSL): HSL {
-    const amount = this.brightness / 100;
+    const brightness = this.getBrightness();
+    const amount = brightness / 100;
     return amount === 0
       ? hsl
       : {
@@ -82,13 +84,15 @@ export class QuietMeshGradient extends QuietElement {
     };
   }
 
-  /** Detects the current base color and regenerates the gradient if needed. */
+  /** Detects the current base color and brightness, and regenerates the gradient if needed. */
   private detectAndGenerateGradient() {
     const baseColor = this.getBaseColor();
+    const brightness = this.getBrightness();
 
-    // Only regenerate if the color actually changed or this is the first generation
-    if (baseColor !== this.currentBaseColor || !this.gradientStyle) {
+    // Only regenerate if the color or brightness actually changed or this is the first generation
+    if (baseColor !== this.currentBaseColor || brightness !== this.currentBrightness || !this.gradientStyle) {
       this.currentBaseColor = baseColor || '';
+      this.currentBrightness = brightness;
       this.generateGradient(baseColor);
     }
   }
@@ -178,6 +182,13 @@ export class QuietMeshGradient extends QuietElement {
     return baseColor || undefined;
   }
 
+  /** Gets the current value of `--brightness` from computed styles. */
+  private getBrightness(): number {
+    const computedStyle = getComputedStyle(this);
+    const brightness = computedStyle.getPropertyValue('--brightness').trim();
+    return brightness ? parseFloat(brightness) : 0;
+  }
+
   /** Determines the optimal text color (black or white) based on the background color. */
   private getOptimalTextColor(color: string): 'black' | 'white' {
     const tinyColor = new TinyColor(color);
@@ -204,11 +215,11 @@ export class QuietMeshGradient extends QuietElement {
   }
 
   /**
-   * Handles the `transitionend` event to detect when `--gradient-color` changes. The 1ms transition on the `color`
-   * property triggers this.
+   * Handles the `transitionend` event to detect when `--gradient-color` or `--brightness` changes. The 1ms transitions
+   * on the `color` and `z-index` properties trigger this.
    */
   private handleColorTransition = (event: TransitionEvent) => {
-    if (event.propertyName === 'color') {
+    if (event.propertyName === 'color' || event.propertyName === 'z-index') {
       this.detectAndGenerateGradient();
     }
   };

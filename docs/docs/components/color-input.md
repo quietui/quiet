@@ -115,7 +115,7 @@ Color inputs support multiple visual styles through the `appearance` attribute.
 ></quiet-color-input>
 ```
 
-### Pill-shaped text fields
+### Pill-shaped color inputs
 
 Color inputs can be rendered with pill-shaped edges by adding the `pill` attribute.
 

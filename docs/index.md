@@ -29,7 +29,7 @@ Browse components
 <quiet-icon id="more-hint" label="Scroll down" name="chevron-down"></quiet-icon>
 </div>
 
-<div id="below-the-fold" class="below-splash">
+<div class="below-splash">
 
 <h2 data-no-anchor>What's in the box?</h2>
 

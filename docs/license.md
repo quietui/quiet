@@ -73,8 +73,8 @@ Quiet UI is source-available and completely free of charge for personal, educati
 <ul class="features-grid" aria-label="Features">
   <li>
     <a class="stretch" href="https://buy.polar.sh/polar_cl_iRqZcL1zYDR6HYDZKYAOiDHMxZPsIGZvUebXF1T2xIj" data-no-external>
-      <quiet-icon name="contract" style="color: #c5a231;"></quiet-icon><br>
-      Commercial licenses available<br>
+      <quiet-icon name="license" style="color: #c5a231;"></quiet-icon><br>
+      Commercial license<br>
       <small>Allows use in commercial applications</small>
     </a>
   </li>

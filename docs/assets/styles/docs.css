@@ -467,6 +467,27 @@ html[data-scroll-restoring] body {
   max-width: 90ch;
 }
 
+/* Licensing & info */
+.licensing-info {
+  --brightness: 50;
+  padding: 2rem;
+  border-radius: 1rem;
+
+  .features-grid li {
+    border-color: color-mix(in oklab, var(--quiet-paper-color), transparent 30%);
+    background-color: color-mix(in oklab, var(--quiet-paper-color), transparent 30%);
+  }
+}
+
+.quiet-dark .licensing-info {
+  --brightness: -50;
+
+  .features-grid li {
+    border-color: color-mix(in oklab, var(--quiet-paper-color), transparent 15%);
+    background-color: color-mix(in oklab, var(--quiet-paper-color), transparent 15%);
+  }
+}
+
 /* Page-specific settings */
 body.browse-components {
   #body {
@@ -1414,6 +1435,14 @@ html:not(.quiet-dark) quiet-scroller:has(.component-table) {
     quiet-icon {
       font-size: 4rem;
       stroke-width: 1px;
+    }
+
+    img {
+      display: inline-block;
+      width: auto;
+      max-width: 4rem;
+      height: 4rem;
+      max-height: 4rem;
     }
   }
 }

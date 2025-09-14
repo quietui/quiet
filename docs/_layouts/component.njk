@@ -26,14 +26,54 @@
   {{ content | safe }}
 {% endblock %}
 
-{# Component API #}
 {% block afterContent %}
+  {# Licensing & info #}
+  <quiet-mesh-gradient class="licensing-info">
+    <ul class="features-grid" aria-label="Features" style="margin-block-end: 0;">
+      <li>
+        <a class="stretch" href="/license">
+          <img class="quiet-if-light" src="/assets/images/logo-light.svg" alt="Quiet logo">
+          <img class="quiet-if-dark" src="/assets/images/logo-dark.svg" alt="Quiet logo">
+          <br>
+          Buy a commercial license<br>
+          <small>Required for commercial applications</small>
+        </a>
+      </li>
+      <li>
+        <a class="stretch" href="/figma">
+          <img src="/assets/images/figma-logo.svg" alt="Figma logo"><br>
+          Get the Figma file<br>
+          <small>Ready to use and customize</small>
+        </a>
+      </li>
+      <li>
+        <a class="stretch" href="/license">
+          <img src="/assets/images/discord-logo.svg" alt="Discord logo"><br>
+          Join the private Discord<br>
+          <small>Get help directly from the maintainer</small>
+        </a>
+      </li>
+      <li>
+        <a class="stretch" href="https://github.com/quietui/quiet/stargazers" target="_blank" data-no-external>
+          <img class="quiet-if-light" src="/assets/images/github-logo-light.svg" alt="GitHub logo">
+          <img class="quiet-if-dark" src="/assets/images/github-logo-dark.svg" alt="GitHub logo">
+          <br>
+          Star on GitHub<br>
+          <small>Free and it makes the cats happy</small>
+        </a>
+      </li>
+    </ul>
+  </quiet-mesh-gradient>
+
+  {# Component API #}
   <h2>API</h2>
 
   {# Importing #}
   <h3>Importing</h3>
   <p>
-    The <a href="/docs/#autoloading">autoloader</a> is the recommended way to import components but, if you prefer to do it manually, the following code snippets will be helpful.
+    The <a href="/docs/#autoloading">autoloader</a> is the recommended way to import components but, if you prefer to do
+    it manually, the following code snippets will be helpful. Please remember to <a href="/license">purchase a license</a>
+    if you're using this in a commercial application.
   </p>
   <quiet-tab-list class="import-tabs" label="How would you like to import this component?">
     <quiet-tab panel="cdn">CDN</quiet-tab>

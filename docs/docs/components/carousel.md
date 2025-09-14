@@ -297,10 +297,9 @@ Carousels come with a simple, minimal appearance. Feel free to customize them wi
     &::part(previous-button),
     &::part(next-button) {
       position: absolute;
-      top: 0;
-      bottom: 0;
+      top: calc(50% - 2.5rem);
       width: 5rem;
-      height: 100%;
+      height: 5rem;
       border-radius: var(--quiet-border-radius-md);
       font-size: 1.5rem;
       background: none;

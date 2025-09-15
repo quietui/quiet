@@ -14,11 +14,11 @@
   --docs-sidebar-z-index: 20;
   --docs-sidebar-width: 17rem;
   --docs-sidebar-speed: 250ms;
-  --docs-wordmark-accent-color: var(--quiet-primary-fill-mid);
+  --docs-logo-accent-color: var(--quiet-primary-fill-mid);
 }
 
 html.quiet-dark {
-  --docs-wordmark-accent-color: color-mix(in oklab, var(--quiet-primary-fill-mid), white 9.5%);
+  --docs-logo-accent-color: color-mix(in oklab, var(--quiet-primary-fill-mid), white 9.5%);
 }
 
 /* Utility classes */
@@ -855,7 +855,7 @@ quiet-badge.experimental {
   margin-block-end: 0.6rem;
 }
 
-.docs-aside a {
+.docs-aside li a {
   display: inline-flex;
   flex-wrap: wrap;
   align-items: center;

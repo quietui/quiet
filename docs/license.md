@@ -65,7 +65,8 @@ Quiet UI is source-available and completely free of charge for personal, educati
 
 <p style="text-align: center; text-wrap: balance; margin-block: 2.5rem 2rem;">
   <small>
-    Prices are flat rate, one-time payments.
+    Prices are one-time payments.
+    <a href="/figma" class="link-disguised">Figma file</a> sold separately.
     Visit the <a href="https://polar.sh/quietui/portal" class="link-disguised">customer portal</a> for order history and receipts.
   </small>
 </p>

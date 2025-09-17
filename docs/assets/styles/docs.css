@@ -1391,10 +1391,14 @@ html:not(.quiet-dark) quiet-scroller:has(.component-table) {
   gap: 2rem;
 
   li {
+    /* Padding is calculated for stretch links */
+    --grid-padding-block: 2.5rem;
+    --grid-padding-inline: 1.5rem;
+
     display: block;
     position: relative;
     margin: 0;
-    padding: 2.5rem 1.5rem;
+    padding: var(--grid-padding-block) var(--grid-padding-inline);
     border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
     border-radius: 1rem;
     background-color: var(--quiet-paper-color);
@@ -1425,9 +1429,9 @@ html:not(.quiet-dark) quiet-scroller:has(.component-table) {
       position: relative;
       top: 0;
       left: 0;
-      width: calc(100% + 2rem);
-      height: calc(100% + 2rem);
-      margin: -1rem;
+      width: calc(100% + calc(var(--grid-padding-inline) * 2));
+      height: calc(100% + calc(var(--grid-padding-block) * 2));
+      margin: calc(-1 * var(--grid-padding-block)) calc(-1 * var(--grid-padding-inline));
       padding: 1rem;
       color: inherit;
       font-weight: inherit;

@@ -5,7 +5,7 @@ layout: component
 
 ```html {.example}
 <quiet-dialog id="dialog__overview">
-  <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">
+  <h3 slot="header" style="font-size: 1.25rem; margin-block: 0;">
     Dialog
   </h3>
 
@@ -41,7 +41,7 @@ Similarly, you can add `data-dialog="close"` to any button inside a dialog to cl
 
 ```html {.example}
 <quiet-dialog id="dialog__opening">
-  <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">
+  <h3 slot="header" style="font-size: 1.25rem; margin-block: 0;">
     Opening and closing
   </h3>
 
@@ -62,7 +62,7 @@ Place elements into the `header` slot to add content at the start of the dialog.
 
 ```html {.example}
 <quiet-dialog id="dialog__header">
-  <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">
+  <h3 slot="header" style="font-size: 1.25rem; margin-block: 0;">
     With header
   </h3>
 
@@ -94,7 +94,7 @@ When clicking outside of a dialog, it will normally pulse briefly to draw the us
 
 ```html {.example}
 <quiet-dialog light-dismiss id="dialog__light">
-  <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">
+  <h3 slot="header" style="font-size: 1.25rem; margin-block: 0;">
     Light dismissal
   </h3>
 
@@ -114,7 +114,7 @@ By default, a close button is provided as a single action in the dialog's header
 
 ```html {.example}
 <quiet-dialog id="dialog__customizing">
-  <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">
+  <h3 slot="header" style="font-size: 1.25rem; margin-block: 0;">
     Actions
   </h3>
 
@@ -150,7 +150,7 @@ By default, dialogs appear in the center of the screen. To make the dialog slide
 
 ```html {.example}
 <quiet-dialog id="dialog__placement">
-  <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">
+  <h3 slot="header" style="font-size: 1.25rem; margin-block: 0;">
     Placement
   </h3>
 
@@ -192,7 +192,7 @@ The `--width` and `--height` custom properties control the default width and hei
 
 ```html {.example}
 <quiet-dialog id="dialog__width" style="--width: 800px;">
-  <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">
+  <h3 slot="header" style="font-size: 1.25rem; margin-block: 0;">
     Size
   </h3>
 
@@ -213,7 +213,7 @@ Dialogs with overflowing content will expand as the viewport allows before scrol
 
 ```html {.example}
 <quiet-dialog id="dialog__scrolling" reset-scroll>
-  <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">
+  <h3 slot="header" style="font-size: 1.25rem; margin-block: 0;">
     The Chronicles of Cats
   </h3>
 
@@ -243,7 +243,7 @@ To move focus to a specific form control when the dialog opens, add the [`autofo
 
 ```html {.example}
 <quiet-dialog id="dialog__focus">
-  <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">
+  <h3 slot="header" style="font-size: 1.25rem; margin-block: 0;">
     Autofocus
   </h3>
 
@@ -263,7 +263,7 @@ You can check `event.detail.source` to see which element triggered the dialog to
 
 ```html {.example}
 <quiet-dialog id="dialog__prevent">
-  <h3 slot="header" style="font-size: 1.125rem; margin-block: 0;">
+  <h3 slot="header" style="font-size: 1.25rem; margin-block: 0;">
     Try closing me
   </h3>
 

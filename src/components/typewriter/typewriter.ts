@@ -71,10 +71,9 @@ export class QuietTypewriter extends QuietElement {
 
   connectedCallback() {
     super.connectedCallback();
+
     if (this.startOnView) {
       this.setupIntersectionObserver();
-    } else {
-      this.startAnimation();
     }
   }
 
@@ -90,10 +89,7 @@ export class QuietTypewriter extends QuietElement {
       this.setAttribute('aria-label', this.lines.join('. '));
 
       if (!this.isAnimating) {
-        this.currentText = '';
-        this.charIndex = 0;
-        this.currentLineIndex = 0;
-        this.isErasing = false;
+        this.resetState();
         if (!this.startOnView) {
           this.startAnimation();
         }
@@ -252,12 +248,18 @@ export class QuietTypewriter extends QuietElement {
     }
   }
 
+  /** Resets the animation state to the beginning. */
+  private resetState() {
+    this.currentText = '';
+    this.charIndex = 0;
+    this.currentLineIndex = 0;
+    this.isErasing = false;
+  }
+
   /** Restarts the animation from the beginning. */
   public restart() {
     this.stopAnimation();
-    this.currentText = ''; // Reset text immediately to prevent showing first character
-    this.currentLineIndex = 0; // Reset to first line
-    this.charIndex = 0;
+    this.resetState();
     this.startAnimation();
   }
 
@@ -295,3 +297,7 @@ declare global {
     'quiet-typewriter': QuietTypewriter;
   }
 }
+
+// The Typewriter animates text which is essential for it to function, so some updates can only be scheduled as a side
+// effect of the previous update. This disables that Lit dev warning about it.
+QuietTypewriter.disableWarning?.('change-in-update');

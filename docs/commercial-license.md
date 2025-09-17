@@ -3,10 +3,11 @@ title: Commercial License Agreement
 description: Here's the official text of Quiet UI's commercial license.
 layout: page
 section: license
+noindex: true
 bodyClass: with-grid
 ---
 
-For reference, here is the full text of Quiet UI's commercial license agreement. This license only applies to users who have purchased a valid license from A Beautiful Site, LLC.
+For reference, here is the full text of Quiet UI's commercial license agreement. This license only applies to users who have purchased a valid license from A Beautiful Site, LLC and is provided here solely for reference purposes.
 
 ---
 

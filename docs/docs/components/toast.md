@@ -329,7 +329,7 @@ Use the placement `attribute` to set the position of the toast stack. The most r
 <div id="toast__placement">
   <quiet-toast></quiet-toast>
 
-  <quiet-select label="Placement" value="top-end" style="max-width: 300px;">
+  <quiet-select label="Placement" value="bottom-end" style="max-width: 300px;">
     <option value="top-start">top-start</option>
     <option value="top-center">top-center</option>
     <option value="top-end">top-end</option>

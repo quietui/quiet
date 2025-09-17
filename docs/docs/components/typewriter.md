@@ -22,7 +22,7 @@ Typewriter honors the user's [`prefers-reduced-motion`](https://developer.mozill
 
 ### Providing text
 
-Use the `text` attribute set the text to animate.
+Use the `text` attribute set the text you want to animate.
 
 ```html {.example}
 <div id="typewriter__text">
@@ -41,6 +41,47 @@ Use the `text` attribute set the text to animate.
     typewriter.restart();
   });
 </script>
+```
+
+To tell the typewriter to animate more than one line of text, separate each one with a newline (whitespace is automatically trimmed). When combined with `loop`, the typewriter cycles back to the first line of text after all the lines are shown.
+
+```html {.example}
+<div id="typewriter__multiline">
+  <p>
+    <quiet-typewriter 
+      text="
+        Did you feed the cats?
+        The cats are hungry…
+        Like really hungry.
+      "
+      loop
+      loop-delay="1500"
+      with-cursor
+    ></quiet-typewriter>
+  </p>
+  <quiet-button>Restart</quiet-button>
+</div>
+
+<script>
+  const container = document.getElementById('typewriter__multiline');
+  const typewriter = container.querySelector('quiet-typewriter');
+  const button = container.querySelector('quiet-button');
+
+  button.addEventListener('click', () => {
+    typewriter.restart();
+  });
+</script>
+```
+
+Instead of newlines, you can use a custom delimiter by setting the `delimiter` attribute.
+
+```html {.example}
+<quiet-typewriter 
+  text="First message | Second message | Third message"
+  delimiter="|"
+  loop
+  with-cursor
+></quiet-typewriter>
 ```
 
 ### Showing the cursor
@@ -78,49 +119,6 @@ Use the `loop` attribute to make the typewriter delete the text and type it agai
   text="Cats love chasing their tails in an endless loop of chaos." 
   loop 
   loop-delay="1000"
-></quiet-typewriter>
-```
-
-### Multiple lines of text
-
-Separate multiple messages with a newline to cycle through different messages. Each line will be typed, erased, then the next line will be typed. When combined with `loop`, the text cycles back to the first line after all lines are shown.
-
-```html {.example}
-<div id="typewriter__multiline">
-  <p>
-    <quiet-typewriter 
-      text="
-        Did you feed the cats?
-        The cats are hungry…
-        Like really hungry.
-      "
-      loop
-      loop-delay="1500"
-      with-cursor
-    ></quiet-typewriter>
-  </p>
-  <quiet-button>Restart</quiet-button>
-</div>
-
-<script>
-  const container = document.getElementById('typewriter__multiline');
-  const typewriter = container.querySelector('quiet-typewriter');
-  const button = container.querySelector('quiet-button');
-
-  button.addEventListener('click', () => {
-    typewriter.restart();
-  });
-</script>
-```
-
-Instead of newlines, you can use a custom delimiter by setting the `delimiter` attribute. Whitespace is automatically trimmed.
-
-```html {.example}
-<quiet-typewriter 
-  text="First message | Second message | Third message"
-  delimiter="|"
-  loop
-  with-cursor
 ></quiet-typewriter>
 ```
 

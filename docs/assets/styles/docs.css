@@ -416,6 +416,7 @@ html[data-scroll-restoring] body {
 
 #page {
   display: grid;
+  z-index: 1; /* keep everything under the header */
   position: relative;
   grid-template-columns: auto;
   /* Adjust for the sidebar's focus ring offset so the page is equally balanced */
@@ -467,8 +468,8 @@ html[data-scroll-restoring] body {
   max-width: 90ch;
 }
 
-/* Licensing & info */
-.licensing-info {
+/* Mesh gradient container */
+.mesh-container {
   --brightness: 50;
   padding: 2rem;
   border-radius: 1rem;
@@ -479,7 +480,7 @@ html[data-scroll-restoring] body {
   }
 }
 
-.quiet-dark .licensing-info {
+.quiet-dark .mesh-container {
   --brightness: -50;
 
   .features-grid li {
@@ -877,7 +878,8 @@ quiet-badge.experimental {
 .docs-aside ul {
   .current {
     color: var(--quiet-primary-text-colorful);
-    font-weight: var(--quiet-font-weight-bold);
+    font-weight: var(--quiet-font-weight-semibold);
+    text-decoration: underline;
   }
 
   li:has(.current) quiet-icon {

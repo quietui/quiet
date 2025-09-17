@@ -139,7 +139,7 @@ If you need to change the scroller's layout, e.g. to flex or grid, apply the app
 
 ### Changing the orientation
 
-Scrollers default to a horizontal orientation. To create a vertical scroller, set the `orientation` attribute to `vertical`. The scroller will adapt to the available space, or you can constrain its height with a wrapper or by setting a height directly.
+Scrollers default to a horizontal orientation. To create a vertical scroller, set the `orientation` attribute to `vertical`. The scroller will adapt to the available space. You can constrain its height with a wrapper or by setting a height directly.
 
 ```html {.example}
 <div style="height: 300px;">

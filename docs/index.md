@@ -10,7 +10,7 @@ bodyClass: with-grid
 
 {% include 'splash-image.njk' %}
 
-<p class="subtitle"><quiet-fit-text>A UI library for the Web</quiet-fit-text></p>
+<p class="subtitle">A UI library for the Web</p>
 
 <p class="focusing-on">Focusing on accessibility, longevity, performance, and simplicity</p>
 

@@ -1011,7 +1011,7 @@ quiet-callout {
     text-wrap: balance;
   }
 
-  @media screen and (max-height: 550px) {
+  @media screen and (max-height: 700px) {
     height: auto;
     margin-block-end: 2rem;
     padding-block-end: 4rem;
@@ -1035,25 +1035,13 @@ quiet-callout {
       max-width: 50vw;
       margin-block-end: 1rem;
     }
-
-    @media screen and (max-height: 550px) {
-      display: none;
-    }
   }
 }
 
 .splash .subtitle {
   margin-block: 1rem;
-  font-size: 2.25rem;
-}
-
-p:has(quiet-fit-text) {
-  width: 100%;
-  max-width: 700px;
-
-  @media screen and (max-height: 550px) {
-    max-width: 500px;
-  }
+  font-size: 4.25rem;
+  line-height: 1.2;
 }
 
 .splash-actions {
@@ -1098,7 +1086,7 @@ p:has(quiet-fit-text) {
   }
 
   .splash .subtitle {
-    font-size: 1.5rem;
+    font-size: 3.25rem;
   }
 
   #body.has-sidebar #page {

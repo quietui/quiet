@@ -103,7 +103,7 @@ bodyClass: browse-components with-grid
 
       .name {
         font-size: 1.25rem;
-        font-weight: var(--quiet-font-weight-semibold);
+        font-weight: var(--quiet-font-weight-bold);
         margin-block-end: 0.25rem;
       }
 
@@ -111,7 +111,7 @@ bodyClass: browse-components with-grid
         margin-block: 0;
 
         code {
-          font-size: 0.975rem;
+          font-size: 0.9375rem;
         }
       }
 

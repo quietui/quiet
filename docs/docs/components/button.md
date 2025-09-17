@@ -58,7 +58,7 @@ Any button can be rendered as a link by setting the `href` attribute. This is us
   I'm secretly a link
 </quiet-button>
 
-<quiet-button href="/assets/images/wordmark-light.svg" download>
+<quiet-button href="/assets/images/logo-light.svg" download>
   Download the logo
 </quiet-button>
 ```

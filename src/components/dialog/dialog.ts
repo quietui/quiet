@@ -11,7 +11,7 @@ import {
 import hostStyles from '../../styles/host.styles.js';
 import { animateWithClass } from '../../utilities/animate.js';
 import { Localize } from '../../utilities/localize.js';
-import { parseSpaceDelimitedTokens } from '../../utilities/parse.js';
+import { parseDelimitedTokens } from '../../utilities/parse.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import { lockScrolling, unlockScrolling } from '../../utilities/scroll.js';
 import styles from './dialog.styles.js';
@@ -233,7 +233,7 @@ document.addEventListener('click', (event: MouseEvent) => {
   const dialogAttrEl = (event.target as Element).closest('[data-dialog]');
 
   if (dialogAttrEl instanceof Element) {
-    const [command, id] = parseSpaceDelimitedTokens(dialogAttrEl.getAttribute('data-dialog') || '');
+    const [command, id] = parseDelimitedTokens(dialogAttrEl.getAttribute('data-dialog') || '');
 
     if (command === 'open' && id?.length) {
       const doc = dialogAttrEl.getRootNode() as Document | ShadowRoot;

@@ -3,7 +3,7 @@ import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { QuietBeforeFlipEvent, QuietFlipEvent } from '../../events/flip.js';
 import hostStyles from '../../styles/host.styles.js';
-import { parseSpaceDelimitedTokens } from '../../utilities/parse.js';
+import { parseDelimitedTokens } from '../../utilities/parse.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import styles from './flip-card.styles.js';
 
@@ -114,7 +114,7 @@ document.addEventListener('click', (event: MouseEvent) => {
   const flipAttrEl = (event.target as Element).closest('[data-flip-card]');
 
   if (flipAttrEl instanceof Element) {
-    const [command, id] = parseSpaceDelimitedTokens(flipAttrEl.getAttribute('data-flip-card') || '');
+    const [command, id] = parseDelimitedTokens(flipAttrEl.getAttribute('data-flip-card') || '');
     let flipCard: QuietFlipCard | null;
 
     if (id) {

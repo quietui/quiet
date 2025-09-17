@@ -4,7 +4,7 @@ import { customElement, property } from 'lit/decorators.js';
 import { QuietIntersectEvent } from '../../events/intersect.js';
 import hostStyles from '../../styles/host.styles.js';
 import { clamp } from '../../utilities/math.js';
-import { parseSpaceDelimitedTokens } from '../../utilities/parse.js';
+import { parseDelimitedTokens } from '../../utilities/parse.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import styles from './intersection-observer.styles.js';
 
@@ -94,7 +94,7 @@ export class QuietIntersectionObserver extends QuietElement {
 
   /** Parses the threshold property into an array of numbers. */
   private parseThreshold(): number[] {
-    const tokens = parseSpaceDelimitedTokens(this.threshold);
+    const tokens = parseDelimitedTokens(this.threshold);
     return tokens.map(token => {
       const num = parseFloat(token);
       return isNaN(num) ? 0 : clamp(num, 0, 1);

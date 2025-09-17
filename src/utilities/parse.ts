@@ -1,7 +1,9 @@
-/** Parses a space-delimited set of tokens and returns an array with all whitespace removed. */
-export function parseSpaceDelimitedTokens(input: string | number): string[] {
+/**
+ * Parses a delimited set of tokens and returns an array with all whitespace and empty items removed.
+ */
+export function parseDelimitedTokens(input: string | number, delimiter: string = ' '): string[] {
   return (input + '')
-    .split(' ')
+    .split(delimiter)
     .map(token => token.trim())
     .filter(token => token !== '');
 }

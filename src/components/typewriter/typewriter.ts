@@ -3,6 +3,7 @@ import { html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { QuietAnimationComplete } from '../../events/animation.js';
 import hostStyles from '../../styles/host.styles.js';
+import { parseDelimitedTokens } from '../../utilities/parse.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import styles from './typewriter.styles.js';
 
@@ -17,7 +18,7 @@ import styles from './typewriter.styles.js';
  * @event quiet-animation-complete - Emitted when the typing animation has completed.
  *
  * @cssproperty [--cursor-color=currentColor] - The color of the cursor during animation when `with-cursor` is enabled.
- * @cssproperty [--cursor-width=1.5px] - The color of the cursor during animation when `with-cursor` is enabled.
+ * @cssproperty [--cursor-width=1.5px] - The width of the cursor during animation when `with-cursor` is enabled.
  *
  * @csspart cursor - The cursor, a `<span>` element with a styled border.
  */
@@ -28,8 +29,11 @@ export class QuietTypewriter extends QuietElement {
   private animationTimeout: number | null = null;
   private observer: IntersectionObserver | null = null;
 
-  /** The text to type out. */
-  @property({ type: String }) text = '';
+  /** The text to type out. Multiple lines can be separated by the delimiter. */
+  @property() text = '';
+
+  /** The delimiter used to separate multiple lines of text. */
+  @property() delimiter = '\n';
 
   /** The average speed in milliseconds to wait between typing each character. */
   @property({ type: Number }) speed = 50;
@@ -58,10 +62,12 @@ export class QuietTypewriter extends QuietElement {
    */
   @property({ attribute: 'ignore-reduced-motion', type: Boolean, reflect: true }) ignoreReducedMotion = false;
 
+  @state() private charIndex = 0;
+  @state() private currentLineIndex = 0;
   @state() private currentText = '';
   @state() private isAnimating = false; // Tracks any animation (typing or erasing)
-  @state() private charIndex = 0;
   @state() private isErasing = false;
+  @state() private lines: string[] = [];
 
   connectedCallback() {
     super.connectedCallback();
@@ -79,12 +85,14 @@ export class QuietTypewriter extends QuietElement {
   }
 
   async updated(changedProperties: PropertyValues<this>) {
-    if (changedProperties.has('text')) {
-      this.setAttribute('aria-label', this.text);
+    if (changedProperties.has('text') || changedProperties.has('delimiter')) {
+      this.lines = parseDelimitedTokens(this.text, this.delimiter);
+      this.setAttribute('aria-label', this.lines.join('. '));
 
       if (!this.isAnimating) {
         this.currentText = '';
         this.charIndex = 0;
+        this.currentLineIndex = 0;
         this.isErasing = false;
         if (!this.startOnView) {
           this.startAnimation();
@@ -110,19 +118,15 @@ export class QuietTypewriter extends QuietElement {
     this.observer.observe(this);
   }
 
+  /** Gets the current line of text to type. */
+  private getCurrentLine(): string {
+    return this.lines[this.currentLineIndex] || '';
+  }
+
   /** Starts the typewriter animation. */
   private startAnimation() {
-    // Prevent starting if already animating
-    if (this.isAnimating) return;
-
-    // Check for reduced motion preference
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion && !this.ignoreReducedMotion) {
-      this.currentText = this.text;
-      this.charIndex = this.text.length;
-      this.dispatchEvent(new QuietAnimationComplete());
-      return;
-    }
+    // Prevent starting if already animating or no lines to type
+    if (this.isAnimating || this.lines.length === 0) return;
 
     // Clear any existing animation to avoid overlaps
     this.stopAnimation();
@@ -145,46 +149,104 @@ export class QuietTypewriter extends QuietElement {
   private typeNextChar() {
     if (!this.isAnimating || this.isErasing || this.pause) return;
 
-    if (this.charIndex < this.text.length) {
-      this.currentText = this.text.slice(0, this.charIndex + 1);
-      this.charIndex++;
-      const currentDuration = this.speed * (0.5 + Math.random());
-      this.animationTimeout = window.setTimeout(() => this.typeNextChar(), currentDuration);
+    const currentLine = this.getCurrentLine();
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // If reduced motion, type entire line at once
+    if (prefersReducedMotion && !this.ignoreReducedMotion) {
+      this.currentText = currentLine;
+      this.charIndex = currentLine.length;
     } else {
+      // Normal character-by-character typing
+      if (this.charIndex < currentLine.length) {
+        this.currentText = currentLine.slice(0, this.charIndex + 1);
+        this.charIndex++;
+        const currentDuration = this.speed * (0.5 + Math.random());
+        this.animationTimeout = window.setTimeout(() => this.typeNextChar(), currentDuration);
+        return;
+      }
+    }
+
+    // Line is complete (either way)
+    if (this.charIndex >= currentLine.length) {
+      // Finished typing the current line
       this.isAnimating = false;
       this.dispatchEvent(new QuietAnimationComplete());
-      if (this.loop && !this.pause) {
-        this.startEraseAnimation();
+
+      // Determine next action
+      const hasMoreLines = this.currentLineIndex < this.lines.length - 1;
+
+      if (hasMoreLines) {
+        // Move to next line after erasing current one
+        this.startEraseAnimation(true);
+      } else if (this.loop && !this.pause) {
+        // Loop back to first line after erasing
+        this.startEraseAnimation(false);
       }
     }
   }
 
   /** Starts the erase animation. */
-  private startEraseAnimation() {
+  private startEraseAnimation(moveToNextLine = false) {
     if (this.isAnimating || this.pause) return;
 
     this.isAnimating = true;
     this.isErasing = true;
+
+    // Calculate display duration
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let displayDuration = this.loopDelay;
+
+    // If reduced motion, add the time it would have taken to type the line
+    if (prefersReducedMotion && !this.ignoreReducedMotion) {
+      const typingDuration = this.currentText.length * this.speed;
+      displayDuration = typingDuration + this.loopDelay;
+    }
+
     this.animationTimeout = window.setTimeout(
       () => {
-        this.eraseNextChar();
+        this.eraseNextChar(moveToNextLine);
       },
-      Math.max(0, this.loopDelay)
+      Math.max(0, displayDuration)
     );
   }
 
   /** Erases the next character in the animation. */
-  private eraseNextChar() {
+  private eraseNextChar(moveToNextLine: boolean) {
     if (!this.isAnimating || !this.isErasing || this.pause) return;
 
-    if (this.currentText.length > 0) {
-      this.currentText = this.currentText.slice(0, -1);
-      this.charIndex--;
-      this.animationTimeout = window.setTimeout(() => this.eraseNextChar(), 50);
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // If reduced motion, erase entire line at once
+    if (prefersReducedMotion && !this.ignoreReducedMotion) {
+      this.currentText = '';
+      this.charIndex = 0;
     } else {
+      // Normal character-by-character erasing
+      if (this.currentText.length > 0) {
+        this.currentText = this.currentText.slice(0, -1);
+        this.charIndex--;
+        this.animationTimeout = window.setTimeout(() => this.eraseNextChar(moveToNextLine), 50);
+        return;
+      }
+    }
+
+    // Erasing complete (either way)
+    if (this.currentText.length === 0) {
+      // Finished erasing
       this.isAnimating = false;
       this.isErasing = false;
+
       if (!this.pause) {
+        if (moveToNextLine) {
+          // Move to next line
+          this.currentLineIndex++;
+        } else {
+          // Loop back to first line
+          this.currentLineIndex = 0;
+        }
+
+        this.charIndex = 0;
         this.startAnimation();
       }
     }
@@ -194,6 +256,8 @@ export class QuietTypewriter extends QuietElement {
   public restart() {
     this.stopAnimation();
     this.currentText = ''; // Reset text immediately to prevent showing first character
+    this.currentLineIndex = 0; // Reset to first line
+    this.charIndex = 0;
     this.startAnimation();
   }
 
@@ -211,7 +275,9 @@ export class QuietTypewriter extends QuietElement {
   private resumeAnimation() {
     if (!this.isAnimating) return;
     if (this.isErasing) {
-      this.eraseNextChar();
+      // Determine if we're moving to next line or looping
+      const hasMoreLines = this.currentLineIndex < this.lines.length - 1;
+      this.eraseNextChar(hasMoreLines);
     } else {
       this.typeNextChar();
     }

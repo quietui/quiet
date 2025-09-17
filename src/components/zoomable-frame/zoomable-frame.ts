@@ -3,7 +3,7 @@ import { html } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { Localize } from '../../utilities/localize.js';
-import { parseSpaceDelimitedTokens } from '../../utilities/parse.js';
+import { parseDelimitedTokens } from '../../utilities/parse.js';
 import { QuietElement } from '../../utilities/quiet-element.js';
 import '../icon/icon.js';
 import styles from './zoomable-frame.styles.js';
@@ -86,7 +86,7 @@ export class QuietZoomableFrame extends QuietElement {
   }
 
   private parseZoomLevels(zoomLevelsString: string): number[] {
-    const tokens = parseSpaceDelimitedTokens(zoomLevelsString);
+    const tokens = parseDelimitedTokens(zoomLevelsString);
     const levels: number[] = [];
 
     for (const token of tokens) {

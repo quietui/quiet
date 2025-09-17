@@ -81,6 +81,49 @@ Use the `loop` attribute to make the typewriter delete the text and type it agai
 ></quiet-typewriter>
 ```
 
+### Multiple lines of text
+
+Separate multiple messages with a newline to cycle through different messages. Each line will be typed, erased, then the next line will be typed. When combined with `loop`, the text cycles back to the first line after all lines are shown.
+
+```html {.example}
+<div id="typewriter__multiline">
+  <p>
+    <quiet-typewriter 
+      text="
+        Did you feed the cats?
+        The cats are hungry…
+        Like really hungry.
+      "
+      loop
+      loop-delay="1500"
+      with-cursor
+    ></quiet-typewriter>
+  </p>
+  <quiet-button>Restart</quiet-button>
+</div>
+
+<script>
+  const container = document.getElementById('typewriter__multiline');
+  const typewriter = container.querySelector('quiet-typewriter');
+  const button = container.querySelector('quiet-button');
+
+  button.addEventListener('click', () => {
+    typewriter.restart();
+  });
+</script>
+```
+
+Instead of newlines, you can use a custom delimiter by setting the `delimiter` attribute. Whitespace is automatically trimmed.
+
+```html {.example}
+<quiet-typewriter 
+  text="First message | Second message | Third message"
+  delimiter="|"
+  loop
+  with-cursor
+></quiet-typewriter>
+```
+
 ### Controlling speed and delay
 
 Use the `delay` attribute to set the time before typing begins and the `speed` attribute to control the average typing speed.

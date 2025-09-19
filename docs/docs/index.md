@@ -100,11 +100,21 @@ If you don't want to use the autoloader, you can import components manually from
 - [`@quietui/quiet`](https://www.npmjs.com/package/@quietui/quiet) - use this if you're using a bundler or a framework
 - [`@quietui/quiet-browser`](https://www.npmjs.com/package/@quietui/quiet-browser) - use this if you're using Quiet directly in a browser or serving it via CDN
 
-The following command will install Quiet via npm.
+The following commands will install Quiet via npm.
 
 ```sh
+# Use this for bundlers and frameworks
 npm install @quietui/quiet
+
+# Use this for browsers and CDNs
+npm install @quietui/quiet-browser
 ```
+
+:::details What's the difference?
+The `@quietui/quiet` package contains [bare module specifiers](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules#importing_modules_as_bare_names), allowing bundlers to deduplicate dependencies for a more efficient bundle. This means dependencies are excluded from the distribution and must be resolved at build time.
+
+The `@quietui/quiet-browser` package contains all dependencies baked in, meaning it works directly in the browser and CDNs with no bundling necessary.
+:::
 
 Add the [default theme](/docs/theming) and the [optional CSS reset](/docs/restyle). You may need to configure your app to serve the `dist` folder from a path of your choice.
 

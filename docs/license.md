@@ -156,8 +156,8 @@ Quiet UI is source-available and completely free of charge for personal, educati
 
 ## Frequently asked questions
 
-:::details Where can I find my order history, receipts, and commercial license?
-You can access your orders and receipts by visiting the [customer portal](https://polar.sh/quietui/portal). The exact text of the commercial license [can be found here](/commercial-license).
+:::details Where can I find my order history and receipts?
+You can access your past orders, receipts, and licenses by visiting the [customer portal](https://polar.sh/quietui/portal).
 :::
 
 :::details What is a source-available license?

@@ -2,25 +2,26 @@
 
 ![Quiet UI logo](https://pbs.twimg.com/profile_banners/1705198841094356992/1697645956/1500x500)
 
-Quiet is a user interface library for the modern Web. It features dozens of accessible, performant, and interoperable components along with an optional CSS reset to streamline development of websites and apps.
+Quiet is a [source-available](https://quietui.org/license) user interface library for the modern Web. It features dozens of accessible, performant, and interoperable components along with an optional CSS reset to streamline development of websites and apps.
 
-You might be curious to learn that Quiet's components aren't built with React, Vue, or any other framework. They're custom HTML elements, or Web Components, which means you can use them in plain ol' HTML pages as well as your favorite frameworks.
+You might be curious to learn that Quiet's components aren't built with React, Vue, or any other framework. They're custom HTML elements, or [Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components), which means you can use them in plain ol' HTML pages as well as your favorite frameworks.
 
 ## What's in the box?
 
-- 🧰 A collection of high quality components for building beautiful, accessible, and consistent user interfaces.
-- 🎨 An [optional] opinionated CSS reset to kick off new projects with.
-- 🪙 Customizable design tokens that make it easy to change the look and feel any time.
+- 🧰 A collection of high quality components for building beautiful, accessible, and consistent user interfaces
+- 🚀 An [optional] opinionated CSS reset to kick off new projects with beautiful base styles
+- 🎨 Extreme customizability using plain ol' CSS
 - 🐭 A built-in autoloader that detects components in your HTML — even ones you add dynamically — and loads them on the fly!
 
 ## Where do I…?
 
 - [Get started using Quiet UI](https://quietui.org/)
-- [Ask for help](https://github.com/quietui/quiet/discussions/2)
+- [Ask for help](https://github.com/quietui/quiet/discussions/categories/help-support)
+- [Request a feature](https://github.com/quietui/quiet/discussions/categories/feature-requests)
+- [Report a bug](https://github.com/quietui/quiet/issues/new/choose)
+- [Buy a commercial license](https://quietui.org/license)
 - [Follow the project on Bluesky](https://bsky.app/profile/quietui.org)
 - [Follow the project on X](https://x.com/quiet_ui)
-- [Request a feature](https://github.com/quietui/quiet/discussions/categories/feature-requests)
-- [Submit a bug report](https://github.com/quietui/quiet/issues/new/choose)
 
 ## Developer instructions
 

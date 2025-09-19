@@ -13,13 +13,15 @@ You might be curious to learn that Quiet's components aren't built with React, V
 - 🎨 Extreme customizability using plain ol' CSS
 - 🐭 A built-in autoloader that detects components in your HTML — even ones you add dynamically — and loads them on the fly!
 
-## Where do I…?
+## Where can I…?
 
 - [Get started using Quiet UI](https://quietui.org/)
-- [Ask for help](https://github.com/quietui/quiet/discussions/categories/help-support)
+- [Buy a commercial license](https://quietui.org/license)
 - [Request a feature](https://github.com/quietui/quiet/discussions/categories/feature-requests)
 - [Report a bug](https://github.com/quietui/quiet/issues/new/choose)
-- [Buy a commercial license](https://quietui.org/license)
+- [Ask for help](https://github.com/quietui/quiet/discussions/categories/help-support)
+- [Visit the community forum](https://github.com/quietui/quiet/discussions)
+- [Star the project on GitHub](https://github.com/quietui/quiet/stargazers)
 - [Follow the project on Bluesky](https://bsky.app/profile/quietui.org)
 - [Follow the project on X](https://x.com/quiet_ui)
 

@@ -55,8 +55,6 @@
     "test": "wtr --group default",
     "test:component": "wtr -- --watch --group",
     "test:watch": "wtr --watch --group default",
-    "release": "node scripts/release.js",
-    "release:dry-run": "node scripts/release.js --dry-run",
     "prepublishOnly": "node scripts/no-direct-publish.js",
     "create": "plop --plopfile src/plop/plopfile.js",
     "prepare": "npx playwright install",

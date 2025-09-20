@@ -66,7 +66,7 @@ function generateManifest() {
   spinner.start('Generating CEM');
 
   try {
-    execSync('cem analyze --config "custom-elements-manifest.js"');
+    execSync('npx cem analyze --config "custom-elements-manifest.js"');
   } catch (error) {
     console.error(`\n\n${error.message}`);
   }
@@ -117,7 +117,7 @@ function generateTypes() {
   spinner.start('Running the TypeScript compiler');
 
   try {
-    execSync(`tsc --project ./tsconfig.prod.json --outdir "${distDir}"`);
+    execSync(`npx tsc --project ./tsconfig.prod.json --outdir "${distDir}"`);
   } catch (error) {
     // Report the error, but don't break the build
     spinner.fail(`TypeScript reported problems:\n\n${chalk.red(error.stdout.toString().trim())}\n`);

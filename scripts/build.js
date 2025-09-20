@@ -156,21 +156,9 @@ async function generateBuild() {
     format: 'esm',
     target: 'es2020',
     logLevel: 'silent',
-    entryPoints: [
-      //
-      // IMPORTANT: Entry points MUST be mapped in package.json => exports
-      //
-      // Main file
-      './src/quiet.ts',
-      // Autoloader + utilities
-      './src/quiet.loader.ts',
-      // Individual components
-      ...(await globby('./src/components/**/!(*.(style|test)).ts')),
-      // Utilities
-      ...(await globby('./src/utilities/**/*.ts')),
-      // Translations
-      ...(await globby('./src/translations/**/*.ts'))
-    ],
+    entryPoints: await globby('./src/**/*.ts', {
+      ignore: ['**/*.test.ts']
+    }),
     outdir: distDir,
     chunkNames: 'chunks/[name].[hash]',
     conditions: isDeveloping ? ['development'] : undefined,

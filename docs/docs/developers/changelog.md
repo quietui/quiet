@@ -48,9 +48,10 @@ Components marked [stable] are well-tested, ready for production, and less likel
 
 ## Releases
 
-### 1.0.1 & 1.0.2 🔨
+### 1.0.1 – 1.0.3 🔨
 
-- Fixed a bug in the unbundled dist that caused some files to not be included
+- Fixed a bug in the unbundled distribution that caused some files to not be included
+- Removed splitting from the browser distribution
 
 ### 1.0.0 🧀
 

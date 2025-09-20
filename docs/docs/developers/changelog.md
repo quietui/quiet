@@ -48,6 +48,10 @@ Components marked [stable] are well-tested, ready for production, and less likel
 
 ## Releases
 
+### 1.0.1 🔨
+
+- Fixed a bug in the unbundled dist that caused utilities to not be published
+
 ### 1.0.0 🧀
 
 <small>August 1, 2025</small>

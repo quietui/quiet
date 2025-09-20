@@ -61,7 +61,8 @@
     "prettier": "prettier --check --log-level=warn .",
     "prettier:fix": "prettier --write --log-level=warn .",
     "spellcheck": "cspell \"**/*.{js,ts,json,html,css,md}\" --no-progress",
-    "check-updates": "npx npm-check-updates --interactive --format group"
+    "check-updates": "npx npm-check-updates --interactive --format group",
+    "postversion": "git push --follow-tags"
   },
   "dependencies": {
     "@ctrl/tinycolor": "4.1.0",

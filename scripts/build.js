@@ -160,12 +160,14 @@ async function generateBuild() {
       //
       // IMPORTANT: Entry points MUST be mapped in package.json => exports
       //
-      // Utilities
+      // Main file
       './src/quiet.ts',
       // Autoloader + utilities
       './src/quiet.loader.ts',
       // Individual components
       ...(await globby('./src/components/**/!(*.(style|test)).ts')),
+      // Utilities
+      ...(await globby('./src/utilities/**/*.ts')),
       // Translations
       ...(await globby('./src/translations/**/*.ts'))
     ],

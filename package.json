@@ -42,6 +42,9 @@
     "./quiet.js": "./dist/quiet.js",
     "./quiet.loader.js": "./dist/quiet.loader.js",
     "./components/*": "./dist/components/*",
+    "./events/*": "./dist/events/*",
+    "./themes/*": "./dist/themes/*",
+    "./translations/*": "./dist/translations/*",
     "./custom-elements.json": "./dist/custom-elements.json"
   },
   "files": [

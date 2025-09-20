@@ -48,9 +48,9 @@ Components marked [stable] are well-tested, ready for production, and less likel
 
 ## Releases
 
-### 1.0.1 🔨
+### 1.0.1 & 1.0.2 🔨
 
-- Fixed a bug in the unbundled dist that caused utilities to not be published
+- Fixed a bug in the unbundled dist that caused some files to not be included
 
 ### 1.0.0 🧀
 

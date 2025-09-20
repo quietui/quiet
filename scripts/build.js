@@ -170,7 +170,7 @@ async function generateBuild() {
       js: `/*! Required Notice: Copyright ${currentYear} A Beautiful Site, LLC - https://quietui.org/license */`
     },
     legalComments: 'none',
-    splitting: true
+    splitting: isBrowserBuild
   };
 
   try {

@@ -202,7 +202,7 @@ Quiet considers lazy loading tab content to be an anti-pattern but, when necessa
 
 ### Making tabs closable
 
-Avoid nesting buttons and other interactive elements inside of a tab, as it will cause assistive devices to work incorrectly. Instead, you can add buttons adjacent to tabs using `. When tabs are removable, you should also listen for the [[Delete]] key.
+Avoid nesting buttons and other interactive elements inside of a tab, as it will cause assistive devices to work incorrectly. Instead, you can add buttons adjacent to tabs using the `tab` slot as shown in this example. When tabs are removable, you should also listen for the [[Delete]] key.
 
 Note that we use `tabindex="-1"` on the close button to prevent it from interfering with normal tabbing. The button, however, is still accessible to virtual cursors.
 

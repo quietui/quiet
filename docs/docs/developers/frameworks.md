@@ -257,3 +257,5 @@ Older versions of React also struggles with native events:
 While it's possible to use custom elements in React 18 and below, the experience is less than optimal. Some custom element libraries provide wrappers to improve the experience in older versions of React, but supporting legacy frameworks isn't an objective of this project.
 
 If you need to React 18 or below, consider trying [this utility](https://www.npmjs.com/package/@lit-labs/react) for a more idiomatic experience.
+
+<img class="whiskers-center" src="/assets/images/whiskers/with-skateboard.svg" alt="Whiskers the mouse riding a skateboard">

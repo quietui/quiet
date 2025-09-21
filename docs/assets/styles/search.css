@@ -6,7 +6,6 @@
     padding: 0;
     overflow: hidden;
     border-radius: var(--quiet-border-radius-xl);
-    backdrop-filter: blur(6px);
     background-color: var(--quiet-paper-color);
   }
 

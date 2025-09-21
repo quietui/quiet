@@ -219,7 +219,7 @@ Content slotted into the mesh gradient will be centered by default. You can targ
 
 ### Brightness Control
 
-Adjust the brightness from -100 (darker) to +100 (lighter). Positive values create a tinted effect (lighter and slightly desaturated), while negative values create a shaded effect (darker while maintaining richness):
+Adjust the brightness from -100 (darker) to +100 (lighter). Positive values create a tinted effect, while negative values create a shaded effect.
 
 ```html {.example .flex-col}
 <quiet-mesh-gradient style="--gradient-color: #3b82f6; --brightness: 75; height: 250px;" seed="100">

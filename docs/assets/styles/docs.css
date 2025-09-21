@@ -824,6 +824,10 @@ quiet-badge.experimental {
   margin-block: 0.5rem;
   font-size: inherit;
 
+  a {
+    text-decoration: none;
+  }
+
   quiet-icon {
     font-size: 1.25rem;
     vertical-align: -0.25em;
@@ -879,7 +883,6 @@ quiet-badge.experimental {
   .current {
     color: var(--quiet-primary-text-colorful);
     font-weight: var(--quiet-font-weight-semibold);
-    text-decoration: underline;
   }
 
   li:has(.current) quiet-icon {

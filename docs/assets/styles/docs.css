@@ -1086,7 +1086,11 @@ quiet-callout {
   }
 
   .splash .subtitle {
-    font-size: 3.25rem;
+    font-size: 2.5rem;
+  }
+
+  .splash .focusing-on {
+    font-size: 1rem;
   }
 
   #body.has-sidebar #page {

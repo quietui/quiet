@@ -8,7 +8,7 @@ Quiet components are fully localized using a tiny in-house library called [Squea
 
 ## Registering translations
 
-The default language is English (US), which doesn't need to be registered. Additional languages can be registered by importing the appropriate translation files.
+The default language is English (US), which doesn't need to be registered. Additional languages can be registered by importing the appropriate [translation files](https://github.com/quietui/quiet/tree/main/src/translations).
 
 ```js
 import '/dist/translations/es.js';

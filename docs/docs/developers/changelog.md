@@ -48,6 +48,10 @@ Components marked [stable] are well-tested, ready for production, and less likel
 
 ## Releases
 
+### Unreleased
+
+- Improved `<summary>` styles so the hit area extends the full width of the container
+
 ### 1.0.1 – 1.0.3 🔨
 
 - Fixed a bug in the unbundled distribution that caused some files to not be included

@@ -138,6 +138,20 @@
     font-size: 1.125em;
   }
 
+  /* Inline quotes & citations */
+  q,
+  cite {
+    font-style: normal;
+  }
+
+  q {
+    quotes: '“' '”' '‘' '’'; /* Smart quotes */
+  }
+
+  cite {
+    font-style: italic;
+  }
+
   /* Dividers */
   hr {
     margin: calc(var(--quiet-content-spacing) * 2) 0;

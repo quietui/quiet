@@ -143,14 +143,20 @@ Use `<ol>` and `<ul>` to make ordered and unordered lists.
 </div>
 ```
 
-### Block quotes
+### Quotes
 
-Use `<blockquote>` to show quotes that stand out.
+Use `<blockquote>` to show quotations that stand out.
 
 ```html {.example .no-edit}
 <blockquote>
   Neither the mouse nor the boy was the least bit surprised that each could understand the other. Two creatures who shared a love for web design naturally spoke the same language.
 </blockquote>
+```
+
+Use `<q>` to show inline quotations. Citations are displayed in italics.
+
+```html {.example .no-edit}
+<q>Freedom's just another word for nothing left to lose</q> from <cite>Me and Meowy McGee</cite>.
 ```
 
 ### Code blocks

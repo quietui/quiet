@@ -48,8 +48,10 @@ Components marked [stable] are well-tested, ready for production, and less likel
 
 ## Releases
 
-### Unreleased
+### 1.1.0
 
+- Added the `<quiet-random-content>` utility component
+- Added styles for `<q>` and `<cite>` elements in Restyle
 - Improved `<summary>` styles so the hit area extends the full width of the container
 
 ### 1.0.1 – 1.0.3 🔨

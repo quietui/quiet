@@ -11,6 +11,7 @@ bodyClass: browse-components with-grid
     slot="controller" 
     placeholder="Searching {{ components.length }} custom elements" 
     description="Results will automatically update as you type" 
+    type="search"
     pill 
     autofocus 
     with-clear

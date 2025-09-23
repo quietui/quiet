@@ -49,7 +49,7 @@ export class QuietRandomContent extends QuietElement {
 
   /** Applies selection based on the mode and items properties. */
   private applySelection(isManualRandomize = false) {
-    const children = Array.from(this.children);
+    const children = this.shadowRoot?.querySelector('slot')?.assignedElements({ flatten: true }) || [];
     if (!children.length) return;
 
     const itemsToShow = Math.min(this.items, children.length);
@@ -78,7 +78,15 @@ export class QuietRandomContent extends QuietElement {
     }
 
     this.currentIndices = selected;
-    this.updateVisibility(children, selected);
+
+    // Toggle 'em
+    children.forEach((el, i) => {
+      if (selected.has(i)) {
+        el.setAttribute('data-visible', '');
+      } else {
+        el.removeAttribute('data-visible');
+      }
+    });
   }
 
   /** Gets truly random indices with possible duplicates from previous selection. */
@@ -142,17 +150,6 @@ export class QuietRandomContent extends QuietElement {
     }
 
     return new Set(availableIndices.slice(0, itemsToShow));
-  }
-
-  /** Updates the visibility of children based on selected indices. */
-  private updateVisibility(children: Element[], selected: Set<number>) {
-    children.forEach((el, i) => {
-      if (selected.has(i)) {
-        el.setAttribute('data-visible', '');
-      } else {
-        el.removeAttribute('data-visible');
-      }
-    });
   }
 
   /** Rotates the visible item(s) based on the selected mode. */

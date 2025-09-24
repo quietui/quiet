@@ -186,7 +186,7 @@ The text color will automatically adjust to white or black based on the gradient
 
 ```html {.example .flex-col}
 <quiet-mesh-gradient
-  style="--gradient-color: #fad5ff; --brightness: 40; height: 250px;"
+  style="--gradient-color: #a447fc; --brightness: 25; height: 250px;"
   complexity="3"
   seed="24"
 >
@@ -194,7 +194,7 @@ The text color will automatically adjust to white or black based on the gradient
 </quiet-mesh-gradient>
 
 <quiet-mesh-gradient
-  style="--gradient-color: #561161; --brightness: 40; height: 250px;"
+  style="--gradient-color: #461d6d; --brightness: -10; height: 250px;"
   complexity="3"
   seed="75"
 >

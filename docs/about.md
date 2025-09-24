@@ -16,7 +16,7 @@ With Quiet, you no longer need to learn a new UI library when you switch framewo
 
 ## A message from the creator
 
-<a href="https://x.com/cory_laviska" data-no-external-icon>
+<a href="https://x.com/claviska" data-no-external-icon>
   <img 
     class="avatar"
     src="https://gravatar.com/avatar/bf1b3b95fd5b096a3592247c29667b33?s=400"
@@ -26,7 +26,7 @@ With Quiet, you no longer need to learn a new UI library when you switch framewo
   >
 </a>
 
-Quiet is built and maintained by Cory LaViska ([X](https://x.com/cory_laviska) / [BlueSky](https://bsky.app/profile/cory.laviska.com) / [LinkedIn](https://www.linkedin.com/in/claviska/)). With the success of [Shoelace](https://shoelace.style/), many of you are probably wondering why I'd choose to build another UI library, and that's a reasonable question.
+Quiet is built and maintained by Cory LaViska ([X](https://x.com/claviska) / [BlueSky](https://bsky.app/profile/cory.laviska.com) / [Mastodon](https://mastodon.social/@claviska) / [LinkedIn](https://www.linkedin.com/in/claviska/)). With the success of [Shoelace](https://shoelace.style/), many of you are probably wondering why I'd choose to build another UI library, and that's a reasonable question.
 
 The truth is, Shoelace has matured a lot over the years. While that's a great thing for its users, as an artist, I've lost my canvas for creativity. I'm still committed to Shoelace and it has a very promising future — it has a full team and we're building an awesome product out of it! But it's not my personal playground anymore.
 
@@ -40,7 +40,7 @@ You can use Quiet free for personal, educational, and non-profit use. If you're 
 
 ## Tell me about the mouse
 
-Why did I choose a mouse for Quiet's mascot? Because mice are quiet. Because the computer mouse was an incredible boon to UX. Because I've [rescued and raised](https://x.com/cory_laviska/status/1508128840937316360) numerous mice over the years. It seemed like a good fit. But then something much deeper clicked…
+Why did I choose a mouse for Quiet's mascot? Because mice are quiet. Because the computer mouse was an incredible boon to UX. Because I've [rescued and raised](https://x.com/claviska/status/1508128840937316360) numerous mice over the years. It seemed like a good fit. But then something much deeper clicked…
 
 As some of the world's [most](https://en.wikipedia.org/wiki/Dinosaur) [impressive](https://en.wikipedia.org/wiki/Woolly_mammoth) [creatures](https://en.wikipedia.org/wiki/Smilodon) vanished in the mists of time, the humble mouse continued to live on. Their resilience reminds us that survival belongs not to the strongest or the most spectacular, but to those who can bend without breaking; who can find opportunity in adversity; who can thrive in the spaces between.
 

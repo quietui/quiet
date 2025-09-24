@@ -154,6 +154,10 @@ export default css`
     translate: 0 var(--quiet-button-active-offset);
   }
 
+  #visual-box.filled .tag {
+    background-color: var(--quiet-neutral-fill-soft);
+  }
+
   /* Text input - base styles */
   #text-box {
     appearance: none;

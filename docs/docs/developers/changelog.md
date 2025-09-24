@@ -48,6 +48,10 @@ Components marked [stable] are well-tested, ready for production, and less likel
 
 ## Releases
 
+### Unreleased
+
+- Fixed the tag color in `<quiet-combobox>` so they're visible in the filled appearance
+
 ### 1.1.0
 
 - Added the `<quiet-random-content>` utility component

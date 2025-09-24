@@ -50,6 +50,7 @@ Components marked [stable] are well-tested, ready for production, and less likel
 
 ### Unreleased
 
+- Fixed the default value of `--quiet-form-control-font-size-xl` so it's not a fractional font size
 - Fixed the tag color in `<quiet-combobox>` so they're visible in the filled appearance
 - Fixed a bug in `<quiet-combobox>` that allowed the browser's autocomplete menu to appear 
 

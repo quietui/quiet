@@ -62,7 +62,7 @@ Quiet uses [Cascade Layers](https://developer.mozilla.org/en-docs/Learn_web_deve
 - `quiet-restyle` - optional CSS reset  
 - `quiet-utilities` - optional utility classes
 
-This approach ensures your custom styles will override library defaults simply by placing them in higher layers or using normal cascade rules, giving you complete control over styling precedence while maintaining the library's internal organization.
+This approach ensures your custom styles will override library defaults simply by placing them in higher layers or using normal cascade rules.
 
 ## Theme concepts
 

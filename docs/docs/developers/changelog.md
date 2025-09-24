@@ -51,6 +51,7 @@ Components marked [stable] are well-tested, ready for production, and less likel
 ### Unreleased
 
 - Fixed the tag color in `<quiet-combobox>` so they're visible in the filled appearance
+- Fixed a bug in `<quiet-combobox>` that allowed the browser's autocomplete menu to appear 
 
 ### 1.1.0
 

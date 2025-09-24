@@ -1109,6 +1109,7 @@ export class QuietCombobox extends QuietFormControlElement {
             ?required=${this.required}
             placeholder=${ifDefined(this.placeholder)}
             .value=${this.inputValue}
+            autocomplete="off"
             style=${styleMap(inputStyles)}
             @input=${this.handleInput}
             @focus=${this.handleFocus}

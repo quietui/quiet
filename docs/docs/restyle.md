@@ -21,7 +21,7 @@ To add Restyle to your app, add the following markup to the `<head>` of your doc
 ```
 
 :::info
-Restyle uses [CSS layers](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer) to manage specificity. This means you can customize anything with simple CSS selectors without worrying about specificity.
+Restyle uses [CSS layers](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer) to manage specificity. This means you can customize anything with simple CSS selectors without worrying about conflicts.
 :::
 
 ## Typography & text flow

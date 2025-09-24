@@ -6,6 +6,11 @@ Quiet is a [source-available](https://quietui.org/license) user interface librar
 
 You might be curious to learn that Quiet's components aren't built with React, Vue, or any other framework. They're custom HTML elements, or [Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components), which means you can use them in plain ol' HTML pages as well as your favorite frameworks.
 
+**There are two primary packages for this library:**
+
+- [`@quietui/quiet`](https://www.npmjs.com/package/@quietui/quiet) - Use with frameworks and bundlers
+- [`@quietui/quiet-browser`](https://www.npmjs.com/package/@quietui/quiet-browser) - Use directly in the browser and on CDNs
+
 ## What's in the box?
 
 - 🧰 A collection of high quality components for building beautiful, accessible, and consistent user interfaces

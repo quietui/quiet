@@ -15,5 +15,6 @@ The Quiet Figma Starter Kit is built and maintained by [Ange Romanska](https://w
 Please check back in a week or so or follow the project to get notified when it launches!
 
 - [Quiet on Bluesky](https://bsky.app/profile/quietui.org)
+- [Quiet on Mastodon](https://mastodon.social/@quietui)
 - [Quiet on X](https://x.com/quiet_ui)
 

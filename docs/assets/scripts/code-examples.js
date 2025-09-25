@@ -32,8 +32,13 @@ document.addEventListener('click', event => {
     const code = codeExample.querySelector('code');
     const version = document.documentElement.dataset.version;
     const html =
-      `<script type="module" src="https://cdn.jsdelivr.net/npm/@quietui/quiet-browser@${version}/dist/quiet.loader.js"></script>` +
-      `\n\n` +
+      `<!-- Quiet UI <https://quietui.org/> -->\n` +
+      `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@quietui/quiet-browser@${version}/dist/themes/quiet.css">\n` +
+      `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@quietui/quiet-browser@${version}/dist/themes/restyle.css">\n` +
+      `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@quietui/quiet-browser@${version}/dist/themes/utilities.css">\n` +
+      `<script type="module" src="https://cdn.jsdelivr.net/npm/@quietui/quiet-browser@${version}/dist/quiet.loader.js"></script>\n` +
+      `\n` +
+      `<!-- Demo code -->\n` +
       `${code.textContent}`;
     const css = 'body {\n  font: 16px sans-serif;\n  padding: 1rem;\n}\n';
     const js = '';
@@ -49,7 +54,7 @@ document.addEventListener('click', event => {
       tags: ['quietui', 'custom elements', 'web-components'],
       editors: '1000',
       head: '<meta name="viewport" content="width=device-width">',
-      html_classes: '',
+      html_classes: document.documentElement.classList.contains('quiet-dark') ? 'quiet-dark' : '',
       css_external: '',
       js_external: '',
       js_module: true,

@@ -54,6 +54,7 @@ Components marked [stable] are well-tested, ready for production, and less likel
 - Fixed the tag color in `<quiet-combobox>` so they're visible in the filled appearance
 - Fixed a bug in `<quiet-combobox>` that allowed the browser's autocomplete menu to appear
 - Fixed CodePen demos so they include the theme, Restyle, utilities, and dark mode
+- Fixed a bug in Restyle where text in the `<summary>` element would overlap the chevron
 
 ### 1.1.0
 

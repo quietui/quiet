@@ -380,7 +380,8 @@
     position: relative;
     margin-inline: -1rem;
     margin-block: 0;
-    padding-inline: 1em;
+    padding-inline-start: 1em;
+    padding-inline-end: 2.5em;
     padding-block: calc(var(--quiet-content-spacing) / 2);
     cursor: pointer;
     user-select: none;
@@ -392,7 +393,7 @@
     &::before {
       position: absolute;
       top: calc(50% - 0.5em);
-      right: 1.2em;
+      right: 1em;
       width: 1em;
       height: 1em;
       transform-origin: center;

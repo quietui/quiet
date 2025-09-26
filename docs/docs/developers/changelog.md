@@ -48,7 +48,7 @@ Components marked [stable] are well-tested, ready for production, and less likel
 
 ## Releases
 
-### Unreleased
+### 1.1.1 🐜
 
 - Fixed the default value of `--quiet-form-control-font-size-xl` so it's not a fractional font size
 - Fixed the tag color in `<quiet-combobox>` so they're visible in the filled appearance
@@ -56,7 +56,7 @@ Components marked [stable] are well-tested, ready for production, and less likel
 - Fixed CodePen demos so they include the theme, Restyle, utilities, and dark mode
 - Fixed a bug in Restyle where text in the `<summary>` element would overlap the chevron
 
-### 1.1.0
+### 1.1.0 🎲
 
 - Added the `<quiet-random-content>` utility component
 - Added styles for `<q>` and `<cite>` elements in Restyle

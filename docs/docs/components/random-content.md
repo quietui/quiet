@@ -177,7 +177,7 @@ Use the `items` attribute to display multiple random items at once. This is usef
       height: 100px;
       background-color: var(--quiet-primary-fill-mid);
       border-radius: var(--quiet-border-radius-md);
-      color: var(--quiet-neutral-text-on-soft);
+      color: var(--quiet-neutral-text-on-mid);
       font-size: 1.5rem;
       font-weight: var(--quiet-font-weight-semibold);
       display: flex;

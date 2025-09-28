@@ -40,7 +40,7 @@ To prevent interactions while comparing, add the [`inert`](https://developer.moz
 
 ### Setting the initial position
 
-Add the `disabled` attribute to lock the comparison in its current position.
+Set the initial position of the comparison using the `position` attribute.
 
 ```html {.example}
 <quiet-comparison position=".75">

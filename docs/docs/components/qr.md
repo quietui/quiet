@@ -3,7 +3,7 @@ title: QR Code
 layout: component
 ---
 
-[QR codes](https://www.qrcode.com/) offer an efficient way to direct mobile users to websites, exchange contact details, process mobile transactions, and other digital interactions through a simple scan.
+[QR codes](https://en.wikipedia.org/wiki/QR_code) offer an efficient way to direct mobile users to websites, exchange contact details, process mobile transactions, and other digital interactions through a simple scan.
 
 ```html {.example}
 <quiet-qr data="https://quietui.org/" label="QR code to visit Quiet UI on the Web"></quiet-qr>

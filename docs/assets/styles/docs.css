@@ -1428,6 +1428,7 @@ html:not(.quiet-dark) quiet-scroller:has(.component-table) {
       height: calc(100% + calc(var(--grid-padding-block) * 2));
       margin: calc(-1 * var(--grid-padding-block)) calc(-1 * var(--grid-padding-inline));
       padding: 1rem;
+      border-radius: inherit;
       color: inherit;
       font-weight: inherit;
       text-decoration: none;

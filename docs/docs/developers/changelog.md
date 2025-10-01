@@ -48,6 +48,10 @@ Components marked [stable] are well-tested, ready for production, and less likel
 
 ## Releases
 
+### Unreleased
+
+- Added support for link buttons using `<a class="quiet-button">` to Restyle
+
 ### 1.1.1 🐜
 
 - Fixed the default value of `--quiet-form-control-font-size-xl` so it's not a fractional font size

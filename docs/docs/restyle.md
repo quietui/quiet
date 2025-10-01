@@ -433,6 +433,34 @@ Use the `quiet-pill` class to make rounded pill buttons.
 </div>
 ```
 
+Use the `<a class="quiet-button">` to make a link button.
+
+```html {.example .no-edit}
+<div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
+  <a class="quiet-button" href="#">Default</a>
+  <a class="quiet-button quiet-primary" href="#">Primary</a>
+  <a class="quiet-button quiet-destructive" href="#">Destructive</a>
+</div>
+```
+
+Size, pill, and variant modifiers work with link buttons as well.
+
+```html {.example .no-edit}
+<div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
+  <a class="quiet-button quiet-xs" href="#"><quiet-icon name="settings"></quiet-icon> xs</a>
+  <a class="quiet-button quiet-sm" href="#"><quiet-icon name="settings"></quiet-icon> sm</a>
+  <a class="quiet-button quiet-md" href="#"><quiet-icon name="settings"></quiet-icon> md</a>
+  <a class="quiet-button quiet-lg" href="#"><quiet-icon name="settings"></quiet-icon> lg</a>
+  <a class="quiet-button quiet-xl" href="#"><quiet-icon name="settings"></quiet-icon> xl</a>
+</div>
+
+<br>
+
+<a class="quiet-button quiet-pill quiet-sm" href="#">Default Pill</a>
+<a class="quiet-button quiet-primary quiet-pill quiet-sm" href="#">Primary Pill</a>
+<a class="quiet-button quiet-destructive quiet-pill quiet-sm" href="#">Destructive Pill</a>
+```
+
 ### Form controls
 
 For consistency, most native form controls are styled to look similar to Quiet form controls. Add the `quiet-xs`, `quiet-sm`, `quiet-md`, `quiet-lg`, and `quiet-xl` classes to `<input>`, `<select>`, and `<textarea>` elements to change their size.

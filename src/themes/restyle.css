@@ -905,7 +905,8 @@
   }
 
   /* Buttons */
-  button {
+  button,
+  a.quiet-button {
     display: inline-block;
     appearance: none;
     position: relative;
@@ -921,6 +922,7 @@
     font: inherit;
     font-weight: var(--quiet-font-weight-semibold);
     font-size: var(--quiet-form-control-font-size-md);
+    text-align: center;
     text-decoration: none;
     vertical-align: middle;
     white-space: nowrap;
@@ -974,7 +976,7 @@
       color: var(--quiet-neutral-text-on-soft);
 
       @media (hover: hover) {
-        &:hover:not(:disabled) {
+        &:hover:not(:disabled, .quiet-disabled) {
           background-color: color-mix(in oklab, var(--quiet-neutral-fill-softer), black 5%);
         }
       }
@@ -986,7 +988,7 @@
       color: var(--quiet-primary-text-on-mid);
 
       @media (hover: hover) {
-        &:hover:not(:disabled) {
+        &:hover:not(:disabled, .quiet-disabled) {
           background-color: color-mix(in oklab, var(--quiet-primary-fill-mid), black 5%);
         }
       }
@@ -998,13 +1000,13 @@
       color: var(--quiet-destructive-text-on-mid);
 
       @media (hover: hover) {
-        &:hover:not(:disabled) {
+        &:hover:not(:disabled, .quiet-disabled) {
           background-color: color-mix(in oklab, var(--quiet-destructive-fill-mid), black 5%);
         }
       }
     }
 
-    &:active:not(:disabled) {
+    &:active:not(:disabled, .quiet-disabled) {
       translate: 0 var(--quiet-button-active-offset);
     }
 
@@ -1017,7 +1019,8 @@
       outline-offset: var(--quiet-focus-offset);
     }
 
-    &:disabled {
+    &:disabled,
+    &.quiet-disabled {
       cursor: not-allowed;
       opacity: 0.5;
     }
@@ -1027,6 +1030,35 @@
       stroke-width: 1.75px;
       margin-inline: 0.025em;
       vertical-align: -0.2em;
+    }
+  }
+
+  /* Link button adjustments */
+  a.quiet-button {
+    line-height: var(--quiet-form-control-height-md);
+
+    &.quiet-xs {
+      line-height: var(--quiet-form-control-height-xs);
+    }
+
+    &.quiet-sm {
+      line-height: var(--quiet-form-control-height-sm);
+    }
+
+    &.quiet-md {
+      line-height: var(--quiet-form-control-height-md);
+    }
+
+    &.quiet-lg {
+      line-height: var(--quiet-form-control-height-lg);
+    }
+
+    &.quiet-xl {
+      line-height: var(--quiet-form-control-height-xl);
+    }
+
+    &.quiet-disabled {
+      pointer-events: none;
     }
   }
 

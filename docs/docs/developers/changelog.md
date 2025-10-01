@@ -50,7 +50,8 @@ Components marked [stable] are well-tested, ready for production, and less likel
 
 ### Unreleased
 
-- Added support for link buttons using `<a class="quiet-button">` to Restyle
+- Added support for link buttons using `<a class="quiet-button">` in Restyle
+- Added missing border and background styles for `<iframe>` in Restyle
 
 ### 1.1.1 🐜
 

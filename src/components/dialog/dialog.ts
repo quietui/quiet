@@ -146,6 +146,8 @@ export class QuietDialog extends QuietElement {
       const elementToFocus = this.querySelector<HTMLButtonElement>('[autofocus]');
       if (elementToFocus && typeof elementToFocus.focus === 'function') {
         elementToFocus.focus();
+      } else {
+        this.dialog.focus();
       }
     });
 

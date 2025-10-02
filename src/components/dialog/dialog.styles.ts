@@ -38,12 +38,9 @@ export default css`
       background-color: var(--quiet-backdrop-color, rgb(0 0 0 / 0.25));
     }
 
-    &:focus {
-      outline: none;
-    }
-
+    &:focus,
     &:focus-visible {
-      outline: var(--quiet-focus-ring);
+      outline: none;
     }
 
     /* Shake animation */

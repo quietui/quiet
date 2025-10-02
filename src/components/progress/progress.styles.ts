@@ -171,4 +171,105 @@ export default css`
       rotate: -360deg;
     }
   }
+
+  /* Pie */
+  :host([appearance='pie']) {
+    /* Private - smaller radius so stroke fits within bounds */
+    --radius: calc(var(--diameter) / 4);
+    --circumference: calc(var(--radius) * 2 * 3.141592654);
+
+    display: inline-flex;
+    position: relative;
+    width: var(--diameter) !important;
+    height: var(--diameter) !important;
+    font-size: 0.875em;
+  }
+
+  :host([appearance='pie']) svg {
+    flex: 1 1 auto;
+    overflow: hidden;
+    border-radius: 50%;
+  }
+
+  :host([appearance='pie']) #track,
+  :host([appearance='pie']) #indicator {
+    fill: none;
+    r: var(--radius);
+    cx: calc(var(--diameter) / 2);
+    cy: calc(var(--diameter) / 2);
+    transform-origin: 50% 50%;
+    rotate: -90deg;
+  }
+
+  :host([appearance='pie']) #track {
+    fill: var(--track-color);
+    r: calc(var(--diameter) / 2);
+    stroke: none;
+  }
+
+  :host([appearance='pie']) #indicator {
+    fill: none;
+    stroke: var(--indicator-color);
+    stroke-width: calc(var(--radius) * 2);
+    stroke-linecap: butt;
+    transition: 300ms stroke-dasharray ease;
+    stroke-dasharray: calc((var(--circumference) * var(--percentage)) / 100) var(--circumference);
+  }
+
+  /* RTL support */
+  :host([appearance='pie']:dir(rtl)) #indicator {
+    stroke-dasharray: 0 calc((var(--circumference) * (100 - var(--percentage))) / 100) var(--circumference);
+  }
+
+  /* Indeterminate pie */
+  :host([appearance='pie'][indeterminate]) #indicator {
+    animation: 2.5s pie-indeterminate infinite ease-in-out;
+    stroke-dasharray: calc((var(--circumference) * 50) / 100) var(--circumference);
+  }
+
+  :host([appearance='pie'][indeterminate]:dir(rtl)) #indicator {
+    animation-name: pie-indeterminate-rtl;
+  }
+
+  :host([appearance='pie']) #content {
+    display: flex;
+    z-index: 1;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    width: var(--diameter);
+    height: var(--diameter);
+    padding: var(--track-size);
+    color: var(--quiet-primary-text-on-mid);
+  }
+
+  @keyframes pie-indeterminate {
+    0% {
+      stroke-dasharray: 0 var(--circumference);
+      stroke-dashoffset: 0;
+    }
+    50% {
+      stroke-dasharray: var(--circumference) 0;
+      stroke-dashoffset: 0;
+    }
+    100% {
+      stroke-dasharray: 0 var(--circumference);
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes pie-indeterminate-rtl {
+    0% {
+      stroke-dasharray: 0 var(--circumference);
+      stroke-dashoffset: 0;
+    }
+    50% {
+      stroke-dasharray: var(--circumference) 0;
+      stroke-dashoffset: 0;
+    }
+    100% {
+      stroke-dasharray: 0 var(--circumference);
+      stroke-dashoffset: 0;
+    }
+  }
 `;

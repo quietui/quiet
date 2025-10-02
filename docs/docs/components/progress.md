@@ -37,6 +37,14 @@ Set the `appearance` attribute to `ring` to show progress in the shape of a ring
 </quiet-progress>
 ```
 
+### Progress pie charts
+
+Set the `appearance` attribute to `pie` to show progress in the shape of a filled pie chart.
+
+```html {.example .flex-row}
+<quiet-progress label="Completion" appearance="pie" value="75"></quiet-progress>
+```
+
 ### Indeterminate progress
 
 When the completion status can't be determined, the progress bar is considered indeterminate. Add the `indeterminate` attribute for tasks whose progress can't be reported.
@@ -46,17 +54,20 @@ When the completion status can't be determined, the progress bar is considered i
 
 <br>
 
-<quiet-progress label="Waiting for response" appearance="ring" indeterminate></quiet-progress>
+<div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+  <quiet-progress label="Waiting for response" appearance="ring" indeterminate></quiet-progress>
+  <quiet-progress label="Waiting for response" appearance="pie" indeterminate></quiet-progress>
+</div>
 ```
 
 ### Changing the size
 
-Use `--track-size` property to change the track size. For progress rings, use the `--diameter` custom property to change the size of the ring.
+Use `--track-size` property to change the track size for bars and rings. For rings and pie charts, use the `--diameter` custom property to change the size.
 
 ```html {.example}
 <quiet-progress 
   label="Progress"
-  value="50"
+  value="75"
   style="--track-size: 10px;"
 >
 </quiet-progress>
@@ -65,7 +76,7 @@ Use `--track-size` property to change the track size. For progress rings, use th
 
 <quiet-progress 
   label="Progress"
-  value="50"
+  value="75"
   style="--track-size: 60px; font-size: 1.5rem;"
 >
   Loading
@@ -73,13 +84,22 @@ Use `--track-size` property to change the track size. For progress rings, use th
 
 <br>
 
-<quiet-progress 
-  appearance="ring"
-  value="50"
-  style="--track-size: 4px; --diameter: 100px;"
->
-  50%
-</quiet-progress>
+<div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+  <quiet-progress 
+    appearance="ring"
+    value="75"
+    style="--track-size: 4px; --diameter: 100px;"
+  >
+    75%
+  </quiet-progress>
+
+  <quiet-progress 
+    appearance="pie"
+    value="75"
+    style="--diameter: 100px;"
+  >
+  </quiet-progress>
+</div>
 ```
 
 ### Changing the colors
@@ -97,12 +117,22 @@ Use the `--track-color` custom property to change the progress bar's track color
 
 <br>
 
-<quiet-progress 
-  style="--track-color: mistyrose; --indicator-color: deeppink;"
-  appearance="ring"
-  label="Progress" 
-  value="75"
->
-  75%
-</quiet-progress>
+<div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+  <quiet-progress 
+    style="--track-color: mistyrose; --indicator-color: deeppink;"
+    appearance="ring"
+    label="Progress" 
+    value="75"
+  >
+    75%
+  </quiet-progress>
+
+  <quiet-progress 
+    style="--track-color: mistyrose; --indicator-color: deeppink;"
+    appearance="pie"
+    label="Progress" 
+    value="75"
+  >
+  </quiet-progress>
+</div>
 ```

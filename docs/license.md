@@ -52,7 +52,7 @@ Quiet UI is source-available and completely free of charge for personal, educati
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Commercial use</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Modify the software</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Keep your code private</li>
-      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> <mark>Use in unlimited apps</mark></li>
+      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> <mark>Use in all your apps</mark></li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Maintainer support</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Priority bug fixes</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Private Discord access</li>

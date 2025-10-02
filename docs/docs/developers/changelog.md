@@ -52,6 +52,7 @@ Components marked [stable] are well-tested, ready for production, and less likel
 
 - Added support for link buttons using `<a class="quiet-button">` in Restyle
 - Added missing border and background styles for `<iframe>` in Restyle
+- Fixed a bug in `<quiet-slider>` that allowed the tooltip position to get out of sync [issue:12]
 - Fixed initial focus when `<quiet-dialog>` opens [issue:16]
 
 ### 1.1.1 🐜

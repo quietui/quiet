@@ -19,6 +19,7 @@ Components marked [stable] are well-tested, ready for production, and less likel
 - Added the `pie` appearance to `<quiet-progress>`
 - Fixed a bug in `<quiet-slider>` that allowed the tooltip position to get out of sync [issue:12]
 - Fixed initial focus when `<quiet-dialog>` opens [issue:16]
+- Fixed a bug in `<quiet-popover>` that caused clicks inside the popover to close it when used inside a shadow root [issue:17]
 
 ### 1.1.1 🐜
 

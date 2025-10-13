@@ -66,25 +66,29 @@ Quiet's Figma Starter Kit aligns design and engineering with a single source of 
   <li>
     <a class="stretch" href="https://buy.polar.sh/polar_cl_IB9AY0KWdP5MnVnpruntpoVjZN246wooCJDZq2gYiyE" data-no-external>
       <quiet-icon name="palette" style="color: #c5a231;"></quiet-icon><br>
-      The <strong>Foundations file</strong> is your design system's single source of truth. Every color, typeface, shadow, and radius is meticulously organized and variable-driven. Control permissions, enforce consistency, and scale with confidence.
+      Foundations file<br>
+      <small>The definitive source for your design system. Every color, typeface, shadow, and radius. Meticulously crafted.</small>
     </a>
   </li>
   <li>
     <a class="stretch" href="https://buy.polar.sh/polar_cl_IB9AY0KWdP5MnVnpruntpoVjZN246wooCJDZq2gYiyE" data-no-external>
       <quiet-icon name="library-photo" style="color: #58acf2;"></quiet-icon><br>
-      The <strong>Icon Library</strong> delivers 400+ carefully crafted icons from Tabler, ready to use. Expand effortlessly with the Figma plugin or import your own. Every icon, perfectly balanced. Every style, consistently applied.
+      Icon Library<br>
+      <small>400+ precision-crafted Tabler icons. Instantly expandable. Endlessly versatile.</small>
     </a>
   </li>
   <li>
     <a class="stretch" href="https://buy.polar.sh/polar_cl_IB9AY0KWdP5MnVnpruntpoVjZN246wooCJDZq2gYiyE" data-no-external>
       <quiet-icon name="blocks" style="color: #e98d61;"></quiet-icon><br>
-      The Figma <strong>Component Library</strong> perfectly mirrors your web components. Every variant, state, and size is thoughtfully engineered with consistent tokens. Design with precision. Ship with certainty. Scale without limits.
+      Component Library<br>
+      <small>Flawless parity from design to code. Every variant. Every state. Engineered to perfection.</small>
     </a>
   </li>
   <li>
     <a class="stretch" href="https://buy.polar.sh/polar_cl_IB9AY0KWdP5MnVnpruntpoVjZN246wooCJDZq2gYiyE" data-no-external>
       <quiet-icon name="building-lighthouse" style="color: #b394f4;"></quiet-icon><br>
-      <strong>Usage guidelines</strong> transform good intentions into great design. Clear principles for every component. Best practices for every decision. Empower your team to design with purpose and maintain excellence at scale.
+      Usage guidelines<br>
+      <small>Principled design at scale. Clear direction. Consistent execution. Design with confidence.</small>
     </a>
   </li>
 </ul>
@@ -96,6 +100,19 @@ The Figma Starter Kit adapts to your ambition. Launch a proof of concept in minu
 ### What's included
 
 Purchase once, own forever. You'll receive the complete Figma Starter Kit, including Foundations, Icon Library, and Component Library source files (.fig) delivered instantly. Every component, every token, every detail is yours to customize, extend, and evolve. No subscriptions. No limitations. Just the tools you need to build something extraordinary.
+
+<div 
+  style="
+    display: flex; 
+    gap: 1rem; 
+    justify-content: center; 
+    margin-block: 2.5rem 2rem;
+  "
+>
+  <quiet-button variant="primary" size="lg" pill href="https://buy.polar.sh/polar_cl_IB9AY0KWdP5MnVnpruntpoVjZN246wooCJDZq2gYiyE">
+    Purchase the Figma Starter Kit
+  </quiet-button>
+</div>
 
 ---
 

@@ -113,7 +113,7 @@ npm install @quietui/quiet-browser
 :::details What's the difference?
 The `@quietui/quiet` package contains [bare module specifiers](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules#importing_modules_as_bare_names), allowing bundlers to deduplicate dependencies for a more efficient bundle. This means dependencies are excluded from the distribution and must be resolved at build time.
 
-The `@quietui/quiet-browser` package contains all dependencies baked in, meaning it works directly in the browser and CDNs with no bundling necessary.
+The `@quietui/quiet-browser` package contains all dependencies baked in, meaning it works directly in the browser and CDNs with no bundling necessary. However, this means bundlers can't deduplicate dependencies.
 :::
 
 Add the [default theme](/docs/theming) and the [optional CSS reset](/docs/restyle). You may need to configure your app to serve the `dist` folder from a path of your choice.

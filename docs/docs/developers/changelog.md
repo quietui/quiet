@@ -21,7 +21,7 @@ Components marked [stable] are well-tested, ready for production, and less likel
 - Fixed initial focus when `<quiet-dialog>` opens [issue:16]
 - Fixed a bug in `<quiet-popover>` that caused clicks inside the popover to close it when used inside a shadow root [issue:17]
 
-### 1.1.1 🐜
+### 1.1.1
 
 - Fixed the default value of `--quiet-form-control-font-size-xl` so it's not a fractional font size
 - Fixed the tag color in `<quiet-combobox>` so they're visible in the filled appearance
@@ -29,18 +29,18 @@ Components marked [stable] are well-tested, ready for production, and less likel
 - Fixed CodePen demos so they include the theme, Restyle, utilities, and dark mode
 - Fixed a bug in Restyle where text in the `<summary>` element would overlap the chevron
 
-### 1.1.0 🎲
+### 1.1.0
 
 - Added the `<quiet-random-content>` utility component
 - Added styles for `<q>` and `<cite>` elements in Restyle
 - Improved `<summary>` styles so the hit area extends the full width of the container
 
-### 1.0.1 – 1.0.3 🔨
+### 1.0.1 – 1.0.3
 
 - Fixed a bug in the unbundled distribution that caused some files to not be included
 - Removed splitting from the browser distribution
 
-### 1.0.0 🧀
+### 1.0.0
 
 <small>August 1, 2025</small>
 

@@ -170,15 +170,13 @@ export class QuietPopover extends QuietElement {
   };
 
   private handleDocumentClick = (event: MouseEvent) => {
-    const target = event.target as HTMLElement;
-
     // Ignore clicks on the anchor so it will be closed by the anchor's click handler
     if (this.anchor && event.composedPath().includes(this.anchor)) {
       return;
     }
 
     // Detect when clicks occur outside the popover
-    if (target.closest('quiet-popover') !== this) {
+    if (!event.composedPath().includes(this)) {
       this.open = false;
     }
   };

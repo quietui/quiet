@@ -69,7 +69,7 @@ You can use this function in the beginning of your app to wait for components to
 
 :::details Advanced usage
 
-You can provide options to change how this function works, allowing you to listen for other custom elements and/or custom elements that may not be on the page when the function is called. All available options are shown below.
+You can provide options to change how this function works.
 
 ```ts
 await allDefined({

@@ -9,7 +9,7 @@ bodyClass: with-grid
 
 Quiet UI is source-available and completely free of charge for personal, educational, and non-profit use under the terms of the [PolyForm Noncommercial License](https://github.com/quietui/quiet/blob/main/LICENSE). Commercial licenses are available for those who wish to use the software in business applications or require support.
 
-<div class="pricing-tiers">
+<div class="pricing-tiers-triple">
   <div class="pricing-tier">
     <quiet-icon class="pricing-tier-icon" name="code" style="color: #7db664;"></quiet-icon>
     <h3 data-no-anchor>Source-available</h3><br>
@@ -41,7 +41,7 @@ Quiet UI is source-available and completely free of charge for personal, educati
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Private Discord access</li>
     </ul>
     <quiet-button variant="primary" pill href="https://buy.polar.sh/polar_cl_iRqZcL1zYDR6HYDZKYAOiDHMxZPsIGZvUebXF1T2xIj">
-      Purchase &middot; $199
+      Purchase &middot; $99
     </quiet-button>
   </div>
 
@@ -52,13 +52,13 @@ Quiet UI is source-available and completely free of charge for personal, educati
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Commercial use</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Modify the software</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Keep your code private</li>
-      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> <mark>Use in unlimited apps</mark></li>
+      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> <mark>Use in all your apps</mark></li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Maintainer support</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Priority bug fixes</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Private Discord access</li>
     </ul>
     <quiet-button class="button-unlimited" pill href="https://buy.polar.sh/polar_cl_iRqZcL1zYDR6HYDZKYAOiDHMxZPsIGZvUebXF1T2xIj">
-      Purchase &middot; $799
+      Purchase &middot; $599
     </quiet-button>
   </div>  
 </div>
@@ -67,7 +67,7 @@ Quiet UI is source-available and completely free of charge for personal, educati
   <small>
     Prices are one-time payments.
     <a href="/figma" class="link-disguised">Figma file</a> sold separately.
-    Visit the <a href="https://polar.sh/quietui/portal" class="link-disguised">customer portal</a> for order history and receipts.
+    Visit the <a href="https://polar.sh/quietui/portal" class="link-disguised" data-no-external>customer portal</a> for order history and receipts.
   </small>
 </p>
 
@@ -156,18 +156,8 @@ Quiet UI is source-available and completely free of charge for personal, educati
 
 ## Frequently asked questions
 
-:::details Where can I find my order history and receipts?
-You can access your past orders, receipts, and licenses by visiting the [customer portal](https://polar.sh/quietui/portal).
-:::
-
-:::details What is a source-available license?
-Quiet doesn't qualify as "open source" under the [OSI's definition](https://en.wikipedia.org/wiki/Open_Source_Initiative) of the term, but it's [source-available license](https://github.com/quietui/quiet/blob/main/LICENSE) is actually _more_ permissive than most viral open source licenses. You can use Quiet, learn from it, and change it just like open source software.
-
-Unfortunately, there's no fair way for open source authors to build something valuable and sustainable while giving it away completely free to everyone. Traditional open source means any company can take years of your work, build profitable products with it, and contribute nothing back to development.
-
-[Copyleft licenses](https://www.gnu.org/licenses/copyleft.en.html) try to solve this problem by requiring everyone who uses the code to open source their entire application. But this creates an unfair burden on noncommercial users — individuals, students, and hobbyists who just want to keep their code private without having to navigate complex licensing requirements.
-
-Quiet's dual-license approach lets individuals, students, and non-profits use, learn from, and adapt the software freely while ensuring that businesses who profit from it help fund continued development.
+:::details Where can I find my order history, downloads, and receipts?
+You can access your past orders, downloads, and receipts by visiting the [customer portal](https://polar.sh/quietui/portal).
 :::
 
 :::details What does "noncommercial" mean?

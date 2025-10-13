@@ -325,9 +325,20 @@ Dialogs come with a simple, minimal appearance. Feel free to customize them with
 </style>
 ```
 
-<!-- For the examples -->
-<style>
-  quiet-dialog > p:last-of-type {
-    margin-block-end: 0;
-  }
-</style>
+### Using dialogs with top-layer elements
+
+This component uses the [`<dialog>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/dialog) element under the hood, which makes everything outside of it [inert](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/inert) and blocks interaction with other top-layer elements such as [popovers](/docs/components/popover) and [toasts](/docs/components/toast). The elements will be visible, but they cannot receive clicks or focus.
+
+One workaround is to place interactive top-layer elements _inside_ the dialog, which will prevent them from becoming inert when the dialog opens.
+
+```html
+<quiet-dialog>
+  ...
+  <quiet-button id="my-popover">Show popover</quiet-button>
+
+  <!-- This popover is inside the dialog and will be interactive -->
+  <quiet-popover for="my-popover">
+    ...
+  </quiet-popover>
+</quiet-dialog>
+```

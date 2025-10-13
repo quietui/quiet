@@ -34,7 +34,7 @@ export class QuietProgress extends QuietElement {
   @property() label: string;
 
   /** The type of progress bar to render. */
-  @property({ reflect: true }) appearance: 'bar' | 'ring' = 'bar';
+  @property({ reflect: true }) appearance: 'bar' | 'ring' | 'pie' = 'bar';
 
   /** The progress bar's minimum value. */
   @property({ type: Number }) min = 0;
@@ -85,8 +85,8 @@ export class QuietProgress extends QuietElement {
   }
 
   render() {
-    // Progress ring
-    if (this.appearance === 'ring') {
+    // Progress ring & pie
+    if (this.appearance === 'ring' || this.appearance === 'pie') {
       return html`
         <svg>
           <circle id="track" part="track"></circle>

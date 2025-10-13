@@ -7,11 +7,17 @@ noindex: true
 bodyClass: with-grid
 ---
 
-Congratulations! You just purchased a commercial license for Quiet&nbsp;UI. Thanks for supporting the project — _I hope you build something incredible!_
+<p class="purchased-license">
+Congratulations! You just purchased a commercial license for Quiet&nbsp;UI. Thanks for supporting the project — <em>I hope you build something incredible!</em>
+</p>
+
+<p class="purchased-figma">
+Congratulations! You just purchased a license for the Figma Starter Kit. Thanks for supporting the project! — <em>I hope you build something incredible!</em>
+</p>
 
 <img class="whiskers-center-large" src="/assets/images/whiskers/celebrating.svg" alt="Whiskers celebrating with confetti">
 
-**You can start using Quiet in your commercial application immediately.** These links will help you get squared away with other benefits.
+These links will help you get squared away with your new license and benefits.
 
 <ul class="features-grid" aria-label="Features">
   <li>
@@ -32,7 +38,7 @@ Congratulations! You just purchased a commercial license for Quiet&nbsp;UI. Than
     <a class="stretch" href="https://polar.sh/quietui/portal" target="_blank" data-no-external>
       <quiet-icon name="package" style="color: #e98d61;"></quiet-icon><br>
       Download the files<br>
-      <small>Download available in the customer portal</small>
+      <small>Downloads are available in the customer portal</small>
     </a>
   </li>
   <li>
@@ -49,3 +55,16 @@ Congratulations! You just purchased a commercial license for Quiet&nbsp;UI. Than
     Visit the <a href="https://polar.sh/quietui/portal" target="_blank">customer portal</a> for order history, receipts, downloads, and Discord access.
   </small>
 </p>
+
+<script>
+  // Check for ?figma in URL
+  const urlParams = new URLSearchParams(window.location.search);
+  document.documentElement.classList.toggle('figma', urlParams.has('figma'));
+</script>
+
+<style>
+  html:not(.figma) .purchased-figma,
+  html.figma .purchased-license {
+    display: none;
+  }
+</style>

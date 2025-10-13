@@ -270,8 +270,8 @@ export class QuietTooltip extends QuietElement {
     }
   }
 
-  /** Repositions the tooltip */
-  private reposition() {
+  /** @internal Repositions the tooltip */
+  public reposition() {
     if (!this.anchor) return;
 
     computePosition(this.anchor, this.tooltip, {

@@ -54,6 +54,8 @@ Quiet's Figma Starter Kit aligns design and engineering with a single source of 
   </small>
 </p>
 
+<iframe src="https://embed.figma.com/design/3Uy2x2ilZrs7Ps3cMbd7by/Quiet-Components-V1.1.0?node-id=566-12368&embed-host=share" allowfullscreen></iframe>
+
 <ul class="features-grid" aria-label="Features">
   <li>
     <a class="stretch" href="https://buy.polar.sh/polar_cl_IB9AY0KWdP5MnVnpruntpoVjZN246wooCJDZq2gYiyE" data-no-external>

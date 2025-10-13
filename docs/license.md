@@ -9,7 +9,7 @@ bodyClass: with-grid
 
 Quiet UI is source-available and completely free of charge for personal, educational, and non-profit use under the terms of the [PolyForm Noncommercial License](https://github.com/quietui/quiet/blob/main/LICENSE). Commercial licenses are available for those who wish to use the software in business applications or require support.
 
-<div class="pricing-tiers">
+<div class="pricing-tiers-triple">
   <div class="pricing-tier">
     <quiet-icon class="pricing-tier-icon" name="code" style="color: #7db664;"></quiet-icon>
     <h3 data-no-anchor>Source-available</h3><br>
@@ -41,7 +41,7 @@ Quiet UI is source-available and completely free of charge for personal, educati
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Private Discord access</li>
     </ul>
     <quiet-button variant="primary" pill href="https://buy.polar.sh/polar_cl_iRqZcL1zYDR6HYDZKYAOiDHMxZPsIGZvUebXF1T2xIj">
-      Purchase &middot; $199
+      Purchase &middot; $99
     </quiet-button>
   </div>
 
@@ -58,7 +58,7 @@ Quiet UI is source-available and completely free of charge for personal, educati
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Private Discord access</li>
     </ul>
     <quiet-button class="button-unlimited" pill href="https://buy.polar.sh/polar_cl_iRqZcL1zYDR6HYDZKYAOiDHMxZPsIGZvUebXF1T2xIj">
-      Purchase &middot; $799
+      Purchase &middot; $599
     </quiet-button>
   </div>  
 </div>

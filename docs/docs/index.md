@@ -116,29 +116,29 @@ The `@quietui/quiet` package contains [bare module specifiers](https://developer
 The `@quietui/quiet-browser` package contains all dependencies baked in, meaning it works directly in the browser and CDNs with no bundling necessary. However, this means bundlers can't deduplicate dependencies.
 :::
 
-Add the [default theme](/docs/theming) and the [optional CSS reset](/docs/restyle). You may need to configure your app to serve the `dist` folder from a path of your choice.
+Add the [default theme](/docs/theming) and the [optional CSS reset](/docs/restyle). You may need to configure your app to serve Quiet from a path of your choice.
 
 ```html
 <!-- Quiet styles -->
-<link rel="stylesheet" href="/path/to/dist/themes/quiet.css">
+<link rel="stylesheet" href="/path/to/quiet/themes/quiet.css">
 
 <!-- Optional CSS reset -->
-<link rel="stylesheet" href="/path/to/dist/themes/restyle.css">
+<link rel="stylesheet" href="/path/to/quiet/themes/restyle.css">
 ```
 
 Quiet ships standard ES modules, so you can use [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) or [`import()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import) to pull in exactly the components and utilities you need.
 
 ```js
 // Static imports are the most common
-import '@quietui/quiet/dist/components/badge/badge.js';
-import '@quietui/quiet/dist/components/button/button.js';
-import '@quietui/quiet/dist/components/card/card.js';
+import '@quietui/quiet/components/badge/badge.js';
+import '@quietui/quiet/components/button/button.js';
+import '@quietui/quiet/components/card/card.js';
 
 // ...but you can also import components dynamically
 await Promise.all([
-  import '@quietui/quiet/dist/components/badge/badge.js',
-  import '@quietui/quiet/dist/components/button/button.js',
-  import '@quietui/quiet/dist/components/card/card.js'
+  import '@quietui/quiet/components/badge/badge.js',
+  import '@quietui/quiet/components/button/button.js',
+  import '@quietui/quiet/components/card/card.js'
 ]);
 ```
 

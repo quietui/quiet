@@ -88,7 +88,7 @@
       <p>
         To manually import <code>&lt;{{ component.tagName }}&gt;</code> from npm, use the following code.
       </p>
-      <pre><code class="language-js">import '@quietui/quiet/{{ component.path }}';</code></pre>
+      <pre><code class="language-js">import '@quietui/quiet/{{ component.path | stripDistPrefix }}';</code></pre>
     </quiet-tab-panel>
   </quiet-tab-list>
 

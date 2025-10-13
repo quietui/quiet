@@ -18,10 +18,10 @@ Next, load the default theme and the optional CSS reset. Depending on your frame
 
 ```html
 <!-- Quiet theme -->
-<link rel="stylesheet" href="@quietui/quiet/dist/themes/quiet.css">
+<link rel="stylesheet" href="@quietui/quiet/themes/quiet.css">
 
 <!-- Optional CSS reset -->
-<link rel="stylesheet" href="@quietui/quiet/dist/themes/restyle.css">
+<link rel="stylesheet" href="@quietui/quiet/themes/restyle.css">
 ```
 
 If you're using icons or other assets, you will need to copy Quiet's `dist/assets` folder into your app and [configure the library path](/docs/#setting-the-library-path) for icons and other assets to work.
@@ -100,7 +100,7 @@ Preact plays nicely with custom elements without additional configuration. Just 
 ```tsx
 import { h } from 'preact';
 import { useState } from 'preact/hooks';
-import '@quietui/quiet/dist/components/button/button.js';
+import '@quietui/quiet/components/button/button.js';
 
 export function Component() {
   return (
@@ -113,7 +113,7 @@ If you're using TypeScript, you can import JSX types for a better developer expe
 
 ```tsx
 import type {} from '@quietui/quiet/jsx';
-import '@quietui/quiet/dist/components/button/button.js';
+import '@quietui/quiet/components/button/button.js';
 
 export function Component() {
   return (
@@ -192,7 +192,7 @@ Svelte plays nicely with custom elements without additional configuration. Just 
 
 ```html
 <script>
-  import '@quietui/quiet/dist/components/button/button.js';
+  import '@quietui/quiet/components/button/button.js';
 </script>
 
 <quiet-button variant="primary">
@@ -205,7 +205,7 @@ Svelte plays nicely with custom elements without additional configuration. Just 
 React 19 [added support for custom elements](https://react.dev/blog/2024/04/25/react-19#support-for-custom-elements) and generally works well with them.
 
 ```jsx
-import '@quietui/quiet/dist/components/button/button.js';
+import '@quietui/quiet/components/button/button.js';
 
 function App() {
  return (
@@ -220,7 +220,7 @@ If you're using TypeScript, you can import JSX types for a better developer expe
 
 ```tsx
 import type {} from '@quietui/quiet/jsx';
-import '@quietui/quiet/dist/components/button/button.js';
+import '@quietui/quiet/components/button/button.js';
 
 function App() {
   return (

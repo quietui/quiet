@@ -74,6 +74,7 @@ export default function (eleventyConfig) {
   });
   eleventyConfig.addFilter('stripExtension', string => parse(string).name);
   eleventyConfig.addFilter('stripQuietPrefix', content => content.replace(/^quiet-/, ''));
+  eleventyConfig.addFilter('stripDistPrefix', content => content.replace(/^dist\//, ''));
   eleventyConfig.addFilter('splitPipes', content => {
     // Trims whitespace and pipes from the start and end of a string and replaces them with a <br> tag. Useful for CEM
     // types, which are pipe-delimited. With Prettier 3, a leading pipe is added when the line wraps.

@@ -42,7 +42,7 @@ Set the `appearance` attribute to `ring` to show progress in the shape of a ring
 Set the `appearance` attribute to `pie` to show progress in the shape of a filled pie chart.
 
 ```html {.example .flex-row}
-<quiet-progress label="Completion" appearance="pie" value="75"></quiet-progress>
+<quiet-progress label="Completion" appearance="pie" value="66"></quiet-progress>
 ```
 
 ### Indeterminate progress

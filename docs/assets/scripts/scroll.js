@@ -32,11 +32,7 @@ document.addEventListener('click', event => {
       event.preventDefault();
       const scrollTop = target.offsetTop - headerHeight;
 
-      // Save the current scroll position before navigating
-      history.replaceState({ scrollTop: window.scrollY }, '');
-
-      // Push the new state with the target scroll position
-      history.pushState({ scrollTop }, '', `#${id}`);
+      history.replaceState(history.state, '', `#${id}`);
 
       window.scroll({
         top: scrollTop,

@@ -14,6 +14,8 @@ Components marked [stable] are well-tested, ready for production, and less likel
 
 ### 1.2.0
 
+<small>October 12, 2025</small>
+
 - Added support for link buttons using `<a class="quiet-button">` in Restyle
 - Added missing border and background styles for `<iframe>` in Restyle
 - Added the `pie` appearance to `<quiet-progress>`
@@ -23,6 +25,8 @@ Components marked [stable] are well-tested, ready for production, and less likel
 
 ### 1.1.1
 
+<small>September 25, 2025</small>
+
 - Fixed the default value of `--quiet-form-control-font-size-xl` so it's not a fractional font size
 - Fixed the tag color in `<quiet-combobox>` so they're visible in the filled appearance
 - Fixed a bug in `<quiet-combobox>` that allowed the browser's autocomplete menu to appear
@@ -31,18 +35,23 @@ Components marked [stable] are well-tested, ready for production, and less likel
 
 ### 1.1.0
 
+<small>September 22, 2025</small>
+
 - Added the `<quiet-random-content>` utility component
 - Added styles for `<q>` and `<cite>` elements in Restyle
 - Improved `<summary>` styles so the hit area extends the full width of the container
 
 ### 1.0.1 – 1.0.3
 
+<small>September 20, 2025</small>
+
 - Fixed a bug in the unbundled distribution that caused some files to not be included
 - Removed splitting from the browser distribution
+- Fixed publishing goofs
 
 ### 1.0.0
 
-<small>August 1, 2025</small>
+<small>September 20, 2025</small>
 
 This is the first public release of Quiet UI, which includes:
 

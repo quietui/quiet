@@ -24,7 +24,7 @@ Quiet's Figma Starter Kit aligns design and engineering with a single source of 
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Instant download</li>
     </ul>
     <quiet-button variant="primary" pill href="https://buy.polar.sh/polar_cl_IB9AY0KWdP5MnVnpruntpoVjZN246wooCJDZq2gYiyE">
-      Purchase &middot; $299
+      Purchase &middot; $249
     </quiet-button>
   </div>
 

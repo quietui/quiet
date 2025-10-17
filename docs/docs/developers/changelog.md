@@ -12,6 +12,12 @@ Components marked [stable] are well-tested, ready for production, and less likel
 
 ## Releases
 
+### 1.3.0
+
+<small>October 16, 2025</small>
+
+- Quiet UI is now open source and available under the MIT License
+
 ### 1.2.0
 
 <small>October 12, 2025</small>

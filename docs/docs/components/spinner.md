@@ -43,7 +43,7 @@ Here's an example using an <abbr title="Animated PNG">APNG</abbr> image. You can
 </quiet-spinner>
 ```
 
-Here are some examples using animated SVGs from the [SVG spinners](https://github.com/n3r4zzurr0/svg-spinners) library. These SVGs are available under [the MIT license](https://github.com/n3r4zzurr0/svg-spinners/blob/main/LICENSE). Note that `fill="currentColor"` has been added to match the text color.
+Here are some examples using animated SVGs from the [SVG spinners](https://github.com/n3r4zzurr0/svg-spinners) library. These SVGs are available under [the MIT License](https://github.com/n3r4zzurr0/svg-spinners/blob/main/LICENSE). Note that `fill="currentColor"` has been added to match the text color.
 
 ```html {.example .flex-row}
 <!-- Rotating dots -->

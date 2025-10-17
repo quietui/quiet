@@ -6,7 +6,7 @@ section: about
 bodyClass: with-grid
 ---
 
-Quiet is a [source-available](/license) user interface library for the modern Web. It features {{ components.length }} accessible, performant, localized, and interoperable components along with an optional CSS reset to streamline development of websites and apps.
+Quiet is an [open source](/support) user interface library for the modern Web. It features {{ components.length }} accessible, performant, localized, and interoperable components along with an optional CSS reset to streamline development of websites and apps.
 
 You might be curious to learn that Quiet's components aren't built with React, Vue, or any other framework. They're custom HTML elements, or [Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components), which means you can use them in plain ol' HTML _and_ with your favorite frameworks.
 
@@ -35,8 +35,6 @@ The truth is, Shoelace has matured a lot over the years. While that's a great th
 A passion project. Something I'm building from scratch to explore new ideas and have fun. A place where I can satisfy my component addiction, improve my design skills, explore new Web APIs, and let my curiosity run wild. ==A place to do things my way.==
 
 As a result, you'll find that Quiet is rather opinionated. I carefully curate everything from the project's scope down to every individual line of code. Oftentimes, saying "no" is key to maintaining the quality of the library and my ability to steward it effectively.
-
-You can use Quiet free for personal, educational, and non-profit use. If you're making money with it, I ask that you support the project by [purchasing a commercial license](/license). It's how I justify spending weekends building components instead of — you know — doing other weekend things.
 
 ## Tell me about the mouse
 

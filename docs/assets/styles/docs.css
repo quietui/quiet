@@ -612,22 +612,22 @@ quiet-badge.experimental {
   float: inline-end;
   border-radius: var(--quiet-border-radius-sm);
   background-color: var(--quiet-background-color-lowered);
-}
 
-#content aside :first-child {
-  margin-block-start: 0;
-}
+  :first-child {
+    margin-block-start: 0;
+  }
 
-#content aside :last-child {
-  margin-block-end: 0;
-}
+  :last-child {
+    margin-block-end: 0;
+  }
 
-#content quiet-tab-list {
-  margin-block-end: var(--quiet-content-spacing);
-}
+  quiet-tab-list {
+    margin-block-end: var(--quiet-content-spacing);
+  }
 
-#content .code-example quiet-tab-list {
-  margin-block-end: revert;
+  .code-example quiet-tab-list {
+    margin-block-end: revert;
+  }
 }
 
 @media screen and (max-width: 959px) {
@@ -1393,7 +1393,7 @@ html:not(.quiet-dark) quiet-scroller:has(.component-table) {
     display: block;
     position: relative;
     margin: 0;
-    padding: var(--grid-padding-block) var(--grid-padding-inline);
+    padding: 1rem;
     border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
     border-radius: 1rem;
     background-color: var(--quiet-paper-color);
@@ -1419,6 +1419,11 @@ html:not(.quiet-dark) quiet-scroller:has(.component-table) {
       }
     }
 
+    /* Stretchy links */
+    &:has(a.stretch) {
+      padding: var(--grid-padding-block) var(--grid-padding-inline);
+    }
+
     a.stretch {
       display: block;
       position: relative;
@@ -1430,7 +1435,7 @@ html:not(.quiet-dark) quiet-scroller:has(.component-table) {
       padding: 1rem;
       border-radius: inherit;
       color: inherit;
-      font-weight: inherit;
+      font-weight: var(--quiet-font-weight-normal);
       text-decoration: none;
     }
 
@@ -1492,7 +1497,9 @@ html:not(.quiet-dark) quiet-scroller:has(.component-table) {
 /* 2-column variation with equal sizes */
 .pricing-tiers-double {
   grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  max-width: calc(620px + 3rem);
+  margin-inline: auto;
+  gap: 1rem;
 
   @media screen and (min-width: 768px) {
     margin-block: 3rem;
@@ -1550,9 +1557,15 @@ html:not(.quiet-dark) quiet-scroller:has(.component-table) {
   background-color: var(--quiet-paper-color);
   box-shadow: var(--quiet-shadow-softer);
 
-  .pricing-tier-icon {
+  quiet-icon.pricing-tier-icon {
     font-size: 4rem;
     stroke-width: 1px;
+  }
+
+  img.pricing-tier-icon {
+    max-width: 4rem;
+    height: 4rem;
+    margin-inline: auto;
   }
 
   ul {

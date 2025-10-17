@@ -167,7 +167,7 @@ async function generateBuild() {
     },
     bundle: isBrowserBuild,
     banner: {
-      js: `/*! Required Notice: Copyright ${currentYear} A Beautiful Site, LLC - https://quietui.org/license */`
+      js: `/*! Required Notice: Copyright ${currentYear} A Beautiful Site, LLC - https://quietui.org */`
     },
     legalComments: 'none',
     splitting: isBrowserBuild

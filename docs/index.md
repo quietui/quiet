@@ -37,7 +37,7 @@ Browse components
   <li>
     <a class="stretch" href="/components">
       <quiet-icon name="packages" style="color: #b394f4;"></quiet-icon><br>
-      {{ components.length }} high-quality, accessible, and interoperable UI components
+      {{ components.length }} open source, accessible, and interoperable UI components
     </a>
   </li>
   <li>
@@ -74,7 +74,7 @@ Browse components
 
 <h2 data-no-anchor>Quick start</h2>
 
-Copy and paste the following code into the `<head>` section of any HTML document. The autoloader will fetch components from the CDN as you add them to the DOM.
+Copy and paste the following code into the `<head>` section of any HTML document. The autoloader will fetch components from the public CDN as you add them to the DOM.
 
 ```html
 <!-- Quiet theme + autoloader -->
@@ -85,13 +85,15 @@ Copy and paste the following code into the `<head>` section of any HTML document
 <link rel="stylesheet" href="{% cdnUrl '/dist/themes/restyle.css' %}">
 ```
 
+Or you can [import components manually](http://localhost:4000/docs/#manually-importing) using npm.
+
 <div class="quick-start">
   <quiet-button size="lg" appearance="outline" pill href="/docs">
     Installation guide
   </quiet-button>
   
-  <quiet-button size="lg" appearance="outline" pill href="/license">
-    Licensing &amp; Support
+  <quiet-button size="lg" appearance="outline" pill href="/support">
+    Help &amp; Support
   </quiet-button>
 </div>
 

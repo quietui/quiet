@@ -4,7 +4,7 @@ description: Please read the project's contribution guidelines.
 layout: docs
 ---
 
-Quiet UI is a [source-available](/license) project, meaning everyone can use it and contribute to its development. There are many ways to contribute, and some of the most important contributions come from those who never write a single line of code. Here's a list of ways you can make a meaningful contribution to the project:
+Quiet UI is an [open source](/support) project, meaning everyone can use it and contribute to its development. There are many ways to contribute, and some of the most important contributions come from those who never write a single line of code. Here's a list of ways you can make a meaningful contribution to the project:
 
 - Submitting well-written bug reports
 - Submitting feature requests that are within the scope of the project
@@ -77,13 +77,13 @@ If you need help with documentation, feel free to reach out on the [discussion f
 
 ## Code contributions & licensing
 
-By submitting a contribution to this project, you agree to license your entire contribution under the same terms of the project's current or future license(s) as chosen by the maintainer. This includes source-available, open source, and/or commercial licenses. The copyright holder reserves the right to change the license(s) as necessary to ensure the longevity of the project.
+By submitting a contribution to this project, you agree to license your entire contribution under the same terms of the project's current or future license(s) as chosen by the maintainer. This includes source-available, open source, and/or commercial licenses. The maintainer reserves the right to change the license(s) as necessary to ensure the longevity of the project.
 
 If you do not agree to license your contribution under these terms, do not make contributions to the project. Unless otherwise noted:
 
-- The project's source code is licensed under the [PolyForm Noncommercial License 1.0.0](https://github.com/quietui/quiet/blob/main/LICENSE)
+- The project's source code is licensed under the [MIT License](https://github.com/quietui/quiet/blob/main/LICENSE)
 - Code examples in the documentation are public domain
-- The website and documentation are copyrighted and may not be reproduced without prior written consent from the maintainer
+- The website, documentation, and Whiskers images are copyrighted and may not be reproduced without prior written consent from the maintainer
 
 ## Conventions for component development
 

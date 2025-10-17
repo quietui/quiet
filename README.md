@@ -2,7 +2,7 @@
 
 ![Quiet UI logo](https://pbs.twimg.com/profile_banners/1705198841094356992/1697645956/1500x500)
 
-Quiet is a [source-available](https://quietui.org/license) user interface library for the modern Web. It features dozens of accessible, performant, and interoperable components along with an optional CSS reset to streamline development of websites and apps.
+Quiet is an open source user interface library for the modern Web. It features dozens of accessible, performant, and interoperable components along with an optional CSS reset to streamline development of websites and apps.
 
 You might be curious to learn that Quiet's components aren't built with React, Vue, or any other framework. They're custom HTML elements, or [Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components), which means you can use them in plain ol' HTML pages as well as your favorite frameworks.
 
@@ -21,7 +21,7 @@ You might be curious to learn that Quiet's components aren't built with React, V
 ## Where can I…?
 
 - [Get started using Quiet UI](https://quietui.org/)
-- [Buy a commercial license](https://quietui.org/license)
+- [Get help and support](https://quietui.org/support)
 - [Request a feature](https://github.com/quietui/quiet/discussions/categories/feature-requests)
 - [Report a bug](https://github.com/quietui/quiet/issues/new/choose)
 - [Ask for help](https://github.com/quietui/quiet/discussions/categories/help-support)

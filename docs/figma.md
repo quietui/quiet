@@ -9,18 +9,16 @@ bodyClass: with-grid
 The Figma Starter Kit aligns design and engineering with a single source of truth for foundational components. It's built to pick up and customize, rather than doing everything from scratch.
 
 <a id="figma-link" href="https://www.figma.com/design/3Uy2x2ilZrs7Ps3cMbd7by/Quiet-Components-V1.1.0?node-id=562-4430&p=f&t=vGZJBXlRedGu9qJr-0" target="_blank" data-no-external>
-  <div inert>
-    <iframe src="https://embed.figma.com/design/3Uy2x2ilZrs7Ps3cMbd7by/Quiet-Components-V1.1.0?node-id=566-12368&embed-host=share" allowfullscreen></iframe>
-  </div>
+  <img src="/assets/figma/preview.png" alt="Preview of the Figma file for Quiet UI" style="border: solid var(--quiet-border-width) var(--quiet-neutral-stroke-softer); box-shadow: var(--quiet-shadow-softer);">
 </a>
 
 <quiet-tooltip for="figma-link">
-  Open in Figma
+  Preview in Figma
 </quiet-tooltip>
 
 <p style="text-align: center; text-wrap: balance; margin-block: 2rem -0.5rem;">
   <small>
-    Explore the components file to see exactly what's inside! The Figma Starter Kit is maintained by <a href="https://www.linkedin.com/in/angeromanska/" class="link-disguised" data-no-external>Ange Romanska</a>.
+    Explore the components file to see exactly what's inside! The Figma Starter Kit is maintained by Ange Romanska.
   </small>
 </p>
 
@@ -93,7 +91,7 @@ Purchase once, own forever. You'll receive the complete Figma Starter Kit, inclu
   <li>
     <quiet-icon name="blocks" style="color: #e98d61;"></quiet-icon><br>
     Component Library<br>
-    <small>Flawless parity from design to code. Every variant. Every state. Engineered to perfection.</small>
+    <small>Expertly structured variants built with nested instances, advanced properties, and auto layout.</small>
   </li>
   <li>
     <quiet-icon name="building-lighthouse" style="color: #b394f4;"></quiet-icon><br>

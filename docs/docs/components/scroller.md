@@ -238,7 +238,7 @@ Use the `without-shadow` attribute to remove the shadows from the scroller.
 
 ### Styling the shadow
 
-Use the `--shadow-color` and `--shadow-size` custom properties to style the shadows that appear when scrolling is available. This example adds edges and a more natural shadow for light mode, while leaving dark mode intact.
+Use the `start-shadow` and `end-shadow` parts along with the `--shadow-color` and `--shadow-size` custom properties to style the shadows that appear when scrolling is available. This example adds edges and a more natural shadow for light mode, while leaving dark mode intact.
 
 ```html {.example}
 <quiet-scroller id="scroller__shadow">

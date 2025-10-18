@@ -6,6 +6,20 @@ labels: bug
 assignees: claviska
 ---
 
+<!-- 
+
+**************************************************
+
+THIS ISSUE TRACKER IS FOR BUGS ONLY! 🐛
+
+Help & support: https://quietui.org/support
+
+Feature requests: https://github.com/quietui/quiet/discussions/categories/feature-requests
+
+**************************************************
+
+-->
+
 ## Describe the bug
 
 <!-- Please provide a brief description of the bug below this line. -->

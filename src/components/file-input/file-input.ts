@@ -8,6 +8,7 @@ import formControlStyles from '../../styles/form-control.styles.js';
 import hostStyles from '../../styles/host.styles.js';
 import { Localize } from '../../utilities/localize.js';
 import { QuietFormControlElement } from '../../utilities/quiet-element.js';
+import '../button/button.js';
 import '../bytes/bytes.js';
 import '../icon/icon.js';
 import styles from './file-input.styles.js';
@@ -27,6 +28,7 @@ const VALIDATION_MESSAGE = nativeFileInput.validationMessage;
  * @status stable
  * @since 1.0
  *
+ * @dependency quiet-button
  * @dependency quiet-bytes
  * @dependency quiet-icon
  *

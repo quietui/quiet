@@ -12,6 +12,12 @@ Components marked [stable] are well-tested, ready for production, and less likel
 
 ## Releases
 
+### Unreleased
+
+<small>TBD</small>
+
+- Fixed a missing button dependency in `<quiet-file-input>`
+
 ### 1.3.0
 
 <small>October 16, 2025</small>

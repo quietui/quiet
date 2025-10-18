@@ -85,7 +85,7 @@ Copy and paste the following code into the `<head>` section of any HTML document
 <link rel="stylesheet" href="{% cdnUrl '/dist/themes/restyle.css' %}">
 ```
 
-Or you can [import components manually](http://localhost:4000/docs/#manually-importing) using npm.
+Or you can [import components manually](/docs/#manually-importing) using npm.
 
 <div class="quick-start">
   <quiet-button size="lg" appearance="outline" pill href="/docs">

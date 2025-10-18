@@ -211,6 +211,7 @@ export class QuietTooltip extends QuietElement {
       }
     });
 
+    // Stop here if it's not connected
     if (!this.tooltip.isConnected) return;
 
     this.tooltip.showPopover();

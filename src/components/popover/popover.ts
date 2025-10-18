@@ -201,6 +201,9 @@ export class QuietPopover extends QuietElement {
       }
     });
 
+    // Stop here if it's not connected
+    if (!this.dialog.isConnected) return;
+
     this.dialog.showPopover();
     this.customStates.set('open', true);
     this.open = true;

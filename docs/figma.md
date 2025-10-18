@@ -8,20 +8,6 @@ bodyClass: with-grid
 
 The Figma Starter Kit aligns design and engineering with a single source of truth for foundational components. It's built to pick up and customize, rather than doing everything from scratch.
 
-<a id="figma-link" href="https://www.figma.com/design/3Uy2x2ilZrs7Ps3cMbd7by/Quiet-Components-V1.1.0?node-id=562-4430&p=f&t=vGZJBXlRedGu9qJr-0" target="_blank" data-no-external>
-  <img src="/assets/figma/preview.png" alt="Preview of the Figma file for Quiet UI" style="border: solid var(--quiet-border-width) var(--quiet-neutral-stroke-softer); box-shadow: var(--quiet-shadow-softer);">
-</a>
-
-<quiet-tooltip for="figma-link">
-  Preview in Figma
-</quiet-tooltip>
-
-<p style="text-align: center; text-wrap: balance; margin-block: 2rem -0.5rem;">
-  <small>
-    Explore the components file to see exactly what's inside! The Figma Starter Kit is maintained by Ange Romanska.
-  </small>
-</p>
-
 <div class="pricing-tiers-double">
   <div class="pricing-tier">
     <quiet-icon class="pricing-tier-icon" name="user" style="color: #7577c5;"></quiet-icon>
@@ -29,7 +15,7 @@ The Figma Starter Kit aligns design and engineering with a single source of trut
     <ul>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> License for one user</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Commercial use allowed</li>
-      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Mirrored Figma &amp; web components</li>
+      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Mirrored Figma &amp; components</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Fully customizable with variables</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Light &amp; dark modes</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Component usage guidelines</li>
@@ -43,12 +29,12 @@ The Figma Starter Kit aligns design and engineering with a single source of trut
   </div>
 
   <div class="pricing-tier">
-    <quiet-icon class="pricing-tier-icon" name="users-group" style="color: #c5a231;"></quiet-icon>
+    <quiet-icon class="pricing-tier-icon" name="users-group" style="color: #ef6383;"></quiet-icon>
     <h3 data-no-anchor>Team</h3><br>
     <ul>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> <mark>License for multiple users</mark></li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Commercial use allowed</li>
-      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Mirrored Figma &amp; web components</li>
+      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Mirrored Figma &amp; components</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Fully customizable with variables</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Light &amp; dark modes</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Component usage guidelines</li>
@@ -70,12 +56,29 @@ The Figma Starter Kit aligns design and engineering with a single source of trut
 
 ### Who it's for
 
-The Figma Starter Kit adapts to your ambition. Launch a proof of concept in minutes with production-ready components. Build a complete design system that scales across products and teams. Start simple with smart defaults, then customize every detail when you're ready. From rapid prototypes to enterprise platforms. One system, infinite possibilities.
+The Figma Starter Kit adapts to your ambition. Launch a proof of concept in minutes with production-ready components. Build a complete design system that scales across products and teams. Start simple with smart defaults, then customize when you're ready.
+
+From rapid prototypes to enterprise platforms. One system, infinite possibilities.
 
 ### What's included
 
-Purchase once, own forever. You'll receive the complete Figma Starter Kit, including Foundations, Icon Library, and Component Library source files (.fig) delivered instantly. Every component, every token, every detail is yours to customize, extend, and evolve. No subscriptions. No limitations. Just the tools you need to build something extraordinary.
+Purchase once, own forever. You'll receive the complete Figma Starter Kit, including three source files (.fig) delivered instantly: ==Foundations==, ==Icon Library==, and ==Component Library==.
 
+Every component, every token, every detail is yours to customize, extend, and evolve. No subscriptions. No limitations. Just the tools you need to build something extraordinary.
+
+<a id="figma-link" href="https://www.figma.com/design/3Uy2x2ilZrs7Ps3cMbd7by/Quiet-Components-V1.1.0?node-id=562-4430&p=f&t=vGZJBXlRedGu9qJr-0" target="_blank" data-no-external>
+  <img src="/assets/figma/preview.png" alt="Preview of the Figma file for Quiet UI" style="border: solid var(--quiet-border-width) var(--quiet-neutral-stroke-softer); box-shadow: var(--quiet-shadow-softer);">
+</a>
+
+<quiet-tooltip for="figma-link">
+  Preview in Figma
+</quiet-tooltip>
+
+<p style="text-align: center; text-wrap: balance; margin-block: 2rem;">
+  <small>
+    Explore the components file to see exactly what's inside! The Figma Starter Kit is maintained by Ange Romanska.
+  </small>
+</p>
 
 <ul class="features-grid" aria-label="Features">
   <li>

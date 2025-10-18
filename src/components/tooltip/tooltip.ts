@@ -211,6 +211,8 @@ export class QuietTooltip extends QuietElement {
       }
     });
 
+    if (!this.tooltip.isConnected) return;
+
     this.tooltip.showPopover();
     this.customStates.set('open', true);
     this.open = true;

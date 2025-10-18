@@ -17,6 +17,7 @@ Components marked [stable] are well-tested, ready for production, and less likel
 <small>TBD</small>
 
 - Fixed a missing button dependency in `<quiet-file-input>`
+- Fixed a bug in `<quiet-tooltip>` that caused an error when showing tooltips after disconnecting and reconnecting to the DOM
 
 ### 1.3.0
 

@@ -39,7 +39,7 @@ A bug is a demonstrable problem caused by code in the library. Bug reports are a
 - Please **do** search for an existing issue before creating a new one
 - Please **do** explain the bug clearly and concisely
 - Please **do** provide a minimal reproduction that shows the bug (e.g. [CodePen](https://codepen.io/pen/) or [JSFiddle](https://jsfiddle.net/))
-- Please **do not** use the issue tracker for personal support requests ([go here instead](https://github.com/quietui/components/discussions/categories/help-support))
+- Please **do not** use the issue tracker for personal support requests ([go here instead](https://quietui.org/support))
 - Please **do not** paste in large blocks of irrelevant code
 - Please **do not** paste in screenshots of code
 

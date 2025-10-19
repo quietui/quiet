@@ -114,8 +114,8 @@ export class Burrow {
 /**
  * Creates a new Burrow instance with the given template and options.
  *
- * @param options - Configuration options for the burrow
- * @param template - A function that returns a TemplateResult. This function is called on each update to get fresh
+ * @param options - Configuration options for the burrow, a string ID, or an HTMLElement to use as the host element.
+ * @param template - A function that returns a `TemplateResult`. This function is called on each update to get fresh
  * template with current state values.
  *
  * @example
@@ -127,29 +127,36 @@ export class Burrow {
  *   <button @click=${() => data.count++}>
  *     Count: ${data.count}
  *   </button>
- * `, { host: 'app' });
+ * `, 'app');
  * ```
  */
-export function burrow(template: () => TemplateResult, options: BurrowOptions = {}): Burrow {
+export function burrow(template: () => TemplateResult, options: BurrowOptions | string | HTMLElement = {}): Burrow {
   const instance = new Burrow(template);
 
+  // Normalize options
+  const normalizedOptions: BurrowOptions =
+    typeof options === 'string' || options instanceof HTMLElement ? { host: options } : options;
+
   // Set callbacks if provided
-  if (options.connect) {
-    instance.connect = options.connect;
+  if (normalizedOptions.connect) {
+    instance.connect = normalizedOptions.connect;
   }
 
-  if (options.disconnect) {
-    instance.disconnect = options.disconnect;
+  if (normalizedOptions.disconnect) {
+    instance.disconnect = normalizedOptions.disconnect;
   }
 
   // Auto-attach if host is provided
-  if (options.host) {
-    const element = typeof options.host === 'string' ? document.getElementById(options.host) : options.host;
+  if (normalizedOptions.host) {
+    const element =
+      typeof normalizedOptions.host === 'string'
+        ? document.getElementById(normalizedOptions.host)
+        : normalizedOptions.host;
 
     if (element) {
       instance.attach(element);
-    } else if (typeof options.host === 'string') {
-      console.warn(`Burrow: Element with id "${options.host}" not found`);
+    } else if (typeof normalizedOptions.host === 'string') {
+      console.warn(`Burrow: Element with id "${normalizedOptions.host}" not found`);
     }
   }
 

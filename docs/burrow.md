@@ -2,8 +2,10 @@
 layout: page
 ---
 
+
 <div id="c1"></div>
 <div id="c2"></div>
+
 
 <script type="module">
   import { burrow, html, state } from '/dist/burrow.js';
@@ -55,5 +57,5 @@ layout: page
     </div>
   `, {
     host: 'c2'
-  });  
+  });
 </script>

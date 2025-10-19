@@ -21,14 +21,12 @@ export interface BurrowOptions {
   disconnect?: () => void;
 }
 
-// Track all attached burrows
 const attachedBurrows = new Set<Burrow>();
-
-// Track which burrow is currently rendering
+const pendingUpdates = new Set<Burrow>();
+const burrowsByState = new Map<object, Set<Burrow>>(); // tracks which state belongs to which burrow
+const statesByBurrow = new Map<Burrow, Set<object>>(); // NEW: tracks which states belong to which burrow
 let currentlyRenderingBurrow: Burrow | null = null;
-
-// WeakMap to track which burrows a state object belongs to
-const stateBurrows = new WeakMap<object, Set<Burrow>>();
+let updateScheduled = false;
 
 export class Burrow {
   connect: () => void = () => {};
@@ -67,14 +65,10 @@ export class Burrow {
     this.wrapper.style.display = 'contents'; // Make the wrapper transparent in layout
     this.host.appendChild(this.wrapper);
 
-    // Set this burrow as currently rendering before template execution
-    currentlyRenderingBurrow = this;
-    render(this.template(), this.wrapper);
-    currentlyRenderingBurrow = null;
-
     // Add to attached burrows set
     attachedBurrows.add(this);
 
+    this.update(); // initial render
     this.connect();
   }
 
@@ -92,6 +86,25 @@ export class Burrow {
     // Remove from attached burrows set
     attachedBurrows.delete(this);
 
+    // Only iterate over states this burrow actually uses
+    const usedStates = statesByBurrow.get(this);
+    if (usedStates) {
+      usedStates.forEach(stateObj => {
+        const burrows = burrowsByState.get(stateObj);
+        if (burrows) {
+          burrows.delete(this);
+
+          // Clean up empty sets to prevent memory leaks
+          if (burrows.size === 0) {
+            burrowsByState.delete(stateObj);
+          }
+        }
+      });
+
+      // Clean up the burrow's state tracking
+      statesByBurrow.delete(this);
+    }
+
     this.disconnect();
 
     this.host = null;
@@ -103,10 +116,33 @@ export class Burrow {
    */
   async update(): Promise<void> {
     if (this.wrapper) {
+      // Clear previous state tracking before re-render to ensure we only track states that are actually used in the
+      // current render
+      const oldStates = statesByBurrow.get(this);
+      if (oldStates) {
+        oldStates.forEach(stateObj => {
+          const burrows = burrowsByState.get(stateObj);
+          if (burrows) {
+            burrows.delete(this);
+            if (burrows.size === 0) {
+              burrowsByState.delete(stateObj);
+            }
+          }
+        });
+      }
+
+      // Create a fresh Set for this render
+      statesByBurrow.set(this, new Set());
+
       // Set this burrow as currently rendering before template execution
       currentlyRenderingBurrow = this;
       render(this.template(), this.wrapper);
       currentlyRenderingBurrow = null;
+
+      // If this render triggered state changes, wait for the batched updates to complete
+      if (updateScheduled) {
+        await new Promise<void>(queueMicrotask);
+      }
     }
   }
 }
@@ -164,38 +200,57 @@ export function burrow(template: () => TemplateResult, options: BurrowOptions | 
 }
 
 /**
- * Creates a reactive state object that automatically updates associatead burrows when modified.
+ * Creates a reactive state object that automatically updates associated burrows when modified.
  */
 export function state<T extends Record<string, any>>(defaults: T): T {
   const handler: ProxyHandler<T> = {
     get(target, prop) {
       // Track which burrow is accessing this state
       if (currentlyRenderingBurrow) {
-        let burrows = stateBurrows.get(target);
+        // Track state -> burrow
+        let burrows = burrowsByState.get(target);
         if (!burrows) {
           burrows = new Set();
-          stateBurrows.set(target, burrows);
+          burrowsByState.set(target, burrows);
         }
         burrows.add(currentlyRenderingBurrow);
+
+        // Track burrow -> state (bidirectional)
+        let states = statesByBurrow.get(currentlyRenderingBurrow);
+        if (!states) {
+          states = new Set();
+          statesByBurrow.set(currentlyRenderingBurrow, states);
+        }
+        states.add(target);
       }
 
       return target[prop as keyof T];
     },
 
     set(target, prop, value) {
+      // Skip if value hasn't changed
+      if (target[prop as keyof T] === value) {
+        return true;
+      }
+
       target[prop as keyof T] = value;
 
-      // Update only the burrows that use this state
-      const burrows = stateBurrows.get(target);
+      // Add burrows to pending updates
+      const burrows = burrowsByState.get(target);
       if (burrows) {
         burrows.forEach(burrow => {
           if (attachedBurrows.has(burrow)) {
-            burrow.update();
+            pendingUpdates.add(burrow);
           } else {
             // Clean up references to detached burrows
             burrows.delete(burrow);
           }
         });
+
+        // Schedule a batched update
+        if (pendingUpdates.size > 0) {
+          scheduleUpdates();
+        }
       }
 
       return true;
@@ -203,4 +258,21 @@ export function state<T extends Record<string, any>>(defaults: T): T {
   };
 
   return new Proxy({ ...defaults }, handler);
+}
+
+function scheduleUpdates() {
+  if (updateScheduled) return;
+
+  updateScheduled = true;
+  queueMicrotask(() => {
+    const burrowsToUpdate = new Set(pendingUpdates);
+    pendingUpdates.clear();
+    updateScheduled = false;
+
+    burrowsToUpdate.forEach(burrow => {
+      if (attachedBurrows.has(burrow)) {
+        burrow.update();
+      }
+    });
+  });
 }

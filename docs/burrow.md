@@ -25,6 +25,7 @@ layout: page
     
     if (data.count >= 3) {
       data.message = 'HE’S ON FIRE!';
+      if (data.count > 3) data.message += ` x ${data.count - 3}`;
     }
   }
   
@@ -34,7 +35,7 @@ layout: page
   }
   
   // C1
-  burrow(() => html`
+  const c1 = burrow(() => html`
     <div style="border: solid 2px dodgerblue; padding: 1rem; margin-block-start: 2rem;">
       <button @click=${handleClick}>
         Clicks: ${data.count}
@@ -42,10 +43,8 @@ layout: page
       
       <p style="margin-block-start: 1rem;">${data.message}</p>
     </div>
-  `, {
-    host: 'c1'
-  });
-  
+  `, 'c1');
+
   // C2
   burrow(() => html`
     <div style="border: solid 2px dodgerblue; padding: 1rem; margin-block-start: 2rem;">
@@ -55,7 +54,5 @@ layout: page
       
       <p style="margin-block-start: 1rem;">Total count: ${data.count}</p>
     </div>
-  `, {
-    host: 'c2'
-  });
+  `, 'c2');
 </script>

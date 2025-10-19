@@ -14,11 +14,11 @@ export interface BurrowOptions {
   /**
    * A callback to run when the burrow connects to the DOM. Use `this` to access the Burrow instance.
    */
-  connect?: () => void;
+  attached?: () => void;
   /**
    * A callback to run when the burrow disconnects from the DOM. Use `this` to access the Burrow instance.
    */
-  disconnect?: () => void;
+  detached?: () => void;
 }
 
 const attachedBurrows = new Set<Burrow>();
@@ -154,12 +154,12 @@ export function burrow(template: () => TemplateResult, options: BurrowOptions | 
     typeof options === 'string' || options instanceof HTMLElement ? { host: options } : options;
 
   // Set callbacks if provided
-  if (normalizedOptions.connect) {
-    instance.connect = normalizedOptions.connect;
+  if (normalizedOptions.attached) {
+    instance.connect = normalizedOptions.attached;
   }
 
-  if (normalizedOptions.disconnect) {
-    instance.disconnect = normalizedOptions.disconnect;
+  if (normalizedOptions.detached) {
+    instance.disconnect = normalizedOptions.detached;
   }
 
   // Auto-attach if host is provided

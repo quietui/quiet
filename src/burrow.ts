@@ -1,6 +1,9 @@
 import { render, type TemplateResult } from 'lit-html';
 
 export { html } from 'lit-html';
+export { classMap } from 'lit/directives/class-map.js';
+export { repeat } from 'lit/directives/repeat.js';
+export { styleMap } from 'lit/directives/style-map.js';
 
 export interface BurrowOptions {
   /**
@@ -154,8 +157,7 @@ export function burrow(template: () => TemplateResult, options: BurrowOptions = 
 }
 
 /**
- * Creates a reactive state object that automatically updates its associated burrow when modified. State objects are
- * local to the burrow that uses them.
+ * Creates a reactive state object that automatically updates associatead burrows when modified.
  */
 export function state<T extends Record<string, any>>(defaults: T): T {
   const handler: ProxyHandler<T> = {

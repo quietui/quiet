@@ -7,11 +7,6 @@ export { styleMap } from 'lit/directives/style-map.js';
 
 export interface BurrowOptions {
   /**
-   * An element that will host the burrow. Can be an ID or an element reference. When set, the burrow will be
-   * automatically attached.
-   */
-  host?: string | HTMLElement;
-  /**
    * A callback to run when the burrow connects to the DOM. Use `this` to access the Burrow instance.
    */
   attached?: () => void;
@@ -130,49 +125,68 @@ export class Burrow {
 /**
  * Creates a new Burrow instance with the given template and options.
  *
- * @param options - Configuration options for the burrow, a string ID, or an HTMLElement to use as the host element.
  * @param template - A function that returns a `TemplateResult`. This function is called on each update to get fresh
  * template with current state values.
+ * @param options - Optional configuration options for the burrow.
  *
  * @example
  * ```ts
  * const data = state({ count: 0 });
  *
- * // Pass template as a function so it re-evaluates on each update
- * burrow(() => html`
+ * // With auto-attach to host element
+ * burrow('app', () => html`
  *   <button @click=${() => data.count++}>
  *     Count: ${data.count}
  *   </button>
- * `, 'app');
+ * `);
+ *
+ * // Without auto-attach
+ * const myBurrow = burrow(() => html`<div>Content</div>`);
+ * myBurrow.attach('app');
  * ```
  */
-export function burrow(template: () => TemplateResult, options: BurrowOptions | string | HTMLElement = {}): Burrow {
-  const instance = new Burrow(template);
+export function burrow(template: () => TemplateResult, options?: BurrowOptions): Burrow;
+export function burrow(host: string | HTMLElement, template: () => TemplateResult, options?: BurrowOptions): Burrow;
+export function burrow(
+  templateOrHost: (() => TemplateResult) | string | HTMLElement,
+  optionsOrTemplate?: BurrowOptions | (() => TemplateResult),
+  maybeOptions?: BurrowOptions
+): Burrow {
+  let template: () => TemplateResult;
+  let host: string | HTMLElement | undefined;
+  let options: BurrowOptions = {};
 
-  // Normalize options
-  const normalizedOptions: BurrowOptions =
-    typeof options === 'string' || options instanceof HTMLElement ? { host: options } : options;
-
-  // Set callbacks if provided
-  if (normalizedOptions.attached) {
-    instance.connect = normalizedOptions.attached;
+  // Determine which signature is being used
+  if (typeof templateOrHost === 'function') {
+    // burrow(() => html`...`, options?)
+    template = templateOrHost;
+    options = (optionsOrTemplate as BurrowOptions) || {};
+  } else {
+    // burrow(host, () => html`...`, options?)
+    host = templateOrHost;
+    template = optionsOrTemplate as () => TemplateResult;
+    options = maybeOptions || {};
   }
 
-  if (normalizedOptions.detached) {
-    instance.disconnect = normalizedOptions.detached;
+  const instance = new Burrow(template);
+
+  // Set callbacks if provided
+  if (options.attached) {
+    instance.connect = options.attached;
+  }
+
+  if (options.detached) {
+    instance.disconnect = options.detached;
   }
 
   // Auto-attach if host is provided
-  if (normalizedOptions.host) {
-    const element =
-      typeof normalizedOptions.host === 'string'
-        ? document.getElementById(normalizedOptions.host)
-        : normalizedOptions.host;
+  if (host) {
+    const element = typeof host === 'string' ? document.getElementById(host) : host;
 
     if (element) {
       instance.attach(element);
-    } else if (typeof normalizedOptions.host === 'string') {
-      console.warn(`Burrow: Element with id "${normalizedOptions.host}" not found`);
+    } else if (typeof host === 'string') {
+      console.warn(`Burrow: Element with id "${host}" not found`);
     }
   }
 

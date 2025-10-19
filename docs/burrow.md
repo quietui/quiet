@@ -2,28 +2,36 @@
 layout: page
 ---
 
-<div id="abc"></div>
+<div id="c1"></div>
+<div id="c2"></div>
+<div id="c3"></div>
 
 <script type="module">
-  import { burrow, html } from '/dist/burrow.js';
+  import { burrow, html, state } from '/dist/burrow.js';
+  
+  // Create local state for this burrow
+  const data = state({
+    count: 0,
+    message: 'WELCOME TO NBA JAM'
+  });
   
   function handleClick() {
-    console.log('click');
-  }
-
-  const b = burrow({
-    host: 'abc',
-    connect() {
-      // Use `this` to access the Burrow instance
-      console.log('connected', this.host); 
-    },
-    disconnect() {
-      // Use `this` to access the Burrow instance
-      console.log('disconnected', this  );
+    data.count++;
+    if (data.count >= 2) {
+      data.message = 'HE’S HEATING UP';
     }
-  }, html`
+    if (data.count >= 3) {
+      data.message = 'HE’S ON FIRE!';
+    }
+  }
+  
+  const b = burrow(() => html`
     <button @click=${handleClick}>
-      Click me
+      Clicks: ${data.count}
     </button>
-  `);
+    
+    <p style="margin-block-start: 1rem;">${data.message}</p>
+  `, {
+    host: 'c1'
+  });
 </script>

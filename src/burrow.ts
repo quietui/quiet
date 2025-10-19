@@ -8,27 +8,33 @@ export interface BurrowOptions {
    * automatically attached.
    */
   host?: string | HTMLElement;
-
   /**
-   * A callback to run when the burrow connects to the DOM.
+   * A callback to run when the burrow connects to the DOM. Use `this` to access the Burrow instance.
    */
   connect?: () => void;
-
   /**
-   * A callback to run when the burrow disconnects from the DOM.
+   * A callback to run when the burrow disconnects from the DOM. Use `this` to access the Burrow instance.
    */
   disconnect?: () => void;
 }
+
+// Track all attached burrows
+const attachedBurrows = new Set<Burrow>();
+
+// Track which burrow is currently rendering
+let currentlyRenderingBurrow: Burrow | null = null;
+
+// WeakMap to track which burrows a state object belongs to
+const stateBurrows = new WeakMap<object, Set<Burrow>>();
 
 export class Burrow {
   connect: () => void = () => {};
   disconnect: () => void = () => {};
   host: HTMLElement | null = null;
-
-  private template: TemplateResult;
+  private template: () => TemplateResult;
   private wrapper: HTMLElement | null = null;
 
-  constructor(template: TemplateResult) {
+  constructor(template: () => TemplateResult) {
     this.template = template;
   }
 
@@ -58,7 +64,14 @@ export class Burrow {
     this.wrapper.style.display = 'contents'; // Make the wrapper transparent in layout
     this.host.appendChild(this.wrapper);
 
-    render(this.template, this.wrapper);
+    // Set this burrow as currently rendering before template execution
+    currentlyRenderingBurrow = this;
+    render(this.template(), this.wrapper);
+    currentlyRenderingBurrow = null;
+
+    // Add to attached burrows set
+    attachedBurrows.add(this);
+
     this.connect();
   }
 
@@ -72,6 +85,10 @@ export class Burrow {
 
     // Remove the wrapper element cleanly
     this.wrapper.remove();
+
+    // Remove from attached burrows set
+    attachedBurrows.delete(this);
+
     this.disconnect();
 
     this.host = null;
@@ -83,21 +100,41 @@ export class Burrow {
    */
   async update(): Promise<void> {
     if (this.wrapper) {
-      render(this.template, this.wrapper);
+      // Set this burrow as currently rendering before template execution
+      currentlyRenderingBurrow = this;
+      render(this.template(), this.wrapper);
+      currentlyRenderingBurrow = null;
     }
   }
 }
 
 /**
  * Creates a new Burrow instance with the given template and options.
+ *
+ * @param options - Configuration options for the burrow
+ * @param template - A function that returns a TemplateResult. This function is called on each update to get fresh
+ * template with current state values.
+ *
+ * @example
+ * ```ts
+ * const data = state({ count: 0 });
+ *
+ * // Pass template as a function so it re-evaluates on each update
+ * burrow(() => html`
+ *   <button @click=${() => data.count++}>
+ *     Count: ${data.count}
+ *   </button>
+ * `, { host: 'app' });
+ * ```
  */
-export function burrow(options: BurrowOptions = {}, template: TemplateResult): Burrow {
+export function burrow(template: () => TemplateResult, options: BurrowOptions = {}): Burrow {
   const instance = new Burrow(template);
 
   // Set callbacks if provided
   if (options.connect) {
     instance.connect = options.connect;
   }
+
   if (options.disconnect) {
     instance.disconnect = options.disconnect;
   }
@@ -114,4 +151,47 @@ export function burrow(options: BurrowOptions = {}, template: TemplateResult): B
   }
 
   return instance;
+}
+
+/**
+ * Creates a reactive state object that automatically updates its associated burrow when modified. State objects are
+ * local to the burrow that uses them.
+ */
+export function state<T extends Record<string, any>>(defaults: T): T {
+  const handler: ProxyHandler<T> = {
+    get(target, prop) {
+      // Track which burrow is accessing this state
+      if (currentlyRenderingBurrow) {
+        let burrows = stateBurrows.get(target);
+        if (!burrows) {
+          burrows = new Set();
+          stateBurrows.set(target, burrows);
+        }
+        burrows.add(currentlyRenderingBurrow);
+      }
+
+      return target[prop as keyof T];
+    },
+
+    set(target, prop, value) {
+      target[prop as keyof T] = value;
+
+      // Update only the burrows that use this state
+      const burrows = stateBurrows.get(target);
+      if (burrows) {
+        burrows.forEach(burrow => {
+          if (attachedBurrows.has(burrow)) {
+            burrow.update();
+          } else {
+            // Clean up references to detached burrows
+            burrows.delete(burrow);
+          }
+        });
+      }
+
+      return true;
+    }
+  };
+
+  return new Proxy({ ...defaults }, handler);
 }

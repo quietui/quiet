@@ -39,6 +39,25 @@ export class Burrow {
     this.template = template;
   }
 
+  private clearStateTracking(removeFromMap: boolean = false): void {
+    const usedStates = statesByBurrow.get(this);
+    if (usedStates) {
+      usedStates.forEach(stateObj => {
+        const burrows = burrowsByState.get(stateObj);
+        if (burrows) {
+          burrows.delete(this);
+          if (burrows.size === 0) {
+            burrowsByState.delete(stateObj);
+          }
+        }
+      });
+
+      if (removeFromMap) {
+        statesByBurrow.delete(this);
+      }
+    }
+  }
+
   /**
    * Attaches the burrow to a DOM element.
    */
@@ -80,31 +99,9 @@ export class Burrow {
       return;
     }
 
-    // Remove the wrapper element cleanly
     this.wrapper.remove();
-
-    // Remove from attached burrows set
     attachedBurrows.delete(this);
-
-    // Only iterate over states this burrow actually uses
-    const usedStates = statesByBurrow.get(this);
-    if (usedStates) {
-      usedStates.forEach(stateObj => {
-        const burrows = burrowsByState.get(stateObj);
-        if (burrows) {
-          burrows.delete(this);
-
-          // Clean up empty sets to prevent memory leaks
-          if (burrows.size === 0) {
-            burrowsByState.delete(stateObj);
-          }
-        }
-      });
-
-      // Clean up the burrow's state tracking
-      statesByBurrow.delete(this);
-    }
-
+    this.clearStateTracking(true); // Clean up and remove from map
     this.disconnect();
 
     this.host = null;
@@ -116,30 +113,13 @@ export class Burrow {
    */
   async update(): Promise<void> {
     if (this.wrapper) {
-      // Clear previous state tracking before re-render to ensure we only track states that are actually used in the
-      // current render
-      const oldStates = statesByBurrow.get(this);
-      if (oldStates) {
-        oldStates.forEach(stateObj => {
-          const burrows = burrowsByState.get(stateObj);
-          if (burrows) {
-            burrows.delete(this);
-            if (burrows.size === 0) {
-              burrowsByState.delete(stateObj);
-            }
-          }
-        });
-      }
+      this.clearStateTracking(); // Clear but keep burrow in map
+      statesByBurrow.set(this, new Set()); // Fresh set for new render
 
-      // Create a fresh Set for this render
-      statesByBurrow.set(this, new Set());
-
-      // Set this burrow as currently rendering before template execution
       currentlyRenderingBurrow = this;
       render(this.template(), this.wrapper);
       currentlyRenderingBurrow = null;
 
-      // If this render triggered state changes, wait for the batched updates to complete
       if (updateScheduled) {
         await new Promise<void>(queueMicrotask);
       }

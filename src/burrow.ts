@@ -3,8 +3,20 @@ import { render, type TemplateResult } from 'lit-html';
 export { html } from 'lit-html';
 
 export interface BurrowOptions {
+  /**
+   * An element that will host the burrow. Can be an ID or an element reference. When set, the burrow will be
+   * automatically attached.
+   */
   host?: string | HTMLElement;
+
+  /**
+   * A callback to run when the burrow connects to the DOM.
+   */
   connect?: () => void;
+
+  /**
+   * A callback to run when the burrow disconnects from the DOM.
+   */
   disconnect?: () => void;
 }
 

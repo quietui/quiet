@@ -67,7 +67,7 @@
     --quiet-form-control-font-size-xl: 1.5rem;
     --quiet-form-control-required-content: '*';
     --quiet-form-control-placeholder-color: color-mix(in oklab, var(--quiet-text-muted), transparent 25%);
-    --quiet-button-active-offset: 1px;
+    --quiet-button-active-offset: 1.5px;
 
     /*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //

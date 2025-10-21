@@ -122,7 +122,7 @@ Now let's add a text field that controls who we're greeting. We'll store the val
       type="text" 
       placeholder="Enter your name"
       .value=${data.name}
-      @input=${(e) => data.name = e.target.value}
+      @input=${event => data.name = event.target.value}
     />
     <br>
     <p>Hello, ${data.name}!</p>
@@ -372,7 +372,7 @@ State objects can be shared between multiple burrows, making it easy to keep dif
     <input 
       placeholder="Enter a message"
       .value=${data.message}
-      @input=${(e) => data.message = e.target.value}
+      @input=${event => data.message = event.target.value}
     />
   `);
   
@@ -406,7 +406,7 @@ import { sharedData } from './data.js';
 burrow('input', () => html`
   <input 
     .value=${sharedData.message}
-    @input=${(e) => sharedData.message = e.target.value}
+    @input=${event => sharedData.message = event.target.value}
   />
 `);
 

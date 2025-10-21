@@ -24,14 +24,22 @@ let currentlyRenderingBurrow: Burrow | null = null;
 let updateScheduled = false;
 
 export class Burrow {
-  connect: () => void = () => {};
-  disconnect: () => void = () => {};
-  host: HTMLElement | null = null;
+  private connectedCallback: () => void = () => {};
+  private disconnectedCallback: () => void = () => {};
   private template: () => TemplateResult;
   private wrapper: HTMLElement | null = null;
+  public host: HTMLElement | null = null;
 
-  constructor(template: () => TemplateResult) {
+  constructor(template: () => TemplateResult, options?: BurrowOptions) {
     this.template = template;
+
+    if (options?.attached) {
+      this.connectedCallback = options.attached;
+    }
+
+    if (options?.detached) {
+      this.disconnectedCallback = options.detached;
+    }
   }
 
   private clearStateTracking(removeFromMap: boolean = false): void {
@@ -83,7 +91,7 @@ export class Burrow {
     attachedBurrows.add(this);
 
     this.update(); // initial render
-    this.connect();
+    this.connectedCallback();
   }
 
   /**
@@ -97,7 +105,7 @@ export class Burrow {
     this.wrapper.remove();
     attachedBurrows.delete(this);
     this.clearStateTracking(true); // Clean up and remove from map
-    this.disconnect();
+    this.disconnectedCallback();
 
     this.host = null;
     this.wrapper = null;
@@ -168,16 +176,7 @@ export function burrow(
     options = maybeOptions || {};
   }
 
-  const instance = new Burrow(template);
-
-  // Set callbacks if provided
-  if (options.attached) {
-    instance.connect = options.attached;
-  }
-
-  if (options.detached) {
-    instance.disconnect = options.detached;
-  }
+  const instance = new Burrow(template, options);
 
   // Auto-attach if host is provided
   if (host) {

@@ -19,7 +19,7 @@ Think of a _burrow_ as an interactive "island" that lives in your static page. C
 
 Here's an obligatory counter example.
 
-```html {.example .open}
+```html {.example .open .no-edit}
 <!-- Host -->
 <div id="counter"></div>
 
@@ -102,7 +102,7 @@ Every burrow needs a _host_ element, which is where it will be attached. The hos
 
 Now let's add a text field that controls who we're greeting. We'll store the value in a state object so the DOM will automatically update when it gets modified. Inside the template, we'll use `@input` to respond to the `input` event when the user types something.
 
-```html {.example .open}
+```html {.example .open .no-edit}
 <!-- Host -->
 <div id="greeting"></div>
 
@@ -352,7 +352,7 @@ State objects are _shallow reactive_, meaning only direct properties trigger upd
 
 State objects can be shared between multiple burrows, making it easy to keep different parts of the UI in sync without making the entire page reactive.
 
-```html {.example .open}
+```html {.example .open .no-edit}
 <!-- Host elements -->
 <div id="input"></div><br>
 <!-- ... -->

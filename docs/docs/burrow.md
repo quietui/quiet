@@ -256,7 +256,7 @@ Event listeners are automatically cleaned up when the burrow detaches.
 
 ### Using directives
 
-Burrow exports several useful directives from lit-html that handle common patterns.
+Burrow exports some useful directives from that handle common patterns.
 
 **`classMap`** — Conditionally apply CSS classes.
 
@@ -318,7 +318,7 @@ The `repeat` directive is more efficient than mapping arrays when items can be r
 
 ## Working with state
 
-State objects are reactive so, when you modify state, all burrows using that state will automatically re-render. This means you have full control over keeping state objects local and/or sharing them with other burrows. A state's scope is effectively the same scope as the variable you assign it to.
+State objects are reactive so, when you modify them, all burrows using the state will automatically re-render. This means you have full control over keeping state objects local and/or sharing them with other burrows. A state's scope is effectively the same scope as the variable you assign it to.
 
 ### Creating state
 

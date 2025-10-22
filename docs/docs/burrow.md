@@ -13,11 +13,11 @@ layout: docs
 
 :::
 
-Quiet Burrow™ is a tiny reactive library that lets you add interactivity to specific parts of the page without taking over the entire DOM. It's completely optional and works well with HTML, Quiet components, and other web component libraries.
+Quiet Burrow™ is a tiny library that lets you add interactivity to various parts of the page without taking over the entire DOM. It's completely optional and works well with HTML, Quiet components, and other web component libraries.
 
-Think of a _burrow_ as an interactive "island" that lives in your static page. Create templates with a familiar declarative syntax, add state, and respond to events just like you would in a framework…and do it with just a few lines of code!
+Think of a _burrow_ as an interactive "island" that lives in your page. Create templates with a familiar declarative syntax, add state, and respond to events just like you would in a framework…but do it with just a few lines of code.
 
-Here's an obligatory counter example.
+Here's an obligatory counter example. No build step or transpilation is required.
 
 ```html {.example .open .no-edit}
 <!-- Host -->
@@ -39,7 +39,11 @@ Here's an obligatory counter example.
 </script>
 ```
 
-Many applications use expensive frameworks to control the entire DOM when they only need interactivity in specific places. Burrow embraces the _islands architecture_ ideology and lets you start with static content and add reactivity only where you need it.
+Burrows are designed to be authored [directly in HTML](#inline-burrows) or [imported](#importing-burrows). You can put multiple burrows on the page and keep them all in sync with without making the rest of the page reactive, giving you fast, efficient updates without the overhead or complexity of a framework.
+
+**When to use Burrow:** If find yourself reaching for a framework just to add a handful of interactive elements to an otherwise static page, Burrow is probably a good fit.
+
+**When not to use Burrow:** If you're building a single-page application or if your app requires routing, stores, and similar features, a framework might be better.
 
 ## Installation
 
@@ -55,11 +59,11 @@ Burrow can be installed via CDN or npm. Use these copy-and-paste examples to get
 import { burrow, state, html } from '{% cdnUrl '/dist/burrow.js' %}';
 
 const data = state({
-  // Add state here
+  name: 'Whiskers'
 });
 
 burrow('ELEMENT_ID_HERE', () => html`
-  <p>Your template here</p>
+  <p>Hello, ${data.name}!</p>
 `);
 ```
 
@@ -71,11 +75,11 @@ burrow('ELEMENT_ID_HERE', () => html`
 import { burrow, state, html } from '@quietui/quiet/burrow.js';
 
 const data = state({
-  // Add state here
+  name: 'Whiskers'
 });
 
 burrow('ELEMENT_ID_HERE', () => html`
-  <p>Your template here</p>
+  <p>Hello, ${data.name}!</p>
 `);
 ```
 
@@ -84,7 +88,7 @@ burrow('ELEMENT_ID_HERE', () => html`
 
 ## Creating your first burrow
 
-Every burrow needs a _host_ element, which is where it will be attached. The host can be just about any HTML element on the page. This example creates a burrow and attaches it to the `#greeting` element. All it does at the moment is render a paragraph.
+Every burrow needs a _host_ element, which is where the burrow will be attached. The host can be virtually any HTML element on the page. This example creates a burrow and attaches it to the `#greeting` element. All it does at the moment is render a paragraph.
 
 ```html
 <!-- Host -->
@@ -537,14 +541,10 @@ When you create a burrow, you get back a burrow instance with the following prop
 - `detach()` — Removes the burrow from the DOM and cleans up all state tracking and event listeners.
 - `update()` — Manually triggers a re-render of the burrow. This is rarely needed since state changes automatically trigger updates, but can be useful when integrating with external libraries or when you need to force a refresh. Returns a promise that resolves after the DOM has been fully updated.
 
-## When not to use burrows
+## Antipatterns
 
-Burrow is designed for adding interactivity to otherwise static pages. It's not designed to be a full-fledged application framework. Here are some scenarios where you probably _don't_ want to use a burrow.
-
-- **Nested burrows** — Don't create burrows inside other burrows. Each burrow should be independent.
-- **Full-page applications** — If your entire page is interactive and you're "burrowing" everything, you probably want a framework instead.
-- **Complex routing** — Burrow doesn't include routing. For single-page applications with multiple views and navigation, use a framework designed for that purpose.
-- **Large state trees** — Burrow's state system is intentionally simple. If you need computed properties, deep reactivity, or complex state management patterns, a more sophisticated solution might be better.
-- **Server-side rendering** — Burrow is designed for client-side interactivity. If SSR is a requirement, look at meta-frameworks built for that purpose.
+- Do not nest burrows. Here be [unsupported] dragons.
+- Avoid building single-page applications with Burrow; use a framework instead
+- Avoid building apps that require routing, complex state management; use a framework instead
 
 <img class="whiskers-center" src="/assets/images/whiskers/with-letter.svg" alt="Whiskers the mouse seated with a pencil and paper">

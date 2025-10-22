@@ -85,6 +85,8 @@ export class Burrow {
     this.wrapper = document.createElement('div');
     this.wrapper.classList.add('quiet-burrow');
     this.wrapper.style.display = 'contents'; // Make the wrapper transparent in layout
+
+    this.host.innerHTML = ''; // clear it out to ensure a clean slate
     this.host.appendChild(this.wrapper);
 
     // Add to attached burrows set

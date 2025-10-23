@@ -9,6 +9,19 @@ layout: component
 
 ## Examples
 
+### Labels and descriptions
+
+The switch's label is provided via its default slot. You can use the `description` attribute to provide a plain text description. If you want to provide HTML, use the `description` slot instead.
+
+```html {.example}
+<quiet-switch name="notifications" value="enabled">
+  Enable notifications
+  <span slot="description">
+    Get updates when your cat takes a nap. <a href="#">Learn more</a>
+  </span>
+</quiet-switch>
+```
+
 ### Checked initially
 
 Add the `checked` attribute to check the switch initially.

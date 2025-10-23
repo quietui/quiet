@@ -16,6 +16,7 @@ Components marked [stable] are well-tested, ready for production, and less likel
 
 <small>TBD</small>
 
+- Added support for `description` to `<quiet-checkbox>` and `<quiet-switch>` [issue:21]
 - Fixed a missing button dependency in `<quiet-file-input>`
 - Fixed a bug in `<quiet-popover>` and `<quiet-tooltip>` that caused an error when showing the popover/tooltip after disconnecting and reconnecting to the DOM
 - Improved `<quiet-button>` active style from 1px to 1.5px so it's a bit more obvious visually

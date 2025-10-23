@@ -9,6 +9,19 @@ layout: component
 
 ## Examples
 
+### Labels and descriptions
+
+The checkbox's label is provided via its default slot. You can use the `description` attribute to provide a plain text description. If you want to provide HTML, use the `description` slot instead.
+
+```html {.example}
+<quiet-checkbox name="terms" value="accepted">
+  I agree to the terms and conditions
+  <span slot="description">
+    By checking this box, you agree to our <a href="#">catnip usage policy</a>
+  </span>
+</quiet-checkbox>
+```
+
 ### Checked initially
 
 Add the `checked` attribute to check the checkbox initially.

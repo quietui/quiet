@@ -2,35 +2,37 @@ import { css } from 'lit';
 
 export default css`
   :host {
-    display: inline-flex;
+    display: inline-grid;
+    grid-template-columns: auto 1fr;
+    align-items: start;
+    gap: 0.5em;
+  }
+
+  /* Sizes */
+  :host([size='xs']) {
+    font-size: var(--quiet-form-control-font-size-xs);
+  }
+
+  :host([size='sm']) {
+    font-size: var(--quiet-form-control-font-size-sm);
+  }
+
+  :host([size='md']) {
+    font-size: var(--quiet-form-control-font-size-md);
+  }
+
+  :host([size='lg']) {
+    font-size: var(--quiet-form-control-font-size-lg);
+  }
+
+  :host([size='xl']) {
+    font-size: var(--quiet-form-control-font-size-xl);
   }
 
   /* The checkbox's label */
   #label {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5em;
+    display: contents; /* Makes children participate in the grid */
     cursor: pointer;
-
-    &:has(.xs) {
-      font-size: var(--quiet-form-control-font-size-xs);
-    }
-
-    &:has(.sm) {
-      font-size: var(--quiet-form-control-font-size-sm);
-    }
-
-    &:has(.md) {
-      font-size: var(--quiet-form-control-font-size-md);
-    }
-
-    &:has(.lg) {
-      font-size: var(--quiet-form-control-font-size-lg);
-    }
-
-    &:has(.xl) {
-      font-size: var(--quiet-form-control-font-size-xl);
-    }
   }
 
   :host(:state(disabled)) #label {
@@ -40,6 +42,10 @@ export default css`
   #visual-box {
     display: flex;
     position: relative;
+    grid-row: 1;
+    grid-column: 1;
+    flex: 0 0 auto;
+    align-self: center; /* Vertically center with label text */
     width: 1.125em;
     height: 1.125em;
     border-radius: var(--quiet-border-radius-sm);
@@ -127,8 +133,23 @@ export default css`
     }
   }
 
+  /* Label slot content */
+  #label > slot {
+    grid-row: 1;
+    grid-column: 2;
+  }
+
   :host(:state(disabled)) {
     cursor: not-allowed;
     opacity: 0.5;
+  }
+
+  #description {
+    display: block;
+    grid-row: 2;
+    grid-column: 2;
+    margin-block-start: -0.5em;
+    color: var(--quiet-text-muted);
+    font-size: max(12px, 0.875em); /* never smaller than 12px */
   }
 `;

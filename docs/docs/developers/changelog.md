@@ -19,6 +19,7 @@ Components marked [stable] are well-tested, ready for production, and less likel
 - Added support for `description` to `<quiet-checkbox>` and `<quiet-switch>` [issue:21]
 - Fixed a missing button dependency in `<quiet-file-input>`
 - Fixed a bug in `<quiet-popover>` and `<quiet-tooltip>` that caused an error when showing the popover/tooltip after disconnecting and reconnecting to the DOM
+- Fixed a bug in `<quiet-dropdown>`, `<quiet-popover>`, and `<quiet-tooltip>` that didn't allow linked IDs to have `.` and other valid characters
 - Improved `<quiet-button>` active style from 1px to 1.5px so it's a bit more obvious visually
 
 ### 1.3.0

@@ -142,7 +142,7 @@ export class QuietTooltip extends QuietElement {
       }
 
       // Setup the new anchor
-      this.anchor = this.for ? root.querySelector(`#${this.for}`) : null;
+      this.anchor = this.for ? root.getElementById(this.for) : null;
 
       if (this.anchor) {
         if (this.activation === 'auto') {

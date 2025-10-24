@@ -138,7 +138,7 @@ export class QuietDropdown extends QuietElement {
       }
 
       // Setup the new context element
-      this.contextMenuElement = this.contextMenu ? root.querySelector(`#${this.contextMenu}`) : null;
+      this.contextMenuElement = this.contextMenu ? root.getElementById(this.contextMenu) : null;
 
       if (this.contextMenuElement) {
         this.contextMenuLongPress = new LongPress(this.contextMenuElement, {

@@ -877,6 +877,10 @@ quiet-badge.experimental {
       text-decoration: underline;
     }
   }
+
+  .external-link-icon {
+    opacity: 0.5;
+  }
 }
 
 .docs-aside li quiet-icon {

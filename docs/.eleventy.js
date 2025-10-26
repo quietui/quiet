@@ -186,11 +186,20 @@ export default function (eleventyConfig) {
   // SVG colors plugin
   eleventyConfig.addPlugin(imgToSvgPlugin, {
     inputDir: resolve('./docs'),
-    shouldProcess: filename => filename.includes('images/whiskers/'),
+    shouldProcess: filename => {
+      // Whiskers illustrations
+      if (filename.includes('images/whiskers/')) return true;
+
+      // Adaptive logos
+      if (filename.includes('images/symbol-dark.svg') || filename.includes('images/symbol-light.svg')) return true;
+
+      return false;
+    },
     colorMap: {
-      '#7a7bbe': 'var(--quiet-primary-600, #7a7bbe)', // primary
-      '#6969a3': 'var(--quiet-primary-700, #6969a3)', // primary shade
-      '#c9cdd4': 'var(--quiet-neutral-fill-softer)' // shadows
+      '#7a7bbe': 'var(--quiet-primary-600, #7a7bbe)', // primary light
+      '#6969a3': 'var(--quiet-primary-700, #6969a3)', // primary light shade
+      '#c9cdd4': 'var(--quiet-neutral-fill-softer)', // shadows,
+      '#989CFF': 'var(--quiet-primary-600, #7a7bbe)' // primary dark
     }
   });
 

@@ -34,7 +34,7 @@ Use the `value` attribute to provide an initial value for the text field.
 Text fields support more than just text. Use the `type` attribute to change the type of input they accept.
 
 ```html {.example}
-<quiet-text-field type="color" label="Color" value="#787acf"></quiet-text-field><br>
+<quiet-text-field type="color" label="Color" value="#7a7bbe"></quiet-text-field><br>
 <quiet-text-field type="date" label="Date" value="1989-03-12"></quiet-text-field><br>
 <quiet-text-field type="time" label="Time" value="12:00:00"></quiet-text-field><br>
 <quiet-text-field type="number" label="Number" value="42" inputmode="numeric"></quiet-text-field><br>

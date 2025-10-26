@@ -1226,7 +1226,8 @@ td.table-reflects {
   color: inherit;
 }
 
-html:not(.quiet-dark) quiet-scroller:has(.component-table) {
+html:not(.quiet-dark) quiet-scroller:has(.component-table),
+#content quiet-scroller:has(table) {
   --shadow-color: #0001;
   --shadow-size: 0.75rem;
 

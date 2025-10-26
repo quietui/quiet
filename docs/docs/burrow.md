@@ -6,11 +6,11 @@ layout: docs
 
 [experimental] <quiet-badge>since 1.4.0</quiet-badge>
 
-Quiet Burrow™ is a tiny library that lets you add interactivity to various parts of a webpage without taking over the entire DOM. It's completely optional and works well with HTML, Quiet components, and other web component libraries.
+Quiet Burrow™ is an optional utility lets you add interactivity to various parts of a webpage without taking over the entire DOM. It gives you framework-like features without the framework so you can sprinkle in reactivity only where you actually need it.
 
 ## What is a burrow?
 
-Think of a _burrow_ as an interactive "island" that lives in your page. Create templates with a familiar declarative syntax, add state, and respond to events just like you would in a framework…and do it with just a few lines of code.
+Think of a _burrow_ as an interactive "island" that lives in your page. Create reactive templates with a familiar declarative syntax, add state, and respond to events…all with just a few lines of code.
 
 Here's an obligatory counter example. No build step or transpilation is required.
 
@@ -34,11 +34,11 @@ Here's an obligatory counter example. No build step or transpilation is required
 </script>
 ```
 
-Burrows are designed to be authored [directly in HTML](#inline-burrows) or [imported](#importing-burrows). You can put multiple burrows on the page and keep them all in sync with without making the rest of the page reactive, giving you fast, efficient updates without the overhead or complexity of a framework.
+Burrows are designed to be authored [directly in HTML](#inline-burrows) but can also be [imported](#importing-burrows). You can put multiple burrows on the page and keep them all in sync without making the rest of the page reactive, giving you fast, efficient updates without the overhead or complexity of a framework.
 
 **When to use Burrow:** If find yourself reaching for a framework just to add a handful of interactive elements to an otherwise static page, Burrow is probably a good fit.
 
-**When not to use Burrow:** If you're building a single-page application or if your app requires routing, stores, and similar features, a framework might be better.
+**When not to use Burrow:** If you're building a single-page application or if your app requires routing, stores, and complex framework features, a framework is probably better. 
 
 ## Installation
 
@@ -135,7 +135,7 @@ Note that we use `.value` to bind to the text field's value _property_ instead o
 
 ## Authoring templates
 
-Burrow uses [lit-html](https://lit.dev/docs/libraries/standalone-templates/) under the hood, which gives you a powerful and efficient templating system. Templates are written using [tagged template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) with the `html` tag.
+Burrow uses [lit-html](https://lit.dev/docs/libraries/standalone-templates/) under the hood, which gives you a powerful and efficient templating system based on platform APIs. Templates are written using [tagged template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) via `html`.
 
 ### Template syntax
 
@@ -220,7 +220,7 @@ html`<input .value=${currentValue} />`;
 ```
 
 :::info
-Always use `.value` for form inputs instead of the `value` attribute. The attribute only sets the _initial_ value, while the property controls the _current_ value.
+Always use `.value` for form controls instead of the `value` attribute. The attribute only sets the _initial_ value, while the property controls the _current_ value.
 :::
 
 ### Listening to events
@@ -269,7 +269,7 @@ Event listeners are automatically cleaned up when the burrow detaches.
 
 Burrow exports some useful directives from that handle common patterns.
 
-**`classMap`** — Conditionally apply CSS classes.
+[**`classMap`**](https://lit.dev/docs/templates/directives/#classmap) — Conditionally apply CSS classes.
 
 ```javascript
 import { html, classMap } from '/dist/burrow.js';
@@ -287,7 +287,7 @@ html`
 `;
 ```
 
-**`styleMap`** — Apply inline styles from an object.
+[**`styleMap`**](https://lit.dev/docs/templates/directives/#stylemap) — Apply inline styles from an object.
 
 ```javascript
 import { html, styleMap } from '/dist/burrow.js';
@@ -300,7 +300,7 @@ const styles = {
 html`<p style=${styleMap(styles)}>Styled text</p>`;
 ```
 
-**`repeat`** — Efficiently render lists with keys.
+[**`repeat`**](https://lit.dev/docs/templates/directives/#repeat) — Efficiently render lists with keys.
 
 ```javascript
 import { html, repeat } from '/dist/burrow.js';
@@ -325,15 +325,15 @@ html`
 The `repeat` directive is more efficient than mapping arrays when items can be reordered, added, or removed, since it preserves DOM elements by key instead of recreating them.
 :::
 
-**Additional Directives** —  Burrow exports only the most commonly used directives. However, you can use any of [lit-html's directives](https://lit.dev/docs/api/directives/) in a template by importing them directly from [`lit-html`](https://www.npmjs.com/package/lit-html).
+**Additional Directives** —  Burrow exports only the most commonly used directives, but you can use any of [lit-html's directives](https://lit.dev/docs/api/directives/) in a template by importing them directly from [`lit-html`](https://www.npmjs.com/package/lit-html).
 
 ## Working with state
 
-State objects are reactive so, when you modify them, all burrows using the state will automatically re-render. This means you have full control over keeping state objects local and/or sharing them with other burrows. A state's scope is effectively the same scope as the variable you assign it to.
+State objects are reactive so, when you modify them, all burrows using the state will automatically re-render. A state's scope is effectively the same scope as the variable you assign it to. This means you have full control over keeping state objects local and/or sharing them with other burrows.
 
 ### Creating state
 
-Create a state object by passing an object with default values to the `state()` function.
+State objects are created by passing an object with default values to the `state()` function:
 
 ```javascript
 import { state } from '/dist/burrow.js';
@@ -345,7 +345,7 @@ const data = state({
 });
 ```
 
-You can read and write properties just like a normal object.
+You can read and write properties just like a normal object:
 
 ```javascript
 console.log(data.count); // 0
@@ -353,7 +353,7 @@ data.count = 5;
 console.log(data.count); // 5
 ```
 
-When you modify a state property, all attached burrows will automatically update to reflect the new state. Updates are batched, so multiple changes in a single tick only trigger one re-render.
+When you modify a state property, all attached burrows will update to reflect the new state. Updates are batched, so multiple changes in a single tick only trigger one re-render.
 
 :::warn
 State objects are _shallow reactive_, meaning only direct properties trigger updates. If you modify nested objects or arrays, you'll need to reassign them for the change to be detected.
@@ -475,7 +475,7 @@ Inline burrows are defined directly in your HTML. This approach is perfect for o
 </script>
 ```
 
-### Importing burrows
+### Imported burrows
 
 For complex burrows or those used across multiple pages, create them in separate JavaScript files and export them.
 
@@ -543,16 +543,18 @@ Each burrow instance can only be attached to one element at a time. If you call 
 
 When you create a burrow, you get back a burrow instance with the following properties and methods.
 
-- `host` — A reference to the DOM element the burrow is attached to, or `null` if it's not attached. Useful for checking attachment state or accessing the host element directly.
-- `attach(element)` — Attaches the burrow to a DOM element. Accepts either a string ID or an HTMLElement reference. If the burrow is already attached elsewhere, it will detach first.
-- `detach()` — Removes the burrow from the DOM and cleans up all state tracking and event listeners.
-- `update()` — Manually triggers a re-render of the burrow. This is rarely needed since state changes automatically trigger updates, but can be useful when integrating with external libraries or when you need to force a refresh. Returns a promise that resolves after the DOM has been fully updated.
+Here's the API documentation formatted as a markdown table:
+
+| Method/Property | Description |
+|-----------------|-------------|
+| `host` | A reference to the DOM element the burrow is attached to, or `null` if it's not attached. Useful for checking attachment state or accessing the host element directly. |
+| `attach(element)` | Attaches the burrow to a DOM element. Accepts either a string ID or an element reference. If the burrow is already attached elsewhere, it will detach first. |
+| `detach()` | Removes the burrow from the DOM and cleans up all state tracking and event listeners. |
+| `update()` | Manually triggers a re-render of the burrow. This is rarely needed since state changes automatically trigger updates, but can be useful when integrating with external libraries or when you need to force a refresh. Returns a promise that resolves after the DOM has been fully updated. |
 
 ## Using TypeScript
 
 Burrow is written in TypeScript and includes type definitions out of the box. Here are some tips to improve your experience if you happen to be using TypeScript. 
-
-### Typing state
 
 To strongly type state objects, define an interface and pass it as a type parameter.
 
@@ -570,8 +572,6 @@ const data = state<AppData>({
 });
 ```
 
-### Typing events
-
 Event handlers aren't inferred, but you can assign them as shown.
 
 ```typescript
@@ -585,11 +585,11 @@ burrow('app', () => html`
 `);
 ```
 
-
 ## Antipatterns
 
-- Do not nest burrows. Here be [unsupported] dragons.
-- Avoid building single-page applications with Burrow; use a framework instead
+- Do not nest burrows. Burrows are not components and shouldn't be used as such; here be [unsupported] dragons
+- Do not try to use a burrow more than once on the same page; the need for this is a strong sign that you should componentize the functionality instead
+- Avoid using refs and/or surigcally changing the DOM within a burrow; let the template do the work
 - Avoid building apps that require routing, complex state management; use a framework instead
 
 ## Building apps with Burrow
@@ -600,23 +600,23 @@ It's not a recommendation of the maintainer to use Burrow to build complex appli
 
 The web started off with multi-page applications (MPA) and then single-page applications became all the rage (SPA). Now the world seems split between the two patterns.
 
-There's something to be said about the simplicity a clean slate provides on each page load. For this, the maintainer recommends an MPA, as no router is provided — and the browser provides a file-based one for free! Consider using [Hotwire:Turbo](https://turbo.hotwired.dev/) or [View Transitions](https://caniuse.com/cross-document-view-transitions) for a SPA-like experience.
+For this purpose, the maintainer recommends an MPA, as no router is provided. The browser provides a file-based one for free anyways! Plus, there's something to be said about the simplicity of a clean slate on every page load.
+
+Consider using [Hotwire:Turbo](https://turbo.hotwired.dev/) or [View Transitions](https://caniuse.com/cross-document-view-transitions) for a more SPA-like experience.
 
 ### Managing state
 
-Create an _App State_ file and store in it only the data that must be global to the app. Keep all other state local. Anything that _doesn't_ need to be exposed outside of a burrow shouldn't be exposed outside of a burrow.
+Create an _App State_ file and only store in it the data that must be global to the app. Keep all other state local. Anything that _doesn't_ need to be exposed outside of a burrow shouldn't be exposed outside of a burrow.
 
-This strict separation makes understanding, maintaining, and debugging easier since each burrow acts as an independent module, only poking through the module to interact with the _App State_.
+This strict separation makes understanding, maintaining, and debugging easier since each burrow acts as an independent module, only poking through the module barrier to interact with the _App State_.
 
-Use ES modules to abstract and share functionality. Instead of writing the same logic and copying it multiple times, consider importing it and executing it within each burrow instead of duplicating the code. Module data can also be shared, making it easy to reference the same objects, arrays, etc. across burrows.
+Use ES modules to abstract and share functionality. Instead of writing the same logic and copying it multiple times, consider importing it into each burrow that needs it. State and other objects can also be shared, making it easy to reference the same data across multiple burrows.
 
-### Leveraging the platform
+### Minimizing dependencies
 
-The simplicity of Burrow stems from it's mission to use browser APIs to provide a modern developer experience that lets you do framework-like things using less code and minimal abstractions.
+Sometimes it's necessary to import third-party dependencies into a burrow, but each dependency comes at a cost. As a developer, you must carefully consider that cost. Try to use lean, laser-focused libraries instead of large, complex ones that try to do everything.
 
-While it's possible and sometimes even necessary to import third-party modules into a burrow, each dependency comes at a cost. As a developer, you must carefully consider that cost. Consider lean, laser-focused libraries over large, complex ones that try to do everything.
-
-As for your own code, Burrow's philosophy encourages you to use minimal JavaScript. This keeps load times fast and and reactivity focused only where it needs to be for the best possible performance.
+As for your own code, Burrow's philosophy encourages minimal JavaScript. This keeps load times fast and reactivity focused only where it needs to be for the best possible performance.
 
 But again, the maintainer doesn't recommend Burrow for complex applications. Should you choose to swim upstream, I would love to hear about your experience regardless of how it goes. Feel free to post in the [public forum](https://github.com/quietui/quiet/discussions/categories/show-and-tell).
 

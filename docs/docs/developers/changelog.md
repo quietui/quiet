@@ -12,9 +12,9 @@ Components marked [stable] are well-tested, ready for production, and less likel
 
 ## Releases
 
-### Unreleased
+### 1.4.0
 
-<small>TBD</small>
+<small>October 26, 2025</small>
 
 - Added support for `description` to `<quiet-checkbox>` and `<quiet-switch>` [issue:21]
 - Added the `label` part to `<quiet-button>` to improve customizability
@@ -80,3 +80,10 @@ This is the first public release of Quiet UI, which includes:
 - A focus on accessibility, longevity, performance, and simplicity
 
 <small><em><a href="https://x.com/pants/status/1912832380794003928">The next brushstroke could change everything.</a></em></small>
+
+<style>
+  #content h3 + p:has(small) {
+    margin-block-start: -0.5rem;
+    margin-block-end: 1rem;
+  }
+</style>

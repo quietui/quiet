@@ -877,6 +877,10 @@ quiet-badge.experimental {
       text-decoration: underline;
     }
   }
+
+  .external-link-icon {
+    opacity: 0.5;
+  }
 }
 
 .docs-aside li quiet-icon {
@@ -1222,7 +1226,8 @@ td.table-reflects {
   color: inherit;
 }
 
-html:not(.quiet-dark) quiet-scroller:has(.component-table) {
+html:not(.quiet-dark) quiet-scroller:has(.component-table),
+#content quiet-scroller:has(table) {
   --shadow-color: #0001;
   --shadow-size: 0.75rem;
 
@@ -1448,7 +1453,8 @@ html:not(.quiet-dark) quiet-scroller:has(.component-table) {
       stroke-width: 1px;
     }
 
-    img {
+    img,
+    svg {
       display: inline-block;
       width: auto;
       max-width: 4rem;
@@ -1566,7 +1572,8 @@ html:not(.quiet-dark) quiet-scroller:has(.component-table) {
     stroke-width: 1px;
   }
 
-  img.pricing-tier-icon {
+  img.pricing-tier-icon,
+  svg.pricing-tier-icon {
     max-width: 4rem;
     height: 4rem;
     margin-inline: auto;

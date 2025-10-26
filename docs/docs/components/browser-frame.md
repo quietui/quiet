@@ -121,7 +121,7 @@ And, of course, websites. Browser frame works particularly well with [zoomable f
 
 ```html {.example}
 <quiet-browser-frame label="quietui.org" flush>
-  <img slot="icon" src="/assets/images/symbol-light.svg" alt="" style="translate: 0 .125em;">
+  <quiet-icon slot="icon" name="cat"></quiet-icon>
   <quiet-zoomable-frame 
     src="https://quietui.org/" 
     zoom="0.5" 

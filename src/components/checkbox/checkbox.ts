@@ -21,6 +21,8 @@ import styles from './checkbox.styles.js';
  * @dependency quiet-icon
  *
  * @slot - The checkbox's label. For plain-text labels, you can use the `label` attribute instead.
+ * @slot description - The checkbox's description. For plain-text descriptions, you can use the `description` attribute
+ *  instead.
  *
  * @event quiet-blur - Emitted when the checkbox loses focus. This event does not bubble.
  * @event quiet-change - Emitted when the user commits changes to the checkbox's value.
@@ -28,6 +30,7 @@ import styles from './checkbox.styles.js';
  * @event quiet-input - Emitted when the checkbox receives input.
  *
  * @csspart label - The `<label>` that wraps the entire control.
+ * @csspart description - The element that contains the checkbox's description.
  * @csspart visual-box - The element that wraps the internal checkbox.
  * @csspart check-icon - The check icon, a `<quiet-icon>` element.
  * @csspart check-icon__svg - The check icon's `svg` part.
@@ -43,6 +46,7 @@ import styles from './checkbox.styles.js';
 @customElement('quiet-checkbox')
 export class QuietCheckbox extends QuietFormControlElement {
   static formAssociated = true;
+  static observeSlots = true;
   static styles: CSSResultGroup = [hostStyles, styles];
 
   protected get focusableAnchor() {
@@ -59,6 +63,9 @@ export class QuietCheckbox extends QuietFormControlElement {
    * The checkbox's label. If you need to provide HTML in the label, use the `label` slot instead.
    */
   @property() label: string;
+
+  /** The checkbox's description. If you need to provide HTML in the description, use the `description` slot instead. */
+  @property() description: string;
 
   /** The name of the checkbox. This will be submitted with the form as a name/value pair. */
   @property({ reflect: true }) name: string;
@@ -206,6 +213,8 @@ export class QuietCheckbox extends QuietFormControlElement {
   }
 
   render() {
+    const hasDescription = this.description || this.slotsWithContent.has('description');
+
     return html`
       <label id="label" part="label">
         <div
@@ -236,6 +245,7 @@ export class QuietCheckbox extends QuietFormControlElement {
             .checked=${live(this.checked)}
             .disabled=${this.disabled}
             .required=${this.required}
+            aria-describedby="description"
             @change=${this.handleChange}
             @click=${this.handleClick}
             @input=${this.handleInput}
@@ -259,6 +269,10 @@ export class QuietCheckbox extends QuietFormControlElement {
         </div>
         <slot>${this.label}</slot>
       </label>
+
+      <div id="description" part="description" class=${classMap({ vh: !hasDescription })}>
+        <slot name="description">${this.description}</slot>
+      </div>
     `;
   }
 }

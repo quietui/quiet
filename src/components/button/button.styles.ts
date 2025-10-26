@@ -246,7 +246,7 @@ export default css`
     &.loading {
       cursor: not-allowed;
 
-      &:not(.image) slot {
+      &:not(.image) #label {
         visibility: hidden;
       }
 

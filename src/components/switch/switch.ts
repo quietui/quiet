@@ -21,6 +21,8 @@ import styles from './switch.styles.js';
  * @dependency quiet-icon
  *
  * @slot - The switch's label. For plain-text labels, you can use the `label` attribute instead.
+ * @slot description - The switch's description. For plain-text descriptions, you can use the `description` attribute
+ *  instead.
  * @slot off-label - The label to show when the switch is off.
  * @slot on-label - The label to show when the switch is on.
  *
@@ -30,6 +32,7 @@ import styles from './switch.styles.js';
  * @event quiet-input - Emitted when the switch receives input.
  *
  * @csspart label - The `<label>` that wraps the entire control.
+ * @csspart description - The element that contains the switch's description.
  * @csspart visual-box - The element that wraps the internal switch.
  * @csspart switch - The internal switch, an `<input type="checkbox" role="switch">` element.
  * @csspart thumb - The switch's thumb.
@@ -44,6 +47,7 @@ import styles from './switch.styles.js';
 @customElement('quiet-switch')
 export class QuietSwitch extends QuietFormControlElement {
   static formAssociated = true;
+  static observeSlots = true;
   static styles: CSSResultGroup = [hostStyles, styles];
 
   protected get focusableAnchor() {
@@ -61,9 +65,7 @@ export class QuietSwitch extends QuietFormControlElement {
    */
   @property() label: string;
 
-  /**
-   * The switch's description. If you need to provide HTML in the description, use the `description` slot instead.
-   */
+  /** The switch's description. If you need to provide HTML in the description, use the `description` slot instead. */
   @property() description: string;
 
   /** The name of the switch. This will be submitted with the form as a name/value pair. */
@@ -206,6 +208,8 @@ export class QuietSwitch extends QuietFormControlElement {
   }
 
   render() {
+    const hasDescription = this.description || this.slotsWithContent.has('description');
+
     return html`
       <label part="label" id="label">
         <div
@@ -231,6 +235,7 @@ export class QuietSwitch extends QuietFormControlElement {
             value=${ifDefined(this.value)}
             role="switch"
             aria-checked=${this.checked ? 'true' : 'false'}
+            aria-describedby="description"
             .checked=${live(this.checked)}
             .disabled=${this.disabled}
             .required=${this.required}
@@ -247,6 +252,10 @@ export class QuietSwitch extends QuietFormControlElement {
         </div>
         <slot>${this.label}</slot>
       </label>
+
+      <div id="description" part="description" class=${classMap({ vh: !hasDescription })}>
+        <slot name="description">${this.description}</slot>
+      </div>
     `;
   }
 }

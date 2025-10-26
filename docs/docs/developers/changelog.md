@@ -12,12 +12,15 @@ Components marked [stable] are well-tested, ready for production, and less likel
 
 ## Releases
 
-### Unreleased
+### 1.4.0
 
-<small>TBD</small>
+<small>October 26, 2025</small>
 
+- Added support for `description` to `<quiet-checkbox>` and `<quiet-switch>` [issue:21]
+- Added the `label` part to `<quiet-button>` to improve customizability
 - Fixed a missing button dependency in `<quiet-file-input>`
 - Fixed a bug in `<quiet-popover>` and `<quiet-tooltip>` that caused an error when showing the popover/tooltip after disconnecting and reconnecting to the DOM
+- Fixed a bug in `<quiet-dropdown>`, `<quiet-popover>`, and `<quiet-tooltip>` that didn't allow linked IDs to have `.` and other valid characters
 - Improved `<quiet-button>` active style from 1px to 1.5px so it's a bit more obvious visually
 
 ### 1.3.0
@@ -77,3 +80,10 @@ This is the first public release of Quiet UI, which includes:
 - A focus on accessibility, longevity, performance, and simplicity
 
 <small><em><a href="https://x.com/pants/status/1912832380794003928">The next brushstroke could change everything.</a></em></small>
+
+<style>
+  #content h3 + p:has(small) {
+    margin-block-start: -0.5rem;
+    margin-block-end: 1rem;
+  }
+</style>

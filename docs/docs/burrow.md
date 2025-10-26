@@ -6,7 +6,7 @@ layout: docs
 
 [experimental] <quiet-badge>since 1.4.0</quiet-badge>
 
-Quiet Burrow™ is an optional utility lets you add interactivity to various parts of a webpage without taking over the entire DOM. It gives you framework-like features without the framework so you can sprinkle in reactivity only where you actually need it.
+Quiet Burrow™ is an optional utility that lets you add interactivity to various parts of a webpage without taking over the entire DOM. It gives you framework-like features without the framework so you can sprinkle in reactivity only where you actually need it.
 
 ## What is a burrow?
 
@@ -36,7 +36,7 @@ Here's an obligatory counter example. No build step or transpilation is required
 
 Burrows are designed to be authored [directly in HTML](#inline-burrows) but can also be [imported](#importing-burrows). You can put multiple burrows on the page and keep them all in sync without making the rest of the page reactive, giving you fast, efficient updates without the overhead or complexity of a framework.
 
-**When to use Burrow:** If find yourself reaching for a framework just to add a handful of interactive elements to an otherwise static page, Burrow is probably a good fit.
+**When to use Burrow:** If you find yourself reaching for a framework just to add a handful of interactive elements to an otherwise static page, Burrow is probably a good fit.
 
 **When not to use Burrow:** If you're building a single-page application or if your app requires routing, stores, and complex framework features, a framework is probably better. 
 
@@ -589,7 +589,7 @@ burrow('app', () => html`
 
 - Do not nest burrows. Burrows are not components and shouldn't be used as such; here be [unsupported] dragons
 - Do not try to use a burrow more than once on the same page; the need for this is a strong sign that you should componentize the functionality instead
-- Avoid using refs and/or surigcally changing the DOM within a burrow; let the template do the work
+- Avoid using refs and/or surgically changing the DOM within a burrow; let the template do the work
 - Avoid building apps that require routing, complex state management; use a framework instead
 
 ## Building apps with Burrow

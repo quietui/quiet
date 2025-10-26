@@ -12,6 +12,12 @@ Components marked [stable] are well-tested, ready for production, and less likel
 
 ## Releases
 
+### 1.5.0
+
+<small>October 26, 2025</small>
+
+- Added [Burrow](/docs/burrow) as an optional and experimental utility for adding interactivity to static pages
+
 ### 1.4.0
 
 <small>October 26, 2025</small>

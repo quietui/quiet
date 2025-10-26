@@ -267,7 +267,7 @@ Event listeners are automatically cleaned up when the burrow detaches.
 
 ### Using directives
 
-Burrow exports some useful directives from that handle common patterns.
+Burrow exports some useful directives from lit-html that handle common patterns.
 
 [**`classMap`**](https://lit.dev/docs/templates/directives/#classmap) — Conditionally apply CSS classes.
 

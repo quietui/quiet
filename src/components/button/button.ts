@@ -267,12 +267,12 @@ export class QuietButton extends QuietFormControlElement {
         @focus=${this.handleFocus}
         @click=${this.handleClick}
       >
+        ${isLoading ? html`<quiet-spinner id="spinner" part="spinner"></quiet-spinner>` : ''}
         <slot name="start"></slot>
-        <slot></slot>
+        <slot id="label" part="label"></slot>
         <slot name="end"></slot>
         ${this.withCaret ? html`<quiet-icon id="caret" part="caret" exportparts="svg:caret__svg" slot="end" name="chevron-down" library="system"></quiet-icon>` : ''}
         ${isToggle ? html`<span part="toggle-indicator" id="toggle-indicator"></span>` : ''}
-        ${isLoading ? html`<quiet-spinner id="spinner" part="spinner"></quiet-spinner>` : ''}
       </${tag}>
     `;
   }

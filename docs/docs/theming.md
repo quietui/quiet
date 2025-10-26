@@ -6,7 +6,7 @@ layout: docs
 
 Quiet features a sleek, modern aesthetic that looks great out of the box, especially when coupled with [Restyle](/docs/restyle). But it's also designed to be highly customizable — with pure CSS — for those who want something a little different.
 
-The default theme provides simple, elegant styles with support for light and dark modes and 21 built-in color presets. A number of [design tokens](#design-tokens) are exposed, giving you an easy way to make high-level changes to the library.
+The default theme provides simple, elegant styles with support for light and dark modes and 21 built-in [color presets](#built-in-presets). A number of [design tokens](#design-tokens) are exposed, giving you an easy way to make high-level changes to the library.
 
 ## Using the default theme
 
@@ -102,7 +102,7 @@ To use a preset in your app, add the `quiet-{preset}` class to the `<html>` elem
 ```
 
 :::info
-Presets must be added to the `<html>` element. They won't have any affect if you place them elsewhere on the page.
+Presets are only supported on the `<html>` element. They won't have any affect if you place them elsewhere on the page.
 :::
 
 ### Adapting to existing brands
@@ -113,7 +113,7 @@ However, that will only work well if your brand color happens to be a midtone, o
 
 _"But my buttons don't match my brand color exactly…"_
 
-Components should absolutely be _on brand_, but that doesn't mean buttons have to be the exact hex color as your logo! However, if you insist on such a style, the correct way to achieve it is by overriding the generated palettes and/or component styles with CSS and ensuring proper contrast manually.
+Components should absolutely be _on brand_, but that doesn't mean buttons have to be the exact hex color as your logo! However, if you insist on such a style, the correct way to achieve it is by overriding the component styles with CSS and ensuring proper contrast manually.
 
 ### Color primitives
 

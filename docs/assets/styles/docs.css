@@ -1710,5 +1710,8 @@ h2 + details {
 }
 
 h1.title + p:has(quiet-badge:first-child):has(quiet-badge:last-child) {
+  display: flex;
+  align-items: center;
   margin-block-start: -0.75rem;
+  gap: 0.25rem;
 }

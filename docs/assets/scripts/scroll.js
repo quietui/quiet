@@ -32,8 +32,6 @@ document.addEventListener('click', event => {
       event.preventDefault();
       const scrollTop = target.offsetTop - headerHeight;
 
-      history.replaceState(history.state, '', `#${id}`);
-
       window.scroll({
         top: scrollTop,
         behavior: 'smooth'

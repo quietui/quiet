@@ -40,6 +40,7 @@
       "types": "./dist/solid-integration.d.ts"
     },
     "./quiet.js": "./dist/quiet.js",
+    "./burrow.js": "./dist/burrow.js",
     "./quiet.loader.js": "./dist/quiet.loader.js",
     "./components/*": "./dist/components/*",
     "./events/*": "./dist/events/*",

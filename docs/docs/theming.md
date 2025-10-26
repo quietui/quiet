@@ -671,13 +671,15 @@ Here are some additional tokens you can use and customize for various purposes.
 
 ## Creating your own theme
 
-Quiet uses [CSS layers](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer) to manage specificity. This means your custom styles will automatically take precedence over the library's styles without needing to use `!important` or increase selector specificity.
-
 If you just want to change a few things here and there, it's usually better to leave the default theme intact and _extend it_ by adding your own stylesheet with the specific rules you want. Use [design tokens](#design-tokens), [CSS custom properties](/docs/using-components/#css-custom-properties), [CSS parts](/docs/using-components/#css-parts), and [custom states](/docs/using-components/#custom-states) to customize virtually anything on any component.
 
 This is the recommended approach. 👆
 
 If you _really_ want to create an entirely new theme, the most efficient way is to fork ("copy") the [default theme's CSS](https://github.com/quietui/quiet/blob/main/src/themes/quiet.css) and modify it. This is faster, easier, and will result in less mistakes than starting from scratch.
+
+:::info
+Quiet uses [CSS layers](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer) to manage specificity. This means your custom styles will automatically take precedence over the library's styles without needing to use `!important` or increase selector specificity.
+:::
 
 ## Adding custom variants
 

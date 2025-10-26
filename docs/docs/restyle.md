@@ -495,7 +495,7 @@ For consistency, most native form controls are styled to look similar to Quiet f
 Various input types are supported via `<input type="...">`, `<select>`, and `<textarea>`.
 
 ```html {.example .flex-col .no-edit}
-<input type="color" placeholder="Color" value="#787acf">
+<input type="color" placeholder="Color" value="#7a7bbe">
 <input type="date" placeholder="Date" value="1989-03-12">
 <input type="time" placeholder="Time" value="12:00:00">
 <input type="number" placeholder="Number" value="42" inputmode="numeric">

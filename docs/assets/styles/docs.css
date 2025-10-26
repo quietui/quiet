@@ -1453,7 +1453,8 @@ html:not(.quiet-dark) quiet-scroller:has(.component-table),
       stroke-width: 1px;
     }
 
-    img {
+    img,
+    svg {
       display: inline-block;
       width: auto;
       max-width: 4rem;
@@ -1571,7 +1572,8 @@ html:not(.quiet-dark) quiet-scroller:has(.component-table),
     stroke-width: 1px;
   }
 
-  img.pricing-tier-icon {
+  img.pricing-tier-icon,
+  svg.pricing-tier-icon {
     max-width: 4rem;
     height: 4rem;
     margin-inline: auto;

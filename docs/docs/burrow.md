@@ -34,7 +34,7 @@ Here's an obligatory counter example. No build step or transpilation is required
 </script>
 ```
 
-Burrows are designed to be authored [directly in HTML](#inline-burrows) but can also be [imported](#importing-burrows). You can put multiple burrows on the page and keep them all in sync without making the rest of the page reactive, giving you fast, efficient updates without the overhead or complexity of a framework.
+Burrows are designed to be authored [directly in HTML](#inline-burrows) but can also be [imported](#imported-burrows). You can put multiple burrows on the page and keep them all in sync without making the rest of the page reactive, giving you fast, efficient updates without the overhead or complexity of a framework.
 
 **When to use Burrow:** If you find yourself reaching for a framework just to add a handful of interactive elements to an otherwise static page, Burrow is probably a good fit.
 

@@ -80,6 +80,9 @@ export class QuietTextField extends QuietFormControlElement {
 
   /** The text field's value. */
   @property() value = '';
+  public get validationMessage(): string {
+    return this.internals.validationMessage;
+  }
 
   /** A placeholder to show in the text field when it's blank. */
   @property() placeholder: string;
@@ -318,7 +321,7 @@ export class QuietTextField extends QuietFormControlElement {
   private async updateValidity() {
     await this.updateComplete;
     const hasCustomValidity = this.getCustomValidity().length > 0;
-    const validationMessage = hasCustomValidity ? this.getCustomValidity() : this.textBox.validationMessage;
+    const validationMessage = hasCustomValidity ? this.getCustomValidity() : (this.textBox.validationMessage ?? '');
     const flags: ValidityStateFlags = {
       badInput: this.textBox.validity.badInput,
       customError: hasCustomValidity,

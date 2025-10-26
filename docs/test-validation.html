@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Test validationMessage Fix</title>
+    <script type="module" src="./dist/quiet.js"></script>
+  </head>
+  <body>
+    <h1>Test validationMessage Bug Fix</h1>
+
+    <!-- Test text-field -->
+    <quiet-text-field id="test-field" label="Email" type="email" required placeholder="Enter email"> </quiet-text-field>
+
+    <!-- Test color-input -->
+    <quiet-color-input id="test-color" label="Color" required> </quiet-color-input>
+
+    <button id="check-validation">Check validationMessage</button>
+
+    <div id="results"></div>
+
+    <script>
+      const checkBtn = document.getElementById('check-validation');
+      const resultsDiv = document.getElementById('results');
+      const textField = document.getElementById('test-field');
+      const colorInput = document.getElementById('test-color');
+
+      checkBtn.addEventListener('click', () => {
+        // Check validity first to trigger validation
+        textField.reportValidity();
+        colorInput.reportValidity();
+
+        // Now check validationMessage
+        const textValidation = textField.validationMessage;
+        const colorValidation = colorInput.validationMessage;
+
+        resultsDiv.innerHTML = `
+        <h3>Results:</h3>
+        <p><strong>Text Field validationMessage:</strong> 
+          ${
+            textValidation === undefined
+              ? '<span style="color: red">❌ UNDEFINED (BUG STILL EXISTS)</span>'
+              : `<span style="color: green">✅ "${textValidation}"</span>`
+          }
+        </p>
+        <p><strong>Color Input validationMessage:</strong> 
+          ${
+            colorValidation === undefined
+              ? '<span style="color: red">❌ UNDEFINED (BUG STILL EXISTS)</span>'
+              : `<span style="color: green">✅ "${colorValidation}"</span>`
+          }
+        </p>
+      `;
+
+        console.log('Text Field validationMessage:', textValidation);
+        console.log('Color Input validationMessage:', colorValidation);
+      });
+    </script>
+  </body>
+</html>

@@ -312,7 +312,7 @@ export class QuietPasscode extends QuietFormControlElement {
   private async updateValidity() {
     await this.updateComplete;
     const hasCustomValidity = this.getCustomValidity().length > 0;
-    const validationMessage = hasCustomValidity ? this.getCustomValidity() : this.textBox.validationMessage;
+    const validationMessage = hasCustomValidity ? this.getCustomValidity() : (this.textBox.validationMessage ?? '');
     const flags: ValidityStateFlags = {
       badInput: this.textBox.validity.badInput,
       customError: hasCustomValidity,

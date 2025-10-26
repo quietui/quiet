@@ -1708,3 +1708,7 @@ h2 + details {
     }
   }
 }
+
+h1.title + p:has(quiet-badge:first-child):has(quiet-badge:last-child) {
+  margin-block-start: -0.75rem;
+}

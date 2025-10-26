@@ -74,7 +74,7 @@ export class Burrow {
 
     if (!element) {
       if (typeof el === 'string') {
-        console.warn(`Burrow: An element with id "${el}" could not be found in this document.`);
+        console.warn(`Unable to attach burrow: an element with id "${el}" could not be found in this document.`);
       }
       return;
     }
@@ -187,7 +187,7 @@ export function burrow(
     if (element) {
       instance.attach(element);
     } else if (typeof host === 'string') {
-      console.warn(`Burrow: Element with id "${host}" not found`);
+      console.warn(`Unable to attach burrow: an element with id "${host}" could not be found in this document.`);
     }
   }
 

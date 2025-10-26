@@ -4,18 +4,13 @@ description: A mouse-sized library for building reactive islands in your web app
 layout: docs
 ---
 
-[experimental]
+[experimental] <quiet-badge>since 1.4.0</quiet-badge>
 
-:::details 🚧 TODO
+Quiet Burrow™ is a tiny library that lets you add interactivity to various parts of a webpage without taking over the entire DOM. It's completely optional and works well with HTML, Quiet components, and other web component libraries.
 
-- Move Burrow files to separate package `@quietui/burrow`
-- Export Burrow from `@quietui/quiet` so lit-html is shared in the browser version
+## What is a burrow?
 
-:::
-
-Quiet Burrow™ is a tiny library that lets you add interactivity to various parts of the page without taking over the entire DOM. It's completely optional and works well with HTML, Quiet components, and other web component libraries.
-
-Think of a _burrow_ as an interactive "island" that lives in your page. Create templates with a familiar declarative syntax, add state, and respond to events just like you would in a framework…but do it with just a few lines of code.
+Think of a _burrow_ as an interactive "island" that lives in your page. Create templates with a familiar declarative syntax, add state, and respond to events just like you would in a framework…and do it with just a few lines of code.
 
 Here's an obligatory counter example. No build step or transpilation is required.
 
@@ -135,12 +130,12 @@ Now let's add a text field that controls who we're greeting. We'll store the val
 ```
 
 :::info
-Note that we're using `.value` to bind to the text field's value _property_ instead of its _attribute_. This will be discussed more later on.
+Note that we use `.value` to bind to the text field's value _property_ instead of its _attribute_. This will be discussed more later on.
 :::
 
 ## Authoring templates
 
-Burrow uses [lit-html](https://lit.dev/docs/libraries/standalone-templates/) under the hood, which gives you a powerful and efficient templating system. Templates are written using tagged template literals with the `html` tag.
+Burrow uses [lit-html](https://lit.dev/docs/libraries/standalone-templates/) under the hood, which gives you a powerful and efficient templating system. Templates are written using [tagged template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) with the `html` tag.
 
 ### Template syntax
 
@@ -250,8 +245,20 @@ html`
     @input=${event => {
       console.log('New value:', event.target.value);
     }}
-  />
+  >
 `;
+```
+
+Handlers can be moved to functions outside the template to keep code organized.
+
+```javascript
+function handleClick() {
+  console.log('The click has been handled');
+}
+
+burrow('app', () => html`
+  <button @click=${handleClick}>Click me</button>
+`);
 ```
 
 :::info
@@ -541,10 +548,76 @@ When you create a burrow, you get back a burrow instance with the following prop
 - `detach()` — Removes the burrow from the DOM and cleans up all state tracking and event listeners.
 - `update()` — Manually triggers a re-render of the burrow. This is rarely needed since state changes automatically trigger updates, but can be useful when integrating with external libraries or when you need to force a refresh. Returns a promise that resolves after the DOM has been fully updated.
 
+## Using TypeScript
+
+Burrow is written in TypeScript and includes type definitions out of the box. Here are some tips to improve your experience if you happen to be using TypeScript. 
+
+### Typing state
+
+To strongly type state objects, define an interface and pass it as a type parameter.
+
+```typescript
+interface AppData {
+  count: number;
+  name: string;
+  items: string[];
+}
+
+const data = state<AppData>({
+  count: 0,
+  name: 'Meowy',
+  items: []
+});
+```
+
+### Typing events
+
+Event handlers aren't inferred, but you can assign them as shown.
+
+```typescript
+burrow('app', () => html`
+  <input 
+    @input=${(event: InputEvent) => {
+      const target = event.target as HTMLInputElement;
+      data.name = target.value;
+    }}
+  />
+`);
+```
+
+
 ## Antipatterns
 
 - Do not nest burrows. Here be [unsupported] dragons.
 - Avoid building single-page applications with Burrow; use a framework instead
 - Avoid building apps that require routing, complex state management; use a framework instead
+
+## Building apps with Burrow
+
+It's not a recommendation of the maintainer to use Burrow to build complex applications. However, if you were to find yourself on such an adventure, here are some tips for a successful quest:
+
+### MPA vs. SPA
+
+The web started off with multi-page applications (MPA) and then single-page applications became all the rage (SPA). Now the world seems split between the two patterns.
+
+There's something to be said about the simplicity a clean slate provides on each page load. For this, the maintainer recommends an MPA, as no router is provided — and the browser provides a file-based one for free! Consider using [Hotwire:Turbo](https://turbo.hotwired.dev/) or [View Transitions](https://caniuse.com/cross-document-view-transitions) for a SPA-like experience.
+
+### Managing state
+
+Create an _App State_ file and store in it only the data that must be global to the app. Keep all other state local. Anything that _doesn't_ need to be exposed outside of a burrow shouldn't be exposed outside of a burrow.
+
+This strict separation makes understanding, maintaining, and debugging easier since each burrow acts as an independent module, only poking through the module to interact with the _App State_.
+
+Use ES modules to abstract and share functionality. Instead of writing the same logic and copying it multiple times, consider importing it and executing it within each burrow instead of duplicating the code. Module data can also be shared, making it easy to reference the same objects, arrays, etc. across burrows.
+
+### Leveraging the platform
+
+The simplicity of Burrow stems from it's mission to use browser APIs to provide a modern developer experience that lets you do framework-like things using less code and minimal abstractions.
+
+While it's possible and sometimes even necessary to import third-party modules into a burrow, each dependency comes at a cost. As a developer, you must carefully consider that cost. Consider lean, laser-focused libraries over large, complex ones that try to do everything.
+
+As for your own code, Burrow's philosophy encourages you to use minimal JavaScript. This keeps load times fast and and reactivity focused only where it needs to be for the best possible performance.
+
+But again, the maintainer doesn't recommend Burrow for complex applications. Should you choose to swim upstream, I would love to hear about your experience regardless of how it goes. Feel free to post in the [public forum](https://github.com/quietui/quiet/discussions/categories/show-and-tell).
 
 <img class="whiskers-center" src="/assets/images/whiskers/with-letter.svg" alt="Whiskers the mouse seated with a pencil and paper">

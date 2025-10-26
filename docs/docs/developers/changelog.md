@@ -12,6 +12,12 @@ Components marked [stable] are well-tested, ready for production, and less likel
 
 ## Releases
 
+### 1.6.0
+
+<small>October 26, 2025</small>
+
+- Added `ifDefined`, `live`, `unsafeHTML`, `unsafeSVG`, and `until` directives to [Burrow](/docs/burrow)
+
 ### 1.5.0
 
 <small>October 26, 2025</small>

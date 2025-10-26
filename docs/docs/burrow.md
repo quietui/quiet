@@ -287,17 +287,41 @@ html`
 `;
 ```
 
-[**`styleMap`**](https://lit.dev/docs/templates/directives/#stylemap) — Apply inline styles from an object.
+[**`ifDefined`**](https://lit.dev/docs/templates/directives/#ifdefined) — Only sets an attribute if the value is defined (not `null` or `undefined`).
 
 ```javascript
-import { html, styleMap } from '/dist/burrow.js';
+import { html, ifDefined } from '/dist/burrow.js';
 
-const styles = {
-  color: 'red',
-  fontSize: '16px'
-};
+const userId = null;
+const userName = 'Alice';
 
-html`<p style=${styleMap(styles)}>Styled text</p>`;
+html`
+  <div 
+    data-user-id=${ifDefined(userId)}
+    data-user-name=${ifDefined(userName)}
+  >
+    User Info
+  </div>
+`;
+// Result: only data-user-name attribute is set
+```
+
+[**`live`**](https://lit.dev/docs/templates/directives/#live) — Checks the live DOM value and only updates if different, useful for inputs where the user might be typing.
+
+```javascript
+import { html, live } from '/dist/burrow.js';
+
+const data = state({ 
+  value: 'initial' 
+});
+
+html`
+  <input 
+    .value=${live(data.value)}
+    @input=${e => data.value = e.target.value}
+  />
+`;
+// The input won't reset cursor position during typing
 ```
 
 [**`repeat`**](https://lit.dev/docs/templates/directives/#repeat) — Efficiently render lists with keys.
@@ -324,6 +348,67 @@ html`
 :::info
 The `repeat` directive is more efficient than mapping arrays when items can be reordered, added, or removed, since it preserves DOM elements by key instead of recreating them.
 :::
+
+[**`styleMap`**](https://lit.dev/docs/templates/directives/#stylemap) — Apply inline styles from an object.
+
+```javascript
+import { html, styleMap } from '/dist/burrow.js';
+
+const styles = {
+  color: 'red',
+  fontSize: '16px'
+};
+
+html`<p style=${styleMap(styles)}>Styled text</p>`;
+```
+
+[**`unsafeHTML`**](https://lit.dev/docs/templates/directives/#unsafehtml) — Renders a string as HTML without escaping.
+
+```javascript
+import { html, unsafeHTML } from '/dist/burrow.js';
+
+const htmlContent = '<strong>Bold</strong> and <em>italic</em> text';
+
+html`
+  <div>
+    ${unsafeHTML(htmlContent)}
+  </div>
+`;
+// Renders the HTML tags instead of escaping them
+```
+
+[**`unsafeSVG`**](https://lit.dev/docs/templates/directives/#unsafesvg) — Renders a string as SVG without escaping.
+
+```javascript
+import { html, unsafeSVG } from '/dist/burrow.js';
+
+const svgContent = '<circle cx="50" cy="50" r="40" fill="blue" />';
+
+html`
+  <svg width="100" height="100">
+    ${unsafeSVG(svgContent)}
+  </svg>
+`;
+// Renders the SVG elements directly
+```
+
+[**`until`**](https://lit.dev/docs/templates/directives/#until) — Renders placeholder content until a Promise resolves.
+
+```javascript
+import { html, until } from '/dist/burrow.js';
+
+const fetchUser = fetch('/api/user').then(r => r.json());
+
+html`
+  <div>
+    ${until(
+      fetchUser.then(user => html`<p>Hello, ${user.name}!</p>`),
+      html`<p>Loading...</p>`
+    )}
+  </div>
+`;
+// Shows "Loading..." until the promise resolves
+```
 
 **Additional Directives** —  Burrow exports only the most commonly used directives, but you can use any of [lit-html's directives](https://lit.dev/docs/api/directives/) in a template by importing them directly from [`lit-html`](https://www.npmjs.com/package/lit-html).
 

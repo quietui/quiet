@@ -2,8 +2,13 @@ import { render, type TemplateResult } from 'lit-html';
 
 export { html } from 'lit-html';
 export { classMap } from 'lit/directives/class-map.js';
+export { ifDefined } from 'lit/directives/if-defined.js';
+export { live } from 'lit/directives/live.js';
 export { repeat } from 'lit/directives/repeat.js';
 export { styleMap } from 'lit/directives/style-map.js';
+export { unsafeHTML } from 'lit/directives/unsafe-html.js';
+export { unsafeSVG } from 'lit/directives/unsafe-svg.js';
+export { until } from 'lit/directives/until.js';
 
 export interface BurrowOptions {
   /**

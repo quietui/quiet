@@ -4,7 +4,7 @@ description: A mouse-sized library for building reactive islands in your web app
 layout: docs
 ---
 
-[experimental] <quiet-badge>since 1.4.0</quiet-badge>
+[experimental] <quiet-badge>since 1.5.0</quiet-badge>
 
 Quiet Burrow™ is an optional utility that lets you add interactivity to various parts of a webpage without taking over the entire DOM. It gives you framework-like features without the framework so you can sprinkle in reactivity only where you actually need it.
 

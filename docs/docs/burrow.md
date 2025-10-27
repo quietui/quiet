@@ -645,8 +645,6 @@ Each burrow instance can only be attached to one element at a time. If you call 
 
 When you create a burrow, you get back a burrow instance with the following properties and methods.
 
-Here's the API documentation formatted as a markdown table:
-
 | Method/Property | Description |
 |-----------------|-------------|
 | `host` | A reference to the DOM element the burrow is attached to, or `null` if it's not attached. Useful for checking attachment state or accessing the host element directly. |
@@ -692,7 +690,7 @@ burrow('app', () => html`
 - Do not nest burrows. Burrows are not components and shouldn't be used as such; here be [unsupported] dragons
 - Do not try to use a burrow more than once on the same page; the need for this is a strong sign that you should componentize the functionality instead
 - Avoid using refs and/or surgically changing the DOM within a burrow; let the template do the work
-- Avoid building apps that require routing, complex state management; use a framework instead
+- Avoid building apps that require routing and complex state management; use a framework instead
 
 ## Building apps with Burrow
 

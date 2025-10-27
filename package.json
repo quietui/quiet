@@ -1,7 +1,7 @@
 {
   "name": "@quietui/quiet",
   "description": "A UI library for the Web with a focus on accessibility, longevity, performance, and simplicity.",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "license": "MIT",
   "author": {
     "name": "Cory LaViska",

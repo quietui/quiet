@@ -12,6 +12,12 @@ Components marked [stable] are well-tested, ready for production, and less likel
 
 ## Releases
 
+### 1.6.1
+
+<small>October 26, 2025</small>
+
+- Fixed missing `validationMessage` read-only property in all form controls [issue:24]
+
 ### 1.6.0
 
 <small>October 26, 2025</small>

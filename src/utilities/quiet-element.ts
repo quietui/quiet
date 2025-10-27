@@ -146,6 +146,11 @@ export abstract class QuietFormControlElement extends QuietElement {
     return constructor.formAssociated ? this.internals.validity : undefined;
   }
 
+  /** Gets the form control's current validation message or an empty string when the form control is valid. */
+  public get validationMessage() {
+    return this.internals.validationMessage;
+  }
+
   /**
    * Checks if the form control has any restraints and whether it satisfies them. If invalid, `false` will be returned
    * and the `invalid` event will be dispatched. If valid, `true` will be returned.

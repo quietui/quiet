@@ -412,6 +412,23 @@ html`
 
 **Additional Directives** —  Burrow exports only the most commonly used directives, but you can use any of [lit-html's directives](https://lit.dev/docs/api/directives/) in a template by importing them directly from [`lit-html`](https://www.npmjs.com/package/lit-html).
 
+## Stylesheets
+
+Elements inside burrows will inherit styles as you'd expect. You can also add styles to a template using the `<style>` element. Burrow does not encapsulate styles, but you can easily scope them to the host element using [nested CSS](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_nesting):
+
+```css
+#your-host-id {
+  /* Host element styles */
+  background: light-dark(#f3f4f6, #1e293b);
+  
+  /* Nested styles only apply to elements inside the host */
+  h1,
+  p {
+    color: light-dark(#111827, #f1f5f9);
+  }
+}
+```
+
 ## Working with state
 
 State objects are reactive so, when you modify them, all burrows using the state will automatically re-render. A state's scope is effectively the same scope as the variable you assign it to. This means you have full control over keeping state objects local and/or sharing them with other burrows.

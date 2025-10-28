@@ -42,29 +42,29 @@ export default css`
     &.xl {
       font-size: calc(var(--quiet-form-control-font-size-xl) * 0.875);
     }
+
+    &:has(:focus-visible) {
+      outline: var(--quiet-focus-ring);
+      outline-offset: var(--quiet-focus-offset);
+    }
+
+    &:not(.disabled):active {
+      translate: 0 var(--quiet-button-active-offset);
+    }
+
+    &.checked {
+      background-color: var(--quiet-primary-fill-mid);
+      color: var(--quiet-primary-text-on-mid);
+    }
+
+    &.disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
   }
 
   ::slotted(quiet-icon) {
     font-size: 1.25em;
-  }
-
-  :host(:not(:state(disabled)):active) #label {
-    translate: 0 var(--quiet-button-active-offset);
-  }
-
-  :host(:not(:state(disabled))):has(:focus-visible) #label {
-    outline: var(--quiet-focus-ring);
-    outline-offset: var(--quiet-focus-offset);
-  }
-
-  :host(:state(checked)) #label {
-    background-color: var(--quiet-primary-fill-mid);
-    color: var(--quiet-primary-text-on-mid);
-  }
-
-  :host(:state(disabled)) #label {
-    cursor: not-allowed;
-    opacity: 0.5;
   }
 
   /* The actual checkbox control - visually hidden */

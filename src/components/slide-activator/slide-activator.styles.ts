@@ -38,12 +38,6 @@ export default css`
     animation: activated 0.3s ease-out;
   }
 
-  /* Focus */
-  :host:has(:focus-visible) {
-    outline: var(--quiet-border-style) calc(var(--quiet-border-width) + 1px) var(--quiet-focus-color);
-    outline-offset: var(--quiet-border-width);
-  }
-
   /* Label */
   #label {
     display: flex;
@@ -121,6 +115,11 @@ export default css`
 
     &:focus {
       outline: none;
+    }
+
+    &:focus-visible {
+      outline: var(--quiet-border-style) calc(var(--quiet-border-width) + 1px) var(--quiet-focus-color);
+      outline-offset: var(--quiet-border-width);
     }
 
     &.activated {

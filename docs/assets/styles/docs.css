@@ -1528,6 +1528,32 @@ html:not(.quiet-dark) quiet-scroller:has(.component-table),
 .pricing-tiers-triple {
   grid-template-columns: 1fr 1fr 1fr;
 
+  /* Center ribbon */
+  .pricing-tier.with-ribbon {
+    position: relative;
+
+    &::after {
+      display: flex;
+      position: absolute;
+      top: -2px;
+      right: 1rem;
+      align-items: center;
+      justify-content: center;
+      width: 3.75rem;
+      height: 5rem;
+      padding-inline: 0.5rem;
+      padding-block-end: 0.5rem;
+      background: linear-gradient(135deg, deeppink 0%, color-mix(in oklab, deeppink, #705ec2 50%) 100%);
+      content: 'TOP PICK';
+      color: white;
+      font-weight: bold;
+      font-size: 0.875rem;
+      line-height: 1.2;
+      text-shadow: 0 -1px color-mix(in oklab, black, transparent 95%);
+      clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
+    }
+  }
+
   @media screen and (min-width: 768px) {
     margin-block: 3rem;
 
@@ -1561,7 +1587,6 @@ html:not(.quiet-dark) quiet-scroller:has(.component-table),
 
 .pricing-tier {
   padding: 1.5rem 1rem 2rem 1rem;
-  overflow: hidden;
   border: var(--quiet-border-style) var(--quiet-border-width) var(--quiet-neutral-stroke-softer);
   border-radius: 1rem;
   background-color: var(--quiet-paper-color);

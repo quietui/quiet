@@ -18,6 +18,15 @@ export default css`
     -webkit-overflow-scrolling: touch;
   }
 
+  :host(:focus) {
+    outline: none;
+  }
+
+  :host(:focus-visible) {
+    outline: var(--quiet-border-style) calc(var(--quiet-border-width) + 1px) var(--quiet-focus-color);
+    outline-offset: var(--quiet-border-width);
+  }
+
   quiet-spinner {
     margin-inline: auto;
     margin-block: 1rem;

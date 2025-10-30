@@ -27,7 +27,7 @@ Quiet UI is available under the terms of the [MIT License](https://github.com/qu
     </quiet-button>
   </div>
 
-  <div class="pricing-tier">
+  <div class="pricing-tier with-ribbon">
     <img class="pricing-tier-icon quiet-if-light" src="/assets/images/symbol-light.svg" alt="Quiet logo">
     <img class="pricing-tier-icon quiet-if-dark" src="/assets/images/symbol-dark.svg" alt="Quiet logo">
     <h3 data-no-anchor>Quiet Insider</h3><br>
@@ -42,6 +42,7 @@ Quiet UI is available under the terms of the [MIT License](https://github.com/qu
     <quiet-button variant="primary" pill href="https://buy.polar.sh/polar_cl_mpasqxfW1U2foivCOYuS9Lux4uUk459jIywEA27Z3gm">
       Become an Insider
     </quiet-button>
+    <div class="ribbon">TOP PICK</div>
   </div>  
   
   <div class="pricing-tier">

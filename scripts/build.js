@@ -244,7 +244,7 @@ if (isDeveloping) {
   spinner.start('Launching the dev server');
 
   const bs = browserSync.create();
-  const port = await getPort({ port: portNumbers(4000, 4999) });
+  const port = await getPort({ port: portNumbers(4874, 4999) });
   const url = `http://localhost:${port}/`;
   const reload = () => {
     spinner.start('Reloading browser');

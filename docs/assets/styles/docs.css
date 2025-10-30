@@ -1731,7 +1731,6 @@ h1.title + p:has(quiet-badge:first-child):has(quiet-badge:last-child) {
     padding-inline: 0.5rem;
     padding-block-end: 0.5rem;
     background: linear-gradient(135deg, deeppink 0%, color-mix(in oklab, deeppink, #705ec2 50%) 100%);
-    content: 'TOP PICK';
     color: white;
     font-weight: bold;
     font-size: 0.875rem;

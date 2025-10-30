@@ -14,7 +14,7 @@ Every modern browser has the APIs necessary to support interoperable components 
 
 With Quiet, you no longer need to learn a new UI library when you switch frameworks — just take it with you! And since it's built on top of stable platform APIs, it will continue to work for many years to come.
 
-## A message from the creator
+## A living experiment
 
 <a href="https://x.com/claviska" data-no-external-icon>
   <img 
@@ -26,13 +26,11 @@ With Quiet, you no longer need to learn a new UI library when you switch framewo
   >
 </a>
 
-Quiet is built and maintained by Cory LaViska ([X](https://x.com/claviska) / [BlueSky](https://bsky.app/profile/cory.laviska.com) / [Mastodon](https://mastodon.social/@claviska) / [LinkedIn](https://www.linkedin.com/in/claviska/)). With the success of [Shoelace](https://shoelace.style/), many of you are probably wondering why I'd choose to build another UI library, and that's a reasonable question.
+Quiet is built and maintained by Cory LaViska ([X](https://x.com/claviska) / [BlueSky](https://bsky.app/profile/cory.laviska.com) / [Mastodon](https://mastodon.social/@claviska) / [LinkedIn](https://www.linkedin.com/in/claviska/)). It's my personal playground. My creative outlet. 
 
-The truth is, Shoelace has matured a lot over the years. While that's a great thing for its users, as an artist, I've lost my canvas for creativity. I'm still committed to Shoelace and it has a very promising future — it has a full team and we're building an awesome product out of it! But it's not my personal playground anymore.
+It's something I'm building from scratch to explore new ideas and have fun. A place where I can satisfy my component addiction, improve my design skills, explore new Web APIs, and let my curiosity run wild.
 
-**Enter Quiet, my creative outlet.**
-
-A passion project. Something I'm building from scratch to explore new ideas and have fun. A place where I can satisfy my component addiction, improve my design skills, explore new Web APIs, and let my curiosity run wild. ==A place to do things my way.==
+**A place to do things my way.**
 
 As a result, you'll find that Quiet is rather opinionated. I carefully curate everything from the project's scope down to every individual line of code. Oftentimes, saying "no" is key to maintaining the quality of the library and my ability to steward it effectively.
 

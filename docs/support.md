@@ -42,7 +42,7 @@ Quiet UI is available under the terms of the [MIT License](https://github.com/qu
     <quiet-button variant="primary" pill href="https://buy.polar.sh/polar_cl_mpasqxfW1U2foivCOYuS9Lux4uUk459jIywEA27Z3gm">
       Become an Insider
     </quiet-button>
-    <div class="ribbon">TOP PICK</div>
+    <div class="ribbon">BEST PICK</div>
   </div>  
   
   <div class="pricing-tier">

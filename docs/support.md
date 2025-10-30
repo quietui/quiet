@@ -32,9 +32,9 @@ Quiet UI is available under the terms of the [MIT License](https://github.com/qu
     <img class="pricing-tier-icon quiet-if-dark" src="/assets/images/symbol-dark.svg" alt="Quiet logo">
     <h3 data-no-anchor>Quiet Insider</h3><br>
     <ul>
+      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Private Discord access</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Help from the maintainer</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Priority bug fixes</li>
-      <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Private Discord access</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Fast response times</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Insider-only content</li>
       <li><quiet-icon name="check" style="color: #7db664;"></quiet-icon> Pay what you want*</li>

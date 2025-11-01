@@ -100,7 +100,7 @@ Or you can [import components manually](/docs/#manually-importing) using npm.
 <quiet-mesh-gradient class="testimonials-cover">
   <div class="testimonials" aria-label="What people are saying">
     <div class="testimonial">
-      <q>Quite UI is probably the cleanest component library I've come across.</q>
+      <q>Quite UI is probably the cleanest component library I've come across</q>
       <cite>Wayne R.</cite>
     </div>
     <div class="testimonial">
@@ -108,15 +108,15 @@ Or you can [import components manually](/docs/#manually-importing) using npm.
       <cite><a href="https://news.ycombinator.com/item?id=45370766">lazerbones</a></cite>
     </div>
     <div class="testimonial">
-      <q>I can tell someone who knows the game built this.</q>
+      <q>I can tell someone who knows the game built this</q>
       <cite><a href="https://mastodon.social/@getflourish/115274647515104862">getflourish</a></cite>
     </div>
     <div class="testimonial">
-      <q>This is incredible and deserves so many more upvotes.</q>
+      <q>This is incredible and deserves so many more upvotes</q>
       <cite><a href="https://www.reddit.com/r/webdev/s/9R0sVmaUyF">Inaccurate-</a></cite>
     </div>
     <div class="testimonial">
-      <q>Awesome components library. Well done!</q>
+      <q>Awesome components library</q>
       <cite><a href="https://news.ycombinator.com/item?id=45419789">sccomps</a></cite>
     </div>
     <div class="testimonial">
@@ -124,11 +124,11 @@ Or you can [import components manually](/docs/#manually-importing) using npm.
       <cite><a href="https://x.com/src_rip/status/1971935947936989597">srcrip</a></cite>
     </div>
     <div class="testimonial">
-      <q>It's so beautifully crafted.</q>
+      <q>It's so beautifully crafted</q>
       <cite><a href="https://news.ycombinator.com/item?id=45425109">rancar2</a></cite>
     </div>
     <div class="testimonial">
-      <q>it's very inspirational to see someone really sweating the details and crafting something with love and care like this.</q>
+      <q>It's very inspirational to see someone really sweating the details and crafting something with love and care like this</q>
       <cite><a href="https://github.com/quietui/quiet/discussions/13">allmarkedup</a></cite>
     </div>
     <div class="testimonial">
@@ -144,7 +144,7 @@ Or you can [import components manually](/docs/#manually-importing) using npm.
       <cite><a href="https://x.com/rodydavis/status/1981096188956090597">rodydavis</a></cite>
     </div>
     <div class="testimonial">
-      <q>Slick af</q>
+      <q>slick af</q>
       <cite><a href="https://www.reddit.com/r/webdev/comments/1o9wm2f/comment/nkdjulx/">TacoWaffleSupreme</a></cite>
     </div>
     <div class="testimonial">
@@ -152,15 +152,15 @@ Or you can [import components manually](/docs/#manually-importing) using npm.
       <cite><a href="https://bsky.app/profile/josef.dev/post/3m3q27urejc2o">josef.dev</a></cite>
     </div>
     <div class="testimonial">
-      <q>I'm seriously considering making this the default component set for all side projects going forward.</q>
+      <q>I'm seriously considering making this the default component set for all side projects going forward</q>
       <cite><a href="https://daverupert.com/2025/10/quiet-ui/">Dave Rupert</a></cite>
     </div>
     <div class="testimonial">
-      <q>the theme is amazing</q>
+      <q>The theme is amazing</q>
       <cite><a href="https://x.com/kennethrohde/status/1981098244064367091">kennethrohde</a></cite>
     </div>
     <div class="testimonial">
-      <q>this is beautiful work here</q>
+      <q>This is beautiful work here</q>
       <cite><a href="https://mastodonapp.uk/@mathampson/115394708271897906">mathampson</a></cite>
     </div>
   </div>

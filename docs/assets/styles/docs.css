@@ -1319,11 +1319,12 @@ body.scrolled-down #more-hint {
 
   cite {
     font-style: normal;
-    font-size: 0.9375rem;
+    font-size: 0.875rem;
     opacity: 0.66;
 
     a {
       color: inherit;
+      font-weight: inherit;
 
       .external-link-icon {
         display: none;

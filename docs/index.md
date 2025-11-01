@@ -156,7 +156,7 @@ Or you can [import components manually](/docs/#manually-importing) using npm.
       <cite><a href="https://daverupert.com/2025/10/quiet-ui/">Dave Rupert</a></cite>
     </div>
     <div class="testimonial">
-      <q>The theme is amazing</q>
+      <q>I really love it and the theme is amazing</q>
       <cite><a href="https://x.com/kennethrohde/status/1981098244064367091">kennethrohde</a></cite>
     </div>
     <div class="testimonial">

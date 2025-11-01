@@ -100,7 +100,7 @@ Or you can [import components manually](/docs/#manually-importing) using npm.
 <quiet-mesh-gradient class="testimonials-cover">
   <div class="testimonials" aria-label="What people are saying">
     <div class="testimonial">
-      <q>Quite UI is probably the cleanest component library I've come across</q>
+      <q>Quiet UI is probably the cleanest component library I've come across</q>
       <cite>Wayne R.</cite>
     </div>
     <div class="testimonial">

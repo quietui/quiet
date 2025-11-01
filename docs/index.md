@@ -132,11 +132,11 @@ Or you can [import components manually](/docs/#manually-importing) using npm.
       <cite><a href="https://github.com/quietui/quiet/discussions/13">allmarkedup</a></cite>
     </div>
     <div class="testimonial">
-      <q>so nice and polished</q>
+      <q>So nice and polished</q>
       <cite><a href="https://bsky.app/profile/jeroen.wtf/post/3m24wnfrmxs2j">jeroen.wtf</a></cite>
     </div>
     <div class="testimonial">
-      <q>not bad at all</q>
+      <q>Not bad at all</q>
       <cite><a href="https://x.com/webreflection/status/1973113747930792405">WebReflection</a></cite>
     </div>
     <div class="testimonial">
@@ -144,7 +144,7 @@ Or you can [import components manually](/docs/#manually-importing) using npm.
       <cite><a href="https://x.com/rodydavis/status/1981096188956090597">rodydavis</a></cite>
     </div>
     <div class="testimonial">
-      <q>slick af</q>
+      <q>Slick af</q>
       <cite><a href="https://www.reddit.com/r/webdev/comments/1o9wm2f/comment/nkdjulx/">TacoWaffleSupreme</a></cite>
     </div>
     <div class="testimonial">
